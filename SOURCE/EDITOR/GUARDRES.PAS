@@ -72,7 +72,7 @@ begin
 
  {gl”m inte att „ndra 7:an om antalet guards „ndras}
  inc(c);
- Statbar(C,6,global_masterx,global_mastery,1,1);
+ Statbar(C,7,global_masterx,global_mastery,1,1);
 
 end;
 
