@@ -192,7 +192,7 @@ Implementation
 
 Uses Crt, Dos, CMS, Elog,
      DDplus, DDScott, Jakob,
-     Various, TxtShare, AnsiColr,
+     Various, {$IFDEF MSDOS}TxtShare,{$ENDIF} AnsiColr,
      Mail, Invent, Relatio2,
      JakeLock, Online {$IFDEF WIN32}, Strings{$ENDIF};
 
@@ -1845,6 +1845,12 @@ var
 
     error,
     memmy : integer;
+{$IFDEF WIN32}
+    memmy_r : integer;
+    memmy_rw : integer;
+    lockmde_r : byte;
+    lockmde_rw : byte;
+{$ENDIF}
 
     txt : text;
 
@@ -1854,6 +1860,10 @@ Begin {this routine deals with all textfile related stuff.
  {init}
  error:=0;
  memmy:=filemode;
+{$IFDEF WIN32}
+ memmy_r := TextModeRead;
+ memmy_rw := TextModeReadWrite;
+{$ENDIF}
 
  if (f_exists(fname)=false) and (action<>Trewrite) then begin
   assign(txt,fname);
@@ -1870,11 +1880,20 @@ Begin {this routine deals with all textfile related stuff.
  end;
 
  global_lockmode:=filemode;
+{$IFDEF WIN32}
+ lockmde_r := TextModeRead;
+ lockmde_rw := TextModeReadWrite;
+{$ENDIF}
  mem:=global_multi;
  global_multi:=false;
  i:=0;
 
+{$IFDEF MSDOS}
  AssignText(text(f),Fname);  (* From TxtShare unit *)
+{$ENDIF}
+{$IFDEF WIN32}
+ Assign(text(f),Fname);  (* From TxtShare unit *)
+{$ENDIF}
  SetTextBuf(text(f),Global_TextBuffer);
 
  if global_ushare then begin
@@ -1885,6 +1904,10 @@ Begin {this routine deals with all textfile related stuff.
    TRewrite: FileMode:=fmWriteOnly+fmDenyAll;
   end; {case .end.}
  end;
+{$IFDEF WIN32}
+ TextModeRead := FileMode;
+ TextModeReadWrite := FileMode;
+{$ENDIF}
 
  repeat (* Only repeat if denied access *)
 
@@ -1909,6 +1932,10 @@ Begin {this routine deals with all textfile related stuff.
 
  (* Set FileMode to default *)
  FileMode:=global_lockmode;
+{$IFDEF WIN32}
+ TextModeRead := lockmde_r;
+ TextModeReadWrite := lockmde_rw;
+{$ENDIF}
 
  if error=0 then begin
   case action of
@@ -1936,6 +1963,10 @@ Begin {this routine deals with all textfile related stuff.
  {reset filemode}
  global_multi:=mem;
  filemode:=memmy;
+{$IFDEF WIN32}
+ TextModeRead := memmy_r;
+ TextModeReadWrite := memmy_rw;
+{$ENDIF}
 
  {return result}
  if error<>0 then Open_TxtFile:=false

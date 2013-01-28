@@ -98,7 +98,7 @@ Function CalcHelpName(const wanted:string): string;
 
 Implementation
 
-Uses Dos, MsgBox, TxtShare, Jakobe {$IFDEF WIN32}, Strings{$ENDIF};
+Uses Dos, MsgBox, {$IFDEF MSDOS}TxtShare,{$ENDIF} Jakobe {$IFDEF WIN32}, Strings{$ENDIF};
 
 const
  locknrs   = 100; {how many attempts to access a file?}
@@ -1386,10 +1386,19 @@ var
     txt : text;
     memmy : integer;
     lockmde:byte;
-
+{$IFDEF WIN32}
+    memmy_r : integer;
+    memmy_rw : integer;
+    lockmde_r : byte;
+    lockmde_rw : byte;
+{$ENDIF}
 Begin
 
  memmy:=filemode;
+{$IFDEF WIN32}
+ memmy_r := TextModeRead;
+ memmy_rw := TextModeReadWrite;
+{$ENDIF}
 
  if f_exists(fname)=false then begin
   assign(txt,fname);
@@ -1398,6 +1407,10 @@ Begin
  end;
 
  lockmde:=filemode;
+{$IFDEF WIN32}
+ lockmde_r := TextModeRead;
+ lockmde_rw := TextModeReadWrite;
+{$ENDIF}
 
  i:=0;
  tries:=50;
@@ -1412,7 +1425,12 @@ Begin
  }
 
  repeat
+{$IFDEF MSDOS}
   AssignText(text(f),Fname);  (* From TxtShare unit *)
+{$ENDIF}
+{$IFDEF WIN32}
+  Assign(text(f),FName);
+{$ENDIF}
 
   case action of
    Treset  : FileMode:=fmReadOnly+fmDenyNone;
@@ -1420,6 +1438,10 @@ Begin
    TDelete : FileMode:=fmWriteOnly+fmDenyAll;
    TRewrite: FileMode:=fmWriteOnly+fmDenyAll;
   end;
+{$IFDEF WIN32}
+  TextModeRead := FileMode;
+  TextModeReadWrite := FileMode;
+{$ENDIF}
 
   {$I-}Reset(text(f));{$I+}
   IORes:=IoResult;
@@ -1442,6 +1464,10 @@ Begin
  Until (IORes=0) OR (i>=tries);
 
  FileMode:=lockmde;    (* Set FileMode to default *)
+{$IFDEF WIN32}
+ TextModeRead := lockmde_r;
+ TextModeReadWrite := lockmde_rw;
+{$ENDIF}
 
  if IORes=0 then begin
   case action of
@@ -1469,6 +1495,10 @@ Begin
 
  {Reset filemode}
  filemode:=memmy;
+{$IFDEF WIN32}
+ TextModeRead := memmy_r;
+ TextModeReadWrite := memmy_rw;
+{$ENDIF}
 
  if IOREs<>0 then Open_TxtFile:=false
              else open_txtfile:=true;

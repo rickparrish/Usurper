@@ -44,7 +44,6 @@ Var
    DoNothing_Addr : Pointer;
    CloseText_Addr : Pointer;
 
-{$IFDEF MSDOS}
 Function ReadText(Var F : TextRec) : Word;
 Begin
    Inline(
@@ -92,15 +91,7 @@ errors}
      $1F/                   {Error: pop      ds          ;Restore ds value}
      $89/$46/$FE);          {       mov      [bp-2],ax   ;Store returned value}
 End {ReadText};
-{$ENDIF}
-{$IFDEF WIN32}
-Function ReadText(Var F : TextRec) : Word;
-begin
-  WriteLn('REETODO TXTSHARE ReadText'); Halt;
-end;
-{$ENDIF}
 
-{$IFDEF MSDOS}
 Function WriteText(Var F : TextRec) : Word;
 Begin
    Inline(
@@ -141,29 +132,13 @@ register}
      $89/$46/$FE);          {       mov      [bp-2],ax   ;Store function
 result}
 End {WriteText};
-{$ENDIF}
-{$IFDEF WIN32}
-Function WriteText(Var F : TextRec) : Word;
-begin
-  WriteLn('REETODO TXTSHARE WriteText'); Halt;
-end;
-{$ENDIF}
 
-{$IFDEF MSDOS}
 Function DoNothing(Var F : TextRec) : Word;
 Begin
    Inline(
      $C7/$46/$FE/$00/$00);    {        mov    word [bp-2],0}
 End {DoNothing};
-{$ENDIF}
-{$IFDEF WIN32}
-Function DoNothing(Var F : TextRec) : Word;
-begin
-  WriteLn('REETODO TXTSHARE DoNothing'); Halt;
-end;
-{$ENDIF}
 
-{$IFDEF MSDOS}
 Function SeekEofText(Var F : TextRec) : Word;
 Begin
    Inline(
@@ -270,15 +245,7 @@ if no errors}
      $1F/                     {Error:  pop      ds}
      $89/$46/$FE);            {        mov      [bp-2],ax}
 End {SeekEofText};
-{$ENDIF}
-{$IFDEF WIN32}
-Function SeekEofText(Var F : TextRec) : Word;
-begin
-  WriteLn('REETODO TXTSHARE SeekEofText'); Halt;
-end;
-{$ENDIF}
 
-{$IFDEF MSDOS}
 Function CloseText(Var F : TextRec) : Word;
 Begin
    Inline(
@@ -339,15 +306,7 @@ Begin
      $89/$46/$FE);                  {         mov      [bp-2],ax
 ;Store function result}
 End {CloseText};
-{$ENDIF}
-{$IFDEF WIN32}
-Function CloseText(Var F : TextRec) : Word;
-begin
-  WriteLn('REETODO TXTSHARE CloseText'); Halt;
-end;
-{$ENDIF}
 
-{$IFDEF MSDOS}
 Function OpenText(Var F : TextRec) : Word;
 Begin
    Inline(
@@ -458,13 +417,6 @@ errors, return a 0 to caller}
      $89/$46/$FE);              {         mov       [bp-2],ax           ;Store
 function result}
 End {OpenText};
-{$ENDIF}
-{$IFDEF WIN32}
-Function OpenText(Var F : TextRec) : Word;
-begin
-  WriteLn('REETODO TXTSHARE OpenText'); Halt;
-end;
-{$ENDIF}
 
 Procedure AssignText(Var F : Text; const FileName : String);
 Var
