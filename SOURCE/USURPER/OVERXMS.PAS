@@ -1,3 +1,6 @@
+{$IFDEF WIN32}
+{$I DEFINES.INC}
+{$ENDIF}
 { OVERXMS - Loads overlays in XMS.  Written by Wilbert van Leijen }
 
 Unit OverXMS;

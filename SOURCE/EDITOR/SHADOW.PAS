@@ -1,3 +1,6 @@
+{$IFDEF WIN32}
+{$I DEFINES.INC}
+{$ENDIF}
 Unit shadow;
 { Provides basic routines needed to implement Shadow Classes }
 interface

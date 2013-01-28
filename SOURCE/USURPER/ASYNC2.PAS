@@ -1,3 +1,6 @@
+{$IFDEF WIN32}
+{$I DEFINES.INC}
+{$ENDIF}
 {*--------------------------------------------------------------------------*}
 {*                                                                          *}
 {*  Status byte definition (C_Status):                                      *}

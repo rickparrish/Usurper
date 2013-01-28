@@ -1,3 +1,6 @@
+{$IFDEF WIN32}
+{$I DEFINES.INC}
+{$ENDIF}
 
 unit ddfossil;
 {$S-,V-,R-}

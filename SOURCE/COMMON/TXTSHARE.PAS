@@ -1,3 +1,6 @@
+{$IFDEF WIN32}
+{$I DEFINES.INC}
+{$ENDIF}
 Unit TxtShare;
 
 { This UNIT implements a TEXT file device driver to access TEXT files with a }
@@ -28,7 +31,7 @@ Uses Dos;
 Var
    WriteTextEofChar : Boolean;
 
-Procedure AssignText(Var F : Text; FileName : String);
+Procedure AssignText(Var F : Text; const FileName : String);
 
 Implementation
 
@@ -415,7 +418,7 @@ errors, return a 0 to caller}
 function result}
 End {OpenText};
 
-Procedure AssignText(Var F : Text; FileName : String);
+Procedure AssignText(Var F : Text; const FileName : String);
 Var
    I : Integer;
 Begin

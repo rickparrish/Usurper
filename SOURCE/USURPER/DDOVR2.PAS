@@ -1,3 +1,6 @@
+{$IFDEF WIN32}
+{$I DEFINES.INC}
+{$ENDIF}
 unit ddovr2;
 
 {$O+,F+,V-}

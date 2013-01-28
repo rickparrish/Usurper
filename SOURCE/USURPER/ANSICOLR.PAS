@@ -1,3 +1,6 @@
+{$IFDEF WIN32}
+{$I DEFINES.INC}
+{$ENDIF}
 {*********************************************************}
 {*                   ANSICOLR.PAS 1.0                    *}
 {*            Copyright (c) Ì ·ETATech Ì 1991.           *}

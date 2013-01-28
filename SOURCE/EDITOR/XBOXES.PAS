@@ -1,3 +1,6 @@
+{$IFDEF WIN32}
+{$I DEFINES.INC}
+{$ENDIF}
 { Usurper Editor - XBoxes
 This Unit was originally taken from the SWAG collection (OOP section) and
 then modified to meet with Jakob and Usurpers needs
