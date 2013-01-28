@@ -1087,14 +1087,28 @@ begin {MAIN PROC **START**}
    '1':begin {*Attacking player uses Backstab*}
         if player.class=Assassin then begin
          stab1:=0;
-         if player.rhand+player.lhand=0 then begin
-          crlf;
-          d(config.textcolor,'You don''t have a weapon!');
-          crlf;
-          pause;
-          cho:=' ';
+         if config.classic then begin
+           if player.weapon=0 then begin
+             crlf;
+             d(config.textcolor,'You don''t have a weapon!');
+             crlf;
+             pause;
+             cho:=' ';
+           end;
          end
          else begin
+           if player.rhand+player.lhand=0 then begin
+             crlf;
+             d(config.textcolor,'You don''t have a weapon!');
+             crlf;
+             pause;
+             cho:=' ';
+           end;
+         end;
+
+         { Make sure we still can backstab }
+         if (cho = '1') then
+         begin
           mon:=target_monster;
           crlf;
           d(config.textcolor,'You try to Backstab the '+monster[mon]^.name+'!');
@@ -1244,10 +1258,9 @@ begin {MAIN PROC **START**}
      if monster[mon]^.armnr>0 then begin
       x:=random(monster[mon]^.armpow);
       if x>player.punch then x:=player.punch;
-      dec(player.punch,x);
      end;
 
-     zz:=monster[i]^.defence+random(monster[i]^.defence div 8);
+     zz:=monster[mon]^.defence+random(monster[mon]^.defence div 8);
 
      if zz>0 then begin
       inc(x,zz);
@@ -1257,6 +1270,7 @@ begin {MAIN PROC **START**}
 
       {kludge, the programmer (jakob) is sloppy, he admits!}
       if x>player.punch then x:=player.punch;
+      dec(player.punch,x);
       d(3,monster[mon]^.name+'s armor absorbed '+commastr(x)+' points!');
 
      end;
