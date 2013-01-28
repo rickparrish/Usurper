@@ -38,9 +38,9 @@ const
  vision_is_running : boolean = false;
 
  {Editor Version}
- uver      = '0.20e';
+ uver      = '0.23';
  uversion  = 'Usurper Editor '+uver;
- ubeta : boolean = true; {is this a BETA version?}
+ ubeta : boolean = false; {is this a BETA version?}
 
  {number of options in USURPER.CFG}
  {see cfgdef.pas for help regarding adding/editing/removing config options}
