@@ -492,7 +492,8 @@ end;
 {$IFDEF WIN32}
 function TrueDosVer (var WinNtOK :boolean): Word;
 begin
-  WriteLn('REETODO DDSCOTT TrueDosVer'); Halt;
+  WinNtOK := True;
+  TrueDosVer := 5;
 end;
 {$ENDIF}
 
@@ -519,7 +520,9 @@ end;
 {$IFDEF WIN32}
 function DosVer(var Minor,OS2Ver : Word) : Word;
 begin
-  WriteLn('REETODO DDSCOTT DosVer'); Halt;
+  Minor := 0;
+  OS2Ver := 0;
+  DosVer := 5;
 end;
 {$ENDIF}
 
@@ -544,7 +547,7 @@ end;
 {$IFDEF WIN32}
 Function Win3_Check_On: boolean;
 begin
-  WriteLn('REETODO DDSCOTT Win3_Check_On'); Halt;
+  Win3_Check_On := false;
 end;
 {$ENDIF}
 
@@ -570,7 +573,7 @@ end;
 {$IFDEF WIN32}
 Function DV_Check_On : boolean;
 begin
-  WriteLn('REETODO DDSCOTT DV_Check_On'); Halt;
+  DV_Check_On := false;
 end;
 {$ENDIF}
 
