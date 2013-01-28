@@ -301,7 +301,9 @@ var
    ext: string [5];
 
 
+{$IFDEF MSDOS}
 {$L spawnp}
+{$ENDIF}
 function do_spawn (swapping: integer;
                    var xeqfn; var cmdtail; envlen: word;
                    var env
@@ -782,6 +784,7 @@ function parse_redirect (var par: string; idx: integer;
 {$ENDIF}
 
 
+{$IFDEF MSDOS}
 function do_exec (xfn: string; pars: string; spawn: integer;
                   needed: word; newenv: boolean): integer;
    label
@@ -971,7 +974,14 @@ exit:
       then freemem (stderr, length (stderr^) + 2);
 {$ENDIF}
    end;
-
+{$ENDIF}
+{$IFDEF WIN32}
+function do_exec (xfn: string; pars: string; spawn: integer;
+                  needed: word; newenv: boolean): integer;
+begin
+  WriteLn('REETODO EXEC do_exec'); Halt;
+end;
+{$ENDIF}
 
 { Initialisation for environment processing }
 

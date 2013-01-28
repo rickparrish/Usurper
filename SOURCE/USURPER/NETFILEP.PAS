@@ -122,6 +122,7 @@ const {-- Function numbers for DOS calls -----------------------------}
 {* Global var. : NetError/W (error status after call)                *}
 {*********************************************************************}
 
+{$IFDEF MSDOS}
 function ShareInst : boolean;
 
 var regs   : registers;      { Processor registers for interrupt call }
@@ -132,6 +133,13 @@ begin
  ShareInst := ( regs.al = $FF );                      { Return result }
  NetError := NE_OK;                                        { No error }
 end;
+{$ENDIF}
+{$IFDEF WIN32}
+function ShareInst : boolean;
+begin
+  WriteLn('REETODO NETFILEP ShareInst'); Halt;
+end;
+{$ENDIF}
 
 {*********************************************************************}
 {* NetErrorMsg : Error message text.                                 *}
@@ -169,6 +177,7 @@ end;
 {* Global var. : NetError/W (error status after call)                *}
 {*********************************************************************}
 
+{$IFDEF MSDOS}
 procedure NetRewrite(     FName  : string;
                           AMode  : integer;
                           RecS   : word;
@@ -200,6 +209,16 @@ begin
         NetError := ax;                           { Note error number }
     end;
 end;
+{$ENDIF}
+{$IFDEF WIN32}
+procedure NetRewrite(     FName  : string;
+                          AMode  : integer;
+                          RecS   : word;
+                      var DFile );
+begin
+  WriteLn('REETODO NETFILEP NetRewrite'); Halt;
+end;
+{$ENDIF}
 
 {*********************************************************************}
 {* NetReset    : Opens a specific file.                              *}
@@ -208,6 +227,7 @@ end;
 {* Global var. : NetError/W (error status after call)                *}
 {*********************************************************************}
 
+{$IFDEF MSDOS}
 procedure NetReset(     FName  : string;
                         AMode  : integer;
                         RecS   : word;
@@ -247,6 +267,16 @@ begin
         end;
     end;
 end;
+{$ENDIF}
+{$IFDEF WIN32}
+procedure NetReset(     FName  : string;
+                        AMode  : integer;
+                        RecS   : word;
+                    var DFile );
+begin
+  WriteLn('REETODO NETFILEP NetReset'); Halt;
+end;
+{$ENDIF}
 
 {*********************************************************************}
 {* NetClose  : Closes a file.                                        *}
@@ -254,6 +284,7 @@ end;
 {* Output    : None                                                  *}
 {*********************************************************************}
 
+{$IFDEF MSDOS}
 procedure NetClose( var DFile );
 
 var regs : registers;        { Processor registers for interrupt call }
@@ -274,6 +305,13 @@ begin
   else
     NetError := NE_InvalidHandle;                     { File not open }
 end;
+{$ENDIF}
+{$IFDEF WIN32}
+procedure NetClose( var DFile );
+begin
+  WriteLn('REETODO NETFILEP NetClose'); Halt;
+end;
+{$ENDIF}
 
 {*********************************************************************}
 {* Locking     : Locks or unlocks a file range.                      *}
@@ -284,6 +322,7 @@ end;
 {* Info        : Call NetLock and NetUnlock for internal access only.*}
 {*********************************************************************}
 
+{$IFDEF MSDOS}
 function Locking( Handle    : word;
                   Operation : byte;
                   Offset    : longint;
@@ -338,6 +377,16 @@ begin
   UNTIL (W103=True) or (W102=200);
  ReleaseTimeSlice; {Added by Bob Dalton - Gives up timeslice}
 end;
+{$ENDIF}
+{$IFDEF WIN32}
+function Locking( Handle    : word;
+                  Operation : byte;
+                  Offset    : longint;
+                  WrdLen    : longint ) : boolean;
+begin
+  WriteLn('REETODO NETFILEP Locking'); Halt;
+end;
+{$ENDIF}
 
 {*********************************************************************}
 {* NetLock     : Locks records.                                      *}
@@ -421,6 +470,7 @@ end;
 {*               Attention: No type checking performed here.         *}
 {*********************************************************************}
 
+{$IFDEF MSDOS}
 procedure NetWrite( var DFile;
                     var FData );
 
@@ -441,6 +491,14 @@ begin
         NetError := ax;                           { Note error number }
     end;
 end;
+{$ENDIF}
+{$IFDEF WIN32}
+procedure NetWrite( var DFile;
+                    var FData );
+begin
+  WriteLn('REETODO NETFILEP NetWrite'); Halt;
+end;
+{$ENDIF}
 
 {*********************************************************************}
 {* NetRead     : Reads from file.                                    *}
@@ -451,6 +509,7 @@ end;
 {*               Attention: No type checking performed here.         *}
 {*********************************************************************}
 
+{$IFDEF MSDOS}
 procedure NetRead( var DFile;
                    var FData );
 
@@ -471,6 +530,14 @@ begin
         NetError := ax;                           { Note error number }
     end;
 end;
+{$ENDIF}
+{$IFDEF WIN32}
+procedure NetRead( var DFile;
+                   var FData );
+begin
+  WriteLn('REETODO NETFILEP NetRead'); Halt;
+end;
+{$ENDIF}
 
 {*********************************************************************}
 {* NetSeek     : Sets file pointer.                                  *}
@@ -480,6 +547,7 @@ end;
 {*               files have been opened in input-output mode.        *}
 {*********************************************************************}
 
+{$IFDEF MSDOS}
 procedure NetSeek( var DFile;
                        RecNo : longint );
 
@@ -501,6 +569,14 @@ begin
         NetError := ax;                           { Note error number }
     end;
 end;
+{$ENDIF}
+{$IFDEF WIN32}
+procedure NetSeek( var DFile;
+                       RecNo : longint );
+begin
+  WriteLn('REETODO NETFILEP NetSeek'); Halt;
+end;
+{$ENDIF}
 
 begin
 end.

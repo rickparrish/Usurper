@@ -194,7 +194,7 @@ Uses Crt, Dos, CMS, Elog,
      DDplus, DDScott, Jakob,
      Various, TxtShare, AnsiColr,
      Mail, Invent, Relatio2,
-     JakeLock, Online;
+     JakeLock, Online {$IFDEF WIN32}, Strings{$ENDIF};
 
 const
  {item data files, the reason for not declaring these constants in INIT.PAS
@@ -5895,7 +5895,12 @@ begin
 
  {$I-}close(f);{$I+}
  error:=IoResult; {get error}
+{$IFDEF MSDOS}
  if error<>0 then unable_to_close(textrec(f).name,error);
+{$ENDIF}
+{$IFDEF WIN32}
+ if error<>0 then unable_to_close(StrPas(textrec(f).name),error);
+{$ENDIF}
 
 end; {close_text *end*}
 
@@ -5908,8 +5913,12 @@ begin
 
  {$I-}readln(f,s);{$I+}
  error:=IoResult; {get error}
+{$IFDEF MSDOS}
  if error<>0 then unable_to_read(textrec(f).name,error);
-
+{$ENDIF}
+{$IFDEF WIN32}
+ if error<>0 then unable_to_read(StrPas(textrec(f).name),error);
+{$ENDIF}
 end; {readln_from_text *end*}
 
 Procedure Write_To_Text(var f:text;const s:string);

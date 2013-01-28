@@ -98,7 +98,7 @@ Function CalcHelpName(const wanted:string): string;
 
 Implementation
 
-Uses Dos, MsgBox, TxtShare, Jakobe;
+Uses Dos, MsgBox, TxtShare, Jakobe {$IFDEF WIN32}, Strings{$ENDIF};
 
 const
  locknrs   = 100; {how many attempts to access a file?}
@@ -1479,26 +1479,45 @@ Procedure Close_Text(var f:text);
 begin
 
  {$I-}close(f);{$I+}
+{$IFDEF MSDOS}
  if IOResult<>0 then unable_to_close(textrec(f).name);
-
+{$ENDIF}
+{$IFDEF WIN32}
+ if IOResult<>0 then unable_to_close(StrPas(textrec(f).name));
+{$ENDIF}
 end;
 
 Procedure Readln_from_Text(var f:text;var s:string);
 begin
  {$I-}readln(f,s);{$I+}
+{$IFDEF MSDOS}
  if IOResult<>0 then unable_to_read(textrec(f).name);
+{$ENDIF}
+{$IFDEF WIN32}
+ if IOResult<>0 then unable_to_read(StrPas(textrec(f).name));
+{$ENDIF}
 end;
 
 Procedure Write_To_Text(var f:text;const s:string);
 begin
  {$I-}write(f,s);{$I+}
+{$IFDEF MSDOS}
  if IOResult<>0 then unable_to_write(textrec(f).name);
+{$ENDIF}
+{$IFDEF WIN32}
+ if IOResult<>0 then unable_to_write(StrPas(textrec(f).name));
+{$ENDIF}
 end;
 
 Procedure Writeln_To_Text(var f:text;const s:string);
 begin
  {$I-}writeln(f,s);{$I+}
+{$IFDEF MSDOS}
  if IOResult<>0 then unable_to_write(textrec(f).name);
+{$ENDIF}
+{$IFDEF WIN32}
+ if IOResult<>0 then unable_to_write(StrPas(textrec(f).name));
+{$ENDIF}
 end;
 
 end. {Unit File_Io .end.}

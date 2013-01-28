@@ -215,6 +215,7 @@ begin;
  namestr:=s;
 end;
 
+{$IFDEF MSDOS}
 procedure setmode(modenumber: byte);
 var
  regs: registers;
@@ -223,7 +224,15 @@ begin;
  regs.al:=modenumber;
  intr($10,regs);
 end;
+{$ENDIF}
+{$IFDEF WIN32}
+procedure setmode(modenumber: byte);
+begin
+  WriteLn('REETODO DDSCOTT setmode'); Halt;
+end;
+{$ENDIF}
 
+{$IFDEF MSDOS}
 procedure set25lines;
 var
  regs: registers;
@@ -237,7 +246,15 @@ begin;
  regs.cx:=$0C00;
  intr($10,regs);
 end;
+{$ENDIF}
+{$IFDEF WIN32}
+procedure set25lines;
+begin
+  WriteLn('REETODO DDSCOTT set25lines'); Halt;
+end;
+{$ENDIF}
 
+{$IFDEF MSDOS}
 function isega: boolean;
 var
  regs: registers;
@@ -247,7 +264,15 @@ begin;
  intr($10,regs);
  if regs.bx=$10 then isega:=false else isega:=true;
 end;
+{$ENDIF}
+{$IFDEF WIN32}
+function isega: boolean;
+begin
+  WriteLn('REETODO DDSCOTT isega'); Halt;
+end;
+{$ENDIF}
 
+{$IFDEF MSDOS}
 function QueryAdapterType: Adaptertype;
 var
  regs: registers;
@@ -269,7 +294,15 @@ begin;
   end;
  end;
 end;
+{$ENDIF}
+{$IFDEF WIN32}
+function QueryAdapterType: Adaptertype;
+begin
+  WriteLn('REETODO DDSCOTT QueryAdapterType'); Halt;
+end;
+{$ENDIF}
 
+{$IFDEF MSDOS}
 procedure cursoroff;
 var
  regs: registers;
@@ -278,7 +311,15 @@ begin;
  regs.cx:=$2000;
  intr($10,regs);
 end;
+{$ENDIF}
+{$IFDEF WIN32}
+procedure cursoroff;
+begin
+  WriteLn('REETODO DDSCOTT cursoroff'); Halt;
+end;
+{$ENDIF}
 
+{$IFDEF MSDOS}
 function determinepoints: integer;
 var
  regs: registers;
@@ -294,7 +335,15 @@ begin;
                      end;
  end;
 end;
+{$ENDIF}
+{$IFDEF WIN32}
+function determinepoints: integer;
+begin
+  WriteLn('REETODO DDSCOTT determinepoints'); Halt;
+end;
+{$ENDIF}
 
+{$IFDEF MSDOS}
 procedure cursoron;
 var
  regs: registers;
@@ -304,7 +353,15 @@ begin;
  regs.cl:=determinepoints-1;
  intr($10,regs);
 end;
+{$ENDIF}
+{$IFDEF WIN32}
+procedure cursoron;
+begin
+  WriteLn('REETODO DDSCOTT cursoron'); Halt;
+end;
+{$ENDIF}
 
+{$IFDEF MSDOS}
 procedure cursorblock;
 var
  regs: registers;
@@ -314,6 +371,13 @@ begin;
  regs.cl:=determinepoints-1;
  intr($10,regs);
 end;
+{$ENDIF}
+{$IFDEF WIN32}
+procedure cursorblock;
+begin
+  WriteLn('REETODO DDSCOTT cursorblock'); Halt;
+end;
+{$ENDIF}
 
 function screenaddress: word;
 begin;
@@ -325,6 +389,7 @@ begin;
  end;
 end;
 
+{$IFDEF MSDOS}
 procedure savescreen;
 var
  sc1: byte absolute $b000:0;
@@ -335,7 +400,15 @@ begin;
  x:=wherex;
  y:=wherey;
 end;
+{$ENDIF}
+{$IFDEF WIN32}
+procedure savescreen;
+begin
+  WriteLn('REETODO DDSCOTT savescreen'); Halt;
+end;
+{$ENDIF}
 
+{$IFDEF MSDOS}
 procedure restorescreen;
 var
  sc1: byte absolute $b800:0;
@@ -345,6 +418,13 @@ begin;
  if screenaddress=$b800 then move(screen^, sc1,4000);
  gotoxy(x,y);
 end;
+{$ENDIF}
+{$IFDEF WIN32}
+procedure restorescreen;
+begin
+  WriteLn('REETODO DDSCOTT restorescreen'); Halt;
+end;
+{$ENDIF}
 
 function date: datetype;
 var
@@ -392,6 +472,7 @@ begin;
  n:=(a and n);
 end;
 
+{$IFDEF MSDOS}
 function TrueDosVer (var WinNtOK :boolean): Word;
 var
  Regs: Registers;
@@ -407,7 +488,15 @@ Begin
     TrueDosVer := Bl;
   end;
 end;
+{$ENDIF}
+{$IFDEF WIN32}
+function TrueDosVer (var WinNtOK :boolean): Word;
+begin
+  WriteLn('REETODO DDSCOTT TrueDosVer'); Halt;
+end;
+{$ENDIF}
 
+{$IFDEF MSDOS}
 function DosVer(var Minor,OS2Ver : Word) : Word;
 var
  Regs: Registers;
@@ -426,7 +515,15 @@ Begin
       OS2Ver := 2;
   end;
 end;
+{$ENDIF}
+{$IFDEF WIN32}
+function DosVer(var Minor,OS2Ver : Word) : Word;
+begin
+  WriteLn('REETODO DDSCOTT DosVer'); Halt;
+end;
+{$ENDIF}
 
+{$IFDEF MSDOS}
 Function Win3_Check_On: boolean;
 const
   Multplx_intr = $2F;
@@ -443,7 +540,15 @@ begin
       Win3_Check_On := true;
    end;
 end;
+{$ENDIF}
+{$IFDEF WIN32}
+Function Win3_Check_On: boolean;
+begin
+  WriteLn('REETODO DDSCOTT Win3_Check_On'); Halt;
+end;
+{$ENDIF}
 
+{$IFDEF MSDOS}
 Function DV_Check_On : boolean;
 var
   Regs : registers;
@@ -461,6 +566,13 @@ begin
   else
      DV_Check_On := true;
 end;
+{$ENDIF}
+{$IFDEF WIN32}
+Function DV_Check_On : boolean;
+begin
+  WriteLn('REETODO DDSCOTT DV_Check_On'); Halt;
+end;
+{$ENDIF}
 
 Procedure FindTaskerType;  { Find what tasker if any is being used      }
 var

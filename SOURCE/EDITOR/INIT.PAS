@@ -1262,9 +1262,6 @@ begin
     hcSupportDoc     : Hint:= supportdoc+' file';
 
     {moat editor related}
-    hcMoatEditor     : Hint:= 'Moat Editor';
-
-    {moat editor related}
     hcMoatEditor      : Hint:= 'Moat Editor';
     hcMoatName        : Hint:= 'Name of Moat Creature'; {moat creature name}
     hcMoatCost        : Hint:= 'Cost to buy'; {name of user who created the drink}

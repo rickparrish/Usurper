@@ -24,6 +24,7 @@ IMPLEMENTATION   (********************************)
 Uses Crt, Dos, DDPlus,
      Netfilep, Jakob, File_Io; {jakob}
 
+{$IFDEF MSDOS}
 Procedure GetDate1(VAR Month:Word;
                    VAR day:Word;
                    VAR year:Word);
@@ -36,6 +37,15 @@ Procedure GetDate1(VAR Month:Word;
   Day:=MyRegs.DL;
   Year:=MyRegs.CX;
  End;
+{$ENDIF}
+{$IFDEF WIN32}
+Procedure GetDate1(VAR Month:Word;
+                   VAR day:Word;
+                   VAR year:Word);
+begin
+  WriteLn('REETODO ELOG GetDate1'); Halt;
+end;
+{$ENDIF}
 
 PROCEDURE Terminate (N:Byte);
  Begin

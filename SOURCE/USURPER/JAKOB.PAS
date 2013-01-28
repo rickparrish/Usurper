@@ -144,7 +144,7 @@ Uses Dos, Crt, Init,
      DDplus, DDscott, ComIO,
      Exec, AnsiColr, SwagDate,
      Various, NetFilep, DispText,
-     Online, sdelay, File_IO;
+     Online, {$IFDEF MSDOS}sdelay,{$ENDIF} File_IO;
 
 var carriage_return : boolean; {used by D and SD procedures (display routines)}
 
@@ -385,6 +385,7 @@ begin
 
 end; { Replace String }
 
+{$IFDEF MSDOS}
 Procedure Delay4(ms : Word); Assembler; {SWAG/CRT}
 Asm {machine independent Delay Function}
   mov ax, 1000;
@@ -394,6 +395,13 @@ Asm {machine independent Delay Function}
   mov ah, $86;
   int $15;
 end;
+{$ENDIF}
+{$IFDEF WIN32}
+Procedure Delay4(ms : Word);
+begin
+  WriteLn('REETODO JAKOB Delay4'); Halt;
+end;
+{$ENDIF}
 
 Type LongRec = record
         L, H : Word;
@@ -419,6 +427,7 @@ VAR
     *    DL      Hundredths of seconds (0 through 99)        *
     *******************   READ CLOCK  ***********************)
 
+{$IFDEF MSDOS}
     PROCEDURE ReadClock(VAR Secs : Real);
 
     CONST
@@ -440,6 +449,13 @@ VAR
                 +Regs.DH
                 +0.01*Regs.DL;
     END;
+{$ENDIF}
+{$IFDEF WIN32}
+    PROCEDURE ReadClock(VAR Secs : Real);
+    begin
+      WriteLn('REETODO JAKOB ReadClock'); Halt;
+    end;
+{$ENDIF}
 
 { BODY OF WAIT procedure}
 
@@ -457,7 +473,13 @@ VAR
 
 Procedure Delay2;
 begin
+{$IFDEF MSDOS}
  millidelay(godis);
+{$ENDIF}
+{$IFDEF WIN32}
+ // REENOTE millidelay must come from sdelay
+ WriteLn('REETODO JAKOB Delay2'); Halt;
+{$ENDIF}
 end;
 
 Procedure Delay3;
@@ -633,6 +655,7 @@ begin
 
 end;
 
+{$IFDEF MSDOS}
 Procedure Upper4(var Str: String);
 InLine(
  $8C/$DA/               {      mov   DX,DS               }
@@ -652,6 +675,13 @@ InLine(
  $80/$6C/$FF/$20/       {      sub   BYTE PTR [SI-1],$20 }
  $E2/$F1/               { @28: loop  @15                 }
  $8E/$DA);              { @30: mov   DS,DX               }
+{$ENDIF}
+{$IFDEF WIN32}
+Procedure Upper4(var Str: String);
+begin
+  WriteLn('REETODO JAKOB Upper4'); Halt;
+end;
+{$ENDIF}
 
 Function UpCaseStr;
 begin
@@ -2053,6 +2083,7 @@ begin;
 
 end; {drop_dos *end*}
 
+{$IFDEF MSDOS}
 Function IsWin95: Boolean; Assembler;
 Asm
  push ds                  ;{ Pascal doesn't save these }
@@ -2064,6 +2095,14 @@ Asm
  pop si
  pop ds
 End; {iswin95 *end*}
+{$ENDIF}
+{$IFDEF WIN32}
+Function IsWin95: Boolean;
+begin
+  // REENOTE Does the above return true?  Is it important (for slicing or something)?
+  WriteLn('REETODO JAKOB IsWin95'); Halt;
+end;
+{$ENDIF}
 
 Function Jake_Tasker:byte; {Which OS is running?}
 var result : byte;
@@ -2129,7 +2168,7 @@ begin {handles all heap errors}
 end; {heaphandler *end*}
 
 
-
+{$IFDEF MSDOS}
 FUNCTION ScreenRows: byte; ASSEMBLER;
 { -- ScreenRows := mem[Seg0040:$84] + 1 }
 {Peter Louwen (2:283/502)}
@@ -2138,7 +2177,15 @@ ASM mov AX, [Seg0040]
     mov AL, ES:$84
     inc AL
 END;
+{$ENDIF}
+{$IFDEF WIN32}
+FUNCTION ScreenRows: byte; 
+begin
+  WriteLn('REETODO JAKOB ScreenRows'); Halt;
+end;
+{$ENDIF}
 
+{$IFDEF MSDOS}
 FUNCTION ScreenCols: byte; ASSEMBLER;
 { -- ScreenCols := mem[Seg0040:$4A] }
 {Peter Louwen (2:283/502)}
@@ -2146,6 +2193,13 @@ ASM mov AX, [Seg0040]
     mov ES, AX
     mov AL, ES:$4A
 END;
+{$ENDIF}
+{$IFDEF WIN32}
+FUNCTION ScreenCols: byte;
+begin
+  WriteLn('REETODO JAKOB ScreenCols'); Halt;
+end;
+{$ENDIF}
 
 Procedure Spin_Cursor(action,cursor_color:byte);
 const sc: array[0..3] of char = '-\|/';

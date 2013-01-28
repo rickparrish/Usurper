@@ -2370,9 +2370,6 @@ begin {*MAIN PROCEDURE*}
                end;
               until ch='0';
              end;
-         'C':begin
-
-             end;
         end; {case ch of .end.}
        end;
 

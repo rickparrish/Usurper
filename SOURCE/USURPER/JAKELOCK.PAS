@@ -38,6 +38,7 @@ Implementation
 Uses Dos;
 
 {this routine was taken from the SWAG archive, locks records AND files}
+{$IFDEF MSDOS}
 function File_Lock(var F; Action: filAction; FPos,Len: Longint): Word;
  assembler;
 asm
@@ -56,5 +57,12 @@ asm
 @@End:
 
 end; {File_Lock *end*}
+{$ENDIF}
+{$IFDEF WIN32}
+function File_Lock(var F; Action: filAction; FPos,Len: Longint): Word;
+begin
+  WriteLn('REETODO JAKELOCK File_Lock'); Halt;
+end;
+{$ENDIF}
 
 end. {Unit JakeLock .end.}

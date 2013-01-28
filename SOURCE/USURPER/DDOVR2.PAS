@@ -53,8 +53,16 @@ type
 var
  iomode: iomodetypes;
  ctlnm:string[2];
+
 Procedure CallProc;
+{$IFDEF MSDOS}
 inline($FF/$1E/DDUserConfigPtr);
+{$ENDIF}
+{$IFDEF WIN32}
+begin
+  WriteLn('REETODO DDOVR2 CallProc'); Halt;
+end;
+{$ENDIF}
 
 procedure Loadconfig(
  fn: string;

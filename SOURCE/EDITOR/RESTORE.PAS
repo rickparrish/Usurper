@@ -45,6 +45,7 @@ procedure MyExitProc; far;
 begin
   Index := 0;
   { Iterate over all rows, copying from memory to screen }
+{$IFDEF MSDOS}
   for Loop := 1 to Mem[Seg0040:ScreenRows] do
   begin
     P := Ptr(Segment, Index);
@@ -55,6 +56,10 @@ begin
   Dispose(PScreen);
   { Restore cursor coordinates }
   MemW[Seg0040:CursorPos] := CursorCoords;
+{$ENDIF}
+{$IFDEF WIN32}
+  WriteLn('REETODO RESTORE MyExitProc'); Halt;
+{$ENDIF}
   ExitProc := ExitSave
 end; { MyExitProc }
 
@@ -65,6 +70,7 @@ begin
   SegB000 := $B000;
   SegB800 := $B800;
 {$endif}
+{$IFDEF MSDOS}
   { Save cursor position }
   CursorCoords := MemW[Seg0040:CursorPos];
   { Allocate memory to save screen }
@@ -86,6 +92,10 @@ begin
     Move(P^, PScreen^[Loop], RowSize);
     Inc(Index, RowSize)
   end;
+{$ENDIF}
+{$IFDEF WIN32}
+  WriteLn('REETODO RESTORE initialization'); Halt;
+{$ENDIF}
   ExitSave := ExitProc;
   ExitProc := @MyExitProc
 end. { Restore }

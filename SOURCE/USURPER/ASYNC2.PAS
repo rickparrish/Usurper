@@ -119,7 +119,9 @@ IMPLEMENTATION
 
 Uses DOS,CRT;
 
+{$IFDEF MSDOS}
 {$L SLASYNC.OBJ}
+{$ENDIF}
 
 Const
   C_IER = 1;                           { 8250 register offsets }
@@ -144,7 +146,12 @@ Var
 {*                                                                          *}
 {****************************************************************************}
 
-Procedure INT_Handler; External;
+Procedure INT_Handler; {$IFDEF MSDOS}External;{$ENDIF}
+{$IFDEF WIN32}
+begin
+  WriteLn('REETODO ASYNC2 INT_Handler'); Halt;
+end;
+{$ENDIF}
 
 {****************************************************************************}
 {*                                                                          *}
@@ -158,7 +165,12 @@ Procedure INT_Handler; External;
 {*                                                                          *}
 {****************************************************************************}
 
-Function ComReadCh(ComPort:Byte) : Char; External;
+Function ComReadCh(ComPort:Byte) : Char; {$IFDEF MSDOS}External;{$ENDIF}
+{$IFDEF WIN32}
+begin
+  WriteLn('REETODO ASYNC2 ComReadCh'); Halt;
+end;
+{$ENDIF}
 
 {****************************************************************************}
 {*                                                                          *}
@@ -173,7 +185,12 @@ Function ComReadCh(ComPort:Byte) : Char; External;
 {*                                                                          *}
 {****************************************************************************}
 
-Function ComReadChW(ComPort:Byte) : Char; External;
+Function ComReadChW(ComPort:Byte) : Char; {$IFDEF MSDOS}External;{$ENDIF}
+{$IFDEF WIN32}
+begin
+  WriteLn('REETODO ASYNC2 ComReadChW'); Halt;
+end;
+{$ENDIF}
 
 {****************************************************************************}
 {*                                                                          *}
@@ -189,7 +206,12 @@ Function ComReadChW(ComPort:Byte) : Char; External;
 {*                                                                          *}
 {****************************************************************************}
 
-Procedure ComWriteCh(ComPort:Byte; Ch:Char); External;
+Procedure ComWriteCh(ComPort:Byte; Ch:Char); {$IFDEF MSDOS}External;{$ENDIF}
+{$IFDEF WIN32}
+begin
+  WriteLn('REETODO ASYNC2 ComWriteCh'); Halt;
+end;
+{$ENDIF}
 
 {****************************************************************************}
 {*                                                                          *}
@@ -206,7 +228,12 @@ Procedure ComWriteCh(ComPort:Byte; Ch:Char); External;
 {*                                                                          *}
 {****************************************************************************}
 
-Procedure ComWriteChW(ComPort:Byte; Ch:Char); External;
+Procedure ComWriteChW(ComPort:Byte; Ch:Char); {$IFDEF MSDOS}External;{$ENDIF}
+{$IFDEF WIN32}
+begin
+  WriteLn('REETODO ASYNC2 ComWriteChW'); Halt;
+end;
+{$ENDIF}
 
 {****************************************************************************}
 {*                                                                          *}
@@ -608,6 +635,7 @@ Begin
   IO := Upcase(IO);
   P := C_PortAddr[ComPort];
 
+{$IFDEF MSDOS}
   Inline($FA);
   If (IO='I') Or (IO='B') Then
     Begin
@@ -624,6 +652,10 @@ Begin
       X := Port[P+C_LSR] + Port[P+C_MSR] + Port[P+C_IIR];
     End;
   Inline($FB);
+{$ENDIF}
+{$IFDEF WIN32}
+  WriteLn('REETODO ASYNC2 ClearCom'); Halt;
+{$ENDIF}
 End;
 
 {****************************************************************************}
@@ -982,6 +1014,7 @@ Var
 Begin
   If (ComPort<1) Or (ComPort>C_MaxPort) Or (Not C_PortOpen[ComPort]) Then Exit;
 
+{$IFDEF MSDOS}
   Inline($FA);
   P := C_PortAddr[ComPort];
 
@@ -1052,7 +1085,10 @@ Begin
   {end new stuff srl*}
 
   Inline($FB);
-
+{$ENDIF}
+{$IFDEF WIN32}
+  WriteLn('REETODO ASYNC2 ComParams'); Halt;
+{$ENDIF}
 End;
 
 {****************************************************************************}
@@ -1096,6 +1132,7 @@ Begin
 
   { Clear any pending activity from 8250 interrupt queue }
 
+{$IFDEF MSDOS}
   Inline($FA);
 
   { Set up interrupt vectors & 8259 PIC }
@@ -1156,6 +1193,10 @@ Begin
   OpenCom := True;
 
   Inline($FB);
+{$ENDIF}
+{$IFDEF WIN32}
+  WriteLn('REETODO ASYNC2 OpenCom'); Halt;
+{$ENDIF}
 End;
 
 {****************************************************************************}
@@ -1187,6 +1228,7 @@ Begin
 
   { Drop RS232 control lines (DTR,RTS,OUT2) and reset 8250 interrupt mode }
 
+{$IFDEF MSDOS}
   Inline($FA);
   P := C_PortAddr[ComPort];
   Port[P+C_IER] := oldier;
@@ -1224,6 +1266,10 @@ Begin
   FreeMem(C_InBufPtr[ComPort],C_InSize[ComPort]);
   FreeMem(C_OutBufPtr[ComPort],C_OutSize[ComPort]);
   Inline($FB);
+{$ENDIF}
+{$IFDEF WIN32}
+  WriteLn('REETODO ASYNC2 CloseCom'); Halt;
+{$ENDIF}
 End;
 
 {****************************************************************************}

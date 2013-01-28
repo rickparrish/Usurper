@@ -1458,18 +1458,6 @@ begin
         global_multi:=true;
 
        end;
-   'T':begin
-       { crlf;
-        crlf;
-        d(14,'Hey! Wait a minute!');
-        d(12,'Entering the Castle can bring instant');
-        d(12,'death to any small time player...');
-
-        sd(config.textcolor,'Are you sure about doing this ');
-        if confirm('','n')=true then begin
-         the_castle;
-        end;  }
-       end;
    'R':begin {Return to MainStreet}
         crlf;
         exit;
@@ -1669,10 +1657,6 @@ begin
          end;
         end;
        end;
-   'R':begin {return to mainstreet}
-        exit;
-       end;
-
   end; {case .end.}
 
  until Never; {MAIN-LOOP *end*}

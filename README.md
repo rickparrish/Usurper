@@ -31,8 +31,6 @@ These files are part of Usurper.
 
 TODO list:<br />
 <ul>
-  <li>IFDEF out anything that doesn't compile and make a WIN32 placeholder that does a "WriteLn('REETODO UNIT FUNCTION'); Halt;" (then you can grep the executables for REETODO to see which REETODOs actually need to be implemented)</li>
-  <li>IFDEF out any ASM code blocks and handle the same as above</li>
   <li>Implement any REETODOs that appear in compiled executables</li>
   <li>WORD in RECORD to SMALLWORD</li>
   <li>INTEGER in RECORD to SMALLINT</li>
@@ -44,4 +42,6 @@ TODO list:<br />
 
 Completed list<br />
 <ul>
+  <li>IFDEF out anything that doesn't compile and make a WIN32 placeholder that does a "WriteLn('REETODO UNIT FUNCTION'); Halt;" (then you can grep the executables for REETODO to see which REETODOs actually need to be implemented)</li>
+  <li>IFDEF out any ASM code blocks and handle the same as above</li>
 </ul>

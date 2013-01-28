@@ -34,7 +34,7 @@ Program Editor; {Usurper - DoorGame Editor}
 
 
 
-Uses Overlay, Init, CfgVal,
+Uses {$IFDEF MSDOS}Overlay,{$ENDIF} Init, CfgVal,
      JakobE, muffi2, extra,
      file_io;
 
@@ -79,11 +79,13 @@ var
 
 Begin
 
+{$IFDEF MSDOS}
  {Overlay}
  OvrFilemode:=64;
  filemode:=66;
  OvrInit('EDITOR.OVR');
  OvrInitEMS;
+{$ENDIF}
 
  {Assign some files}
  assign(monsterfile,monfile);

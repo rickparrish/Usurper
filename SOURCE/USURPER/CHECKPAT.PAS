@@ -63,7 +63,9 @@ function exists (var fname): boolean;
 
 Implementation
 
+{$IFDEF MSDOS}
 {$L checkpap}
+{$ENDIF}
 function checkpath (var name; inflags: integer; var drive; var dir; 
                     var fname; var ext; var fullpath) : integer; external;
 function exists (var fname): boolean; external;

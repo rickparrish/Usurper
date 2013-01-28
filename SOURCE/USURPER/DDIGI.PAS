@@ -41,6 +41,7 @@ var
   EBIOSok,DTRok,RTSok    : boolean;
   CharReadyP : BytePtr;
 
+{$IFDEF MSDOS}
 function digi_Init_driver : boolean;
 var
  regs: registers;
@@ -85,12 +86,20 @@ begin;
 
  OutReady:=false;
 end;
+{$ENDIF}
+{$IFDEF WIN32}
+function digi_Init_driver : boolean;
+begin
+  WriteLn('REETODO DDIGI digi_Init_driver'); Halt;
+end;
+{$ENDIF}
 
 function  digi_deinit_driver;  { A do nada routine, no deinit calls exist. }
 begin
  digi_deinit_driver:=true;
 end;
 
+{$IFDEF MSDOS}
 function digi_buffer_check: boolean;
 var
  regs: registers;
@@ -106,7 +115,15 @@ begin;
  else
    digi_buffer_check:=false;
 end;
+{$ENDIF}
+{$IFDEF WIN32}
+function digi_buffer_check: boolean;
+begin
+  WriteLn('REETODO DDIGI digi_buffer_check'); Halt;
+end;
+{$ENDIF}
 
+{$IFDEF MSDOS}
 procedure digi_send(c: char);
 var
  regs: registers;
@@ -124,7 +141,15 @@ begin;
  else
    OutReady:=false;
 end;
+{$ENDIF}
+{$IFDEF WIN32}
+procedure digi_send(c: char);
+begin
+  WriteLn('REETODO DDIGI digi_send'); Halt;
+end;
+{$ENDIF}
 
+{$IFDEF MSDOS}
 function digi_receive(var c: char): boolean;
 var
  regs: registers;
@@ -146,7 +171,15 @@ begin;
       end;
   end;
 end;
+{$ENDIF}
+{$IFDEF WIN32}
+function digi_receive(var c: char): boolean;
+begin
+  WriteLn('REETODO DDIGI digi_receive'); Halt;
+end;
+{$ENDIF}
 
+{$IFDEF MSDOS}
 function digi_carrier_present: boolean;
 var
  regs: registers;
@@ -166,6 +199,13 @@ begin;
  else
    OutReady:=false;
 end;
+{$ENDIF}
+{$IFDEF WIN32}
+function digi_carrier_present: boolean;
+begin
+  WriteLn('REETODO DDIGI digi_carrier_present'); Halt;
+end;
+{$ENDIF}
 
 function ExtBaud(n:longint) : byte;
 var
@@ -196,6 +236,7 @@ begin
   ExtBaud:=b;
 end;
 
+{$IFDEF MSDOS}
 procedure digi_set_modem;
 var
   regs: registers;
@@ -210,10 +251,18 @@ begin
    end;
   intr($14,regs);
 end;
+{$ENDIF}
+{$IFDEF WIN32}
+procedure digi_set_modem;
+begin
+  WriteLn('REETODO DDIGI digi_set_modem'); Halt;
+end;
+{$ENDIF}
 
 { This is included for completeness only }
 { Most sysops don't want a door to reinitiallize their board }
 { so this is by passed.                                      }
+{$IFDEF MSDOS}
 function digi_set_baud;      { new form digiboard init }
 var
   regs: registers;
@@ -250,7 +299,15 @@ begin;
     digi_set_modem;
    end;
 end;
+{$ENDIF}
+{$IFDEF WIN32}
+function digi_set_baud;      { new form digiboard init }
+begin
+  WriteLn('REETODO DDIGI digi_set_baud'); Halt;
+end;
+{$ENDIF}
 
+{$IFDEF MSDOS}
 procedure digi_flush_io;
 var
  regs: registers;
@@ -259,7 +316,15 @@ begin;
  regs.dx:=dport_num;
  intr($14,regs);
 end;
+{$ENDIF}
+{$IFDEF WIN32}
+procedure digi_flush_io;
+begin
+  WriteLn('REETODO DDIGI digi_flush_io'); Halt;
+end;
+{$ENDIF}
 
+{$IFDEF MSDOS}
 procedure digi_flush_input;
 var
  regs: registers;
@@ -268,7 +333,15 @@ begin;
  regs.dx:=dport_num;
  intr($14,regs);
 end;
+{$ENDIF}
+{$IFDEF WIN32}
+procedure digi_flush_input;
+begin
+  WriteLn('REETODO DDIGI digi_flush_input'); Halt;
+end;
+{$ENDIF}
 
+{$IFDEF MSDOS}
 procedure digi_flush_output;
 var
  regs: registers;
@@ -277,7 +350,15 @@ begin;
  regs.dx:=dport_num;
  intr($14,regs);
 end;
+{$ENDIF}
+{$IFDEF WIN32}
+procedure digi_flush_output;
+begin
+  WriteLn('REETODO DDIGI digi_flush_output'); Halt;
+end;
+{$ENDIF}
 
+{$IFDEF MSDOS}
 procedure digi_Get_Info(var drivername:string);
 const
  dname : array[1..5] of
@@ -336,7 +417,15 @@ begin;
  drivername:=d+s+o;
 
 end;
+{$ENDIF}
+{$IFDEF WIN32}
+procedure digi_Get_Info(var drivername:string);
+begin
+  WriteLn('REETODO DDIGI digi_Get_Info'); Halt;
+end;
+{$ENDIF}
 
+{$IFDEF MSDOS}
 procedure EnableTimeOutError;
 var
  regs: registers;
@@ -349,7 +438,15 @@ begin;
   end;
  intr($14,regs);
 end;
+{$ENDIF}
+{$IFDEF WIN32}
+procedure EnableTimeOutError;
+begin
+  WriteLn('REETODO DDIGI EnableTimeOutError'); Halt;
+end;
+{$ENDIF}
 
+{$IFDEF MSDOS}
 procedure Digi_Break(StatusCode : Word);  { send break }
 var
  regs: registers;
@@ -363,6 +460,13 @@ begin;
  intr($14,regs);
  AsyncStat := StatusCode;
 end;
+{$ENDIF}
+{$IFDEF WIN32}
+procedure Digi_Break(StatusCode : Word);  { send break }
+begin
+  WriteLn('REETODO DDIGI Digi_Break'); Halt;
+end;
+{$ENDIF}
 
 
 end.

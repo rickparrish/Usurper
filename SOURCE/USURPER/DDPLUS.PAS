@@ -132,14 +132,26 @@ procedure InitDoorDriver(ConfigFileName: string);
 function Time_used: integer;
 
 Implementation
+{$IFDEF MSDOS}
 {$L DVAWARE.OBJ}
+{$ENDIF}
 
 Uses Init, Cms, InitGods,
      Jakob, Mail, News,
      Online, File_io; {jakob! You have also changed in DDOVR2.PAS}
 
-Procedure DV_Aware_On;       External;
-Procedure DV_Pause;          External;
+Procedure DV_Aware_On;       {$IFDEF MSDOS}External;{$ENDIF}
+{$IFDEF WIN32}
+begin
+  WriteLn('REETODO DDPLUS DV_Aware_On'); Halt;
+end;
+{$ENDIF}
+Procedure DV_Pause;          {$IFDEF MSDOS}External;{$ENDIF}
+{$IFDEF WIN32}
+begin
+  WriteLn('REETODO DDPLUS DV_Pause'); Halt;
+end;
+{$ENDIF}
 
 var
  buffered: boolean;
@@ -147,6 +159,7 @@ var
  tcolor,bcolor: integer;
  firsttime: boolean;
 
+{$IFDEF MSDOS}
 procedure Dos_Sleep;
 var
  Regs : Registers;
@@ -154,8 +167,16 @@ begin
  with Regs do
    Intr($28,Regs);
 end;
+{$ENDIF}
+{$IFDEF WIN32}
+procedure Dos_Sleep;
+begin
+  WriteLn('REETODO DDPLUS Dos_Sleep'); Halt;
+end;
+{$ENDIF}
 { This releases the virtual machine time slice for MSwindows, Dos 5.0, OS/2 }
 
+{$IFDEF MSDOS}
 procedure Win_Pause;
 var
  Regs : Registers;
@@ -166,6 +187,13 @@ begin
    Intr($2F,Regs);
  end;
 end;
+{$ENDIF}
+{$IFDEF WIN32}
+procedure Win_Pause;
+begin
+  WriteLn('REETODO DDPLUS Win_Pause'); Halt;
+end;
+{$ENDIF}
 
 Procedure ReleaseTimeSlice;
 begin
@@ -825,7 +853,14 @@ end;
  { Customize this for each game }
 
 Procedure CallProc;
+{$IFDEF MSDOS}
 inline($FF/$1E/Proc_Call_Ptr);
+{$ENDIF}
+{$IFDEF WIN32}
+begin
+  WriteLn('REETODO DDPLUS CallProc'); Halt;
+end;
+{$ENDIF}
 
 Procedure DefineFKeys(var a:char;fkeyon:byte);
 begin

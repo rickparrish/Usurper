@@ -25,7 +25,9 @@ Copyright 2007 Jakob Dangarden
 
 
 
+{$IFDEF MSDOS
 {$M 40000, 34000, 65000}
+{$ENDIF}
 {UTEST+}
 
 Program Usurper; {Door-Game by Jakob Dangarden
@@ -33,14 +35,14 @@ Program Usurper; {Door-Game by Jakob Dangarden
                    .. and miscellaneous routines .. }
 
 
-Uses Overlay, Dos, InitOver,
+Uses {$IFDEF MSDOS}Overlay,{$ENDIF} Dos, {$IFDEF MSDOS}InitOver,{$ENDIF}
      DDplus, Init, Jakob,
      Maint, Cms, SortPl,
      VarGods, GodWorld, UserHunc,
      Gamec, Byebyec, Mail,
      Various, Various2, Rating,
      Relation, Relatio2, Post_To,
-     Online, File_Io, OverXms,
+     Online, File_Io, {$IFDEF MSDOS}OverXms,{$ENDIF}
      Various3, News, Children,
      InitGods;
 
@@ -352,8 +354,10 @@ var
 
 begin {* Main Program *}
 
+{$IFDEF MSDOS}
  {Set Overlay FileMode}
  OvrFilemode:=64;
+{$ENDIF}
 
  {Set Share}
  if Is_Share then begin

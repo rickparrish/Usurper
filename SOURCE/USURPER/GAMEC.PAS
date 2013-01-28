@@ -629,7 +629,7 @@ begin
    Prison:begin
            cho:='-';
           end;
-   Inn,Dormy:begin
+   Inn:begin
              cho:='I';
             end;
    UmanCave:begin
@@ -706,7 +706,7 @@ begin
            menu('(M)arry NPC (set out to marry)');
            menu('(V)iew relations');
            menu('(E)dit relation');
-           menu('(C)heck my spouse');
+           menu('(1) Check my spouse');
            menu('(D)uplicate check relations');
            menu('(A) Validate a relation records player index / userfile');
            menu('(B) Validate all relations (you can break out)');
@@ -770,7 +770,7 @@ begin
                 end;
                end;
 
-           'C':begin {check_my_spouse}
+           '1':begin {check_my_spouse}
                 {check i player is married and to whom}
                 crlf;
                 crlf;

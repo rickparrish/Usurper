@@ -436,6 +436,7 @@ begin
   IsBlank := (Ch = ' ') or (Ch = #13) or (Ch = #10);
 end;
 
+{$IFDEF MSDOS}
 function Scan(var P; Offset, Size: Integer; C: Char): Integer; assembler;
 asm
 	CLD
@@ -453,7 +454,15 @@ asm
         NEG	CX
         XCHG	AX,CX
 end;
+{$ENDIF}
+{$IFDEF WIN32}
+function Scan(var P; Offset, Size: Integer; C: Char): Integer;
+begin
+  WriteLn('REETODO HELPFILE Scan'); Halt;
+end;
+{$ENDIF}
 
+{$IFDEF MSDOS}
 procedure TextToLine(var Text; Offset, Length: Integer; var Line: String);
   assembler;
 asm
@@ -468,6 +477,13 @@ asm
         REP	MOVSB
         POP	DS
 end;
+{$ENDIF}
+{$IFDEF WIN32}
+procedure TextToLine(var Text; Offset, Length: Integer; var Line: String);
+begin
+  WriteLn('REETODO HELPFILE TextToLine'); Halt;
+end;
+{$ENDIF}
 
 begin
   I := Scan(Text, Offset, Size, #13);

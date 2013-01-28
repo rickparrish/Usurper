@@ -130,7 +130,7 @@ begin
  j:=random(10)+9;
  cryptIt:=emptystr;
  for i:=1 to j do begin
-  case random(37) of
+  case random(39) of
    0: cryptIt:=cryptIt+'A';
    1: cryptIt:=cryptIt+'B';
    2: cryptIt:=cryptIt+'C';
@@ -162,14 +162,14 @@ begin
    28: cryptIt:=cryptIt+'%';
    29: cryptIt:=cryptIt+'0';
    30: cryptIt:=cryptIt+'1';
-   30: cryptIt:=cryptIt+'2';
-   31: cryptIt:=cryptIt+'3';
-   32: cryptIt:=cryptIt+'4';
-   33: cryptIt:=cryptIt+'5';
-   34: cryptIt:=cryptIt+'6';
-   35: cryptIt:=cryptIt+'7';
-   36: cryptIt:=cryptIt+'8';
-   37: cryptIt:=cryptIt+'9';
+   31: cryptIt:=cryptIt+'2';
+   32: cryptIt:=cryptIt+'3';
+   33: cryptIt:=cryptIt+'4';
+   34: cryptIt:=cryptIt+'5';
+   35: cryptIt:=cryptIt+'6';
+   36: cryptIt:=cryptIt+'7';
+   37: cryptIt:=cryptIt+'8';
+   38: cryptIt:=cryptIt+'9';
   end; {case .end.}
  end; {for i:= .end.}
 
