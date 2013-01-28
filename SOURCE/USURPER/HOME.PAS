@@ -2577,7 +2577,7 @@ begin {Main proc START}
          pause;
         end
         else begin
-         chest_of_items;
+         chest_with_items;
         end;
 
        end; {chest_of_items .end.}

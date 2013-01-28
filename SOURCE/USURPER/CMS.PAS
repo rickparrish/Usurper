@@ -285,6 +285,7 @@ const {player (online) location constants, onlinerec.location=onloc_church}
  onloc_prisonerex = 93; {prisoner, execution}
  onloc_prisonwalk = 94; {outside the prison}
  onloc_prisonbreak= 95; {outside the prison, attempting to liberate a prisoner}
+ onloc_chestloot  = 96; {stealing chest items}
 
  {relations locations}
  onloc_lovestreet = 200; {love street}

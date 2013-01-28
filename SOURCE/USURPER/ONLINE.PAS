@@ -1635,6 +1635,7 @@ begin
                   loc2:=onloc_outsideinn;
                   if caller.sex=1 then loc3:=onloc_whores
                                   else loc3:=onloc_gigolos;
+				  loc4:=onloc_chestloot;
                  end;
   onloc_master:begin
                 loc1:=onloc_mainstreet;
@@ -1692,6 +1693,9 @@ begin
  onloc_gigolos:begin
                 loc1:=onloc_darkness;
                end;
+ onloc_chestloot:begin
+                  loc1:=onloc_darkness;
+                 end;
  onloc_outsideinn:begin
                    loc1:=onloc_darkness;
                   end;
@@ -3123,6 +3127,7 @@ begin
   onloc_drugs      : s:='Ordlofs Beer House';
   onloc_darkness   : s:='Dirty alley';
   onloc_whores     : s:='Beauty Nest';
+  onloc_chestloot  : s:='Stealing chest items';
   onloc_darkeralley: s:='Very Dark Alley';
   onloc_gigolos    : s:='Pleasure Dome';
   onloc_outsideinn : s:='outside the Beer Hut';
