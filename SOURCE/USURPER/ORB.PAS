@@ -58,7 +58,7 @@ Const
              'Chilipeppar');
 
 Type AmountRec = Record
-      amount : array [1..maxingredients] of integer;
+      amount : array [1..maxingredients] of SmallInt;
      end;
 
 Type DrinkTypes = (OwnDrink,FileDrink,MailDrink,NpcDrink);

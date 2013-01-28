@@ -404,7 +404,7 @@ end;
 {$ENDIF}
 
 Type LongRec = record
-        L, H : Word;
+        L, H : SmallWord;
      end;
 
 PROCEDURE Delay5(NumberOfSecs : Real);

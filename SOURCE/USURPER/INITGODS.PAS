@@ -38,15 +38,15 @@ type {see vargods.pas => become_god}
   name : s30;      {alias}
   id   : s15;      {unique ID tag, this id follows the player from the
                     user file!}
-  recnr: word;      {rec # in file}
-  age  : word;      {age}
+  recnr: SmallWord;      {rec # in file}
+  age  : SmallWord;      {age}
   sex  : byte;      {sex, 1=male, 2=female}
   ai   : char;      {ai: 'H'uman or 'C'omputer }
-  level: word;      {level}
+  level: SmallWord;      {level}
   exp  : longint;   {experience, power}
-  deedsleft : word; {deedsleft today, new ones given at maintenance}
+  deedsleft : SmallWord; {deedsleft today, new ones given at maintenance}
   deleted  : boolean; {deleted}
-  believers: word;    {believers, disciples, # of players who worship this god}
+  believers: SmallWord;    {believers, disciples, # of players who worship this god}
   darkness : longint; {good points, follows from the player time}
   goodness : longint; {dark points, follows from the player time}
  end; {godrec *end*}

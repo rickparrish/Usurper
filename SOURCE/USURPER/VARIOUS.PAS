@@ -33,7 +33,7 @@ Uses Init, InitGods;
 {Miscellaneous}
 Procedure Zero_Player(var target : UserRec);
 Procedure Make_Delay_Dots(col,dots,delayy:integer);
-Procedure Swappy(var nr1 : word; var nr2 : word);
+Procedure Swappy(var nr1 : SmallWord; var nr2 : SmallWord);
 Procedure Create_Maint_Flag;
 Function Random_Path : s70;
 Function Crypt(nr:word) : s70;
@@ -93,7 +93,7 @@ Procedure Quest_Rankings;
 Procedure Read_News_Paper;
 
 {Close Combat}
-Function HitChance(var nr:integer) : integer;
+Function HitChance(var nr:SmallInt) : integer;
 Function Condition(now, max : longint ) : s70;
 Function Bash_Name(nr:integer) : s70;
 Function Bash_Rank(nr:integer) : s70;
