@@ -11,17 +11,24 @@ uses
 const
   MaxScreenHeight = 60;
 
+{$IFDEF MSDOS}
 type
   PTheScreen = ^TTheScreen;
   TTheScreen = array[1..MaxScreenHeight] of TDrawBuffer;
 
 var
   PScreen: PTheScreen;
+{$ENDIF}
 
 implementation
 
 uses
-  Drivers;
+  Drivers {$IFDEF WIN32}, RPScreen{$ENDIF};
+
+{$IFDEF WIN32}
+var
+  SavedScreen: TScreenBuf;
+{$ENDIF}
 
 const
   ScreenMode = $49;
@@ -58,7 +65,8 @@ begin
   MemW[Seg0040:CursorPos] := CursorCoords;
 {$ENDIF}
 {$IFDEF WIN32}
-  WriteLn('REETODO RESTORE MyExitProc'); Halt;
+  RPRestoreScreen(SavedScreen);
+  RPGotoXY(CursorCoords);
 {$ENDIF}
   ExitProc := ExitSave
 end; { MyExitProc }
@@ -94,7 +102,8 @@ begin
   end;
 {$ENDIF}
 {$IFDEF WIN32}
-  WriteLn('REETODO RESTORE initialization'); Halt;
+  CursorCoords := RPWhereXY;
+  RPSaveScreen(SavedScreen);
 {$ENDIF}
   ExitSave := ExitProc;
   ExitProc := @MyExitProc
