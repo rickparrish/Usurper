@@ -46,7 +46,8 @@ Procedure Add_Guard( const name    : s70;
                      const lin3    : s70;
                      const lin4    : s70;
                      const lin5    : s70);
-
+var
+  i: integer;
 begin
 
  guard.name    :=name;
@@ -62,8 +63,8 @@ begin
  guard.descp[4]:=lin4;
  guard.descp[5]:=lin5;
 
- for c:=1 to 5 do begin
-  if guard.descp[c]='' then guard.descp[c]:=emptystr;
+ for i:=1 to 5 do begin
+  if guard.descp[i]='' then guard.descp[i]:=emptystr;
  end;
 
  {$I-}write(guardfile,guard);{$I+}
