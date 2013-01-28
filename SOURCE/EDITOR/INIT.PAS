@@ -1775,6 +1775,7 @@ begin
 
       if (Event.Command = cmHelp) and not HelpInUse then
       begin
+{$IFDEF MSDOS}
         HelpInUse := True;
         HelpStrm := New(PDosStream, Init(CalcHelpName(global_EDHELP), stOpenRead));
         HFile := New(PHelpFile, Init(HelpStrm));
@@ -1794,6 +1795,10 @@ begin
           ClearEvent(Event);
         end;
         HelpInUse := False;
+{$ENDIF}
+{$IFDEF WIN32}
+        NoWin32Help;
+{$ENDIF}
       end;
     evMouseDown:
       if Event.Buttons <> 1 then Event.What := evNothing;
