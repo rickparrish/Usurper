@@ -527,6 +527,9 @@ var
 begin
   ofm:=filemode;
   filemode:=66;
+{$IFDEF WIN32}
+  FileModeReadWrite := FileMode;
+{$ENDIF}
   ansisave:=ansion;
   ansion:=true;
   quit:=false;
@@ -553,14 +556,23 @@ begin
 
  {$I-}
  filemode:=66;
+{$IFDEF WIN32}
+ FileModeReadWrite := FileMode;
+{$ENDIF}
  reset(f);
  filemode:=66;
+{$IFDEF WIN32}
+ FileModeReadWrite := FileMode;
+{$ENDIF}
  {$I+}
  if ioresult<>0 then
    begin
      swriteln('File '+filenm+' missing');
      ansion:=ansisave;
      filemode:=ofm;
+{$IFDEF WIN32}
+     FileModeReadWrite := FileMode;
+{$ENDIF}
      exit;
    end;
 
@@ -596,6 +608,9 @@ begin
    ansion:=ansisave;
    set_foreground(default_fore);
    filemode:=ofm;
+{$IFDEF WIN32}
+   FileModeReadWrite := FileMode;
+{$ENDIF}
 end;
 
 procedure displayfile1; {jakobs special! ta bort originalet!}

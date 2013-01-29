@@ -151,6 +151,9 @@ BEGIN
      {SaveGame(Player,PlayerFile,TempP,Country,CountryFile,Map1,MapFile);}
      
      IF ShareInst=False then FileMode:=64;
+{$IFDEF WIN32}
+     FileModeReadWrite := FileMode;
+{$ENDIF}
      YE:=False;
      ASSIGN(ErrFile,logname);
      IF F_EXISTS(logname) THEN
@@ -193,6 +196,9 @@ BEGIN
      WRITELN_to_text(ErrFile,Exit_Message(Exitcode));
      Close_text(ErrFile); {jakob}
      IF ShareInst=False then FileMode:=66;
+{$IFDEF WIN32}
+     FileModeReadWrite := FileMode;
+{$ENDIF}
      {be sure to uncomment this if using RipLink}
      {if RIP <> nil then
       Dispose(RIP, Done);}
@@ -256,6 +262,9 @@ BEGIN
        WRITELN_to_text(ErrFile,'------------------------------------------------');
        Close_text(ErrFile);
        IF ShareInst=False then FileMode:=66;
+{$IFDEF WIN32}
+       FileModeReadWrite := FileMode;
+{$ENDIF}
       END ;
    ErrorAddr := NIL ;
    {be sure to uncomment this if using RipLink}

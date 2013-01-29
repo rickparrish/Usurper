@@ -60,6 +60,9 @@ begin
   end;
 
   FileMode:=fmReadOnly+fmDenyNone;
+{$IFDEF WIN32}
+  FileModeReadWrite := FileMode;
+{$ENDIF}
 
   ok:=true;
   {$I-}reset(playerfile);{$I+}
@@ -72,6 +75,9 @@ begin
  file_size:=filesize(playerfile);
  close(playerfile);
  filemode:=lemmy;
+{$IFDEF WIN32}
+ FileModeReadWrite := FileMode;
+{$ENDIF}
 
 end;
 
@@ -100,6 +106,9 @@ begin
    'L': FileMode:=fmReadOnly+fmDenyNone;
    'S': FileMode:=fmReadWrite+fmDenyAll;
   end;
+{$IFDEF WIN32}
+  FileModeReadWrite := FileMode;
+{$ENDIF}
 
   {$I-}reset(playerfile);{$I+}
 
@@ -119,7 +128,9 @@ begin
  end;
  close(playerfile);
  filemode:=memmy;
-
+{$IFDEF WIN32}
+ FileModeReadWrite := FileMode;
+{$ENDIF}
 end;
 
 Function Get_Type ( oldtype : objtype ) : ObjType;

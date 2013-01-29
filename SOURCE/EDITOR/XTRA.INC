@@ -218,6 +218,9 @@ begin
    'L': FileMode:=fmReadOnly+fmDenyNone;
    'S': FileMode:=fmReadWrite+fmDenyAll;
   end;
+{$IFDEF WIN32}
+  FileModeReadWrite := FileMode;
+{$ENDIF}
 
   {$I-}reset(playerfile);{$I+}
 
@@ -236,7 +239,9 @@ begin
  end;
  close(playerfile);
  filemode:=memmy;
-
+{$IFDEF WIN32}
+ FileModeReadWrite := FileMode;
+{$ENDIF}
 end;
 
 Procedure Load_Guard(    action : char;
@@ -259,6 +264,9 @@ begin
    'L': FileMode:=fmReadOnly+fmDenyNone;
    'S': FileMode:=fmReadWrite+fmDenyAll;
   end;
+{$IFDEF WIN32}
+  FileModeReadWrite := FileMode;
+{$ENDIF}
 
   {$I-}reset(guardfile);{$I+}
 
@@ -277,7 +285,9 @@ begin
  end;
  close(guardfile);
  filemode:=memmy;
-
+{$IFDEF WIN32}
+ FileModeReadWrite := FileMode;
+{$ENDIF}
 end;
 
 Procedure Load_Level(  action : char;
@@ -300,6 +310,9 @@ begin
    'L': FileMode:=fmReadOnly+fmDenyNone;
    'S': FileMode:=fmReadWrite+fmDenyAll;
   end;
+{$IFDEF WIN32}
+  FileModeReadWrite := FileMode;
+{$ENDIF}
 
   {$I-}reset(levelfile);{$I+}
 
@@ -318,7 +331,9 @@ begin
  end;
  close(levelfile);
  filemode:=memmy;
-
+{$IFDEF WIN32}
+ FileModeReadWrite := FileMode;
+{$ENDIF}
 end;
 
 Procedure Load_Monster(  action : char;
@@ -341,6 +356,9 @@ begin
    'L': FileMode:=fmReadOnly+fmDenyNone;
    'S': FileMode:=fmReadWrite+fmDenyAll;
   end;
+{$IFDEF WIN32}
+  FileModeReadWrite := FileMode;
+{$ENDIF}
 
   {$I-}reset(monsterfile);{$I+}
 
@@ -359,7 +377,9 @@ begin
  end;
  close(monsterfile);
  filemode:=memmy;
-
+{$IFDEF WIN32}
+ FileModeReadWrite := FileMode;
+{$ENDIF}
 end;
 
 Procedure Load_Weapon( nr        : word;
@@ -378,6 +398,9 @@ begin
   assign(weapfile,weapofile);
 
   FileMode:=fmReadOnly+fmDenyNone;
+{$IFDEF WIN32}
+  FileModeReadWrite := FileMode;
+{$ENDIF}
 
   {$I-}reset(weapfile);{$I+}
 
@@ -393,7 +416,9 @@ begin
  close(weapfile);
 
  filemode:=memmy;
-
+{$IFDEF WIN32}
+ FileModeReadWrite := FileMode;
+{$ENDIF}
 end;
 
 Procedure Load_Armor( nr        : word;
@@ -412,6 +437,9 @@ begin
   ok:=true;
   assign(armfile,armofile);
   FileMode:=fmReadOnly+fmDenyNone;
+{$IFDEF WIN32}
+  FileModeReadWrite := FileMode;
+{$ENDIF}
   {$I-}reset(armfile);{$I+}
 
   if IOResult<>0 then begin
@@ -426,7 +454,9 @@ begin
  close(armfile);
 
  filemode:=memmy;
-
+{$IFDEF WIN32}
+ FileModeReadWrite := FileMode;
+{$ENDIF}
 end;
 
 Procedure Item_Info(item : objektrec);

@@ -337,6 +337,9 @@ begin
 
  memmy:=filemode;
  FileMode:=fmReadOnly+fmDenyNone;
+{$IFDEF WIN32}
+ FileModeReadWrite := FileMode;
+{$ENDIF}
 
  repeat
   ok:=true;
@@ -356,7 +359,9 @@ begin
 
  {reset filemode}
  filemode:=memmy;
-
+{$IFDEF WIN32}
+ FileModeReadWrite := FileMode;
+{$ENDIF}
 end;
 
 Function FsClassic( weapon : boolean ) : word;
@@ -381,6 +386,9 @@ begin
 
  memmy:=filemode;
  FileMode:=fmReadOnly+fmDenyNone;
+{$IFDEF WIN32}
+ FileModeReadWrite := FileMode;
+{$ENDIF}
 
  repeat
   ok:=true;
@@ -414,7 +422,9 @@ begin
 
  {reset filemode}
  filemode:=memmy;
-
+{$IFDEF WIN32}
+ FileModeReadWrite := FileMode;
+{$ENDIF}
 end;
 
 Function Fs( filtyp : filsize ) : word;
@@ -432,6 +442,9 @@ begin
 
  memmy:=filemode;
  FileMode:=fmReadOnly+fmDenyNone;
+{$IFDEF WIN32}
+ FileModeReadWrite := FileMode;
+{$ENDIF}
 
  case filtyp of
   FsPlayer:begin {player/npc file}
@@ -593,7 +606,9 @@ begin
 
  {reset filemode}
  filemode:=memmy;
-
+{$IFDEF WIN32}
+ FileModeReadWrite := FileMode;
+{$ENDIF}
 end;
 
 Procedure Load_Objekt;
@@ -639,6 +654,9 @@ begin
    Fload: FileMode:=fmReadOnly+fmDenyNone;
    FSave: FileMode:=fmReadWrite+fmDenyAll;
   end;
+{$IFDEF WIN32}
+  FileModeReadWrite := FileMode;
+{$ENDIF}
   {$I-}reset(ofil);{$I+}
 
   if IOResult<>0 then begin
@@ -667,7 +685,9 @@ begin
 
  {reset filemode}
  filemode:=memmy;
-
+{$IFDEF WIN32}
+ FileModeReadWrite := FileMode;
+{$ENDIF}
 end;
 
 Procedure Load_Player;
@@ -694,6 +714,9 @@ begin
    Fload: FileMode:=fmReadOnly+fmDenyNone;
    Fsave: FileMode:=fmReadWrite+fmDenyAll;
   end;
+{$IFDEF WIN32}
+  FileModeReadWrite := FileMode;
+{$ENDIF}
 
   {$I-}reset(playerfile);{$I+}
 
@@ -726,7 +749,9 @@ begin
 
  {reset filemode}
  filemode:=memmy;
-
+{$IFDEF WIN32}
+ FileModeReadWrite := FileMode;
+{$ENDIF}
 end; {load_player *end*}
 
 Procedure Load_Guard;
@@ -748,6 +773,9 @@ begin
    Fload: FileMode:=fmReadOnly+fmDenyNone;
    Fsave: FileMode:=fmReadWrite+fmDenyAll;
   end;
+{$IFDEF WIN32}
+  FileModeReadWrite := FileMode;
+{$ENDIF}
 
   {$I-}reset(guardfile);{$I+}
 
@@ -778,7 +806,9 @@ begin
 
  {reset filemode}
  filemode:=memmy;
-
+{$IFDEF WIN32}
+ FileModeReadWrite := FileMode;
+{$ENDIF}
 end;
 
 Procedure Load_Moat;
@@ -800,6 +830,9 @@ begin
    Fload: FileMode:=fmReadOnly+fmDenyNone;
    Fsave: FileMode:=fmReadWrite+fmDenyAll;
   end;
+{$IFDEF WIN32}
+  FileModeReadWrite := FileMode;
+{$ENDIF}
 
   {$I-}reset(moatfile);{$I+}
 
@@ -830,7 +863,9 @@ begin
 
  {reset filemode}
  filemode:=memmy;
-
+{$IFDEF WIN32}
+ FileModeReadWrite := FileMode;
+{$ENDIF}
 end; {load_moat .end.}
 
 Procedure Load_God; {load/save immortal}
@@ -852,6 +887,9 @@ begin
    Fload: FileMode:=fmReadOnly+fmDenyNone;
    Fsave: FileMode:=fmReadWrite+fmDenyAll;
   end;
+{$IFDEF WIN32}
+  FileModeReadWrite := FileMode;
+{$ENDIF}
 
   {$I-}reset(godfile);{$I+}
 
@@ -882,7 +920,9 @@ begin
 
  {reset filemode}
  filemode:=memmy;
-
+{$IFDEF WIN32}
+ FileModeReadWrite := FileMode;
+{$ENDIF}
 end; {load_god .end.}
 
 Procedure Load_Child; {load/save child}
@@ -904,6 +944,9 @@ begin
    Fload: FileMode:=fmReadOnly+fmDenyNone;
    Fsave: FileMode:=fmReadWrite+fmDenyAll;
   end;
+{$IFDEF WIN32}
+  FileModeReadWrite := FileMode;
+{$ENDIF}
 
   {$I-}reset(childfile);{$I+}
 
@@ -934,7 +977,9 @@ begin
 
  {reset filemode}
  filemode:=memmy;
-
+{$IFDEF WIN32}
+ FileModeReadWrite := FileMode;
+{$ENDIF}
 end; {load_child .end.}
 
 
@@ -1025,6 +1070,9 @@ begin
    Fload: FileMode:=fmReadOnly+fmDenyNone;
    Fsave: FileMode:=fmReadWrite+fmDenyAll;
   end;
+{$IFDEF WIN32}
+  FileModeReadWrite := FileMode;
+{$ENDIF}
 
   {$I-}reset(cocktailfile);{$I+}
 
@@ -1055,7 +1103,9 @@ begin
 
  {restore filemode}
  filemode:=memmy;
-
+{$IFDEF WIN32}
+ FileModeReadWrite := FileMode;
+{$ENDIF}
 end; {load_drink *end*}
 
 Procedure Load_Level;
@@ -1076,6 +1126,9 @@ begin
    Fload: FileMode:=fmReadOnly+fmDenyNone;
    Fsave: FileMode:=fmReadWrite+fmDenyAll;
   end;
+{$IFDEF WIN32}
+  FileModeReadWrite := FileMode;
+{$ENDIF}
 
   {$I-}reset(levelfile);{$I+}
 
@@ -1103,7 +1156,9 @@ begin
  {$I-}close(levelfile);{$I+}
  if IOResult<>0 then unable_to_close(lvlfile);
  filemode:=memmy;
-
+{$IFDEF WIN32}
+ FileModeReadWrite := FileMode;
+{$ENDIF}
 end;
 
 Procedure Load_Monster;
@@ -1125,6 +1180,9 @@ begin
    Fload: FileMode:=fmReadOnly+fmDenyNone;
    FSave: FileMode:=fmReadWrite+fmDenyAll;
   end;
+{$IFDEF WIN32}
+  FileModeReadWrite := FileMode;
+{$ENDIF}
 
   {$I-}reset(monsterfile);{$I+}
 
@@ -1155,7 +1213,9 @@ begin
 
  {reset filemode}
  filemode:=memmy;
-
+{$IFDEF WIN32}
+ FileModeReadWrite := FileMode;
+{$ENDIF}
 end;
 
 Procedure Load_Weapon;
@@ -1174,6 +1234,9 @@ begin
   assign(weapfile,weapofile);
 
   FileMode:=fmReadOnly+fmDenyNone;
+{$IFDEF WIN32}
+  FileModeReadWrite := FileMode;
+{$ENDIF}
 
   {$I-}reset(weapfile);{$I+}
 
@@ -1195,7 +1258,9 @@ begin
 
  {reset filemode}
  filemode:=memmy;
-
+{$IFDEF WIN32}
+ FileModeReadWrite := FileMode;
+{$ENDIF}
 end;
 
 Procedure Load_Armor;
@@ -1213,6 +1278,9 @@ begin
   ok:=true;
   assign(armfile,armofile);
   FileMode:=fmReadOnly+fmDenyNone;
+{$IFDEF WIN32}
+  FileModeReadWrite := FileMode;
+{$ENDIF}
   {$I-}reset(armfile);{$I+}
 
   if IOResult<>0 then begin
@@ -1232,7 +1300,9 @@ begin
  if IOResult<>0 then unable_to_close(armofile);
 
  filemode:=memmy;
-
+{$IFDEF WIN32}
+ FileModeReadWrite := FileMode;
+{$ENDIF}
 end;
 
 Procedure Rewrite_Datfiles( force : boolean );

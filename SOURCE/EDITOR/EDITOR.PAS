@@ -79,10 +79,13 @@ var
 
 Begin
 
+filemode:=66;
+{$IFDEF WIN32}
+FileModeReadWrite := FileMode;
+{$ENDIF}
 {$IFDEF MSDOS}
  {Overlay}
  OvrFilemode:=64;
- filemode:=66;
  OvrInit('EDITOR.OVR');
  OvrInitEMS;
 {$ENDIF}

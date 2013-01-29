@@ -253,6 +253,9 @@ begin;
  selectctl;
  ofm:=filemode;
  filemode:=66;
+{$IFDEF WIN32}
+ FileModeReadWrite := FileMode;
+{$ENDIF}
  assign(f,fn);
 
  {$i-}reset(f);{$I+}
@@ -333,6 +336,9 @@ begin;
  end;
  close(f);
  filemode:=ofm;
+{$IFDEF WIN32}
+ FileModeReadWrite := FileMode;
+{$ENDIF}
 
 {$IFDEF WIN32}
  { ensure win32 doors run with fossil io (where we put the socket code) }
