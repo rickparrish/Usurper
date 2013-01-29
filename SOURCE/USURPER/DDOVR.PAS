@@ -576,6 +576,7 @@ begin;
  close(f);
 end;
 
+{$IFDEF WIN32}
 procedure load_door32;
 var
  a: integer;
@@ -626,6 +627,7 @@ begin
 
  close(f);
 end;
+{$ENDIF}
 
 procedure load_doorsys;
 var
@@ -907,6 +909,9 @@ begin;
  if bbstype=12 then load_spitfire;
  if bbstype=13 then load_2am;
  if bbstype=14 then load_TriBBS;
+{$IFDEF WIN32}
+ if bbstype=15 then load_door32;
+{$ENDIF}
  user_first_name:=stu(user_first_name);
  user_last_name:=stu(user_last_name);
 {if node_num=0 then node_num:=1; }
@@ -948,6 +953,18 @@ procedure MakeInfoStrings(
  var lockbaud: longint);
 
 const
+{$IFDEF MSDOS}
+ software_names: array[0..14] of string[15]=
+  ('Maint',     'Local',      'Sysop',      'QBBS',       'PCBoard 12',
+   'WWIV',      'PCBoard 15',        'RBBS 16+',   'Phoenix',    'DORINFO1',
+   'PCBoard 14','DOORSYS',    'Spitfire',   '2am-bbs',   'TriBBS');
+ drop_files: array[0..14] of string[15]=
+  ('n/a',        'n/a',         'n/a',         'DORINFOx.DEF',
+   'PCBOARD.SYS','CHAIN.TXT','PCBOARD.SYS', 'DORINFOx.DEF',
+   'INFO.BBS',   'DORINFO1.DEF','PCBOARD.SYS', 'DOOR.SYS',
+   'SFDOORS.DAT','JUMPER.DAT','TRIBBS.SYS');
+{$ENDIF}
+{$IFDEF WIN32}
  software_names: array[0..15] of string[15]=
   ('Maint',     'Local',      'Sysop',      'QBBS',       'PCBoard 12',
    'WWIV',      'PCBoard 15',        'RBBS 16+',   'Phoenix',    'DORINFO1',
@@ -957,6 +974,7 @@ const
    'PCBOARD.SYS','CHAIN.TXT','PCBOARD.SYS', 'DORINFOx.DEF',
    'INFO.BBS',   'DORINFO1.DEF','PCBOARD.SYS', 'DOOR.SYS',
    'SFDOORS.DAT','JUMPER.DAT','TRIBBS.SYS', 'DOOR32.SYS');
+{$ENDIF}
  istrue: array[false..true] of string[8] = ('FALSE','TRUE');
 var
  s: string;
