@@ -1,0 +1,92 @@
+#define SOCEPERM           10001
+#define SOCESRCH           10003
+#define SOCEINTR           10004
+#define SOCENXIO           10006
+#define SOCEBADF           10009
+#define SOCEACCES          10013
+#define SOCEFAULT          10014
+#define SOCEINVAL          10022
+#define SOCEMFILE          10024
+#define SOCEPIPE           10032
+#define SOCEOS2ERR         10100
+#define SOCEWOULDBLOCK     10035
+#define SOCEINPROGRESS     10036
+#define SOCEALREADY        10037
+#define SOCENOTSOCK        10038
+#define SOCEDESTADDRREQ    10039
+#define SOCEMSGSIZE        10040
+#define SOCEPROTOTYPE      10041
+#define SOCENOPROTOOPT     10042
+#define SOCEPROTONOSUPPORT 10043
+#define SOCESOCKTNOSUPPORT 10044
+#define SOCEOPNOTSUPP      10045
+#define SOCEPFNOSUPPORT    10046
+#define SOCEAFNOSUPPORT    10047
+#define SOCEADDRINUSE      10048
+#define SOCEADDRNOTAVAIL   10049
+#define SOCENETDOWN        10050
+#define SOCENETUNREACH     10051
+#define SOCENETRESET       10052
+#define SOCECONNABORTED    10053
+#define SOCECONNRESET      10054
+#define SOCENOBUFS         10055
+#define SOCEISCONN         10056
+#define SOCENOTCONN        10057
+#define SOCESHUTDOWN       10058
+#define SOCETOOMANYREFS    10059
+#define SOCETIMEDOUT       10060
+#define SOCECONNREFUSED    10061
+#define SOCELOOP           10062
+#define SOCENAMETOOLONG    10063
+#define SOCEHOSTDOWN       10064
+#define SOCEHOSTUNREACH    10065
+#define SOCENOTEMPTY       10066
+
+
+STRINGTABLE
+{
+  SOCEPERM, "Not owner"
+  SOCESRCH, "No such process"
+  SOCEINTR, "Interrupted system call"
+  SOCENXIO, "No such device or address"
+  SOCEBADF, "Bad file number"
+  SOCEACCES, "Permission denied"
+  SOCEFAULT, "Bad address"
+  SOCEINVAL, "Invalid argument"
+  SOCEMFILE, "Too many open files"
+  SOCEPIPE, "Broken pipe"
+  SOCEOS2ERR, "OS/2 Error"
+  SOCEWOULDBLOCK, "Operation would block"
+  SOCEINPROGRESS, "Operation now in progress"
+  SOCEALREADY, "Operation already in progress"
+  SOCENOTSOCK, "Socket operation on non-socket"
+  SOCEDESTADDRREQ, "Destination address required"
+  SOCEMSGSIZE, "Message too long"
+  SOCEPROTOTYPE, "Protocol wrong type for socket"
+  SOCENOPROTOOPT, "Protocol not available"
+  SOCEPROTONOSUPPORT, "Protocol not supported"
+  SOCESOCKTNOSUPPORT, "Socket type not supported"
+  SOCEOPNOTSUPP, "Operation not supported on socket"
+  SOCEPFNOSUPPORT, "Protocol family not supported"
+  SOCEAFNOSUPPORT, "Address family not supported by protocol family"
+  SOCEADDRINUSE, "Address already in use"
+  SOCEADDRNOTAVAIL, "Can't assign requested address"
+  SOCENETDOWN, "Network is down"
+  SOCENETUNREACH, "Network is unreachable"
+  SOCENETRESET, "Network dropped connection on reset"
+  SOCECONNABORTED, "Software caused connection abort"
+  SOCECONNRESET, "Connection reset by peer"
+  SOCENOBUFS, "No buffer space available"
+  SOCEISCONN, "Socket is already connected"
+  SOCENOTCONN, "Socket is not connected"
+  SOCESHUTDOWN, "Can't send after socket shutdown"
+  SOCETOOMANYREFS, "Too many references: can't splice"
+  SOCETIMEDOUT, "Connection timed out"
+  SOCECONNREFUSED, "Connection refused"
+  SOCELOOP, "Too many levels of symbolic links"
+  SOCENAMETOOLONG, "File name too long"
+  SOCEHOSTDOWN, "Host is down"
+  SOCEHOSTUNREACH, "No route to host"
+  SOCENOTEMPTY, "Directory not empty"
+}
+

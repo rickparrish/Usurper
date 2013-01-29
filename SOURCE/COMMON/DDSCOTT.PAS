@@ -50,6 +50,14 @@ procedure HexToDec(var s: string);
 
 implementation
 
+{$IFDEF WIN32}
+uses
+  RPScreen;
+  
+var
+  SavedScreen: TScreenBuf;
+{$ENDIF}
+
 function hex(i: byte): string;
 const
  ss: string='0123456789ABCDEF';
@@ -315,7 +323,7 @@ end;
 {$IFDEF WIN32}
 procedure cursoroff;
 begin
-  WriteLn('REETODO DDSCOTT cursoroff'); Halt;
+  RPHideCursor;
 end;
 {$ENDIF}
 
@@ -357,7 +365,7 @@ end;
 {$IFDEF WIN32}
 procedure cursoron;
 begin
-  WriteLn('REETODO DDSCOTT cursoron'); Halt;
+  RPShowCursor;
 end;
 {$ENDIF}
 
@@ -404,7 +412,9 @@ end;
 {$IFDEF WIN32}
 procedure savescreen;
 begin
-  WriteLn('REETODO DDSCOTT savescreen'); Halt;
+  RPSaveScreen(SavedScreen);
+  x:=wherex;
+  y:=wherey;
 end;
 {$ENDIF}
 
@@ -422,7 +432,8 @@ end;
 {$IFDEF WIN32}
 procedure restorescreen;
 begin
-  WriteLn('REETODO DDSCOTT restorescreen'); Halt;
+  RPRestoreScreen(SavedScreen);
+  gotoxy(x,y);
 end;
 {$ENDIF}
 

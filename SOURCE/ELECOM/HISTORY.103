@@ -1,0 +1,24 @@
+WHATSNEW
+========
+
+16 June 2002     : Added a very small state machine to the IAC parser of the
+                   telnet code, to prevent misses of IAC's on the last
+                   character of the buffer.
+23 December 2000 : Increased buffersizes that Win32 allocates for in/out
+                   communications. It now uses 3k, instead of 256 bytes.
+30 July 2000     : Initial DoRxEvent and DoTxEvent were set in true state
+                   which could cause initial very high CPU usage.
+18 June 2000     : Changed the way EleCOM calls it threaded functions, making
+                   EleCOM useful for applications where more than one comport
+                   has to be controlled at a time.
+20 February 2000 : W32SNGL.PAS or WIN32COM.PAS now include WINDEF.FPC if
+                   compiled with the FPC compiler. This include file redefines
+                   (some) of the Win32 API calls to make sure they are the
+                   correct calling format for us (= the same as with Delphi
+                   and VirtualPascal)
+09 September 1999: W32SNGL.PAS - Reduced the number of threads used by this
+                   engine. This one works better on Win9x systems.
+05 September 1999: TELNET.PAS added some extra error information to make sure
+                   errors can be more easily diagnosed.
+29 August 1999   : ELENORM.PAS - "Plain, vanilly" Pascal version you can use
+                   as a wrapper around the OOP code.

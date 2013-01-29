@@ -976,10 +976,12 @@ exit:
    end;
 {$ENDIF}
 {$IFDEF WIN32}
+// This is only used when the sysop shells to dos while someone is playing
+// so it's not overly important to implement all the features do_exec supports
 function do_exec (xfn: string; pars: string; spawn: integer;
                   needed: word; newenv: boolean): integer;
 begin
-  WriteLn('REETODO EXEC do_exec'); Halt;
+  Dos.Exec(xfn, pars);
 end;
 {$ENDIF}
 

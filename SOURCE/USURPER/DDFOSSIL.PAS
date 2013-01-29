@@ -53,11 +53,19 @@ procedure Async_Buffer_Status(var Insize,Infree,OutSize,Outfree: word;
 
 implementation
 
+{$IFDEF WIN32}
+uses
+  EleNorm, Windows;
+  
+var LastChar: Char;
+    DidInit: Boolean = false;
+{$ENDIF}
+
 {$IFDEF MSDOS}
 procedure async_send(c: char);
 var
  regs: registers;
-begin;
+begin
  with regs do
   begin
     ah:=$01;
@@ -70,27 +78,38 @@ end;
 {$IFDEF WIN32}
 procedure async_send(c: char);
 begin
-  WriteLn('REETODO DDFOSSIL async_send'); Halt;
+  if Not(DidInit) then Exit;
+  Com_SendChar(c);
 end;
 {$ENDIF}
 
+{$IFDEF MSDOS}
 procedure async_send_string(s: string);
 var
  a: integer;
-begin;
+begin
+ { REETODO This could probably be optimized to send a block at a time, not a character at a time }
  for a:=1 to length(s) do async_send(s[a]);
 end;
+{$ENDIF}
+{$IFDEF WIN32}
+procedure async_send_string(s: string);
+begin
+  if Not(DidInit) then Exit;
+  Com_SendString(s);
+end;
+{$ENDIF}
 
 {$IFDEF MSDOS}
 function async_receive(var ch: char): boolean;
 var
  regs: registers;
-begin;
+begin
  ch:=#0;
  regs.ah:=$03;
  regs.dx:=port_num;
  intr($14,regs);
- if (regs.ah and 1)=1 then begin;
+ if (regs.ah and 1)=1 then begin
   regs.ah:=$02;
   regs.dx:=port_num;
   intr($14,regs);
@@ -102,7 +121,39 @@ end;
 {$IFDEF WIN32}
 function async_receive(var ch: char): boolean;
 begin
-  WriteLn('REETODO DDFOSSIL async_receive'); Halt;
+  ch := #0;
+  async_receive := false;
+  if Not(DidInit) then Exit;
+  
+  // Loop until we get a key we want
+  while (Com_CharAvail) and (ch = #0) do
+  begin
+    // Get next char
+    ch := Com_GetChar;
+      
+    // Handle translating the LF character
+    if (ch = #10) then
+    begin
+      if (LastChar = #13) then
+      begin
+        // Last was CR, so ignore LF
+        LastChar := #0;
+        ch := #0;
+      end else
+      begin
+        // Last was not CR, so translate this LF to CR
+        ch := #13;
+        LastChar := ch;
+        async_receive := true;
+        Exit;
+      end;
+    end else
+    begin
+      LastChar := ch;
+      async_receive := true;
+      Exit;
+    end;
+  end;
 end;
 {$ENDIF}
 
@@ -110,7 +161,7 @@ end;
 function async_carrier_drop: boolean;
 var
  regs: registers;
-begin;
+begin
  regs.ah:=$03;
  regs.dx:=port_num;
  intr($14,regs);
@@ -120,7 +171,9 @@ end;
 {$IFDEF WIN32}
 function async_carrier_drop: boolean;
 begin
-  WriteLn('REETODO DDFOSSIL async_carrier_drop'); Halt;
+  async_carrier_drop := false;
+  if Not(DidInit) then Exit;
+  async_carrier_drop := NOT Com_Carrier;
 end;
 {$ENDIF}
 
@@ -128,7 +181,7 @@ end;
 function async_carrier_present: boolean;
 var
  regs: registers;
-begin;
+begin
  regs.ah:=$03;
  regs.dx:=port_num;
  intr($14,regs);
@@ -138,7 +191,9 @@ end;
 {$IFDEF WIN32}
 function async_carrier_present: boolean;
 begin
-  WriteLn('REETODO DDFOSSIL async_carrier_present'); Halt;
+  async_carrier_present := true;
+  if Not(DidInit) then Exit;
+  async_carrier_present := Com_Carrier;
 end;
 {$ENDIF}
 
@@ -146,7 +201,7 @@ end;
 function async_buffer_check: boolean;
 var
  regs: registers;
-begin;
+begin
  regs.ah:=$03;
  regs.dx:=port_num;
  intr($14,regs);
@@ -156,7 +211,9 @@ end;
 {$IFDEF WIN32}
 function async_buffer_check: boolean;
 begin
-  WriteLn('REETODO DDFOSSIL async_buffer_check'); Halt;
+  async_buffer_check := false;
+  if Not(DidInit) then Exit;
+  async_buffer_check := Com_CharAvail;
 end;
 {$ENDIF}
 
@@ -164,7 +221,7 @@ end;
 function async_init_fossil: boolean;
 var
  regs: registers;
-begin;
+begin
  regs.ah:=$04;
  regs.bx:=$00;
  regs.dx:=port_num;
@@ -175,7 +232,12 @@ end;
 {$IFDEF WIN32}
 function async_init_fossil: boolean;
 begin
-  WriteLn('REETODO DDFOSSIL async_init_fossil'); Halt;
+  if (DidInit) then Exit;
+  DidInit := true;
+  Com_StartUp(2);
+  Com_SetDontClose(true);
+  Com_OpenQuick(port_num);
+  async_init_fossil := true;
 end;
 {$ENDIF}
 
@@ -183,7 +245,7 @@ end;
 procedure async_deinit_fossil;
 var
  regs: registers;
-begin;
+begin
  regs.ah:=$05;
  regs.dx:=port_num;
  intr($14,regs);
@@ -192,7 +254,8 @@ end;
 {$IFDEF WIN32}
 procedure async_deinit_fossil;
 begin
-  WriteLn('REETODO DDFOSSIL async_deinit_fossil'); Halt;
+  if Not(DidInit) then Exit;
+  Com_ShutDown;
 end;
 {$ENDIF}
 
@@ -200,7 +263,7 @@ end;
 procedure async_set_dtr(state: boolean);
 var
  regs: registers;
-begin;
+begin
  regs.ah:=$06;
  if state then regs.al:=1 else regs.al:=0;
  regs.dx:=port_num;
@@ -210,7 +273,8 @@ end;
 {$IFDEF WIN32}
 procedure async_set_dtr(state: boolean);
 begin
-  WriteLn('REETODO DDFOSSIL async_set_dtr'); Halt;
+  if Not(DidInit) then Exit;
+  // REENOTE Telnet can't set DTR
 end;
 {$ENDIF}
 
@@ -218,16 +282,21 @@ end;
 procedure async_flush_output;
 var
  regs: registers;
-begin;
+begin
  regs.ah:=$08;
  regs.dx:=port_num;
  intr($14,regs);
 end;
 {$ENDIF}
 {$IFDEF WIN32}
+procedure MySlice;
+begin
+  Sleep(1);
+end;
+
 procedure async_flush_output;
 begin
-  WriteLn('REETODO DDFOSSIL async_flush_output'); Halt;
+  Com_FlushOutBuffer(MySlice);
 end;
 {$ENDIF}
 
@@ -235,7 +304,7 @@ end;
 procedure async_purge_output;
 var
  regs: registers;
-begin;
+begin
  regs.ah:=$09;
  regs.dx:=port_num;
  intr($14,regs);
@@ -244,7 +313,8 @@ end;
 {$IFDEF WIN32}
 procedure async_purge_output;
 begin
-  WriteLn('REETODO DDFOSSIL async_purge_output'); Halt;
+  if Not(DidInit) then Exit;
+  Com_PurgeOutBuffer;
 end;
 {$ENDIF}
 
@@ -252,7 +322,7 @@ end;
 procedure async_purge_input;
 var
  regs: registers;
-begin;
+begin
  regs.ah:=$0A;
  regs.dx:=port_num;
  intr($14,regs);
@@ -261,7 +331,8 @@ end;
 {$IFDEF WIN32}
 procedure async_purge_input;
 begin
-  WriteLn('REETODO DDFOSSIL async_purge_input'); Halt;
+  if Not(DidInit) then Exit;
+  Com_PurgeInBuffer;
 end;
 {$ENDIF}
 
@@ -269,7 +340,7 @@ end;
 procedure async_watchdog_on;
 var
  regs: registers;
-begin;
+begin
  regs.ah:=$14;
  regs.al:=$01;
  regs.dx:=port_num;
@@ -279,7 +350,8 @@ end;
 {$IFDEF WIN32}
 procedure async_watchdog_on;
 begin
-  WriteLn('REETODO DDFOSSIL async_watchdog_on'); Halt;
+  if Not(DidInit) then Exit;
+  // REENOTE Nothing to do here
 end;
 {$ENDIF}
 
@@ -287,7 +359,7 @@ end;
 procedure async_watchdog_off;
 var
  regs: registers;
-begin;
+begin
  regs.ah:=$14;
  regs.al:=$00;
  regs.dx:=port_num;
@@ -297,7 +369,8 @@ end;
 {$IFDEF WIN32}
 procedure async_watchdog_off;
 begin
-  WriteLn('REETODO DDFOSSIL async_watchdog_off'); Halt;
+  if Not(DidInit) then Exit;
+  // REENOTE Nothing to do here
 end;
 {$ENDIF}
 
@@ -305,7 +378,7 @@ end;
 procedure async_warm_reboot;
 var
  regs: registers;
-begin;
+begin
  regs.ah:=$17;
  regs.al:=$01;
  intr($14,regs);
@@ -314,7 +387,8 @@ end;
 {$IFDEF WIN32}
 procedure async_warm_reboot;
 begin
-  WriteLn('REETODO DDFOSSIL async_warm_reboot'); Halt;
+  if Not(DidInit) then Exit;
+  // REENOTE Nothing to do here
 end;
 {$ENDIF}
 
@@ -322,7 +396,7 @@ end;
 procedure async_cold_reboot;
 var
  regs: registers;
-begin;
+begin
  regs.ah:=$17;
  regs.al:=$00;
  intr($14,regs);
@@ -331,7 +405,8 @@ end;
 {$IFDEF WIN32}
 procedure async_cold_reboot;
 begin
-  WriteLn('REETODO DDFOSSIL async_cold_reboot'); Halt;
+  if Not(DidInit) then Exit;
+  // REENOTE Nothing to do here
 end;
 {$ENDIF}
 
@@ -340,7 +415,7 @@ procedure async_set_baud(n: longint);
 var
  w : word;
  regs: registers;
-begin;
+begin
  regs.ah:=$00;
  regs.al:=$03;
  regs.dx:=port_num;
@@ -370,7 +445,8 @@ end;
 {$IFDEF WIN32}
 procedure async_set_baud(n: longint);
 begin
-  WriteLn('REETODO DDFOSSIL async_set_baud'); Halt;
+  if Not(DidInit) then Exit;
+  // REENOTE Telnet can't set baud
 end;
 {$ENDIF}
 
@@ -379,7 +455,7 @@ procedure async_set_baudBnu(n: longint);
 var
  w : word;
  regs: registers;
-begin;
+begin
  regs.ah:=$00;
  regs.al:=$03;
  regs.dx:=port_num;
@@ -412,7 +488,8 @@ end;
 {$IFDEF WIN32}
 procedure async_set_baudBnu(n: longint);
 begin
-  WriteLn('REETODO DDFOSSIL async_set_baudBnu'); Halt;
+  if Not(DidInit) then Exit;
+  // REENOTE Telnet can't set baud
 end;
 {$ENDIF}
 
@@ -439,7 +516,7 @@ david  }
 procedure async_set_flow(SoftTran,Hard,SoftRecv: boolean);
 var
  regs: registers;
-begin;
+begin
  regs.ah:=$0F;
  regs.al:=$00;
  if softtran then regs.al:=regs.al or $01;
@@ -452,7 +529,8 @@ end;
 {$IFDEF WIN32}
 procedure async_set_flow(SoftTran,Hard,SoftRecv: boolean);
 begin
-  WriteLn('REETODO DDFOSSIL async_set_flow'); Halt;
+  if Not(DidInit) then Exit;
+  // REENOTE Telnet can't set flow
 end;
 {$ENDIF}
 
@@ -460,7 +538,7 @@ end;
 procedure async_get_fossil_data;
 var
  regs: registers;
-begin;
+begin
  regs.ah:=$1B;
  regs.cx:=sizeof(fossildata);
  regs.dx:=port_num;
@@ -472,15 +550,17 @@ end;
 {$IFDEF WIN32}
 procedure async_get_fossil_data;
 begin
-  WriteLn('REETODO DDFOSSIL async_get_fossil_data'); Halt;
+  if Not(DidInit) then Exit;
+  // REENOTE Telnet has no FOSSIL data to get
 end;
 {$ENDIF}
 
+{$IFDEF MSDOS}
 procedure Async_Buffer_Status(var Insize,Infree,OutSize,Outfree: word;
                               var fossilname:string);
 var
  i:byte;
-begin;
+begin
  async_get_fossil_data;
  insize:=fossildata.ibufr;
  infree:=fossildata.ifree;
@@ -492,5 +572,19 @@ begin;
  move(fossildata.ident^, fossilname[1], i);
  fossilname[0] := char(i);
 end;
+{$ENDIF}
+{$IFDEF WIN32}
+procedure Async_Buffer_Status(var Insize,Infree,OutSize,Outfree: word;
+                              var fossilname:string);
+var FInFree, FOutFree, FInUsed, FOutUsed: Longint;
+begin
+  if Not(DidInit) then Exit;
+  Com_GetBufferStatus(FInFree, FOutFree, FInUsed, FOutUsed);
+  Insize := FInFree + FInUsed;
+  Infree := FInFree;
+  Outsize := FOutFree + FOutUsed;
+  Outfree := FOutFree;
+end;
+{$ENDIF}
 
 end.

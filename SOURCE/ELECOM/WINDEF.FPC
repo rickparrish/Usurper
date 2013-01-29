@@ -1,0 +1,79 @@
+(*
+**
+** Include file to make FPC more Delphi compatible
+**
+*)
+
+{$IFDEF FPC}
+type DCB = record
+          DCBlength : DWORD;
+          BaudRate : DWORD;
+          flags : longint;
+          wReserved : WORD;
+          XonLim : WORD;
+          XoffLim : WORD;
+          ByteSize : BYTE;
+          Parity : BYTE;
+          StopBits : BYTE;
+          XonChar : char;
+          XoffChar : char;
+          ErrorChar : char;
+          EofChar : char;
+          EvtChar : char;
+          wReserved1 : WORD;
+       end;
+
+  TDcb     = DCB;
+  pInteger = ^Integer;
+
+  PSecurityAttributes = ^TSecurityAttributes;
+  TSecurityAttributes = record
+    nLength: Longint;
+    lpSecurityDescriptor: Pointer;
+    bInheritHandle: Bool;
+  end;
+
+  function GetCommState(hFile:HANDLE; var lpDCB:TDCB):WINBOOL; external 'kernel32' name 'GetCommState';
+  function SetCommState(hFile:HANDLE; var lpDCB:TDCB):WINBOOL; external 'kernel32' name 'SetCommState';
+  function WaitForMultipleObjects(nCount:DWORD; lpHandles:Pointer; bWaitAll:WINBOOL; dwMilliseconds:DWORD):DWORD; external 'kernel32' name 'WaitForMultipleObjects';
+
+
+{-- Apparently, FPC 1.0 doesnt have the "SysErrorMessage" defined in its ------}
+{-- SYSUTILS unit. We create this function here. ------------------------------}
+function FormatMessageA(dwFlags     : DWORD;
+                        lpSource    : Pointer;
+                        dwMessageId : DWORD;
+                        dwLanguageId: DWORD;
+                        lpBuffer    : PCHAR;
+                        nSize       : DWORD;
+                        Arguments   : Pointer): DWORD; external 'kernel32' name 'FormatMessageA';
+
+
+function SysErrorMessage(ErrorCode: Integer): String;
+const
+  MaxMsgSize = Format_Message_Max_Width_Mask;
+
+var MsgBuffer: pChar;
+begin
+  {-- Allocate memory for error message ---------------------------------------}
+  GetMem(MsgBuffer, MaxMsgSize);
+  FillChar(MsgBuffer^, MaxMsgSize, #0);
+
+  {-- Retrieve the message ----------------------------------------------------}
+  FormatMessageA(FORMAT_MESSAGE_FROM_SYSTEM,
+                 nil,
+                 ErrorCode,
+                 MakeLangId(LANG_NEUTRAL, SUBLANG_DEFAULT),
+                 MsgBuffer,                 { This function allocs the memory }
+                 MaxMsgSize,                           { Maximum message size }
+                 nil);
+
+  {-- Return the string and release the memory --------------------------------}
+  SysErrorMessage := StrPas(MsgBuffer);
+
+  FreeMem(MsgBuffer, MaxMsgSize);
+end; { func. SysErrorMessage }
+
+{$ENDIF}
+
+

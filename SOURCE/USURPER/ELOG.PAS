@@ -42,8 +42,10 @@ Procedure GetDate1(VAR Month:Word;
 Procedure GetDate1(VAR Month:Word;
                    VAR day:Word;
                    VAR year:Word);
+var
+  DOW: Word;
 begin
-  WriteLn('REETODO ELOG GetDate1'); Halt;
+  GetDate(Year, Month, Day, DOW);
 end;
 {$ENDIF}
 

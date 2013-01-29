@@ -144,7 +144,7 @@ Uses Dos, Crt, Init,
      DDplus, DDscott, ComIO,
      Exec, AnsiColr, SwagDate,
      Various, NetFilep, DispText,
-     Online, {$IFDEF MSDOS}sdelay,{$ENDIF} File_IO;
+     Online, {$IFDEF MSDOS}sdelay,{$ENDIF} File_IO {$IFDEF WIN32}, RPScreen, Windows{$ENDIF};
 
 var carriage_return : boolean; {used by D and SD procedures (display routines)}
 
@@ -308,10 +308,10 @@ var
  i, j, k, j2, ju: real;
 begin
  i := yr;     j := mo;     k := da;
- j2 := int( (j - 14)/12 );
- ju := k - 32075 + int(1461 * ( i + 4800 + j2 ) / 4 );
- ju := ju + int( 367 * (j - 2 - j2 * 12) / 12);
- ju := ju - int(3 * int( (i + 4900 + j2) / 100) / 4);
+ j2 := System.int( (j - 14)/12 );
+ ju := k - 32075 + System.int(1461 * ( i + 4800 + j2 ) / 4 );
+ ju := ju + System.int( 367 * (j - 2 - j2 * 12) / 12);
+ ju := ju - System.int(3 * System.int( (i + 4900 + j2) / 100) / 4);
  Jul := ju;
 end;
 
@@ -477,8 +477,7 @@ begin
  millidelay(godis);
 {$ENDIF}
 {$IFDEF WIN32}
- // REENOTE millidelay must come from sdelay
- WriteLn('REETODO JAKOB Delay2'); Halt;
+ Sleep(Trunc(godis));
 {$ENDIF}
 end;
 
@@ -678,8 +677,18 @@ InLine(
 {$ENDIF}
 {$IFDEF WIN32}
 Procedure Upper4(var Str: String);
+var
+  i, len : Integer;
 begin
-  WriteLn('REETODO JAKOB Upper4'); Halt;
+  i := 0;
+  len := Ord(Str[0]);
+  Repeat
+    Inc(i);
+    If i > len Then
+      Break;
+    If Str[i] in ['a'..'z'] Then
+      Dec(Str[i], 32);
+  Until False;
 end;
 {$ENDIF}
 
@@ -2180,8 +2189,12 @@ END;
 {$ENDIF}
 {$IFDEF WIN32}
 FUNCTION ScreenRows: byte; 
+var
+  y: Word;
 begin
-  WriteLn('REETODO JAKOB ScreenRows'); Halt;
+  y := RPScreenSizeY;
+  if (y > 255) then y := 255;
+  ScreenRows := y;
 end;
 {$ENDIF}
 
@@ -2196,8 +2209,12 @@ END;
 {$ENDIF}
 {$IFDEF WIN32}
 FUNCTION ScreenCols: byte;
+var
+  x: Word;
 begin
-  WriteLn('REETODO JAKOB ScreenCols'); Halt;
+  x := RPScreenSizeX;
+  if (x > 255) then x := 255;
+  ScreenCols := x;
 end;
 {$ENDIF}
 

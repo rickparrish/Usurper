@@ -138,18 +138,18 @@ Implementation
 
 Uses Init, Cms, InitGods,
      Jakob, Mail, News,
-     Online, File_io; {jakob! You have also changed in DDOVR2.PAS}
+     Online, File_io {$IFDEF WIN32}, Windows{$ENDIF}; {jakob! You have also changed in DDOVR2.PAS}
 
 Procedure DV_Aware_On;       {$IFDEF MSDOS}External;{$ENDIF}
 {$IFDEF WIN32}
 begin
-  WriteLn('REETODO DDPLUS DV_Aware_On'); Halt;
+  // REENOTE Presumably unimportant since we're not running DesqView
 end;
 {$ENDIF}
 Procedure DV_Pause;          {$IFDEF MSDOS}External;{$ENDIF}
 {$IFDEF WIN32}
 begin
-  WriteLn('REETODO DDPLUS DV_Pause'); Halt;
+  // REENOTE Presumably unimportant since we're not running DesqView
 end;
 {$ENDIF}
 
@@ -171,7 +171,7 @@ end;
 {$IFDEF WIN32}
 procedure Dos_Sleep;
 begin
-  WriteLn('REETODO DDPLUS Dos_Sleep'); Halt;
+  Sleep(1);
 end;
 {$ENDIF}
 { This releases the virtual machine time slice for MSwindows, Dos 5.0, OS/2 }
@@ -191,7 +191,7 @@ end;
 {$IFDEF WIN32}
 procedure Win_Pause;
 begin
-  WriteLn('REETODO DDPLUS Win_Pause'); Halt;
+  Sleep(1);
 end;
 {$ENDIF}
 
@@ -858,7 +858,7 @@ inline($FF/$1E/Proc_Call_Ptr);
 {$ENDIF}
 {$IFDEF WIN32}
 begin
-  WriteLn('REETODO DDPLUS CallProc'); Halt;
+  // REENOTE Doesn't look like Proc_Call_Ptr is ever assigned to, so it never needs to be called
 end;
 {$ENDIF}
 

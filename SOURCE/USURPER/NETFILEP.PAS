@@ -137,7 +137,7 @@ end;
 {$IFDEF WIN32}
 function ShareInst : boolean;
 begin
-  WriteLn('REETODO NETFILEP ShareInst'); Halt;
+  ShareInst := true;
 end;
 {$ENDIF}
 

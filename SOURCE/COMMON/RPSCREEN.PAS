@@ -14,9 +14,13 @@ type
 {$ENDIF}
 
 procedure RPGotoXY(xy: SmallWord);
+procedure RPHideCursor;
 procedure RPRestoreScreen(var screenBuf: TScreenBuf);
 procedure RPSaveScreen(var screenBuf: TScreenBuf);
+function  RPScreenSizeX: Word;
+function  RPScreenSizeY: Word;
 procedure RPSetAttrAt(x, y, attr: SmallWord);
+procedure RPShowCursor;
 function  RPWhereXY: SmallWord;
 
 implementation
@@ -34,6 +38,15 @@ begin
   Coord.x := xy AND $00FF;
   Coord.y := xy AND $FF00 SHR 8;
   SetConsoleCursorPosition(StdOut, Coord);
+end;
+
+procedure RPHideCursor;
+var
+  CCI: TConsoleCursorInfo;
+begin
+  GetConsoleCursorInfo(StdOut, CCI);
+  CCI.bVisible := false;
+  SetConsoleCursorInfo(StdOut, CCI);
 end;
 
 { REETODO Should detect screen size }
@@ -72,6 +85,22 @@ begin
   ReadConsoleOutput(StdOut, @screenBuf[1][1], BufSize, ReadPos, SourceRect);
 end;
 
+function  RPScreenSizeX: Word;
+var
+  CSBI: TConsoleScreenBufferInfo;
+begin
+  GetConsoleScreenBufferInfo(StdOut, CSBI);
+  RPScreenSizeX := CSBI.srWindow.Right - CSBI.srWindow.Left + 1;
+end;
+
+function  RPScreenSizeY: Word;
+var
+  CSBI: TConsoleScreenBufferInfo;
+begin
+  GetConsoleScreenBufferInfo(StdOut, CSBI);
+  RPScreenSizeY := CSBI.srWindow.Bottom - CSBI.srWindow.Top + 1;
+end;
+
 procedure RPSetAttrAt(x, y, attr: SmallWord);
 var
   NumWritten: Longint;
@@ -80,6 +109,15 @@ begin
   WriteCoord.X := x;
   WriteCoord.Y := y;
   WriteConsoleOutputAttribute(StdOut, @attr, 1, WriteCoord, NumWritten);
+end;
+
+procedure RPShowCursor;
+var
+  CCI: TConsoleCursorInfo;
+begin
+  GetConsoleCursorInfo(StdOut, CCI);
+  CCI.bVisible := true;
+  SetConsoleCursorInfo(StdOut, CCI);
 end;
 
 function RPWhereXY: SmallWord;

@@ -31,7 +31,6 @@ These files are part of Usurper.
 
 TODO list:<br />
 <ul>
-  <li>Implement any REETODOs that appear in compiled executables</li>
   <li>Investigate FILEMODE usage to see if FILEMODEREADWRITE, TEXTMODEREAD or TEXTMODEREADWRITE should be used</li>
   <li>Find/correct any usage of FOR loop variables after the loop (since they are 1 greater in VP than in BP</li>
 </ul>
@@ -44,4 +43,5 @@ Completed list<br />
   <li>TYPEs of OF INTEGER to OF SMALLINT (just in case they're used in a RECORD)</li>
   <li>WORD in RECORD to SMALLWORD</li>
   <li>INTEGER in RECORD to SMALLINT</li>
+  <li>Implement any REETODOs that appear in compiled executables</li>
 </ul>

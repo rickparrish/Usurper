@@ -60,7 +60,7 @@ inline($FF/$1E/DDUserConfigPtr);
 {$ENDIF}
 {$IFDEF WIN32}
 begin
-  WriteLn('REETODO DDOVR2 CallProc'); Halt;
+  // REENOTE Doesn't look like DDUserConfigPtr is ever assigned to, so it never needs to be called
 end;
 {$ENDIF}
 
