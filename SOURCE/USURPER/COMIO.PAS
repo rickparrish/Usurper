@@ -16,7 +16,7 @@ var
  initok, NoFossinit, fosBnu  : boolean;
  internalinsize,internaloutsize: word;
 
-procedure AsyncSelectPort(pn: byte);
+procedure AsyncSelectPort(pn: {$IFDEF MSDOS}byte{$ENDIF}{$IFDEF WIN32}integer{$ENDIF});
 procedure AsyncSendChar(ch: char);
 procedure AsyncReceiveChar(var ch: char);
 function  AsyncCarrierPresent: boolean;
@@ -25,7 +25,7 @@ procedure AsyncSelectFossil(var fossilname:string);
 procedure AsyncSelectInternal;
 procedure AsyncSelectDigiBoard(var digiboardname:string);
 procedure AsyncCloseUp;
-procedure AsyncCloseCom(cp : byte);
+procedure AsyncCloseCom(cp : {$IFDEF MSDOS}byte{$ENDIF}{$IFDEF WIN32}integer{$ENDIF});
 procedure AsyncSetBaud(n: longint);
 procedure AsyncSetDTR(state: boolean);
 procedure AsyncFlushOutput;
@@ -42,11 +42,11 @@ Procedure ResetPorts (var port1,port2,port3,port4: word;
 
 implementation
 
-procedure AsyncSelectPort(pn: byte);
+procedure AsyncSelectPort(pn: {$IFDEF MSDOS}byte{$ENDIF}{$IFDEF WIN32}integer{$ENDIF});
 begin;
  case AsyncIoType of
    Fossil: begin
-             port_num:=pn-1;
+             port_num:=pn{$IFDEF MSDOS}-1{$ENDIF};
              If NoFossInit then
                begin
                  async_purge_output;      { 10/29/94 SRL This may clear up}

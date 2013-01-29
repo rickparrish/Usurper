@@ -28,7 +28,7 @@ var
  com1,com2,com3,com4 : byte;        { temporary non-std comports             }
  port1,port2,port3,port4:word;
  irq1,irq2,irq3,irq4 : byte;
- com_port: byte;                    {from DROP FILE: com port                }
+ com_port: {$IFDEF MSDOS}byte{$ENDIF}{$IFDEF WIN32}integer{$ENDIF}; {from DROP FILE: com port}
  fossilIO,DigiIO: boolean;          {from .CTL file: fossil, digiboard i/o   }
  mintime: byte;                     {Minimum time left before user kicked off}
  notime: string;                    {Out of time filename                    }

@@ -15,7 +15,7 @@ procedure GetBBSInfo(
  var user_first_name,user_last_name: string;
  var user_access_level: word;
  var bbs_time_left: integer;
- var com_port: byte;
+ var com_port: {$IFDEF MSDOS}byte{$ENDIF}{$IFDEF WIN32}integer{$ENDIF};
  var baud_rate : Longint;
  var node_num: integer;
  var local: boolean;
@@ -34,7 +34,7 @@ procedure MakeInfoStrings(
  var user_first_name,user_last_name: string;
  var user_access_level: word;
  var bbs_time_left: integer;
- var com_port: byte;
+ var com_port: {$IFDEF MSDOS}byte{$ENDIF}{$IFDEF WIN32}integer{$ENDIF};
  var baud_rate,baud_modem: longint;
  var node_num: integer;
  var local: boolean;
@@ -63,7 +63,7 @@ procedure GetBBSInfo(
  var user_first_name,user_last_name: string;
  var user_access_level: word;
  var bbs_time_left: integer;
- var com_port: byte;
+ var com_port: {$IFDEF MSDOS}byte{$ENDIF}{$IFDEF WIN32}integer{$ENDIF};
  var baud_rate: LongInt;
  var node_num: integer;
  var local: boolean;
@@ -933,7 +933,7 @@ procedure MakeInfoStrings(
  var user_first_name,user_last_name: string;
  var user_access_level: word;
  var bbs_time_left: integer;
- var com_port: byte;
+ var com_port: {$IFDEF MSDOS}byte{$ENDIF}{$IFDEF WIN32}integer{$ENDIF};
  var baud_rate,baud_modem: longint;
  var node_num: integer;
  var local: boolean;
