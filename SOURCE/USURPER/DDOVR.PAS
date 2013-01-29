@@ -576,6 +576,57 @@ begin;
  close(f);
 end;
 
+procedure load_door32;
+var
+ a: integer;
+ b: boolean;
+ f: text;
+ s: string;
+begin
+ writeln('Opening "DOOR32.SYS".');
+ assign(f,dropfilepath+'DOOR32.SYS');
+ {$I-}
+ reset(F);
+ {$I+}
+ if ioresult<>0 then dderror('Cannot load DOOR32.SYS');
+
+ readln(f, s); { 1 - Comm Type (0=Local, 1=Serial, 2=Telnet) }
+ if (s = '0') then local := true else local := false;
+
+ readln(f, s); { 2 - Comm Or Socket Handle }
+ val(s,com_port,a);
+ 
+ readln(f, s); { 3 - Baud Rate }
+ val(s,baud_rate,a);
+ 
+ readln(f, s); { 4 - BBSID (Software Name & Version }
+ 
+ readln(f, s); { 5 - User's Record Position (1 based) }
+ 
+ readln(f, s); { 6 - User's Real Name }
+ s:=stu(s);
+ b:=false;
+ user_first_name:='';
+ user_last_name:='';
+ for a:=1 to length(s) do if s[a]=' ' then b:=true else if b then
+  user_last_name:=user_last_name+upcase(s[a]) else user_first_name:=user_first_name+upcase(s[a]);
+
+ readln(f, s); { 7 - User's Handle/Alias }
+ 
+ readln(f, s); { 8 - User's Access Level }
+ val(s,user_access_level,a);
+ 
+ readln(f, s); { 9 - User's Time Left (In Minutes) }
+ val(s,bbs_time_left,a);
+ 
+ readln(f, s); { 10 - Emulation (0=Ascii, 1=Ansi, 2=Avatar, 3=RIP, 4=MaxGfx) }
+ if (s = '0') then graphics := 2 else graphics := 3;
+ 
+ readln(f, s); { 11 - Current Node Number }
+
+ close(f);
+end;
+
 procedure load_doorsys;
 var
  b: boolean;
@@ -897,15 +948,15 @@ procedure MakeInfoStrings(
  var lockbaud: longint);
 
 const
- software_names: array[0..14] of string[15]=
+ software_names: array[0..15] of string[15]=
   ('Maint',     'Local',      'Sysop',      'QBBS',       'PCBoard 12',
    'WWIV',      'PCBoard 15',        'RBBS 16+',   'Phoenix',    'DORINFO1',
-   'PCBoard 14','DOORSYS',    'Spitfire',   '2am-bbs',   'TriBBS');
- drop_files: array[0..14] of string[15]=
+   'PCBoard 14','DOORSYS',    'Spitfire',   '2am-bbs',   'TriBBS', 'DOOR32.SYS');
+ drop_files: array[0..15] of string[15]=
   ('n/a',        'n/a',         'n/a',         'DORINFOx.DEF',
    'PCBOARD.SYS','CHAIN.TXT','PCBOARD.SYS', 'DORINFOx.DEF',
    'INFO.BBS',   'DORINFO1.DEF','PCBOARD.SYS', 'DOOR.SYS',
-   'SFDOORS.DAT','JUMPER.DAT','TRIBBS.SYS');
+   'SFDOORS.DAT','JUMPER.DAT','TRIBBS.SYS', 'DOOR32.SYS');
  istrue: array[false..true] of string[8] = ('FALSE','TRUE');
 var
  s: string;

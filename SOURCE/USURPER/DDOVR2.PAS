@@ -293,6 +293,7 @@ begin;
     if p2='SPITFIRE' then bbs_software:=12 else
     if p2='2AM' then bbs_software:=13 else
     if p2='TRIBBS' then bbs_software:=14 else
+    if p2='DOOR32' then bbs_software:=15 else
      badparam(s);
    end else
    if p1='STATUS' then begin;
@@ -332,6 +333,13 @@ begin;
  end;
  close(f);
  filemode:=ofm;
+
+{$IFDEF WIN32}
+ { ensure win32 doors run with fossil io (where we put the socket code) }
+ bbs_software:=15;
+ fossilio := true;
+ noFossInit:=false;
+{$ENDIF}
 
  case iomode of
   remote: ;
