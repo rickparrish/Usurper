@@ -42,7 +42,32 @@ Step 3) Edit Z:\vp21\source\tv\dialogs.pas
           (UpCase(Event.CharCode) = C)) then FocusLink
     end;
 
-Step 4) Build new EXEs
+Step 4) Edit Z:\vp21\source\rtl\vpsysw32.pas
+
+	For some reason the cursor position isn't always updated in the background thread in the Win32 version.  I'm guessing
+    it's a race condition with the CurXPos and CurYPos variables, so the thread doesn't think an update is needed when
+    one really is.   So I've updated my copy of CursorThreadFunc to take the return value of the SemWaitEvent() call into
+    account, so the update will also happen if the event is signaled.  Can't think of a reason why they wouldn't have done
+    this in the first place.  Here's the entire function to copy/paste into place:
+    
+    function CursorThreadFunc(P: Pointer): Longint;
+    var
+      LastX, LastY: Longint;
+    begin
+      LastX := -1;
+      LastY := -1;
+      repeat
+        if SemWaitEvent(semCursor, 300) or (CurXPos <> LastX) or (CurYPos <> LastY) then
+          begin
+            DoSetCursorPosition;
+            LastX := CurXPos;
+            LastY := CurYPos;
+          end;
+      until tidCursor = -2;
+      tidCursor := -1;
+    end;
+    
+Step 5) Build new EXEs
 
 	Run BUILDBP.CMD to build the DOS EXEs and have them copied to Z:\Usurper
 
