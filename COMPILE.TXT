@@ -1,9 +1,9 @@
 Step 0) Assumptions:
 
-	The first assumption is that you have Borland Pascal installed in C:\BP.  
+	The first assumption is that you have Borland Pascal installed in Z:\BP.  
 	If you don't, you'll have to update the BUILDBP.CMD file
 
-	The second assumption is that you have Virtual Pascal installed in C:\vp21.
+	The second assumption is that you have Virtual Pascal installed in Z:\vp21.
 	If you don't, you'll have to update the BUILDVP.CMD file
 
 	*NOTE* The BUILD*.CMD files will copy a BPC.CFG or VPC.CFG into the relevant bin directory, meaning
@@ -23,7 +23,7 @@ Step 2) Get the source
 
 	Check out the GIT contents into Z:\Programming\Usurper
 
-Step 3) Edit C:\vp21\source\tv\dialogs.pas
+Step 3) Edit Z:\vp21\source\tv\dialogs.pas
 
 	TLabel.HandleEvent has a bug that will cause EDITOR32 to crash.  So go to line 2068, which should be:
 
