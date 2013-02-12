@@ -44,4 +44,5 @@ Completed list<br />
   <li>INTEGER in RECORD to SMALLINT</li>
   <li>Implement any REETODOs that appear in compiled executables</li>
   <li>Investigate FILEMODE usage to see if FILEMODEREADWRITE, TEXTMODEREAD or TEXTMODEREADWRITE should be used</li>
+  <li>Anything passing 0 for the Attr parameter to FindFirst should pass AnyFile instead (VP returns no files when 0 is passed for Attr)</li>
 </ul>

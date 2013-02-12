@@ -1260,7 +1260,15 @@ begin {MAIN PROC **START**}
       if x>player.punch then x:=player.punch;
      end;
 
-     zz:=monster[mon]^.defence+random(monster[mon]^.defence div 8);
+     (* REENOTE Up to and including v0.20e this defence calculation wasn't taken into
+        account, because the dec(player.punch,x); line was happening before this calcluation
+        instead of after.  After fixing that mistake monsters have become much more
+        difficult to kill, in some cases impossible since they absorb all damange, and
+        so I'm taking the easy way out and re-disabling this calculation.  If someone
+        wants to fix this the real way in the future, this calculation should be re-enabled,
+        and then the defence value for each monster should be rebalanced to ensure they
+        aren't too hard/impossible to kill
+     zz:=monster[mon]^.defence+random(monster[mon]^.defence div 8); *)
 
      if zz>0 then begin
       inc(x,zz);
