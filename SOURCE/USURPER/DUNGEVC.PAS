@@ -1771,7 +1771,6 @@ begin
 
  {*Should player (and team) be caught in something... an event}
  
-
  {if random(1)=0 then begin {cheat, jakob}
 
  if random(8)=1 then begin
