@@ -479,7 +479,7 @@ begin {Cast_Spell *begin*}
 
               if online then begin
                put_out(imp,uplc+foe+config.textcol1+' is surrounded by a magical aura!',
-                           uplc+foe+config.textcol1+' casted a HEAL spell!',
+                           uplc+foe+config.textcol1+' cast a HEAL spell!',
                            '');
               end;
              end;
@@ -494,7 +494,7 @@ begin {Cast_Spell *begin*}
 
                 if online then begin
                  put_out(imp,'You stagger under the impact from '+uplc+foe+config.textcol1+' missiles!',
-                             'You lose '+uwhite+commastr(damage)+config.textcol1+' hps.',
+                             'You lose '+uwhite+commastr(damage)+config.textcol1+' hitpoints.',
                              '');
                 end;
 
@@ -654,7 +654,7 @@ begin {Cast_Spell *begin*}
               end;
 
               if online then begin
-               put_out(imp,uplc+foe+config.textcol1+' casted a HEAL spell!!','','');
+               put_out(imp,uplc+foe+config.textcol1+' cast a HEAL spell!!','','');
               end;
              end;
 
@@ -768,7 +768,7 @@ begin {Cast_Spell *begin*}
                 temp1.spell[ii,2]:=true;
 
                 if online then begin
-                 put_out(imp,uplc+foe+config.textcol1+' casted a HEAL spell!','','');
+                 put_out(imp,uplc+foe+config.textcol1+' cast a HEAL spell!','','');
                 end;
 
                end;
@@ -783,7 +783,7 @@ begin {Cast_Spell *begin*}
 
            if online then begin
             put_out(imp,'You are struck by a beam of hellfire!',
-                        'You lose '+uwhite+commastr(damage)+config.textcol1+' hps.',
+                        'You lose '+uwhite+commastr(damage)+config.textcol1+' hitpoints.',
                         '');
            end;
           end;
@@ -803,7 +803,7 @@ begin {Cast_Spell *begin*}
 
               if online then begin
                put_out(imp,'A magic bomb goes off right in your face!',
-                           'You lose '+commastr(damage)+' hps.',
+                           'You lose '+commastr(damage)+' hitpoints.',
                            '');
               end;
         end;
@@ -819,7 +819,7 @@ begin {Cast_Spell *begin*}
 
                 if online then begin
                  put_out(imp,'You scream in horror as you are caught in a Fireball!',
-                             'You lose '+commastr(damage)+' hps.',
+                             'You lose '+commastr(damage)+' hitpoints.',
                              '');
                 end;
                end;
@@ -835,7 +835,7 @@ begin {Cast_Spell *begin*}
 
            if online then begin
             put_out(imp,'Some strange force makes you hit yourself!!',
-                        'You lose '+commastr(damage)+' hps.',
+                        'You lose '+commastr(damage)+' hitpoints.',
                         '');
            end;
           end;
@@ -921,7 +921,7 @@ begin {Cast_Spell *begin*}
 
                 if online then begin
                  put_out(imp,'You are struck by a Lightning Bolt!',
-                             'You lose '+commastr(damage)+' hps.','');
+                             'You lose '+commastr(damage)+' hitpoints.','');
                 end;
                end;
 
@@ -951,8 +951,8 @@ begin {Cast_Spell *begin*}
               do_the_damage;
 
               if online then begin
-               put_out(imp,'A lightning strikes you from above!',
-                           'You lose '+commastr(damage)+' hps.','');
+               put_out(imp,'Lightning strikes you from above!',
+                           'You lose '+commastr(damage)+' hitpoints.','');
               end;
 
              end;
@@ -1009,21 +1009,21 @@ begin {Cast_Spell *begin*}
                d(4,'You regain some hitpoints!');
               end;
               if online then begin
-               put_out(imp,uplc+foe+config.textcol1+' seems to grow bigger....or is it just imagination?','','');
+               put_out(imp,uplc+foe+config.textcol1+' seems to grow bigger....or is it just your imagination?','','');
               end;
              end;
 
       Magician:begin
                 damage:=100+random(12);
 
-                cm1:=' is severly burned in a Wall of fire!';
+                cm1:=' is severely burned in a Wall of fire!';
                 cm2:=' is engulfed in flames!';
 
                 do_the_damage;
 
                 if online then begin
-                 put_out(imp,'You are severly burned in a Wall of Fire!',
-                             'You lose '+uwhite+commastr(damage)+config.textcol1+' hps.','');
+                 put_out(imp,'You are severely burned in a Wall of Fire!',
+                             'You lose '+uwhite+commastr(damage)+config.textcol1+' hitpoints.','');
                 end;
 
                end;
@@ -1038,7 +1038,7 @@ begin {Cast_Spell *begin*}
 
            if online then begin
             put_out(imp,uplc+foe+config.textcol1+' is draining your energy!',
-                            'You lose '+uwhite+commastr(damage)+config.textcol1+' hps.','');
+                            'You lose '+uwhite+commastr(damage)+config.textcol1+' hitpoints.','');
            end;
 
           end;
@@ -1058,13 +1058,13 @@ begin {Cast_Spell *begin*}
                 damage:=220+random(45);
 
                 cm1:=' suffers from the KISS OF DEATH!';
-                cm2:=' was touched by the LIPS OF DEATH!';
+                cm2:=' is touched by the LIPS OF DEATH!';
 
                 do_the_damage;
 
                 if online then begin
                  put_out(imp,uplc+foe+config.textcol1+' makes you suffer from the LIPS OF DEATH!',
-                                 'You lose '+uwhite+commastr(damage)+config.textcol1+' hps.','');
+                                 'You lose '+uwhite+commastr(damage)+config.textcol1+' hitpoints.','');
                 end;
 
                end;
@@ -1086,14 +1086,14 @@ begin {Cast_Spell *begin*}
       Cleric:begin
               damage:=220+random(31);
 
-              cm1:=' was hit by a Divine Lightning Bolt!';
-              cm2:=' was hit by a Holy Lightning Bolt!';
+              cm1:=' is hit by a Divine Lightning Bolt!';
+              cm2:=' is hit by a Holy Lightning Bolt!';
 
               do_the_damage;
 
               if online then begin
                put_out(imp,'A Divine Lightning bolt hits you! (OUCH!)',
-                           'You lose '+commastr(damage)+' hps.','');
+                           'You lose '+commastr(damage)+' hitpoints.','');
               end;
 
              end;
@@ -1118,7 +1118,7 @@ begin {Cast_Spell *begin*}
 
            if online then begin
             put_out(imp,'You struggle against the Force of Death!',
-                        'You lose '+commastr(damage)+' hps.','');
+                        'You lose '+commastr(damage)+' hitpoints.','');
            end;
 
         end;

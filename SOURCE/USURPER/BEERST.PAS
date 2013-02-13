@@ -30,8 +30,7 @@ Interface
 
 Procedure Beer_Stealing; {Stealing beer barrels}
 
-Implementation {this routine needs to be recoded! Jakob admits that
-               this was done in a hurry :( }
+Implementation
 
 Uses Init, Cms, Jakob,
      Statusc, Mail, News,
@@ -82,7 +81,6 @@ begin
  turbo:=false;
  arrived:=false;
  polare:='';
- pstam:=player.stamina;
 
  clearscreen;
  crlf;
@@ -163,28 +161,10 @@ begin
 
 end; {orkar *end*}
 
-Procedure Init_Values;
+Procedure Init_Names_Stam;
 begin
 
- knock1:=0;
- knock2:=0;
-
- for i:=1 to 10 do begin
-  sonarriv[i]:=false;
- end;
-
- {Init pointer vars}
- {for i:=1 to 10 do begin
-  new(son[i]);
- end;
-
- for i:=1 to 40 do begin
-  new(doggy[i]);
- end;
- }
- new(pl0);
-
- son[1]:='Tim'; son[2]:='Dim'; son[3]:='Kim';
+  son[1]:='Tim'; son[2]:='Dim'; son[3]:='Kim';
  son[4]:='Tom'; son[5]:='Bim'; son[6]:='Jim';
  son[7]:='Gum'; son[8]:='Nim'; son[9]:='Nippe';
  son[10]:='Ola';
@@ -209,34 +189,137 @@ begin
  doggy[37]:='Zing';   doggy[38]:='Bokaj';   doggy[39]:='Hades';
  doggy[40]:='Revelation';
 
- for i:=1 to 40 do begin
+end; {init_Names_Stam *end*}
+
+procedure Prep_Steal;
+begin
+knock1:=0;
+ knock2:=0;
+
+ for i:=1 to 10 do begin
+  sonarriv[i]:=false;
+ end;
+
+ 
+ new(pl0);
+
+ for i:=1 to 39 do begin
   s2:=doggy[i];
-  xx:=random(40)+1;
+  xx:=i+random(40-i);
   doggy[i]:=doggy[xx];
   doggy[xx]:=s2;
  end;
 
- for i:=1 to 10 do begin
+ for i:=1 to 9 do begin
   s2:=son[i];
-  xx:=random(10)+1;
+  xx:=i+random(10 - i);
   son[i]:=son[xx];
   son[xx]:=s2;
  end; {for i:= .end.}
+end;
 
-end; {init_values *end*}
 
 Procedure Beer_Stealing;
 
+procedure solo_dogs_news;
+                         begin
+                         newsy(true,
+                         'Burglary Attempt!',
+                         ' '+uplc+player.name2+config.textcol1+' tried to steal Beer from the Inn!',
+                         ' Fortunately, a bunch of watchdogs took care of the thief!',
+                         '',
+                         '',
+                         '',
+                         '',
+                         '',
+                         '',
+                         '');
+end;
+
+procedure run_away;
 begin
+                       sd(15,'RUN!');
+                       crlf;
+                       d(config.textcolor,'You run for your life!!!');
+                       sd(4,'BUT THE DOGS ARE AFTER YOU!...');
+                       delay2(600);
+                       sd(4,'.....');
+                       delay2(600);
+                       crlf;
+                       crlf;
+                       d(config.textcolor,'You managed to get away!');
+                       s:='';
+                       if poor>0 then begin
+                        d(config.textcolor,'But in the distance you can hear '+uplc+polare+'s'+config.textcol1
+                          +' terrifying screams!');
+                        d(config.textcolor,'The dogs probably got hold of something...');
+                        s:=' Poor '+uplc+polare+config.textcol1+' was left behind, chased by another bunch of dogs!';
+                       end;
+                       crlf;
+                      
+                       newsy(true,
+                       'Burglary Attempt!',
+                       ' '+uplc+player.name2+config.textcol1+' tried to steal Beer from the Inn!',
+                       ' '+uplc+player.name2+config.textcol1+' fled in panic, chased by a bunch of watchdogs!',
+                       s,
+                       '',
+                       '',
+                       '',
+                       '',
+                       '',
+                       '');
 
- init_values;
+                       pause;
+                       end;
+                       
+procedure battle_dogs;
+begin
+pstam:=player.stamina;
+risk:=2;
+                       if (player.class=Assassin) or (player.class=Jester) then risk:=risk+2;
+                       if player.agility>10 then inc(risk);
+                       if player.agility>20 then inc(risk);
+                       if player.agility>30 then inc(risk);
+                       if player.agility>50 then inc(risk);
+                       if player.agility>70 then inc(risk);
+                       if player.agility>90 then inc(risk);
 
+                       repeat
+                        pause;
+
+                        if random(2)=0 then begin
+                         d(4,'HIT! You managed to knock one out!');
+                         
+                         dec(dogs);
+                         inc(knock1);
+                        end;
+
+                        if dogs>0 then begin
+                         for i:=1 to dogs do begin
+                          sd(3,doggy[i]);
+                          case random(3) of
+                           0: sd(config.textcolor,' tries to bite you!');
+                           1: sd(config.textcolor,' charges you!');
+                           2: sd(config.textcolor,' takes a jump at you!');
+                          end;
+                          crlf;
+                          if random(risk)=0 then begin
+                           case random(2) of
+                            0: d(4,'And you didn''t manage to get away!');
+                            1: d(4,'ARGH! That damn dog is glued to your leg!');
+                           end;
+                           dec(pstam);
+                          end;
+                         end;
+                        end;
+                       until (dogs<1) or (pstam<1);
+end;
+
+
+begin
  repeat
 
-  for i:=1 to 10 do begin
-   sonarriv[i]:=false;
-  end;
-
+  Init_Names_Stam;
   if onliner.location<>onloc_outsideinn then begin
    refresh:=true;
    onliner.location:=onloc_outsideinn;
@@ -263,6 +346,7 @@ begin
          onliner.doing   :=location_desc(onliner.location);
          add_onliner(OUpdateLocation,Onliner);
 
+        
         if player.darknr<1 then begin
          crlf;
          {no dark deeds left}
@@ -319,49 +403,51 @@ begin
             crlf;
             d(11,'Help - Thievery at the Inn');
             d(10,'The first problem that you will encounter when');
-            d(10,'you raid the Inn, is the watchdogs.');
+            d(10,'you raid the Inn is the watchdogs.');
             d(10,'You can choose to either bring a teammate along,');
             d(10,'or do the job yourself.');
-            d(10,'Your teammates job will be to distract the watchdogs.');
+            d(10,'Your teammate''s job will be to distract the watchdogs.');
             d(10,'This is a nice and quite safe option, but');
             d(10,'you must share your loot with your mate...');
-            d(10,'So, if you are greedy you can go alone, but you must');
-            d(10,'then bring the dogs some fresh bones.');
+            d(10,'So, if you are greedy you can go alone, but you might');
+            d(10,'want to bring the dogs some fresh bones.');
             crlf;
             pause;
-            d(10,'If you don''t want have any expenditures at all,');
+            d(10,'If you don''t want to have any expenditures at all,');
             d(10,'then you can choose to bring a club instead of bones.');
             d(10,'You may be able to knock all dogs out before they can make');
             d(10,'any significant noise! THIS IS EXTREMELY RISKY!');
-            d(10,'(However, you receive xp for every dog you knock out)');
+            d(10,'(However, you receive experience for every dog you knock out)');
             crlf;
-            d(10,'If you make it past the dogs, you then have your chance');
+            d(10,'If you make it past the dogs, you then get a chance');
             d(10,'to load the beer-barrels on to your cart.');
             d(10,'The more barrels you can bring on, the more profit you make.');
             d(10,'But the risk for getting caught increases for every barrel');
             d(10,'you carry!');
             crlf;
             d(10,'Don''t let your greed get you caught!');
-            d(10,'(If you are caught, you will not be able to play until the next day)');
-
+            
             pause;
             ch:='?';
            end;
 
+           Prep_Steal;
+           
            if ch='2' then begin
             ch:='?';
             crlf;
             d(5,'Buy some Bones');
             cost:=dogs*350;
-            d(config.textcolor,'You need '+commastr(dogs)+' bones');
-            d(config.textcolor,'Each bone costs 350 '+many_money(350)+'.');
-            sd(config.textcolor,commastr(dogs)+' * 350 equals : ');
-            sd(14,commastr(cost));
-            sd(config.textcolor,' '+many_money(cost)+'.');
-            crlf;
             sd(config.textcolor,'You have ');
             sd(14,commastr(player.gold));
             sd(config.textcolor,' '+many_money(player.gold)+'.');
+            crlf;
+
+            d(config.textcolor,'You need '+commastr(dogs)+' bones');
+            d(config.textcolor,'Each bone costs 350 '+many_money(350)+'.');
+            sd(config.textcolor,'Total cost of the bones is ');
+            sd(14,commastr(cost));
+            sd(config.textcolor,' '+many_money(cost)+'.');
             crlf;
             if player.gold<cost then begin
              crlf;
@@ -406,10 +492,7 @@ begin
                else begin
 
                 polare:=pl0^.name2;
-                if pl0^.sex=1 then male:=true
-                              else male:=false;
                 npc:=false;
-                cstam:=pl0^.stamina;
                 break;
                end;
 
@@ -442,10 +525,8 @@ begin
                 end
                 else begin
                  polare:=pl0^.name2;
-                 if pl0^.sex=1 then male:=true
-                               else male:=false;
                  npc:=true;
-                 cstam:=pl0^.stamina;
+                 
                  break;
                 end;
 
@@ -455,6 +536,10 @@ begin
             end;
 
             if polare<>'' then begin
+            if pl0^.sex=1 then male:=true
+                               else male:=false;
+                 cstam:=pl0^.stamina;
+                  
              ch:='1';
              dogs:=dogs*2;
              if dogs>40 then begin
@@ -462,6 +547,8 @@ begin
              end;
             end
             else begin
+d(config.textcolor,'No teammate found!');; crlf;
+
              ch:='?';
             end;
            end;
@@ -472,7 +559,7 @@ begin
           poor:=0;
           case ch of
            '1':begin
-                d(config.textcolor,'Late at night, you and '+uplc+polare+config.textcol1+' sneak up behind the Inns storage');
+                d(config.textcolor,'Late at night, you and '+uplc+polare+config.textcol1+' sneak up behind the Inn''s storage');
                 d(config.textcolor,'room. There are '+commastr(dogs)+' dogs in the yard, watching everything');
                 d(config.textcolor,'that moves...');
                 d(config.textcolor,'They look mean and dangerous, capable of tearing you apart in a few seconds.');
@@ -482,9 +569,8 @@ begin
                 d(config.textcolor,'so you can start to steal the barrels...');
                 crlf;
                 pause;
-                d(global_plycol,polare+config.textcol1+' looks a bit scared, but finally runs off to');
-                d(config.textcolor,'distract the hideous dogs...');
-                crlf;
+                d(global_plycol,polare+config.textcol1+' is quite frightened...');
+                                crlf;
                 pause;
                 crlf;
                 turbo:=true;
@@ -525,108 +611,21 @@ begin
 
                  case ch of
                   'R':begin
-                       sd(15,'RUN!');
-                       crlf;
-                       d(config.textcolor,'You run for your life!!!');
-                       sd(4,'BUT THE DOGS ARE AFTER YOU!...');
-                       delay2(600);
-                       sd(4,'.....');
-                       delay2(600);
-                       crlf;
-                       crlf;
-                       d(config.textcolor,'You managed to get away!');
-                       if poor>0 then begin
-                        d(config.textcolor,'But in a distance you can hear '+uplc+polare+'s'+config.textcol1
-                          +' terrifying screams!');
-                        d(config.textcolor,'The dogs probably got hold of something...');
-                       end;
-                       crlf;
-
-                       if poor>0 then begin
-                        s:=' Poor '+uplc+polare+config.textcol1+' was left behind, chased by another bunch...';
-                       end
-                       else begin
-                        s:='';
-                       end;
-
-                       newsy(true,
-                       'Burglary Attempt!',
-                       ' '+uplc+player.name2+config.textcol1+' tried to steal Beer from the Inn!',
-                       ' '+uplc+player.name2+config.textcol1+' fled in panic, chased by a bunch of watchdogs!',
-                       s,
-                       '',
-                       '',
-                       '',
-                       '',
-                       '',
-                       '');
-
-                       pause;
+                       run_away;
                        break;
                       end;
                   'F':begin
                        sd(15,'I AIN''T AFRAID OF NO DOGS!');
                        crlf;
-                       risk:=2;
-                       if (player.class=Assassin) or (player.class=Jester) then risk:=risk+2;
-                       if player.agility>10 then inc(risk);
-                       if player.agility>20 then inc(risk);
-                       if player.agility>30 then inc(risk);
-                       if player.agility>50 then inc(risk);
-                       if player.agility>70 then inc(risk);
-                       if player.agility>90 then inc(risk);
-
-                       repeat
-                        pause;
-
-                        if random(2)=0 then begin
-                         d(4,'HIT! You managed to knock one out!');
-                         d(15,'('+commastr(player.level*50)+' xp earned)');
-                         dec(dogs);
-                         inc(knock1);
-                         inc(player.exp,(player.level*50));
-                        end;
-
-                        if dogs>0 then begin
-                         for i:=1 to dogs do begin
-                          sd(3,doggy[i]);
-                          case random(3) of
-                           0: sd(config.textcolor,' tries to bite you!');
-                           1: sd(config.textcolor,' charges you!');
-                           2: sd(config.textcolor,' takes a jump at you!');
-                          end;
-                          crlf;
-                          if random(risk)=0 then begin
-                           case random(2) of
-                            0: d(4,'And you didn''t manage to get away!');
-                            1: d(4,'ARGH! That damn dog is glued to your leg!');
-                           end;
-                           dec(pstam);
-                          end;
-                         end;
-                        end;
-                       until (dogs<1) or (pstam<1);
-
+                       battle_dogs;
                        if pstam<1 then begin
                         crlf;
                         d(4,'You are too exhausted to struggle any more!!');
                         d(4,'You fade away into the darkness...listening to');
                         d(4,'the dogs barking...');
 
-                        if turbo=false then begin
-                         newsy(true,
-                         'Burglary Attempt!',
-                         ' '+uplc+player.name2+config.textcol1+' tried to steal Beer from the Inn!',
-                         ' Fortunately, a bunch of watchdogs took care of the thief!',
-                         '',
-                         '',
-                         '',
-                         '',
-                         '',
-                         '',
-                         '');
-                        end
-                        else begin
+                        if turbo=false then solo_dogs_news
+                                                else begin
                          newsy(true,
                          'Burglary Attempt!',
                          ' '+uplc+player.name2+config.textcol1+' and '+uplc+polare+config.textcol1
@@ -640,8 +639,10 @@ begin
                          '',
                          '');
                         end;
+{player.allowed:=false;}
+                        Reduce_Player_Resurrections(player,true);
 
-                        crlf;
+                       crlf;
                         crlf;
                         pause;
 
@@ -671,7 +672,7 @@ begin
                 end;
                end;
            '2':begin
-                d(config.textcolor,'Late at night, you sneak up behind the Inns storage room.');
+                d(config.textcolor,'Late at night, you sneak up behind the Inn''s storage room.');
                 d(config.textcolor,'There are '+commastr(dogs)+' dogs in the yard, watching closely');
                 d(config.textcolor,'every stranger. You take the bones out from your bag...');
                 crlf;
@@ -687,7 +688,7 @@ begin
                   sd(4,' but ignores the bones!');
                  end
                  else begin
-                  sd(14,' and chews in on a bone!');
+                  sd(14,' and chews on a bone!');
                   dec(dogs);
                  end;
                  crlf;
@@ -708,89 +709,19 @@ begin
                  crlf;
                  case ch of
                   'R':begin
-                       sd(15,'RUN!');
-                       crlf;
-                       d(config.textcolor,'You run for your life!!!');
-                       sd(4,'BUT THE DOGS ARE AFTER YOU!...');
-                       delay2(800);
-                       sd(4,'.....');
-                       delay2(800);
-                       crlf;
-                       crlf;
-                       d(config.textcolor,'You managed to get away!');
-
-                       newsy(true,
-                       'Burglary Attempt!',
-                       ' '+uplc+player.name2+config.textcol1+' tried to steal Beer from the Inn!',
-                       ' '+uplc+player.name2+config.textcol1+' fled in panic, chased by the watchdogs!',
-                       '',
-                       '',
-                       '',
-                       '',
-                       '',
-                       '',
-                       '');
-
+                       run_away;
                        break;
                       end;
                   'F':begin
                        sd(15,'WHO''S AFRAID OF PUPPYS!');
                        crlf;
-                       pstam:=player.stamina;
-                       risk:=2;
-                       if (player.class=Assassin) or (player.class=Jester) then risk:=risk+2;
-                       if player.agility>10 then inc(risk);
-                       if player.agility>20 then inc(risk);
-                       if player.agility>30 then inc(risk);
-                       if player.agility>50 then inc(risk);
-                       if player.agility>70 then inc(risk);
-                       if player.agility>90 then inc(risk);
-
-                       repeat
-                        pause;
-                        if random(2)=0 then begin
-                         d(4,'HIT! You managed to knock one out!');
-                         d(15,'('+commastr(player.level*50)+' xp earned)');
-                         dec(dogs);
-                         inc(player.exp,(player.level*50));
-                         inc(knock1);
-                        end;
-
-                        if dogs>0 then begin
-                         for i:=1 to dogs do begin
-                          sd(3,doggy[i]);
-                          case random(3) of
-                           0: sd(config.textcolor,' takes a bite at you!');
-                           1: sd(config.textcolor,' charges you!');
-                           2: sd(config.textcolor,' takes a jump at you!');
-                          end;
-                          crlf;
-                          if random(risk)=0 then begin
-                           d(4,'And you didn''t manage to get away!');
-                           dec(pstam);
-                          end;
-                         end;
-                        end;
-                       until (dogs<1) or (pstam<1);
-
+                       battle_dogs;
                        if pstam<1 then begin
                         crlf;
                         d(4,'You are too exhausted to struggle any more!!');
                         d(4,'You fade away into the darkness...listening to');
                         d(4,'the dogs barking...');
-
-                        newsy(true,
-                        'Burglary Attempt!',
-                        ' '+uplc+player.name2+config.textcol1+' tried to steal Beer from the Inn!',
-                        ' Fortunately, a bunch of watchdogs took care of the thief!',
-                        '',
-                        '',
-                        '',
-                        '',
-                        '',
-                        '',
-                        '');
-
+solo_dogs_news;
                         {player.allowed:=false;}
                         Reduce_Player_Resurrections(player,true);
 
@@ -817,7 +748,7 @@ begin
                     end;
                end;
            '3':begin
-                d(config.textcolor,'Late at night, you sneak up behind the Inns storage room.');
+                d(config.textcolor,'Late at night, you sneak up behind the Inn''s storage room.');
                 d(config.textcolor,'There are '+commastr(dogs)+' dogs in the yard, watching closely');
                 d(config.textcolor,'every stranger. You get a close grip on your club...');
                 crlf;
@@ -830,43 +761,7 @@ begin
 
                 crlf;
                 pause;
-                pstam:=player.stamina;
-                risk:=2;
-                if (player.class=Assassin) or (player.class=Jester) then risk:=risk+2;
-                if player.agility>10 then inc(risk);
-                if player.agility>20 then inc(risk);
-                if player.agility>30 then inc(risk);
-                if player.agility>50 then inc(risk);
-                if player.agility>70 then inc(risk);
-                if player.agility>90 then inc(risk);
-
-                repeat
-                 pause;
-                 if random(2)=0 then begin
-                  d(4,'HIT! You managed to knock one out!');
-                  d(15,'('+commastr(player.level*50)+' xp earned)');
-                  dec(dogs);
-                  inc(player.exp,(player.level*50));
-                  inc(knock1);
-                 end;
-
-                 if dogs>0 then begin
-                  for i:=1 to dogs do begin
-                   sd(3,doggy[i]);
-                   case random(3) of
-                    0: sd(config.textcolor,' takes a bite at you!');
-                    1: sd(config.textcolor,' charges you!');
-                    2: sd(config.textcolor,' takes a jump at you!');
-                   end;
-                   crlf;
-                   if random(risk)=0 then begin
-                    d(4,'And you didn''t manage to get away!');
-                    dec(pstam);
-                   end;
-                  end;
-                 end;
-                until (dogs<1) or (pstam<1);
-
+                battle_dogs;
                 if pstam<1 then begin
                  crlf;
                  d(4,'You are too exhausted to struggle any more!!');
@@ -874,18 +769,7 @@ begin
                  d(4,'the dogs barking...');
 
                  {news-paper}
-                 newsy(true,
-                 'Burglary Attempt!',
-                 ' '+uplc+player.name2+config.textcol1+' tried to steal Beer from the Inn!',
-                 ' Fortunately, a bunch of watchdogs took care of the thief!',
-                 '',
-                 '',
-                 '',
-                 '',
-                 '',
-                 '',
-                 '');
-
+                 solo_dogs_news;
                  {player.allowed:=false;}
                  Reduce_Player_Resurrections(player,true);
                  disposal;
@@ -933,7 +817,7 @@ begin
            if (cstam>0) and (arrived=false) and (turbo=true) and (poor>0) and (xx>7) and (random(2)=0) then begin
             crlf;
             d(global_plycol,polare+config.textcol1+' has arrived, looking rather tired.');
-            d(global_talkcol,'I finally managed to loose those dogs!');
+            d(global_talkcol,'I finally managed to lose those dogs!');
             crlf;
             pause;
             arrived:=true;
@@ -973,7 +857,7 @@ begin
             end;
            end;
 
-           menu('(G)rab a barrel');
+           menu('(G)rab some barrels');
            menu('(F)lee with the loot');
            sd(config.textcolor,':');
 
@@ -1030,9 +914,9 @@ begin
            end;
 
            if (xx>5) and (random(4)=0) then begin
-            {en son vaknar...}
+            {a son arrives...}
             for i:=1 to 10 do begin
-             if (sonarriv[i]=false) and (sonstam[i]>0) then begin
+             if sonarriv[i]=false then begin
               sonarriv[i]:=true;
               d(config.textcolor,'Suddenly You hear someone coming out from the house!');
               sd(4,'OH NO! It''s ');
@@ -1047,9 +931,9 @@ begin
            end;
 
            if (xx>3) and (random(3)=0) and (poor>0) then begin
-            {en hund †terv„nder...}
+            {a dog arrives}
             inc(newdogs);
-            inc(poor);
+            dec(poor);
             sd(config.textcolor,'You hear barking....');
             delay2(700);
             sd(config.textcolor,'....');
@@ -1259,9 +1143,9 @@ begin
             newsy(true,
             'Successful Burglary!',
             ' '+uplc+player.name2+config.textcol1+' and '+uplc+polare+config.textcol1+' stole barrels from the Inn!',
-            ' '+uplc+player.name2+config.textcol1+' was finished off by the watchdogs!',
             ' '+uplc+polare+config.textcol1+' got away with the loot!',
-            '',
+                        ' '+uplc+player.name2+config.textcol1+' wasn''t so lucky!',
+'',
             '',
             '',
             '',
@@ -1330,14 +1214,13 @@ begin
           sd(config.textcolor,' '+many_money(xx)+'!');
           crlf;
 
-          yy:=knock1+knock2;
-          yy:=player.level*50;
-
+          yy:=0;          
           if knock1+knock2>0 then begin
            sd(config.textcolor,'You managed to knock out ');
            sd(14,commastr(knock1+knock2));
            sd(config.textcolor,' dogs/sons.');
            crlf;
+           yy:=player.level*50*(knock1+knock2);
            sd(config.textcolor,'This gives you ');
            sd(14,commastr(yy));
            sd(config.textcolor,' experience points!');
@@ -1351,21 +1234,17 @@ begin
             if male=true then d(config.textcolor,'Of course you must give '+uplc+polare+config.textcol1+' his share!')
                          else d(config.textcolor,'Of course you must give '+uplc+polare+config.textcol1+' her share!');
             xx:=xx div 2;
-            if yy>0 then yy:=yy div 2;
+            
            end;
-
+           if (cstam>0) and (yy>0) then yy:=yy div 2;
            if npc=false then begin
 
-            if (cstam>0) and (xx>0) then begin
+            if cstam>0 then begin
              incplayermoney(pl0^,xx);
-             if yy>0 then begin
-              inc(pl0^.exp,yy);
-             end;
-            end;
-
+             inc(pl0^.exp,yy);
+            
             user_save(pl0^);
 
-            if cstam>0 then begin
              post(MailSend,
              pl0^.name2,
              pl0^.ai,
@@ -1399,7 +1278,7 @@ begin
              mkstring(9,underscore),
              'You joined '+uplc+player.name2+config.textcol1+' on a burglary tour!',
              'The watchdogs got you! You earned nothing!',
-             uplc+player.name2+config.textcol1+' got all loot! ('+uyellow+commastr(xx*2)+config.textcol1+')',
+             uplc+player.name2+config.textcol1+' got all the loot! ('+uyellow+commastr(xx*2)+config.textcol1+')',
              '',
              '',
              '',
@@ -1418,9 +1297,9 @@ begin
            s:='';
            s2:='';
            if cstam<1 then begin
-            s:=' '+uplc+polare+config.textcol1+' was finished off by the watchdogs!';
             s2:=' '+uplc+player.name2+config.textcol1+' got away with the loot!';
-           end
+                       s:=' '+uplc+polare+config.textcol1+' wasn''t so lucky!';
+end
            else begin
             s:=' They got away with '+uwhite+commastr(stolen)+config.textcol1+' barrels!';
             if stolen<1 then s2:=' (they proved to be lousy thieves)';
