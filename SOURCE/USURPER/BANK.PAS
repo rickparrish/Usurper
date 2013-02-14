@@ -706,7 +706,7 @@ begin
 
            sd(config.textcolor,'Guards to fight  : ');
            sd(15,commastr(guards));
-           d(config.textcolor,' (could be some dogs to)');
+           d(config.textcolor,' (could be some dogs too)');
            sd(config.textcolor,'Players to fight : ');
            d(5,'*unknown*');
            crlf;

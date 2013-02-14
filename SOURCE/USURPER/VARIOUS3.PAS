@@ -1367,13 +1367,6 @@ begin
      pause;
      cho:='?';
     end
-    else if (cho='P') and (player.darknr<1) then begin
-     crlf;
-     crlf;
-     d(12,'You are too tired.');
-     cho:='?';
-     pause;
-    end
     else if cho=ReturnKey then begin
      cho:='?';
     end;
@@ -2061,7 +2054,7 @@ begin
            sd(global_talkcol,'So you don''t dare to face me in the open you COWARD! ');
            sd(global_plycol,s);
            d(config.textcolor,' screams.');
-           d(config.textcolor,'Everybody in the dormitory is awake and gather around you.');
+           d(config.textcolor,'Everybody in the dormitory is awake and gathered around you.');
            d(config.textcolor,'You realize that soon you will be fighting for your life.');
            crlf;
            crlf;
@@ -2396,7 +2389,7 @@ begin
     {shit text}
     d(12,'Damn!');
     d(global_plycol,ply.name2+'s'+config.textcol1+' team-mate '+uplc+mate.name2+config.textcol1+' was hiding');
-    d(config.textcolor,s+' Now you must fight '+sex[mate.sex]+' to!');
+    d(config.textcolor,s+' Now you must fight '+sex[mate.sex]+' too!');
     pause;
 
     {player versus team-mate}
@@ -2413,7 +2406,7 @@ begin
      'Friends',
      ' '+uplc+player.name2+config.textcol1+' stalked '+uplc+ply.name2+config.textcol1+' at the Dormitory.',
      ' '+uplc+ply.name2+config.textcol1+' was sleeping and would have been killed if it hadn''t',
-     ' been for the brave '+uplc+mate.name2+config.textcol1+' who rushed to '+sex3[mate.sex]+' friends',
+     ' been for the brave '+uplc+mate.name2+config.textcol1+' who rushed to '+sex3[mate.sex]+' friend''s',
      ' rescue. Both the evil '+uplc+player.name2+config.textcol1+' and '+uplc+mate.name2+config.textcol1+' were killed.',
      '',
      '',
@@ -2476,7 +2469,7 @@ begin
      user_save(mate);
 
      {exit preparations}
-     d(12,'It''s dangerous to attack people that has friends...');
+     d(12,'It''s dangerous to attack people who have friends...');
      d(12,'Darkness...');
 
      {player.allowed:=true;}
@@ -2493,7 +2486,7 @@ begin
      'Helping Hand',
      ' '+uplc+player.name2+config.textcol1+' stalked '+uplc+ply.name2+config.textcol1+' at the Dormitory.',
      ' '+uplc+ply.name2+config.textcol1+' was sleeping and would have been killed if it hadn''t',
-     ' been for the brave '+uplc+mate.name2+config.textcol1+' who rushed to '+sex3[mate.sex]+' friends',
+     ' been for the brave '+uplc+mate.name2+config.textcol1+' who rushed to '+sex3[mate.sex]+' friend''s',
      ' rescue. The evil '+ulred+player.name2+config.textcol1+' was defeated!',
      '',
      '',
@@ -2572,7 +2565,7 @@ begin
      'Not enough',
      ' '+uplc+player.name2+config.textcol1+' stalked '+uplc+ply.name2+config.textcol1+' at the Dormitory.',
      ' '+uplc+ply.name2+config.textcol1+' was sleeping and would have been killed if it hadn''t',
-     ' been for the brave '+uplc+mate.name2+config.textcol1+' who rushed to '+sex3[mate.sex]+' friends',
+     ' been for the brave '+uplc+mate.name2+config.textcol1+' who rushed to '+sex3[mate.sex]+' friend''s',
      ' rescue. Unfortunately '+ulred+mate.name2+config.textcol1+' was defeated.',
      '',
      '',
