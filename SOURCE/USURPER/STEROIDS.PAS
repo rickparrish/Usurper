@@ -52,11 +52,11 @@ begin
  d(config.textcolor,'However, you can get what you want without any questions being');
  d(config.textcolor,'asked. The creatures that lurk around here obviously belong to');
  d(config.textcolor,'the lower sediments of society.');
- d(config.textcolor,'Among these gentlemens big muscles often make a difference.');
- d(config.textcolor,'No wonder then, that you can buy pills here.');
+ d(config.textcolor,'Among these gentlemen, big muscles often make a difference.');
+ d(config.textcolor,'No wonder then that you can buy pills here.');
  d(config.textcolor,'You walk to the register desk.');
  crlf;
- menu('(L)ist Vitamines');
+ menu('(L)ist Vitamins');
  menu('(B)uy');
  menu('(S)tatus');
  menu('(R)eturn to street');
@@ -154,16 +154,16 @@ begin
  sterprice[9]^:=350000;
  sterprice[10]^:=500000;
 
- comment[1]^:='Effective prep when taken during a long period.';
+ comment[1]^:='Effective prep when taken over a long period.';
  comment[2]^:='Cheap and primitive strength almost for free!';
  comment[3]^:='Often used by Troll warriors. Aggressive impact.';
  comment[4]^:='Superb muscle booster. Nasty sideffects though.';
- comment[5]^:='Used to raise young slaves stamina and output.';
+ comment[5]^:='Used to raise young slaves'' stamina and output.';
  comment[6]^:='Druids fabricate. That should warn you...';
  comment[7]^:='Miracle maker. Can also turn you old very fast.';
  comment[8]^:='Be experienced before you take this stuff...';
  comment[9]^:='Fly to madness or salvation with these pills.';
- comment[10]^:='What can this be? Why don'+chr(39)+'t you try it?';
+ comment[10]^:='What can this be? Why don''t you try it?';
 
  leave_store:=false;
  crlf;
@@ -219,7 +219,7 @@ begin
          if confirm('','n')=true then begin
           if player.mental<10 then begin
            crlf;
-           d(config.textcolor,'You may not buy Steriods with your current status!');
+           d(config.textcolor,'You may not buy Steroids in your current state!');
            d(config.textcolor,'It may kill you! Try to stay healthy!');
            crlf;
            pause;
@@ -232,7 +232,7 @@ begin
           end
           else begin
            crlf;
-           d(config.textcolor,'After have seen your '+config.moneytype+', '+owner+' picks up a tiny package');
+           d(config.textcolor,'After having seen your '+config.moneytype+', '+owner+' picks up a tiny package');
            d(config.textcolor,'behind his counter. You hand the slimy human the '+config.moneytype+'.');
            d(config.textcolor,'Inside the package you find a little box containing a couple');
            d(config.textcolor,'of pills. You quickly swallow them down with a glass of water.');
@@ -308,6 +308,7 @@ begin
              7 : x:=16+random(20);
              8 : x:=18+random(25);
              9 : x:=26+random(55);
+                          10 : x:=31+random(60);
             end;
 
             {x:=x-random(player.mental);
@@ -319,7 +320,7 @@ begin
             crlf;
             d(config.textcolor,'Successful Body Build-up!');
             d(config.textcolor,'*************************');
-            d(config.textcolor,'Your strength increase with '+uwhite+commastr(x)+config.textcol1+'!');
+            d(config.textcolor,'Your strength increased by '+uwhite+commastr(x)+config.textcol1+'!');
             crlf;
 
 
@@ -334,6 +335,7 @@ begin
              7 : x:=16+random(18);
              8 : x:=18+random(20);
              9 : x:=26+random(25);
+             10 : x:=31+random(30);
             end;
 
             if player.race=Gnome then begin
@@ -344,9 +346,9 @@ begin
             if player.mental<0 then player.mental:=0;
 
             case random(5) of
-             0 : s:=uplc+player.name2+config.textcol1+' shot '+sex4[player.sex]+' full with steroids.';
-             1 : s:=uplc+player.name2+config.textcol1+' bought loads with steroids.';
-             2 : s:=uplc+player.name2+config.textcol1+' increased his strength with steroids.';
+             0 : s:=uplc+player.name2+config.textcol1+' shot '+sex4[player.sex]+' full of steroids.';
+             1 : s:=uplc+player.name2+config.textcol1+' bought loads of steroids.';
+             2 : s:=uplc+player.name2+config.textcol1+' increased '+sex3[player.sex]+' strength with steroids.';
              3 : s:=uplc+player.name2+config.textcol1+' got bigger and meaner with some pills.';
              4 : s:=uplc+player.name2+config.textcol1+' gave '+sex3[player.sex]+' body a dose of steroids.';
             end;
