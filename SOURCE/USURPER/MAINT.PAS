@@ -213,9 +213,9 @@ begin
      14: s:='My Master is not Apollonia!';
      15: s:='No, I did not do the old couple!';
      16: s:='I know who took out the town masters!';
-     17: s:='Ha! You all have so pathetic names...';
+     17: s:='Ha! You all have such pathetic names...';
      18: s:='Worthless worms.';
-     19: s:='The steroids helped me to a better life (at least stronger)';
+     19: s:='The steroids helped me to a better life (at least a stronger one)';
      20: s:='Ha ha ha!';
      21: s:='Puppets!';
      22: s:='I was robbed!!';
@@ -360,7 +360,7 @@ begin
    player.AutoHate:=1;
   end;
 
-  {reseting all kinds of "daily" parameters}
+  {resetting all kinds of "daily" parameters}
   player.UmanBearTries:=0;
   player.massage:=0;
   player.gym_sessions:=config.gymsessions;
@@ -377,7 +377,7 @@ begin
   player.assa:=3;
   player.drinksleft:=Config.DrinksatOrbs; {drinks / day at Orbs}
   player.intimacyActs:=Config.IntimacyActs;
-  player.wrestlings:=Config.MaxWrestlings; {when you cange this value, check with UMAN.PAS
+  player.wrestlings:=Config.MaxWrestlings; {when you change this value, check with UMAN.PAS
                          and the WWTRIES constant, they should match}
 
   if player.class=Assassin then begin
@@ -414,7 +414,7 @@ begin
   end;
 
 
-  {Is it a Computer Controlled character then delete his newsfiles}
+  {If it is a Computer Controlled character then delete his newsfiles}
   {and revive him/her}
   if player.ai='C' then begin
 
@@ -889,7 +889,7 @@ begin
    x:=1;
    newsy(true,'Gang Influence',
    utec+' '+player.team+config.textcol1+' control the Town.',
-   ' The have done so for '+uwhite+commastr(player.teamrec)+config.textcol1+' '+s+' now.',
+   ' They have done so for '+uwhite+commastr(player.teamrec)+config.textcol1+' '+s+' now.',
    '',
    '',
    '',
@@ -912,7 +912,7 @@ begin
     x:=1;
     newsy(true,'Gang Power',
     utec+' '+player.team+config.textcol1+' control the Town.',
-    ' The have done so for '+uwhite+commastr(player.teamrec)+config.textcol1+' days now.',
+    ' They have done so for '+uwhite+commastr(player.teamrec)+config.textcol1+' days now.',
     '',
     '',
     '',
@@ -1008,7 +1008,7 @@ begin
  d(11,'DONE');
 
 
- {Update the QUESTS, they mail fail here if players haven't finished
+ {Update the QUESTS, they may fail here if players haven't finished
   their missions in time}
  sd(global_mainttxt,'Browsing Quests ... ');
  if f_exists(global_rquestf) then begin

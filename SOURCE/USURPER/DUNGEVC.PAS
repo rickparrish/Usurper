@@ -1630,7 +1630,7 @@ begin
          end;
      '1':begin
           x:=1;
-          inc(player.strength,random(3));
+          inc(player.strength,random(3) + 1);
           crlf;
           d(config.textcolor,'Your Strength has increased!');
           crlf;
@@ -1641,7 +1641,7 @@ begin
           x:=random(5)+2;
           inc(player.defence,x);
           crlf;
-          sd(config.textcolor,'Your defence capabilities went up with ');
+          sd(config.textcolor,'Your defence capabilities increased by ');
           sd(15,commastr(x));
           d(config.textcolor,' points!');
           crlf;
@@ -1663,7 +1663,7 @@ begin
           x:=random(25)+20;
           inc(player.healing,x);
           crlf;
-          sd(config.textcolor,'Your supply of Healing Potions increased with ');
+          sd(config.textcolor,'Your supply of Healing Potions increased by ');
           sd(15,commastr(x));
           d(config.textcolor,' !');
           crlf;
@@ -1675,7 +1675,7 @@ begin
           inc(player.maxhps,x);
           player.hps:=player.maxhps;
           crlf;
-          d(config.textcolor,'Your Hitpoints has increased!');
+          d(config.textcolor,'Your Hitpoints have increased!');
           crlf;
           pause;
           ciao:=true;
@@ -1683,7 +1683,7 @@ begin
      '6':begin
           x:=random(1000)+300;
           if player.level>20 then begin
-           x:=x*random(10);
+           x:=x*(random(10)+1);
           end;
           incplayerexp(player,x);
           crlf;

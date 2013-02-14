@@ -1283,7 +1283,7 @@ begin
      case random(5) of
       0: s:='vagrancy';
       1: s:='theft';
-      2: s:='drunkeness';
+      2: s:='drunkenness';
       3: s:='witchcraft';
       4: s:='fraud';
      end;
