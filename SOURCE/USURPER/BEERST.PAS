@@ -351,9 +351,9 @@ begin
          crlf;
          {no dark deeds left}
          no_dark_deeds;
+         pause;
         end
         else begin
-         if player.darknr>0 then begin
           dogs:=random(2)+5;
           if player.level>10 then dogs:=dogs+random(5)+2;
           if player.level>20 then dogs:=dogs+random(5)+2;
@@ -1354,7 +1354,7 @@ end
        end;
     end;
   end;
-  end;
+  
 
  until ch='R';
 

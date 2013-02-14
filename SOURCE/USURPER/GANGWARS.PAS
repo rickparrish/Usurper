@@ -409,7 +409,7 @@ var
     fastgame : boolean;
     i,j,x : longint;
 
-    to_death, found, all_dead:boolean;
+    found, all_dead:boolean;
 
 begin
 
