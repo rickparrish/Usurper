@@ -1391,7 +1391,7 @@ begin {RAPE_GIRL event *START*.... a woman is being harassed by local militia}
 
 end; {RAPE_GIRL event *END*}
 
-Procedure Find_Item_Event(var pl1,pl2,pl3,pl4 : userrec);
+Function Find_Item_Event(var pl1,pl2,pl3,pl4 : userrec) : boolean;
 var
     i, j, found : longint;
 
@@ -1405,7 +1405,8 @@ begin
 
  new(objekt);  {player finds item in dungeons}
 
- if config.classic=false then begin
+ Find_Item_Event:=false;if config.classic=false then begin
+  Find_Item_Event:=true;
   for i:=1 to 15 do begin
    case i of
     1: gtyp:=Head;
@@ -1748,7 +1749,7 @@ begin
            inc(player.maxmana,x);
            player.mana:=player.maxmana;
            crlf;
-           d(config.textcolor,'Your MANA resource increased!');
+           d(config.textcolor,'Your MANA has increased!');
            crlf;
            pause;
            ciao:=true;
@@ -1765,15 +1766,11 @@ begin
    end;
 
   end;
+ exit;
  end; {**WISHING WELL END**}
 
  {*Should player (and team) be caught in something... an event}
- x:=random(6);
- if global_auto_probe=UmanCAve then begin
-  x:=0;
- end;
-
-
+ 
  {if random(1)=0 then begin {cheat, jakob}
 
  if random(8)=1 then begin
@@ -2306,7 +2303,7 @@ begin
                 xx:=random(500)+50;
                 give_chivalry(player,xx);
 
-                d(config.textcolor,'Your feel a cool breeze, and your heart feels a bit stronger!');
+                d(config.textcolor,'You feel a cool breeze, and your heart feels a bit stronger!');
 
                 if player_active(pl1,true) then give_chivalry(pl1,xx);
                 if player_active(pl2,true) then give_chivalry(pl2,xx);
@@ -2413,7 +2410,7 @@ begin
      end; {SURROUNDED BY STRANGERS}
 
    4:begin {Find item}
-      Find_Item_Event(pl1,pl2,pl3,pl4);
+      Dungeon_Event:=Find_Item_Event(pl1,pl2,pl3,pl4);
      end;
    5:begin {Harassed Woman}
       Harassed_Woman(pl1,pl2,pl3,pl4);
@@ -2431,7 +2428,7 @@ begin
       beggar(pl1,pl2,pl3,pl4);
      end;
    9:begin {witchdoctor}
-      witch_doctor(pl1,pl2,pl3,pl4);
+      Dungeon_Event:=witch_doctor;
      end;
   10:begin {sniff glue}
       sniffing_glue(pl1,pl2,pl3,pl4);

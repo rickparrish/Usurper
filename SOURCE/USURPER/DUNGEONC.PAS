@@ -949,11 +949,8 @@ begin
           {decrease dungeon fights}
           dec(player.fights);
 
-          xx:=(global_dungeonlevel-1)*10;
-          x:=global_dungeonlevel*10;
-          repeat
-           y:=random(x);
-          until y>xx;
+          xx:=(global_dungeonlevel-1)*10;          
+          y:=xx+random(10);
 
           load_monster(y,1);
 
@@ -1043,7 +1040,7 @@ begin
            crlf;
            d(config.textcolor,'The ground starts to tremble!');
            d(config.textcolor,'Through the shattered rocks something horrible');
-           d(config.textcolor,'rise! A Demon has been summoned upon YOU!');
+           d(config.textcolor,'rises! A Demon has been summoned upon YOU!');
            crlf;
            d(config.textcolor,'Your grip to your weapon hardens...the Demon turns');
            d(config.textcolor,'it''s ugly head against you...');
@@ -1071,10 +1068,8 @@ begin
            for i:=2 to yy do begin
             xx:=(global_dungeonlevel-4)*10;
             if xx<1 then xx:=1;
-            x:=global_dungeonlevel*10;
-            repeat
-             y:=random(x);
-            until y>xx;
+            x:=global_dungeonlevel*10;            
+            y:=xx+random(x-xx);
 
             {load a monster}
             load_monster(y,i);
@@ -1209,16 +1204,16 @@ begin
              d(config.textcolor,'You buy '+ulcyan+commastr(zz)+config.textcol1+' potions.');
 
              sd(global_plycol,'The '+uplc+'Monk'+config.textcol1+' ');
-             case random(10) of
+             case random(9) of
               0: d(config.textcolor,'smiles at you.');
               1: d(config.textcolor,'stares at you.');
               2: d(config.textcolor,'waves goodbye.');
               3: d(config.textcolor,'smirks.');
-              5: d(config.textcolor,'walks away.');
-              6: d(config.textcolor,'burps.');
-              7: d(config.textcolor,'is silent.');
-              8: d(config.textcolor,'smiles');
-              9: d(config.textcolor,'wishes you good luck.');
+              4: d(config.textcolor,'walks away.');
+              5: d(config.textcolor,'burps.');
+              6: d(config.textcolor,'is silent.');
+              7: d(config.textcolor,'smiles');
+              8: d(config.textcolor,'wishes you good luck.');
              end; {case .end.}
              crlf;
             end

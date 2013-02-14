@@ -33,7 +33,7 @@ Uses Init;
 Procedure Merchant(var pl1,pl2,pl3,pl4:UserRec);
 Procedure Beggar  (var pl1,pl2,pl3,pl4:UserRec);
 Procedure Strangers(var pl1,pl2,pl3,pl4:UserRec);
-Procedure Witch_Doctor(var pl1,pl2,pl3,pl4:UserRec);
+Function Witch_Doctor : boolean;
 Procedure Sniffing_Glue(var pl1,pl2,pl3,pl4:UserRec);
 
 Implementation
@@ -91,7 +91,7 @@ begin
 
 end; {sniffing_glue *end*}
 
-Procedure Witch_Doctor;
+Function Witch_Doctor : boolean;
 const doctor = 'Mbluta';
 var
     ch : char;
@@ -101,7 +101,7 @@ begin
 
  cost:=player.level*12500;
 
- if player.gold<cost then exit;
+ if player.gold>=cost then begin
 
  clearscreen;
  crlf;
@@ -180,10 +180,11 @@ begin
 
           end; {escape failed *end*}
        end; {case .end.}
-
+       
+       end 
       end;
- end; {case .end.}
-
+witch_doctor:=true;      
+ end else witch_doctor:=false;
 end; {witch_doctor *end*}
 
 Procedure Strangers; {encounter with strangers}
@@ -450,7 +451,7 @@ begin
              'R':begin {rude response}
                   d(config.textcolor,'You tell the strangers what a pack of trash they are.');
                   d(config.textcolor,'You let them know that their mothers must have been');
-                  d(config.textcolor,'the most ugliest creatures ever to have set foot');
+                  d(config.textcolor,'the most ugly creatures ever to have set foot');
                   d(config.textcolor,'on earth.');
                   crlf;
                   pause;
