@@ -2417,7 +2417,9 @@ begin
      end;
 
    6:begin {Man needing healing -QUEST-}
+      Dungeon_Event:=false;
       if DungeonQuest.magicshoppe=false then begin
+       Dungeon_Event:=true;
        ManNeeding_Healing(pl1,pl2,pl3,pl4);
       end;
      end;

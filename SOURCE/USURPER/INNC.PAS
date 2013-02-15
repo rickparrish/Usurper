@@ -64,7 +64,7 @@ begin
  {news-paper}
  newsy(true,
  'Guest at the Inn',
- ' '+uplc+player.name2+config.textcol1+' hired a room at the Inn.',
+ ' '+uplc+player.name2+config.textcol1+' is staying in a room at the Inn.',
  ' '+s,
  '',
  '',
@@ -89,7 +89,7 @@ begin
  d(5,mkstring(length(s),underscore));
  crlf;
  d(config.textcolor,'You enter the pub which is filled with a strange mix of creatures.');
- d(config.textcolor,'Screaming trolls and grim looking orcs are spread out at small tables');
+ d(config.textcolor,'Screaming trolls and grim-looking orcs are spread out at small tables');
  d(config.textcolor,'in the center of the room. Elves and humans are mostly concentrated at');
  d(config.textcolor,'the bar, involved in deep conversations about the latest events.');
  d(config.textcolor,'You really don''t know what to do...');
@@ -723,9 +723,9 @@ begin {MAIN-PROCEDURE}
 
            case pl0^.location of
             offloc_innroom1: d(config.textcolor,' at a room downstairs.');
-            offloc_innroom2: d(config.textcolor,' at the 1 floor.');
-            offloc_innroom3: d(config.textcolor,' at the 2 floor.');
-            offloc_innroom4: d(config.textcolor,' at the 3 floor.');
+            offloc_innroom2: d(config.textcolor,' on the first floor.');
+            offloc_innroom3: d(config.textcolor,' on the second floor.');
+            offloc_innroom4: d(config.textcolor,' on the third floor.');
            end; {case .end.}
 
            if pl0^.bguard>0 then begin

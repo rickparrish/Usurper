@@ -2388,7 +2388,7 @@ begin
 
     {shit text}
     d(12,'Damn!');
-    d(global_plycol,ply.name2+'s'+config.textcol1+' team-mate '+uplc+mate.name2+config.textcol1+' was hiding');
+    d(global_plycol,ply.name2+'s'+config.textcol1+' teammate '+uplc+mate.name2+config.textcol1+' was hiding');
     d(config.textcolor,s+' Now you must fight '+sex[mate.sex]+' too!');
     pause;
 
