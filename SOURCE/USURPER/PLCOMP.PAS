@@ -384,7 +384,7 @@ begin
     x:=random(4)+1;
     if x=3 then begin
      crlf;
-     d(config.textcolor,'**Poisoned Gnollbite!**');
+     d(config.textcolor,'**Poisonous Gnollbite!**');
      d(config.textcolor,'You poisoned '+sex[player2.sex]+'!');
      player2.gnollp:=1;
     end;
@@ -474,16 +474,16 @@ begin
     battle_comment(1,player2.name2);
    end;
 
-   if (player1.punch=0) and (player1.used_item=false) and (player1.casted=false)
+   if (player1.punch+player1.poison=0) and (player1.used_item=false) and (player1.casted=false)
    and (stab1<>-1) then begin
     d(config.textcolor,'You miss your blow against '+player2.name2+'!');
    end;
-   if (player1.punch>0) and (player1.used_item=false) and (player1.casted=false)
+   if (player1.punch+player1.poison>0) and (player1.used_item=false) and (player1.casted=false)
    and (stab1<>-1) then begin
     sd(config.textcolor,'You hit ');
     sd(global_plycol,player2.name2);
     sd(config.textcolor,' for ');
-    sd(12,commastr(player1.punch));
+    sd(12,commastr(player1.punch+player1.poison));
     d(config.textcolor,' points!');
 
     if random(4)=0 then begin
@@ -503,14 +503,14 @@ begin
     end;
    end;
 
-  if (player2.punch=0) and (player2.used_item=false) and (player2.casted=false) and (stab2<>-1) then begin
+  if (player2.punch+player2.poison=0) and (player2.used_item=false) and (player2.casted=false) and (stab2<>-1) then begin
    d(config.textcolor,player2.name2+' missed you completely!');
   end;
 
-  if (player2.punch>0) and (player2.used_item=false) and (player2.casted=false) and (stab2<>-1) then begin
+  if (player2.punch+player2.poison>0) and (player2.used_item=false) and (player2.casted=false) and (stab2<>-1) then begin
    sd(global_plycol,player2.name2);
    sd(config.textcolor,' hits you for ');
-   sd(12,commastr(player2.punch));
+   sd(12,commastr(player2.punch+player2.poison));
    d(config.textcolor,' points!');
 
    if random(3)=0 then begin
@@ -520,7 +520,7 @@ begin
    normal_defence(player1);
    if player1.absorb>player2.punch then player1.absorb:=player2.punch;
    if player1.absorb>0 then begin
-    d(config.textcolor,'armor absorbed '+commastr(player1.absorb)+' points!');
+    d(config.textcolor,'Your armor absorbed '+commastr(player1.absorb)+' points!');
     player2.punch:=player2.punch-player1.absorb;
     if player2.punch<0 then player2.punch:=0;
    end;
@@ -544,7 +544,7 @@ begin
    player1.punch:=player1.punch+player2.level;
   end;
 
-  {poison effekt}
+  {poison effect}
   if player1.poison>0 then player1.punch:=player1.punch+player1.poison;
   if player2.poison>0 then player2.punch:=player2.punch+player2.poison;
 

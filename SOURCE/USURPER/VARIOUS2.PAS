@@ -920,25 +920,25 @@ begin
          d(config.textcolor,' says.');
         end;
       3:begin
-         sd(global_talkcol,'Gosh! Im really bleeding!');
+         sd(global_talkcol,'Gosh! I''m really bleeding!');
          sd(config.textcolor,', ');
          sd(global_plycol,player);
          d(config.textcolor,' moans.');
         end;
       4:begin
-         sd(global_talkcol,'Ahh..! Where do all this blood come from?');
+         sd(global_talkcol,'Ahh..! Where did all this blood come from?');
          sd(config.textcolor,', ');
          sd(global_plycol,player);
          d(config.textcolor,' screams.');
         end;
       5:begin
-         sd(global_talkcol,' Oh Noo... I''m hit!');
+         sd(global_talkcol,' Oh No... I''m hit!');
          sd(config.textcolor,', ');
          sd(global_plycol,player);
          d(config.textcolor,' screams.');
         end;
       6:begin
-         sd(global_talkcol,'I''m to good to die!');
+         sd(global_talkcol,'I''m too good to die!');
          sd(config.textcolor,', ');
          sd(global_plycol,player);
          d(config.textcolor,' cries.');
