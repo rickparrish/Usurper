@@ -51,7 +51,7 @@ begin
  d(5,'Beer-House, run by '+uplc+owner+umag);
  d(5,mkstring(length(s),underscore));
  crlf;
- d(config.textcolor,'You enter the shabby hut with a close grip to your equipment.');
+ d(config.textcolor,'You enter the shabby hut with a close grip on your equipment.');
  d(config.textcolor,'In these parts of town you must keep an eye on everything, and');
  d(config.textcolor,'no one is to be trusted.');
  d(config.textcolor,'Everybody knows that this place is the biggest drughole in town.');
@@ -227,7 +227,7 @@ begin
            pause;
            clearscreen;
            crlf;
-           d(config.textcolor,'Well seated in one of the rooms. You take the pill and');
+           d(config.textcolor,'Seated in one of the rooms, you take the pill and');
            d(config.textcolor,'swallow it down together with a cool softdrink.');
            delay2(800);
            crlf;
@@ -256,10 +256,10 @@ begin
                crlf;
                d(config.textcolor,'At first you feel nothing from the pill. But you know that');
                d(config.textcolor,'Psilocybin is a drug worth waiting for... And yes, sudden impressions');
-               d(config.textcolor,'and experiences soon begins to fill your mind. They all have');
-               d(config.textcolor,'one thing in common. All are filled with happiness and joy.');
+               d(config.textcolor,'and experiences soon begin to fill your mind. They all have');
+               d(config.textcolor,'one thing in common: all are filled with happiness and joy.');
                d(config.textcolor,'You start to notice a deep vibration from somewhere near...');
-               d(config.textcolor,'It take a while before you realize that it is your pulse beating.');
+               d(config.textcolor,'It takes a while before you realize that it is your pulse beating.');
                d(config.textcolor,'You stretch out on the couch and let the drug take over...');
               end;
             3:begin
@@ -275,14 +275,14 @@ begin
                crlf;
                d(config.textcolor,'Psylxion is a combat drug. A real stress reducer.');
                d(config.textcolor,'The dose you took was a triple normal. After a couple of');
-               d(config.textcolor,'minutes you feel how your tensions disappears. Your mind feel');
+               d(config.textcolor,'minutes you feel how your tensions disappears. Your mind feels');
                d(config.textcolor,'amazingly sharp and crystal clear. You soon enter a state of');
-               d(config.textcolor,'complete harmony with yourself. The strong dose take you');
+               d(config.textcolor,'complete harmony with yourself. The strong dose takes you');
                d(config.textcolor,'beyond reality. Soon you surf the lightwaves...');
               end;
             5:begin
                crlf;
-               d(config.textcolor,'The intro-effect from this drug isn'+chr(39)+'t nice. After a short');
+               d(config.textcolor,'The intro-effect from this drug isn''t nice. After a short');
                d(config.textcolor,'moment you feel like you got hit by a giant hammer...');
                d(config.textcolor,'You wake up in a long dark tunnel. At the end you can see');
                d(config.textcolor,'a light shining with sharp intensity. At the same time you');
@@ -292,7 +292,7 @@ begin
               end;
             6:begin
                crlf;
-               d(config.textcolor,'The Neopratin drug soon take over your body and soul.');
+               d(config.textcolor,'The Neopratin drug soon takes over your body and soul.');
                d(config.textcolor,'The familiar spinner effect takes place, where you feel the');
                d(config.textcolor,'short discomfort of having your head turning at the speed of');
                d(config.textcolor,'light. Bright colours fill your mind and give you a feeling');
@@ -305,33 +305,33 @@ begin
                d(config.textcolor,'After a while you hear this intense stomping sound.');
                d(config.textcolor,'During the short time it takes for you to realize that');
                d(config.textcolor,'the stomping sound is your own heart, bolts of light');
-               d(config.textcolor,'cuts right through your mind. The darkness that follows');
+               d(config.textcolor,'cut right through your mind. The darkness that follows');
                d(config.textcolor,'soon changes to a new reality, the ocean of galaxies...');
               end;
             8:begin
                crlf;
                d(config.textcolor,'"Ko-nahm toh, ko-nahm toh, ko-nahm toh". The phrase');
                d(config.textcolor,'repeats itself inside your head. Quite funny drug effect.');
-               d(config.textcolor,'Large amount of energy pours through your body. This would');
-               d(config.textcolor,'would be a perfect combat drug, a true illegal rush.');
+               d(config.textcolor,'A large amount of energy pours through your body. This would');
+               d(config.textcolor,'be a perfect combat drug, a true illegal rush.');
                d(config.textcolor,'Unfortunately there is a coma stadium too...');
-               d(config.textcolor,'Your increased brain capacity scan your accumulated wisdom');
+               d(config.textcolor,'Your increased brain capacity scans your accumulated wisdom');
                d(config.textcolor,'and reworks it. The last thing you must do before darkness...');
               end;
             9:begin
                crlf;
                d(config.textcolor,'Before you know it a large black helmet is drawn over');
                d(config.textcolor,'your head. Your quest for joy and knowledge begins with a');
-               d(config.textcolor,'trip the other side of life. The combined journey is dark');
-               d(config.textcolor,'and dangerous. But it'+chr(39)+'s a mustbe for the true adventurer of');
-               d(config.textcolor,'life. Altered states can be confusing, but all in all it'+chr(39)+'s');
+               d(config.textcolor,'trip to the other side of life. The combined journey is dark');
+               d(config.textcolor,'and dangerous. But it''s a mustbe for the true adventurer of');
+               d(config.textcolor,'life. Altered states can be confusing, but all in all it''s');
                d(config.textcolor,'just one hell of a trip...');
               end;
             10:begin
                crlf;
                d(config.textcolor,'Warping into the unknown with Transactor.');
                d(config.textcolor,'You feel that the reality around you transforms into');
-               d(config.textcolor,'atoms of light. Your body looses it'+chr(39)+'s contours before');
+               d(config.textcolor,'atoms of light. Your body loses it''s contours before');
                d(config.textcolor,'you takeoff into the unknown realitys of your subconscious...');
               end;
            end; {case .end.}
@@ -395,10 +395,9 @@ begin
             crlf;
             d(config.textcolor,'Successful Trip!');
             d(config.textcolor,'******************');
-            d(config.textcolor,'You receive '+uwhite+commastr(x)+config.textcol1+' experience points');
-            d(config.textcolor,'(don''t turn into a dopey)');
+            d(config.textcolor,'You receive '+uwhite+commastr(x)+config.textcol1+' experience points.');
+            d(config.textcolor,'(Don''t turn into a dopey!)');
             crlf;
-            pause;
 
             case i of
              1 : x:=2+random(2);
@@ -421,9 +420,10 @@ begin
             player.addict:=player.addict+x;
             if player.addict>100 then player.addict:=100;
 
+            pause;
             case random(5) of
              0 : s:=uplc+player.name2+config.textcol1+' got high on some heavy drugs.';
-             1 : s:=uplc+player.name2+config.textcol1+' shot himself full with drugs.';
+             1 : s:=uplc+player.name2+config.textcol1+' shot himself full of drugs.';
              2 : s:=uplc+player.name2+config.textcol1+' escaped reality with the help of drugs.';
              3 : s:=uplc+player.name2+config.textcol1+' boosted his experience with a skytripper.';
              4 : s:=uplc+player.name2+config.textcol1+' made his way to dreamland with a dose of chemicals.';

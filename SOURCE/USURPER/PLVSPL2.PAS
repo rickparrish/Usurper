@@ -60,7 +60,7 @@ begin
 
  stab2:=0;
 
- {This unit is called upon from Pl_vs_plc, when 'A'ttack is choosen}
+ {This unit is called upon from Pl_vs_plc, when 'A'ttack is chosen}
 
  {restoring overmaxed hps}
  if pl0.hps>pl0.maxhps then pl0.hps:=pl0.maxhps;

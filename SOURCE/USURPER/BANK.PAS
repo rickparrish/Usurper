@@ -1483,7 +1483,7 @@ begin
                  {combat ends and attackers won!}
 
                  crlf;
-                 d(15,'Succesful Robbery!');
+                 d(15,'Successful Robbery!');
                  sd(config.textcolor,'Well done ');
                  sd(5,player.name2);
                  d(config.textcolor,'.');
