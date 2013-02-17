@@ -281,7 +281,7 @@ begin
        end; {ShakeDown END}
      1:begin {vitamin offer START}
         x:=player.level*10000;
-        d(config.textcolor,'The stranger offers you a vitamine cure which he claims could');
+        d(config.textcolor,'The stranger offers you a vitamin cure which he claims could');
         d(config.textcolor,'enhance your strength.');
         sd(config.textcolor,'The man wants ');
         sd(14,commastr(x));
@@ -305,7 +305,7 @@ begin
           x:=3+random(3);
           d(config.textcolor,'You wake up a short moment later. You are laying in the');
           d(config.textcolor,'alley. All your belongings are left untouched.');
-          sd(config.textcolor,'Your strength went up with ');
+          sd(config.textcolor,'Your strength went up by ');
           sd(15,commastr(x));
           d(config.textcolor,' !');
           pause;

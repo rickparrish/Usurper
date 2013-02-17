@@ -279,7 +279,7 @@ begin
       end;
  end; {case .end.}
 
- {should Ted the Bartended get involved in the fight?}
+ {should Ted the Bartender get involved in the fight?}
  if random(2)=0 then begin
   crlf;
   d(global_plycol,config.bobsbartender+' the Bartender'+config.textcol1+' immediately grabs a wooden club and jumps');
@@ -481,7 +481,7 @@ begin
      newsy(true,
      ' '+uplc+player.name2+config.textcol1+' was knocked out by '+uplc+config.bobsbartender+' the Bartender'
         +config.textcol1+'!',
-     '',
+     ' ('+uplc+player.name2+config.textcol1+' managed to knock out '+commastr(knocks)+' foes)',
      '',
      '',
      '',
@@ -559,20 +559,6 @@ begin
     crlf;
     greppad:=true;
 
-    if random(4)=0 then begin
-     newsy(false,
-     ' '+uplc+player.name2+config.textcol1+' was held by two foes, and beaten up by a '+s+'!',
-     '',
-     '',
-     '',
-     '',
-     '',
-     '',
-     '',
-     '',
-     '');
-
-    end;
     pause;
    end;
   end;
@@ -1229,29 +1215,16 @@ begin
    end; {for i:= .end.}
 
    if s<>'' then begin
-    d(config.textcolor,'A '+s+' approches! He grins evilly and ');
+    d(config.textcolor,'A '+s+' approaches! He grins evilly and ');
     case random(4) of
      0: d(12,'kicks you in the head!');
      1: d(12,'kicks you in the chest!');
      2: d(12,'jumps on your head!');
-     3: d(12,'punch you in the face!');
+     3: d(12,'punches you in the face!');
     end;
     stamina:=stamina-random(2)+1;
     d(12,'You suffer from your wounds!');
     crlf;
-
-    {news-paper}
-    newsy(false,
-    ' '+uplc+player.name2+config.textcol1+' was severly beat up!',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '');
 
    end;
 

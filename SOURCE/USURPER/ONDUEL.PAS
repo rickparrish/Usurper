@@ -501,7 +501,7 @@ begin
             close_text(txt);
            end
            else begin
-            d(12,'You could''nt express your feelings.');
+            d(12,'You couldn''t express your feelings.');
            end;
            delay2(global_lockdelay);
           end;
