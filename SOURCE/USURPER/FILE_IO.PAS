@@ -180,7 +180,7 @@ Function Open_Txtfile(action:tshare; var f; const fname:string) : boolean;
 Function Get_Random_Line_From_Textfile(const fname:string) : string;
 Procedure Pack_Txtfile(const fname:s70;max_lines:word);
 Procedure Write_To_Inn_File(const sender,m1,m2,m3,m4,m5:s70);
-Procedure Check_TruthFile;
+Procedure Check_TruthFile(inmaint:boolean);
 Procedure Write_To_Truth_File(const sender:string;const mess:string);
 Procedure Readln_from_Text(var f:text;var s:string);
 Procedure Write_To_Text(var f:text;const s:string);
@@ -1532,7 +1532,7 @@ end;
 
 
 
-Procedure Check_TruthFile; {creates the "street-talk" files if non-existant}
+Procedure Check_TruthFile(inmaint:boolean); {creates the "street-talk" files if non-existant}
 const maxo = 15;
 var txt : text;
 Function Cool_Line : string;
@@ -1568,9 +1568,10 @@ begin
   {remove ascii file if it exists}
   if f_exists(global_truthfile2) then delete_file(global_truthfile2);
 
-  d(12,'Could not find the '+ulcyan+'Street-talk'+ulred+' files.');
-  d(config.textcolor,'Creating new ones...');
-
+  if not inmaint then begin
+   d(12,'Could not find the '+ulcyan+'Street-talk'+ulred+' files.');
+   d(config.textcolor,'Creating new ones...');
+  end;
   if open_txtfile(trewrite,txt,global_truthfile1) then begin
    writeln_to_text(txt,cool_line);
    writeln_to_text(txt,'  Street Talk');
@@ -1607,7 +1608,7 @@ var txt : text;
 begin {write_to_truth_file}
 
  {create files if non-existant}
- check_truthfile;
+ check_truthfile(false);
 
  for i:=1 to 2 do begin
   ok:=false;

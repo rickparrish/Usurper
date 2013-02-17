@@ -169,7 +169,7 @@ begin
  {Reset Truth files}
  if f_exists(global_truthfile1) then Delete_File(global_truthfile1);
  if f_exists(global_truthfile2) then Delete_File(global_truthfile2);
-
+  Check_TruthFile(true); {make empty truth file}
  {add some NPC comments to the Inn Chat file}
  if Config.AddNpcInnComments>0 then begin
 

@@ -2718,7 +2718,7 @@ begin
  end;
 
  {check "street-talk" files, create if non-existant}
- Check_TruthFile;
+ Check_TruthFile(false);
 
  {Check if "Fame File" exists}
  if f_exists(global_famefile)=false then begin
