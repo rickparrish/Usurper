@@ -1,10 +1,10 @@
 Step 0) Assumptions:
 
 	The first assumption is that you have Borland Pascal installed in Z:\BP.  
-	If you don't, you'll have to update the BUILDBP.CMD file
+	If you don't, you'll have to update the BPC.CFG and BUILDBP.CMD files
 
 	The second assumption is that you have Virtual Pascal installed in Z:\vp21.
-	If you don't, you'll have to update the BUILDVP.CMD file
+	If you don't, you'll have to update the VPC.CFG and BUILDVP.CMD files
 
 	*NOTE* The BUILD*.CMD files will copy a BPC.CFG or VPC.CFG into the relevant bin directory, meaning
 	if you have cusomized the .CFG file in the bin directory, it will be lost.  Make a backup!
@@ -67,6 +67,11 @@ Step 4) Edit Z:\vp21\source\rtl\vpsysw32.pas
       tidCursor := -1;
     end;
     
+Step 5) Extract build scripts / config files
+
+        Extract COMPILE.ZIP (into the same directory as COMPILE.TXT).  As mentioned in Step 0, you'll need to modify this
+        file if you aren't running off the Z:\ drive.
+
 Step 5) Build new EXEs
 
 	Run BUILDBP.CMD to build the DOS EXEs and have them copied to Z:\Usurper
