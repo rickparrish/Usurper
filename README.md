@@ -9,7 +9,8 @@ Become king, be a GOD or fall in love and have children.<br />
 
 ==============================
 Copyright 2009 Jakob Dangarden<br />
-Ported to Win32 by Rick Parrish<br />
+Ported to Win32 by <a href="https://github.com/rickparrish">Rick Parrish</a><br />
+Additional programming by <a href="https://github.com/dan1982code">Dan</a><br />
 
 These files are part of Usurper.
 
