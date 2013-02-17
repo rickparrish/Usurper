@@ -1010,7 +1010,7 @@ begin
         crlf;
         crlf;
         d(15,'Wake up call');
-        d(config.textcolor,'Ruining peoples sleep is fun, but not advisable.');
+        d(config.textcolor,'Ruining people''s sleep is fun, but not advisable.');
         d(config.textcolor,'There''s going to be trouble for sure.');
         crlf;
 
@@ -1062,7 +1062,7 @@ begin
           case ch of
            'S':begin {scream}
                 crlf;
-                d(config.textcolor,'You take a deep breath and scream for all what you''re worth;');
+                d(config.textcolor,'You take a deep breath and scream for all that you''re worth;');
                 sd(global_talkcol,'Ayyyiieeeeeee!!!..');
                 Make_Delay_Dots(global_talkcol,5,300);
                 crlf;

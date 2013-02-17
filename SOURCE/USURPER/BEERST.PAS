@@ -40,7 +40,7 @@ Uses Init, Cms, Jakob,
 var
     ch : char;
     xx, yy, cost, stolen : longint;
-    capable, knock1, knock2, target, pstam, poor, risk : integer;
+    capable, knockdogs, knocksons, target, pstam, poor, risk : integer;
     arrived, turbo : boolean;
     i : longint;
     cstam, newdogs, barrels, dogs, y : integer;
@@ -193,8 +193,8 @@ end; {init_Names_Stam *end*}
 
 procedure Prep_Steal;
 begin
-knock1:=0;
- knock2:=0;
+knockdogs:=0;
+ knocksons:=0;
 
  for i:=1 to 10 do begin
   sonarriv[i]:=false;
@@ -291,7 +291,7 @@ risk:=2;
                          d(4,'HIT! You managed to knock one out!');
                          
                          dec(dogs);
-                         inc(knock1);
+                         inc(knockdogs);
                         end;
 
                         if dogs>0 then begin
@@ -351,9 +351,9 @@ begin
          crlf;
          {no dark deeds left}
          no_dark_deeds;
+         pause;
         end
         else begin
-         if player.darknr>0 then begin
           dogs:=random(2)+5;
           if player.level>10 then dogs:=dogs+random(5)+2;
           if player.level>20 then dogs:=dogs+random(5)+2;
@@ -389,6 +389,7 @@ begin
            crlf;
 
            if ch='0' then begin
+            inc(player.darknr); {didn't use after all}
             disposal;
             exit;
            end;
@@ -1032,7 +1033,7 @@ solo_dogs_news;
              else begin
               sd(4,'And Hits! The dog goes down!');
               dec(newdogs);
-              inc(knock2);
+              inc(knockdogs);
              end;
              crlf;
            end;
@@ -1045,7 +1046,7 @@ solo_dogs_news;
             else begin
              sd(4,'Hit! The dog goes down!');
              dec(newdogs);
-             inc(knock1);
+             inc(knockdogs);
             end;
             crlf;
            end;
@@ -1067,7 +1068,7 @@ solo_dogs_news;
              crlf;
              if sonstam[i]<1 then begin
               d(15,'He goes down!');
-              inc(knock1);
+              inc(knocksons);
              end;
              break;
             end;
@@ -1090,7 +1091,7 @@ solo_dogs_news;
              crlf;
              if sonstam[i]<1 then begin
               d(15,'He goes down!');
-              inc(knock2);
+              inc(knocksons);
              end;
              break;
             end;
@@ -1209,18 +1210,26 @@ solo_dogs_news;
 
           xx:=stolen*500;
           sd(14,commastr(stolen));
-          sd(config.textcolor,' stolen barrels give you ');
+          sd(config.textcolor,' stolen barrels gives you ');
           sd(14,commastr(xx));
           sd(config.textcolor,' '+many_money(xx)+'!');
           crlf;
 
           yy:=0;          
-          if knock1+knock2>0 then begin
+          if knockdogs+knocksons>0 then begin
+           if knockdogs>0 then begin
            sd(config.textcolor,'You managed to knock out ');
-           sd(14,commastr(knock1+knock2));
-           sd(config.textcolor,' dogs/sons.');
+           sd(14,commastr(knockdogs));
+           sd(config.textcolor,' dogs.');
            crlf;
-           yy:=player.level*50*(knock1+knock2);
+           end;
+           if knocksons>0 then begin
+           sd(config.textcolor,'You managed to knock out ');
+           sd(14,commastr(knocksons));
+           sd(config.textcolor,' sons!');
+           crlf;
+           end;
+           yy:=player.level*((50*knockdogs)+(100*knocksons));
            sd(config.textcolor,'This gives you ');
            sd(14,commastr(yy));
            sd(config.textcolor,' experience points!');
@@ -1345,7 +1354,7 @@ end
        end;
     end;
   end;
-  end;
+  
 
  until ch='R';
 

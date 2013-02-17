@@ -84,7 +84,7 @@ begin
      d(config.textcolor,' mutters.');
     end;
   5:begin
-     sd(global_talkcol,'You have a bad breath!');
+     sd(global_talkcol,'You have bad breath!');
      sd(config.textcolor,', ');
      sd(global_plycol,owner);
      d(config.textcolor,' remarks.');
@@ -170,7 +170,7 @@ Procedure Groggos_Magic;
 var
     tempin : s70;
     a:^string;
-    s : ^s70;
+    s, msg : ^s70;
     yy, i, x, y : longint;
     ch : char;
     pl0 : ^UserRec;
@@ -234,7 +234,7 @@ begin
             d(global_talkcol,'And...');
            end;
          4:begin
-            d(global_talkcol,'My knowledge and reputation is wellknown!');
+            d(global_talkcol,'My knowledge and reputation is well-known!');
            end;
          5:begin
             d(global_talkcol,'Doesn''t surprise me at all, by the looks of you!');
@@ -272,7 +272,7 @@ begin
            no_dark_deeds;
            ch:=' ';
            crlf;
-           menu('(S)ummon Demon');
+           menu('(S)ummon Demon against other player');
            menu('(C)ast Disease');
            menu('(I)nfo');
            menu('(A)bort');
@@ -377,7 +377,7 @@ begin
                 sd(global_plycol,owner);
                 d(config.textcolor,' says.');
 
-                d(global_talkcol,'Your foes class make '+sex[pl0^.sex]+' a difficult target!');
+                d(global_talkcol,'Your foe''s class makes '+sex[pl0^.sex]+' a difficult target!');
 
                 if confirm('Continue anyway','n')=false then begin
                  found:=false;
@@ -409,17 +409,17 @@ begin
 
                 x:=5;
                 case pl0^.class of
-                 Alchemist : x:=1;
-                 Assassin  : x:=4;
-                 Barbarian : x:=8;
-                 Bard      : x:=5;
-                 Cleric    : x:=3;
-                 Jester    : x:=7;
-                 Magician  : x:=3;
-                 Paladin   : x:=4;
-                 Ranger    : x:=6;
-                 Sage      : x:=2;
-                 Warrior   : x:=7;
+                 Alchemist : x:=8;
+                 Assassin  : x:=5;
+                 Barbarian : x:=1;
+                 Bard      : x:=4;
+                 Cleric    : x:=6;
+                 Jester    : x:=2;
+                 Magician  : x:=6;
+                 Paladin   : x:=5;
+                 Ranger    : x:=3;
+                 Sage      : x:=7;
+                 Warrior   : x:=2;
                 end;
 
                 if pl0^.disres>10 then inc(x);
@@ -444,128 +444,33 @@ begin
                  s^:='Black Magic used against You!';
 
                  case random(5) of
-                  0:begin
-                     pl0^.blind:=true;
-
-                     post(MailSend,
-                     pl0^.name2,
-                     pl0^.ai,
-                     false,
-                     mailrequest_nothing,
-                     '',
-                     umailheadc+s^+config.textcol1,
-                     mkstring(length(s^),underscore),
-                     'You have been cursed! You are Blind!',
-                     '',
-                     '',
-                     '',
-                     '',
-                     '',
-                     '',
-                     '',
-                     '',
-                     '',
-                     '',
-                     '',
-                     '');
-                    end;
-                  1:begin
-                     pl0^.plague:=true;
-                     post(MailSend,
-                     pl0^.name2,
-                     pl0^.ai,
-                     false,
-                     mailrequest_nothing,
-                     '',
-                     umailheadc+s^+config.textcol1,
-                     mkstring(length(s^),underscore),
-                     'You have been cursed! You have the Plague!',
-                     '',
-                     '',
-                     '',
-                     '',
-                     '',
-                     '',
-                     '',
-                     '',
-                     '',
-                     '',
-                     '',
-                     '');
-                    end;
-                  2:begin
-                     pl0^.smallpox:=true;
-                     post(MailSend,
-                     pl0^.name2,
-                     pl0^.ai,
-                     false,
-                     mailrequest_nothing,
-                     '',
-                     umailheadc+s^+config.textcol1,
-                     mkstring(length(s^),underscore),
-                     'You have been cursed! You have Smallpox!',
-                     '',
-                     '',
-                     '',
-                     '',
-                     '',
-                     '',
-                     '',
-                     '',
-                     '',
-                     '',
-                     '',
-                     '');
-                    end;
-                  3:begin
-                     pl0^.measles:=true;
-                     post(MailSend,
-                     pl0^.name2,
-                     pl0^.ai,
-                     false,
-                     mailrequest_nothing,
-                     '',
-                     umailheadc+s^+config.textcol1,
-                     mkstring(length(s^),underscore),
-                     'You have been cursed! You have the Measles!',
-                     '',
-                     '',
-                     '',
-                     '',
-                     '',
-                     '',
-                     '',
-                     '',
-                     '',
-                     '',
-                     '',
-                     '');
-                    end;
-                  4:begin
-                     pl0^.leprosy:=true;
-                     post(MailSend,
-                     pl0^.name2,
-                     pl0^.ai,
-                     false,
-                     mailrequest_nothing,
-                     '',
-                     umailheadc+s^+config.textcol1,
-                     mkstring(length(s^),underscore),
-                     'You have been cursed! You have Leprosy!',
-                     '',
-                     '',
-                     '',
-                     '',
-                     '',
-                     '',
-                     '',
-                     '',
-                     '',
-                     '',
-                     '',
-                     '');
-                    end;
-                 end;
+                  0: begin pl0^.blind:=true; msg^:='You are blind!' end;
+                  1: begin pl0^.plague:=true; msg^:='You have the plague!' end;
+                  2: begin pl0^.smallpox:=true; msg^:='You have smallpox!' end;
+                  3: begin pl0^.measles:=true; msg^:='You have the measles!' end;
+                  4: begin pl0^.leprosy:=true; msg^:='You have leprosy!' end;
+                 end; 
+                 post(MailSend,
+                 pl0^.name2,
+                 pl0^.ai,
+                 false,
+                 mailrequest_nothing,
+                 '',
+                 umailheadc+s^+config.textcol1,
+                 mkstring(length(s^),underscore),
+                 'You have been cursed! '+msg^,
+                 '',
+                 '',
+                 '',
+                 '',
+                 '',
+                 '',
+                 '',
+                 '',
+                 '',
+                 '',
+                 '',
+                 '');
                  user_save(pl0^);
                  pause;
                 end
@@ -573,7 +478,7 @@ begin
 
 
                  {Failed Spellcasting}
-                 d(config.textcolor,'After have mumbled the standard formulas,');
+                 d(config.textcolor,'After having mumbled the standard formulas,');
                  d(config.textcolor,owner+' suddenly stumbles to the ground, white');
                  d(config.textcolor,'in the face...');
 
@@ -607,7 +512,7 @@ begin
                  '');
 
                  decplayermoney(player,yy);
-                 pl0^.blind:=true;
+                 
 
                  {news-paper}
                  newsy(true,
@@ -658,7 +563,7 @@ begin
                   sd(global_plycol,owner);
                   d(config.textcolor,' says.');
 
-                  d(global_talkcol,'Your foes class make '+sex[pl0^.sex]+' a difficult target!');
+                  d(global_talkcol,'Your foe''s class make '+sex[pl0^.sex]+' a difficult target!');
 
                   if confirm('Continue anyway','n')=false then begin
                    break;
@@ -686,23 +591,23 @@ begin
                  x:=5;
 
                  case pl0^.class of
-                  Alchemist : x:=2;
-                  Assassin  : x:=5;
-                  Barbarian : x:=11;
+                  Alchemist : x:=10;
+                  Assassin  : x:=7;
+                  Barbarian : x:=1;
                   Bard      : x:=6;
-                  Cleric    : x:=4;
-                  Jester    : x:=8;
-                  Magician  : x:=4;
-                  Paladin   : x:=5;
-                  Ranger    : x:=7;
-                  Sage      : x:=3;
-                  Warrior   : x:=10;
+                  Cleric    : x:=8;
+                  Jester    : x:=4;
+                  Magician  : x:=8;
+                  Paladin   : x:=7;
+                  Ranger    : x:=5;
+                  Sage      : x:=9;
+                  Warrior   : x:=2;
                  end;
 
                  if random(x)=0 then begin
                   {Failed Spellcasting}
                   crlf;
-                  d(config.textcolor,'After have mumbled the standard formulas,');
+                  d(config.textcolor,'After having mumbled the standard formulas,');
                   d(config.textcolor,owner+' suddenly stumbles to the ground, white');
                   d(config.textcolor,'in the face...');
 
@@ -710,7 +615,7 @@ begin
                   d(config.textcolor,', the old man whispers.');
 
                   crlf;
-                  d(config.textcolor,'You wonder who might stumble over a straying Demon,');
+                  d(config.textcolor,'You wonder who might stumble over a stray Demon,');
                   d(config.textcolor,'now lurking in the Dungeons...');
                   crlf;
 
@@ -737,7 +642,7 @@ begin
                   '',
                   '');
 
-                  pl0^.blind:=true;
+                  
 
                   {news-paper}
                   newsy(true,

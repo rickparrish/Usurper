@@ -706,7 +706,7 @@ begin
 
            sd(config.textcolor,'Guards to fight  : ');
            sd(15,commastr(guards));
-           d(config.textcolor,' (could be some dogs to)');
+           d(config.textcolor,' (could be some dogs too)');
            sd(config.textcolor,'Players to fight : ');
            d(5,'*unknown*');
            crlf;
@@ -1483,7 +1483,7 @@ begin
                  {combat ends and attackers won!}
 
                  crlf;
-                 d(15,'Succesful Robbery!');
+                 d(15,'Successful Robbery!');
                  sd(config.textcolor,'Well done ');
                  sd(5,player.name2);
                  d(config.textcolor,'.');

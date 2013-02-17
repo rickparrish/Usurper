@@ -60,7 +60,7 @@ begin
 
  stab2:=0;
 
- {This unit is called upon from Pl_vs_plc, when 'A'ttack is choosen}
+ {This unit is called upon from Pl_vs_plc, when 'A'ttack is chosen}
 
  {restoring overmaxed hps}
  if pl0.hps>pl0.maxhps then pl0.hps:=pl0.maxhps;
@@ -186,21 +186,21 @@ begin
   soulstrike:=0;
   sd(config.textcolor,'Soulstrike from ');
   sd(global_plycol,pl0.name2);
-  d(config.textcolor,' hits you for for '+uwhite+commastr(zz)+config.textcol1+' points!');
+  d(config.textcolor,' hits you for '+uwhite+commastr(zz)+config.textcol1+' points!');
  end;
 
  if random(4)=0 then begin
   battle_comment(1,pl0.name2);
  end;
 
- if (player.punch=0) and (player.used_item=false) and (player.casted=false) and (stab1<>-1) then begin
+ if (player.punch+player.poison=0) and (player.used_item=false) and (player.casted=false) and (stab1<>-1) then begin
   sd(config.textcolor,'You miss your blow against ');
   d(global_plycol,pl0.name2+'!');
  end;
- if (player.punch>0) and (player.used_item=false) and (player.casted=false) and (stab1<>-1) then begin
+ if (player.punch+player.poison>0) and (player.used_item=false) and (player.casted=false) and (stab1<>-1) then begin
   sd(config.textcolor,'You hit ');
   sd(global_plycol,pl0.name2);
-  d(config.textcolor,' for '+uwhite+commastr(player.punch)+config.textcol1+' points!');
+  d(config.textcolor,' for '+uwhite+commastr(player.punch+player.poison)+config.textcol1+' points!');
 
   if random(3)=0 then begin
    battle_comment(2,pl0.name2);
@@ -218,11 +218,11 @@ begin
    if player.punch<0 then player.punch:=0;
   end;
  end;
- if (pl0.punch=0) and (pl0.used_item=false) and (pl0.casted=false) and (stab2<>-1) then begin
+ if (pl0.punch+pl0.poison=0) and (pl0.used_item=false) and (pl0.casted=false) and (stab2<>-1) then begin
   sd(global_plycol,pl0.name2);
   d(config.textcolor,' missed you completely!');
  end;
- if (pl0.punch>0) and (pl0.used_item=false) and (pl0.casted=false) and (stab2<>-1) then begin
+ if (pl0.punch+pl0.poison>0) and (pl0.used_item=false) and (pl0.casted=false) and (stab2<>-1) then begin
   sd(global_plycol,pl0.name2);
   d(config.textcolor,' hits you for '+uwhite+commastr(pl0.punch)+config.textcol1+' points!');
 

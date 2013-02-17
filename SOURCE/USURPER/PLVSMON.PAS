@@ -1255,11 +1255,14 @@ begin {MAIN PROC **START**}
 
      x:=0;
      {monster armor/defence}
+     
+     
      if monster[mon]^.armnr>0 then begin
       x:=random(monster[mon]^.armpow);
       if x>player.punch then x:=player.punch;
      end;
 
+     zz:=0;
      (* REENOTE Up to and including v0.20e this defence calculation wasn't taken into
         account, because the dec(player.punch,x); line was happening before this calcluation
         instead of after.  After fixing that mistake monsters have become much more
