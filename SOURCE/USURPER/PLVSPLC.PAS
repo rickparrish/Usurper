@@ -65,7 +65,7 @@ begin
  if s='' then offkill:=false;
  if upcasestr(s)='NO' then offkill:=true;
 
- {reseting spells}
+ {resetting spells}
  for i:=1 to global_maxspells do begin
   player.spell[i,2]:=false;
   pl2.spell[i,2]:=false;
@@ -241,7 +241,7 @@ begin
      d(config.textcolor,'They hand '+uplc+pl2.name2+config.textcol1+' a big axe... A quick swing, and your head');
      d(config.textcolor,'is seperated from your body....');
      crlf;
-     d(config.textcolor,'Darkness surround you....');
+     d(config.textcolor,'Darkness surrounds you....');
      d(config.textcolor,'');
      pause;
 

@@ -361,8 +361,6 @@ Var
 
     rr : ^real;
 
-    stunned1, stunned2 : boolean;
-
     ch : char;
 
 begin
@@ -659,7 +657,7 @@ begin
    end;
 
    case random(3) of
-    0: d(config.textcolor,'Many guests laugh at your !');
+    0: d(config.textcolor,'Many guests laugh at you!');
     1: d(config.textcolor,'There is a sudden silence in the room!');
     2: d(config.textcolor,'Everybody is looking your way!');
    end;
@@ -813,9 +811,9 @@ begin
       if xx<100 then a^:='You have some small wounds and bruises';
       if xx<80 then a^:='You have some wounds';
       if xx<70 then a^:='You are pretty hurt!';
-      if xx<50 then a^:='You are in a bad shape!';
+      if xx<50 then a^:='You are in bad shape!';
       if xx<30 then a^:='You have some BIG and NASTY wounds!';
-      if xx<20 then a^:='You are in a awful condition!';
+      if xx<20 then a^:='You are in an awful condition!';
       if xx<5 then a^:='You are bleeding from wounds ALL over your body!';
 
       crlf;
@@ -830,9 +828,9 @@ begin
       if xx<100 then a^:='Small wounds and bruises';
       if xx<80 then a^:='Some wounds';
       if xx<70 then a^:='Pretty hurt!';
-      if xx<50 then a^:='Bad condition!';
-      if xx<30 then a^:='Have some BIG and NASTY wounds!';
-      if xx<20 then a^:='Is in a awful condition!';
+      if xx<50 then a^:='Bad shape!';
+      if xx<30 then a^:='Some BIG and NASTY wounds!';
+      if xx<20 then a^:='Awful condition!';
       if xx<5 then a^:='AWFUL CONDITION!';
 
       sd(global_plycol,s^+ucyan+' status : ');
@@ -867,14 +865,14 @@ begin
      case ch of
      'A':begin
          crlf;
-         d(config.textcolor,'Here goes...You take run and then charge '+uplc+s^+config.textcol1+' and try a tackle!');
+         d(config.textcolor,'Here goes...You take a run and charge '+uplc+s^+config.textcol1+' for a tackle!');
          if random(hitchance(player.skill[1]))<>0 then begin
-          if male=true then d(global_plycol,s^+config.textcol1+' evade your attack! You stumble past him!')
-          else d(global_plycol,s^+config.textcol1+' evade your attack! You stumble past her!');
+          if male=true then d(global_plycol,s^+config.textcol1+' evades your attack! You stumble past him!')
+          else d(global_plycol,s^+config.textcol1+' evades your attack! You stumble past her!');
          end
          else begin
           d(config.textcolor,'Your tackle hit '+uplc+s^+config.textcol1+' VERY hard!');
-          d(global_plycol,s^+config.textcol1+' lose sense of all directions!');
+          d(global_plycol,s^+config.textcol1+' loses sense of all directions!');
           cstam:=cstam-(random(4)+4);
          end;
          end;
@@ -904,9 +902,9 @@ begin
          end;
          end;
      'D':begin
-         d(config.textcolor,'You trow yourself against '+uplc+s^+config.textcol1+' with a fearsome battlecry!');
+         d(config.textcolor,'You throw yourself against '+uplc+s^+config.textcol1+' with a fearsome battlecry!');
          if random(hitchance(player.skill[4]))<>0 then begin
-          d(config.textcolor,'But '+uplc+s^+config.textcol1+' elegantly avoid your clumsy assault!');
+          d(config.textcolor,'But '+uplc+s^+config.textcol1+' elegantly avoids your clumsy assault!');
          end
          else begin
           if male=true then d(global_plycol,s^+config.textcol1+' screams in horror as you bite him hard!')
@@ -917,7 +915,7 @@ begin
      'E':begin
          d(config.textcolor,'You try a Leg-Sweep against '+uplc+s^+config.textcol1+'!');
          if random(hitchance(player.skill[5]))<>0 then begin
-          d(config.textcolor,'But '+uplc+s^+config.textcol1+' manage to avoid the assault!');
+          d(config.textcolor,'But '+uplc+s^+config.textcol1+' manages to avoid the assault!');
           crlf;
          end
          else begin
@@ -946,8 +944,8 @@ begin
 
           if male=true then d(global_plycol,s^+config.textcol1+' looks surprised when your punch hit him hard in the chest!')
           else d(global_plycol,s^+config.textcol1+' looks surprised when your punch hit her hard in the chest!');
-          if male=true then d(config.textcolor,'He goes down oh his knees, moaning!')
-          else d(config.textcolor,'She goes down oh his knees, moaning!');
+          if male=true then d(config.textcolor,'He goes down to his knees, moaning!')
+          else d(config.textcolor,'She goes down to her knees, moaning!');
           cstam:=cstam-(random(4)+4);
          end;
          end;
@@ -963,17 +961,17 @@ begin
           if male=true then d(config.textcolor,'He goes down!')
           else d(config.textcolor,'She goes down!');
           cstam:=cstam-(random(4)+4);
-          stunned2:=true;
+          
          end;
          end;
      'I':begin
          d(config.textcolor,'You try to get your hands around '+uplc+s^+'s'+config.textcol1+' throat!');
          if random(hitchance(player.skill[9]))<>0 then begin
-          d(config.textcolor,'But '+uplc+s^+config.textcol1+' takes a couple of ballet steps, and avoid your attack!');
+          d(config.textcolor,'But '+uplc+s^+config.textcol1+' takes a couple of ballet steps, and avoids your attack!');
          end
          else begin
-          if male=true then d(global_plycol,s^+'s'+config.textcol1+' face turns red when he chokes!')
-          else d(global_plycol,s^+'s'+config.textcol1+' face turns red when she chokes! (hehe!)');
+          if male=true then d(global_plycol,s^+'''s'+config.textcol1+' face turns red when he chokes!')
+          else d(global_plycol,s^+'''s'+config.textcol1+' face turns red when she chokes!');
           cstam:=cstam-(random(4)+4);
          end;
          end;
@@ -983,14 +981,14 @@ begin
           d(config.textcolor,'But '+uplc+s^+config.textcol1+' quickly takes a few steps back!');
          end
          else begin
-          d(config.textcolor,'You hit '+uplc+s^+'s'+config.textcol1+' head with a massive blow!');
+          d(config.textcolor,'You hit '+uplc+s^+'''s'+config.textcol1+' head with a massive blow!');
           if male=true then d(config.textcolor,'He goes down bleeding from some nasty wounds!')
           else d(config.textcolor,'She goes down bleeding from some nasty wounds!');
           cstam:=cstam-(random(4)+4);
          end;
          end;
      'K':begin
-         d(config.textcolor,'You try to grab hold of '+uplc+s^+'s'+config.textcol1+' hair!');
+         d(config.textcolor,'You try to grab hold of '+uplc+s^+'''s'+config.textcol1+' hair!');
          if random(hitchance(player.skill[11]))<>0 then begin
           d(config.textcolor,'But '+uplc+s^+config.textcol1+' manages to evade your attack!');
          end
@@ -1004,7 +1002,6 @@ begin
          d(config.textcolor,'You try a Kick against '+uplc+s^+config.textcol1+'!');
          if random(hitchance(player.skill[12]))<>0 then begin
           d(config.textcolor,'But '+uplc+s^+config.textcol1+' blocks it!');
-          pause;
          end
          else begin
           if male=true then d(config.textcolor,'He staggers under your blow!')
@@ -1019,7 +1016,7 @@ begin
          end
          else begin
           if male=true then d(config.textcolor,'You hit him right on the chin! He is dazed!')
-          else d(config.textcolor,'You hit her right on the chin! Se is dazed!');
+          else d(config.textcolor,'You hit her right on the chin! She is dazed!');
           cstam:=cstam-(random(4)+4);
          end;
          end;
@@ -1050,7 +1047,7 @@ begin
       4: d(config.textcolor,a2^+' tries to bite you in the leg!');
       5: d(config.textcolor,a2^+' goes for a leg-sweep against you!');
       6: d(config.textcolor,a2^+' tries to break your arm!');
-      7: d(config.textcolor,a2^+' sends off a Nicehand, aimed at your chest!');
+      7: d(config.textcolor,a2^+' sends off a Nifehand, aimed at your chest!');
       8: d(config.textcolor,a2^+' sends off a nervepunch!');
       9: d(config.textcolor,'The bastard tries to strangle you!');
       10: d(config.textcolor,a2^+' goes for a Headbash! Watch it!');
@@ -1072,7 +1069,7 @@ begin
 
      if random(y)<2 then begin
       d(config.textcolor,'You didn''t manage to evade!');
-      if x=8 then stunned1:=true;
+      
       case x of
        1:d(config.textcolor,'The hard tackle sends you across the floor! You lose your breath!');
        2:d(config.textcolor,'You stagger under the impact from the kick!');
@@ -1089,12 +1086,12 @@ begin
          end;
        8:d(config.textcolor,'The stroke hits a nerve! You are stunned!');
        9:begin
-          if male=true then d(config.textcolor,'He got you in a chokeholt! You can''t breathe!')
-          else d(config.textcolor,'She got you in a chokeholt! You can''t breathe!');
+          if male=true then d(config.textcolor,'He got you in a chokehold! You can''t breathe!')
+          else d(config.textcolor,'She got you in a chokehold! You can''t breathe!');
          end;
        10:d(config.textcolor,'BONK! You are feeling dizzy! Your head aches!');
        11:d(config.textcolor,'Arrgghhh! That really hurt! What a dirty trick!');
-       12:d(config.textcolor,'The well placed kick lands right in solar-plexus! Ouch!');
+       12:d(config.textcolor,'The well-placed kick lands right in solar-plexus! Ouch!');
        13:d(config.textcolor,'The punch lands right on your nose! You lose sense of all directions!');
        14:begin
            if male=true then d(config.textcolor,'His attack sends you sprawling! You fall to the floor!')

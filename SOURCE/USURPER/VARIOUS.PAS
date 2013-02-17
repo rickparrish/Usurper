@@ -2426,7 +2426,7 @@ begin
  end;
 
 
- {get Allowed Pick Pocket Attempts per day CFG, #198}
+ {get Allowed bank robbery Attempts per day CFG, #198}
  s:=cfg_string(198);
  Config.BankRobberyAttempts:=str_to_nr(s);
  if (Config.BankRobberyAttempts<0) or (Config.BankrobberyAttempts>60000) then begin
@@ -2718,7 +2718,7 @@ begin
  end;
 
  {check "street-talk" files, create if non-existant}
- Check_TruthFile;
+ Check_TruthFile(false);
 
  {Check if "Fame File" exists}
  if f_exists(global_famefile)=false then begin

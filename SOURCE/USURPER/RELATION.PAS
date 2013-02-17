@@ -2528,7 +2528,8 @@ begin {npc character PLY maintains/creates/nurses/establishes/destroys
 
   {should player try to marry?}
   if global_utest then d(15,ply.name2+' entering npc_set_out_to_marry');
-  npc_set_out_to_marry(ply);
+  {dirty hack to speed up cfg option #53}
+  if random(5) = 0 then npc_set_out_to_marry(ply);
   if global_utest then d(15,ply.name2+' exiting npc_set_out_to_marry');
 
  end;
@@ -2598,7 +2599,7 @@ begin {npc character PLY maintains/creates/nurses/establishes/destroys
               jakob}
               Relation_Change_News(ply,ply2,relation.relation1);
 
-              {mail of other player is human controlled}
+              {mail other player if human controlled}
               if ply2.ai='H' then begin
                post(MailSend,
                ply2.name2,
@@ -2847,7 +2848,7 @@ begin {npc character PLY maintains/creates/nurses/establishes/destroys
 
    {debug}
    if global_utest then begin
-    online_send_to_all(uplc+ply.name2+config.textcol1+' divored '+uplc+ply2.name2+config.textcol1
+    online_send_to_all(uplc+ply.name2+config.textcol1+' divorced '+uplc+ply2.name2+config.textcol1
     +'!',ply.name2,'');
    end;
 
