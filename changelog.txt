@@ -1,0 +1,38 @@
+Dungeon:
+-Fixed backstab command in classic mode (R)
+-Fixed index error in monster defense code (R)
+-Wishing well could give 0 strength. Fixed.
+-L)ook could result in nothing (no fight and no event). Fixed.
+-An event could follow the wishing well without having to do another look. Fixed.
+-Optimized l)ook code
+
+Steroids shop:
+-Bad error causing drug 10 to add very little strength and remove very little mental stability
+
+Beer stealing:
+-Experience was not properly split with teammate. Fixed.
+-After stealing is complete, experience gained and number of dogs/sons killed was not reported accurately. Fixed.
+-Dark deed was used up even when 0)abort was chosen. Fixed. (Now you can use the bones option to determine number of dogs without wasting a dark deed, but I think this is better than penalizing for aborting.)
+-Son stamina was not reset when stealing again without returning to dark deeds menu. Fixed.
+-Dog order was only randomized when you r)eturned and then b)eer stealing. Fixed (now it randomizes every time you g)o)
+-More exp is given now for knocking out sons (previously they yielded the same exp as dogs, but sons are much harder to kill)
+-Number of dogs and sons killed is reported separately now
+
+Dorm:
+-If you had no dark deeds left, you could not pickpocket regardless of number of remaining pickpocket attempts. The strategy was then to pickpocket first, then use dark deeds later (since pickpocketting did not reduce dark deeds). Fixed (pickpocketting does not count as a dark deed)
+
+Player fights:
+-Alchemist poison was not included in the "You hit x for y damage" messages, even though it was correctly applied. Fixed.
+-The player fight code is a mess, with duplicate copies of code all over. This has to be fixed.
+
+Groggo's:
+-Magicians, sages, clerics, and alchemists were supposed to be less susceptible to demons and diseases, but a nasty bug caused them to be _most_ susceptible. Fixed.
+
+Maintenance:
+-Removed the "could not find street-talk files" message that began every maintenance session
+-Sped up maintenance by reducing NPC marriage attempts
+
+Daily News:
+-Sometimes, the daily news would glitch and produces messages like
+Rugwash,male,troll,barbarian
+Fixed.
