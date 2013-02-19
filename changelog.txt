@@ -36,3 +36,8 @@ Daily News:
 -Sometimes, the daily news would glitch and produces messages like
 Rugwash,male,troll,barbarian
 Fixed.
+
+Bob's Beer:
++Added Man in Robes event. It was in the source, but not accessible.
+-Apologizing to an 'insulted!' event resulted in getting kicked back to Shady Shops. Fixed.
+-Brawls produced way too much stuff in the daily news. Fixed.
