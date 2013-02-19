@@ -1248,7 +1248,9 @@ end
         if player.dex>80 then dec(y);
         if player.dex>140 then dec(y);
         if player.dex>260 then dec(y);
+if player.dex>400 then dec(y);
         if player.dex>500 then dec(y);
+        if player.dex>650 then dec(y);
 
         s^:='Master Thief!';
         case y of
@@ -1272,7 +1274,7 @@ end
         if confirm('Do you dare to attempt thievery in here','n')=true then begin
 
          player.thiefs:=player.thiefs-1;
-         if random(y)=0 then begin
+         if (y=0) or (random(y)=0) then begin
           xx:=random(3000)+500;
           xx:=xx*player.level;
           incplayermoney(player,xx);
@@ -1340,7 +1342,7 @@ end
         crlf;
 
         if confirm('Initiate a Beerdrinking contest','N')=true then begin
-         dec(player.chivnr);;
+         dec(player.chivnr);
          drinking_competition;
         end;
 
