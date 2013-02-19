@@ -42,3 +42,5 @@ Bob's Beer:
 -Apologizing to an 'insulted!' event resulted in getting kicked back to Shady Shops. Fixed.
 -Brawls produced way too much stuff in the daily news. Fixed.
 -It was impossible to have the best two thief statuses when trying (T)hievery. Fixed (now an assassin can eventually become a 'master thief')
+-In the drinking competition, choice of drink did not influence anything. Fixed (now stronger drinks lead to shorter competitions)
+-In the drinking competition, messages for out-of-competition participants were not shown. Also, 'glug' messages for participants were sometimes not shown. Fixed.

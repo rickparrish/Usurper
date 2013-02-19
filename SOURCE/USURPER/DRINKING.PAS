@@ -645,7 +645,7 @@ begin
    sd(3,'You');
    sd(config.textcolor,' take your Beer...');
    glugg;
-   pvalue:=pvalue-random(25);
+   pvalue:=pvalue-random(23+strength);
    if pvalue<1 then begin
     crlf;
     playerr:=false;
@@ -656,7 +656,12 @@ begin
     d(config.textcolor,'You didn''t make it, you drunken rat!');
     crlf;
     crlf;
-    d(config.textcolor,'Darkness....');
+  if losers_out=true then begin
+   {player.allowed:=false;}
+   player.hps:=0;
+   Reduce_Player_Resurrections(player,true);
+  end;
+
     pause;
    end;
   end;
@@ -664,9 +669,9 @@ begin
   for i:=1 to maxopp do begin
    if (cname[i]<>'') and (cvalue[i]>0) then begin
 
-    cvalue[i]:=cvalue[i]-random(25);
+    cvalue[i]:=cvalue[i]-random(23+strength);
 
-    if (cvalue[i]>0) and (pvalue>0) then begin
+    if (pvalue>0) then begin
      sd(global_plycol,cname[i]);
 
      if male[i] then begin
@@ -886,12 +891,6 @@ begin
 
 
  if pvalue<1 then begin
-  if losers_out=true then begin
-   {player.allowed:=false;}
-   player.hps:=0;
-   Reduce_Player_Resurrections(player,true);
-  end;
-
   crlf;
   d(config.textcolor,'You are out of the competition! (with a nice hangover)');
   d(config.textcolor,'Be better prepared next time!');
