@@ -155,11 +155,11 @@ begin
       1: d(global_talkcol,'   I''m in!!');
       2: d(global_talkcol,'   I''m ready! I can''t see any competition here though...');
       3: d(global_talkcol,'   I feel sorry for you, '+player.name2+'!');
-      4: d(global_talkcol,'   Are you ready to loose, '+player.name2+'!? Haha!');
+      4: d(global_talkcol,'   Are you ready to lose, '+player.name2+'!? Haha!');
       5: d(global_talkcol,'   My luck has never failed me so far...');
       6: d(global_talkcol,'   I have some experience from competitions like this!');
       7: d(global_talkcol,'   Make room for me you cry-babies!');
-      8: d(global_talkcol,'   I can''t loose!');
+      8: d(global_talkcol,'   I can''t lose!');
       9: d(global_talkcol,'   I need to show you who''s the master!');
       10: d(global_talkcol,'   I will show you...');
       11: d(global_talkcol,'   I present to you : MYSELF!');
@@ -581,7 +581,7 @@ begin
         0: d(config.textcolor,'"That was a wimpy choice!", you hear someone shout from the back.');
         1: d(config.textcolor,'There is a buzz of disappointment in the room...');
         2: d(config.textcolor,'"Scared of the stronger stuff, '+player.name2+'?", someone shouts from the back.');
-        3: d(config.textcolor,'There is a buzz expectancy in the bar...');
+        3: d(config.textcolor,'There is a buzz of expectancy in the bar...');
         4: d(config.textcolor,'There is a buzz of discontent among the competitors...');
        end;
       end;
@@ -680,7 +680,7 @@ begin
      if cvalue[i]<1 then begin
       sd(global_plycol,cname[i]);
       d(config.textcolor,' starts to reel round in a daze!');
-      d(config.textcolor,'Everybody laughs heartidly as '+cname[i]);
+      d(config.textcolor,'Everybody laughs heartily as '+cname[i]);
       d(config.textcolor,'staggers a few steps and then falls heavily');
       d(config.textcolor,'to the floor!');
       d(config.textcolor,'Another one bites the dust!');
