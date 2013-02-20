@@ -362,14 +362,14 @@ begin
                 end;
                end;
 
-               if (pl0^.blind=true) and (pl0^.plague=true) and
+               if (found) and (pl0^.blind=true) and (pl0^.plague=true) and
                   (pl0^.leprosy=true) and (pl0^.smallpox=true) and
                   (pl0^.measles=true) then begin
                 d(global_talkcol,'That fellow already suffers from ALL diseases!');
                 found:=false;
                end;
 
-               if (pl0^.class in [Alchemist,Cleric,Magician,Sage]) or
+               if (found) and (pl0^.class in [Alchemist,Cleric,Magician,Sage]) or
                   (pl0^.disres>75) then begin
 
                 sd(global_talkcol,'There is a great risk of failure here!');

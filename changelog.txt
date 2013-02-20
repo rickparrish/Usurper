@@ -30,6 +30,7 @@ Player fights:
 
 Groggo's:
 -Magicians, sages, clerics, and alchemists were supposed to be less susceptible to demons and diseases, but a nasty bug caused them to be _most_ susceptible. Fixed.
+-When it was 'unfair' to cast a disease on someone, it was possible that follow-up questions would be asked anyway. Fixed.
 
 Maintenance:
 -Fixed the "could not find street-talk files" message that began every maintenance session
