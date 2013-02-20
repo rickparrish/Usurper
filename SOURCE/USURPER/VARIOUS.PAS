@@ -3956,9 +3956,9 @@ begin
 
  crlf;
  crlf;
- menu2('[T]odays News,');
- menu2(' Yesterdays News or');
- menu2(' Abort :');
+ menu2('(T)odays News,');
+ menu2(' (Y)esterdays News or');
+ menu2(' (A)bort :');
 
  repeat
   ch:=upcase(getchar);

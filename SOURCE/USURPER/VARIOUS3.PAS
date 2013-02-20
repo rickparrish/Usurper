@@ -1621,6 +1621,7 @@ begin
           {worsen pl0:s attitude to player}
           Update_Relation(Relation_Worsen,2,pl0^,player,false,false);
 
+          to_death:=false;
           repeat
            player_computer(player,pl0^,false,4);
           until (player.hps<1) or (pl0^.hps<1);
@@ -2393,8 +2394,9 @@ begin
     pause;
 
     {player versus team-mate}
+    to_death:=false;
     repeat
-     begg:=player_computer(player,mate,false,4);
+     player_computer(player,mate,false,4);
     until (player.hps<1) or (mate.hps<1);
 
     {evaluate fight}

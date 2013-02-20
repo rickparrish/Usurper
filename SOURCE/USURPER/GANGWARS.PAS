@@ -1049,7 +1049,7 @@ begin
    d(12,'Loser!');
    crlf;
    d(config.textcolor,'You have ruined it all...');
-   d(config.textcolor,'Where are all the grandios plans of which you');
+   d(config.textcolor,'Where are all the grandiose plans of which you');
    d(config.textcolor,'spoke? I can only see dead bodies and death staring');
    d(config.textcolor,'at your miserable team of adventurers. You promised');
    d(config.textcolor,'them victory but the only gain was pain and misery...');

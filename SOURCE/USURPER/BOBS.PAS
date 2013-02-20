@@ -108,13 +108,13 @@ Procedure Man_In_Robes;
 var ch : char;
     i,x : longint;
 begin
- {strange man i robes approaches!}
-  if (random(5)=0) and (player.gold>=1000) then begin
+ {strange man in robes approaches!}
    crlf;
+   dec(player.darknr);
    d(10,'You are approached by a stranger in robes!');
    d(15,'He offers you to see some fine wares he has in store.');
    crlf;
-   d(config.textcolor,'The stranger smiles at you, his face is well hidden though, and');
+   d(config.textcolor,'The stranger smiles at you. His face is well hidden though, and');
    d(config.textcolor,'you can''t really figure out if this is someone to trust...');
    crlf;
    if confirm('Follow the stranger outside ','N')=true then begin
@@ -273,7 +273,7 @@ begin
               crlf;
               delay2(300);
               d(config.textcolor,'Suddenly you are alone in the alley. You think for yourself that');
-              d(config.textcolor,'perhaps you should have fought those men. Would it been worth it?');
+              d(config.textcolor,'perhaps you should have fought those men. Would it have been worth it?');
               pause;
              end;
         end;
@@ -281,7 +281,7 @@ begin
        end; {ShakeDown END}
      1:begin {vitamin offer START}
         x:=player.level*10000;
-        d(config.textcolor,'The stranger offers you a vitamine cure which he claims could');
+        d(config.textcolor,'The stranger offers you a vitamin cure which he claims could');
         d(config.textcolor,'enhance your strength.');
         sd(config.textcolor,'The man wants ');
         sd(14,commastr(x));
@@ -305,7 +305,7 @@ begin
           x:=3+random(3);
           d(config.textcolor,'You wake up a short moment later. You are laying in the');
           d(config.textcolor,'alley. All your belongings are left untouched.');
-          sd(config.textcolor,'Your strength went up with ');
+          sd(config.textcolor,'Your strength went up by ');
           sd(15,commastr(x));
           d(config.textcolor,' !');
           pause;
@@ -324,7 +324,7 @@ begin
         d(config.textcolor,' '+many_money(x)+'.');
 
         if player.gold<x then begin
-         d(config.textcolor,'When you explain that you don''t have the '+config.moneytype+' he is asking');
+         d(config.textcolor,'When you explain that you don''t have the '+config.moneytype+',');
          d(config.textcolor,'the stranger leaves.');
         end
         else begin
@@ -332,6 +332,7 @@ begin
          crlf;
          d(config.textcolor,'You hand over the '+config.moneytype+' and start following the stranger...');
          crlf;
+         pause;
          global_auto_probe:=UmanCave;
         end;
        end; {teleport to UMAN cave END}
@@ -344,13 +345,13 @@ begin
     d(15,'NO THANKS!');
    end;
 
-  end;
 
 end; {man_in_robes *end*}
 
 Procedure Bobs_Inn;
 Var
 
+    escaped:boolean;
     xx, y, x, reward : longint;
 
     male : boolean;
@@ -375,14 +376,14 @@ begin
 
  repeat
 
-  { FUSK man_in_robes;}
-
-  if global_auto_probe<>Nowhere then begin
-   break;
-  end;
+  if (random(5) = 0) and (player.darknr>0) and (player.gold>=1000) then begin
+   man_in_robes;
+   if global_auto_probe<>Nowhere then
+    break;
+  end
 
   {spaghetti incident?}
-  if (random(2)=0) and (player.darknr>0) then begin
+  else if (random(2)=0) and (player.darknr>0) then begin
    crlf;
    crlf;
    dec(player.darknr);
@@ -404,7 +405,7 @@ begin
       male:=false;
       ts^:='mutant';
       ok^:='Alright, run and hide WIMP!';
-      no^:='Oh no...you'+chr(39)+'re gonna take what'+chr(39)+'s coming to ya!';
+      no^:='Oh no...you''re gonna take what''s coming to ya!';
       end;
     2:begin
       s^:='Hobbes';
@@ -428,14 +429,14 @@ begin
       male:=true;
       ts^:='mutant';
       ok^:='Kiss my leather boots too!';
-      no^:='To late sucker!';
+      no^:='Too late sucker!';
       end;
     5:begin
       s^:='Sandra';
       cstam:=70;
       male:=false;
       ts^:='human';
-      ok^:='Next time I'+chr(39)+'ll mess ya up bad honey!';
+      ok^:='Next time I''ll mess ya up bad honey!';
       no^:='Fistfight!';
       end;
     6:begin
@@ -460,7 +461,7 @@ begin
       male:=true;
       ts^:='human';
       ok^:='Get lost scum!';
-      no^:='I'+chr(39)+'m gonna trash you to pieces!';
+      no^:='I''m gonna trash you to pieces!';
       end;
     9:begin
       s^:='Soufie';
@@ -500,7 +501,7 @@ begin
       male:=false;
       ts^:='dwarf';
       ok^:='Hahaha...get lost COWARD!';
-      no^:='BAHAHA! I don'+chr(39)+'t think you realize who I am!';
+      no^:='BAHAHA! I don''t think you realize who I am!';
       end;
    14:begin
       s^:='Fat Irma';
@@ -548,7 +549,7 @@ begin
       male:=true;
       ts^:='Half-elf';
       ok^:='I accept your apology!';
-      no^:='I'+chr(39)+'m afraid it'+chr(39)+'s too late for that!';
+      no^:='I''m afraid it''s too late for that!';
       end;
    20:begin
       s^:='Sbort Afsghar';
@@ -587,7 +588,7 @@ begin
       cstam:=155;
       male:=true;
       ts^:='human';
-      ok^:='It'+chr(39)+'s your lucky day!';
+      ok^:='It''s your lucky day!';
       no^:='Fight!';
       end;
    25:begin
@@ -620,7 +621,7 @@ begin
       male:=true;
       ts^:='half-elf';
       ok^:='Oh my! Getting nervous, are we?';
-      no^:='Let'+chr(39)+'s solve this problem with our fists!';
+      no^:='Let''s solve this problem with our fists!';
       end;
    29:begin
       s^:='Rooney';
@@ -722,6 +723,7 @@ begin
     menu('(A)pologize for disturbing '+s^);
     sd(config.textcolor,':');
 
+    escaped:=false;
     repeat
      ch:=upcase(getchar);
     until ch in ['E','S','T','B','A'];
@@ -734,17 +736,8 @@ begin
      else begin
       crlf;
       d(14,'"'+ok^+'"');
-
+      escaped:=true;
       pause;
-      dispose(rr);
-      dispose(a);
-      dispose(a2);
-      dispose(s);
-      dispose(ts);
-      dispose(ok);
-      dispose(no);
-
-      exit;
      end;
     end;
 
@@ -797,6 +790,7 @@ begin
          end;
     end;
 
+    if not escaped then begin
     repeat
      repeat
       ch:='?';
@@ -1182,7 +1176,7 @@ begin
      sd(config.textcolor,'You also receive ');
      sd(14,commastr(xx));
      sd(config.textcolor,' experience points!');
-     crlf; d(config.textcolor,'...');
+     crlf; 
      incplayermoney(player,reward);
      player.exp:=player.exp+xx;
 
@@ -1200,13 +1194,14 @@ begin
 
      pause;
     end;
-
+end
    end
    else begin
     crlf;
     d(5,'You leave things as they are...');
     d(5,'Wise perhaps, but not very brave.');
     if player.charisma>5 then player.charisma:=player.charisma-random(3);
+    pause;
    end;
    crlf;
   end;
@@ -1235,7 +1230,7 @@ begin
         crlf; crlf;
         d(5,'You strut your stuff!');
         d(config.textcolor,'Many adventurers look your way.');
-        d(config.textcolor,'They don'+chr(39)+'t seem to appreciate your performance!');
+        d(config.textcolor,'They don''t seem to appreciate your performance!');
         d(config.textcolor,'You are being ridiculed!');
         crlf;
         pause;
@@ -1253,7 +1248,9 @@ begin
         if player.dex>80 then dec(y);
         if player.dex>140 then dec(y);
         if player.dex>260 then dec(y);
+if player.dex>400 then dec(y);
         if player.dex>500 then dec(y);
+        if player.dex>650 then dec(y);
 
         s^:='Master Thief!';
         case y of
@@ -1277,7 +1274,7 @@ begin
         if confirm('Do you dare to attempt thievery in here','n')=true then begin
 
          player.thiefs:=player.thiefs-1;
-         if random(y)=0 then begin
+         if (y=0) or (random(y)=0) then begin
           xx:=random(3000)+500;
           xx:=xx*player.level;
           incplayermoney(player,xx);
@@ -1345,7 +1342,7 @@ begin
         crlf;
 
         if confirm('Initiate a Beerdrinking contest','N')=true then begin
-         dec(player.chivnr);;
+         dec(player.chivnr);
          drinking_competition;
         end;
 
