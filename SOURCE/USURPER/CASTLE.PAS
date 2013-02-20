@@ -3429,7 +3429,7 @@ begin {THE_CASTLE, MAIN PROC **START**}
         crlf;
         d(5,'Abdicate!');
         d(12,'Are you mad? Leaving the land without ruler could lead to');
-        d(12,'unforseeable consequences. If you have no successor to the');
+        d(12,'unforeseeable consequences. If you have no successor to the');
         d(12,'throne then you must reconsider!');
 
         crlf;
@@ -3490,6 +3490,7 @@ begin {THE_CASTLE, MAIN PROC **START**}
          '',
          '',
          '');
+         pause;
 
         end
         else begin

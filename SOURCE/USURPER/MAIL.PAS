@@ -262,6 +262,7 @@ var
    quote,
    readerisgod,
    forced_quest,
+   killed,
    accept_quest : boolean;
 
 procedure disposal;
@@ -1533,6 +1534,7 @@ begin
 
      {set player flags}
      player.hps:=0;
+     killed:=true;
      {player.allowed:=false;}
      Reduce_Player_Resurrections(player,true);
 
@@ -2288,6 +2290,7 @@ var sender_type : OnlineTypes; {see init.pas, determines type of online player}
 
 begin {MAIN PROC (POST) **START**}
 
+ killed:=false;
  {init pointer vars}
  new(King);
  new(Quest);
@@ -3188,7 +3191,7 @@ begin {MAIN PROC (POST) **START**}
                   d(12,'Glugg...!');
                   crlf;
 
-                  d(12,'It was a odd flavor to this drink...');
+                  d(12,'It was an odd flavor to this drink...');
                   show_usurper_data(picture_DEATH_HEAD,false);
                   d(12,'ARSENIC!!!!!');
                   d(12,'Arghhhh!............');
@@ -3198,6 +3201,7 @@ begin {MAIN PROC (POST) **START**}
                   {set player flags}
                   player.hps:=0;
                   Reduce_Player_Resurrections(player,true);
+                  killed:=true;
                   {player.allowed:=false;}
 
                   {how much xp should poisoner (ply0) receive}
@@ -3763,19 +3767,18 @@ begin {MAIN PROC (POST) **START**}
                adios:=true;
               end;
 
-              {we exit if player is dead}
-              if player.hps<1 then begin
-               disposal;
-               normal_exit;
-              end;
-
              end;
 
             end; {for i:= .end.}
 
-           end; {READ News to player .end.}
 
- end; {case action of .end.}
+               if killed then begin
+               disposal;
+               normal_exit;
+              end;
+
+end; {READ News to player .end.}
+end; {case action of .end.}
 
  {dispose pointer vars}
  disposal;

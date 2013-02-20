@@ -1900,7 +1900,13 @@ Begin {this routine deals with all textfile related stuff.
 {$IFDEF WIN32}
  Assign(text(f),Fname);  (* From TxtShare unit *)
 {$ENDIF}
- SetTextBuf(text(f),Global_TextBuffer);
+ {This code was not reentrant.
+ For now, I'm commenting it out.
+ It causes problems when displaying news,
+ and then a fake player causes a read
+ from fake.dat. 
+ The real fix is to assign separate buffers to files.
+ SetTextBuf(text(f),Global_TextBuffer);}
 
  if global_ushare then begin
   case Action of

@@ -1873,12 +1873,12 @@ begin
            sd(config.textcolor,'You travel many hours before reaching your destination...');
            delay2(600);
            crlf;
-           d(config.textcolor,'Finally! Before you lie a huge cave with only one small entrance.');
+           d(config.textcolor,'Finally! Before you lies a huge cave with only one small entrance.');
            d(config.textcolor,'The treasure should be in here.');
            case random(3) of
             0: d(config.textcolor,'The Cave appears to be empty. But you can never be sure...');
             1: d(config.textcolor,'Skulls and bones are laying outside the Cave. Danger ahead!');
-            2: d(config.textcolor,'You can hear some noice from the Cave. Something is in there.');
+            2: d(config.textcolor,'You can hear some noise from the Cave. Something is in there.');
            end;
 
            crlf;

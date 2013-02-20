@@ -1,0 +1,57 @@
+Text:
+-Fixed dozens of spelling mistakes. There are certainly many more.
+
+Dungeon:
+-Fixed backstab command in classic mode (R)
+-Fixed index error in monster defense code (R)
+-Wishing well could give 0 strength. Fixed.
+-L)ook could result in nothing (no fight and no event). Fixed.
+-An event could follow the wishing well without having to do another look. Fixed.
+-Optimized l)ook code
+
+Steroids shop:
+-Bad error causing steroid 10 to add very little strength and remove very little mental stability
+
+Beer stealing:
+-Experience was not properly split with teammate. Fixed.
+-After stealing is complete, experience gained and number of dogs/sons killed was not reported accurately. Fixed.
+-Dark deed was used up even when 0)abort was chosen. Fixed. (Now you can use the bones option to determine number of dogs without wasting a dark deed, but I think this is better than penalizing for aborting.)
+-Son stamina was not reset when stealing again. Fixed.
+-Dog order was only randomized when you r)eturned and then b)eer stealing. Fixed (now it randomizes every time you g)o)
+-More exp is given now for knocking out sons (previously they yielded the same exp as dogs, but sons are much harder to kill)
+-Number of dogs and sons killed is reported separately now
+
+Dorm:
+-If you had no dark deeds left, you could not pickpocket regardless of number of remaining pickpocket attempts. The strategy was then to pickpocket first, then use dark deeds later (since pickpocketting did not reduce dark deeds). Fixed (pickpocketting does not count as a dark deed)
+
+Player fights:
+-Alchemist poison was not included in the "You hit x for y damage" messages, even though it was correctly applied. Fixed.
+-The player fight code is a mess, with duplicate copies of code all over. This has to be fixed.
+
+Groggo's:
+-Magicians, sages, clerics, and alchemists were supposed to be less susceptible to demons and diseases, but a nasty bug caused them to be _most_ susceptible. Fixed.
+
+Maintenance:
+-Fixed the "could not find street-talk files" message that began every maintenance session
+-Sped up maintenance by reducing NPC marriage attempts
+
+Daily News:
+-Sometimes, the daily news would glitch and produces messages like
+Rugwash,male,troll,barbarian
+Fixed.
+
+Bob's Beer:
++Added Man in Robes event. It was in the source, but not accessible.
+-Apologizing to an 'insulted!' event resulted in getting kicked back to Shady Shops. Fixed.
+-Brawls produced way too much stuff in the daily news. Fixed.
+-It was impossible to have the best two thief statuses when trying (T)hievery. Fixed (now an assassin can eventually become a 'master thief')
+-In the drinking competition, choice of drink did not influence anything. Fixed (now stronger drinks lead to shorter competitions)
+-In the drinking competition, messages for out-of-competition participants were not shown. Also, 'glug' messages for participants were sometimes not shown. Fixed.
+
+New Player Sequence:
+-No more y/n on each behavior line entered. It was way too many questions for a new user, and they can change this behavior easily from the status screen.
+-Stats was displayed twice for a new user. Fixed.
+-New users were asked their opinion of the king, even though they can't possibly know anything yet. Fixed.
+
+Mail:
+-When you were not allowed to play further (0 res.), each (p)lay would read one remaining letter from the mail and then exit without giving you time to read the mail. Fixed.

@@ -269,7 +269,6 @@ Begin
 
     {save user, changes have been made above}
     user_save(player);
-
    end;
 
    if (player.maxtime<1) and (player.allowed=true) then begin
@@ -284,7 +283,11 @@ Begin
     normal_exit;
    end;
 
-   if (player.hps=-9000) and (player.allowed=false) then begin
+   if player.allowed=false then begin
+        {read mail}
+     read_my_mail(player);
+
+   if (player.hps=-9000) then begin
     crlf;
     d(12,'Since your last visit ...');
 
@@ -299,7 +302,7 @@ Begin
 
    end;
 
-   if (player.hps=-8000) and (player.allowed=false) then begin
+   if (player.hps=-8000) then begin
     crlf;
     d(12,'Since your last visit ...');
 
@@ -315,7 +318,6 @@ Begin
 
    end;
 
-   if player.allowed=false then begin
     crlf;
     d(12,'Since your last visit ...');
     crlf;
@@ -323,8 +325,6 @@ Begin
      {d(config.textcolor,'You are in jail. Return tomorrow for more action.');}
     end
     else begin
-     {read mail}
-     read_my_mail(player);
      d(config.textcolor,'You may return tomorrow and regain some of your lost pride...');
      crlf;
      pause;
@@ -643,7 +643,7 @@ Begin
          player.race:=Troll;
         end;
     '6':begin
-         s:='a ill-mannered';
+         s:='an ill-mannered';
          player.race:=Orc;
         end;
     '7':begin
@@ -830,7 +830,7 @@ Begin
   d(config.textcolor,'Example :');
   d(config.textcolor,'1. Before you stands a man of great dignity. His bulging muscles');
   d(config.textcolor,'2. are of enormous proportions and the many scars bear witness of');
-  d(config.textcolor,'3. grim battles. His pale blue eyes are staring right on You!');
+  d(config.textcolor,'3. grim battles. His pale blue eyes are staring right at You!');
   d(config.textcolor,'4. Truly a great man to have as a friend.');
 
   crlf;
@@ -1307,7 +1307,7 @@ Begin
  player.Gym_Owner:=0; {controller of the gym? has to be in a team}
  player.Gym_Card:=0; {free card to the gym? if not gym_owner that is}
  player.royqueststoday:=0;
- player.KingVotePoll:=200; {how many days since voted for king popularity}
+ player.KingVotePoll:=0; {how many days since voted for king popularity}
  player.KingLastVote:=0; {how did player vote last time}
  player.married:=false; {is player married, only used when creating scores}
  player.Kids:=0; {how many kids this playeer is father/mother to}
@@ -1353,7 +1353,7 @@ Begin
  pause;
  crlf;
  crlf;
- d(config.textcolor,'I will now ask you a couple of questions on how');
+ d(config.textcolor,'I will now ask you a few questions on how');
  d(config.textcolor,'you would like your character to behave.');
  d(config.textcolor,'You can always change these options later on,');
  d(config.textcolor,'by pressing '+config.textcol2+'C'+config.textcol1+' from your status screen.');
@@ -1386,8 +1386,6 @@ Begin
  {let the player define some phrases}
 
  {battle cry}
- repeat
-  ok:=false;
   crlf;
   d(config.textcolor,'What is your general '+ulred+'BATTLE-CRY'+config.textcol1+'?');
   d(config.textcolor,'Enter phrase (1 line)');
@@ -1395,15 +1393,9 @@ Begin
   s:='Here I come!!!';
   get_stringDefault(s,70);
   d(global_talkcol,s);
-  if confirm('Is this alright','Y')=true then begin
    player.battlecry:=s;
-   ok:=true;
-  end;
- until ok;
-
+   
  {phrase #1}
- repeat
-  ok:=false;
   crlf;
   d(config.textcolor,'What shall you say when you are being attacked?');
   d(config.textcolor,'Enter phrase (1 line)');
@@ -1411,15 +1403,9 @@ Begin
   s:='You are going to regret this!';
   get_stringDefault(s,70);
   d(global_talkcol,s);
-  if confirm('Is this alright','Y')=true then begin
    player.phr[1]:=s;
-   ok:=true;
-  end;
- until ok;
-
+   
  {phrase #2}
- repeat
-  ok:=false;
   crlf;
   d(config.textcolor,'What shall you say when you have defeated somebody?');
   d(config.textcolor,'Enter phrase (1 line)');
@@ -1428,15 +1414,9 @@ Begin
   get_stringDefault(s,70);
   d(global_talkcol,s);
   crlf;
-  if confirm('Is this alright','Y')=true then begin
-   player.phr[2]:=s;
-   ok:=true;
-  end;
- until ok;
-
+     player.phr[2]:=s;
+ 
  {phrase #3}
- repeat
-  ok:=false;
   crlf;
   d(config.textcolor,'What shall you say when you have been defeated?');
   d(config.textcolor,'Enter phrase (1 line)');
@@ -1444,15 +1424,9 @@ Begin
   s:='It wasn''t a fair fight!';
   get_stringDefault(s,70);
   d(global_talkcol,s);
-  if confirm('Is this alright','Y')=true then begin
    player.phr[3]:=s;
-   ok:=true;
-  end;
- until ok;
-
+ 
  {phrase #4}
- repeat
-  ok:=false;
   crlf;
   d(config.textcolor,'What shall you say when you are begging for mercy?');
   d(config.textcolor,'Enter phrase (1 line)');
@@ -1461,15 +1435,9 @@ Begin
   Get_StringDefault(s,70);
   d(global_talkcol,s);
   crlf;
-  if confirm('Is this alright','Y')=true then begin
    player.phr[4]:=s;
-   ok:=true;
-  end;
- until ok;
-
+ 
  {phrase #5}
- repeat
-  ok:=false;
   crlf;
   d(config.textcolor,'What shall you say when you spare your opponents life?');
   d(config.textcolor,'Enter phrase (1 line)');
@@ -1477,15 +1445,9 @@ Begin
   s:='It''s your lucky day!';
   Get_StringDefault(s,70);
   d(global_talkcol,s);
-  if confirm('Is this alright','Y')=true then begin
    player.phr[5]:=s;
-   ok:=true;
-  end;
- until ok;
-
+ 
  {phrase #6}
- repeat
-  ok:=false;
   crlf;
   d(config.textcolor,'What shall you say when you don''t spare your opponents life?');
   d(config.textcolor,'Enter phrase (1 line)');
@@ -1493,12 +1455,8 @@ Begin
   s:='This is not the time for weakness! DIE!';
   get_stringDefault(s,70);
   d(global_talkcol,s);
-  if confirm('Is this alright','Y')=true then begin
    player.phr[6]:=s;
-   ok:=true;
-  end;
- until ok;
-
+ 
  {put the new players arrival in the news}
  case random(3) of
   0:begin {news-paper}
@@ -1578,7 +1536,6 @@ Begin
 }
 
  pause;
- status(player);
 
  {return result}
  user_search:=true;

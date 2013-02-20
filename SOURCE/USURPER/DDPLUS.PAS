@@ -655,7 +655,7 @@ begin
   if ch=#10 then inc(counter);
   if (counter>global_screenlines-1) and (not nonstop) then begin
    counter:=1;
-   swrite('Continue,Stop,Non-stop ? ');
+   swrite('(C)ontinue, (N)on-stop, (S)top ? ');
    sread_char(ch);
    for b:=1 to 26 do swrite(chr(8));
    clreol;

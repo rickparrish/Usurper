@@ -1090,7 +1090,7 @@ begin {* Main Program *}
          crlf;
          crlf;
          d(2,cool_string(53,'=','-',5,10));
-         d(13,'ALERT! This an early test-version of '+uversion+'.');
+         d(13,'ALERT! This is an early test-version of '+uversion+'.');
          d(13,'Report any errors and bugs via e-mail to : jakob@dangarden.com');
          d(2,cool_string(53,'=','-',5,10));
          pause;
