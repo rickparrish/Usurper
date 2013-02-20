@@ -560,7 +560,8 @@ d(config.textcolor,'No teammate found!');; crlf;
           poor:=0;
           case ch of
            '1':begin
-                d(config.textcolor,'Late at night, you and '+uplc+polare+config.textcol1+' sneak up behind the Inn''s storage');
+                d(config.textcolor,'Late at night, you and '+uplc+polare+config.textcol1+
+                                   ' sneak up behind the Inn''s storage');
                 d(config.textcolor,'room. There are '+commastr(dogs)+' dogs in the yard, watching everything');
                 d(config.textcolor,'that moves...');
                 d(config.textcolor,'They look mean and dangerous, capable of tearing you apart in a few seconds.');
