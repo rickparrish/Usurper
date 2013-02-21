@@ -1,6 +1,14 @@
 Groggo's:
 -When it was 'unfair' to cast a disease on someone, it was possible that follow-up questions would be asked anyway. Fixed.
+
 -Fixed spurious "press return to continue" after checking who's online
+
+Casting Spells:
+-Reworking magic system to fix many bugs in player fights
+
+Statistics:
+-Pick-pocket attempts not shown in new mode. Fixed.
+-Spurious options shown when viewing stats of other players. Fixed.
 
 
 ----------
