@@ -271,14 +271,14 @@ begin
 
    shared_menu(player1);
 
-   player1.casted:=false;
-   player2.casted:=false;
   end;
 
-  if cho='C' then begin
+     player1.casted:=false;
+   player2.casted:=false;
+
+if cho='C' then begin
    cho:=' ';
    if player1.class in [Cleric,Magician,Sage] then begin
-    player1.casted:=false;
     cast_spell(fastgame,1,2,player1,player2,false,dummy);
 
     if player1.casted=true then begin
@@ -379,13 +379,21 @@ begin
    {*should opponent quaff healing potions?*}
    computer_healing(true,player2);
 
+   {*should npc use spells?*}
+   if (player2.used_item=false) and (player2.casted=false) then begin
+    if player2.class in [Cleric,Magician,Sage] then begin
+     d(12,'Player2 is allowed to cast!');
+     cast_spell(fastgame,1,2,player2,player1,false,dummy);
+    end;
+   end;
+
    if (player1.race=Gnoll) and (player2.gnollp=0) and (player1.used_item=false) and (player1.casted=false) then begin
     {x:=random(player2.level+5);}
     x:=random(4)+1;
     if x=3 then begin
      crlf;
      d(config.textcolor,'**Poisonous Gnollbite!**');
-     d(config.textcolor,'You poisoned '+sex[player2.sex]+'!');
+     d(config.textcolor,'You managed to poison '+sex[player2.sex]+'!');
      player2.gnollp:=1;
     end;
    end;
@@ -402,7 +410,7 @@ begin
    end;
    if player1.gnollp>0 then begin
     player2.punch:=random(player2.level)+1;
-    d(config.textcolor,'You suffer '+uwhite+commastr(player2.punch)+config.textcol1+' points from poison!');
+    d(config.textcolor,'You suffered '+uwhite+commastr(player2.punch)+config.textcol1+' points from poison!');
     dec(player1.hps,player2.punch);
    end;
    if player2.gnollp>0 then begin
@@ -412,62 +420,82 @@ begin
     dec(player2.hps,player1.punch);
    end;
 
-   {strength in player attacks}
-   if player1.used_item=false then begin
+    player1.punch:=0;
+ player1.absorb:=0;
+ player2.punch:=0;
+ player2.absorb:=0;
+
+{strength in player attacks}
+   if (player1.used_item=false) and (player1.casted=false) then begin
     player1.punch:=normal_attack(false,player1);
    end;
 
-   if player2.used_item=false then begin
+   if (player2.used_item=false) and (player2.casted=false) then begin
     player2.punch:=normal_attack(false,player2);
    end;
+ cast_spell(fastgame,2,2,player2,player1,false,dummy);
+ cast_spell(fastgame,2,2,player1,player2,false,dummy);
+
 
    {has player chosen a soulstrike?}
    if soulstrike>0 then begin
-    player1.punch:=soulstrike;
+    zz:=soulstrike;
+    player1.punch:=soul_effect(player1, zz);
     soulstrike:=0;
-    d(config.textcolor,'Soulstrike hits '+uplc+player2.name2+config.textcol1+' for '+uwhite+commastr(soulstrike)
+    d(config.textcolor,'Soulstrike hits '+uplc+player2.name2+config.textcol1+' for '+uwhite+commastr(player1.punch)
       +config.textcol1+' points!');
    end;
+ {*should computer controlled player ues Backstab?*}
+ if config.classic then begin
+  if (player2.class=Assassin) and (random(3)=0) and (player2.used_item=false) and
+     (player2.casted=false) and (player2.weapon>0) then begin
 
-   {*should npc use spells?*}
-   if (player2.used_item=false) and (player2.casted=false) then begin
-    if player2.class in [Cleric,Magician,Sage] then begin
-     cast_spell(fastgame,1,2,player2,player1,false,dummy);
-    end;
+   sd(global_plycol,player2.name2);
+   d(config.textcolor,' tries to Backstab you!');
+   if random(3)=0 then begin
+    sd(config.textcolor,'You scream out in pain as ');
+    sd(global_plycol,player2.name2);
+    d(config.textcolor,' cuts you !');
+    stab2:=player2.maxhps div 2;
+   end
+   else begin
+   stab2:=-1;
+   d(config.textcolor,'But misses!');
    end;
+  end;
+ end
+ else begin
+  if (player2.class=Assassin) and (random(3)=0) and (player2.used_item=false) and
+     (player2.casted=false) and (player2.rhand+player2.lhand>0) then begin
 
-   {*should NPC use Backstab?*}
-   if (player2.class=Assassin) and (random(3)=0) and (player2.used_item=false) and (player2.casted=false) and
-   (player2.rhand+player2.lhand>0) then begin
-    d(config.textcolor,player2.name2+' tries to Backstab you!');
-    if random(3)=0 then begin
-     d(config.textcolor,'You scream in pain as '+uplc+player2.name2+config.textcol1+' cuts you!');
-     stab2:=player2.maxhps div 2;
-    end
-    else begin
-     stab2:=-1;
-     d(12,'But misses!');
-    end;
+   sd(global_plycol,player2.name2);
+   d(config.textcolor,' tries to Backstab you!');
+   if random(3)=0 then begin
+    sd(config.textcolor,'You scream out in pain as ');
+    sd(global_plycol,player2.name2);
+    d(config.textcolor,' cuts you !');
+    stab2:=player2.maxhps div 2;
+   end
+   else begin
+   stab2:=-1;
+    d(config.textcolor,'But misses!');
    end;
+  end;
+
+ end;
+
 
    {*should NPC use soul strike?*}
    if (player2.class=Paladin) and (player2.hps>100) and (random(3)=0) and
       (player2.used_item=false) and (player2.casted=false) then begin
     zz:=player2.hps div 3;
     soulstrike:=zz;
-    player2.hps:=player2.hps-zz;
+  dec(player2.hps,zz);
     player2.punch:=soul_effect(player2,zz);
     soulstrike:=0;
     d(config.textcolor,'Soulstrike from '+uplc+player2.name2+config.textcol1+' hits you for '+uwhite+commastr(player2.punch)
       +config.textcol1+' points!');
    end;
-
-   player2.absorb:=0;
-   player1.absorb:=0;
-
-   {deduct Player spells}
-   cast_spell(fastgame,2,2,player2,player1,false,dummy);
-   cast_spell(fastgame,2,2,player1,player2,false,dummy);
 
    {* random messages *}
    if random(4)=0 then begin

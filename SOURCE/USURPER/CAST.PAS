@@ -307,6 +307,7 @@ begin {Cast_Spell *begin*}
   end;
 
   {caster is a computer player, checking possibilities to cast spell.}
+  d(12, 'computer wants to cast!');
   if (temp1.spell[12,1]=true) and (temp1.spell[12,2]=false) and
      (temp1.mana>=spell_cost(temp1.class,12)) and (random(2)=0) then begin
    cho:='L';
@@ -407,17 +408,8 @@ begin {Cast_Spell *begin*}
   'J': ii:=10;
   'K': ii:=11;
   'L': ii:=12;
-  'M': ii:=13;
-  'N': ii:=14;
-  'O': ii:=15;
-  'P': ii:=16;
-  'Q': ii:=17;
-  'R': ii:=18;
-  'S': ii:=19;
-  'T': ii:=20;
-  'U': ii:=21;
+  
  end; {case .end.}
-
  if (fastgame=false) and (att<>yo2) then begin
   sd(global_plycol,temp1.name2);
   sd(config.textcolor,' utters ');
@@ -462,6 +454,7 @@ begin {Cast_Spell *begin*}
 
 
  {Spell # II has been casted!}
+ d(12, 'Casted spell ' + commastr(ii));
  case ii of
 
   1:begin {***** LEVEL 1 SPELLS *****}
