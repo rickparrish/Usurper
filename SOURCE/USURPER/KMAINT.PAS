@@ -342,8 +342,8 @@ begin
 
      {reward size, 1-3}
 
-     x:=random(4)+1;
-     quest.reward:=x; {nothing,low,medium,high}
+     x:=random(3)+1;
+     quest.reward:=x; {low,medium,high}
 
 
      {reward type}
