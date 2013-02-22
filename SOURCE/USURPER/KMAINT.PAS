@@ -164,7 +164,8 @@ begin
 
 
      {id # number}
-     quest.id:=crypt(20); {unique identification # number}
+          new_quest(quest);
+          quest.id:=crypt(20); {unique identification # number}
 
      {initiator}
      quest.initiator:=ply.name2;

@@ -43,7 +43,7 @@ var
     capable, knockdogs, knocksons, target, pstam, poor, risk : integer;
     arrived, turbo : boolean;
     i : longint;
-    cstam, newdogs, barrels, dogs, y : integer;
+    cstam, newdogs, dogoffset, barrels, dogs, y : integer;
 
     s, s2, polare : s70;
 
@@ -59,21 +59,8 @@ var
     pl0      : ^UserRec;
 
 Procedure Disposal;
-var i3 : word;
 begin
-
- {
- for i3:=1 to 10 do begin
-  dispose(son[i3]);
- end;
-
- for i3:=1 to 40 do begin
-  dispose(doggy[i3]);
- end;
-  }
  dispose(pl0);
-
-
 end; {disposal *end*}
 
 Procedure Meny;
@@ -161,18 +148,13 @@ begin
 
 end; {orkar *end*}
 
-Procedure Init_Names_Stam;
+Procedure Init_Names;
 begin
-
+new(pl0);
   son[1]:='Tim'; son[2]:='Dim'; son[3]:='Kim';
  son[4]:='Tom'; son[5]:='Bim'; son[6]:='Jim';
  son[7]:='Gum'; son[8]:='Nim'; son[9]:='Nippe';
  son[10]:='Ola';
-
- sonstam[1]:=15; sonstam[2]:=20; sonstam[3]:=30;
- sonstam[4]:=40; sonstam[5]:=50; sonstam[6]:=55;
- sonstam[7]:=60; sonstam[8]:=70; sonstam[9]:=10;
- sonstam[10]:=100;
 
  doggy[1]:='Dallas';  doggy[2]:='Pluto';    doggy[3]:='Biff';
  doggy[4]:='Moon';    doggy[5]:='Bert';     doggy[6]:='Mimi';
@@ -201,7 +183,7 @@ knockdogs:=0;
  end;
 
  
- new(pl0);
+ 
 
  for i:=1 to 39 do begin
   s2:=doggy[i];
@@ -216,6 +198,12 @@ knockdogs:=0;
   son[i]:=son[xx];
   son[xx]:=s2;
  end; {for i:= .end.}
+
+ sonstam[1]:=15; sonstam[2]:=20; sonstam[3]:=30;
+ sonstam[4]:=40; sonstam[5]:=50; sonstam[6]:=55;
+ sonstam[7]:=60; sonstam[8]:=70; sonstam[9]:=10;
+ sonstam[10]:=100;
+
 end;
 
 
@@ -317,10 +305,10 @@ end;
 
 
 begin
+ Init_Names;
  repeat
 
-  Init_Names_Stam;
-  if onliner.location<>onloc_outsideinn then begin
+    if onliner.location<>onloc_outsideinn then begin
    refresh:=true;
    onliner.location:=onloc_outsideinn;
    onliner.doing:=location_desc(onliner.location);
@@ -390,7 +378,7 @@ begin
 
            if ch='0' then begin
             inc(player.darknr); {didn't use after all}
-            disposal;
+            
             exit;
            end;
 
@@ -685,7 +673,7 @@ d(config.textcolor,'No teammate found!');; crlf;
                 for i:=1 to dogs do begin
                  sd(3,doggy[i]);
                  sd(config.textcolor,' sniffs...');
-                 delay2(700);
+                 delay2(600);
                  if random(3)=0 then begin
                   sd(4,' but ignores the bones!');
                  end
@@ -804,6 +792,7 @@ solo_dogs_news;
 
           xx:=0;
           newdogs:=0;
+          dogoffset:=0;
           stolen:=0;
           repeat
            inc(xx);
@@ -937,10 +926,10 @@ solo_dogs_news;
             inc(newdogs);
             dec(poor);
             sd(config.textcolor,'You hear barking....');
-            delay2(700);
+            delay2(600);
             sd(config.textcolor,'....');
             sd(config.textcolor,'it''s coming closer!...');
-            delay2(800);
+            delay2(700);
             sd(config.textcolor,'....');
             crlf;
             d(4,'OH NO! A dog has returned!');
@@ -962,7 +951,7 @@ solo_dogs_news;
                target:=2;
               end;
              end;
-             delay2(700);
+             delay2(600);
              if random(3)=0 then begin
               sd(4,'and hits!');
               case target of
@@ -979,9 +968,9 @@ solo_dogs_news;
 
            {nytillkomna hundar sl†r till}
            if newdogs>0 then begin
-            for i:=1 to newdogs do begin
+            for i:=dogoffset+1 to dogoffset+newdogs do begin
              sd(config.textcolor,doggy[i]+' attacks... ');
-             delay2(700);
+             delay2(600);
              if (arrived=true) and (cstam>0) then begin
               case random(2) of
                0:begin
@@ -1027,7 +1016,7 @@ solo_dogs_news;
            if (newdogs>0) and (pstam>0) then begin
             if (arrived=true) and (cstam>0) then begin
              sd(global_plycol,polare+config.textcol1+' attacks a dog!....');
-             delay2(700);
+             delay2(600);
              if random(2)=0 then begin
               sd(4,'But misses!');
              end
@@ -1035,18 +1024,20 @@ solo_dogs_news;
               sd(4,'And Hits! The dog goes down!');
               dec(newdogs);
               inc(knockdogs);
+              inc(dogoffset);
              end;
              crlf;
            end;
            if newdogs>0 then begin
             sd(config.textcolor,'You charge a dog!....');
-            delay2(700);
+            delay2(600);
             if random(2)=0 then begin
              sd(4,'But miss!');
             end
             else begin
              sd(4,'Hit! The dog goes down!');
              dec(newdogs);
+             inc(dogoffset);
              inc(knockdogs);
             end;
             crlf;

@@ -309,7 +309,6 @@ begin {Cast_Spell *begin*}
   end;
 
   {caster is a computer player, checking possibilities to cast spell.}
-  d(12, 'computer wants to cast!');
   for i := 12 downto 1 do
    if (temp1.spell[i,1]=true) and (temp1.spell[i,2]=false) and
     (temp1.mana>=spell_cost(temp1.class,i)) and (random(2)=0) then begin
@@ -410,7 +409,6 @@ end;
 
 
  {Spell # II has been casted!}
- d(12, 'Casted spell ' + commastr(ii));
  case ii of
 
   1:begin {***** LEVEL 1 SPELLS *****}

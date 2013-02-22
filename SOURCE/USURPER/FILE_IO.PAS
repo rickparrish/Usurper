@@ -4813,7 +4813,6 @@ var
    Monsterfile : file of MonsterRec; {** Monster file        **}
 
 begin
-
  {init}
  new(objekt);
  error:=0;
@@ -4846,8 +4845,10 @@ begin
  {$I-}seek(monsterfile,filnr);{$I+}
  error:=IoResult; {get error}
  if error<>0 then unable_to_seek(global_monfile,filnr);
-
+  
  {$I-}read(monsterfile,monster[monnr]^);{$I+}
+   
+
  error:=IoResult; {get error}
  if error<>0 then unable_to_read(global_monfile,error);
 

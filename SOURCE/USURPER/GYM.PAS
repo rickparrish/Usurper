@@ -1791,6 +1791,7 @@ end; {tug_of_war *end*}
 
 Procedure Dumb_Bells;
 begin
+ d(config.textcolor,'This feature is not implemented yet.');
 end; {dumb_bells *end*}
 
 Procedure Lift_Barrels;
@@ -1809,12 +1810,12 @@ begin
 
  if x>0 then begin
   d(15,'Congratulations!!');
-  d(15,'You made it to the #'+commastr(x)+'st place in the BARREL HALL OF FAME!');
+  d(15,'You made it to #'+commastr(x)+' in the BARREL HALL OF FAME!');
 
   newsy(true,
        config.textcol1+'Barrel Champion!',
        ' '+uplc+player.name2+config.textcol1+' lifted '+uwhite+commastr(brls)+config.textcol1+' beer barrels!',
-       ' '+uplc+player.name2+config.textcol1+' entered the '+uwhite+commastr(x)+config.textcol1+' place in the '+ulcyan
+       ' '+uplc+player.name2+config.textcol1+' entered position '+uwhite+commastr(x)+config.textcol1+' in the '+ulcyan
           +'Barrel Hall of Fame'+config.textcol1+'!',
        '',
        '',
@@ -1971,7 +1972,7 @@ begin
  d(5,mkstring(length(local_place),underscore));
  crlf;
  d(config.textcolor,'The private Gym for tough people with an attitude.');
- d(config.textcolor,'Working out and flex your muscles could earn you a position');
+ d(config.textcolor,'Working out and flexing your muscles could earn you a position');
  d(config.textcolor,'in this town, some day.');
  d(global_plycol,config.gymMasseur+config.textcol1+', the masseur, is watching you.');
  crlf;
@@ -2289,8 +2290,7 @@ begin {Main proc START}
            'R': finished:=true;
            'D':begin
                 crlf;
-                crlf;
-                pause; if confirm('Lift Barrels','Y')=true then begin
+                if confirm('Lift Dumb-bells','Y')=true then begin
                  if player.gym_sessions<1 then begin
                   no_gym_sessions;
                  end
