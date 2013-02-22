@@ -10,6 +10,8 @@ Statistics:
 -Pick-pocket attempts not shown in new mode. Fixed.
 -Spurious options shown when viewing stats of other players. Fixed.
 
+Gym:
+-Disabled dumb-bells option; Jakob wrote no code for this
 
 ----------
 
