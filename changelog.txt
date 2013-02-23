@@ -1,6 +1,7 @@
 Groggo's:
 -When it was 'unfair' to cast a disease on someone, it was possible that follow-up questions would be asked anyway. Fixed.
 
+ctrl+w:
 -Fixed spurious "press return to continue" after checking who's online
 
 Casting Spells:
@@ -19,6 +20,9 @@ Dorm:
 Quests:
 -NPC-created quests caused exception violation and fatal exit. Perhaps fixed (not sure).
 -NPC quests could be created so that a "reward" is 0. Fixed.
+
+Teams:
+-Two different team rankings were being used: one in the team corner and one in the gangwars menu. Fixed to use the one that does not cause overflow (and hence huge positive and negative integer scores in the team score files).
 
 ----------
 

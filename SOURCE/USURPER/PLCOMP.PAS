@@ -382,7 +382,6 @@ if cho='C' then begin
    {*should npc use spells?*}
    if (player2.used_item=false) and (player2.casted=false) then begin
     if player2.class in [Cleric,Magician,Sage] then begin
-     d(12,'Player2 is allowed to cast!');
      cast_spell(fastgame,1,2,player2,player1,false,dummy);
     end;
    end;
