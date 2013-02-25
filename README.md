@@ -32,6 +32,8 @@ These files are part of Usurper.
 
 TODO list:<br />
 <ul>
+  <li>The linux port will need to use / instead of \ as a directory separator character</li>
+  <li>The linux port will also need correctly cased filenames</li>
   <li>Find/correct any usage of FOR loop variables after the loop (since they are 1 greater in VP than in BP</li>
 </ul>
 
