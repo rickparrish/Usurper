@@ -144,7 +144,7 @@ Uses Dos, Crt, Init,
      DDplus, DDscott, ComIO,
      Exec, AnsiColr, SwagDate,
      Various, NetFilep, DispText,
-     Online, {$IFDEF MSDOS}sdelay,{$ENDIF} File_IO {$IFNDEF MSDOS}, RPScreen, Windows{$ENDIF};
+     Online, {$IFDEF MSDOS}sdelay,{$ENDIF} File_IO {$IFNDEF MSDOS}, RPScreen, VpSysLow{$ENDIF};
 
 var carriage_return : boolean; {used by D and SD procedures (display routines)}
 
@@ -477,7 +477,7 @@ begin
  millidelay(godis);
 {$ENDIF}
 {$IFNDEF MSDOS}
- Sleep(Trunc(godis));
+ SysCtrlSleep(Trunc(godis));
 {$ENDIF}
 end;
 

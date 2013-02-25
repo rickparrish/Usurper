@@ -55,7 +55,7 @@ implementation
 
 {$IFNDEF MSDOS}
 uses
-  EleNorm, Windows;
+  EleNorm, VpSysLow;
   
 var LastChar: Char;
     DidInit: Boolean = false;
@@ -291,7 +291,7 @@ end;
 {$IFNDEF MSDOS}
 procedure MySlice;
 begin
-  Sleep(1);
+  SysCtrlSleep(1);
 end;
 
 procedure async_flush_output;

@@ -5,19 +5,13 @@ unit RPScreen;
 
 interface
 
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 uses
   Windows;
-{$ENDIF}
 
 type
-{$IFNDEF WIN32}
-  TCharInfo = packed record
-    Ch: Char;
-    Attr: Byte;
-  end;
-{$ENDIF}
   TScreenBuf = Array[1..25, 1..80] of TCharInfo; // REETODO Don't hardcode to 80x25
+{$ENDIF}
 
 procedure RPGotoXY(xy: SmallWord);
 procedure RPHideCursor;
@@ -25,27 +19,37 @@ procedure RPRestoreScreen(var screenBuf: TScreenBuf);
 procedure RPSaveScreen(var screenBuf: TScreenBuf);
 function  RPScreenSizeX: Word;
 function  RPScreenSizeY: Word;
-procedure RPSetAttrAt(x, y: SmallWord; attr: Byte);
+procedure RPSetAttrAt(x, y, attr: SmallWord);
 procedure RPShowCursor;
 function  RPWhereXY: SmallWord;
 
 implementation
 
-uses
-  VPUtils, VpSysLow;
-  
+{$IFNDEF MSDOS}
+var
+  StdOut: THandle;
+{$ENDIF}
+
+{$IFNDEF MSDOS}
 procedure RPGotoXY(xy: SmallWord);
+var
+  Coord: TCoord;
 begin
-  SysTVSetCurPos(xy AND $00FF, xy AND $FF00 SHR 8);
+  Coord.x := xy AND $00FF;
+  Coord.y := xy AND $FF00 SHR 8;
+  SetConsoleCursorPosition(StdOut, Coord);
 end;
 
 procedure RPHideCursor;
+var
+  CCI: TConsoleCursorInfo;
 begin
-  HideCursor;
+  GetConsoleCursorInfo(StdOut, CCI);
+  CCI.bVisible := false;
+  SetConsoleCursorInfo(StdOut, CCI);
 end;
 
 { REETODO Should detect screen size }
-{$IFDEF WIN32}
 procedure RPRestoreScreen(var screenBuf: TScreenBuf);
 var
   BufSize    : TCoord;
@@ -60,18 +64,10 @@ begin
   DestRect.Top    := 0;
   DestRect.Right  := 79;
   DestRect.Bottom := 24;
-  WriteConsoleOutput(GetStdHandle(STD_OUTPUT_HANDLE), @screenBuf[1][1], BufSize, WritePos, DestRect);
+  WriteConsoleOutput(StdOut, @screenBuf[1][1], BufSize, WritePos, DestRect);
 end;
-{$ENDIF}
-{$IFNDEF WIN32}
-procedure RPRestoreScreen(var screenBuf: TScreenBuf);
-begin
-  WriteLn('REETODO RPSCREEN RPRestoreScreen'); Halt;
-end;
-{$ENDIF}
 
 { REETODO Should detect screen size }
-{$IFDEF WIN32}
 procedure RPSaveScreen(var screenBuf: TScreenBuf);
 var
   BufSize    : TCoord;
@@ -86,51 +82,56 @@ begin
   SourceRect.Top    := 0;
   SourceRect.Right  := 79;
   SourceRect.Bottom := 24;
-  ReadConsoleOutput(GetStdHandle(STD_OUTPUT_HANDLE), @screenBuf[1][1], BufSize, ReadPos, SourceRect);
+  ReadConsoleOutput(StdOut, @screenBuf[1][1], BufSize, ReadPos, SourceRect);
 end;
-{$ENDIF}
-{$IFNDEF WIN32}
-procedure RPSaveScreen(var screenBuf: TScreenBuf);
-begin
-  WriteLn('REETODO RPSCREEN RPSaveScreen'); Halt;
-end;
-{$ENDIF}
 
 function  RPScreenSizeX: Word;
 var
-  Size: TSysPoint;
+  CSBI: TConsoleScreenBufferInfo;
 begin
-  SysTVGetScrMode(@Size, False);
-  RPScreenSizeX := Size.X;
+  GetConsoleScreenBufferInfo(StdOut, CSBI);
+  RPScreenSizeX := CSBI.srWindow.Right - CSBI.srWindow.Left + 1;
 end;
 
 function  RPScreenSizeY: Word;
 var
-  Size: TSysPoint;
+  CSBI: TConsoleScreenBufferInfo;
 begin
-  SysTVGetScrMode(@Size, False);
-  RPScreenSizeY := Size.Y;
+  GetConsoleScreenBufferInfo(StdOut, CSBI);
+  RPScreenSizeY := CSBI.srWindow.Bottom - CSBI.srWindow.Top + 1;
 end;
 
-procedure RPSetAttrAt(x, y: SmallWord; attr: Byte);
+procedure RPSetAttrAt(x, y, attr: SmallWord);
 var
-  Ch: Char;
+  NumWritten: Longint;
+  WriteCoord: TCoord;
 begin
-  Ch := SysReadCharAt(x, y);
-  SysWrtCharStrAtt(@Ch, 1, x, y, attr);
+  WriteCoord.X := x;
+  WriteCoord.Y := y;
+  WriteConsoleOutputAttribute(StdOut, @attr, 1, WriteCoord, NumWritten);
 end;
 
 procedure RPShowCursor;
+var
+  CCI: TConsoleCursorInfo;
 begin
-  ShowCursor;
+  GetConsoleCursorInfo(StdOut, CCI);
+  CCI.bVisible := true;
+  SetConsoleCursorInfo(StdOut, CCI);
 end;
 
 function RPWhereXY: SmallWord;
 var
-  X, Y: SmallWord;
+  CSBI: TConsoleScreenBufferInfo;
 begin
-  SysGetCurPos(X, Y);
-  RPWhereXY := X + (Y SHL 8);
+  GetConsoleScreenBufferInfo(StdOut, CSBI);
+  RPWhereXY := CSBI.dwCursorPosition.x + (CSBI.dwCursorPosition.y SHL 8);
 end;
+{$ENDIF}
 
+
+{$IFNDEF MSDOS}
+BEGIN
+  StdOut := GetStdHandle(STD_OUTPUT_HANDLE);
+{$ENDIF}
 END.

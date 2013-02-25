@@ -98,7 +98,12 @@ function  SockInetAddr(_s: ShortString):tIn_Addr;
 
 {$IFNDEF LINUX}
  {$IFNDEF FPC}
-  {$R SOCKFUNC.RES}
+  {$IFDEF OS2}
+   {$R SOCKFUNC.OS2}
+  {$ENDIF}
+  {$IFDEF WIN32}
+   {$R SOCKFUNC.W32}
+  {$ENDIF}
  {$ENDIF}
 {$ENDIF}
 

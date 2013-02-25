@@ -35,7 +35,7 @@ function File_Lock(var F; Action: filAction; FPos,Len: Longint): Word;
 
 Implementation
 
-Uses Dos {$IFNDEF MSDOS}, Windows{$ENDIF};
+Uses Dos {$IFDEF WIN32}, Windows{$ENDIF};
 
 {this routine was taken from the SWAG archive, locks records AND files}
 {$IFDEF MSDOS}
@@ -58,7 +58,7 @@ asm
 
 end; {File_Lock *end*}
 {$ENDIF}
-{$IFNDEF MSDOS}
+{$IFDEF WIN32}
 // From ELEBBS (and modified)
 function File_Lock(var F; Action: filAction; FPos,Len: Longint): Word;
 var Tmp: Word;
@@ -87,6 +87,18 @@ begin
        
   File_Lock := Tmp;
 end; { func. LockFile }
+{$ENDIF}
+{$IFDEF LINUX}
+function File_Lock(var F; Action: filAction; FPos,Len: Longint): Word;
+begin
+  WriteLn('REETODO JAKELOCK File_Lock'); Halt;
+end;
+{$ENDIF}
+{$IFDEF OS2}
+function File_Lock(var F; Action: filAction; FPos,Len: Longint): Word;
+begin
+  WriteLn('REETODO JAKELOCK File_Lock'); Halt;
+end;
 {$ENDIF}
 
 end. {Unit JakeLock .end.}
