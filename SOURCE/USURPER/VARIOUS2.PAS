@@ -3093,7 +3093,7 @@ begin
 
  {depending on inval this function either returns config.moneytype2
   or config.moneytype3}
- if inval>1 then result:=config.moneytype+' '+config.moneytype3
+ if inval<>1 then result:=config.moneytype+' '+config.moneytype3
             else result:=config.moneytype+' '+config.moneytype2;
 
  {return result}

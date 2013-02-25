@@ -437,12 +437,8 @@ begin
      x:=0;
      if currentmax>0 then begin
       for k:=1 to currentmax do begin
-       if (infos[k]^=player0^.team) and (x=0) then begin
-        yy:=1500;
-        inc(yy,player0^.exp);
-        inc(yy,(player0^.strength*12));
-        inc(yy,(player0^.defence*12));
-        inc(nice[k]^,yy);
+       if (infos[k]^=player0^.team) then begin
+         inc(nice[k]^,player0^.maxhps+(player0^.level*10));
         x:=1;
         break;
        end;
@@ -457,15 +453,8 @@ begin
        new(nice[currentmax]);
       end;
 
-      nice[currentmax]^:=0; {don't forget to reset vars in Pascal}
-                            {it was my first mistake back in '93}
-
       infos[currentmax]^:=player0^.team;
-      yy:=1500;
-      inc(yy,player0^.exp);
-      inc(yy,(player0^.strength*12));
-      inc(yy,(player0^.defence*12));
-      inc(nice[currentmax]^,yy);
+       nice[currentmax]^:=player0^.maxhps+(player0^.level*10);
      end;
 
     end;

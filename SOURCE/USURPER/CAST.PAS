@@ -176,6 +176,8 @@ begin
 
 end; {Do_the_Damage *end*}
 
+               
+               
 begin {Cast_Spell *begin*}
 
  {Computer Controlled Player (temp1) casts a spell against player2 (temp2)
@@ -198,9 +200,9 @@ begin {Cast_Spell *begin*}
  if mode>1 then goto spell_check;
 
  att:=temp1.name2;
+ if (temp1.name2=player.name2) and (global_maintrunning=false) then att:=yo2;
  foe:=temp2.name2;
  if (temp2.name2=player.name2) and (global_maintrunning=false) then foe:=yo1;
- if (temp1.name2=player.name2) and (global_maintrunning=false) then att:=yo2;
 
  cho:=ReturnKey;
 
@@ -307,59 +309,13 @@ begin {Cast_Spell *begin*}
   end;
 
   {caster is a computer player, checking possibilities to cast spell.}
-  if (temp1.spell[12,1]=true) and (temp1.spell[12,2]=false) and
-     (temp1.mana>=spell_cost(temp1.class,12)) and (random(2)=0) then begin
-   cho:='L';
-  end
-  else if (temp1.spell[11,1]=true) and (temp1.spell[11,2]=false) and
-          (temp1.mana>=spell_cost(temp1.class,11)) and (random(2)=0) then begin
-   cho:='K';
-  end
-  else if (temp1.spell[10,1]=true) and (temp1.spell[10,2]=false) and
-          (temp1.mana>=spell_cost(temp1.class,10)) and (random(2)=0) then begin
-   cho:='J';
-  end
-  else if (temp1.spell[9,1]=true) and (temp1.spell[9,2]=false) and
-          (temp1.mana>=spell_cost(temp1.class,9)) and (random(2)=0) then begin
-   cho:='I';
-  end
-  else if (temp1.spell[8,1]=true) and (temp1.spell[8,2]=false) and
-          (temp1.mana>=spell_cost(temp1.class,8)) and (random(2)=0) then begin
-   cho:='H';
-  end
-  else if (temp1.spell[7,1]=true) and (temp1.spell[7,2]=false) and
-          (temp1.mana>=spell_cost(temp1.class,7)) and (random(2)=0) then begin
-   cho:='G';
-  end
-  else if (temp1.spell[6,1]=true) and (temp1.spell[6,2]=false) and
-          (temp1.mana>=spell_cost(temp1.class,6)) and (random(2)=0) then begin
-   cho:='F';
-  end
-  else if (temp1.spell[5,1]=true) and (temp1.spell[5,2]=false) and
-          (temp1.mana>=spell_cost(temp1.class,5)) and (random(2)=0) then begin
-   cho:='E';
-  end
-  else if (temp1.spell[4,1]=true) and (temp1.spell[4,2]=false) and
-          (temp1.mana>=spell_cost(temp1.class,4)) and (random(2)=0) then begin
-   cho:='D';
-  end
-  else if (temp1.spell[3,1]=true) and (temp1.spell[3,2]=false) and
-          (temp1.mana>=spell_cost(temp1.class,3)) and (random(2)=0) then begin
-   cho:='C';
-  end
-  else if (temp1.spell[2,1]=true) and (temp1.spell[2,2]=false) and
-          (temp1.mana>=spell_cost(temp1.class,2)) and (random(2)=0) then begin
-   cho:='B';
-  end
-  else if (temp1.spell[1,1]=true) and (temp1.spell[1,2]=false) and
-          (temp1.mana>=spell_cost(temp1.class,1)) and (random(2)=0) then begin
-   cho:='A';
-  end
-  else begin
-   {hupp .. }
+  for i := 12 downto 1 do
+   if (temp1.spell[i,1]=true) and (temp1.spell[i,2]=false) and
+    (temp1.mana>=spell_cost(temp1.class,i)) and (random(2)=0) then begin
+   cho:=chr(ord('A')+i-1);
+   break;
   end;
- end;
-
+end;
  if cho<>ReturnKey then begin
   temp1.casted:=true;
  end;
@@ -407,23 +363,14 @@ begin {Cast_Spell *begin*}
   'J': ii:=10;
   'K': ii:=11;
   'L': ii:=12;
-  'M': ii:=13;
-  'N': ii:=14;
-  'O': ii:=15;
-  'P': ii:=16;
-  'Q': ii:=17;
-  'R': ii:=18;
-  'S': ii:=19;
-  'T': ii:=20;
-  'U': ii:=21;
+  
  end; {case .end.}
-
  if (fastgame=false) and (att<>yo2) then begin
   sd(global_plycol,temp1.name2);
   sd(config.textcolor,' utters ');
   d(global_talkcol,spell_utter(temp1.class,ii));
  end
- else if (fastgame=false) and (att=yo2) then begin
+ else if fastgame=false then begin
   d(global_talkcol,spell_utter(temp1.class,ii));
  end;
 

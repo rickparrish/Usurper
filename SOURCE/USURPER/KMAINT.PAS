@@ -164,7 +164,8 @@ begin
 
 
      {id # number}
-     quest.id:=crypt(20); {unique identification # number}
+          new_quest(quest);
+          quest.id:=crypt(20); {unique identification # number}
 
      {initiator}
      quest.initiator:=ply.name2;
@@ -341,8 +342,8 @@ begin
 
      {reward size, 1-3}
 
-     x:=random(4)+1;
-     quest.reward:=x; {nothing,low,medium,high}
+     x:=random(3)+1;
+     quest.reward:=x; {low,medium,high}
 
 
      {reward type}
