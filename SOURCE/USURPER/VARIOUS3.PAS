@@ -1926,7 +1926,7 @@ begin
            Newsy(true,
            'Murder at the Dormitory!',
            ' '+ulred+pl0^.name2+config.textcol1+' was found murdered in '+sex3[pl0^.sex]+' bed this morning!',
-           ' The guests and staff at the Dorm are horrifed.',
+           ' The guests and staff at the Dorm are horrified.',
            '',
            '',
            '',
