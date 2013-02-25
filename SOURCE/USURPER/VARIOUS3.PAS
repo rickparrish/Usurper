@@ -1634,7 +1634,7 @@ begin
            {set news-paper headline}
            case random(3) of
             0: headline:='Pick-Pockets at the Dormitory';
-            1: headline:='Cleptomaniac on the lose!';
+            1: headline:='Cleptomaniac on the loose!';
             2: headline:='Skinners at the Dormitory';
            end; {case .end.}
 
@@ -1728,9 +1728,6 @@ begin
            d(12,' suffer from fatal wounds.');
            d(12,'There is darkness...');
 
-           {update offline player}
-           user_save(pl0^);
-
            if config.dormpocketattackallow=false then begin
             player.allowed:=false;
            end;
@@ -1743,6 +1740,9 @@ begin
 
            {update player}
            user_save(player);
+           {update offline player}
+           user_save(pl0^);
+
 
            reduce_player_resurrections(player,true);
 
@@ -1767,7 +1767,6 @@ begin
            if steal_money then begin
             if player.gold>0 then begin
              {player is robbed of his money}
-             incplayermoney(pl0^,player.gold);
              sd(global_plycol,pl0^.name2);
              d(12,' took your '+many_money(player.gold)+'!');
              {create string to be used in the mail to victor}
@@ -1778,7 +1777,6 @@ begin
            else if steal_potions then begin
             if player.healing>0 then begin
              {player is robbed of his potions}
-             inc(pl0^.healing,player.healing);
              sd(global_plycol,pl0^.name2);
              d(12,' took your healing potions!');
              {create string to be used in the mail to victor}
@@ -1885,6 +1883,7 @@ begin
 
            {save player}
            user_save(pl0^);
+           user_save(player);
 
            d(config.textcolor,'You draw your last breath knowing your head will be put');
            d(config.textcolor,'on a pole outside the Town, to warn others from following');
@@ -1901,12 +1900,12 @@ begin
            crlf;
            d(15,'Yippiie!');
 
-           if steal_money then begin
+           if (steal_money) and (pl0^.gold>0) then begin
             sd(config.textcolor,'You take ');
             sd(14,commastr(pl0^.gold));
             d(config.textcolor,' '+many_money(pl0^.gold)+' from the corpse.');
            end
-           else if steal_potions then begin
+           else if (steal_potions) and (pl0^.healing>0) then begin
             sd(config.textcolor,'You take ');
             sd(15,commastr(pl0^.healing));
             d(config.textcolor,' Healing Potions from the corpse.');

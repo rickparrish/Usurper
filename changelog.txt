@@ -1,3 +1,32 @@
+Groggo's:
+-When it was 'unfair' to cast a disease on someone, it was possible that follow-up questions would be asked anyway. Fixed.
+
+ctrl+w:
+-Fixed spurious "press return to continue" after checking who's online
+
+Casting Spells:
+-Reworking magic system to fix many bugs in player fights
+
+Statistics:
+-Pick-pocket attempts not shown in new mode. Fixed.
+-Spurious options shown when viewing stats of other players. Fixed.
+
+Gym:
+-Disabled dumb-bells option; Jakob wrote no code for this
+
+Dorm:
+-(p)ickpocket -> (p)otions -> kill opponent could result in a "you took 0 healing potions" message if your kill caused the opponent to waste all potions. Fixed.
+
+Quests:
+-NPC-created quests caused exception violation and fatal exit. Perhaps fixed (not sure).
+-NPC quests could be created so that a "reward" is 0. Fixed.
+
+Teams:
+-Two different team rankings were being used: one in the team corner and one in the gangwars menu. Fixed to use the one that does not cause overflow (and hence huge positive and negative integer scores in the team score files).
+
+----------
+
+Version 0.23b:
 Text:
 -Fixed dozens of spelling mistakes. There are certainly many more.
 

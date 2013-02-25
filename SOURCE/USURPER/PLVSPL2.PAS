@@ -158,7 +158,7 @@ begin
  end
  else begin
   if (pl0.class=Assassin) and (random(3)=0) and (pl0.used_item=false) and
-     (pl0.casted=false) and (pl0.rhand+player.lhand>0) then begin
+     (pl0.casted=false) and (pl0.rhand+pl0.lhand>0) then begin
 
    sd(global_plycol,pl0.name2);
    d(config.textcolor,' tries to Backstab you!');

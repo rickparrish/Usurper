@@ -411,6 +411,9 @@ begin
     crlf;
 
     crlf;
+        if (player0.name1=player.name1) and
+            (player0.name2=player.name2) then begin
+
     sd(config.textcolor,'(');
 
     sd(config.hotkeycolor,'M');
@@ -438,7 +441,7 @@ begin
     {sd(config.textcolor,'(');
     sd(config.hotkeycolor,'Enter');
     sd(config.textcolor,')');}
-
+   end
    end
    else begin
 
@@ -592,13 +595,12 @@ begin
     {shield}
     sd(config.textcolor,itemstr[15,1]^);
     d(itemcol(itemstr[15,2]^),itemstr[15,2]^);
+    sd(config.textcolor,ljust('Pick-Pocket: '+commastr(player0.PickPocketAttempts),justval));
 
     crlf;
+crlf;
 
-    if player0.name2<>player.name2 then begin
-     d(config.textcolor,'**');
-    end
-    else if (player0.name1=player.name1) and
+    if (player0.name1=player.name1) and
             (player0.name2=player.name2) then begin
      sd(config.textcolor,'(');
 

@@ -347,7 +347,7 @@ begin
            ch:=' ';
           end
           else if (ch='A') and (player.gym_card=0) and (s='') then begin
-           d(12,'The is nobody to send the application to! The Gym is not owned by anyone right now!');
+           d(12,'There is nobody to send the application to! The Gym is not owned by anyone right now!');
            d(12,'Why don''t you take over the Gym now when you have the chance!?');
            pause;
           end

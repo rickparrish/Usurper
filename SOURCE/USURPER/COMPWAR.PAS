@@ -103,7 +103,7 @@ begin
 
  {Gnoll bite?}
  if (player1.race=Gnoll) and (player2.gnollp=0) and (player1.used_item=false) and (player1.casted=false) then begin
-  x:=random(player2.level+5);
+  x:=random(4) + 1;
   if x=3 then begin
    if skrik then begin
     d(config.textcolor,'**Poisonous Gnollbite!**');
@@ -114,7 +114,7 @@ begin
  end;
 
  if (player2.race=Gnoll) and (player1.gnollp=0) and (player2.used_item=false) and (player2.casted=false) then begin
-  x:=random(player1.level+5);
+  x:=random(4) + 1;
   if x=3 then begin
    if skrik then begin
     d(config.textcolor,'**Poisonous Gnollbite!**');
@@ -206,7 +206,7 @@ begin
  end;
 
  {*should player1 use soul strike? *}
- if (player1.class=Paladin) and (player1.hps>100) and (random(2)=0) and (player1.used_item=false)
+ if (player1.class=Paladin) and (player1.hps>100) and (random(3)=0) and (player1.used_item=false)
  and (player1.casted=false) then begin
   zz:=player1.hps div 3;
   soulstrike:=zz;
@@ -223,7 +223,7 @@ begin
    {strength in player1:s attack}
    player1.punch:=normal_attack(fastgame,player1);
 
-   if (player1.punch=0) and (player1.used_item=false) and (player1.casted=false) then begin
+   if (player1.punch+player1.poison=0) and (player1.used_item=false) and (player1.casted=false) then begin
     if skrik then begin
      d(global_plycol,player1.name2+config.textcol1+' missed '+uplc+player2.name2+config.textcol1+' completely!');
     end;
@@ -232,11 +232,24 @@ begin
     if (player1.used_item=false) and (player1.casted=false) then begin
      if skrik then begin
       d(global_plycol,player1.name2+config.textcol1+' hits '+uplc+player2.name2+config.textcol1+' for '+uwhite
-        +commastr(player1.punch)+config.textcol1+' points!');
+        +commastr(player1.punch+player1.poison)+config.textcol1+' points!');
      end;
     end;
    end;
   end;
+ end;
+
+  player2.absorb:=0;
+ {absorbed points are displayed}
+ normal_defence(player2);
+ if player2.absorb>player1.punch then player2.absorb:=player1.punch;
+ if player2.absorb>0 then begin
+  if fastgame=false then begin
+   d(global_plycol,player2.name2+'s'+config.textcol1+' armor absorbed '+uwhite+commastr(player2.absorb)
+     +config.textcol1+' points!');
+  end;
+  player1.punch:=player1.punch-player2.absorb;
+  if player1.punch<0 then player1.punch:=0;
  end;
 
  {*Should player2 use Backstab?*}
@@ -288,7 +301,7 @@ begin
  end;
 
  {*should player2 use soul strike? *}
- if (player2.class=Assassin) and (player2.hps>100) and (random(2)=0) and
+ if (player2.class=Paladin) and (player2.hps>100) and (random(3)=0) and
     (player2.used_item=false) and (player2.casted=false) then begin
   zz:=player2.hps div 3;
   soulstrike:=zz;
@@ -305,7 +318,7 @@ begin
    {strength in player2:s attack}
    player2.punch:=normal_attack(fastgame,player2);
 
-   if (player2.punch=0) and (player2.used_item=false) and (player2.casted=false) then begin
+   if (player2.punch+player2.poison=0) and (player2.used_item=false) and (player2.casted=false) then begin
     if skrik then begin
      d(global_plycol,player2.name2+config.textcol1+' missed '+sex3[player2.sex]+' blow against '+uplc+player1.name2
        +config.textcol1+'!');
@@ -315,33 +328,20 @@ begin
     if (player2.used_item=false) and (player2.casted=false) then begin
      if skrik then begin
       d(global_plycol,player2.name2+config.textcol1+' hits '+uplc+player1.name2+config.textcol1+' for '+uwhite
-        +commastr(player2.punch)+config.textcol1+' points!');
+        +commastr(player2.punch+player2.poison)+config.textcol1+' points!');
      end;
     end;
    end;
   end;
  end;
 
- player1.absorb:=0;
- player2.absorb:=0;
 
  {spell attacks}
  cast_spell(fastgame,2,2,player2,player1,false,dummy);
  cast_spell(fastgame,2,2,player1,player2,false,dummy);
 
- {absorbed points are displayed}
- normal_defence(player2);
- if player2.absorb>player1.punch then player2.absorb:=player1.punch;
- if player2.absorb>0 then begin
-  if fastgame=false then begin
-   d(global_plycol,player2.name2+'s'+config.textcol1+' armor absorbed '+uwhite+commastr(player2.absorb)
-     +config.textcol1+' points!');
-  end;
-  player1.punch:=player1.punch-player2.absorb;
-  if player1.punch<0 then player1.punch:=0;
- end;
-
- normal_defence(player1);
+  player1.absorb:=0;
+normal_defence(player1);
  if player1.absorb>player2.punch then player1.absorb:=player2.punch;
  if player1.absorb>0 then begin
 

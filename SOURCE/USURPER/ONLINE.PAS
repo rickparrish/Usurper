@@ -1219,10 +1219,7 @@ begin
  end; {for i:= .end.}
 
  crlf;
- if pausetext then begin
-  sd(config.textcolor,'Press '+Config.ReturnEnter+' :');
- end;
-
+ 
  global_multi:=true;
 
 end; {Who_is_On *end*}
