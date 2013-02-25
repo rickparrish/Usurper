@@ -32,7 +32,7 @@ function  RPWhereXY: SmallWord;
 implementation
 
 uses
-  VPUtils, VpSysLow;
+  {$IFDEF OS2}OS2Base,{$ENDIF} VPUtils, VpSysLow;
   
 procedure RPGotoXY(xy: SmallWord);
 begin
@@ -63,10 +63,28 @@ begin
   WriteConsoleOutput(GetStdHandle(STD_OUTPUT_HANDLE), @screenBuf[1][1], BufSize, WritePos, DestRect);
 end;
 {$ENDIF}
-{$IFNDEF WIN32}
+{$IFDEF OS2}
 procedure RPRestoreScreen(var screenBuf: TScreenBuf);
+var
+  Size: SmallWord;
 begin
-  WriteLn('REETODO RPSCREEN RPRestoreScreen'); Halt;
+  Size := SizeOf(TScreenBuf);
+  VioWrtCellStr(@screenBuf, Size, 0, 0, 0);
+end;
+{$ENDIF}
+{$IFDEF LINUX}
+procedure RPRestoreScreen(var screenBuf: TScreenBuf);
+var
+  X, Y: Integer;
+begin
+  // REETODO Don't hardcode to 80x25
+  for Y := 1 to 25 do
+  begin
+    for X := 1 to 80 do
+    begin
+      SysWrtCharStrAtt(@screenBuf[Y][X].Ch, 1, X - 1, Y - 1, screenBuf[Y][X].Attr);
+    end;
+  end;
 end;
 {$ENDIF}
 
@@ -89,10 +107,23 @@ begin
   ReadConsoleOutput(GetStdHandle(STD_OUTPUT_HANDLE), @screenBuf[1][1], BufSize, ReadPos, SourceRect);
 end;
 {$ENDIF}
-{$IFNDEF WIN32}
+{$IFDEF OS2}
 procedure RPSaveScreen(var screenBuf: TScreenBuf);
+var
+  Size: SmallWord;
 begin
-  WriteLn('REETODO RPSCREEN RPSaveScreen'); Halt;
+  Size := SizeOf(TScreenBuf);
+  VioReadCellStr(screenBuf, Size, 0, 0, 0);
+end;
+{$ENDIF}
+{$IFDEF LINUX}
+procedure RPSaveScreen(var screenBuf: TScreenBuf);
+var
+  Source, Dest: Pointer;
+begin
+  Source := SysTVGetSrcBuf;
+  Dest := @screenBuf;
+  Move(Source, Dest, SizeOf(TScreenBuf));
 end;
 {$ENDIF}
 
