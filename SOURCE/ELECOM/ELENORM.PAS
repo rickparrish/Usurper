@@ -42,7 +42,12 @@ uses ComBase
         	
        {$IFDEF MSDOS}
          , Fos_com
-       {$ENDIF}  ;
+       {$ENDIF}
+
+       {$IFDEF LINUX}
+         , LinuxCom
+       {$ENDIF}
+       ;
 
 
 function  Com_Open(Comport: Byte; BaudRate: Longint; DataBits: Byte;
@@ -145,6 +150,11 @@ begin
 
     {$IFDEF GO32V2}
       01 : ComObj := New(pFossilObj, Init);
+    {$ENDIF}
+
+    {$IFDEF LINUX}
+      01 : ComObj := New(pLinuxObj, Init);
+      02 : ComObj := New(pLinuxObj, Init);
     {$ENDIF}
   end; { case }
 
