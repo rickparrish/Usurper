@@ -35,7 +35,7 @@ function File_Lock(var F; Action: filAction; FPos,Len: Longint): Word;
 
 Implementation
 
-Uses Dos {$IFDEF WIN32}, Windows{$ENDIF};
+Uses Dos {$IFNDEF MSDOS}, VpUsrLow{$ENDIF};
 
 {this routine was taken from the SWAG archive, locks records AND files}
 {$IFDEF MSDOS}
@@ -58,47 +58,18 @@ asm
 
 end; {File_Lock *end*}
 {$ENDIF}
-{$IFDEF WIN32}
-// From ELEBBS (and modified)
+{$IFNDEF MSDOS}
 function File_Lock(var F; Action: filAction; FPos,Len: Longint): Word;
-var Tmp: Word;
-    StrtHi: Longint;
-    StrtLo: Longint;
-    LgHi: Longint;
-    LgLo: Longint;
 begin
-  StrtHi := FPos Shr 16;
-  StrtLo := FPos and $FFFF;
-  LgHi := Len Shr 16;
-  LgLo := Len and $FFFF;
-
   if (Action = FLock) then
   begin
-    if NOT Windows.LockFile(FileRec(F).Handle, StrtLo, StrtHi, LgLo, LgHi) then
-      Tmp := GetLastError
-        else Tmp := 00;
+    File_Lock := SysLockFile(FileRec(F).Handle, FPos, Len);
   end else
   if (Action = FUnlock) then
   begin
-    if NOT Windows.UnLockFile(FileRec(F).Handle, StrtLo, StrtHi, LgLo, LgHi) then
-      Tmp := GetLastError
-        else Tmp := 00;
+    File_Lock := SysUnLockFile(FileRec(F).Handle, FPos, Len);
   end;
-       
-  File_Lock := Tmp;
 end; { func. LockFile }
-{$ENDIF}
-{$IFDEF LINUX}
-function File_Lock(var F; Action: filAction; FPos,Len: Longint): Word;
-begin
-  WriteLn('REETODO JAKELOCK File_Lock'); Halt;
-end;
-{$ENDIF}
-{$IFDEF OS2}
-function File_Lock(var F; Action: filAction; FPos,Len: Longint): Word;
-begin
-  WriteLn('REETODO JAKELOCK File_Lock'); Halt;
-end;
 {$ENDIF}
 
 end. {Unit JakeLock .end.}
