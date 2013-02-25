@@ -870,7 +870,6 @@ begin
 
        end;
    'L':begin {look for monsters}
-
         if (player.fights<=0) and (global_auto_probe=Nowhere) then begin
          crlf;
          d(12,'Sorry, you have no fights left for today.');
@@ -1009,12 +1008,12 @@ begin
             1: s2:='Annihilation is my profession...';
             2: s2:='I have been summoned to DESTROY you!';
             3: s2:='Risen from hell I have!';
-            4: s2:='It is here were your adventure end!';
+            4: s2:='It is here where your adventure ends!';
             5: s2:='Prepare to fight your last fight EVER!';
             6: s2:='I have come to bring you down!';
             7: s2:='I have been summoned to take care of YOU!';
             8: s2:='Kiss your life GOODBYE!';
-            9: s2:='I have been choosen to kill you!';
+            9: s2:='I have been chosen to kill you!';
            end;
 
            { debug info
