@@ -2641,7 +2641,7 @@ begin {Main proc START}
           {news-paper}
           Newsy(true,
           'Massage',
-          ' '+uplc+player.name2+config.textcol1+' the '+race_display(2,player.race,0)+', enjoyed massage at the '+gymcol
+          ' '+uplc+player.name2+config.textcol1+' the '+race_display(2,player.race,0)+' enjoyed a massage at the '+gymcol
              +'Gym'+config.textcol1+'.',
           ' '+uplc+player.name2+config.textcol1+' used '+oilcol+my_oil+config.textcol1+' oil to relax '
              +sex3[player.sex]+' body.',

@@ -39,8 +39,6 @@ Text:
 -Fixed dozens of spelling mistakes. There are certainly many more.
 
 Dungeon:
--Fixed backstab command in classic mode (R)
--Fixed index error in monster defense code (R)
 -Wishing well could give 0 strength. Fixed.
 -L)ook could result in nothing (no fight and no event). Fixed.
 -An event could follow the wishing well without having to do another look. Fixed.

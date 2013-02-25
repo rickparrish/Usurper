@@ -259,7 +259,8 @@ begin
   end; {for i:= .end.}
 
   if (search=false) and (finito=false) then begin
-   d(config.textcolor,'There is no '+uplc+s+config.textcol1+' here.');
+   Could_Not_Locate_Challengable_Character;
+
   end;
 
   {target found}
