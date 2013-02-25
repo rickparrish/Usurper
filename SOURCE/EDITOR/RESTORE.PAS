@@ -1,4 +1,4 @@
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 {$I DEFINES.INC}
 {$ENDIF}
 unit Restore;
@@ -23,9 +23,9 @@ var
 implementation
 
 uses
-  Drivers {$IFDEF WIN32}, RPScreen{$ENDIF};
+  Drivers {$IFNDEF MSDOS}, RPScreen{$ENDIF};
 
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 var
   SavedScreen: TScreenBuf;
 {$ENDIF}
@@ -64,7 +64,7 @@ begin
   { Restore cursor coordinates }
   MemW[Seg0040:CursorPos] := CursorCoords;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
   RPRestoreScreen(SavedScreen);
   RPGotoXY(CursorCoords);
 {$ENDIF}
@@ -101,7 +101,7 @@ begin
     Inc(Index, RowSize)
   end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
   CursorCoords := RPWhereXY;
   RPSaveScreen(SavedScreen);
 {$ENDIF}

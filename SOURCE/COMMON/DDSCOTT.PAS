@@ -1,4 +1,4 @@
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 {$I DEFINES.INC}
 {$ENDIF}
 unit ddscott;
@@ -50,7 +50,7 @@ procedure HexToDec(var s: string);
 
 implementation
 
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 uses
   RPScreen;
   
@@ -233,7 +233,7 @@ begin;
  intr($10,regs);
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 procedure setmode(modenumber: byte);
 begin
   WriteLn('REETODO DDSCOTT setmode'); Halt;
@@ -255,7 +255,7 @@ begin;
  intr($10,regs);
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 procedure set25lines;
 begin
   WriteLn('REETODO DDSCOTT set25lines'); Halt;
@@ -273,7 +273,7 @@ begin;
  if regs.bx=$10 then isega:=false else isega:=true;
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 function isega: boolean;
 begin
   WriteLn('REETODO DDSCOTT isega'); Halt;
@@ -303,7 +303,7 @@ begin;
  end;
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 function QueryAdapterType: Adaptertype;
 begin
   WriteLn('REETODO DDSCOTT QueryAdapterType'); Halt;
@@ -320,7 +320,7 @@ begin;
  intr($10,regs);
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 procedure cursoroff;
 begin
   RPHideCursor;
@@ -344,7 +344,7 @@ begin;
  end;
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 function determinepoints: integer;
 begin
   WriteLn('REETODO DDSCOTT determinepoints'); Halt;
@@ -362,7 +362,7 @@ begin;
  intr($10,regs);
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 procedure cursoron;
 begin
   RPShowCursor;
@@ -380,7 +380,7 @@ begin;
  intr($10,regs);
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 procedure cursorblock;
 begin
   WriteLn('REETODO DDSCOTT cursorblock'); Halt;
@@ -409,7 +409,7 @@ begin;
  y:=wherey;
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 procedure savescreen;
 begin
   RPSaveScreen(SavedScreen);
@@ -429,7 +429,7 @@ begin;
  gotoxy(x,y);
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 procedure restorescreen;
 begin
   RPRestoreScreen(SavedScreen);
@@ -500,7 +500,7 @@ Begin
   end;
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 function TrueDosVer (var WinNtOK :boolean): Word;
 begin
   WinNtOK := True;
@@ -528,7 +528,7 @@ Begin
   end;
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 function DosVer(var Minor,OS2Ver : Word) : Word;
 begin
   Minor := 0;
@@ -555,7 +555,7 @@ begin
    end;
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 Function Win3_Check_On: boolean;
 begin
   Win3_Check_On := false;
@@ -581,7 +581,7 @@ begin
      DV_Check_On := true;
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 Function DV_Check_On : boolean;
 begin
   DV_Check_On := false;

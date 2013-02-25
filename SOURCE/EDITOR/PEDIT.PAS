@@ -1,4 +1,4 @@
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 {$I DEFINES.INC}
 {$ENDIF}
 {
@@ -60,7 +60,7 @@ begin
   end;
 
   FileMode:=fmReadOnly+fmDenyNone;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
   FileModeReadWrite := FileMode;
 {$ENDIF}
 
@@ -75,7 +75,7 @@ begin
  file_size:=filesize(playerfile);
  close(playerfile);
  filemode:=lemmy;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
  FileModeReadWrite := FileMode;
 {$ENDIF}
 
@@ -106,7 +106,7 @@ begin
    'L': FileMode:=fmReadOnly+fmDenyNone;
    'S': FileMode:=fmReadWrite+fmDenyAll;
   end;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
   FileModeReadWrite := FileMode;
 {$ENDIF}
 
@@ -128,7 +128,7 @@ begin
  end;
  close(playerfile);
  filemode:=memmy;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
  FileModeReadWrite := FileMode;
 {$ENDIF}
 end;

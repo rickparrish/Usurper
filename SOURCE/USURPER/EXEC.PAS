@@ -1,4 +1,4 @@
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 {$I DEFINES.INC}
 {$ENDIF}
 
@@ -975,7 +975,7 @@ exit:
 {$ENDIF}
    end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 // This is only used when the sysop shells to dos while someone is playing
 // so it's not overly important to implement all the features do_exec supports
 function do_exec (xfn: string; pars: string; spawn: integer;

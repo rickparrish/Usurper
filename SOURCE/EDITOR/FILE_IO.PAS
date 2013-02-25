@@ -1,4 +1,4 @@
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 {$I DEFINES.INC}
 {$ENDIF}
 {
@@ -98,7 +98,7 @@ Function CalcHelpName(const wanted:string): string;
 
 Implementation
 
-Uses Dos, MsgBox, {$IFDEF MSDOS}TxtShare,{$ENDIF} Jakobe {$IFDEF WIN32}, Strings{$ENDIF};
+Uses Dos, MsgBox, {$IFDEF MSDOS}TxtShare,{$ENDIF} Jakobe {$IFNDEF MSDOS}, Strings{$ENDIF};
 
 const
  locknrs   = 100; {how many attempts to access a file?}
@@ -337,7 +337,7 @@ begin
 
  memmy:=filemode;
  FileMode:=fmReadOnly+fmDenyNone;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
  FileModeReadWrite := FileMode;
 {$ENDIF}
 
@@ -359,7 +359,7 @@ begin
 
  {reset filemode}
  filemode:=memmy;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
  FileModeReadWrite := FileMode;
 {$ENDIF}
 end;
@@ -386,7 +386,7 @@ begin
 
  memmy:=filemode;
  FileMode:=fmReadOnly+fmDenyNone;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
  FileModeReadWrite := FileMode;
 {$ENDIF}
 
@@ -422,7 +422,7 @@ begin
 
  {reset filemode}
  filemode:=memmy;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
  FileModeReadWrite := FileMode;
 {$ENDIF}
 end;
@@ -442,7 +442,7 @@ begin
 
  memmy:=filemode;
  FileMode:=fmReadOnly+fmDenyNone;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
  FileModeReadWrite := FileMode;
 {$ENDIF}
 
@@ -606,7 +606,7 @@ begin
 
  {reset filemode}
  filemode:=memmy;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
  FileModeReadWrite := FileMode;
 {$ENDIF}
 end;
@@ -654,7 +654,7 @@ begin
    Fload: FileMode:=fmReadOnly+fmDenyNone;
    FSave: FileMode:=fmReadWrite+fmDenyAll;
   end;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
   FileModeReadWrite := FileMode;
 {$ENDIF}
   {$I-}reset(ofil);{$I+}
@@ -685,7 +685,7 @@ begin
 
  {reset filemode}
  filemode:=memmy;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
  FileModeReadWrite := FileMode;
 {$ENDIF}
 end;
@@ -714,7 +714,7 @@ begin
    Fload: FileMode:=fmReadOnly+fmDenyNone;
    Fsave: FileMode:=fmReadWrite+fmDenyAll;
   end;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
   FileModeReadWrite := FileMode;
 {$ENDIF}
 
@@ -749,7 +749,7 @@ begin
 
  {reset filemode}
  filemode:=memmy;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
  FileModeReadWrite := FileMode;
 {$ENDIF}
 end; {load_player *end*}
@@ -773,7 +773,7 @@ begin
    Fload: FileMode:=fmReadOnly+fmDenyNone;
    Fsave: FileMode:=fmReadWrite+fmDenyAll;
   end;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
   FileModeReadWrite := FileMode;
 {$ENDIF}
 
@@ -806,7 +806,7 @@ begin
 
  {reset filemode}
  filemode:=memmy;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
  FileModeReadWrite := FileMode;
 {$ENDIF}
 end;
@@ -830,7 +830,7 @@ begin
    Fload: FileMode:=fmReadOnly+fmDenyNone;
    Fsave: FileMode:=fmReadWrite+fmDenyAll;
   end;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
   FileModeReadWrite := FileMode;
 {$ENDIF}
 
@@ -863,7 +863,7 @@ begin
 
  {reset filemode}
  filemode:=memmy;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
  FileModeReadWrite := FileMode;
 {$ENDIF}
 end; {load_moat .end.}
@@ -887,7 +887,7 @@ begin
    Fload: FileMode:=fmReadOnly+fmDenyNone;
    Fsave: FileMode:=fmReadWrite+fmDenyAll;
   end;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
   FileModeReadWrite := FileMode;
 {$ENDIF}
 
@@ -920,7 +920,7 @@ begin
 
  {reset filemode}
  filemode:=memmy;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
  FileModeReadWrite := FileMode;
 {$ENDIF}
 end; {load_god .end.}
@@ -944,7 +944,7 @@ begin
    Fload: FileMode:=fmReadOnly+fmDenyNone;
    Fsave: FileMode:=fmReadWrite+fmDenyAll;
   end;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
   FileModeReadWrite := FileMode;
 {$ENDIF}
 
@@ -977,7 +977,7 @@ begin
 
  {reset filemode}
  filemode:=memmy;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
  FileModeReadWrite := FileMode;
 {$ENDIF}
 end; {load_child .end.}
@@ -1070,7 +1070,7 @@ begin
    Fload: FileMode:=fmReadOnly+fmDenyNone;
    Fsave: FileMode:=fmReadWrite+fmDenyAll;
   end;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
   FileModeReadWrite := FileMode;
 {$ENDIF}
 
@@ -1103,7 +1103,7 @@ begin
 
  {restore filemode}
  filemode:=memmy;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
  FileModeReadWrite := FileMode;
 {$ENDIF}
 end; {load_drink *end*}
@@ -1126,7 +1126,7 @@ begin
    Fload: FileMode:=fmReadOnly+fmDenyNone;
    Fsave: FileMode:=fmReadWrite+fmDenyAll;
   end;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
   FileModeReadWrite := FileMode;
 {$ENDIF}
 
@@ -1156,7 +1156,7 @@ begin
  {$I-}close(levelfile);{$I+}
  if IOResult<>0 then unable_to_close(lvlfile);
  filemode:=memmy;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
  FileModeReadWrite := FileMode;
 {$ENDIF}
 end;
@@ -1180,7 +1180,7 @@ begin
    Fload: FileMode:=fmReadOnly+fmDenyNone;
    FSave: FileMode:=fmReadWrite+fmDenyAll;
   end;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
   FileModeReadWrite := FileMode;
 {$ENDIF}
 
@@ -1213,7 +1213,7 @@ begin
 
  {reset filemode}
  filemode:=memmy;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
  FileModeReadWrite := FileMode;
 {$ENDIF}
 end;
@@ -1234,7 +1234,7 @@ begin
   assign(weapfile,weapofile);
 
   FileMode:=fmReadOnly+fmDenyNone;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
   FileModeReadWrite := FileMode;
 {$ENDIF}
 
@@ -1258,7 +1258,7 @@ begin
 
  {reset filemode}
  filemode:=memmy;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
  FileModeReadWrite := FileMode;
 {$ENDIF}
 end;
@@ -1278,7 +1278,7 @@ begin
   ok:=true;
   assign(armfile,armofile);
   FileMode:=fmReadOnly+fmDenyNone;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
   FileModeReadWrite := FileMode;
 {$ENDIF}
   {$I-}reset(armfile);{$I+}
@@ -1300,7 +1300,7 @@ begin
  if IOResult<>0 then unable_to_close(armofile);
 
  filemode:=memmy;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
  FileModeReadWrite := FileMode;
 {$ENDIF}
 end;
@@ -1456,7 +1456,7 @@ var
     txt : text;
     memmy : integer;
     lockmde:byte;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
     memmy_r : integer;
     memmy_rw : integer;
     lockmde_r : byte;
@@ -1465,7 +1465,7 @@ var
 Begin
 
  memmy:=filemode;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
  memmy_r := TextModeRead;
  memmy_rw := TextModeReadWrite;
 {$ENDIF}
@@ -1477,7 +1477,7 @@ Begin
  end;
 
  lockmde:=filemode;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
  lockmde_r := TextModeRead;
  lockmde_rw := TextModeReadWrite;
 {$ENDIF}
@@ -1498,7 +1498,7 @@ Begin
 {$IFDEF MSDOS}
   AssignText(text(f),Fname);  (* From TxtShare unit *)
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
   Assign(text(f),FName);
 {$ENDIF}
 
@@ -1508,7 +1508,7 @@ Begin
    TDelete : FileMode:=fmWriteOnly+fmDenyAll;
    TRewrite: FileMode:=fmWriteOnly+fmDenyAll;
   end;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
   TextModeRead := FileMode;
   TextModeReadWrite := FileMode;
 {$ENDIF}
@@ -1534,7 +1534,7 @@ Begin
  Until (IORes=0) OR (i>=tries);
 
  FileMode:=lockmde;    (* Set FileMode to default *)
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
  TextModeRead := lockmde_r;
  TextModeReadWrite := lockmde_rw;
 {$ENDIF}
@@ -1565,7 +1565,7 @@ Begin
 
  {Reset filemode}
  filemode:=memmy;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
  TextModeRead := memmy_r;
  TextModeReadWrite := memmy_rw;
 {$ENDIF}
@@ -1582,7 +1582,7 @@ begin
 {$IFDEF MSDOS}
  if IOResult<>0 then unable_to_close(textrec(f).name);
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
  if IOResult<>0 then unable_to_close(StrPas(textrec(f).name));
 {$ENDIF}
 end;
@@ -1593,7 +1593,7 @@ begin
 {$IFDEF MSDOS}
  if IOResult<>0 then unable_to_read(textrec(f).name);
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
  if IOResult<>0 then unable_to_read(StrPas(textrec(f).name));
 {$ENDIF}
 end;
@@ -1604,7 +1604,7 @@ begin
 {$IFDEF MSDOS}
  if IOResult<>0 then unable_to_write(textrec(f).name);
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
  if IOResult<>0 then unable_to_write(StrPas(textrec(f).name));
 {$ENDIF}
 end;
@@ -1615,7 +1615,7 @@ begin
 {$IFDEF MSDOS}
  if IOResult<>0 then unable_to_write(textrec(f).name);
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
  if IOResult<>0 then unable_to_write(StrPas(textrec(f).name));
 {$ENDIF}
 end;

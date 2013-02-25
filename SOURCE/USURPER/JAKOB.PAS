@@ -1,4 +1,4 @@
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 {$I DEFINES.INC}
 {$ENDIF}
 {
@@ -144,7 +144,7 @@ Uses Dos, Crt, Init,
      DDplus, DDscott, ComIO,
      Exec, AnsiColr, SwagDate,
      Various, NetFilep, DispText,
-     Online, {$IFDEF MSDOS}sdelay,{$ENDIF} File_IO {$IFDEF WIN32}, RPScreen, Windows{$ENDIF};
+     Online, {$IFDEF MSDOS}sdelay,{$ENDIF} File_IO {$IFNDEF MSDOS}, RPScreen, Windows{$ENDIF};
 
 var carriage_return : boolean; {used by D and SD procedures (display routines)}
 
@@ -396,7 +396,7 @@ Asm {machine independent Delay Function}
   int $15;
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 Procedure Delay4(ms : Word);
 begin
   WriteLn('REETODO JAKOB Delay4'); Halt;
@@ -450,7 +450,7 @@ VAR
                 +0.01*Regs.DL;
     END;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
     PROCEDURE ReadClock(VAR Secs : Real);
     begin
       WriteLn('REETODO JAKOB ReadClock'); Halt;
@@ -476,7 +476,7 @@ begin
 {$IFDEF MSDOS}
  millidelay(godis);
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
  Sleep(Trunc(godis));
 {$ENDIF}
 end;
@@ -675,7 +675,7 @@ InLine(
  $E2/$F1/               { @28: loop  @15                 }
  $8E/$DA);              { @30: mov   DS,DX               }
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 Procedure Upper4(var Str: String);
 var
   i, len : Integer;
@@ -2105,7 +2105,7 @@ Asm
  pop ds
 End; {iswin95 *end*}
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 Function IsWin95: Boolean;
 begin
   // REENOTE Does the above return true?  Is it important (for slicing or something)?
@@ -2187,7 +2187,7 @@ ASM mov AX, [Seg0040]
     inc AL
 END;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 FUNCTION ScreenRows: byte; 
 var
   y: Word;
@@ -2207,7 +2207,7 @@ ASM mov AX, [Seg0040]
     mov AL, ES:$4A
 END;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 FUNCTION ScreenCols: byte;
 var
   x: Word;

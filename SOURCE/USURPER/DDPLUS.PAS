@@ -1,4 +1,4 @@
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 {$I DEFINES.INC}
 {$ENDIF}
 Unit DDPlus;
@@ -28,7 +28,7 @@ var
  com1,com2,com3,com4 : byte;        { temporary non-std comports             }
  port1,port2,port3,port4:word;
  irq1,irq2,irq3,irq4 : byte;
- com_port: {$IFDEF MSDOS}byte{$ENDIF}{$IFDEF WIN32}integer{$ENDIF}; {from DROP FILE: com port}
+ com_port: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}integer{$ENDIF}; {from DROP FILE: com port}
  fossilIO,DigiIO: boolean;          {from .CTL file: fossil, digiboard i/o   }
  mintime: byte;                     {Minimum time left before user kicked off}
  notime: string;                    {Out of time filename                    }
@@ -138,16 +138,16 @@ Implementation
 
 Uses Init, Cms, InitGods,
      Jakob, Mail, News,
-     Online, File_io {$IFDEF WIN32}, Windows{$ENDIF}; {jakob! You have also changed in DDOVR2.PAS}
+     Online, File_io {$IFNDEF MSDOS}, Windows{$ENDIF}; {jakob! You have also changed in DDOVR2.PAS}
 
 Procedure DV_Aware_On;       {$IFDEF MSDOS}External;{$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 begin
   // REENOTE Presumably unimportant since we're not running DesqView
 end;
 {$ENDIF}
 Procedure DV_Pause;          {$IFDEF MSDOS}External;{$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 begin
   // REENOTE Presumably unimportant since we're not running DesqView
 end;
@@ -168,7 +168,7 @@ begin
    Intr($28,Regs);
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 procedure Dos_Sleep;
 begin
   Sleep(1);
@@ -188,7 +188,7 @@ begin
  end;
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 procedure Win_Pause;
 begin
   Sleep(1);
@@ -527,7 +527,7 @@ var
 begin
   ofm:=filemode;
   filemode:=66;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
   FileModeReadWrite := FileMode;
 {$ENDIF}
   ansisave:=ansion;
@@ -556,12 +556,12 @@ begin
 
  {$I-}
  filemode:=66;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
  FileModeReadWrite := FileMode;
 {$ENDIF}
  reset(f);
  filemode:=66;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
  FileModeReadWrite := FileMode;
 {$ENDIF}
  {$I+}
@@ -570,7 +570,7 @@ begin
      swriteln('File '+filenm+' missing');
      ansion:=ansisave;
      filemode:=ofm;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
      FileModeReadWrite := FileMode;
 {$ENDIF}
      exit;
@@ -608,7 +608,7 @@ begin
    ansion:=ansisave;
    set_foreground(default_fore);
    filemode:=ofm;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
    FileModeReadWrite := FileMode;
 {$ENDIF}
 end;
@@ -871,7 +871,7 @@ Procedure CallProc;
 {$IFDEF MSDOS}
 inline($FF/$1E/Proc_Call_Ptr);
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 begin
   // REENOTE Doesn't look like Proc_Call_Ptr is ever assigned to, so it never needs to be called
 end;

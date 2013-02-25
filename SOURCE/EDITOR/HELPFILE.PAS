@@ -1,4 +1,4 @@
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 {$I DEFINES.INC}
 {$ENDIF}
 {************************************************}
@@ -455,7 +455,7 @@ asm
         XCHG	AX,CX
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 function Scan(var P; Offset, Size: Integer; C: Char): Integer;
 begin
   WriteLn('REETODO HELPFILE Scan'); Halt;
@@ -478,7 +478,7 @@ asm
         POP	DS
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 procedure TextToLine(var Text; Offset, Length: Integer; var Line: String);
 begin
   WriteLn('REETODO HELPFILE TextToLine'); Halt;

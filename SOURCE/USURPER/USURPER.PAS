@@ -1,4 +1,4 @@
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 {$I DEFINES.INC}
 {$ENDIF}
 {
@@ -362,7 +362,7 @@ begin {* Main Program *}
  {Set Share}
  if Is_Share then begin
   filemode:=66;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
   FileModeReadWrite := FileMode;
 {$ENDIF}
   global_ushare:=true;

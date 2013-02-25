@@ -1,11 +1,11 @@
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 {$I DEFINES.INC}
 {$ENDIF}
 unit RPScreen;
 
 interface
 
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 uses
   Windows;
 
@@ -25,12 +25,12 @@ function  RPWhereXY: SmallWord;
 
 implementation
 
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 var
   StdOut: THandle;
 {$ENDIF}
 
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 procedure RPGotoXY(xy: SmallWord);
 var
   Coord: TCoord;
@@ -130,7 +130,7 @@ end;
 {$ENDIF}
 
 
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 BEGIN
   StdOut := GetStdHandle(STD_OUTPUT_HANDLE);
 {$ENDIF}

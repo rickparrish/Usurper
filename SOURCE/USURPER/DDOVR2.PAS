@@ -1,4 +1,4 @@
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 {$I DEFINES.INC}
 {$ENDIF}
 unit ddovr2;
@@ -15,7 +15,7 @@ procedure Loadconfig(
  var user_first_name,user_last_name: string;
  var user_access_level: word;
  var bbs_time_left: integer;
- var com_port: {$IFDEF MSDOS}byte{$ENDIF}{$IFDEF WIN32}integer{$ENDIF};
+ var com_port: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}integer{$ENDIF};
  var baud_rate: longint;
  var node_num: integer; {jakob; originally BYTE in DDplus version}
  var local: boolean;
@@ -58,7 +58,7 @@ Procedure CallProc;
 {$IFDEF MSDOS}
 inline($FF/$1E/DDUserConfigPtr);
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 begin
   // REENOTE Doesn't look like DDUserConfigPtr is ever assigned to, so it never needs to be called
 end;
@@ -70,7 +70,7 @@ procedure Loadconfig(
  var user_first_name,user_last_name: string;
  var user_access_level: word;
  var bbs_time_left: integer;
- var com_port: {$IFDEF MSDOS}byte{$ENDIF}{$IFDEF WIN32}integer{$ENDIF};
+ var com_port: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}integer{$ENDIF};
  var baud_rate: longint;
  var node_num: integer;
  var local: boolean;
@@ -253,7 +253,7 @@ begin;
  selectctl;
  ofm:=filemode;
  filemode:=66;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
  FileModeReadWrite := FileMode;
 {$ENDIF}
  assign(f,fn);
@@ -336,11 +336,11 @@ begin;
  end;
  close(f);
  filemode:=ofm;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
  FileModeReadWrite := FileMode;
 {$ENDIF}
 
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
  { ensure win32 doors run with fossil io (where we put the socket code) }
  bbs_software:=15;
  fossilio := true;

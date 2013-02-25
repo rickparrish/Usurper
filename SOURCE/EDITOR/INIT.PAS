@@ -1,4 +1,4 @@
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 {$I DEFINES.INC}
 {$ENDIF}
 {
@@ -1796,7 +1796,7 @@ begin
         end;
         HelpInUse := False;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
         NoWin32Help;
 {$ENDIF}
       end;

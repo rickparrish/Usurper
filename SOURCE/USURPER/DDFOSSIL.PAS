@@ -1,4 +1,4 @@
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 {$I DEFINES.INC}
 {$ENDIF}
 
@@ -53,7 +53,7 @@ procedure Async_Buffer_Status(var Insize,Infree,OutSize,Outfree: word;
 
 implementation
 
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 uses
   EleNorm, Windows;
   
@@ -75,7 +75,7 @@ begin
  intr($14,regs);
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 procedure async_send(c: char);
 begin
   if Not(DidInit) then Exit;
@@ -92,7 +92,7 @@ begin
  for a:=1 to length(s) do async_send(s[a]);
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 procedure async_send_string(s: string);
 begin
   if Not(DidInit) then Exit;
@@ -118,7 +118,7 @@ begin
  end else async_receive:=false;
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 function async_receive(var ch: char): boolean;
 begin
   ch := #0;
@@ -168,7 +168,7 @@ begin
  if (regs.al and $80)<>0 then async_carrier_drop:=false else async_carrier_drop:=true;
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 function async_carrier_drop: boolean;
 begin
   async_carrier_drop := false;
@@ -188,7 +188,7 @@ begin
  if (regs.al and $80)<>0 then async_carrier_present:=true else async_carrier_present:=false;
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 function async_carrier_present: boolean;
 begin
   async_carrier_present := true;
@@ -208,7 +208,7 @@ begin
  if (regs.ah and 1)=1 then async_buffer_check:=true else async_buffer_check:=false;
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 function async_buffer_check: boolean;
 begin
   async_buffer_check := false;
@@ -229,7 +229,7 @@ begin
  if regs.ax=$1954 then async_init_fossil:=true else async_init_fossil:=false;
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 function async_init_fossil: boolean;
 begin
   if (DidInit) then Exit;
@@ -251,7 +251,7 @@ begin
  intr($14,regs);
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 procedure async_deinit_fossil;
 begin
   if Not(DidInit) then Exit;
@@ -270,7 +270,7 @@ begin
  intr($14,regs);
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 procedure async_set_dtr(state: boolean);
 begin
   if Not(DidInit) then Exit;
@@ -288,7 +288,7 @@ begin
  intr($14,regs);
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 procedure MySlice;
 begin
   Sleep(1);
@@ -310,7 +310,7 @@ begin
  intr($14,regs);
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 procedure async_purge_output;
 begin
   if Not(DidInit) then Exit;
@@ -328,7 +328,7 @@ begin
  intr($14,regs);
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 procedure async_purge_input;
 begin
   if Not(DidInit) then Exit;
@@ -347,7 +347,7 @@ begin
  intr($14,regs);
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 procedure async_watchdog_on;
 begin
   if Not(DidInit) then Exit;
@@ -366,7 +366,7 @@ begin
  intr($14,regs);
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 procedure async_watchdog_off;
 begin
   if Not(DidInit) then Exit;
@@ -384,7 +384,7 @@ begin
  intr($14,regs);
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 procedure async_warm_reboot;
 begin
   if Not(DidInit) then Exit;
@@ -402,7 +402,7 @@ begin
  intr($14,regs);
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 procedure async_cold_reboot;
 begin
   if Not(DidInit) then Exit;
@@ -442,7 +442,7 @@ begin
  intr($14,regs);
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 procedure async_set_baud(n: longint);
 begin
   if Not(DidInit) then Exit;
@@ -485,7 +485,7 @@ begin
  intr($14,regs);
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 procedure async_set_baudBnu(n: longint);
 begin
   if Not(DidInit) then Exit;
@@ -526,7 +526,7 @@ begin
  Intr($14,regs);
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 procedure async_set_flow(SoftTran,Hard,SoftRecv: boolean);
 begin
   if Not(DidInit) then Exit;
@@ -547,7 +547,7 @@ begin
  intr($14,regs);
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 procedure async_get_fossil_data;
 begin
   if Not(DidInit) then Exit;
@@ -573,7 +573,7 @@ begin
  fossilname[0] := char(i);
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 procedure Async_Buffer_Status(var Insize,Infree,OutSize,Outfree: word;
                               var fossilname:string);
 var FInFree, FOutFree, FInUsed, FOutUsed: Longint;

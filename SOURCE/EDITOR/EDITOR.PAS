@@ -1,4 +1,4 @@
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 {$I DEFINES.INC}
 {$ENDIF}
 {
@@ -80,7 +80,7 @@ var
 Begin
 
 filemode:=66;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 FileModeReadWrite := FileMode;
 {$ENDIF}
 {$IFDEF MSDOS}

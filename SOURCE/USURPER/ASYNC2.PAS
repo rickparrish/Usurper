@@ -1,4 +1,4 @@
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 {$I DEFINES.INC}
 {$ENDIF}
 {*--------------------------------------------------------------------------*}
@@ -147,7 +147,7 @@ Var
 {****************************************************************************}
 
 Procedure INT_Handler; {$IFDEF MSDOS}External;{$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 begin
   WriteLn('REETODO ASYNC2 INT_Handler'); Halt;
 end;
@@ -166,7 +166,7 @@ end;
 {****************************************************************************}
 
 Function ComReadCh(ComPort:Byte) : Char; {$IFDEF MSDOS}External;{$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 begin
   WriteLn('REETODO ASYNC2 ComReadCh'); Halt;
 end;
@@ -186,7 +186,7 @@ end;
 {****************************************************************************}
 
 Function ComReadChW(ComPort:Byte) : Char; {$IFDEF MSDOS}External;{$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 begin
   WriteLn('REETODO ASYNC2 ComReadChW'); Halt;
 end;
@@ -207,7 +207,7 @@ end;
 {****************************************************************************}
 
 Procedure ComWriteCh(ComPort:Byte; Ch:Char); {$IFDEF MSDOS}External;{$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 begin
   WriteLn('REETODO ASYNC2 ComWriteCh'); Halt;
 end;
@@ -229,7 +229,7 @@ end;
 {****************************************************************************}
 
 Procedure ComWriteChW(ComPort:Byte; Ch:Char); {$IFDEF MSDOS}External;{$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 begin
   WriteLn('REETODO ASYNC2 ComWriteChW'); Halt;
 end;
@@ -653,7 +653,7 @@ Begin
     End;
   Inline($FB);
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
   WriteLn('REETODO ASYNC2 ClearCom'); Halt;
 {$ENDIF}
 End;
@@ -1086,7 +1086,7 @@ Begin
 
   Inline($FB);
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
   WriteLn('REETODO ASYNC2 ComParams'); Halt;
 {$ENDIF}
 End;
@@ -1194,7 +1194,7 @@ Begin
 
   Inline($FB);
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
   WriteLn('REETODO ASYNC2 OpenCom'); Halt;
 {$ENDIF}
 End;
@@ -1267,7 +1267,7 @@ Begin
   FreeMem(C_OutBufPtr[ComPort],C_OutSize[ComPort]);
   Inline($FB);
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
   WriteLn('REETODO ASYNC2 CloseCom'); Halt;
 {$ENDIF}
 End;

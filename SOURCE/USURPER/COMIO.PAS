@@ -1,4 +1,4 @@
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 {$I DEFINES.INC}
 {$ENDIF}
 
@@ -16,7 +16,7 @@ var
  initok, NoFossinit, fosBnu  : boolean;
  internalinsize,internaloutsize: word;
 
-procedure AsyncSelectPort(pn: {$IFDEF MSDOS}byte{$ENDIF}{$IFDEF WIN32}integer{$ENDIF});
+procedure AsyncSelectPort(pn: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}integer{$ENDIF});
 procedure AsyncSendChar(ch: char);
 procedure AsyncReceiveChar(var ch: char);
 function  AsyncCarrierPresent: boolean;
@@ -25,7 +25,7 @@ procedure AsyncSelectFossil(var fossilname:string);
 procedure AsyncSelectInternal;
 procedure AsyncSelectDigiBoard(var digiboardname:string);
 procedure AsyncCloseUp;
-procedure AsyncCloseCom(cp : {$IFDEF MSDOS}byte{$ENDIF}{$IFDEF WIN32}integer{$ENDIF});
+procedure AsyncCloseCom(cp : {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}integer{$ENDIF});
 procedure AsyncSetBaud(n: longint);
 procedure AsyncSetDTR(state: boolean);
 procedure AsyncFlushOutput;
@@ -42,7 +42,7 @@ Procedure ResetPorts (var port1,port2,port3,port4: word;
 
 implementation
 
-procedure AsyncSelectPort(pn: {$IFDEF MSDOS}byte{$ENDIF}{$IFDEF WIN32}integer{$ENDIF});
+procedure AsyncSelectPort(pn: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}integer{$ENDIF});
 begin;
  case AsyncIoType of
    Fossil: begin
@@ -150,7 +150,7 @@ begin;
  AsyncIoType:=Digi;
  digi_Get_Info(digiboardname);
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
   // REENOTE Only use FOSSIL in Win32, won't ever select digiboard
 {$ENDIF}
 end;
@@ -276,7 +276,7 @@ begin
       C_PortInt[i]  := D_PortInt[i];
     end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
   // REENOTE Only use FOSSIL in Win32, no need to setup the ports
 {$ENDIF}
 end;
@@ -294,7 +294,7 @@ begin
  port4 :=  D_PortAddr[4];
  irq4  :=  D_PortInt[4];
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
   // REENOTE Only use FOSSIL in Win32, no need to load the ports
 {$ENDIF}
 end;
@@ -312,7 +312,7 @@ begin
   C_PortAddr[4] := port4;
   C_PortInt[4]  := irq4;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
   // REENOTE Only use FOSSIL in Win32, no need to reset the ports
 {$ENDIF}
 end;
@@ -322,7 +322,7 @@ begin;
  AsyncIoType:=Internal;
  comport:=1;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
  AsyncIoType:=Fossil;
 {$ENDIF}
  internalinsize :=2048;

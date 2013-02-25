@@ -1,4 +1,4 @@
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 {$I DEFINES.INC}
 {$ENDIF}
 Unit ddigi;
@@ -87,7 +87,7 @@ begin;
  OutReady:=false;
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 function digi_Init_driver : boolean;
 begin
   WriteLn('REETODO DDIGI digi_Init_driver'); Halt;
@@ -116,7 +116,7 @@ begin;
    digi_buffer_check:=false;
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 function digi_buffer_check: boolean;
 begin
   WriteLn('REETODO DDIGI digi_buffer_check'); Halt;
@@ -142,7 +142,7 @@ begin;
    OutReady:=false;
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 procedure digi_send(c: char);
 begin
   WriteLn('REETODO DDIGI digi_send'); Halt;
@@ -172,7 +172,7 @@ begin;
   end;
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 function digi_receive(var c: char): boolean;
 begin
   WriteLn('REETODO DDIGI digi_receive'); Halt;
@@ -200,7 +200,7 @@ begin;
    OutReady:=false;
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 function digi_carrier_present: boolean;
 begin
   WriteLn('REETODO DDIGI digi_carrier_present'); Halt;
@@ -252,7 +252,7 @@ begin
   intr($14,regs);
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 procedure digi_set_modem;
 begin
   WriteLn('REETODO DDIGI digi_set_modem'); Halt;
@@ -300,7 +300,7 @@ begin;
    end;
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 function digi_set_baud;      { new form digiboard init }
 begin
   WriteLn('REETODO DDIGI digi_set_baud'); Halt;
@@ -317,7 +317,7 @@ begin;
  intr($14,regs);
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 procedure digi_flush_io;
 begin
   WriteLn('REETODO DDIGI digi_flush_io'); Halt;
@@ -334,7 +334,7 @@ begin;
  intr($14,regs);
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 procedure digi_flush_input;
 begin
   WriteLn('REETODO DDIGI digi_flush_input'); Halt;
@@ -351,7 +351,7 @@ begin;
  intr($14,regs);
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 procedure digi_flush_output;
 begin
   WriteLn('REETODO DDIGI digi_flush_output'); Halt;
@@ -418,7 +418,7 @@ begin;
 
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 procedure digi_Get_Info(var drivername:string);
 begin
   WriteLn('REETODO DDIGI digi_Get_Info'); Halt;
@@ -439,7 +439,7 @@ begin;
  intr($14,regs);
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 procedure EnableTimeOutError;
 begin
   WriteLn('REETODO DDIGI EnableTimeOutError'); Halt;
@@ -461,7 +461,7 @@ begin;
  AsyncStat := StatusCode;
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 procedure Digi_Break(StatusCode : Word);  { send break }
 begin
   WriteLn('REETODO DDIGI Digi_Break'); Halt;

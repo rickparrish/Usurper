@@ -1,4 +1,4 @@
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 {$I DEFINES.INC}
 {$ENDIF}
 (********************************)
@@ -38,7 +38,7 @@ Procedure GetDate1(VAR Month:Word;
   Year:=MyRegs.CX;
  End;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 Procedure GetDate1(VAR Month:Word;
                    VAR day:Word;
                    VAR year:Word);
@@ -151,7 +151,7 @@ BEGIN
      {SaveGame(Player,PlayerFile,TempP,Country,CountryFile,Map1,MapFile);}
      
      IF ShareInst=False then FileMode:=64;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
      FileModeReadWrite := FileMode;
 {$ENDIF}
      YE:=False;
@@ -196,7 +196,7 @@ BEGIN
      WRITELN_to_text(ErrFile,Exit_Message(Exitcode));
      Close_text(ErrFile); {jakob}
      IF ShareInst=False then FileMode:=66;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
      FileModeReadWrite := FileMode;
 {$ENDIF}
      {be sure to uncomment this if using RipLink}
@@ -262,7 +262,7 @@ BEGIN
        WRITELN_to_text(ErrFile,'------------------------------------------------');
        Close_text(ErrFile);
        IF ShareInst=False then FileMode:=66;
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
        FileModeReadWrite := FileMode;
 {$ENDIF}
       END ;

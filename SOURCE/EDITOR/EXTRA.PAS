@@ -1,4 +1,4 @@
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 {$I DEFINES.INC}
 {$ENDIF}
 {
@@ -56,7 +56,7 @@ Procedure Options_Menu;
 Procedure More_Editors_Menu;
 
 Procedure About; {about box - who made the program + version etc. etc.}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 Procedure NoWin32Help; {about box - letting user know Win32 help is not available}
 {$ENDIF}
 Function YesNoBox(const toptext:string; const text:string) : boolean;
@@ -2109,7 +2109,7 @@ begin
 
 end;
 
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 Procedure NoWin32Help;
 var
   Dia: XDialogP;

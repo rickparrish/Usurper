@@ -1,4 +1,4 @@
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 {$I DEFINES.INC}
 {$ENDIF}
 
@@ -134,7 +134,7 @@ begin
  NetError := NE_OK;                                        { No error }
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 function ShareInst : boolean;
 begin
   ShareInst := true;
@@ -210,7 +210,7 @@ begin
     end;
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 procedure NetRewrite(     FName  : string;
                           AMode  : integer;
                           RecS   : word;
@@ -268,7 +268,7 @@ begin
     end;
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 procedure NetReset(     FName  : string;
                         AMode  : integer;
                         RecS   : word;
@@ -306,7 +306,7 @@ begin
     NetError := NE_InvalidHandle;                     { File not open }
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 procedure NetClose( var DFile );
 begin
   WriteLn('REETODO NETFILEP NetClose'); Halt;
@@ -378,7 +378,7 @@ begin
  ReleaseTimeSlice; {Added by Bob Dalton - Gives up timeslice}
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 function Locking( Handle    : word;
                   Operation : byte;
                   Offset    : longint;
@@ -492,7 +492,7 @@ begin
     end;
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 procedure NetWrite( var DFile;
                     var FData );
 begin
@@ -531,7 +531,7 @@ begin
     end;
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 procedure NetRead( var DFile;
                    var FData );
 begin
@@ -570,7 +570,7 @@ begin
     end;
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 procedure NetSeek( var DFile;
                        RecNo : longint );
 begin

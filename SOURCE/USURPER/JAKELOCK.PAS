@@ -1,4 +1,4 @@
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 {$I DEFINES.INC}
 {$ENDIF}
 
@@ -35,7 +35,7 @@ function File_Lock(var F; Action: filAction; FPos,Len: Longint): Word;
 
 Implementation
 
-Uses Dos {$IFDEF WIN32}, Windows{$ENDIF};
+Uses Dos {$IFNDEF MSDOS}, Windows{$ENDIF};
 
 {this routine was taken from the SWAG archive, locks records AND files}
 {$IFDEF MSDOS}
@@ -58,7 +58,7 @@ asm
 
 end; {File_Lock *end*}
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFNDEF MSDOS}
 // From ELEBBS (and modified)
 function File_Lock(var F; Action: filAction; FPos,Len: Longint): Word;
 var Tmp: Word;
