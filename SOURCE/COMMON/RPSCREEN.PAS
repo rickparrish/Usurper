@@ -52,6 +52,7 @@ var
   WritePos   : TCoord;
   DestRect   : TSmallRect;
 begin
+  // REETODO Don't hardcode to 80x25
   BufSize.X       := 80;
   BufSize.Y       := 25;
   WritePos.X      := 0;
@@ -96,6 +97,7 @@ var
   ReadPos    : TCoord;
   SourceRect : TSmallRect;
 begin
+  // REETODO Don't hardcode to 80x25
   BufSize.X         := 80;
   BufSize.Y         := 25;
   ReadPos.X         := 0;
@@ -118,12 +120,8 @@ end;
 {$ENDIF}
 {$IFDEF LINUX}
 procedure RPSaveScreen(var screenBuf: TScreenBuf);
-var
-  Source, Dest: Pointer;
 begin
-  Source := SysTVGetSrcBuf;
-  Dest := @screenBuf;
-  Move(Source, Dest, SizeOf(TScreenBuf));
+  Move(SysTVGetSrcBuf^, screenBuf, SizeOf(TScreenBuf));
 end;
 {$ENDIF}
 
