@@ -129,7 +129,7 @@ begin
            'for instance.');
 
  add_guard('Small Dragon',75000,500,true,25,25,
-           'The drawback with the dragon is that it''s',
+           'The drawback with the dragon is that it',
            'all too often sleeps on its post.',
            'Other than this, you should have no reason to',
            'be concerned with your safety.',

@@ -190,7 +190,7 @@ begin
        dispat:=true;
       end;
       if (global_s_bstaff=true) and (dispat=false) then begin
-       d(15,'The Black Staff increases you strength!');
+       d(15,'The Black Staff increases your strength!');
        dispat:=true;
       end;
 
@@ -616,17 +616,9 @@ begin {MAIN PROC **START**}
 
  mon:=0;
 
- {what???? I have forgot why I put this code snippet here =( }
- for i:=1 to global_maxmon do begin
-  if monster[i]^.name<>'' then begin
-
-   monster[i]^.hps:=monster[i]^.strength;
-   monster[i]^.hps:=monster[i]^.hps*3;
-
-   if monster[i]^.hps<1 then monster[i]^.hps:=2;
-  end;
- end; {for i:= .end.}
-
+ {code here used to set hps to strength*3.
+  This made setting hitpoints in the monster editor completely
+  pointless.}
 
  repeat
   player.casted:=false;

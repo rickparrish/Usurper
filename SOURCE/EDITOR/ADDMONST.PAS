@@ -72,7 +72,7 @@ begin
 
 
  {ej i monsterfilerna}
- monster.hps      :=0;
+ monster.hps      :=monster.strength*3;
  monster.punch    :=0;
  monster.poisoned :=false;
  monster.weapon   :=emptystr;

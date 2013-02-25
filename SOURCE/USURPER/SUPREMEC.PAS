@@ -44,7 +44,7 @@ Procedure Supreme;
 
 const supcol = ulred; {supreme beings color in the NEWS and MAIL file}
 Var
-    x, i : longint;
+    x, i, gain : longint;
     justval : integer;
     ch : char;
     s : s70;
@@ -259,7 +259,10 @@ begin
    player.hps:=1;
   end
   else begin
-   d(config.textcolor,'Power Booster! Your hitpoints increase with 500!');
+   d(config.textcolor,'Power Booster! Your hitpoints increase by 500!');
+   gain:=32000-player.maxhps;
+   if gain < 0 then gain:=0;
+   if gain > 500 then gain:=500;
    player.maxhps:=player.maxhps+500;
    player.hps:=player.maxhps;
   end;
@@ -285,7 +288,9 @@ begin
 { monster[1]^.hps:=2;
  monster[1]^.strength:=1;
 }
- monster[1]^.hps:=player.hps*3;
+ 
+ monster[1]^.hps:=player.strength*9;
+
  monster[1]^.strength:=player.strength*3;
 
 
