@@ -989,7 +989,7 @@ begin
         ' '+uplc+player.name2+config.textcol1+t+' of the killing',
         ' of '+ucyan+n+config.textcol1+' the beggar. The poor man',
         ' was found with a pole driven through his body.',
-        ' This senseless violence must come to an halt!',
+        ' This senseless violence must come to a halt!',
         '',
         '',
         '',

@@ -915,7 +915,7 @@ begin
     'You were lead by '+uplc+Player.name2+config.textcol1+' to aid in',
     'the rape of an innocent girl. Your evil genes had no',
     'problems of accepting this hideous act.',
-    'You had plenty of fun with the lucious girl.',
+    'You had plenty of fun with the luscious girl.',
     '',
     '',
     '',
@@ -1109,7 +1109,7 @@ begin
         '',
         '');
 
-  {player survided, now some interaction with the saved girl}
+  {player survived, now some interaction with the saved girl}
   crlf;
   crlf;
   crlf;
@@ -1134,7 +1134,7 @@ begin
   d(config.textcolor,'After a short recovery, the girl picks up a dagger from');
   sd(config.textcolor,'one of the fallen Orcs. She finds the body of ');
   d(global_plycol,leader[boss]);
-  d(config.textcolor,'and starts to desecrate the already mutilated corpse.');
+  d(config.textcolor,'and starts to desecrate the already-mutilated corpse.');
   pause;
 
   crlf;
@@ -1269,7 +1269,7 @@ begin {RAPE_GIRL event *START*.... a woman is being harassed by local militia}
 
        d(15,'Rescue!');
        d(config.textcolor,'You charge down the ravine! Screaming all the way, trying');
-       d(config.textcolor,'to make an imression on the confused lot down there...');
+       d(config.textcolor,'to make an impression on the confused lot down there...');
        crlf;
        d(config.textcolor,'When you close in on the orc party, you notice that their');
        sd(config.textcolor,'leader is the notorious ');
