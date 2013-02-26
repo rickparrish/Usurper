@@ -2126,7 +2126,7 @@ end; {jake_tasker *end*}
 
 Procedure Display_Bar_Status; {call to DDplus Display_Status (bar) proc}
 begin
- display_status(force);
+ if (statline) then display_status(force);
 end;
 
 Function Param_Hunt; {checking for Command Line parameters}
