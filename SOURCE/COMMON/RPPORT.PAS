@@ -1,7 +1,7 @@
 {$IFNDEF MSDOS}
 {$I DEFINES.INC}
 {$ENDIF}
-unit RPScreen;
+unit RPPort;
 
 interface
 
@@ -21,18 +21,21 @@ type
 
 procedure RPGotoXY(xy: SmallWord);
 procedure RPHideCursor;
+function  RPLockFile(handle, start, length: LongInt): LongInt;
 procedure RPRestoreScreen(var screenBuf: TScreenBuf);
 procedure RPSaveScreen(var screenBuf: TScreenBuf);
 function  RPScreenSizeX: Word;
 function  RPScreenSizeY: Word;
 procedure RPSetAttrAt(x, y: SmallWord; attr: Byte);
+procedure RPSleep(ms: Word);
 procedure RPShowCursor;
+function  RPUnLockFile(handle, start, length: LongInt): LongInt;
 function  RPWhereXY: SmallWord;
 
 implementation
 
 uses
-  {$IFDEF OS2}OS2Base,{$ENDIF} VPUtils, VpSysLow;
+  {$IFDEF OS2}OS2Base,{$ENDIF} VPUtils, VpSysLow, VpUsrLow;
   
 {$IFDEF WIN32}
 var
@@ -61,6 +64,11 @@ begin
   HideCursor;
 end;
 {$ENDIF}
+
+function  RPLockFile(handle, start, length: LongInt): LongInt;
+begin
+  RPLockFile := SysLockFile(handle, start, length);
+end;
 
 { REETODO Should detect screen size }
 {$IFDEF WIN32}
@@ -218,6 +226,16 @@ begin
   ShowCursor;
 end;
 {$ENDIF}
+
+procedure RPSleep(ms: Word);
+begin
+  SysCtrlSleep(ms);
+end;
+
+function  RPUnLockFile(handle, start, length: LongInt): LongInt;
+begin
+  RPUnLockFile := SysUnLockFile(handle, start, length);
+end;
 
 // REENOTE Can't to platform specific since cursor position is stored internally in VP units
 function RPWhereXY: SmallWord;

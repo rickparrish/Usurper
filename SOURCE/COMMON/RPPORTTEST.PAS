@@ -1,7 +1,7 @@
-program RPScreenTest;
+program RPPortTest;
 
 uses
-  Crt, RPScreen, VpSysLow;
+  Crt, RPPort, VpSysLow;
 
 procedure PauseOrQuit;
 var
@@ -18,6 +18,8 @@ var
   X, Y, XY: SmallWord;
   SavedScreen: TScreenBuf;
 begin
+  TextAttr := 7;
+  
   ClrScr;
   WriteLn('Test #1: RPGotoXY and RPWhereXY');
   XY := RPWhereXY;
@@ -80,13 +82,19 @@ begin
   PauseOrQuit;
 
   WriteLn;
-  WriteLn('Test #5: RPSetAttrAt');
-  WriteLn('  The "X Size" text above should now be white on blue');
+  WriteLn('Test #5: RPSetAttrAt and RPSleep');
+  WriteLn('  The "X Size" text above should slowly become white on blue');
+  RPSleep(500);  
   RPSetAttrAt(2, 1, 31);
+  RPSleep(500);  
   RPSetAttrAt(3, 1, 31);
+  RPSleep(500);  
   RPSetAttrAt(4, 1, 31);
+  RPSleep(500);  
   RPSetAttrAt(5, 1, 31);
+  RPSleep(500);  
   RPSetAttrAt(6, 1, 31);
+  RPSleep(500);  
   RPSetAttrAt(7, 1, 31);
   PauseOrQuit;
 end.

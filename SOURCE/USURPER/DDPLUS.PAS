@@ -138,7 +138,7 @@ Implementation
 
 Uses Init, Cms, InitGods,
      Jakob, Mail, News,
-     Online, File_io {$IFNDEF MSDOS}, VpSysLow{$ENDIF}; {jakob! You have also changed in DDOVR2.PAS}
+     Online, File_io {$IFNDEF MSDOS}, RPPort{$ENDIF}; {jakob! You have also changed in DDOVR2.PAS}
 
 Procedure DV_Aware_On;       {$IFDEF MSDOS}External;{$ENDIF}
 {$IFNDEF MSDOS}
@@ -171,7 +171,7 @@ end;
 {$IFNDEF MSDOS}
 procedure Dos_Sleep;
 begin
-  SysCtrlSleep(1);
+  RPSleep(1);
 end;
 {$ENDIF}
 { This releases the virtual machine time slice for MSwindows, Dos 5.0, OS/2 }
@@ -191,7 +191,7 @@ end;
 {$IFNDEF MSDOS}
 procedure Win_Pause;
 begin
-  SysCtrlSleep(1);
+  RPSleep(1);
 end;
 {$ENDIF}
 

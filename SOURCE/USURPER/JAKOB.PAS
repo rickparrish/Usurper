@@ -144,7 +144,7 @@ Uses Dos, Crt, Init,
      DDplus, DDscott, ComIO,
      Exec, AnsiColr, SwagDate,
      Various, NetFilep, DispText,
-     Online, {$IFDEF MSDOS}sdelay,{$ENDIF} File_IO {$IFNDEF MSDOS}, RPScreen, VpSysLow{$ENDIF};
+     Online, {$IFDEF MSDOS}sdelay,{$ENDIF} File_IO {$IFNDEF MSDOS}, RPPort{$ENDIF};
 
 var carriage_return : boolean; {used by D and SD procedures (display routines)}
 
@@ -308,10 +308,10 @@ var
  i, j, k, j2, ju: real;
 begin
  i := yr;     j := mo;     k := da;
- j2 := System.int( (j - 14)/12 );
- ju := k - 32075 + System.int(1461 * ( i + 4800 + j2 ) / 4 );
- ju := ju + System.int( 367 * (j - 2 - j2 * 12) / 12);
- ju := ju - System.int(3 * System.int( (i + 4900 + j2) / 100) / 4);
+ j2 := int( (j - 14)/12 );
+ ju := k - 32075 + int(1461 * ( i + 4800 + j2 ) / 4 );
+ ju := ju + int( 367 * (j - 2 - j2 * 12) / 12);
+ ju := ju - int(3 * int( (i + 4900 + j2) / 100) / 4);
  Jul := ju;
 end;
 
@@ -477,7 +477,7 @@ begin
  millidelay(godis);
 {$ENDIF}
 {$IFNDEF MSDOS}
- SysCtrlSleep(Trunc(godis));
+ RPSleep(Trunc(godis));
 {$ENDIF}
 end;
 

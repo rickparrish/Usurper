@@ -52,7 +52,7 @@ implementation
 
 {$IFNDEF MSDOS}
 uses
-  RPScreen;
+  RPPort;
   
 var
   SavedScreen: TScreenBuf;

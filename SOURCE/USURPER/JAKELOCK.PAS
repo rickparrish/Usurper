@@ -35,7 +35,7 @@ function File_Lock(var F; Action: filAction; FPos,Len: Longint): Word;
 
 Implementation
 
-Uses Dos {$IFNDEF MSDOS}, VpUsrLow{$ENDIF};
+Uses Dos {$IFNDEF MSDOS}, RPPort{$ENDIF};
 
 {this routine was taken from the SWAG archive, locks records AND files}
 {$IFDEF MSDOS}
@@ -63,11 +63,11 @@ function File_Lock(var F; Action: filAction; FPos,Len: Longint): Word;
 begin
   if (Action = FLock) then
   begin
-    File_Lock := SysLockFile(FileRec(F).Handle, FPos, Len);
+    File_Lock := RPLockFile(FileRec(F).Handle, FPos, Len);
   end else
   if (Action = FUnlock) then
   begin
-    File_Lock := SysUnLockFile(FileRec(F).Handle, FPos, Len);
+    File_Lock := RPUnLockFile(FileRec(F).Handle, FPos, Len);
   end;
 end; { func. LockFile }
 {$ENDIF}
