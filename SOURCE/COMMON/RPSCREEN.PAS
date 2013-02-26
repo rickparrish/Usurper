@@ -34,15 +34,33 @@ implementation
 uses
   {$IFDEF OS2}OS2Base,{$ENDIF} VPUtils, VpSysLow;
   
+{$IFDEF WIN32}
+var
+  StdOut: THandle;
+{$ENDIF}
+  
+// REENOTE Can't to platform specific since cursor position is stored internally in VP units
 procedure RPGotoXY(xy: SmallWord);
 begin
   SysTVSetCurPos(xy AND $00FF, xy AND $FF00 SHR 8);
 end;
 
+{$IFDEF WIN32}
+procedure RPHideCursor;
+var
+  CCI: TConsoleCursorInfo;
+begin
+  GetConsoleCursorInfo(StdOut, CCI);
+  CCI.bVisible := false;
+  SetConsoleCursorInfo(StdOut, CCI);
+end;
+{$ENDIF}
+{$IFNDEF WIN32}
 procedure RPHideCursor;
 begin
   HideCursor;
 end;
+{$ENDIF}
 
 { REETODO Should detect screen size }
 {$IFDEF WIN32}
@@ -125,6 +143,16 @@ begin
 end;
 {$ENDIF}
 
+{$IFDEF WIN32}
+function  RPScreenSizeX: Word;
+var
+  CSBI: TConsoleScreenBufferInfo;
+begin
+  GetConsoleScreenBufferInfo(StdOut, CSBI);
+  RPScreenSizeX := CSBI.srWindow.Right - CSBI.srWindow.Left + 1;
+end;
+{$ENDIF}
+{$IFNDEF WIN32}
 function  RPScreenSizeX: Word;
 var
   Size: TSysPoint;
@@ -132,7 +160,18 @@ begin
   SysTVGetScrMode(@Size, False);
   RPScreenSizeX := Size.X;
 end;
+{$ENDIF}
 
+{$IFDEF WIN32}
+function  RPScreenSizeY: Word;
+var
+  CSBI: TConsoleScreenBufferInfo;
+begin
+  GetConsoleScreenBufferInfo(StdOut, CSBI);
+  RPScreenSizeY := CSBI.srWindow.Bottom - CSBI.srWindow.Top + 1;
+end;
+{$ENDIF}
+{$IFNDEF WIN32}
 function  RPScreenSizeY: Word;
 var
   Size: TSysPoint;
@@ -140,7 +179,20 @@ begin
   SysTVGetScrMode(@Size, False);
   RPScreenSizeY := Size.Y;
 end;
+{$ENDIF}
 
+{$IFDEF WIN32}
+procedure RPSetAttrAt(x, y: SmallWord; attr: Byte);
+var
+  NumWritten: Longint;
+  WriteCoord: TCoord;
+begin
+  WriteCoord.X := x;
+  WriteCoord.Y := y;
+  WriteConsoleOutputAttribute(StdOut, @attr, 1, WriteCoord, NumWritten);
+end;
+{$ENDIF}
+{$IFNDEF WIN32}
 procedure RPSetAttrAt(x, y: SmallWord; attr: Byte);
 var
   Ch: Char;
@@ -148,12 +200,26 @@ begin
   Ch := SysReadCharAt(x, y);
   SysWrtCharStrAtt(@Ch, 1, x, y, attr);
 end;
+{$ENDIF}
 
+{$IFDEF WIN32}
+procedure RPShowCursor;
+var
+  CCI: TConsoleCursorInfo;
+begin
+  GetConsoleCursorInfo(StdOut, CCI);
+  CCI.bVisible := true;
+  SetConsoleCursorInfo(StdOut, CCI);
+end;
+{$ENDIF}
+{$IFNDEF WIN32}
 procedure RPShowCursor;
 begin
   ShowCursor;
 end;
+{$ENDIF}
 
+// REENOTE Can't to platform specific since cursor position is stored internally in VP units
 function RPWhereXY: SmallWord;
 var
   X, Y: SmallWord;
@@ -162,9 +228,11 @@ begin
   RPWhereXY := X + (Y SHL 8);
 end;
 
-BEGIN
-  SysSetVideoMode(80, 25);
+begin
+{$IFDEF WIN32}  
+  StdOut := GetStdHandle(STD_OUTPUT_HANDLE);
+{$ENDIF}  
 {$IFDEF LINUX}
   SysTVSetScrMode($FB); { $FB = COL2 = Color, graphics chars }
 {$ENDIF}
-END.
+end.
