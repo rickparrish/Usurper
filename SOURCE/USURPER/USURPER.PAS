@@ -542,10 +542,6 @@ begin {* Main Program *}
 
  {should statline (bottom of screen) be displayed?}
  statline:=true;
-{$IFDEF LINUX}
- { ensure linux doors don't show the status bar }
- statline := false;
-{$ENDIF}
 
  {Determine Graphics}
  if (graphics=1) or (graphics=2) then global_ansi:=false

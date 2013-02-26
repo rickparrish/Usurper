@@ -453,6 +453,7 @@ var
  el_mn, el_hr, el_sc: longint; {jakob:longint}
  alias : string[30];
 begin;
+{$IFNDEF LINUX}
  x:=wherex;
  y:=wherey;
  cursoroff;
@@ -485,6 +486,7 @@ begin;
      firsttime:=false;
      save_sc:=999;
    end;
+{$ENDIF}
  gettime(hour,minute,second,sec100);
  elapsed(hour,minute,second,st_hr,st_mn,st_sc,el_hr,el_mn,el_sc);
  c:=(bbs_time_left-1)+time_credit;
@@ -496,6 +498,7 @@ begin;
      tdropped:=true;
      halt;
    end;
+{$IFNDEF LINUX}
  c:=c-((el_hr*60)+el_mn);
  d:=60-el_sc;
  if d<>save_sc then
@@ -514,6 +517,7 @@ begin;
  window(1,1,80,numlines-1);
  gotoxy(x,y);
  If Not NoLocal then cursoron;
+{$ENDIF}
 end;
 
 procedure Selectansi;
