@@ -232,7 +232,7 @@ begin
   if Lo(DosVersion) >= 3 then EXEName := ParamStr(0)
   else EXEName := FSearch(Wanted, GetEnv('PATH'));
   FSplit(EXEName, Dir, Name, Ext);
-  if Dir[Length(Dir)] = '\' then Dec(Dir[0]);
+  if Dir[Length(Dir)] = DIRECTORY_SEPARATOR then Dec(Dir[0]);
 
   CalcHelpName := FSearch(wanted, Dir);
 end;

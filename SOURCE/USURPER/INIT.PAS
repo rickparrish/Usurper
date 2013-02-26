@@ -126,10 +126,16 @@ Const
 Const
 
  {Directories}
- global_datadir ='DATA\';   {Path to DATA directory}
- global_docsdir ='DOCS\';   {Path to DOCS directory}
- global_nodedir ='NODE\';   {Path to NODE directory}
- global_scoredir='SCORES\'; {Path to SCORE and NEWS directory}
+{$IFNDEF LINUX}
+ DIRECTORY_SEPARATOR = '\';
+{$ENDIF}
+{$IFDEF LINUX}
+ DIRECTORY_SEPARATOR = '/';
+{$ENDIF}
+ global_datadir ='DATA' + DIRECTORY_SEPARATOR;   {Path to DATA directory}
+ global_docsdir ='DOCS' + DIRECTORY_SEPARATOR;   {Path to DOCS directory}
+ global_nodedir ='NODE' + DIRECTORY_SEPARATOR;   {Path to NODE directory}
+ global_scoredir='SCORES' + DIRECTORY_SEPARATOR; {Path to SCORE and NEWS directory}
 
  {Files and their Paths}
  global_ucfg     = 'USURPER.CFG'; {Usurper configuration file}
@@ -263,7 +269,7 @@ const global_maintrunning : boolean=false; {set to true when Maintenance is runn
 const global_carrierdropped:boolean=false; {set to true when ddplus reports carried dropped, see ddplus.pas=proc dropmessage}
 const global_checkcarrier:boolean=false; {set to false when command line options are running}
 const global_mainttxt = 10 ; {color of p† maint text, when its running}
-const global_webaddress = 'http://come.to/usurper';
+const global_webaddress = 'http://www.randm.ca/usurper.aspx';
 const global_levelraise = '(you are eligible for a level raise!)'; {text displayed when player is eligible for level raise}
 
 

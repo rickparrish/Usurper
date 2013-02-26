@@ -50,10 +50,16 @@ const
  onlyin  = 'Only Available In Registered Version!';
 
  {Directories}
- global_datadir ='DATA\';   {Path to DATA directory}
- global_docsdir ='DOCS\';   {Path to DOCS directory}
- global_nodedir ='NODE\';   {Path to NODE files}
- global_scoredir='SCORES\'; {Path to SCORE and NEWS files}
+{$IFNDEF LINUX}
+ DIRECTORY_SEPARATOR = '\';
+{$ENDIF}
+{$IFDEF LINUX}
+ DIRECTORY_SEPARATOR = '/';
+{$ENDIF}
+ global_datadir ='DATA' + DIRECTORY_SEPARATOR;   {Path to DATA directory}
+ global_docsdir ='DOCS' + DIRECTORY_SEPARATOR;   {Path to DOCS directory}
+ global_nodedir ='NODE' + DIRECTORY_SEPARATOR;   {Path to NODE files}
+ global_scoredir='SCORES' + DIRECTORY_SEPARATOR; {Path to SCORE and NEWS files}
 
  {file with all online help-texts. raw-file : edhelp.txt.
  to compile raw helpfile, type: tvhc edhelp editor edhelp

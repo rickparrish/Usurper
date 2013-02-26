@@ -32,7 +32,6 @@ These files are part of Usurper.
 
 TODO list:<br />
 <ul>
-  <li>The linux port will need to use / instead of \ as a directory separator character</li>
   <li>The linux port will also need correctly cased filenames</li>
   <li>Find/correct any usage of FOR loop variables after the loop (since they are 1 greater in VP than in BP</li>
 </ul>
@@ -48,4 +47,5 @@ Completed list<br />
   <li>Implement any REETODOs that appear in compiled executables</li>
   <li>Investigate FILEMODE usage to see if FILEMODEREADWRITE, TEXTMODEREAD or TEXTMODEREADWRITE should be used</li>
   <li>Anything passing 0 for the Attr parameter to FindFirst should pass AnyFile instead (VP returns no files when 0 is passed for Attr)</li>
+  <li>The linux port will need to use / instead of \ as a directory separator character</li>
 </ul>

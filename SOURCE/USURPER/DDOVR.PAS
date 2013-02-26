@@ -584,7 +584,7 @@ var
  f: text;
  s: string;
 begin
- writeln('Opening "DOOR32.SYS".');
+ writeln('Opening "' + dropfilepath + 'DOOR32.SYS".');
  assign(f,dropfilepath+'DOOR32.SYS');
  {$I-}
  reset(F);

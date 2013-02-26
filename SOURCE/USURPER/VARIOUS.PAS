@@ -823,6 +823,21 @@ begin
   unable_to_find(global_ucfg);
  end;
 
+{$IFDEF LINUX}
+ // translate \ to / for path related entries
+ // 70..83 = score files
+ // 99 = semaphore path
+ // 117..120 = news
+ if (i in [70..83, 99, 117..120]) then
+ begin
+   while (Pos('\', S) > 0) do
+   begin
+     Insert('/', S, Pos('\', S));
+     Delete(S, Pos('\', S), 1);
+   end;
+ end;
+{$ENDIF} 
+
  {return result}
  cfg_string:=s;
 
@@ -2459,22 +2474,22 @@ begin
 
  {GETTING NEWS & YESTERDAYS NEWSFILES....(if they are defined that is)}
  s:=cfg_string(117);
- s:=striplead(s,'\'); {removing leading /}
+ s:=striplead(s,DIRECTORY_SEPARATOR); {removing leading /}
  global_nwfileasc:=s;
 
  {ansi newsfile defined?}
  s:=cfg_string(118);
- s:=striplead(s,'\');
+ s:=striplead(s,DIRECTORY_SEPARATOR);
  global_nwfileans:=s;
 
  {#119, ascii yesterdays newsfile defined?}
  s:=cfg_string(119);
- s:=striplead(s,'\');
+ s:=striplead(s,DIRECTORY_SEPARATOR);
  global_ynwfileasc:=s;
 
  {#120, ansi yesterdays newsfile defined?}
  s:=cfg_string(120);
- s:=striplead(s,'\');
+ s:=striplead(s,DIRECTORY_SEPARATOR);
  global_ynwfileans:=s;
 
  {#121, min level for players req to usurp the throne}
@@ -2575,9 +2590,9 @@ begin
  s:=cfg_string(99);
  if s<>'' then begin
   i:=length(s);
-  if s[i]<>'\' then begin
+  if s[i]<>DIRECTORY_SEPARATOR then begin
    {append trailing backslash}
-   s:=s+'\';
+   s:=s+DIRECTORY_SEPARATOR;
   end;
 
   {set onfile (onliners.dat) to semaphore dir}
