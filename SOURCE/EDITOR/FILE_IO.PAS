@@ -253,6 +253,9 @@ var Inf: SearchRec;
 begin
  findfirst(s,AnyFile,Inf);
  f_exists := (DOSError = 0);
+{$IFNDEF MSDOS}
+ FindClose(Inf);
+{$ENDIF}
 end;
 
 Function Make_Dir(const s:string) : boolean;

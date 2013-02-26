@@ -48,4 +48,5 @@ Completed list<br />
   <li>Investigate FILEMODE usage to see if FILEMODEREADWRITE, TEXTMODEREAD or TEXTMODEREADWRITE should be used</li>
   <li>Anything passing 0 for the Attr parameter to FindFirst should pass AnyFile instead (VP returns no files when 0 is passed for Attr)</li>
   <li>The linux port will need to use / instead of \ as a directory separator character</li>
+  <li>FindClose must be called to free the handle allocated by FindFirst on non-MSDOS platforms</li>
 </ul>

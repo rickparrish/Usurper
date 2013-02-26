@@ -1765,6 +1765,9 @@ Var dirinfo: searchrec;
 Begin
  FindFirst(Fn,Anyfile - directory - volumeid,DirInfo);
  F_Exists := DosError = 0;
+{$IFNDEF MSDOS}
+ FindClose(dirinfo);
+{$ENDIF}
 End; {f_exists *end*}
 
 Function Get_Random_Line_From_Textfile(const fname:string) : string;
@@ -6368,6 +6371,9 @@ begin
 
   end;
  end;
+{$IFNDEF MSDOS}
+ FindClose(Sr);
+{$ENDIF}
 
  {return result}
  ChatArea_InUse:=occupied;
@@ -6434,6 +6440,9 @@ Begin
 
   end;
  end;
+{$IFNDEF MSDOS}
+ FindClose(Sr);
+{$ENDIF}
 
 End; {chatsend *end*}
 
@@ -6560,6 +6569,9 @@ Begin
 
   end;
  end;
+{$IFNDEF MSDOS}
+ FindClose(Sr);
+{$ENDIF}
 
 end; {display_userconfs *end*}
 
