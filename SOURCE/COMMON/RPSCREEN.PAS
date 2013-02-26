@@ -162,8 +162,9 @@ begin
   RPWhereXY := X + (Y SHL 8);
 end;
 
-{$IFDEF LINUX}
 BEGIN
+  SysSetVideoMode(80, 25);
+{$IFDEF LINUX}
   SysTVSetScrMode($FB); { $FB = COL2 = Color, graphics chars }
 {$ENDIF}
 END.
