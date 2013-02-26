@@ -542,6 +542,10 @@ begin {* Main Program *}
 
  {should statline (bottom of screen) be displayed?}
  statline:=true;
+{$IFDEF LINUX}
+ { ensure linux doors don't show the status bar }
+ statline := false;
+{$ENDIF}
 
  {Determine Graphics}
  if (graphics=1) or (graphics=2) then global_ansi:=false
@@ -1073,7 +1077,7 @@ begin {* Main Program *}
 
         d(15,'Instructions');
         crlf;
-        display_file(global_docsdir+'Usurper.doc');
+        display_file(global_docsdir+'USURPER.DOC');
         pause;
 
        end;
@@ -1216,17 +1220,20 @@ begin {* Main Program *}
 
         crlf;
         crlf;
-        d(config.textcolor,'Original Program Information');
-        d(config.textcolor,'E-mail:');
-        d(14,'   jakob@dangarden.com');
+        d(config.textcolor,'Program Information');
+		crlf;
+        d(config.textcolor,'Programmers:');
+        d(14,'                   Original author : Jakob Dangarden jakob@dangarden.com');
+		d(14,'            Win32/Linux/OS/2 Ports : Rick Parrish usurper@rickparrish.ca');
+		d(14,'   Post 0.20e Fixes & Improvements : DANTODO Put whatever you''d like here');
         crlf;
         {d(config.textcolor,'The Usurper project comprises approximately 180,000 lines of source code.');
         crlf;}
         d(config.textcolor,'Web:');
-        d(config.textcolor,'   '+global_webaddress);
+        d(14,'   '+global_webaddress);
         crlf;
         d(config.textcolor,'Forum:');
-        d(14,'   http://www.usurper.dangarden.com');
+        d(14,'   http://www.usurper.dangarden.com (currently unmoderated)');
         crlf;
         pause;
         crlf;
