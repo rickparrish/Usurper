@@ -48,6 +48,14 @@ const
 
 implementation
 
+const
+{$IFNDEF LINUX}
+ DIRECTORY_SEPARATOR = '\';
+{$ENDIF}
+{$IFDEF LINUX}
+ DIRECTORY_SEPARATOR = '/';
+{$ENDIF}
+
 type
  iomodetypes=(localu,remote,maint);
 var
@@ -187,13 +195,15 @@ begin;
  ctlnm:='';
  for a:=1 to paramcount do begin;
   s:=paramstr(a);
+{$IFNDEF LINUX}
   for b:=1 to length(s) do s[b]:=upcase(s[b]);
+{$ENDIF}
   if (s[1]='/') and (length(s)>1) then begin;
    delete(s,1,1);
    s2:=s;
    delete(s2,1,1);
    EMSOK:=False;
-   case s[1] of
+   case UpCase(s[1]) of
     'B': val(s2,lockbaud,b);
     'C': val(s2,com_port,b);
     'E': EMSOk:=true;
@@ -202,7 +212,7 @@ begin;
     'N': val(s2,node_num,b);
     'M': ctlnm := s2;
     'P': begin;
-          if s2[length(s2)]<>'\' then s2:=s2+'\';
+          if s2[length(s2)]<>DIRECTORY_SEPARATOR then s2:=s2+DIRECTORY_SEPARATOR;
           dropfilepath:=s2;
          end;
     'R': GoRip:=4;

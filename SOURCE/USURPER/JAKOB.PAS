@@ -925,9 +925,9 @@ end; {padright *end*}
 Procedure AddBackSlash(Var InPath: String);
 Begin
  If Length(InPath) > 0 Then Begin
-  If InPath[Length(InPath)] <> '\' Then Begin
+  If InPath[Length(InPath)] <> DIRECTORY_SEPARATOR Then Begin
    InPath[0] := Chr(Length(InPath) + 1);
-   InPath[Length(InPath)] := '\';
+   InPath[Length(InPath)] := DIRECTORY_SEPARATOR;
   End;
  End;
 End; {addbackslash *end*}

@@ -126,10 +126,16 @@ Const
 Const
 
  {Directories}
- global_datadir ='DATA\';   {Path to DATA directory}
- global_docsdir ='DOCS\';   {Path to DOCS directory}
- global_nodedir ='NODE\';   {Path to NODE directory}
- global_scoredir='SCORES\'; {Path to SCORE and NEWS directory}
+{$IFNDEF LINUX}
+ DIRECTORY_SEPARATOR = '\';
+{$ENDIF}
+{$IFDEF LINUX}
+ DIRECTORY_SEPARATOR = '/';
+{$ENDIF}
+ global_datadir ='DATA' + DIRECTORY_SEPARATOR;   {Path to DATA directory}
+ global_docsdir ='DOCS' + DIRECTORY_SEPARATOR;   {Path to DOCS directory}
+ global_nodedir ='NODE' + DIRECTORY_SEPARATOR;   {Path to NODE directory}
+ global_scoredir='SCORES' + DIRECTORY_SEPARATOR; {Path to SCORE and NEWS directory}
 
  {Files and their Paths}
  global_ucfg     = 'USURPER.CFG'; {Usurper configuration file}
