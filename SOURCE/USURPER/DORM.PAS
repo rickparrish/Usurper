@@ -298,7 +298,7 @@ begin
          {player attack .start.}
          crlf;
          crlf;
-         if random(hitchance(player.skill[i]))<>0 then begin
+         if (random(2)=0) and (random(hitchance(player.skill[i]))<>0) then begin
           d(12,'You missed!');
          end
          else begin
