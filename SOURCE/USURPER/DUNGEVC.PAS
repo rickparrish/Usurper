@@ -867,7 +867,7 @@ begin
        end;
 
        pause;
-       d(config.textcolor,'After the job is done you receive sporadic applaus from');
+       d(config.textcolor,'After the job is done you receive sporadic applause from');
        d(config.textcolor,'the surrounding Orcs.');
        sd(global_plycol,leader[boss]);
        d(config.textcolor,' comes forward and shakes your blood-stained hand.');

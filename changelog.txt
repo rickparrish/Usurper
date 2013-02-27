@@ -31,10 +31,13 @@ Teams:
 Monsters:
 -Of interest here is two monster attributes: hitpoints and strength. Strength is supposed to be the attack power, and hitpoints is the starting hitpoints. Unfortunately, Jakob did something so that hitpoints was always calculated as a monster's strength * 3. So regardless of hitpoint setting, it was ignored and set to strength*3. This severely limited the usefulness of the monster editor, since strength was in effect used to calculate strength and hitpoints. I have now changed the code so that it honours the hitpoints setting. The monsters that ship with Usurper have now been modified so that their hitpoints are strength*3, instead of 0 (but of course we know that the 0 was meaningless since strength*3 was hard-coded). This is why the monster datafiles must be reset. In other places in the code (such as dungeon events, joining alchemist order, fighting demon), Jakob's hitpoint values will now be honoured (rather than just using strength*3). I do not know the outfall of my changes in these circumstances, and will continue to test.
 
+Dungeon:
+-Removed duplicate "your share is..." messages when fighting alone in the dungeon
 
 ----------
 
 Version 0.23b:
+
 Text:
 -Fixed dozens of spelling mistakes. There are certainly many more.
 

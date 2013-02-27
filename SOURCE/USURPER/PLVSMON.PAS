@@ -435,12 +435,14 @@ begin
   if player_active(pl3,true) then inc(yy);
   if player_active(pl4,true) then inc(yy);
 
-  if yy>1 then d(3,'The xp and '+config.moneytype+' are split equally...');
+  if yy>1 then d(3,'The experience and '+config.moneytype+' are split equally...');
 
   xx:=xx div yy;
   incplayerexp(player,xx);
 
-  sd(config.textcolor,'You receive your share of ');
+  if yy>1 then sd(config.textcolor,'You receive your share of ')
+  else sd(config.textcolor,'You receive ');
+
   sd(14,commastr(xx));
   d(config.textcolor,' experience points!');
 
@@ -458,10 +460,11 @@ begin
   xx:=xx div yy;
   incplayermoney(player,xx);
 
-  sd(config.textcolor,'Your share is ');
-  sd(14,commastr(xx));
-  d(config.textcolor,' '+many_money(xx)+'!');
-
+  if yy>1 then begin
+   sd(config.textcolor,'Your share is ');
+   sd(14,commastr(xx));
+   d(config.textcolor,' '+many_money(xx)+'!');
+  end;
   if player_active(pl1,true) then incplayermoney(pl1,xx);
   if player_active(pl2,true) then incplayermoney(pl2,xx);
   if player_active(pl3,true) then incplayermoney(pl3,xx);
