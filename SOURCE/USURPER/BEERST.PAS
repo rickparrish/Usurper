@@ -630,6 +630,7 @@ d(config.textcolor,'No teammate found!');; crlf;
                          '');
                         end;
 {player.allowed:=false;}
+                        player.hps:=0;
                         Reduce_Player_Resurrections(player,true);
 
                        crlf;
@@ -713,6 +714,7 @@ d(config.textcolor,'No teammate found!');; crlf;
                         d(4,'the dogs barking...');
 solo_dogs_news;
                         {player.allowed:=false;}
+                        player.hps:=0;
                         Reduce_Player_Resurrections(player,true);
 
                         disposal;
@@ -761,6 +763,7 @@ solo_dogs_news;
                  {news-paper}
                  solo_dogs_news;
                  {player.allowed:=false;}
+                 player.hps:=0;
                  Reduce_Player_Resurrections(player,true);
                  disposal;
 

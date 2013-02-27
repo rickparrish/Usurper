@@ -1050,7 +1050,7 @@ begin {MAIN PROC **START**}
            d(config.textcolor,'about your pathetic whining!');
            crlf;
            d(config.textcolor,'You soon realize that your life have come to an end...');
-           d(4,'Splatt! Splatt! Your limbs are torned apart...');
+           d(4,'Splatt! Splatt! Your limbs are torn apart...');
            crlf;
            d(config.textcolor,'Darkness...');
            crlf;

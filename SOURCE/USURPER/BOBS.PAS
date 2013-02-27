@@ -256,6 +256,9 @@ begin
                d(config.textcolor,'Kiss your precious '+config.moneytype+' goodbye!');
                player.hps:=0;
                player.gold:=0;
+           {player.allowed:=false;}
+           Reduce_Player_Resurrections(player,true);
+
                normal_exit;
               end;
 
