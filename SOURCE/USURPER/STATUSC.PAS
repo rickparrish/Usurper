@@ -1297,7 +1297,7 @@ Begin
        crlf;
 
        sd(config.textcolor,ljust('Charisma   : '+commastr(player0.charisma),justval));
-       sd(config.textcolor,ljust('Fights     : '+commastr(player0.fights),justval));
+       sd(config.textcolor,ljust('Dungeon fights     : '+commastr(player0.fights),justval));
        crlf;
 
        sd(config.textcolor,ljust('Agility    : '+commastr(player0.agility),justval));
@@ -1305,10 +1305,12 @@ Begin
        crlf;
 
        sd(config.textcolor,ljust('Dexterity  : '+commastr(player0.dex),justval));
-       sd(config.textcolor,ljust('Chivalry   : '+commastr(player0.chiv),justval));
+       sd(config.textcolor,ljust('Player fights     : '+commastr(player0.pfights),justval));
 
        crlf;
        sd(config.textcolor,ljust('Stamina    : '+commastr(player0.stamina),justval));
+       sd(config.textcolor,ljust('Chivalry   : '+commastr(player0.chiv),justval));
+
        crlf;
 
        crlf;

@@ -542,7 +542,7 @@ begin
   case cho of
    'Y':begin
         d(11,'Yes, bring the team!');
-        if Team_Select<>0 then begin
+        if (Team_Select<>0) and (player.fights>0) then begin
          case random(4) of
           0: s:='brave';
           1: s:='famous';

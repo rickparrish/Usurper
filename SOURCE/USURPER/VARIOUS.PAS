@@ -1198,12 +1198,12 @@ begin
 
  h:='is in Excellent condition';
  if x<100 then h:='has some small wounds and bruises';
- if x<80 then  h:='has some some wounds';
+ if x<80 then  h:='has some wounds';
  if x<70 then  h:='is pretty hurt!';
  if x<50 then  h:='is in bad shape!';
  if x<30 then  h:='has some BIG and NASTY wounds!';
- if x<20 then  h:='is in awful condition!';
- if x<5 then   h:='is bleeding from wounds ALL over the body!';
+ if x<20 then  h:='is in an awful condition!';
+ if x<5 then   h:='is bleeding from wounds ALL over their body!';
  {return result}
  condition:=h;
 end; {condition *end*}

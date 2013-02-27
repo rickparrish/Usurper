@@ -141,9 +141,8 @@ begin
    case random(11) of
     0:begin
        sd(global_plycol,fistboys[i]^.name);
-       d(config.textcolor,' grins and shows '+sex3[fistboys[i]^.sex]+' theeth; ');
-       sd(global_talkcol,' I''m gonna bite you bad '+player.name2+'!');
-       d(15,' (gulp)');
+       d(config.textcolor,' grins and shows '+sex3[fistboys[i]^.sex]+' teeth; ');
+       d(global_talkcol,' I''m gonna bite you bad '+player.name2+'!');
        pause;
        crlf;
        break;
@@ -299,7 +298,7 @@ begin
          {player attack .start.}
          crlf;
          crlf;
-         if random(3)=0 then begin
+         if random(hitchance(player.skill[i]))<>0 then begin
           d(12,'You missed!');
          end
          else begin

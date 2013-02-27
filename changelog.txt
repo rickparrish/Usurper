@@ -14,12 +14,14 @@ Casting Spells:
 Statistics:
 -Pick-pocket attempts not shown in new mode. Fixed.
 -Spurious options shown when viewing stats of other players. Fixed.
++Added player fights to statistics, and clarified "Fights" to mean "Dungeon fights"
 
 Gym:
 -Disabled dumb-bells option; Jakob wrote no code for this
 
 Dorm:
 -(p)ickpocket -> (p)otions -> kill opponent could result in a "you took 0 healing potions" message if your kill caused the opponent to waste all potions. Fixed.
+-When (w)aking up the guests, you had a 1/3 chance of hitting an opponent, regardless of which move you selected (and independent of your close-combat skills). This, in combination with being able to choose the same move every time in Bob's, made it completely pointless to train anything besides knifehand. Fixed (now the chance of hitting in the dorm depends on close-combat skill).
 
 Quests:
 -NPC-created quests caused exception violation and fatal exit. Fixed.
