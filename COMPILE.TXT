@@ -1,23 +1,25 @@
 Step 0) Assumptions:
 
 	The first assumption is that you have Borland Pascal installed in Z:\BP.  
-	If you don't, you'll have to update the BPC.CFG and BUILDBP.CMD files
+	If you don't, you'll have to update the BPC.CFG and BUILD-DOS.CMD files
 
 	The second assumption is that you have Virtual Pascal installed in Z:\vp21.
-	If you don't, you'll have to update the VPC.CFG and BUILDVP.CMD files
+	If you don't, you'll have to update the Linux, OS/2 and Win32 build files
 
-	*NOTE* The BUILD*.CMD files will copy a BPC.CFG or VPC.CFG into the relevant bin directory, meaning
+	*NOTE* The BUILD-*.CMD files will copy a BPC.CFG or VPC.CFG into the relevant bin directory, meaning
 	if you have cusomized the .CFG file in the bin directory, it will be lost.  Make a backup!
 
 Step 1) Create directories to hold everything:
 
 	Z:\Usurper
 	Z:\Programming\Usurper
-	Z:\Programming\Usurper\EXE\BP
-	Z:\Programming\Usurper\EXE\VP
+	Z:\Programming\Usurper\EXE\DOS
+	Z:\Programming\Usurper\EXE\LINUX
+	Z:\Programming\Usurper\EXE\OS2
+	Z:\Programming\Usurper\EXE\WIN32
 
 	If you don't have a Z: drive, you can use SUBST or map a network drive to fake one
-	You can also put the files in an alternate location if you want, you'll just have to update the BUILD*.CMD scripts
+	You can also put the files in an alternate location if you want, you'll just have to update the BUILD-*.CMD scripts
 
 Step 2) Get the source
 
@@ -74,6 +76,11 @@ Step 5) Extract build scripts / config files
 
 Step 5) Build new EXEs
 
-	Run BUILDBP.CMD to build the DOS EXEs and have them copied to Z:\Usurper
+        Run BUILD-DOS.CMD, BUILD-LINUX.CMD, BUILD-OS2.CMD, or BUILD-WIN32.CMD to build EXEs for one of the platforms
+	and have the EXEs copied to Z;\Usurper
 
-	Run BUILDVP.CMD to build the WIN32 EXEs and have them copied to Z:\Usurper
+	Each platform will have the EXEs named slightly differently to avoid overwriting each other:
+	DOS will use the original EDITOR.EXE and USURPER.EXE
+	Linux will drop the .EXE and become just EDITOR and USURPER
+	OS2 will add a 2 and become EDITOR2.EXE and USURPER2.EXE
+	Win32 will add a 32 and become EDITOR32.EXE and USURPER32.exe
