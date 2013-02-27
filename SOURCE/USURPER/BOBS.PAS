@@ -1334,18 +1334,15 @@ if player.dex>400 then dec(y);
         if player.chivnr<1 then begin
          crlf;
          d(12,'You are too exhausted!');
-         pause;
-         break;
+         crlf;
+        end
+        else begin
+         crlf;
+         if confirm('Initiate a Beerdrinking contest','N')=true then begin
+          dec(player.chivnr);
+          drinking_competition;
+         end
         end;
-
-        crlf;
-        crlf;
-
-        if confirm('Initiate a Beerdrinking contest','N')=true then begin
-         dec(player.chivnr);
-         drinking_competition;
-        end;
-
        end;
 
   end; {case .end.}
