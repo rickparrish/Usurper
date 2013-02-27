@@ -919,7 +919,7 @@ begin
 
  player.exp:=player.exp+xp;
 
- d(config.textcolor,'You receive ');
+ sd(config.textcolor,'You receive ');
  sd(14,commastr(xp));
  d(config.textcolor,' Experience points!');
  crlf;

@@ -648,7 +648,7 @@ begin
          if player.bankguard then begin
           crlf;
           sd(15,'WARNING! ');
-          d(config.textcolor,'You are signed up as guard in the bank.');
+          d(config.textcolor,'You are signed up as a guard in the bank.');
           if confirm('Do you dare to break your contract ','N')=true then begin
            player.bankguard:=false;
           end
