@@ -62,19 +62,24 @@ Type PLinuxObj = ^TLinuxObj;
 var
   FCarrier: Boolean;
 
-{REETODO procedure SignalHandler(ASig: LongInt); cdecl;
+procedure SignalHandler(ASig: LongInt); cdecl;
 begin
   FCarrier := False;
-end;}
+end;
 
 constructor TLinuxObj.Init;
+var
+  Act, Old: TSigAction;
 begin
   inherited Init;
 
   FCarrier := True;
 
-{REETODO  Signal(SIGHUP, SignalHandler);
-  Signal(SIGTERM, SignalHandler);}
+  FillChar(Act, SizeOf(Act), 0);
+  Act.sa_Handler := @SignalHandler;
+  Act.sa_Flags := SA_NODEFER;
+  LnxSigAction(SIGHUP, Act, Old);
+  LnxSigAction(SIGTERM, Act, Old); 
 end; { constructor Init }
 
 (*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-*)
