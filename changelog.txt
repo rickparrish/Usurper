@@ -18,6 +18,7 @@ Statistics:
 
 Gym:
 -Disabled dumb-bells option; Jakob wrote no code for this
++Gym now shows the owning team
 
 Dorm:
 -(p)ickpocket -> (p)otions -> kill opponent could result in a "you took 0 healing potions" message if your kill caused the opponent to waste all potions. Fixed.
@@ -35,6 +36,10 @@ Monsters:
 
 Dungeon:
 -Removed duplicate "your share is..." messages when fighting alone in the dungeon
+
+Bob's:
+-Fixed loop in drinking competition when inviting new participants
+
 
 ----------
 

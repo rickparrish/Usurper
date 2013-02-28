@@ -310,23 +310,12 @@ begin
            if s='' then begin
             d(15,'The Gym is free to take over!');
            end
-           else if (s<>'') and (s=player.team) then begin
-            d(14,'The Gym is owned by your gang!');
-            player.gym_owner:=1;
-            the_gym;
-           end
            else begin
             d(config.textcolor,'The Gym is in the hands of '+utec+s+config.textcol1+'.');
            end;
 
-           if (s<>'') and (s=player.team) then begin
-            d(config.textcolor,'Welcome to '+gymcol+'The Gym'+config.textcol1+'.');
-            d(config.textcolor,'The club is for your gang and members only.');
-           end
-           else begin
             d(config.textcolor,'The Gym is for owners and members only.');
             d(config.textcolor,'Get your sorry butt out of here NOW! (unless you want it kicked)');
-           end;
            crlf;
            menu('(A)pply for membership');
            menu('(T)ake over the Gym! (fistfight)');
@@ -350,6 +339,7 @@ begin
            d(12,'There is nobody to send the application to! The Gym is not owned by anyone right now!');
            d(12,'Why don''t you take over the Gym now when you have the chance!?');
            pause;
+           ch:=' ';
           end
           else if (ch='T') and (player.team='') then begin
            d(12,'You must be in a Team to be able to take over the Gym!');
@@ -1580,7 +1570,7 @@ begin
          crlf;
          if confirm('Are you SURE that you wanna leave town control','n')=true then begin
           crlf;
-          d(config.textcolor,'You publicly announce your teams withdrawal from town control.');
+          d(config.textcolor,'You publicly announce your team''s withdrawal from town control.');
           d(config.textcolor,'The big question now is : Who''s gonna take over!?');
           crlf;
           d(config.textcolor,'(By the way, i hope that your teammates know about this!)');

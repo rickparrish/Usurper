@@ -309,7 +309,7 @@ var
 
      drink : string[12]; {name of competition drink}
      e : string[5];
-     j,size : word;
+     j,k,size : word;
      x : byte;
 
      winner : s30;
@@ -488,12 +488,11 @@ begin
        if confirm('','N')=true then begin
         {already invited?}
         go_ahead:=true;
-        for j:=1 to maxopp do begin
-         if pl[j]^.name2=pl0^.name2 then begin
+        for k:=1 to maxopp do begin
+         if pl[k]^.name2=pl0^.name2 then begin
           sd(global_plycol,pl0^.name2);
           d(config.textcolor,' is already in the competition (stupid).');
           go_ahead:=false;
-          pause;
          end;
         end;
 

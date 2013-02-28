@@ -727,7 +727,7 @@ begin
      update_power(2);
     end;
   2:begin {draw}
-     d(11,'Both team struggle...');
+     d(11,'Both teams struggle...');
     end;
  end; {case .end.}
 
@@ -1975,6 +1975,12 @@ begin
  d(config.textcolor,'Working out and flexing your muscles could earn you a position');
  d(config.textcolor,'in this town, some day.');
  d(global_plycol,config.gymMasseur+config.textcol1+', the masseur, is watching you.');
+ s:=gym_owning_team;
+ if (s<>'') and (s=player.team) then
+  d(14,'The Gym is owned by your gang!')
+ else
+  d(config.textcolor,'The Gym is in the hands of '+utec+s+config.textcol1+'.');
+
  crlf;
 
  menu2(ljust('(L)ist members',offset));
