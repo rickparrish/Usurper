@@ -2262,8 +2262,8 @@ begin
 
           end;
         1:begin {potions}
-           d(config.textcolor,'The chest if filled with healing potions!');
-           d(config.textcolor,'You grab so many you can carry...');
+           d(config.textcolor,'The chest is filled with healing potions!');
+           d(config.textcolor,'You grab as many as you can carry...');
            xx:=random(player.level)+1;
            xx:=xx*2;
            sd(config.textcolor,'You took ');

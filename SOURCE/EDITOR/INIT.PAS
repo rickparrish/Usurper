@@ -551,7 +551,7 @@ type {Monster structure}
   grabarm  : boolean;  {kan armor er”vras?}
   phrase : string[70]; {intro fras fr†n monstret}
   magicres : SmallInt;
-  strength : SmallInt;
+  strength : longint;
   defence  : SmallInt;
   wuser : boolean;
   auser : boolean;

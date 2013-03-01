@@ -260,7 +260,7 @@ begin
        if config.print_kingpolls=true then begin
          newsy(true,
          'The Royal Family is supported',
-         ' '+uplc+player.name2+config.textcol1+' the '+classnames[player.class]+' support '+kingstring(king.sexy)+' '+ukingc
+         ' '+uplc+player.name2+config.textcol1+' the '+classnames[player.class]+' supports '+kingstring(king.sexy)+' '+ukingc
             +king.name+config.textcol1+'.',
          '',
          '',
@@ -282,7 +282,7 @@ begin
        if config.print_kingpolls=true then begin
          newsy(true,
          'The Royal Family is loved',
-         ' '+uplc+player.name2+config.textcol1+' the '+classnames[player.class]+' plead loyalty to '+kingstring(king.sexy)+' '
+         ' '+uplc+player.name2+config.textcol1+' the '+classnames[player.class]+' pleads loyalty to '+kingstring(king.sexy)+' '
             +ukingc+king.name+config.textcol1+'.',
          '',
          '',

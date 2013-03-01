@@ -1034,7 +1034,7 @@ type {Monster definition}
   grabarm  : boolean; {can armor be taken?}
   phrase   : s70;     {intro phrase from monster}
   magicres : SmallInt; {magic resistance}
-  strength : SmallInt; {strength}
+  strength : longint; {strength}
   defence  : SmallInt; {defence}
   wuser    : boolean; {weapon user}
   auser    : boolean; {armor user}
