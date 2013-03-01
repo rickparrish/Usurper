@@ -301,7 +301,7 @@ end; {get_random_opponent *end*}
 Procedure Drinking_Competition;
 var
      ch : char;
-     done,found,go_ahead : boolean;
+     done,found,go_ahead, finito : boolean;
      favvis, s,s2 : s70;
      round : word;
      i, xp, player_gone : longint;
@@ -454,6 +454,7 @@ begin
     s:=get_string(30);
 
     found:=false;
+    finito:=false;
     for i:=1 to 2 do begin
 
      case i of
@@ -461,7 +462,7 @@ begin
       2: size:=fs(fsnpc);
      end;
 
-     if found then break;
+     if (found) or (finito) then break;
 
      for j:=1 to Size do begin
       load_character(pl0^,i,j);
@@ -531,6 +532,7 @@ begin
        end
        else begin
         if confirm('Continue search','Y')=false then begin
+         finito:=true;
          break;
         end;
        end;
@@ -637,9 +639,8 @@ begin
   crlf;
   crlf;
 
-  if pvalue>0 then d(5,'Beer Round # '+commastr(round));
-
   if pvalue>0 then begin
+   d(5,'Beer Round # '+commastr(round));
    crlf;
    sd(3,'You');
    sd(config.textcolor,' take your Beer...');
@@ -721,10 +722,10 @@ begin
   for i:=1 to maxopp do begin
    if (cname[i]<>'') and (cvalue[i]>0) then count:=count+1;
   end;
+if pvalue>0 then count:=count+1;
+  if count>1 then exit_ok:=false;
 
-  if count>0 then exit_ok:=false;
-
- until (pvalue<1) or (exit_ok);
+ until exit_ok;
 
 
  {Write to Newsfile}
