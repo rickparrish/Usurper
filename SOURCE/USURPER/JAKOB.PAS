@@ -144,7 +144,7 @@ Uses Dos, Crt, Init,
      DDplus, DDscott, ComIO,
      Exec, AnsiColr, SwagDate,
      Various, NetFilep, DispText,
-     Online, {$IFDEF MSDOS}sdelay,{$ENDIF} File_IO {$IFNDEF MSDOS}, RPPort{$ENDIF};
+     Online, File_IO {$IFNDEF MSDOS}, RPPort{$ENDIF};
 
 var carriage_return : boolean; {used by D and SD procedures (display routines)}
 
@@ -399,7 +399,7 @@ end;
 {$IFNDEF MSDOS}
 Procedure Delay4(ms : Word);
 begin
-  WriteLn('REETODO JAKOB Delay4'); Halt;
+  WriteLn('REEPORT JAKOB Delay4');
 end;
 {$ENDIF}
 
@@ -453,7 +453,7 @@ VAR
 {$IFNDEF MSDOS}
     PROCEDURE ReadClock(VAR Secs : Real);
     begin
-      WriteLn('REETODO JAKOB ReadClock'); Halt;
+      WriteLn('REEPORT JAKOB ReadClock');
     end;
 {$ENDIF}
 
@@ -474,7 +474,10 @@ VAR
 Procedure Delay2;
 begin
 {$IFDEF MSDOS}
- millidelay(godis);
+ (*REENOTE Super Delay by Allen Cheng caused a RTE207, so it is being retired
+           Delay() is much less accurate, so could look into using APTIMER's delay instead
+ millidelay(godis);*)
+ Delay(Trunc(godis));
 {$ENDIF}
 {$IFNDEF MSDOS}
  RPSleep(Trunc(godis));
@@ -2109,7 +2112,7 @@ End; {iswin95 *end*}
 Function IsWin95: Boolean;
 begin
   // REENOTE Does the above return true?  Is it important (for slicing or something)?
-  WriteLn('REETODO JAKOB IsWin95'); Halt;
+  WriteLn('REEPORT JAKOB IsWin95');
 end;
 {$ENDIF}
 

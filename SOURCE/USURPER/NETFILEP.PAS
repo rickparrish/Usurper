@@ -216,7 +216,7 @@ procedure NetRewrite(     FName  : string;
                           RecS   : word;
                       var DFile );
 begin
-  WriteLn('REETODO NETFILEP NetRewrite'); Halt;
+  WriteLn('REEPORT NETFILEP NetRewrite');
 end;
 {$ENDIF}
 
@@ -274,7 +274,7 @@ procedure NetReset(     FName  : string;
                         RecS   : word;
                     var DFile );
 begin
-  WriteLn('REETODO NETFILEP NetReset'); Halt;
+  WriteLn('REEPORT NETFILEP NetReset');
 end;
 {$ENDIF}
 
@@ -309,7 +309,7 @@ end;
 {$IFNDEF MSDOS}
 procedure NetClose( var DFile );
 begin
-  WriteLn('REETODO NETFILEP NetClose'); Halt;
+  WriteLn('REEPORT NETFILEP NetClose');
 end;
 {$ENDIF}
 
@@ -384,7 +384,7 @@ function Locking( Handle    : word;
                   Offset    : longint;
                   WrdLen    : longint ) : boolean;
 begin
-  WriteLn('REETODO NETFILEP Locking'); Halt;
+  WriteLn('REEPORT NETFILEP Locking');
 end;
 {$ENDIF}
 
@@ -496,7 +496,7 @@ end;
 procedure NetWrite( var DFile;
                     var FData );
 begin
-  WriteLn('REETODO NETFILEP NetWrite'); Halt;
+  WriteLn('REEPORT NETFILEP NetWrite');
 end;
 {$ENDIF}
 
@@ -535,7 +535,7 @@ end;
 procedure NetRead( var DFile;
                    var FData );
 begin
-  WriteLn('REETODO NETFILEP NetRead'); Halt;
+  WriteLn('REEPORT NETFILEP NetRead');
 end;
 {$ENDIF}
 
@@ -574,7 +574,7 @@ end;
 procedure NetSeek( var DFile;
                        RecNo : longint );
 begin
-  WriteLn('REETODO NETFILEP NetSeek'); Halt;
+  WriteLn('REEPORT NETFILEP NetSeek');
 end;
 {$ENDIF}
 

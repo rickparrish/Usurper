@@ -236,7 +236,7 @@ end;
 {$IFNDEF MSDOS}
 procedure setmode(modenumber: byte);
 begin
-  WriteLn('REETODO DDSCOTT setmode'); Halt;
+  WriteLn('REEPORT DDSCOTT setmode');
 end;
 {$ENDIF}
 
@@ -258,7 +258,7 @@ end;
 {$IFNDEF MSDOS}
 procedure set25lines;
 begin
-  WriteLn('REETODO DDSCOTT set25lines'); Halt;
+  WriteLn('REEPORT DDSCOTT set25lines');
 end;
 {$ENDIF}
 
@@ -276,7 +276,7 @@ end;
 {$IFNDEF MSDOS}
 function isega: boolean;
 begin
-  WriteLn('REETODO DDSCOTT isega'); Halt;
+  WriteLn('REEPORT DDSCOTT isega');
 end;
 {$ENDIF}
 
@@ -306,7 +306,7 @@ end;
 {$IFNDEF MSDOS}
 function QueryAdapterType: Adaptertype;
 begin
-  WriteLn('REETODO DDSCOTT QueryAdapterType'); Halt;
+  WriteLn('REEPORT DDSCOTT QueryAdapterType');
 end;
 {$ENDIF}
 
@@ -347,7 +347,7 @@ end;
 {$IFNDEF MSDOS}
 function determinepoints: integer;
 begin
-  WriteLn('REETODO DDSCOTT determinepoints'); Halt;
+  WriteLn('REEPORT DDSCOTT determinepoints');
 end;
 {$ENDIF}
 
@@ -383,7 +383,7 @@ end;
 {$IFNDEF MSDOS}
 procedure cursorblock;
 begin
-  WriteLn('REETODO DDSCOTT cursorblock'); Halt;
+  WriteLn('REEPORT DDSCOTT cursorblock');
 end;
 {$ENDIF}
 

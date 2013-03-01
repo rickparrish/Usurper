@@ -149,7 +149,7 @@ Var
 Procedure INT_Handler; {$IFDEF MSDOS}External;{$ENDIF}
 {$IFNDEF MSDOS}
 begin
-  WriteLn('REETODO ASYNC2 INT_Handler'); Halt;
+  WriteLn('REEPORT ASYNC2 INT_Handler');
 end;
 {$ENDIF}
 
@@ -168,7 +168,7 @@ end;
 Function ComReadCh(ComPort:Byte) : Char; {$IFDEF MSDOS}External;{$ENDIF}
 {$IFNDEF MSDOS}
 begin
-  WriteLn('REETODO ASYNC2 ComReadCh'); Halt;
+  WriteLn('REEPORT ASYNC2 ComReadCh');
 end;
 {$ENDIF}
 
@@ -188,7 +188,7 @@ end;
 Function ComReadChW(ComPort:Byte) : Char; {$IFDEF MSDOS}External;{$ENDIF}
 {$IFNDEF MSDOS}
 begin
-  WriteLn('REETODO ASYNC2 ComReadChW'); Halt;
+  WriteLn('REEPORT ASYNC2 ComReadChW');
 end;
 {$ENDIF}
 
@@ -209,7 +209,7 @@ end;
 Procedure ComWriteCh(ComPort:Byte; Ch:Char); {$IFDEF MSDOS}External;{$ENDIF}
 {$IFNDEF MSDOS}
 begin
-  WriteLn('REETODO ASYNC2 ComWriteCh'); Halt;
+  WriteLn('REEPORT ASYNC2 ComWriteCh');
 end;
 {$ENDIF}
 
@@ -231,7 +231,7 @@ end;
 Procedure ComWriteChW(ComPort:Byte; Ch:Char); {$IFDEF MSDOS}External;{$ENDIF}
 {$IFNDEF MSDOS}
 begin
-  WriteLn('REETODO ASYNC2 ComWriteChW'); Halt;
+  WriteLn('REEPORT ASYNC2 ComWriteChW');
 end;
 {$ENDIF}
 
@@ -654,7 +654,7 @@ Begin
   Inline($FB);
 {$ENDIF}
 {$IFNDEF MSDOS}
-  WriteLn('REETODO ASYNC2 ClearCom'); Halt;
+  WriteLn('REEPORT ASYNC2 ClearCom');
 {$ENDIF}
 End;
 
@@ -1087,7 +1087,7 @@ Begin
   Inline($FB);
 {$ENDIF}
 {$IFNDEF MSDOS}
-  WriteLn('REETODO ASYNC2 ComParams'); Halt;
+  WriteLn('REEPORT ASYNC2 ComParams');
 {$ENDIF}
 End;
 
@@ -1195,7 +1195,7 @@ Begin
   Inline($FB);
 {$ENDIF}
 {$IFNDEF MSDOS}
-  WriteLn('REETODO ASYNC2 OpenCom'); Halt;
+  WriteLn('REEPORT ASYNC2 OpenCom');
 {$ENDIF}
 End;
 
@@ -1268,7 +1268,7 @@ Begin
   Inline($FB);
 {$ENDIF}
 {$IFNDEF MSDOS}
-  WriteLn('REETODO ASYNC2 CloseCom'); Halt;
+  WriteLn('REEPORT ASYNC2 CloseCom');
 {$ENDIF}
 End;
 

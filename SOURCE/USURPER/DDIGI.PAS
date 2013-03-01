@@ -90,7 +90,7 @@ end;
 {$IFNDEF MSDOS}
 function digi_Init_driver : boolean;
 begin
-  WriteLn('REETODO DDIGI digi_Init_driver'); Halt;
+  WriteLn('REEPORT DDIGI digi_Init_driver');
 end;
 {$ENDIF}
 
@@ -119,7 +119,7 @@ end;
 {$IFNDEF MSDOS}
 function digi_buffer_check: boolean;
 begin
-  WriteLn('REETODO DDIGI digi_buffer_check'); Halt;
+  WriteLn('REEPORT DDIGI digi_buffer_check');
 end;
 {$ENDIF}
 
@@ -145,7 +145,7 @@ end;
 {$IFNDEF MSDOS}
 procedure digi_send(c: char);
 begin
-  WriteLn('REETODO DDIGI digi_send'); Halt;
+  WriteLn('REEPORT DDIGI digi_send');
 end;
 {$ENDIF}
 
@@ -175,7 +175,7 @@ end;
 {$IFNDEF MSDOS}
 function digi_receive(var c: char): boolean;
 begin
-  WriteLn('REETODO DDIGI digi_receive'); Halt;
+  WriteLn('REEPORT DDIGI digi_receive');
 end;
 {$ENDIF}
 
@@ -203,7 +203,7 @@ end;
 {$IFNDEF MSDOS}
 function digi_carrier_present: boolean;
 begin
-  WriteLn('REETODO DDIGI digi_carrier_present'); Halt;
+  WriteLn('REEPORT DDIGI digi_carrier_present');
 end;
 {$ENDIF}
 
@@ -255,7 +255,7 @@ end;
 {$IFNDEF MSDOS}
 procedure digi_set_modem;
 begin
-  WriteLn('REETODO DDIGI digi_set_modem'); Halt;
+  WriteLn('REEPORT DDIGI digi_set_modem');
 end;
 {$ENDIF}
 
@@ -303,7 +303,7 @@ end;
 {$IFNDEF MSDOS}
 function digi_set_baud;      { new form digiboard init }
 begin
-  WriteLn('REETODO DDIGI digi_set_baud'); Halt;
+  WriteLn('REEPORT DDIGI digi_set_baud');
 end;
 {$ENDIF}
 
@@ -320,7 +320,7 @@ end;
 {$IFNDEF MSDOS}
 procedure digi_flush_io;
 begin
-  WriteLn('REETODO DDIGI digi_flush_io'); Halt;
+  WriteLn('REEPORT DDIGI digi_flush_io');
 end;
 {$ENDIF}
 
@@ -337,7 +337,7 @@ end;
 {$IFNDEF MSDOS}
 procedure digi_flush_input;
 begin
-  WriteLn('REETODO DDIGI digi_flush_input'); Halt;
+  WriteLn('REEPORT DDIGI digi_flush_input');
 end;
 {$ENDIF}
 
@@ -354,7 +354,7 @@ end;
 {$IFNDEF MSDOS}
 procedure digi_flush_output;
 begin
-  WriteLn('REETODO DDIGI digi_flush_output'); Halt;
+  WriteLn('REEPORT DDIGI digi_flush_output');
 end;
 {$ENDIF}
 
@@ -421,7 +421,7 @@ end;
 {$IFNDEF MSDOS}
 procedure digi_Get_Info(var drivername:string);
 begin
-  WriteLn('REETODO DDIGI digi_Get_Info'); Halt;
+  WriteLn('REEPORT DDIGI digi_Get_Info');
 end;
 {$ENDIF}
 
@@ -442,7 +442,7 @@ end;
 {$IFNDEF MSDOS}
 procedure EnableTimeOutError;
 begin
-  WriteLn('REETODO DDIGI EnableTimeOutError'); Halt;
+  WriteLn('REEPORT DDIGI EnableTimeOutError');
 end;
 {$ENDIF}
 
@@ -464,7 +464,7 @@ end;
 {$IFNDEF MSDOS}
 procedure Digi_Break(StatusCode : Word);  { send break }
 begin
-  WriteLn('REETODO DDIGI Digi_Break'); Halt;
+  WriteLn('REEPORT DDIGI Digi_Break');
 end;
 {$ENDIF}
 

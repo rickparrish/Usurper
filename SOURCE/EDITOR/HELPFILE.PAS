@@ -458,7 +458,7 @@ end;
 {$IFNDEF MSDOS}
 function Scan(var P; Offset, Size: Integer; C: Char): Integer;
 begin
-  WriteLn('REETODO HELPFILE Scan'); Halt;
+  WriteLn('REEPORT HELPFILE Scan');
 end;
 {$ENDIF}
 
@@ -481,7 +481,7 @@ end;
 {$IFNDEF MSDOS}
 procedure TextToLine(var Text; Offset, Length: Integer; var Line: String);
 begin
-  WriteLn('REETODO HELPFILE TextToLine'); Halt;
+  WriteLn('REEPORT HELPFILE TextToLine');
 end;
 {$ENDIF}
 
