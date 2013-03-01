@@ -907,11 +907,11 @@ if pvalue>0 then count:=count+1;
  d(config.textcolor,'You managed to stay sober longer than the rest of the players!');
  d(config.textcolor,'Three cheers for the Beer Champion!');
  sd(14,'....Horray!');
- delay2(800);
+ delay2(500);
  sd(14,'....Horray!');
- delay2(800);
+ delay2(500);
  sd(14,'....Horray!');
- delay2(800);
+ delay2(500);
  crlf;
 
  {experience reward}
