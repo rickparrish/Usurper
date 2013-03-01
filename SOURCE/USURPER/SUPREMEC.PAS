@@ -263,7 +263,7 @@ begin
    gain:=32000-player.maxhps;
    if gain < 0 then gain:=0;
    if gain > 500 then gain:=500;
-   player.maxhps:=player.maxhps+500;
+   player.maxhps:=player.maxhps+gain;
    player.hps:=player.maxhps;
   end;
   crlf;
