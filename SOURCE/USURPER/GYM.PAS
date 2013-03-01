@@ -1319,7 +1319,7 @@ begin {*Tug_Of_War*}
     '',
     ulcyan+'Tug-of-War Competition'+config.textcol1,
     mkstring(22,underscore),
-    uplc+player.name2+config.textcol1+' inivited you to a Tug-of-War Competition!',
+    uplc+player.name2+config.textcol1+' invited you to a Tug-of-War Competition!',
     'You were selected to fight in '+uplc+player.name2+'s'+config.textcol1+' Team.',
     'Your Team : '+uplc+home_team[1].name,
     '            '+home_team[2].name,
@@ -1345,7 +1345,7 @@ begin {*Tug_Of_War*}
     '',
     ulcyan+'Tug-of-War Competition'+config.textcol1,
     mkstring(22,underscore),
-    uplc+player.name2+config.textcol1+' inivited you to a Tug-of-War Competition!',
+    uplc+player.name2+config.textcol1+' invited you to a Tug-of-War Competition!',
     'You were selected to fight against '+uplc+player.name2+config.textcol1+' Team.',
     'Your Team : '+uplc++away_team[1].name,
     '            '+away_team[2].name,
@@ -1496,25 +1496,26 @@ begin {*Tug_Of_War*}
    ' '+uplc+player.name2+config.textcol1+' arranged a TUG-Of-War Competition.',
    ' It ended in a DRAW!',
    ' Team1 :',
-   '  '+uplc+home_team[1].name,
-   '  '+uplc+home_team[2].name,
-   '  '+uplc+home_team[3].name,
-   '  '+uplc+home_team[4].name,
+   '  '+uplc+home_team[1].name +
+   '  '+uplc+home_team[2].name +
+   '  '+uplc+home_team[3].name +
+   '  '+uplc+home_team[4].name +
    '  '+uplc+home_team[5].name,
-   config.textcol1+' Team2 :');
+   config.textcol1+' Team2 :',
+   '', '', '', '');
 
    {the newsfile continues here...}
    newsy(true,
-   '  '+uplc+away_team[1].name,
-   '  '+uplc+away_team[2].name,
-   '  '+uplc+away_team[3].name,
-   '  '+uplc+away_team[4].name,
+   '  '+uplc+away_team[1].name +
+   '  '+uplc+away_team[2].name +
+   '  '+uplc+away_team[3].name +
+   '  '+uplc+away_team[4].name +
    '  '+uplc+away_team[5].name,
    '',
    '',
    '',
    '',
-   '');
+   '', '', '', '', '');
 
   end {DRAW .END.}
   else if team2_power<1 then begin
@@ -1578,12 +1579,7 @@ begin {*Tug_Of_War*}
      {load character}
      if load_character(pl0,away_team[i].filtyp,away_team[i].recnr)=true then begin
 
-      {experience points reward}
-      x:=0;
-      IncPlayerExp(pl0,x);
-
-      {save character}
-      user_save(pl0);
+      {no experience points rewarded}
 
       {mail}
       post(MailSend,
@@ -1621,25 +1617,26 @@ begin {*Tug_Of_War*}
    ' '+uplc+player.name2+config.textcol1+' arranged a TUG-Of-War Competition.',
    ' '+uplc+player.name2+'s'+config.textcol1+' team won!',
    ' Winning Team',
-   '  '+uplc+home_team[1].name,
-   '  '+uplc+home_team[2].name,
-   '  '+uplc+home_team[3].name,
-   '  '+uplc+home_team[4].name,
+   '  '+uplc+home_team[1].name +
+   '  '+uplc+home_team[2].name +
+   '  '+uplc+home_team[3].name +
+   '  '+uplc+home_team[4].name +
    '  '+uplc+home_team[5].name,
-   config.textcol1+' Losing Team');
+   config.textcol1+' Losing Team',
+   '', '', '', '');
 
    {the newsfile continues here...}
    newsy(true,
-   '  '+uplc+away_team[1].name,
-   '  '+uplc+away_team[2].name,
-   '  '+uplc+away_team[3].name,
-   '  '+uplc+away_team[4].name,
+   '  '+uplc+away_team[1].name +
+   '  '+uplc+away_team[2].name +
+   '  '+uplc+away_team[3].name +
+   '  '+uplc+away_team[4].name +
    '  '+uplc+away_team[5].name+config.textcol1,
    '',
    '',
    '',
    '',
-   '');
+   '', '', '', '', '');
 
 
   end {WON .END.}
@@ -1670,12 +1667,7 @@ begin {*Tug_Of_War*}
      {load character}
      if load_character(pl0,home_team[i].filtyp,home_team[i].recnr)=true then begin
 
-      {experience points reward}
-      x:=0;
-      IncPlayerExp(pl0,x);
-
-      {save character}
-      user_save(pl0);
+      {no experience points rewarded}
 
       {mail}
       post(MailSend,
@@ -1756,25 +1748,26 @@ begin {*Tug_Of_War*}
    ' '+uplc+player.name2+config.textcol1+' arranged a TUG-Of-War Competition.',
    ' '+uplc+player.name2+'s'+config.textcol1+' team lost!',
    ' Winning Team',
-   '  '+uplc+away_team[1].name,
-   '  '+uplc+away_team[2].name,
-   '  '+uplc+away_team[3].name,
-   '  '+uplc+away_team[4].name,
+   '  '+uplc+away_team[1].name +
+   '  '+uplc+away_team[2].name +
+   '  '+uplc+away_team[3].name +
+   '  '+uplc+away_team[4].name +
    '  '+uplc+away_team[5].name,
-   config.textcol1+' Losing Team');
+   config.textcol1+' Losing Team',
+   '', '', '', '');
 
    {the newsfile continues here...}
    newsy(true,
-   '  '+uplc+home_team[1].name,
-   '  '+uplc+home_team[2].name,
-   '  '+uplc+home_team[3].name,
-   '  '+uplc+home_team[4].name,
+   '  '+uplc+home_team[1].name +
+   '  '+uplc+home_team[2].name +
+   '  '+uplc+home_team[3].name +
+   '  '+uplc+home_team[4].name +
    '  '+uplc+home_team[5].name+config.textcol1,
    '',
    '',
    '',
    '',
-   '');
+   '', '', '', '', '');
 
 
   end; {LOSE .END.}
