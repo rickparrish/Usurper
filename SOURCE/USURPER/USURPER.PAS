@@ -25,7 +25,7 @@ Copyright 2007 Jakob Dangarden
 
 
 
-{$IFDEF MSDOS
+{$IFDEF MSDOS}
 {$M 40000, 34000, 65000}
 {$ENDIF}
 {UTEST+}
