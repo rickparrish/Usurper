@@ -36,6 +36,7 @@ Monsters:
 
 Dungeon:
 -Removed duplicate "your share is..." messages when fighting alone in the dungeon
+-When trying to join the orcs instead of saving the girl, you unintentionally saved the girl anyway. Fixed.
 
 Bob's:
 -Fixed loop in drinking competition when inviting new participants

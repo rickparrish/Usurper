@@ -716,7 +716,6 @@ const maxleaders = 3;
       leader : array[1..maxleaders] of s70=('Margulf',
                                             'Stompa',
                                             'Radrik');
-      fight : boolean = false;
 
 var ch   : char;
     boss,
@@ -986,7 +985,7 @@ procedure fight_orcs(evil_minded:boolean); {fight the orcish scum}
 {if evil_minded=true then player tried to join the orcs in the beginning, but was turned down by them}
 var i : byte;
     x : longint;
-    s : s70;
+    s, s2, msg1, msg2 : s70;
     weapon,armor : s70;
 
     alivebefore,
@@ -994,8 +993,6 @@ var i : byte;
     player0 : ^userrec;
 
 begin
-
- fight:=true;
 
  Reset_Monsters;
  Reset_Spells(pl1,pl2,pl3,pl4);
@@ -1110,6 +1107,7 @@ begin
         '');
 
   {player survived, now some interaction with the saved girl}
+  if not evil_minded then begin
   crlf;
   crlf;
   crlf;
@@ -1144,6 +1142,12 @@ begin
   d(config.textcolor,'and leave her just outside the Glargmont clearing.');
   pause;
 
+ end
+ else begin
+   d(config.textcolor,'You look around the ravine for the girl...');
+   d(config.textcolor,'But she is gone! (Too bad for you!)');
+   pause;
+ end
  end;
 
 
@@ -1170,23 +1174,34 @@ begin
   end;
 
   if (alivebefore=true) and (player_active(player0^,true)=true) then begin
+   {team mate survived the fight!}
+   if not evil_minded then begin
+   s2:='Dungeon Party & Heroism';
+   msg1:='You were lead by '+uplc+Player.name2+config.textcol1+' to rescue a girl from';
+   msg2:='being raped. You fought well and killed all enemies.';
+
    case random(3) of
     0: s:='You got a million thanks from the girl.';
     1: s:='You even got a kiss from the girl!';
     2: s:='You even got a hug from the girl!';
    end;
-
-   {team mate survived the fight!}
+   end else begin
+   s2:='Disgraceful Behaviour!';
+   s:='';
+   msg1:='You were lead by '+uplc+Player.name2+config.textcol1+' to defile a girl.';
+   msg2:='She got away during a fight with some orcs.';
+   
+   end;
    post(MailSend,
    player0^.name2,
    player0^.ai,
    false,
    mailrequest_nothing,
    '',
-   umailheadc+'Dungeon Party & Heroism'+config.textcol1,
-   mkstring(23,underscore),
-   'You were lead by '+uplc+Player.name2+config.textcol1+' to rescue a girl from',
-   'being raped. You fought well and killed all enemies.',
+   umailheadc+s2+config.textcol1,
+   mkstring(length(s2),underscore),
+   msg1,
+   msg2,
    s,
    '',
    '',
@@ -1201,11 +1216,20 @@ begin
   end
   else if (alivebefore=true) and (player_active(player0^,true)=false) then begin
    {team mate died in the fight}
+   if not evil_minded then begin
+   s2:='Dungeon Party & Your Death';
+   msg1:='You were lead by '+uplc+Player.name2+config.textcol1+' to rescue a girl from';
+   msg2:='being raped by a gang of Orcs.';
+   end else begin
+   s2:='Dungeon Party & Your Death';
+   msg1:='You were lead by '+uplc+Player.name2+config.textcol1+' to defile a girl.';
+   msg2:='';
+   end;
    case random(4) of
     0: s:='You were stabbed in the back by a wily half-orc.';
     1: s:='A spear penetrated your back!';
     2: s:='In the battle, some swine cut your throat!';
-    3: s:='In the battle, some genious cut your throat!';
+    3: s:='In the battle, some genius cut your throat!';
    end;
 
    post(MailSend,
@@ -1214,10 +1238,10 @@ begin
    false,
    mailrequest_nothing,
    '',
-   umailheadc+'Dungeon Party & Your Death'+config.textcol1,
-   mkstring(26,underscore),
-   'You were lead by '+uplc+Player.name2+config.textcol1+' to rescue a girl from',
-   'being raped by a gang of Orcs.',
+   umailheadc+s2+config.textcol1,
+   mkstring(length(s2),underscore),
+   msg1,
+   msg2,
    s,
    '',
    '',
@@ -1366,8 +1390,7 @@ begin {RAPE_GIRL event *START*.... a woman is being harassed by local militia}
        end;
 
        {goodness penalty for raping the girl!}
-       if fight=false then begin
-
+       if evil_minded then begin
         pre_darkness;
         Give_Darkness(player,150);
        end;
@@ -1578,7 +1601,6 @@ begin
  new(objekt);
 
  x:=random(8);
-
  if (x=0) and (player.wellwish=false) and (global_auto_probe=Nowhere) then begin
 
   {*WISHING WELL START*}
@@ -1778,7 +1800,6 @@ begin
 
   rendezvous:=random(11);
   {rendezvous:=10; {cheat, jakob}
-
   case Rendezvous of
 
    0:begin {**OLD MAN WITH MAP START**}

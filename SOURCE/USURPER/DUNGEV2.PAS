@@ -1470,7 +1470,7 @@ var i : byte;
 begin
  crlf;
  d(config.textcolor,'You run away to save your own skin!');
- d(config.textcolor,'In the distant you can hear the scream from the poor merchant.');
+ d(config.textcolor,'In the distance you can hear the scream from the poor merchant.');
  d(config.textcolor,'You can only hope that the robbers spare his life.');
  d(config.textcolor,'(not very likely)');
  crlf;
