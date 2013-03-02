@@ -1100,9 +1100,6 @@ begin {* Main Program *}
         {check if game is registered}
         muffis;
 
-        {kick out overdue players}
-        kick_out_old_onliners;
-
         play:=true;
 
         {check if player already have Immortals and the config disallows it}

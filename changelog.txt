@@ -41,6 +41,10 @@ Bob's:
 -Fixed loop in drinking competition when inviting new participants
 -In drinking competition, if the initiating player lost then the "favourite" always won the competition and the competition ended with no further rounds. Fixed.
 
+Supreme Being:
+-Fixed crashes with too many hitpoints
+
+
 ----------
 
 Version 0.23b:
