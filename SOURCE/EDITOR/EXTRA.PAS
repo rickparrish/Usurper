@@ -56,9 +56,6 @@ Procedure Options_Menu;
 Procedure More_Editors_Menu;
 
 Procedure About; {about box - who made the program + version etc. etc.}
-{$IFNDEF MSDOS}
-Procedure NoWin32Help; {about box - letting user know Win32 help is not available}
-{$ENDIF}
 Function YesNoBox(const toptext:string; const text:string) : boolean;
 Function Save_Request : boolean;
 
@@ -2108,44 +2105,6 @@ begin
  MyApp.ExecuteDialog(Dia,Nil);
 
 end;
-
-{$IFNDEF MSDOS}
-Procedure NoWin32Help;
-var
-  Dia: XDialogP;
-  R : TRect;
-
-begin
-
- R.Assign(0, 0, 35, 13);
- Dia := New(XDialogP, Init(R, 'No Win32 Help'));
- With Dia^ do begin
-  Options := Options or ofCentered;
-
-  R.Grow(-1, -1);
-  Dec(R.B.Y, 3);
-
-  {Text}
-  Insert(New(PStaticText, Init(R,
-   #13 +
-   ^C'Usurper Editor' + #13 +
-   #13 + ^C+'Version '+ uver + #13 +
-   #13 +
-   ^C'Sorry, help is not' + #13 +
-   ^C'supported in the' + #13 +
-   ^C'Win32 EDITOR32.exe')));
-  {1993,98}
-
-  {Button}
-  Okbutton(12,10);
-
- end; {with Dia do .end.}
-
- {Execute Dialog}
- MyApp.ExecuteDialog(Dia,Nil);
-
-end;
-{$ENDIF}
 
 Function YesNoBox(const toptext:string; const text:string) : boolean;
 var

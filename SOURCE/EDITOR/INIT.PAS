@@ -64,7 +64,12 @@ const
  {file with all online help-texts. raw-file : edhelp.txt.
  to compile raw helpfile, type: tvhc edhelp editor edhelp
   or better: run makehelp.bat file}
+{$IFDEF MSDOS}
  global_edhelp = 'EDITOR.HLP';
+{$ENDIF}
+{$IFNDEF MSDOS}
+ global_edhelp = 'EDITOR32.HLP';
+{$ENDIF}
 
  {Files in the Usurper directory}
  ucfg = 'USURPER.CFG';
@@ -1781,7 +1786,6 @@ begin
 
       if (Event.Command = cmHelp) and not HelpInUse then
       begin
-{$IFDEF MSDOS}
         HelpInUse := True;
         HelpStrm := New(PDosStream, Init(CalcHelpName(global_EDHELP), stOpenRead));
         HFile := New(PHelpFile, Init(HelpStrm));
@@ -1801,10 +1805,6 @@ begin
           ClearEvent(Event);
         end;
         HelpInUse := False;
-{$ENDIF}
-{$IFNDEF MSDOS}
-        NoWin32Help;
-{$ENDIF}
       end;
     evMouseDown:
       if Event.Buttons <> 1 then Event.What := evNothing;

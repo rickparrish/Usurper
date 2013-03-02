@@ -456,9 +456,42 @@ asm
 end;
 {$ENDIF}
 {$IFNDEF MSDOS}
-function Scan(var P; Offset, Size: Integer; C: Char): Integer;
-begin
-  WriteLn('REEPORT HELPFILE Scan');
+function Scan(var P; Offset, Size: Integer; C: Char): Integer; assembler;
+{$IFDEF USE32}
+        {&USES esi,edi} {&FRAME-}
+asm
+        cld
+        mov     edi,P
+        add     edi,&Offset
+        mov     edx,Size
+        sub     edx,&Offset
+        test    dh,dh
+        jz      @@1
+        mov     edx,256
+      @@1:
+        mov     ecx,edx
+        mov     al,C
+        repne   scasb
+        sub     ecx,edx
+        neg     ecx
+        xchg    eax,ecx
+{$ELSE}
+asm
+        CLD
+        LES     DI,P
+        ADD     DI,&Offset
+        MOV     DX,Size
+        SUB     DX,&Offset
+        OR      DH,DH
+        JZ      @@1
+        MOV     DX,256
+@@1:    MOV     CX,DX
+        MOV     AL, C
+        REPNE   SCASB
+        SUB     CX,DX
+        NEG     CX
+        XCHG    AX,CX
+{$ENDIF}
 end;
 {$ENDIF}
 
@@ -480,8 +513,31 @@ end;
 {$ENDIF}
 {$IFNDEF MSDOS}
 procedure TextToLine(var Text; Offset, Length: Integer; var Line: String);
-begin
-  WriteLn('REEPORT HELPFILE TextToLine');
+  assembler;
+{$IFDEF USE32}
+       {&USES esi,edi} {&FRAME-}
+asm
+        cld
+        mov     esi,Text
+        add     esi,&Offset
+        mov     edi,Line
+        mov     eax,Length
+        stosb
+        xchg    eax,ecx
+        rep     movsb
+{$ELSE}
+asm
+        CLD
+        PUSH    DS
+        LDS     SI,Text
+        ADD     SI,&Offset
+        LES     DI,Line
+        MOV     AX,Length
+        STOSB
+        XCHG    AX,CX
+        REP     MOVSB
+        POP     DS
+{$ENDIF}
 end;
 {$ENDIF}
 
