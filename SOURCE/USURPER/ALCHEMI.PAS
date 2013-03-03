@@ -307,7 +307,7 @@ begin
            reset_monsters;
 
            monster[1]^.name:='Iceman';
-           monster[1]^.hps:=75;
+           monster[1]^.hps:=130;
            monster[1]^.strength:=30;
            monster[1]^.defence:=17;
            monster[1]^.phrase:='Thou shall be frosty!';

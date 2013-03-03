@@ -716,7 +716,7 @@ begin
 
                             if i=1 then begin
                              s:='Ancient King'; {the boss}
-                             hps:=player.hps*2;
+                             hps:=hps+global_dungeonlevel;
                             end;
 
                             Create_Monster(i,              {#}
@@ -1129,8 +1129,8 @@ begin
        crlf;
        d(config.textcolor,'You leave the bloody lump of meat laying on the ground,');
        d(config.textcolor,'for the animals to gnaw on.');
-       d(config.textcolor,'You feel refreshed after this little excercise!');
-       d(config.textcolor,'(you need to wash your boots to)');
+       d(config.textcolor,'You feel refreshed after this little exercise!');
+       d(config.textcolor,'(you need to wash your boots too)');
        pause;
 
        {give penalty darkness points}
@@ -1265,6 +1265,7 @@ begin
 
   end;
 
+  hps:=global_dungeonlevel*3;
 
   if i=1 then begin
    case terrain of
@@ -1678,11 +1679,6 @@ begin
 
   hps:=50;
 
-  {if i=1 then begin
-   s:=warleader; {the warleader}
-  { hps:=hps*2;
-  end;}
-
   create_monster(i,              {#}
                  s,              {name}
                  hps,            {hps}
@@ -1760,7 +1756,7 @@ begin
   x:=random(5000)+1000;
 
   d(14,'******* Poor Mans Death *********');
-  d(config.textcolor,'After this shameful assault you search the Mercants belongings...');
+  d(config.textcolor,'After this shameful assault you search the Merchant's belongings...');
   d(config.textcolor,'You find some furs in the cart.');
   sd(config.textcolor,'They are worth ');
   sd(14,commastr(x));

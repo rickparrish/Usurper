@@ -1023,7 +1023,7 @@ begin
 
            create_monster(1,                 {#}
                           s,                 {name}
-                          player.maxhps*y,   {hps}
+                          global_dungeonlevel*5*y,   {hps}
                           90,                {strength}
                           15,                {defence}
                           s2,                {phrase}
