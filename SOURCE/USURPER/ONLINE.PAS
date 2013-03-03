@@ -1143,8 +1143,6 @@ var
     i       : word;
     justval : integer;
     ply     : onlinerec;
-    already : boolean;
-    already2: boolean;
     ok      : boolean;
 
 begin
@@ -1157,8 +1155,10 @@ begin
  crlf;
 
  global_multi:=false;
- already:=false;
- already2:=false;
+ d(14,'** People Online **');
+ crlf;
+ d(5,'Node    Character             Status                                   Arrived');
+
 
  for i:=1 to fs(fsonline) do begin
 
@@ -1169,13 +1169,6 @@ begin
   if ply.name='' then ok:=false;
 
   if ok then begin
-
-   if already=false then begin
-    already:=true;
-    d(14,'** People Online **');
-    crlf;
-    d(5,'Node    Character             Status                                   Arrived');
-   end;
 
    {node}
    justval:=22;

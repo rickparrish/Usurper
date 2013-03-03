@@ -1006,7 +1006,6 @@ begin {* Main Program *}
    'W':begin {Who is playing}
 
         crlf;
-        d(14,'-=Who is Online=-');
         who_is_on(true,false);
         pause;
 

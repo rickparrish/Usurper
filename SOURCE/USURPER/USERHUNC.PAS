@@ -129,9 +129,9 @@ Begin
     player.name1:=emptystr;
     player.name2:=emptystr;
 
-    if enter_game_if_exists then begin
      pause;
-    end;
+     user_search:=false;
+     exit;
 
     normal_exit;
    end;
