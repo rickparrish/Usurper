@@ -1756,7 +1756,7 @@ begin
   x:=random(5000)+1000;
 
   d(14,'******* Poor Mans Death *********');
-  d(config.textcolor,'After this shameful assault you search the Merchant's belongings...');
+  d(config.textcolor,'After this shameful assault you search the Merchant''s belongings...');
   d(config.textcolor,'You find some furs in the cart.');
   sd(config.textcolor,'They are worth ');
   sd(14,commastr(x));
