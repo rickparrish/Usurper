@@ -120,8 +120,7 @@ Function Menu_Choices(const m1,m2,m3,m4,m5:string):char;
 Function HeapHandler(Size : Word) : Integer;far; {handles heap errors}
 Procedure My_TimeSlice; {release a time slice}
 Procedure Normal_Exit; {HALT the program}
-Procedure Delay2(const godis : real);
-Procedure Delay3(const tics : real); {delay routine, replacing delay() }
+Procedure Delay2(const milliSeconds: LongInt);
 Function UKeyPressed : boolean; {same as pascal KeyPressed function}
 Function GetChar : char; {get a character from local or remote keyboard}
 Function UnderScore : char; {returns a '_'}
@@ -386,117 +385,44 @@ begin
 end; { Replace String }
 
 {$IFDEF MSDOS}
-Procedure Delay4(ms : Word); Assembler; {SWAG/CRT}
-Asm {machine independent Delay Function}
-  mov ax, 1000;
-  mul ms;
-  mov cx, dx;
-  mov dx, ax;
-  mov ah, $86;
-  int $15;
-end;
-{$ENDIF}
-{$IFNDEF MSDOS}
-Procedure Delay4(ms : Word);
+Procedure Delay2;
+const
+  TicsPerDay = 1573040;      {Assumes 18.20648 tics/sec}
+var
+  BiosTics: ^LongInt;
+  DelayTics: LongInt;
+  ExpireTics: LongInt;
+  StartTics: LongInt;
 begin
-  WriteLn('REEPORT JAKOB Delay4');
+  BiosTics := Ptr($40, $6C);
+  StartTics := BiosTics^;
+  
+  { Convert milliseconds to number of tics to delay for }
+  DelayTics := milliSeconds div 55;
+  if (DelayTics <= 0) then Exit;
+  if (DelayTics > TicsPerDay) then DelayTics := TicsPerDay;
+
+  ExpireTics := StartTics + DelayTics;
+  
+  while (true) do
+  begin
+    { Don't use 100% CPU }
+    releasetimeslice; 
+	
+    {Check normal expiration}
+    if (BiosTics^ > ExpireTics) then Break;
+	
+    {Check wrapped expiration}
+    if (BiosTics^ < StartTics) and ((BiosTics^ + TicsPerDay) > ExpireTics) then Break;
+  end;
 end;
 {$ENDIF}
-
-Type LongRec = record
-        L, H : SmallWord;
-     end;
-
-PROCEDURE Delay5(NumberOfSecs : Real);
-CONST
- Secs_PER_DAY = 86400.0; {60 * 60 * 24}
-VAR
- TimeIsUp : Boolean;
- StartingSecs,
-  Secs : Real;
-
-    (******************   READ CLOCK  ************************
-    *                                                        *
-    *  Reads the PC clock, by using service $2C of int 21h.  *
-    *  This service returns information in the 8088          *
-    *  registers as follows:                                 *
-    *                                                        *
-    *    CH      Hour                  (0 through 23)        *
-    *    CL      Minute                (0 through 59)        *
-    *    DH      Seconds               (0 through 59)        *
-    *    DL      Hundredths of seconds (0 through 99)        *
-    *******************   READ CLOCK  ***********************)
-
-{$IFDEF MSDOS}
-    PROCEDURE ReadClock(VAR Secs : Real);
-
-    CONST
-      Secs_PER_HOUR = 3600.0; {This must be a real constant!}
-      Secs_PER_MINUTE = 60.0;
-   {TYPE {Delete this type for TP4 and TP5}
-     { Registers = RECORD
-        CASE Boolean OF
-          True : (AL,AH,BL,BH,CL,CH,DL,DH:Byte);
-          False : (AX,BX,CX,DX,BP,SI,DI,DS,ES,Flags:Integer)
-        END;}
-
-    VAR Regs : Registers;
-    BEGIN
-      Regs.AH := $2C;
-      msDos(Regs);
-      Secs := Secs_PER_HOUR*(Regs.CH)
-                +Secs_PER_MINUTE*(Regs.CL)
-                +Regs.DH
-                +0.01*Regs.DL;
-    END;
-{$ENDIF}
 {$IFNDEF MSDOS}
-    PROCEDURE ReadClock(VAR Secs : Real);
-    begin
-      WriteLn('REEPORT JAKOB ReadClock');
-    end;
-{$ENDIF}
-
-{ BODY OF WAIT procedure}
-
-  BEGIN
-    ReadClock(StartingSecs);
-    REPEAT                                  { allow break out }
-      My_TimeSlice; {jakob, release a timeslice}
-      ReadClock(Secs);
-      IF Secs-StartingSecs >= 0.0 THEN {Normal situation.}
-        TimeIsUp := Secs-StartingSecs >= NumberOfSecs
-      ELSE {During call, clock has ticked past midnight.}
-        TimeIsUp := Secs_PER_DAY-StartingSecs+Secs >= NumberOfSecs
-    UNTIL TimeIsUp
-  END;
-
 Procedure Delay2;
 begin
-{$IFDEF MSDOS}
- (*REENOTE Super Delay by Allen Cheng caused a RTE207, so it is being retired
-           Delay() is much less accurate, so could look into using APTIMER's delay instead
- millidelay(godis);*)
- Delay(Trunc(godis));
-{$ENDIF}
-{$IFNDEF MSDOS}
- RPSleep(Trunc(godis));
-{$ENDIF}
+ RPSleep(milliSeconds);
 end;
-
-Procedure Delay3;
-var hm : real;
-begin
-
- my_timeslice;
-
- hm:= tics / 1000;
-
- delay5(hm);
-
- my_timeslice;
-
-end; {delay2 *end*}
+{$ENDIF}
 
 Function GetChar; {get a character from the local or remote keyboard}
 var temp : char;
