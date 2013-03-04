@@ -51,7 +51,7 @@ Procedure Relations_Editor; {for debugging purposes only!}
 Procedure Validate_All_Relations(const step_through:boolean); {deletes all relations that cannot be
 
 {npc - maint}
-Procedure Npc_Set_Out_To_Marry(var ply:userrec);
+Procedure Npc_Set_Out_To_Marry;
 
 
 Implementation
@@ -783,7 +783,7 @@ begin
      'S':begin {set out to marry}
           crlf;
           sd(15,'Hang on... setting out to marry');
-          npc_set_out_to_marry(ply);
+          {npc_set_out_to_marry(ply);}
           crlf;
          end;
      'M':begin {maintain relations}
@@ -882,70 +882,36 @@ end; {relation_change_news *end*}
 Procedure Npc_Set_Out_To_Marry; {called from npcmaint.pas}
 var
    i, ii : word;
-
    x : longint;
-
    j : byte;
-
    s : s70;
-
-   done,
    go_ahead : boolean;
-
    child : childrec;
-   spouse  : userrec;
+   marry, spouse  : userrec;
    relation : relationrec;
 
-begin {called from npcmaint.pas. ply marries the first girl/boy he can find}
-      {ply MUST NOT be married since this proc doesn't check for this
-       condition}
-
- {we exit this proc if ply is too young to marry}
- if ply.age<config.MinimumAgetoMarry then begin
-  if global_utest then d(2,ply.name2+' is too young to marry.');
-  exit;
- end;
-
+begin {called from npcmaint.pas. player marries the first girl/boy he can find}
  {scan relations for a LOVE-LOVE relation}
- done:=false;
  for i:=1 to fs(FsRelation) do begin
-
-  {load relation}
+  if i mod 100 = 0 then sd(12,'.');
   load_relation(fload,relation,i);
+  if relation.deleted=true then continue;
+      {relation_checkplyrec(relation); (user exists?)}
 
-  if relation.deleted=false then begin
-
-   go_ahead:=false;
-   if (relation.name1=ply.name2) and (relation.idtag1=ply.id) then begin
-    go_ahead:=true;
-   end
-   else if (relation.name2=ply.name2) and (relation.idtag2=ply.id) then begin
-    go_ahead:=true;
-   end;
-
-   if go_ahead=true then begin
-
-    {correct relation}
-    correct_relation(ply.name2,relation);
-
-    {jakob...why?}
-
-    {other player can't marry}
-    if is_player_married(relation.name2,relation.idtag2)='' then begin
-
-     if (relation.relation2=global_RelationLove) and
+     if ((relation.relation1=global_RelationLove) or
+          (relation.relation2=global_RelationLove)) and
         (relation.BannedMarry=false) then begin
+          if is_player_married(relation.name1,relation.idtag1)<>'' then continue;
+    if is_player_married(relation.name2,relation.idtag2)<>'' then continue;
 
-      {are the players in the userfiles?}
-      relation_checkplyrec(relation);
 
-      if load_character(spouse,relation.filetype2,relation.recnr2)=true then begin
-
-       if (spouse.name2=relation.name2) and (spouse.id=relation.idtag2) and
-          (spouse.age>=config.minimumagetomarry)then begin
+      if load_character(marry,relation.filetype2,relation.recnr1)=false then continue;
+      if load_character(spouse,relation.filetype2,relation.recnr2)=false then continue;
+          if (marry.age>=config.minimumagetomarry) and (spouse.age>=config.minimumagetomarry)then begin
 
         {we both love each other, lets marry!}
         relation.relation1:=global_RelationLove;
+        relation.relation2:=global_RelationLove;
 
         {the npcs don't have to pay for their marriages!
          ^---perhaps you wanna change this later.}
@@ -960,7 +926,7 @@ begin {called from npcmaint.pas. ply marries the first girl/boy he can find}
         {news-paper}
         newsy(true,
         'Wedding!',
-        ' '+uplc+ply.name2+config.textcol1+', the '+race_display(2,ply.race,0)+', and '+uplc+spouse.name2
+        ' '+uplc+marry.name2+config.textcol1+', the '+race_display(2,marry.race,0)+', and '+uplc+spouse.name2
           +config.textcol1+', the '+race_display(2,spouse.race,0)+', were married!',
         s,
         '',
@@ -974,7 +940,7 @@ begin {called from npcmaint.pas. ply marries the first girl/boy he can find}
         {marriage-log, see duplicate code in lovers.pas}
         Generic_News(MarriageDivorceNews,
         false,
-        ugreen+'['+fix_date(todays_date)+'] '+uplc+ply.name2+ugreen+' and '+uplc+spouse.name2+ugreen+' were '+uyellow+'Married'
+        ugreen+'['+fix_date(todays_date)+'] '+uplc+marry.name2+ugreen+' and '+uplc+spouse.name2+ugreen+' were '+uyellow+'Married'
           +ugreen+'.',
         '',
         '',
@@ -997,7 +963,7 @@ begin {called from npcmaint.pas. ply marries the first girl/boy he can find}
         '',
         uyellow+s+config.textcol1,
         mkstring(length(s),underscore),
-        uplc+ply.name2+config.textcol1+' and You were married!',
+        uplc+marry.name2+config.textcol1+' and You were married!',
         '',
         '',
         '',
@@ -1022,13 +988,12 @@ begin {called from npcmaint.pas. ply marries the first girl/boy he can find}
 
         {update player married flags}
         spouse.married:=true;
-        ply.married:=true;
+        marry.married:=true;
 
         {update statistics}
         inc(spouse.marriedtimes);
-        inc(ply.marriedtimes);
+        inc(marry.marriedtimes);
 
-        done:=true;
 
         {make children from previous marriage happy when their parents
          reunite. NOTE! This routine is copied in lovers.pas => marry_routine
@@ -1041,14 +1006,14 @@ begin {called from npcmaint.pas. ply marries the first girl/boy he can find}
          if load_child(fload,child,ii)=true then begin
 
           if (child.deleted=false) and
-             (my_child(ply,child)=true) and
+             (my_child(marry,child)=true) and
              (my_child(spouse,child)=true) then begin
 
            {give xp for happy child}
            x:=child.age*850;
 
            {give parents xp}
-           incplayerexp(ply,x);
+           incplayerexp(marry,x);
            incplayerexp(spouse,x);
 
            {update child}
@@ -1067,7 +1032,7 @@ begin {called from npcmaint.pas. ply marries the first girl/boy he can find}
            +uyellow+'Happy Child!'+config.textcol1,
            'You receive '+uwhite+commastr(x)+config.textcol1+' experience points for making your',
            sex7[child.sex]+' '+ukidc+child.name+config.textcol1+' extremely happy by marrying',
-           uplc+ply.name2+config.textcol1+' the '+classnames[ply.class]+'.',
+           uplc+marry.name2+config.textcol1+' the '+classnames[marry.class]+'.',
            '',
            '',
            '',
@@ -1087,28 +1052,18 @@ begin {called from npcmaint.pas. ply marries the first girl/boy he can find}
 
         {save updated player flags}
         user_save(spouse);
-        user_save(ply);
+        user_save(marry);
 
         {debug}
-        if global_utest then begin
-         d(15,'NPC marriage between '+relation.name1+' and '+relation.name2+'!');
+        if true then begin
+         {d(15,'NPC marriage between '+relation.name1+' and '+relation.name2+'!');}
         end;
 
        end;
       end;
-     end;
-    end;
-
-   end;
-  end;
-
-  if done=true then begin
-   break;
-  end;
 
  end; {for i:= .end.}
 
 end; {npc_set_out_to_marry *end*}
 
-
-end. {Unit Relatio2 .END.}
+end.

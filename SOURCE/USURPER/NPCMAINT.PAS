@@ -35,7 +35,7 @@ Implementation
 Uses Crt, DDplus, Init, Cms,
      Jakob, Invent, Autogang,
      Mail, News, TeamRec,
-     Relation, WantedSc, Compwar,
+     Relation, relatio2, WantedSc, Compwar,
      Kmaint, Various, Various2,
      Various3, InitGods, VarGods,
      ChallKng, File_Io;
@@ -1791,6 +1791,14 @@ begin
 
  sd(global_mainttxt,' ... ');
  d(11,'DONE');
+ if config.allownpcmarry then begin
+     sd(global_mainttxt,'Checking NPC marriages...');
+
+   npc_set_out_to_marry;
+  d(11,'DONE');
+
+ end;
+
 
  {Should the NPC build gangs?}
  {first we check how many "clean" NPC teams there are

@@ -2528,8 +2528,6 @@ begin {npc character PLY maintains/creates/nurses/establishes/destroys
 
   {should player try to marry?}
   if global_utest then d(15,ply.name2+' entering npc_set_out_to_marry');
-  {dirty hack to speed up cfg option #53}
-  if random(5) = 0 then npc_set_out_to_marry(ply);
   if global_utest then d(15,ply.name2+' exiting npc_set_out_to_marry');
 
  end;

@@ -669,7 +669,7 @@ Begin {Weapon Shop}
            if player.race=troll then begin
             sd(global_plycol,Tully^);
             d(config.textcolor,' blinks at you ');
-            d(global_talkcol,'Hey, we troll gotta stick together!');
+            d(global_talkcol,'Hey, we trolls gotta stick together!');
             d(global_talkcol,'therefore i will give ya a discount!');
 
             rr^:=0.1;

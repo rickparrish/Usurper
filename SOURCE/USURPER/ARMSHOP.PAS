@@ -954,7 +954,7 @@ begin
                   sd(global_talkcol,'Deal!');
                   sd(config.textcolor,', says ');
                   sd(global_plycol,reese^);
-                  d(config.textcolor,' and give you the armor.');
+                  d(config.textcolor,' and gives you the armor.');
 
                   d(config.textcolor,'You hand over the '+config.moneytype+'.');
 

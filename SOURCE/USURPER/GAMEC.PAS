@@ -895,7 +895,7 @@ begin
                  end
                  else begin
                   d(15,'Processing...'+temp.name2);
-                  Npc_Set_Out_To_Marry(temp);
+                  {Npc_Set_Out_To_Marry(temp);}
                   d(15,'Finished processing.');
                   pause;
                  end;
