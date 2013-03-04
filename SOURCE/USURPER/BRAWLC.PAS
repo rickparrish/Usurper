@@ -28,7 +28,7 @@ Unit BrawlC; {Usurper - Bar Brawl at Bobs Bar}
 
 Interface
 
-Procedure Brawl;
+Function Brawl : boolean;
 
 Implementation
 
@@ -312,7 +312,7 @@ begin
 
 end; {init_fight *end*}
 
-Procedure Brawl; {the brawl routine!}
+Function Brawl : boolean; {the brawl routine!}
 begin
 
  Init_Fight;
@@ -350,12 +350,12 @@ begin
    if random(2)=0 then begin
     sd(config.textcolor,'The ');
     sd(foe_col,race_display(2,elf,y));
-    d(config.textcolor,' immideately throws himself into the fight!');
+    d(config.textcolor,' immediately throws himself into the fight!');
     inc(foess);
     inc(foes[y]^);
    end
    else begin
-    d(config.textcolor,'But he disappears when he sees whats going on!');
+    d(config.textcolor,'But he disappears when he sees what''s going on!');
    end;
    crlf;
    pause;
@@ -658,7 +658,7 @@ begin
          for i:=1 to 10 do begin
           dispose(foes[i]);
          end;
-
+         brawl:=false;
          exit;
 
         end;
@@ -1305,6 +1305,7 @@ begin
   {get money from frisked bodies}
   incplayermoney(player,yy);
   crlf;
+  brawl:=true;
   pause;
  end;
 

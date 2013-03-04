@@ -1327,7 +1327,7 @@ if player.dex>400 then dec(y);
         else begin
          crlf;
          if confirm('Start a fight ','n')=true then begin
-          brawl;
+          if brawl = false then ch:='R';
          end;
         end;
 
