@@ -5,8 +5,7 @@ Maintenance:
 
 Version 0.23c:
 
-
-----------
+[Rick, could you add your .23c changes in here?]
 
 ***************RESET MONSTER DATAFILES***************
 
