@@ -1,3 +1,13 @@
+Maintenance:
+-Maintenance with option #153 was slow. Fixed (wicked-fast now)
+
+----------
+
+Version 0.23c:
+
+
+----------
+
 ***************RESET MONSTER DATAFILES***************
 
 When upgrading to this release, you must use the editor to reset the monster datafiles. Choose Reset, then check the Monsters checkbox. The game will crash if you don't do this. Further details on why this happened below.

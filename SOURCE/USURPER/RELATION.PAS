@@ -1193,12 +1193,12 @@ begin {displays ply:s looks depending upon age,race etc etc}
   0..10  : sd(col,' is a puny '+race_display(2,ply.race,0)+'.');
  11..20  : sd(col,' is a wimpish '+race_display(2,ply.race,0)+'.');
  21..30  : sd(col,' is a mediocre '+race_display(2,ply.race,0)+'.');
- 31..40  : sd(col,' is a average '+race_display(2,ply.race,0)+'.');
+ 31..40  : sd(col,' is an average '+race_display(2,ply.race,0)+'.');
  41..50  : sd(col,' is a strong '+race_display(2,ply.race,0)+'.');
- 51..60  : sd(col,' is a experienced '+race_display(2,ply.race,0)+'.');
+ 51..60  : sd(col,' is an experienced '+race_display(2,ply.race,0)+'.');
  61..70  : sd(col,' is a potent '+race_display(2,ply.race,0)+'.');
  71..80  : sd(col,' is a veteran '+race_display(2,ply.race,0)+'.');
- 81..90  : sd(col,' is a overwhelming '+race_display(2,ply.race,0)+'.');
+ 81..90  : sd(col,' is an overwhelming '+race_display(2,ply.race,0)+'.');
  100..255: sd(col,' is a super mighty '+race_display(2,ply.race,0)+'.');
  end; {case .end.}
  crlf;
@@ -2523,13 +2523,6 @@ begin {npc character PLY maintains/creates/nurses/establishes/destroys
   married:=true;
   {perform spouse maintenance}
   {jakob .. add something here please. }
- end
- else begin
-
-  {should player try to marry?}
-  if global_utest then d(15,ply.name2+' entering npc_set_out_to_marry');
-  if global_utest then d(15,ply.name2+' exiting npc_set_out_to_marry');
-
  end;
 
 

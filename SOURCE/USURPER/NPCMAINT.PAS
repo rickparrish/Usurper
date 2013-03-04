@@ -2105,6 +2105,7 @@ begin
 
      {opponents found}
 
+     {don't see why this should be shown to users now.
      sd(14,'  ');
      sd(global_teamcol,s);
      sd(14,' ');
@@ -2112,7 +2113,7 @@ begin
      sd(14,' ');
      sd(global_teamcol,s2);
      d(10,' !');
-
+}
      {gang - gang routine}
      auto_gangwar(s,s2);
      inc(attack_nr);

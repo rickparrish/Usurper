@@ -885,7 +885,6 @@ var
    x : longint;
    j : byte;
    s : s70;
-   go_ahead : boolean;
    child : childrec;
    marry, spouse  : userrec;
    relation : relationrec;
@@ -896,18 +895,15 @@ begin {called from npcmaint.pas. player marries the first girl/boy he can find}
   if i mod 100 = 0 then sd(12,'.');
   load_relation(fload,relation,i);
   if relation.deleted=true then continue;
-      {relation_checkplyrec(relation); (user exists?)}
-
-     if ((relation.relation1=global_RelationLove) or
-          (relation.relation2=global_RelationLove)) and
-        (relation.BannedMarry=false) then begin
-          if is_player_married(relation.name1,relation.idtag1)<>'' then continue;
+  if ((relation.relation1=global_RelationLove) or
+     (relation.relation2=global_RelationLove)) and
+     (relation.BannedMarry=false) then begin
+    if is_player_married(relation.name1,relation.idtag1)<>'' then continue;
     if is_player_married(relation.name2,relation.idtag2)<>'' then continue;
 
-
-      if load_character(marry,relation.filetype2,relation.recnr1)=false then continue;
-      if load_character(spouse,relation.filetype2,relation.recnr2)=false then continue;
-          if (marry.age>=config.minimumagetomarry) and (spouse.age>=config.minimumagetomarry)then begin
+    if load_character(marry,relation.filetype2,relation.recnr1)=false then continue;
+    if load_character(spouse,relation.filetype2,relation.recnr2)=false then continue;
+    if (marry.age>=config.minimumagetomarry) and (spouse.age>=config.minimumagetomarry)then begin
 
         {we both love each other, lets marry!}
         relation.relation1:=global_RelationLove;
@@ -1059,8 +1055,8 @@ begin {called from npcmaint.pas. player marries the first girl/boy he can find}
          {d(15,'NPC marriage between '+relation.name1+' and '+relation.name2+'!');}
         end;
 
-       end;
-      end;
+   end;
+  end;
 
  end; {for i:= .end.}
 
