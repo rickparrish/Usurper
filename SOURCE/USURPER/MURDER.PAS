@@ -330,7 +330,7 @@ begin
      end;
 
      monster[i]^.strength:=25;
-     monster[i]^.defence:=15;
+     monster[i]^.defence:={15} 0;
      monster[i]^.phrase:='Surrender NOW!';
      monster[i]^.grabweap:=false;
      monster[i]^.grabarm:=false;

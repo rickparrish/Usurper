@@ -727,7 +727,7 @@ begin
                             'Captain of the Guard', {name}
                             75,            {hps}
                             25,            {strength}
-                            15,            {defence}
+                            {15} 0,            {defence}
                             'Stop!',       {phrase}
                             false,         {grabweap}
                             false,         {grabarm}
@@ -745,7 +745,7 @@ begin
                             'Guard',       {name}
                             50,            {hps}
                             20,            {strength}
-                            10,            {defence}
+                            {10} 0,            {defence}
                             'Robbery',     {phrase}
                             false,         {grabweap}
                             false,         {grabarm}
@@ -770,7 +770,7 @@ begin
                            'Pitbull',     {name}
                            95,            {hps}
                            40,            {strength}
-                           20,            {defence}
+                           {20} 0,            {defence}
                            'Grrrr..',     {phrase}
                            false,         {grabweap}
                            false,         {grabarm}
