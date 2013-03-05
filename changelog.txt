@@ -8,6 +8,8 @@ Maintenance:
 Monsters:
 -For 20 years, monsters' defense was ignored, regardless of its value in the monster editor. I've now activated monster defense, but to keep the game the same I have explicitly set all default monsters' defense to 0. This means that this change does not affect anything unless you want to run a custom game where monsters have defense (since now the defense values in the monster editor will be honoured if you change them from 0).
 
+Experience:
+-Terrible bug where 10% of experience could be lost when both you and your opponent die in a teamfight. Fixed.
 
 ----------
 
