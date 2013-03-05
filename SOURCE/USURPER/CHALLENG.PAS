@@ -1100,7 +1100,7 @@ begin
                else if player.team<>'' then begin
                 crlf;
                 d(15,'Quit your team first! If you''re going up against the Royals');
-                d(15,'you must alone, not representing any other interest than yourself.');
+                d(15,'you must be alone, not representing any other interest than yourself.');
                 go:=false;
                 pause;
                end

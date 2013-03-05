@@ -209,7 +209,7 @@ begin
                  s,              {name}
                  hps,            {hps}
                  global_dungeonlevel*3,          {strength}
-                 global_dungeonlevel*3,          {defence}
+                 0,          {defence}
                  'bloody liar!', {phrase}
                  false,          {grabweap}
                  false,          {grabarm}
@@ -1029,7 +1029,7 @@ begin
                  s,              {name}
                  hps,            {hps}
                  global_dungeonlevel*2,          {strength}
-                 global_dungeonlevel*2,          {defence}
+                 0,          {defence}
                  'trespasser!',  {phrase}
                  false,          {grabweap}
                  false,          {grabarm}

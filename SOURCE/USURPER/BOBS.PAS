@@ -163,7 +163,7 @@ begin
                monster[i]^.name:='thug';
                monster[i]^.hps:=player.hps-random(25);
                monster[i]^.strength:=player.strength-random(25);
-               monster[i]^.defence:=50;
+               monster[i]^.defence:={50} 0;
                monster[i]^.phrase:='Give us your '+config.moneytype+'!';
                monster[i]^.grabweap:=false;
                monster[i]^.grabarm:=false;

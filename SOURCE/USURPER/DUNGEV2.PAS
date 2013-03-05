@@ -252,7 +252,7 @@ begin
                           s,              {name}
                           global_dungeonlevel*5,          {hps}
                           global_dungeonlevel*2,          {strength}
-                          global_dungeonlevel*2,          {defence}
+                          0,          {defence}
                           'Husch Husch!', {phrase}
                           false,          {grabweap}
                           false,          {grabarm}
@@ -284,7 +284,7 @@ begin
                           s,              {name}
                           global_dungeonlevel*9,          {hps}
                           global_dungeonlevel*3,          {strength}
-                          global_dungeonlevel*3,          {defence}
+                          0,          {defence}
                           'Gsawha! Stmack!', {phrase}
                           false,          {grabweap}
                           false,          {grabarm}
@@ -317,7 +317,7 @@ begin
                           s,              {name}
                           global_dungeonlevel*5,          {hps}
                           global_dungeonlevel*2,          {strength}
-                          global_dungeonlevel*2,          {defence}
+                          0,          {defence}
                           'Shining gold!',{phrase}
                           false,          {grabweap}
                           false,          {grabarm}
@@ -347,7 +347,7 @@ begin
                           s,              {name}
                           global_dungeonlevel*6,          {hps}
                           global_dungeonlevel*3,          {strength}
-                          global_dungeonlevel*4,          {defence}
+                          0,          {defence}
                           'Take no prisoners!',{phrase}
                           false,          {grabweap}
                           false,          {grabarm}
@@ -723,7 +723,7 @@ begin
                              s,              {name}
                              hps,            {hps}
                              global_dungeonlevel*3,          {strength}
-                             global_dungeonlevel*3,          {defence}
+                             0,          {defence}
                              'Mmmm..',       {phrase}
                              false,          {grabweap}
                              false,          {grabarm}
@@ -1296,7 +1296,7 @@ begin
                  s,              {name}
                  hps,            {hps}
                  global_dungeonlevel*2, {strength}
-                 global_dungeonlevel*2, {defence}
+                 0, {defence}
                  phrase,         {phrase}
                  false,          {grabweap}
                  false,          {grabarm}
@@ -1683,7 +1683,7 @@ begin
                  s,              {name}
                  hps,            {hps}
                  global_dungeonlevel*2,          {strength}
-                 global_dungeonlevel*2,          {defence}
+                 0,          {defence}
                  'help me!',     {phrase}
                  false,          {grabweap}
                  false,          {grabarm}

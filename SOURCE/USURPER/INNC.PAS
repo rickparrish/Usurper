@@ -334,7 +334,7 @@ begin
         guard^.name,    {name}
         guard^.hps,     {hps}
         guard^.battack, {strength}
-        player.level,   {defence}
+        {player.level} 0,   {defence}
         'Grrrr..',      {phrase}
         false,          {grabweap}
         false,          {grabarm}

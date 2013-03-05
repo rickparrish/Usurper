@@ -154,7 +154,7 @@ begin
          end;
 
          if first=true then begin
-          d(config.textcolor,'1. How old are you?');
+          d(config.textcolor,'2. How old are you?');
           sd(config.textcolor,':');
           x:=get_number(0,1000);
 

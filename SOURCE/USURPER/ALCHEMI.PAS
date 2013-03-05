@@ -230,7 +230,7 @@ begin
                monster[1]^.name:='Great Boa';
                monster[1]^.hps:=150;
                monster[1]^.strength:=20;
-               monster[1]^.defence:=12;
+               monster[1]^.defence:={12} 0;
                monster[1]^.phrase:='Ssssssss.....!!';
                monster[1]^.grabweap:=false;
                monster[1]^.grabarm:=false;
@@ -244,7 +244,7 @@ begin
                monster[1]^.name:='Great Boar';
                monster[1]^.hps:=125;
                monster[1]^.strength:=25;
-               monster[1]^.defence:=10;
+               monster[1]^.defence:={10} 0;
                monster[1]^.phrase:='Mmmmrrrrr..!';
                monster[1]^.grabweap:=false;
                monster[1]^.grabarm:=false;
@@ -258,7 +258,7 @@ begin
                monster[1]^.name:='Huge Tiger';
                monster[1]^.hps:=110;
                monster[1]^.strength:=30;
-               monster[1]^.defence:=14;
+               monster[1]^.defence:={14} 0;
                monster[1]^.phrase:='rrrrrrr...';
                monster[1]^.grabweap:=false;
                monster[1]^.grabarm:=false;
@@ -309,7 +309,7 @@ begin
            monster[1]^.name:='Iceman';
            monster[1]^.hps:=130;
            monster[1]^.strength:=30;
-           monster[1]^.defence:=17;
+           monster[1]^.defence:={17} 0;
            monster[1]^.phrase:='Thou shall be frosty!';
            monster[1]^.grabweap:=true;
            monster[1]^.grabarm:=false;

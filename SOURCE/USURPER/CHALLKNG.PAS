@@ -317,7 +317,7 @@ begin {CHALLENGE KING *START*}
     MoatGuard.name,    {name}
     MoatGuard.hps,     {hps}
     MoatGuard.battack, {strength}
-    challenger.level,  {defence}
+    {challenger.level} 0,  {defence}
     'Grrrr..',      {phrase}
     false,          {grabweap}
     false,          {grabarm}

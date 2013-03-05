@@ -65,13 +65,11 @@ begin
  monster.magicres:=random(50);
 
  monster.strength:=strength+random(10);
- monster.defence :=monster.strength div 2;
 
  if weaponuser=false then monster.strength:=monster.strength+random(20);
- if armoruser=false then monster.defence:=monster.defence+random(20);
 
 
- {ej i monsterfilerna}
+ {all of Jakob's monsters had strength*3}
  monster.hps      :=monster.strength*3;
  monster.punch    :=0;
  monster.poisoned :=false;

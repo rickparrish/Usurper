@@ -1025,7 +1025,7 @@ begin
                           s,                 {name}
                           global_dungeonlevel*5*y,   {hps}
                           90,                {strength}
-                          15,                {defence}
+                          0,                {defence}
                           s2,                {phrase}
                           false,             {grabweap}
                           false,             {grabarm}

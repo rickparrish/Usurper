@@ -1,5 +1,13 @@
+***************RESET MONSTER DATAFILES***************
+
+When upgrading to this release, you must use the editor to reset the monster datafiles. Choose Reset, then check the Monsters checkbox. The game will crash if you don't do this. Further details on why this happened below.
+
 Maintenance:
 -Maintenance with option #153 was slow. Fixed (wicked-fast now)
+
+Monsters:
+-For 20 years, monsters' defense was ignored, regardless of its value in the monster editor. I've now activated monster defense, but to keep the game the same I have explicitly set all default monsters' defense to 0. This means that this change does not affect anything unless you want to run a custom game where monsters have defense (since now the defense values in the monster editor will be honoured if you change them from 0).
+
 
 ----------
 
