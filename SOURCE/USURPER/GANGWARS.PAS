@@ -1024,11 +1024,7 @@ begin
    team_save(pl[1]^,pl[2]^,pl[3]^,pl[4]^,
              pl[5]^,pl[6]^,pl[7]^,pl[8]^,pl[9]^);
 
-   rr:=0.90;
-   rr:=(player.exp*rr);
-   player.exp:=round(rr);
-   if player.exp<0 then player.exp:=0;
-
+   
    reduce_player_resurrections(player,true);
    {player.allowed:=false;}
    pause;
@@ -1083,7 +1079,6 @@ begin
 
    {player.allowed:=false;}
    reduce_player_resurrections(player,true);
-   if player.exp<0 then player.exp:=0;
 
    normal_exit;
   end;
@@ -1102,7 +1097,7 @@ begin
    if pl[1]^.name2<>'' then begin
     d(config.textcolor,'Gang attack aborted due to death of leader!');
     crlf;
-    d(config.textcolor,'As you fall to the ground the moral within your');
+    d(config.textcolor,'As you fall to the ground, the morale within your');
     d(config.textcolor,'ranks drops....maybe next time...');
     crlf;
    end
@@ -1133,10 +1128,6 @@ begin
              pl[5]^,pl[6]^,pl[7]^,pl[8]^,pl[9]^);
 
    {player.allowed:=false;}
-   if player.exp<0 then begin
-    player.exp:=0;
-   end;
-
    reduce_player_resurrections(player,true);
 
    pause;
@@ -1272,10 +1263,6 @@ begin
 
     {player.allowed:=false;}
     reduce_player_resurrections(player,true);
-    if player.exp<0 then begin
-     player.exp:=0;
-    end;
-
     {save teams}
     team_save(pl[1]^,pl[2]^,pl[3]^,pl[4]^,pl[5]^,pl[6]^,pl[7]^,pl[8]^,pl[9]^);
 
