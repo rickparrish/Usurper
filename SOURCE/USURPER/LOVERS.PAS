@@ -2633,14 +2633,14 @@ begin
                              global_RelationAnger,
                              global_RelationHate] then begin
 
-                             {npc hates player! no kiss!}
+                             {npc hates player! no bed!}
                              d(global_plycol,pl0^.name2+ulred+' hates you!');
                              d(12,'You can forget about sex!');
                              pause;
 
                             end
                             else begin
-                             {npc agrees to kiss player, provided npc isn't married!}
+                             {npc agrees to sleep with player, provided npc isn't married!}
 
                              s:=is_player_married(pl0^.name2,pl0^.id);
                              if s<>'' then begin
