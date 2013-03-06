@@ -563,7 +563,7 @@ begin
    end;
   end;
 
-  {other brawlers make their mmoves}
+  {other brawlers make their moves}
   for i:=1 to 10 do begin
    if foes[i]^>0 then begin
     if random(4)=0 then begin
@@ -1138,7 +1138,7 @@ begin
     '0':begin
         if random(stamina)=0 then begin
          d(config.textcolor,'You make a dash for the door!');
-         d(12,'But its blocked!');
+         d(12,'But it''s blocked!');
          crlf;
          pause;
         end
@@ -1158,12 +1158,12 @@ begin
 
          crlf;
          pause;
-
-         {for i:= .end.}
+         
          for i:=1 to 10 do begin
           dispose(foes[i]);
          end;
 
+         brawl:=false;
          exit;
 
         end;
@@ -1192,19 +1192,6 @@ begin
   if stunned=true then begin
    d(12,'You are laying on the floor stunned!');
    crlf;
-
-   {news-paper}
-   newsy(false,
-   ' '+uplc+player.name2+config.textcol1+' was stunned by a nerve punch!',
-   '',
-   '',
-   '',
-   '',
-   '',
-   '',
-   '',
-   '',
-   '');
 
    s:='';
    for i:=1 to 10 do begin
