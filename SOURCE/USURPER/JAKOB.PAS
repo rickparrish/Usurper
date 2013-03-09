@@ -44,6 +44,7 @@ Function striplead(st:string;ch:char):string;
 Function WithBackSlash(inpath:string):string;
 Function padright(const st:string;ch:char;l:integer):string;
 Function Str_to_Nr(const s:string) : longint; {string to number}
+Function Str_to_Real(const s:string) : real; {string to number}
 Function CommaStr(Number: LongInt):string;
 Function Long2Str(Number: LongInt):string;
 Function MkString( nr : integer;const s:string) :string;
@@ -233,6 +234,23 @@ begin
  end;
 
 end; {Str_To_Nr2 *end*}
+
+Function Str_To_Real(const s:string) : real;
+var y : integer;
+    i : real;
+begin
+
+ val(s,i,y);
+
+ if y<>0 then begin
+  str_to_real:=0;
+ end
+ else begin
+  str_to_real:=i;
+ end;
+
+end;
+
 
 Function Dos_Version : word;
 begin

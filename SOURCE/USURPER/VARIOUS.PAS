@@ -1459,7 +1459,7 @@ end; {swappy *end*}
 Procedure XPLose;
 var
    s : s70;
-   z : real;
+   z, zz : real;
    x : longint;
    lost : byte;
    lose : ^real;
@@ -1501,27 +1501,15 @@ begin
  end;
 
  {vi l„ser in lose parametrarna}
- case loser.level of
-   1..10  : x:=24;
-  11..20  : x:=25;
-  21..30  : x:=26;
-  31..40  : x:=27;
-  41..50  : x:=28;
-  51..60  : x:=29;
-  61..70  : x:=30;
-  71..80  : x:=31;
-  81..90  : x:=32;
-  91..200 : x:=33;
- end;
-
+ x:=24+(loser.level - 1) div 10;
  s:=cfg_string(x);
- x:=str_to_nr(s);
+ zz:=str_to_real(s);
 
- if (x<0) or (x>25) then begin
-  x:=1;
+ if (zz<0) or (zz>90) then begin
+  zz:=1;
  end;
 
- lose^:=x;
+ lose^:=zz;
  lose^:=lose^ / 100;
 
  plose:=round(lose^*loser.exp);
