@@ -956,10 +956,12 @@ begin
           if player.level>99 then global_dungeonlevel:=101;
 
           if (global_dungeonlevel=101) and (global_registered=true) then begin
+           {uncomment this to make supreme being based on mon editor
            y:=fs(FsMonster);
            load_monster(y-1,1);
            monster[1]^.hps:=player.hps*4;
            pause;
+           }
            supreme(pl[1]^,pl[2]^,pl[3]^,pl[4]^);
            normal_exit;
           end;

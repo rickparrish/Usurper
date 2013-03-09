@@ -292,6 +292,7 @@ begin
  monster[1]^.hps:=player.strength*9;
 
  monster[1]^.strength:=player.strength*3;
+ monster[1]^.defence:=0;
 
 
  Player_vs_Monsters(3,pl1,pl2,pl3,pl4);
