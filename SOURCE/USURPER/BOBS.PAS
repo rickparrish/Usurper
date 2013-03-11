@@ -1303,6 +1303,9 @@ if player.dex>400 then dec(y);
            '',
            '',
            '');
+       player.location:=offloc_prison;
+       player.daysinprison:=1; {days to spend in prison}
+       player.hps:=0;
 
            {player.allowed:=false;}
            Reduce_Player_Resurrections(player,true);

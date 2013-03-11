@@ -93,8 +93,7 @@ begin
    if (findsub(a,pl0^.name2)) and
       (pl0^.name2<>player.name2) and
       (player_active(pl0^,false)=true) and
-      (pl0^.team=player.team) and
-      (pl0^.hps<1) then begin
+      (pl0^.team=player.team) then begin
 
     if confirm(uplc+pl0^.name2+config.textcol1,'N')=false then begin
      done:=true;

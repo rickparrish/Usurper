@@ -169,15 +169,10 @@ begin
       if x=0 then begin
        {jailed!}
 
+       dec(player.darknr);
        {update location}
        player.location:=offloc_prison;
        player.daysinprison:=1; {days to spend in prison}
-
-       {update player variables}
-       dec(player.darknr);
-       player.hps:=0;
-       {player.allowed:=false;}
-       Reduce_Player_Resurrections(player,true);
 
        crlf;
        d(12,'***failure***   THEY WERE WAITING FOR YOU!   ***failure***');
@@ -185,6 +180,12 @@ begin
        d(config.textcolor,'The crowd outside would like to see you lynched, but');
        d(config.textcolor,'the guards manage to protect you.');
        crlf;
+       {update player variables}
+       dec(player.darknr);
+       player.hps:=0;
+       {player.allowed:=false;}
+       Reduce_Player_Resurrections(player,true);
+
        pause;
        crlf;
 

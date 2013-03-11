@@ -13,6 +13,10 @@ Experience:
 +Editor now allows float experience losses (e.g. 3.5%)
 +Between 0 and 90% of experience can be lost now, as per the help text in the editor (before only 0-25% was accepted)
 
+Prison:
+-Players were told that they were imprisoned when failing to thieve in Bob's, but they were not. Fixed.
+
+
 ----------
 
 Version 0.23c:
