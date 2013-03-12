@@ -1049,7 +1049,7 @@ begin {MAIN PROC **START**}
            d(config.textcolor,'But the monster doesn'+chr(39)+'t seem to care');
            d(config.textcolor,'about your pathetic whining!');
            crlf;
-           d(config.textcolor,'You soon realize that your life have come to an end...');
+           d(config.textcolor,'You soon realize that your life has come to an end...');
            d(4,'Splatt! Splatt! Your limbs are torn apart...');
            crlf;
            d(config.textcolor,'Darkness...');
@@ -1831,9 +1831,6 @@ begin {MAIN PROC **START**}
 
    end;
 
-   {infections?}
-   infections;
-
    done:=true;
    for i:=1 to global_maxmon do begin
     if monster[i]^.hps>0 then begin
@@ -1847,6 +1844,9 @@ begin {MAIN PROC **START**}
     global_PlayerInFight:=false;
     exit;
    end;
+   {infections?}
+   infections;
+
   end;
   {** end of 'A' <attack> **}
 

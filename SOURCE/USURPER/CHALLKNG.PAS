@@ -110,7 +110,7 @@ begin
  if fight then begin
   {put the event in the news}
   newsy(true,uwhite+'NEW '+s+'! --- NEW '+s+'! --- NEW '+s+'! --- NEW '+s+'!'+config.textcol1,
-  ' '+uplc+challenger.name2+config.textcol1+' usurped the thone!',
+  ' '+uplc+challenger.name2+config.textcol1+' usurped the throne!',
   ' '+config.textcol1+s1+' '+ukingc+pl0.name2+config.textcol1+' was defeated after a duel in the Castle!',
   ' The Royal Forces have sworn allegiance to '+ukingc+challenger.name2+config.textcol1+'.',
   ' May the Kingdom prosper under the new Reign!'+config.textcol1,
@@ -123,7 +123,7 @@ begin
  else begin
   {put the event in the news}
   newsy(true,uwhite+'NEW '+s+'! --- NEW '+s+'! --- NEW '+s+'! --- NEW '+s+'!'+config.textcol1,
-  ' '+uplc+challenger.name2+config.textcol1+' usurped the thone!',
+  ' '+uplc+challenger.name2+config.textcol1+' usurped the throne!',
   ' '+config.textcol1+s1+' '+ukingc+pl0.name2+config.textcol1+' was unable to defend the Castle!',
   ' The Royal Forces have sworn allegiance to '+ukingc+challenger.name2+config.textcol1+'.',
   ' May the Kingdom prosper under the new reign!'+config.textcol1,
