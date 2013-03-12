@@ -1501,7 +1501,7 @@ begin;
 
   repeat;
    sread_char_filtered(ch); {read(kbd,ch);}
-   if (ch<>#8) and (ch<>^M) and (length(s)<le) then begin;
+   if (ch<>#8) and (ch<>^M) and (ch<>#11) and (length(s)<le) then begin
     s:=s+ch;
     swrite(ch); { write(ch);}
    end;
@@ -1512,6 +1512,16 @@ begin;
     swrite(' ');
     swrite(#8);
    end;
+   if (ch=chr(11)) and (length(s)>0) then begin
+    while length(s) > 0 do begin
+    delete(s,length(s),1);
+    swrite(chr(8));                                { write(#8,' ',#8);}
+    swrite(' ');
+    swrite(#8);
+   end
+   end;
+
+
   until (ch=^M) or (length(s)=999);
   if pc then begin;
    set_foreground(promptcol3);
