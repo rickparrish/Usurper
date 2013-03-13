@@ -639,6 +639,10 @@ begin
                global_auto_probe:=NoWhere;
                cho:=' ';
               end;
+   AtHome:begin
+             cho:='H';
+            end;
+
   end; {case .end.}
 
 

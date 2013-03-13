@@ -16,6 +16,11 @@ Experience:
 Prison:
 -Players were told that they were imprisoned when failing to thieve in Bob's, but they were not. Fixed.
 
+Home:
+-(g)oing to sleep in home put you at main street on next entrance. Fixed.
+
+Dungeon fights:
+-Disease text was printed after player was dead. Fixed.
 
 ----------
 

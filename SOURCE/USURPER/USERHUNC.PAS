@@ -52,8 +52,7 @@ var
    players_allowed : longint;
 
    dngfights,
-   plfights,
-   maxplys    : integer;
+   plfights : integer;
 
    found_user,
    maxtime,
@@ -92,11 +91,6 @@ Begin
  plfights:=str_to_nr(s);
  if (plfights<1) or (plfights>99) then plfights:=3;
 
- {get Max players allowed fr†n .CFG}
- s:=cfg_string(50);
- maxplys:=str_to_nr(s);
- if (maxplys<1) or (maxplys>global_maxplayers) then maxplys:=global_maxplayers;
-
  {get MaxTime fr†n USURP.CTL}
  maxtime:=time_left;
 
@@ -124,26 +118,26 @@ Begin
      crlf;
      d(14,'If you want, you can send messages to online players');
      d(14,'from the main menu.');
+     pause;
     end;
 
     player.name1:=emptystr;
     player.name2:=emptystr;
 
-     pause;
      user_search:=false;
      exit;
 
-    normal_exit;
    end;
 
    if (player.interest>0) or
       (player.alive_bonus>0) or
-      (player.roytaxpaied>0) then begin
+      (player.roytaxpaied>0) or
+      (player.bankwage>0) then begin
 
+    if player.roytaxpaied>0 then begin
     {load king}
     load_king(fload,king);
 
-    if player.roytaxpaied>0 then begin
      {repost Royal Taxes payed since last login}
      post(MailSend,
      player.name2,
@@ -321,10 +315,7 @@ Begin
     crlf;
     d(12,'Since your last visit ...');
     crlf;
-    if player.location=offloc_prison then begin
-     {d(config.textcolor,'You are in jail. Return tomorrow for more action.');}
-    end
-    else begin
+    if player.location<>offloc_prison then begin
      d(config.textcolor,'You may return tomorrow and regain some of your lost pride...');
      crlf;
      pause;
@@ -341,13 +332,17 @@ Begin
  end;
 
  if found_user>0 then begin
-  load_character(player,1,found_user);
 
   if player.hps<1 then player.hps:=player.maxhps;
 
   if player.location=offloc_dormitory then begin
    global_auto_probe:=Dormy;
   end
+  else if player.location=offloc_home then begin
+   global_auto_probe:=AtHome;
+  end
+
+
   else if player.location in [offloc_innroom1..offloc_innroom4] then begin
    global_auto_probe:=Inn;
   end

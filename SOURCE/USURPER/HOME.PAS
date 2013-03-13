@@ -1528,11 +1528,20 @@ begin {Main proc START}
    add_onliner(OUpdateLocation,onliner);
   end;
 
-  {display menu}
-  display_menu(true,true);
+  {auto-probe, players is moving automatically}
+  case global_auto_probe of
+   NoWhere:begin
+            display_menu(true,true);
+            ch:=upcase(getchar);
+            
+           end;
 
-  {get user-input}
-  ch:=upcase(getchar);
+   AtHome:begin
+         global_auto_probe:=NoWhere;
+                  ch:='?';
+
+        end;
+  end; {case .end.}
 
   {evaluate user-input}
   case ch of

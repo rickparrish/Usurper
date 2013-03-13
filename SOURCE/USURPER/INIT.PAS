@@ -330,7 +330,8 @@ type
            Inn,
            Dormy,
            Prison,
-           UmanCave);
+           UmanCave,
+           AtHome);
 
  Classes = (Alchemist, {change RATING.PAS and VARIOUS.PAS when changing # of classes}
             Assassin,
