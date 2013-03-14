@@ -15,12 +15,17 @@ Experience:
 
 Prison:
 -Players were told that they were imprisoned when failing to thieve in Bob's, but they were not. Fixed.
+-When (e)scaping from prison, you were kicked out of the game instead of put on Main Street. Fixed. (I think Jakob did this because he was worried that the player would not be initialized correctly. I tried to fix that.)
+-No more resurrecting players that are in prison
 
 Home:
 -(g)oing to sleep in home put you at main street on next entrance. Fixed.
 
 Dungeon fights:
 -Disease text was printed after player was dead. Fixed.
+
+Gym:
+-Dead or imprisoned players should not be able to defend the gym. Fixed.
 
 ----------
 

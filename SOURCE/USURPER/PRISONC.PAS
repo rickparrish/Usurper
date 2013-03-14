@@ -179,6 +179,9 @@ begin
          d(13,'You are free!');
 
          player.location:=offloc_dormitory;
+         player.hps:=player.maxhps;
+           player.DaysinPrison:=0;
+           global_auto_probe:=MainStreet;
          user_save(player);
 
          exit;
@@ -300,11 +303,12 @@ begin
 
            {set player flags}
            player.location:=offloc_dormitory;
+           player.hps:=player.maxhps;
            player.DaysinPrison:=0;
            global_auto_probe:=MainStreet;
 
            {enter game}
-           normal_exit;
+           exit;
 
           end;
 

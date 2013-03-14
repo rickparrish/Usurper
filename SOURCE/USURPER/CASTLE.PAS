@@ -1817,7 +1817,7 @@ begin
         +many_money(king^.treasury)+'.');
    crlf;
    menu('(T)axes'+s);
-   menu('(S)et tax privilegies.');
+   menu('(S)et tax privileges.');
    menu('(A)dd your own '+config.moneytype+' to the Treasury (good).');
    menu('(W)ithdraw '+config.moneytype+' from the Treasury to your personal account (bad).');
    menu('(R)eturn');
@@ -1832,7 +1832,7 @@ begin
 
   {evaluate user-input}
   case cho of
-   'S':begin {special tax privilegies}
+   'S':begin {special tax privileges}
         cho:='?';
         repeat
 

@@ -62,7 +62,7 @@ begin
  big_done:=false;
  repeat
  crlf;
- d(config.textcolor,'Who do you wish to Resurrect? (enter ? to see your team)');
+ d(config.textcolor,'Who do you wish to Resurrect? (enter '+config.textcol2+'?'+config.textcol1+' to see your team)');
  sd(config.textcolor,':');
  a:=get_string(20);
  a:=upcasestr(a);
@@ -100,7 +100,11 @@ begin
     end
     else begin
 
-     if pl0^.hps>0 then begin
+     if pl0^.location=offloc_prison then begin
+               sd(global_plycol,pl0^.name2);
+          d(config.textcolor,' is in prison and cannot be resurrected!');
+end
+     else if pl0^.hps>0 then begin
       case random(5) of
        0:begin
           sd(global_talkcol,'I feel fine! I don''t need your Hocus Pocus!');

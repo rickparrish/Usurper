@@ -316,6 +316,7 @@ begin
          end
          else begin
           d(15,'"NO THANKS!"');
+          pause;
          end;
         end;
        end; {vitamin offer END}
@@ -1241,6 +1242,7 @@ end
    'T':begin
        if player.thiefs<1 then begin
         d(5,'You have tried enough for today.');
+        pause;
        end
        else begin
         y:=10;
@@ -1326,6 +1328,7 @@ if player.dex>400 then dec(y);
          crlf;
          d(5,'You are too exhausted!');
          crlf;
+         pause;
         end
         else begin
          crlf;
@@ -1341,6 +1344,7 @@ if player.dex>400 then dec(y);
          crlf;
          d(12,'You are too exhausted!');
          crlf;
+         pause;
         end
         else begin
          crlf;

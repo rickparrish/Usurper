@@ -506,9 +506,15 @@ Begin
 
   x:=0;
 
+if (s='SYSOP') then begin
+    d(12,'I''m sorry, but that name is already being used.');
+    crlf;
+continue
+end;
+
   for i:=1 to fs(FsPlayer) do begin
    load_character(player,1,i);
-   if (s=upcasestr(player.name2)) or (s='SYSOP') then begin
+   if (s=upcasestr(player.name2)) then begin
     d(12,'I''m sorry, but that name is already being used.');
     crlf;
     x:=999;
@@ -523,10 +529,6 @@ Begin
 
    for i:=1 to fs(FsNpc) do begin
     load_character(pl0,2,i);
-    if alias='' then begin
-     x:=999;
-     break;
-    end;
     if s=upcasestr(pl0.name2) then begin
      d(config.textcolor,'I''m sorry, but that name is already being used.');
      crlf;
@@ -803,9 +805,8 @@ Begin
    end;
   end;
 
- until cho='+';
+ until cho='Never';
 
- clearscreen;
 
  {*user description*}
  for i:=1 to 4 do begin
@@ -849,7 +850,7 @@ Begin
  player.bankgold:=0;
  player.exp:=10;
  player.fights:=dngfights;
- player.healing:=150;
+ player.healing:=125;
  player.ageplus:=0;
  player.darknr:=3;
  player.chivnr:=3;
@@ -888,7 +889,7 @@ Begin
  player.master:='1';
  player.tfights:=3;
  player.thiefs:=3;
- player.brawls:=2;
+ player.brawls:=3;
  player.assa:=3;
  player.poison:=0;
 
@@ -1293,7 +1294,7 @@ Begin
  player.recnr:=0;
  player.auto_meny:=true;
  player.roytaxpaied:=0;
- player.wrestlings:=8;
+ player.wrestlings:=Config.MaxWrestlings;
  player.drinksleft:=Config.DrinksatOrbs;
  player.daysinprison:=0;
  player.umanbeartries:=0;
