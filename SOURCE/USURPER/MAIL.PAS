@@ -257,7 +257,6 @@ var
    worm  : array [1..global_maxmaillines] of ^s100;
 
    oki,
-   adios,
    found,
    quote,
    readerisgod,
@@ -1283,6 +1282,7 @@ end; {raising_children *end*}
 
 procedure birthday; {mailrequest_birthday}
 var
+    i : integer;
     ch : char;
     done : boolean;
     tries: byte;
@@ -1321,8 +1321,7 @@ begin
   {get user-input}
   ch:=upcase(getchar);
 
-  {a character will instantly fall in love with you}
-
+  
   {evaluate user-input}
   case ch of
    'S':begin
@@ -2378,7 +2377,8 @@ begin {MAIN PROC (POST) **START**}
               end;
              end;
 
-             if (letter^.receiver=receiver) and
+             
+                if (letter^.receiver=receiver) and
                 (letter^.readflag=false) and
                 (letter^.recgod=ReaderIsGod) then begin
 
@@ -2539,8 +2539,7 @@ begin {MAIN PROC (POST) **START**}
               end {NORMAL LETTER FROM SOMEBODY **END**}
 
               {special LETTERS, mail/requests}
-              else if (letter^.receiver=receiver) and
-                      (letter^.special=MailRequest_IWantGuard) and
+                      else if (letter^.special=MailRequest_IWantGuard) and
                       (player.king=true) then begin
                {PLAYER OFFERS KING TO BE HIS/HER PERSONAL GUARD}
 
@@ -2726,8 +2725,7 @@ begin {MAIN PROC (POST) **START**}
 
               end
               
-              else if (letter^.receiver=receiver) and
-                      (letter^.special=MailRequest_RoyalAngel) then begin
+                      else if (letter^.special=MailRequest_RoyalAngel) then begin
                {KING HAS SENT A ANGEL TO HEAL PLAYER}
 
                {is the good doing king still king?}
@@ -2779,8 +2777,7 @@ begin {MAIN PROC (POST) **START**}
                end;
 
               end {royal angel *end*}
-              else if (letter^.receiver=receiver) and
-                      (letter^.special=MailRequest_RoyalAvenger) then begin
+                      else if (letter^.special=MailRequest_RoyalAvenger) then begin
                {KING HAS SENT A DARK AVENGER TO HURT PLAYER}
 
                {is the evil doing king still king?}
@@ -2835,8 +2832,7 @@ begin {MAIN PROC (POST) **START**}
                end;
 
               end {royal Dark Avenger *end*}
-              else if (letter^.receiver=receiver) and
-                      (letter^.special=MailRequest_QuestOffer) then begin
+                      else if (letter^.special=MailRequest_QuestOffer) then begin
                {KING HAS OFFERED A QUEST TO PLAYER}
 
                {is the king still king?}
@@ -3083,8 +3079,7 @@ begin {MAIN PROC (POST) **START**}
                end;
 
               end {quest offer *end*}
-              else if (letter^.receiver=receiver) and
-                      (letter^.special=MailRequest_Poison) then begin
+                      else if (letter^.special=MailRequest_Poison) then begin
                {SENDER has sent "poison" to PLAYER *relation event*}
 
                {let us first check whether the SENDER still is valid}
@@ -3126,7 +3121,7 @@ begin {MAIN PROC (POST) **START**}
 
                   {detected the poison!}
                   crlf;
-                  d(15,'Wait a minute! You can smell the Arsenic long way..!');
+                  d(15,'Wait a minute! You can smell the Arsenic right away..!');
                   d(15,'This is a lethal Drink!');
                   d(15,'They are trying to get rid of you!');
 
@@ -3295,8 +3290,7 @@ begin {MAIN PROC (POST) **START**}
 
               end
 
-              else if (letter^.receiver=receiver) and
-                      (letter^.special=MailRequest_Roses) then begin
+                      else if (letter^.special=MailRequest_Roses) then begin
                {SENDER has sent "bouquet of roses" to PLAYER *relation event*}
 
                {let us first check whether the SENDER still is valid}
@@ -3450,70 +3444,56 @@ begin {MAIN PROC (POST) **START**}
 
               end
 
-              else if (letter^.receiver=receiver) and
-                      (letter^.special in [MailRequest_ChildRaisingExp,
+                      else if (letter^.special in [MailRequest_ChildRaisingExp,
                                            MailRequest_ChildPoisonedExp,
                                            MailRequest_ChildCursedExp,
                                            MailRequest_ChildDepressedExp]) then begin
                raising_children(letter^.special);
               end
-              else if (letter^.receiver=receiver) and
-                      (letter^.special=MailRequest_ChildFightExp) then begin
+                      else if (letter^.special=MailRequest_ChildFightExp) then begin
                fighting_children;
               end
-              else if (letter^.receiver=receiver) and
-                      (letter^.special=MailRequest_SilentExp) then begin
+                      else if (letter^.special=MailRequest_SilentExp) then begin
                silent_experience;
               end
-              else if (letter^.receiver=receiver) and
-                      (letter^.special=MailRequest_ScanForBabies) then begin
+                      else if (letter^.special=MailRequest_ScanForBabies) then begin
                name_babies(player,false);
               end
-              else if (letter^.receiver=receiver) and
-                      (letter^.special=MailRequest_JoinTeam) then begin
+                      else if (letter^.special=MailRequest_JoinTeam) then begin
                Join_Team;
               end
-              else if (letter^.receiver=receiver) and
-                      (letter^.special=MailRequest_GymMembership) then begin
+                      else if (letter^.special=MailRequest_GymMembership) then begin
                Gym_Membership;
               end
-              else if (letter^.receiver=receiver) and
-                      (letter^.special=MailRequest_Birthday) then begin
+                      else if (letter^.special=MailRequest_Birthday) then begin
                birthday;
               end
-              else if (letter^.receiver=receiver) and
-                      (letter^.special in [MailRequest_HoldHands,
+                      else if (letter^.special in [MailRequest_HoldHands,
                                            MailRequest_Dinner,
                                            MailRequest_Kiss]) then begin
                dating;
               end
-              else if (letter^.receiver=receiver) and
-                      (letter^.special in [MailRequest_Scorpions,
+                      else if (letter^.special in [MailRequest_Scorpions,
                                            MailRequest_Chocolate]) then begin
                surprise_box;
               end
-              else if (letter^.receiver=receiver) and
-                      (letter^.special in [MailRequest_HaveSex,
+                      else if (letter^.special in [MailRequest_HaveSex,
                                            MailRequest_HaveDiscreteSex]) then begin
                Have_Sex;
               end
-              else if (letter^.receiver=receiver) and
-                      (letter^.special=MailRequest_DrinkOffer) then begin
+                      else if (letter^.special=MailRequest_DrinkOffer) then begin
 
                drink_offer;
 
               end {drink offer *end*}
 
-              else if (letter^.receiver=receiver) and
-                      (letter^.special=mailrequest_ImmortalOffer) then begin
+                      else if (letter^.special=mailrequest_ImmortalOffer) then begin
 
                immortal_offer(player);
 
               end {drink offer *end*}
 
-
-              else if (letter^.receiver=receiver) and
-                      (letter^.special=MailRequest_BeMyGuard) then begin
+                      else if (letter^.special=MailRequest_BeMyGuard) then begin
                {KING OFFERS PLAYER TO BE HIS/HER PERSONAL GUARD}
 
                {is the offering king still king?}
@@ -3735,9 +3715,6 @@ begin {MAIN PROC (POST) **START**}
 
                end; {the kings offer}
 
-               {set readflag}
-               letter^.readflag:=true;
-
 
               end {be My Guard .end.}
 
@@ -3762,13 +3739,10 @@ begin {MAIN PROC (POST) **START**}
 
               {we only update the letter if the readflag has been set}
               if letter^.readflag=true then begin
-               adios:=false;
                Load_Mail(FSave,letter^,i);
-               adios:=true;
               end;
 
              end;
-
             end; {for i:= .end.}
 
 

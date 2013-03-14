@@ -3279,7 +3279,7 @@ begin {take_over_the_gym}
 
      if (pl0.name2<>player.name2) and
         (pl0.id<>player.id) and
-        (pl0^.hps>0) and (pl0^.location<>offloc_prison) and 
+        (pl0.hps>0) and (pl0.location<>offloc_prison) and 
         (pl0.deleted=false) then begin
 
       if (pl0.team=gym_owners) and (pl0.gym_owner>0) then begin

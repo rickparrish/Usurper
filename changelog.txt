@@ -27,6 +27,9 @@ Dungeon fights:
 Gym:
 -Dead or imprisoned players should not be able to defend the gym. Fixed.
 
+Birthday:
+-Infinite loop with (l)ove reward. Fixed.
+
 ----------
 
 Version 0.23c:
