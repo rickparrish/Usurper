@@ -526,14 +526,13 @@ begin {calculates and returns the levels tempgod should have based on
 
  {check exp}
  if currexp>5000 then result:=2;
- if currexp>15000 then result:=4;
- if currexp>50000 then result:=5;
- if currexp>70000 then result:=6;
- if currexp>90000 then result:=7;
- if currexp>110000 then result:=8;
- if currexp>550000 then result:=9;
- if currexp>1000500 then result:=10;
- if currexp>25030000 then result:=11;
+ if currexp>15000 then result:=3;
+ if currexp>50000 then result:=4;
+ if currexp>70000 then result:=5;
+ if currexp>90000 then result:=6;
+ if currexp>110000 then result:=7;
+ if currexp>550000 then result:=8;
+ if currexp>1000500 then result:=9;
 
  {return result}
  god_level_raise:=result;
@@ -552,8 +551,8 @@ begin
   5 : s:='Minor Deity';
   6 : s:='Deity';
   7 : s:='Major Deity';
-  9 : s:='DemiGod';
-  10: s:='God';
+  8 : s:='DemiGod';
+  9: s:='God';
 
  end; {case of .end.}
 
@@ -1029,7 +1028,7 @@ begin {the boss god!}
 
  crlf;
  crlf;
- d(config.textcolorH,'Your mind shift toward other matters.');
+ d(config.textcolorH,'Your mind shifts toward other matters.');
 
 end; {the_great_creators_place *end*}
 

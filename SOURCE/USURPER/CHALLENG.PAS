@@ -1637,7 +1637,6 @@ begin
          d(config.textcolor,'You can end up with a lot of stiffs here.');
          crlf;
          if confirm('Really go to GANGWAR','n')=true then begin
-          dec(player.tfights);
           gang_wars('vet inte „nnu!',true);
           player.gnollp:=0;
          end

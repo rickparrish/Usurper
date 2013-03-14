@@ -506,10 +506,7 @@ begin
 
       if (findsub(a,player0^.team)) and
          (player0^.team<>'') and
-         (player0^.team<>player.team) and
-         (player_active(player0^,true)=true) and
-         (player0^.allowed=true) then begin
-
+         (player0^.team<>player.team) then begin
        x:=0;
 
        if currentmax>0 then begin
@@ -605,7 +602,6 @@ begin
    end;
 
    if s<>'' then begin
-    dec(player.tfights);
 
     {update onliner.doing}
     onliner.doing:='fighting '+utec+s+config.textcol1;

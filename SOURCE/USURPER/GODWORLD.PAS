@@ -608,7 +608,7 @@ begin
            go_ahead:=false;
 
 
-           if confirm(uplc+mortal.name2+config.textcol1+' is alredy a believer in '+ugodc+mortal.god
+           if confirm(uplc+mortal.name2+config.textcol1+' is already a believer in '+ugodc+mortal.god
                +config.textcol1+'! Continue','N')=true then begin
             d(config.textcolor,'You are not afraid of '+ugodc+mortal.god+config.textcol1+'!');
             go_ahead:=true;
@@ -643,7 +643,7 @@ begin
             menu('(J)ust ask');
             menu('(A)bort');
             crlf;
-            sd(config.textcolor,'Recruite Method ('+config.textcol2H+'?'+config.textcol1H+' for menu) :');
+            sd(config.textcolor,'Recruit Method ('+config.textcol2H+'?'+config.textcol1H+' for menu) :');
 
 
             ch:=upcase(getchar);
@@ -697,7 +697,7 @@ begin
                      d(14,'Success!');
                      d(global_plycol,mortal.name2+config.textcol1+' has decided to follow you!');
                      d(14,'Your powers grow!');
-                     d(14,'News of your actions spread through the mortal and immortal world...');
+                     d(14,'News of your actions spreads through the mortal and immortal world...');
 
                      switch_sides:=true;
                     end
@@ -711,7 +711,7 @@ begin
                       d(global_plycol,mortal.name2+config.textcol1+' rejects your offer!');
                      end;
 
-                     d(12,'News of your actions spread through the mortal and immortal world...');
+                     d(12,'News of your actions spreads through the mortal and immortal world...');
 
                      switch_sides:=false;
                     end;
@@ -724,6 +724,9 @@ begin
                      user_save(mortal);
 
                      {update immortal with new stats}
+                    {experience, change this and you must change in mail.pas as well}
+                    incgodexp(god,150);
+
                      inc(god.believers);
                      load_god(fsave,god,god.recnr);
 
@@ -946,7 +949,7 @@ begin
                      Newsy(true,
                      'Salvation',
                      ' '+uplc+mortal.name2+config.textcol1+' found faith in '+ugodc+god.name+config.textcol1+'!',
-                     ' Evil tounges claim that '+uplc+mortal.name2+config.textcol1+' was forced into '+ugodc+god.name+'s'
+                     ' Evil tongues claim that '+uplc+mortal.name2+config.textcol1+' was forced into '+ugodc+god.name+'s'
                         +config.textcol1+' flock.',
                      '',
                      '',
@@ -960,7 +963,7 @@ begin
                      Newsy(true,
                      'Salvation',
                      ' '+uplc+mortal.name2+config.textcol1+' found faith in '+ugodc+god.name+config.textcol1+'!',
-                     ' Evil tounges claim that '+ugodc+god.name+config.textcol1+' played an active part in this!',
+                     ' Evil tongues claim that '+ugodc+god.name+config.textcol1+' played an active part in this!',
                      '',
                      '',
                      '',
@@ -981,7 +984,7 @@ begin
                      d(12,'FAILURE!');
                      d(global_plycol,mortal.name2+config.textcol1h+' is not afraid of YOUR powers!');
                      d(config.textcolor,'Your intimidation tactics don''t seem to work...');
-                     d(12,'News of your actions spread through the mortal and immortal world...');
+                     d(12,'News of your actions spreads through the mortal and immortal world...');
 
 
                      {news-paper}
@@ -1003,14 +1006,14 @@ begin
                      crlf;
                      d(12,'FAILURE!');
                      d(global_plycol,mortal.name2+config.textcol1h+' has no interest in joining your flock!');
-                     d(12,'News of your actions spread through the mortal and immortal world...');
+                     d(12,'News of your actions spreads through the mortal and immortal world...');
 
 
                      {news-paper}
                      newsy(true,
                      +config.textcol1+'Pathetic Recruitment Attempt',
                      config.textcol1+' The immortal '+ugodc+god.name+config.textcol1
-                        +' attempted to recruite ',
+                        +' attempted to recruit ',
                      ' '+uplc+mortal.name2+config.textcol1+'.',
                      ' The attempt failed miserably.',
                      '',

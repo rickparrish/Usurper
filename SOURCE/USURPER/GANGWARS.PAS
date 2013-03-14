@@ -572,7 +572,7 @@ begin
   {display current Town controllers}
   sd(global_teamcol,upcasestr(oppo));
   d(15,' holds the town!');
-
+end; 
   {check if the opposing team is around}
   found:=false;
   all_dead:=true;
@@ -618,7 +618,7 @@ begin
     end;
    end;
   end;
-
+if turfgo then begin
   if (found=false) and (all_dead=false) then begin
    crlf;
    d(config.textcolor,'Sorry! Nobody in the other team can face your boys.');
@@ -628,8 +628,8 @@ begin
    pause;
    disposal;
    exit;
-  end
-  else if (found=false) and (all_dead=true) then begin
+  end;
+  if (found=false) and (all_dead=true) then begin
    {all in the opposing team are dead, we get the town by default}
    sd(config.textcolor,'The members of ');
    sd(11,oppo);
@@ -692,7 +692,16 @@ begin
   end;
 
  end;
-
+if not found then begin
+   sd(config.textcolor,'Noone in ');
+   sd(11,oppo);
+   d(config.textcolor,' can fight right now!');
+crlf;
+pause;
+disposal;
+exit;
+end;
+dec(player.tfights);
  bround:=1;
  crlf;
 
@@ -708,7 +717,6 @@ begin
                 else fastgame:=false;
 
  clearscreen;
-
 
 
 

@@ -30,6 +30,9 @@ Gym:
 Birthday:
 -Infinite loop with (l)ove reward. Fixed.
 
+Gangwars:
+-Gangfights available should not be decremented when no one in rival gang is around to fight. Fixed.
+
 ----------
 
 Version 0.23c:

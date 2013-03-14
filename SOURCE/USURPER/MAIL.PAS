@@ -1010,7 +1010,7 @@ begin
            s:='Loyalty!';
            ss1:=uplc+player.name2+config.textcol1+' was tempted by the mighty immortal '+ugodc+god0.name+config.textcol1+'!';
            ss2:=uplc+player.name2+config.textcol1+' received several gifts from '+ugodc+god0.name+config.textcol1
-            +' to switch side!';
+            +' to switch sides!';
            ss3:=uplc+player.name2+config.textcol1+' continues to have faith in you!';
           end;
       'N':begin
