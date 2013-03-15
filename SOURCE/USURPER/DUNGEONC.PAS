@@ -701,7 +701,7 @@ begin
        end;
    'D':begin {death maze, nothing serious. a test area for the programmer}
 
-        if global_utest=false then begin
+        if global_utest=true then begin
          crlf;
          crlf;
          death_maze;
