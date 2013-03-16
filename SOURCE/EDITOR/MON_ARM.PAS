@@ -71,25 +71,16 @@ begin
 
   end;
 
-  ready1:=true;
-  ready2:=true;
 
-  if (monster.wuser=true) and (monster.weapnr>0) then begin
-   ready1:=false;
-  end;
-
-  if ready1 then begin
-   if monster.wuser then begin
-    if monster.wuser then begin
+   if (monster.wuser) and (monster.weapnr=0) then begin
      ready1:=false;
-    end;
 
     for j:=1 to fso(Weapon) do begin
 
      load_objekt(fload,objekt,weapon,j);
 
-     if (monster.weapnr=0) and (objekt.ttype=Weapon) and
-        (Monster.wuser=true) and (objekt.attack>=cc) and
+     if (objekt.ttype=Weapon) and
+        (objekt.attack>=cc) and
         (objekt.attack<cc+4) and (random(2)=0) then begin
       monster.weapnr:=j;
       monster.weappow:=objekt.attack;
@@ -102,7 +93,7 @@ begin
      end;
     end; {for j:= .end.}
    end;
-  end;
+  
 
   inc(counter);
   Statbar(Counter,totobj,global_masterx,global_mastery,1,1);
