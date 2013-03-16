@@ -311,7 +311,7 @@ begin         {monster #i casts monster_spell against tempman}
          end;
       end; {case .end.}
 
-      d(12,'From the ground, a '+s+' suddenly rise!');
+      d(12,'From the ground, a '+s+' suddenly rises!');
 
       {check in any empty monster spots are available}
       for j:=1 to global_maxmon do begin
@@ -1252,27 +1252,18 @@ begin {MAIN PROC **START**}
      {monster armor/defence}
      
      
-     if monster[mon]^.armnr>0 then begin
-      x:=random(monster[mon]^.armpow);
-      if x>player.punch then x:=player.punch;
-     end;
-
      zz:=0;
-     (* REENOTE Up to and including v0.20e this defence calculation wasn't taken into
-        account, because the dec(player.punch,x); line was happening before this calcluation
-        instead of after.  After fixing that mistake monsters have become much more
-        difficult to kill, in some cases impossible since they absorb all damange, and
-        so I'm taking the easy way out and re-disabling this calculation.  If someone
-        wants to fix this the real way in the future, this calculation should be re-enabled,
-        and then the defence value for each monster should be rebalanced to ensure they
-        aren't too hard/impossible to kill*)
      zz:=monster[mon]^.defence+random(monster[mon]^.defence div 8);
+     
+if monster[mon]^.armnr>0 then begin
+zz:=zz+random(monster[mon]^.armpow);
+end;
 
      if zz>0 then begin
       inc(x,zz);
      end;
-
-     if x>0 then begin
+ 
+ if x>0 then begin
 
       {kludge, the programmer (jakob) is sloppy, he admits!}
       if x>player.punch then x:=player.punch;
@@ -1442,15 +1433,18 @@ begin {MAIN PROC **START**}
        if norm_att=true then begin
         {*Normal attack}
         zz:=normal_attack(false,pl1);
-        x:=0;
-        {has monster armor?}
-        if monster[j]^.armpow>0 then begin
-         x:=random(monster[j]^.armpow);
+        s:=hit_output(zz);
+             x:=monster[j]^.defence+random(monster[j]^.defence div 8);
+if monster[j]^.armnr>0 then begin
+x:=x+random(monster[j]^.armpow);
+end;
+        
+        if x>0 then begin
+         if x>zz then x:=zz;
+
          dec(zz,x);
         end;
-
         dec(monster[j]^.hps,zz);
-        s:=hit_output(zz);
 
         if (random(6)=0) and (tempman.battlecry<>'') then begin
          sd(global_talkcol,tempman.battlecry);

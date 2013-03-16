@@ -335,7 +335,8 @@ var
     objekt : ^orec;
 
     righthand,
-    rightfinger : boolean;
+    rightfinger,
+    neck1 : boolean;
 
 begin
 
@@ -470,7 +471,7 @@ begin
 
   i:=str_to_nr(s);
 
-  if (i<1) or (i>16) then begin
+  if (i<1) or (i>=yy) then begin
    i:=0;
   end;
 
@@ -502,14 +503,17 @@ begin
     if yy=i then load_objekt(objekt^,face,player.face);
     inc(yy);
    end;
-
+neck1:=true;
    if player.neck>0 then begin
     if yy=i then load_objekt(objekt^,neck,player.neck);
     inc(yy);
    end;
 
    if player.neck2>0 then begin
-    if yy=i then load_objekt(objekt^,neck,player.neck2);
+    if yy=i then begin
+    load_objekt(objekt^,neck,player.neck2);
+    neck1:=false;
+    end;
     inc(yy);
    end;
 
@@ -734,7 +738,7 @@ begin
             d(config.textcolor,'You are not wearing anything around your neck!');
            end
            else begin
-            if player.neck>0 then begin
+            if (player.neck>0) and (neck1) then begin
              sd(config.textcolor,'You remove the ');
              d(global_itemcol,objekt^.name+' '+item_power_display(objekt^));
              player.item[i]:=player.neck;
@@ -814,7 +818,6 @@ begin
 
  if predefined=0 then begin
   player.used_item:=false;
-  inventory_sort(player);
  end;
 
  repeat
@@ -919,7 +922,7 @@ begin
 
              if (player.rhand=0) and (player.lhand=0) then begin
               menu2('[R]ight or');
-              menu2(' Left hand ? :');
+              menu2(' [L]eft hand ? :');
              end
              else if player.rhand=0 then begin
               menu2('[R]ight or');
@@ -1114,7 +1117,7 @@ begin
              force_right:=false;
              force_left:=false;
              if config.allowitem[6]=true then begin
-              if (config.allowitem[5]=false) or (player.lfinger<>0) then begin
+              if (config.allowitem[5]=false) or ((player.lfinger<>0) and (player.rfinger=0)) then begin
                force_right:=true;
               end
               else begin
@@ -1123,11 +1126,11 @@ begin
                sd(config.textcolor,' on your ');
 
                menu2('[R]ight or');
-               menu2(' Left finger ? :');
+               menu2(' [L]eft finger ? :');
               end;
              end
              else if config.allowitem[5]=true then begin
-              if (config.allowitem[6]=false) or (player.rfinger<>0) then begin
+              if (config.allowitem[6]=false) or ((player.rfinger<>0) and (player.lfinger=0)) then begin
                force_left:=true;
               end
               else begin
@@ -1136,7 +1139,7 @@ begin
                sd(config.textcolor,' on your ');
 
                menu2('[L]eft or');
-               menu2(' Right finger ? :');
+               menu2(' [R]ight finger ? :');
               end;
              end;
 
@@ -1546,7 +1549,7 @@ begin
   end;
 
   if value<0 then begin
-   d(txtcol,who+' '+txtval+' '+uyellow+'increase'+txtcol2+' by '+uwhite+'+'+commastr(value)+txtcol2+'!');
+   d(txtcol,who+' '+txtval+' '+uyellow+'increase'+txtcol2+' by '+uwhite+'+'+commastr(abs(value))+txtcol2+'!');
   end
   else if value>0 then begin
    d(txtcol,who+' '+txtval+' '+ulred+'decrease'+txtcol2+' by '+ulred+commastr(value)+txtcol2+'!');
@@ -1573,7 +1576,7 @@ begin
    d(txtcol,who+' '+txtval+' '+uyellow+'increase'+txtcol2+' by '+uwhite+'+'+commastr(value)+txtcol2+'!');
   end
   else if value<0 then begin
-   d(txtcol,who+' '+txtval+' '+ulred+'decrease'+txtcol2+' by '+ulred+commastr(value)+txtcol2+'!');
+   d(txtcol,who+' '+txtval+' '+ulred+'decrease'+txtcol2+' by '+ulred+commastr(abs(value))+txtcol2+'!');
   end;
 
  end;

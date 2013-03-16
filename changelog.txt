@@ -33,6 +33,13 @@ Birthday:
 Gangwars:
 -Gangfights available should not be decremented when no one in rival gang is around to fight. Fixed.
 
+Inventory:
+-Trying to drop neck2 caused neck1 to be dropped. Fixed.
+-Equipping a ring when both ring fingers were occupied always used the right finger. Fixed. (Neck is still messed up though.)
+-Invalid numbers in the (s)top Using menu caused things to be dropped or inaccurate messages to be printed. Fixed.
+-"decreased by +-5" ridiculousness fixed
+
+
 ----------
 
 Version 0.23c:
