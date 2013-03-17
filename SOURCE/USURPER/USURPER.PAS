@@ -340,7 +340,6 @@ var
     kill_file,
     exit_ordered,
     order_maint,
-    maint_exit,
     dimmy,
     found,
     first,
@@ -398,8 +397,6 @@ begin {* Main Program *}
     param_hunt('/?') or
     param_hunt('HELP') or
     param_hunt('/HELP') or
-    param_hunt('/HMAINT') or
-    param_hunt('/FMAINT') or
     param_hunt('/SCORES') or
     param_hunt('/DO_PACKMAIL') or
     param_hunt('/DO_PACKMOAT') or
@@ -470,6 +467,10 @@ begin {* Main Program *}
  if param_hunt('/DO_SENDMAIL') then begin
   {Send mail to user}
   send_a_letter(true);
+ end;
+
+ if exit_ordered=true then begin
+  normal_exit;
  end;
 
  {does maintfile exists and has it existed too long?}
@@ -561,7 +562,6 @@ begin {* Main Program *}
 
  {Maintenance variables}
  order_maint:=false;
- maint_exit:=true;
 
  {Date file}
  if f_exists(global_datefile)=false then begin
@@ -577,21 +577,17 @@ begin {* Main Program *}
   end;
 
   order_maint:=true;
-  maint_exit:=false;
-
-  if param_hunt('/FMAINT') or param_hunt('/HMAINT') then begin
-   maint_exit:=true;
-  end;
 
  end;
 
  { /HMAINT = unconditional maintenance }
  if param_hunt('/HMAINT')=true then begin
+  exit_ordered:=true;
   order_maint:=true;
  end;
 
  if (param_hunt('/FMAINT')=true) and (order_maint=false) then begin
-
+exit_ordered:=true;
   if open_txtfile(treset,txt,global_datefile) then begin
    readln_from_text(txt,s);
    close_text(txt);
@@ -621,7 +617,6 @@ begin {* Main Program *}
 
   if s<>todays_date then begin
    order_maint:=true;
-   maint_exit:=false;
   end;
  end;
 
@@ -663,7 +658,6 @@ begin {* Main Program *}
 
  end;
 
- {should we exit?}
  if exit_ordered=true then begin
   normal_exit;
  end;

@@ -3281,7 +3281,9 @@ begin {take_over_the_gym}
 
      if (pl0.name2<>player.name2) and
         (pl0.id<>player.id) and
-        (pl0.hps>0) and (pl0.location<>offloc_prison) and 
+        (pl0.hps>0) and (pl0.location<>offloc_prison) and
+        (is_online(pl0.name2,online_player)=false) and
+
         (pl0.deleted=false) then begin
 
       if (pl0.team=gym_owners) and (pl0.gym_owner>0) then begin
@@ -3804,6 +3806,7 @@ begin {take_over_the_gym}
          d(12,'**YOU ARE OUT!**');
          player_knocked:=true;
          player_nemesis:=attacker[i].name;
+         pause;
         end
         else begin
          {computer player was knocked out}
@@ -3816,6 +3819,7 @@ begin {take_over_the_gym}
          else begin
           d(12,defender[target].name+' WAS KNOCKED OUT!');
          end;
+        pause;
         end;
        end;
       end
@@ -4185,10 +4189,29 @@ begin {take_over_the_gym}
   normal_exit;
 
  end;
-s:=gym_owning_team;
-           if (s<>'') and (s=player.team) then begin
             player.gym_owner:=1;
-           end
+
+ for i:=1 to 2 do begin
+  case i of
+   1: size:=fs(FsPlayer);
+   2: size:=fs(FsNpc);
+  end; {case .end.}
+
+  for j:=1 to size do begin
+   {load character}
+   if load_character(pl0,i,j)=true then begin
+    if (pl0.team=gym_owners) then begin
+pl0.gym_owner:=0;
+pl0.gym_card:=0;
+user_save(pl0);
+end else if pl0.team=player.team then begin
+pl0.gym_owner:=1;
+pl0.gym_card:=0;
+user_save(pl0);
+end
+end
+end
+end;
 
 end; {take_over_the_gym *end*}
 
