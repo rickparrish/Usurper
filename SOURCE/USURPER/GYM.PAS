@@ -1969,7 +1969,9 @@ begin
  d(config.textcolor,'in this town, some day.');
  d(global_plycol,config.gymMasseur+config.textcol1+', the masseur, is watching you.');
  s:=gym_owning_team;
- if (s<>'') and (s=player.team) then
+ if s='' then
+ d(14, 'No team owns the gym!')
+ else if (s=player.team) then
   d(14,'The Gym is owned by your gang!')
  else
   d(config.textcolor,'The Gym is in the hands of '+utec+s+config.textcol1+'.');
@@ -4183,6 +4185,10 @@ begin {take_over_the_gym}
   normal_exit;
 
  end;
+s:=gym_owning_team;
+           if (s<>'') and (s=player.team) then begin
+            player.gym_owner:=1;
+           end
 
 end; {take_over_the_gym *end*}
 
