@@ -44,8 +44,6 @@ Inventory:
 
 Version 0.23c:
 
-[Rick, could you add your .23c changes in here?]
-
 ***************RESET MONSTER DATAFILES***************
 
 When upgrading to this release, you must use the editor to reset the monster datafiles. Choose Reset, then check the Monsters checkbox. The game will crash if you don't do this. Further details on why this happened below.
@@ -93,6 +91,18 @@ Bob's:
 Supreme Being:
 -Fixed crashes with too many hitpoints
 
+Rick's change log:	
+    -Fixed a problem where the statusbar was still drawn at certain points even if it had been disabled.
+    -Fixed problem that caused Usurper to use an insane number of file handles (and caused lockups on Linux, which is how it was discovered).
+    -Fixed some screen display issues when running in a console window with a buffer size larger than the screen size (possibly introduced after the last release, so maybe nobody experienced this)
+    -Added support for native versions of Usurper on Linux and OS/2
+	  -Linux was only quickly tested on Ubuntu 12.10 under Synchronet (latest from CVS).  It's important you enable STDIO and use the uppercase DOOR32.SYS.  The command I used was USURPER /P%n
+	  -I have no method for testing OS/2, so if you try it out and run into problems feel free to contact me and I'll try to get things working.
+	-Fixed a nasty bug that affected the DOS version of Usurper.  I made a typo when porting to Win32 that caused seemingly random crashes (which were stack overflows).  Typo is now fixed, so if you were experiencing problems with DOS Usurper 0.23 and newer, hopefully that's fixed now.
+	-Added a help file for EDITOR32 (previously hitting F1 in EDITOR32 just gave an error message saying help was unavailable)
+	-Changed delay routine since the old "Super Delay" routine would:
+	 1) Use 100% CPU (or 100% of 1 core if on a multi-core processor)
+	 2) Cause Usurper to intermitently crash with a run-time error 207 at startup
 
 ----------
 
