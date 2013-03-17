@@ -167,8 +167,8 @@ end
       d(config.textcolor,'The revival process takes a couple of hours');
       sd(config.textcolor,'But then suddenly ');
       sd(global_plycol,pl0^.name2);
-      d(config.textcolor,' open');
-      d(config.textcolor,sex3[pl0^.sex]+' eyes and speak!');
+      d(config.textcolor,' opens');
+      d(config.textcolor,sex3[pl0^.sex]+' eyes and speaks!');
       d(config.textcolor,'Although looking very pale and worn out,');
       crlf;
       sd(global_plycol,pl0^.name2);

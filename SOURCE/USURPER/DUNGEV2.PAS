@@ -798,7 +798,7 @@ begin
                    if (global_killed=false) and (xx>100) then begin
                     {split the loot}
                     i:=team_active(pl1,pl2,pl3,pl4);
-                    dec(i);
+                    
 
                     sd(config.textcolor,'You earned ');
                     sd(14,commastr(xx));
@@ -1898,7 +1898,7 @@ begin
        d(config.textcolor,'The merchant looks afraid but finally clears his throat and speaks :');
        sd(global_talkcol,' I''m headed for ');
        sd(15,dest);
-       d(global_talkcol,', a four days march from here.');
+       d(global_talkcol,', a four days'' march from here.');
 
        sd(global_talkcol,' I could really use an escort through the ');
        sd(15,forest);
