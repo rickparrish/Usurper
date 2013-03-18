@@ -252,6 +252,7 @@ begin
  dispose(pl0);
 
  {return result}
+ if not found then s:='';
  give_me_a_team:=s;
 
 end; {Give_Me_A_Team *end*}

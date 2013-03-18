@@ -39,6 +39,8 @@ Inventory:
 -Invalid numbers in the (s)top Using menu caused things to be dropped or inaccurate messages to be printed. Fixed.
 -"decreased by +-5" ridiculousness fixed
 
+Team Corner:
+-Using invalid teamnames in certain places let you send messages to nonexistent teams, join nonexistent teams, etc. Fixed.
 
 ----------
 
