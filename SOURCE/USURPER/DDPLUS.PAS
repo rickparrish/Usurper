@@ -1053,7 +1053,7 @@ begin;
     end
     else if (config.inactivity-el_mn2<2) and (minute_warning=false)then begin
      minute_warning:=true;
-     d(12,'***You are about be disconnected for inactivity!***');
+     d(12,'***You are about to be disconnected for inactivity!***');
     end;
    end;
 

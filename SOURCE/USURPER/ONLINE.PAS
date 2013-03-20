@@ -1182,31 +1182,15 @@ begin
     sd(11,ply.node+'     ');
    end;
 
-   if ply.shadow=false then begin
     sd(global_plycol,ljust(ply.name,justval));
-   end
-   else begin
-    sd(global_plycol,ljust(ply.name,justval));
-   end;
-
+   
    {doing}
-   s:=' ';
-   s1:=ply.doing;
-   s2:=strip(ply.doing);
-
    justval:=40;
-   if length(s2)>justval then begin
-    s1:=copy(s1,1,justval);
-   end
-   else if length(s2)<justval then begin
-    justval:=justval-length(s2);
-    s1:=s1+mkstring(justval,' ');
-   end;
+       sd(config.textcolor,ljust(strip(ply.doing),justval));
 
-   sd(config.textcolor,s1);
    {arrived}
    {justval:=8;}
-   d(config.textcolor,s+ply.arrived);
+   d(config.textcolor,' '+ply.arrived);
 
   end;
  end; {for i:= .end.}
@@ -2787,7 +2771,6 @@ begin
      else begin
       sd(global_plycol,gubbe.name);
       d(config.textcolor,' is not interested anymore!');
-      d(15,'(Press '+Config.ReturnEnter+')');
       onliner.bname  :=emptystr;
       onliner.com    :=' ';
       onliner.comfile:=emptystr;
@@ -2798,7 +2781,6 @@ begin
 
    if found=false then begin
     d(15,onliner.bname+' seems to have dropped out of the game!');
-    d(15,'(Press '+Config.ReturnEnter+')');
    end;
 
   end
@@ -2851,7 +2833,6 @@ begin
     else begin
      sd(global_plycol,gubbe.name);
      d(config.textcolor,' has closed the cell-door!');
-     d(15,'(Press '+Config.ReturnEnter+')');
      onliner.bname:=emptystr;
      onliner.com:=' ';
      onliner.comfile:=emptystr;
@@ -2866,7 +2847,7 @@ begin
   d(config.textcolor,'You are brought up to the court-yard and greeted by the Hangman');
   d(config.textcolor,'and his men. People have gathered to watch the spectacle and');
   d(config.textcolor,'you wave to the crowd, you don''t want to disappoint anyone.');
-  d(config.textcolor,'Then there is silence when the Axe is swinged ....');
+  d(config.textcolor,'Then there is silence when the Axe is swung ....');
 
   {execute}
   crlf;
@@ -2991,7 +2972,6 @@ begin
       }
       sd(global_plycol,gubbe.name);
       d(config.textcolor,' is not interested anymore (the coward).');
-      d(15,'('+Config.ReturnEnter+')');
       onliner.bname:=emptystr;
       onliner.com:=intercom_empty;
       onliner.comfile:=emptystr;
@@ -3002,7 +2982,6 @@ begin
 
    if found=false then begin
     d(15,'The scumbag seems to have dropped out of the game!');
-    d(15,'(Press '+Config.ReturnEnter+')');
    end;
 
   end
