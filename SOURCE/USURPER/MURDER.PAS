@@ -399,7 +399,7 @@ begin
     d(config.textcolor,'You leave the scene with blood dripping from your hands.');
     d(config.textcolor,'A beautiful evening for dark deeds.');
     d(config.textcolor,'Giving the families of the butchered guards little thought,');
-    d(config.textcolor,'you make your way towards the nearest bar to refresh yourself.');
+    d(config.textcolor,'you make your way towards the nearest bar to referesh yourself.');
 
     crlf;
     pause;
@@ -504,7 +504,7 @@ begin
      end;
 
      crlf;
-     d(config.textcolor,'You wait for the hatch to open under your feet...');
+     d(config.textcolor,'You wait for the hatch to open under your feets...');
      d(config.textcolor,'Kreeekk! The hatch opens and and a second later your life');
      d(config.textcolor,'is gone...The crowd cheer!');
      crlf;
