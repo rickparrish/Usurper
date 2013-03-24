@@ -42,6 +42,10 @@ Inventory:
 Team Corner:
 -Using invalid teamnames in certain places let you send messages to nonexistent teams, join nonexistent teams, etc. Fixed.
 
+Online trading/dueling:
+-These were mostly broken because fake player movement would break the initiation process. Fixed.
+
+
 ----------
 
 Version 0.23c:
