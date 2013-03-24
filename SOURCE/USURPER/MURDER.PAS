@@ -399,7 +399,7 @@ begin
     d(config.textcolor,'You leave the scene with blood dripping from your hands.');
     d(config.textcolor,'A beautiful evening for dark deeds.');
     d(config.textcolor,'Giving the families of the butchered guards little thought,');
-    d(config.textcolor,'you make your way towards the nearest bar to referesh yourself.');
+    d(config.textcolor,'you make your way towards the nearest bar to refresh yourself.');
 
     crlf;
     pause;

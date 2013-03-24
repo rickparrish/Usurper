@@ -1815,6 +1815,8 @@ var
    possible_exits : byte;
 
    save_needed : boolean;
+ hour, minute, second, sec100: word;
+ el_hr, el_mn, el_sc: longint;
 
    loc_array : array [1..location_exits] of integer;
    {exit locations, used when moving the fake players.}
@@ -1825,6 +1827,11 @@ var
    target : OnlineRec;
 
 begin
+   gettime(hour,minute,second,sec100);
+   if config.multicheck>0 then begin
+    elapsed(hour,minute,second,global_lasthour,global_lastminute,global_lastsecond,el_hr,el_mn,el_sc);
+    if el_sc<config.multicheck then exit;
+end;
 
  {scan fake players initiated by player}
  if global_fakeplayers>0 then begin
@@ -2781,6 +2788,9 @@ begin
 
    if found=false then begin
     d(15,onliner.bname+' seems to have dropped out of the game!');
+          onliner.bname  :=emptystr;
+      onliner.com    :=' ';
+      onliner.comfile:=emptystr;
    end;
 
   end
@@ -2879,7 +2889,7 @@ begin
   d(config.textcolor,' has opened the Cell door!');
 
   if confirm('Walk out to freedom ','Y')=true then begin
-   d(13,'The door is unlocked! Open it! (press '+Config.ReturnEnter+')');
+   d(13,'The door is unlocked! Open it!');
    found:=false;
    player.location:=offloc_dormitory;
    for j:=1 to fs(FsOnline) do begin
@@ -2901,7 +2911,6 @@ begin
      else begin
       sd(global_plycol,gubbe.name);
       d(config.textcolor,' has closed the cell-door!');
-      d(15,'(Press '+Config.ReturnEnter+')');
       onliner.bname:=emptystr;
       onliner.com:=' ';
       onliner.comfile:=emptystr;
@@ -2912,7 +2921,6 @@ begin
 
    if found=false then begin
     d(global_plycol,gubbe.name+uwhite+' has closed the cell-door!');
-    d(15,'(Press '+Config.ReturnEnter+')');
    end;
   end
   else begin
@@ -2982,6 +2990,10 @@ begin
 
    if found=false then begin
     d(15,'The scumbag seems to have dropped out of the game!');
+          onliner.bname  :=emptystr;
+      onliner.com    :=' ';
+      onliner.comfile:=emptystr;
+
    end;
 
   end
@@ -3037,7 +3049,8 @@ begin
  end;
 
  if (save_needed) or (online_fight) or (online_trade2) then begin
-  onliner.bname:=emptystr;
+  {caused huge bugs with initiating trading and duels
+  onliner.bname:=emptystr;}
   add_onliner(OUpdateAll,onliner);
  end;
 
