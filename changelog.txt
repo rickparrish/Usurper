@@ -45,6 +45,9 @@ Team Corner:
 Online trading/dueling:
 -These were mostly broken because fake player movement would break the initiation process. Fixed.
 
+Marrying:
+-Saying 'y' to paying for marriage when it was not a love-love relationship caused money to be wasted. Fixed (now it costs money only when marriage actually happens.) Found this one on an old Usurper forum.
+
 
 ----------
 

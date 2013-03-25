@@ -1270,12 +1270,11 @@ begin
     if confirm('Pay '+uyellow+commastr(weddingcost)+config.textcol1+' '+many_money(weddingcost)
        +' for the wedding','Y')=true then begin
 
-     {pay for the wedding}
-     DecPlayerMoney(player,weddingcost);
-
      {relation needs to be "IN LOVE" from both sides before marriage}
      if (relation^.relation1=global_RelationLove) and
         (relation^.relation2=global_RelationLove) then begin
+     {pay for the wedding}
+     DecPlayerMoney(player,weddingcost);
 
       crlf;
       d(15,'MARRIAGE!');
