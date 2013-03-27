@@ -2401,6 +2401,8 @@ begin
 
            if x=0 then begin
             {ransom removed}
+            d(15,'Ransom removed.');
+
             child.ransom_demanded:=x;
 
             {update child record}
@@ -2447,6 +2449,7 @@ begin
            else if x>child.ransom_demanded then begin
             {ransom raised}
             child.ransom_demanded:=x;
+            d(15,'Ransom set.');
 
             {update child record}
             load_child(fsave,child,child.recnr);
@@ -2493,6 +2496,7 @@ begin
            else if x<child.ransom_demanded then begin
 
             {ransom lowered}
+            d(15,'Ransom set.');
             child.ransom_demanded:=x;
 
             {update child record}

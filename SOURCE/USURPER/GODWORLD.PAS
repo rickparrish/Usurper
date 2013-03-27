@@ -1297,9 +1297,6 @@ begin
   player.name2:='';
   player.name1:='';
 
-  god.realname:='';
-  god.name:='';
-
   pause;
   normal_exit;
  end;

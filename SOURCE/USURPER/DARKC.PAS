@@ -95,7 +95,7 @@ begin
       d(7,'Kidnap attempt successful!');
       d(config.textcolor,'You run away with '+ukidc+child.name+config.textcol1+' in a sack.');
       d(config.textcolor,ukidc+child.name+'s'+config.textcol1+' destiny is in your hands!');
-      d(config.textcolor,'(go '+ulgray+'Home'+config.textcol1+' to for "kidnappers options")');
+      d(config.textcolor,'(go '+ulgray+'Home'+config.textcol1+' for "kidnappers options")');
       crlf;
       d(7,'Good work evil one!');
 

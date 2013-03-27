@@ -141,7 +141,7 @@ begin
   {news-paper}
   newsy(true,
   'Drop Out!',
-  ' '+uplc+player.name2+config.textcol1+' dropped carrier during a figt!',
+  ' '+uplc+player.name2+config.textcol1+' dropped carrier during a fight!',
   '',
   '',
   '',
