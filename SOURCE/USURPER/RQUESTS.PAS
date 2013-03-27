@@ -337,9 +337,8 @@ begin
            repeat
 
             {pick random monster}
-            repeat
-             x:=random(maxrange)+1;
-            until (x>=minrange) and (x<=maxrange);
+             x:=random(maxrange - minrange + 1)+minrange;
+
 
             {lets see if we already have this type of monster}
             found:=false;
