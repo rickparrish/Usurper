@@ -56,6 +56,7 @@ Var
 
     memory_sex: byte;
    memory_name1: s70;
+custtemp : ^Userrec; {temporary user record}
 
 
 begin
@@ -469,11 +470,11 @@ begin
    'B':begin {Become a God}
 
         become_god(memory_name1,memory_sex);
-
-        god_world;
-
         {remove playerinfight flag}
         global_PlayerInFight:=false;
+
+
+        god_world;
 
         normal_exit;
        end;
@@ -481,6 +482,18 @@ begin
  end
  else begin
   {player was killed}
+             for i:=1 to 4 do begin
+            case i of
+            1 : custtemp^:=pl1;
+                        2 : custtemp^:=pl2;
+            3 : custtemp^:=pl3;
+            4 : custtemp^:=pl4;
+end;
+            if (custtemp^.name2<>'') and (custtemp^.name1<>'') then begin
+             user_save(custtemp^);
+            end;
+end;
+
   crlf;
   crlf;
   d(config.textcolor,'You have been slain!');

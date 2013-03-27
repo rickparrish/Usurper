@@ -888,9 +888,6 @@ begin
             if (custtemp^.name2<>'') and (custtemp^.name1<>'') then begin
              user_save(custtemp^);
             end;
-           end;
-
-           if global_killed=true then begin
 
             player.hps:=0;
             {player.allowed:=false;}
