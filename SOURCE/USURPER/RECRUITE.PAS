@@ -149,7 +149,7 @@ begin
         status(player);
         crlf;
        end;
-   'E':begin {recruite NPC}
+   'E':begin {examine NPC}
         crlf;
         crlf;
         d(config.textcolor,'Who would you like to Examine ?');
@@ -301,7 +301,7 @@ begin
 
             if player0^.king then begin
              d(12,'The '+kingstring(player0^.sex)+' scorns your pathetic attempt to interfere with the Royal affairs!');
-             d(12,'Your releation with the Royals is not improving..');
+             d(12,'Your relation with the Royals is not improving..');
              {worsen pl0:s attitude to player}
              Update_Relation(Relation_Worsen,2,player0^,player,false,false);
 

@@ -2335,7 +2335,7 @@ begin {humans_involved=false when npcs call this routine}
      end;
    1:begin
       d(global_plycol,pl2.name2+config.textcol1+' looks at you with a stupid grin on '+sex3[pl2.sex]+' face:');
-      d(global_talkcol,' Was it good for you to?');
+      d(global_talkcol,' Was it good for you too?');
      end;
   end; {case .end.}
  end;
@@ -2394,7 +2394,7 @@ begin {humans_involved=false when npcs call this routine}
   end;
 
   {inform players}
-  if (pl1.sex=1) or (humans_involved=false) then begin
+  if (pl1.sex=1) then begin
 
    if humans_involved=true then begin
     {inform father}
@@ -2427,7 +2427,7 @@ begin {humans_involved=false when npcs call this routine}
 
   end;
 
-  if (pl1.sex=2) or (humans_involved=false) then begin
+  if (pl1.sex=2) then begin
 
    if humans_involved=true then begin
     {inform mother}

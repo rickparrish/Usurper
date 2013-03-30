@@ -52,7 +52,7 @@ begin
  d(config.textcolor,'You stumble in to the dark areas of the town.');
  d(config.textcolor,'It is here where you can get what you want, without');
  d(config.textcolor,'any questions being asked. Trouble is never far away in these');
- d(config.textcolor,'neighbourhood.');
+ d(config.textcolor,'neighbourhoods.');
  crlf;
 
  menu2(ljust('(D)rug Palace',offset));
