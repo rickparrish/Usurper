@@ -382,7 +382,8 @@ begin
          repeat
           found:=false;
           crlf;
-          d(config.textcolor,'Who would you like to examine ? (enter '+config.textcol2+'?'+config.textcol1+' to see your team)');
+          d(config.textcolor,'Who would you like to examine ? (enter '+config.textcol2+'?'+config.textcol1
+		    +' to see your team)');
           sd(config.textcolor,':');
 
           s:=get_string(20);

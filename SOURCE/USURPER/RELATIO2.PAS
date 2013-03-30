@@ -936,8 +936,8 @@ begin {called from npcmaint.pas. player marries the first girl/boy he can find}
         {marriage-log, see duplicate code in lovers.pas}
         Generic_News(MarriageDivorceNews,
         false,
-        ugreen+'['+fix_date(todays_date)+'] '+uplc+marry.name2+ugreen+' and '+uplc+spouse.name2+ugreen+' were '+uyellow+'Married'
-          +ugreen+'.',
+        ugreen+'['+fix_date(todays_date)+'] '+uplc+marry.name2+ugreen+' and '+uplc+spouse.name2+ugreen+' were '
+		  +uyellow+'Married'+ugreen+'.',
         '',
         '',
         '',

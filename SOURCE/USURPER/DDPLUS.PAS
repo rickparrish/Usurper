@@ -14,7 +14,7 @@ type
 const
  version= 'Version 7.10  ; 05-01-95';
 
- progname: string[60] = 'Usurper 0.23c';
+ progname: string[60] = 'Usurper 0.23d';
  graphics_codes: array[1..5] of string[4] = ('','.ASC','.ANS','.MUS','.ANS');
  { You will have to make up your mind to have item #5 .ANS or .RIP.  You may }
  { find that displaying a ripfile is more effectively done if shown some     }
