@@ -1520,13 +1520,15 @@ begin {scans the 'onliners.dat' file and deletes players who have
      load_onlinefile(fsave,temp,i);
     end
     else begin
-     {should this be displayed?}
+     {should this be displayed?
+     Dan: I don't think so. Looks like debug data.
      wr(14,temp.name);
      wr(12,' has been online for ');
      wr(15,commastr(online_minutes));
      wr(12,' minutes ('+sex2[temp.sex]+' will be deactivated in ');
      wr(15,commastr(maxtime-online_minutes));
      wrl(12,' minutes).');
+     }
     end;
 
    end;

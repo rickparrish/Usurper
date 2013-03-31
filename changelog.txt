@@ -4,6 +4,10 @@ Pregnancy:
 Scores:
 -In the (e)quipment score rating, deleted players caused gaps in numbering. Fixed.
 
+Status line:
+-STATUS OFF in usurp.ctl to disable the status bar did not work. Fixed.
+-Disabling the status bar screwed up inter-node processing (probably because status bar couldn't actually be disabled until my change above). Fixed.
+
 
 ----------
 

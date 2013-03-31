@@ -1058,7 +1058,7 @@ counter:=0;
        (ply0^.deleted=false) and
        (ply0^.name2<>global_delname2) then begin
      counter:=counter+1;
-     temp2^:=commastr(i)+'.';
+     temp2^:=commastr(counter)+'.';
      write_to_text(ascifile,ljust(temp2^,6));
 
      temp2^:=ply0^.name2+mkstring(20,'.');
@@ -2725,7 +2725,7 @@ begin
         d(15,mkstring(32,underscore));
         crlf;
         d(15,'PLAYER KILLERS TOP 400 :');
-        d(15,' Who has killed most players (Computer characters included).');
+        d(15,' Who has killed most players.');
         crlf;
         d(15,'MONSTER KILLERS TOP 400 :');
         d(15,' Who has killed most monsters.');
@@ -2740,10 +2740,10 @@ begin
         d(15,' Who has the best equipment.');
         crlf;
         d(15,'QUEST MASTERS TOP 400 :');
-        d(15,' Who has the completed most quests.');
+        d(15,' Who has completed most quests.');
         crlf;
         d(15,'THE MONARCH AND THE PEOPLE :');
-        d(15,' What do the players think of their ruler.');
+        d(15,' What do the players think of their ruler?');
         crlf;
         pause;
        end;

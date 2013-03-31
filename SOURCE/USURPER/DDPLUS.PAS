@@ -385,10 +385,10 @@ begin;
  a:=(time1_hour*3600)+(time1_min*60)+time1_sec;
  b:=(time2_hour*3600)+(time2_min*60)+time2_sec;
  c:=a-b;
- if c>=3600 then elap_hour:=c div 3600 else elap_hour:=0;
- c:=c-((c div 3600)*3600);
- if c>=60 then elap_min:=c div 60 else elap_min:=0;
- c:=c-((c div 60)*60);
+ elap_hour:=c div 3600;
+ c:=c mod 3600;
+ elap_min:=c div 60;
+ c:=c mod 60;
  elap_sec:=c;
 end;
 
@@ -429,7 +429,7 @@ begin;
  textbackground(statback);
  gotoxy(1,numlines);
  clreol;                          {jakob drop-dos}
- write(' F1=Help Toggle ³ F2=Chat ³ F6=Dos ³ F7=+5Min ³ F8=-5Min ³ F10=Eject ³');
+ if f1toggle = 0 then write(' F1=Help Toggle ³ F2=Chat ³ F6=Dos ³ F7=+5Min ³ F8=-5Min ³ F10=Eject ³');
  window(1,1,80,numlines-1);
  gotoxy(x,y);
  textcolor(a);
@@ -974,9 +974,9 @@ begin;
   if statline then begin;
    if cc=1 then display_status(false);
    if cc>1000 then cc:=0;
-
+  end;
    {jakob start}
-   gettime(hour,minute,second,sec100);
+    gettime(hour,minute,second,sec100);
 
    {online events}
    if config.multicheck>0 then begin
@@ -1059,7 +1059,6 @@ begin;
 
    {jakob end}
 
-  end;
 
  until ch<>#0;
 

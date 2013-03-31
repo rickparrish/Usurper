@@ -509,6 +509,9 @@ begin {* Main Program *}
   {pause;}
 
  end;
+ {should statline (bottom of screen) be displayed?}
+ statline:=true;
+
 
  {Init DoorDriver}
  InitDoorDriver(uctlfile);
@@ -540,9 +543,6 @@ begin {* Main Program *}
 
  {Time has Expired Message (DDplus variable)}
  notime:='*** TIME HAS EXPIRED ***';
-
- {should statline (bottom of screen) be displayed?}
- statline:=true;
 
  {Determine Graphics}
  if (graphics=1) or (graphics=2) then global_ansi:=false
