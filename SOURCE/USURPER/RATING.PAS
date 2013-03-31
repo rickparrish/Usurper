@@ -885,7 +885,7 @@ end; {race_popularity *end*}
 
 Procedure Equipment_Masters(filescore : boolean);
 var
-    o : word;
+    o, counter : word;
 
     ansifile,
     ascifile : text;
@@ -921,20 +921,20 @@ begin
 
  for i:=1 to fs(FsPlayer) do begin
   if o>=maxsorts then break;
-  inc(o);
   if load_character(ply0^,1,i)=true then begin
-   nice[i]:=ply0^.armpow+ply0^.weappow;
-   if nice[i]<0 then nice[i]:=0;
-   nice2[i]:=i;
-   nice3[i]:=true;
+  inc(o);
+   nice[o]:=ply0^.armpow+ply0^.weappow;
+   if nice[o]<0 then nice[o]:=0;
+   nice2[o]:=i;
+   nice3[o]:=true;
   end;
  end;
 
  if (o<maxsorts) and (npcinc=true) then begin
   for i:=1 to fs(FsNPC) do begin
    if o>=maxsorts then break;
-   inc(o);
    if load_character(ply0^,2,i)=true then begin
+   inc(o);
     nice[o]:=ply0^.armpow+ply0^.weappow;
     if nice[o]<0 then nice[o]:=0;
     nice2[o]:=i;
@@ -968,7 +968,7 @@ begin
   end;
   gap:=gap div 2;
  end;
-
+counter:=0;
  if (filescore=true) and (eansi^<>'') then begin
   dummy:=0;
 
@@ -995,8 +995,8 @@ begin
     if (loading_ok=true) and
        (ply0^.deleted=false) and
        (ply0^.name2<>global_delname2) then begin
-
-     temp2^:=commastr(i)+'.';
+counter:=counter+1;
+     temp2^:=commastr(counter)+'.';
      write_to_text(ansifile,ljust(temp2^,6));
 
      temp2^:=ply0^.name2+mkstring(20,'.');
@@ -1033,7 +1033,7 @@ begin
  if (filescore=true) and (easci^<>'') then begin
 
   dummy:=0;
-
+counter:=0;
   if open_txtfile(trewrite,ascifile,easci^) then begin
 
    wrl(10,'    '+easci^);
@@ -1057,6 +1057,7 @@ begin
     if (loading_ok=true) and
        (ply0^.deleted=false) and
        (ply0^.name2<>global_delname2) then begin
+     counter:=counter+1;
      temp2^:=commastr(i)+'.';
      write_to_text(ascifile,ljust(temp2^,6));
 
@@ -1100,7 +1101,7 @@ begin
   d(5,'Rank  Name              Equipment Rating   Level');
 
   count:=6;
-
+counter:=0;
   for i:=1 to o do begin
    loading_ok:=false;
    if nice3[i] then begin
@@ -1114,7 +1115,8 @@ begin
    if (loading_ok=true) and
       (ply0^.deleted=false) and
       (ply0^.name2<>global_delname2) then begin
-    temp2^:=commastr(i)+'.';
+    counter:=counter+1;
+    temp2^:=commastr(counter)+'.';
     sd(config.textcolor,ljust(temp2^,6));
 
     temp2^:=ply0^.name2+mkstring(20,'.');
@@ -1136,7 +1138,6 @@ begin
      2: sd(3,'   '+temp2^);
      3: sd(3,'  '+temp2^);
     end;
-   end;
    crlf;
    inc(count);
 
@@ -1144,6 +1145,7 @@ begin
     count:=0;
     if confirm('More','y')=false then break;
    end;
+  end;
   end;
   crlf;
   pause;

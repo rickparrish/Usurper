@@ -1,3 +1,14 @@
+Pregnancy:
+-Two mails could be received for a pregnancy (telling you that you and then your partner were pregnant). Fixed.
+
+Scores:
+-In the (e)quipment score rating, deleted players caused gaps in numbering. Fixed.
+
+
+----------
+
+Version 0.23d:
+
 ***************RESET MONSTER DATAFILES***************
 
 When upgrading to this release, you must use the editor to reset the monster datafiles. Choose Reset, then check the Monsters checkbox. The game will crash if you don't do this. Further details on why this happened below.
