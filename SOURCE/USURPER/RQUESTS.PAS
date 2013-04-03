@@ -379,13 +379,58 @@ begin
 
            {display monsters}
            d(15,'player must defeat');
-           for i:=1 to global_maxmon do begin
-            if quest.monsters[i,1]>0 then begin
-             sd(15,commastr(quest.monsters[i,2])+' ');
-             load_monster(quest.monsters[i,1],1);
-             d(global_moncol,monster[1]^.name);
-            end;
-           end; {for i:= .end.}
+             for i:=1 to global_maxmon do begin
+   mtemp1[i]:='';
+   mtemp2[i]:=0;
+  end;
+
+  for i:=1 to global_maxmon do begin
+   found:=false;
+   if quest.monsters[i, 1]>0 then begin
+                 load_monster(quest.monsters[i,1],1);
+for j:=1 to global_maxmon do begin
+     if mtemp1[j]=monster[1]^.name then begin
+      inc(mtemp2[j],quest.monsters[i,2]);
+      found:=true;
+      break;
+     end;
+    end;
+    if found=false then begin
+     for j:=1 to global_maxmon do begin
+      if mtemp1[j]='' then begin
+       mtemp1[j]:=monster[1]^.name;
+       inc(mtemp2[j],quest.monsters[i,2]);
+       break;
+      end;
+     end;
+    end;
+   end;
+  end; {for i:= .end.}
+
+  x:=0;
+  y:=0;
+  for i:=1 to global_maxmon do begin
+   if mtemp1[i]<>'' then begin
+    inc(y);
+    if y<>1 then begin
+     sd(global_moncol,', ');
+    end;
+
+    inc(x);
+    if x>3 then begin
+     x:=0;
+     crlf;
+    end;
+
+    if mtemp2[i]=1 then sd(global_moncol,mtemp1[i])
+                   else sd(global_moncol,commastr(mtemp2[i])+' '+mtemp1[i]);
+    if mtemp2[i]>1 then begin
+     sd(global_moncol,'s');
+    end;
+
+   end;
+  end;
+
            pause;
 
           end; {if quest.questtarget = monster .end.}

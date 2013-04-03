@@ -591,7 +591,6 @@ begin {persons recnr in RELATION to #record nr in userfile
      end;
   end; {case .end.}
 
-
   loadres:=Load_Character(ply,relation_filtyp,relation_recnr);
 
   if loadres then begin
@@ -658,7 +657,6 @@ begin {called by relation.pas => Relation_Maintenance
 
   {load relation}
   load_relation(fload,relation,i);
-
   if relation.deleted=false then begin
    relation_checkplyrec(relation);
   end;

@@ -666,7 +666,7 @@ begin
  end;
 
  if (pl0.abody=0) and (random(g)=0) and (config.allowitem[14]) then begin
-  hands_need:=true;
+  abody_need:=true;
  end;
 
  bought:=false;
@@ -887,7 +887,7 @@ begin
     if pl0.abody>0 then begin
      objekt_affect(2,pl0.abody,abody,pl0,false);
     end;
-    pl0.face:=j;
+    pl0.abody:=j;
     objekt_affect(1,pl0.abody,abody,pl0,false);
     break;
    end;

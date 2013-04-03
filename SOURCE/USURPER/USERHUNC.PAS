@@ -438,7 +438,6 @@ Begin
   no_play:=true;
   {check if any of the slots are empty}
   sd(config.textcolor,'Looking for an empty slot to put your character in...');
-  no_play:=true;
   for i:=1 to fs(fsplayer) do begin
    load_character(pl0,1,i);
 

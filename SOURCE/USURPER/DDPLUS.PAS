@@ -970,12 +970,10 @@ begin;
     ReleaseTimeSlice;
 
   inc(cc);
+      if cc>1000 then cc:=0;
 
-  if statline then begin;
-   if cc=1 then display_status(false);
-   if cc>1000 then cc:=0;
-  end;
-   {jakob start}
+  if cc=1 then begin
+   if statline then display_status(false);
     gettime(hour,minute,second,sec100);
 
    {online events}
@@ -1058,7 +1056,7 @@ begin;
    end;
 
    {jakob end}
-
+end;
 
  until ch<>#0;
 

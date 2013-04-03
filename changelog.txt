@@ -7,6 +7,7 @@ Scores:
 Status line:
 -STATUS OFF in usurp.ctl to disable the status bar did not work. Fixed.
 -Disabling the status bar screwed up inter-node processing (probably because status bar couldn't actually be disabled until my change above). Fixed.
+-f1 toggle did not work when status bar was disabled. Fixed.
 
 
 ----------
