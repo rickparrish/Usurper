@@ -101,7 +101,7 @@ Procedure Royal_Quests; {Main procedure}
 var
    ch : char;
 
-   i,
+   i, j, y,
    counter : word;
 
    x: longint;
@@ -120,6 +120,9 @@ var
    Pl0 : ^UserRec;
    King : KingRec;
    Quest : QuestRec;
+mtemp1 : array [1..global_maxmon] of s70;
+ mtemp2 : array [1..global_maxmon] of integer;
+
 
 begin
 

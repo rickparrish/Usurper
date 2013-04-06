@@ -2224,7 +2224,7 @@ begin
           d(7,sex3[pl0^.sex]+' '+race_display(2,pl0^.race,0)+' buddies cheer when '
               +sex2[pl0^.sex]+' makes a couple of');
 
-          if ((config.classic = false) and (pl0^.rhand+pl0^.lhand>0) or (config.classic = true and pl0^.weapon>0) then begin
+          if ((config.classic = false) and (pl0^.rhand+pl0^.lhand>0)) or ((config.classic = true) and (pl0^.weapon>0)) then begin
            d(7,'slick moves with '+sex3[pl0^.sex]+' weapon!');
           end
           else begin
