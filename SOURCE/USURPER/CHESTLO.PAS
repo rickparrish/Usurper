@@ -59,8 +59,7 @@ begin
  crlf;
 
  menu('(L)ist targets (people with items in their chests)');
- menu('(E)xamine chest');
- menu('(G)rab some loot from a chest!');
+  menu('(G)rab some loot from a chest!');
  menu('(S)tatus');
  menu('(R)eturn from crime scene');
 
@@ -236,7 +235,8 @@ begin
          crlf;
          {no dark deeds left}
          no_dark_deeds;
-        end
+         pause;
+                 end
         else if inventory_empty(player) = 0 then begin
          crlf;
          d(12,'Your inventory is full!');
@@ -381,6 +381,7 @@ begin
             d(12,'You decide to be a coward.');
           end
           else begin
+            dec(player.darknr);
 
            {locate item}
            counter:=0;
@@ -423,7 +424,7 @@ begin
 
             i:=random(2);
             {jakob}
-            if i<99 then begin
+            if i=1 then begin
              spotted:=true;
              d(12,'Oh no!');
              d(global_plycol,ply2.name2+config.textcol1+' is standing in the room. Watching you.');
@@ -458,8 +459,6 @@ begin
             load_chestitem(FSave,ChestItem,posmem);
 
 
-            {jakob}
-            {dec(player.darknr);}
 
             {darkness}
             x:=player.level*20;
@@ -516,7 +515,7 @@ begin
 
              {news-paper}
               newsy(true,
-              'Burgalrs',
+              'Burglars',
               ' Thieves broke into '+uplc+ply2.name2+'s'+config.textcol1+' home and stole treasure.',
               '',
               '',

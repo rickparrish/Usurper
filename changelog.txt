@@ -15,6 +15,11 @@ Maintenance:
 Quests:
 -When creating a quest, monsters would be listed multiple times (not aggregated like in the dungeons). Fixed.
 
+Chest Items:
+-Stealing items should not be available in classic mode. Fixed.
+-Unimplemented (e)xamine chest option. Removed.
+- 50% chance that home-owner sees you and initiates a fight, rather than 100% (a Jakob cheat that was left in by mistake). Fixed.
+-Stealing should reduce dark deeds. Fixed.
 
 
 ----------

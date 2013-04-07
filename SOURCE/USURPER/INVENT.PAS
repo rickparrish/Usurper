@@ -1985,7 +1985,7 @@ begin {called from Home.pas}
  clearscreen;
  crlf;
  crlf;
- d(config.textcolor,'You unlock the door to the room with your valaubles ..');
+ d(config.textcolor,'You unlock the door to the room with your valuables ..');
  d(config.textcolor,'Ahh, the door opens.');
  crlf;
  pause;

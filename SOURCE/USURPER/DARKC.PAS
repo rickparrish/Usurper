@@ -615,14 +615,13 @@ begin
         end;
        end;
    'G':begin {steal from Chests, at peoples homes *start*}
-
-        crlf;
-        crlf;
-        d(config.textcolor,'Why earn things in a honest way, when you can take what you want.');
-        d(config.textcolor,'You make your way to the housing district. Be careful..');
-
+        if config.classic then begin
+         crlf;
+         d(15,'This option is not available in Usurper Classic mode.');
+        end else begin
         chest_looting;
         crlf;
+        end;
        end; {steal from Chests, at peoples homes *end*}
    'M':begin {murder innocent people}
         if player.darknr<=0 then begin
