@@ -410,6 +410,7 @@ begin
 
       if (player_active(pl0^,false)=true) and
          (pl0^.team='') and
+         (not pl0^.king) and
          (random(3)=0) then begin
 
        inc(power2[i]);
@@ -1685,7 +1686,7 @@ begin
     newsy(true,
     'Team Deserter',
     ' '+uplc+pl0^.name2+config.textcol1+' left '+utec+pl0^.team+config.textcol1+'!',
-    ' '+uplc+pl0^.name2+config.textcol1+' became something better; '+ukingc+kingstring(pl0^.sex)+config.textcol1+'!',
+    ' '+uplc+pl0^.name2+config.textcol1+' became something better: '+ukingc+kingstring(pl0^.sex)+config.textcol1+'!',
     '',
     '',
     '',
@@ -1707,7 +1708,7 @@ begin
 
     {leave team}
     pl0^.team:='';
-
+    save_need:=true;
    end;
 
   end;

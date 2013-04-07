@@ -11,6 +11,7 @@ Status line:
 
 Maintenance:
 -NPCs never bought around-body armour. Fixed.
+-The NPC king could be recruited to an NPC team. Fixed.
 
 Quests:
 -When creating a quest, monsters would be listed multiple times (not aggregated like in the dungeons). Fixed.
@@ -23,7 +24,7 @@ Chest Items:
 -Player should only see you if alive and at home. Fixed.
 -Should not be able to beg for mercy when seen stealing. Fixed.
 -Stolen chest items show up as still available for stealing, but with *unknown* owner. Fixed.
-
+-Player-owned items listed as owned by Pogo. Fixed.
 
 ----------
 
