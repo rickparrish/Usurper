@@ -40,7 +40,7 @@ Function Player_Computer( var player1, player2 : UserRec;
                            {battletype=1  (team fight)
                                        2  (king challenge)
                                        3  (bank fight)
-                                       4  (player caught stealing in the Dormitory)
+                                       4  (player caught stealing in the Dormitory or home)
                                        5  (player fighting Royal Guard at the Prison)
                                        6  (player fighting Team-Mate in the Dormitory, who is protecting friend)
                                         }

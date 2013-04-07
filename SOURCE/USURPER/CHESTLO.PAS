@@ -37,9 +37,9 @@ Implementation
 
 Uses Cms, Jakob,
      Statusc, Mail, News,
-     Various, Various2, Various3,
+     Various, Various2, Various3, plcomp,
      Online, File_Io, Invent,
-     PlvsPlc;
+     relation;
 
 var
     ch : char;
@@ -177,6 +177,10 @@ begin
 
          {don't show players own item .. or rather: dont show Player in this list}
          if chestItem.PlyID=player.ID then begin
+          go_ahead:=false;
+         end;
+
+         if chestItem.PlyID='' then begin
           go_ahead:=false;
          end;
 
@@ -366,7 +370,7 @@ begin
 
          {did we found any items}
          if counter=0 then begin
-          d(12,'Bah! You didn''t find any valuables stored in '+uplc+ply2.name2+config.textcol1+' house.');
+          d(12,'Bah! You didn''t find any valuables stored in '+uplc+ply2.name2+'s'+config.textcol1+' house.');
          end
          else begin
 
@@ -424,15 +428,33 @@ begin
 
             i:=random(2);
             {jakob}
-            if i=1 then begin
+            if (i=1) and (ply2.hps>0) and (ply2.location=offloc_home) then begin
+if add_shadow(SAdd,ply2,player.name2,'fighting '+uplc
+                 +player.name2+config.textcol1+'!',0)=true then begin
+           
              spotted:=true;
              d(12,'Oh no!');
              d(global_plycol,ply2.name2+config.textcol1+' is standing in the room. Watching you.');
              d(config.textcolor,'This is going to get ugly.');
              pause;
+    to_death:=false;
+    repeat
+     player_computer(player,ply2,false,4);
+    until (player.hps<1) or (ply2.hps<1);
+if player.hps <= 0 then killed_by_stats(ply2,player);
+if ply2.hps <= 0 then killed_by_stats(player, ply2);
 
-             player_vs_player(ply2);
+if player.hps > 0 then
+sd(config.textcolor, 'Ahh, nothing like killing someone at home!')
+else begin
+     reduce_player_resurrections(player,true);
+     pause;
+     normal_exit;
+end;
+     add_shadow(SRemove,ply2,'','',0);
 
+            end
+            
             end
             else begin
              if random(3)=0 then begin
@@ -618,15 +640,11 @@ begin
      end;
     end;
 
-
-    if found then begin
-     Load_Chest_Item_Owner := true;
-     break;
-    end;
-
    end; {for j:= .end.}
-
+if found then break;
   end; {for i:= .end.}
+
+     Load_Chest_Item_Owner := found;
 
 end; {Load_Chest_Item_Owner *end*}
 

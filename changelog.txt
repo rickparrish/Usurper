@@ -20,6 +20,9 @@ Chest Items:
 -Unimplemented (e)xamine chest option. Removed.
 - 50% chance that home-owner sees you and initiates a fight, rather than 100% (a Jakob cheat that was left in by mistake). Fixed.
 -Stealing should reduce dark deeds. Fixed.
+-Player should only see you if alive and at home. Fixed.
+-Should not be able to beg for mercy when seen stealing. Fixed.
+-Stolen chest items show up as still available for stealing, but with *unknown* owner. Fixed.
 
 
 ----------
