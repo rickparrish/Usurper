@@ -136,7 +136,7 @@ begin
 end; {online_release *end*}
 
 
-Function Tell_Onliner(const sender,receiver:onlinerec; const mess:s70; filnr:word) : boolean;
+Function Tell_Onliner(const sender:onlinerec; const receiver:s30; const mess:s70) : boolean;
 var
     i, j : word;
 
@@ -162,8 +162,7 @@ begin {sends a message(chatline) to receiver. see also related routine:
 
    load_onlinefile(fload,gubbe,i);
 
-   if (gubbe.name=receiver.name) and
-      (gubbe.usertype=receiver.usertype) and
+   if (gubbe.name=receiver) and
       (gubbe.ear in [global_ear_all,global_ear_personal]) then begin
 
     for j:=1 to global_maxnod do begin
@@ -206,10 +205,8 @@ end; {Tell_Onliner *end*}
 
 Function Tell_Onliner_Compact(const sender:onlinerec;const receiver:s30; const mess:s70):boolean;
 var
-    found,
     result : boolean;
 
-    filnr,
     i : word;
 
     target : onlinerec;
@@ -217,21 +214,9 @@ var
 begin {see the related "tell_onliner" routine for details...}
 
  result:=false;
- found:=false;
  {look for receiver}
 
- for i:=1 to fs(FsOnline) do begin
-  load_onliner(fload,target,i);
-  if target.name=receiver then begin
-   found:=true;
-   filnr:=i;
-   break;
-  end;
- end; {for i:= .end.}
-
- if found then begin
-  result:=tell_onliner(sender,target,mess,filnr);
- end;
+  result:=tell_onliner(sender,receiver,mess);
 
  {return result}
  tell_onliner_compact:=result;
@@ -393,12 +378,6 @@ begin
 
     if (findsub(he,s)=true) and (gubbe.name<>player.name2) then begin
      if confirm(uplc+gubbe.name+config.textcol1,'N')=true then begin
-      if gubbe.name=onliner.name then begin
-       d(12,'Mail yourself? (fool!)');
-       found:=true;
-       break;
-      end
-      else begin
        found:=true;
        if gubbe.ear=global_ear_quiet then begin
         sd(global_plycol,gubbe.name);
@@ -420,7 +399,7 @@ begin
          {load_onliner(fsave,gubbe,i); {saving online record}
 
          {send message}
-         if tell_onliner(onliner,gubbe,s,i)=true then begin
+         if tell_onliner(onliner,gubbe.name,s)=true then begin
           sd(config.textcolor,'You tell ');
           sd(global_plycol,gubbe.name);
           d(config.textcolor,' :');
@@ -446,7 +425,6 @@ begin
         end;
         break;
        end;
-      end;
      end;
     end;
    end;

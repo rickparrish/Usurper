@@ -937,7 +937,7 @@ begin {fakeplayer response to players who send them online chatmail}
  22: s:='leave me alone!';
  23: s:='you are a pain in the *ss!';
  24: s:='crawl back home';
- 25: s:='idiot';
+ 25: s:='that''s enough!';
  26: s:='balloon-head!';
  27: s:='misfit!';
  28: s:='bye dear!';
