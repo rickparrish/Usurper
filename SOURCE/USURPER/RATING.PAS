@@ -1206,27 +1206,27 @@ begin
 
  for i:=1 to fs(FsPlayer) do begin
   if o>=maxsorts then break;
-  inc(o);
 
   if load_character(ply0^,1,i)=true then begin
-   if config.classic then begin
-    nice[i]:=ply0^.apow*11;
+     inc(o);
+if config.classic then begin
+    nice[o]:=ply0^.apow*11;
    end
    else begin
-    nice[i]:=ply0^.armpow;
+    nice[o]:=ply0^.armpow;
    end;
-   if nice[i]<0 then nice[i]:=0;
-   nice2[i]:=i;
-   nice3[i]:=true;
+   if nice[o]<0 then nice[o]:=0;
+   nice2[o]:=i;
+   nice3[o]:=true;
   end;
  end;
 
  if (o<maxsorts) and (npcinc=true) then begin
   for i:=1 to fs(FsNPC) do begin
    if o>=maxsorts then break;
-   inc(o);
    if load_character(ply0^,2,i)=true then begin
-    if config.classic then begin
+       inc(o);
+if config.classic then begin
      nice[o]:=ply0^.apow*11;
     end
     else begin
@@ -1278,9 +1278,7 @@ begin
    writeln_to_text(ansifile,' ');
    writeln_to_text(ansifile,AYellowonBlack+head4+ConvertToAnsi(config.textcolor));
 
-   x:=0;
-   count:=0;
-
+counter:=0;
    for i:=1 to o do begin
     loading_ok:=false;
     if nice3[i] then begin
@@ -1294,7 +1292,8 @@ begin
     if (loading_ok=true) and
        (ply0^.deleted=false) and
        (ply0^.name2<>global_delname2) then begin
-     temp2^:=commastr(i)+'.';
+     counter:=counter+1;
+     temp2^:=commastr(counter)+'.';
      write_to_text(ansifile,ljust(temp2^,6));
 
      temp2^:=ply0^.name2+mkstring(20,'.');
@@ -1345,7 +1344,7 @@ begin
    writeln_to_text(ascifile,' ');
    writeln_to_text(ascifile,head4);
 
-   x:=0;
+   counter:=0;
    count:=0;
 
    for i:=1 to o do begin
@@ -1361,8 +1360,8 @@ begin
     if (loading_ok=true) and
        (ply0^.deleted=false) and
        (ply0^.name2<>global_delname2) then begin
-
-     temp2^:=commastr(i)+'.';
+counter:=counter+1;
+     temp2^:=commastr(counter)+'.';
      write_to_text(ascifile,ljust(temp2^,6));
 
      temp2^:=ply0^.name2+mkstring(20,'.');
@@ -1409,7 +1408,7 @@ begin
   crlf;
   d(5,head4);
 
-  x:=0;
+  counter:=0;
   count:=6;
 
   for i:=1 to o do begin
@@ -1425,9 +1424,9 @@ begin
    if (loading_ok=true) and
       (ply0^.deleted=false) and
       (ply0^.name2<>global_delname2) then begin
-
+counter:=counter+1;
     {#}
-    temp2^:=commastr(i)+'.';
+    temp2^:=commastr(counter)+'.';
     sd(config.textcolor,ljust(temp2^,6));
 
     {name}
@@ -1538,27 +1537,27 @@ begin
 
  for i:=1 to fs(FsPlayer) do begin
   if o>=maxsorts then break;
-  inc(o);
   if load_character(ply0^,1,i)=true then begin
+   inc(o);
    if config.classic then begin
-    nice[i]:=ply0^.wpow*11;
+    nice[o]:=ply0^.wpow*11;
    end
    else begin
-    nice[i]:=ply0^.weappow;
+    nice[o]:=ply0^.weappow;
    end;
 
-   if nice[i]<0 then nice[i]:=0;
-   nice2[i]:=i;
-   nice3[i]:=true;
+   if nice[o]<0 then nice[o]:=0;
+   nice2[o]:=i;
+   nice3[o]:=true;
   end;
  end;
 
  if (o<maxsorts) and (npcinc=true) then begin
   for i:=1 to fs(FsNPC) do begin
    if o>=maxsorts then break;
-   inc(o);
    if load_character(ply0^,2,i)=true then begin
-    if config.classic then begin
+       inc(o);
+if config.classic then begin
      nice[o]:=ply0^.wpow*11;
     end
     else begin
@@ -1596,7 +1595,7 @@ begin
   end;
   gap:=gap div 2;
  end;
-
+counter:=0;
  if (filescore=true) and (wansi^<>'') then begin
   dummy:=0;
 
@@ -1608,9 +1607,6 @@ begin
    writeln_to_text(ansifile,head3);
    writeln_to_text(ansifile,' ');
    writeln_to_text(ansifile,AYellowOnBlack+head4+ConvertToAnsi(config.textcolor));
-
-   x:=0;
-   count:=0;
 
    for i:=1 to o do begin
     loading_ok:=false;
@@ -1624,7 +1620,8 @@ begin
     if (loading_ok=true) and
        (ply0^.deleted=false) and
        (ply0^.name2<>global_delname2) then begin
-     temp2^:=commastr(i)+'.';
+     counter:=counter+1;
+     temp2^:=commastr(counter)+'.';
      write_to_text(ansifile,ljust(temp2^,6));
 
      temp2^:=ply0^.name2+mkstring(20,'.');
@@ -1669,7 +1666,7 @@ begin
 
  if (filescore=true) and (wasci^<>'') then begin
   dummy:=0;
-
+counter:=0;
   if open_txtfile(trewrite,ascifile,wasci^) then begin
    wrl(10,'    '+wasci^);
    writeln_to_text(ascifile,head1);
@@ -1690,7 +1687,8 @@ begin
     if (loading_ok=true) and
        (ply0^.deleted=false) and
        (ply0^.name2<>global_delname2) then begin
-     temp2^:=commastr(i)+'.';
+     counter:=counter+1;
+     temp2^:=commastr(counter)+'.';
      write_to_text(ascifile,ljust(temp2^,6));
 
      temp2^:=ply0^.name2+mkstring(20,'.');
@@ -1737,7 +1735,7 @@ begin
   crlf;
   d(5,head4);
 
-  x:=0;
+  counter:=0;
   count:=6;
 
   for i:=1 to o do begin
@@ -1752,9 +1750,9 @@ begin
    if (loading_ok=true) and
       (ply0^.deleted=false) and
       (ply0^.name2<>global_delname2) then begin
-
+counter:=counter+1;
     {#}
-    temp2^:=commastr(i)+'.';
+    temp2^:=commastr(counter)+'.';
     sd(config.textcolor,ljust(temp2^,6));
 
     {name}
@@ -1871,21 +1869,22 @@ begin
  {Sorting}
  for i:=1 to fs(FsPlayer) do begin
   if o>=maxsorts then break;
-  inc(o);
   if load_character(ply0^,1,i)=true then begin
-   nice[i]:=ply0^.m_kills-ply0^.m_defeats; {killer rating}
+     inc(o);
+nice[o]:=ply0^.m_kills-ply0^.m_defeats; {killer rating}
    {if nice[i]<0 then nice[i]:=0;}
-   nice2[i]:=i; {points to player record}
-   nice3[i]:=true; {true=user, false=npc}
+   nice2[o]:=i; {points to player record}
+   nice3[o]:=true; {true=user, false=npc}
   end;
  end; {for i:= .end.}
 
  if npcinc then begin
   for i:=1 to fs(FsNPC) do begin
    if o>=maxsorts then break;
-   inc(o);
+   
 
    if load_character(ply0^,2,i)=true then begin
+    inc(o);
     nice[o]:=ply0^.m_kills-ply0^.m_defeats;
     {if nice[o]<0 then nice[o]:=0;}
     nice2[o]:=i;
@@ -1940,8 +1939,7 @@ begin
    writeln_to_text(ansifile,' ');
    writeln_to_text(ansifile,AYEllowOnBlack+head4+ConvertToAnsi(config.textcolor));
 
-   x:=0;
-
+counter:=0;
    for i:=1 to o do begin
     loading_ok:=false;
     if nice3[i] then begin
@@ -1954,9 +1952,9 @@ begin
     if (loading_ok=true) and
        (ply0^.deleted=false) and
        (ply0^.name2<>global_delname2) then begin
-
+counter:=counter+1;
      {#}
-     temp2^:=commastr(i)+'.';
+     temp2^:=commastr(counter)+'.';
      write_to_text(ansifile,ljust(temp2^,6));
 
      {name}
@@ -2026,7 +2024,7 @@ begin
    writeln_to_text(ascifile,' ');
    writeln_to_text(ascifile,head4);
 
-   x:=0;
+   counter:=0;
 
    for i:=1 to o do begin
     loading_ok:=false;
@@ -2040,7 +2038,8 @@ begin
     if (loading_ok=true) and
        (ply0^.deleted=false) and
        (ply0^.name2<>global_delname2) then begin
-     temp2^:=commastr(i)+'.';
+     counter:=counter+1;
+     temp2^:=commastr(counter)+'.';
      write_to_text(ascifile,ljust(temp2^,6));
 
      ply0^.name2:=ply0^.name2+mkstring(20,'.');
@@ -2102,7 +2101,7 @@ begin
   crlf;
   d(5,head4);
 
-  x:=0;
+  counter:=0;
   count:=6;
 
   for i:=1 to o do begin
@@ -2119,9 +2118,9 @@ begin
    if (loading_ok=true) and
       (ply0^.deleted=false) and
       (ply0^.name2<>global_delname2) then begin
-
+counter:=counter+1;
     {#}
-    temp2^:=commastr(i)+'.';
+    temp2^:=commastr(counter)+'.';
     sd(config.textcolor,ljust(temp2^,6));
 
     {name}
@@ -2253,21 +2252,21 @@ begin
 
  for i:=1 to fs(FsPlayer) do begin
   if o>=maxsorts then break;
-  inc(o);
   if load_character(ply0^,1,i)=true then begin
-   nice[i]:=ply0^.p_kills-ply0^.p_defeats;
-   if nice[i]<0 then nice[i]:=0;
-   nice2[i]:=i;
-   nice3[i]:=true;
+     inc(o);
+nice[o]:=ply0^.p_kills-ply0^.p_defeats;
+   if nice[o]<0 then nice[o]:=0;
+   nice2[o]:=i;
+   nice3[o]:=true;
   end;
  end; {for i:= .end.}
 
  if (o<maxsorts) and (npcinc=true) then begin
   for i:=1 to fs(FsNPC) do begin
    if o>=maxsorts then break;
-   inc(o);
    if load_character(ply0^,2,i)=true then begin
-    nice[o]:=ply0^.p_kills-ply0^.p_defeats;
+       inc(o);
+nice[o]:=ply0^.p_kills-ply0^.p_defeats;
     if nice[o]<0 then nice[o]:=0;
     nice2[o]:=i;
     nice3[o]:=false;
@@ -2314,7 +2313,7 @@ begin
    writeln_to_text(ansifile,head3);
    writeln_to_text(ansifile,' ');
    writeln_to_text(ansifile,AYellowOnBlack+head4+ConvertToAnsi(config.textcolor));
-
+counter:=0;
    for i:=1 to o do begin
 
     loading_ok:=false;
@@ -2328,8 +2327,8 @@ begin
     if (loading_ok=true) and
        (ply0^.deleted=false) and
        (ply0^.name2<>global_delname2) then begin
-
-     temp2^:=commastr(i)+'.';
+counter:=counter+1;
+     temp2^:=commastr(counter)+'.';
      write_to_text(ansifile,ljust(temp2^,6));
 
      ply0^.name2:=ply0^.name2+mkstring(20,'.');
@@ -2392,7 +2391,7 @@ begin
    writeln_to_text(ascifile,head3);
    writeln_to_text(ascifile,' ');
    writeln_to_text(ascifile,head4);
-
+counter:=0;
    for i:=1 to o do begin
 
     loading_ok:=false;
@@ -2406,8 +2405,8 @@ begin
     if (loading_ok=true) and
        (ply0^.deleted=false) and
        (ply0^.name2<>global_delname2) then begin
-
-     temp2^:=commastr(i)+'.';
+counter:=counter+1;
+     temp2^:=commastr(counter)+'.';
      write_to_text(ascifile,ljust(temp2^,6));
 
      ply0^.name2:=ply0^.name2+mkstring(20,'.');
@@ -2469,8 +2468,8 @@ begin
   crlf;
   d(5,head4);
 
-  counter:=6;
-
+  count:=6;
+counter:=0;
   for i:=1 to o do begin
 
    loading_ok:=false;
@@ -2484,9 +2483,9 @@ begin
    if (loading_ok=true) and
       (ply0^.deleted=false) and
       (ply0^.name2<>global_delname2) then begin
-
+counter:=counter+1;
     {#}
-    temp2^:=commastr(i)+'.';
+    temp2^:=commastr(counter)+'.';
     sd(config.textcolor,ljust(temp2^,6));
 
     {name}
@@ -2546,10 +2545,10 @@ begin
     d(3,'        '+commastr(ply0^.level));
 
    end;
-   inc(counter);
+   inc(count);
 
-   if counter>global_screenlines-2 then begin
-    counter:=0;
+   if count>global_screenlines-2 then begin
+    count:=0;
     if confirm('More','y')=false then break;
    end;
   end;
