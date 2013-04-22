@@ -213,7 +213,7 @@ begin
       x:=1;
       break;
      end;
-    end; {for j:= .end.}
+    end; {for k:= .end.}
 
     if x=0 then begin
      if confirm(utec+pl0^.team+config.textcol1,'N')=true then begin
@@ -1440,28 +1440,26 @@ begin
 
           for i:=1 to fs(FsPlayer) do begin
            load_character(pl0,1,i);
-           if (upcasestr(pl0.team)=upcasestr(s)) and (s<>'') and
+           if (upcasestr(pl0.team)=upcasestr(s)) and
               (pl0.deleted=false) then begin
-            d(config.textcolor,'Sorry, but this teamname already exist!');
+            d(config.textcolor,'Sorry, but this teamname already exists!');
             s:=emptystr;
            end;
           end; {for i:= .end.}
 
           for i:=1 to fs(FsNPC) do begin
            load_character(pl0,2,i);
-           if (upcasestr(pl0.team)=upcasestr(s)) and (s<>'') and
+           if (upcasestr(pl0.team)=upcasestr(s)) and
               (pl0.deleted=false) then begin
-            d(config.textcolor,'That teamname already exist!');
+            d(config.textcolor,'Sorry, but this teamname already exists!');
             s:=emptystr;
            end;
           end; {for i:= .end.}
 
-          if s<>'' then begin
            sd(global_teamcol,s);
            if confirm('','N')=false then begin
             s:=emptystr;
            end;
-          end;
          until s<>'';
 
          ss:=emptystr;
@@ -1473,10 +1471,11 @@ begin
            sd(config.textcolor,':');
            ss:=get_stringsec(10,'*');
            if length(ss)<3 then begin
-            ss:=emptystr;
+            d(config.textcolor,'Password too short.');
+ss:=emptystr;
            end;
            if ss<>'' then begin
-            d(config.textcolor,'Please verify');
+            d(config.textcolor,'Please verify (type password again)');
             sd(config.textcolor,':');
             s2:=get_stringsec(10,'*');
             if s2<>ss then begin

@@ -661,7 +661,7 @@ begin
    counter:=1;
    swrite('(C)ontinue, (N)on-stop, (S)top ? ');
    sread_char(ch);
-   for b:=1 to 26 do swrite(chr(8));
+   for b:=1 to 33 do swrite(chr(8));
    clreol;
    if ch in ['S','s'] then Quit:=true;
    if ch in ['N','n'] then nonstop:=true;
