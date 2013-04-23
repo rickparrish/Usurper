@@ -438,7 +438,9 @@ if add_shadow(SAdd,ply2,player.name2,'fighting '+uplc
              d(config.textcolor,'This is going to get ugly.');
              pause;
     to_death:=false;
-    repeat
+              for i:=1 to global_maxspells do
+           player.spell[i,2]:=false;
+repeat
      player_computer(player,ply2,false,4);
     until (player.hps<1) or (ply2.hps<1);
 if player.hps <= 0 then killed_by_stats(ply2,player);

@@ -1616,6 +1616,8 @@ begin
 
           {worsen pl0:s attitude to player}
           Update_Relation(Relation_Worsen,2,pl0^,player,false,false);
+          for i:=1 to global_maxspells do
+           player.spell[i,2]:=false;
 
           to_death:=false;
           repeat
@@ -2390,7 +2392,9 @@ begin
 
     {player versus team-mate}
     to_death:=false;
-    repeat
+              for i:=1 to global_maxspells do
+           player.spell[i,2]:=false;
+repeat
      player_computer(player,mate,false,4);
     until (player.hps<1) or (mate.hps<1);
 

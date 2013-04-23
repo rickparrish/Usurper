@@ -702,7 +702,9 @@ begin {CHALLENGE KING *START*}
       sd(global_plycol,pl[1]^.name2);
       d(config.textcolor,'!');
       pause;
-
+          for i:=1 to global_maxspells do
+           player.spell[i,2]:=false;
+to_death:=false;
       repeat
        challenger_begged:=player_computer(challenger,pl[1]^,false,2);
       until (challenger_begged) or (challenger.hps<1) or (pl[1]^.hps<1);
@@ -1159,7 +1161,10 @@ begin {CHALLENGE KING *START*}
   else begin
 
    {fight}
-   repeat
+             for i:=1 to global_maxspells do
+           player.spell[i,2]:=false;
+to_death:=false;
+repeat
     challenger_begged:=player_computer(challenger,pl0,false,2);
    until (challenger_begged) or (challenger.hps<1) or (pl0.hps<1);
 

@@ -26,6 +26,11 @@ Chest Items:
 -Stolen chest items show up as still available for stealing, but with *unknown* owner. Fixed.
 -Player-owned items listed as owned by Pogo. Fixed.
 
+Spells:
+-Active spells were not reset before player fights. Fixed.
+-Many spells did not work in player fights. Fixed, but I think this unbalances things (sage can use 'escape' spell and make the opponent miss for the rest of the fight). This is what Jakob intended (based on the code), but we'll work on balancing once I scrub all of the bugs.
+
+
 ----------
 
 Version 0.23d:

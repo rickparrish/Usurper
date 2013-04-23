@@ -449,7 +449,7 @@ end;
 
      Sage:begin
            if (fastgame=false) or (foe=yo1) then begin
-            if magic_res[mon]<>no_effect then begin
+            if (place=2) or (magic_res[mon]<>no_effect) then begin
              d(config.textcolor,uplc+foe+config.textcol1+' seems to be blinded!');
              temp1.spell[ii,2]:=true;
             end;
@@ -498,7 +498,7 @@ end;
 
      Sage:begin
            if (fastgame=false) or (foe=yo1) then begin
-            if magic_res[mon]<>no_effect then begin
+            if (place=2) or (magic_res[mon]<>no_effect) then begin
              d(4,uplc+foe+ured+' seems to be poisoned!');
             end;
            end;
@@ -525,7 +525,7 @@ end;
      case temp1.class of
       Cleric:begin
               if (fastgame=false) or (foe=yo1) then begin
-               if magic_res[mon]<>no_effect then begin
+               if (place=2) or (magic_res[mon]<>no_effect) then begin
                 d(config.textcolor,foe+' suddenly freezes!');
                 temp1.spell[ii,2]:=true;
                end;
@@ -544,7 +544,7 @@ end;
 
       Magician:begin
                 if (fastgame=false) or (foe=yo1) then begin
-                 if magic_res[mon]<>no_effect then begin
+                 if (place=2) or (magic_res[mon]<>no_effect) then begin
                   d(config.textcolor,uplc+foe+config.textcol1+' suddenly goes to sleep!');
                   temp1.spell[ii,2]:=true;
                  end;
@@ -561,7 +561,7 @@ end;
 
      Sage:begin
            if (fastgame=false) or (foe=yo1) then begin
-            if magic_res[mon]<>no_effect then begin
+            if (place=2) or (magic_res[mon]<>no_effect) then begin
              d(config.textcolor,uplc+foe+config.textcol1+' suddenly freezes!');
              temp1.spell[ii,2]:=true;
             end;
@@ -607,7 +607,7 @@ end;
 
       Magician:begin
                 if (fastgame=false) or (foe=yo1) then begin
-                 if magic_res[mon]<>no_effect then begin
+                 if (place=2) or (magic_res[mon]<>no_effect) then begin
                   d(config.textcolor,'A Magic Web suddenly surrounds '+uplc+foe+config.textcol1+'!');
                   temp1.spell[ii,2]:=true;
                  end;
@@ -807,7 +807,7 @@ end;
 
       Magician:begin
                 if (fastgame=false) or (foe=yo1) then begin
-                 if magic_res[mon]<>no_effect then begin
+                 if (place=2) or (magic_res[mon]<>no_effect) then begin
                   d(config.textcolor,uplc+foe+config.textcol1+' screams in fear from '+uplc+att+config.textcol1+' presence!');
                   temp1.spell[ii,2]:=true;
                  end;
@@ -825,7 +825,7 @@ end;
 
      Sage:begin
            if (fastgame=false) or (foe=yo1) then begin
-            if magic_res[mon]<>no_effect then begin
+            if (place=2) or (magic_res[mon]<>no_effect) then begin
              d(config.textcolor,uplc+foe+config.textcol1+' kindly asks '+uplc+att+config.textcol1+' to stop the fight!');
              temp1.spell[ii,2]:=true;
             end;
@@ -906,7 +906,7 @@ end;
 
       Magician:begin
                 if (fastgame=false) or (foe=yo1) then begin
-                 if magic_res[mon]<>no_effect then begin
+                 if (place=2) or (magic_res[mon]<>no_effect) then begin
                   d(config.textcolor,'A Magic Cage suddenly lowers over '+uplc+foe+config.textcol1+'!');
                   temp1.spell[ii,2]:=true;
                  end;
