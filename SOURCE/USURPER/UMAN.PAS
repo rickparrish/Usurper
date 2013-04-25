@@ -542,9 +542,6 @@ begin
           p1str:=player.strength;
           p2str:=pl0.strength;
 
-          p1orig:=p1str;
-          p2orig:=p2str;
-
           if (p1str>10000) and (p2str>10000)    then x:=10000
           else if (p1str>1000) and (p2str>1000) then x:=1000
           else if (p1str>100) and (p2str>100)   then x:=100
@@ -557,6 +554,9 @@ begin
           end;
           if p1str<2 then p1str:=2;
           if p2str<2 then p2str:=2;
+          p1orig:=p1str;
+          p2orig:=p2str;
+
 
           repeat
            lose1:=false;

@@ -33,6 +33,8 @@ Spells:
 
 Uman cave:
 -Result of last-allowed indian wrestling was cleared before it could be read. Fixed.
+-In Indian Wrestling, players started with strange power like 4/48. Fixed so that initial power and maximum are both the same initial power
+
 
 
 ----------
