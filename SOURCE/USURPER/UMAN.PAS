@@ -476,7 +476,7 @@ begin
                          xpreward:=player.level*60;
                         end;
            -99..0      :begin
-                         sd(global_plycol,pl0.name2+'s');
+                         sd(global_plycol,pl0.name2);
                          sd(config.textcolor,' is a pretty strong ');
                          if pl0.sex=1 then d(config.textcolor,'guy!')
                                       else d(config.textcolor,'girl!');
@@ -835,7 +835,7 @@ begin
           {remove offline opponent}
           add_shadow(SRemove,pl0,player.name2,'',0);
           onliner.location:=onloc_umanwrest;
-
+          if player.wrestlings=0 then pause;
           if (player.wrestlings>0) and
              (confirm('Another Match','Y')=true) then begin
            newgame:=true;

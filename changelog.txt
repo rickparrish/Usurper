@@ -29,6 +29,10 @@ Chest Items:
 Spells:
 -Active spells were not reset before player fights. Fixed.
 -Many spells did not work in player fights. Fixed, but I think this unbalances things (sage can use 'escape' spell and make the opponent miss for the rest of the fight). This is what Jakob intended (based on the code), but we'll work on balancing once I scrub all of the bugs.
+-Angel caused dropped carrier in dungeon fights. Fixed.
+
+Uman cave:
+-Result of last-allowed indian wrestling was cleared before it could be read. Fixed.
 
 
 ----------

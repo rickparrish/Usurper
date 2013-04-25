@@ -1235,7 +1235,7 @@ end;
    {player versus monster}
    {is monster active?}
    newmon:=0;
-   if monster_active(mon)=true then begin
+   if monster_active(mon2)=true then begin
     newmon:=mon2;
    end
    else begin
@@ -1262,7 +1262,7 @@ end;
   if fastgame=false then begin
    d(config.textcolor,uplc+att+'s'+config.textcol1+' Transformation protects '+sex[temp1.sex]+'!');
   end;
-  dec(temp2.hps,10);
+  if place = 2 then dec(temp2.hps,10);
   inc(temp1.absorb,50);
  end;
 
