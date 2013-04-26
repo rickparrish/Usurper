@@ -29,12 +29,14 @@ Chest Items:
 Spells:
 -Active spells were not reset before player fights. Fixed.
 -Many spells did not work in player fights. Fixed, but I think this unbalances things (sage can use 'escape' spell and make the opponent miss for the rest of the fight). This is what Jakob intended (based on the code), but we'll work on balancing once I scrub all of the bugs.
--Angel caused dropped carrier in dungeon fights. Fixed.
+-Angel caused dropped carrier in dungeon fights. Fixed. (Thanks Alex G)
 
 Uman cave:
--Result of last-allowed indian wrestling was cleared before it could be read. Fixed.
+-Result of last-allowed indian wrestling was cleared before it could be read. Fixed. (Thanks Alex G)
 -In Indian Wrestling, players started with strange power like 4/48. Fixed so that initial power and maximum are both the same initial power
 
+Fake players:
+-Garbage occasionally produced when checking (^w)ho is online. Fixed. (Thanks Alex G)
 
 
 ----------

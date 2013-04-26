@@ -233,9 +233,9 @@ begin
   d(5,'E-mail : jakob@dangarden.com');
   crlf;
 
-  d(config.textcolor,'Writing scores...');
 
   if (global_godactive=false) and (onliner.usertype=online_player) then begin
+    d(config.textcolor,'Writing scores...');
 
    if global_utest=false then begin
     {Write Player Scores}

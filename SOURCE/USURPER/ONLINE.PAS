@@ -1856,7 +1856,7 @@ end;
 
     {should we send some random mail to a human player?}
     if config.fakeschatty then begin
-     if random(30)=0 then begin
+     if random(40)=0 then begin
 
       {get a target for our mail}
       get_random_human_onliner(target);
@@ -1869,7 +1869,7 @@ end;
     end;
 
     {should we move?}
-    if random(7)=0 then begin
+    if random(15)=0 then begin
 
      {init locations array}
      for j:=1 to location_exits do begin
@@ -1947,7 +1947,7 @@ end;
 
  {add a fake player?}
  if (global_fakeplayers<config.fakeplayers) and
-    (random(3)=0) then begin
+    (random(5)=0) then begin
 
   {init pointer vars}
   new(fakeplayer);
@@ -3053,7 +3053,7 @@ var
    s : s70;
 
 begin
-
+s:='xxx';
  {* Online Location Description *}
  case mode of
   onloc_gangprep   : s:='preparing for gangwar';
@@ -3062,18 +3062,19 @@ begin
   onloc_royalmail  : s:='reading Royal Mail';
   onloc_entering   : s:='entering game...';
   onloc_mainstreet : s:='Main street';
-  onloc_theinn     : s:='the Inn';
+  onloc_theinn     : s:='Inn';
   onloc_darkalley  : s:='outside the Shady Shops';
   onloc_church     : s:='Church';
+  onloc_dungeons   : s:='Dungeons';
   onloc_deathmaze  : s:='Death Maze';
   onloc_weaponshop : s:='Weapon shop';
   onloc_master     : s:='level master';
   onloc_magicshop  : s:='Magic shop';
-  onloc_madmage    : s:='the Mad mage';
-  onloc_armorshop  : s:='Armor store';
-  onloc_bank       : s:='the Bank';
+  onloc_madmage    : s:='Mad mage';
+  onloc_armorshop  : s:='Armor shop';
+  onloc_bank       : s:='Bank';
   onloc_reportroom : s:='report room';
-  onloc_healer     : s:='the healer';
+  onloc_healer     : s:='Healer';
   onloc_marketplace: s:='Market Place';
   onloc_foodstore  : s:='Food Store';
   onloc_plymarket  : s:='players Market';
@@ -3107,7 +3108,7 @@ begin
   onloc_gymfists   : s:='FISTFIGHT IN THE GYM';
   onloc_temple     : s:='temple area';
   onloc_outCastle  : s:='outside the Castle';
-  onloc_the_gym    : s:='the Gym';
+  onloc_the_gym    : s:='Gym';
   onloc_MultiChat  : s:='in a chat-room (the Inn).';
   onloc_outsideGym : s:='outside the Gym';
   onloc_gossipmonger:s:='gossip-monger';
@@ -3126,23 +3127,23 @@ begin
   {relations}
   onloc_lovestreet : s:='Love corner';
   onloc_home       : s:='managing family affairs';
-  onloc_nursery    : s:='the nursery';
+  onloc_nursery    : s:='Nursery';
   onloc_kidnapper  : s:='home and doing bad things.';
-  onloc_giftshop   : s:='gift shop';
+  onloc_giftshop   : s:='Gift shop';
 
   {castle}
-  onloc_castle     : s:='the Royal Castle';
-  onloc_royorphanag: s:='the Royal Orphanage';
+  onloc_castle     : s:='Royal Castle';
+  onloc_royorphanag: s:='Royal Orphanage';
   onloc_courtmage  : s:='visiting the Court Magician';
-  onloc_warchamber : s:='the Royal War Chamber';
+  onloc_warchamber : s:='Royal War Chamber';
   onloc_questmaster: s:='Quest Chamber';
   onloc_questhall  : s:='quest hall';
   onloc_questattemp: s:='on a Quest!';
-  onloc_guardoffice: s:='the Royal Guard Office'; {players visiting}
+  onloc_guardoffice: s:='Royal Guard Office'; {players visiting}
 
   onloc_prison     : s:='in the '+udgray+'Royal Prison'+config.textcol1;
-  onloc_prisoner   : s:='in a prison-cell.';
-  onloc_prisonerop : s:='walking out of a cell.';
+  onloc_prisoner   : s:='Prison-cell';
+  onloc_prisonerop : s:='walking out of a cell';
   onloc_prisonerex : s:='preparing to be executed!';
   onloc_prisonwalk : s:='outside the Royal Prison';
   onloc_prisonbreak: s:='breaking into Prison!';
