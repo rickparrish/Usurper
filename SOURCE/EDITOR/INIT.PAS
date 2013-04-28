@@ -38,7 +38,7 @@ const
  vision_is_running : boolean = false;
 
  {Editor Version}
- uver      = '0.23d';
+ uver      = '0.23e';
  uversion  = 'Usurper Editor '+uver;
  ubeta : boolean = false; {is this a BETA version?}
 
