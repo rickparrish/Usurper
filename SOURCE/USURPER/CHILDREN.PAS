@@ -1203,7 +1203,7 @@ begin
 
   if load_child(fload,tempchild,i)=true then begin
 
-   {is quest available}
+   {is child available}
    if tempchild.deleted then begin
     child.recnr:=i;
     load_child(fsave,child,i);
@@ -1451,7 +1451,7 @@ begin
      mailrequest_nothing,
      uyellow+'Birthday'+config.textcol1,
      mkstring(8,underscore),
-     'You celebrated your '+sex7[child.sex]+'s '+ukidc+child.name+config.textcol1+' '+uwhite+commastr(child.age)+'th'
+     'You celebrated your '+sex7[child.sex]+' '+ukidc+child.name+config.textcol1+'''s '+uwhite+commastr(child.age)+'th'
         +config.textcol1+' birthday.',
      '',
      '',
