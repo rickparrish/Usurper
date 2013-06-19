@@ -235,7 +235,7 @@ begin
  186: s:='YES'; {Allow NPCs to interact with GODs}
  187: s:='LightGreen'; {God color}
  188: s:='YES'; {fake players be chatty?}
- 189: s:='10'; {intimacy acts per day}
+ 189: s:='2'; {intimacy acts per day}
  190: s:='NO'; {homo relations allowed}
  191: s:='3'; {resurrections / day}
  192: s:='YES'; {allow a user to have both immortal and mortal characters active}

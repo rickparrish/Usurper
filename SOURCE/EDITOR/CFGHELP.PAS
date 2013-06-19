@@ -1298,7 +1298,7 @@ begin
  189:begin
      case line of
       1: s:='How many Intimacy acts should a player have every day (0-60000)';
-      2: s:='Default is 10.';
+      2: s:='Default is 2.';
      end;
     end;
 

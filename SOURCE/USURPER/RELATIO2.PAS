@@ -893,9 +893,10 @@ begin {called from npcmaint.pas. player marries the first girl/boy he can find}
   if i mod 100 = 0 then sd(12,'.');
   load_relation(fload,relation,i);
   if relation.deleted=true then continue;
-  if ((relation.relation1=global_RelationLove) or
+  if ((relation.relation1=global_RelationLove) and
      (relation.relation2=global_RelationLove)) and
-     (relation.BannedMarry=false) then begin
+     (relation.BannedMarry=false) and
+     (relation.ai1 = 'C') and (relation.ai2 = 'C') then begin
     if is_player_married(relation.name1,relation.idtag1)<>'' then continue;
     if is_player_married(relation.name2,relation.idtag2)<>'' then continue;
 

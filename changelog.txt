@@ -4,6 +4,16 @@ Sorting:
 Text:
 -Minor cleanup
 
+Marriages:
+-No more unrequited marriages created by maintenance. I think this is a bug I (Dan) introduced in my optimizations. NPCs will now never marry a human automatically; NPCs only marry other NPCs. Human-involved marriages will never happen automatically. (Thanks Brittany)
+-No more getting tons of 'feelings' messages from NPCs every day.
+
+Experience:
+-Reduced default intimacy acts/day from 10 to 2. 10 is kinda ridiculous.
+-Halved experience earned from beer stealing, since it gave way too much. (Thanks Alex)
+
+
+
 ----------
 
 Version 0.23d:

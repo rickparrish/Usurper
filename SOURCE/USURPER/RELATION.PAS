@@ -2921,7 +2921,7 @@ end; {Npc_Change_Relations *end*}
 Procedure Create_New_Relations;
 const max_attempts = 44; {important setting!}
 var
-    i , jj : integer;
+    i , jj, prop,temp : integer;
 
     relationValue : word;
 
@@ -2937,19 +2937,19 @@ begin
 
  attempts:=0;
  created_relations:=0;
+ temp:=fs(FsPlayer);
+ prop:=temp+ fs(FsNpc);
+ 
  repeat
 
   {1=load from playerfile, 2=load from npc file}
-  repeat
-   i:=random(2)+1;
-  until i in [1,2];
-
-  {pick random character from selected file}
-  case i of
-   1: jj:=random(fs(FsPlayer)+1);
-   2: jj:=random(fs(FsNpc)+1);
-  end; {case .end.}
-
+   jj:=random(prop)+1;
+ if jj<temp then 
+  i:=1 
+ else begin
+  i:=2;
+  jj:=jj-temp;
+ end;
   inc(attempts);
 
   {load random selected character}
@@ -2989,8 +2989,8 @@ begin
       5: i:=global_RelationAnger;
       6: i:=global_RelationEnemy;
       7: i:=global_RelationHate;
+      8:i:=global_RelationLove {no}
      end; {case .end.}
-
      relation.relation1:=i;
 
      {debug}

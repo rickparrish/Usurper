@@ -1224,7 +1224,7 @@ solo_dogs_news;
            sd(config.textcolor,' sons!');
            crlf;
            end;
-           yy:=player.level*((50*knockdogs)+(100*knocksons));
+           yy:=player.level*((25*knockdogs)+(50*knocksons));
            sd(config.textcolor,'This gives you ');
            sd(14,commastr(yy));
            sd(config.textcolor,' experience points!');
