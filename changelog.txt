@@ -12,6 +12,8 @@ Experience:
 -Reduced default intimacy acts/day from 10 to 2. 10 is kinda ridiculous.
 -Halved experience earned from beer stealing, since it gave way too much. (Thanks Alex)
 
+Mail:
+-No more receiving mail out-of-order. The upshot is that sending mail (including the reams of auto-generated mail) is much faster, but scanning for new mail will be slower toward the end of the day on busy systems. Mail is now automatically packed at the start of maintenance. (Thanks Rick)
 
 
 ----------

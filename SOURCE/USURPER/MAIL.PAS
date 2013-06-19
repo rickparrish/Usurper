@@ -151,46 +151,6 @@ begin
   {set filesize}
   size:=global_mailfilesize;
 
-  for i:=1 to Size do begin
-
-   {lock mailfile}
-   lock_MailRecord(global_mailfile,flock,i);
-
-   {load mail record}
-   load_mailfile(Fload,TempMail,i);
-
-   {checking if mail is old and can be discarded}
-   if TempMail.readflag=false then begin
-
-    if old_mail(TempMail) then begin
-     TempMail.readflag:=true;
-    end;
-
-   end;
-
-   {has mail been read?}
-   if TempMail.readflag=true then begin
-    empty_mailslot:=i;
-    saved:=true;
-
-    {save mail}
-    load_Mailfile(fsave,postme,empty_mailslot);
-
-   end;
-
-   {unlock mail file}
-   lock_MailRecord(global_mailfile,funlock,i);
-
-   {we are done}
-   if saved then begin
-    break;
-   end;
-
-  end; {for i:= .end.}
-
-  {no empty mail-slot found, we place the new mail record at the end of file}
-  if NOT saved then begin
-
    empty_mailslot:=size+1;
 
    {save mail}
@@ -207,7 +167,6 @@ begin
     load_Mailfile(fsave,postme,empty_mailslot);
 
    end;
-  end;
 
   {unlock mailfile}
   Lock_MailFile(FUnlock);

@@ -98,6 +98,7 @@ begin
  d(global_mainttxt,' '+datefix(todays_date)+ured+'  ['+ulred+'Usurper Maintenance'+ured+']'+config.textcol1);
  }
 
+ pack_mail;
  {load king}
  load_king(fload,king);
 
