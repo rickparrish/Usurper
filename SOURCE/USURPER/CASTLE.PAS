@@ -2196,6 +2196,12 @@ begin
 
        end; {taxes .end.}
    'A':begin {Add money to the Treasury, from personal funds}
+   if player.gold<=0 then begin
+    crlf;
+    crlf;
+    d(12,'You have no '+config.moneytype+'!');
+ end
+ else begin
         crlf;
         crlf;
         d(2,'Your personal funds amount to '+uyellow+commastr(player.gold)+ugreen+'.');
@@ -2247,7 +2253,7 @@ begin
             d(12,'They Royal Purse can not accept such an amount!');
             pause;
           end;
-
+end;
          end;
         end;
 
@@ -2256,7 +2262,12 @@ begin
 
         {load king}
         load_king(fload,king^);
-
+ if king^.treasury<=0 then begin
+  crlf;
+  crlf;
+  d(12,'The treasury is empty!');
+ end
+else begin
         crlf;
         crlf;
         d(2,'You decide to put your hand in the cookie-jar.');
@@ -2280,7 +2291,7 @@ begin
 
          if detected then begin
           {news-leak}
-          d(15,'Ops! It leaked to the Press!');
+          d(15,'Oops! It leaked to the Press!');
 
           case random(7) of
            0: s:='upset';
@@ -2334,7 +2345,7 @@ begin
          else begin
           d(12,'Something went wrong! You were unable to get the '+config.moneytype+'!');
          end;
-
+end;
         end;
 
        end;
