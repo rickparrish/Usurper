@@ -160,7 +160,7 @@ begin
  else if s='LEVEL_MASTER_#1' then begin
   crlf;
   d(config.textcolor,'Akrappas house resides just outside town. They call him the Wisest');
-  d(config.textcolor,'of them all. Well, undisputable the most popular of them all.');
+  d(config.textcolor,'of them all. Well, undisputably the most popular of them all.');
   d(config.textcolor,'You notice the heap of books which are stored all over the big');
   d(config.textcolor,'living room. The legends of Akrappa are so many, and yet so few');
   d(config.textcolor,'compared to the other Great Masters. Anyhow, the impression when');
@@ -170,26 +170,26 @@ begin
  end
  else if s='LEVEL_MASTER_#2' then begin
   crlf;
-  d(config.textcolor,'Singuman is the youngest of the known Masters. Required his title');
-  d(config.textcolor,'only 35 years old, making a wood burst in to flames in only 30 seconds.');
+  d(config.textcolor,'Singuman is the youngest of the known Masters. He acquired his title');
+  d(config.textcolor,'at only 35 years old, making a wood burst in to flames in only 30 seconds.');
   d(config.textcolor,'Singuman also wrestled Xzinn on the mountain of Moon. His love for');
   d(config.textcolor,'Ishana is well known but it is uncertain whether it goes both ways.');
-  d(config.textcolor,'By no mean envious by nature, Singuman strive for Akrappas position');
+  d(config.textcolor,'By no means envious by nature, Singuman strives for Akrappas position');
   d(config.textcolor,'as Head of Masters. Some say he''s already superior to');
-  d(config.textcolor,'Akrappa, some says Singuman lacks the important bit of caring for');
-  d(config.textcolor,'the poor. Always dressed in a Elven Chainmail and a red mantle');
+  d(config.textcolor,'Akrappa, some say Singuman lacks the important bit of caring for');
+  d(config.textcolor,'the poor. Always dressed in an Elven Chainmail and a red mantle');
   d(config.textcolor,'Singuman is easily recognized.');
  end
  else if s='LEVEL_MASTER_#3' then begin
   crlf;
   d(config.textcolor,'Elven and human blood pours through Ishanas veins. Taught for house-');
   d(config.textcolor,'holding, she saw her father be brutally slain by Uruk-Hai.');
-  d(config.textcolor,'Rescued from slavery by Ahriman Ishana learned a lot from the wise');
+  d(config.textcolor,'Rescued from slavery by Ahriman, Ishana learned a lot from the wise');
   d(config.textcolor,'man. At the age of 25 she started her own practice of elementary');
   d(config.textcolor,'magic. Ishana possesses wisdom unmatched by few, and disputed by');
   d(config.textcolor,'even less. Extremely skilled with a longbow and sword. Slayed');
   d(config.textcolor,'Ogmof the Fat in the battle of Shares in 3014. While never married,');
-  d(config.textcolor,'rumours speaks of her magic being connected with her virginity.');
+  d(config.textcolor,'rumours speak of her magic being connected with her virginity.');
  end
  else if s='LEVEL_MASTER_#4' then begin
   crlf;
@@ -199,22 +199,22 @@ begin
   d(config.textcolor,'allied with many great Warlords who have strived for power. They say');
   d(config.textcolor,'that he is secretly building his own empire somewhere on the great');
   d(config.textcolor,'plains of Okhsor. Eyes of stone and a weapon skill which outmatches');
-  d(config.textcolor,'the best warrior in the county. Dzarrgo is also excellent trained in');
+  d(config.textcolor,'the best warriors in the county. Dzarrgo is also expertly trained in');
   d(config.textcolor,'Black Magic.');
  end
  else if s='LEVEL_MASTER_#5' then begin
   crlf;
   d(config.textcolor,'Agni is a Master unmarked of time. He has never been seated in the');
-  d(config.textcolor,'Great Council, a fact which has rendered him suspect in manys view.');
+  d(config.textcolor,'Great Council, a fact which has rendered him suspect in many''s view.');
   d(config.textcolor,'In feud with Gregorius after a disputed chess game, which Agni claims');
-  d(config.textcolor,'to have won, but Gregorius refuse to accept, accusing Agni of cheating.');
-  d(config.textcolor,'Always elegant in both manners and clothing, Agni get the rightful');
+  d(config.textcolor,'to have won, but Gregorius refuses to accept, accusing Agni of cheating.');
+  d(config.textcolor,'Always elegant in both manners and clothing, Agni gets the rightful');
   d(config.textcolor,'respect he deserves, whether feared or praised.');
  end
  else if s='LEVEL_MASTER_#6' then begin
   crlf;
-  d(config.textcolor,'As pupil of Sagan the Great, Apollonia makes no difference between');
-  d(config.textcolor,'who seek her aid. May it be evil, good or neutral; Apollonia is thought');
+  d(config.textcolor,'As a pupil of Sagan the Great, Apollonia makes no distinction between');
+  d(config.textcolor,'those who seek her aid. May it be evil, good or neutral; Apollonia is thought');
   d(config.textcolor,'to assist all creatures. This seemingly rather naive attitude is an');
   d(config.textcolor,'approach linked back to the first Ages, when purity ruled the world.');
   d(config.textcolor,'Dressed in a glittering Silvergown and wearing a blue mantle, Apollonia');
@@ -224,7 +224,7 @@ begin
   crlf;
   d(config.textcolor,'The Witchmasters ramschackle lies in the shabby Eastern parts');
   d(config.textcolor,'of Town. As probably one of the most feared men in the county, this');
-  d(config.textcolor,'tell us a bit of the ignorance of the townpeople. Almost never seen');
+  d(config.textcolor,'tells us a bit of the ignorance of the townpeople. Almost never seen');
   d(config.textcolor,'the rumours of Sachmez evil doings have reached absurd proportions.');
   d(config.textcolor,'Still, when facing the Sorceror, You can''t get rid of the nasty');
   d(config.textcolor,'feeling of being scrutinized by a superior mind, who wishes to control You.');
@@ -251,7 +251,7 @@ begin
   crlf;
   d(config.textcolor,'Gregorius great mansion resides two miles outside of town');
   d(config.textcolor,'After the short journey You let yourself in to this eccentric mans house.');
-  d(config.textcolor,'He live by himself in this enormous building, all made in marble.');
+  d(config.textcolor,'He lives by himself in this enormous building, all made in marble.');
   d(config.textcolor,'Religious symbols are imprinted everywhere, some you can interpret,');
   d(config.textcolor,'some not. After a short while the Patriarch arrives, looking very busy');
   d(config.textcolor,'You try to make your request as short and precise as possible.');

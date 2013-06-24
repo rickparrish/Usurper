@@ -219,7 +219,7 @@ begin
 
  if ch<>player.master then begin
   crlf;
-  sd(7,'You have not choosen Your normal Master : ');
+  sd(7,'You have not chosen Your normal Master : ');
   case player.master of
    '1': sd(14,master[1]);
    '2': sd(14,master[2]);
@@ -257,7 +257,7 @@ begin
 
    newsy(true,
    'Change of Master',
-   ' '+uplc+player.name2+config.textcol1+' has choosen a new Master!',
+   ' '+uplc+player.name2+config.textcol1+' has chosen a new Master!',
    '',
    '',
    '',

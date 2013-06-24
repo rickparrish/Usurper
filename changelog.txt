@@ -2,7 +2,7 @@ Sorting:
 -Sped up generation of player lists. (The shellsort Jakob used is fine but inefficient. I optimized the shellsort in one place but there are tons of duplicated copies of the code that should be fixed too.)
 
 Text:
--Minor cleanup
+-Minor cleanup and spelling
 
 Marriages:
 -No more unrequited marriages created by maintenance. I think this is a bug I (Dan) introduced in my optimizations. NPCs will now never marry a human automatically; NPCs only marry other NPCs. Human-involved marriages will never happen automatically. (Thanks Brittany)

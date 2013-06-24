@@ -1338,6 +1338,7 @@ begin
  until (fakelev>98) or (x<>0);
 
  if realtime then begin
+  d(global_talkcol,'and you fully deserve a raise.');
 
   if right>1 then begin
    sd(11,'You have earned ');
@@ -1348,7 +1349,7 @@ begin
    end;
   end;
 
-  sd(global_talkcol,'and you fully deserve a raise. You are now a level ');
+  sd(global_talkcol,'You are now a level ');
   d(15,commastr(happy.level+right));
   d(global_talkcol,classnames[happy.class]+'!');
 
