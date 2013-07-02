@@ -594,13 +594,14 @@ end;
    menu('(0) Human');
    menu('(1) Hobbit');
    menu('(2) Elf');
-   menu('(3) Half-elf '+ulcyan+'*hypnotize');
+   menu('(3) Half-elf');
    menu('(4) Dwarf');
    menu('(5) Troll');
-   menu('(6) Orc '+ulcyan+'*black blood');
+   menu('(6) Orc');
    menu('(7) Gnome');
    menu('(8) Gnoll '+ulcyan+'*poisonous bite');
-   menu('(9) Mutant '+ulcyan+'*immune to evil immortals');
+   {Dan: 'evil immortals': I might implement this}
+   menu('(9) Mutant');
    menu('(H) '+ulgreen+'Help');
    menu('(A) Abort');
    crlf;
@@ -643,7 +644,7 @@ end;
          player.race:=Orc;
         end;
     '7':begin
-         s:='a wilful';
+         s:='a willful';
          player.race:=Gnome;
         end;
     '8':begin
@@ -694,16 +695,17 @@ end;
    crlf;
    d(config.textcolor,'Choose your Profession :   (* special ability)');
    crlf;
-   menu('(1) Alchemist   *poison');
-   menu('(2) Assassin    *backstabbing');
+   menu('(1) Alchemist   '+ulcyan+'*poison');
+   menu('(2) Assassin    '+ulcyan+'*backstabbing');
    menu('(3) Barbarian');
-   menu('(4) Bard        *songs');
-   menu('(5) Cleric      *spells');
-   menu('(6) Jester      *dodge expert');
-   menu('(7) Magician    *spells');
-   menu('(8) Paladin     *soulstrike');
+   menu('(4) Bard'); {no songs}
+   menu('(5) Cleric      '+ulcyan+'*spells');
+   {'dodge expert': I might implement this}
+   menu('(6) Jester');
+   menu('(7) Magician    '+ulcyan+'*spells');
+   menu('(8) Paladin     '+ulcyan+'*soulstrike');
    menu('(9) Ranger');
-   menu('(0) Sage        *spells');
+   menu('(0) Sage        '+ulcyan+'*spells');
    menu('(W) Warrior');
    menu('(H) '+ulgreen+'Help');
    menu('(A) Abort');

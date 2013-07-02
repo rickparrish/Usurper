@@ -17,6 +17,9 @@ Mail:
 
 Cosmetics:
 -Depositing/withdrawing in the treasury doesn't accept values if you have no gold to deposit/withdraw (i.e. it works like the bank now)
+-Cleaner level-raising text when you have the experience to raise multiple levels
+-Some races/professions listed fake abilities that were never implemented (songs, dodge expert, immune to immortal gods). Removed. (I may implement some of these later, but for now they are just misleading.)
+
 
 ----------
 
