@@ -325,6 +325,8 @@ begin
       if confirm('Attack ','N')=true then begin
        crlf;
        d(config.textcolor,'Charging!');
+       {dec player fights}
+       dec(player.pfights);
 
        {reset monsters}
        reset_monsters;
@@ -382,93 +384,26 @@ begin
         {opponent checks his inventory}
         check_inventory(pl0^,0,weapon,false,0);
 
-        {dec player fights}
-        dec(player.pfights);
-
         {worsen pl0:s attitude to player}
         Update_Relation(Relation_Worsen,2,pl0^,player,false,false);
 
-        {the fight}
+        {dispose of door guards}
+        pl0^.bguardnr:=0;
+        user_save(pl0^);
+
+{the fight}
         player_vs_player(pl0^);
 
        end
-       else begin
-
-        {text}
+       else begin {died against doorguards}
 
         {set player flags}
         player.hps:=0;
         {player.allowed:=false;}
         Reduce_Player_Resurrections(player,true);
 
-        {pause}
         crlf;
         pause;
-
-        if global_begged then begin
-
-         Newsy(true,'Coward at the Inn!',
-         ' '+uplc+player.name2+config.textcol1+' fought '+uplc+pl0^.name2+'s'+config.textcol1
-            +' doorguards, but got scared and',
-         ' begged for mercy. '+uplc+player.name2+'s'+config.textcol1+' life was not spared...',
-         '',
-         '',
-         '',
-         '',
-         '',
-         '',
-         '');
-
-         {mail player}
-         s:='Failed Attack!';
-         post(MailSend,
-         player.name2,
-         player.ai,
-         false,
-         mailrequest_nothing,
-         '',
-         ulred+s+config.textcol1,
-         mkstring(length(s),underscore),
-         'You were slain by '+uplc+pl0^.name2+'s'+config.textcol1+' door-guards!',
-         'You died like a wimp, on your knees begging for mercy.',
-         '',
-         '',
-         '',
-         '',
-         '',
-         '',
-         '',
-         '',
-         '',
-         '',
-         '');
-
-         {mail opponent}
-         s:='Assaulted!';
-         post(MailSend,
-         pl0^.name2,
-         pl0^.ai,
-         false,
-         mailrequest_nothing,
-         '',
-         umailheadc+s+config.textcol1,
-         mkstring(length(s),underscore),
-         uplc+player.name2+config.textcol1+' attacked your guards, but failed!',
-         uplc+player.name2+config.textcol1+' begged for mercy! You didn''t show any mercy...',
-         '',
-         '',
-         '',
-         '',
-         '',
-         '',
-         '',
-         '',
-         '',
-         '',
-         '');
-
-        end
-        else begin
 
          if pl0^.bguardnr>1 then begin
           s:=' '+uplc+player.name2+config.textcol1+' fought '+uwhite+commastr(pl0^.bguardnr)+' '+uguardc+guard^.name+'s'
@@ -569,7 +504,6 @@ begin
         normal_exit;
 
        end;
-      end;
      end
      else begin
 

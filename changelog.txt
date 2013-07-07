@@ -20,6 +20,10 @@ Cosmetics:
 -Cleaner level-raising text when you have the experience to raise multiple levels
 -Some races/professions listed fake abilities that were never implemented (songs, dodge expert, immune to immortal gods). Removed. (I may implement some of these later, but for now they are just misleading.)
 
+Inn player fights:
+-Fight is now deducted if you die against doorguards
+-Doorguards stayed dead if you killed some but died against doorguards, but all stayed alive if you killed doorguards and died against player. Fixed (dead doorguards stay dead)
+
 
 ----------
 
