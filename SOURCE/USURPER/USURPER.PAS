@@ -279,8 +279,8 @@ Uses {$IFDEF MSDOS}Overlay,{$ENDIF} Dos, {$IFDEF MSDOS}InitOver,{$ENDIF}
 
 
 Const            {version number also in DDPLUS.PAS}
-     uversion  = 'Usurper 0.23e'; {prog & version}
-     ucomp     = '04/27/2013';      {compile date, mm/dd/yyyy}
+     uversion  = 'Usurper 0.23f'; {prog & version}
+     ucomp     = '07/08/2013';      {compile date, mm/dd/yyyy}
 
      uctlfile  = 'USURP.CTL'; {modem/fossil configuration file, used by DDPLUS}
      never = false; {never leave the main loop}

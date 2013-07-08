@@ -1,3 +1,9 @@
+Version github:
+
+----------
+
+Version 0.23f:
+
 Sorting:
 -Sped up generation of player lists. (The shellsort Jakob used is fine but inefficient. I optimized the shellsort in one place but there are tons of duplicated copies of the code that should be fixed too.)
 
@@ -27,7 +33,7 @@ Inn player fights:
 
 ----------
 
-Version 0.23d:
+Version 0.23e:
 
 Pregnancy:
 -Two mails could be received for a pregnancy (telling you that you and then your partner were pregnant). Fixed.
