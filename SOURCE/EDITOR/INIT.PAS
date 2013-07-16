@@ -1958,7 +1958,7 @@ End;
 
 Procedure ResDialog.HandleEvent(var Event:TEvent);
 var  sx,sy : byte;
-
+     Txt: Text;
 Begin
 
  if doneit=false then begin
@@ -2002,7 +2002,8 @@ Begin
    if f_exists(ChildBirthHistANSI) then delete_file(ChildBirthHistANSI);
    if f_exists(ChildBirthHistASCI) then delete_file(ChildBirthHistASCI);
 
-
+   { Data file version }
+   if (F_Exists(VersionF)) then Delete_File(VersionF);
   end;
   sx:=3;
   sy:=0;
@@ -2110,6 +2111,16 @@ Begin
   if game then begin
    if f_exists(global_pfile) then delete_file(global_pfile);
    if f_exists(childrenf) then delete_file(childrenf);
+   
+   { Data file version }
+   if (Open_TxtFile(TReWrite, Txt, VersionF)) then 
+   begin
+     WriteLn_To_Text(Txt, uver);
+     Close_Text(Txt);
+   end else
+   begin
+     Unable_To_Create(VersionF);
+   end;
   end;
 
   if game then begin
