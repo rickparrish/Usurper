@@ -1,0 +1,339 @@
+                                    (2013, version 0.24)
+
+ ---------------------
+  ---------------------
+   Usurper the DoorGame
+   ---------------------
+    ---------------------
+
+Welcome to Usurper, a fantasy game filled with fast paced action, violence
+and instant death. This game has only one purpose : to give you a good time
+without the need of reading any lengthy documentation. You can actually
+enter the game and go berzerk straight away. However, you can consider
+ continuing to read and perhaps learn something that can keep you alive for 
+a while. 
+
+You can choose to play as a lonewolf adventurer/warrior who seek gain only for
+yourself, and care little for anything else. You can also form teams in which
+you and your comrades fight for each other. In either case you should always
+concentrate your efforts on the dungeons. It's in these huge cave
+areas that your fortune can be made, or your life end...
+There are over one hundred dungeons stretching from the top of the huge
+mountain, down to it's deepest level. It may be said at once that no creature
+has ever returned from the deeper levels. The ancient legends say that on
+Durunghins bottom there is a "thing" so powerful that the worlds destiny
+can be altered with it. But the legends also say that the guardians of this
+"thing" goes beyond everything your worst nightmares can bring forth...
+Well, no one has ever reached beyond the magic 90th level--you might be the
+first. You can take your team with you to the dungeons. It is almost always
+better to have more than one to face those monsters.
+
+Completing the final challenge at the bottom of the huge mountain will reward
+you with immortalization in the chronicles. Your name will live forever.
+
+It is important to note that in the dungeons, many strange creatures lurk
+around. Some will eventually approach you and offer different things. Your
+response will ultimately lead to either riches or to death...
+
+If you don't fancy strolling down the dungeons, you can do other things.
+You can visit the Dormitory, where many of the characters take their rest.
+You can kick them out of their beds and challenge them for a fight, or perhaps
+try to murder them while they sleep... 
+
+You will always have opponents in this game, not just the monsters you
+challenge in the dungeons, but also computer controlled characters.
+These guys are not always nice. Some will try to slain you just for the
+hell of it! The dungeon monsters, on the other hand, are always there 
+waiting for you.
+
+
+
+Team Play
+---------
+
+A nice feature of Usurper is the team function. If they wish, players can
+form gangs/teams and seek their luck together. The gangs can be used to
+gain control of the town, which in turn can add income to the members.
+Controlling the town brings your team money, but remember that everything
+has a price. Every gang wants to beat the leaders. You don't just have to
+worry about other player gangs. There are also computer teams that
+are waiting just to whip the senses out of you and your comrades. If you don't
+trust the other players you can hire in computer characters to fight for
+your team. Don't trust them too much though as most of them can be turned
+when offered the right sum of money...  
+Other teams can at all times challenge the town controllers. Gangfights are
+mostly short, bloody and dirty. It is recommended that you let your teammates
+know before you take them out to a street massacre where they risk to lose
+everything, including their lives.
+
+Teams can also enter the dungeons together. This can be a good way to
+help fellow members to raise their experience. After a successful battle
+you can take them to see their levelmaster, and raise their level.
+
+
+
+Character Creation
+------------------
+
+Upon the creation of a new player you will be given the opportunity to
+choose between different races and classes. This selection is vital to
+the type of game you will be involved in. First of all, every race and
+class has different abilities according to strength and defence, but
+they also have different values when it comes to 'valor' and 'darkness'.
+
+Take a paladin for example. This character is aimed for goodness, and should
+be played good. That means that you should spare innocent victims, perform
+quests of valor, and thereby raise your valor. However, the paladin can also
+be played bad, and perform violent acts such as murder innocent creatures and
+visit whorehouses. Unfortunately your characters deeds will eventually catch
+up with him. In the case of the paladin this will cause his soul to darken,
+and eventually something terrible will happen. But of that i will not discuss
+anything more here.
+If we take another character like the troll, this creature can and should
+be played bad. To be vicious and commit evil deeds will raise the trolls
+darkness score, and eventually reward him. But it must be said that
+you can experiment whith different combinations, as none is totally 
+predictable. If you want the ultimate killing machine, consider the
+choice of Troll as race, and Barbarian as class. 
+
+Also remember that every race and class has their own special abilities.
+The Gnoll has a poisoned bite. The Paladin can at extreme situations
+use a so called soul-strike, this is a blow where he use some of his
+hitpoints to create a kind of superblow. The Paladin has this ability
+due to his strong virtue. In difficult situations he can concentrate
+this force and use it to achieve maximum performance. However, a good
+Paladin can achieve greater than a dark paladin. The strike can be used
+when you want a quick solution in a battle against a stubborn foe, or
+in a situation where you have little hope to stay alive. The 'soulblow'
+is a VERY risky business though. If you use all your hitpoints in a
+strike, an enemy can easily defeat you... 
+
+Races :
+ Humans     - good overall choice.
+ Hobbits    - great rangers.
+ Elves      - builds mana faster than other races.
+ Half-elves - more robustly built than the elves.
+ Dwarves    - make great warriors.
+ Trolls     - big and strong.
+ Orcs       - great as fighters and magicians.
+ Gnomes     - good in combination with alchemists and assassins.
+ Gnolls     - poisonous bite. unfortunately with a rather weak constitution.
+ Mutants    - ...?
+
+Professions :
+ Alchemists  - can poison their weapons.
+ Assassins   - backstabbing is their trade.
+ Barbarians  - raw strength is favored among the barbarians.
+ Bards       - "masters of soft voices". Bards are invaluable in
+               team-play, since they can boost morale.
+ Clerics     - spell masters.
+ Jesters     - jesters are very hard to hit.
+ Magicians   - spell masters
+ Paladins    - should be played GOOD. Have soulstrike as special weapon.
+ Rangers     - excellent stealth qualities. Hard to hit.
+ Sages       - spell masters.
+ Warriors    - the standard fighter class.
+
+
+(M)=Affects whole group of monsters.
+
+
+*Cleric*  SPELL-BOOK
+Level=Spell==============Effect==========Duration=========Mana.needed==
+1.....Cure Light.........+4-7 hps........1.turn...................10...
+5.....Armor..............+5 protection...whole fight..............20...
+10....Baptize Monster....enemy.freezes...random...................30...
+15....Cure Critical......+20-24 hps......1.turn...................40...
+20....Disease............random disease..1.turn...................50...
+25....Holy Explosion.....20-30.damage....1.turn...................60.(M)
+30....Invisibility.......+15-25 prot.....whole fight..............70...
+40....Angel..............100 damage....  whole fight..............80...
+50....Call Lightning.....80-89 damage....1.turn...................90...
+60....Heal...............+200 hps........1.turn..................100...
+70....Divination.........+110 prot.*.....random..................110...
+80....Gods Finger........220-250.damage..1.turn..................120...
+(* the DIVINATION spell will also reduce players darkness with 50 and
+   increase chivalry with the same amount.)
+
+
+*Magician*  SPELL-BOOK
+Level=Spell==============Effect==========Duration=========Mana.needed==
+1.....Magic Missile......4-7 damage......1.turn...................10...
+5.....Shield.............+4 protection...whole fight..............20...
+10....Sleep..............enemy.freezes...random...................30...
+15....Web................enemy freezes...1.turn...................40...
+20....Power Hat..........regains.60-20...1.turn...................50...
+25....Fireball...........60-70.damage....1.turn...................60...
+30....Fear...............enemy freezes...whole fight..............70...
+40....Lightning Bolt.....60-70 damage....1.turn...................80.(M)
+50....Prismatic Cage.....absorbs 20......whole fight..............90...
+60....Pillar of Fire.....100-112.damage..1.turn..................100...
+70....Power Word KILL....220-265.damage..1.turn..................110...
+80....Summon Demon.......200-300.damage..whole fight.............120...
+
+
+*Sage*  SPELL-BOOK
+Level=Spell==============Effect==========Duration=========Mana.needed==
+1.....Fog of War.........+3 protection...whole fight..............10...
+5.....Poison.............enemy level+1...whole fight..............20...
+10....Freeze.............enemy.freezes...1.turn...................30...
+15....Duplicate..........your attack*2...whole fight..............40.+25 hps
+20....Roast..............50-65 damage....1.turn...................50.(M)
+25....Hit Self...........70-80.damage....1.turn...................60...
+30....Escape.............enemy freezes...1.turn...................70...
+40....The Giant..........+25dmg,.........whole fight..............80...
+50....Steal..............enemys money....1.turn...................90...
+60....Energy Drain.......130-141.damage..1.turn..................100...
+70....Summon.Demon.......100-120.damage..whole fight.............110...
+80....Death Kiss.........240-290.damage..1.turn..................120...
+
+
+
+Dungeon Events
+--------------
+In the dungeons you will sometimes bump into individuals and creatures
+with not just fighting on their mind. 
+Some will just be out to make fun of you. Others will try to trick you
+into an early grave. Most encounters will be short, but there are a few
+exceptions where you will have the opportunity to participate in a mission
+where high politics is often involved. Your success on these missions is
+vital for the chance to ever get another chance. So, keep your mission record
+on the plus side (it can turn negative). Don't play with spies and diplomats
+when you are a low level character. And never lie to Ragmoth.
+
+
+
+
+The King
+--------
+Characters with a certain level can attempt to usurp the royal throne.
+The task is easy if no king or queen exists. Should that be the case,
+you will get the title without struggle.
+Should a king already be in rule,  you will have to infiltrate the castle
+and try to remove the current ruler (assassinate or something).
+
+pros and cons with being king:
+(+) 
+    you are the top gun in the game, isn't that enough?
+    you can close and open establishments (shops).
+    you can enforce new taxes.
+    you have the power to order the Court Mage to impose his magic (good or
+    evil). The Royal Magic is very powerful, since you can be a decisive force
+    in ongoing events.
+    You have the authority to dissolve or ban marriage.
+    you will have the pleasure of having other players crumbling in the dust
+    before you. You will hear them scream when they swim across the moat and
+    find out about the surprises you have put there.
+    you can put other players kids in the royal orphanage.
+    you can imprison (and execute) other players.
+    you can sleep safe at the castle (until you are deposed).
+    you can't go to prison! You stand above the law.
+    other players can't spy on you, or attack you.
+
+(-) you cannot be in a team when you are king.
+    people wont appreciate you for the taxes, which you might have to set
+    if you want to be able to hire soldiers (security). 
+    you have responsibility for the law and the proper behaviour of your subjects.
+    (you can of course be a bad king, but people will probably remove you
+    from office if you act mean and vicious)
+    you must take care of all orphans produced by irresponsible parents! 
+    a lot of people will hate your guts whatever you do.
+    you will probably be assassinated.
+
+
+
+The Immortals
+-------------
+When a player completes his doings on earth, he may choose to retire from
+Usurper altogether, or ascend to the world of the immortals (heaven).
+Should you decide to become an immortal it does not imply immediate supreme
+powers and "almightyness" at your fingertips. Contrary to popular belief, life in
+heaven can be hell.
+
+
+
+The Relations
+-------------
+As soon as you do something nice or bad to another player/npc this will
+be recorded and affect your relation with that character.
+All of this will, of course, play a part later on when you want to bribe or
+recruit a team-member or have a love-affair. The Npc's are more predictable 
+in their shift in attitude. They get annoyed when attacked and pleased when
+you help them. But don't be foolish and think that you can kill Ugluk 50
+times and then send him a million bucks and everything will be well.
+These guys remember exactly how many times you have done wrong and the
+grudges are nursed until it's time to settle the old score.
+
+You can marry another player/npc when you both are in love with each other.
+The matrimonial bond carries benefits; You get extra experience.
+You can have kids. Your spouse can be nice to you (if you are lucky).
+The drawbacks are mainly related to the kids. They can be kidnapped, put
+in an orphanage or even die (causing grief and anxiety). 
+Having forced sex with other players/spouses can prove to be most
+detrimental to yourself. Watch out especially for npc characters, who tend to pay back
+as soon as the clock passes midnight :)
+
+
+Raising children is an expensive business. If you can't afford to pay
+for their upbringing, your offspring will be sent to the Royal Orphanage.
+This means that the royal treasury must spend tax-money on an ever
+increasing number of kids. The King might be generous and take care of
+the little rascals for a period of time, but he can also decide to
+put the babies to the wolves or something...
+Should the royal treasury not hold enough funds to sustain the children
+then they will starve and ultimately die...
+Your enemies may try to harm your offspring by poisoning, kidnapping or
+beating them. There are ways to protect your children though.
+
+If you should decide that a divorce is the way to go, then keep in mind
+that custody of your children will go to the other parent!
+Your children will get depressed from a divorce. That is not good.
+
+A husband can never attack his wife (and vice versa), except in team-fights.
+You can trick other players by sending them "gifts" with poison or
+other scary stuff inside.
+
+
+Shortcuts to Success
+--------------------
+
+* Are you the type of player who wants to achieve faster progress than the 
+  normal monster and team bashings can result in? 
+* Are you the type of player who can do almost anything just to beat
+  the others?
+* Are you willing to risk everything in these attempts?
+
+If you answered yes to all of the questions above you should read further.
+If you answered no to one or more of the questions : why not read this anyway? 
+
+First of all, there are good and evil acts that can give you experience and
+money. They can, of course, give you pain and death as well. Most important of
+all, though, they influence your soul. Every bad act darkens your soul, and every good
+lightens it. Swinging either side over the limit will give you some 
+unpredictable and sometimes fatal consequences. Some races can withstand good
+or evil better than others, and can therefore benefit longer. 
+
+Usurper is not a normal and restricted Fantasy game. It includes some more
+modern features too. Ever heard of drugs and steroids? Well, here they are.
+There are many different types of drugs in this game. They all have two things
+in common though. Firstly, they send you into dreamland where you can receive 
+hallucinated experiences which add to your earlier experience. Drugs also
+increase your addiction to narcotics. You should be very careful not to
+turn into a junkie, cause if you start to stuff yourself full with drugs
+every session, you'll soon enter your final dreamland. Keep an eye on your
+-Drug Addiction- parameter and also remember that drugs occasionally give
+you bad trips, or can even kill you with an overdose...      
+
+Steroids will not give you any experience. They will, however, give you
+what you are always going to need in these kind of games : MUSCLES. 
+Wouldn't it be nice to be able to crack those enemy bones just as easy as
+you pull the wings of a fly? Well, buy some steroids and you will (never)
+regret yourself. Steroids come in many different types. The results on
+your body will show at once! Just keep an eye on your -Mental Stability-
+parameter. It will show when you're about to crack. And please try not to
+fool yourself with these pills. Psychos are not treated kindly in this game.
+
+
+Good Luck in Your Quest!
+
+(Zen Paradox, The light at the end...)
