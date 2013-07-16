@@ -36,7 +36,7 @@ Program Editor; {Usurper - DoorGame Editor}
 
 Uses {$IFDEF MSDOS}Overlay,{$ENDIF} Init, CfgVal,
      JakobE, muffi2, extra,
-     file_io;
+     file_io, Upgrade;
 
 {---$O Addit}
 {---$O CfgHelp}
@@ -78,6 +78,17 @@ var
    txt : text;
 
 Begin
+  if Not(UpgradeIfNecessary) then
+  begin
+    WriteLn;
+    WriteLn('An error was encountered while upgrading your version of Usurper');
+    WriteLn('Please try running EDITOR again to see if the error persists');
+    WriteLn('If it does, please see the documentation for support contact information');
+    WriteLn;
+    WriteLn('Hit ENTER to quit');
+    ReadLn;
+    Halt;
+  end;
 
 filemode:=66;
 {$IFNDEF MSDOS}
