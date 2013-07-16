@@ -108,6 +108,7 @@ const
  childmalef  =global_datadir+'CHILDMAL.DAT'; {children, male names *used by npcs*}
  childfemalef=global_datadir+'CHILDFEM.DAT';{children, female names *used by npcs*}
  bardsongf  = global_datadir+'BARDSONG.DAT'; {bard song file *confirm deletion*}
+ VersionF   = global_datadir+'VERSION.DAT'; {stores version number for data files, used by UPGRADE.PAS}
 
  {news files}
  nwfileans  = global_scoredir+'NEWS.ANS';
