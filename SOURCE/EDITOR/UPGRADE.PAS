@@ -35,23 +35,26 @@ uses
 
 const
   { Constants to use in version detection }
-  VERSION_001_OR_001e                                             = '0.01 or 0.01e';
-  VERSION_001f                                                    = '0.01f';
-  VERSION_002_OR_004c_OR_005b                                     = '0.02 or 0.04c or 0.05b';
-  VERSION_008                                                     = '0.08';
-  VERSION_013c                                                    = '0.13c';
-  VERSION_017                                                     = '0.17';
-  VERSION_014_OR_016                                              = '0.14 or 0.16';
-  VERSION_018_OR_019b6                                            = '0.18 or 0.19b6';
-  VERSION_020d                                                    = '0.20d';
-  VERSION_020e_OR_021DOS_OR_021aDOS_OR_022_OR_023_OR_023a_OR_023b = '0.20e or 0.21 (DOS) or 0.21a (DOS) or 0.22 or 0.23 or 0.23a or 0.23b'
-  VERSION_021W32_OR_021aW32                                       = '0.21 (W32) or 0.21a (W32)';
-  VERSION_023c_OR_023d_OR_023e_OR_023f                            = '0.23c or 0.23d or 0.23e or 0.23f';
+  VERSION_001_OR_001e                        = '0.01 or 0.01e';
+  VERSION_001f                               = '0.01f';
+  VERSION_002_OR_004c_OR_005b                = '0.02 or 0.04c or 0.05b';
+  VERSION_008                                = '0.08';
+  VERSION_013c                               = '0.13c';
+  VERSION_017                                = '0.17';
+  VERSION_014_OR_016                         = '0.14 or 0.16';
+  VERSION_018_OR_019b6                       = '0.18 or 0.19b6';
+  VERSION_020d                               = '0.20d';
+  VERSION_020e_OR_022_OR_023_OR_023a_OR_023b = '0.20e or 0.22 or 0.23 or 0.23a or 0.23b';
+  VERSION_021DOS_OR_021aDOS                  = '0.21 (DOS) or 0.21a (DOS)';
+  VERSION_021W32_OR_021aW32                  = '0.21 (W32) or 0.21a (W32)';
+  VERSION_023c_OR_023d_OR_023e_OR_023f       = '0.23c or 0.23d or 0.23e or 0.23f';
   
 function GetOldVersion: String; forward;
 function GuessVersionByData: String; forward;
 function GetVersionDatVersion: String; forward;
 function PerformUpgrade(OldVersion: String): Boolean; forward;
+function PerformUpgradeTo023c: Boolean; forward;
+function PerformUpgradeTo023d: Boolean; forward;
 
 function GetOldVersion: String;
 var
@@ -86,7 +89,6 @@ begin
     { BP can't use a LongInt in a case statement?  Makes for ugly repetetive IFs... }
     if (NpcsDatSize = 37800) then
     begin
-      { TODO Not an exact match, further check possible? }
       Result := VERSION_001_OR_001e;
     end else
     if (NpcsDatSize = 49770) then
@@ -95,7 +97,6 @@ begin
     end else
     if (NpcsDatSize = 173880) then
     begin
-      { TODO Not an exact match, further check possible? }
       Result := VERSION_002_OR_004c_OR_005b;
     end else
     if (NpcsDatSize = 89320) then
@@ -108,7 +109,6 @@ begin
     end else
     if (NpcsDatSize = 91420) then
     begin
-      { TODO Not an exact match, further check possible? }
       Result := VERSION_014_OR_016;
     end else
     if (NpcsDatSize = 91910) then
@@ -117,7 +117,6 @@ begin
     end else
     if (NpcsDatSize = 100270) then
     begin
-      { TODO Not an exact match, further check possible? }
       Result := VERSION_018_OR_019b6;
     end else
     if (NpcsDatSize = 100418) then
@@ -126,17 +125,20 @@ begin
     end else
     if (NpcsDatSize = 100566) then
     begin
-      { TODO Not an exact match, further check possible? }
-      Result := VERSION_020e_OR_021DOS_OR_021aDOS_OR_022_OR_023_OR_023a_OR_023b;
+      if (F_Exists(Global_DataDir + 'DOSORWIN.DAT')) then
+      begin
+        Result := VERSION_021DOS_OR_021aDOS;
+      end else
+      begin
+        Result := VERSION_020e_OR_022_OR_023_OR_023a_OR_023b;
+      end;
     end else
     if (NpcsDatSize = 113590) then
     begin
-      { TODO Not an exact match, further check possible? }
       Result := VERSION_021W32_OR_021aW32;
     end else
     if (NpcsDatSize = 100566) then
     begin
-      { TODO Not an exact match, further check possible? }
       Result := VERSION_023c_OR_023d_OR_023e_OR_023f;
     end;
   end else
@@ -171,11 +173,11 @@ begin
         WriteLn(' - If you will be resetting the game, then you can safely ignore this message');
         WriteLn(' - If you want to upgrade your game:');
         WriteLn('   - Hit Y to try to detect the installed version again');
-        WriteLn('   - Hit any other key to skip the version check (and you can upgrade manually)');
+        WriteLn('   - Hit N to skip the version check (and you can upgrade manually)');
         WriteLn('     See UPGRADE.TXT for instructions to manually upgrade your game');
         Ch := UpCase(ReadKey);
       end;
-    until (Ch <> 'Y');
+    until (Ch = 'N');
   end;
   
   GetVersionDatVersion := Result;
@@ -190,39 +192,35 @@ begin
   Result := false;
   
   { Check which version we're upgrading from to see what needs to be done }
-  if (OldVersion = VERSION_020e_OR_021DOS_OR_021aDOS_OR_022_OR_023_OR_023a_OR_023b) then
+  if (OldVersion = VERSION_020e_OR_022_OR_023_OR_023a_OR_023b) then
   begin
-    WriteLn(' - If you will be resetting the game, then you can safely ignore this message');
-    WriteLn(' - If you want to upgrade your game:');
-    WriteLn('   - Hit Y to automatically upgrade your game (PLEASE BACKUP BEFORE DOING THIS)');
-    WriteLn('   - Hit any other key to skip the upgrade (and you can upgrade manually)');
-    WriteLn('     See UPGRADE.TXT for instructions to manually upgrade your game');
-    Ch := UpCase(ReadKey);
-    if (Ch = 'Y') then
-    begin
-      WriteLn('TODO Perform 0.23c upgrade');
-      Result := true; { TODO Result should be set by success of upgrade }
-      ReadKey;
-    end else
-    begin
-      Result := true;
-    end;
+    Result := PerformUpgradeTo023c;
+    if (Result) then Result := PerformUpgradeTo023d;
+  end else
+  if (OldVersion = VERSION_023c_OR_023d_OR_023e_OR_023f) then
+  begin
+    Result := PerformUpgradeTo023d;
   end else
   begin
-    WriteLn(' - Unfortunately your existing version is not supported by the automatic');
-    WriteLn('   upgrade process, so you''ll have to perform the upgrade manually');
-    WriteLn(' - See UPGRADE.TXT for instructions to manually upgrade your game');
-    WriteLn;
-    WriteLn('Hit any key to continue');
-    ReadKey;
-    Result := true;
+    WriteLn('Unfortunately the auto upgrader does not support your version of Usurper!');
   end;
   
   PerformUpgrade := Result;
 end;
 
+function PerformUpgradeTo023c: Boolean;
+begin
+  { TODO }
+end;
+
+function PerformUpgradeTo023d: Boolean;
+begin
+  { TODO }
+end;
+
 procedure UpgradeIfNecessary;
 var
+  Ch: Char;
   NewVersion, OldVersion: String;
 begin
   WriteLn;
@@ -247,18 +245,35 @@ begin
   end else
   if (NewVersion <> OldVersion) then
   begin
-    WriteLn('It looks like your copy of Usurper needs to be updated');
+    WriteLn('It looks like your copy of Usurper needs to be upgraded!');
+    WriteLn;
     WriteLn('       Existing version: ' + OldVersion);
     WriteLn('  Version to upgrade to: ' + NewVersion);
     WriteLn;
-    if Not(PerformUpgrade(OldVersion)) then
+    WriteLn('Would you like to attempt an automatic upgrade now?');
+    repeat
+      Ch := UpCase(ReadKey);
+    until (Ch in ['Y', 'N']);
+    WriteLn;
+    
+    if (Ch = 'Y') then
     begin
-      WriteLn('An error was encountered while trying to upgrade your version of Usurper!');
-      WriteLn(' - If you will be resetting the game, then you can safely ignore this message');
-      WriteLn(' - If you want to upgrade your game, please see UPGRADE.TXT for instructions');
-      WriteLn('   NOTE: This upgrade may have partially completed, so it would be best to');
-      WriteLn('         restore the backup you made before manually upgrading (you made a');
-      WriteLn('         backup like you were told to, right?!?)');
+      if Not(PerformUpgrade(OldVersion)) then
+      begin
+        WriteLn;
+        WriteLn('An error was encountered while trying to upgrade your game!  Please either');
+        WriteLn('upgrade manually (see UPGRADE.TXT for instructions to manually upgrade your');
+        WriteLn('game) or reset the game before trying to play again, or data corruption may');
+        WriteLn('occur.');
+        WriteLn;
+        WriteLn('Hit any key to continue');
+        ReadKey;
+      end;
+    end else
+    begin
+      WriteLn('OK, I''ll leave your data alone.  Please either upgrade manually (see');
+      WriteLn('UPGRADE.TXT for instructions to manually upgrade your game) or reset the game');
+      WriteLn('before trying to play again, or data corruption may occur.');
       WriteLn;
       WriteLn('Hit any key to continue');
       ReadKey;
