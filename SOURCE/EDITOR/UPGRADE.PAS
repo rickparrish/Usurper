@@ -3,7 +3,7 @@
 {$ENDIF}
 {
 
-Copyright 2007 Jakob Dangarden
+Copyright 2013 Usurper Dev Team
 
  This file is part of Usurper.
 
@@ -26,58 +26,122 @@ Unit Upgrade;
 
 interface
 
-function UpgradeIfNecessary: Boolean;
+procedure UpgradeIfNecessary;
 
 implementation
 
 uses
-  File_IO, Init;
+  Crt, File_IO, Init;
 
-function UpgradeIfNecessary: Boolean;
+function GetOldVersion: String; forward;
+function GuessVersionByData: String; forward;
+function GetVersionDatVersion: String; forward;
+function PerformUpgrade(OldVersion: String): Boolean; forward;
+
+function GetOldVersion: String;
 var
-  Txt: Text;
-  VersionDatVersion: String;
+  Result: String;
 begin
-  { Assume failure }
-  UpgradeIfNecessary := false;
+  Result := GetVersionDatVersion;
+  if (Result = '') then Result := GuessVersionByData;
+  GetOldVersion := Result;
+end;
+
+function GuessVersionByData: String;
+var
+  Result: String;
+begin
+  Result := '';
   
-  { Get installed version from VERSION.DAT }
-  WriteLn;
-  WriteLn('Checking if Usurper needs to be upgraded...');
-  WriteLn('          EXE version: ' + uver);
+  { TODO Guess version by looking at data files }
+  
+  GuessVersionByData := Result;
+end;
+
+function GetVersionDatVersion: String;
+var
+  Ch: Char;
+  InFile: Text;
+  Result: String;
+begin
+  Result := '';
+  
   if (F_Exists(VersionF)) then
   begin
-    if (Open_TxtFile(TReset, Txt, VersionF)) then
-    begin
-      ReadLn_From_Text(Txt, VersionDatVersion);
-      Close_Text(Txt);
-      WriteLn('  VERSION.DAT version: ' + VersionDatVersion);
-    end else
-    begin
-      Unable_To_Access(VersionF);
-      Exit;
-    end;
-  end else
-  begin
-    WriteLn('  VERSION.DAT version: File not found');
-    WriteLn('Unknown version found, nothing to do');
-    UpgradeIfNecessary := true;
-    Exit;
-    { TODO Could check for existence of files in DATA subdirectory.  If they exist, we could probably detect the installed
-      version by looking at the sizes of certain data files, and upgrade as necessary.  If they don't exist, it's a new
-      install, so no need to do anything }
+    repeat
+      if not(Open_TxtFile(TReset, InFile, VersionF)) then
+      begin
+        ReadLn_From_Text(InFile, Result);
+        Close_Text(InFile);
+        Ch := 'N'; { Causes repeat loop to terminate, since we got the verrsion we need }
+      end else
+      begin
+        Result := 'ERROR';
+        WriteLn('Error reading ' + VersionF + ' to determine which version of Usurper');
+        WriteLn('you have installed!');
+        WriteLn(' - If you will be resetting the game, then you can safely ignore this message');
+        WriteLn(' - If you want to upgrade your game:');
+        WriteLn('   - Hit Y to try to detect the installed version again');
+        WriteLn('   - Hit any other key to skip the version check (and you can upgrade manually)');
+        WriteLn('     See UPGRADE.TXT for instructions to manually upgrade your game');
+        Ch := UpCase(ReadKey);
+      end;
+    until (Ch <> 'Y');
   end;
   
-  { If we get here we have a version from VERSION.DAT (or a guessed version from DATA file sizes) }
-  if (uver = VersionDatVersion) then
+  GetVersionDatVersion := Result;
+end;
+
+function PerformUpgrade(OldVersion: String): Boolean;
+var
+  Result: Boolean;
+begin
+  { Assume failure }
+  Result := false;
+  
+  { TODO Check which version we're upgrading from to see what needs to be done }
+  
+  PerformUpgrade := Result;
+end;
+
+procedure UpgradeIfNecessary;
+var
+  NewVersion, OldVersion: String;
+begin
+  WriteLn;
+  
+  { Get EDITOR.EXE and VERSION.DAT (or best guess) versions }
+  NewVersion := uver;
+  OldVersion := GetOldVersion;
+  
+  { Check if we were able to retrieve the VERSION.DAT version }
+  if (OldVersion = '') then
   begin
-    { Versions match, no need to do anything }
-    WriteLn('Versions match, nothing to do');
-    UpgradeIfNecessary := true;
-    Exit;
+    WriteLn('Unable to determine which version of Usurper you have installed!');
+    WriteLn(' - If you will be resetting the game, then you can safely ignore this message');
+    WriteLn(' - If you want to upgrade your game, please see UPGRADE.TXT for instructions');
+    WriteLn;
+    WriteLn('Hit any key to continue');
+    ReadKey;
   end else
+  if (OldVersion = 'ERROR') then
   begin
-    WriteLn('TODO Upgrade is necessary');
+    { Ignore, error message would have been presented to user earlier }
+  end else
+  if (NewVersion <> OldVersion) then
+  begin
+    if Not(PerformUpgrade(OldVersion)) then
+    begin
+      WriteLn('An error was encountered while trying to upgrade your version of Usurper!');
+      WriteLn(' - If you will be resetting the game, then you can safely ignore this message');
+      WriteLn(' - If you want to upgrade your game, please see UPGRADE.TXT for instructions');
+      WriteLn('   NOTE: This upgrade may have partially completed, so it would be best to');
+      WriteLn('         restore the backup you made before manually upgrading (you made a');
+      WriteLn('         backup like you were told to, right?!?)');
+      WriteLn;
+      WriteLn('Hit any key to continue');
+      ReadKey;
+    end;
   end;
 end;
 
