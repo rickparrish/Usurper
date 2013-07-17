@@ -78,17 +78,7 @@ var
    txt : text;
 
 Begin
-  if Not(UpgradeIfNecessary) then
-  begin
-    WriteLn;
-    WriteLn('An error was encountered while upgrading your version of Usurper');
-    WriteLn('Please try running EDITOR again to see if the error persists');
-    WriteLn('If it does, please see the documentation for support contact information');
-    WriteLn;
-    WriteLn('Hit ENTER to quit');
-    ReadLn;
-    Halt;
-  end;
+  UpgradeIfNecessary;
 
 filemode:=66;
 {$IFNDEF MSDOS}
