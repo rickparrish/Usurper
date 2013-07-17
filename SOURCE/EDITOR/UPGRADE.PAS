@@ -55,6 +55,7 @@ function GetVersionDatVersion: String; forward;
 function PerformUpgrade(OldVersion: String): Boolean; forward;
 function PerformUpgradeTo023c: Boolean; forward;
 function PerformUpgradeTo023d: Boolean; forward;
+function UpdateVersionDat: Boolean; forward;
 
 function GetOldVersion: String;
 var
@@ -196,10 +197,12 @@ begin
   begin
     Result := PerformUpgradeTo023c;
     if (Result) then Result := PerformUpgradeTo023d;
+    if (Result) then Result := UpdateVersionDat;
   end else
   if (OldVersion = VERSION_023c_OR_023d_OR_023e_OR_023f) then
   begin
     Result := PerformUpgradeTo023d;
+    if (Result) then Result := UpdateVersionDat;
   end else
   begin
     WriteLn('Unfortunately the auto upgrader does not support your version of Usurper!');
@@ -209,13 +212,99 @@ begin
 end;
 
 function PerformUpgradeTo023c: Boolean;
+var
+  Buf114: Array[1..114] of Byte;
+  Buf121: Array[1..121] of Byte;
+  BufLongInt: LongInt;
+  BufSmallInt: SmallInt;
+  InFile, OutFile: File;
+  NumRead, NumWritten: SmallWord;
+  Result: Boolean;
+  TempMonsterDat, OldMonsterDat: String;
 begin
-  { TODO }
+  Result := false;
+  
+  TempMonsterDat := Global_DataDir + 'MONSTER.$$$';
+  OldMonsterDat := Global_DataDir + 'MONSTER.OLD';
+  
+  Assign(InFile, monfile);
+  {$I-}Reset(InFile, 1);{$I+}
+  if (IOResult = 0) then
+  begin
+    Assign(OutFile, TempMonsterDat);
+    {$I-}ReWrite(OutFile, 1);{$I+}
+    if (IOResult = 0) then
+    begin
+      while Not(EOF(InFile)) do
+      begin
+        BlockRead(InFile, Buf114, 114, NumRead);
+        BlockWrite(OutFile, Buf114, 114, NumWritten);
+        
+        BlockRead(InFile, BufSmallInt, 2, NumRead);
+        BufLongInt := BufSmallInt;
+        BlockWrite(OutFile, BufLongInt, 4, NumWritten);
+        
+        BlockRead(InFile, Buf121, 121, NumRead);
+        BlockWrite(OutFile, Buf121, 121, NumWritten);
+      end;
+      
+      Close(InFile);
+      Close(OutFile);
+      
+      {$I-}Erase(InFile);{$I+}
+      if (IOResult = 0) then
+      begin
+        {$I-}Rename(OutFile, monfile);{$I+}
+        if (IOResult = 0) then
+        begin
+          Result := true;
+        end else
+        begin
+          WriteLn('ERROR RENAMING NEW MONSTER FILE TO ' + monfile);
+        end;
+      end else
+      begin
+        WriteLn('ERROR DELETING ' + monfile);
+      end;
+    end else
+    begin
+      Close(InFile);
+      WriteLn('ERROR CREATING ' + TempMonsterDat + ' FOR OUTPUT');
+    end;
+    
+  end else
+  begin
+    WriteLn('ERROR OPENING ' + monfile + ' FOR INPUT');
+  end;
+
+  PerformUpgradeTo023c := Result;
 end;
 
 function PerformUpgradeTo023d: Boolean;
 begin
   { TODO }
+end;
+
+function UpdateVersionDat: Boolean;
+var
+  OutFile: Text;
+  Result: Boolean;
+begin
+  Result := false;
+  
+  Assign(OutFile, VersionF);
+  {$I-}ReWrite(OutFile);{$I+}
+  if (IOResult = 0) then
+  begin
+    WriteLn(OutFile, uver);
+    Close(OutFile);
+    Result := true;
+  end else
+  begin
+    WriteLn('ERROR CREATING ' + VersionF + ' FOR OUTPUT');
+  end;
+  
+  UpdateVersionDat := Result;
 end;
 
 procedure UpgradeIfNecessary;
@@ -250,7 +339,8 @@ begin
     WriteLn('       Existing version: ' + OldVersion);
     WriteLn('  Version to upgrade to: ' + NewVersion);
     WriteLn;
-    WriteLn('Would you like to attempt an automatic upgrade now?');
+    WriteLn('Would you like to attempt an automatic upgrade now? [y/n]');
+    WriteLn('(I *STRONGLY* recommend you take a backup first!)');
     repeat
       Ch := UpCase(ReadKey);
     until (Ch in ['Y', 'N']);
