@@ -33,6 +33,21 @@ implementation
 uses
   Crt, File_IO, Init;
 
+const
+  { Constants to use in version detection }
+  VERSION_001_OR_001e                                             = '0.01 or 0.01e';
+  VERSION_001f                                                    = '0.01f';
+  VERSION_002_OR_004c_OR_005b                                     = '0.02 or 0.04c or 0.05b';
+  VERSION_008                                                     = '0.08';
+  VERSION_013c                                                    = '0.13c';
+  VERSION_017                                                     = '0.17';
+  VERSION_014_OR_016                                              = '0.14 or 0.16';
+  VERSION_018_OR_019b6                                            = '0.18 or 0.19b6';
+  VERSION_020d                                                    = '0.20d';
+  VERSION_020e_OR_021DOS_OR_021aDOS_OR_022_OR_023_OR_023a_OR_023b = '0.20e or 0.21 (DOS) or 0.21a (DOS) or 0.22 or 0.23 or 0.23a or 0.23b'
+  VERSION_021W32_OR_021aW32                                       = '0.21 (W32) or 0.21a (W32)';
+  VERSION_023c_OR_023d_OR_023e_OR_023f                            = '0.23c or 0.23d or 0.23e or 0.23f';
+  
 function GetOldVersion: String; forward;
 function GuessVersionByData: String; forward;
 function GetVersionDatVersion: String; forward;
@@ -72,57 +87,57 @@ begin
     if (NpcsDatSize = 37800) then
     begin
       { TODO Not an exact match, further check possible? }
-      Result := '0.01 or 0.01e';
+      Result := VERSION_001_OR_001e;
     end else
     if (NpcsDatSize = 49770) then
     begin
-      Result := '0.01f';
+      Result := VERSION_001f;
     end else
     if (NpcsDatSize = 173880) then
     begin
       { TODO Not an exact match, further check possible? }
-      Result := '0.02 or 0.04c or 0.05b';
+      Result := VERSION_002_OR_004c_OR_005b;
     end else
     if (NpcsDatSize = 89320) then
     begin
-      Result := '0.08';
+      Result := VERSION_008;
     end else
     if (NpcsDatSize = 90370) then
     begin
-      Result := '0.13c';
+      Result := VERSION_013c;
     end else
     if (NpcsDatSize = 91420) then
     begin
       { TODO Not an exact match, further check possible? }
-      Result := '0.14 or 0.15 or 0.16';
+      Result := VERSION_014_OR_016;
     end else
     if (NpcsDatSize = 91910) then
     begin
-      Result := '0.17';
+      Result := VERSION_017;
     end else
     if (NpcsDatSize = 100270) then
     begin
       { TODO Not an exact match, further check possible? }
-      Result := '0.18 or 0.19b6';
+      Result := VERSION_018_OR_019b6;
     end else
     if (NpcsDatSize = 100418) then
     begin
-      Result := '0.20d';
+      Result := VERSION_020d;
     end else
     if (NpcsDatSize = 100566) then
     begin
       { TODO Not an exact match, further check possible? }
-      Result := '0.20e or 0.21 (DOS) or 0.21a (DOS) or 0.22 or 0.23a or 0.23b';
+      Result := VERSION_020e_OR_021DOS_OR_021aDOS_OR_022_OR_023_OR_023a_OR_023b;
     end else
     if (NpcsDatSize = 113590) then
     begin
       { TODO Not an exact match, further check possible? }
-      Result := '0.21 (W32) or 0.21a (W32)';
+      Result := VERSION_021W32_OR_021aW32;
     end else
     if (NpcsDatSize = 100566) then
     begin
       { TODO Not an exact match, further check possible? }
-      Result := '0.23c or 0.23d or 0.23e or 0.23f';
+      Result := VERSION_023c_OR_023d_OR_023e_OR_023f;
     end;
   end else
   begin
@@ -175,7 +190,7 @@ begin
   Result := false;
   
   { Check which version we're upgrading from to see what needs to be done }
-  if (OldVersion = '0.20e or 0.21 (DOS) or 0.21a (DOS) or 0.22 or 0.23a or 0.23b') then
+  if (OldVersion = VERSION_020e_OR_021DOS_OR_021aDOS_OR_022_OR_023_OR_023a_OR_023b) then
   begin
     WriteLn(' - If you will be resetting the game, then you can safely ignore this message');
     WriteLn(' - If you want to upgrade your game:');
