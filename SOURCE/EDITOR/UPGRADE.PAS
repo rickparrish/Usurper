@@ -286,7 +286,6 @@ begin
       WriteLn('SUCCESS');
       Write('     - Converting ' + monfile + ' to ' + TempMonsterDat + '...');
       
-      { TODO This doesn't seem to be working right -- need to investigate }
       while Not(EOF(InFile)) do
       begin
         BlockRead(InFile, Buf, 114);
