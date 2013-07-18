@@ -35,6 +35,8 @@ uses
 
 const
   { Constants to use in version detection }
+  VERSION_ERROR                              = 'ERROR';
+  VERSION_UNKNOWN                            = 'UNKNOWN';
   VERSION_001_OR_001e                        = '0.01 or 0.01e';
   VERSION_001f                               = '0.01f';
   VERSION_002_OR_004c_OR_005b                = '0.02 or 0.04c or 0.05b';
@@ -61,8 +63,12 @@ function GetOldVersion: String;
 var
   Result: String;
 begin
+  WriteLn(' - Trying to determine your installed version...');
+  
   Result := GetVersionDatVersion;
-  if (Result = '') then Result := GuessVersionByData;
+  if (Result = VERSION_UNKNOWN) then Result := GuessVersionByData;
+  WriteLn;
+  
   GetOldVersion := Result;
 end;
 
@@ -73,19 +79,31 @@ var
   NpcsDatSize: LongInt;
   Result: String;
 begin
-  Result := '';
+  Result := VERSION_UNKNOWN;
   
   { Try to get filesize for DATA\NPCS.DAT (or .\NPCS.DAT for older versions) to use in version guessing }
   NpcsDat := Global_DataDir + 'NPCS.DAT';
-  if Not(F_Exists(NpcsDat)) then NpcsDat := 'NPCS.DAT';
+  Write('   - Looking for ' + NpcsDat + '...');
   if (F_Exists(NpcsDat)) then
   begin
+    { Do nothing, the 'FOUND' will be output later }
+  end else
+  begin
+    WriteLn('NOT FOUND');
+    NpcsDat := 'NPCS.DAT';
+    Write('   - Looking for ' + NpcsDat + '...');
+  end;
+  if (F_Exists(NpcsDat)) then
+  begin
+    WriteLn('FOUND');
+    Write('   - Determining size of file...');
     {$I-}
     Assign(NpcsDatFile, NpcsDat);
     Reset(NpcsDatFile);
     NpcsDatSize := FileSize(NpcsDatFile);
     Close(NpcsDatFile);
     {$I+}
+    WriteLn(NpcsDatSize, ' bytes');
 
     { BP can't use a LongInt in a case statement?  Makes for ugly repetetive IFs... }
     if (NpcsDatSize = 37800) then
@@ -141,10 +159,16 @@ begin
     if (NpcsDatSize = 100566) then
     begin
       Result := VERSION_023c_OR_023d_OR_023e_OR_023f;
+    end else
+    begin
+      Result := VERSION_UNKNOWN;
     end;
+    
+    WriteLn('   - Size indicates version: ' + Result);
   end else
   begin
     { Ignore, just means it's a new game that needs to be reset }
+    WriteLn('NOT FOUND');
   end;
   
   GuessVersionByData := Result;
@@ -156,29 +180,44 @@ var
   InFile: Text;
   Result: String;
 begin
-  Result := '';
+  Result := VERSION_UNKNOWN;
   
+  Write('   - Looking for ' + VersionF + '...');
   if (F_Exists(VersionF)) then
   begin
+    WriteLn('FOUND');
+    
     repeat
+      Write('   - Trying to open file');
       if (Open_TxtFile(TReset, InFile, VersionF)) then
       begin
+        WriteLn('SUCCESS');
         ReadLn_From_Text(InFile, Result);
         Close_Text(InFile);
         Ch := 'N'; { Causes repeat loop to terminate, since we got the verrsion we need }
+        WriteLn('   - Version from file: ' + Result);
       end else
       begin
-        Result := 'ERROR';
-        WriteLn('Error reading ' + VersionF + ' to determine which version of Usurper');
-        WriteLn('you have installed!');
-        WriteLn(' - If you will be resetting the game, then you can safely ignore this message');
-        WriteLn(' - If you want to upgrade your game:');
-        WriteLn('   - Hit Y to try to detect the installed version again');
-        WriteLn('   - Hit N to skip the version check (and you can upgrade manually)');
-        WriteLn('     See UPGRADE.TXT for instructions to manually upgrade your game');
-        Ch := UpCase(ReadKey);
+        WriteLn('FAILED');
+        Result := VERSION_ERROR;
+        
+        WriteLn;
+        WriteLn(VersionF + ' exists, but I was unable to open it for input.  Try again?');
+        WriteLn;
+        WriteLn('  (Y)es, try reading the file again');
+        WriteLn('  (N)o, don''t bother I''m going to reset the game anyway');
+        WriteLn;
+        Write('  Your choice [y/n]: ');
+        repeat
+          Ch := UpCase(ReadKey);
+        until (Ch in ['Y', 'N']);
+        WriteLn;
+        WriteLn;
       end;
     until (Ch = 'N');
+  end else
+  begin
+    WriteLn('NOT FOUND');
   end;
   
   GetVersionDatVersion := Result;
@@ -192,97 +231,123 @@ begin
   { Assume failure }
   Result := false;
   
+  WriteLn(' - Performing automatic upgrade');
+  
   { Check which version we're upgrading from to see what needs to be done }
-  if (OldVersion = VERSION_020e_OR_022_OR_023_OR_023a_OR_023b) then
+  if (OldVersion = VERSION_020e_OR_022_OR_023_OR_023a_OR_023b) or (OldVersion = VERSION_021DOS_OR_021aDOS) then
   begin
     Result := PerformUpgradeTo023c;
     if (Result) then Result := PerformUpgradeTo023d;
-    if (Result) then Result := UpdateVersionDat;
   end else
   if (OldVersion = VERSION_023c_OR_023d_OR_023e_OR_023f) then
   begin
     Result := PerformUpgradeTo023d;
-    if (Result) then Result := UpdateVersionDat;
   end else
   begin
-    WriteLn('Unfortunately the auto upgrader does not support your version of Usurper!');
+    WriteLn('   - On second thought, maybe not!  Your version of Usurper is not supported');
+    WriteLn('     by the auto upgrader');
   end;
+
+  { If we succeeded above, update the VERSION.DAT file }
+  if (Result) then Result := UpdateVersionDat;
   
   PerformUpgrade := Result;
 end;
 
 function PerformUpgradeTo023c: Boolean;
 var
-  Buf114: Array[1..114] of Byte;
-  Buf121: Array[1..121] of Byte;
+  Buf: Array[1..121] of Byte;
   BufLongInt: LongInt;
   BufSmallInt: SmallInt;
   InFile, OutFile: File;
   NumRead, NumWritten: SmallWord;
   Result: Boolean;
-  TempMonsterDat, OldMonsterDat: String;
+  TempMonsterDat: String;
 begin
   Result := false;
   
+  WriteLn('   - Upgrading to 0.23c');
+  
   TempMonsterDat := Global_DataDir + 'MONSTER.$$$';
-  OldMonsterDat := Global_DataDir + 'MONSTER.OLD';
+  
+  Write('     - Opening ' + monfile + ' for input...');
   
   Assign(InFile, monfile);
   {$I-}Reset(InFile, 1);{$I+}
   if (IOResult = 0) then
   begin
+    WriteLn('SUCCESS');
+    Write('     - Opening ' + TempMonsterDat + ' for output...');
+    
     Assign(OutFile, TempMonsterDat);
     {$I-}ReWrite(OutFile, 1);{$I+}
     if (IOResult = 0) then
     begin
+      WriteLn('SUCCESS');
+      Write('     - Converting ' + monfile + ' to ' + TempMonsterDat + '...');
+      
+      { TODO This doesn't seem to be working right -- need to investigate }
       while Not(EOF(InFile)) do
       begin
-        BlockRead(InFile, Buf114, 114, NumRead);
-        BlockWrite(OutFile, Buf114, 114, NumWritten);
+        BlockRead(InFile, Buf, 114);
+        BlockWrite(OutFile, Buf, 114);
         
-        BlockRead(InFile, BufSmallInt, 2, NumRead);
+        BlockRead(InFile, BufSmallInt, 2);
         BufLongInt := BufSmallInt;
-        BlockWrite(OutFile, BufLongInt, 4, NumWritten);
+        BlockWrite(OutFile, BufLongInt, 4);
         
-        BlockRead(InFile, Buf121, 121, NumRead);
-        BlockWrite(OutFile, Buf121, 121, NumWritten);
+        BlockRead(InFile, Buf, 121);
+        BlockWrite(OutFile, Buf, 121);
       end;
+      WriteLn('DONE');
       
       Close(InFile);
       Close(OutFile);
       
+      Write('     - Erasing ' + monfile + '...');
+      
       {$I-}Erase(InFile);{$I+}
       if (IOResult = 0) then
       begin
+        WriteLn('SUCCESS');
+        Write('     - Renaming ' + TempMonsterDat + ' to ' + monfile + '...');
+        
         {$I-}Rename(OutFile, monfile);{$I+}
         if (IOResult = 0) then
         begin
+          WriteLn('SUCCESS');
           Result := true;
         end else
         begin
-          WriteLn('ERROR RENAMING NEW MONSTER FILE TO ' + monfile);
+          WriteLn('FAILED');
         end;
       end else
       begin
-        WriteLn('ERROR DELETING ' + monfile);
+        WriteLn('FAILED');
       end;
     end else
     begin
       Close(InFile);
-      WriteLn('ERROR CREATING ' + TempMonsterDat + ' FOR OUTPUT');
+      WriteLn('FAILED');
     end;
-    
   end else
   begin
-    WriteLn('ERROR OPENING ' + monfile + ' FOR INPUT');
+    WriteLn('FAILED');
   end;
 
   PerformUpgradeTo023c := Result;
 end;
 
 function PerformUpgradeTo023d: Boolean;
+var
+  Result: Boolean;
 begin
-  { TODO }
+  Result := false;
+  
+  WriteLn('   - TODO Upgrading to 0.23d');
+  Result := true;
+  
+  PerformUpgradeTo023d := Result;
 end;
 
 function UpdateVersionDat: Boolean;
@@ -292,16 +357,24 @@ var
 begin
   Result := false;
   
+  WriteLn('   - Updating ' + VersionF + ' with current version');
+  Write('     - Opening ' + VersionF + ' for output...');
+  
   Assign(OutFile, VersionF);
   {$I-}ReWrite(OutFile);{$I+}
   if (IOResult = 0) then
   begin
+    WriteLn('SUCCESS');
+    Write('     - Writing new version to file...');
+    
     WriteLn(OutFile, uver);
     Close(OutFile);
+    
+    WriteLn('SUCCESS');    
     Result := true;
   end else
   begin
-    WriteLn('ERROR CREATING ' + VersionF + ' FOR OUTPUT');
+    WriteLn('FAILED');
   end;
   
   UpdateVersionDat := Result;
@@ -312,6 +385,9 @@ var
   Ch: Char;
   NewVersion, OldVersion: String;
 begin
+  ClrScr;
+  WriteLn;
+  WriteLn('USURPER AUTO UPGRADER');
   WriteLn;
   
   { Get EDITOR.EXE and VERSION.DAT (or best guess) versions }
@@ -319,7 +395,11 @@ begin
   OldVersion := GetOldVersion;
   
   { Check if we were able to retrieve the VERSION.DAT version }
-  if (OldVersion = '') then
+  if (OldVersion = VERSION_ERROR) then
+  begin
+    { Ignore, error message would have been presented to user earlier }
+  end else
+  if (OldVersion = VERSION_UNKNOWN) then
   begin
     WriteLn('Unable to determine which version of Usurper you have installed!');
     WriteLn(' - If you will be resetting the game, then you can safely ignore this message');
@@ -328,10 +408,6 @@ begin
     WriteLn('Hit any key to continue');
     ReadKey;
   end else
-  if (OldVersion = 'ERROR') then
-  begin
-    { Ignore, error message would have been presented to user earlier }
-  end else
   if (NewVersion <> OldVersion) then
   begin
     WriteLn('It looks like your copy of Usurper needs to be upgraded!');
@@ -339,34 +415,59 @@ begin
     WriteLn('       Existing version: ' + OldVersion);
     WriteLn('  Version to upgrade to: ' + NewVersion);
     WriteLn;
-    WriteLn('Would you like to attempt an automatic upgrade now? [y/n]');
+    WriteLn('Would you like to attempt an automatic upgrade now?');
     WriteLn('(I *STRONGLY* recommend you take a backup first!)');
+    WriteLn;
+    WriteLn('  (Y)es, upgrade now');
+    WriteLn('  (N)o, I''ll upgrade later or plan on resetting the game');
+    WriteLn('  (A)bort, I want to go take a backup or something');
+    WriteLn;
+    Write('  Your choice [y/n/a]: ');
     repeat
       Ch := UpCase(ReadKey);
-    until (Ch in ['Y', 'N']);
+    until (Ch in ['Y', 'N', 'A']);
+    WriteLn;
     WriteLn;
     
     if (Ch = 'Y') then
     begin
-      if Not(PerformUpgrade(OldVersion)) then
+      ClrScr;
+      WriteLn;
+      WriteLn('USURPER AUTO UPGRADER');
+      WriteLn;
+
+      if (PerformUpgrade(OldVersion)) then
       begin
         WriteLn;
-        WriteLn('An error was encountered while trying to upgrade your game!  Please either');
-        WriteLn('upgrade manually (see UPGRADE.TXT for instructions to manually upgrade your');
-        WriteLn('game) or reset the game before trying to play again, or data corruption may');
-        WriteLn('occur.');
+        WriteLn('Upgrade complete.  Hit any key to continue');
+        ReadKey;
+      end else
+      begin
+        WriteLn;
+        WriteLn('I wasn''t able to upgrade your game.  Please either reset the game, or be');
+        WriteLn('careful with this program as some of the editors may expect data files with');
+        WriteLn('a different structure, so you could cause damage using them before upgrading.');
+        WriteLn;
+        WriteLn('If you want to retry the upgrade, just quit and run this program again.');
         WriteLn;
         WriteLn('Hit any key to continue');
         ReadKey;
       end;
     end else
+    if (Ch = 'N') then
     begin
-      WriteLn('OK, I''ll leave your data alone.  Please either upgrade manually (see');
-      WriteLn('UPGRADE.TXT for instructions to manually upgrade your game) or reset the game');
-      WriteLn('before trying to play again, or data corruption may occur.');
+      WriteLn('OK, I won''t upgrade your game now.  Please either reset the game, or be');
+      WriteLn('careful with this program as some of the editors may expect data files with');
+      WriteLn('a different structure, so you could cause damage using them before upgrading.');
+      WriteLn;
+      WriteLn('If you want to perform the upgrade, just quit and run this program again.');
       WriteLn;
       WriteLn('Hit any key to continue');
       ReadKey;
+    end else
+    if (Ch = 'A') then
+    begin
+      Halt;
     end;
   end;
 end;
