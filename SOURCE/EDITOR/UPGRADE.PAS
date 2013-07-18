@@ -82,7 +82,7 @@ begin
   Result := VERSION_UNKNOWN;
   
   { Try to get filesize for DATA\NPCS.DAT (or .\NPCS.DAT for older versions) to use in version guessing }
-  NpcsDat := Global_DataDir + 'NPCS.DAT';
+  NpcsDat := 'DATA' + DIRECTORY_SEPARATOR + 'NPCS.DAT';
   Write('   - Looking for ' + NpcsDat + '...');
   if (F_Exists(NpcsDat)) then
   begin
@@ -144,7 +144,7 @@ begin
     end else
     if (NpcsDatSize = 100566) then
     begin
-      if (F_Exists(Global_DataDir + 'DOSORWIN.DAT')) then
+      if (F_Exists('DATA' + DIRECTORY_SEPARATOR + 'DOSORWIN.DAT')) then
       begin
         Result := VERSION_021DOS_OR_021aDOS;
       end else
@@ -268,7 +268,7 @@ begin
   
   WriteLn('   - Upgrading to 0.23c');
   
-  TempMonsterDat := Global_DataDir + 'MONSTER.$$$';
+  TempMonsterDat := 'MONSTER.$$$';
   
   Write('     - Opening ' + monfile + ' for input...');
   
