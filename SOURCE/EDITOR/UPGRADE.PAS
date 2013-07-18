@@ -51,14 +51,52 @@ const
   VERSION_021W32_OR_021aW32                  = '0.21 (W32) or 0.21a (W32)';
   VERSION_023c_OR_023d_OR_023e_OR_023f       = '0.23c or 0.23d or 0.23e or 0.23f';
   
+function CloseAndRenameFiles(var InFile: File; InFileName: String; var OutFile: File; OutFileName: String): Boolean; forward;
 function GetOldVersion: String; forward;
 function GuessVersionByData: String; forward;
 function GetVersionDatVersion: String; forward;
+function OpenFiles(var InFile: File; InFileName: String; var OutFile: File; OutFileName: String): Boolean; forward;
 function PerformUpgrade(OldVersion: String): Boolean; forward;
 function PerformUpgradeTo023c: Boolean; forward;
 function PerformUpgradeTo023d: Boolean; forward;
 function UpdateVersionDat: Boolean; forward;
 
+function CloseAndRenameFiles(var InFile: File; InFileName: String; var OutFile: File; OutFileName: String): Boolean;
+var
+  Result: Boolean;
+begin
+  Result := false;
+  
+  WriteLn('DONE');
+  
+  Close(InFile);
+  Close(OutFile);
+  
+  Write('     - Erasing ' + InFileName + '...');
+  
+  {$I-}Erase(InFile);{$I+}
+  if (IOResult = 0) then
+  begin
+    WriteLn('SUCCESS');
+    Write('     - Renaming ' + OutFileName + ' to ' + InFileName + '...');
+    
+    {$I-}Rename(OutFile, InFileName);{$I+}
+    if (IOResult = 0) then
+    begin
+      WriteLn('SUCCESS');
+      Result := true;
+    end else
+    begin
+      WriteLn('FAILED');
+    end;
+  end else
+  begin
+    WriteLn('FAILED');
+  end;
+  
+  CloseAndRenameFiles := Result;
+end;
+      
 function GetOldVersion: String;
 var
   Result: String;
@@ -223,6 +261,41 @@ begin
   GetVersionDatVersion := Result;
 end;
 
+function OpenFiles(var InFile: File; InFileName: String; var OutFile: File; OutFileName: String): Boolean;
+var
+  Result: Boolean;
+begin
+  Result := false;
+  
+  Write('     - Opening ' + InFileName + ' for input...');
+  
+  Assign(InFile, InFileName);
+  {$I-}Reset(InFile, 1);{$I+}
+  if (IOResult = 0) then
+  begin
+    WriteLn('SUCCESS');
+    Write('     - Opening ' + OutFileName + ' for output...');
+    
+    Assign(OutFile, OutFileName);
+    {$I-}ReWrite(OutFile, 1);{$I+}
+    if (IOResult = 0) then
+    begin
+      WriteLn('SUCCESS');
+      Write('     - Converting ' + InFileName + ' to ' + OutFileName + '...');
+      Result := true;
+    end else
+    begin
+      Close(InFile);
+      WriteLn('FAILED');
+    end;
+  end else
+  begin
+    WriteLn('FAILED');
+  end; 
+
+  OpenFiles := Result;  
+end;
+
 function PerformUpgrade(OldVersion: String): Boolean;
 var
   Ch: Char;
@@ -271,71 +344,25 @@ begin
   OldMonsterDat := 'DATA' + DIRECTORY_SEPARATOR + 'MONSTER.DAT';
   TempMonsterDat := 'DATA' + DIRECTORY_SEPARATOR + 'MONSTER.$$$';
   
-  Write('     - Opening ' + OldMonsterDat + ' for input...');
-  
-  Assign(InFile, OldMonsterDat);
-  {$I-}Reset(InFile, 1);{$I+}
-  if (IOResult = 0) then
+  if (OpenFiles(InFile, OldMonsterDat, OutFile, TempMonsterDat)) then
   begin
-    WriteLn('SUCCESS');
-    Write('     - Opening ' + TempMonsterDat + ' for output...');
-    
-    Assign(OutFile, TempMonsterDat);
-    {$I-}ReWrite(OutFile, 1);{$I+}
-    if (IOResult = 0) then
+    while Not(EOF(InFile)) do
     begin
-      WriteLn('SUCCESS');
-      Write('     - Converting ' + OldMonsterDat + ' to ' + TempMonsterDat + '...');
+      { Read/write everything from beginning of record to Strength }
+      BlockRead(InFile, Buf, 114);
+      BlockWrite(OutFile, Buf, 114);
       
-      while Not(EOF(InFile)) do
-      begin
-        { Read/write everything from beginning of record to Strength }
-        BlockRead(InFile, Buf, 114);
-        BlockWrite(OutFile, Buf, 114);
-        
-        { Read/write Strength, converting from SmallInt to LongInt }
-        BlockRead(InFile, StrengthSmallInt, 2);
-        StrengthLongInt := StrengthSmallInt;
-        BlockWrite(OutFile, StrengthLongInt, 4);
-        
-        { Read/write everything past Strength to the end of the record }
-        BlockRead(InFile, Buf, 121);
-        BlockWrite(OutFile, Buf, 121);
-      end;
-      WriteLn('DONE');
+      { Read/write Strength, converting from SmallInt to LongInt }
+      BlockRead(InFile, StrengthSmallInt, 2);
+      StrengthLongInt := StrengthSmallInt;
+      BlockWrite(OutFile, StrengthLongInt, 4);
       
-      Close(InFile);
-      Close(OutFile);
-      
-      Write('     - Erasing ' + OldMonsterDat + '...');
-      
-      {$I-}Erase(InFile);{$I+}
-      if (IOResult = 0) then
-      begin
-        WriteLn('SUCCESS');
-        Write('     - Renaming ' + TempMonsterDat + ' to ' + OldMonsterDat + '...');
-        
-        {$I-}Rename(OutFile, OldMonsterDat);{$I+}
-        if (IOResult = 0) then
-        begin
-          WriteLn('SUCCESS');
-          Result := true;
-        end else
-        begin
-          WriteLn('FAILED');
-        end;
-      end else
-      begin
-        WriteLn('FAILED');
-      end;
-    end else
-    begin
-      Close(InFile);
-      WriteLn('FAILED');
+      { Read/write everything past Strength to the end of the record }
+      BlockRead(InFile, Buf, 121);
+      BlockWrite(OutFile, Buf, 121);
     end;
-  end else
-  begin
-    WriteLn('FAILED');
+      
+    Result := CloseAndRenameFiles(InFile, OldMonsterDat, OutFile, TempMonsterDat);
   end;
 
   PerformUpgradeTo023c := Result;
@@ -353,92 +380,47 @@ var
   Strength: LongInt;
 begin
   Result := false;
+  Defense := 0;
   
-  { TODO Is it worth it to prompt users before applying this update?  Probably only a small number of people customized their monsters, and even
-         if they did, it's likely they'll want the Hps and Defense to match the way the game used to play anyway }
+  { TODO Is it worth it to prompt users before applying this update?  
+         Probably only a small number of people customized their monsters, and even if they did, 
+         it's likely they'll want the Hps and Defense to match the way the game used to play anyway }
   WriteLn('   - Upgrading to 0.23d');
   
   OldMonsterDat := 'DATA' + DIRECTORY_SEPARATOR + 'MONSTER.DAT';
   TempMonsterDat := 'DATA' + DIRECTORY_SEPARATOR + 'MONSTER.$$$';
   
-  Write('     - Opening ' + OldMonsterDat + ' for input...');
-  
-  Assign(InFile, OldMonsterDat);
-  {$I-}Reset(InFile, 1);{$I+}
-  if (IOResult = 0) then
+  if (OpenFiles(InFile, OldMonsterDat, OutFile, TempMonsterDat)) then
   begin
-    WriteLn('SUCCESS');
-    Write('     - Opening ' + TempMonsterDat + ' for output...');
-    
-    Assign(OutFile, TempMonsterDat);
-    {$I-}ReWrite(OutFile, 1);{$I+}
-    if (IOResult = 0) then
+    while Not(EOF(InFile)) do
     begin
-      WriteLn('SUCCESS');
-      Write('     - Converting ' + OldMonsterDat + ' to ' + TempMonsterDat + '...');
+      { Read/write everything from beginning of record to Strength }
+      BlockRead(InFile, Buf, 114);
+      BlockWrite(OutFile, Buf, 114);
       
-      Defense := 0;
-      while Not(EOF(InFile)) do
-      begin
-        { Read/write everything from beginning of record to Strength }
-        BlockRead(InFile, Buf, 114);
-        BlockWrite(OutFile, Buf, 114);
-        
-        { Read/write Strength for use later }
-        BlockRead(InFile, Strength, 4);
-        BlockWrite(OutFile, Strength, 4);
-        
-        { Zero out defense }
-        BlockRead(InFile, Buf, 2);
-        BlockWrite(OutFile, Defense, 2);
-        
-        { Read/write everything between defense and hps }
-        BlockRead(InFile, Buf, 2);
-        BlockWrite(OutFile, Buf, 2);
-        
-        { Write Hps as Strength * 3 }
-        Hps := Strength * 3;
-        BlockRead(InFile, Buf, 4);
-        BlockWrite(OutFile, Hps, 4);
-        
-        { Read/write everything past Hps to the end of the record }
-        BlockRead(InFile, Buf, 113);
-        BlockWrite(OutFile, Buf, 113);
-      end;
-      WriteLn('DONE');
+      { Read/write Strength for use later }
+      BlockRead(InFile, Strength, 4);
+      BlockWrite(OutFile, Strength, 4);
       
-      Close(InFile);
-      Close(OutFile);
+      { Zero out defense }
+      BlockRead(InFile, Buf, 2);
+      BlockWrite(OutFile, Defense, 2);
       
-      Write('     - Erasing ' + OldMonsterDat + '...');
+      { Read/write everything between defense and hps }
+      BlockRead(InFile, Buf, 2);
+      BlockWrite(OutFile, Buf, 2);
       
-      {$I-}Erase(InFile);{$I+}
-      if (IOResult = 0) then
-      begin
-        WriteLn('SUCCESS');
-        Write('     - Renaming ' + TempMonsterDat + ' to ' + OldMonsterDat + '...');
-        
-        {$I-}Rename(OutFile, OldMonsterDat);{$I+}
-        if (IOResult = 0) then
-        begin
-          WriteLn('SUCCESS');
-          Result := true;
-        end else
-        begin
-          WriteLn('FAILED');
-        end;
-      end else
-      begin
-        WriteLn('FAILED');
-      end;
-    end else
-    begin
-      Close(InFile);
-      WriteLn('FAILED');
+      { Write Hps as Strength * 3 }
+      Hps := Strength * 3;
+      BlockRead(InFile, Buf, 4);
+      BlockWrite(OutFile, Hps, 4);
+      
+      { Read/write everything past Hps to the end of the record }
+      BlockRead(InFile, Buf, 113);
+      BlockWrite(OutFile, Buf, 113);
     end;
-  end else
-  begin
-    WriteLn('FAILED');
+    
+    Result := CloseAndRenameFiles(InFile, OldMonsterDat, OutFile, TempMonsterDat);
   end;
 
   PerformUpgradeTo023d := Result;
