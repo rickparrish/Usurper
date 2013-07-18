@@ -52,9 +52,10 @@ const
   VERSION_023c_OR_023d_OR_023e_OR_023f       = '0.23c or 0.23d or 0.23e or 0.23f';
   
 function CloseAndRenameFiles(var InFile: File; InFileName: String; var OutFile: File; OutFileName: String): Boolean; forward;
+function GetDataFileSize(InFileName: String): LongInt; forward;
 function GetOldVersion: String; forward;
-function GuessVersionByData: String; forward;
 function GetVersionDatVersion: String; forward;
+function GuessVersionByData: String; forward;
 function OpenFiles(var InFile: File; InFileName: String; var OutFile: File; OutFileName: String): Boolean; forward;
 function PerformUpgrade(OldVersion: String): Boolean; forward;
 function PerformUpgradeTo023c: Boolean; forward;
@@ -97,6 +98,54 @@ begin
   CloseAndRenameFiles := Result;
 end;
       
+function GetDataFileSize(InFileName: String): LongInt;
+var
+  InFile: File of Byte;
+  Result: LongInt;
+  TryFileName: String;
+begin
+  Result := -1;
+  
+  { First try in DATA directory }
+  TryFileName := 'DATA' + DIRECTORY_SEPARATOR + InFileName;
+  Write('   - Looking for ' + TryFileName + '...');
+  if Not(F_Exists(TryFileName)) then
+  begin
+    { Not in DATA directory, so setup for base directory lookup }
+    WriteLn('NOT FOUND');
+    TryFileName := InFileName;
+    Write('   - Looking for ' + TryFileName + '...');
+  end;
+  
+  { Look for the filename created above }
+  if (F_Exists(TryFileName)) then
+  begin
+    WriteLn('FOUND');
+    Write('   - Determining size of file...');
+    
+    Assign(InFile, TryFileName);
+    {$I-}Reset(InFile);{$I+}
+    if (IOResult = 0) then
+    begin
+      {$I-}Result := FileSize(InFile);{$I+}
+      if (IOResult = 0) then
+      begin
+        WriteLn(Result, ' bytes');
+      end else
+      begin
+        WriteLn('ERROR');
+      end;
+      
+      Close(InFile);
+    end else
+    begin
+      WriteLn('ERROR');
+    end;
+  end;
+  
+  GetDataFileSize := Result;
+end;
+
 function GetOldVersion: String;
 var
   Result: String;
@@ -108,108 +157,6 @@ begin
   WriteLn;
   
   GetOldVersion := Result;
-end;
-
-function GuessVersionByData: String;
-var
-  NpcsDat: String;
-  NpcsDatFile: File of Byte;
-  NpcsDatSize: LongInt;
-  Result: String;
-begin
-  Result := VERSION_UNKNOWN;
-  
-  { Try to get filesize for DATA\NPCS.DAT (or .\NPCS.DAT for older versions) to use in version guessing }
-  NpcsDat := 'DATA' + DIRECTORY_SEPARATOR + 'NPCS.DAT';
-  Write('   - Looking for ' + NpcsDat + '...');
-  if (F_Exists(NpcsDat)) then
-  begin
-    { Do nothing, the 'FOUND' will be output later }
-  end else
-  begin
-    WriteLn('NOT FOUND');
-    NpcsDat := 'NPCS.DAT';
-    Write('   - Looking for ' + NpcsDat + '...');
-  end;
-  if (F_Exists(NpcsDat)) then
-  begin
-    WriteLn('FOUND');
-    Write('   - Determining size of file...');
-    {$I-}
-    Assign(NpcsDatFile, NpcsDat);
-    Reset(NpcsDatFile);
-    NpcsDatSize := FileSize(NpcsDatFile);
-    Close(NpcsDatFile);
-    {$I+}
-    WriteLn(NpcsDatSize, ' bytes');
-
-    { BP can't use a LongInt in a case statement?  Makes for ugly repetetive IFs... }
-    if (NpcsDatSize = 37800) then
-    begin
-      Result := VERSION_001_OR_001e;
-    end else
-    if (NpcsDatSize = 49770) then
-    begin
-      Result := VERSION_001f;
-    end else
-    if (NpcsDatSize = 173880) then
-    begin
-      Result := VERSION_002_OR_004c_OR_005b;
-    end else
-    if (NpcsDatSize = 89320) then
-    begin
-      Result := VERSION_008;
-    end else
-    if (NpcsDatSize = 90370) then
-    begin
-      Result := VERSION_013c;
-    end else
-    if (NpcsDatSize = 91420) then
-    begin
-      Result := VERSION_014_OR_016;
-    end else
-    if (NpcsDatSize = 91910) then
-    begin
-      Result := VERSION_017;
-    end else
-    if (NpcsDatSize = 100270) then
-    begin
-      Result := VERSION_018_OR_019b6;
-    end else
-    if (NpcsDatSize = 100418) then
-    begin
-      Result := VERSION_020d;
-    end else
-    if (NpcsDatSize = 100566) then
-    begin
-      if (F_Exists('DATA' + DIRECTORY_SEPARATOR + 'DOSORWIN.DAT')) then
-      begin
-        Result := VERSION_021DOS_OR_021aDOS;
-      end else
-      begin
-        Result := VERSION_020e_OR_022_OR_023_OR_023a_OR_023b;
-      end;
-    end else
-    if (NpcsDatSize = 113590) then
-    begin
-      Result := VERSION_021W32_OR_021aW32;
-    end else
-    if (NpcsDatSize = 100566) then
-    begin
-      Result := VERSION_023c_OR_023d_OR_023e_OR_023f;
-    end else
-    begin
-      Result := VERSION_UNKNOWN;
-    end;
-    
-    WriteLn('   - Size indicates version: ' + Result);
-  end else
-  begin
-    { Ignore, just means it's a new game that needs to be reset }
-    WriteLn('NOT FOUND');
-  end;
-  
-  GuessVersionByData := Result;
 end;
 
 function GetVersionDatVersion: String;
@@ -259,6 +206,88 @@ begin
   end;
   
   GetVersionDatVersion := Result;
+end;
+
+function GuessVersionByData: String;
+var
+  NpcsDat, MonsterDat: String;
+  NpcsDatFile, MonsterDatFile: File of Byte;
+  NpcsDatSize, MonsterDatSize: LongInt;
+  Result: String;
+begin
+  Result := VERSION_UNKNOWN;
+  
+  { Try to get filesize for NPCS.DAT and MONSTER.DAT to use in version guessing }
+  NpcsDatSize := GetDataFileSize('NPCS.DAT');
+  MonsterDatSize := GetDataFileSize('MONSTER.DAT');
+  if (NpcsDatSize > 0) and (MonsterDatSize > 0) then  
+  begin
+    { BP can't use a LongInt in a case statement?  Makes for ugly repetetive IFs... }
+    if (NpcsDatSize = 37800) then
+    begin
+      Result := VERSION_001_OR_001e;
+    end else
+    if (NpcsDatSize = 49770) then
+    begin
+      Result := VERSION_001f;
+    end else
+    if (NpcsDatSize = 173880) then
+    begin
+      Result := VERSION_002_OR_004c_OR_005b;
+    end else
+    if (NpcsDatSize = 89320) then
+    begin
+      Result := VERSION_008;
+    end else
+    if (NpcsDatSize = 90370) then
+    begin
+      Result := VERSION_013c;
+    end else
+    if (NpcsDatSize = 91420) then
+    begin
+      Result := VERSION_014_OR_016;
+    end else
+    if (NpcsDatSize = 91910) then
+    begin
+      Result := VERSION_017;
+    end else
+    if (NpcsDatSize = 100270) then
+    begin
+      Result := VERSION_018_OR_019b6;
+    end else
+    if (NpcsDatSize = 100418) then
+    begin
+      Result := VERSION_020d;
+    end else
+    if (NpcsDatSize = 100566) then
+    begin
+      if (MonsterDatSize = 237237) then
+      begin
+        if (F_Exists('DATA' + DIRECTORY_SEPARATOR + 'DOSORWIN.DAT')) then
+        begin
+          Result := VERSION_021DOS_OR_021aDOS;
+        end else
+        begin
+          Result := VERSION_020e_OR_022_OR_023_OR_023a_OR_023b;
+        end;
+      end else
+      if (MonsterDatSize = 239239) then
+      begin
+        Result := VERSION_023c_OR_023d_OR_023e_OR_023f;
+      end;
+    end else
+    if (NpcsDatSize = 113590) then
+    begin
+      Result := VERSION_021W32_OR_021aW32;
+    end else
+    begin
+      Result := VERSION_UNKNOWN;
+    end;
+    
+    WriteLn('   - Size indicates version: ' + Result);
+  end;
+  
+  GuessVersionByData := Result;
 end;
 
 function OpenFiles(var InFile: File; InFileName: String; var OutFile: File; OutFileName: String): Boolean;
