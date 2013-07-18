@@ -174,6 +174,7 @@ Const
  global_barrelf   = global_datadir+'BARRELS.DAT'; {beer barrel lifters top X list}
  global_badfile   = global_datadir+'BADWORDS.DAT'; {sysop can place names here if she wants
                                        to replace certain words with proper ones}
+ Global_VersionF   = global_datadir+'VERSION.DAT'; {stores version number for data files, used by UPGRADE.PAS}
 
  global_teamrecordf= global_datadir+'TEAMREC.DAT'; {record fil with current gang record}
  global_teamrectxt = global_datadir+'TRECORD.DAT'; {txtfil, team records for holding TOWN}

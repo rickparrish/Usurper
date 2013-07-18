@@ -279,7 +279,8 @@ Uses {$IFDEF MSDOS}Overlay,{$ENDIF} Dos, {$IFDEF MSDOS}InitOver,{$ENDIF}
 
 
 Const            {version number also in DDPLUS.PAS}
-     uversion  = 'Usurper 0.23f'; {prog & version}
+     uver      = '0.23f';
+     uversion  = 'Usurper ' + uver; {prog & version}
      ucomp     = '07/08/2013';      {compile date, mm/dd/yyyy}
 
      uctlfile  = 'USURP.CTL'; {modem/fossil configuration file, used by DDPLUS}
@@ -352,6 +353,43 @@ var
     Person : OnlineRec; {Online record}
 
 begin {* Main Program *}
+
+  { Check that DATA\VERSION.DAT exists, and contains the same version number as this EXE }
+  S := '';
+  Write('   - Looking for ' + Global_VersionF + '...');
+  if (F_Exists(Global_VersionF)) then
+  begin
+    WriteLn('FOUND');
+    
+    for i := 1 to 10 do
+    begin
+      Write('   - Trying to open file...');
+      if (Open_TxtFile(TReset, Txt, Global_VersionF)) then
+      begin
+        WriteLn('SUCCESS');
+        ReadLn_From_Text(Txt, S);
+        Close_Text(Txt);
+        WriteLn('   - Version from file: ' + S);
+        break;
+      end else
+      begin
+        WriteLn('FAILED');
+        Delay2(500);
+      end;
+    end;
+  end else
+  begin
+    WriteLn('NOT FOUND');
+  end;
+  WriteLn('   - Expected version: ' + uver);
+  if (S = uver) then
+  begin
+    WriteLn('   - Version matches');
+  end else
+  begin
+    WriteLn('   - Version does not match!  Aborting!');
+    Halt;
+  end;
 
 {$IFDEF MSDOS}
  {Set Overlay FileMode}
