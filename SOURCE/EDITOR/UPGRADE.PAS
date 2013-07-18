@@ -257,12 +257,12 @@ end;
 function PerformUpgradeTo023c: Boolean;
 var
   Buf: Array[1..121] of Byte;
-  BufLongInt: LongInt;
-  BufSmallInt: SmallInt;
   InFile, OutFile: File;
   NumRead, NumWritten: SmallWord;
   OldMonsterDat, TempMonsterDat: String;
   Result: Boolean;
+  StrengthLongInt: LongInt;
+  StrengthSmallInt: SmallInt;
 begin
   Result := false;
   
@@ -289,13 +289,16 @@ begin
       
       while Not(EOF(InFile)) do
       begin
+        { Read/write everything from beginning of record to Strength }
         BlockRead(InFile, Buf, 114);
         BlockWrite(OutFile, Buf, 114);
         
-        BlockRead(InFile, BufSmallInt, 2);
-        BufLongInt := BufSmallInt;
-        BlockWrite(OutFile, BufLongInt, 4);
+        { Read/write Strength, converting from SmallInt to LongInt }
+        BlockRead(InFile, StrengthSmallInt, 2);
+        StrengthLongInt := StrengthSmallInt;
+        BlockWrite(OutFile, StrengthLongInt, 4);
         
+        { Read/write everything past Strength to the end of the record }
         BlockRead(InFile, Buf, 121);
         BlockWrite(OutFile, Buf, 121);
       end;
@@ -340,13 +343,104 @@ end;
 
 function PerformUpgradeTo023d: Boolean;
 var
+  Buf: Array[1..114] of Byte;
+  Defense: SmallInt;
+  Hps: LongInt;
+  InFile, OutFile: File;
+  NumRead, NumWritten: SmallWord;
+  OldMonsterDat, TempMonsterDat: String;
   Result: Boolean;
+  Strength: LongInt;
 begin
   Result := false;
   
-  WriteLn('   - TODO Upgrading to 0.23d');
-  Result := true;
+  { TODO Is it worth it to prompt users before applying this update?  Probably only a small number of people customized their monsters, and even
+         if they did, it's likely they'll want the Hps and Defense to match the way the game used to play anyway }
+  WriteLn('   - Upgrading to 0.23d');
   
+  OldMonsterDat := 'DATA' + DIRECTORY_SEPARATOR + 'MONSTER.DAT';
+  TempMonsterDat := 'DATA' + DIRECTORY_SEPARATOR + 'MONSTER.$$$';
+  
+  Write('     - Opening ' + OldMonsterDat + ' for input...');
+  
+  Assign(InFile, OldMonsterDat);
+  {$I-}Reset(InFile, 1);{$I+}
+  if (IOResult = 0) then
+  begin
+    WriteLn('SUCCESS');
+    Write('     - Opening ' + TempMonsterDat + ' for output...');
+    
+    Assign(OutFile, TempMonsterDat);
+    {$I-}ReWrite(OutFile, 1);{$I+}
+    if (IOResult = 0) then
+    begin
+      WriteLn('SUCCESS');
+      Write('     - Converting ' + OldMonsterDat + ' to ' + TempMonsterDat + '...');
+      
+      Defense := 0;
+      while Not(EOF(InFile)) do
+      begin
+        { Read/write everything from beginning of record to Strength }
+        BlockRead(InFile, Buf, 114);
+        BlockWrite(OutFile, Buf, 114);
+        
+        { Read/write Strength for use later }
+        BlockRead(InFile, Strength, 4);
+        BlockWrite(OutFile, Strength, 4);
+        
+        { Zero out defense }
+        BlockRead(InFile, Buf, 2);
+        BlockWrite(OutFile, Defense, 2);
+        
+        { Read/write everything between defense and hps }
+        BlockRead(InFile, Buf, 2);
+        BlockWrite(OutFile, Buf, 2);
+        
+        { Write Hps as Strength * 3 }
+        Hps := Strength * 3;
+        BlockRead(InFile, Buf, 4);
+        BlockWrite(OutFile, Hps, 4);
+        
+        { Read/write everything past Hps to the end of the record }
+        BlockRead(InFile, Buf, 113);
+        BlockWrite(OutFile, Buf, 113);
+      end;
+      WriteLn('DONE');
+      
+      Close(InFile);
+      Close(OutFile);
+      
+      Write('     - Erasing ' + OldMonsterDat + '...');
+      
+      {$I-}Erase(InFile);{$I+}
+      if (IOResult = 0) then
+      begin
+        WriteLn('SUCCESS');
+        Write('     - Renaming ' + TempMonsterDat + ' to ' + OldMonsterDat + '...');
+        
+        {$I-}Rename(OutFile, OldMonsterDat);{$I+}
+        if (IOResult = 0) then
+        begin
+          WriteLn('SUCCESS');
+          Result := true;
+        end else
+        begin
+          WriteLn('FAILED');
+        end;
+      end else
+      begin
+        WriteLn('FAILED');
+      end;
+    end else
+    begin
+      Close(InFile);
+      WriteLn('FAILED');
+    end;
+  end else
+  begin
+    WriteLn('FAILED');
+  end;
+
   PerformUpgradeTo023d := Result;
 end;
 
