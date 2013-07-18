@@ -381,13 +381,17 @@ begin {* Main Program *}
   begin
     WriteLn('NOT FOUND');
   end;
-  WriteLn('   - Expected version: ' + uver);
+  Write('   - Expected version: ' + uver);
   if (S = uver) then
   begin
-    WriteLn('   - Version matches');
+    WriteLn(' (MATCH)');
   end else
   begin
-    WriteLn('   - Version does not match!  Aborting!');
+    WriteLn(' (DOES NOT MATCH)');
+    WriteLn;
+    WriteLn('   - Please run EDITOR to upgrade your version of Usurper');
+    WriteLn('   - Aborting...');
+    WriteLn;
     Halt;
   end;
 
