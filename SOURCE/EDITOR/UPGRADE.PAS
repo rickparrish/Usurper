@@ -261,18 +261,19 @@ var
   BufSmallInt: SmallInt;
   InFile, OutFile: File;
   NumRead, NumWritten: SmallWord;
+  OldMonsterDat, TempMonsterDat: String;
   Result: Boolean;
-  TempMonsterDat: String;
 begin
   Result := false;
   
   WriteLn('   - Upgrading to 0.23c');
   
-  TempMonsterDat := 'MONSTER.$$$';
+  OldMonsterDat := 'DATA' + DIRECTORY_SEPARATOR + 'MONSTER.DAT';
+  TempMonsterDat := 'DATA' + DIRECTORY_SEPARATOR + 'MONSTER.$$$';
   
-  Write('     - Opening ' + monfile + ' for input...');
+  Write('     - Opening ' + OldMonsterDat + ' for input...');
   
-  Assign(InFile, monfile);
+  Assign(InFile, OldMonsterDat);
   {$I-}Reset(InFile, 1);{$I+}
   if (IOResult = 0) then
   begin
@@ -284,7 +285,7 @@ begin
     if (IOResult = 0) then
     begin
       WriteLn('SUCCESS');
-      Write('     - Converting ' + monfile + ' to ' + TempMonsterDat + '...');
+      Write('     - Converting ' + OldMonsterDat + ' to ' + TempMonsterDat + '...');
       
       while Not(EOF(InFile)) do
       begin
@@ -303,15 +304,15 @@ begin
       Close(InFile);
       Close(OutFile);
       
-      Write('     - Erasing ' + monfile + '...');
+      Write('     - Erasing ' + OldMonsterDat + '...');
       
       {$I-}Erase(InFile);{$I+}
       if (IOResult = 0) then
       begin
         WriteLn('SUCCESS');
-        Write('     - Renaming ' + TempMonsterDat + ' to ' + monfile + '...');
+        Write('     - Renaming ' + TempMonsterDat + ' to ' + OldMonsterDat + '...');
         
-        {$I-}Rename(OutFile, monfile);{$I+}
+        {$I-}Rename(OutFile, OldMonsterDat);{$I+}
         if (IOResult = 0) then
         begin
           WriteLn('SUCCESS');
