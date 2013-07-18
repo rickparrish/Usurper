@@ -173,7 +173,7 @@ begin
     WriteLn('FOUND');
     
     repeat
-      Write('   - Trying to open file');
+      Write('   - Trying to open file...');
       if (Open_TxtFile(TReset, InFile, VersionF)) then
       begin
         WriteLn('SUCCESS');
