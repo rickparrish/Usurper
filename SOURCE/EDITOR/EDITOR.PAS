@@ -22,7 +22,7 @@ Copyright 2007 Jakob Dangarden
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 }
 
-Program Editor; {Usurper - DoorGame Editor}
+Unit Editor; {Usurper - DoorGame Editor}
                 {Tools:Borland Pascal 7.0 and TurboVision 2.0}
 
                 {to change version and year: look for uver in init.pas
@@ -30,9 +30,7 @@ Program Editor; {Usurper - DoorGame Editor}
 
                 {looking for the reset game proc? look in init.pas
                  Procedure ResDialog.HandleEvent(var Event:TEvent);}
-
-
-
+interface
 
 Uses {$IFDEF MSDOS}Overlay,{$ENDIF} Init, CfgVal,
      JakobE, muffi2, extra,
@@ -69,6 +67,11 @@ Uses {$IFDEF MSDOS}Overlay,{$ENDIF} Init, CfgVal,
 {$O Npc}
 {$O resettn}
 
+procedure EditorMain;
+
+implementation
+
+procedure EditorMain;
 var
    i : Longint;
    j : integer;

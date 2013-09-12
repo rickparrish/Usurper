@@ -1,5 +1,9 @@
+backup/
+bin/
 EXE/
+lib/
 ORIGINAL ARCHIVES/
 BPC.CFG
 BUILD*.CMD
 VPC*.CFG
+*.lps
