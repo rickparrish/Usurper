@@ -19,23 +19,25 @@ type
 {$ENDIF}
   TScreenBuf = Array[1..25, 1..80] of TCharInfo; // REETODO Don't hardcode to 80x25
 
-procedure RPGotoXY(xy: SmallWord);
+procedure RPGotoXY(xy: Word);
 procedure RPHideCursor;
 function  RPLockFile(handle, start, length: LongInt): LongInt;
 procedure RPRestoreScreen(var screenBuf: TScreenBuf);
 procedure RPSaveScreen(var screenBuf: TScreenBuf);
 function  RPScreenSizeX: Word;
 function  RPScreenSizeY: Word;
-procedure RPSetAttrAt(x, y: SmallWord; attr: Byte);
+procedure RPSetAttrAt(x, y: Word; attr: Byte);
 procedure RPSleep(ms: Word);
 procedure RPShowCursor;
 function  RPUnLockFile(handle, start, length: LongInt): LongInt;
-function  RPWhereXY: SmallWord;
+function  RPWhereXY: Word;
 
 implementation
 
+{$IFDEF VPASCAL}
 uses
   {$IFDEF OS2}OS2Base,{$ENDIF} VPUtils, VpSysLow, VpUsrLow;
+{$ENDIF}
   
 {$IFDEF WIN32}
 var
@@ -43,9 +45,14 @@ var
 {$ENDIF}
   
 // REENOTE Can't to platform specific since cursor position is stored internally in VP units
-procedure RPGotoXY(xy: SmallWord);
+procedure RPGotoXY(xy: Word);
 begin
+{$IFDEF VPASCAL}
   SysTVSetCurPos(xy AND $00FF, xy AND $FF00 SHR 8);
+{$ENDIF}
+{$IFDEF FPC}
+  WriteLn('REETODO RPPort RPGotoXY'); Halt;
+{$ENDIF}
 end;
 
 {$IFDEF WIN32}
@@ -67,7 +74,12 @@ end;
 
 function  RPLockFile(handle, start, length: LongInt): LongInt;
 begin
+{$IFDEF VPASCAL}
   RPLockFile := SysLockFile(handle, start, length);
+{$ENDIF}
+{$IFDEF FPC}
+  WriteLn('REETODO RPPort RPLockFile'); Halt;
+{$ENDIF}
 end;
 
 { REETODO Should detect screen size }
@@ -93,7 +105,7 @@ end;
 {$IFDEF OS2}
 procedure RPRestoreScreen(var screenBuf: TScreenBuf);
 var
-  Size: SmallWord;
+  Size: Word;
 begin
   Size := SizeOf(TScreenBuf);
   VioWrtCellStr(@screenBuf, Size, 0, 0, 0);
@@ -138,7 +150,7 @@ end;
 {$IFDEF OS2}
 procedure RPSaveScreen(var screenBuf: TScreenBuf);
 var
-  Size: SmallWord;
+  Size: Word;
 begin
   Size := SizeOf(TScreenBuf);
   VioReadCellStr(screenBuf, Size, 0, 0, 0);
@@ -190,9 +202,15 @@ end;
 {$ENDIF}
 
 {$IFDEF WIN32}
-procedure RPSetAttrAt(x, y: SmallWord; attr: Byte);
+procedure RPSetAttrAt(x, y: Word; attr: Byte);
 var
+{$IFDEF VPASCAL}
   NumWritten: Longint;
+{$ENDIF}
+{$IFDEF FPC}
+  NumWritten: LongWord;
+{$ENDIF}
+
   WriteCoord: TCoord;
 begin
   WriteCoord.X := x;
@@ -201,7 +219,7 @@ begin
 end;
 {$ENDIF}
 {$IFNDEF WIN32}
-procedure RPSetAttrAt(x, y: SmallWord; attr: Byte);
+procedure RPSetAttrAt(x, y: Word; attr: Byte);
 var
   Ch: Char;
 begin
@@ -229,20 +247,35 @@ end;
 
 procedure RPSleep(ms: Word);
 begin
+{$IFDEF VPASCAL}
   SysCtrlSleep(ms);
+{$ENDIF}
+{$IFDEF FPC}
+  WriteLn('REETODO RPPort RPSleep'); Halt;
+{$ENDIF}
 end;
 
 function  RPUnLockFile(handle, start, length: LongInt): LongInt;
 begin
+{$IFDEF VPASCAL}
   RPUnLockFile := SysUnLockFile(handle, start, length);
+{$ENDIF}
+{$IFDEF FPC}
+  WriteLn('REETODO RPPort RPUnLockFile'); Halt;
+{$ENDIF}
 end;
 
 // REENOTE Can't to platform specific since cursor position is stored internally in VP units
-function RPWhereXY: SmallWord;
+function RPWhereXY: Word;
 var
-  X, Y: SmallWord;
+  X, Y: Word;
 begin
+{$IFDEF VPASCAL}
   SysGetCurPos(X, Y);
+{$ENDIF}
+{$IFDEF FPC}
+  WriteLn('REETODO RPPort RPWhereXY'); Halt;
+{$ENDIF}
   RPWhereXY := X + (Y SHL 8);
 end;
 

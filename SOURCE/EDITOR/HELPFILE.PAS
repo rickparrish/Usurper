@@ -457,7 +457,6 @@ end;
 {$ENDIF}
 {$IFNDEF MSDOS}
 function Scan(var P; Offset, Size: Integer; C: Char): Integer; assembler;
-{$IFDEF USE32}
         {&USES esi,edi} {&FRAME-}
 asm
         cld
@@ -475,23 +474,7 @@ asm
         sub     ecx,edx
         neg     ecx
         xchg    eax,ecx
-{$ELSE}
-asm
-        CLD
-        LES     DI,P
-        ADD     DI,&Offset
-        MOV     DX,Size
-        SUB     DX,&Offset
-        OR      DH,DH
-        JZ      @@1
-        MOV     DX,256
-@@1:    MOV     CX,DX
-        MOV     AL, C
-        REPNE   SCASB
-        SUB     CX,DX
-        NEG     CX
-        XCHG    AX,CX
-{$ENDIF}
+
 end;
 {$ENDIF}
 
@@ -514,7 +497,6 @@ end;
 {$IFNDEF MSDOS}
 procedure TextToLine(var Text; Offset, Length: Integer; var Line: String);
   assembler;
-{$IFDEF USE32}
        {&USES esi,edi} {&FRAME-}
 asm
         cld
@@ -525,19 +507,6 @@ asm
         stosb
         xchg    eax,ecx
         rep     movsb
-{$ELSE}
-asm
-        CLD
-        PUSH    DS
-        LDS     SI,Text
-        ADD     SI,&Offset
-        LES     DI,Line
-        MOV     AX,Length
-        STOSB
-        XCHG    AX,CX
-        REP     MOVSB
-        POP     DS
-{$ENDIF}
 end;
 {$ENDIF}
 

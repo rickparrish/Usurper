@@ -51,6 +51,12 @@
       <OtherUnitFiles Value="common;editor"/>
       <UnitOutputDirectory Value="..\lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
+    <Parsing>
+      <SyntaxOptions>
+        <SyntaxMode Value="tp"/>
+        <UseAnsiStrings Value="False"/>
+      </SyntaxOptions>
+    </Parsing>
     <Other>
       <CompilerMessages>
         <MsgFileName Value=""/>

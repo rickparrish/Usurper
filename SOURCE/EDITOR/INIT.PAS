@@ -180,6 +180,14 @@ type
   SmallInt  = System.Integer;
   SmallWord = System.Word;
 {$ENDIF}
+{$IFDEF FPC}
+type
+  SmallWord = System.Word;
+var
+  FileModeReadWrite: Integer;
+  TextModeRead: Integer;
+  TextModeReadWrite: Integer;
+{$ENDIF}
 
 type ItemHandler = (Item_Add,Item_Remove); {useb by itemhandler in ADDIT.pas}
 
@@ -366,7 +374,7 @@ type {god}
   cursed_by_god  : s30; {name of god who cursed}
   cursed_by_godID: s15; {god unique id}
   royal : byte; {royal blood? 0=no, 1=half, 2=full}
-  {cursed_typeof:byte; {type of curse: 1=age, 2=mental, 3=?}
+  (*cursed_typeof:byte; {type of curse: 1=age, 2=mental, 3=?}*)
 
  end;
 
@@ -811,7 +819,7 @@ type
   defence  : longint;
  { wuser : boolean;
   auser : boolean;  n”dv„ndigt?}
- { punch : longint;
+ { punch : longint; }
  { poisoned : boolean;}
  { weapon : string[40];
   armor  : string[40]; n”dv„ndigt?}
@@ -1702,24 +1710,24 @@ begin
 
 
   {16-23, cyan windows}
-{  p[apcolor,16] := #$3F;   {frame passive}
-{  p[apcolor,17] := #$3F;   {frame active,border}
-{  p[apcolor,18] := #$3A;  {close icon, size gadget}
-{  p[apcolor,19] := #$31;  {scrollbar page}
-{  p[apcolor,20] := #$31;  {scrollbar reserved text (pilarna)}
-{  p[apcolor,21] := #$30;  {scroller normal text, texten i f”nstret}
-{  p[apcolor,22] := #$3E;  {scroller selected text}
-{  p[apcolor,23] := #$31;  {reserved}
+(*  p[apcolor,16] := #$3F;   {frame passive}*)
+(*  p[apcolor,17] := #$3F;   {frame active,border}*)
+(*  p[apcolor,18] := #$3A;  {close icon, size gadget}*)
+(*  p[apcolor,19] := #$31;  {scrollbar page}*)
+(*  p[apcolor,20] := #$31;  {scrollbar reserved text (pilarna)}*)
+(*  p[apcolor,21] := #$30;  {scroller normal text, texten i f”nstret}*)
+(*  p[apcolor,22] := #$3E;  {scroller selected text}*)
+(*  p[apcolor,23] := #$31;  {reserved}*)
 
   {24-31, gray windows}
-{  p[apcolor,24] := #$3F;   {frame passive}
-{  p[apcolor,25] := #$3F;   {frame active,border}
-{  p[apcolor,26] := #$3A;  {close icon, size gadget}
-{  p[apcolor,27] := #$31;  {scrollbar page}
-{  p[apcolor,28] := #$31;  {scrollbar reserved text (pilarna)}
-{  p[apcolor,29] := #$30;  {scroller normal text, texten i f”nstret}
-{  p[apcolor,30] := #$3E;  {scroller selected text}
-{  p[apcolor,31] := #$31;  {reserved}
+(*  p[apcolor,24] := #$3F;   {frame passive}*)
+(*  p[apcolor,25] := #$3F;   {frame active,border}*)
+(*  p[apcolor,26] := #$3A;  {close icon, size gadget}*)
+(*  p[apcolor,27] := #$31;  {scrollbar page}*)
+(*  p[apcolor,28] := #$31;  {scrollbar reserved text (pilarna)}*)
+(*  p[apcolor,29] := #$30;  {scroller normal text, texten i f”nstret}*)
+(*  p[apcolor,30] := #$3E;  {scroller selected text}*)
+(*  p[apcolor,31] := #$31;  {reserved}*)
 
 
  {nedan ska va me!}
@@ -1823,11 +1831,11 @@ begin
                       NewStatusKey('~F1~ Help', kbF1, cmHelp,nil),nil)));
 
 { draw nothing, allow ALT-X quit }
-{  GetExtent(R);
+(*  GetExtent(R);
   R.A.Y := R.B.Y + 1;   { below screen bottom }
 {  New(StatusLine, Init(R, NewStatusDef(0, $EFFF,
                             StdStatusKeys(nil), nil)));
-}
+}*)
 end;
 
 procedure TMyapp.ToggleVideoMode;
@@ -1836,7 +1844,12 @@ var
   R: TRect;
 begin
 
+{$IFDEF VPASCAL}
   NewMode := ScreenMode xor smFont8x8;
+{$ENDIF}
+{$IFDEF FPC}
+  WriteLn('REETODO Init ToggleVideoMode'); Halt;
+{$ENDIF}
   if NewMode and smFont8x8 <> 0 then ShadowSize.X := 1
                                 else ShadowSize.X := 2;
   SetScreenMode(NewMode);

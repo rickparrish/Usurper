@@ -1,9 +1,9 @@
-program USURPER_EDITOR;
+program EDITOR;
 
-{$mode objfpc}{$H+}
+{$mode tp}{$H-}
 
 uses
-  Editor;
+  EditorU;
 
 begin
   EditorMain;
