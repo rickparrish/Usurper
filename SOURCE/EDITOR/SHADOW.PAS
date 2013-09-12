@@ -104,7 +104,12 @@ implementation
 		P := FindMethodSlot(OldMethod,ClassVmt);
 		if P<>nil then
 			 begin
+{$IFNDEF FPC}
 			 P^ := NewMethod;
+{$ENDIF}
+{$IFDEF FPC}
+  // REETODO
+{$ENDIF}
 			 ReplaceMethod := true;
 			 end
 		else

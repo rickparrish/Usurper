@@ -38,7 +38,11 @@ implementation
 uses
   {$IFDEF OS2}OS2Base,{$ENDIF} VPUtils, VpSysLow, VpUsrLow;
 {$ENDIF}
-  
+{$IFDEF FPC}
+uses
+  Crt;
+{$ENDIF}
+
 {$IFDEF WIN32}
 var
   StdOut: THandle;
@@ -51,7 +55,8 @@ begin
   SysTVSetCurPos(xy AND $00FF, xy AND $FF00 SHR 8);
 {$ENDIF}
 {$IFDEF FPC}
-  WriteLn('REETODO RPPort RPGotoXY'); Halt;
+  // REETODO values are offset by Window()
+  GotoXY(xy AND $00FF, xy AND $FF00 SHR 8);
 {$ENDIF}
 end;
 
@@ -274,7 +279,9 @@ begin
   SysGetCurPos(X, Y);
 {$ENDIF}
 {$IFDEF FPC}
-  WriteLn('REETODO RPPort RPWhereXY'); Halt;
+  // REETODO values are offset by Window()
+  X := WhereX;
+  Y := WhereY;
 {$ENDIF}
   RPWhereXY := X + (Y SHL 8);
 end;
