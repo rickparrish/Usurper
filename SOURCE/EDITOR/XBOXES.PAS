@@ -51,7 +51,7 @@ Type
                        Procedure HandleEvent(var Event:tevent);virtual;
                        Procedure GetData(var r); virtual;
                        Procedure SetData(var r); virtual;
-                       {$IFDEF VPASCAL}
+                       {$IFNDEF FPC}
                        Function DataSize:word; virtual;
                        {$ENDIF}
                        {$IFDEF FPC}

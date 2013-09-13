@@ -1844,7 +1844,7 @@ var
   R: TRect;
 begin
 
-{$IFDEF VPASCAL}
+{$IFNDEF FPC}
   NewMode := ScreenMode xor smFont8x8;
 {$ENDIF}
 {$IFDEF FPC}

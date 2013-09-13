@@ -38,7 +38,7 @@ implementation
 uses
   {$IFDEF OS2}OS2Base,{$ENDIF} VPUtils, VpSysLow, VpUsrLow;
 {$ENDIF}
-{$IFDEF FPC}
+{$IFNDEF VPASCAL}
 uses
   Crt;
 {$ENDIF}
@@ -54,7 +54,7 @@ begin
 {$IFDEF VPASCAL}
   SysTVSetCurPos(xy AND $00FF, xy AND $FF00 SHR 8);
 {$ENDIF}
-{$IFDEF FPC}
+{$IFNDEF VPASCAL}
   // REETODO values are offset by Window()
   GotoXY(xy AND $00FF, xy AND $FF00 SHR 8);
 {$ENDIF}
@@ -82,7 +82,7 @@ begin
 {$IFDEF VPASCAL}
   RPLockFile := SysLockFile(handle, start, length);
 {$ENDIF}
-{$IFDEF FPC}
+{$IFNDEF VPASCAL}
   WriteLn('REETODO RPPort RPLockFile'); Halt;
 {$ENDIF}
 end;
@@ -212,7 +212,7 @@ var
 {$IFDEF VPASCAL}
   NumWritten: Longint;
 {$ENDIF}
-{$IFDEF FPC}
+{$IFNDEF VPASCAL}
   NumWritten: LongWord;
 {$ENDIF}
 
@@ -255,7 +255,7 @@ begin
 {$IFDEF VPASCAL}
   SysCtrlSleep(ms);
 {$ENDIF}
-{$IFDEF FPC}
+{$IFNDEF VPASCAL}
   WriteLn('REETODO RPPort RPSleep'); Halt;
 {$ENDIF}
 end;
@@ -265,7 +265,7 @@ begin
 {$IFDEF VPASCAL}
   RPUnLockFile := SysUnLockFile(handle, start, length);
 {$ENDIF}
-{$IFDEF FPC}
+{$IFNDEF VPASCAL}
   WriteLn('REETODO RPPort RPUnLockFile'); Halt;
 {$ENDIF}
 end;
@@ -278,7 +278,7 @@ begin
 {$IFDEF VPASCAL}
   SysGetCurPos(X, Y);
 {$ENDIF}
-{$IFDEF FPC}
+{$IFNDEF VPASCAL}
   // REETODO values are offset by Window()
   X := WhereX;
   Y := WhereY;
