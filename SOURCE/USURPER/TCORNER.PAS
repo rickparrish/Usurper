@@ -500,7 +500,7 @@ begin
                 crlf;
                 sd(config.textcolor,'You approach ');
                 sd(global_plycol,pl0.name2);
-                d(config.textcolor,+' and let '+sex[pl0.sex]);
+                d(config.textcolor,' and let '+sex[pl0.sex]);
                 d(config.textcolor,'know that you no longer desire '+sex[pl0.sex]+'!');
                 sd(global_plycol,pl0.name2);
                 d(config.textcolor,' looks surprised, but soon leaves');

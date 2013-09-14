@@ -1701,7 +1701,7 @@ begin
                     'Team Drop-Out!',    {letter head}
                     mailrequest_nothing, {mailrequest_constant}
                     uplc+pl0^.name2+config.textcol1+' left your Team!', {line1}
-                    uplc+pl0^.name2+config.textcol1+' became '++kingstring(pl0^.sex)+config.textcol1+'!', {line2}
+                    uplc+pl0^.name2+config.textcol1+' became '+kingstring(pl0^.sex)+config.textcol1+'!', {line2}
                     '',  {line3}
                     ''); {line4}
 

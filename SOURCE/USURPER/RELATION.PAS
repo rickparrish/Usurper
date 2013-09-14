@@ -2269,7 +2269,7 @@ begin
 
    {news-paper}
    newsy(true,'Childbirth!',
-   ' '+uplc+pl1.name2+config.textcol1+' the '++race_display(2,pl1.race,0)+', delivered a baby '+sex6[child.sex]+'!',
+   ' '+uplc+pl1.name2+config.textcol1+' the '+race_display(2,pl1.race,0)+', delivered a baby '+sex6[child.sex]+'!',
    ' '+s2,
    ''+sr3,
    ''+sr4,

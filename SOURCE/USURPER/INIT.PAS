@@ -34,6 +34,14 @@ type
   SmallInt  = System.Integer;
   SmallWord = System.Word;
 {$ENDIF}
+{$IFDEF FPC}
+type
+  SmallWord = System.Word;
+var
+  FileModeReadWrite: Integer;
+  TextModeRead: Integer;
+  TextModeReadWrite: Integer;
+{$ENDIF}
 
 {Uses}
 Type

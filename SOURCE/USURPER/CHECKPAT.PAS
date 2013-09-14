@@ -67,7 +67,18 @@ Implementation
 {$L checkpap}
 {$ENDIF}
 function checkpath (var name; inflags: integer; var drive; var dir; 
-                    var fname; var ext; var fullpath) : integer; external;
-function exists (var fname): boolean; external;
+                    var fname; var ext; var fullpath) : integer; {$IFNDEF FPC}external;{$ENDIF}
+{$IFDEF FPC}
+begin
+  WriteLn('REETODO checkpat checkpath'); Halt;
+end;
+{$ENDIF}
+
+function exists (var fname): boolean; {$IFNDEF FPC}external;{$ENDIF}
+{$IFDEF FPC}
+begin
+  WriteLn('REETODO checkpat exists'); Halt;
+end;
+{$ENDIF}
 
 end.

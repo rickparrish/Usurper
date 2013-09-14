@@ -278,7 +278,7 @@ begin
  if crime then begin
   dec(player.darknr);
 
-  x:=random(4); {RISK/SANNOLIKHET ATT èKA FAST}
+  x:=random(4); {RISK/SANNOLIKHET ATT KA FAST}
   {x:=0; {FUSK!}
 
   if (x=0) and (player.king=false) then begin
@@ -357,7 +357,7 @@ begin
      {news-paper}
      newsy(true,
      'Murderer killed by City Guards!',
-     ' '+uplc+player.name2++config.textcol1+' was cut down after a ',
+     ' '+uplc+player.name2+config.textcol1+' was cut down after a ',
      ' fierce fight with the city police.',
      '',
      '',

@@ -30,10 +30,11 @@ Copyright 2007 Jakob Dangarden
 {$ENDIF}
 {UTEST+}
 
-Program Usurper; {Door-Game by Jakob Dangarden
+unit UsurperU; {Door-Game by Jakob Dangarden
                   Written using - Borland Pascal 7.0 and DDplus 7.1
                    .. and miscellaneous routines .. }
 
+interface
 
 Uses {$IFDEF MSDOS}Overlay,{$ENDIF} Dos, {$IFDEF MSDOS}InitOver,{$ENDIF}
      DDplus, Init, Jakob,
@@ -329,7 +330,11 @@ Const            {version number also in DDPLUS.PAS}
       *feeling_list in rating.pas should not use s15 in array
       }
 
+procedure UsurperMain;
 
+implementation
+
+procedure UsurperMain;
 var
     s   : string;
     fix : string[4];
@@ -566,7 +571,9 @@ begin {* Main Program *}
  Exitproc:=@ByeBye;
 
  {Setup New HeapHandler}
+{$IFNDEF FPC}
  HeapError:=@HeapHandler;
+{$ENDIF}
 
  {Setup Beta version indicators}
  global_ubeta:=false;  {jakob beta version}
@@ -1278,5 +1285,6 @@ exit_ordered:=true;
   end; {case .end.}
 
  until never; {Main loop *END*}
+end;
 
-end.ÿ{* Main Program END *}
+end.{* Main Program END *}

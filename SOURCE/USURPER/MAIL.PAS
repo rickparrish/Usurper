@@ -2822,7 +2822,7 @@ begin {MAIN PROC (POST) **START**}
                 if x>0 then begin
 
                  {present the Quest Offer to player}
-                 d(config.textcolor,+uquestc+'QUEST '+uyellow+'Proposal'+config.textcol1);
+                 d(config.textcolor,uquestc+'QUEST '+uyellow+'Proposal'+config.textcol1);
                  d(5,mkstring(14,underscore));
                  sd(config.textcolor,kingstring(king^.sexy)+' ');
                  sd(global_kingcol,king^.name);

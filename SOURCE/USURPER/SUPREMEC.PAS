@@ -303,7 +303,7 @@ begin
   {news-paper}
   newsy(true,
   uyellow+'Heroic Deed!'+config.textcol1,
-  ' '+uplc+player.name2+config.textcol1+' encountered the '+supcol+'Supreme Being'+config.textcol1++' and won!',
+  ' '+uplc+player.name2+config.textcol1+' encountered the '+supcol+'Supreme Being'+config.textcol1+' and won!',
   ' '+uplc+player.name2+config.textcol1+' ended '+sex3[player.sex]+' career with',
   ' a brilliant victory!',
   '',

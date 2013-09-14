@@ -3316,8 +3316,10 @@ end;
 Procedure MemInfo; {good when developing the program}
 begin
  {d(14,'Overlay buffer : '+commastr(ovrgetbuf));}
+{$IFNDEF FPC}
  d(14,'Mem available  : '+commastr(memavail));
  d(14,'Heap available : '+commastr(maxavail));
+{$ENDIF}
 end;
 
 Procedure Command_Help; {executed when : 'usurper ?' is typed}

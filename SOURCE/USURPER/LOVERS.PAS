@@ -1410,7 +1410,7 @@ begin
           false,
           mailrequest_nothing,
           '',
-          +uyellow+'Happy Child!'+config.textcol1,
+          uyellow+'Happy Child!'+config.textcol1,
           'You receive '+uwhite+commastr(x)+config.textcol1+' experience points for making your',
           sex7[child^.sex]+' '+ukidc+child^.name+config.textcol1+' extremely happy by marrying',
           uplc+player.name2+config.textcol1+' the '+classnames[player.class]+'.',

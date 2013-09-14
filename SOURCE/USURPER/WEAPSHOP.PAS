@@ -680,7 +680,7 @@ Begin {Weapon Shop}
            crlf;
            sd(config.textcolor,'It will cost you ');
            sd(14,commastr(wweapon.value));
-           d(config.textcolor,' in '++config.moneytype+'.');
+           d(config.textcolor,' in '+config.moneytype+'.');
 
            sd(config.textcolor,'Pay ? ');
            menu2('(Y)es, ');

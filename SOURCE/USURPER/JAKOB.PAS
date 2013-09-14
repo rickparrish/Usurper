@@ -34,6 +34,13 @@ Interface
 
 const global_place : byte = 0; {see spin_cursor}
 
+{$IFDEF FPC}
+var
+  FileModeReadWrite: Integer;
+  TextModeRead: Integer;
+  TextModeReadWrite: Integer;
+{$ENDIF}
+
 {Uses Init;}
 
 {string}

@@ -55,10 +55,7 @@ implementation
 
 {$IFNDEF MSDOS}
 uses
-  EleNorm, RPPort;
-  
-var LastChar: Char;
-    DidInit: Boolean = false;
+  Comm;
 {$ENDIF}
 
 {$IFDEF MSDOS}
@@ -78,8 +75,7 @@ end;
 {$IFNDEF MSDOS}
 procedure async_send(c: char);
 begin
-  if Not(DidInit) then Exit;
-  Com_SendChar(c);
+  CommWrite(c);
 end;
 {$ENDIF}
 
@@ -95,8 +91,7 @@ end;
 {$IFNDEF MSDOS}
 procedure async_send_string(s: string);
 begin
-  if Not(DidInit) then Exit;
-  Com_SendString(s);
+  CommWrite(s);
 end;
 {$ENDIF}
 
@@ -123,36 +118,13 @@ function async_receive(var ch: char): boolean;
 begin
   ch := #0;
   async_receive := false;
-  if Not(DidInit) then Exit;
-  
+
   // Loop until we get a key we want
-  while (Com_CharAvail) and (ch = #0) do
+  while (CommCharAvail) and (ch = #0) do
   begin
     // Get next char
-    ch := Com_GetChar;
-      
-    // Handle translating the LF character
-    if (ch = #10) then
-    begin
-      if (LastChar = #13) then
-      begin
-        // Last was CR, so ignore LF
-        LastChar := #0;
-        ch := #0;
-      end else
-      begin
-        // Last was not CR, so translate this LF to CR
-        ch := #13;
-        LastChar := ch;
-        async_receive := true;
-        Exit;
-      end;
-    end else
-    begin
-      LastChar := ch;
-      async_receive := true;
-      Exit;
-    end;
+    ch := CommReadChar;
+    async_receive := true;
   end;
 end;
 {$ENDIF}
@@ -172,8 +144,7 @@ end;
 function async_carrier_drop: boolean;
 begin
   async_carrier_drop := false;
-  if Not(DidInit) then Exit;
-  async_carrier_drop := NOT Com_Carrier;
+  async_carrier_drop := NOT CommCarrier;
 end;
 {$ENDIF}
 
@@ -192,8 +163,7 @@ end;
 function async_carrier_present: boolean;
 begin
   async_carrier_present := true;
-  if Not(DidInit) then Exit;
-  async_carrier_present := Com_Carrier;
+  async_carrier_present := CommCarrier;
 end;
 {$ENDIF}
 
@@ -212,8 +182,7 @@ end;
 function async_buffer_check: boolean;
 begin
   async_buffer_check := false;
-  if Not(DidInit) then Exit;
-  async_buffer_check := Com_CharAvail;
+  async_buffer_check := CommCharAvail;
 end;
 {$ENDIF}
 
@@ -232,11 +201,7 @@ end;
 {$IFNDEF MSDOS}
 function async_init_fossil: boolean;
 begin
-  if (DidInit) then Exit;
-  DidInit := true;
-  Com_StartUp(2);
-  Com_SetDontClose(true);
-  Com_OpenQuick(port_num);
+  CommOpen(port_num);
   async_init_fossil := true;
 end;
 {$ENDIF}
@@ -254,8 +219,7 @@ end;
 {$IFNDEF MSDOS}
 procedure async_deinit_fossil;
 begin
-  if Not(DidInit) then Exit;
-  Com_ShutDown;
+  CommClose(false);
 end;
 {$ENDIF}
 
@@ -273,7 +237,6 @@ end;
 {$IFNDEF MSDOS}
 procedure async_set_dtr(state: boolean);
 begin
-  if Not(DidInit) then Exit;
   // REENOTE Telnet can't set DTR
 end;
 {$ENDIF}
@@ -289,14 +252,9 @@ begin
 end;
 {$ENDIF}
 {$IFNDEF MSDOS}
-procedure MySlice;
-begin
-  RPSleep(1);
-end;
-
 procedure async_flush_output;
 begin
-  Com_FlushOutBuffer(MySlice);
+  WriteLn('REETODO ddfossil async_flush_output'); Halt;
 end;
 {$ENDIF}
 
@@ -313,8 +271,7 @@ end;
 {$IFNDEF MSDOS}
 procedure async_purge_output;
 begin
-  if Not(DidInit) then Exit;
-  Com_PurgeOutBuffer;
+  WriteLn('REETODO ddfossil async_purge_output'); Halt;
 end;
 {$ENDIF}
 
@@ -331,8 +288,7 @@ end;
 {$IFNDEF MSDOS}
 procedure async_purge_input;
 begin
-  if Not(DidInit) then Exit;
-  Com_PurgeInBuffer;
+  WriteLn('REETODO ddfossil async_purge_input'); Halt;
 end;
 {$ENDIF}
 
@@ -350,7 +306,6 @@ end;
 {$IFNDEF MSDOS}
 procedure async_watchdog_on;
 begin
-  if Not(DidInit) then Exit;
   // REENOTE Nothing to do here
 end;
 {$ENDIF}
@@ -369,7 +324,6 @@ end;
 {$IFNDEF MSDOS}
 procedure async_watchdog_off;
 begin
-  if Not(DidInit) then Exit;
   // REENOTE Nothing to do here
 end;
 {$ENDIF}
@@ -387,7 +341,6 @@ end;
 {$IFNDEF MSDOS}
 procedure async_warm_reboot;
 begin
-  if Not(DidInit) then Exit;
   // REENOTE Nothing to do here
 end;
 {$ENDIF}
@@ -405,7 +358,6 @@ end;
 {$IFNDEF MSDOS}
 procedure async_cold_reboot;
 begin
-  if Not(DidInit) then Exit;
   // REENOTE Nothing to do here
 end;
 {$ENDIF}
@@ -445,7 +397,6 @@ end;
 {$IFNDEF MSDOS}
 procedure async_set_baud(n: longint);
 begin
-  if Not(DidInit) then Exit;
   // REENOTE Telnet can't set baud
 end;
 {$ENDIF}
@@ -488,7 +439,6 @@ end;
 {$IFNDEF MSDOS}
 procedure async_set_baudBnu(n: longint);
 begin
-  if Not(DidInit) then Exit;
   // REENOTE Telnet can't set baud
 end;
 {$ENDIF}
@@ -529,7 +479,6 @@ end;
 {$IFNDEF MSDOS}
 procedure async_set_flow(SoftTran,Hard,SoftRecv: boolean);
 begin
-  if Not(DidInit) then Exit;
   // REENOTE Telnet can't set flow
 end;
 {$ENDIF}
@@ -550,7 +499,6 @@ end;
 {$IFNDEF MSDOS}
 procedure async_get_fossil_data;
 begin
-  if Not(DidInit) then Exit;
   // REENOTE Telnet has no FOSSIL data to get
 end;
 {$ENDIF}
@@ -578,12 +526,7 @@ procedure Async_Buffer_Status(var Insize,Infree,OutSize,Outfree: word;
                               var fossilname:string);
 var FInFree, FOutFree, FInUsed, FOutUsed: Longint;
 begin
-  if Not(DidInit) then Exit;
-  Com_GetBufferStatus(FInFree, FOutFree, FInUsed, FOutUsed);
-  Insize := FInFree + FInUsed;
-  Infree := FInFree;
-  Outsize := FOutFree + FOutUsed;
-  Outfree := FOutFree;
+  WriteLn('REETODO ddfossil Async_Buffer_Status'); Halt;
 end;
 {$ENDIF}
 

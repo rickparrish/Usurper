@@ -1354,7 +1354,7 @@ end;
 
   if place=2 then begin
    if fastgame=false then begin
-    d(global_moncol,'The Demon'+config.textcol1++' claws '+uplc+foe+config.textcol1+' extremely Hard!');
+    d(global_moncol,'The Demon'+config.textcol1+' claws '+uplc+foe+config.textcol1+' extremely Hard!');
    end;
    dec(temp2.hps,(200+random(101)));
   end

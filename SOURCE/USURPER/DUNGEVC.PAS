@@ -1280,7 +1280,7 @@ begin {RAPE_GIRL event *START*.... a woman is being harassed by local militia}
  d(11,'Encounter');
  d(config.textcolor,'In a ravine nearby you notice a young woman being');
  sd(config.textcolor,'harassed by a pack of orcish riff-raff (you can see at least ');
- sd(7,+commastr(foes));
+ sd(7,commastr(foes));
  d(config.textcolor,' orcs here).');
  d(config.textcolor,'They are having fun and are probably going to rape her soon...');
  crlf;
