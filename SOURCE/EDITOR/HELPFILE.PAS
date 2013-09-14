@@ -1,6 +1,4 @@
-{$IFNDEF MSDOS}
 {$I DEFINES.INC}
-{$ENDIF}
 {************************************************}
 {                                                }
 {   Turbo Vision Demo                            }

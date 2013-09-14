@@ -1,7 +1,4 @@
-{$IFNDEF MSDOS}
 {$I DEFINES.INC}
-{$ENDIF}
-
 {
 
 Copyright 2007 Jakob Dangarden
@@ -22,8 +19,6 @@ Copyright 2007 Jakob Dangarden
     along with Usurper; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 }
-
-
 Unit ChallKng; {Challenge the King (or Queen)}
 
 Interface    {This routine can be called by a player or NPC}

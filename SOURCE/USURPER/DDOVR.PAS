@@ -1,6 +1,4 @@
-{$IFNDEF MSDOS}
 {$I DEFINES.INC}
-{$ENDIF}
 unit ddovr;
 {$O+,F+,V-}
 

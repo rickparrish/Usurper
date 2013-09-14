@@ -1,6 +1,4 @@
-{$IFNDEF MSDOS}
 {$I DEFINES.INC}
-{$ENDIF}
 Unit TxtShare;
 
 { This UNIT implements a TEXT file device driver to access TEXT files with a }

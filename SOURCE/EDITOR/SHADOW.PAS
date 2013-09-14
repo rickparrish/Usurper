@@ -1,6 +1,4 @@
-{$IFNDEF MSDOS}
 {$I DEFINES.INC}
-{$ENDIF}
 Unit shadow;
 { Provides basic routines needed to implement Shadow Classes }
 interface

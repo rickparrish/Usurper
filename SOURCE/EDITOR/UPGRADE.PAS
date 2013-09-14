@@ -1,6 +1,4 @@
-{$IFNDEF MSDOS}
 {$I DEFINES.INC}
-{$ENDIF}
 {
 
 Copyright 2013 Usurper Dev Team
@@ -21,7 +19,6 @@ Copyright 2013 Usurper Dev Team
     along with Usurper; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 }
-
 Unit Upgrade;
 
 interface

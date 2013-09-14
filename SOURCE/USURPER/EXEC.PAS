@@ -1,6 +1,4 @@
-{$IFNDEF MSDOS}
 {$I DEFINES.INC}
-{$ENDIF}
 
 Unit exec;
 {  --- Version 3.3 91-11-21 16:12 ---

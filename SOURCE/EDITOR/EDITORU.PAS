@@ -1,6 +1,4 @@
-{$IFNDEF MSDOS}
 {$I DEFINES.INC}
-{$ENDIF}
 {
 
 Copyright 2007 Jakob Dangarden
@@ -21,7 +19,6 @@ Copyright 2007 Jakob Dangarden
     along with Usurper; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 }
-
 Unit EditorU; {Usurper - DoorGame Editor}
                 {Tools:Borland Pascal 7.0 and TurboVision 2.0}
 

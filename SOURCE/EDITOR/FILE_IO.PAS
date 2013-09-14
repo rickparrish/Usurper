@@ -1,6 +1,4 @@
-{$IFNDEF MSDOS}
 {$I DEFINES.INC}
-{$ENDIF}
 {
 
 Copyright 2007 Jakob Dangarden
@@ -21,7 +19,6 @@ Copyright 2007 Jakob Dangarden
     along with Usurper; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 }
-
 Unit File_Io; {Usurper Editor - File I/O Routines}
 
 {NOTE that all textfile related I/O is handled in OPENTXT.PAS}

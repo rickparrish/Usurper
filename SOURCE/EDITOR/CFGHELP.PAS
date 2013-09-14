@@ -1,6 +1,4 @@
-{$IFNDEF MSDOS}
 {$I DEFINES.INC}
-{$ENDIF}
 {
 
 Copyright 2007 Jakob Dangarden
@@ -21,8 +19,6 @@ Copyright 2007 Jakob Dangarden
     along with Usurper; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 }
-
-
 Unit CfgHelp; {Usurper Editor - Configuration Options Help text}
               {see cfgdef.pas for help regarding adding/editing/removing
                config options}
