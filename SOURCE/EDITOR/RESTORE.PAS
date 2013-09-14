@@ -23,7 +23,7 @@ var
 implementation
 
 uses
-  Drivers {$IFNDEF MSDOS}, RPPort{$ENDIF};
+  Crt, Drivers {$IFNDEF MSDOS}, VideoUtils{$ENDIF};
 
 {$IFNDEF MSDOS}
 var
@@ -65,8 +65,8 @@ begin
   MemW[Seg0040:CursorPos] := CursorCoords;
 {$ENDIF}
 {$IFNDEF MSDOS}
-  RPRestoreScreen(SavedScreen);
-  RPGotoXY(CursorCoords);
+  RestoreScreen(SavedScreen);
+  GotoXY(CursorCoords AND $00FF, (CursorCoords AND $FF00) SHR 8);
 {$ENDIF}
   ExitProc := ExitSave
 end; { MyExitProc }
@@ -102,8 +102,8 @@ begin
   end;
 {$ENDIF}
 {$IFNDEF MSDOS}
-  CursorCoords := RPWhereXY;
-  RPSaveScreen(SavedScreen);
+  CursorCoords := WhereX + (WhereY SHL 8);
+  SaveScreen(SavedScreen);
 {$ENDIF}
   ExitSave := ExitProc;
   ExitProc := @MyExitProc

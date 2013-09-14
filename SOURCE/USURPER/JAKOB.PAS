@@ -151,7 +151,7 @@ Uses Dos, Crt, Init,
      DDplus, DDscott, ComIO,
      Exec, AnsiColr, SwagDate,
      Various, NetFilep, DispText,
-     Online, File_IO {$IFNDEF MSDOS}, RPPort{$ENDIF};
+     Online, File_IO {$IFNDEF MSDOS}, VideoUtils{$ENDIF};
 
 var carriage_return : boolean; {used by D and SD procedures (display routines)}
 
@@ -445,7 +445,7 @@ end;
 {$IFNDEF MSDOS}
 Procedure Delay2;
 begin
- RPSleep(milliSeconds);
+ Delay(milliSeconds); // TODO Does this timeslice?
 end;
 {$ENDIF}
 
@@ -2008,13 +2008,13 @@ begin;
   writeln(' type "EXIT" to return)');
  end;
 
- savescreen;
+ DDScott.savescreen;
  if not local then AsyncCloseUp;
  swapvectors;
  do_exec(getenv('COMSPEC'),'',USE_ALL,$FFFF,TRUE);
  swapvectors;
  if not local then AsyncSelectPort(com_port);
- restorescreen;
+ DDScott.restorescreen;
 
  if not local then begin
   crlf;
@@ -2146,7 +2146,7 @@ FUNCTION ScreenRows: byte;
 var
   y: Word;
 begin
-  y := RPScreenSizeY;
+  y := ScreenSizeY;
   if (y > 255) then y := 255;
   ScreenRows := y;
 end;
@@ -2166,7 +2166,7 @@ FUNCTION ScreenCols: byte;
 var
   x: Word;
 begin
-  x := RPScreenSizeX;
+  x := ScreenSizeX;
   if (x > 255) then x := 255;
   ScreenCols := x;
 end;

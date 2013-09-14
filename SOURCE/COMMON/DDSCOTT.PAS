@@ -52,7 +52,7 @@ implementation
 
 {$IFNDEF MSDOS}
 uses
-  RPPort;
+  VideoUtils;
   
 var
   SavedScreen: TScreenBuf;
@@ -323,7 +323,7 @@ end;
 {$IFNDEF MSDOS}
 procedure cursoroff;
 begin
-  RPHideCursor;
+  Crt.cursoroff;
 end;
 {$ENDIF}
 
@@ -365,7 +365,7 @@ end;
 {$IFNDEF MSDOS}
 procedure cursoron;
 begin
-  RPShowCursor;
+  Crt.cursoron;
 end;
 {$ENDIF}
 
@@ -412,7 +412,7 @@ end;
 {$IFNDEF MSDOS}
 procedure savescreen;
 begin
-  RPSaveScreen(SavedScreen);
+  VideoUtils.SaveScreen(SavedScreen);
   x:=wherex;
   y:=wherey;
 end;
@@ -432,7 +432,7 @@ end;
 {$IFNDEF MSDOS}
 procedure restorescreen;
 begin
-  RPRestoreScreen(SavedScreen);
+  VideoUtils.RestoreScreen(SavedScreen);
   gotoxy(x,y);
 end;
 {$ENDIF}

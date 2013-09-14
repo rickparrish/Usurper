@@ -34,7 +34,7 @@
     </RunParams>
     <Units Count="1">
       <Unit0>
-        <Filename Value="EDITOR.LPR"/>
+        <Filename Value="EDITOR.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="EDITOR"/>
       </Unit0>
@@ -48,7 +48,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="common;$(ProjOutDir)"/>
-      <OtherUnitFiles Value="common;editor"/>
+      <OtherUnitFiles Value="..\..\rmdoor;common;editor"/>
       <UnitOutputDirectory Value="..\lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Parsing>
