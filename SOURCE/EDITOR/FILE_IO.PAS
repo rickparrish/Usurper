@@ -95,7 +95,7 @@ Function CalcHelpName(const wanted:string): string;
 
 Implementation
 
-Uses Dos, MsgBox, {$IFDEF MSDOS}TxtShare,{$ENDIF} Jakobe {$IFNDEF MSDOS}, Strings{$ENDIF};
+Uses Dos, MsgBox, Jakobe, Strings;
 
 const
  locknrs   = 100; {how many attempts to access a file?}
@@ -250,9 +250,7 @@ var Inf: SearchRec;
 begin
  findfirst(s,AnyFile,Inf);
  f_exists := (DOSError = 0);
-{$IFNDEF MSDOS}
  FindClose(Inf);
-{$ENDIF}
 end;
 
 Function Make_Dir(const s:string) : boolean;
@@ -337,9 +335,6 @@ begin
 
  memmy:=filemode;
  FileMode:=fmReadOnly+fmDenyNone;
-{$IFNDEF MSDOS}
- FileModeReadWrite := FileMode;
-{$ENDIF}
 
  repeat
   ok:=true;
@@ -359,9 +354,6 @@ begin
 
  {reset filemode}
  filemode:=memmy;
-{$IFNDEF MSDOS}
- FileModeReadWrite := FileMode;
-{$ENDIF}
 end;
 
 Function FsClassic( weapon : boolean ) : word;
@@ -386,9 +378,6 @@ begin
 
  memmy:=filemode;
  FileMode:=fmReadOnly+fmDenyNone;
-{$IFNDEF MSDOS}
- FileModeReadWrite := FileMode;
-{$ENDIF}
 
  repeat
   ok:=true;
@@ -422,9 +411,6 @@ begin
 
  {reset filemode}
  filemode:=memmy;
-{$IFNDEF MSDOS}
- FileModeReadWrite := FileMode;
-{$ENDIF}
 end;
 
 Function Fs( filtyp : filsize ) : word;
@@ -442,9 +428,6 @@ begin
 
  memmy:=filemode;
  FileMode:=fmReadOnly+fmDenyNone;
-{$IFNDEF MSDOS}
- FileModeReadWrite := FileMode;
-{$ENDIF}
 
  case filtyp of
   FsPlayer:begin {player/npc file}
@@ -606,9 +589,6 @@ begin
 
  {reset filemode}
  filemode:=memmy;
-{$IFNDEF MSDOS}
- FileModeReadWrite := FileMode;
-{$ENDIF}
 end;
 
 Procedure Load_Objekt;
@@ -654,9 +634,6 @@ begin
    Fload: FileMode:=fmReadOnly+fmDenyNone;
    FSave: FileMode:=fmReadWrite+fmDenyAll;
   end;
-{$IFNDEF MSDOS}
-  FileModeReadWrite := FileMode;
-{$ENDIF}
   {$I-}reset(ofil);{$I+}
 
   if IOResult<>0 then begin
@@ -685,9 +662,6 @@ begin
 
  {reset filemode}
  filemode:=memmy;
-{$IFNDEF MSDOS}
- FileModeReadWrite := FileMode;
-{$ENDIF}
 end;
 
 Procedure Load_Player;
@@ -714,9 +688,6 @@ begin
    Fload: FileMode:=fmReadOnly+fmDenyNone;
    Fsave: FileMode:=fmReadWrite+fmDenyAll;
   end;
-{$IFNDEF MSDOS}
-  FileModeReadWrite := FileMode;
-{$ENDIF}
 
   {$I-}reset(playerfile);{$I+}
 
@@ -749,9 +720,6 @@ begin
 
  {reset filemode}
  filemode:=memmy;
-{$IFNDEF MSDOS}
- FileModeReadWrite := FileMode;
-{$ENDIF}
 end; {load_player *end*}
 
 Procedure Load_Guard;
@@ -773,9 +741,6 @@ begin
    Fload: FileMode:=fmReadOnly+fmDenyNone;
    Fsave: FileMode:=fmReadWrite+fmDenyAll;
   end;
-{$IFNDEF MSDOS}
-  FileModeReadWrite := FileMode;
-{$ENDIF}
 
   {$I-}reset(guardfile);{$I+}
 
@@ -806,9 +771,6 @@ begin
 
  {reset filemode}
  filemode:=memmy;
-{$IFNDEF MSDOS}
- FileModeReadWrite := FileMode;
-{$ENDIF}
 end;
 
 Procedure Load_Moat;
@@ -830,9 +792,6 @@ begin
    Fload: FileMode:=fmReadOnly+fmDenyNone;
    Fsave: FileMode:=fmReadWrite+fmDenyAll;
   end;
-{$IFNDEF MSDOS}
-  FileModeReadWrite := FileMode;
-{$ENDIF}
 
   {$I-}reset(moatfile);{$I+}
 
@@ -863,9 +822,6 @@ begin
 
  {reset filemode}
  filemode:=memmy;
-{$IFNDEF MSDOS}
- FileModeReadWrite := FileMode;
-{$ENDIF}
 end; {load_moat .end.}
 
 Procedure Load_God; {load/save immortal}
@@ -887,9 +843,6 @@ begin
    Fload: FileMode:=fmReadOnly+fmDenyNone;
    Fsave: FileMode:=fmReadWrite+fmDenyAll;
   end;
-{$IFNDEF MSDOS}
-  FileModeReadWrite := FileMode;
-{$ENDIF}
 
   {$I-}reset(godfile);{$I+}
 
@@ -920,9 +873,6 @@ begin
 
  {reset filemode}
  filemode:=memmy;
-{$IFNDEF MSDOS}
- FileModeReadWrite := FileMode;
-{$ENDIF}
 end; {load_god .end.}
 
 Procedure Load_Child; {load/save child}
@@ -944,9 +894,6 @@ begin
    Fload: FileMode:=fmReadOnly+fmDenyNone;
    Fsave: FileMode:=fmReadWrite+fmDenyAll;
   end;
-{$IFNDEF MSDOS}
-  FileModeReadWrite := FileMode;
-{$ENDIF}
 
   {$I-}reset(childfile);{$I+}
 
@@ -977,9 +924,6 @@ begin
 
  {reset filemode}
  filemode:=memmy;
-{$IFNDEF MSDOS}
- FileModeReadWrite := FileMode;
-{$ENDIF}
 end; {load_child .end.}
 
 
@@ -1070,9 +1014,6 @@ begin
    Fload: FileMode:=fmReadOnly+fmDenyNone;
    Fsave: FileMode:=fmReadWrite+fmDenyAll;
   end;
-{$IFNDEF MSDOS}
-  FileModeReadWrite := FileMode;
-{$ENDIF}
 
   {$I-}reset(cocktailfile);{$I+}
 
@@ -1103,9 +1044,6 @@ begin
 
  {restore filemode}
  filemode:=memmy;
-{$IFNDEF MSDOS}
- FileModeReadWrite := FileMode;
-{$ENDIF}
 end; {load_drink *end*}
 
 Procedure Load_Level;
@@ -1126,9 +1064,6 @@ begin
    Fload: FileMode:=fmReadOnly+fmDenyNone;
    Fsave: FileMode:=fmReadWrite+fmDenyAll;
   end;
-{$IFNDEF MSDOS}
-  FileModeReadWrite := FileMode;
-{$ENDIF}
 
   {$I-}reset(levelfile);{$I+}
 
@@ -1156,9 +1091,6 @@ begin
  {$I-}close(levelfile);{$I+}
  if IOResult<>0 then unable_to_close(lvlfile);
  filemode:=memmy;
-{$IFNDEF MSDOS}
- FileModeReadWrite := FileMode;
-{$ENDIF}
 end;
 
 Procedure Load_Monster;
@@ -1180,9 +1112,6 @@ begin
    Fload: FileMode:=fmReadOnly+fmDenyNone;
    FSave: FileMode:=fmReadWrite+fmDenyAll;
   end;
-{$IFNDEF MSDOS}
-  FileModeReadWrite := FileMode;
-{$ENDIF}
 
   {$I-}reset(monsterfile);{$I+}
 
@@ -1213,9 +1142,6 @@ begin
 
  {reset filemode}
  filemode:=memmy;
-{$IFNDEF MSDOS}
- FileModeReadWrite := FileMode;
-{$ENDIF}
 end;
 
 Procedure Load_Weapon;
@@ -1234,9 +1160,6 @@ begin
   assign(weapfile,weapofile);
 
   FileMode:=fmReadOnly+fmDenyNone;
-{$IFNDEF MSDOS}
-  FileModeReadWrite := FileMode;
-{$ENDIF}
 
   {$I-}reset(weapfile);{$I+}
 
@@ -1258,9 +1181,6 @@ begin
 
  {reset filemode}
  filemode:=memmy;
-{$IFNDEF MSDOS}
- FileModeReadWrite := FileMode;
-{$ENDIF}
 end;
 
 Procedure Load_Armor;
@@ -1278,9 +1198,6 @@ begin
   ok:=true;
   assign(armfile,armofile);
   FileMode:=fmReadOnly+fmDenyNone;
-{$IFNDEF MSDOS}
-  FileModeReadWrite := FileMode;
-{$ENDIF}
   {$I-}reset(armfile);{$I+}
 
   if IOResult<>0 then begin
@@ -1300,9 +1217,6 @@ begin
  if IOResult<>0 then unable_to_close(armofile);
 
  filemode:=memmy;
-{$IFNDEF MSDOS}
- FileModeReadWrite := FileMode;
-{$ENDIF}
 end;
 
 Procedure Rewrite_Datfiles( force : boolean );
@@ -1456,19 +1370,9 @@ var
     txt : text;
     memmy : integer;
     lockmde:byte;
-{$IFNDEF MSDOS}
-    memmy_r : integer;
-    memmy_rw : integer;
-    lockmde_r : byte;
-    lockmde_rw : byte;
-{$ENDIF}
 Begin
 
  memmy:=filemode;
-{$IFNDEF MSDOS}
- memmy_r := TextModeRead;
- memmy_rw := TextModeReadWrite;
-{$ENDIF}
 
  if f_exists(fname)=false then begin
   assign(txt,fname);
@@ -1477,10 +1381,6 @@ Begin
  end;
 
  lockmde:=filemode;
-{$IFNDEF MSDOS}
- lockmde_r := TextModeRead;
- lockmde_rw := TextModeReadWrite;
-{$ENDIF}
 
  i:=0;
  tries:=50;
@@ -1495,12 +1395,7 @@ Begin
  }
 
  repeat
-{$IFDEF MSDOS}
-  AssignText(text(f),Fname);  (* From TxtShare unit *)
-{$ENDIF}
-{$IFNDEF MSDOS}
   Assign(text(f),FName);
-{$ENDIF}
 
   case action of
    Treset  : FileMode:=fmReadOnly+fmDenyNone;
@@ -1508,10 +1403,6 @@ Begin
    TDelete : FileMode:=fmWriteOnly+fmDenyAll;
    TRewrite: FileMode:=fmWriteOnly+fmDenyAll;
   end;
-{$IFNDEF MSDOS}
-  TextModeRead := FileMode;
-  TextModeReadWrite := FileMode;
-{$ENDIF}
 
   {$I-}Reset(text(f));{$I+}
   IORes:=IoResult;
@@ -1534,10 +1425,6 @@ Begin
  Until (IORes=0) OR (i>=tries);
 
  FileMode:=lockmde;    (* Set FileMode to default *)
-{$IFNDEF MSDOS}
- TextModeRead := lockmde_r;
- TextModeReadWrite := lockmde_rw;
-{$ENDIF}
 
  if IORes=0 then begin
   case action of
@@ -1565,10 +1452,6 @@ Begin
 
  {Reset filemode}
  filemode:=memmy;
-{$IFNDEF MSDOS}
- TextModeRead := memmy_r;
- TextModeReadWrite := memmy_rw;
-{$ENDIF}
 
  if IOREs<>0 then Open_TxtFile:=false
              else open_txtfile:=true;
@@ -1579,45 +1462,25 @@ Procedure Close_Text(var f:text);
 begin
 
  {$I-}close(f);{$I+}
-{$IFDEF MSDOS}
- if IOResult<>0 then unable_to_close(textrec(f).name);
-{$ENDIF}
-{$IFNDEF MSDOS}
  if IOResult<>0 then unable_to_close(StrPas(textrec(f).name));
-{$ENDIF}
 end;
 
 Procedure Readln_from_Text(var f:text;var s:string);
 begin
  {$I-}readln(f,s);{$I+}
-{$IFDEF MSDOS}
- if IOResult<>0 then unable_to_read(textrec(f).name);
-{$ENDIF}
-{$IFNDEF MSDOS}
  if IOResult<>0 then unable_to_read(StrPas(textrec(f).name));
-{$ENDIF}
 end;
 
 Procedure Write_To_Text(var f:text;const s:string);
 begin
  {$I-}write(f,s);{$I+}
-{$IFDEF MSDOS}
- if IOResult<>0 then unable_to_write(textrec(f).name);
-{$ENDIF}
-{$IFNDEF MSDOS}
  if IOResult<>0 then unable_to_write(StrPas(textrec(f).name));
-{$ENDIF}
 end;
 
 Procedure Writeln_To_Text(var f:text;const s:string);
 begin
  {$I-}writeln(f,s);{$I+}
-{$IFDEF MSDOS}
- if IOResult<>0 then unable_to_write(textrec(f).name);
-{$ENDIF}
-{$IFNDEF MSDOS}
  if IOResult<>0 then unable_to_write(StrPas(textrec(f).name));
-{$ENDIF}
 end;
 
 end. {Unit File_Io .end.}

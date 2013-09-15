@@ -357,7 +357,7 @@ function PerformUpgradeTo023c: Boolean;
 var
   Buf: Array[1..121] of Byte;
   InFile, OutFile: File;
-  NumRead, NumWritten: SmallWord;
+  NumRead, NumWritten: Word;
   OldMonsterDat, TempMonsterDat: String;
   Result: Boolean;
   StrengthLongInt: LongInt;
@@ -400,7 +400,7 @@ var
   Defense: SmallInt;
   Hps: LongInt;
   InFile, OutFile: File;
-  NumRead, NumWritten: SmallWord;
+  NumRead, NumWritten: Word;
   OldMonsterDat, TempMonsterDat: String;
   Result: Boolean;
   Strength: LongInt;

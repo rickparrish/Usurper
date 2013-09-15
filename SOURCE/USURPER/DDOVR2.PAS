@@ -13,7 +13,7 @@ procedure Loadconfig(
  var user_first_name,user_last_name: string;
  var user_access_level: word;
  var bbs_time_left: integer;
- var com_port: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}integer{$ENDIF};
+ var com_port: Integer;
  var baud_rate: longint;
  var node_num: integer; {jakob; originally BYTE in DDplus version}
  var local: boolean;
@@ -47,11 +47,11 @@ const
 implementation
 
 const
-{$IFNDEF LINUX}
- DIRECTORY_SEPARATOR = '\';
-{$ENDIF}
-{$IFDEF LINUX}
+{$IFDEF UNIX}
  DIRECTORY_SEPARATOR = '/';
+{$ENDIF}
+{$IFNDEF UNIX}
+ DIRECTORY_SEPARATOR = '\';
 {$ENDIF}
 
 type
@@ -61,14 +61,9 @@ var
  ctlnm:string[2];
 
 Procedure CallProc;
-{$IFDEF MSDOS}
-inline($FF/$1E/DDUserConfigPtr);
-{$ENDIF}
-{$IFNDEF MSDOS}
 begin
-  // REENOTE Doesn't look like DDUserConfigPtr is ever assigned to, so it never needs to be called
+  // REETODO Doesn't look like DDUserConfigPtr is ever assigned to, so it never needs to be called
 end;
-{$ENDIF}
 
 procedure Loadconfig(
  fn: string;
@@ -76,7 +71,7 @@ procedure Loadconfig(
  var user_first_name,user_last_name: string;
  var user_access_level: word;
  var bbs_time_left: integer;
- var com_port: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}integer{$ENDIF};
+ var com_port: Integer;
  var baud_rate: longint;
  var node_num: integer;
  var local: boolean;
@@ -193,7 +188,7 @@ begin;
  ctlnm:='';
  for a:=1 to paramcount do begin;
   s:=paramstr(a);
-{$IFNDEF LINUX}
+{$IFNDEF UNIX}
   for b:=1 to length(s) do s[b]:=upcase(s[b]);
 {$ENDIF}
   if (s[1]='/') and (length(s)>1) then begin;
@@ -261,9 +256,6 @@ begin;
  selectctl;
  ofm:=filemode;
  filemode:=66;
-{$IFNDEF MSDOS}
- FileModeReadWrite := FileMode;
-{$ENDIF}
  assign(f,fn);
 
  {$i-}reset(f);{$I+}
@@ -344,16 +336,13 @@ begin;
  end;
  close(f);
  filemode:=ofm;
-{$IFNDEF MSDOS}
- FileModeReadWrite := FileMode;
-{$ENDIF}
 
-{$IFNDEF MSDOS}
- { ensure win32 doors run with fossil io (where we put the socket code) }
- bbs_software:=15;
+{$IFNDEF GO32V2}
+  { ensure win32 doors run with fossil io (where we put the socket code) }
+  bbs_software:=15;
+{$ENDIF}
  fossilio := true;
  noFossInit:=false;
-{$ENDIF}
 
  case iomode of
   remote: ;

@@ -68,7 +68,7 @@ procedure settings_header(const head : string);
 
 Implementation
 
-Uses CMS, Jakob, {$IFDEF MSDOS}InitOver,{$ENDIF} Various,
+Uses CMS, Jakob, Various,
      Various2, PlvsPlc, PlComp,
      Mail, News, SortTeam,
      Relation, Online;
@@ -3183,18 +3183,6 @@ begin
  sd(config.textcolor,'Delay between File/Record-Locking attempts is '
    +setcol+commastr(Config.LockDelay)+config.textcol1+' milliseconds.');
  d(2,config_nr(140));
-
-{$IFDEF MSDOS}
- {EMS/XMS}
- if over_ems then d(setcol2,'EMS'+config.textcol1+' memory utilized for speed.');
- if over_xms then d(setcol2,'XMS'+config.textcol1+' memory utilized for speed.');
-{$ENDIF}
-
- {memory availible}
-{$IFNDEF FPC}
- d(config.textcolor,'Free Memory Available in the Heap: '+setcol+commastr(memavail));
- crlf;
-{$ENDIF}
 end; {system_tech .end.}
 
 Procedure Display_Game_Settings; {display game settings - view/edit mode}

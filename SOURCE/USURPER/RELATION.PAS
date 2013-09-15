@@ -522,7 +522,7 @@ begin {Setup_Relation **start**}
 
 end;
 
-Procedure Decrease_Relation(var relation:SmallWord);
+Procedure Decrease_Relation(var relation:Word);
 begin
 
  {decrease relation (RELATION) one step}
@@ -545,7 +545,7 @@ begin
 
 end;
 
-Procedure Increase_Relation(var relation:SmallWord;overridemaxfeeling:boolean);
+Procedure Increase_Relation(var relation:Word;overridemaxfeeling:boolean);
 begin
 
  {increase relation (RELATION) one step}

@@ -26,7 +26,7 @@ var
  com1,com2,com3,com4 : byte;        { temporary non-std comports             }
  port1,port2,port3,port4:word;
  irq1,irq2,irq3,irq4 : byte;
- com_port: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}integer{$ENDIF}; {from DROP FILE: com port}
+ com_port: Integer; {from DROP FILE: com port}
  fossilIO,DigiIO: boolean;          {from .CTL file: fossil, digiboard i/o   }
  mintime: byte;                     {Minimum time left before user kicked off}
  notime: string;                    {Out of time filename                    }
@@ -130,26 +130,20 @@ procedure InitDoorDriver(ConfigFileName: string);
 function Time_used: integer;
 
 Implementation
-{$IFDEF MSDOS}
-{$L DVAWARE.OBJ}
-{$ENDIF}
 
 Uses Init, Cms, InitGods,
      Jakob, Mail, News,
      Online, File_io; {jakob! You have also changed in DDOVR2.PAS}
 
-Procedure DV_Aware_On;       {$IFDEF MSDOS}External;{$ENDIF}
-{$IFNDEF MSDOS}
+Procedure DV_Aware_On;
 begin
-  // REENOTE Presumably unimportant since we're not running DesqView
+  // REETODO Presumably unimportant since we're not running DesqView
 end;
-{$ENDIF}
-Procedure DV_Pause;          {$IFDEF MSDOS}External;{$ENDIF}
-{$IFNDEF MSDOS}
+
+Procedure DV_Pause; 
 begin
-  // REENOTE Presumably unimportant since we're not running DesqView
+  // REETODO Presumably unimportant since we're not running DesqView
 end;
-{$ENDIF}
 
 var
  buffered: boolean;
@@ -157,41 +151,16 @@ var
  tcolor,bcolor: integer;
  firsttime: boolean;
 
-{$IFDEF MSDOS}
-procedure Dos_Sleep;
-var
- Regs : Registers;
-begin
- with Regs do
-   Intr($28,Regs);
-end;
-{$ENDIF}
-{$IFNDEF MSDOS}
 procedure Dos_Sleep;
 begin
   Delay(1); // REETODO Does this timeslice?
 end;
-{$ENDIF}
 { This releases the virtual machine time slice for MSwindows, Dos 5.0, OS/2 }
 
-{$IFDEF MSDOS}
-procedure Win_Pause;
-var
- Regs : Registers;
-begin
- with Regs do
- begin
-   Ax := $1680;
-   Intr($2F,Regs);
- end;
-end;
-{$ENDIF}
-{$IFNDEF MSDOS}
 procedure Win_Pause;
 begin
   Delay(1); // REETODO Does this timeslice
 end;
-{$ENDIF}
 
 Procedure ReleaseTimeSlice;
 begin
@@ -451,7 +420,6 @@ var
  el_mn, el_hr, el_sc: longint; {jakob:longint}
  alias : string[30];
 begin;
-{$IFNDEF LINUX}
  x:=wherex;
  y:=wherey;
  cursoroff;
@@ -484,7 +452,6 @@ begin;
      firsttime:=false;
      save_sc:=999;
    end;
-{$ENDIF}
  gettime(hour,minute,second,sec100);
  elapsed(hour,minute,second,st_hr,st_mn,st_sc,el_hr,el_mn,el_sc);
  c:=(bbs_time_left-1)+time_credit;
@@ -496,7 +463,6 @@ begin;
      tdropped:=true;
      halt;
    end;
-{$IFNDEF LINUX}
  c:=c-((el_hr*60)+el_mn);
  d:=60-el_sc;
  if d<>save_sc then
@@ -515,7 +481,6 @@ begin;
  window(1,1,80,numlines-1);
  gotoxy(x,y);
  If Not NoLocal then cursoron;
-{$ENDIF}
 end;
 
 procedure Selectansi;
@@ -529,9 +494,6 @@ var
 begin
   ofm:=filemode;
   filemode:=66;
-{$IFNDEF MSDOS}
-  FileModeReadWrite := FileMode;
-{$ENDIF}
   ansisave:=ansion;
   ansion:=true;
   quit:=false;
@@ -558,23 +520,14 @@ begin
 
  {$I-}
  filemode:=66;
-{$IFNDEF MSDOS}
- FileModeReadWrite := FileMode;
-{$ENDIF}
  reset(f);
  filemode:=66;
-{$IFNDEF MSDOS}
- FileModeReadWrite := FileMode;
-{$ENDIF}
  {$I+}
  if ioresult<>0 then
    begin
      swriteln('File '+filenm+' missing');
      ansion:=ansisave;
      filemode:=ofm;
-{$IFNDEF MSDOS}
-     FileModeReadWrite := FileMode;
-{$ENDIF}
      exit;
    end;
 
@@ -610,9 +563,6 @@ begin
    ansion:=ansisave;
    set_foreground(default_fore);
    filemode:=ofm;
-{$IFNDEF MSDOS}
-   FileModeReadWrite := FileMode;
-{$ENDIF}
 end;
 
 procedure displayfile1; {jakobs special! ta bort originalet!}
@@ -870,14 +820,9 @@ end;
  { Customize this for each game }
 
 Procedure CallProc;
-{$IFDEF MSDOS}
-inline($FF/$1E/Proc_Call_Ptr);
-{$ENDIF}
-{$IFNDEF MSDOS}
 begin
-  // REENOTE Doesn't look like Proc_Call_Ptr is ever assigned to, so it never needs to be called
+  // REETODO Doesn't look like Proc_Call_Ptr is ever assigned to, so it never needs to be called
 end;
-{$ENDIF}
 
 Procedure DefineFKeys(var a:char;fkeyon:byte);
 begin
@@ -1907,7 +1852,6 @@ begin;
  exitproc:=@DDexit;
  firsttime:=true;
 
- LoadPorts(port1,port2,port3,port4,irq1,irq2,irq3,irq4);
  Loadconfig( ConfigFileName,
              bbs_software,
              user_first_name,user_last_name,
@@ -1970,13 +1914,9 @@ begin;
              dropfilepath,
              lockbaud);
 
- ReSetPorts(port1,port2,port3,port4,irq1,irq2,irq3,irq4);
-
- if not local then
+  if not local then
    begin;
-    if FossilIO then AsyncSelectFossil(fossilstr) else
-     if DigiIO then AsyncSelectDigiBoard(fossilstr) else
-      AsyncSelectInternal;
+    AsyncSelectFossil(fossilstr);
     Open_Async_Port;
    end;
 

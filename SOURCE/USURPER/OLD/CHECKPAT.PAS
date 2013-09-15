@@ -68,14 +68,14 @@ function checkpath (var name; inflags: integer; var drive; var dir;
                     var fname; var ext; var fullpath) : integer; {$IFNDEF FPC}external;{$ENDIF}
 {$IFDEF FPC}
 begin
-  WriteLn('REETODO checkpat checkpath'); Halt;
+  WriteLn('REEPORT checkpat checkpath'); Halt;
 end;
 {$ENDIF}
 
 function exists (var fname): boolean; {$IFNDEF FPC}external;{$ENDIF}
 {$IFDEF FPC}
 begin
-  WriteLn('REETODO checkpat exists'); Halt;
+  WriteLn('REEPORT checkpat exists'); Halt;
 end;
 {$ENDIF}
 

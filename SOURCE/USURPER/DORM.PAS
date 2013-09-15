@@ -39,15 +39,15 @@ type
     FistBoyRec = record  {Offline characters when fighting trouble-maker}
      name      : string[30]; {name}
      filnr     : byte; {1=player file, 2=npc file}
-     recnr     : SmallWord; {record # in file}
+     recnr     : Word; {record # in file}
      ai        : char; {'H'uman or 'C'omputer}
      sex       : byte; {1=male,2=female}
-     level     : SmallWord; {character level}
+     level     : Word; {character level}
      stamina   : SmallInt; {stamina}
      strength  : SmallInt; {strength}
      myexp     : longint; {experience earned during fight}
      myfate    : string[100]; {knocked out by whom? empty string means that he survived}
-     me_nailed : SmallWord; {i was nailed in this round}
+     me_nailed : Word; {i was nailed in this round}
      skill     : array[1..global_maxcombat] of SmallInt; {close-combat skills}
     end;
 

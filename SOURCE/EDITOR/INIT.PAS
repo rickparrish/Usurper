@@ -46,11 +46,11 @@ const
  onlyin  = 'Only Available In Registered Version!';
 
  {Directories}
-{$IFNDEF LINUX}
- DIRECTORY_SEPARATOR = '\';
-{$ENDIF}
-{$IFDEF LINUX}
+{$IFDEF UNIX}
  DIRECTORY_SEPARATOR = '/';
+{$ENDIF}
+{$IFNDEF UNIX}
+ DIRECTORY_SEPARATOR = '\';
 {$ENDIF}
  global_datadir ='DATA' + DIRECTORY_SEPARATOR;   {Path to DATA directory}
  global_docsdir ='DOCS' + DIRECTORY_SEPARATOR;   {Path to DOCS directory}
@@ -60,12 +60,7 @@ const
  {file with all online help-texts. raw-file : edhelp.txt.
  to compile raw helpfile, type: tvhc edhelp editor edhelp
   or better: run makehelp.bat file}
-{$IFDEF MSDOS}
- global_edhelp = 'EDITOR.HLP';
-{$ENDIF}
-{$IFNDEF MSDOS}
  global_edhelp = 'EDITOR32.HLP';
-{$ENDIF}
 
  {Files in the Usurper directory}
  ucfg = 'USURPER.CFG';
@@ -170,20 +165,6 @@ const
                      Should head items be used... and so on...}
 var
  allowitem : array[1..maxallows] of boolean;
-
-{$IFDEF MSDOS}
-type
-  SmallInt  = System.Integer;
-  SmallWord = System.Word;
-{$ENDIF}
-{$IFDEF FPC}
-type
-  SmallWord = System.Word;
-var
-  FileModeReadWrite: Integer;
-  TextModeRead: Integer;
-  TextModeReadWrite: Integer;
-{$ENDIF}
 
 type ItemHandler = (Item_Add,Item_Remove); {useb by itemhandler in ADDIT.pas}
 
@@ -309,15 +290,15 @@ type {god}
   name : s30;      {alias}
   id   : s15;      {unique ID tag, this id follows the player from the
                     user file!}
-  recnr: SmallWord;      {rec # in file}
-  age  : SmallWord;      {age}
+  recnr: Word;      {rec # in file}
+  age  : Word;      {age}
   sex  : byte;      {sex, 1=male, 2=female}
   ai   : char;      {ai: 'H'uman or 'C'omputer }
-  level: SmallWord;      {level}
+  level: Word;      {level}
   exp  : longint;   {experience, power}
-  deedsleft : SmallWord; {deedsleft today, new ones given at maintenance}
+  deedsleft : Word; {deedsleft today, new ones given at maintenance}
   deleted  : boolean; {deleted}
-  believers: SmallWord;    {believers, disciples, # of players who worship this god}
+  believers: Word;    {believers, disciples, # of players who worship this god}
   darkness : longint; {good points, follows from the player time}
   goodness : longint; {dark points, follows from the player time}
  end; {godrec *end*}
@@ -326,10 +307,10 @@ type {god}
                     couples. remember that a divorce will split the kids}
   name    : s30;  {name}
   sex     : byte; {sex, 1=male, 2=female}
-  age     : SmallWord; {age}
+  age     : Word; {age}
   birth   : udate; {date of birth}
-  recnr   : SmallWord; {record #, position in file}
-  ageplus : SmallWord; {how soon before getting one year older}
+  recnr   : Word; {record #, position in file}
+  ageplus : Word; {how soon before getting one year older}
   bastard: boolean; {set to true if product of secret lay or whore intercourse}
   named  : boolean; {has kid been named yet? if not it's not accessible in lists etc}
   deleted: boolean; {is this record deleted}
@@ -405,7 +386,7 @@ type {Player & Npc structures}
   loc : SmallInt;
   team  : string[25];
   teampw : string[20];
-  teamrec : SmallWord;
+  teamrec : Word;
   bguard : SmallInt;
   cturf : boolean;
   gnollp : SmallInt;
@@ -456,22 +437,22 @@ type {Player & Npc structures}
   spell       : array[1..maxspells,1..2] of boolean;
   skill       : array[1..maxcombskills] of SmallInt;
   trains      : SmallInt;
-  lhand       : SmallWord;
-  rhand       : SmallWord;
-  head        : SmallWord;
-  body        : SmallWord;
-  arms        : SmallWord;
-  lfinger     : SmallWord;
-  rfinger     : SmallWord;
-  legs        : SmallWord;
-  feet        : SmallWord;
-  waist       : SmallWord;
-  neck        : SmallWord;
-  neck2       : SmallWord;
-  face        : SmallWord;
-  shield      : SmallWord;
-  hands       : SmallWord;
-  abody       : SmallWord;
+  lhand       : Word;
+  rhand       : Word;
+  head        : Word;
+  body        : Word;
+  arms        : Word;
+  lfinger     : Word;
+  rfinger     : Word;
+  legs        : Word;
+  feet        : Word;
+  waist       : Word;
+  neck        : Word;
+  neck2       : Word;
+  face        : Word;
+  shield      : Word;
+  hands       : Word;
+  abody       : Word;
   immortal    : boolean; {dialog?}
   battlecry   : string[70];
   bguardnr    : SmallInt; {antal doorguards, typ specificeras i bguard}
@@ -489,10 +470,10 @@ type {Player & Npc structures}
   maxtime     : SmallInt;
   ear         : byte;
   castin      : char;
-  weapon      : SmallWord; {OLD mode}
-  armor       : SmallWord; {OLD mode}
-  apow        : SmallWord; {OLD mode}
-  wpow        : SmallWord; {OLD mode}
+  weapon      : Word; {OLD mode}
+  armor       : Word; {OLD mode}
+  apow        : Word; {OLD mode}
+  wpow        : Word; {OLD mode}
   disres      : byte;
   amember     : boolean;
   medal       : array[1..20] of boolean;
@@ -500,7 +481,7 @@ type {Player & Npc structures}
   bankwage    : longint;
   weaphag     : byte; {ggr en spelare har hagglat i weaponshop}
   armhag      : byte; {ggr en spelare har hagglat i armorshop}
-  recnr       : SmallWord;
+  recnr       : Word;
   auto_meny   : boolean;
   {new for 0.14}
   quests      : SmallInt; {# of comleted quests/missions}
@@ -520,13 +501,13 @@ type {Player & Npc structures}
   Gym_Sessions  : byte; {gym sessions(workout) left today}
   Gym_Owner     : byte; {controller of the gym? has to be in a team}
   Gym_Card      : byte; {free card to the gym? if not gym_owner that is}
-  RoyQuestsToday: SmallWord;{how many royal quests have the player completed today}
+  RoyQuestsToday: Word;{how many royal quests have the player completed today}
   KingVotePoll: byte; {how many days since voted for king popularity}
   KingLastVote: byte; {last vote, to be used for polls}
 
   Married     : boolean; {is player married? only used in score list creation}
-  Kids        : SmallWord; {how many kids this playeer is father/mother to}
-  IntimacyActs: SmallWord; {how many acts of intimacy has player left today?}
+  Kids        : Word; {how many kids this playeer is father/mother to}
+  IntimacyActs: Word; {how many acts of intimacy has player left today?}
   Pregnancy   : byte; {is player pregnant? 0=no, 1...X = days pregnant}
   FatherID    : s15;  {fathers id tag, set when pregnancy starts}
 
@@ -537,17 +518,17 @@ type {Player & Npc structures}
                       name as a deceased father will inherit a the old guys
                       children. relations.id correspond to playe.id}
   Tax_Relief : boolean; {free from tax?}
-  MarriedTimes : SmallWord; {counter for marriages}
-  Bard_Songs_Left: SmallWord; {ehhh..quite self-explanatory huh?}
+  MarriedTimes : Word; {counter for marriages}
+  Bard_Songs_Left: Word; {ehhh..quite self-explanatory huh?}
   prison_escapes : byte; {allowed prison escape attempts}
   Filtyp : byte; {type of file player resides in (1=player file, 2=npc file)}
-  Resurrections: SmallWord; {# of resurrections left today}
+  Resurrections: Word; {# of resurrections left today}
 
   {below is new for 0.20}
-  PickPocketAttempts : SmallWord; {allowed pick pocket attempts}
+  PickPocketAttempts : Word; {allowed pick pocket attempts}
 
   {below is new for 0.20e}
-  BankRobberyAttempts : SmallWord; {bank robbery attempts / day}
+  BankRobberyAttempts : Word; {bank robbery attempts / day}
 
 
 end;
@@ -672,7 +653,7 @@ var
   cfgchang : boolean; {global setting that keeps track if .cfg has changed}
 
 {Transfer Types, used when editor dialogs are converted to RECORD types}
-{REENOTE These should not use SmallWord or SmallInt, or VP's TV clone will break
+{REENOTE These should not use Word or SmallInt, or VP's TV clone will break
          They're only used in memory, so no binary compatibility problems}
 type
  EditRec2 = Record     {RECORD used in PLAYER/NPC DIALOG}
@@ -1840,12 +1821,8 @@ var
   R: TRect;
 begin
 
-{$IFNDEF FPC}
-  NewMode := ScreenMode xor smFont8x8;
-{$ENDIF}
-{$IFDEF FPC}
+  //REETODO NewMode := ScreenMode xor smFont8x8;
   WriteLn('REETODO Init ToggleVideoMode'); Halt;
-{$ENDIF}
   if NewMode and smFont8x8 <> 0 then ShadowSize.X := 1
                                 else ShadowSize.X := 2;
   SetScreenMode(NewMode);

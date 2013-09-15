@@ -50,7 +50,7 @@ implementation
 
 uses
   VideoUtils;
-  
+
 var
   SavedScreen: TScreenBuffer;
 
@@ -219,144 +219,45 @@ begin;
  namestr:=s;
 end;
 
-{$IFDEF MSDOS}
-procedure setmode(modenumber: byte);
-var
- regs: registers;
-begin;
- regs.ah:=0;
- regs.al:=modenumber;
- intr($10,regs);
-end;
-{$ENDIF}
-{$IFNDEF MSDOS}
 procedure setmode(modenumber: byte);
 begin
   WriteLn('REEPORT DDSCOTT setmode');
 end;
-{$ENDIF}
 
-{$IFDEF MSDOS}
-procedure set25lines;
-var
- regs: registers;
-begin;
- regs.ax:=$1111;
- regs.bx:=0;
- intr($10,regs);
- mem[$40:$87]:=mem[$40:$87] or $01;
- regs.ax:=$100;
- regs.bx:=0;
- regs.cx:=$0C00;
- intr($10,regs);
-end;
-{$ENDIF}
-{$IFNDEF MSDOS}
 procedure set25lines;
 begin
   WriteLn('REEPORT DDSCOTT set25lines');
 end;
-{$ENDIF}
 
-{$IFDEF MSDOS}
-function isega: boolean;
-var
- regs: registers;
-begin;
- regs.ah:=$12;
- regs.bx:=$10;
- intr($10,regs);
- if regs.bx=$10 then isega:=false else isega:=true;
-end;
-{$ENDIF}
-{$IFNDEF MSDOS}
 function isega: boolean;
 begin
   WriteLn('REEPORT DDSCOTT isega');
 end;
-{$ENDIF}
 
-{$IFDEF MSDOS}
-function QueryAdapterType: Adaptertype;
-var
- regs: registers;
- code: byte;
-begin;
- if isega then begin;
-  regs.ah:=$12;
-  regs.bx:=$10;
-  intr($10,regs);
-  if (regs.bh=0) then queryadaptertype:=egacolor else queryadaptertype:=egamono;
- end else begin;
-  intr($11,regs);
-  code:=(regs.al and $30) shr 4;
-  case code of
-   1: queryadaptertype:=cga;
-   2: queryadaptertype:=cga;
-   3: queryadaptertype:=mda;
-  else queryadaptertype:=cga;
-  end;
- end;
-end;
-{$ENDIF}
-{$IFNDEF MSDOS}
 function QueryAdapterType: Adaptertype;
 begin
   WriteLn('REEPORT DDSCOTT QueryAdapterType');
 end;
-{$ENDIF}
 
 procedure cursoroff;
 begin
   CursorHide;
 end;
 
-{$IFDEF MSDOS}
-function determinepoints: integer;
-var
- regs: registers;
-begin;
- case queryadaptertype of
-  cga: determinepoints:=8;
-  mda: determinepoints:=14;
-  egamono, egacolor: begin;
-                      regs.ax:=$1130;
-                      regs.bx:=0;
-                      intr($10,regs);
-                      determinepoints:=regs.cx;
-                     end;
- end;
-end;
-{$ENDIF}
-{$IFNDEF MSDOS}
 function determinepoints: integer;
 begin
   WriteLn('REEPORT DDSCOTT determinepoints');
 end;
-{$ENDIF}
 
 procedure cursoron;
 begin
   CursorShow;
 end;
 
-{$IFDEF MSDOS}
-procedure cursorblock;
-var
- regs: registers;
-begin;
- regs.ax:=$0100;
- regs.ch:=1;
- regs.cl:=determinepoints-1;
- intr($10,regs);
-end;
-{$ENDIF}
-{$IFNDEF MSDOS}
 procedure cursorblock;
 begin
   WriteLn('REEPORT DDSCOTT cursorblock');
 end;
-{$ENDIF}
 
 function screenaddress: word;
 begin;
@@ -368,45 +269,18 @@ begin;
  end;
 end;
 
-{$IFDEF MSDOS}
-procedure savescreen;
-var
- sc1: byte absolute $b000:0;
- sc2: byte absolute $b800:0;
-begin;
- if screenaddress=$b000 then move(sc1,screen^,4000);
- if screenaddress=$b800 then move(sc2,screen^,4000);
- x:=wherex;
- y:=wherey;
-end;
-{$ENDIF}
-{$IFNDEF MSDOS}
 procedure savescreen;
 begin
   VideoUtils.SaveScreen(SavedScreen);
   x:=wherex;
   y:=wherey;
 end;
-{$ENDIF}
 
-{$IFDEF MSDOS}
-procedure restorescreen;
-var
- sc1: byte absolute $b800:0;
- sc2: byte absolute $b000:0;
-begin;
- if screenaddress=$b000 then move(screen^, sc2,4000);
- if screenaddress=$b800 then move(screen^, sc1,4000);
- gotoxy(x,y);
-end;
-{$ENDIF}
-{$IFNDEF MSDOS}
 procedure restorescreen;
 begin
   VideoUtils.RestoreScreen(SavedScreen);
   gotoxy(x,y);
 end;
-{$ENDIF}
 
 function date: datetype;
 var
@@ -454,110 +328,28 @@ begin;
  n:=(a and n);
 end;
 
-{$IFDEF MSDOS}
-function TrueDosVer (var WinNtOK :boolean): Word;
-var
- Regs: Registers;
-Begin
-  with Regs do
-  begin
-    Ax := $3306;
-    MsDos(Regs);
-    If Bx = $3205 then
-      WinNtOK := true
-    else
-      WinNtOK := false;
-    TrueDosVer := Bl;
-  end;
-end;
-{$ENDIF}
-{$IFNDEF MSDOS}
 function TrueDosVer (var WinNtOK :boolean): Word;
 begin
   WinNtOK := True;
   TrueDosVer := 5;
 end;
-{$ENDIF}
 
-{$IFDEF MSDOS}
-function DosVer(var Minor,OS2Ver : Word) : Word;
-var
- Regs: Registers;
-Begin
-  OS2Ver := 0;
-  with Regs do
-  begin
-    Ax := $3000;
-    MsDos(Regs);
-    DosVer := Al;
-    Minor  := Ah;
-    If Al = $0A then
-      OS2Ver := 1
-    else
-    If Al = $14 then
-      OS2Ver := 2;
-  end;
-end;
-{$ENDIF}
-{$IFNDEF MSDOS}
 function DosVer(var Minor,OS2Ver : Word) : Word;
 begin
   Minor := 0;
   OS2Ver := 0;
   DosVer := 5;
 end;
-{$ENDIF}
 
-{$IFDEF MSDOS}
-Function Win3_Check_On: boolean;
-const
-  Multplx_intr = $2F;
-var
-  Regs : registers;
-begin
-  With Regs do
-  begin
-    AX := $1600;
-    Intr(Multplx_intr,regs);                { $00 no Win 2.x or 3.x      }
-    if AL in [$00,$01,$80,$FF] then         { $01 Win/386 2.x running    }
-      Win3_Check_On := false                { $80 obsolete XMS installed }
-    else                                    { $FF Win/386 2.x running    }
-      Win3_Check_On := true;
-   end;
-end;
-{$ENDIF}
-{$IFNDEF MSDOS}
 Function Win3_Check_On: boolean;
 begin
   Win3_Check_On := false;
 end;
-{$ENDIF}
 
-{$IFDEF MSDOS}
-Function DV_Check_On : boolean;
-var
-  Regs : registers;
-begin
-  DV_Check_On := false;
-  With Regs do
-  begin
-    Ax := $2B01;
-    Cx := $4445;
-    Dx := $5351;
-    Intr($21,Regs);
-  end;
-  If (Regs.AL = $FF) then
-     DV_Check_On := false
-  else
-     DV_Check_On := true;
-end;
-{$ENDIF}
-{$IFNDEF MSDOS}
 Function DV_Check_On : boolean;
 begin
   DV_Check_On := false;
 end;
-{$ENDIF}
 
 Procedure FindTaskerType;  { Find what tasker if any is being used      }
 var

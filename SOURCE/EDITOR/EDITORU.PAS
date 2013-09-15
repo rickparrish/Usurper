@@ -29,7 +29,7 @@ Unit EditorU; {Usurper - DoorGame Editor}
                  Procedure ResDialog.HandleEvent(var Event:TEvent);}
 interface
 
-Uses {$IFDEF MSDOS}Overlay,{$ENDIF} Init, CfgVal,
+Uses Init, CfgVal,
      JakobE, muffi2, extra,
      file_io, Upgrade;
 
@@ -50,15 +50,6 @@ Begin
   UpgradeIfNecessary;
 
 filemode:=66;
-{$IFNDEF MSDOS}
-FileModeReadWrite := FileMode;
-{$ENDIF}
-{$IFDEF MSDOS}
- {Overlay}
- OvrFilemode:=64;
- OvrInit('EDITOR.OVR');
- OvrInitEMS;
-{$ENDIF}
 
  {Assign some files}
  assign(monsterfile,monfile);
@@ -159,19 +150,9 @@ FileModeReadWrite := FileMode;
  vision_is_running:=true;
 
  {Run the Editor Application}
-{$IFNDEF FPC}
- i := memavail;
- if i <> memavail then begin
-  wrl('Out of Heap space! (give me some memory!)');
- end
- else begin
-{$ENDIF}
-  MyApp.init;
-  MyApp.run;
-  MyApp.done;
-{$IFNDEF FPC}
- end;
-{$ENDIF}
+ MyApp.init;
+ MyApp.run;
+ MyApp.done;
 end;
 
 End. {End Of Program}

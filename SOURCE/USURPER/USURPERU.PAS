@@ -25,14 +25,14 @@ unit UsurperU; {Door-Game by Jakob Dangarden
 
 interface
 
-Uses {$IFDEF MSDOS}Overlay,{$ENDIF} Dos, {$IFDEF MSDOS}InitOver,{$ENDIF}
+Uses Dos,
      DDplus, Init, Jakob,
      Maint, Cms, SortPl,
      VarGods, GodWorld, UserHunc,
      Gamec, Byebyec, Mail,
      Various, Various2, Rating,
      Relation, Relatio2, Post_To,
-     Online, File_Io, {$IFDEF MSDOS}OverXms,{$ENDIF}
+     Online, File_Io,
      Various3, News, Children,
      InitGods;
 
@@ -287,17 +287,9 @@ begin {* Main Program *}
     Halt;
   end;
 
-{$IFDEF MSDOS}
- {Set Overlay FileMode}
- OvrFilemode:=64;
-{$ENDIF}
-
  {Set Share}
  if Is_Share then begin
   filemode:=66;
-{$IFNDEF MSDOS}
-  FileModeReadWrite := FileMode;
-{$ENDIF}
   global_ushare:=true;
  end
  else begin
@@ -456,11 +448,6 @@ begin {* Main Program *}
  {Setup New Exitproc}
  ExitSave:=Exitproc;
  Exitproc:=@ByeBye;
-
- {Setup New HeapHandler}
-{$IFNDEF FPC}
- HeapError:=@HeapHandler;
-{$ENDIF}
 
  {Setup Beta version indicators}
  global_ubeta:=false;  {jakob beta version}
@@ -1146,8 +1133,8 @@ exit_ordered:=true;
 		crlf;
         d(config.textcolor,'Programmers:');
         d(14,'                   Original author : Jakob Dangarden jakob@dangarden.com');
-		d(14,'            Windows/Linux/OS/2 Ports : Rick Parrish usurper@rickparrish.ca');
-		d(14,'   Post 0.20e Fixes & Improvements : Dan dan1982code@hotmail.ca');
+		    d(14,'  Ports to other operating systems : Rick Parrish usurper@rickparrish.ca');
+		    d(14,'   Post 0.20e fixes & improvements : Dan dan1982code@hotmail.ca');
         crlf;
         {d(config.textcolor,'The Usurper project comprises approximately 180,000 lines of source code.');
         crlf;}
