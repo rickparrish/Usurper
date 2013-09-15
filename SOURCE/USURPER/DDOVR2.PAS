@@ -62,7 +62,7 @@ var
 
 Procedure CallProc;
 begin
-  // REETODO Doesn't look like DDUserConfigPtr is ever assigned to, so it never needs to be called
+  WriteLn('REEPORT DDOVR2 CallProc'); Halt;
 end;
 
 procedure Loadconfig(

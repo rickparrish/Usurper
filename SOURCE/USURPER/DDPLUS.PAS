@@ -85,8 +85,6 @@ var
  proc_call_ptr: pointer;            {used internally                         }
  nodirect: boolean;
 
-Procedure DV_Aware_On;
-Procedure DV_Pause;
 Procedure Win_Pause;
 Procedure ReleaseTimeSlice;
 procedure close_async_port;
@@ -135,16 +133,6 @@ Uses Init, Cms, InitGods,
      Jakob, Mail, News,
      Online, File_io; {jakob! You have also changed in DDOVR2.PAS}
 
-Procedure DV_Aware_On;
-begin
-  // REETODO Presumably unimportant since we're not running DesqView
-end;
-
-Procedure DV_Pause; 
-begin
-  // REETODO Presumably unimportant since we're not running DesqView
-end;
-
 var
  buffered: boolean;
  exitsave: pointer;
@@ -153,19 +141,18 @@ var
 
 procedure Dos_Sleep;
 begin
-  Delay(1); // REETODO Does this timeslice?
+  Delay(1);
 end;
 { This releases the virtual machine time slice for MSwindows, Dos 5.0, OS/2 }
 
 procedure Win_Pause;
 begin
-  Delay(1); // REETODO Does this timeslice
+  Delay(1);
 end;
 
 Procedure ReleaseTimeSlice;
 begin
   Case Tasker of
-    1     : DV_Pause;
     2,4,5 : Win_Pause;
     3     : begin
              Win_Pause;
@@ -821,7 +808,7 @@ end;
 
 Procedure CallProc;
 begin
-  // REETODO Doesn't look like Proc_Call_Ptr is ever assigned to, so it never needs to be called
+  WriteLn('REEPORT DDPLUS CallProc'); Halt;
 end;
 
 Procedure DefineFKeys(var a:char;fkeyon:byte);
@@ -1945,7 +1932,6 @@ begin;
     If RipDetect then
           graphics := 5;
 
- DV_Aware_ON;
  current_foreground:=default_fore;
  current_background:=default_back;
  if graphics = 3 then

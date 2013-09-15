@@ -1822,7 +1822,7 @@ var
 begin
 
   //REETODO NewMode := ScreenMode xor smFont8x8;
-  WriteLn('REETODO Init ToggleVideoMode'); Halt;
+  WriteLn('REEPORT Init ToggleVideoMode'); Halt;
   if NewMode and smFont8x8 <> 0 then ShadowSize.X := 1
                                 else ShadowSize.X := 2;
   SetScreenMode(NewMode);

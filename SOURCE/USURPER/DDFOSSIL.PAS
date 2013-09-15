@@ -109,52 +109,52 @@ end;
 
 procedure async_set_dtr(state: boolean);
 begin
-  // REETODO Telnet can't set DTR
+  WriteLn('REEPORT DDFOSSIL async_set_dtr'); Halt;
 end;
 
 procedure async_flush_output;
 begin
-  WriteLn('REETODO ddfossil async_flush_output'); Halt;
+  WriteLn('REEPORT ddfossil async_flush_output'); Halt;
 end;
 
 procedure async_purge_output;
 begin
-  WriteLn('REETODO ddfossil async_purge_output'); Halt;
+  WriteLn('REEPORT ddfossil async_purge_output'); Halt;
 end;
 
 procedure async_purge_input;
 begin
-  WriteLn('REETODO ddfossil async_purge_input'); Halt;
+  WriteLn('REEPORT ddfossil async_purge_input'); Halt;
 end;
 
 procedure async_watchdog_on;
 begin
-  // REETODO Nothing to do here
+  WriteLn('REEPORT ddfossil async_watchdog_on'); Halt;
 end;
 
 procedure async_watchdog_off;
 begin
-  // REETODO Nothing to do here
+  WriteLn('REEPORT ddfossil async_watchdog_off'); Halt;
 end;
 
 procedure async_warm_reboot;
 begin
-  // REETODO Nothing to do here
+  WriteLn('REEPORT ddfossil async_warm_reboot'); Halt;
 end;
 
 procedure async_cold_reboot;
 begin
-  // REETODO Nothing to do here
+  WriteLn('REEPORT ddfossil async_cold_reboot'); Halt;
 end;
 
 procedure async_set_baud(n: longint);
 begin
-  // REETODO Telnet can't set baud
+  WriteLn('REEPORT ddfossil async_set_baud'); Halt;
 end;
 
 procedure async_set_baudBnu(n: longint);
 begin
-  // REETODO Telnet can't set baud
+  WriteLn('REEPORT ddfossil async_set_baudBnu'); Halt;
 end;
 
 {
@@ -178,19 +178,19 @@ david  }
 
 procedure async_set_flow(SoftTran,Hard,SoftRecv: boolean);
 begin
-  // REETODO Telnet can't set flow
+  WriteLn('REEPORT ddfossil async_set_flow'); Halt;
 end;
 
 procedure async_get_fossil_data;
 begin
-  // REETODO Telnet has no FOSSIL data to get
+  WriteLn('REEPORT ddfossil async_get_fossil_data'); Halt;
 end;
 
 procedure Async_Buffer_Status(var Insize,Infree,OutSize,Outfree: word;
                               var fossilname:string);
 var FInFree, FOutFree, FInUsed, FOutUsed: Longint;
 begin
-  WriteLn('REETODO ddfossil Async_Buffer_Status'); Halt;
+  WriteLn('REEPORT ddfossil Async_Buffer_Status'); Halt;
 end;
 
 end.
