@@ -1,5 +1,3 @@
-EXE/
+*.lpi
+*.lps
 ORIGINAL ARCHIVES/
-BPC.CFG
-BUILD*.CMD
-VPC*.CFG
