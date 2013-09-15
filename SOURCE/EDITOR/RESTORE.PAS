@@ -21,7 +21,7 @@ var
 implementation
 
 uses
-  Crt, Drivers {$IFNDEF MSDOS}, VideoUtils{$ENDIF};
+  Crt, Drivers {$IFNDEF MSDOS}, VidHelp{$ENDIF};
 
 {$IFNDEF MSDOS}
 var

@@ -48,13 +48,11 @@ procedure HexToDec(var s: string);
 
 implementation
 
-{$IFNDEF MSDOS}
 uses
-  VideoUtils;
+  VidHelp;
   
 var
   SavedScreen: TScreenBuf;
-{$ENDIF}
 
 function hex(i: byte): string;
 const
@@ -308,22 +306,10 @@ begin
 end;
 {$ENDIF}
 
-{$IFDEF MSDOS}
-procedure cursoroff;
-var
- regs: registers;
-begin;
- regs.ax:=$0100;
- regs.cx:=$2000;
- intr($10,regs);
-end;
-{$ENDIF}
-{$IFNDEF MSDOS}
 procedure cursoroff;
 begin
-  Crt.cursoroff;
+  CursorHide;
 end;
-{$ENDIF}
 
 {$IFDEF MSDOS}
 function determinepoints: integer;
@@ -349,23 +335,10 @@ begin
 end;
 {$ENDIF}
 
-{$IFDEF MSDOS}
-procedure cursoron;
-var
- regs: registers;
-begin;
- regs.ax:=$0100;
- regs.ch:=determinepoints-2;
- regs.cl:=determinepoints-1;
- intr($10,regs);
-end;
-{$ENDIF}
-{$IFNDEF MSDOS}
 procedure cursoron;
 begin
-  Crt.cursoron;
+  CursorShow;
 end;
-{$ENDIF}
 
 {$IFDEF MSDOS}
 procedure cursorblock;
@@ -410,7 +383,7 @@ end;
 {$IFNDEF MSDOS}
 procedure savescreen;
 begin
-  VideoUtils.SaveScreen(SavedScreen);
+  VidHelp.SaveScreen(SavedScreen);
   x:=wherex;
   y:=wherey;
 end;
@@ -430,7 +403,7 @@ end;
 {$IFNDEF MSDOS}
 procedure restorescreen;
 begin
-  VideoUtils.RestoreScreen(SavedScreen);
+  VidHelp.RestoreScreen(SavedScreen);
   gotoxy(x,y);
 end;
 {$ENDIF}

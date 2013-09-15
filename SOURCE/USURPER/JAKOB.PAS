@@ -146,7 +146,7 @@ Uses Dos, Crt, Init,
      DDplus, DDscott, ComIO,
      Exec, AnsiColr, SwagDate,
      Various, NetFilep, DispText,
-     Online, File_IO {$IFNDEF MSDOS}, VideoUtils{$ENDIF};
+     Online, File_IO {$IFNDEF MSDOS}, VidHelp{$ENDIF};
 
 var carriage_return : boolean; {used by D and SD procedures (display routines)}
 

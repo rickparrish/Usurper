@@ -2089,7 +2089,7 @@ begin
    ^C'GPL License 2007' + #13 +
    ^C'original game by ' + #13 +
    ^C'Jakob Dangarden' + #13 +
-   #13 + ^C+'Ported to Win32 by' + #13 +
+   #13 + ^C+'Ported by' + #13 +
    ^C'Rick Parrish')));
   {1993,98}
 
