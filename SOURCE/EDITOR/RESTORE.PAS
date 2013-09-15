@@ -21,11 +21,11 @@ var
 implementation
 
 uses
-  Crt, Drivers {$IFNDEF MSDOS}, VidHelp{$ENDIF};
+  Crt, Drivers {$IFNDEF MSDOS}, VideoUtils{$ENDIF};
 
 {$IFNDEF MSDOS}
 var
-  SavedScreen: TScreenBuf;
+  SavedScreen: TScreenBuffer;
 {$ENDIF}
 
 const

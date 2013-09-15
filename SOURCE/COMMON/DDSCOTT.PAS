@@ -49,10 +49,10 @@ procedure HexToDec(var s: string);
 implementation
 
 uses
-  VidHelp;
+  VideoUtils;
   
 var
-  SavedScreen: TScreenBuf;
+  SavedScreen: TScreenBuffer;
 
 function hex(i: byte): string;
 const
@@ -383,7 +383,7 @@ end;
 {$IFNDEF MSDOS}
 procedure savescreen;
 begin
-  VidHelp.SaveScreen(SavedScreen);
+  VideoUtils.SaveScreen(SavedScreen);
   x:=wherex;
   y:=wherey;
 end;
@@ -403,7 +403,7 @@ end;
 {$IFNDEF MSDOS}
 procedure restorescreen;
 begin
-  VidHelp.RestoreScreen(SavedScreen);
+  VideoUtils.RestoreScreen(SavedScreen);
   gotoxy(x,y);
 end;
 {$ENDIF}

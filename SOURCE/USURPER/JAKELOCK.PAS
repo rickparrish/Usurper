@@ -30,7 +30,7 @@ function File_Lock(var F; Action: filAction; FPos,Len: Longint): Word;
 
 Implementation
 
-Uses Dos {$IFNDEF MSDOS}, FileHelp{$ENDIF};
+Uses Dos {$IFNDEF MSDOS}, FileUtils{$ENDIF};
 
 {this routine was taken from the SWAG archive, locks records AND files}
 {$IFDEF MSDOS}
