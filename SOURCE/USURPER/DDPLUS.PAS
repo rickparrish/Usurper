@@ -4,7 +4,7 @@ Unit DDPlus;
 
 Interface
 
-Uses dos, crt, comio, ddscott, ddansi2, ddovr, ddovr2;
+Uses dos, crt, comio, ddansi2, ddovr, ddovr2, SysUtils;
 
 type
  CharOriginType=(localchar,remotechar);
@@ -152,15 +152,7 @@ end;
 
 Procedure ReleaseTimeSlice;
 begin
-  Case Tasker of
-    2,4,5 : Win_Pause;
-    3     : begin
-             Win_Pause;
-             Dos_Sleep;        { OS/2 likes this/ it don't hurt }
-            end;
-  else
-    Dos_Sleep;
-  end;
+  Sleep(1);
 end;
 
 Procedure Clear_Region(x,a,b:byte);
@@ -434,8 +426,8 @@ begin;
       write(alias+' ('+user_first_name+' '+user_last_name+')'); {jakob}
      end;
 
-     gotoxy(60-(length(progname+' - Node '+va(node_num)) div 2),numlines);
-     write(progname+' - Node '+va(node_num));
+     gotoxy(60-(length(progname+' - Node '+IntToStr(node_num)) div 2),numlines);
+     write(progname+' - Node '+IntToStr(node_num));
      firsttime:=false;
      save_sc:=999;
    end;
@@ -496,7 +488,7 @@ begin
    begin
      while (g>=0) and (not c) do
        begin
-         if exist(filenm+graphics_codes[g]) then
+         if FileExists(filenm+graphics_codes[g]) then
            begin
              assign(f,filenm+graphics_codes[g]);
              c:=true;
@@ -579,7 +571,7 @@ begin
  end
  else begin
   while (g>=0) and (not c) do begin
-   if exist(filen+graphics_codes[g]) then begin
+   if FileExists(filen+graphics_codes[g]) then begin
     if g in [2,3,5] then nonstop:=true;
     nyfil:=filen+graphics_codes[g];
     c:=true;
@@ -718,7 +710,6 @@ end;
 
 procedure swrite(s: string);
 begin;
- if hexon then hexfilt(s);
  if not local then sendtext(s);
  if NoLocal then
   begin
@@ -734,7 +725,6 @@ end;
 
 procedure swriteln(s: string);
 begin;
- if hexon then hexfilt(s);
  if not local then sendtext(s+#13+#10);
  if NoLocal then
   begin
@@ -760,7 +750,6 @@ end;
 Procedure swritexy;
 begin
  Sgoto_XY(x,y);
- if hexon then hexfilt(s);
  if not local then sendtext(s);
  if NoLocal then
   begin
@@ -1099,8 +1088,6 @@ var
  ch: char;
  hexsave: boolean;
 begin;
- hexsave:=hexon;
- hexon:=false;
  curlinenum:=1;
  s:='';
  get_stacked(s);
@@ -1122,8 +1109,6 @@ begin;
   end;
  end;
  swriteln('');
- hexon:=hexsave;
- if hexon then hextodec(s);
 end;
 
 procedure sread_num(var n: integer);
@@ -1397,8 +1382,6 @@ var
 
 begin;
 
- hexsave:=hexon;
- hexon:=false;
  fg:=current_foreground;
  bg:=current_background;
 
@@ -1464,7 +1447,6 @@ begin;
    get_stacked(s);
    while length(s)>le do delete(s,length(s),1);
   end;
- hexon:=hexsave;
 
 end;
 
@@ -1480,8 +1462,6 @@ var
  a: integer;
  hexsave: boolean;
 begin;
- hexsave:=hexon;
- hexon:=false;
  fg:=current_foreground;
  bg:=current_background;
  get_stacked(s);
@@ -1531,7 +1511,6 @@ begin;
    while length(s)>le do delete(s,length(s),1);
   end;
  end;
- hexon:=hexsave;
 end;
 
 procedure promptwr;  {jakob, som PROMPT ovan, men med word wrap}
@@ -1547,8 +1526,6 @@ var
  hexsave: boolean;
 begin;
 
- hexsave:=hexon;
- hexon:=false;
  fg:=current_foreground;
  bg:=current_background;
  {get_stacked(s);}
@@ -1600,7 +1577,6 @@ begin;
   end;}
 
  end;
- hexon:=hexsave;
 end;
 
 procedure sgoto_xy;
@@ -1779,16 +1755,19 @@ end;
 Procedure StatusMess(var fs:string);
 begin
   Set_Color(2,0);
-  Case Tasker of
-    1 : writeln('DESQview Detected');
-    2 : writeln('MS-Windows Detected'); {jakob}
-    3 : writeln('OS/2 Detected');
-    4 : writeln('Win/NT Detected');
-    5 : writeln('Dos 5.0 with Network Detected');
-    6 : writeln('Dos 5.0+ Detected');
-  else
-        writeln('No Multiplexer Detected');
-  end;
+  {$IFDEF GO32V2}
+    WriteLn('OS: DOS (GO32V2)');
+  {$ELSE}
+    {$IFDEF UNIX}
+      WriteLn('OS: UNIX');
+    {$ELSE}
+      {$IFDEF WINDOWS}
+        WriteLn('OS: Windows');
+      {$ELSE}
+        WriteLn('OS: Unknown');
+      {$ENDIF}
+    {$ENDIF}
+  {$ENDIF}
   If FossilIO or DigiIO then
    begin
       Set_Foreground(10);
@@ -1831,7 +1810,6 @@ begin;
  com_port:=0;
  fouled_up:=#0;
  stacked:='';
- hexon:=false;
  buffered:=false;
  cdropped:=false;
  tdropped:=false;
@@ -1946,14 +1924,12 @@ begin;
  macro:='';
  mintime:=1;
  notime:='';
- user_first_name:=stu(user_first_name);
- user_last_name:=stu(user_last_name);
+ user_first_name:=UpperCase(user_first_name);
+ user_last_name:=UpperCase(user_last_name);
  stackon:=true;
 { if node_num=0 then node_num:=1; }
  ddassignsoutput(soutput);
  rewrite(soutput);
- If Not NetOk then
-   If (Tasker = 5) then inc(Tasker);
  StatusMess(fossilstr);
 
 end;

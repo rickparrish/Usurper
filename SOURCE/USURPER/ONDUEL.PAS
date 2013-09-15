@@ -27,7 +27,7 @@ Procedure Online_Duel(the_challenger : boolean);
                       {the_challenger = true, player is the challenger}
 Implementation
 
-Uses Jakob, Init, ddscott,
+Uses Jakob, Init,
      news, statusc, online,
      spellsu, cast, swapeq,
      various, various2, various3,

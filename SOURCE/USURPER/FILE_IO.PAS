@@ -187,7 +187,7 @@ Procedure Close_Text(var f:text);
 Implementation
 
 Uses Crt, Dos, CMS, Elog,
-     DDplus, DDScott, Jakob,
+     DDplus, Jakob,
      Various, AnsiColr,
      Mail, Invent, Relatio2,
      JakeLock, Online, Strings;
@@ -5798,9 +5798,9 @@ begin
 
    if inclusions in [1,3] then begin
     {display date string}
-    s:=va(month);
+    s:=IntToStr(month);
     if length(s)=1 then s:='0'+s;
-    s2:=va(day);
+    s2:=IntToStr(day);
     if length(s2)=1 then s2:='0'+s2;
     s:=s+'-'+s2;
     s2:=long2str(year);

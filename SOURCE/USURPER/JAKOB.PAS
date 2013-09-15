@@ -136,10 +136,10 @@ Function Param_Hunt(const h:string) : boolean; {checking for Command Line parame
 Implementation
 
 Uses Dos, Crt, Init,
-     DDplus, DDscott, ComIO,
-     AnsiColr, SwagDate,
+     DDplus, ComIO,
+     AnsiColr,
      Various, NetFilep, DispText,
-     Online, File_IO, VideoUtils;
+     Online, File_IO, VideoUtils, SysUtils;
 
 var carriage_return : boolean; {used by D and SD procedures (display routines)}
 
@@ -375,13 +375,7 @@ Function LowerCase(const s:string) : string;
 var i : integer;
     t : string;
 begin
-
- t:='';
- for i:=1 to length(s) do begin
-  t:=t+locase(s[i]);
- end;
-
- lowercase:=t;
+ lowercase:=SysUtils.LowerCase(s);
 end;
 
 Function Replace_String;
@@ -694,7 +688,7 @@ end; {confirm2 *end*}
 
 Function Packed_Date : longint;
 begin
- packed_date:=swag_date;
+ packed_date:=0; // REETODO
 end;
 
 Function MkString;
@@ -1449,7 +1443,7 @@ var result : longint;
     s : s70;
     ok : boolean;
     i : byte;
-
+    ch: char;
 begin
 
  {init vars}
@@ -1938,7 +1932,7 @@ begin;
   writeln(' type "EXIT" to return)');
  end;
 
- DDScott.savescreen;
+ savescreen;
  if not local then AsyncCloseUp;
  swapvectors;
  exec(getenv('COMSPEC'),'');
