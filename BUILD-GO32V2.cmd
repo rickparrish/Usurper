@@ -3,11 +3,11 @@ Z:
 CD \PROGRAMMING\USURPER\SOURCE
 
 ECHO BUILDING EDITOR.EXE
-Z:\FPCDOS\BIN\GO32V2\FPC -B -Fueditor -Fu..\..\rmdoor -FE..\bin\i386-go32v2 EDITOR.lpr
+Z:\FPCDOS\BIN\GO32V2\FPC -B -CX -O3 -XsX -Fueditor;..\..\rmdoor -FU..\lib\i386-go32v2 -o..\bin\i386-go32v2\EDITOR EDITOR.lpr
 IF NOT %ERRORLEVEL% == 0 GOTO END
 
 ECHO BUILDING USURPER.EXE
-Z:\FPCDOS\BIN\GO32V2\FPC -B -Fuusurper -Fu..\..\rmdoor -FE..\bin\i386-go32v2 USURPER.lpr
+Z:\FPCDOS\BIN\GO32V2\FPC -B -CX -O3 -XsX -Fuusurper;..\..\rmdoor -FU..\lib\i386-go32v2 -o..\bin\i386-go32v2\USURPER USURPER.lpr
 IF NOT %ERRORLEVEL% == 0 GOTO END
 
 :END
