@@ -68,8 +68,6 @@ CONST
 
 VAR
    ErrFile    : TEXT ;
-   A1: Byte;
-   YE: Boolean;
    OpenAttempts: Integer;
    GoAhead:Boolean;
    Year,Month,Day: Word;
@@ -113,8 +111,6 @@ VAR
    END;
 
 BEGIN
-   A1:=18;
-   YE:=False;
    GetDate1(Month,day,year);
    IF ErrorAddr = NIL THEN
     Begin
@@ -130,7 +126,6 @@ BEGIN
 
      {SaveGame(Player,PlayerFile,TempP,Country,CountryFile,Map1,MapFile);}
      
-     YE:=False;
      ASSIGN(ErrFile,logname);
      IF F_EXISTS(logname) THEN
       Begin
@@ -241,7 +236,6 @@ BEGIN
   END;
 
 Procedure MyExit1;
-VAR SaveExitProc: POINTER;
 Begin;
  TrapExit;
  SaveExitProc:=Exitproc;

@@ -358,7 +358,6 @@ var
 
     ply : userrec;
 
-    go_ahead,
     break_out : boolean;
 
     infos : array [1..global_maxplayers] of ^s30;
@@ -368,7 +367,6 @@ begin
  {init}
  result:='';
  currentmax:=0;
- go_ahead:=true;
  break_out:=false;
 
  crlf;

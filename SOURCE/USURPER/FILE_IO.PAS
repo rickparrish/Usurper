@@ -1998,7 +1998,6 @@ end; { DirExist END, from SWAG }
 {-----FILESIZE START-----}
 Function Fs;
 var
-    dum    : byte;
     memmy,
     i      : integer;
     error  : integer;
@@ -2031,7 +2030,6 @@ begin
 
  {init}
  error:=0;
- dum:=0;
  result:=0;
  i:=0;
 
@@ -2637,7 +2635,6 @@ end; {-----FILESIZE END-----}
 {-----ITEM FILESIZE START-----}
 Function FsOb;
 var
-    dum    : byte;
     memmy,
     i      : integer;
     error  : word;
@@ -2648,7 +2645,6 @@ var
 begin
 
  {init}
- dum:=0;
  error:=0;
  fsob:=0;
  i:=0;

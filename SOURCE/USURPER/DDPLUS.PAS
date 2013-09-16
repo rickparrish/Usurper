@@ -459,7 +459,6 @@ begin
   c:=false;
   swon:=false;
   g:=graphics;
-  k:=' ';
 
   assign(f,'ERROR');
   if pos('.',filenm)<>0 then assign(f,filenm) else
@@ -1346,7 +1345,7 @@ const
 var
 
  fg,bg: integer;
- x,y: integer;
+ x: integer;
  ch: char;
  a: integer;
 
@@ -1378,7 +1377,6 @@ begin;
   for a:=1 to le do swrite(' ');
   for a:=1 to le do swrite(#8);
   x:=wherex;
-  y:=wherey;
  end;
 
   repeat;
@@ -1428,7 +1426,7 @@ const
  promptcol3=15;
 var
  fg,bg: integer;
- x,y: integer;
+ x: integer;
  ch: char;
  a: integer;
 begin;
@@ -1448,7 +1446,6 @@ begin;
    for a:=1 to le do swrite(' ');
    for a:=1 to le do swrite(#8);
    x:=wherex;
-   y:=wherey;
   end;
   s:='';
   repeat;
@@ -1490,7 +1487,7 @@ const
  promptcol3=15;
 var
  fg,bg: integer;
- x,y: integer;
+ x: integer;
  ch: char;
  a: integer;
 begin;
@@ -1510,7 +1507,6 @@ begin;
    for a:=1 to le do swrite(' ');
    for a:=1 to le do swrite(#8);
    x:=wherex;
-   y:=wherey;
   end;
   {s:='';}
   repeat;

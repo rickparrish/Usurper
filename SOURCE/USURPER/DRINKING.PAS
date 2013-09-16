@@ -39,7 +39,7 @@ const maxopp = 9; {opponents in drinking competiton}
 var
     count, togo : integer;
 
-    losers_out, playerr, exit_ok : boolean;
+    losers_out, exit_ok : boolean;
 
     pvalue : longint;
 
@@ -626,7 +626,6 @@ begin
  {'slurred speech of a drunk!';}
 
  exit_ok:=false;
- playerr:=true;
  player_gone:=0;
  repeat
   inc(round);
@@ -646,7 +645,6 @@ begin
    pvalue:=pvalue-random(23+strength);
    if pvalue<1 then begin
     crlf;
-    playerr:=false;
     d(config.textcolor,'The room is spinning!');
     d(config.textcolor,'You hear evil laughter as you');
     d(config.textcolor,'stagger around the room... finally falling');

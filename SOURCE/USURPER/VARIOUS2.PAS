@@ -1142,18 +1142,14 @@ end; {kill_comment}
 
 Procedure Load_MoatId(var temp:MoatRec;IDTAG:s15);
 var i : word;
-   result : boolean;
 begin
  {load the Moat Guard with the unique Id-tag IDTAG}
-
- result:=false;
 
  for i:=1 to fs(fsMoat) do begin
   load_moat(fload,temp,i);
   if (temp.Id=IDTAG) and
      (temp.deleted=false) and
      (temp.name<>'') then begin
-   result:=true;
    break;
   end;
  end; {for i:= .end.}
@@ -3003,7 +2999,7 @@ label
  9045;
 
 var
-    yy, j, x, y : longint;
+    yy, j, x : longint;
     a, bbs, sysop : s70;
     regnr : longint;
     i : integer;
@@ -3025,7 +3021,6 @@ begin
   j:=length(a);
   yy:=0;
   x:=0;
-  y:=0;
   for i:=1 to length(a) do begin
    x:=x+(ord(a[i])*i);
    yy:=yy+(ord(a[i])*j);

@@ -107,7 +107,7 @@ var
 
    x,y : longint;
 
-   s, s2 : s90;
+   s, s2 : s90; // REETODO s2 goes unused below, but appears to contain useful text
 
    done,
    wrong_god,

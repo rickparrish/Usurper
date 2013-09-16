@@ -83,10 +83,7 @@ type
    char2  = array[1..2] of char;
    char4  = array[1..4] of char;
    char5  = array[1..5] of char;
-   char8  = array [1..8] of char;
-   char9  = array [1..9] of char;
    char12 = array[1..12] of char;
-   char13 = array [1..13] of char;
    char15 = array[1..15] of char;
    char25 = array[1..25] of char;
    single = array [0..3] of byte;

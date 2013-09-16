@@ -1954,7 +1954,6 @@ Procedure Meny;
 const offset = 18;
       offset2= 26;
 var s : s90;
-    x : byte;
 begin
 
  clearscreen;
@@ -1984,8 +1983,6 @@ begin
  else crlf;
 
  menu2(ljust('(B)arrel Masters',offset));
- if player.sex=1 then x:=2
-                 else x:=1;
  menu2(ljust('(T)ug-of-war competition',offset2));
  if player.gym_owner>0 then begin
   menu('(D)istribute club-card');

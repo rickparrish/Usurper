@@ -730,7 +730,6 @@ const maxages = 5;
                                       'nineteen');
 var i,x : longint;
     newswritten : boolean;
-    girl_dead : boolean;
     player0 : ^UserRec;
 begin
 
@@ -764,7 +763,6 @@ begin
  ch:=menu_choices('(S)atisfy your lust','(R)ough her up','(W)alk away','','');
 
  newswritten:=false;
- girl_dead:=false;
 
  case ch of
   'S':begin {rape time *start*}
@@ -844,7 +842,6 @@ begin
         '');
 
         newswritten:=true;
-        girl_dead:=true;
 
        end;
 

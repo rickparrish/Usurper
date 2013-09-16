@@ -41,7 +41,7 @@ var
     capable, knockdogs, knocksons, target, pstam, poor, risk : integer;
     arrived, turbo : boolean;
     i : longint;
-    cstam, newdogs, dogoffset, barrels, dogs, y : integer;
+    cstam, newdogs, dogoffset, barrels, dogs : integer;
 
     s, s2, polare : s70;
 
@@ -451,8 +451,6 @@ begin
            end;
 
            if ch='1' then begin
-            y:=0;
-
             polare:='';
             for i:=1 to fs(FsPlayer) do begin
              load_character(pl0^,1,i);

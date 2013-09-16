@@ -400,7 +400,6 @@ Procedure Gang_Wars; {main proc}
 var
     s : s100;
     a, a2 : s70;
-    rr : real;
     bround : integer;
     ch : char;
     rounds : array [0..global_maxteammembers-1] of integer;
@@ -787,8 +786,6 @@ dec(player.tfights);
 
   clearscreen;
   crlf;
-
-  rr:=0;
 
   {*Fight #1*}
 

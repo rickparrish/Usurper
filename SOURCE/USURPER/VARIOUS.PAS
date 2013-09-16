@@ -473,7 +473,6 @@ Function Target_Monster;
 var
     done : boolean;
     k, ii, rad, temp : integer;
-    cho : char;
     s : s70;
     x  : integer;
 
@@ -526,7 +525,6 @@ begin
     repeat
      if monster[rad]^.hps>0 then begin
       result:=rad;
-      cho:='Z';
       crlf;
       done:=true;
       break;
@@ -539,7 +537,6 @@ begin
     repeat
      if monster[rad]^.hps>0 then begin
       result:=rad;
-      cho:='Z';
       crlf;
       done:=true;
       break;
@@ -747,27 +744,23 @@ Procedure Normal_Defence;
 var
     yy    : longint;
     rr    : real;
-    slask : longint;
 
 begin
 
  {calculates normal armor defence from Defender}
  yy:=0;
  rr:=0;
- slask:=0;
 
  if config.classic then begin
   if defender.apow>1 then begin
    rr:=(config.abase*defender.apow);
    yy:=round(rr);
-   slask:=defender.apow-yy;
   end;
  end
  else begin
   if defender.armpow>1 then begin
    rr:=(config.abase*defender.armpow);
    yy:=round(rr);
-   slask:=defender.armpow-yy;
   end;
  end;
 

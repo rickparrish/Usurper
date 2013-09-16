@@ -45,7 +45,6 @@ Var
     x, i, gain : longint;
     ch : char;
     s : s70;
-    dummy : ^userrec;
     first, second : boolean;
     txt : text;
 
@@ -56,9 +55,6 @@ custtemp : ^Userrec; {temporary user record}
 
 
 begin
-
- {init pointer vars}
- new(dummy);
 
  onliner.doing:='on the final Quest!';
  add_onliner(OUpdateLocation,onliner);

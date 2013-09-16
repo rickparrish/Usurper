@@ -47,8 +47,6 @@ var
     reward : boolean;
     dummy : byte;
 
-const soulstrike : longint = 0;
-
 begin
 
  skrik:=true;
@@ -207,7 +205,6 @@ begin
  if (player1.class=Paladin) and (player1.hps>100) and (random(3)=0) and (player1.used_item=false)
  and (player1.casted=false) then begin
   zz:=player1.hps div 3;
-  soulstrike:=zz;
   dec(player1.hps,zz);
   player1.punch:=soul_effect(player1,zz);
 
@@ -302,7 +299,6 @@ begin
  if (player2.class=Paladin) and (player2.hps>100) and (random(3)=0) and
     (player2.used_item=false) and (player2.casted=false) then begin
   zz:=player2.hps div 3;
-  soulstrike:=zz;
   dec(player2.hps,zz);
   player2.punch:=soul_effect(player2,zz);
 

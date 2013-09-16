@@ -62,7 +62,7 @@ var
     nice2 : array [1..maxnr] of ^s70;
 
     counter : integer;
-    yy,i,j,k : longint;
+    i,j,k : longint;
 
     afflicted,
     save_need,
@@ -359,7 +359,6 @@ begin
      (player_active(pl0^,false)=true) then begin
 
    for i:=1 to maxnr do begin
-    yy:=i;
     if pl0^.team=nice2[i]^ then begin
      inc(power2[i]);
      y:=1;
@@ -525,17 +524,14 @@ var
     save_need : boolean;
 
     rhand_need,
-    lhand_need,
     head_need,
     body_need,
     arms_need,
-    lfinger_need,
     rfinger_need,
     legs_need,
     feet_need,
     waist_need,
     neck_need,
-    neck2_need,
     face_need,
     shield_need,
     hands_need,
@@ -556,17 +552,14 @@ begin
 }
 
  rhand_need:=false;
- lhand_need:=false;
  head_need:=false;
  body_need:=false;
  arms_need:=false;
- lfinger_need:=false;
  rfinger_need:=false;
  legs_need:=false;
  feet_need:=false;
  waist_need:=false;
  neck_need:=false;
- neck2_need:=false;
  face_need:=false;
  shield_need:=false;
  hands_need:=false;

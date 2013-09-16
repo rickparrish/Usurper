@@ -457,7 +457,6 @@ var
 
     InAi : char;
     InId : s30;
-    InName : s30;
 
     result : boolean;
 
@@ -470,12 +469,10 @@ begin
   1:begin
      inid:=relation.idtag1;
      inai:=relation.ai1;
-     inname:=relation.name1;
     end;
   2:begin
      inid:=relation.idtag2;
      inai:=relation.ai2;
-     inname:=relation.name2;
     end;
  end; {case .end.}
 
@@ -548,8 +545,6 @@ var
 
    ply : userrec;
 
-   relation_ai : char;
-
 procedure ubeta_text;
 begin
 
@@ -576,13 +571,11 @@ begin {persons recnr in RELATION to #record nr in userfile
 
   case i of
    1:begin
-      relation_AI:=relation.ai1;
       relation_recnr:=relation.recnr1;
       relation_idtag:=relation.idtag1;
       relation_filtyp:=relation.filetype1;
      end;
    2:begin
-      relation_AI:=relation.ai2;
       relation_recnr:=relation.recnr2;
       relation_idtag:=relation.idtag2;
       relation_filtyp:=relation.filetype2;

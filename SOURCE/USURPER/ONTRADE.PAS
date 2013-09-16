@@ -35,8 +35,6 @@ Uses Init, Jakob, Statusc,
      Various2, File_Io, SysUtils;
 
 var
-    mesleepy,
-    sleepy,
     adios,
     imp,
     challenger : boolean;
@@ -78,7 +76,6 @@ begin
   if f_exists(onliner.comfile)=false then begin
    d(config.textcolor,'The talks are over!');
    d(config.textcolor,'The other part has left!');
-   mesleepy:=true;
    adios:=true;
    bye:=true;
   end;
@@ -87,7 +84,6 @@ begin
 
    d(config.textcolor,'The talks are over!');
    d(config.textcolor,'You have not responded fast enough! (press ENTER)');
-   mesleepy:=true;
    adios:=true;
    bye:=true;
 
@@ -155,7 +151,6 @@ begin
 
  if sleepcounter>=global_online_maxwaits_bigloop then begin
   adios:=true;
-  sleepy:=true;
   sd(global_plycol,oppo);
   d(config.textcolor,' has suddenly left you!');
  end
@@ -247,7 +242,6 @@ begin
  error:=0;
  challenger:=utman;
  imp:=utman;
- sleepy:=false;
  adios:=false;
  oppo:=onliner.bname;
 

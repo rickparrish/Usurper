@@ -129,15 +129,12 @@ var
     size,
     empty_mailslot : word;
 
-    saved : boolean;
-
 begin
 
  {lock mail file and find space to save new mail record}
  {find deleted mail(record) in mailfile.}
 
  {init vars}
- saved:=false;
  empty_mailslot:=1;
 
  {lock mailfile}

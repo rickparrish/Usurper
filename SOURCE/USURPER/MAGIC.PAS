@@ -130,7 +130,7 @@ var
     ch, cho : char;
     rr : real;
     zz, xx, z, x, i : longint;
-    cc, j, justval : integer;
+    cc, j : integer;
     s : s70;
     idcost : longint;
     objekt : ^orec;
@@ -555,7 +555,6 @@ begin
         clearscreen;
         j:=0;
         cc:=3;
-        justval:=14;
         d(5,'#   Item                  Cost');
         crlf;
 

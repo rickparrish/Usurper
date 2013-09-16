@@ -189,7 +189,6 @@ var
    k : byte;
    i,j,price,xpprice:longint;
    bearmood:byte;
-   fruits:byte;
    z,insats:integer;
    rounds:byte;
    risk:byte;
@@ -907,7 +906,6 @@ begin
 
           crlf;
           bearmood:=5; {0=t„mjd .. 5=indifferent ..10=galen av ilska}
-          fruits:=15;
 
           repeat
            case bearmood of

@@ -237,8 +237,7 @@ begin
 
 end; {new_ruler *end*}
 
-var monsters_killed : boolean;
-    rounds : word;
+var rounds : word;
 begin {CHALLENGE KING *START*}
 
  {load king record}
@@ -285,13 +284,11 @@ begin {CHALLENGE KING *START*}
    CHEAT routine!  the npc/offline player never fights the monsters}
    if random(3)=0 then begin
     {npc killed moat monsters!}
-    monsters_killed:=true;
     global_killed:=false;
     j:=0;
    end
    else begin
     {R.I.P.}
-    monsters_killed:=false;
     global_killed:=true;
     j:=king.moatnr;
    end;
