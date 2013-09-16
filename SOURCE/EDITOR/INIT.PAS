@@ -1627,10 +1627,16 @@ var
     r : trect;
     MyBackGround : pbackground;
     Event : Tevent;
+    VM: TVideoMode;
 begin
 
  {Tapplication.Init;}
  Inherited Init;
+
+ VM.Col:=80;
+ VM.Row:=25;
+ VM.Color:=True;
+ SetScreenVideoMode(VM);
 
  {fixes so that streams work with the below stated,
   or else helpfile won't work}
