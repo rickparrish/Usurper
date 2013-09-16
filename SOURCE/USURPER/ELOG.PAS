@@ -22,21 +22,6 @@ IMPLEMENTATION   (********************************)
 Uses Crt, Dos, DDPlus,
      Netfilep, Jakob, File_Io; {jakob}
 
-{$IFDEF MSDOS}
-Procedure GetDate1(VAR Month:Word;
-                   VAR day:Word;
-                   VAR year:Word);
- VAR MyRegs:Registers;
-
- Begin
-  MyRegs.AH:=$2A;
-  MSDOS(MyRegs);
-  Month:=MyRegs.DH;
-  Day:=MyRegs.DL;
-  Year:=MyRegs.CX;
- End;
-{$ENDIF}
-{$IFNDEF MSDOS}
 Procedure GetDate1(VAR Month:Word;
                    VAR day:Word;
                    VAR year:Word);
@@ -45,7 +30,6 @@ var
 begin
   GetDate(Year, Month, Day, DOW);
 end;
-{$ENDIF}
 
 PROCEDURE Terminate (N:Byte);
  Begin
@@ -149,9 +133,6 @@ BEGIN
      {SaveGame(Player,PlayerFile,TempP,Country,CountryFile,Map1,MapFile);}
      
      IF ShareInst=False then FileMode:=64;
-{$IFNDEF MSDOS}
-     FileModeReadWrite := FileMode;
-{$ENDIF}
      YE:=False;
      ASSIGN(ErrFile,logname);
      IF F_EXISTS(logname) THEN
@@ -194,9 +175,6 @@ BEGIN
      WRITELN_to_text(ErrFile,Exit_Message(Exitcode));
      Close_text(ErrFile); {jakob}
      IF ShareInst=False then FileMode:=66;
-{$IFNDEF MSDOS}
-     FileModeReadWrite := FileMode;
-{$ENDIF}
      {be sure to uncomment this if using RipLink}
      {if RIP <> nil then
       Dispose(RIP, Done);}
@@ -260,9 +238,6 @@ BEGIN
        WRITELN_to_text(ErrFile,'------------------------------------------------');
        Close_text(ErrFile);
        IF ShareInst=False then FileMode:=66;
-{$IFNDEF MSDOS}
-       FileModeReadWrite := FileMode;
-{$ENDIF}
       END ;
    ErrorAddr := NIL ;
    {be sure to uncomment this if using RipLink}

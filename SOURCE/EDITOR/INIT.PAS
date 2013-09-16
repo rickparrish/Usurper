@@ -48,11 +48,11 @@ const
  onlyin  = 'Only Available In Registered Version!';
 
  {Directories}
-{$IFNDEF LINUX}
- DIRECTORY_SEPARATOR = '\';
-{$ENDIF}
-{$IFDEF LINUX}
+{$IFDEF UNIX}
  DIRECTORY_SEPARATOR = '/';
+{$ENDIF}
+{$IFNDEF UNIX}
+ DIRECTORY_SEPARATOR = '\';
 {$ENDIF}
  global_datadir ='DATA' + DIRECTORY_SEPARATOR;   {Path to DATA directory}
  global_docsdir ='DOCS' + DIRECTORY_SEPARATOR;   {Path to DOCS directory}
@@ -62,12 +62,7 @@ const
  {file with all online help-texts. raw-file : edhelp.txt.
  to compile raw helpfile, type: tvhc edhelp editor edhelp
   or better: run makehelp.bat file}
-{$IFDEF MSDOS}
- global_edhelp = 'EDITOR.HLP';
-{$ENDIF}
-{$IFNDEF MSDOS}
  global_edhelp = 'EDITOR32.HLP';
-{$ENDIF}
 
  {Files in the Usurper directory}
  ucfg = 'USURPER.CFG';
@@ -172,12 +167,6 @@ const
                      Should head items be used... and so on...}
 var
  allowitem : array[1..maxallows] of boolean;
-
-{$IFDEF MSDOS}
-type
-  SmallInt  = System.Integer;
-  SmallWord = System.Word;
-{$ENDIF}
 
 type ItemHandler = (Item_Add,Item_Remove); {useb by itemhandler in ADDIT.pas}
 

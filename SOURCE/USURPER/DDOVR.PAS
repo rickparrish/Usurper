@@ -13,7 +13,7 @@ procedure GetBBSInfo(
  var user_first_name,user_last_name: string;
  var user_access_level: word;
  var bbs_time_left: integer;
- var com_port: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}integer{$ENDIF};
+ var com_port: integer;
  var baud_rate : Longint;
  var node_num: integer;
  var local: boolean;
@@ -32,7 +32,7 @@ procedure MakeInfoStrings(
  var user_first_name,user_last_name: string;
  var user_access_level: word;
  var bbs_time_left: integer;
- var com_port: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}integer{$ENDIF};
+ var com_port: integer;
  var baud_rate,baud_modem: longint;
  var node_num: integer;
  var local: boolean;
@@ -61,7 +61,7 @@ procedure GetBBSInfo(
  var user_first_name,user_last_name: string;
  var user_access_level: word;
  var bbs_time_left: integer;
- var com_port: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}integer{$ENDIF};
+ var com_port: integer;
  var baud_rate: LongInt;
  var node_num: integer;
  var local: boolean;
@@ -574,7 +574,7 @@ begin;
  close(f);
 end;
 
-{$IFNDEF MSDOS}
+{$IFNDEF GO32V2}
 procedure load_door32;
 var
  a: integer;
@@ -907,7 +907,7 @@ begin;
  if bbstype=12 then load_spitfire;
  if bbstype=13 then load_2am;
  if bbstype=14 then load_TriBBS;
-{$IFNDEF MSDOS}
+{$IFNDEF GO32V2}
  if bbstype=15 then load_door32;
 {$ENDIF}
  user_first_name:=stu(user_first_name);
@@ -936,7 +936,7 @@ procedure MakeInfoStrings(
  var user_first_name,user_last_name: string;
  var user_access_level: word;
  var bbs_time_left: integer;
- var com_port: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}integer{$ENDIF};
+ var com_port: integer;
  var baud_rate,baud_modem: longint;
  var node_num: integer;
  var local: boolean;
@@ -951,7 +951,7 @@ procedure MakeInfoStrings(
  var lockbaud: longint);
 
 const
-{$IFDEF MSDOS}
+{$IFDEF GO32V2}
  software_names: array[0..14] of string[15]=
   ('Maint',     'Local',      'Sysop',      'QBBS',       'PCBoard 12',
    'WWIV',      'PCBoard 15',        'RBBS 16+',   'Phoenix',    'DORINFO1',
@@ -962,7 +962,7 @@ const
    'INFO.BBS',   'DORINFO1.DEF','PCBOARD.SYS', 'DOOR.SYS',
    'SFDOORS.DAT','JUMPER.DAT','TRIBBS.SYS');
 {$ENDIF}
-{$IFNDEF MSDOS}
+{$IFNDEF GO32V2}
  software_names: array[0..15] of string[15]=
   ('Maint',     'Local',      'Sysop',      'QBBS',       'PCBoard 12',
    'WWIV',      'PCBoard 15',        'RBBS 16+',   'Phoenix',    'DORINFO1',

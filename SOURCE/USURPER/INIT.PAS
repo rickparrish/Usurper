@@ -27,12 +27,6 @@ Unit Init; {Usurper Init & Structure code}
 Interface  {see CMS.pas for more constants.
             see InitGods.pas for God related stuff}
 
-{$IFDEF MSDOS}
-type
-  SmallInt  = System.Integer;
-  SmallWord = System.Word;
-{$ENDIF}
-
 {Uses}
 Type
  {String types}
@@ -124,11 +118,11 @@ Const
 Const
 
  {Directories}
-{$IFNDEF LINUX}
- DIRECTORY_SEPARATOR = '\';
-{$ENDIF}
-{$IFDEF LINUX}
+{$IFDEF UNIX}
  DIRECTORY_SEPARATOR = '/';
+{$ENDIF}
+{$IFNDEF UNIX}
+ DIRECTORY_SEPARATOR = '\';
 {$ENDIF}
  global_datadir ='DATA' + DIRECTORY_SEPARATOR;   {Path to DATA directory}
  global_docsdir ='DOCS' + DIRECTORY_SEPARATOR;   {Path to DOCS directory}

@@ -20,27 +20,18 @@ Copyright 2007 Jakob Dangarden
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 }
 
-
-
-
-{$IFDEF MSDOS}
-{$M 40000, 34000, 65000}
-{$ENDIF}
-{UTEST+}
-
 Program Usurper; {Door-Game by Jakob Dangarden
                   Written using - Borland Pascal 7.0 and DDplus 7.1
                    .. and miscellaneous routines .. }
 
 
-Uses {$IFDEF MSDOS}Overlay,{$ENDIF} Dos, {$IFDEF MSDOS}InitOver,{$ENDIF}
-     DDplus, Init, Jakob,
+Uses Dos, DDplus, Init, Jakob,
      Maint, Cms, SortPl,
      VarGods, GodWorld, UserHunc,
      Gamec, Byebyec, Mail,
      Various, Various2, Rating,
      Relation, Relatio2, Post_To,
-     Online, File_Io, {$IFDEF MSDOS}OverXms,{$ENDIF}
+     Online, File_Io,
      Various3, News, Children,
      InitGods;
 
@@ -393,17 +384,9 @@ begin {* Main Program *}
     Halt;
   end;
 
-{$IFDEF MSDOS}
- {Set Overlay FileMode}
- OvrFilemode:=64;
-{$ENDIF}
-
  {Set Share}
  if Is_Share then begin
   filemode:=66;
-{$IFNDEF MSDOS}
-  FileModeReadWrite := FileMode;
-{$ENDIF}
   global_ushare:=true;
  end
  else begin

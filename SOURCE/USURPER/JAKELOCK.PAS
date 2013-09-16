@@ -33,30 +33,9 @@ function File_Lock(var F; Action: filAction; FPos,Len: Longint): Word;
 
 Implementation
 
-Uses Dos {$IFNDEF MSDOS}, RPPort{$ENDIF};
+Uses Dos;
 
 {this routine was taken from the SWAG archive, locks records AND files}
-{$IFDEF MSDOS}
-function File_Lock(var F; Action: filAction; FPos,Len: Longint): Word;
- assembler;
-asm
-  je @@End
-  mov al, Action  {0=Lock,1=Unlock}
-  mov ah, $5C     {Dos lock function}
-  les si, F       {Load F}
-  mov bx, es:[si] {Get file handle}
-  les dx, Fpos
-  mov cx, es      {CX:DI=Begin position}
-  les di, len
-  mov si, es      {SI:DI length lock area}
-  int 21h         {MS-DOS}
-  jc @@End        {If error, return AX}
-  xor ax, ax      {Else, return 0}
-@@End:
-
-end; {File_Lock *end*}
-{$ENDIF}
-{$IFNDEF MSDOS}
 function File_Lock(var F; Action: filAction; FPos,Len: Longint): Word;
 begin
   if (Action = FLock) then
@@ -68,6 +47,5 @@ begin
     File_Lock := RPUnLockFile(FileRec(F).Handle, FPos, Len);
   end;
 end; { func. LockFile }
-{$ENDIF}
 
 end. {Unit JakeLock .end.}

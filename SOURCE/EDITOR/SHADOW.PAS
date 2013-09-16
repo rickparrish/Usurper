@@ -16,10 +16,6 @@ interface
 		PVMT = ^TVMT;
 		TVMT = record
 			Size:word; NegSize:integer;
-		{$IFDEF VER70}
-			DMTofs:word;    {Dynamic Method Table Offset into DS}
-			Reserved:word;
-		{$ENDIF}
 			Table:TMethodTable;
 			end;
 
@@ -43,31 +39,7 @@ implementation
 		ValidVMT := ((PVMT(VMT)^.size<>0) and
 								 ((PVMT(VMT)^.Size + PVMT(VMT)^.NegSize)=0)) ;
 		end;
- {------------------------------------------------------}
- {$IFDEF VER70}
-	{Find a Method in a Dynamic Method Table (DMT).  If found return
-	 pointer to the location of the Method's reference in the
-	 DMT.  If not found, return a nil pointer.                        }
-	function  FindDMTMethod (AMethod:pointer; DMTofs:word):pointer;
-		var
-			DMT:PDMT;
-			Table:PMethodTable;
-			i:word;
-		begin
-		DMT := ptr(DSeg,DMTofs);
-		Table := ptr(Dseg,DMTofs+8+(DMT^.cnt*2));
-		i:=0;
-		while (Table^[i]<>AMethod)and(I<(DMT^.cnt-1)) do inc(i);
-		if Table^[i]=AMethod then
-			FindDMTMethod := @Table^[i]
-		else
-			if (DMT^.BaseDMT>0) then
-				FindDMTMethod := FindDMTMethod(AMethod,DMT^.BaseDMT)
-			else
-				FindDMTMethod := nil;
-		end;
- {$ENDIF}
- {------------------------------------------------------}
+{------------------------------------------------------}
 	{Find a Method in a Virtual Method Table (VMT).  If found return
 	 pointer to the location of the Method's reference in the
 	 VMT.  If not found, return a nil pointer.                        }
@@ -85,12 +57,7 @@ implementation
 				if Slot<MaxVMTPointers then
 					FindMethodSlot:= @Table[Slot]
 				else
-				 {$IFDEF VER70}
-					if DMTofs >0 then
-						FindMethodSlot := FindDMTMethod(AMethod,DMTofs)
-					else
-				 {$ENDIF}
-						FindMethodSlot := nil;
+ 					FindMethodSlot := nil;
 				end;
 		end;
  {---------------------------------------------------------}

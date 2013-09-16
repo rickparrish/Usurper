@@ -142,7 +142,7 @@ Uses Dos, Crt, Init,
      DDplus, DDscott, ComIO,
      Exec, AnsiColr, SwagDate,
      Various, NetFilep, DispText,
-     Online, File_IO {$IFNDEF MSDOS}, RPPort{$ENDIF};
+     Online, File_IO;
 
 var carriage_return : boolean; {used by D and SD procedures (display routines)}
 
@@ -400,46 +400,6 @@ begin
 
 end; { Replace String }
 
-{$IFDEF MSDOS}
-Procedure Delay2;
-const
-  TicsPerDay = 1573040;      {Assumes 18.20648 tics/sec}
-var
-  BiosTics: ^LongInt;
-  DelayTics: LongInt;
-  ExpireTics: LongInt;
-  StartTics: LongInt;
-begin
-  BiosTics := Ptr($40, $6C);
-  StartTics := BiosTics^;
-  
-  { Convert milliseconds to number of tics to delay for }
-  DelayTics := milliSeconds div 55;
-  if (DelayTics <= 0) then Exit;
-  if (DelayTics > TicsPerDay) then DelayTics := TicsPerDay;
-
-  ExpireTics := StartTics + DelayTics;
-  
-  while (true) do
-  begin
-    { Don't use 100% CPU }
-    releasetimeslice; 
-	
-    {Check normal expiration}
-    if (BiosTics^ > ExpireTics) then Break;
-	
-    {Check wrapped expiration}
-    if (BiosTics^ < StartTics) and ((BiosTics^ + TicsPerDay) > ExpireTics) then Break;
-  end;
-end;
-{$ENDIF}
-{$IFNDEF MSDOS}
-Procedure Delay2;
-begin
- RPSleep(milliSeconds);
-end;
-{$ENDIF}
-
 Function GetChar; {get a character from the local or remote keyboard}
 var temp : char;
 begin
@@ -597,50 +557,6 @@ begin
  d(col,text);
  carriage_return:=true;
 
-end;
-
-{$IFDEF MSDOS}
-Procedure Upper4(var Str: String);
-InLine(
- $8C/$DA/               {      mov   DX,DS               }
- $5E/                   {      pop   SI                  }
- $1F/                   {      pop   DS                  }
- $FC/                   {      cld                       }
- $AC/                   {      lodsb                     }
- $30/$E4/               {      xor   AH,AH               }
- $89/$C1/               {      mov   CX,AX               }
- $E3/$12/               {      jcxz  @30                 }
- $BB/Ord('a')/Ord('z')/ {      mov   BX,'za'             }
- $AC/                   { @15: lodsb                     }
- $38/$D8/               {      cmp   AL,BL               }
- $72/$08/               {      jb    @28                 }
- $38/$F8/               {      cmp   AL,BH               }
- $77/$04/               {      ja    @28                 }
- $80/$6C/$FF/$20/       {      sub   BYTE PTR [SI-1],$20 }
- $E2/$F1/               { @28: loop  @15                 }
- $8E/$DA);              { @30: mov   DS,DX               }
-{$ENDIF}
-{$IFNDEF MSDOS}
-Procedure Upper4(var Str: String);
-var
-  i, len : Integer;
-begin
-  i := 0;
-  len := Ord(Str[0]);
-  Repeat
-    Inc(i);
-    If i > len Then
-      Break;
-    If Str[i] in ['a'..'z'] Then
-      Dec(Str[i], 32);
-  Until False;
-end;
-{$ENDIF}
-
-Function UpCaseStr;
-begin
- upper4(s);
- UpcaseStr:=s;
 end;
 
 Function Confirm;
@@ -2037,27 +1953,6 @@ begin;
 
 end; {drop_dos *end*}
 
-{$IFDEF MSDOS}
-Function IsWin95: Boolean; Assembler;
-Asm
- push ds                  ;{ Pascal doesn't save these }
- push si
-
- mov ax, 4A33h
- int 2Fh                  ;{ AX nonzero if present }
-
- pop si
- pop ds
-End; {iswin95 *end*}
-{$ENDIF}
-{$IFNDEF MSDOS}
-Function IsWin95: Boolean;
-begin
-  // REENOTE Does the above return true?  Is it important (for slicing or something)?
-  WriteLn('REEPORT JAKOB IsWin95');
-end;
-{$ENDIF}
-
 Function Jake_Tasker:byte; {Which OS is running?}
 var result : byte;
 begin
@@ -2120,48 +2015,6 @@ begin {handles all heap errors}
  HeapHandler:=1;
 
 end; {heaphandler *end*}
-
-
-{$IFDEF MSDOS}
-FUNCTION ScreenRows: byte; ASSEMBLER;
-{ -- ScreenRows := mem[Seg0040:$84] + 1 }
-{Peter Louwen (2:283/502)}
-ASM mov AX, [Seg0040]
-    mov ES, AX
-    mov AL, ES:$84
-    inc AL
-END;
-{$ENDIF}
-{$IFNDEF MSDOS}
-FUNCTION ScreenRows: byte; 
-var
-  y: Word;
-begin
-  y := RPScreenSizeY;
-  if (y > 255) then y := 255;
-  ScreenRows := y;
-end;
-{$ENDIF}
-
-{$IFDEF MSDOS}
-FUNCTION ScreenCols: byte; ASSEMBLER;
-{ -- ScreenCols := mem[Seg0040:$4A] }
-{Peter Louwen (2:283/502)}
-ASM mov AX, [Seg0040]
-    mov ES, AX
-    mov AL, ES:$4A
-END;
-{$ENDIF}
-{$IFNDEF MSDOS}
-FUNCTION ScreenCols: byte;
-var
-  x: Word;
-begin
-  x := RPScreenSizeX;
-  if (x > 255) then x := 255;
-  ScreenCols := x;
-end;
-{$ENDIF}
 
 Procedure Spin_Cursor(action,cursor_color:byte);
 const sc: array[0..3] of char = '-\|/';
