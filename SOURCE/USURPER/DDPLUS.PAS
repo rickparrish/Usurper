@@ -178,7 +178,7 @@ var
   word: string;
   lastspace: integer;
 
-begin;
+begin
   SGoto_XY(1,19);
   Set_Color(0,6);
   swrite(' The SYSOP wants to chat with you.       [ESC] to exit.');
@@ -248,7 +248,7 @@ begin;
 end;
 
 Procedure DropMessage;
-begin;
+begin
 
  {jakob}
  if global_maintrunning=true then begin
@@ -289,13 +289,13 @@ begin
 end;
 
 procedure textcolor(i: byte);
-begin;
+begin
  if localcol then crt.textcolor(i);
  tcolor:=i;
 end;
 
 procedure textbackground(i: byte);
-begin;
+begin
  if localcol then crt.textbackground(i);
  bcolor:=i;
 end;
@@ -304,7 +304,7 @@ procedure elapsed(time1_hour, time1_min, time1_sec, time2_hour, time2_min,
                   time2_sec: longint; var elap_hour, elap_min, elap_sec: longint);
 var
  a,b,c: longint;
-begin;
+begin
  if time1_hour<time2_hour then time1_hour:=time1_hour+24;
  a:=(time1_hour*3600)+(time1_min*60)+time1_sec;
  b:=(time2_hour*3600)+(time2_min*60)+time2_sec;
@@ -320,7 +320,7 @@ function time_left: integer;
 var
  hour, minute, second, sec100: word;
  el_hr, el_mn, el_sc: longint;
-begin;
+begin
  gettime(hour, minute, second, sec100);
  elapsed(hour, minute, second, st_hr, st_mn, st_sc, el_hr, el_mn, el_sc);
  time_left:=time_credit+(bbs_time_left-((el_hr*60)+el_mn));
@@ -331,7 +331,7 @@ function time_used: integer;
 var
  hour, minute, second, sec100: word;
  el_hr, el_mn, el_sc: longint;
-begin;
+begin
  gettime(hour, minute, second, sec100);
  elapsed(hour, minute, second, st_hr, st_mn, st_sc, el_hr, el_mn, el_sc);
  time_used:=(el_hr*60)+el_mn;
@@ -341,7 +341,7 @@ procedure display_Fkeys;
 var
  a,b: integer;
  x,y: integer;
-begin;
+begin
  save_sc:=999;
  x:=wherex;
  y:=wherey;
@@ -376,7 +376,7 @@ var
  hour, minute, second, sec100:word;
  el_mn, el_hr, el_sc: longint; {jakob:longint}
  alias : string[30];
-begin;
+begin
  x:=wherex;
  y:=wherey;
  cursoroff;
@@ -594,7 +594,7 @@ begin
 end;
 
 procedure SendText(s: string);
-begin;
+begin
  {jakob}
  If (Not CommCarrier) then begin
   DropMessage;
@@ -606,21 +606,21 @@ begin;
 end;
 
 procedure CharOut(ch: char);
-begin;
+begin
  CommWrite(ch);
 end;
 
 function charin(var ch: char): boolean;
-begin;
+begin
  if badchar<>'' then
-   begin;
+   begin
      ch:=badchar[1];
      delete(badchar,1,1);
      charin:=true;
    end
  else
   if CommCharAvail then
-     begin;
+     begin
        ch := CommReadChar;
        charin:=true;
      end
@@ -628,7 +628,7 @@ begin;
 end;
 
 procedure CloseDown;
-begin;
+begin
   if buffered then
      CommFlushOutBuffer;
   CommClose(false);
@@ -651,7 +651,7 @@ begin
 end;
 
 procedure sclreol;
-begin;
+begin
  if not local then sendtext(#27'[K');
  clreol;
 end;
@@ -659,7 +659,7 @@ end;
 procedure morecheck;
 var
  ch: char;
-begin;
+begin
  swrite('<More>');
  sread_char(ch);
  swrite(#8+#8+#8+#8+#8+#8);
@@ -668,7 +668,7 @@ begin;
 end;
 
 procedure swritec(ch: char);
-begin;
+begin
  if not local then
    CommWrite(ch);
  if NoLocal then
@@ -683,7 +683,7 @@ begin;
 end;
 
 procedure swrite(s: string);
-begin;
+begin
  if not local then sendtext(s);
  if NoLocal then
   begin
@@ -698,7 +698,7 @@ begin;
 end;
 
 procedure swriteln(s: string);
-begin;
+begin
  if not local then sendtext(s+#13+#10);
  if NoLocal then
   begin
@@ -715,7 +715,7 @@ begin;
  else
    writeln(s);
  inc(curlinenum);
- if (curlinenum=(numlines-1)) then begin;
+ if (curlinenum=(numlines-1)) then begin
   curlinenum:=1;
   if moreok then morecheck;
  end;
@@ -759,7 +759,7 @@ begin
 end;
 
 procedure DDexit;
-begin;
+begin
  If not local then CloseDown;
  if lastmode<>oldtextmode then textmode(oldtextmode);
  cursoron;
@@ -824,7 +824,7 @@ Procedure ReadScanCode(var a:char);
 begin
   a :=readkey;
   if (a=#0) and (keypressed) then
-    begin;
+    begin
       a:=readkey;
       sFkeys(a);
     end;
@@ -840,7 +840,7 @@ var
  minute_warning : boolean; {jakob}
  s : s30; {jakob}
 
-begin;
+begin
  cc:=0;
 
  a:=#0;
@@ -972,12 +972,12 @@ end;
 procedure sread_char(var ch: char);
 var
  ch1: char;
-begin;
+begin
  curlinenum:=1;
  repeat;
 
   if macro<>'' then
-    begin;
+    begin
       ch:=macro[1];
       delete(macro,1,1);
     end
@@ -985,25 +985,25 @@ begin;
     repeat;
     ch:=#0;
     if fouled_up<>#0 then
-      begin;
+      begin
         ch:=fouled_up;
         fouled_up:=#0;
       end
     else
-      begin;
+      begin
         sread_ch(ch1);
         if ch1=^N then
-          begin;
+          begin
             ch1:=#1;
             macro:=macro_str;
           end;
 
 {       delay(20);
         if (ch1=#27) and skeypressed then
-          begin;
+          begin
             sread_ch(ch2);
             if ch2='[' then
-              begin;
+              begin
                 sread_ch(ch2);
                 if (ch2 in ['1'..'9']) and (skeypressed) then
                   sread_ch(ch2);
@@ -1015,7 +1015,7 @@ begin;
                 end;
               end
             else
-              begin;
+              begin
                 ch:=ch1;
                 fouled_up:=ch2;
               end;
@@ -1030,7 +1030,7 @@ begin;
 end;
 
 procedure sread_char_filtered(var ch: char);
-begin;
+begin
  sread_char(ch);
  {if ch in [#1..#7,#10..#12,#14..#31,#127..#255] then ch:='.';}
 end;
@@ -1040,15 +1040,15 @@ var
  s2: string;
  a: integer;
  b: boolean;
-begin;
+begin
  s:='';
  s2:='';
  b:=false;
- if length(stacked)=0 then begin;
+ if length(stacked)=0 then begin
   s:='';
   exit;
  end;
- for a:=1 to length(stacked) do begin;
+ for a:=1 to length(stacked) do begin
   if stacked[a]=';' then b:=true else if not b then s:=s+stacked[a];
   if b then s2:=s2+stacked[a];
  end;
@@ -1059,23 +1059,23 @@ end;
 procedure sread(var s: string);
 var
  ch: char;
-begin;
+begin
  curlinenum:=1;
  s:='';
  get_stacked(s);
- if s<>'' then swrite(s) else begin;
+ if s<>'' then swrite(s) else begin
   repeat;
    sread_char_filtered(ch);
-   if (ch<>#8) and (ch<>^M) then begin;
+   if (ch<>#8) and (ch<>^M) then begin
     s:=s+ch;
     swrite(ch);
    end;
-   if (ch=chr(8)) and (length(s)>0) then begin;
+   if (ch=chr(8)) and (length(s)>0) then begin
     delete(s,length(s),1);
     swrite(chr(8)+' '+chr(8));
    end;
   until (ch=^M);
-  if (pos(';',s)<>0) and (stackon) then begin;
+  if (pos(';',s)<>0) and (stackon) then begin
    stacked:=s;
    get_stacked(s);
   end;
@@ -1086,7 +1086,7 @@ end;
 procedure sread_num(var n: integer);
 var
  s: string;
-begin;
+begin
  sread(s);
  n := StrToIntDef(s, 0);
 end;
@@ -1094,7 +1094,7 @@ end;
 procedure sread_num_byte(var b: byte);
 var
  s: string;
-begin;
+begin
  sread(s);
  b := StrToIntDef(s, 0);
 end;
@@ -1102,7 +1102,7 @@ end;
 procedure sread_num_word(var n: word);
 var
  s: string;
-begin;
+begin
  sread(s);
  n := StrToIntDef(s, 0);
 end;
@@ -1110,7 +1110,7 @@ end;
 procedure sread_num_longint(var n: longint);
 var
  s: string;
-begin;
+begin
  sread(s);
  n := StrToIntDef(s, 0);
 end;
@@ -1127,7 +1127,7 @@ var
 begin
   inc(cc);
   if statline then
-    begin;
+    begin
        if cc=1 then display_status(false);
        if cc>1000 then cc:=0;
     end;
@@ -1165,7 +1165,7 @@ end;
 function va(i: integer): string;
 var
  s: string;
-begin;
+begin
  str(i,s);
  va:=s;
 end;
@@ -1176,7 +1176,7 @@ const
   colorb: array[0..7] of integer = (40,44,42,46,41,45,43,47);
 var
  s,sb : string;
-begin;
+begin
  if f > 31 then exit;
  if (f = current_foreground) then exit;
  if Not NoLocal then textcolor(f);
@@ -1235,7 +1235,7 @@ end;
 procedure set_background;  { b : byte }
 const
  colorb: array[0..7] of integer = (40,44,42,46,41,45,43,47);
-begin;
+begin
  if b > 7 then exit;
  if (b = current_background) then exit;
  if Not NoLocal then textbackground(b);
@@ -1347,7 +1347,7 @@ var
 
  jake: string;
 
-begin;
+begin
 
  fg:=current_foreground;
  bg:=current_background;
@@ -1357,7 +1357,7 @@ begin;
  end;
 
  jake:='';
- if s<>'' then begin;
+ if s<>'' then begin
   {set_foreground(promptcol3);}
   while length(s)>le do delete(s,length(s),1);
   swrite(s);
@@ -1367,7 +1367,7 @@ begin;
 
  s:=jake;
  if not color_chg then pc:=false;
- if pc then begin;
+ if pc then begin
   set_foreground(promptcol1);
   set_background(promptcol2);
   for a:=1 to le do swrite(' ');
@@ -1382,7 +1382,7 @@ begin;
     swrite(ch); { write(ch);}
    end;
    if length(s)>200 then delete(s,1,1);
-   if (ch=chr(8)) and (length(s)>0) then begin;
+   if (ch=chr(8)) and (length(s)>0) then begin
     delete(s,length(s),1);
     swrite(chr(8));                                { write(#8,' ',#8);}
     swrite(' ');
@@ -1399,7 +1399,7 @@ begin;
 
 
   until (ch=^M) or (length(s)=999);
-  if pc then begin;
+  if pc then begin
    set_foreground(promptcol3);
    set_background(bg);
    while wherex>x do swrite(#8);
@@ -1408,7 +1408,7 @@ begin;
    set_foreground(fg);
   end;
   swriteln('');                                    { writeln('');}
-  if pos(';',s)<>0 then begin;
+  if pos(';',s)<>0 then begin
    stacked:=s;
    get_stacked(s);
    while length(s)>le do delete(s,length(s),1);
@@ -1425,18 +1425,18 @@ var
  x: integer;
  ch: char;
  a: integer;
-begin;
+begin
  fg:=current_foreground;
  bg:=current_background;
  get_stacked(s);
- if s<>'' then begin;
+ if s<>'' then begin
   set_foreground(promptcol3);
   while length(s)>le do delete(s,length(s),1);
   swrite(s);
   set_foreground(fg);
- end else begin;
+ end else begin
   if not color_chg then pc:=false;
-  if pc then begin;
+  if pc then begin
    set_foreground(promptcol1);
    set_background(promptcol2);
    for a:=1 to le do swrite(' ');
@@ -1446,20 +1446,20 @@ begin;
   s:='';
   repeat;
    sread_char_filtered(ch);                                 { read(kbd,ch);}
-   if (ch<>#8) and (ch<>^M) and (length(s)<le) then begin;
+   if (ch<>#8) and (ch<>^M) and (length(s)<le) then begin
     s:=s+ch;
     {swrite(ch);}                                    { write(ch);}
     swrite(sec);
    end;
    if length(s)>200 then delete(s,1,1);
-   if (ch=chr(8)) and (length(s)>0) then begin;
+   if (ch=chr(8)) and (length(s)>0) then begin
     delete(s,length(s),1);
     swrite(chr(8));                                { write(#8,' ',#8);}
     swrite(' ');
     swrite(#8);
    end;
   until (ch=^M) or (length(s)=999);
-  if pc then begin;
+  if pc then begin
    set_foreground(promptcol3);
    set_background(bg);
    while wherex>x do swrite(#8);
@@ -1468,7 +1468,7 @@ begin;
    set_foreground(fg);
   end;
   swriteln('');                                    { writeln('');}
-  if pos(';',s)<>0 then begin;
+  if pos(';',s)<>0 then begin
    stacked:=s;
    get_stacked(s);
    while length(s)>le do delete(s,length(s),1);
@@ -1486,18 +1486,18 @@ var
  x: integer;
  ch: char;
  a: integer;
-begin;
+begin
  fg:=current_foreground;
  bg:=current_background;
  {get_stacked(s);}
 
- if s<>'' then begin;
+ if s<>'' then begin
   swrite(s);
  end;
 
- if s<>'†††' then begin;
+ if s<>'†††' then begin
   if not color_chg then pc:=false;
-  if pc then begin;
+  if pc then begin
    set_foreground(promptcol1);
    set_background(promptcol2);
    for a:=1 to le do swrite(' ');
@@ -1507,12 +1507,12 @@ begin;
   {s:='';}
   repeat;
    sread_char_filtered(ch);                                 { read(kbd,ch);}
-   if (ch<>#8) and (ch<>^M) and (length(s)<le) then begin;
+   if (ch<>#8) and (ch<>^M) and (length(s)<le) then begin
     s:=s+ch;
     swrite(ch);                                    { write(ch);}
    end;
    if length(s)>200 then delete(s,1,1);
-   if (ch=chr(8)) and (length(s)>0) then begin;
+   if (ch=chr(8)) and (length(s)>0) then begin
     delete(s,length(s),1);
     swrite(chr(8));                                { write(#8,' ',#8);}
     swrite(' ');
@@ -1520,7 +1520,7 @@ begin;
    end;
   until (ch=^M) or (length(s)=le); {jakobs „ndring f”r att f† wordwrap}
 
-  if pc then begin;
+  if pc then begin
    set_foreground(promptcol3);
    set_background(bg);
    while wherex>x do swrite(#8);
@@ -1530,7 +1530,7 @@ begin;
   end;
   {swriteln('');}                                    { writeln('');}
 
-  {if pos(';',s)<>0 then begin;
+  {if pos(';',s)<>0 then begin
    stacked:=s;
    {get_stacked(s);}
    {while length(s)>le do delete(s,length(s),1);
@@ -1542,7 +1542,7 @@ end;
 procedure sgoto_xy;
 var
  s,s2: string;
-begin;
+begin
  gotoxy(x,y);
  curlinenum := y;
  s:=#27+'[';
@@ -1556,7 +1556,7 @@ end;
 function skeypressed: boolean;
 var
  b: boolean;
-begin;
+begin
  b:=false;
  if not local then b:=CommCharAvail;
  if not b then     b:=keypressed;
@@ -1565,8 +1565,8 @@ begin;
 end;
 
 procedure close_async_port;
-begin;
- if buffered then begin;
+begin
+ if buffered then begin
    buffered:=false;
    CommFlushOutBuffer;
    CommClose(true);
@@ -1574,7 +1574,7 @@ begin;
 end;
 
 procedure open_async_port;
-begin;
+begin
  CommOpen(com_port);
  if lockbaud=0 then
   CommSetBaud(baud_rate)
@@ -1591,7 +1591,7 @@ var
 function NewCrtOutPut(var f: textrec): integer;
 var
  p: integer;
-begin;
+begin
  for p:=0 to f.bufpos-1 do swrite(f.bufptr^[p]);
  f.bufpos:=0;
  NewCrtOutPut:=0;
@@ -1601,17 +1601,17 @@ function NewCrtInPut(var f: textrec): integer;
 var
  p: integer;
  ch: char;
-begin;
- with f do begin;
+begin
+ with f do begin
   p:=0;
-  if nclastchar=#13 then begin; nclastchar:=' '; end else repeat;
+  if nclastchar=#13 then begin nclastchar:=' '; end else repeat;
    ch:=readkey;
    nclastchar:=ch;
    write(ch);
    bufptr^[p]:=ch;
    inc(p);
    if ch=#13 then write(#10);
-   if ch=#8 then begin;
+   if ch=#8 then begin
     write(' '#8);
     if p>0 then dec(p);
     if p>0 then dec(p);
@@ -1624,16 +1624,16 @@ begin;
 end;
 
 function NewCrtIgnore(var f: textrec): integer;
-begin;
+begin
  newcrtignore:=0;
 end;
 
 function NewCRTOpen(var f: textrec): integer;
-begin;
- if f.mode=fmInput then begin;
+begin
+ if f.mode=fmInput then begin
   f.inoutfunc:=@NewCrtInput;
   f.flushfunc:=@NewCrtIgnore;
- end else begin;
+ end else begin
   f.mode:=fmOutput;
   f.inoutfunc:=@NewCrtOutPut;
   f.flushfunc:=@NewCrtOutPut;
@@ -1700,8 +1700,8 @@ begin
 end;
 
 procedure DDAssignSOutput(var f: text);
-begin;
- with textrec(f) do begin;
+begin
+ with textrec(f) do begin
   handle   := $FFFF;
   mode     := fmclosed;
   bufsize  := sizeof(buffer);
@@ -1742,7 +1742,7 @@ Var
  junk: word;
  fossilstr:string;
 
-begin;
+begin
 
  initddansi;
  oldtextmode:=lastmode;
@@ -1837,7 +1837,7 @@ begin;
              lockbaud);
 
   if not local then
-   begin;
+   begin
     Open_Async_Port;
    end;
 

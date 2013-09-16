@@ -108,21 +108,21 @@ function getparam(s: string; n: integer): string;
 var
  a: integer;
  s2: string;
-begin;
+begin
 
  while (length(s)>0) and (s[1]=' ') do delete(s,1,1);
- if n<>1 then begin;
+ if n<>1 then begin
   while (length(s)>0) and (s[1]<>' ') do delete(s,1,1);
   while (length(s)>0) and (s[1]=' ') do delete(s,1,1);
  end;
- if n=3 then begin;
+ if n=3 then begin
   while (length(s)>0) and (s[1]<>' ') do delete(s,1,1);
   while (length(s)>0) and (s[1]=' ') do delete(s,1,1);
  end;
- while (pos(' ',s)<>0) do begin;
+ while (pos(' ',s)<>0) do begin
   a:=1;
   s2:='';
-  while s[a]<>' ' do begin;
+  while s[a]<>' ' do begin
    s2:=s2+upcase(s[a]);
    a:=a+1;
   end;
@@ -134,7 +134,7 @@ begin;
 end;
 
 function getsecond(s: string): string;
-begin;
+begin
  while (length(s)>0) and (s[1]=' ') do delete(s,1,1);
  while (length(s)>0) and (s[1]<>' ') do delete(s,1,1);
  while (length(s)>0) and (s[1]=' ') do delete(s,1,1);
@@ -145,7 +145,7 @@ end;
 function numparams(s: string): integer;
 var
  i: integer;
-begin;
+begin
  i:=0;
  numparams:=0;
  if length(s)=0 then exit;
@@ -166,7 +166,7 @@ begin
 end;
 
 procedure DDError(s: string);
-begin;
+begin
  write(^G^G);
  writeln('ERROR: '+s);
  write(^G^G);
@@ -174,7 +174,7 @@ begin;
 end;
 
 procedure BadParam(s: string);
-begin;
+begin
  dderror('Invalid parameter');
  halt;
 end;
@@ -183,16 +183,16 @@ procedure processcmdline;
 var
  a,b: integer;
  s,s2: string;
-begin;
+begin
  iomode:=remote;
  dropfilepath:='';
  ctlnm:='';
- for a:=1 to paramcount do begin;
+ for a:=1 to paramcount do begin
   s:=paramstr(a);
 {$IFNDEF LINUX}
   for b:=1 to length(s) do s[b]:=upcase(s[b]);
 {$ENDIF}
-  if (s[1]='/') and (length(s)>1) then begin;
+  if (s[1]='/') and (length(s)>1) then begin
    delete(s,1,1);
    s2:=s;
    delete(s2,1,1);
@@ -205,7 +205,7 @@ begin;
     'L': iomode:=localu;
     'N': val(s2,node_num,b);
     'M': ctlnm := s2;
-    'P': begin;
+    'P': begin
           if s2[length(s2)]<>DIRECTORY_SEPARATOR then s2:=s2+DIRECTORY_SEPARATOR;
           dropfilepath:=s2;
          end;
@@ -234,7 +234,7 @@ var
  f: text;
  ps,p1,p2,p3: string[80];
  ofm: word;
-begin;
+begin
 
  maxtime:=999;
  localcol:=true;
@@ -271,9 +271,9 @@ begin;
   dderror('Configuration file, '+fn+', is missing!');
  end;
 
- while not eof(f) do begin;
+ while not eof(f) do begin
   readln(f,s);
-  if numparams(s)>0 then begin;
+  if numparams(s)>0 then begin
    p1:=getparam(s,1);
    p2:=getparam(s,2);
    p3:=getparam(s,3);
@@ -282,7 +282,7 @@ begin;
   if p1='SYSOPFIRST' then sysop_first_name:=ps else
    if p1='SYSOPLAST' then sysop_last_name:=ps else
    if p1='BBSNAME' then board_name:=ps else
-   if p1='BBSTYPE' then begin;
+   if p1='BBSTYPE' then begin
     if p2='LOCAL' then bbs_software:=1;
     if p2='QUICK' then bbs_software:=3 else
     if p2='PCB12' then bbs_software:=4 else
@@ -299,7 +299,7 @@ begin;
     if p2='DOOR32' then bbs_software:=15 else
      badparam(s);
    end else
-   if p1='STATUS' then begin;
+   if p1='STATUS' then begin
     if p2='OFF' then statline:=false else
     if p2='ON' then statline:=true else
      badparam(s);
@@ -321,7 +321,7 @@ begin;
    if p1='COMPORT' then com_port := StrToIntDef(p2, 0) else
    if p1='PAUSECODE' then pause_code:=ps else
 
-   begin;
+   begin
     ddcfgp1:=p1;
     ddcfgp2:=p2;
     ddcfgps:=ps;

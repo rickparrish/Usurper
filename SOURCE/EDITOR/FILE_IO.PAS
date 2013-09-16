@@ -238,7 +238,7 @@ end;
 procedure Delete_File;
 var
  f: file;
-begin;
+begin
  assign(f,fn);
  {$I-}erase(f);{$I+}
  if ioresult<>0 then begin

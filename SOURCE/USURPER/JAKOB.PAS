@@ -1824,7 +1824,7 @@ Function Todays_Time; {time string[8]}
 var
  hour, min, sec, sec100: word;
  result: string[8];
-begin;  {original code taken from the "date" function in ddscott.pas}
+begin  {original code taken from the "date" function in ddscott.pas}
 
  gettime(hour,min,sec,sec100);
 
@@ -1841,7 +1841,7 @@ Function Todays_Date; {date string[8] american, mm dd yyyy}
 var
  d,m,y,dow: word;
  s,s2: string[8];
-begin;  {original code taken from the "date" function in ddscott.pas}
+begin  {original code taken from the "date" function in ddscott.pas}
 
  getdate(y,m,d,dow);
 
@@ -1872,7 +1872,7 @@ begin
 end;
 
 Procedure Drop_Dos; {Sysop/local user has activated DROP TO DOS function}
-begin;
+begin
 
  if not local then begin
   d(15,'A God has entered the underworld ...');

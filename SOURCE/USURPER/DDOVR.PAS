@@ -132,7 +132,7 @@ var
 function wva(a: word): string;
 var
  s: string;
-begin;
+begin
  str(a,s);
  wva:=s;
 end;
@@ -152,7 +152,7 @@ end;
 function w36(a: word): string;
 var
  s: string;
-begin;
+begin
  case a of
   10..35 : s:=in36(a);
  else
@@ -164,13 +164,13 @@ end;
 function stu(s: string): string;
 var
  a: integer;
-begin;
+begin
  for a:=1 to length(s) do s[a]:=upcase(s[a]);
  stu:=s;
 end;
 
 procedure DDError(s: string);
-begin;
+begin
  write(^G^G);
  writeln('ERROR: '+s);
  write(^G^G);
@@ -184,7 +184,7 @@ type
 var
  dummy: real;
  x: atmp absolute dummy;
-begin;
+begin
  x[1]:=breal[4];
  x[2]:=#0;
  x[3]:=#0;
@@ -200,7 +200,7 @@ var
 begin
  assign(fd,dropfilepath+'PCBOARD.SYS');
  {$i-} reset(fd); {$i+}
- if ioresult <> 0 then begin;
+ if ioresult <> 0 then begin
   dderror('Can''t read system file PCBOARD.SYS');
   halt;
  end;
@@ -213,7 +213,7 @@ var
  tl: integer;
  time_used: real;
  time_left: real;
-begin;
+begin
  time_used:=basic_real(pcbsys.open_time)-basic_real(pcbsys.time_on);
  time_left:=basic_Real(pcbsys.time_limit)-(time_used);
  tl:=round(time_left/60);
@@ -435,7 +435,7 @@ procedure Load_pcboard14;
 var
  tleft,com,graph: integer;
  baud : longint;
-begin;
+begin
  getpcb14(user_first_name,user_last_name,com,graph,tleft,baud);
  com_port:=com;
  baud_rate:=baud;
@@ -450,7 +450,7 @@ procedure load_pcboard;
 var
  a: integer;
  b: boolean;
-begin;
+begin
  user_access_level:=0;
  local:=false;
  get_pcbsys_file;
@@ -479,7 +479,7 @@ var
  i: integer;
  b : boolean;
  a: integer;
-begin;
+begin
  assign(f,dropfilepath+'info.bbs');
  writeln('Opening file "info.bbs"');
  {$I-}
@@ -514,7 +514,7 @@ var
  i: integer;
  sint: word;
 
-begin;
+begin
  assign(f,dropfilepath+'chain.txt');
  writeln('Opening file "Chain.txt"');
  {$I-}
@@ -528,7 +528,7 @@ begin;
  b:=false;
  for a:=1 to length(s) do if s[a]=' ' then b:=true else if b then
   user_last_name:=user_last_name+s[a] else user_first_name:=user_first_name+s[a];
- for i:=1 to 9 do begin;
+ for i:=1 to 9 do begin
   readln(f,s);
  end;
  sint := StrToIntDef(s, 0);
@@ -536,7 +536,7 @@ begin;
  readln(f,s);
  readln(f,s);
  readln(f,s);
- if s<>'0' then begin graphics:=3;color_chg:=true; end else begin;
+ if s<>'0' then begin graphics:=3;color_chg:=true; end else begin
   graphics:=1;
   color_chg:=false;
  end;
@@ -625,7 +625,7 @@ var
  a: integer;
  f: text;
  s: string;
-begin;
+begin
  writeln('Opening "DOOR.SYS".');
  assign(f,dropfilepath+'DOOR.SYS');
  {$I-}
@@ -691,7 +691,7 @@ var
  a: integer;
  f: text;
  s: string;
-begin;
+begin
  writeln('Opening "SFDOORS.DAT".');
  assign(f,dropfilepath+'SFDOORS.DAT');
  {$I-}
@@ -736,7 +736,7 @@ procedure Load_2am;
 var
  f: text;
  s,s2: string;
-begin;
+begin
  local:=false;
  user_access_level:=0;
  writeln('Opening JUMPER.DAT');
@@ -785,7 +785,7 @@ var
  a: integer;
  f: text;
  s: string;
-begin;
+begin
  local:=false;
  user_access_level:=0;
  writeln('Opening TRIBBS.SYS');
@@ -838,7 +838,7 @@ var
  a: integer;
  d: boolean;
  s: string;
-begin;
+begin
  a := StrToIntDef(ParamStr(1), 0);
  if a>0 then node_num:=a;
  local:=true;
@@ -850,10 +850,10 @@ begin;
  writeln('Please enter your name below (or leave blank for '+sysop_first_name+' '+sysop_last_name+'):');
  write('>');
  readln(s);
- if s='' then begin;
+ if s='' then begin
   user_first_name:=stu(sysop_first_name);
   user_last_name:=stu(sysop_last_name);
- end else begin;
+ end else begin
   user_first_name:='';
   user_last_name:='';
   d:=false;
@@ -861,7 +861,7 @@ begin;
    user_first_name:=user_first_name+upcase(s[a])
   else
    user_last_name:=user_last_name+upcase(s[a]);
-  if user_last_name='' then begin;
+  if user_last_name='' then begin
    writeln('Please enter your last name:');
    write('>');
    readln(user_last_name);
@@ -874,7 +874,7 @@ begin;
 end;
 
 procedure load_maint;
-begin;
+begin
  local:=true;
  user_first_name:='SYSTEM';
  user_last_name:='MAINTENANCE';
@@ -882,7 +882,7 @@ begin;
  graphics:=3;
 end;
 
-begin;
+begin
  baud_rate:=0;
  if bbstype=0 then load_maint;
  if bbstype=1 then load_local;
@@ -911,13 +911,13 @@ end;
 function wva(w: word): string;
 var
  s: string;
-begin;
+begin
  str(w,s);
  wva:=s;
 end;
 
 procedure stuffstr(n: word; s: string);
-begin;
+begin
  getmem(ddovrinfo[n],length(s)+1);
  move(s,ddovrinfo[n]^,length(s)+1);
 end;
@@ -968,7 +968,7 @@ const
 var
  s: string;
  a: integer;
-begin;
+begin
  stuffstr( 1,'Baud rate: '+wva(baud_rate));
  stuffstr( 2,'    Local: '+istrue[local]);
  stuffstr( 3,' Graphics: '+wva(graphics));

@@ -422,7 +422,7 @@ begin
    2: size:=fs(FsNpc);
   end;
 
-  for j:=1 to size do begin;
+  for j:=1 to size do begin
    if load_character(player0^,i,j)=true then begin
 
     if (player0^.team<>'') and

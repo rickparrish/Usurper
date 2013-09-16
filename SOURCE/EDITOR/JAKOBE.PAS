@@ -58,7 +58,7 @@ Function Todays_Date:string; {date string[8] american}
 var
  d,m,y,dow: word;
  s,s2: string[8];
-begin;  {original code taken from the "date" function in ddscott.pas}
+begin  {original code taken from the "date" function in ddscott.pas}
  getdate(y,m,d,dow);
  s:=long2str(m);
  if length(s)=1 then s:='0'+s;

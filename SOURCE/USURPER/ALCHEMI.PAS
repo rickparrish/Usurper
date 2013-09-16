@@ -670,7 +670,7 @@ begin
           crlf;
           pause;
          end
-         else begin;
+         else begin
           decplayermoney(player,pcost[zz]^);
 
           player.poison:=strength[zz]^;

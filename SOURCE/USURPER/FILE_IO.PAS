@@ -1725,7 +1725,7 @@ var
    ok : boolean;
    error : integer;
 
-begin; {well, this routine deletes file FN, what a surprise huh!}
+begin {well, this routine deletes file FN, what a surprise huh!}
 
  {init vars}
  i:=0;

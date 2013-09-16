@@ -46,14 +46,14 @@ var
  restx,resty,curcolor: integer;
 
 procedure change_color(c: integer);
-begin;
+begin
  case c of
-  00: begin;any:=true;blink:=false;high:=false;norm:=true;end;
-  01: begin;high:=true;end;
-  02: begin;clrscr;any:=true;end;
-  05: begin;blink:=true;any:=true;end;
+  00: beginany:=true;blink:=false;high:=false;norm:=true;end;
+  01: beginhigh:=true;end;
+  02: beginclrscr;any:=true;end;
+  05: beginblink:=true;any:=true;end;
  end;
- if (c>29) and (c<38) then begin;
+ if (c>29) and (c<38) then begin
   any:=true;
   any2:=true;
   c:=c-30;
@@ -64,7 +64,7 @@ begin;
   if (high=false) and (blink=false) then textcolor(scale[c]);
   fflag:=true;
  end;
- if (c>39) and (c<48) then begin;
+ if (c>39) and (c<48) then begin
   any:=true;
   c:=c-40;
   textbackground(scale[c]);
@@ -78,24 +78,24 @@ var
  T: CHAR;
  jj,a,ttt,tttt: integer;
  flag1:boolean;
-begin;
+begin
  t:=s[length(s)];
  cp:=2;
  case t of
   'k','K': clreol;
   'u': gotoxy(restx,resty);
-  's': begin;
+  's': begin
         restx:=wherex;
         resty:=wherey;
        end;
-  'm','J':begin;
+  'm','J':begin
            repeat;
             a:=-1;
             val(s[cp],a,tttt);
-            if tttt=0 then begin;
+            if tttt=0 then begin
              cp:=cp+1;
              val(s[cp],ttt,tttt);
-             if tttt=0 then begin;
+             if tttt=0 then begin
               a:=a*10;
               a:=a+ttt;
              end;
@@ -103,13 +103,13 @@ begin;
             end;
             cp:=cp+1;
            until cp>=length(s);
-           if norm then begin;
-             if (fflag=false) and (gflag=false) then begin;textcolor(7);textbackground(0);curcolor:=7;end;
-             if (fflag=false) and (gflag=true) then begin;textcolor(7);curcolor:=7;end;
+           if norm then begin
+             if (fflag=false) and (gflag=false) then begintextcolor(7);textbackground(0);curcolor:=7;end;
+             if (fflag=false) and (gflag=true) then begintextcolor(7);curcolor:=7;end;
              if (high=true) and (fflag=false) then textcolor(scaleh[curcolor]);
              if (blink=true) and (fflag=false) then textcolor(scale[curcolor]+32);
              if (blink=true) and (high=true) and (fflag=false) then textcolor(scaleh[curcolor]+32);
-             if (fflag=true) and (gflag=false) then begin;textbackground(0);end;
+             if (fflag=true) and (gflag=false) then begintextbackground(0);end;
             end;
            if any=false then textcolor(scaleh[curcolor]);
 { 5/12/95 srl }
@@ -126,13 +126,13 @@ begin;
 
            any2:=false;any:=false;fflag:=false;gflag:=false;norm:=false;
          end;
-   'C': begin;
+   'C': begin
             a:=1;
             val(s[cp],a,tttt);
-            if tttt=0 then begin;
+            if tttt=0 then begin
              cp:=cp+1;
              val(s[cp],ttt,tttt);
-             if tttt=0 then begin;
+             if tttt=0 then begin
               a:=a*10;
               a:=a+ttt;
              end;
@@ -140,13 +140,13 @@ begin;
             ttt:=wherex;
             if a+ttt<=80 then gotoxy(a+ttt,wherey);
            end;
-   'D': begin;
+   'D': begin
             a:=1;
             val(s[cp],a,tttt);
-            if tttt=0 then begin;
+            if tttt=0 then begin
              cp:=cp+1;
              val(s[cp],ttt,tttt);
-             if tttt=0 then begin;
+             if tttt=0 then begin
               a:=a*10;
               a:=a+ttt;
              end;
@@ -154,13 +154,13 @@ begin;
             ttt:=wherex;
             if ttt-a>=1 then gotoxy(ttt-a,wherey);
            end;
-   'A': begin;
+   'A': begin
             a:=1;
             val(s[cp],a,tttt);
-            if tttt=0 then begin;
+            if tttt=0 then begin
              cp:=cp+1;
              val(s[cp],ttt,tttt);
-             if tttt=0 then begin;
+             if tttt=0 then begin
               a:=a*10;
               a:=a+ttt;
              end;
@@ -168,13 +168,13 @@ begin;
             ttt:=wherey;
             if ttt-a>=1 then gotoxy(wherex,ttt-a);
            end;
-   'B': begin;
+   'B': begin
             a:=1;
             val(s[cp],a,tttt);
-            if tttt=0 then begin;
+            if tttt=0 then begin
              cp:=cp+1;
              val(s[cp],ttt,tttt);
-             if tttt=0 then begin;
+             if tttt=0 then begin
               a:=a*10;
               a:=a+ttt;
              end;
@@ -182,14 +182,14 @@ begin;
             ttt:=wherey;
             if ttt+a<=25 then gotoxy(wherex,ttt+a);
            end;
-  'f','H': begin;
+  'f','H': begin
            flag1:=false;
            a:=1;
             val(s[cp],a,tttt);
-            if tttt=0 then begin;
+            if tttt=0 then begin
              cp:=cp+1;
              val(s[cp],ttt,tttt);
-             if tttt=0 then begin;
+             if tttt=0 then begin
               a:=a*10;
               a:=a+ttt;
               flag1:=true;
@@ -198,13 +198,13 @@ begin;
             jj:=a;
             if flag1=false then cp:=cp+1;
             if flag1=true then cp:=cp+2;
-            if cp<length(s) then begin;
+            if cp<length(s) then begin
             a:=1;
             val(s[cp],a,tttt);
-            if tttt=0 then begin;
+            if tttt=0 then begin
              cp:=cp+1;
              val(s[cp],ttt,tttt);
-             if tttt=0 then begin;
+             if tttt=0 then begin
               a:=a*10;
               a:=a+ttt;
              end;
@@ -217,25 +217,25 @@ begin;
 end;
 
 Procedure ansi_write(ch: char);
-begin;
+begin
   case ch of
    #12: clrscr;
    #09: repeat; write(' '); until wherex/8 = wherex div 8;
-   #27: begin; escape:=true; bbb:=true; end;
+   #27: begin escape:=true; bbb:=true; end;
 
-   else begin;
-    if escape then begin;
-     if (bbb=true) and (ch<>'[') then begin;
+   else begin
+    if escape then begin
+     if (bbb=true) and (ch<>'[') then begin
       blink:=false;
       high:=false;
       escape:=false;
       ansi_string:='';
       write(#27);
      end else bbb:=false;
-     if escape then begin;
+     if escape then begin
       ansi_string:=ansi_string+ch;
       if ch=#13 then escape:=false;
-      if (ch in ['u','s','A','B','C','D','H','m','J','f','K','k',#14]) then begin;
+      if (ch in ['u','s','A','B','C','D','H','m','J','f','K','k',#14]) then begin
        escape:=false;
        eval_string(ansi_string);
        ansi_string:='';
@@ -249,26 +249,26 @@ end;
 Procedure ansi_write_str(var s: string);
 var
  a: integer;
-begin;
- for a:=1 to length(s) do begin;
+begin
+ for a:=1 to length(s) do begin
   case s[a] of
    #12: clrscr;
    #09: repeat; write(' '); until wherex/8 = wherex div 8;
-   #27: begin; escape:=true; bbb:=true; end;
+   #27: begin escape:=true; bbb:=true; end;
 
-   else begin;
-    if escape then begin;
-     if (bbb=true) and (s[a]<>'[') then begin;
+   else begin
+    if escape then begin
+     if (bbb=true) and (s[a]<>'[') then begin
       blink:=false;
       high:=false;
       escape:=false;
       ansi_string:='';
       write(#27);
      end else bbb:=false;
-     if escape then begin;
+     if escape then begin
       ansi_string:=ansi_string+s[a];
       if s[a]=#13 then escape:=false;
-      if (s[a] in ['u','s','A','B','C','D','H','m','J','f','K','k',#14]) then begin;
+      if (s[a] in ['u','s','A','B','C','D','H','m','J','f','K','k',#14]) then begin
        escape:=false;
        eval_string(ansi_string);
        ansi_string:='';
@@ -281,7 +281,7 @@ begin;
 end;
 
 procedure InitDDAnsi;
-begin;
+begin
  escape:=false;
  ansi_string:='';
  blink:=false;

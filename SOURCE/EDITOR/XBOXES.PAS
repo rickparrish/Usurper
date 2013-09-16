@@ -245,7 +245,7 @@ var
   the x,y coordinates in the dialog box; hint=constant pointing at HcX }
    R    : TRect;
    Temp : PButton;
-Begin;
+begin
  R.Assign(x,y,x+w,y+2);
  Temp := New(PButton,Init(R,Txt,cmd,mode));
 
@@ -255,13 +255,13 @@ End;
 
 Procedure XDialog.OKButton(x,y : Byte);
 { Create and insert an 'OK' Button at x,y coordinates }
-Begin;
+begin
  MakeButton(x,y,10,'~O~K',cmOK,bfNormal+bfgrabfocus,hcGenOk);
 End;
 
 Procedure XDialog.CancelButton(x,y : Byte);
 { Create and insert a 'Cancel' button }
-Begin;
+begin
  MakeButton(x,y,10,'~C~ancel',cmCancel,bfNormal+bfgrabfocus,hcGENCancel);
 End;
 
@@ -272,7 +272,7 @@ Var
    ID : PView;
    R : TRect;
 
-Begin;
+begin
 
    GetExtent(R);
    {R.Assign(x+Length(txt)+2,y,R.B.X-2,y+1);  old row, Jakob edits happily!}
@@ -293,7 +293,7 @@ Var
    ID : PView;
    R  : TRect;
 
-Begin;
+begin
    GetExtent(R);
    R.Assign(x+Length(txt)+2,y,x+max+length(txt)+2,y+1);
    ID := New(PValInputLine,Init(R,max,okteck,liten,stor));
@@ -307,7 +307,7 @@ Procedure XDialog.Static(x,y : Byte; const txt : string);
 { Static text at x,y }
 Var
    R : TRect;
-Begin;
+begin
    R.Assign(x,y,x+Length(txt)+1,y+1);
    Insert(New(PStaticText,Init(R,txt)));
 End;
@@ -320,7 +320,7 @@ Var
    amask : longint;
    ID : PCheckboxes;
    lab : PLabel;
-Begin;
+begin
 
  R.Assign(x,y,x+(w+3)+1,y+z);
 
@@ -352,7 +352,7 @@ Var
    y2 : byte;
    lab : plabel;
 
-Begin;
+begin
 
  if flat then begin
   z:=1;

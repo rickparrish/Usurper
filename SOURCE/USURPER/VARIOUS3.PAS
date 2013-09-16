@@ -209,7 +209,7 @@ begin
 
  {name=player who shall receive message in lines nice[1-lines]}
 
- for i:=1 to fs(FsPlayer) do begin;
+ for i:=1 to fs(FsPlayer) do begin
 
   {load character}
   if load_character(pl0,1,i)=true then begin
@@ -301,7 +301,7 @@ begin
  if exclude<>'' then inc(counter);
 
  {send message to ALL human players in team TEAM}
- for i:=1 to fs(FsPlayer) do begin;
+ for i:=1 to fs(FsPlayer) do begin
 
   {load character}
   if load_character(pl0^,1,i)=true then begin

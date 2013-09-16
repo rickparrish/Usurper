@@ -63,7 +63,7 @@ const
  ss: string='0123456789ABCDEF';
 var
  hibyte,lobyte: byte;
-begin;
+begin
  hibyte:=i div 16;
  lobyte:=i-((i div 16)*16);
  hex:=ss[hibyte+1]+ss[lobyte+1];
@@ -78,13 +78,13 @@ var
  e: integer;
  d: longint;
  c: array[1..4] of byte absolute d;
-begin;
+begin
  s:=s+#13;
  s2:='';
  numst:='';
- for a:=1 to length(S) do begin;
-  if s[a] in ['0'..'9'] then numst:=numst+s[a] else begin;
-   if (numst<>'') then begin;
+ for a:=1 to length(S) do begin
+  if s[a] in ['0'..'9'] then numst:=numst+s[a] else begin
+   if (numst<>'') then begin
     val(numst,r,b);
     str(r:0:0,s3);
     val(s3,r,b);
@@ -94,7 +94,7 @@ begin;
      e:=e+1;
      if upcase(s[e])='H' then b:=1;
     until (s[e]=' ') or (e>=length(s)) or (s[e]=#13) or (s[e]=#10);
-    if (r<2000000000) and (b=0) then begin;
+    if (r<2000000000) and (b=0) then begin
      d:=trunc(r);
      numst:=hex(c[4])+hex(c[3])+hex(c[2])+hex(c[1]);
      while (length(numst)>0) and (numst[1]='0') do delete(numst,1,1);
@@ -117,7 +117,7 @@ const
 var
  d: longint;
  c: array[1..4] of byte absolute d;
-begin;
+begin
  if length(s)=0 then exit;
  if upcase(s[length(s)])<>'H' then exit;
  if not (s[1] in ['0'..'9']) then exit;
@@ -134,7 +134,7 @@ end;
 procedure delete_file(fn: string);
 var
  f: file;
-begin;
+begin
  assign(f,fn);
  erase(f);
 end;
@@ -142,7 +142,7 @@ end;
 function va(n: integer): string;
 var
  v: string;
-begin;
+begin
  str(n,v);
  if hexon then hexfilt(v);
  va:=v;
@@ -151,7 +151,7 @@ end;
 function wva(n: word): string;
 var
  v: string;
-begin;
+begin
  str(n,v);
  if hexon then hexfilt(v);
  wva:=v;
@@ -160,7 +160,7 @@ end;
 function lva(n: longint): string;
 var
  v: string;
-begin;
+begin
  str(n,v);
  if hexon then hexfilt(v);
  lva:=v;
@@ -169,7 +169,7 @@ end;
 function rva(n: real): string;
 var
  v: string;
-begin;
+begin
  str(n:0:0,v);
  if hexon then hexfilt(v);
  rva:=v;
@@ -178,13 +178,13 @@ end;
 function stu(s: string): string;
 var
  a: integer;
-begin;
+begin
  for a:=1 to length(s) do s[a]:=upcase(s[a]);
  stu:=s;
 end;
 
 function locase(c: char): char;
-begin;
+begin
  if (c>='A') and (c<='Z') then c:=chr(ord(c)+32);
  locase:=c;
 end;
@@ -192,7 +192,7 @@ end;
 function stl(s: string): string;
 var
  a: integer;
-begin;
+begin
  for a:=1 to length(s) do s[a]:=locase(s[a]);
  stl:=s;
 end;
@@ -201,7 +201,7 @@ Function exist(file_name: string): boolean;
 var
  f: text;
  b: boolean;
-begin;
+begin
  assign(f,file_name);
  {$I-} reset(f); {$I+}
  if ioresult<>0 then b:=false else b:=true;
@@ -212,11 +212,11 @@ end;
 function namestr(s: string): string;
 var
  a: integer;
-begin;
+begin
  s:=stl(s);
- if length(s)>2 then begin;
+ if length(s)>2 then begin
   s[1]:=upcase(s[1]);
-  for a:=1 to length(s) do begin;
+  for a:=1 to length(s) do begin
    if (s[a] in ['.',' ',',',':',';','-','_','(',')']) and (a+1<length(s)) then s[a+1]:=upcase(s[a+1]);
   end;
  end;
@@ -227,7 +227,7 @@ end;
 procedure setmode(modenumber: byte);
 var
  regs: registers;
-begin;
+begin
  regs.ah:=0;
  regs.al:=modenumber;
  intr($10,regs);
@@ -244,7 +244,7 @@ end;
 procedure set25lines;
 var
  regs: registers;
-begin;
+begin
  regs.ax:=$1111;
  regs.bx:=0;
  intr($10,regs);
@@ -266,7 +266,7 @@ end;
 function isega: boolean;
 var
  regs: registers;
-begin;
+begin
  regs.ah:=$12;
  regs.bx:=$10;
  intr($10,regs);
@@ -285,13 +285,13 @@ function QueryAdapterType: Adaptertype;
 var
  regs: registers;
  code: byte;
-begin;
- if isega then begin;
+begin
+ if isega then begin
   regs.ah:=$12;
   regs.bx:=$10;
   intr($10,regs);
   if (regs.bh=0) then queryadaptertype:=egacolor else queryadaptertype:=egamono;
- end else begin;
+ end else begin
   intr($11,regs);
   code:=(regs.al and $30) shr 4;
   case code of
@@ -314,7 +314,7 @@ end;
 procedure cursoroff;
 var
  regs: registers;
-begin;
+begin
  regs.ax:=$0100;
  regs.cx:=$2000;
  intr($10,regs);
@@ -331,11 +331,11 @@ end;
 function determinepoints: integer;
 var
  regs: registers;
-begin;
+begin
  case queryadaptertype of
   cga: determinepoints:=8;
   mda: determinepoints:=14;
-  egamono, egacolor: begin;
+  egamono, egacolor: begin
                       regs.ax:=$1130;
                       regs.bx:=0;
                       intr($10,regs);
@@ -355,7 +355,7 @@ end;
 procedure cursoron;
 var
  regs: registers;
-begin;
+begin
  regs.ax:=$0100;
  regs.ch:=determinepoints-2;
  regs.cl:=determinepoints-1;
@@ -373,7 +373,7 @@ end;
 procedure cursorblock;
 var
  regs: registers;
-begin;
+begin
  regs.ax:=$0100;
  regs.ch:=1;
  regs.cl:=determinepoints-1;
@@ -388,7 +388,7 @@ end;
 {$ENDIF}
 
 function screenaddress: word;
-begin;
+begin
  case queryadaptertype of
   cga: screenaddress:=$B800;
   mda: screenaddress:=$b000;
@@ -402,7 +402,7 @@ procedure savescreen;
 var
  sc1: byte absolute $b000:0;
  sc2: byte absolute $b800:0;
-begin;
+begin
  if screenaddress=$b000 then move(sc1,screen^,4000);
  if screenaddress=$b800 then move(sc2,screen^,4000);
  x:=wherex;
@@ -423,7 +423,7 @@ procedure restorescreen;
 var
  sc1: byte absolute $b800:0;
  sc2: byte absolute $b000:0;
-begin;
+begin
  if screenaddress=$b000 then move(screen^, sc2,4000);
  if screenaddress=$b800 then move(screen^, sc1,4000);
  gotoxy(x,y);
@@ -441,7 +441,7 @@ function date: datetype;
 var
  d,m,y,dow: word;
  s,s2: string[6];
-begin;
+begin
  getdate(y,m,d,dow);
  y:=y-1900;
  s:=va(m);
@@ -458,7 +458,7 @@ end;
 function bitcheck(n: word; b: byte): boolean;
 var
  a,c: integer;
-begin;
+begin
  a:=2;
  for c:=1 to b do a:=a*2;
  if (a and n)<>0 then bitcheck:=true else bitcheck:=false;
@@ -467,7 +467,7 @@ end;
 procedure setbit(var n: word; b: byte);
 var
  a,c: integer;
-begin;
+begin
  a:=2;
  for c:=1 to b do a:=a*2;
  n:=(a or n);
@@ -476,7 +476,7 @@ end;
 procedure resetbit(var n: word; b: byte);
 var
  a,c: integer;
-begin;
+begin
  a:=2;
  for c:=1 to b do a:=a*2;
  a:= not a;

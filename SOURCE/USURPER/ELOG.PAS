@@ -236,7 +236,7 @@ BEGIN
   END;
 
 Procedure MyExit1;
-Begin;
+begin
  TrapExit;
  SaveExitProc:=Exitproc;
 End;
