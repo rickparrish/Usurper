@@ -57,8 +57,6 @@ Procedure Newsy;
 var
     newsfile : text;
 
-    i : integer;
-
     s1,
     s2,
     s3 : s100;

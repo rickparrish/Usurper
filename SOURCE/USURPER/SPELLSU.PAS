@@ -48,7 +48,7 @@ Function Spell_Multi_Monster(nr:integer) : boolean;
 
 Implementation
 
-Uses Jakob, Various, Various2;
+Uses Jakob, Various2;
 
 
 Function Spell_User (const ply:userrec):boolean; {is ply a spell user?}

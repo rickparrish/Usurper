@@ -30,7 +30,7 @@ Procedure Death_Maze;
 Implementation
 
 Uses Init, Cms, Jakob,
-     File_Io, Statusc, Various,
+     File_Io, Statusc,
      Online;
 
 var refresh : boolean;

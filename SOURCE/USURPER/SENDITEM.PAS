@@ -31,7 +31,7 @@ Implementation
 
 Uses Init, Cms, Jakob,
      Mail, Statusc, Invent,
-     Comp_Use, Npc_Chec, Various,
+     Npc_Chec, Various,
      Various2, Various3, Relation,
      Online, File_Io;
 

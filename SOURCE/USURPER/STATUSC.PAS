@@ -642,7 +642,7 @@ Procedure Status;
 var
 
  tempin,
- s, a, a2 : s70;
+ a2 : s70;
 
  ch : char;
 

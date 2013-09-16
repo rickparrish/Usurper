@@ -119,8 +119,6 @@ Const
       opentxt  ='OPEN'; {open estab. text}
       closetxt ='closed'; {closed estab. text}
 
-      {moat stuff}
-      maxmoatguards =100; {max creatures a king can have in the moat}
 var
 
    k,
@@ -132,8 +130,7 @@ var
    ok,
    found,
    search,
-   finito,
-   accept  : boolean;
+   finito : boolean;
 
    pl0,
    pl1       : ^UserRec; {user records}
@@ -218,9 +215,6 @@ var
 
    done,
    abort : boolean;
-
-   i,
-   j : word;
 
    x : longint;
 
@@ -784,7 +778,6 @@ Procedure Royal_Orders;
 var
   cho : char;
   i : word;
-  x : longint;
 
   s,
   s3,
@@ -2421,9 +2414,6 @@ var
  y,
  cost,
  money : longint;
-
-
- done : boolean;
 
 begin {THE_CASTLE, MAIN PROC **START**}
 

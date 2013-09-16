@@ -34,7 +34,7 @@ Implementation
 
 Uses DDplus, Init, Cms,
      InitGods, Jakob, Various,
-     Various2, Various3, VarGods,
+     Various3, VarGods,
      StatusC, Relation, Mail,
      Post_To, Sortpl, Online,
      Children, News, GenNews,

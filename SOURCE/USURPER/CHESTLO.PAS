@@ -40,7 +40,6 @@ Uses Cms, Jakob,
      relation;
 
 var
-    ch : char;
     refresh : boolean;
 
 Procedure Meny;
@@ -107,14 +106,13 @@ end; {display_menu *end*}
 Procedure Chest_Looting;
 var
    go_ahead, loadres,
-   done, found, abort,
+   found, abort,
    spotted : boolean;
 
     ch : char;
 
 
     cc,
-    check,
     posmem,
     counter : integer;
 

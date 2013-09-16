@@ -140,7 +140,6 @@ var
 
     xx, zz, x, i : longint;
     y : integer;
-    s : s70;
     a : s70;
     ch : char;
     pl : array [1..4] of ^Userrec;

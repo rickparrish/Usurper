@@ -167,7 +167,6 @@ Function Get_Teamname; {returns a teamname}
 var
     result : s70;
 
-    txt : text;
 begin
 
  {init}
@@ -2265,7 +2264,7 @@ var
     k,l : byte;
     mate : UserRec;
     s : s70;
-    ok,begg : boolean;
+    ok : boolean;
 
     roster  : array[1..4] of s30; {keep plys team-mates}
     rosterx : array[1..4] of byte; {1=player file,2=npc file}

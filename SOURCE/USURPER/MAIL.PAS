@@ -126,13 +126,10 @@ end; {Old_Mail *end*}
 Procedure Save_Mail(var postme:mailrec);
 const max_records = 65500; {max records allowed in mail database}
 var
-    i,
     size,
     empty_mailslot : word;
 
     saved : boolean;
-
-    TempMail : MailRec;
 
 begin
 
@@ -193,14 +190,11 @@ var
    i,
    j,
    x,
-   y,
-   cc,
-   result : longint;
+   y : longint;
 
    l,
    k,
-   col,
-   maxdays : byte;
+   col : byte;
 
    count : integer;
 
@@ -213,7 +207,6 @@ var
    qtext : array [1..10] of ^s100;
    worm  : array [1..global_maxmaillines] of ^s100;
 
-   oki,
    found,
    quote,
    readerisgod,

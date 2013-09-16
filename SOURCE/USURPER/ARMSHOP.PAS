@@ -31,7 +31,7 @@ Procedure Armor_Shop;
 Implementation
 
 Uses Init, Cms, Jakob,
-     News, Statusc, Invent,
+     News, Invent,
      Hagglec, Various, Various2,
      Online, File_Io;
 
@@ -332,11 +332,10 @@ Procedure Armor_Shop;
 var
     komihag, cho, ch : char;
 
-    cc, y,j, justval : integer;
+    cc, j : integer;
 
     x, i, xx : longint;
 
-    show,
     leave_place : boolean;
 
     zz : word;
@@ -436,7 +435,6 @@ begin
    crlf;
    j:=0;
    cc:=3;
-   justval:=14;
 
    sd(5,ljust('#',4));
    sd(5,ljust('Item',16));
@@ -682,7 +680,6 @@ begin
          crlf;
          d(5,'Ancient Armors                 Price');
          cc:=1;
-         justval:=14;
 
          for i:=1 to fs(FsArmorClassic) do begin
           load_armor(i,aarmor);

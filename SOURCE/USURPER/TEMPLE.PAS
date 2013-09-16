@@ -527,7 +527,6 @@ var
    note : s90;
 
    i : word;
-   nr : word;
 
    x : longint;
    y : longint;

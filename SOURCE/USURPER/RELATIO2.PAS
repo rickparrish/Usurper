@@ -55,7 +55,7 @@ Procedure Npc_Set_Out_To_Marry;
 Implementation
 
 Uses CMS, Jakob, Various,
-     Various2, Various3, News,
+     Various3, News,
      Mail, File_Io, GenNews,
      Children, File_Io2, Relation;
 
@@ -676,8 +676,6 @@ end; {validate_all_relations *end*}
 Procedure Relations_Editor; {for debugging purposes only!}
 var
 
-    rel : Relationrec;
-
     ply,ply2 : userrec;
 
     done,
@@ -879,7 +877,6 @@ Procedure Npc_Set_Out_To_Marry; {called from npcmaint.pas}
 var
    i, ii : word;
    x : longint;
-   j : byte;
    s : s70;
    child : childrec;
    marry, spouse  : userrec;

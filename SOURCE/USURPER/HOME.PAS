@@ -73,7 +73,6 @@ var
 
     ok,
     done,
-    found,
     child_mean,
     nursery_done,
     play_finished,
@@ -89,11 +88,9 @@ var
     attacker,
     defender : s30;
 
-    attacker_sex,
-    defender_sex : byte;
+    attacker_sex : byte;
 
-    kid_turn1,
-    kid_turn2 : boolean;
+    kid_turn1 : boolean;
 
     kid_power1,
     kid_power2 : integer;
@@ -330,7 +327,6 @@ begin
            repeat
             for i:=1 to max_kidparty do begin
              if child_array[i]^.name<>'' then begin
-              found:=false;
               x:=0;
               for j:=1 to max_kidparty do begin
                if (child_array[j]^.name<>child_array[i]^.name) and
@@ -339,7 +335,6 @@ begin
                   (child_array[j]^.motherid<>child_array[i]^.motherid) and
                   (child_array[j]^.fatherid<>child_array[i]^.fatherid) then begin
                 x:=j;
-                found:=true;
                 break;
                end;
               end; {for j:= .end.}
@@ -1002,7 +997,6 @@ begin
                kid_power1:=child.age*2;
                kid_power2:=otherchild.age*2;
                kid_turn1:=true;
-               kid_turn2:=false;
 
                crlf;
                d(2,ukidc+child.name+config.textcol1+' sneaks up behind '+ukidc+otherchild.name+config.textcol1+'!');
@@ -1013,13 +1007,11 @@ begin
                  attacker    :=child.name;
                  attacker_sex:=child.sex;
                  defender    :=otherchild.name;
-                 defender_sex:=otherchild.sex;
                 end
                 else begin
                  attacker    :=otherchild.name;
                  attacker_sex:=otherchild.sex;
                  defender    :=child.name;
-                 defender_sex:=otherchild.sex;
                 end;
 
                 {attack option}
@@ -1051,11 +1043,9 @@ begin
                 {switch turns}
                 if kid_turn1 then begin
                  kid_turn1:=false;
-                 kid_turn2:=true;
                 end
                 else begin
                  kid_turn1:=true;
-                 kid_turn2:=false;
                 end;
 
                until (kid_power1<1) or (kid_power2<1);

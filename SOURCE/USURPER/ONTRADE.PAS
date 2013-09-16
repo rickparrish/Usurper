@@ -43,7 +43,6 @@ var
 
     oppo : s30;
 
-    s,
     save_mess,
     outmessage : s70;
 

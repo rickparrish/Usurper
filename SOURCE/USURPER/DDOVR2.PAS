@@ -1,11 +1,11 @@
 {$I DEFINES.INC}
 unit ddovr2;
 
-{$O+,F+,V-}
+{$O+,V-}
 
 interface
 
-uses dos, jakob, crt;
+uses dos, crt;
 
 procedure Loadconfig(
  fn: string;
@@ -134,9 +134,6 @@ begin;
 end;
 
 function getsecond(s: string): string;
-var
- a: integer;
- s2: string;
 begin;
  while (length(s)>0) and (s[1]=' ') do delete(s,1,1);
  while (length(s)>0) and (s[1]<>' ') do delete(s,1,1);
@@ -237,7 +234,7 @@ end;
 var
  s: string;
  f: text;
- a,b,c: integer;
+ a: integer;
  ps,p1,p2,p3: string[80];
  ofm: word;
 begin;

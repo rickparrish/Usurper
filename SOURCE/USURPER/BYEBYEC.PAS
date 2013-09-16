@@ -26,7 +26,7 @@ Unit ByeByeC; {Usurper - This is the Exit routine,
 
 Interface  {keyboard inactivity check takes place in DDPLUS.PAS}
 
-Procedure ByeBye; far;
+Procedure ByeBye;
 
 Implementation
 

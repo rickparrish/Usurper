@@ -150,7 +150,6 @@ Procedure The_Inn;
 const never : boolean = false;
 const maxlin=5; {max lines to add to Inn chat file}
 var
-    y,
     k,
     cc,
     size,
@@ -184,7 +183,7 @@ var
 const len = 70;   {max length of text lines}
 
 Procedure Attack_Player; {attack a character}
-var i, j, k, x : longint;
+var i, j, x : longint;
 begin
 
  if player.pfights<1 then begin

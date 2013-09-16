@@ -37,11 +37,8 @@ Uses Init, Cms, Jakob,
 
 Procedure Resurrect;
 var
-    s,
-    a,
-    a2 : s70;
+    a : s70;
 
-    x,
     yy : longint;
 
     i, j,
@@ -172,9 +169,6 @@ end
       sd(global_plycol,pl0^.name2);
       d(config.textcolor,' seems to be fit for fight!');
       crlf;
-
-      x:=1;
-      a2:='';
 
       if pl0^.ai='H' then begin
        post(MailSend,

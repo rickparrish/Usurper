@@ -31,7 +31,7 @@ Function User_Search(var username:s70;enter_game_if_exists:boolean) : boolean; {
 Implementation
 
 Uses DDplus, Jakob, Cms,
-     Mail, Statusc, News,
+     Mail, News,
      Various, Various2, Online,
      File_Io, SysUtils;
 
@@ -59,7 +59,7 @@ var
    pl0 : UserRec;
    king : KingRec;
 
-   no_play,ok : boolean;
+   no_play : boolean;
 
 
 Begin

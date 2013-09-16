@@ -67,10 +67,7 @@ var
     afflicted,
     save_need,
     npcpurnews,
-    bought,
-    bother,
-    found,
-    skip_hunt : boolean;
+    bother : boolean;
 
     pl0, pl1 : ^UserRec;
     objekt : ^orec;
@@ -968,14 +965,13 @@ var
     npccharge,
     npcbuy,
     npcnews,
-    npc_married,
     go_ahead,
     npcallow  : boolean;
 
     vic, mem,
     attempts, y, interest : integer;
 
-    yy, rep, xx, townpot, zz, x, z, q, rand : longint;
+    yy, rep, xx, zz, x, q : longint;
 
     s2, ss,s : string;
 

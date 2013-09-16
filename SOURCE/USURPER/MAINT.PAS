@@ -34,16 +34,13 @@ Uses Crt, DDplus, Init, Cms,
      Jakob, NpcMaint, Wantedsc,
      Mail, News, Various,
      Various2, Various3, VarGods,
-     Children, Relation, Online,
+     Children, Relation,
      File_Io, SysUtils;
 
 Procedure Maintenance;
 var
    pay,
    mem,
-   save,
-   truly,
-   found,
    king_found,
    resurrect : boolean;
 
@@ -53,8 +50,6 @@ var
    s,
    s1: s90;
 
-   y,
-   rep,
    mem2,
    maxtime,
    tfights,
@@ -64,7 +59,6 @@ var
    rr : real;
 
    i,
-   j,
    x,
    xx,
    yy,
@@ -73,8 +67,6 @@ var
    treasury_mem : longint;
 
    memy : byte;
-
-   txt : text;
 
    pl0 : UserRec;
    aarmor : armrec;

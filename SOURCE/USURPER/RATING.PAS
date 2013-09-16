@@ -36,16 +36,14 @@ Implementation
 
 Uses Init, Cms, Jakob,
      Statusc, Online, Sortpl,
-     Various, Various2, AnsiColr,
+     Various, AnsiColr,
      Relatio2, File_Io, SysUtils;
 
       {max number of users/records the routines in this unit will handle}
 const maxsorts = global_maxplayers*2;
 
 var
-    dummy : byte;
-
-    k, y : word;
+    k : word;
 
     gap,
     count,
@@ -968,7 +966,6 @@ begin
  end;
 counter:=0;
  if (filescore=true) and (eansi^<>'') then begin
-  dummy:=0;
 
   if open_txtfile(trewrite,ansifile,eansi^) then begin
    wrl(10,'    '+eansi^);
@@ -1030,7 +1027,6 @@ counter:=counter+1;
 
  if (filescore=true) and (easci^<>'') then begin
 
-  dummy:=0;
 counter:=0;
   if open_txtfile(trewrite,ascifile,easci^) then begin
 
@@ -1264,7 +1260,6 @@ if config.classic then begin
  end;
 
  if (filescore=true) and (aansi^<>'') then begin
-  dummy:=0;
 
   if open_txtfile(trewrite,ansifile,aansi^) then begin
    wrl(10,'    '+aansi^);
@@ -1331,8 +1326,6 @@ counter:=0;
  end;
 
  if (filescore=true) and (aasci^<>'') then begin
-
-  dummy:=0;
 
   if open_txtfile(trewrite,ascifile,aasci^) then begin
    wrl(10,'    '+aasci^);
@@ -1595,7 +1588,6 @@ if config.classic then begin
  end;
 counter:=0;
  if (filescore=true) and (wansi^<>'') then begin
-  dummy:=0;
 
   if open_txtfile(trewrite,ansifile,wansi^) then begin
    wrl(10,'    '+wansi^);
@@ -1663,7 +1655,6 @@ counter:=0;
  end;
 
  if (filescore=true) and (wasci^<>'') then begin
-  dummy:=0;
 counter:=0;
   if open_txtfile(trewrite,ascifile,wasci^) then begin
    wrl(10,'    '+wasci^);
@@ -1925,7 +1916,6 @@ nice[o]:=ply0^.m_kills-ply0^.m_defeats; {killer rating}
 
  {Writing Ansi-File}
  if (filescore=true) and (mkillansi^<>'') then begin
-  dummy:=0;
 
   if open_txtfile(trewrite,ansifile,mkillansi^) then begin
    wrl(10,'    '+mkillansi^);
@@ -2012,7 +2002,6 @@ counter:=counter+1;
 
  {Writing Ascii-File}
  if (filescore=true) and (mkillasci^<>'') then begin
-  dummy:=0;
 
   if open_txtfile(trewrite,ascifile,mkillasci^) then begin
    wrl(10,'    '+mkillasci^);
@@ -2300,7 +2289,6 @@ nice[o]:=ply0^.p_kills-ply0^.p_defeats;
  end;
 
  if (filescore=true) and (pkillansi^<>'') then begin
-  dummy:=0;
 
   if open_txtfile(trewrite,ansifile,pkillansi^) then begin
    wrl(10,'    '+pkillansi^);
@@ -2380,7 +2368,6 @@ counter:=counter+1;
  end;
 
  if (filescore=true) and (pkillasci^<>'') then begin
-  dummy:=0;
 
   if open_txtfile(trewrite,ascifile,pkillasci^) then begin
    wrl(10,'    '+pkillasci^);

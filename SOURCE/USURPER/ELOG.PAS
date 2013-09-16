@@ -41,8 +41,6 @@ PROCEDURE Terminate (N:Byte);
    End
  End;
 
-{$F+}
-
 (* This exit procedure may be used to trap HALT codes.  If defined in the
    main body of your program (DoorExit := TrapExit), this procedure will be
    called whenever your program encounters a HALT code or runtime error.
@@ -241,9 +239,8 @@ BEGIN
    {if RIP <> nil then
      Dispose(RIP, Done);}
   END;
-{$F-}
 
-{$F+} Procedure MyExit1; {$F-}
+Procedure MyExit1;
 VAR SaveExitProc: POINTER;
 Begin;
  TrapExit;

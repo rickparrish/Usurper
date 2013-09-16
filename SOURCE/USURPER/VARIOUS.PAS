@@ -171,7 +171,7 @@ Implementation
 
 Uses Crt, DDplus, Jakob,
      Cms, Mail, Resetg,
-     PlvsPlc, PlComp, Various2,
+     Various2,
      Various3, Relation, News,
      Online, File_Io2, File_Io, SysUtils;
 
@@ -1457,7 +1457,7 @@ end; {swappy *end*}
 Procedure XPLose;
 var
    s : s70;
-   z, zz : real;
+   zz : real;
    x : longint;
    lost : byte;
    lose : ^real;
@@ -1648,7 +1648,6 @@ Procedure Healing;
 
 var
     zz, x, z : longint;
-    s : s70;
 
 begin
 
@@ -2903,8 +2902,6 @@ var
     found : boolean;
 
     i : word;
-
-    king : kingrec;
 
 begin {try to locate and load king from user/npc file}
 

@@ -661,7 +661,6 @@ end; {remove_parent *end*}
 
 Procedure Free_Kidnapped_Children(const ply:userrec);
 var i : word;
-   ok : boolean;
    child : ChildRec;
 begin
  {set kids by player free, this routine is used by the deactivate_player
@@ -1285,9 +1284,8 @@ var {display ply:s children, the kidnapped ones}
    lines : byte;
 
    s : s90;
-   parent_string : string[7];
+   parent_string : string[15];
 
-   ok,
    found : boolean;
 
    Child : ChildRec; {a kid!}
@@ -1407,8 +1405,6 @@ var
 
    double_cost,
    x,cost : longint;
-
-   s : s90;
 
    king : KingRec;
    child : ChildRec;
@@ -2174,7 +2170,6 @@ var {display ply:s children, all children including *out of marriage* and
 
    parent_string : string[6];
 
-   ok,
    found : boolean;
 
    Child : ChildRec; {a kid!}

@@ -1,10 +1,10 @@
 {$I DEFINES.INC}
 unit ddovr;
-{$O+,F+,V-}
+{$O+}
 
 interface
 
-uses jakob, crt, init;
+uses crt, init;
 
 {procedure showhelp;}
 
@@ -330,16 +330,9 @@ Type
 VAR
    pcbfile  : file;
    pcb14    : pcb_sys_rec14;
-   qbbsout  : text;
-   filname  : string[8];
-   lastname : string[20];
-   graph    : integer;
-   sys_name,sysopfirst,sysoplast : string[30];
-   a,b,i    : integer;
-   c        : char;
+   a,i    : integer;
    s: string;
    Name        : String[25];
-   GM          : String[2];
 
 Begin
  Assign(PCBFile,dropfilepath+'PCBoard.Sys');
@@ -391,7 +384,7 @@ end;
 procedure load_rbbs16;
 var
  fd:    text;
- a,b: integer;
+ a: integer;
  info_num:byte;
  s,s2: string;
 begin
@@ -460,7 +453,6 @@ procedure load_pcboard;
 var
  a: integer;
  b: boolean;
- ton,toff: real;
 begin;
  user_access_level:=0;
  local:=false;
@@ -521,7 +513,7 @@ var
  a: integer;
  b: boolean;
  f : text;
- ss,s : string;
+ s : string;
  code,i: integer;
  sint: word;
 
@@ -796,7 +788,7 @@ var
  b: boolean;
  a: integer;
  f: text;
- s,s2: string;
+ s: string;
 begin;
  local:=false;
  user_access_level:=0;

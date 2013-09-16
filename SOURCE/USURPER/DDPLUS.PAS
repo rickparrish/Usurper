@@ -1,6 +1,6 @@
 {$I DEFINES.INC}
 Unit DDPlus;
-{$V-,F+}
+{$V-}
 
 Interface
 
@@ -173,9 +173,7 @@ end;
 { area this has colored black.                                      }
 procedure forced_chat;
 var
-  i,x,y,cx,cy,oldy:byte;
   ch: char;
-  a: integer;
   old_origin: charorigintype;
   word: string;
   lastspace: integer;
@@ -445,10 +443,10 @@ end;
 procedure Selectansi;
 var
   f: text;
-  b,g,counter,chcount : integer;
+  g,counter,chcount : integer;
   c,quit: boolean;
   k,ch: char;
-  ansisave,moresave,swon : boolean;
+  ansisave,swon : boolean;
   ofm: word;
 begin
   ofm:=filemode;
@@ -531,7 +529,7 @@ var
   error : integer;
   c,quit,nonstop: boolean;
   k,ch: char;
-  ansisave,moresave: boolean;
+  ansisave: boolean;
   nyfil : string[100];
 
 begin
@@ -597,8 +595,6 @@ begin
 end;
 
 procedure SendText(s: string);
-var
- a: integer;
 begin;
  {jakob}
  If (Not CommCarrier) then begin
@@ -838,7 +834,6 @@ end;
 procedure sread_ch(var ch: char);
 var
  a: char;
- i : integer;
 
  hour, minute, second, sec100:word;
 
@@ -977,7 +972,7 @@ end;
 
 procedure sread_char(var ch: char);
 var
- ch1,ch2: char;
+ ch1: char;
 begin;
  curlinenum:=1;
  repeat;
@@ -1351,7 +1346,7 @@ const
 var
 
  fg,bg: integer;
- x,y,code: integer;
+ x,y: integer;
  ch: char;
  a: integer;
 
@@ -1433,7 +1428,7 @@ const
  promptcol3=15;
 var
  fg,bg: integer;
- x,y,code: integer;
+ x,y: integer;
  ch: char;
  a: integer;
 begin;
@@ -1495,7 +1490,7 @@ const
  promptcol3=15;
 var
  fg,bg: integer;
- x,y,code: integer;
+ x,y: integer;
  ch: char;
  a: integer;
 begin;
@@ -1656,7 +1651,7 @@ end;
 
 Function RipDetect: boolean;
 var
-  i,j,k : integer;
+  i,j : integer;
   a : char;
   s : string;
   RipYes : boolean;
@@ -1752,8 +1747,6 @@ end;
 
 procedure InitDoorDriver(ConfigFileName: string);
 Var
- i,a: byte;
- b: integer;
  junk: word;
  fossilstr:string;
 

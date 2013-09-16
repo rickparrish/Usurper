@@ -27,7 +27,6 @@ Unit Jakob; {Usurper - Basic Door Routines Using DDPLUS door driver
 
              if you plan on switching door driver, some of these
              routines will require modifying}
-{$F+}
 Interface
 
 const global_place : byte = 0; {see spin_cursor}
@@ -133,7 +132,7 @@ Uses Dos, Crt, Init,
      DDplus,
      AnsiColr,
      Various, DispText,
-     Online, File_IO, DateUtils, VideoUtils, Comm, SysUtils;
+     File_IO, DateUtils, VideoUtils, Comm, SysUtils;
 
 var carriage_return : boolean; {used by D and SD procedures (display routines)}
     SavedX, SavedY: Word;

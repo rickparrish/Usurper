@@ -31,12 +31,9 @@ Procedure King_Maintenance(var ply:userrec; var king:kingrec);
 
 Implementation
 
-Uses Cms, Jakob, Mail,
+Uses Cms, Jakob,
      News, Various, Various2,
      Various3, File_Io;
-var
-   not_used : boolean;
-
 
 Procedure King_Maintenance;
 var

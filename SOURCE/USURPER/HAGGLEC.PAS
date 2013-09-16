@@ -36,7 +36,6 @@ Uses Init, Jakob, News;
 
 Function Haggle;
 var
-    diff,
     offer,
     temp,
     cost : longint;

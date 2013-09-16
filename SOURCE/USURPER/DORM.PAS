@@ -31,8 +31,8 @@ Procedure Dormitory;
 Implementation
 
 Uses Init, Cms, Jakob,
-     Plvsplc, Statusc, Mail,
-     News, Npc_Chec, Plcomp,
+      Statusc, Mail,
+     News,
      Various, Various2, Various3,
      Online, File_Io, SysUtils;
 
@@ -891,8 +891,7 @@ var
 
     s : s100;
 
-    size,
-    justval : word;
+    size : word;
 
     x : longint;
 

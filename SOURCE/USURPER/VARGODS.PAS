@@ -131,8 +131,6 @@ var
     result : boolean;
     i : word;
 
-    s : s70;
-
     tgod : godrec;
 
 begin {verify that a God by the name NAME exists, and is not deleted}
@@ -868,7 +866,6 @@ begin
 end; {How_Many_Believers *end*}
 
 Procedure Meny;
-const offset = 18;
 begin
 
  {text}

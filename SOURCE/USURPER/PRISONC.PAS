@@ -32,7 +32,7 @@ Implementation
 
 Uses Init, Cms, Jakob,
      Statusc, Various, Various2,
-     Post_To, Mail, Gamec,
+     Post_To, Mail,
      News, Online, File_Io, SysUtils;
 
 var refresh : boolean;

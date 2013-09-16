@@ -39,8 +39,6 @@ Uses Init, Cms, Jakob,
 var
     refresh : boolean;
 
-    justval : integer;
-
     pl : array [1..4] of ^Userrec; {User Records}
 
 
@@ -358,7 +356,7 @@ Var
 
     male : boolean;
 
-    pstam, cstam, cstammax, i, justval, diff : longint;
+    pstam, cstam, cstammax, i, diff : longint;
 
     a, a2, s, ts, ok , no : ^s70;
 

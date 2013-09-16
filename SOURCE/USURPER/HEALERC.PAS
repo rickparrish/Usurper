@@ -31,14 +31,13 @@ Procedure Healer;
 Implementation
 
 Uses Init, Cms, Jakob,
-     Invent, News, Statusc,
+     News, Statusc,
      Various, Various2, Online,
      File_Io, SysUtils;
 
 const manager = 'Jadu';
 
 var refresh : boolean;
-    justval : byte;
 
 Procedure Meny;
 begin
@@ -50,7 +49,6 @@ begin
  d(config.textcolor,'He is wearing a monks robe and a golden ring.');
 
  crlf;
- justval:=24;
 
  menu('(H)eal Disease');
  menu('(C)ursed item removal');
@@ -103,22 +101,15 @@ end;
 Procedure Healer;
 const disease_col =ulgray ; {display disease names in this color}
 var
-    x,
-    y,
-    justval : integer;
+    y : integer;
 
     healed, found, leave_place : boolean;
 
     ch : char;
 
     i,
-    j,
-    cc,
-    xx,
     total,
     cursecost : longint;
-
-    s : s70;
 
     cost : array [1..5] of ^longint;
 

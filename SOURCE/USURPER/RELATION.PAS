@@ -88,7 +88,7 @@ Implementation
 
 
 Uses CMS, Jakob, Relatio2,
-     Various, Various2, Various3,
+     Various, Various3,
      News, Mail, Online,
      Children, GenNews, File_Io, SysUtils;
 
@@ -892,7 +892,7 @@ end;
 
 Procedure Kill_Duplicate_Relations;
 var
-    i, j, size ,hits, mem  : word;
+    i, j, hits, mem  : word;
 
     ok : boolean;
 

@@ -35,7 +35,7 @@ Procedure Computer_Use ( var player0 : userrec;
 
 Implementation
 
-Uses Jakob, invent, various,
+Uses Jakob, invent,
      file_io;
 
 Procedure Back_Pack(var gubbe : userrec;

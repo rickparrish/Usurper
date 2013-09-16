@@ -37,7 +37,7 @@ Procedure Computer_Computer(maintcombat : boolean;
 Implementation
 
 Uses Jakob, various, various2,
-     invent, cast, swapeq;
+     cast, swapeq;
 
 Procedure Computer_Computer;
 var

@@ -59,8 +59,6 @@ Procedure Generic_News; {** Generic News **}
 var
     newsfile : text;
 
-    i : integer;
-
     header,
     datestr : s90;
 

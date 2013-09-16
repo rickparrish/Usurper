@@ -30,8 +30,8 @@ Procedure Dungeons(teamdngs:boolean);
 Implementation
 
 Uses Init, Cms, Jakob, Dmaze,
-     IceCaves, Dungevc, Statusc,
-     Supremec, Invent, Plvsmon,
+     Dungevc, Statusc,
+     Supremec, Plvsmon,
      Mail, News, Various,
      Uman, Npc_Chec, Various2,
      Various3, Online, File_Io;
@@ -128,11 +128,10 @@ begin
 end; {team_member_instruct *end*}
 
 Function Team_Select : integer; {let player select team-mates to follow}
-const col = 13; {phrase color}
 var
     i : longint;
 
-    y, j  : integer;
+    y  : integer;
 
     gtext1, gtext2 : s70;
 
@@ -495,7 +494,7 @@ var
     y, need : integer;
 
     leave_dungeons,
-    done, alive, demon,
+    done, demon,
     first : boolean;
 
     ch,

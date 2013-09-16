@@ -31,7 +31,7 @@ Implementation
 
 Uses Init, Cms, Jakob,
      Groggo, Bobs, Alchemi,
-     Statusc, Orb, News,
+     Orb,
      Drugs, Steroids, Various,
      Various2, Online, File_Io, SysUtils;
 
@@ -106,9 +106,7 @@ end; {display_menu *end*}
 Procedure Shady_Shops;
 var
     cho : char;
-    y   : word;
    done : boolean;
-      s : s30;
 
    king : kingrec;
 

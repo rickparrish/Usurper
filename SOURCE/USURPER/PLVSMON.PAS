@@ -51,10 +51,6 @@ Uses Jakob, Statusc, Invent,
 var
     dispat, norm_att, found, done, first : boolean;
 
-    ch : char;
-
-    justval : integer;
-
     tempman : userrec;
 
     healed : boolean;
@@ -382,12 +378,10 @@ var
 
  cho : char;
 
- fastgame,
  to_death,
  expert_press : boolean;
 
- s,
- dungeon : s70;
+ s : s70;
 
  i,
  j,
@@ -397,7 +391,6 @@ var
  xx  : longint;
 
  y,
- diff,
  stab1 : integer;
 
  k,

@@ -31,12 +31,11 @@ Procedure Magic_Shop;
 Implementation
 
 Uses Init, Cms, Jakob,
-     Statusc, Invent, Various,
+     Invent, Various,
      Various2, Online, File_Io;
 
 var
    a2, owner : s70;
-   justval : integer;
    refresh : boolean;
    counter : integer;
 
@@ -137,7 +136,6 @@ var
     objekt : ^orec;
     mys1,mys2,mys3 : longint;
     soktyp : objtype;
-    ok : boolean;
 
     souktyp : array[1..3] of objtype;
     xi:byte;

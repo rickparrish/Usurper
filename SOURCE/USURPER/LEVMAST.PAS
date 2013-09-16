@@ -29,7 +29,7 @@ Procedure Level_Masters;
 
 Implementation
 
-Uses DDplus, Init, Cms,
+Uses Init, Cms,
      Jakob, Statusc, News,
      Various, Various2, Various3,
      Online, File_Io, SysUtils;

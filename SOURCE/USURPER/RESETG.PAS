@@ -46,7 +46,6 @@ var
     ok : boolean;
 
     s,
-    a2,
     CryptIt : s70;
 
     PlayerFile : file of UserRec;    {** Userfile **}

@@ -31,7 +31,7 @@ Implementation
 
 Uses Init, Cms, Jakob,
      Various, Various3, Online,
-     AnsiColr, Relation, File_Io;
+     AnsiColr, File_Io;
 
 const header='###  Name                  Level  Race      Class      Experience  Status';
 var

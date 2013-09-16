@@ -38,14 +38,6 @@ var
     s,
     s1 : s70;
 
-    i : longint;
-
-    j : integer;
-
-    player0 : userrec;
-
-    teamdngs : boolean;
-
 begin
 
  clearscreen;

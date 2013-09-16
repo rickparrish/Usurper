@@ -188,11 +188,11 @@ Procedure Close_Text(var f:text);
 
 Implementation
 
-Uses Crt, Dos, CMS, Elog,
+Uses Crt, Dos, CMS,
      DDplus, Jakob,
      Various, AnsiColr,
      Mail, Invent, Relatio2,
-     JakeLock, Online, Strings, SysUtils;
+     JakeLock, Online, SysUtils;
 
 const
  {item data files, the reason for not declaring these constants in INIT.PAS
@@ -1599,7 +1599,7 @@ end; {check_truthfile *end*}
 
 Procedure Write_To_Truth_file;
 var txt : text;
-      i,j : byte;
+      i : byte;
      ok : boolean;
 
 
@@ -1837,8 +1837,7 @@ const max_tries = 80;
 var
     i : word;
 
-    tries,
-    dum : byte;
+    tries : byte;
 
     mem : boolean;
 
@@ -6128,7 +6127,7 @@ Procedure ChatSend(msg: String; Conf: word);
 Var
   Sr: Searchrec;
   tIPC: IPCType;
-  freemessage, i,col : byte;
+  freemessage, i : byte;
 Begin
 
  Dos.FindFirst(IPCpath+'IPC????.IPC',Anyfile-Directory,sr);
@@ -6565,8 +6564,7 @@ end; {Multi_Chat *END*}
 
 Procedure IPCHook; {scanning own ipc node for incoming messages}
 var
-  attr,i: byte;
-  Cline: String;
+  i: byte;
 
 begin
 

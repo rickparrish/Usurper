@@ -266,7 +266,6 @@ var
 
    poor_guy : s30;
 
-   k,
    size : word;
 
    xx, i, j, x : longint;
@@ -274,16 +273,13 @@ var
    motivation,
    resurr,
    make_team,
-   abort,
    found,
-   already,
    done,
    break_out : boolean;
 
    death : integer;
 
-   pl0,
-   pl11 : UserRec; {users}
+   pl0 : UserRec; {users}
 
    Letter : MailRec; {letter}
 

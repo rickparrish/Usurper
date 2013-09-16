@@ -47,8 +47,6 @@ var
     sel,
     guards : byte;
 
-    cho : char;
-
     team,
     refresh : boolean;
 
@@ -409,7 +407,6 @@ var
     ledig : array[1..5] of boolean;
 
     adios,
-    found2,
     battle_over,
     no_robbery : boolean;
 

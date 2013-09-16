@@ -30,7 +30,7 @@ Procedure Weapon_Shop;
 Implementation
 
 Uses Init, Cms, Jakob,
-     News, Statusc, Invent,
+     News, Invent,
      Hagglec, Various, Various2,
      Online, File_Io;
 
@@ -132,8 +132,7 @@ var
     komihag,
     cho, ch : char;
 
-    y, zz,
-    justval : integer;
+    zz : integer;
 
     mincost, maxcost, cc, j, x, i, xx : longint;
 
@@ -193,7 +192,6 @@ Begin {Weapon Shop}
    crlf;
    d(5,'Ancient Weapons            Price');
    cc:=1;
-   justval:=14;
 
    for i:=1 to fs(FsWeaponClassic) do begin
     load_weapon(i,wweapon);
@@ -248,7 +246,6 @@ Begin {Weapon Shop}
    clearscreen;
    j:=0;
    cc:=3;
-   justval:=14;
 
    sd(5,ljust('#',4));
    sd(5,ljust('Item',13));

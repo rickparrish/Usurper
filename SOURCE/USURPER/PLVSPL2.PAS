@@ -37,7 +37,7 @@ Procedure Player_vs_Player2( fastgame : boolean;
 Implementation
 
 Uses Jakob, Cms, Mail,
-     Cast, Invent, SwapEq,
+     Cast, SwapEq,
      News, Various, Various2,
      Relation, File_Io;
 
@@ -45,9 +45,7 @@ Procedure Player_vs_Player2;
 var
     stab2 : integer;
 
-    slask, zz, x,q : longint;
-
-    s : s70;
+    zz, x : longint;
 
     gold_mem : longint;
     gold_string : s100;

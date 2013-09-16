@@ -142,7 +142,6 @@ var
 
    x : longint;
 
-   offset,
    counter2,
    r,k,l : byte;
 

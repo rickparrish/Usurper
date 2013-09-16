@@ -76,6 +76,7 @@
     </Linking>
     <Other>
       <CompilerMessages>
+        <IgnoredMessages idx4047="True" idx5024="True" idx5027="True" idx5057="True"/>
         <MsgFileName Value=""/>
       </CompilerMessages>
       <CompilerPath Value="$(CompPath)"/>

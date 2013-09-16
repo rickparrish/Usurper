@@ -34,7 +34,7 @@ Procedure Gang_Wars( oppo   : s70;
 Implementation
 
 Uses Cms, Jakob, Various,
-     File_Io, Statusc, News, CompWar,
+     File_Io, News, CompWar,
      Plcomp, Mail, TeamRec,
      Npc_Chec, Various3, Online,
      Relation, SysUtils;

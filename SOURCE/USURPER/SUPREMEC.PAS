@@ -32,8 +32,8 @@ Procedure Supreme(var pl1,pl2,pl3,pl4 : userrec);
 
 Implementation
 
-Uses Jakob, Cms, Statusc,
-     SortTeam, PlvsMon, Mail,
+Uses Jakob, Cms,
+     PlvsMon, Mail,
      News, GenNews, GodWorld,
      Various, Various2, Various3,
      VarGods, Online, File_Io, SysUtils;
@@ -43,10 +43,8 @@ Procedure Supreme;
 const supcol = ulred; {supreme beings color in the NEWS and MAIL file}
 Var
     x, i, gain : longint;
-    justval : integer;
     ch : char;
     s : s70;
-    a : s70;
     dummy : ^userrec;
     first, second : boolean;
     txt : text;

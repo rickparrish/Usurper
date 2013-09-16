@@ -32,14 +32,13 @@ Implementation
 
 Uses Init, Cms, Jakob,
      Statusc, Mail, News,
-     Invent, SwapEq, Plmarket,
+     Invent, Plmarket,
      Various, Various2, Relation,
      Online, File_Io, SysUtils;
 
 const food_master = 'Alabat'; {shop keeper, food & drinks}
 var
     refresh : boolean;
-    ok : boolean;
 
 Function Set_Color(rank:byte) : byte;
 begin

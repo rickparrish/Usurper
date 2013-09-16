@@ -169,7 +169,6 @@ var
    justval : byte;
    x : integer;
    lines,counter : byte;
-   wanted : wantedrec;
 
 begin
 

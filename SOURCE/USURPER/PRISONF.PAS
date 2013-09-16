@@ -40,7 +40,6 @@ const captain = 'Ronald'; {captain of the guard *same as in prisonc1.pas}
 var refresh : boolean;
 
 Procedure Meny;
-const offset = 20;
 begin
  clearscreen;
  crlf;
@@ -104,15 +103,11 @@ var
    surrender : boolean;
 
    foes : byte;
-   x : longint;
 
    weapon, armor : s30;
    hps : word;
 
    pl : array[1..4] of ^userrec;
-
-   line_counter : byte;
-   abort : boolean;
 
 begin
 

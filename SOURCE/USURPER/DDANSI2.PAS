@@ -43,10 +43,7 @@ const
  scaleh: array[0..7] of integer = (8,12,10,14,9,13,11,15);
 var
  bbb: boolean;
- t: char;
  restx,resty,curcolor: integer;
- Note_Octave: integer;
- Note_Fraction, Note_Length, Note_Quarter: real;
 
 procedure change_color(c: integer);
 begin;
@@ -79,7 +76,6 @@ procedure eval_string(var s: string);
 var
  cp: integer;
  T: CHAR;
- b:byte;
  jj,a,ttt,tttt: integer;
  flag1:boolean;
 begin;
