@@ -49,7 +49,7 @@ Type
                        Procedure HandleEvent(var Event:tevent);virtual;
                        Procedure GetData(var r); virtual;
                        Procedure SetData(var r); virtual;
-                       Function DataSize:word; virtual;
+                       Function DataSize:sw_word; virtual;
                     end;
 
 Type MyInputLineP = ^TMyInputLine;
@@ -210,7 +210,7 @@ begin
  draw;
 end;
 
-Function TValInputLine.DataSize:word;
+Function TValInputLine.DataSize:sw_word;
 begin
  datasize:=sizeof(longint);
 end;

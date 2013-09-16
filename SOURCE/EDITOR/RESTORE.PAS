@@ -12,10 +12,10 @@ const
 implementation
 
 uses
-  Drivers;
+  Drivers, VideoUtils, Crt;
 
 var
-  SavedScreen: TScreenBuf;
+  SavedScreen: TScreenBuffer;
 
 const
   ScreenMode = $49;
@@ -28,6 +28,7 @@ var
   P: Pointer;
   CursorCoords, Segment, RowSize, Index: Word;
   ExitSave: Pointer;
+  SavedX, SavedY: Integer;
 
 { Exit code performed on program exit }
 procedure MyExitProc; far;

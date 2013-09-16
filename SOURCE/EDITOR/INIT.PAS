@@ -1821,12 +1821,13 @@ procedure TMyapp.ToggleVideoMode;
 var
   NewMode: Word;
   R: TRect;
+  OldMode: TVideoMode;
 begin
-
+  (* REETODO FPC must have changed ScreenMode
   NewMode := ScreenMode xor smFont8x8;
   if NewMode and smFont8x8 <> 0 then ShadowSize.X := 1
                                 else ShadowSize.X := 2;
-  SetScreenMode(NewMode);
+  SetScreenMode(NewMode);*)
 
   {Desktop^.GetExtent(R);}
   {TrashCan^.Reposition(R);

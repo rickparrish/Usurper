@@ -50,7 +50,7 @@ Function Todays_Date:string; {date string[8] american}
 
 Implementation
 
-Uses Dos, Crt, Init, DDscott, SwagDate;
+Uses Dos, Crt, Init, DateUtils;
 
 Function Todays_Date; {date string[8] american}
 var
@@ -75,7 +75,7 @@ end; {todays_date}
 
 Function Packed_Date;
 begin
- packed_date:=swag_date;
+ packed_date:=DaysSince1Jan0001;
 end;
 
 Procedure ClearScreen;

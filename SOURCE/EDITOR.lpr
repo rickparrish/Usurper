@@ -179,14 +179,8 @@ filemode:=66;
  vision_is_running:=true;
 
  {Run the Editor Application}
- i := memavail;
- if i <> memavail then begin
-  wrl('Out of Heap space! (give me some memory!)');
- end
- else begin
-  MyApp.init;
-  MyApp.run;
-  MyApp.done;
- end;
+ MyApp.init;
+ MyApp.run;
+ MyApp.done;
 
 End. {End Of Program}
