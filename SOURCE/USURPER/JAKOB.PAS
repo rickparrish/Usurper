@@ -112,7 +112,6 @@ Procedure Menu5(const text:string; pos:integer);
 Function Menu_Choices(const m1,m2,m3,m4,m5:string):char;
 
 {Other routines}
-Function HeapHandler(Size : Word) : Integer;far; {handles heap errors}
 Procedure Normal_Exit; {HALT the program}
 Function UKeyPressed : boolean; {same as pascal KeyPressed function}
 Function GetChar : char; {get a character from local or remote keyboard}
@@ -1961,22 +1960,6 @@ Procedure Normal_Exit; {exit program}
 begin
  halt(0);
 end;
-
-Function HeapHandler;
-begin {handles all heap errors}
-
- {The HeapError function returns
-   0. to indicate failure, and causes a run-time error to occur immediately.
-   1. to indicate failure, and causes New or GetMem to return a nil pointer.
-   2. to indicate success, and causes a retry (which could also cause
-   another call to the heap error function).
-
- calls to GetMem and New will return NIL if there is not enough memory,
-  instead of aborting with a RTE.}
-
- HeapHandler:=1;
-
-end; {heaphandler *end*}
 
 Procedure Spin_Cursor(action,cursor_color:byte);
 const sc: array[0..3] of char = '-\|/';
