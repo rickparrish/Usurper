@@ -24,6 +24,8 @@ Unit JakobE; {Usurper Editor - Extra Routines}
 
 Interface
 
+// REETODO Remove redundant methods
+
 {Misc}
 Procedure Delay2(tics : word);
 Procedure Statbar(cnum,enum,xspot,yspot,fullcolor,emptycolor: Integer);
@@ -52,7 +54,7 @@ Implementation
 
 Uses Dos, Crt, Init, DateUtils;
 
-Function Todays_Date; {date string[8] american}
+Function Todays_Date:string; {date string[8] american}
 var
  d,m,y,dow: word;
  s,s2: string[8];
@@ -73,7 +75,7 @@ begin;  {original code taken from the "date" function in ddscott.pas}
  Todays_Date:=s;
 end; {todays_date}
 
-Function Packed_Date;
+Function Packed_Date : longint;
 begin
  packed_date:=DaysSince1Jan0001;
 end;
@@ -106,7 +108,7 @@ begin
 end;
 
 
-Function UpCaseStr;
+Function UpCaseStr( s3:string ) : string;
 var i :integer;
 begin
  for i:=1 to length(s3) do
@@ -114,7 +116,7 @@ begin
   UpcaseStr:=s3;
 end;
 
-Function MkString;
+Function MkString( nr:integer; s:string) : string;
 var
     i : integer;
     temp : string;
@@ -163,7 +165,7 @@ Function CommaStr(Number: LongInt): String;
   CommaStr := NumberStr;
   End;
 
-Function CommastrP;
+Function CommastrP( nr:longint) : string; {som ovan fast med + eller -}
 var s : s70;
 begin
 
@@ -177,7 +179,7 @@ begin
 
 end;
 
-Function DateFix;
+Function DateFix(const s : string) : string ;
 begin
  datefix:=s[1]+s[2]+'-'+s[3]+s[4]+'-'+s[5]+s[6]+s[7]+s[8];
 end;
@@ -268,7 +270,7 @@ begin
 
 end;
 
-Function FindSub;
+Function FindSub(const s1,s2:string):boolean; {is s1 somewhere in s2?}
 begin
  if pos(upcasestr(s1),upcasestr(s2))>0 then findsub:=true
                                        else findsub:=false;

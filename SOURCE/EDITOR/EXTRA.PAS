@@ -1490,7 +1490,7 @@ Begin
 
 End;
 
-Function Search_in_Config;  {search configuration file for keyword}
+Function Search_in_Config(text:s70;templist : pstringcollection) : integer;
 const maxlett = 30;
       lastsearch : string[maxlett] = '';
 type DataRec = record
@@ -1630,7 +1630,7 @@ begin
 
 end; {Search_in_Config *end*}
 
-Function Get_a_value_Box;
+Function Get_a_value_box(text:s70;min,max:longint) : integer;
 const lastsearch : string='';
 Var
    Dia : XDialogP;
@@ -2173,7 +2173,7 @@ begin
 
 end; {YesNoBox *end*}
 
-Function Bash_Name;
+Function Bash_Name(nr:integer) : string;
 begin
 
  bash_name:='';
@@ -2196,7 +2196,7 @@ begin
 
 end; {bash_name *end*}
 
-Function Bash_Rank;
+Function Bash_Rank(nr:integer) : string;
 begin
  bash_rank:='';
  case nr of
@@ -2222,7 +2222,7 @@ begin
 
 end; {bash_rank *end*}
 
-Function Race_Display;
+Function Race_Display( race : races ) : string;
 begin
 
  case race of

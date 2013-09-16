@@ -39,7 +39,7 @@ Function Cfg_Default(const c : integer): string;
 
 Implementation
 
-Function Cfg_Default;
+Function Cfg_Default(const c : integer): string;
 var
     s,s2: string;
     i,fill : byte;

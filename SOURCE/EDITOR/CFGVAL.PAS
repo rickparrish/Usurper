@@ -34,7 +34,7 @@ Implementation
 
 Uses Init;
 
-Function Cfg_Value;
+Function Cfg_Value(const c:integer): string;
 
 const YEP = 'YES';
       NOP = 'NO';

@@ -29,14 +29,14 @@ Interface
 Uses Init, Objects;
 
 Function Drink_Ingredient(nr:byte):s15; {name of drink ingredients}
-Function Class_Restricted(class:classes;var o : objektrec):boolean;
+Function Class_Restricted(classid:classes;var o : objektrec):boolean;
 Function Gimme_Astring(titel,text:string;hint:word) : string;
 Function Gimme_Avalue(titel,text:string;n1,n2:longint;hint:word) : longint;
 Procedure Objekt_Affect ( use ,obj : integer;otyp : objtype;var player0 : Userrec );
-Function Spell_Name( spell : integer; class : classes) : string;
+Function Spell_Name( spell : integer; classid : classes) : string;
 Function Monster_Spell(nr : integer) : string;
 Function Spell_Hint(spell_nr : integer):word;
-Function Spell_HintPly(spell_nr : integer;class:classes):word;
+Function Spell_HintPly(spell_nr : integer;classid:classes):word;
 Function Race_Hint(r : races):word;
 Function Class_Hint(c : classes):word;
 Function Combat_Hint(move : byte):word;
@@ -120,11 +120,11 @@ Uses Extra, ClasDis2, CMS,
      Drivers,Views, Xboxes;
 
 
-Function Class_Restricted;
+Function Class_Restricted(classid:classes;var o : objektrec):boolean;
 var i : byte;
 begin
 
- case class of
+ case classid of
   Alchemist : i:=1;
   Assassin  : i:=2;
   Barbarian : i:=3;
@@ -143,7 +143,7 @@ begin
 
 end;
 
-Function Gimme_Avalue;
+Function Gimme_Avalue(titel,text:string;n1,n2:longint;hint:word) : longint;
 
 var
   Dia : GimmeValDialogP;
@@ -189,7 +189,7 @@ begin
 
 end;
 
-Function Gimme_Astring;
+Function Gimme_Astring(titel,text:string;hint:word) : string;
 const max = 100;
 type DataRec = record
       nam : string[max];
@@ -617,18 +617,18 @@ begin
    9: ply.race:=Mutant;
   end;
 
-  case man.class of
-   0:  ply.class:=Alchemist;
-   1:  ply.class:=Assassin;
-   2:  ply.class:=Barbarian;
-   3:  ply.class:=Bard;
-   4:  ply.class:=Cleric;
-   5:  ply.class:=Jester;
-   6:  ply.class:=Magician;
-   7:  ply.class:=Paladin;
-   8:  ply.class:=Ranger;
-   9:  ply.class:=Sage;
-   10: ply.class:=Warrior;
+  case man.classid of
+   0:  ply.classid:=Alchemist;
+   1:  ply.classid:=Assassin;
+   2:  ply.classid:=Barbarian;
+   3:  ply.classid:=Bard;
+   4:  ply.classid:=Cleric;
+   5:  ply.classid:=Jester;
+   6:  ply.classid:=Magician;
+   7:  ply.classid:=Paladin;
+   8:  ply.classid:=Ranger;
+   9:  ply.classid:=Sage;
+   10: ply.classid:=Warrior;
   end;
 
   {age}
@@ -765,18 +765,18 @@ begin
    Mutant : man.race:=9;
   end;
 
-  case ply.class of
-   Alchemist : man.class:=0;
-   Assassin  : man.class:=1;
-   Barbarian : man.class:=2;
-   Bard      : man.class:=3;
-   Cleric    : man.class:=4;
-   Jester    : man.class:=5;
-   Magician  : man.class:=6;
-   Paladin   : man.class:=7;
-   Ranger    : man.class:=8;
-   Sage      : man.class:=9;
-   Warrior   : man.class:=10;
+  case ply.classid of
+   Alchemist : man.classid:=0;
+   Assassin  : man.classid:=1;
+   Barbarian : man.classid:=2;
+   Bard      : man.classid:=3;
+   Cleric    : man.classid:=4;
+   Jester    : man.classid:=5;
+   Magician  : man.classid:=6;
+   Paladin   : man.classid:=7;
+   Ranger    : man.classid:=8;
+   Sage      : man.classid:=9;
+   Warrior   : man.classid:=10;
   end;
 
   {age}
@@ -1082,7 +1082,7 @@ begin
 
 end; {count_oldweapons *end*}
 
-Function Ur_Change;
+Function  Ur_Change : boolean;
 var b : boolean;
     i : integer;
 begin
@@ -1099,7 +1099,7 @@ begin
 
 end; {ur_change *end*}
 
-Function Item_Disp;
+Function Item_Disp(otyp : objtype) : string;
 var s : string[20];
 begin
 
@@ -1421,7 +1421,7 @@ begin
  end;
 
 
- if (ply.class in [Magician,Cleric,Sage]) and (obj.mana<0) then go:=false;
+ if (ply.classid in [Magician,Cleric,Sage]) and (obj.mana<0) then go:=false;
  if obj.strength<-10 then go:=false;
  if obj.strength<-10 then go:=false;
  if obj.hps<-5       then go:=false;
@@ -1450,7 +1450,7 @@ begin
    for i:=1 to fso(WEAPON) do begin
     load_objekt(Fload,obj,weapon,i);
     if (value_objekt(ply,obj)=true) and (random(2)=0) and
-       (class_restricted(ply.class,obj)=false) then begin
+       (class_restricted(ply.classid,obj)=false) then begin
      ply.lhand:=i;
      objekt_affect(1,ply.lhand,weapon,ply);
      break;
@@ -1464,7 +1464,7 @@ begin
    for i:=1 to fso(WEAPON) do begin
     load_objekt(Fload,obj,weapon,i);
     if (value_objekt(ply,obj)=true) and (random(2)=0) and
-       (class_restricted(ply.class,obj)=false) then begin
+       (class_restricted(ply.classid,obj)=false) then begin
      ply.rhand:=i;
      objekt_affect(1,ply.rhand,weapon,ply);
      break;
@@ -1477,7 +1477,7 @@ begin
    for i:=1 to fso(HEAD) do begin
     load_objekt(Fload,obj,HEAD,i);
     if (value_objekt(ply,obj)=true) and (random(2)=0) and
-       (class_restricted(ply.class,obj)=false) then begin
+       (class_restricted(ply.classid,obj)=false) then begin
      ply.head:=i;
      objekt_affect(1,ply.head,head,ply);
      break;
@@ -1490,7 +1490,7 @@ begin
    for i:=1 to fso(BODY) do begin
     load_objekt(Fload,obj,BODY,i);
     if (value_objekt(ply,obj)=true) and (random(2)=0) and
-       (class_restricted(ply.class,obj)=false) then begin
+       (class_restricted(ply.classid,obj)=false) then begin
      ply.body:=i;
      objekt_affect(1,ply.body,body,ply);
      break;
@@ -1503,7 +1503,7 @@ begin
    for i:=1 to fso(ARMS) do begin
     load_objekt(Fload,obj,ARMS,i);
     if (value_objekt(ply,obj)=true) and (random(2)=0) and
-       (class_restricted(ply.class,obj)=false) then begin
+       (class_restricted(ply.classid,obj)=false) then begin
      ply.arms:=i;
      objekt_affect(1,ply.arms,arms,ply);
      break;
@@ -1516,7 +1516,7 @@ begin
    for i:=1 to fso(FINGERS) do begin
     load_objekt(Fload,obj,FINGERS,i);
     if (value_objekt(ply,obj)=true) and (random(2)=0) and
-       (class_restricted(ply.class,obj)=false) then begin
+       (class_restricted(ply.classid,obj)=false) then begin
      ply.lfinger:=i;
      objekt_affect(1,ply.lfinger,fingers,ply);
      break;
@@ -1529,7 +1529,7 @@ begin
    for i:=1 to fso(FINGERS) do begin
     load_objekt(Fload,obj,FINGERS,i);
     if (value_objekt(ply,obj)=true) and (random(2)=0) and
-       (class_restricted(ply.class,obj)=false) then begin
+       (class_restricted(ply.classid,obj)=false) then begin
      ply.rfinger:=i;
      objekt_affect(1,ply.rfinger,fingers,ply);
      break;
@@ -1542,7 +1542,7 @@ begin
    for i:=1 to fso(LEGS) do begin
     load_objekt(Fload,obj,LEGS,i);
     if (value_objekt(ply,obj)=true) and (random(2)=0) and
-       (class_restricted(ply.class,obj)=false) then begin
+       (class_restricted(ply.classid,obj)=false) then begin
      ply.legs:=i;
      objekt_affect(1,ply.legs,legs,ply);
      break;
@@ -1555,7 +1555,7 @@ begin
    for i:=1 to fso(FEET) do begin
     load_objekt(Fload,obj,FEET,i);
     if (value_objekt(ply,obj)=true) and (random(2)=0) and
-       (class_restricted(ply.class,obj)=false) then begin
+       (class_restricted(ply.classid,obj)=false) then begin
      ply.feet:=i;
      objekt_affect(1,ply.feet,feet,ply);
      break;
@@ -1568,7 +1568,7 @@ begin
    for i:=1 to fso(WAIST) do begin
     load_objekt(Fload,obj,WAIST,i);
     if (value_objekt(ply,obj)=true) and (random(2)=0) and
-       (class_restricted(ply.class,obj)=false) then begin
+       (class_restricted(ply.classid,obj)=false) then begin
      ply.waist:=i;
      objekt_affect(1,ply.waist,waist,ply);
      break;
@@ -1581,7 +1581,7 @@ begin
    for i:=1 to fso(NECK) do begin
     load_objekt(Fload,obj,NECK,i);
     if (value_objekt(ply,obj)=true) and (random(2)=0) and
-       (class_restricted(ply.class,obj)=false) then begin
+       (class_restricted(ply.classid,obj)=false) then begin
      ply.neck:=i;
      objekt_affect(1,ply.neck,neck,ply);
      break;
@@ -1594,7 +1594,7 @@ begin
    for i:=1 to fso(NECK) do begin
     load_objekt(Fload,obj,NECK,i);
     if (value_objekt(ply,obj)=true) and (random(2)=0) and
-       (class_restricted(ply.class,obj)=false) then begin
+       (class_restricted(ply.classid,obj)=false) then begin
      ply.neck2:=i;
      objekt_affect(1,ply.neck2,neck,ply);
      break;
@@ -1607,7 +1607,7 @@ begin
    for i:=1 to fso(FACE) do begin
     load_objekt(Fload,obj,FACE,i);
     if (value_objekt(ply,obj)=true) and (random(2)=0) and
-       (class_restricted(ply.class,obj)=false) then begin
+       (class_restricted(ply.classid,obj)=false) then begin
      ply.face:=i;
      objekt_affect(1,ply.face,face,ply);
      break;
@@ -1620,7 +1620,7 @@ begin
    for i:=1 to fso(SHIELD) do begin
     load_objekt(Fload,obj,SHIELD,i);
     if (value_objekt(ply,obj)=true) and (random(2)=0) and
-       (class_restricted(ply.class,obj)=false) then begin
+       (class_restricted(ply.classid,obj)=false) then begin
      ply.shield:=i;
      objekt_affect(1,ply.shield,shield,ply);
      break;
@@ -1633,7 +1633,7 @@ begin
    for i:=1 to fso(HANDS) do begin
     load_objekt(Fload,obj,HANDS,i);
     if (value_objekt(ply,obj)=true) and (random(2)=0) and
-       (class_restricted(ply.class,obj)=false) then begin
+       (class_restricted(ply.classid,obj)=false) then begin
      ply.hands:=i;
      objekt_affect(1,ply.hands,hands,ply);
      break;
@@ -1646,7 +1646,7 @@ begin
    for i:=1 to fso(ABODY) do begin
     load_objekt(Fload,obj,ABODY,i);
     if (value_objekt(ply,obj)=true) and (random(2)=0) and
-       (class_restricted(ply.class,obj)=false) then begin
+       (class_restricted(ply.classid,obj)=false) then begin
      ply.abody:=i;
      objekt_affect(1,ply.abody,abody,ply);
      break;
@@ -1727,11 +1727,11 @@ begin
 
 end;
 
-Function Spell_HintPly(spell_nr : integer;class:classes):word;
+Function Spell_HintPly(spell_nr : integer;classid:classes):word;
 var x : integer;
 begin
 
- case class of
+ case classid of
   Magician:begin
             case spell_nr of
              1:  x:=hcPeditSpells1;
@@ -1792,7 +1792,7 @@ begin
 
 end;
 
-Function Spell_Hint;
+Function Spell_Hint(spell_nr : integer):word;
 var x : integer;
 begin
  case spell_nr of
@@ -1809,7 +1809,7 @@ begin
 
 end;
 
-Function Monster_Spell;
+Function Monster_Spell(nr : integer) : string;
 var s : string;
 begin
 
@@ -1827,7 +1827,7 @@ begin
 
 end;
 
-Function Spell_Name;
+Function Spell_Name( spell : integer; classid : classes) : string;
 var s : s70;
 begin
 
@@ -1836,84 +1836,84 @@ begin
 
  case spell of
   1:begin
-     case class of
+     case classid of
       Cleric   : s:='Cure Light';
       Magician : s:='Magic Missile';
       Sage     : s:='Fog of War';
      end;
     end;
   2:begin
-     case class of
+     case classid of
       Cleric   : s:='Armor';
       Magician : s:='Shield';
       Sage     : s:='Poison';
      end;
     end;
   3:begin
-     case class of
+     case classid of
       Cleric   : s:='Baptize Monster';
       Magician : s:='Sleep';
       Sage     : s:='Freeze';
      end;
     end;
   4:begin
-     case class of
+     case classid of
       Cleric   : s:='Cure Critical';
       Magician : s:='Web';
       Sage     : s:='Duplicate';
      end;
     end;
   5:begin
-     case class of
+     case classid of
       Cleric   : s:='Disease';
       Magician : s:='Power Hat';
       Sage     : s:='Roast';
      end;
     end;
   6:begin
-     case class of
+     case classid of
       Cleric   : s:='Holy Explosion';
       Magician : s:='Fireball';
       Sage     : s:='Hit Self';
      end;
     end;
   7:begin
-     case class of
+     case classid of
       Cleric   : s:='Invisibility';
       Magician : s:='Fear';
       Sage     : s:='Escape';
      end;
     end;
   8:begin
-     case class of
+     case classid of
       Cleric   : s:='Angel';
       Magician : s:='Lightning Bolt';
       Sage     : s:='Giant';
      end;
     end;
   9:begin
-     case class of
+     case classid of
       Cleric   : s:='Call Lightning';
       Magician : s:='Prismatic Cage';
       Sage     : s:='Steal';
      end;
     end;
  10:begin
-     case class of
+     case classid of
       Cleric   : s:='Heal';
       Magician : s:='Pillar of Fire';
       Sage     : s:='Energy Drain';
      end;
     end;
  11:begin
-     case class of
+     case classid of
       Cleric   : s:='Divination';
       Magician : s:='Power word KILL';
       Sage     : s:='Summon Demon';
      end;
     end;
  12:begin
-     case class of
+     case classid of
       Cleric   : s:='Gods Finger';
       Magician : s:='Summon Demon';
       Sage     : s:='Death Kiss';
@@ -4628,7 +4628,7 @@ Begin
 
  {Spells}
  s:='Spells';
- case player.class of
+ case player.classid of
   Magician: s:='Magician '+s;
   Sage    : s:='Sage '+s;
   Cleric  : s:='Cleric '+s;
@@ -4639,13 +4639,13 @@ Begin
  w:=17;
 
  {we shadow the spell boxes if player is not a magic user}
- if player.class in [Sage,Cleric,Magician] then shadow:=false
+ if player.classid in [Sage,Cleric,Magician] then shadow:=false
                                            else shadow:=true;
 
  {setup checkboxes for the spells}
  for i:=1 to maxspells do begin
-  Items:=NewsItem(spell_name(i,player.class),nil);
-  dia^.CheckBoxes('',2,t,w,1,items,shadow,spell_hintply(i,player.class));
+  Items:=NewsItem(spell_name(i,player.classid),nil);
+  dia^.CheckBoxes('',2,t,w,1,items,shadow,spell_hintply(i,player.classid));
   inc(t);
  end;
 

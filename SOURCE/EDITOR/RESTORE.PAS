@@ -24,7 +24,7 @@ begin
   { Iterate over all rows, copying from memory to screen }
   ScreenRestore(SavedScreen);
   GotoXY(SavedX, SavedY);
-  ExitProc := ExitSave
+  ExitProc := ExitSave;
 end; { MyExitProc }
 
 { Initialization code performed on program startup }
@@ -33,5 +33,5 @@ begin
   SavedY := WhereY;
   ScreenSave(SavedScreen);
   ExitSave := ExitProc;
-  ExitProc := @MyExitProc
+  ExitProc := @MyExitProc;
 end. { Restore }

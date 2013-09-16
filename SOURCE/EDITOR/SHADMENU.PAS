@@ -37,6 +37,5 @@ implementation
 
 	begin
 { Install the New GetPallette }
-	ReplaceMethod(typeof(TMenuBox),@TMenuBox.GetPalette,
-																 @TMenuBoxShadow.GetPalette);
+	ReplaceMethod(typeof(TMenuBox),@TMenuBox.GetPalette,@TMenuBoxShadow.GetPalette);
 	end.

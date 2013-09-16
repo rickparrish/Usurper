@@ -51,7 +51,7 @@ begin
 
 end; {color_help *end*}
 
-Function Configuration_Help;
+Function Configuration_Help(nr,line :integer): string;
 var s : string;
 begin
 

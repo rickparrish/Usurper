@@ -426,7 +426,7 @@ type {Player & Npc structures}
    5. what to say when you spare opponents life
    6. what to say when you don't spare opponents life}
   autoheal    : boolean;
-  class       : classes;
+  classid     : classes;
   loyalty     : SmallInt;
   haunt       : SmallInt;
   master      : char;
@@ -705,7 +705,7 @@ type
   sex   : integer;
   king  :integer; {gurka}
   allowed:integer;
-  class : integer;
+  classid: integer;
 
   level : longint;
   hps   : longint;

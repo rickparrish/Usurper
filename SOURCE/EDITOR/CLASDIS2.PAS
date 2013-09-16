@@ -25,15 +25,15 @@ Unit ClasDis2;
 Interface
 Uses Init;
 
-Function Class_Display ( class : classes ) : string;
+Function Class_Display ( classid : classes ) : string;
 Function Class_Display2(nr : byte ) : string;
 
 Implementation
 
-Function Class_Display;
+Function Class_Display ( classid : classes ) : string;
 begin
 
- case class of
+ case classid of
   Alchemist : class_display:='Alchemist';
   Assassin  : class_display:='Assassin';
   Barbarian : class_display:='Barbarian';
@@ -49,7 +49,7 @@ begin
 
 end;
 
-Function Class_Display2;
+Function Class_Display2(nr : byte ) : string;
 var s : string;
 begin
 

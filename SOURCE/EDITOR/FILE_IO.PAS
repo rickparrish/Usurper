@@ -246,7 +246,7 @@ begin;
  end;
 end;
 
-Function F_Exists;
+Function F_Exists(const s : string): boolean;
 var Inf: SearchRec;
 begin
  findfirst(s,AnyFile,Inf);
@@ -296,7 +296,7 @@ begin
     DirExist := ((wo_Fattr and directory) <> 0)
 end; { DirExist END, from SWAG }
 
-Function FsO;
+Function FsO(otyp:objtype):word;
 var
     memmy,
     i      : integer;
@@ -1355,7 +1355,7 @@ begin
 
 end;
 
-Function Open_TxtFile;
+Function Open_TxtFile(action : tshare; var f; const fname : string) : boolean;
 
 var
     i : word;

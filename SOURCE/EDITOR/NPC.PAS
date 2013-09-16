@@ -70,7 +70,7 @@ Procedure Add_Npc( const name : s70;   {name of NPC}
                    strength: integer;  {strength}
                    defin   : integer;  {defence}
                    loyin   : integer;  {loyalty}
-                   class   : classes;  {class}
+                   classid   : classes;  {class}
                    agein   : integer;  {age}
                    const teamin  : s70;      {team}
                    sex     : gender;   {gender}
@@ -152,7 +152,7 @@ begin
  player0.alive_bonus:=0;
  player0.teamrec    :=0;
  player0.autoheal   :=true;
- player0.class      :=class;
+ player0.classid    :=classid;
  player0.loyalty    :=loyin;
  player0.haunt      :=0;
  player0.trains     :=2;
@@ -705,7 +705,7 @@ begin
   player0.dex     :=player0.level*random(3)+1;
   player0.wisdom  :=player0.level*random(3)+1;
 
-  if player0.class in [Cleric,Magician,Sage] then begin
+  if player0.classid in [Cleric,Magician,Sage] then begin
    player0.maxmana:=player0.level*30;
    player0.mana:=player0.maxmana;
   end
