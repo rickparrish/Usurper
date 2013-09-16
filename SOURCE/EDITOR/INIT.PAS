@@ -292,15 +292,15 @@ type {god}
   name : s30;      {alias}
   id   : s15;      {unique ID tag, this id follows the player from the
                     user file!}
-  recnr: SmallWord;      {rec # in file}
-  age  : SmallWord;      {age}
+  recnr: word;      {rec # in file}
+  age  : word;      {age}
   sex  : byte;      {sex, 1=male, 2=female}
   ai   : char;      {ai: 'H'uman or 'C'omputer }
-  level: SmallWord;      {level}
+  level: word;      {level}
   exp  : longint;   {experience, power}
-  deedsleft : SmallWord; {deedsleft today, new ones given at maintenance}
+  deedsleft : word; {deedsleft today, new ones given at maintenance}
   deleted  : boolean; {deleted}
-  believers: SmallWord;    {believers, disciples, # of players who worship this god}
+  believers: word;    {believers, disciples, # of players who worship this god}
   darkness : longint; {good points, follows from the player time}
   goodness : longint; {dark points, follows from the player time}
  end; {godrec *end*}
@@ -309,10 +309,10 @@ type {god}
                     couples. remember that a divorce will split the kids}
   name    : s30;  {name}
   sex     : byte; {sex, 1=male, 2=female}
-  age     : SmallWord; {age}
+  age     : word; {age}
   birth   : udate; {date of birth}
-  recnr   : SmallWord; {record #, position in file}
-  ageplus : SmallWord; {how soon before getting one year older}
+  recnr   : word; {record #, position in file}
+  ageplus : word; {how soon before getting one year older}
   bastard: boolean; {set to true if product of secret lay or whore intercourse}
   named  : boolean; {has kid been named yet? if not it's not accessible in lists etc}
   deleted: boolean; {is this record deleted}
@@ -388,7 +388,7 @@ type {Player & Npc structures}
   loc : SmallInt;
   team  : string[25];
   teampw : string[20];
-  teamrec : SmallWord;
+  teamrec : word;
   bguard : SmallInt;
   cturf : boolean;
   gnollp : SmallInt;
@@ -439,22 +439,22 @@ type {Player & Npc structures}
   spell       : array[1..maxspells,1..2] of boolean;
   skill       : array[1..maxcombskills] of SmallInt;
   trains      : SmallInt;
-  lhand       : SmallWord;
-  rhand       : SmallWord;
-  head        : SmallWord;
-  body        : SmallWord;
-  arms        : SmallWord;
-  lfinger     : SmallWord;
-  rfinger     : SmallWord;
-  legs        : SmallWord;
-  feet        : SmallWord;
-  waist       : SmallWord;
-  neck        : SmallWord;
-  neck2       : SmallWord;
-  face        : SmallWord;
-  shield      : SmallWord;
-  hands       : SmallWord;
-  abody       : SmallWord;
+  lhand       : word;
+  rhand       : word;
+  head        : word;
+  body        : word;
+  arms        : word;
+  lfinger     : word;
+  rfinger     : word;
+  legs        : word;
+  feet        : word;
+  waist       : word;
+  neck        : word;
+  neck2       : word;
+  face        : word;
+  shield      : word;
+  hands       : word;
+  abody       : word;
   immortal    : boolean; {dialog?}
   battlecry   : string[70];
   bguardnr    : SmallInt; {antal doorguards, typ specificeras i bguard}
@@ -472,10 +472,10 @@ type {Player & Npc structures}
   maxtime     : SmallInt;
   ear         : byte;
   castin      : char;
-  weapon      : SmallWord; {OLD mode}
-  armor       : SmallWord; {OLD mode}
-  apow        : SmallWord; {OLD mode}
-  wpow        : SmallWord; {OLD mode}
+  weapon      : word; {OLD mode}
+  armor       : word; {OLD mode}
+  apow        : word; {OLD mode}
+  wpow        : word; {OLD mode}
   disres      : byte;
   amember     : boolean;
   medal       : array[1..20] of boolean;
@@ -483,7 +483,7 @@ type {Player & Npc structures}
   bankwage    : longint;
   weaphag     : byte; {ggr en spelare har hagglat i weaponshop}
   armhag      : byte; {ggr en spelare har hagglat i armorshop}
-  recnr       : SmallWord;
+  recnr       : word;
   auto_meny   : boolean;
   {new for 0.14}
   quests      : SmallInt; {# of comleted quests/missions}
@@ -503,13 +503,13 @@ type {Player & Npc structures}
   Gym_Sessions  : byte; {gym sessions(workout) left today}
   Gym_Owner     : byte; {controller of the gym? has to be in a team}
   Gym_Card      : byte; {free card to the gym? if not gym_owner that is}
-  RoyQuestsToday: SmallWord;{how many royal quests have the player completed today}
+  RoyQuestsToday: word;{how many royal quests have the player completed today}
   KingVotePoll: byte; {how many days since voted for king popularity}
   KingLastVote: byte; {last vote, to be used for polls}
 
   Married     : boolean; {is player married? only used in score list creation}
-  Kids        : SmallWord; {how many kids this playeer is father/mother to}
-  IntimacyActs: SmallWord; {how many acts of intimacy has player left today?}
+  Kids        : word; {how many kids this playeer is father/mother to}
+  IntimacyActs: word; {how many acts of intimacy has player left today?}
   Pregnancy   : byte; {is player pregnant? 0=no, 1...X = days pregnant}
   FatherID    : s15;  {fathers id tag, set when pregnancy starts}
 
@@ -520,17 +520,17 @@ type {Player & Npc structures}
                       name as a deceased father will inherit a the old guys
                       children. relations.id correspond to playe.id}
   Tax_Relief : boolean; {free from tax?}
-  MarriedTimes : SmallWord; {counter for marriages}
-  Bard_Songs_Left: SmallWord; {ehhh..quite self-explanatory huh?}
+  MarriedTimes : word; {counter for marriages}
+  Bard_Songs_Left: word; {ehhh..quite self-explanatory huh?}
   prison_escapes : byte; {allowed prison escape attempts}
   Filtyp : byte; {type of file player resides in (1=player file, 2=npc file)}
-  Resurrections: SmallWord; {# of resurrections left today}
+  Resurrections: word; {# of resurrections left today}
 
   {below is new for 0.20}
-  PickPocketAttempts : SmallWord; {allowed pick pocket attempts}
+  PickPocketAttempts : word; {allowed pick pocket attempts}
 
   {below is new for 0.20e}
-  BankRobberyAttempts : SmallWord; {bank robbery attempts / day}
+  BankRobberyAttempts : word; {bank robbery attempts / day}
 
 
 end;
@@ -655,7 +655,7 @@ var
   cfgchang : boolean; {global setting that keeps track if .cfg has changed}
 
 {Transfer Types, used when editor dialogs are converted to RECORD types}
-{REENOTE These should not use SmallWord or SmallInt, or VP's TV clone will break
+{REENOTE These should not use word or SmallInt, or VP's TV clone will break
          They're only used in memory, so no binary compatibility problems}
 type
  EditRec2 = Record     {RECORD used in PLAYER/NPC DIALOG}

@@ -413,11 +413,11 @@ const ipcpath : s90 = global_nodedir; {dir to .ipc files, inc RAM drive support!
 type {the ipc routines are taken from John Stephensons Jsdoor package
       the structure has been modified to suit the needs of Usurper}
  IPCType = Record {Multi node Chat record}
-  Node      : SmallWord;    {Node number for this record}
+  Node      : word;    {Node number for this record}
   Username  : S30;     {Users Name}
   Available : Boolean; {Is user available for chat}
   In_chat   : boolean; {Whether user is in chat}
-  Conference: SmallWord;     {Conference number}
+  Conference: word;     {Conference number}
   ConfName  : s30;      {Conference name}
   ConfPassW : string[8];{Conference password}
   MessColor : byte;    {this is MY color, as displayed to other players}
@@ -459,8 +459,8 @@ type {used to issue King orders, open shoppes etc etc}
   treasury      : longint; {money in the royal vault}
   prisonsleft   : byte; {# of people king can imprison today. new every day}
   executeleft   : byte; {# of death sentences left today. new every day}
-  questsleft    : SmallWord; {# of new quests the king can issue today}
-  MarryActions  : SmallWord; {# of marriages the king can interfer in today}
+  questsleft    : word; {# of new quests the king can issue today}
+  MarryActions  : word; {# of marriages the king can interfer in today}
   WolfFeed      : byte; {# kids have can be tossed to the wolves/day, set to config.allowfeedingthewolves at maint}
   RoyalAdoptions: byte; {# kids can be placed in the Royal Orphanage/day, set to config.allowRoyalAdoption at maint}
   moatID        : s15; {unique moat creature ID}
@@ -502,14 +502,14 @@ type QuestRec = Record {Royal Quests, initiated by the King/Queen}
       occupier    : s30; {is quest taken at this moment..and in that case the name of the claimnant}
       occrace     : races; {occupiers race}
       occsex      : byte; {occupiers sex 1=male,2=female}
-      occdays     : SmallWord; {quest has been occupied for X days}
-      daystocomple: SmallWord; {days given to complete quest before considered "failed"}
+      occdays     : word; {quest has been occupied for X days}
+      daystocomple: word; {days given to complete quest before considered "failed"}
 
       offerto     : s30; {is this quest an offer to player}
       offerrefused: byte; {if offer is refused (1=delete,2=add to list}
       forced      : boolean; {is quest forced upon OCCUPIER?}
-      minlevel    : SmallWord; {min level required to take on quest}
-      maxlevel    : SmallWord; {max level required to take on quest}
+      minlevel    : word; {min level required to take on quest}
+      maxlevel    : word; {max level required to take on quest}
 
       reward      : byte; {nothing,low,medium,high}
       rewardtype  : qrewardtypes; {type of reward, see qrewardtypes}
@@ -517,7 +517,7 @@ type QuestRec = Record {Royal Quests, initiated by the King/Queen}
       penalty     : byte; {nothing,low,medium,high}
       penaltytype : qrewardtypes; {type of penalty, see qrewardtypes}
 
-      monsters    : array[1..global_maxmon,1..2] of SmallWord; {1=type of monster,2=how many}
+      monsters    : array[1..global_maxmon,1..2] of word; {1=type of monster,2=how many}
 
      end; {QuestRec *end*}
 
@@ -543,7 +543,7 @@ type {Orbs Bar, Special Drinks, made by Players => saved to drinkfile}
 {  title  : s30; {song-title}
 {  creator: s30; {creator: *game* *editor* *name of player(bard)*}
 {  date   : Udate; {when was the song created}
-{  level  : SmallWord; {level needed to sing}
+{  level  : word; {level needed to sing}
 {  available: byte; {1=always,2=training,3=quest,4=disabled}
 {  deleted  : boolean; {deleted?}
 {  goodbad  : byte; {1=good,2=bad,3=any alignment can sing this song}
@@ -553,7 +553,7 @@ type {Orbs Bar, Special Drinks, made by Players => saved to drinkfile}
 
 type {home chest, store items in chest}
     ChestItemRec = record
-     pekare : SmallWord; {pointer to item # in the objXX file}
+     pekare : word; {pointer to item # in the objXX file}
      ityp  : objtype; {type of item}
      PlyID : s15; { must match userrec ID }
     end;
@@ -561,7 +561,7 @@ type {home chest, store items in chest}
 
 type {Players Market, stuff that players want to sell}
  MarketItemRec = record
-  pekare : SmallWord; {points to item # in the objXX file}
+  pekare : word; {points to item # in the objXX file}
   ityp   : objtype; {type of item}
   seller : s30;     {name of seller}
   date   : Udate; {when the item was put in}
@@ -707,7 +707,7 @@ type {online character/record definition}
   usertype : onlinetypes; {see type onlinetypes...player/god/child}
   fake     : boolean; {a fake player is acting like a real player and will
                        stay as long as the player who created him}
-  recnr    : SmallWord; {rec # in ONLINERS.DAT}
+  recnr    : word; {rec # in ONLINERS.DAT}
   shadow   : boolean; {if true then this character is computer controlled}
   dead     : boolean; {is this being used?? check this one out jakob! i don't think its being used}
   race     : races; {race}
@@ -780,7 +780,7 @@ type {Player/Npc Record}
   location: SmallInt;  {offline location, se offloc_?? constants}
   team    : s25; {team name}
   teampw  : s20; {team password}
-  teamrec : SmallWord;    {team record, how many days have we had the town}
+  teamrec : word;    {team record, how many days have we had the town}
   bguard  : SmallInt; {type of guard, # in door guard file}
   cturf   : boolean; {is team in control of town}
   gnollp  : SmallInt; {gnoll poison, temporary used in fights}
@@ -831,22 +831,22 @@ type {Player/Npc Record}
   spell    : array[1..global_maxspells,1..2] of boolean; {spells}
   skill    : array[1..global_maxcombat] of SmallInt; {close combat skills}
   trains   : SmallInt; {training sessions at Close-Combat master}
-  lhand    : SmallWord; {item carried in left hand}
-  rhand    : SmallWord; {item in right hand}
-  head     : SmallWord; {head}
-  body     : SmallWord; {body}
-  arms     : SmallWord; {arms}
-  lfinger  : SmallWord; {left finger}
-  rfinger  : SmallWord; {right fignger}
-  legs     : SmallWord; {legs}
-  feet     : SmallWord; {feet}
-  waist    : SmallWord; {waist}
-  neck     : SmallWord; {neck}
-  neck2    : SmallWord; {neck2}
-  face     : SmallWord; {face}
-  shield   : SmallWord; {shield}
-  hands    : SmallWord; {hands}
-  abody    : SmallWord; {around body}
+  lhand    : word; {item carried in left hand}
+  rhand    : word; {item in right hand}
+  head     : word; {head}
+  body     : word; {body}
+  arms     : word; {arms}
+  lfinger  : word; {left finger}
+  rfinger  : word; {right fignger}
+  legs     : word; {legs}
+  feet     : word; {feet}
+  waist    : word; {waist}
+  neck     : word; {neck}
+  neck2    : word; {neck2}
+  face     : word; {face}
+  shield   : word; {shield}
+  hands    : word; {hands}
+  abody    : word; {around body}
   immortal  : boolean; {if yes, never deleted for inactivity}
   battlecry : s70;     {battle cry}
   bguardnr  : SmallInt; {number of doorguards, type is specified in bguard}
@@ -866,10 +866,10 @@ type {Player/Npc Record}
   maxtime     : SmallInt; {maxtime (minutes) per session in game}
   ear         : byte; {how should player deal with internode messages..see cms.pas}
   castin      : char;
-  weapon      : SmallWord; {OLD mode}
-  armor       : SmallWord; {OLD mode}
-  apow        : SmallWord; {OLD mode}
-  wpow        : SmallWord; {OLD mode}
+  weapon      : word; {OLD mode}
+  armor       : word; {OLD mode}
+  apow        : word; {OLD mode}
+  wpow        : word; {OLD mode}
   disres      : byte; {disease resistance}
   amember     : boolean; {medlem i alchemist s„llskapet}
   medal       : array[1..20] of boolean;
@@ -877,7 +877,7 @@ type {Player/Npc Record}
   bankwage    : longint; {salary from the bank, for guard duty}
   weaphag     : byte; {ggr en spelare har hagglat i weaponshop}
   armhag      : byte; {ggr en spelare har hagglat i armorshop}
-  recnr       : SmallWord; {fil pointer, what record# does the player hold}
+  recnr       : word; {fil pointer, what record# does the player hold}
   auto_meny   : boolean; {spelaren vill ha menyerna automatiskt utritade}
 
   {below is new for 0.14}
@@ -898,13 +898,13 @@ type {Player/Npc Record}
   gym_sessions  : byte; {gym sessions(workout) left today}
   Gym_Owner     : byte; {controller of the gym? has to be in a team}
   Gym_Card      : byte; {free card to the gym? if not gym_owner that is}
-  RoyQuestsToday: SmallWord;{how many royal quests have the player completed today}
+  RoyQuestsToday: word;{how many royal quests have the player completed today}
   KingVotePoll: byte; {how many days since voted for king popularity}
   KingLastVote: byte; {last vote, to be used for polls}
 
   Married     : boolean; {is player married?}
-  Kids        : SmallWord; {how many kids this playeer is father/mother to}
-  IntimacyActs: SmallWord; {how many acts of intimacy has player left today?}
+  Kids        : word; {how many kids this playeer is father/mother to}
+  IntimacyActs: word; {how many acts of intimacy has player left today?}
   Pregnancy   : byte; {is player pregnant? 0=no, 1...X = days pregnant}
   FatherID    : s15;  {fathers id tag, set when pregnancy starts}
   AutoHate    : byte; {automatically worsen relation with a person that
@@ -916,17 +916,17 @@ type {Player/Npc Record}
                      this id also follows the player to the gods.dat!}
   Tax_Relief : boolean; {free from tax?}
 
-  MarriedTimes : SmallWord; {counter for marriages}
-  Bard_Songs_Left: SmallWord; {ehhh..quite self-explanatory huh?}
+  MarriedTimes : word; {counter for marriages}
+  Bard_Songs_Left: word; {ehhh..quite self-explanatory huh?}
   prison_escapes : byte; {allowed prison escape attempts}
   Filtyp : byte; {type of file player resides in (1=player file, 2=npc file)}
-  resurrections : SmallWord; {times left allowed to play...decreases after each death}
+  resurrections : word; {times left allowed to play...decreases after each death}
 
   {below is new for 0.20}
-  PickPocketAttempts : SmallWord; {pick pocket attempts}
+  PickPocketAttempts : word; {pick pocket attempts}
 
   {below is new for 0.20e}
-  BankRobberyAttempts : SmallWord; {bank robbery attempts / day}
+  BankRobberyAttempts : word; {bank robbery attempts / day}
 
 end;
 
@@ -939,10 +939,10 @@ type
                     couples. remember that a divorce will split the kids between parents}
   name    : s30;  {name}
   sex     : byte; {sex, 1=male, 2=female}
-  age     : SmallWord; {age}
+  age     : word; {age}
   birth   : udate; {date of birth}
-  recnr   : SmallWord; {record #, position in file}
-  ageplus : SmallWord; {how soon before getting one year older}
+  recnr   : word; {record #, position in file}
+  ageplus : word; {how soon before getting one year older}
   bastard: boolean; {set to true if product of secret lay or whore intercourse}
   named  : boolean; {has kid been named yet? if not it's not accessible in lists etc}
   deleted: boolean; {is this record deleted}
@@ -1001,22 +1001,22 @@ type {Social Relations, how characters relate to each other}
   ai2         : char; {player 2 ai}
   race1       : races; {pl1 race}
   race2       : races; {pl2 race}
-  relation1   : SmallWord; {pl1s relation to pl2 ,see:relation constants}
-  relation2   : SmallWord; {pl2s relation to pl1 ,see:relation constants}
+  relation1   : word; {pl1s relation to pl2 ,see:relation constants}
+  relation2   : word; {pl2s relation to pl1 ,see:relation constants}
   idtag1      : s15; {holds pl1.id - necessary when identifying kids parents}
   idtag2      : s15; {holds pl2.id - necessary when identifying kids parents}
-  recnr1      : SmallWord; {pl1 recnr in userfile}
-  recnr2      : SmallWord; {pl2 recnr in userfile}
+  recnr1      : word; {pl1 recnr in userfile}
+  recnr2      : word; {pl2 recnr in userfile}
   filetype1   : byte; {pl1 is residing in (1)user/(2)npc file}
   filetype2   : byte; {pl1 is residing in (1)user/(2)npc file}
   deleted     : boolean; {this relation record is deleted}
-  recnr       : SmallWord; {record #, file position of relation record}
+  recnr       : word; {record #, file position of relation record}
   bannedmarry : boolean; {not allowed to marry, only the King can set this flag}
-  marriedtimes: SmallWord; {how many times have this couple been married}
+  marriedtimes: word; {how many times have this couple been married}
   marrieddays : longint; {how many days has the current marriage lasted}
-  kids        : SmallWord; {# of children this relation has produced}
-  killedby1   : SmallWord; {name2 has been killed this many times by name1}
-  killedby2   : SmallWord; {name1 has been killed this many times by name2}
+  kids        : word; {# of children this relation has produced}
+  killedby1   : word; {name2 has been killed this many times by name1}
+  killedby2   : word; {name1 has been killed this many times by name2}
  end;
 
 type {Monster definition}
@@ -1085,7 +1085,7 @@ type {Config Reocrd}
   maxwanted : byte; {how many days should wanted posters stay up}
   maxdrinkds: SmallInt; {how many days should user drinks be kept}
   maxdrinks : SmallInt; {how drinks are allowed in the file}
-  inactivity: SmallWord; {how many minutes of inactivity before a user is logged off}
+  inactivity: word; {how many minutes of inactivity before a user is logged off}
   abase     : real; {armorbase}
   maxheals  : SmallInt; {max # of healing potions}
   classic   : boolean; {old or new game type}
@@ -1099,7 +1099,7 @@ type {Config Reocrd}
   mon_talk  : boolean; {should the monsters speak in the dungeons}
   quaffopt  : byte; {quaffing healing potions in the dungeons, consequences 1..3}
   dormpocketattackallow : boolean; {allow losers from pick-pocket attacks in the dorm to enter again}
-  pickpocketattempts    : SmallWord; {how many pick-pocket attempts per day}
+  pickpocketattempts    : word; {how many pick-pocket attempts per day}
   dormwakeupcallallow   : boolean; {defeated guys from dorm wake up calls}
   BardSongs:byte; {# of bard songs/day}
   Bard_Songs_Allowed : boolean; {allow bards to use sing.NOT added to Editor!}
@@ -1130,14 +1130,14 @@ type {Config Reocrd}
   Print_KingPolls       : boolean; {#158, put the players opinions about the ruler in the news?}
   ResurrectTheKing      : boolean; {resurrect the King when castle is infiltrated}
   AllowKingtoInitQuests : boolean; {allow king/queen to create quests}
-  MaxQuestsAllowed      : SmallWord; {max # of quests allowed in database}
-  MaxClaimedQuests      : SmallWord; {max # of claimed quests a player can have simlutaneously}
-  MaxCompletedQuests    : SmallWord; {max # of quests a player is allowed to complete/day}
-  MaxNewQuestsPerDay    : SmallWord; {max # of new quests the KING can issue/day}
+  MaxQuestsAllowed      : word; {max # of quests allowed in database}
+  MaxClaimedQuests      : word; {max # of claimed quests a player can have simlutaneously}
+  MaxCompletedQuests    : word; {max # of quests a player is allowed to complete/day}
+  MaxNewQuestsPerDay    : word; {max # of new quests the KING can issue/day}
   ForceQuests           : boolean; {allow the king to force quests upon players}
   AllowFailQuestReturn  : boolean; {allow players who die on quests to enter again the same day}
   AllowFailPrisonRescue : boolean; {allow players who are killed in rescue attempts/prison to enter again}
-  MarryActionsPerDay    : SmallWord;    {max # of marriages the King can interfer every day}
+  MarryActionsPerDay    : word;    {max # of marriages the King can interfer every day}
   AllowNPCUsurping      : boolean; {allow the npcs to usurp the throne}
   AllowCloseShops       : boolean; {allowed to close shops}
   AllowRoyalAdoption    : byte; {0-5 allow the King to put X kids per day in Royal Orphanage}
@@ -1156,20 +1156,20 @@ type {Config Reocrd}
 
   {File i/o stuff}
   NetShareMethod : NetShareMethods; {FileLocking, RecordLocking}
-  LockDelay : SmallWord; {delay in milliseconds between file lock attempts}
+  LockDelay : word; {delay in milliseconds between file lock attempts}
 
   {Social}
-  MinimumAgetoMarry  : SmallWord; {minimum age to marry, default is 18}
+  MinimumAgetoMarry  : word; {minimum age to marry, default is 18}
   BirthdayInterAct   : boolean; {allow other players to "congratulate" birtday subject}
   AllowHomoRelations : boolean; {allow homosexual relations}
   AllowAdultOptions  : boolean; {allow intimate sex options #194}
-  IntimacyActs       : SmallWord; {acts of intimacy/day a player has}
+  IntimacyActs       : word; {acts of intimacy/day a player has}
   RelationChangesNews: byte; {put moodswings in the news? 0=no,1=yes}
-  MaxHumanChildren   : SmallWord; {# of children allowed}
-  MaxNPCChildren     : SmallWord; {# of children allowed}
-  LaborDays          : SmallWord; {# of labor days before child pops out}
+  MaxHumanChildren   : word; {# of children allowed}
+  MaxNPCChildren     : word; {# of children allowed}
+  LaborDays          : word; {# of labor days before child pops out}
 
-  HomeItems : SmallWord; {# of items which can be stored at home}
+  HomeItems : word; {# of items which can be stored at home}
 
   {Uman Cave}
   BearTameTries : byte; {chances to go a round with the bear}
@@ -1203,13 +1203,13 @@ type {Config Reocrd}
   SpinCursor : boolean; {use spin cursor routines..may slow some routines}
 
   log_divine_entrance : boolean; {#164, log divine entries in the news}
-  Resurrections : SmallWord; {191, how many ressurections a player have per day}
+  Resurrections : word; {191, how many ressurections a player have per day}
 
   {Quest-Master}
   QuestMaster : s20;
 
   {gods}
-  gods_deedsleft : SmallWord; {deeds/day}
+  gods_deedsleft : word; {deeds/day}
 
   {items}
   allowitem : array[1..global_maxallows] of boolean;
@@ -1226,7 +1226,7 @@ type {Config Reocrd}
   bothImmortalsAndMortals : boolean;
 
   {bank}
-  BankRobberyAttempts : SmallWord;
+  BankRobberyAttempts : word;
 
  end; {ConfigRec *END*}
 

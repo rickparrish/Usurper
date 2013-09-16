@@ -31,7 +31,7 @@ Uses Init, InitGods;
 {Miscellaneous}
 Procedure Zero_Player(var target : UserRec);
 Procedure Make_Delay_Dots(col,dots,delayy:integer);
-Procedure Swappy(var nr1 : SmallWord; var nr2 : SmallWord);
+Procedure Swappy(var nr1 : word; var nr2 : word);
 Procedure Create_Maint_Flag;
 Function Random_Path : s70;
 Function Crypt(nr:word) : s70;

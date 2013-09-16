@@ -36,7 +36,7 @@ type BarrelRec = Record {Barrel Lifter top list, record structure}
       class  : classes; {player class}
       deleted: boolean; {has record been deleted}
       datee  : udate; {date when record was set}
-      barrels: SmallWord; {how many barrels did player lift}
+      barrels: word; {how many barrels did player lift}
      end;
 
 const gymcol = ulcyan; {color to use when displaying "The Gym"}
@@ -212,10 +212,10 @@ type TugofWarRec = Record {Tug-of-War participant}
       name    : s30; {name}
       ai      : char; {ai}
       filtyp  : byte; {filtyp (1,2)}
-      recnr   : SmallWord; {record #}
+      recnr   : word; {record #}
       id      : s15; {id}
       team    : s30; {teamname}
-      strength: SmallWord; {strength}
+      strength: word; {strength}
       {when you change this structure..don't forget initialize functions
        and swap routine!}
      end;
@@ -3031,7 +3031,7 @@ type FistFighterRec = Record {guy in fistfight}
       sex  : byte; {sex}
       human:boolean; {true if this is a human controlled fighter}
       filnr: byte; {1=player file, 2=npc file}
-      recnr: SmallWord; {record position}
+      recnr: word; {record position}
       ai   : char; {'H'uman or 'C'omputer}
       attacking_team:boolean; {belong to the attacking team?}
       level   : SmallInt; {level}
@@ -3043,7 +3043,7 @@ type FistFighterRec = Record {guy in fistfight}
       my_fate  : string[100]; {knocked out by whom? empty string means that he survived}
       my_kills : string[100]; {the guys fighter knocked out}
       mykills  : byte; {number of people fighter took out}
-      me_nailed: SmallWord; {fighter was nailed in this round}
+      me_nailed: word; {fighter was nailed in this round}
       move     : byte; {attackers currently selected combat move}
       skill    : array[1..global_maxcombat] of SmallInt; {close-combat skills}
      end; {fistfighter *end*}

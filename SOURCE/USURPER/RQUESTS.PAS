@@ -804,14 +804,14 @@ end. {RQuests .end.}
   {    deleted     : boolean; {is this quest deleted}
   {    comment     : s90; {comment by initiator}
   {    occupier    : s30; {is quest taken at this moment/name of the person}
-  {    occdays     : SmallWord; {quest has been occupied for X days}
-  {    daystocomple: SmallWord; {days given to complete quest before failed}
+  {    occdays     : word; {quest has been occupied for X days}
+  {    daystocomple: word; {days given to complete quest before failed}
 
   {    offerto     : s30; {is this quest an offer a player}
   {    offerrefused: byte; {if offer is refused (1=delete,2=add to list}
   {    forced      : boolean; {is quest forced upon OCCUPIER}
-  {    minlevel    : SmallWord; {min level required to take on quest}
-  {    maxlevel    : SmallWord; {max level required to take on quest}
+  {    minlevel    : word; {min level required to take on quest}
+  {    maxlevel    : word; {max level required to take on quest}
 
   {    reward      : byte; {low,medium,high}
   {    rewardtype  : qrewardtypes;
