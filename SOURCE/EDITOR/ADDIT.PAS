@@ -2025,10 +2025,9 @@ const s='s';
 Var
   R  : TRect;
   Dia : IREDialogP;
-  bw : byte;
   items : pcheckboxes;
 
-  t,w:byte;
+  w:byte;
 
   result : word;
 
@@ -2038,9 +2037,6 @@ Begin
  Dia:=New(IREDialogP, Init(R,'Item can be used by'));
  Dia^.Options := Dia^.Options or ofCentered;
 
- bw:=10; {button width}
-
- t:=2;
  w:=17;
 
  R.Assign(3, 2, 18, 13); {Size of the radio button box}
@@ -2212,7 +2208,6 @@ var
   i,res,go : integer;
 
   nam,
-  ali,
   found,
   waitishere : boolean;
 
@@ -2248,7 +2243,6 @@ begin
 
  if go=CmOk then begin
   nam:=false;
-  ali:=false;
   found:=false;
   res:=0;
   {looking for data.nam or data.ali}
@@ -2258,7 +2252,6 @@ begin
     s:=data^.nam;
    end
    else begin
-    ali:=true;
     s:=data^.ali;
    end;
 
@@ -4511,7 +4504,7 @@ Var
 
    out : longint;
 
-   x1,y1,x2,y2,
+   x1,y1,y2,
    err : integer;
 Begin
 
@@ -4531,7 +4524,6 @@ Begin
 
   x1:=02;
   y1:=02;
-  x2:=minl-7;
   y2:=03;
 
   {Help Text Rows}

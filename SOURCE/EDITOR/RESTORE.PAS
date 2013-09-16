@@ -15,14 +15,12 @@ var
   SavedScreen: TScreenBuffer;
 
 var
-  Index: Word;
   ExitSave: Pointer;
   SavedX, SavedY: Integer;
 
 { Exit code performed on program exit }
 procedure MyExitProc;
 begin
-  Index := 0;
   { Iterate over all rows, copying from memory to screen }
   ScreenRestore(SavedScreen);
   GotoXY(SavedX, SavedY);

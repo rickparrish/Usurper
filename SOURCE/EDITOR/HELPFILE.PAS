@@ -427,7 +427,7 @@ type
   CArray = array[0..32767] of Char;
 var
   Line: String;
-  I, P: Integer;
+  I: Integer;
 
 function IsBlank(Ch: Char): Boolean;
 begin
@@ -597,7 +597,6 @@ procedure THelpIndex.Add(I: Word; Val: Longint);
 const
   Delta = 10;
 var
-  P: PIndexArray;
   NewSize: Integer;
   Pos: Integer;
 
