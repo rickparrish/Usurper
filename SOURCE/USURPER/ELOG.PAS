@@ -1,6 +1,4 @@
-{$IFNDEF MSDOS}
 {$I DEFINES.INC}
-{$ENDIF}
 (********************************)
 (*   Programming:  Bob Dalton   *)
 (*   ERROR LOG UNIT - Vers 1.00 *)
