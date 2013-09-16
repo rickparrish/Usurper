@@ -36,7 +36,7 @@ Uses DDplus, Init, Cms,
      News, Mail, Npc_Chec,
      Various, Various2, Various3,
      Post_To, Relation, Online,
-     File_Io;
+     File_Io, SysUtils;
 
 var
     sicken : integer;
@@ -558,7 +558,7 @@ begin {MAIN-PROCEDURE}
  teamkill:=false;
  s:=cfg_string(35);
  if s='' then teamkill:=false;
- if upcasestr(s)='YES' then teamkill:=true;
+ if UpperCase(s)='YES' then teamkill:=true;
 
  {display_menu(false,false);}
 

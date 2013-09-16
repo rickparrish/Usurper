@@ -34,7 +34,7 @@ Uses Init, Cms, Jakob,
      Plvsplc, Statusc, Mail,
      News, Npc_Chec, Plcomp,
      Various, Various2, Various3,
-     Online, File_Io;
+     Online, File_Io, SysUtils;
 
 const maxboys = 5; {max people that can be in a fist-fight}
 
@@ -762,7 +762,7 @@ begin
 
  {get user input}
  s:=get_string(25);
- s:=upcasestr(s);
+ s:=UpperCase(s);
 
  found:=false;
 
@@ -917,12 +917,12 @@ begin
  {get 'kill teammates' from .CFG}
  s:=cfg_string(35);
  teamkill:=false;
- if upcasestr(s)='YES' then teamkill:=true;
+ if UpperCase(s)='YES' then teamkill:=true;
 
  {get 'kill npcs' from .CFG}
  s:=cfg_string(39);
  npckill:=false;
- if upcasestr(s)='YES' then npckill:=true;
+ if UpperCase(s)='YES' then npckill:=true;
 
  crlf;
  crlf;

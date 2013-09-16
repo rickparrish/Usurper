@@ -35,7 +35,7 @@ Uses Init, Cms, Jakob,
      CrtMage, Rquests, Post_to,
      GenNews, Relation, Various,
      Various3, News, Mail,
-     Children, Online, File_IO;
+     Children, Online, File_IO, SysUtils;
 
 var refresh : boolean;
 
@@ -2592,7 +2592,7 @@ begin {THE_CASTLE, MAIN PROC **START**}
                sd(2,':');
 
                s:=get_string(20);
-               s:=upcasestr(s);
+               s:=UpperCase(s);
 
                k:=0;
                for i:=1 to global_kingguards do begin
@@ -2702,7 +2702,7 @@ begin {THE_CASTLE, MAIN PROC **START**}
                 sd(2,':');
 
                 s:=get_string(20);
-                s:=upcasestr(s);
+                s:=UpperCase(s);
 
                 search:=false;
                 finito:=false;

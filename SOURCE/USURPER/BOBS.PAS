@@ -34,7 +34,7 @@ Uses Init, Cms, Jakob,
      Statusc, Brawlc, News,
      Drinking, Mail, PlvsMon,
      Various, Various2, Various3,
-     Online, File_Io;
+     Online, File_Io, SysUtils;
 
 var
     refresh : boolean;
@@ -124,7 +124,7 @@ begin
 
     crlf;
     d(config.textcolor,'You follow the stranger out into the nearby alley...');
-    delay2(800);
+    Sleep(800);
     crlf;
 
     x:=random(3);
@@ -272,7 +272,7 @@ begin
               sd(15,'"Wise decision peasant!"');
               d(config.textcolor,', the leader of the scoundrels says as you hand over the '+config.moneytype+'.');
               crlf;
-              delay2(300);
+              Sleep(300);
               d(config.textcolor,'Suddenly you are alone in the alley. You think for yourself that');
               d(config.textcolor,'perhaps you should have fought those men. Would it have been worth it?');
               pause;
@@ -297,10 +297,10 @@ begin
           decplayermoney(player,x);
           d(config.textcolor,'You hand over the '+config.moneytype+' and recieve a bottle filled with');
           sd(config.textcolor,'something which looks like syrup......');
-          delay2(800);
+          Sleep(800);
           crlf;
           sd(global_talkcol,'Down the hatch!');
-          delay2(1000);
+          Sleep(1000);
           crlf;
           crlf;
           x:=3+random(3);

@@ -34,7 +34,7 @@ Uses Init, Cms, Jakob,
      Statusc, Mail, PlvsMon,
      News, CompWar, PlComp,
      Npc_Chec, Various, Various2,
-     Various3, Online, File_Io;
+     Various3, Online, File_Io, SysUtils;
 
 var
 
@@ -979,8 +979,8 @@ begin
                   '');
                  end;
 
-                 if team then d(global_talkcol,'GIVE US THE '+upcasestr(config.moneytype)+' OR DIE!')
-                         else d(global_talkcol,'GIVE ME THE '+upcasestr(config.moneytype)+' OR DIE!');
+                 if team then d(global_talkcol,'GIVE US THE '+UpperCase(config.moneytype)+' OR DIE!')
+                         else d(global_talkcol,'GIVE ME THE '+UpperCase(config.moneytype)+' OR DIE!');
 
 
                  crlf;

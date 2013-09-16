@@ -32,7 +32,7 @@ Implementation
 
 Uses Init, Jakob, News,
      Various, Various2, Various3,
-     File_Io;
+     File_Io, SysUtils;
 
 const foe_col = 10; {enemy color}
 var
@@ -181,7 +181,7 @@ begin
  {fetching "Losers gonna get kicked out" from .CFG #86}
  losers_out:=false;
  s:=cfg_string(86);
- if upcasestr(s)='NO' then begin
+ if UpperCase(s)='NO' then begin
   losers_out:=true;
  end;
 
@@ -1256,7 +1256,7 @@ begin
  else begin
 
   {news-paper}
-  s:=upcasestr(sex2[player.sex]);
+  s:=UpperCase(sex2[player.sex]);
   newsy(true,
   ' '+uplc+player.name2+config.textcol1+' managed to knock out '+ulgray+commastr(foess)+config.textcol1+' foes!',
   ' '+s+' cleaned the place out!',

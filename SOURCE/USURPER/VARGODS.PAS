@@ -55,7 +55,7 @@ Implementation
 Uses Crt, DDplus, CMS,
      Jakob, Various, Various3,
      News, Online, Mail,
-     GenNews, File_IO;
+     GenNews, File_IO, SysUtils;
 
 const bossplace ='Rurforium';
 
@@ -145,7 +145,7 @@ begin {verify that a God by the name NAME exists, and is not deleted}
   {load god}
   if load_god(fload,tgod,i)=true then begin
 
-   if (upcasestr(tgod.name)=upcasestr(name)) and
+   if (UpperCase(tgod.name)=UpperCase(name)) and
       (tgod.deleted=false) then begin
      result:=true;
      break;
@@ -304,7 +304,7 @@ begin
 
 
   if (god.deleted=false) and
-     (upcasestr(god.realname)=upcasestr(user_name)) then begin
+     (UpperCase(god.realname)=UpperCase(user_name)) then begin
 
    inc(counter);
 
@@ -334,7 +334,7 @@ begin
     load_god(fload,god,i);
 
     if (god.deleted=false) and
-       (upcasestr(god.realname)=upcasestr(user_name)) then begin
+       (UpperCase(god.realname)=UpperCase(user_name)) then begin
 
      inc(counter);
 
@@ -402,9 +402,9 @@ begin
 
    load_god(fload,god,i);
 
-   if (upcasestr(alias)=upcasestr(god.name)) or
-      (upcasestr(alias)='SYSOP') or
-      (upcasestr(alias)=upcasestr(global_supreme_creator)) then begin
+   if (UpperCase(alias)=UpperCase(god.name)) or
+      (UpperCase(alias)='SYSOP') or
+      (UpperCase(alias)=UpperCase(global_supreme_creator)) then begin
 
     crlf;
     d(12,'I''m sorry, but this name is already being used.');
@@ -785,7 +785,7 @@ begin {checks is NAME has immortal characters}
   {load god}
   if load_god(fload,goddy,i)=true then begin
 
-   if (upcasestr(goddy.realname)=upcasestr(name)) and
+   if (UpperCase(goddy.realname)=UpperCase(name)) and
       (goddy.deleted=false) then begin
      result:=true;
      break;
@@ -814,7 +814,7 @@ begin {attempts to load a god by NAME}
   {load god}
   if load_god(fload,goddy,i)=true then begin
 
-   if (upcasestr(goddy.name)=upcasestr(name)) and
+   if (UpperCase(goddy.name)=UpperCase(name)) and
       (goddy.deleted=false) then begin
      result:=true;
      break;

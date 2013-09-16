@@ -173,7 +173,7 @@ Uses Crt, DDplus, Jakob,
      Cms, Mail, Resetg,
      PlvsPlc, PlComp, Various2,
      Various3, Relation, News,
-     Online, File_Io2, File_Io;
+     Online, File_Io2, File_Io, SysUtils;
 
 Procedure Pre_Darkness;
 begin
@@ -1770,8 +1770,8 @@ Function Replace_A_String(Source, Old, New : string) : string;
 var p : integer;
 begin
 
- while POS( upcasestr(Old), upcasestr(Source) ) <> 0 do begin
-  p := POS( upcasestr(Old), upcasestr(Source) );
+ while POS( UpperCase(Old), UpperCase(Source) ) <> 0 do begin
+  p := POS( UpperCase(Old), UpperCase(Source) );
   delete( Source, p, length( Old ) );
   insert( New, Source, p );
  end;
@@ -1885,17 +1885,17 @@ begin
 
  {Fast Play, skip first menu, #11}
  s:=cfg_string(11);
- if upcasestr(s)='YES' then config.fastplay:=false
+ if UpperCase(s)='YES' then config.fastplay:=false
                        else config.fastplay:=true;
 
  {Mark Npcs or not, #123}
  s:=cfg_string(123);
- if upcasestr(s)='NO' then config.marknpcs:=false
+ if UpperCase(s)='NO' then config.marknpcs:=false
                       else config.marknpcs:=true;
 
  {Anchor road name, #12}
  s:=cfg_string(12);
- if upcasestr(s)<>'' then begin
+ if UpperCase(s)<>'' then begin
   config.anchor:=s;
  end;
 
@@ -1903,14 +1903,14 @@ begin
   simultaneously, #51}
  config.simulnode:=true;
  s:=cfg_string(51);
- if upcasestr(s)='NO' then begin
+ if UpperCase(s)='NO' then begin
   config.simulnode:=false;
  end;
 
  {checking if Auto_Maint is off, #67}
  s:=cfg_string(67);
  config.automaint:=true;
- if upcasestr(s)='NO' then begin
+ if UpperCase(s)='NO' then begin
   config.automaint:=false;
  end;
 
@@ -1938,7 +1938,7 @@ begin
  {log immortals entries in the news, #164}
  s:=cfg_string(164);
  config.log_divine_entrance:=true;
- if upcasestr(s)='NO' then begin
+ if UpperCase(s)='NO' then begin
   config.log_divine_entrance:=false;
  end;
 
@@ -1952,32 +1952,32 @@ begin
  {name of bobs beer place}
  s:=cfg_string(167);
  config.bobsplace:='Bobs Beer';
- if upcasestr(s)<>'' then config.bobsplace:=s;
+ if UpperCase(s)<>'' then config.bobsplace:=s;
 
  s:=cfg_string(168);
  config.bobsname:='Bob';
- if upcasestr(s)<>'' then config.bobsname:=s;
+ if UpperCase(s)<>'' then config.bobsname:=s;
 
  s:=cfg_string(169);
  config.bishop:='Jakobinus';
- if upcasestr(s)<>'' then config.bishop:=s;
+ if UpperCase(s)<>'' then config.bishop:=s;
 
  s:=cfg_string(170);
  config.gossip_monger:='Lydia';
- if upcasestr(s)<>'' then config.gossip_monger:=s;
+ if UpperCase(s)<>'' then config.gossip_monger:=s;
 
  s:=cfg_string(171);
  config.bobsbartender:='Ted';
- if upcasestr(s)<>'' then config.bobsbartender:=s;
+ if UpperCase(s)<>'' then config.bobsbartender:=s;
 
  s:=cfg_string(172);
  config.gymmasseur:='Hazzan';
- if upcasestr(s)<>'' then config.gymmasseur:=s;
+ if UpperCase(s)<>'' then config.gymmasseur:=s;
 
  {put relation changes in the news, #173}
  s:=cfg_string(173);
  config.relationChangesNews:=1;
- if upcasestr(s)='NO' then begin
+ if UpperCase(s)='NO' then begin
   config.relationChangesNews:=0;
  end;
 
@@ -2003,7 +2003,7 @@ begin
  {allow players to view game settings, #177}
  s:=cfg_string(177);
  config.ViewGameSettings:=true;
- if upcasestr(s)='NO' then begin
+ if UpperCase(s)='NO' then begin
   config.ViewGameSettings:=false;
  end;
 
@@ -2023,7 +2023,7 @@ begin
  {Allow the NPCs to usurp the Royal Throne, #182}
  s:=cfg_string(182);
  config.AllowNPCUsurping:=true;
- if upcasestr(s)='NO' then begin
+ if UpperCase(s)='NO' then begin
   config.AllowNPCUsurping:=false;
  end;
 
@@ -2049,7 +2049,7 @@ begin
  {#186}
  s:=cfg_string(186);
  config.npcbelievers:=true;
- if upcasestr(s)='NO' then begin
+ if UpperCase(s)='NO' then begin
   config.npcbelievers:=false;
  end;
 
@@ -2078,7 +2078,7 @@ begin
  {#127}
  s:=cfg_string(127);
  config.dormpocketattackallow:=true;
- if upcasestr(s)='NO' then begin
+ if UpperCase(s)='NO' then begin
   config.dormpocketattackallow:=false;
  end;
 
@@ -2086,7 +2086,7 @@ begin
  {#128}
  s:=cfg_string(128);
  config.dormwakeupcallallow:=true;
- if upcasestr(s)='NO' then begin
+ if UpperCase(s)='NO' then begin
   config.dormwakeupcallallow:=false;
  end;
 
@@ -2103,7 +2103,7 @@ begin
  {Allow king/queen to create quests, #129}
  s:=cfg_string(129);
  config.AllowKingtoInitQuests:=true;
- if upcasestr(s)='NO' then begin
+ if UpperCase(s)='NO' then begin
   config.AllowKingtoInitQuests:=false;
  end;
 
@@ -2150,14 +2150,14 @@ begin
  {allow the King to force Quests upon players, #134}
  s:=cfg_string(134);
  config.ForceQuests:=true;
- if upcasestr(s)='NO' then begin
+ if UpperCase(s)='NO' then begin
   config.ForceQuests:=false;
  end;
 
  {allow players who die on Quests to enter again, #135}
  s:=cfg_string(135);
  config.AllowFailQuestReturn:=false;
- if upcasestr(s)='YES' then begin
+ if UpperCase(s)='YES' then begin
   config.AllowFailQuestReturn:=true;
  end;
 
@@ -2165,7 +2165,7 @@ begin
   enter again, from .CFG #136}
  s:=cfg_string(136);
  config.AllowFailPrisonRescue:=false;
- if upcasestr(s)='YES' then begin
+ if UpperCase(s)='YES' then begin
   config.AllowFailPrisonRescue:=true;
  end;
 
@@ -2274,7 +2274,7 @@ begin
  {resurrect the King when Castle is infiltrated, #149}
  s:=cfg_string(149);
  config.ResurrectTheKing:=true;
- if upcasestr(s)='NO' then begin
+ if UpperCase(s)='NO' then begin
   config.ResurrectTheKing:=false;
  end;
 
@@ -2291,7 +2291,7 @@ begin
  {allow the King to close shops, .CFG #151}
  s:=cfg_string(151);
  Config.AllowCloseShops:=true;
- if upcasestr(s)='NO' then begin
+ if UpperCase(s)='NO' then begin
   Config.AllowCloseShops:=false;
  end;
 
@@ -2308,42 +2308,42 @@ begin
  {allow the NPCs to marry and have kids, .CFG #153}
  s:=cfg_string(153);
  Config.AllowNpcMarry:=true;
- if upcasestr(s)='NO' then begin
+ if UpperCase(s)='NO' then begin
   Config.AllowNpcMarry:=false;
  end;
 
  {allow players to visit Steroids shop, .CFG #154}
  s:=cfg_string(154);
  Config.Allow_Steroids:=true;
- if upcasestr(s)='NO' then begin
+ if UpperCase(s)='NO' then begin
   Config.Allow_Steroids:=false;
  end;
 
  {allow players to visit Whore house, .CFG #155}
  s:=cfg_string(155);
  Config.Allow_Whores:=true;
- if upcasestr(s)='NO' then begin
+ if UpperCase(s)='NO' then begin
   Config.Allow_Whores:=false;
  end;
 
  {allow players to buy Drugs, .CFG #156}
  s:=cfg_string(156);
  Config.Allow_Drugs:=true;
- if upcasestr(s)='NO' then begin
+ if UpperCase(s)='NO' then begin
   Config.Allow_Drugs:=false;
  end;
 
  {allow players to Murder Innocent People, .CFG #157}
  s:=cfg_string(157);
  Config.Allow_Murder:=true;
- if upcasestr(s)='NO' then begin
+ if UpperCase(s)='NO' then begin
   Config.Allow_Murder:=false;
  end;
 
  {put players opinions of the ruler in the news?, .CFG #158}
  s:=cfg_string(158);
  Config.Print_KingPolls:=true;
- if upcasestr(s)='NO' then begin
+ if UpperCase(s)='NO' then begin
   Config.Print_KingPolls:=false;
  end;
 
@@ -2356,7 +2356,7 @@ begin
 
  {get fakeplayers SHUTUP setting from .CFG, #188}
  s:=cfg_string(188);
- if upcasestr(s)='NO' then begin
+ if UpperCase(s)='NO' then begin
   config.fakeschatty:=false;
  end;
 
@@ -2370,7 +2370,7 @@ begin
 
  {get homo/bi allowed from .CFG, #190}
  s:=cfg_string(190);
- if upcasestr(s)='YES' then begin
+ if UpperCase(s)='YES' then begin
   Config.AllowHomoRelations:=true;
  end;
 
@@ -2385,7 +2385,7 @@ begin
  {get homo/bi allowed from .CFG, #192}
  s:=cfg_string(192);
  Config.bothImmortalsAndMortals:=true;
- if upcasestr(s)='NO' then begin
+ if UpperCase(s)='NO' then begin
   Config.bothImmortalsAndMortals:=false;
  end;
 
@@ -2399,7 +2399,7 @@ begin
  {allow adult options .CFG, #194}
  s:=cfg_string(194);
  Config.AllowAdultOptions:=true;
- if upcasestr(s)='NO' then begin
+ if UpperCase(s)='NO' then begin
   Config.AllowAdultOptions:=false;
  end;
 
@@ -2412,7 +2412,7 @@ begin
 
  {get Quest-Master, #196}
  s:=cfg_string(196);
- if upcasestr(s)='' then begin
+ if UpperCase(s)='' then begin
   config.QuestMaster:='Ulgmog';
  end
  else begin
@@ -2437,19 +2437,19 @@ begin
 
  {MoneyType (gold), .CFG #160}
  s:=cfg_string(160);
- if (upcasestr(s)<>config.moneytype) and (s<>'') then begin
+ if (UpperCase(s)<>config.moneytype) and (s<>'') then begin
   Config.MoneyType:=s;
  end;
 
  {MoneyType2 (coin), .CFG #161}
  s:=cfg_string(161);
- if (upcasestr(s)<>config.moneytype2) and (s<>'') then begin
+ if (UpperCase(s)<>config.moneytype2) and (s<>'') then begin
   Config.MoneyType2:=s;
  end;
 
  {MoneyType3 (coins), .CFG #162}
  s:=cfg_string(162);
- if (upcasestr(s)<>config.moneytype3) and (s<>'') then begin
+ if (UpperCase(s)<>config.moneytype3) and (s<>'') then begin
   Config.MoneyType3:=s;
  end;
 
@@ -2485,7 +2485,7 @@ begin
                      else Config.MinLevelKing:=i;
 
  {#122, soul needed to usurp the throne (1=good,2=evil,3=any)}
- s:=upcasestr(cfg_string(122));
+ s:=UpperCase(cfg_string(122));
  if s='GOOD' then begin
   Config.SoulNeededKing:=1; {good}
  end
@@ -2519,7 +2519,7 @@ begin
 
  {get Classic game mode (or not) from .CFG}
  s:=cfg_string(91);
- if upcasestr(s)='CLASSIC' then config.classic:=true;
+ if UpperCase(s)='CLASSIC' then config.classic:=true;
 
  {get 'which items can be taken from defeated player' from .CFG}
  for i:=53 to 66 do begin
@@ -2548,7 +2548,7 @@ begin
   end
   else begin
    {all other items are processed here}
-   if upcasestr(s)='YES' then config.loot[i-52]:=true
+   if UpperCase(s)='YES' then config.loot[i-52]:=true
                          else config.loot[i-52]:=false;
   end;
 
@@ -2556,7 +2556,7 @@ begin
 
  {allow team mates to help mates attacked at the Dorm?}
  s:=cfg_string(96);
- if upcasestr(s)='YES' then config.TeamAssist:=TRUE
+ if UpperCase(s)='YES' then config.TeamAssist:=TRUE
                        else config.TeamAssist:=FALSE;
 
  {Teamdiff, this sets how much more powerful a team can be than its opponent}
@@ -2601,19 +2601,19 @@ begin
 
  {display error messages on screen, #124}
  s:=cfg_string(124);
- if upcasestr(s)='YES' then begin
+ if UpperCase(s)='YES' then begin
   config.errors:=true;
  end;
 
  {InnKeepers name, #20}
  s:=cfg_string(20);
- if upcasestr(s)='' then begin
+ if UpperCase(s)='' then begin
   config.InnKeeper:='Garth';
  end;
 
  {should the monsters speak in the dungeons, #23}
  s:=cfg_string(23);
- if upcasestr(s)='NO' then begin
+ if UpperCase(s)='NO' then begin
   config.mon_talk:=false;
  end
  else begin
@@ -2622,7 +2622,7 @@ begin
 
  {allow one man TEAM attacks?, #100}
  s:=cfg_string(100);
- if upcasestr(s)='NO' then begin
+ if UpperCase(s)='NO' then begin
   config.onemanshow:=false;
  end;
 
@@ -2630,7 +2630,7 @@ begin
  for i:=101 to 115 do begin
   config.allowitem[i-100]:=true;
   s:=cfg_string(i);
-  if upcasestr(s)='NO' then begin
+  if UpperCase(s)='NO' then begin
    config.allowitem[i-100]:=false;
   end;
  end;
@@ -3895,7 +3895,7 @@ begin
  repeat
   counter:=counter+1;
   sd(col,'.');
-  delay2(delayy);
+  Sleep(delayy);
  until counter>=dots;
 end;
 
@@ -4079,7 +4079,7 @@ begin
   a "s" if players name not already ends with a s}
 
  {return result}
- if upcasestr(name[length(name)])<>'S' then adds:='s'
+ if UpperCase(name[length(name)])<>'S' then adds:='s'
                                        else adds:='';
 
 end; {adds *end*}

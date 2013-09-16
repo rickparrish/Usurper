@@ -90,7 +90,7 @@ Implementation
 Uses CMS, Jakob, Relatio2,
      Various, Various2, Various3,
      News, Mail, Online,
-     Children, GenNews, File_Io;
+     Children, GenNews, File_Io, SysUtils;
 
 
 
@@ -1183,7 +1183,7 @@ begin {displays ply:s looks depending upon age,race etc etc}
 
  {king/queen?}
  if ply.king then begin
-  sd(config.textcolor,', '+uyellow+'THE '+upcasestr(KingString(ply.sex))+'!'+config.textcol1+',');
+  sd(config.textcolor,', '+uyellow+'THE '+UpperCase(KingString(ply.sex))+'!'+config.textcol1+',');
  end;
 
  {power}
@@ -2267,7 +2267,7 @@ begin
 
    {news-paper}
    newsy(true,'Childbirth!',
-   ' '+uplc+pl1.name2+config.textcol1+' the '++race_display(2,pl1.race,0)+', delivered a baby '+sex6[child.sex]+'!',
+   ' '+uplc+pl1.name2+config.textcol1+' the '+race_display(2,pl1.race,0)+', delivered a baby '+sex6[child.sex]+'!',
    ' '+s2,
    ''+sr3,
    ''+sr4,

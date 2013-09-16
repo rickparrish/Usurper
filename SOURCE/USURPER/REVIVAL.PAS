@@ -33,7 +33,7 @@ Implementation
 Uses Init, Cms, Jakob,
      Online, Mail, News,
      Various, Various2, Various3,
-     File_Io;
+     File_Io, SysUtils;
 
 Procedure Resurrect;
 var
@@ -63,7 +63,7 @@ begin
  d(config.textcolor,'Who do you wish to Resurrect? (enter '+config.textcol2+'?'+config.textcol1+' to see your team)');
  sd(config.textcolor,':');
  a:=get_string(20);
- a:=upcasestr(a);
+ a:=UpperCase(a);
 
  done:=false;
 

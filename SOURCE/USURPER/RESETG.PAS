@@ -32,7 +32,7 @@ Procedure Reset_Game;
 Implementation
 
 Uses Init, Cms, Jakob,
-     Various, News, File_Io;
+     Various, News, File_Io, SysUtils;
 
 Procedure Reset_Game;
 
@@ -90,7 +90,7 @@ begin
   error:=IoResult;
   if error<>0 then begin
    unable_to_create(global_pfile,error);
-   delay2(900);
+   Sleep(900);
   end
   else begin
    ok:=true;

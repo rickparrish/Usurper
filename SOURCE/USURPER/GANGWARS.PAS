@@ -37,7 +37,7 @@ Uses Cms, Jakob, Various,
      File_Io, Statusc, News, CompWar,
      Plcomp, Mail, TeamRec,
      Npc_Chec, Various3, Online,
-     Relation;
+     Relation, SysUtils;
 
 var
     nice2 : array [1..global_maxteammembers*2] of s90;
@@ -568,7 +568,7 @@ begin
   {Fight is coming up}
 
   {display current Town controllers}
-  sd(global_teamcol,upcasestr(oppo));
+  sd(global_teamcol,UpperCase(oppo));
   d(15,' holds the town!');
 end; 
   {check if the opposing team is around}

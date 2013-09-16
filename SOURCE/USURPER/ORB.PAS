@@ -80,7 +80,7 @@ Implementation
 Uses File_Io, Jakob, Cms,
      Various, Various2, Various3,
      Statusc, Mail, Relation,
-     News, Online;
+     News, Online, SysUtils;
 
 const
       drink_col = 9; {color used when displaying drink names}
@@ -553,11 +553,11 @@ begin
  {"Glugg" text!}
  crlf;
  sd(config.textcolor,'Glugg...');
- delay2(800);
+ Sleep(800);
  sd(config.textcolor,'Glugg...');
- delay2(800);
+ Sleep(800);
  sd(config.textcolor,'Glugg...');
- delay2(800);
+ Sleep(800);
  d(config.textcolor,'Glugg...!');
  pause;
  crlf;
@@ -580,40 +580,40 @@ begin
  if KindOfDrink in [OwnDrink,FileDrink] then begin
   crlf;
   d(config.textcolor,'You put the empty cup on the bardisk...');
-  delay2(1000);
+  Sleep(1000);
   sd(config.textcolor,'You look at ');
   sd(global_plycol,bartender);
   d(config.textcolor,', the Bartender...');
-  delay2(1000);
+  Sleep(1000);
   sd(global_plycol,bartender);
   d(config.textcolor,' looks at you...');
-  delay2(1000);
+  Sleep(1000);
  end
  else if KindOfDrink=NpcDrink then begin
   crlf;
   d(global_plycol,drinker.name2+config.textcol1+' puts the empty cup on the bardisk...');
-  delay2(1000);
+  Sleep(1000);
   sd(global_plycol,drinker.name2+config.textcol1+' looks at ');
   sd(global_plycol,bartender);
   d(config.textcolor,', the Bartender...');
-  delay2(1000);
+  Sleep(1000);
   sd(global_plycol,drinker.name2+config.textcol1+' looks at ');
   d(config.textcolor,'You...');
-  delay2(1000);
+  Sleep(1000);
 
   sd(global_plycol,bartender);
   d(config.textcolor,' and You look at '+uplc+drinker.name2+config.textcol1+'...');
-  delay2(1000);
+  Sleep(1000);
  end
  else if KindOfDrink=MailDrink then begin
   {MailDrink}
   crlf;
   d(config.textcolor,'You put down the empty cup...');
-  delay2(1000);
+  Sleep(1000);
   d(config.textcolor,'You look at the people around you...');
-  delay2(1000);
+  Sleep(1000);
   d(config.textcolor,'the people look back at you...');
-  delay2(1000);
+  Sleep(1000);
  end;
 
  if KindofDrink=NpcDrink then begin
@@ -626,7 +626,7 @@ begin
  end;
 
  crlf;
- delay2(800);
+ Sleep(800);
 
  {stuff that are directkillers :
  1. troll drink Elf water
@@ -2064,7 +2064,7 @@ begin {*MAIN PROCEDURE*}
                      crlf;
                      d(config.textcolor,'You look at the yellow bubbling liquid before you...');
                      d(global_talkcol,'Character Builder huh!?. Yiehhaaa...here goes...');
-                     delay2(1000);
+                     Sleep(1000);
                      if random(2)=0 then begin
                       player.skin:=random(10);
                       d(config.textcolor,'Haha....your skin just turned '+color[player.skin]+'!');
@@ -2112,7 +2112,7 @@ begin {*MAIN PROCEDURE*}
 
                      if confirm('Swallow the herb ','N')=true then begin
                       d(config.textcolor,'Gulp!....');
-                      delay2(500);
+                      Sleep(500);
                       if player.race=Dwarf then begin
                        d(config.textcolor,'Ahhhh...! You feel the fluid empower you with the');
                        d(config.textcolor,'strength you need so badly.');
@@ -2124,12 +2124,12 @@ begin {*MAIN PROCEDURE*}
                      else begin
                       if player.race=Dwarf then begin
                        d(config.textcolor,'Somehow I feel that this was a bad move...');
-                       delay2(1000);
+                       Sleep(1000);
                       end;
                       d(config.textcolor,'You throw the "lucky dog" in the spittoon....');
-                      delay2(1000);
+                      Sleep(1000);
                       d(config.textcolor,'KLONK!');
-                      delay2(1000);
+                      Sleep(1000);
                      end;
                      player.exp:=player.exp+xx;
                      if xx>0 then d(config.textcolor,'Your experience raised!');
@@ -2151,12 +2151,12 @@ begin {*MAIN PROCEDURE*}
                       'Y':begin
                            for xx:=1 to 5 do begin
                             sd(config.textcolor,'Klunk....');
-                            delay2(700);
+                            Sleep(700);
                            end;
                            crlf;
                            if random(2)=0 then begin
                             d(config.textcolor,'You are DRUNK!.....');
-                            delay2(700);
+                            Sleep(700);
                             d(config.textcolor,'Goodnight! You fall heavily to the floor!');
 
                             if random(2)=0 then begin
@@ -2189,7 +2189,7 @@ begin {*MAIN PROCEDURE*}
                       'N':begin
                            for xx:=1 to 3 do begin
                             sd(config.textcolor,'Klunk....');
-                            delay2(700);
+                            Sleep(700);
                            end;
                            crlf;
                            if random(2)=0 then begin
@@ -2202,7 +2202,7 @@ begin {*MAIN PROCEDURE*}
                       'J':begin
                            for xx:=1 to 3 do begin
                             sd(config.textcolor,'Zip....');
-                            delay2(700);
+                            Sleep(700);
                            end;
                            crlf;
                            if random(2)=0 then begin
@@ -2223,7 +2223,7 @@ begin {*MAIN PROCEDURE*}
                 '7':begin
                      crlf;
                      d(config.textcolor,'This seems to be a quite ordinary drink...');
-                     delay2(800);
+                     Sleep(800);
                      d(config.textcolor,'Cheers!');
                      crlf; pause;
                      if (player.race=Gnome) or (player.race=Gnoll) then begin
@@ -2251,11 +2251,11 @@ begin {*MAIN PROCEDURE*}
                 '8':begin
                      crlf;
                      d(config.textcolor,drink[8]+'! Take a deep breath....');
-                     delay2(900);
+                     Sleep(900);
                      d(config.textcolor,'Here goes! KLUNK!...');
-                     delay2(900);
+                     Sleep(900);
                      d(config.textcolor,'KLUNK!....');
-                     delay2(900);
+                     Sleep(900);
 
                      if (player.level<10) or (random(5)=0) then begin
                       d(config.textcolor,'Sorry, you were knocked out by this one!');
@@ -2323,7 +2323,7 @@ begin {*MAIN PROCEDURE*}
                       '');
 
                       d(config.textcolor,'You take the hideous skull, and drink the whole brew in one go...');
-                      delay2(1200);
+                      Sleep(1200);
                       d(config.textcolor,'Your head is exloding! You fade away into the great unknown..');
                       if player.exp>500 then player.exp:=player.exp-500;
 

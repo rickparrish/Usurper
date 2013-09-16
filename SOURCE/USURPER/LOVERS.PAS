@@ -35,7 +35,7 @@ Uses Init, Jakob, Statusc, CMS,
      Relation, Various3, Mail,
      Relatio2, Online,
      Children, Rating, GenNews,
-     File_Io;
+     File_Io, SysUtils;
 
 const local_place = 'Love Corner'; {name of this place}
 var
@@ -1408,7 +1408,7 @@ begin
           false,
           mailrequest_nothing,
           '',
-          +uyellow+'Happy Child!'+config.textcol1,
+          uyellow+'Happy Child!'+config.textcol1,
           'You receive '+uwhite+commastr(x)+config.textcol1+' experience points for making your',
           sex7[child^.sex]+' '+ukidc+child^.name+config.textcol1+' extremely happy by marrying',
           uplc+player.name2+config.textcol1+' the '+classnames[player.class]+'.',
@@ -2025,11 +2025,11 @@ begin
                        d(global_plycol,pl0^.name2+config.textcol1+' takes the cup and...');
                        crlf;
                        sd(config.textcolor,'Glugg...');
-                       delay2(800);
+                       Sleep(800);
                        sd(config.textcolor,'Glugg...');
-                       delay2(800);
+                       Sleep(800);
                        sd(config.textcolor,'Glugg...');
-                       delay2(800);
+                       Sleep(800);
                        d(12,'Glugg...!');
                        crlf;
 

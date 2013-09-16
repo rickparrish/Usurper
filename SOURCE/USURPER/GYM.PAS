@@ -1345,7 +1345,7 @@ begin {*Tug_Of_War*}
     mkstring(22,underscore),
     uplc+player.name2+config.textcol1+' invited you to a Tug-of-War Competition!',
     'You were selected to fight against '+uplc+player.name2+config.textcol1+' Team.',
-    'Your Team : '+uplc++away_team[1].name,
+    'Your Team : '+uplc+away_team[1].name,
     '            '+away_team[2].name,
     '            '+away_team[3].name,
     '            '+away_team[4].name,

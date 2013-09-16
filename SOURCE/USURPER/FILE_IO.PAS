@@ -189,10 +189,10 @@ Procedure Close_Text(var f:text);
 Implementation
 
 Uses Crt, Dos, CMS, Elog,
-     DDplus, DDScott, Jakob,
+     DDplus, Jakob,
      Various, AnsiColr,
      Mail, Invent, Relatio2,
-     JakeLock, Online, Strings;
+     JakeLock, Online, Strings, SysUtils;
 
 const
  {item data files, the reason for not declaring these constants in INIT.PAS
@@ -1340,7 +1340,7 @@ begin
 
   load_character(ply,who,i);
 
-  if (ply.deleted) or (upcasestr(ply.name1)+upcasestr(ply.name2)=global_delname1+global_delname2) then begin
+  if (ply.deleted) or (UpperCase(ply.name1)+UpperCase(ply.name2)=global_delname1+global_delname2) then begin
    inc(c);
   end
   else begin
@@ -1692,7 +1692,7 @@ begin {save new user at position SLOT}
 
   if error<>0 then begin
    unable_to_access(global_pfile,error);
-   delay2(global_lockdelay);
+   Sleep(global_lockdelay);
    ok:=false;
    inc(i);
   end;
@@ -1739,7 +1739,7 @@ begin; {well, this routine deletes file FN, what a surprise huh!}
   if error<>0 then begin
    unable_to_delete(fn,error);
    inc(i);
-   delay2(global_lockdelay);
+   Sleep(global_lockdelay);
   end
   else begin
    ok:=true;
@@ -1755,9 +1755,9 @@ Function F_Exists(const fn: string): boolean;
 { Checks for the existence of a file, allows wildcards }
 Var dirinfo: searchrec;
 Begin
- FindFirst(Fn,Anyfile - directory - volumeid,DirInfo);
+ Dos.FindFirst(Fn,Anyfile - directory - volumeid,DirInfo);
  F_Exists := DosError = 0;
- FindClose(dirinfo);
+ Dos.FindClose(dirinfo);
 End; {f_exists *end*}
 
 Function Get_Random_Line_From_Textfile(const fname:string) : string;
@@ -1903,7 +1903,7 @@ Begin {this routine deals with all textfile related stuff.
   error:=IoResult;
   if error<>0 then begin
    unable_to_access(fname,error);
-   delay2(global_lockdelay);
+   Sleep(global_lockdelay);
    inc(i);
   end
   else begin
@@ -2053,7 +2053,7 @@ begin
              error:=IoResult;
              if error<>0 then begin
               inc(i);
-              delay2(global_lockdelay);
+              Sleep(global_lockdelay);
               ok:=false;
              end;
             until (ok) or (i>global_locknrs);
@@ -2075,7 +2075,7 @@ begin
           error:=IoResult;
           if error<>0 then begin
            inc(i);
-           delay2(global_lockdelay);
+           Sleep(global_lockdelay);
            ok:=false;
           end;
          until (ok) or (i>global_locknrs);
@@ -2110,7 +2110,7 @@ begin
                 error:=IoResult;
                 if error<>0 then begin
                  inc(i);
-                 delay2(global_lockdelay);
+                 Sleep(global_lockdelay);
                  ok:=false;
                 end;
                until (ok) or (i>global_locknrs);
@@ -2146,7 +2146,7 @@ begin
              error:=IoResult;
              if error<>0 then begin
               inc(i);
-              delay2(global_lockdelay);
+              Sleep(global_lockdelay);
               ok:=false;
              end;
             until (ok) or (i>global_locknrs);
@@ -2169,7 +2169,7 @@ begin
             error:=IoResult;
             if error<>0 then begin
              inc(i);
-             delay2(global_lockdelay);
+             Sleep(global_lockdelay);
              ok:=false;
             end;
            until (ok) or (i>global_locknrs);
@@ -2205,7 +2205,7 @@ begin
             error:=IoResult;
             if error<>0 then begin
              inc(i);
-             delay2(global_lockdelay);
+             Sleep(global_lockdelay);
              ok:=false;
             end;
            until (ok) or (i>global_locknrs);
@@ -2241,7 +2241,7 @@ begin
             error:=IoResult;
             if error<>0 then begin
              inc(i);
-             delay2(global_lockdelay);
+             Sleep(global_lockdelay);
              ok:=false;
             end;
            until (ok) or (i>global_locknrs);
@@ -2277,7 +2277,7 @@ begin
             error:=IoResult;
             if error<>0 then begin
              inc(i);
-             delay2(global_lockdelay);
+             Sleep(global_lockdelay);
              ok:=false;
             end;
            until (ok) or (i>global_locknrs);
@@ -2330,7 +2330,7 @@ begin
             error:=IoResult;
             if error<>0 then begin
              inc(i);
-             delay2(global_lockdelay);
+             Sleep(global_lockdelay);
              ok:=false;
             end;
            until (ok) or (i>global_locknrs);
@@ -2367,7 +2367,7 @@ begin
             error:=IoResult;
             if error<>0 then begin
              inc(i);
-             delay2(global_lockdelay);
+             Sleep(global_lockdelay);
              ok:=false;
             end;
            until (ok) or (i>global_locknrs);
@@ -2396,7 +2396,7 @@ begin
              error:=IoResult;
              if error<>0 then begin
               inc(i);
-              delay2(global_lockdelay);
+              Sleep(global_lockdelay);
               ok:=false;
              end;
             until (ok) or (i>global_locknrs);
@@ -2432,7 +2432,7 @@ begin
            error:=IoResult;
            if error<>0 then begin
             inc(i);
-            delay2(global_lockdelay);
+            Sleep(global_lockdelay);
             ok:=false;
            end;
           until (ok) or (i>global_locknrs);
@@ -2469,7 +2469,7 @@ begin
              error:=IoResult;
              if error<>0 then begin
               inc(i);
-              delay2(global_lockdelay);
+              Sleep(global_lockdelay);
               ok:=false;
              end;
             until (ok) or (i>global_locknrs);
@@ -2505,7 +2505,7 @@ begin
              error:=IoResult;
              if error<>0 then begin
               inc(i);
-              delay2(global_lockdelay);
+              Sleep(global_lockdelay);
               ok:=false;
              end;
             until (ok) or (i>global_locknrs);
@@ -2542,7 +2542,7 @@ begin
              error:=IoResult;
              if error<>0 then begin
               inc(i);
-              delay2(global_lockdelay);
+              Sleep(global_lockdelay);
               ok:=false;
              end;
             until (ok) or (i>global_locknrs);
@@ -2565,7 +2565,7 @@ begin
                      error:=IoResult; {get error}
                      if error<>0 then begin
                       inc(i);
-                      delay2(global_lockdelay);
+                      Sleep(global_lockdelay);
                       ok:=false;
                      end;
                     until (ok) or (i>global_locknrs);
@@ -2587,7 +2587,7 @@ begin
                    error:=IoResult; {get error}
                    if error<>0 then begin
                     inc(i);
-                    delay2(global_lockdelay);
+                    Sleep(global_lockdelay);
                     ok:=false;
                    end;
                   until (ok) or (i>global_locknrs);
@@ -2609,7 +2609,7 @@ begin
               error:=IoResult; {get error}
               if error<>0 then begin
                inc(i);
-               delay2(global_lockdelay);
+               Sleep(global_lockdelay);
                ok:=false;
               end;
              until (ok) or (i>global_locknrs);
@@ -2689,7 +2689,7 @@ begin
   if error<>0 then begin
    inc(i);
    unable_to_access(s,error);
-   delay2(global_lockdelay);
+   Sleep(global_lockdelay);
    ok:=false;
   end;
  until (ok) or (i>global_locknrs);
@@ -2763,7 +2763,7 @@ begin
 
   if Error<>0 then begin
    unable_to_access(s,error);
-   delay2(global_lockdelay);
+   Sleep(global_lockdelay);
    ok:=false;
    inc(i);
   end;
@@ -2839,7 +2839,7 @@ begin
           if err<>0 then begin
            inc(i);
            unable_to_lock(global_mafile,filnr);
-           delay2(global_lockdelay);
+           Sleep(global_lockdelay);
           end;
          until (err=0) or (i>global_locknrs);
 
@@ -2858,7 +2858,7 @@ begin
             if err<>0 then begin
              inc(i);
              unable_to_unlock(global_mafile,filnr);
-             delay2(global_lockdelay);
+             Sleep(global_lockdelay);
             end;
            until (err=0) or (i>global_locknrs);
 
@@ -2917,7 +2917,7 @@ begin
 
   if error<>0 then begin
    unable_to_access(global_mafile,error);
-   delay2(global_lockdelay);
+   Sleep(global_lockdelay);
    ok:=false;
    inc(ii);
   end;
@@ -3004,7 +3004,7 @@ begin
           if err<>0 then begin
            inc(i);
            unable_to_lock(infil,filnr);
-           delay2(global_lockdelay);
+           Sleep(global_lockdelay);
           end;
          until (err=0) or (i>global_locknrs);
 
@@ -3023,7 +3023,7 @@ begin
             if err<>0 then begin
              inc(i);
              unable_to_unlock(infil,filnr);
-             delay2(global_lockdelay);
+             Sleep(global_lockdelay);
             end;
            until (err=0) or (i>global_locknrs);
 
@@ -3118,7 +3118,7 @@ begin
 
   if error<>0 then begin
    unable_to_access(workname,error);
-   delay2(global_lockdelay);
+   Sleep(global_lockdelay);
    ok:=false;
    inc(i);
   end;
@@ -3275,7 +3275,7 @@ begin
 
    if error<>0 then begin
     unable_to_access(global_pfile,error);
-    delay2(global_lockdelay);
+    Sleep(global_lockdelay);
     ok:=false;
     inc(i);
    end;
@@ -3389,7 +3389,7 @@ begin
 
    if error<>0 then begin
     unable_to_access(global_npfile,error);
-    delay2(global_lockdelay);
+    Sleep(global_lockdelay);
     ok:=false;
     inc(i);
    end;
@@ -3512,7 +3512,7 @@ begin
 
   if error<>0 then begin
    unable_to_access(global_wwfile,error);
-   delay2(global_lockdelay);
+   Sleep(global_lockdelay);
    ok:=false;
    inc(i);
   end;
@@ -3586,7 +3586,7 @@ begin
    error:=IoResult; {get error}
    if error<>0 then begin
     unable_to_create(global_kingf,error);
-    delay2(global_lockdelay);
+    Sleep(global_lockdelay);
     ok:=false;
     inc(i);
    end
@@ -3623,7 +3623,7 @@ begin
 
   if error<>0 then begin
    unable_to_access(global_kingf,error);
-   delay2(global_lockdelay);
+   Sleep(global_lockdelay);
    ok:=false;
    inc(i);
   end;
@@ -3700,7 +3700,7 @@ begin
 
   if error<>0 then begin
    unable_to_access(global_gufile,error);
-   delay2(global_lockdelay);
+   Sleep(global_lockdelay);
    ok:=false;
    inc(i);
   end;
@@ -3774,7 +3774,7 @@ begin
 
   if error<>0 then begin
    unable_to_access(global_rquestf,error);
-   delay2(global_lockdelay);
+   Sleep(global_lockdelay);
    ok:=false;
    inc(i);
   end;
@@ -3853,7 +3853,7 @@ begin
 
   if error<>0 then begin
    unable_to_access(global_chestfile,error);
-   delay2(global_lockdelay);
+   Sleep(global_lockdelay);
    ok:=false;
    inc(i);
   end;
@@ -3936,7 +3936,7 @@ begin
 
   if error<>0 then begin
    unable_to_access(global_marketfile,error);
-   delay2(global_lockdelay);
+   Sleep(global_lockdelay);
    ok:=false;
    inc(i);
   end;
@@ -4014,7 +4014,7 @@ begin
 
   if error<>0 then begin
    unable_to_access(global_drinkfile,error);
-   delay2(global_lockdelay);
+   Sleep(global_lockdelay);
    ok:=false;
    inc(i);
   end;
@@ -4097,7 +4097,7 @@ begin
 
   if error<>0 then begin
    unable_to_access(global_moatfile,error);
-   delay2(global_lockdelay);
+   Sleep(global_lockdelay);
    ok:=false;
    inc(i);
   end;
@@ -4176,7 +4176,7 @@ begin
 
   if error<>0 then begin
    unable_to_access(global_relationf,error);
-   delay2(global_lockdelay);
+   Sleep(global_lockdelay);
    ok:=false;
    inc(i);
   end;
@@ -4285,7 +4285,7 @@ begin
 
   if error<>0 then begin
    unable_to_access(global_childrenf,error);
-   delay2(global_lockdelay);
+   Sleep(global_lockdelay);
    ok:=false;
    inc(i);
   end;
@@ -4378,7 +4378,7 @@ begin
 
   if error<>0 then begin
    unable_to_access(global_barrelf,error);
-   delay2(global_lockdelay);
+   Sleep(global_lockdelay);
    ok:=false;
    inc(i);
   end;
@@ -4460,7 +4460,7 @@ begin
 
   if error<>0 then begin
    unable_to_access(global_godfil,error);
-   delay2(global_lockdelay);
+   Sleep(global_lockdelay);
    ok:=false;
    inc(i);
   end;
@@ -4549,7 +4549,7 @@ begin
 
   if error<>0 then begin
    unable_to_access(global_weapofil,error);
-   delay2(global_lockdelay);
+   Sleep(global_lockdelay);
    ok:=false;
    inc(i);
   end;
@@ -4608,7 +4608,7 @@ begin
 
   if error<>0 then begin
    unable_to_access(global_armofile,error);
-   delay2(global_lockdelay);
+   Sleep(global_lockdelay);
    ok:=false;
    inc(i);
   end;
@@ -4669,7 +4669,7 @@ begin
 
   if error<>0 then begin
    unable_to_access(global_monfile,error);
-   delay2(global_lockdelay);
+   Sleep(global_lockdelay);
    ok:=false;
    inc(i);
   end;
@@ -4745,7 +4745,7 @@ begin
 
   if error<>0 then begin
    unable_to_access(global_lvlfile,error);
-   delay2(global_lockdelay);
+   Sleep(global_lockdelay);
    ok:=false;
    inc(i);
   end;
@@ -4809,7 +4809,7 @@ begin
           if error<>0 then begin
            inc(i);
            unable_to_lock(global_onfile,filnr);
-           delay2(global_lockdelay);
+           Sleep(global_lockdelay);
           end;
          until (error=0) or (i>global_locknrs);
 
@@ -4828,7 +4828,7 @@ begin
             if error<>0 then begin
              inc(i);
              unable_to_unlock(global_onfile,filnr);
-             delay2(global_lockdelay);
+             Sleep(global_lockdelay);
             end;
            until (error=0) or (i>global_locknrs);
 
@@ -4905,7 +4905,7 @@ begin
 
           if error<>0 then begin
            unable_to_access(global_onfile,error);
-           delay2(global_lockdelay);
+           Sleep(global_lockdelay);
            inc(i);
           end
           else begin
@@ -5043,7 +5043,7 @@ begin
 
           if error<>0 then begin
            unable_to_access(global_rquestf,error);
-           delay2(global_lockdelay);
+           Sleep(global_lockdelay);
            inc(i);
           end
           else begin
@@ -5139,7 +5139,7 @@ begin
 
           if error<>0 then begin
            unable_to_access(global_relationf,error);
-           delay2(global_lockdelay);
+           Sleep(global_lockdelay);
            inc(i);
           end
           else begin
@@ -5243,7 +5243,7 @@ begin
 
           if error<>0 then begin
            unable_to_access(global_mafile,error);
-           delay2(global_lockdelay);
+           Sleep(global_lockdelay);
            inc(i);
           end
           else begin
@@ -5348,7 +5348,7 @@ begin
 
   if error<>0 then begin
    unable_to_access(global_onfile,error);
-   delay2(global_lockdelay);
+   Sleep(global_lockdelay);
    ok:=false;
    inc(i);
   end;
@@ -5370,7 +5370,7 @@ begin
     if error<>0 then begin
      inc(i);
      unable_to_lock(global_onfile,filnr);
-     delay2(global_lockdelay);
+     Sleep(global_lockdelay);
     end;
    until (error=0) or (i>global_locknrs);
 
@@ -5416,7 +5416,7 @@ begin
     if error<>0 then begin
      inc(i);
      unable_to_unlock(global_onfile,filnr);
-     delay2(global_lockdelay);
+     Sleep(global_lockdelay);
     end;
    until (error=0) or (i>global_locknrs);
 
@@ -5489,7 +5489,7 @@ begin
 
   if error<>0 then begin
    unable_to_access(onliner.comfile,error);
-   delay2(global_lockdelay);
+   Sleep(global_lockdelay);
    ok:=false;
    inc(i);
 
@@ -5572,7 +5572,7 @@ begin
 
   if error<>0 then begin
    unable_to_access(global_saffile,error);
-   delay2(global_lockdelay);
+   Sleep(global_lockdelay);
    ok:=false;
    inc(i);
   end;
@@ -5650,7 +5650,7 @@ begin
   else begin
    unable_to_create(global_saffile,error);
    inc(i);
-   delay2(global_lockdelay);
+   Sleep(global_lockdelay);
   end;
  until (bye) or (i>global_lockdelay);
 
@@ -5691,7 +5691,7 @@ begin
 
           if error<>0 then begin
            unable_to_access(onliner.comfile,error);
-           delay2(global_lockdelay);
+           Sleep(global_lockdelay);
            inc(i);
            if f_exists(onliner.comfile)=false then begin
             i:=global_locknrs+1;
@@ -5779,7 +5779,7 @@ begin
   error:=IoResult;
   if error<>0 then begin
    unable_to_access(fname,error);
-   delay2(global_lockdelay);
+   Sleep(global_lockdelay);
    ok:=false;
    inc(i);
   end
@@ -5801,9 +5801,9 @@ begin
 
    if inclusions in [1,3] then begin
     {display date string}
-    s:=va(month);
+    s:=IntToStr(month);
     if length(s)=1 then s:='0'+s;
-    s2:=va(day);
+    s2:=IntToStr(day);
     if length(s2)=1 then s2:='0'+s2;
     s:=s+'-'+s2;
     s2:=long2str(year);
@@ -5943,7 +5943,7 @@ Begin
   error:=IoResult; {get error}
   If error<>0 then begin
    unable_to_create(filename,error);
-   delay2(global_lockdelay);
+   Sleep(global_lockdelay);
    inc(tries);
   end
   else begin
@@ -5982,7 +5982,7 @@ Begin
  if f_exists(filename) then begin
   repeat
    if delete_file(filename)=false then begin
-    Delay2(global_lockdelay);
+    Sleep(global_lockdelay);
     inc(tries);
    end
    else begin
@@ -6024,7 +6024,7 @@ begin
   error:=IoResult; {get error}
   if error<>0 then begin
    unable_to_access(ipcpath+filename,error);
-   delay2(global_lockdelay);
+   Sleep(global_lockdelay);
    inc(tries);
   end
   else begin
@@ -6096,7 +6096,7 @@ begin
  {init vars}
  occupied:=false;
 
- FindFirst(IPCpath+'IPC????.IPC',Anyfile-Directory,sr);
+ Dos.FindFirst(IPCpath+'IPC????.IPC',Anyfile-Directory,sr);
  with tIPC do begin
   while (doserror=0) and (occupied=false) do begin
    if not ReadIPC(tIPC,sr.name) then begin
@@ -6112,11 +6112,11 @@ begin
    end;
 
    {find next node file to check out}
-   Findnext(sr);
+   Dos.Findnext(sr);
 
   end;
  end;
- FindClose(sr);
+ Dos.FindClose(sr);
  
  {return result}
  ChatArea_InUse:=occupied;
@@ -6131,7 +6131,7 @@ Var
   freemessage, i,col : byte;
 Begin
 
- FindFirst(IPCpath+'IPC????.IPC',Anyfile-Directory,sr);
+ Dos.FindFirst(IPCpath+'IPC????.IPC',Anyfile-Directory,sr);
  with tIPC do begin
   while doserror = 0 do begin
    if not ReadIPC(tIPC,sr.name) then begin
@@ -6179,11 +6179,11 @@ Begin
    end;
 
    {find next node file to send our message to}
-   Findnext(sr);
+   Dos.Findnext(sr);
 
   end;
  end;
- FindClose(sr);
+ Dos.FindClose(sr);
 End; {chatsend *end*}
 
 Procedure Multi_Chat;  {Chat with user(s) in a conference}
@@ -6242,7 +6242,7 @@ Begin
  {init misc vars}
  counter:=0;
 
- FindFirst(IPCpath+'IPC????.IPC',Anyfile-Directory,sr);
+ Dos.FindFirst(IPCpath+'IPC????.IPC',Anyfile-Directory,sr);
  with tIPC do begin
   while doserror = 0 do begin
    if not ReadIPC(tIPC,sr.name) then begin
@@ -6305,11 +6305,11 @@ Begin
    end;
 
    {find next node file to send our message to}
-   Findnext(sr);
+   Dos.Findnext(sr);
 
   end;
  end;
- FindClose(sr);
+ Dos.FindClose(sr);
 end; {display_userconfs *end*}
 
 begin {multi-chat}
@@ -6352,7 +6352,7 @@ begin {multi-chat}
  if s='' then begin
   go_ahead:=false;
  end
- else if upcasestr(s)='C' then begin
+ else if UpperCase(s)='C' then begin
 
   {Create New CHAT-ROOM}
 

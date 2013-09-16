@@ -39,7 +39,7 @@ Implementation
 Uses Cms, Jakob, Various,
      Various2, Various3, PlvsMon,
      SpellsU, Invent, News,
-     Mail, File_Io;
+     Mail, File_Io, SysUtils;
 
 Procedure Sniffing_Glue; {this is not healthy!}
 var x : longint;
@@ -623,7 +623,7 @@ begin
              d(config.textcolor,'You travel downwards...');
              for i:=1 to 25 do begin
               sd(config.textcolor,'.');
-              delay2(150);
+              Sleep(150);
              end;
              crlf;
 
@@ -1920,14 +1920,14 @@ begin
 
              {Mountains}
              sd(config.textcolor,'Day one...over the mountains');
-             delay2(del);
+             Sleep(del);
              crlf;
              if random(evil)=0 then encounter(MOUNTAINS);
 
              if mission_active=true then begin
               {Desert}
               sd(config.textcolor,'Day two...through the desert');
-              delay2(del);
+              Sleep(del);
               crlf;
               if random(evil)=0 then encounter(DESERT);
              end;
@@ -1936,7 +1936,7 @@ begin
               {Forest}
               sd(config.textcolor,'Day three...through ');
               sd(15,forest);
-              delay2(del);
+              Sleep(del);
               crlf;
               if random(evil)=0 then encounter(FORESTS);
              end;
@@ -1945,7 +1945,7 @@ begin
               {arrving at destination}
               sd(config.textcolor,'Day four...arriving to ');
               sd(15,dest);
-              delay2(del);
+              Sleep(del);
               crlf;
 
               crlf;

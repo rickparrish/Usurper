@@ -36,7 +36,7 @@ Uses Crt, DDplus, Init, Cms,
      Relation, relatio2, WantedSc, Compwar,
      Kmaint, Various, Various2,
      Various3, InitGods, VarGods,
-     ChallKng, File_Io;
+     ChallKng, File_Io, SysUtils;
 
      {npcs that go after the crown must:
        not be married to monarch
@@ -1060,7 +1060,7 @@ begin
  interest:=str_to_nr(s);
  if (interest<1) or (interest>15) then interest:=3;
  npcallow:=true;
- if upcasestr(ss)='NO' then npcallow:=false;
+ if UpperCase(ss)='NO' then npcallow:=false;
 
  {fetching NPC ,level raises in news, in NEWS? from .CFG (#44) }
  {fetching NPC allowance to buy new armor/weapons (#45) }
@@ -1073,14 +1073,14 @@ begin
  s :=cfg_string(45);
  ss:=cfg_string(46);
 
- if upcasestr(s2)='NO' then npcnews:=false;
- if upcasestr(s)='NO'  then npcbuy:=false;
- if upcasestr(ss)='NO' then npcpurnews:=false;
+ if UpperCase(s2)='NO' then npcnews:=false;
+ if UpperCase(s)='NO'  then npcbuy:=false;
+ if UpperCase(ss)='NO' then npcpurnews:=false;
 
  {read editor option #94, npc teams allowed to attack?}
  npccharge:=true;
  s:=cfg_string(94);
- if upcasestr(s)='NO' then npccharge:=false;
+ if UpperCase(s)='NO' then npccharge:=false;
 
  {read editor option #88, buying strategy}
  s:=cfg_string(88);
@@ -1699,7 +1699,7 @@ begin
                     'Team Drop-Out!',    {letter head}
                     mailrequest_nothing, {mailrequest_constant}
                     uplc+pl0^.name2+config.textcol1+' left your Team!', {line1}
-                    uplc+pl0^.name2+config.textcol1+' became '++kingstring(pl0^.sex)+config.textcol1+'!', {line2}
+                    uplc+pl0^.name2+config.textcol1+' became '+kingstring(pl0^.sex)+config.textcol1+'!', {line2}
                     '',  {line3}
                     ''); {line4}
 
@@ -1845,7 +1845,7 @@ begin
     for i:=1 to fs(FsPlayer) do begin
      y:=0;
      load_character(player,1,i);
-     if upcasestr(player.team)=upcasestr(s) then begin
+     if UpperCase(player.team)=UpperCase(s) then begin
       y:=1;
       break;
      end;
@@ -1854,7 +1854,7 @@ begin
     if y=0 then begin
      for i:=1 to fs(FsNPC) do begin
       load_character(pl0^,2,i);
-      if upcasestr(pl0^.team)=upcasestr(s) then begin
+      if UpperCase(pl0^.team)=UpperCase(s) then begin
        y:=1;
        break;
       end;

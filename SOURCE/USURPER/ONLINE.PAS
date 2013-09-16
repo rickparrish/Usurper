@@ -19,8 +19,6 @@ Copyright 2007 Jakob Dangarden
     along with Usurper; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 }
-
-
 Unit Online; {Usurper - Online file-related (and other) routines}
 
 Interface
@@ -74,7 +72,7 @@ Implementation
 Uses Dos, DDplus, Cms, InitGods,
      Jakob, Various, Various2,
      Various3, OnTrade, News,
-     Mail, OnDuel, File_Io;
+     Mail, OnDuel, File_Io, SysUtils;
 
 Function Online_Release(const target:s30) : boolean;
 var
@@ -520,7 +518,7 @@ begin
    error:=IoResult;
    if error<>0 then begin
     unable_to_create(global_onfile,error);
-    delay2(global_lockdelay);
+    Sleep(global_lockdelay);
     if f_exists(global_onfile) then begin
      break;
     end;
@@ -1331,8 +1329,8 @@ begin
 
    inc(cc);
    node_check;
-   delay2(global_online_poll_delay);
-   my_timeslice;
+   Sleep(global_online_poll_delay);
+   Sleep(1);
 
    if config.spincursor=true then begin
     spin_cursor(2,config.textcolor);
@@ -2840,7 +2838,7 @@ begin
   {execute}
   crlf;
   sd(13,'Schwoooooop.........');
-  delay2(global_online_poll_delay);
+  Sleep(global_online_poll_delay);
   d(13,'....!');
   crlf;
 

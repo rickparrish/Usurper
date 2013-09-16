@@ -32,7 +32,7 @@ Implementation
 
 Uses Init, Cms, Jakob,
      Various, Statusc, News,
-     Various3, Online;
+     Various3, Online, SysUtils;
 
 var
   owner : s40;
@@ -227,20 +227,20 @@ begin
            crlf;
            d(config.textcolor,'Seated in one of the rooms, you take the pill and');
            d(config.textcolor,'swallow it down together with a cool softdrink.');
-           delay2(800);
+           Sleep(800);
            crlf;
            d(config.textcolor,'Gulp..');
-           delay2(800);
+           Sleep(800);
            d(config.textcolor,'Slurp..');
-           delay2(800);
+           Sleep(800);
            d(config.textcolor,'Mmmm..');
-           delay2(800);
+           Sleep(800);
            d(config.textcolor,'Slurp..');
-           delay2(800);
+           Sleep(800);
            d(config.textcolor,'Slurp..');
-           delay2(800);
+           Sleep(800);
            d(config.textcolor,'....Gulp!');
-           delay2(800);
+           Sleep(800);
 
            case i of
             1:begin

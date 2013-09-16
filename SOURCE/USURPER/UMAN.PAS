@@ -31,7 +31,7 @@ Implementation
 Uses Init, Cms, Jakob,
      Statusc, News, Mail,
      Online, Various, Various2,
-     Various3, File_Io;
+     Various3, File_Io, SysUtils;
 
 const maxlist = 250;
 var refresh : boolean;
@@ -282,8 +282,8 @@ begin
           sd(config.textcolor,':');
 
           s:=get_string(20);
-          a:=upcasestr(s);
-          s:=upcasestr(player.name2);
+          a:=UpperCase(s);
+          s:=UpperCase(player.name2);
 
           if a='?' then begin
            {START list recommended opponents START}
@@ -446,7 +446,7 @@ begin
           sd(15,'TELEPORTING ');
           sd(global_plycol,pl0.name2);
           sd(15,' ... ');
-          delay2(500);
+          Sleep(500);
           sd(global_plycol,pl0.name2);
           sd(15,' has arrived!');
 

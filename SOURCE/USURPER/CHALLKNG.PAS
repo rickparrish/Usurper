@@ -45,7 +45,7 @@ Uses Cms, Jakob, Plcomp,
      Compwar, News, Various,
      Various2, Various3, PlvsMon,
      Mail, GenNews, Online,
-     Relation, File_Io;
+     Relation, File_Io, SysUtils;
 
 Procedure Challenge_King;
 var
@@ -1119,7 +1119,7 @@ to_death:=false;
    crlf;
    pause;
    crlf;
-   d(15,'You are up against the '+upcasestr(kingstring(king.sexy))+'!');
+   d(15,'You are up against the '+UpperCase(kingstring(king.sexy))+'!');
    pause;
   end
   else begin
@@ -1188,7 +1188,7 @@ repeat
    {news-paper}
    newsy(true,
    'Raise the Standard of Revolt!',
-   ' '+uplc+challenger.name2+config.textcol1+' fought '+upcasestr(kingstring(king.sexy))+' '+ukingc+pl0.name2
+   ' '+uplc+challenger.name2+config.textcol1+' fought '+UpperCase(kingstring(king.sexy))+' '+ukingc+pl0.name2
     +config.textcol1+'!',
    ' '+ulred+challenger.name2+config.textcol1+' lost the fight, begged for mercy and was sent to Prison.',
    '',

@@ -35,7 +35,7 @@ Uses Jakob, Cms, Statusc,
      SwapEq, Invent, Plvspl2,
      Cast, News, Mail,
      Npc_Chec, Various, Various2,
-     Various3, Relation, File_Io;
+     Various3, Relation, File_Io, SysUtils;
 
 Procedure Player_vs_Player;
 const soulstrike:longint=0;
@@ -61,7 +61,7 @@ begin
 
  s:=cfg_string(34);
  if s='' then offkill:=false;
- if upcasestr(s)='NO' then offkill:=true;
+ if UpperCase(s)='NO' then offkill:=true;
 
  {resetting spells}
  for i:=1 to global_maxspells do begin

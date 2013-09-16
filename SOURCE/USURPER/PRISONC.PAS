@@ -33,7 +33,7 @@ Implementation
 Uses Init, Cms, Jakob,
      Statusc, Various, Various2,
      Post_To, Mail, Gamec,
-     News, Online, File_Io;
+     News, Online, File_Io, SysUtils;
 
 var refresh : boolean;
 
@@ -197,7 +197,7 @@ begin
         crlf;
         d(5,'You clear your throat : ');
         sd(global_talkcol,'Let me out of here please....!');
-        delay2(900);
+        Sleep(900);
         crlf;
 
         crlf;

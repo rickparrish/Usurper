@@ -31,7 +31,7 @@ Implementation
 
 Uses Init, Cms, Jakob,
      Various, Various3, Statusc,
-     News, Online, File_IO;
+     News, Online, File_IO, SysUtils;
 
 var refresh : boolean;
     owner : s40;
@@ -239,17 +239,17 @@ begin
            crlf;
 
            d(config.textcolor,'Glugg..');
-           delay2(800);
+           Sleep(800);
            d(config.textcolor,'Slurp..');
-           delay2(800);
+           Sleep(800);
            d(config.textcolor,'Mmmmm..');
-           delay2(800);
+           Sleep(800);
            d(config.textcolor,'Slurp..');
-           delay2(800);
+           Sleep(800);
            d(config.textcolor,'Glugg..');
-           delay2(800);
+           Sleep(800);
            d(config.textcolor,'....Gulp!');
-           delay2(1000);
+           Sleep(1000);
 
            {pay for pill}
            decplayermoney(player,sterprice[i]^);

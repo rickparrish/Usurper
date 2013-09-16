@@ -40,7 +40,7 @@ Uses DDplus, Cms, Init,
      Home, Various, Various2,
      Various3, Mail, Online,
      Relation, Relatio2, Children,
-     File_Io;
+     File_Io, SysUtils;
 
 var
     refresh : boolean;
@@ -259,7 +259,7 @@ begin
  {reading line 47 from .cfg = allow teams in the dungeons?}
  teamdngs:=true;
  s:=cfg_string(47);
- if upcasestr(s)='NO' then begin
+ if UpperCase(s)='NO' then begin
   teamdngs:=false;
  end;
 
@@ -273,7 +273,7 @@ begin
  {get "log player entrances in news" from .cfg}
  log_mortal_entrance:=true;
  s:=cfg_string(87);
- if upcasestr(s)='NO' then log_mortal_entrance:=false;
+ if UpperCase(s)='NO' then log_mortal_entrance:=false;
 
  if (player.king) and (log_mortal_entrance) then begin
   if player.sex=1 then s:='King'
@@ -663,7 +663,7 @@ begin
 
         if (king.shop_healing=false) and (player.king=false) then begin
          crlf;
-         d(12,'The Healing Hut is closed! (The '+upcasestr(kingstring(king.sexy))+'s order!)');
+         d(12,'The Healing Hut is closed! (The '+UpperCase(kingstring(king.sexy))+'s order!)');
         end
         else begin
          healer;
@@ -968,7 +968,7 @@ begin
 
         if (king.shop_magic=false) and (player.king=false) then begin
          crlf;
-         d(12,'The Magic Shop is closed! (The '+upcasestr(kingstring(king.sexy))+'s order!)');
+         d(12,'The Magic Shop is closed! (The '+UpperCase(kingstring(king.sexy))+'s order!)');
         end
         else begin
          magic_shop;
@@ -1006,7 +1006,7 @@ begin
 
         if (king.shop_armor=false) and (player.king=false) then begin
          crlf;
-         d(12,'The Armor Shop is closed! (The '+upcasestr(kingstring(king.sexy))+'s order!)');
+         d(12,'The Armor Shop is closed! (The '+UpperCase(kingstring(king.sexy))+'s order!)');
         end
         else if player.armhag<1 then begin
          crlf;
@@ -1025,7 +1025,7 @@ begin
 
         if (king.shop_weapon=false) and (player.king=false) then begin
          crlf;
-         d(12,'The Weapon Shop is closed! (The '+upcasestr(kingstring(king.sexy))+'s order!)');
+         d(12,'The Weapon Shop is closed! (The '+UpperCase(kingstring(king.sexy))+'s order!)');
         end
         else if player.weaphag<1 then begin
          crlf;

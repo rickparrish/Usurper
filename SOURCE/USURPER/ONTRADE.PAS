@@ -32,7 +32,7 @@ Implementation
 
 Uses Init, Jakob, Statusc,
      Invent, News, Various,
-     Various2, File_Io;
+     Various2, File_Io, SysUtils;
 
 var
     mesleepy,
@@ -56,21 +56,21 @@ var
 Procedure Put_Other(incom : char);
 var i : byte;
     bye : boolean;
-    sleep : longint;
+    sleepcounter : longint;
 begin
 
  bye:=false;
- sleep:=0;
+ sleepcounter:=0;
 
  if imp=true then i:=1
              else i:=0;
  repeat
 
-  inc(sleep);
+  inc(sleepcounter);
   loadsave_com(Fload,Commy,i,save_mess);
 
   {jakob}
-  delay2(global_lockdelay);
+  Sleep(global_lockdelay);
 
   if commy.com='=' then begin
    bye:=true;
@@ -84,7 +84,7 @@ begin
    bye:=true;
   end;
 
-  if sleep>global_online_maxwaits_bigloop then begin
+  if sleepcounter>global_online_maxwaits_bigloop then begin
 
    d(config.textcolor,'The talks are over!');
    d(config.textcolor,'You have not responded fast enough! (press ENTER)');
@@ -122,18 +122,18 @@ end; {put_own *end*}
 Function Get_Com( k1,k2,k3,k4,k5,k6,k7,k8,k9,k11,k10, k12,
                   k13,k14,k15,k16,k17,k18 : char ): char;
 var i : byte;
-    sleep : longint;
+    sleepcounter : longint;
 begin
- sleep:=0;
+ sleepcounter:=0;
  if imp=true then i:=0
              else i:=1;
 
  repeat
 
-  inc(sleep);
+  inc(sleepcounter);
 
   {jakob}
-  delay2(global_lockdelay);
+  Sleep(global_lockdelay);
 
   if f_exists(onliner.comfile) then begin
    loadsave_com(Fload,Commy,i,save_mess);
@@ -142,19 +142,19 @@ begin
    end;
   end
   else begin
-   if sleep>global_online_maxwaits_bigloop then begin
+   if sleepcounter>global_online_maxwaits_bigloop then begin
     sd(global_plycol,oppo);
     d(config.textcolor,' has dropped out of the negotiations!');
-    sleep:=global_online_maxwaits_bigloop;
+    sleepcounter:=global_online_maxwaits_bigloop;
     break;
    end;
   end;
 
  until (commy.com in [k1,k2,k3,k4,k5,k6,k7,k8,k9,k10,
-                      k11,k12,k13,k14,k15,k16,k17,k18]) or (sleep>=global_online_maxwaits_bigloop);
+                      k11,k12,k13,k14,k15,k16,k17,k18]) or (sleepcounter>=global_online_maxwaits_bigloop);
 
 
- if sleep>=global_online_maxwaits_bigloop then begin
+ if sleepcounter>=global_online_maxwaits_bigloop then begin
   adios:=true;
   sleepy:=true;
   sd(global_plycol,oppo);
@@ -290,7 +290,7 @@ begin
   abort:=false;
   repeat
 
-   delay2(global_lockdelay);
+   Sleep(global_lockdelay);
    inc(waits);
    {wait until 'attacker' has created a comfile}
    if not grepe then begin
@@ -313,7 +313,7 @@ begin
      end;
     end;
 
-    my_timeslice;
+    Sleep(1);
     sd(config.textcolor,'.');
 
    end;
@@ -919,7 +919,7 @@ begin
     done:=true;
    end;
 
-   delay2(global_lockdelay);
+   Sleep(global_lockdelay);
 
   until done;
 

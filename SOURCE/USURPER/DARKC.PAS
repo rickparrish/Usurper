@@ -35,7 +35,7 @@ Uses Init, Cms, Jakob,
      ChestLo, Whores, Murder,
      Various, Various2, Various3,
      News, Children, Relation,
-     File_Io, Online;
+     File_Io, Online, SysUtils;
 
 var
     refresh : boolean;
@@ -656,7 +656,7 @@ begin
 
           if (king.shop_gigolos=false) and (player.king=false) then begin
            crlf;
-           d(12,'The Gigolos Nest is closed! (The '+upcasestr(kingstring(king.sexy))+'s order!)');
+           d(12,'The Gigolos Nest is closed! (The '+UpperCase(kingstring(king.sexy))+'s order!)');
           end
           else begin
            gigolos;
@@ -675,7 +675,7 @@ begin
 
           if (king.shop_whores=false) and (player.king=false) then begin
            crlf;
-           d(12,'The Whore House is closed! (The '+upcasestr(kingstring(king.sexy))+'s order!)');
+           d(12,'The Whore House is closed! (The '+UpperCase(kingstring(king.sexy))+'s order!)');
           end
           else begin
            whore_house;

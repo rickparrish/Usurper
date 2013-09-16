@@ -38,7 +38,7 @@ Uses Init, Cms, Jakob, News,
      Various, Various2, Various3,
      Temple, Challkng, Prisonf,
      Statusc, PlyQuest, Relation,
-     Mail, Online, File_Io;
+     Mail, Online, File_Io, SysUtils;
 
 var  refresh : boolean;
 
@@ -1385,7 +1385,7 @@ begin
          sd(config.textcolor,' to abort)');
          repeat
           inc(cc);
-          delay2(global_online_poll_delay);
+          Sleep(global_online_poll_delay);
           node_check;
 
           if config.spincursor=true then begin
@@ -1409,7 +1409,7 @@ begin
             end;
            end;
 
-           my_timeslice;
+           Sleep(1);
           end;
 
          until (onliner.com in [intercom_accept,intercom_decline]) or (abort);

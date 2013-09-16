@@ -32,7 +32,7 @@ Implementation
 Uses DDplus, Init, Cms,
      Jakob, Statusc, News,
      Various, Various2, Various3,
-     Online, File_Io;
+     Online, File_Io, SysUtils;
 
       {Level Masters}
 const maxmasters=10;
@@ -325,7 +325,7 @@ begin
           d(global_talkcol,'So, who should be summoned? (enter ? to see your team)');
           sd(config.textcolor,':');
           s:=get_string(20);
-          s:=upcasestr(s);
+          s:=UpperCase(s);
 
           z:=0;
           found:=false;
@@ -512,7 +512,7 @@ begin
         d(config.textcolor,'So, who do you wish to know more about ?');
         sd(config.textcolor,':');
         s:=get_string(20);
-        s:=upcasestr(s);
+        s:=UpperCase(s);
 
         z:=0;
         zz:=0;

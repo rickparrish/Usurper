@@ -36,7 +36,7 @@ Uses Jakob, Cms, Statusc,
      SortTeam, PlvsMon, Mail,
      News, GenNews, GodWorld,
      Various, Various2, Various3,
-     VarGods, Online, File_Io;
+     VarGods, Online, File_Io, SysUtils;
 
 Procedure Supreme;
 
@@ -87,7 +87,7 @@ begin
 
  crlf;
  sd(config.textcolor,'Krreeek........the rusty door opens');
- delay2(900);
+ Sleep(900);
  crlf;
 
  {good or bad? door choice is important}
@@ -241,17 +241,17 @@ begin
  if ch='D' then begin
   crlf;
   d(config.textcolor,'Klunk..');
-  delay2(1000);
+  Sleep(1000);
   d(config.textcolor,'klunk..');
-  delay2(1000);
+  Sleep(1000);
   d(config.textcolor,'klunk..');
-  delay2(1000);
+  Sleep(1000);
   d(config.textcolor,'klunk..');
-  delay2(1000);
+  Sleep(1000);
   d(config.textcolor,'klunk..');
-  delay2(1000);
+  Sleep(1000);
   d(config.textcolor,'..ahh.."');
-  delay2(1000);
+  Sleep(1000);
   x:=random(4);
   if x=0 then begin
    d(config.textcolor,'Poison!! You lose many hitpoints!');
@@ -301,7 +301,7 @@ begin
   {news-paper}
   newsy(true,
   uyellow+'Heroic Deed!'+config.textcol1,
-  ' '+uplc+player.name2+config.textcol1+' encountered the '+supcol+'Supreme Being'+config.textcol1++' and won!',
+  ' '+uplc+player.name2+config.textcol1+' encountered the '+supcol+'Supreme Being'+config.textcol1+' and won!',
   ' '+uplc+player.name2+config.textcol1+' ended '+sex3[player.sex]+' career with',
   ' a brilliant victory!',
   '',

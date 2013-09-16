@@ -34,7 +34,7 @@ Implementation
 Uses Init, Cms, Jakob,
      Mail, News, Statusc,
      Wantedsc, Various, Various2,
-     Online, File_Io;
+     Online, File_Io, SysUtils;
 
 const max_posters = 50; {should be the same as the MAX constant in WANTEDSC.pas}
 var
@@ -165,7 +165,7 @@ begin
         d(config.textcolor,'Clear bounty on whom ?');
         sd(config.textcolor,':');
         a:=get_string(30);
-        a:=upcasestr(a);
+        a:=UpperCase(a);
 
         found:=false;
 
@@ -239,7 +239,7 @@ begin
          d(config.textcolor,'Who are you looking for?');
          sd(config.textcolor,':');
          a:=get_string(30);
-         a:=upcasestr(a);
+         a:=UpperCase(a);
 
          found:=false;
          abort:=false;

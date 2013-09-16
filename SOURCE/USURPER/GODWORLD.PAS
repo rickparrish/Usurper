@@ -38,7 +38,7 @@ Uses DDplus, Init, Cms,
      StatusC, Relation, Mail,
      Post_To, Sortpl, Online,
      Children, News, GenNews,
-     File_Io;
+     File_Io, SysUtils;
 
 var
     refresh : boolean;
@@ -987,7 +987,7 @@ begin
 
                      {news-paper}
                      newsy(true,
-                     +config.textcol1+'Pathetic Recruitment Attempt',
+                     config.textcol1+'Pathetic Recruitment Attempt',
                      config.textcol1+' The immortal '+ugodc+god.name+config.textcol1
                         +' attempted scare tactics to make ',
                      ' '+uplc+mortal.name2+config.textcol1+' join '+sex3[god.sex]+' ranks.',
@@ -1009,7 +1009,7 @@ begin
 
                      {news-paper}
                      newsy(true,
-                     +config.textcol1+'Pathetic Recruitment Attempt',
+                     config.textcol1+'Pathetic Recruitment Attempt',
                      config.textcol1+' The immortal '+ugodc+god.name+config.textcol1
                         +' attempted to recruit ',
                      ' '+uplc+mortal.name2+config.textcol1+'.',
@@ -1703,7 +1703,7 @@ begin
         d(config.textcolor,'So, who is the mortal you wish to know more about?');
         sd(config.textcolor,':');
         s:=get_string(20);
-        s:=upcasestr(s);
+        s:=UpperCase(s);
 
         abort:=false;
         found:=false;

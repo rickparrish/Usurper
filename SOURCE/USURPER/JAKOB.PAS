@@ -49,11 +49,9 @@ Function MkString( nr : integer;const s:string) :string;
 Function Cool_string(lngth:integer;char1,char2:char;col1,col2:integer) : string;
 Function Ljust(const s:string; max:integer) :string;
 Function Rjust(const s:string; max:integer) :string;
-Function UpCaseStr(s:string ) :string;
 Function FindSub(const s1,s2:string):boolean; {is s1 somewhere in s2?}
 Function EmptyStr : string; {returns an empty string}
 Function Replace_String(Source:string; const old,new : string) : string;
-Function LowerCase(const s:string) : string; {converts a string to lower case}
 Function IntToHex(num: longint; digits: byte): string;
 Function IntToStr(Num: longint): string;
 Function Percent_String(num1,num2:integer):string;
@@ -95,8 +93,6 @@ Procedure Display_Text(const name : string);
 Procedure Crlf; {provides a Line Feed/Return on both local and remote screen}
 Procedure ClearScreen; {clears the screen on both local and remote side}
 Procedure Pause; {pause prompt}
-Function ScreenRows: byte;
-Function ScreenCols: byte;
 
 {Ansi Colors/Usurper control codes}
 Function ConvertToAnsi(incolor:byte):string;
@@ -117,9 +113,7 @@ Function Menu_Choices(const m1,m2,m3,m4,m5:string):char;
 
 {Other routines}
 Function HeapHandler(Size : Word) : Integer;far; {handles heap errors}
-Procedure My_TimeSlice; {release a time slice}
 Procedure Normal_Exit; {HALT the program}
-Procedure Delay2(const milliSeconds: LongInt);
 Function UKeyPressed : boolean; {same as pascal KeyPressed function}
 Function GetChar : char; {get a character from local or remote keyboard}
 Function UnderScore : char; {returns a '_'}
@@ -132,19 +126,19 @@ Function Confirm2(const text: string; default:char):char; {Y/N/= confirmation}
 Procedure Drop_Dos; {drop to dos}
 Procedure Display_Bar_Status(force:boolean); {call to DDplus Display_Status (bar) proc}
 Function Dos_Version : word;
-Function Is_Share:boolean; {uses netfilep.pas shareinst function}
-Function Jake_Tasker:byte; {call to DDScott proc}
 Function Param_Hunt(const h:string) : boolean; {checking for Command Line parameters}
 
 Implementation
 
 Uses Dos, Crt, Init,
-     DDplus, DDscott, ComIO,
-     Exec, AnsiColr, SwagDate,
-     Various, NetFilep, DispText,
-     Online, File_IO;
+     DDplus,
+     AnsiColr,
+     Various, DispText,
+     Online, File_IO, DateUtils, VideoUtils, Comm, SysUtils;
 
 var carriage_return : boolean; {used by D and SD procedures (display routines)}
+    SavedX, SavedY: Word;
+    ScreenBuffer: TScreenBuffer;
 
 
 Function percent_string(num1,num2:integer):string;
@@ -253,12 +247,6 @@ end;
 Function Dos_Version : word;
 begin
  dos_version:=dosVersion; {Bp DosUnit function}
-end;
-
-Function Is_Share:boolean; {is share installed?}
-{uses shareinst function from netfilep.pas}
-begin
- is_share:=shareinst;
 end;
 
 Function Hours_Between(const time1,time2:string) : integer;
@@ -372,19 +360,6 @@ var s : string;
 begin
  cleanstring(s);
  emptystr:=s;
-end;
-
-Function LowerCase(const s:string) : string;
-var i : integer;
-    t : string;
-begin
-
- t:='';
- for i:=1 to length(s) do begin
-  t:=t+locase(s[i]);
- end;
-
- lowercase:=t;
 end;
 
 Function Replace_String;
@@ -671,7 +646,7 @@ end; {confirm2 *end*}
 
 Function Packed_Date : longint;
 begin
- packed_date:=swag_date;
+ packed_date:=DaysSince1Jan0001;
 end;
 
 Function MkString;
@@ -895,7 +870,7 @@ begin
    end
    else begin
     {find start of picture}
-    s:='@#'+upcasestr(name);
+    s:='@#'+UpperCase(name);
     if global_ansi then s:=s+'.ANS'
                    else s:=s+'.ASC';
 
@@ -1426,7 +1401,7 @@ var result : longint;
     s : s70;
     ok : boolean;
     i : byte;
-
+    ch : char;
 begin
 
  {init vars}
@@ -1643,22 +1618,22 @@ begin
 
  result:=false;
 
- if upcasestr(incolor)='BLACK' then result:=true
- else if upcasestr(incolor)='BLUE' then result:=true
- else if upcasestr(incolor)='GREEN' then result:=true
- else if upcasestr(incolor)='CYAN' then result:=true
- else if upcasestr(incolor)='RED' then result:=true
- else if upcasestr(incolor)='MAGENTA' then result:=true
- else if upcasestr(incolor)='BROWN' then result:=true
- else if upcasestr(incolor)='LIGHTGRAY' then result:=true
- else if upcasestr(incolor)='DARKGRAY' then result:=true
- else if upcasestr(incolor)='LIGHTBLUE' then result:=true
- else if upcasestr(incolor)='LIGHTGREEN' then result:=true
- else if upcasestr(incolor)='LIGHTCYAN' then result:=true
- else if upcasestr(incolor)='LIGHTRED' then result:=true
- else if upcasestr(incolor)='LIGHTMAGENTA' then result:=true
- else if upcasestr(incolor)='YELLOW' then result:=true
- else if upcasestr(incolor)='WHITE' then result:=true;
+ if UpperCase(incolor)='BLACK' then result:=true
+ else if UpperCase(incolor)='BLUE' then result:=true
+ else if UpperCase(incolor)='GREEN' then result:=true
+ else if UpperCase(incolor)='CYAN' then result:=true
+ else if UpperCase(incolor)='RED' then result:=true
+ else if UpperCase(incolor)='MAGENTA' then result:=true
+ else if UpperCase(incolor)='BROWN' then result:=true
+ else if UpperCase(incolor)='LIGHTGRAY' then result:=true
+ else if UpperCase(incolor)='DARKGRAY' then result:=true
+ else if UpperCase(incolor)='LIGHTBLUE' then result:=true
+ else if UpperCase(incolor)='LIGHTGREEN' then result:=true
+ else if UpperCase(incolor)='LIGHTCYAN' then result:=true
+ else if UpperCase(incolor)='LIGHTRED' then result:=true
+ else if UpperCase(incolor)='LIGHTMAGENTA' then result:=true
+ else if UpperCase(incolor)='YELLOW' then result:=true
+ else if UpperCase(incolor)='WHITE' then result:=true;
 
  {return result}
  valid_color:=result;
@@ -1669,7 +1644,7 @@ Function ConvertToUsurperAnsi(incolor:string):string;
 var result : string[14];
 begin
 
- incolor:=upcasestr(incolor);
+ incolor:=UpperCase(incolor);
  result:=ugreen;
 
  if incolor='BLACK' then             result:=ublack
@@ -1698,7 +1673,7 @@ Function ConvertToUsurperAnsi2(incolor:string):byte;
 var result : byte;
 begin
 
- incolor:=upcasestr(incolor);
+ incolor:=UpperCase(incolor);
  result:=2;
 
  if incolor='BLACK' then result:=0
@@ -1789,7 +1764,7 @@ begin
  end
  else begin
 
-  if pos(upcasestr(s1),upcasestr(s2))>0 then findsub:=true
+  if pos(UpperCase(s1),UpperCase(s2))>0 then findsub:=true
                                         else findsub:=false;
  end;
 
@@ -1915,13 +1890,16 @@ begin;
   writeln(' type "EXIT" to return)');
  end;
 
- savescreen;
- if not local then AsyncCloseUp;
+ ScreenSave(ScreenBuffer);
+ SavedX := WhereX;
+ SavedY := WhereY;
+ if not local then CommClose(false);
  swapvectors;
- do_exec(getenv('COMSPEC'),'',USE_ALL,$FFFF,TRUE);
+ Exec(getenv('COMSPEC'),'');
  swapvectors;
- if not local then AsyncSelectPort(com_port);
- restorescreen;
+ if not local then CommOpen(com_port);
+ ScreenRestore(ScreenBuffer);
+ GotoXY(SavedX, SavedY);
 
  if not local then begin
   crlf;
@@ -1937,7 +1915,7 @@ begin;
 
  {Has Screen Size Changed}
  if local then begin
-  global_screenlines:=screenrows-1; {-1 because the statline takes up 1}
+  global_screenlines:=ScreenSizeY-1; {-1 because the statline takes up 1}
   {this is also used in usurper.pas}
  end;
 
@@ -1953,17 +1931,6 @@ begin;
 
 end; {drop_dos *end*}
 
-Function Jake_Tasker:byte; {Which OS is running?}
-var result : byte;
-begin
-
- result:=tasker; {ddscott 'tasker' variable}
-
- {return result}
- jake_tasker:=result;
-
-end; {jake_tasker *end*}
-
 Procedure Display_Bar_Status; {call to DDplus Display_Status (bar) proc}
 begin
  if (statline) then display_status(force);
@@ -1976,7 +1943,7 @@ begin
  param_hunt:=false;
  if paramcount>0 then begin
   for i:=1 to paramcount do begin
-   if upcasestr(paramstr(i))=h then begin
+   if UpperCase(paramstr(i))=h then begin
     param_hunt:=true;
     break;
    end;
@@ -1993,11 +1960,6 @@ end;
 Procedure Normal_Exit; {exit program}
 begin
  halt(0);
-end;
-
-Procedure My_TimeSlice; {release a timeslice}
-begin
- releasetimeslice; {ddplus routine}
 end;
 
 Function HeapHandler;
@@ -2023,7 +1985,7 @@ procedure take_a_spin(pause_it:boolean);
 begin
  global_place := (global_place+1) mod 4;
  sd(cursor_color,sc[global_place]);
- if pause_it then delay2(250);
+ if pause_it then Sleep(250);
  sd(cursor_color,#8);
 end;
 

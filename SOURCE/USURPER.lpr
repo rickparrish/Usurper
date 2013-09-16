@@ -33,7 +33,7 @@ Uses Dos, DDplus, Init, Jakob,
      Relation, Relatio2, Post_To,
      Online, File_Io,
      Various3, News, Children,
-     InitGods;
+     InitGods, SysUtils, VideoUtils;
 
      {bard : singing...love & battle hymns}
      {half-elves : hypnotize}
@@ -363,7 +363,7 @@ begin {* Main Program *}
       end else
       begin
         WriteLn('FAILED');
-        Delay2(500);
+        Sleep(500);
       end;
     end;
   end else
@@ -385,13 +385,8 @@ begin {* Main Program *}
   end;
 
  {Set Share}
- if Is_Share then begin
-  filemode:=66;
-  global_ushare:=true;
- end
- else begin
-  global_ushare:=false;
- end;
+ filemode:=66;
+ global_ushare:=true;
  global_lockmode:=filemode;
 
 
@@ -545,9 +540,6 @@ begin {* Main Program *}
  {Setup New Exitproc}
  ExitSave:=Exitproc;
  Exitproc:=@ByeBye;
-
- {Setup New HeapHandler}
- HeapError:=@HeapHandler;
 
  {Setup Beta version indicators}
  global_ubeta:=false;  {jakob beta version}
@@ -757,7 +749,7 @@ exit_ordered:=true;
  {if this is a local player then we check for his screen size [rows]}
  if local then begin
   {this is also used in Jakob.pas => drop_dos}
-  global_screenlines:=screenrows-1; {-1 because the statline takes up 1}
+  global_screenlines:=ScreenSizeY-1; {-1 because the statline takes up 1}
  end;
 
  {Main loop *START*}
@@ -1135,7 +1127,7 @@ exit_ordered:=true;
 
            load_onliner(fload,person,i);
 
-           if (upcasestr(person.realname)=upcasestr(username)) and
+           if (UpperCase(person.realname)=UpperCase(username)) and
               (person.realname<>'') then begin
             crlf;
             d(15,'Playing on more than 1 node simultaneously is not allowed.');
@@ -1260,4 +1252,4 @@ exit_ordered:=true;
 
  until never; {Main loop *END*}
 
-end.ÿ{* Main Program END *}
+end.{* Main Program END *}

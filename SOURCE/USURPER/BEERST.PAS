@@ -33,7 +33,7 @@ Implementation
 Uses Init, Cms, Jakob,
      Statusc, Mail, News,
      Various, Various2, Various3,
-     Online, File_Io;
+     Online, File_Io, SysUtils;
 
 var
     ch : char;
@@ -228,9 +228,9 @@ begin
                        crlf;
                        d(config.textcolor,'You run for your life!!!');
                        sd(4,'BUT THE DOGS ARE AFTER YOU!...');
-                       delay2(600);
+                       Sleep(600);
                        sd(4,'.....');
-                       delay2(600);
+                       Sleep(600);
                        crlf;
                        crlf;
                        d(config.textcolor,'You managed to get away!');
@@ -566,7 +566,7 @@ d(config.textcolor,'No teammate found!');; crlf;
                  sd(3,doggy[i]);
                  sd(config.textcolor,' watches '+uplc+polare+config.textcol1+'...');
 
-                 delay2(500);
+                 Sleep(500);
                  if random(3)=0 then begin
                   if male=true then sd(4,' but ignores him!')
                                else sd(4,' but ignores her!');
@@ -672,7 +672,7 @@ d(config.textcolor,'No teammate found!');; crlf;
                 for i:=1 to dogs do begin
                  sd(3,doggy[i]);
                  sd(config.textcolor,' sniffs...');
-                 delay2(600);
+                 Sleep(600);
                  if random(3)=0 then begin
                   sd(4,' but ignores the bones!');
                  end
@@ -927,10 +927,10 @@ solo_dogs_news;
             inc(newdogs);
             dec(poor);
             sd(config.textcolor,'You hear barking....');
-            delay2(600);
+            Sleep(600);
             sd(config.textcolor,'....');
             sd(config.textcolor,'it''s coming closer!...');
-            delay2(700);
+            Sleep(700);
             sd(config.textcolor,'....');
             crlf;
             d(4,'OH NO! A dog has returned!');
@@ -952,7 +952,7 @@ solo_dogs_news;
                target:=2;
               end;
              end;
-             delay2(600);
+             Sleep(600);
              if random(3)=0 then begin
               sd(4,'and hits!');
               case target of
@@ -971,7 +971,7 @@ solo_dogs_news;
            if newdogs>0 then begin
             for i:=dogoffset+1 to dogoffset+newdogs do begin
              sd(config.textcolor,doggy[i]+' attacks... ');
-             delay2(600);
+             Sleep(600);
              if (arrived=true) and (cstam>0) then begin
               case random(2) of
                0:begin
@@ -1017,7 +1017,7 @@ solo_dogs_news;
            if (newdogs>0) and (pstam>0) then begin
             if (arrived=true) and (cstam>0) then begin
              sd(global_plycol,polare+config.textcol1+' attacks a dog!....');
-             delay2(600);
+             Sleep(600);
              if random(2)=0 then begin
               sd(4,'But misses!');
              end
@@ -1031,7 +1031,7 @@ solo_dogs_news;
            end;
            if newdogs>0 then begin
             sd(config.textcolor,'You charge a dog!....');
-            delay2(600);
+            Sleep(600);
             if random(2)=0 then begin
              sd(4,'But miss!');
             end
@@ -1050,7 +1050,7 @@ solo_dogs_news;
            for i:=1 to 10 do begin
             if (sonstam[i]>0) and (sonarriv[i]=true) then begin
              sd(config.textcolor,'You charge '+son[i]+'!...');
-             delay2(500);
+             Sleep(500);
              if random(2)=0 then begin
               sd(4,'And hit!');
               dec(sonstam[i],2);
@@ -1073,7 +1073,7 @@ solo_dogs_news;
            for i:=1 to 10 do begin
             if (sonstam[i]>0) and (sonarriv[i]=true) then begin
              sd(global_plycol,polare+config.textcol1+' attacks '+son[i]+'!...');
-             delay2(500);
+             Sleep(500);
              if random(2)=0 then begin
               sd(4,'And hits!');
               dec(sonstam[i],2);

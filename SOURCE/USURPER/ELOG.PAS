@@ -20,7 +20,7 @@ PROCEDURE MyExit1;
 IMPLEMENTATION   (********************************)
 
 Uses Crt, Dos, DDPlus,
-     Netfilep, Jakob, File_Io; {jakob}
+     Jakob, File_Io, SysUtils; {jakob}
 
 Procedure GetDate1(VAR Month:Word;
                    VAR day:Word;
@@ -132,7 +132,6 @@ BEGIN
 
      {SaveGame(Player,PlayerFile,TempP,Country,CountryFile,Map1,MapFile);}
      
-     IF ShareInst=False then FileMode:=64;
      YE:=False;
      ASSIGN(ErrFile,logname);
      IF F_EXISTS(logname) THEN
@@ -145,7 +144,7 @@ BEGIN
         GoAhead:= (IOResult = 0);
         If Not GoAhead then begin
          OpenAttempts :=OpenAttempts+1;
-         releasetimeslice; {jakob}
+         Sleep(1); {jakob}
         end;
        Until (GoAhead) or (OpenAttempts>15);
       End;
@@ -157,7 +156,7 @@ BEGIN
         GoAhead:= (IOResult = 0);
         If Not GoAhead then begin
          OpenAttempts :=OpenAttempts+1;
-         releasetimeslice; {jakob}
+         Sleep(1); {jakob}
         end;
        Until (GoAhead) or (OpenAttempts>15);
       End;
@@ -174,12 +173,11 @@ BEGIN
      WRITELN_to_text(ErrFile,'Program Termination');
      WRITELN_to_text(ErrFile,Exit_Message(Exitcode));
      Close_text(ErrFile); {jakob}
-     IF ShareInst=False then FileMode:=66;
      {be sure to uncomment this if using RipLink}
      {if RIP <> nil then
       Dispose(RIP, Done);}
      Terminate(ExitCode);
-     Delay2(1000);
+     Sleep(1000);
      End ELSE
       BEGIN
 
@@ -200,7 +198,7 @@ BEGIN
           GoAhead:= (IOResult = 0);
           If Not GoAhead then begin
            OpenAttempts :=OpenAttempts+1;
-           releasetimeslice; {jakob}
+           Sleep(1); {jakob}
           end;
          Until (GoAhead) or (OpenAttempts>15);
         End;
@@ -212,7 +210,7 @@ BEGIN
           GoAhead:= (IOResult = 0);
           If Not GoAhead then begin
            OpenAttempts :=OpenAttempts+1;
-           releasetimeslice; {jakob}
+           Sleep(1); {jakob}
           end;
          Until (GoAhead) or (OpenAttempts>15);
         End;
@@ -237,7 +235,6 @@ BEGIN
        WRITELN(ErrFile,'  Offset:  ', ItoH(ofs(erroraddr^))) ;
        WRITELN_to_text(ErrFile,'------------------------------------------------');
        Close_text(ErrFile);
-       IF ShareInst=False then FileMode:=66;
       END ;
    ErrorAddr := NIL ;
    {be sure to uncomment this if using RipLink}

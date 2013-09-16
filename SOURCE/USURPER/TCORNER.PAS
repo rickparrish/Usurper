@@ -34,7 +34,7 @@ Uses Init, Cms, Jakob,
      Post_to, Revival, News,
      TeamRec, SendItem, Various,
      Various2, Various3, Relation,
-     Online, File_Io;
+     Online, File_Io, SysUtils;
 
 Const local_maxy=200; {max number of teams the routines will handle}
 var
@@ -295,7 +295,7 @@ begin
  {fetching "Resurrect teammates?" option from .CFG}
  resurr:=false;
  s:=cfg_string(36);
- if upcasestr(s)='YES' then resurr:=true;
+ if UpperCase(s)='YES' then resurr:=true;
 
  {Main Loop *START*}
  repeat
@@ -498,7 +498,7 @@ begin
                 crlf;
                 sd(config.textcolor,'You approach ');
                 sd(global_plycol,pl0.name2);
-                d(config.textcolor,+' and let '+sex[pl0.sex]);
+                d(config.textcolor,' and let '+sex[pl0.sex]);
                 d(config.textcolor,'know that you no longer desire '+sex[pl0.sex]+'!');
                 sd(global_plycol,pl0.name2);
                 d(config.textcolor,' looks surprised, but soon leaves');
@@ -1438,7 +1438,7 @@ begin
 
           for i:=1 to fs(FsPlayer) do begin
            load_character(pl0,1,i);
-           if (upcasestr(pl0.team)=upcasestr(s)) and
+           if (UpperCase(pl0.team)=UpperCase(s)) and
               (pl0.deleted=false) then begin
             d(config.textcolor,'Sorry, but this teamname already exists!');
             s:=emptystr;
@@ -1447,7 +1447,7 @@ begin
 
           for i:=1 to fs(FsNPC) do begin
            load_character(pl0,2,i);
-           if (upcasestr(pl0.team)=upcasestr(s)) and
+           if (UpperCase(pl0.team)=UpperCase(s)) and
               (pl0.deleted=false) then begin
             d(config.textcolor,'Sorry, but this teamname already exists!');
             s:=emptystr;

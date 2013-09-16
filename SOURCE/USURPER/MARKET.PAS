@@ -34,7 +34,7 @@ Uses Init, Cms, Jakob,
      Statusc, Mail, News,
      Invent, SwapEq, Plmarket,
      Various, Various2, Relation,
-     Online, File_Io;
+     Online, File_Io, SysUtils;
 
 const food_master = 'Alabat'; {shop keeper, food & drinks}
 var
@@ -230,7 +230,7 @@ begin
  {fetching option set in .CFG, is player allowed to kill teammates?}
  teamkill:=false;
  s:=cfg_String(35);
- if upcasestr(s)='YES' then teamkill:=true;
+ if UpperCase(s)='YES' then teamkill:=true;
 
  {fetching Training masters name from .CFG}
  master:=cfg_string(17);
@@ -271,7 +271,7 @@ begin
         end
         else if (king.shop_plmarket=false) and (player.king=false) then begin
          crlf;
-         d(12,'The Marketplace is closed! (The '+upcasestr(kingstring(king.sexy))+'s order!)');
+         d(12,'The Marketplace is closed! (The '+UpperCase(kingstring(king.sexy))+'s order!)');
         end
         else begin
          players_market;
@@ -287,7 +287,7 @@ begin
         end
         else if (king.shop_alabat=false) and (player.king=false) then begin
          crlf;
-         d(12,food_master+'s store is closed! (The '+upcasestr(kingstring(king.sexy))+'s order!)');
+         d(12,food_master+'s store is closed! (The '+UpperCase(kingstring(king.sexy))+'s order!)');
         end
         else begin
 
@@ -1357,7 +1357,7 @@ begin
           d(config.textcolor,'Who shall receive your gift?');
           sd(config.textcolor,':');
           a:=get_string(20);
-          a:=upcasestr(a);
+          a:=UpperCase(a);
 
           break_time:=false;
           for i:=1 to 2 do begin

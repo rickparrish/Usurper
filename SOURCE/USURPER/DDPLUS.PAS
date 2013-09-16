@@ -4,7 +4,7 @@ Unit DDPlus;
 
 Interface
 
-Uses dos, crt, comio, ddscott, ddansi2, ddovr, ddovr2;
+Uses dos, crt, ddansi2, ddovr, ddovr2;
 
 type
  CharOriginType=(localchar,remotechar);
@@ -85,10 +85,6 @@ var
  proc_call_ptr: pointer;            {used internally                         }
  nodirect: boolean;
 
-Procedure DV_Aware_On;
-Procedure DV_Pause;
-Procedure Win_Pause;
-Procedure ReleaseTimeSlice;
 procedure close_async_port;
 procedure Open_async_port;
 function  skeypressed: boolean;
@@ -133,7 +129,7 @@ Implementation
 
 Uses Init, Cms, InitGods,
      Jakob, Mail, News,
-     Online, File_io; {jakob! You have also changed in DDOVR2.PAS}
+     Online, File_io, SysUtils, Comm, VideoUtils; {jakob! You have also changed in DDOVR2.PAS}
 
 var
  buffered: boolean;
@@ -291,9 +287,7 @@ begin
    for dropping carrier, jakob}
   global_PlayerInFight:=false; {exitproc checks for this flag and handles CARRIER-DROPPING cheaters}
 
-  ReleaseTimeSlice;
-  delay2(500);
-  ReleaseTimeSlice;
+  Sleep(500);
 end;
 
 procedure textcolor(i: byte);
@@ -412,8 +406,8 @@ begin;
       write(alias+' ('+user_first_name+' '+user_last_name+')'); {jakob}
      end;
 
-     gotoxy(60-(length(progname+' - Node '+va(node_num)) div 2),numlines);
-     write(progname+' - Node '+va(node_num));
+     gotoxy(60-(length(progname+' - Node '+IntToStr(node_num)) div 2),numlines);
+     write(progname+' - Node '+IntToStr(node_num));
      firsttime:=false;
      save_sc:=999;
    end;
@@ -474,7 +468,7 @@ begin
    begin
      while (g>=0) and (not c) do
        begin
-         if exist(filenm+graphics_codes[g]) then
+         if FileExists(filenm+graphics_codes[g]) then
            begin
              assign(f,filenm+graphics_codes[g]);
              c:=true;
@@ -557,7 +551,7 @@ begin
  end
  else begin
   while (g>=0) and (not c) do begin
-   if exist(filen+graphics_codes[g]) then begin
+   if FileExists(filen+graphics_codes[g]) then begin
     if g in [2,3,5] then nonstop:=true;
     nyfil:=filen+graphics_codes[g];
     c:=true;
@@ -588,7 +582,7 @@ begin
   if k=^S then sread_char(k);
   if (k=^k) or (k=^c) or (K='s') then begin {sista ifet „r jakobs verk}
    close_text(f);
-   AsyncPurgeOutput;
+   CommPurgeOutBuffer;
    swriteln('');
    ansion:=ansisave;
    exit;
@@ -607,18 +601,18 @@ var
  a: integer;
 begin;
  {jakob}
- If (Not AsyncCarrierPresent) then begin
+ If (Not CommCarrier) then begin
   DropMessage;
  end
  else begin
-  for a:=1 to length(s) do AsyncSendChar(s[a]);
+  CommWrite(s);
  end;
 
 end;
 
 procedure CharOut(ch: char);
 begin;
- AsyncSendChar(ch);
+ CommWrite(ch);
 end;
 
 function charin(var ch: char): boolean;
@@ -630,9 +624,9 @@ begin;
      charin:=true;
    end
  else
-  if AsyncCharPresent then
+  if CommCharAvail then
      begin;
-       AsyncReceiveChar(ch);
+       ch := CommReadChar;
        charin:=true;
      end
  else charin:=false;
@@ -641,9 +635,8 @@ end;
 procedure CloseDown;
 begin;
   if buffered then
-     AsyncFlushOutput;
-  If Not noFossinit then
-     AsyncCloseCom(com_port);
+     CommFlushOutBuffer;
+  CommClose(false);
   buffered := false;
 end;
 
@@ -682,7 +675,7 @@ end;
 procedure swritec(ch: char);
 begin;
  if not local then
-   AsyncSendChar(ch);
+   CommWrite(ch);
  if NoLocal then
     begin
       gotoxy(Wherex+1,Wherey);
@@ -696,7 +689,6 @@ end;
 
 procedure swrite(s: string);
 begin;
- if hexon then hexfilt(s);
  if not local then sendtext(s);
  if NoLocal then
   begin
@@ -712,7 +704,6 @@ end;
 
 procedure swriteln(s: string);
 begin;
- if hexon then hexfilt(s);
  if not local then sendtext(s+#13+#10);
  if NoLocal then
   begin
@@ -738,7 +729,6 @@ end;
 Procedure swritexy;
 begin
  Sgoto_XY(x,y);
- if hexon then hexfilt(s);
  if not local then sendtext(s);
  if NoLocal then
   begin
@@ -788,7 +778,6 @@ Procedure CallProc;
 begin
   WriteLn('REEPORT DDPLUS CallProc'); Halt;
 end;
-{$ENDIF}
 
 Procedure DefineFKeys(var a:char;fkeyon:byte);
 begin
@@ -866,7 +855,7 @@ begin;
 
  repeat;
   if not local then begin
-   If (Not AsyncCarrierPresent) then DropMessage;
+   If (Not CommCarrier) then DropMessage;
    if charin(a) then charorigin:=remotechar;
   end;
   if keypressed then
@@ -876,7 +865,7 @@ begin;
     ch := a
   else
   If cc mod 100 = 99 then
-    ReleaseTimeSlice;
+    Sleep(1);
 
   inc(cc);
       if cc>1000 then cc:=0;
@@ -1076,10 +1065,7 @@ end;
 procedure sread(var s: string);
 var
  ch: char;
- hexsave: boolean;
 begin;
- hexsave:=hexon;
- hexon:=false;
  curlinenum:=1;
  s:='';
  get_stacked(s);
@@ -1101,8 +1087,6 @@ begin;
   end;
  end;
  swriteln('');
- hexon:=hexsave;
- if hexon then hextodec(s);
 end;
 
 procedure sread_num(var n: integer);
@@ -1168,12 +1152,12 @@ begin
         ch := a
       else
       If cc mod 100 = 99 then
-         ReleaseTimeSlice;
+         Sleep(1);
       exit;
     end;
 
   charorigin:=localchar;
-  If (Not AsyncCarrierPresent) then DropMessage;
+  If (Not CommCarrier) then DropMessage;
 
   if charin(a) then
     charorigin:=remotechar
@@ -1185,7 +1169,7 @@ begin
     ch := a
   else
   If cc mod 100 = 99 then
-    ReleaseTimeSlice;
+    Sleep(1);
 end;
 
 function va(i: integer): string;
@@ -1370,14 +1354,11 @@ var
  x,y,code: integer;
  ch: char;
  a: integer;
- hexsave: boolean;
 
  jake: string;
 
 begin;
 
- hexsave:=hexon;
- hexon:=false;
  fg:=current_foreground;
  bg:=current_background;
 
@@ -1443,8 +1424,6 @@ begin;
    get_stacked(s);
    while length(s)>le do delete(s,length(s),1);
   end;
- hexon:=hexsave;
-
 end;
 
 procedure promptsec; {jakobs egna, f”r l”senord, returnerar '*' eller annat}
@@ -1457,10 +1436,7 @@ var
  x,y,code: integer;
  ch: char;
  a: integer;
- hexsave: boolean;
 begin;
- hexsave:=hexon;
- hexon:=false;
  fg:=current_foreground;
  bg:=current_background;
  get_stacked(s);
@@ -1510,7 +1486,6 @@ begin;
    while length(s)>le do delete(s,length(s),1);
   end;
  end;
- hexon:=hexsave;
 end;
 
 procedure promptwr;  {jakob, som PROMPT ovan, men med word wrap}
@@ -1523,11 +1498,7 @@ var
  x,y,code: integer;
  ch: char;
  a: integer;
- hexsave: boolean;
 begin;
-
- hexsave:=hexon;
- hexon:=false;
  fg:=current_foreground;
  bg:=current_background;
  {get_stacked(s);}
@@ -1579,7 +1550,6 @@ begin;
   end;}
 
  end;
- hexon:=hexsave;
 end;
 
 procedure sgoto_xy;
@@ -1601,7 +1571,7 @@ var
  b: boolean;
 begin;
  b:=false;
- if not local then b:=AsyncCharPresent;
+ if not local then b:=CommCharAvail;
  if not b then     b:=keypressed;
  if macro<>'' then b:=true;
  skeypressed:=b;
@@ -1611,18 +1581,18 @@ procedure close_async_port;
 begin;
  if buffered then begin;
    buffered:=false;
-   AsyncFlushOutput;
-   AsyncCloseUp;
+   CommFlushOutBuffer;
+   CommClose(true);
  end;
 end;
 
 procedure open_async_port;
 begin;
- AsyncSelectPort(com_port);
+ CommOpen(com_port);
  if lockbaud=0 then
-  AsyncSetBaud(baud_rate)
+  CommSetBaud(baud_rate)
  else
-  AsyncSetBaud(lockbaud);
+  CommSetBaud(lockbaud);
  buffered := true;   { Not set in original DD - this may not be the best }
                      { place for this but it does work in my tests       }
 end;
@@ -1704,7 +1674,7 @@ begin
  writeln;
  writeln('Checking for RIP');
  sendtext(#27'[!');
- delay2(222);
+ Sleep(222);
  s := '';
  i := 0;
  j := 0;
@@ -1714,7 +1684,7 @@ begin
    a:=chr(0);
    inc(i);
 
-  If (Not AsyncCarrierPresent) then DropMessage;
+  If (Not CommCarrier) then DropMessage;
 
   if charin(a) then
     charorigin:=remotechar;
@@ -1726,9 +1696,9 @@ begin
   else
      begin
        If (i mod 50 = 0) then
-         ReleaseTimeSlice;
+         Sleep(1);
      end;
-  delay2(2);
+  Sleep(2);
   until (i>666) or (j>13);
 
   If Copy(s,1,3) = 'RIP' then
@@ -1758,23 +1728,26 @@ end;
 Procedure StatusMess(var fs:string);
 begin
   Set_Color(2,0);
-  Case Tasker of
-    1 : writeln('DESQview Detected');
-    2 : writeln('MS-Windows Detected'); {jakob}
-    3 : writeln('OS/2 Detected');
-    4 : writeln('Win/NT Detected');
-    5 : writeln('Dos 5.0 with Network Detected');
-    6 : writeln('Dos 5.0+ Detected');
-  else
-        writeln('No Multiplexer Detected');
-  end;
+  {$IFDEF GO32V2}
+    WriteLn('OS: DOS (GO32V2)');
+  {$ELSE}
+    {$IFDEF UNIX}
+      WriteLn('OS: UNIX');
+    {$ELSE}
+      {$IFDEF WINDOWS}
+        WriteLn('OS: Windows');
+      {$ELSE}
+        WriteLn('OS: Unknown');
+      {$ENDIF}
+    {$ENDIF}
+  {$ENDIF}
   If FossilIO or DigiIO then
    begin
       Set_Foreground(10);
       writeln(fs);
    end;
   Set_Color(7,0);
-  ReleaseTimeSlice;
+  Sleep(1);
 end;
 
 procedure InitDoorDriver(ConfigFileName: string);
@@ -1796,7 +1769,7 @@ begin;
  fossilio:=false;
  ansion:=false;
  moreok:=false;
- numlines:=ScreenRows; {jakob}
+ numlines:=ScreenSizeY; {jakob}
  {numlines:=25; {ddplus original}
  cc:=0;
  F1toggle:=0;
@@ -1810,7 +1783,6 @@ begin;
  com_port:=0;
  fouled_up:=#0;
  stacked:='';
- hexon:=false;
  buffered:=false;
  cdropped:=false;
  tdropped:=false;
@@ -1818,7 +1790,6 @@ begin;
  exitproc:=@DDexit;
  firsttime:=true;
 
- LoadPorts(port1,port2,port3,port4,irq1,irq2,irq3,irq4);
  Loadconfig( ConfigFileName,
              bbs_software,
              user_first_name,user_last_name,
@@ -1831,7 +1802,6 @@ begin;
              graphics,
              color1,
              color_chg,
-             noFossinit,
              board_name,
              pause_code,
              sysop_first_name,
@@ -1851,7 +1821,7 @@ begin;
              nodirect,
              port1,port2,port3,port4,irq1,irq2,irq3,irq4);
 
- numlines:=ScreenRows; {jakob}
+ numlines:=ScreenSizeY; {jakob}
  {numlines:=25; {ddplus original}
 
  if nodirect then directvideo:=false;
@@ -1881,18 +1851,13 @@ begin;
              dropfilepath,
              lockbaud);
 
- ReSetPorts(port1,port2,port3,port4,irq1,irq2,irq3,irq4);
-
- if not local then
+  if not local then
    begin;
-    if FossilIO then AsyncSelectFossil(fossilstr) else
-     if DigiIO then AsyncSelectDigiBoard(fossilstr) else
-      AsyncSelectInternal;
     Open_Async_Port;
    end;
 
  if not local then
-  if not initok then
+  if not CommCarrier then
    begin
      writeln('');
      if fossilio then
@@ -1905,7 +1870,7 @@ begin;
       begin
         writeln('DigiDriver was not initialized properly!');
       end;
-    delay2(1000);
+    Sleep(1000);
     halt;
   end;
 
@@ -1916,7 +1881,6 @@ begin;
     If RipDetect then
           graphics := 5;
 
- DV_Aware_ON;
  current_foreground:=default_fore;
  current_background:=default_back;
  if graphics = 3 then
@@ -1931,14 +1895,12 @@ begin;
  macro:='';
  mintime:=1;
  notime:='';
- user_first_name:=stu(user_first_name);
- user_last_name:=stu(user_last_name);
+ user_first_name:=UpperCase(user_first_name);
+ user_last_name:=UpperCase(user_last_name);
  stackon:=true;
 { if node_num=0 then node_num:=1; }
  ddassignsoutput(soutput);
  rewrite(soutput);
- If Not NetOk then
-   If (Tasker = 5) then inc(Tasker);
  StatusMess(fossilstr);
 
 end;

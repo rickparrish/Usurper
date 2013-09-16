@@ -33,7 +33,7 @@ Implementation
 Uses DDplus, Jakob, Cms,
      Mail, Statusc, News,
      Various, Various2, Online,
-     File_Io;
+     File_Io, SysUtils;
 
 Function User_Search;
 var
@@ -97,7 +97,7 @@ Begin
 
  for i:=1 to fs(FsPlayer) do begin
   load_character(player,1,i);
-  if (upcasestr(player.name1)=upcasestr(username)) and
+  if (UpperCase(player.name1)=UpperCase(username)) and
      (player.deleted=false) then begin
 
    found_user:=i;
@@ -499,7 +499,7 @@ Begin
   crlf;
 
   {*Search for dupe aliases among players*}
-  s:=upcasestr(alias);
+  s:=UpperCase(alias);
 
   x:=0;
 
@@ -511,7 +511,7 @@ end;
 
   for i:=1 to fs(FsPlayer) do begin
    load_character(player,1,i);
-   if (s=upcasestr(player.name2)) then begin
+   if (s=UpperCase(player.name2)) then begin
     d(12,'I''m sorry, but that name is already being used.');
     crlf;
     x:=999;
@@ -526,7 +526,7 @@ end;
 
    for i:=1 to fs(FsNpc) do begin
     load_character(pl0,2,i);
-    if s=upcasestr(pl0.name2) then begin
+    if s=UpperCase(pl0.name2) then begin
      d(config.textcolor,'I''m sorry, but that name is already being used.');
      crlf;
      x:=999;
@@ -1321,7 +1321,7 @@ end;
  slot:=0;
  for i:=1 to fs(FsPlayer) do begin
   load_character(pl0,1,i);
-  if (pl0.deleted) or (upcasestr(pl0.name1)+upcasestr(pl0.name2)=global_delname1+global_delname2)=true then begin
+  if (pl0.deleted) or (UpperCase(pl0.name1)+UpperCase(pl0.name2)=global_delname1+global_delname2)=true then begin
    slot:=i;
    break;
   end;

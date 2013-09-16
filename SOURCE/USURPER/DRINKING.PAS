@@ -32,7 +32,7 @@ Implementation
 
 Uses Init, Cms, Jakob,
      News, Various, Online,
-     Various3, Mail, File_Io;
+     Various3, Mail, File_Io, SysUtils;
 
 const maxopp = 9; {opponents in drinking competiton}
       doinghere = 'drinking beer at Bobs';
@@ -133,7 +133,7 @@ begin
  repeat
   counter:=counter+1;
   sd(config.textcolor,'Glugg...');
-  delay2(200);
+  Sleep(200);
  until counter>2;
  d(config.textcolor,'!');
 
@@ -318,7 +318,7 @@ begin
  {get Losers gonna get kicked out from .CFG}
  losers_out:=false;
  s:=cfg_string(85);
- if upcasestr(s)='NO' then losers_out:=true;
+ if UpperCase(s)='NO' then losers_out:=true;
 
  {Init pointer vars}
  new(pl0);
@@ -395,9 +395,9 @@ begin
  d(global_talkcol,' Come on you lazy boozers! I challenge you for a drinking contest!');
  crlf;
  sd(config.textcolor,'There is a sudden silence in the room...');
- delay2(700);
+ Sleep(700);
  sd(config.textcolor,'...');
- delay2(700);
+ Sleep(700);
  crlf;
  d(config.textcolor,'Then you notice how a rowdy bunch of characters make their way');
  d(config.textcolor,'toward you...');
@@ -905,11 +905,11 @@ if pvalue>0 then count:=count+1;
  d(config.textcolor,'You managed to stay sober longer than the rest of the players!');
  d(config.textcolor,'Three cheers for the Beer Champion!');
  sd(14,'....Horray!');
- delay2(500);
+ Sleep(500);
  sd(14,'....Horray!');
- delay2(500);
+ Sleep(500);
  sd(14,'....Horray!');
- delay2(500);
+ Sleep(500);
  crlf;
 
  {experience reward}

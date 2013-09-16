@@ -33,7 +33,7 @@ Implementation
 Uses Init, Cms, Jakob,
      Statusc, Various, News,
      Relation, Mail, Online,
-     Various3, File_Io;
+     Various3, File_Io, SysUtils;
 
 Procedure Royal_Prison;
 const cap = 'Ronald'; {captain of the guard *same as in prisonf.pas}
@@ -105,7 +105,7 @@ begin
          d(global_talkcol,'Who should we take care of sire?');
          sd(config.textcolor,':');
          s:=get_string(20);
-         s:=upcasestr(s);
+         s:=UpperCase(s);
          found:=false;
          nomore:=false;
 
@@ -180,7 +180,7 @@ begin
           cc:=0;
           repeat
            inc(cc);
-           delay2(global_online_poll_delay);
+           Sleep(global_online_poll_delay);
            node_check;
            sd(config.textcolor,'.');
           until (onliner.com in [intercom_accept,intercom_decline]) or (cc>global_online_maxwaits);
@@ -230,7 +230,7 @@ begin
            {execute}
            crlf;
            sd(13,'Schwoooooop.........');
-           delay2(global_online_poll_delay);
+           Sleep(global_online_poll_delay);
            d(13,'....!');
 
            sd(global_plycol,pl0.name2+'s');
@@ -329,7 +329,7 @@ begin
         d(global_talkcol,'Who should be released sire?');
         sd(config.textcolor,':');
         s:=get_string(20);
-        s:=upcasestr(s);
+        s:=UpperCase(s);
         found:=false;
         nomore:=false;
 
@@ -399,7 +399,7 @@ begin
          repeat
 
           inc(cc);
-          delay2(global_online_poll_delay);
+          Sleep(global_online_poll_delay);
           node_check;
           sd(config.textcolor,'.');
 
@@ -645,7 +645,7 @@ begin
          sd(config.textcolor,':');
 
          s:=get_string(20);
-         s:=upcasestr(s);
+         s:=UpperCase(s);
          found:=false;
          nomore:=false;
 

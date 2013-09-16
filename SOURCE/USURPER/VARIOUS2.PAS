@@ -30,7 +30,6 @@ Uses Init;
 
 {Crap}
 Procedure Draw_Picture(const pic:string);
-Procedure MemInfo; {only used when developing the program}
 Function The_Bad : s30; {returns random "the ill-mannered ", "the ugly "}
 
 {Rewards}
@@ -3309,13 +3308,6 @@ begin
  d(config.textcolor,'Press '+config.textcol2+'>'+config.textcol1+' for maximum input.');
  d(config.textcolor,'Press '+config.textcol2+'K'+config.textcol1+' for thousand');
  d(config.textcolor,'Press '+config.textcol2+'M'+config.textcol1+' for million');
-end;
-
-Procedure MemInfo; {good when developing the program}
-begin
- {d(14,'Overlay buffer : '+commastr(ovrgetbuf));}
- d(14,'Mem available  : '+commastr(memavail));
- d(14,'Heap available : '+commastr(maxavail));
 end;
 
 Procedure Command_Help; {executed when : 'usurper ?' is typed}

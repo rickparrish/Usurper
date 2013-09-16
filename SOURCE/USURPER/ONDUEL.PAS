@@ -30,11 +30,11 @@ Procedure Online_Duel(the_challenger : boolean);
                       {the_challenger = true, player is the challenger}
 Implementation
 
-Uses Jakob, Init, ddscott,
+Uses Jakob, Init,
      news, statusc, online,
      spellsu, cast, swapeq,
      various, various2, various3,
-     relation, file_io;
+     relation, file_io, SysUtils;
 
       {Command Constants used to communicate between nodes}
 const Cm_ReadyForInput = '='; {ready to receive command from other node}
@@ -78,21 +78,21 @@ end; {after_battle *end*}
 Procedure Put_Other(incom : char);
 var i : byte;
     bye : boolean;
-    sleep : longint;
+    sleepcounter : longint;
 
 begin
 
  bye:=false;
- sleep:=0;
+ sleepcounter:=0;
 
  if imp=true then i:=1
              else i:=0;
  repeat
 
-  inc(sleep);
+  inc(sleepcounter);
 
   {jakob}
-  delay2(global_lockdelay);
+  Sleep(global_lockdelay);
 
   loadsave_com(Fload,Commy,i,'');
 
@@ -108,7 +108,7 @@ begin
    bye:=true;
   end;
 
-  if sleep>global_online_maxwaits_bigloop then begin
+  if sleepcounter>global_online_maxwaits_bigloop then begin
    d(12,'The fight has been called off!');
    d(12,'You have not responded fast enough! (press ENTER)');
    mesleepy:=true;
@@ -146,9 +146,9 @@ end; {put_own *end*}
 
 Function Get_Com( k1,k2,k3,k4,k5,k6,k7,k8,k9 : char ): char;
 var i : byte;
-    sleep : longint;
+    sleepcounter : longint;
 begin
- sleep:=0;
+ sleepcounter:=0;
  if imp=true then i:=0
              else i:=1;
 
@@ -156,10 +156,10 @@ begin
  commy.com:=cm_nothing;
 
  repeat
-  inc(sleep);
+  inc(sleepcounter);
 
   {jakob}
-  delay2(global_lockdelay);
+  Sleep(global_lockdelay);
 
 
   if f_exists(sayfile) then begin
@@ -186,7 +186,7 @@ begin
     crlf;
 
     {reset sleep counter}
-    sleep:=0;
+    sleepcounter:=0;
 
     sd(config.textcolor,'waiting ... ');
    end;
@@ -200,15 +200,15 @@ begin
    d(config.textcolor,' has lost '+sex3[enemy.sex]+' connection!');
    adios:=true;
    hesleepy:=true;
-   sleep:=global_online_maxwaits_bigloop;
+   sleepcounter:=global_online_maxwaits_bigloop;
   end;
 
   {shit
   d(15,'Waiting for on of these orders : '+k1+','+k2+','+k3+','+k4+','+k5+','+k6+','+k7+','+k8+','+k9);
    }
- until (commy.com in [k1,k2,k3,k4,k5,k6,k7,k8,k9]) or (sleep>=global_online_maxwaits_bigloop);
+ until (commy.com in [k1,k2,k3,k4,k5,k6,k7,k8,k9]) or (sleepcounter>=global_online_maxwaits_bigloop);
 
- if sleep>=global_online_maxwaits_bigloop then begin
+ if sleepcounter>=global_online_maxwaits_bigloop then begin
   adios:=true;
   hesleepy:=true;
   sd(global_plycol,oppo);
@@ -259,7 +259,7 @@ begin
  {checking if loser is allowed to play more today}
  nomore:=false;
  s:=cfg_string(92);
- if upcasestr(s)='NO' then begin
+ if UpperCase(s)='NO' then begin
   nomore:=true;
  end;
 
@@ -331,7 +331,7 @@ begin
   waits:=0;
   abort:=false;
   repeat
-   delay2(global_lockdelay);
+   Sleep(global_lockdelay);
    inc(waits);
 
    {wait until attacker has created a COM file}
@@ -357,7 +357,7 @@ begin
      end;
     end;
 
-    my_timeslice;
+    Sleep(1);
 
    end;
 
@@ -490,7 +490,7 @@ begin
           if s<>'' then begin
            i:=0;
            while (f_exists(sayfile)) and (i<500) do begin
-            delay2(global_lockdelay);
+            Sleep(global_lockdelay);
             inc(i);
            end;
 
@@ -501,7 +501,7 @@ begin
            else begin
             d(12,'You couldn''t express your feelings.');
            end;
-           delay2(global_lockdelay);
+           Sleep(global_lockdelay);
           end;
 
           ch:='?';
@@ -514,7 +514,7 @@ begin
           if s<>'' then begin
            i:=0;
            while (f_exists(sayfile)) and (i<500) do begin
-            delay2(global_lockdelay);
+            Sleep(global_lockdelay);
             inc(i);
            end;
 
@@ -522,7 +522,7 @@ begin
            open_txtfile(trewrite,txt,sayfile);
            write_to_text(txt,s);
            close_text(txt);
-           delay2(global_lockdelay);
+           Sleep(global_lockdelay);
           end;
           ch:='?';
          end;

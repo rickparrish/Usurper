@@ -67,7 +67,7 @@ Uses Jakob, Cms, Post_to,
      Various2, Various3,
      News, Relation, Online,
      Children, InitGods, VarGods,
-     File_Io;
+     File_Io, SysUtils;
 
 Procedure Read_My_Mail(var ply : userrec);
 begin {read ply:s mail}
@@ -2820,7 +2820,7 @@ begin {MAIN PROC (POST) **START**}
                 if x>0 then begin
 
                  {present the Quest Offer to player}
-                 d(config.textcolor,+uquestc+'QUEST '+uyellow+'Proposal'+config.textcol1);
+                 d(config.textcolor,uquestc+'QUEST '+uyellow+'Proposal'+config.textcol1);
                  d(5,mkstring(14,underscore));
                  sd(config.textcolor,kingstring(king^.sexy)+' ');
                  sd(global_kingcol,king^.name);
@@ -3135,11 +3135,11 @@ begin {MAIN PROC (POST) **START**}
                   {drinking poison!}
                   crlf;
                   sd(config.textcolor,'Glugg...');
-                  delay2(800);
+                  Sleep(800);
                   sd(config.textcolor,'Glugg...');
-                  delay2(800);
+                  Sleep(800);
                   sd(config.textcolor,'Glugg...');
-                  delay2(800);
+                  Sleep(800);
                   d(12,'Glugg...!');
                   crlf;
 
@@ -3512,7 +3512,7 @@ begin {MAIN PROC (POST) **START**}
                   if l=0 then begin
 
                    d(12,'Too bad! There is No room for you any more.');
-                   d(12,'The '+upcasestr(kingstring(king^.sexy))+' already has all the guards');
+                   d(12,'The '+UpperCase(kingstring(king^.sexy))+' already has all the guards');
                    d(12,'necessary.');
                    pause;
 

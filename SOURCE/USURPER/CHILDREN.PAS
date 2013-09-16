@@ -76,7 +76,7 @@ Uses CMS, Jakob, Relatio2,
      Various, Various2, Various3,
      StatusC, News, Mail,
      Online, Relation, GenNews,
-     File_Io;
+     File_Io, SysUtils;
 
 
 Function Numbers_In_Orphanage : word;
@@ -146,7 +146,7 @@ begin
   {load child}
   if load_child(fload,child,i)=true then begin
 
-   if (upcasestr(child.name)=upcasestr(name)) and
+   if (UpperCase(child.name)=UpperCase(name)) and
       (child.deleted=false) and
       (child.named=true) then begin
     result:=true;

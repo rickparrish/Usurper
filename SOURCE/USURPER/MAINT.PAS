@@ -35,7 +35,7 @@ Uses Crt, DDplus, Init, Cms,
      Mail, News, Various,
      Various2, Various3, VarGods,
      Children, Relation, Online,
-     File_Io;
+     File_Io, SysUtils;
 
 Procedure Maintenance;
 var
@@ -142,7 +142,7 @@ begin
  {we fetch resurrection}
  s:=cfg_string(68);
  resurrect:=false;
- if upcasestr(s)='YES' then begin
+ if UpperCase(s)='YES' then begin
   resurrect:=true;
  end;
 
@@ -1056,7 +1056,7 @@ begin
   repeat
    delete_file(global_onfile);
    inc(i);
-   delay2(300);
+   Sleep(300);
   until (f_exists(global_onfile)=false) or (i>150);
  end;
 
@@ -1096,7 +1096,7 @@ begin
  repeat
   delete_file(global_maintfile);
   inc(i);
-  delay2(50);
+  Sleep(50);
  until (f_exists(global_maintfile)=false) or (i>150);
 
  sd(2,'ş');

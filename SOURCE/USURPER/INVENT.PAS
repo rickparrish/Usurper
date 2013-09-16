@@ -50,7 +50,7 @@ Procedure Chest_with_Items; {where players can store items, located at home}
 Implementation
 
 Uses Jakob, Various, Various3,
-     News, StatusC, File_Io;
+     News, StatusC, File_Io, SysUtils;
 
 Procedure Inventory_Sort;
 var
@@ -1470,7 +1470,7 @@ begin
            crlf;
            for j:=1 to 6 do begin
             sd(config.textcolor,'Klunk...');
-            delay2(800);
+            Sleep(800);
            end;
            d(15,'Ahhh...!');
 

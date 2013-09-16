@@ -13,14 +13,13 @@ procedure Loadconfig(
  var user_first_name,user_last_name: string;
  var user_access_level: word;
  var bbs_time_left: integer;
- var com_port: integer;
+ var com_port: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}integer{$ENDIF};
  var baud_rate: longint;
  var node_num: integer; {jakob; originally BYTE in DDplus version}
  var local: boolean;
  var graphics: byte;
  var color1: boolean;
  var color_chg: boolean;
- var NoFossInit: boolean;
  var board_name: string;
  var pause_code: string;
  var sysop_first_name: string;
@@ -46,12 +45,15 @@ const
 
 implementation
 
+uses
+  SysUtils;
+
 const
-{$IFDEF UNIX}
- DIRECTORY_SEPARATOR = '/';
-{$ENDIF}
-{$IFNDEF UNIX}
+{$IFNDEF LINUX}
  DIRECTORY_SEPARATOR = '\';
+{$ENDIF}
+{$IFDEF LINUX}
+ DIRECTORY_SEPARATOR = '/';
 {$ENDIF}
 
 type
@@ -61,9 +63,14 @@ var
  ctlnm:string[2];
 
 Procedure CallProc;
+{$IFDEF MSDOS}
+inline($FF/$1E/DDUserConfigPtr);
+{$ENDIF}
+{$IFNDEF MSDOS}
 begin
-  WriteLn('REETODO DDOVR2 CallProc'); Halt;
+  // REENOTE Doesn't look like DDUserConfigPtr is ever assigned to, so it never needs to be called
 end;
+{$ENDIF}
 
 procedure Loadconfig(
  fn: string;
@@ -71,14 +78,13 @@ procedure Loadconfig(
  var user_first_name,user_last_name: string;
  var user_access_level: word;
  var bbs_time_left: integer;
- var com_port: integer;
+ var com_port: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}integer{$ENDIF};
  var baud_rate: longint;
  var node_num: integer;
  var local: boolean;
  var graphics: byte;
  var color1: boolean;
  var color_chg: boolean;
- var noFossInit: boolean;
  var board_name: string;
  var pause_code: string;
  var sysop_first_name: string;
@@ -169,7 +175,7 @@ begin;
  write(^G^G);
  writeln('ERROR: '+s);
  write(^G^G);
- delay2(2000);
+ Sleep(2000);
 end;
 
 procedure BadParam(s: string);
@@ -188,7 +194,7 @@ begin;
  ctlnm:='';
  for a:=1 to paramcount do begin;
   s:=paramstr(a);
-{$IFNDEF UNIX}
+{$IFNDEF LINUX}
   for b:=1 to length(s) do s[b]:=upcase(s[b]);
 {$ENDIF}
   if (s[1]='/') and (length(s)>1) then begin;
@@ -306,11 +312,7 @@ begin;
    end else
    if p1='DIGI'   then digiio:=true   else
    if p1='FOSSIL' then fossilio:=true else
-   if p1='XFOSSIL' then
-       begin
-         fossilio:=true;
-         noFossInit:=true;
-       end                                 else
+   if p1='XFOSSIL' then fossilio:=true else
    if p1='LOCKBAUD' then val(p2,lockbaud,a) else
    if p1='PORT1'    then port_rtn(p2,p3,port1,irq1) else
    if p1='PORT2'    then port_rtn(p2,p3,port2,irq2) else

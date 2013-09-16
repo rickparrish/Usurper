@@ -33,7 +33,7 @@ Implementation
 Uses Init, Cms, Jakob,
      Various2, Statusc, Mail,
      News, Various, Online,
-     File_Io;
+     File_Io, SysUtils;
 
 var
    owner : s70;
@@ -312,8 +312,8 @@ begin
               nogo:=false;
 
               tempin:=get_string(20);
-              s^:=upcasestr(player.name2);
-              a^:=upcasestr(tempin);
+              s^:=UpperCase(player.name2);
+              a^:=UpperCase(tempin);
 
               for i:=1 to fs(FsPlayer) do begin
                load_character(pl0^,1,i);
@@ -537,8 +537,8 @@ begin
               d(config.textcolor,'So, who shall meet a Demon ?');
               sd(config.textcolor,':');
               tempin:=get_String(30);
-              s^:=upcasestr(player.name2);
-              a^:=upcasestr(tempin);
+              s^:=UpperCase(player.name2);
+              a^:=UpperCase(tempin);
 
               for i:=1 to fs(FsPlayer) do begin
                load_character(pl0^,1,i);

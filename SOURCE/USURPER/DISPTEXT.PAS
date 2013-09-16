@@ -32,14 +32,14 @@ Procedure Display_UText(const name:s70);
 
 Implementation
 
-Uses Jakob;
+Uses Jakob, SysUtils;
 
 Procedure Display_UText;
 const nr = 10;
 var s : s70;
 begin
 
- s:=upcasestr(name);
+ s:=UpperCase(name);
 
  if s='RACEHELP' then begin
 

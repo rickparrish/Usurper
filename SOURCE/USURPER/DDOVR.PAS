@@ -56,6 +56,9 @@ var
 
 implementation
 
+uses
+  SysUtils;
+
 procedure GetBBSInfo(
  bbstype: word;
  var user_first_name,user_last_name: string;
@@ -174,7 +177,7 @@ begin;
  write(^G^G);
  writeln('ERROR: '+s);
  write(^G^G);
- delay2(2000);
+ Sleep(2000);
  halt;
 end;
 

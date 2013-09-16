@@ -40,7 +40,7 @@ Uses Cms, Jakob, Invent,
      Uman, Npc_Chec, PlvsMon,
      SpellsU, Various, Various2,
      Various3, Dungev2, News,
-     Mail, File_Io;
+     Mail, File_Io, SysUtils;
 
 Procedure Dead_Check(var pl : userrec);
 begin {checks if player pl1 is dead}
@@ -1278,7 +1278,7 @@ begin {RAPE_GIRL event *START*.... a woman is being harassed by local militia}
  d(11,'Encounter');
  d(config.textcolor,'In a ravine nearby you notice a young woman being');
  sd(config.textcolor,'harassed by a pack of orcish riff-raff (you can see at least ');
- sd(7,+commastr(foes));
+ sd(7,commastr(foes));
  d(config.textcolor,' orcs here).');
  d(config.textcolor,'They are having fun and are probably going to rape her soon...');
  crlf;
@@ -1890,7 +1890,7 @@ begin
         1:begin {kanske en olycka}
            crlf;
            sd(config.textcolor,'You travel many hours before reaching your destination...');
-           delay2(600);
+           Sleep(600);
            crlf;
            d(config.textcolor,'Finally! Before you lies a huge cave with only one small entrance.');
            d(config.textcolor,'The treasure should be in here.');
@@ -2058,7 +2058,7 @@ begin
 
            crlf;
            sd(config.textcolor,'You follow the trail that leads deep into the mountain...');
-           delay2(900);
+           Sleep(900);
            crlf;
            d(config.textcolor,'After many hours of tracking you spot the orcish gang, camped');
            sd(config.textcolor,'in a narrow ravine. You can see at least ');
@@ -2230,7 +2230,7 @@ begin
       if confirm('Open Chest','Y')=true then begin
        crlf;
        sd(15,'Kreeeek.....');
-       delay2(300);
+       Sleep(300);
        crlf;
 
        case y of
@@ -2392,7 +2392,7 @@ begin
                 if confirm('Enter','Y')=true then begin
                  crlf;
                  sd(15,'Kreeeek.....');
-                 delay2(600);
+                 Sleep(600);
 
                  crlf;
                  d(config.textcolor,'It seems as if you have entered a backdoor into a great Cavern.');

@@ -33,7 +33,7 @@ Uses Init, Cms, Jakob,
      Groggo, Bobs, Alchemi,
      Statusc, Orb, News,
      Drugs, Steroids, Various,
-     Various2, Online, File_Io;
+     Various2, Online, File_Io, SysUtils;
 
 var
    owner   : s70;
@@ -171,7 +171,7 @@ begin
 
         if (king.shop_orbs=false) and (player.king=false) then begin
          crlf;
-         d(12,'Orbs Health Club is closed! (The '+upcasestr(kingstring(king.sexy))+'s order!)');
+         d(12,'Orbs Health Club is closed! (The '+UpperCase(kingstring(king.sexy))+'s order!)');
         end
         else begin
          crlf;
@@ -198,7 +198,7 @@ begin
 
          if (king.shop_bobs=false) and (player.king=false) then begin
           crlf;
-          d(12,config.bobsplace+' is closed! (The '+upcasestr(kingstring(king.sexy))+'s order!)');
+          d(12,config.bobsplace+' is closed! (The '+UpperCase(kingstring(king.sexy))+'s order!)');
          end
          else begin
           crlf;
@@ -220,7 +220,7 @@ begin
 
          if (king.shop_evilmagic=false) and (player.king=false) then begin
           crlf;
-          d(12,owner+'s place is closed! (The '+upcasestr(kingstring(king.sexy))+'s order!)');
+          d(12,owner+'s place is closed! (The '+UpperCase(kingstring(king.sexy))+'s order!)');
          end
          else begin
           Groggos_Magic;
@@ -231,7 +231,7 @@ begin
 
         if (king.shop_drugs=false) and (player.king=false) then begin
          crlf;
-         d(12,'The Drug Palace is closed! (The '+upcasestr(kingstring(king.sexy))+'s order!)');
+         d(12,'The Drug Palace is closed! (The '+UpperCase(kingstring(king.sexy))+'s order!)');
         end
         else begin
          Drug_Store;
@@ -242,7 +242,7 @@ begin
 
         if (king.shop_steroids=false) and (player.king=false) then begin
          crlf;
-         d(12,'The Steroid Shop is closed! (The '+upcasestr(kingstring(king.sexy))+'s order!)');
+         d(12,'The Steroid Shop is closed! (The '+UpperCase(kingstring(king.sexy))+'s order!)');
         end
         else begin
          Steroid_Store;

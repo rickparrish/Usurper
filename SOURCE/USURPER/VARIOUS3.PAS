@@ -74,7 +74,7 @@ Implementation
 Uses CMS, Jakob, Various,
      Various2, PlvsPlc, PlComp,
      Mail, News, SortTeam,
-     Relation, Online;
+     Relation, Online, SysUtils;
 
 
 {display settings routines uses setcol and setcol2}
@@ -629,7 +629,7 @@ var a2 : s90;
 begin
  crlf;
  crlf;
- d(global_teamcol,upcasestr(team));
+ d(global_teamcol,UpperCase(team));
  crlf;
  a2:='Player        Status  Level  Class    Weapon  Armor  Potions    HitPoints';
  d(5,a2);
@@ -1211,7 +1211,7 @@ begin
  {get user-input}
  sd(config.textcolor,':');
  s:=get_string(30);
- s:=upcasestr(s);
+ s:=UpperCase(s);
 
  found:=false;
  abort:=false;
@@ -2794,7 +2794,7 @@ begin
  d(2,config_nr(13));
 
  {allow teammates to attack each other, #35}
- if upcasestr(cfg_string(35))='YES' then begin
+ if UpperCase(cfg_string(35))='YES' then begin
   sd(config.textcolor,'Team-mates are allowed to attack each other in single combat');
  end
  else begin
@@ -2803,7 +2803,7 @@ begin
  d(2,config_nr(35));
 
  {allow resurrection of team-mates?, #36}
- if upcasestr(cfg_string(36))='YES' then begin
+ if UpperCase(cfg_string(36))='YES' then begin
   sd(config.textcolor,'Resurrection of Team-mates is allowed');
  end
  else begin
@@ -2812,7 +2812,7 @@ begin
  d(2,config_nr(36));
 
  {allow Npcs to create teams?, #42 DUPLICATED in NPCS}
- if upcasestr(cfg_string(42))='YES' then begin
+ if UpperCase(cfg_string(42))='YES' then begin
   sd(config.textcolor,'NPCs are allowed to form teams');
  end
  else begin
@@ -2821,7 +2821,7 @@ begin
  d(2,config_nr(42));
 
  {allow teams to fight in the dungeons?, #47  DUPLICATED in dungeons}
- if upcasestr(cfg_string(47))='YES' then begin
+ if UpperCase(cfg_string(47))='YES' then begin
   sd(config.textcolor,'Teams are allowed to fight in the Dungeons');
  end
  else begin
@@ -2838,7 +2838,7 @@ begin
   of what players get}
 
  {allow NPC teams to attack other teams, #94  DUPLICATED in npcs}
- if upcasestr(cfg_string(94))='YES' then begin
+ if UpperCase(cfg_string(94))='YES' then begin
   sd(config.textcolor,'NPC Teams are allowed to challenge other teams.');
  end
  else begin
@@ -3034,7 +3034,7 @@ begin
  d(config.textcolor,'Players have '+setcol+cfg_string(6)+config.textcol1+' dungeon fights every day'+config_nr(6));
 
  {allow teams to fight in the dungeons?, (#47)  DUPLICATED in teams}
- if upcasestr(cfg_string(47))='YES' then begin
+ if UpperCase(cfg_string(47))='YES' then begin
   d(config.textcolor,'Teams are allowed to fight in the Dungeons'+config_nr(47));
  end
  else begin
@@ -3076,7 +3076,7 @@ begin
 
 
  {allow Npcs to create teams?, #42 DUPLICATED in TEAMS!!}
- if upcasestr(cfg_string(42))='YES' then begin
+ if UpperCase(cfg_string(42))='YES' then begin
   d(config.textcolor,'NPCs are allowed to form teams'+config_nr(42));
  end
  else begin
@@ -3084,7 +3084,7 @@ begin
  end;
 
  {allow NPC teams to attack other teams, #94  DUPLICATED in teams}
- if upcasestr(cfg_string(94))='YES' then begin
+ if UpperCase(cfg_string(94))='YES' then begin
   sd(config.textcolor,'NPC Teams are allowed to challenge other teams');
  end
  else begin
@@ -3120,7 +3120,7 @@ begin
   sd(config.textcolor,'NPCs are allowed to have faith. They will interact with the Gods.');
  end
  else begin
-  sd(config.textcolor,'NPCs are '+ulred+'NOT'++config.textcol1++' allowed to interact with the Gods.');
+  sd(config.textcolor,'NPCs are '+ulred+'NOT'+config.textcol1+' allowed to interact with the Gods.');
  end;
  d(1,config_nr(153));
 
@@ -3186,9 +3186,6 @@ begin
  sd(config.textcolor,'Delay between File/Record-Locking attempts is '
    +setcol+commastr(Config.LockDelay)+config.textcol1+' milliseconds.');
  d(2,config_nr(140));
-
- {memory availible}
- d(config.textcolor,'Free Memory Available in the Heap: '+setcol+commastr(memavail));
  crlf;
 end; {system_tech .end.}
 

@@ -33,7 +33,7 @@ Implementation
 Uses Init, Cms, Jakob,
      Invent, News, Statusc,
      Various, Various2, Online,
-     File_Io;
+     File_Io, SysUtils;
 
 const manager = 'Jadu';
 
@@ -458,13 +458,13 @@ begin
           d(config.textcolor,' the '+config.moneytype+'. He tells you to lay down on a');
           d(config.textcolor,'bed, in a room nearby.');
           sd(config.textcolor,'You soon fall asleep...');
-          delay2(800);
+          Sleep(800);
           sd(config.textcolor,'...');
-          delay2(800);
+          Sleep(800);
           sd(config.textcolor,'...');
-          delay2(800);
+          Sleep(800);
           sd(config.textcolor,'...');
-          delay2(800);
+          Sleep(800);
           sd(config.textcolor,'...');
           crlf;
           d(config.textcolor,'When you wake up from your well earned sleep, you feel');

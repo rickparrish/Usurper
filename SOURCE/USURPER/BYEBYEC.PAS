@@ -36,7 +36,7 @@ Uses
      SortPl, SortTeam, Rating,
      Various, Various2, Various3,
      Mail, News, Online,
-     File_Io;
+     File_Io, SysUtils;
 
 Procedure ByeBye; {Executed upon exit of game}
 var
@@ -260,7 +260,7 @@ begin
   d(9,'Usurper - from JAS Software');
   crlf;
   d(14,'Unregistered Copy');
-  delay2(1000);
+  Sleep(1000);
  end;
 
  {Dispose global monster array}

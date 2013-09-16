@@ -37,7 +37,7 @@ Implementation
 Uses Init, Cms, Jakob,
      Statusc, Online, Sortpl,
      Various, Various2, AnsiColr,
-     Relatio2, File_Io;
+     Relatio2, File_Io, SysUtils;
 
       {max number of users/records the routines in this unit will handle}
 const maxsorts = global_maxplayers*2;
@@ -331,7 +331,7 @@ begin
     11:kick:=Warrior;
    end; {case .end.}
 
-   sd(10,ljust(upcasestr(classnames[kick]),justval));
+   sd(10,ljust(UpperCase(classnames[kick]),justval));
    justval:=10;
    sd(14,ljust(commastr(cla[i]),justval));
 
@@ -858,7 +858,7 @@ begin
    justval:=8;
    sd(15,ljust(commastr(i)+'.',justval));
    justval:=13;
-   sd(10,ljust(upcasestr(race_display(3,Human,nice2[i])),justval));
+   sd(10,ljust(UpperCase(race_display(3,Human,nice2[i])),justval));
    justval:=10;
    sd(14,ljust(commastr(rac[i]),justval));
 
@@ -2658,13 +2658,13 @@ begin
   s:=cfg_string(84);
 
   allow:=true;
-  if upcasestr(s)='NO' then begin
+  if UpperCase(s)='NO' then begin
    allow:=false;
   end;
 
   s:=cfg_string(93);
   npcinc:=true;
-  if upcasestr(s)='NO' then begin
+  if UpperCase(s)='NO' then begin
    npcinc:=false;
   end;
 

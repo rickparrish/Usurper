@@ -33,7 +33,7 @@ Implementation
 Uses Init, Cms, Jakob,
      Statusc, Mail, News,
      Various, Various2, Various3,
-     Online;
+     Online, SysUtils;
 
 var refresh : boolean;
 
@@ -547,7 +547,7 @@ begin
                  d(config.textcolor,'"Let me provide you with pleasure", he says in a commanding');
                  d(config.textcolor,'voice. You then experience some things that you not could');
                  d(config.textcolor,'have imagined in your wildest fantasies...');
-                 delay2(800);
+                 Sleep(800);
                  crlf;
                  d(config.textcolor,'You wake up early in the morning, Jake is gone.');
                  crlf;
