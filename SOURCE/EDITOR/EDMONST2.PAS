@@ -24,7 +24,7 @@ Unit EdMonst2;
 
 Interface
 
-Uses Init, AddMonst;
+Uses AddMonst;
 
 Procedure Reset_Monsters3;
 

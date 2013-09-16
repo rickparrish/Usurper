@@ -32,8 +32,7 @@ Uses Init, jakobe, file_io;
 
 Procedure Arm_Monsters;
 var
-    ready1,
-    ready2 : boolean;
+    ready1 : boolean;
     cc,
     cc2    : longint;
     i,

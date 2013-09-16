@@ -39,8 +39,6 @@ Function Cfg_Default(const c : integer): string;
 
 Implementation
 
-Uses Init;
-
 Function Cfg_Default;
 var
     s,s2: string;

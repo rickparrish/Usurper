@@ -69,13 +69,13 @@ Function Race_Display( race : races ) : string;
 Implementation
 
 Uses Dos, Cms, Jakobe,
-     Addit, Helpfile, ClasDis2,
+     Addit, ClasDis2,
      cfghelp, cfgval, cfgdef,
      File_Io,
 
      App, MsgBox, Dialogs,
      Drivers, Views,
-     Menus, ViewText;
+     ViewText;
 
 Procedure Config_Editor; {Usurper Configuration Dialog}
 Const
@@ -1263,7 +1263,6 @@ Var
   R     : TRect;
   x1,y1,x2,y2 : byte;
   Dia : EqClDialogP;
-  bx : byte;
 
 Procedure Replace(nr:integer;s:string);
 begin

@@ -23,7 +23,7 @@ Copyright 2007 Jakob Dangarden
 Unit EdWeap;
 
 Interface
-uses Jakobe, init, Obj_Ad,
+uses init, Obj_Ad,
      edweap2;
 
 procedure Reset_weapons;

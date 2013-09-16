@@ -8,7 +8,7 @@
 
 Unit HelpFile;
 
-{$F+,O+,X+,S-,R-}
+{$O+,X+,S-,R-}
 
 Interface
 
@@ -434,6 +434,26 @@ begin
   IsBlank := (Ch = ' ') or (Ch = #13) or (Ch = #10);
 end;
 
+{$IFDEF MSDOS}
+function Scan(var P; Offset, Size: Integer; C: Char): Integer; assembler;
+asm
+	CLD
+	LES	DI,P
+        ADD	DI,&Offset
+        MOV	DX,Size
+        SUB	DX,&Offset
+        OR	DH,DH
+        JZ	@@1
+        MOV	DX,256
+@@1:    MOV	CX,DX
+	MOV	AL, C
+        REPNE	SCASB
+	SUB	CX,DX
+        NEG	CX
+        XCHG	AX,CX
+end;
+{$ENDIF}
+{$IFNDEF MSDOS}
 function Scan(var P; Offset, Size: Integer; C: Char): Integer; assembler;
         {&USES esi,edi} {&FRAME-}
 asm
@@ -452,8 +472,27 @@ asm
         sub     ecx,edx
         neg     ecx
         xchg    eax,ecx
-end;
 
+end;
+{$ENDIF}
+
+{$IFDEF MSDOS}
+procedure TextToLine(var Text; Offset, Length: Integer; var Line: String);
+  assembler;
+asm
+	CLD
+	PUSH	DS
+	LDS	SI,Text
+        ADD	SI,&Offset
+        LES     DI,Line
+        MOV	AX,Length
+        STOSB
+        XCHG	AX,CX
+        REP	MOVSB
+        POP	DS
+end;
+{$ENDIF}
+{$IFNDEF MSDOS}
 procedure TextToLine(var Text; Offset, Length: Integer; var Line: String);
   assembler;
        {&USES esi,edi} {&FRAME-}
@@ -467,6 +506,7 @@ asm
         xchg    eax,ecx
         rep     movsb
 end;
+{$ENDIF}
 
 begin
   I := Scan(Text, Offset, Size, #13);

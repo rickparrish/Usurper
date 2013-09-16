@@ -1205,7 +1205,7 @@ var
 Implementation
 
 Uses Crt, Dos, Addit,
-     Clasdis2, msgbox, muffi2,
+     Clasdis2, msgbox,
      guardres, moatres, npc,
      resettn, extra, jakobe,
      file_io, helpfile, cms,
@@ -1674,8 +1674,6 @@ Function TMyApp.GetPalette:PPalette;
 Const
   P: Array[apColor..apMonochrome] of String[Length(CColor)] =
     (CColor, CBlackWhite, CMonochrome);
-var i : byte;
-
 begin
 
   p[apcolor,1] := #$31;   {background}
@@ -1824,10 +1822,6 @@ begin
 end;
 
 procedure TMyapp.ToggleVideoMode;
-var
-  NewMode: Word;
-  R: TRect;
-  OldMode: TVideoMode;
 begin
   (* REETODO FPC must have changed ScreenMode
   NewMode := ScreenMode xor smFont8x8;
@@ -1863,7 +1857,7 @@ end;
 
 
 Procedure ClassicPickDialog.HandleEvent(var Event:TEvent);
-var i,index : longint;
+var index : longint;
     carmor: armrec;
     cweapon : weaprec;
 Begin
@@ -2331,9 +2325,6 @@ Begin
 End;
 
 Procedure IREDialog.HandleEvent(var Event:TEvent);
-var s :string;
-    n1,n2:longint;
-
 Begin
  inherited HandleEvent(event);
 
@@ -2411,7 +2402,7 @@ Begin
 End;
 
 Procedure ItemPickDialog2.HandleEvent(var Event:TEvent);
-var i,index : longint;
+var index : longint;
     obbe  : objektrec;
 Begin
 
@@ -2636,7 +2627,6 @@ begin
 end;
 
 var
-    index,
     m,mem,kick : word;
 
     obj : objektrec;
@@ -2811,8 +2801,7 @@ begin
 
 end;
 
-var index : integer;
-    m : word;
+var m : word;
     obbe : objektrec;
     mem : array[1..16] of word;
 Begin
@@ -4253,7 +4242,6 @@ End;
 
 {-------PHRASE DIALOG START--------}
 Constructor PhraseDialog.Init(var Bounds:TRect; MyTitle: TTitleStr);
-var r : trect;
 Begin
 
  TDialog.Init(Bounds, MyTitle);
@@ -4329,7 +4317,7 @@ end;
 
 Constructor MonsterDialog.Init(var Bounds:TRect; MyTitle: TTitleStr);
 var r : trect;
-    s1,s2,s3 : string[90];
+    s1,s2 : string[90];
     obj : objektrec;
 Begin
 
@@ -4382,7 +4370,7 @@ end;
 
 Procedure MonsterDialog.HandleEvent(var Event:TEvent);
 Procedure Update_Info;
-var s1,s2,s3 : string[90];
+var s1,s2 : string[90];
     obj : objektrec;
 begin
  {updating WEAPOn / ARMOr POWEr}
@@ -4556,7 +4544,6 @@ End;
 
 {-------CHECKING DEPENDENCIES, DIALOG START--------}
 Constructor DependDialog.Init(var Bounds:TRect; MyTitle: TTitleStr;ra:word;pry:objektrec);
-var r : trect;
 Begin
  TDialog.Init(Bounds, MyTitle);
 
@@ -5088,7 +5075,6 @@ const xl = 30;
 var i : integer;
     s : string;
     s2 : string[6];
-    obj : objektrec;
     max,diff : word;
     carmor : armrec;
     cweapon : weaprec;
@@ -5414,7 +5400,6 @@ End; {View ViewText Dialog ***END***}
 
 {Options Dialog ***START***}
 Procedure OptionsDialog.HandleEvent(var Event:TEvent);
-var r : trect;
 Begin
 
  inherited HandleEvent(event);
@@ -5432,7 +5417,6 @@ End; {Options Dialog ***END***}
 
 {More_Editors Dialog ***START***}
 Procedure MoreEditorsDialog.HandleEvent(var Event:TEvent);
-var r : trect;
 Begin
 
  inherited HandleEvent(event);
@@ -5516,8 +5500,7 @@ End; {More_Editors Dialog ***END***}
 
 {Global Monster Dialog ***START***}
 Procedure GlobalMonsterDialog.HandleEvent(var Event:TEvent);
-var r : trect;
-    i,j : word;
+var i,j : word;
    tempmonster:monsterrec;
   save_need : boolean;
 

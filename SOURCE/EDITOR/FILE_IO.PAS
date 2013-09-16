@@ -298,7 +298,6 @@ end; { DirExist END, from SWAG }
 
 Function FsO;
 var
-    dum    : byte;
     memmy,
     i      : integer;
     ok     : boolean;
@@ -330,7 +329,6 @@ begin
  {assign file}
  assign(ofil,fname);
 
- dum:=0;
  fso:=0;
  i:=0;
 
@@ -359,7 +357,6 @@ end;
 
 Function FsClassic( weapon : boolean ) : word;
 var
-    dum    : byte;
     memmy,
     i      : integer;
     ok     : boolean;
@@ -373,7 +370,6 @@ begin
  if weapon then assign(weapfile,weapofile)
            else assign(armfile,armofile);
 
- dum:=0;
  fsclassic:=0;
  i:=0;
 
@@ -416,14 +412,12 @@ end;
 
 Function Fs( filtyp : filsize ) : word;
 var
-    dum    : byte;
     memmy,
     i      : integer;
     ok     : boolean;
 
 begin
 
- dum:=0;
  fs:=0;
  i:=0;
 
@@ -594,7 +588,7 @@ end;
 
 Procedure Load_Objekt;
 var
-    x,i : word;
+    i : word;
     ofil : file of ObjektRec;
     memmy : integer;
     ok : boolean;
@@ -1367,7 +1361,6 @@ var
     i : word;
     IORes : integer;
     tries : byte;
-    dum : byte;
     txt : text;
     memmy : integer;
     lockmde:byte;

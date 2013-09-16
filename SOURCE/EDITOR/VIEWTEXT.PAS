@@ -12,7 +12,7 @@
 
 Unit ViewText;
 
-{$F+,O+,X+,S-,D-}
+{$O+,X+,S-,D-}
 
 interface
 
@@ -72,7 +72,7 @@ procedure RegisterFViewer;
 
 implementation
 
-uses Memory, MsgBox, App;
+uses Memory, MsgBox;
 
 { TLineCollection }
 procedure TLineCollection.FreeItem(P: Pointer);
@@ -135,7 +135,6 @@ var
   FileToView: Text;
   Line: String;
   MaxWidth: Integer;
-  E: TEvent;
 begin
   IsValid := True;
   if FileName <> nil then DisposeStr(FileName);

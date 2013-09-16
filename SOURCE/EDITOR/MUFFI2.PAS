@@ -36,12 +36,9 @@ var txt : text;
 Procedure Terminate;
 label
  9044,
- 9040,
- 9039,
  9046,
  8088,
- 9045,
- 9041;
+ 9045;
 
 var
    i, j : integer;

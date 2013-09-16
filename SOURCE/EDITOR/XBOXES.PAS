@@ -8,7 +8,7 @@ Unit XBoxes;
 
 Interface
 
-Uses Dialogs, Objects, Menus,
+Uses Dialogs, Objects,
      Views, Drivers, MsgBox;
 
 Type
@@ -269,7 +269,6 @@ Procedure XDialog.TxtEntry(x,y : Byte; const txt : string; max,max2 : Byte;hint:
 {max2 states how many chars you want to diaplay in your textbox.
  max has to be exactly specified or program will hang :) }
 Var
-   w : Byte;
    ID : PView;
    R : TRect;
 
