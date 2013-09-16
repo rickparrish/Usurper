@@ -445,7 +445,7 @@ var
   f: text;
   g,counter,chcount : integer;
   c,quit: boolean;
-  k,ch: char;
+  ch: char;
   ansisave,swon : boolean;
   ofm: word;
 begin
@@ -1085,38 +1085,34 @@ end;
 
 procedure sread_num(var n: integer);
 var
- e: integer;
  s: string;
 begin;
  sread(s);
- val(s,n,e);
+ n := StrToIntDef(s, 0);
 end;
 
 procedure sread_num_byte(var b: byte);
 var
- e: integer;
  s: string;
 begin;
  sread(s);
- val(s,b,e);
+ b := StrToIntDef(s, 0);
 end;
 
 procedure sread_num_word(var n: word);
 var
- e: integer;
  s: string;
 begin;
  sread(s);
- val(s,n,e);
+ n := StrToIntDef(s, 0);
 end;
 
 procedure sread_num_longint(var n: longint);
 var
- e: integer;
  s: string;
 begin;
  sread(s);
- val(s,n,e);
+ n := StrToIntDef(s, 0);
 end;
 
  { Speed read is a one time read of the comport.  What I have used it for }

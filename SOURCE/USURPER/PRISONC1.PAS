@@ -39,7 +39,7 @@ Procedure Royal_Prison;
 const cap = 'Ronald'; {captain of the guard *same as in prisonf.pas}
 
 var cho : char;
-    cc, days: byte;
+    cc, days: word;
     s,s2,s4 : s70;
 
     daystr : string[4];

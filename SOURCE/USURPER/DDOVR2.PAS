@@ -160,11 +160,9 @@ end;
 procedure Port_rtn (var s2,s3 : string;
                     var portadd : word;
                     var irq  : byte);
-var
-  a : integer;
 begin
-  val('$'+s2,portadd,a);
-  val(s3,irq,a);
+  portadd := StrToIntDef('$'+s2, 0); // REETODO Does this work?
+  irq := StrToIntDef(s3, 0);
 end;
 
 procedure DDError(s: string);
@@ -234,7 +232,6 @@ end;
 var
  s: string;
  f: text;
- a: integer;
  ps,p1,p2,p3: string[80];
  ofm: word;
 begin;
@@ -310,18 +307,18 @@ begin;
    if p1='DIGI'   then digiio:=true   else
    if p1='FOSSIL' then fossilio:=true else
    if p1='XFOSSIL' then fossilio:=true else
-   if p1='LOCKBAUD' then val(p2,lockbaud,a) else
+   if p1='LOCKBAUD' then lockbaud := StrToIntDef(p2, 0) else
    if p1='PORT1'    then port_rtn(p2,p3,port1,irq1) else
    if p1='PORT2'    then port_rtn(p2,p3,port2,irq2) else
    if p1='PORT3'    then port_rtn(p2,p3,port3,irq3) else
    if p1='PORT4'    then port_rtn(p2,p3,port4,irq4) else
-   if p1='STATFORE' then val(p2,statfore,a) else
-   if p1='STATBACK' then val(p2,statback,a) else
-   if p1='MAXTIME' then val(p2,maxtime,a) else
+   if p1='STATFORE' then statfore := StrToIntDef(p2, 0) else
+   if p1='STATBACK' then statback := StrToIntDef(p2, 0) else
+   if p1='MAXTIME' then maxtime := StrToIntDef(p2, 0) else
    if p1='COLOR' then localcol:=true else
    if p1='MONO' then localcol:=false else
    if p1='COLOR1' then color1:=true else
-   if p1='COMPORT' then val(p2,com_port,a) else
+   if p1='COMPORT' then com_port := StrToIntDef(p2, 0) else
    if p1='PAUSECODE' then pause_code:=ps else
 
    begin;

@@ -301,7 +301,7 @@ var {from SWAG (a pascal library) => date/time routines => Michael Hoenie}
     {jakob has made two changes in the code. see 'jakob' comments in source.}
   internal1,internal2:longint;
   JNUM:real;
-  cd,month,day,year: integer;
+  month,day,year: integer;
   out:string[25];
 
 function Jul( mo, da, yr: integer): real;
@@ -320,28 +320,28 @@ begin
 
   out:=copy(stream1,1,2);
   if copy(out,1,1)='0' then delete(out,1,1);
-  val(out,month,cd);
+  month := StrToIntDef(out, 0);
   out:=copy(stream1,4,2);
   if copy(out,1,1)='0' then delete(out,1,1);
-  val(out,day,cd);
+  day := StrToIntDef(out, 0);
   out:=copy(stream1,7,4); {jakob, original code is stream1,7,2) }
   if copy(out,1,1)='0' then delete(out,1,1);
-  val(out,year,cd);
+  year := StrToIntDef(out, 0);
   jnum:=jul(month,day,year);
   str(jnum:10:0,out);
-  val(out,internal1,cd);
+  internal1 := StrToIntDef(out, 0);
   out:=copy(stream2,1,2);
   if copy(out,1,1)='0' then delete(out,1,1);
-  val(out,month,cd);
+  month := StrToIntDef(out, 0);
   out:=copy(stream2,4,2);
   if copy(out,1,1)='0' then delete(out,1,1);
-  val(out,day,cd);
+  day := StrToIntDef(out, 0);
   out:=copy(stream2,7,4); {jakob, original code is stream1,7,2) }
   if copy(out,1,1)='0' then delete(out,1,1);
-  val(out,year,cd);
+  year := StrToIntDef(out, 0);
   jnum:=jul(month,day,year);
   str(jnum:10:0,out);
-  val(out,internal2,cd);
+  internal2 := StrToIntDef(out, 0);
 
   {return result}
   days_between:=internal1-internal2;

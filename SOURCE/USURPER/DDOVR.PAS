@@ -9,7 +9,7 @@ uses crt, init;
 {procedure showhelp;}
 
 procedure GetBBSInfo(
- bbstype: word;
+ bbstype: byte;
  var user_first_name,user_last_name: string;
  var user_access_level: word;
  var bbs_time_left: integer;
@@ -60,7 +60,7 @@ uses
   SysUtils;
 
 procedure GetBBSInfo(
- bbstype: word;
+ bbstype: byte;
  var user_first_name,user_last_name: string;
  var user_access_level: word;
  var bbs_time_left: integer;
@@ -137,7 +137,7 @@ begin;
  wva:=s;
 end;
 
-Function In36(Num : word) : String;
+Function In36(Num : byte) : String;
 const
   Array36 : array[0..35] of Char = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 var
@@ -327,7 +327,7 @@ Type
 VAR
    pcbfile  : file;
    pcb14    : pcb_sys_rec14;
-   a,i    : integer;
+   a    : integer;
    s: string;
    Name        : String[25];
 
@@ -345,12 +345,12 @@ Begin
 { If (Data[23]=' ') Then Data[23]:='.'; }
  s:='';
  s :=s+Pcb14.SComPort;
- Val(s,ComPort,I);
+ ComPort := StrToIntDef(s, 0);
  s:='';
  for a:= 1 to 5 do
    s:=s+Pcb14.openbps[a];
  while s[length(s)]=' ' do delete(s,length(s),1);
- val(s,baud,i);
+ baud := StrToIntDef(s, 0);
  If PCB14.connectbps='Local' then
      baud:=0;
  If (baud=0) Then ComPort:=0;
@@ -476,7 +476,7 @@ procedure load_phnx;
 var
  f : text;
  s : string;
- code,i: integer;
+ i: integer;
  b : boolean;
  a: integer;
 begin;
@@ -492,12 +492,12 @@ begin;
  user_last_name:='';
  for a:=1 to 25 do if (pcbsys.name[a]=' ') or (pcbsys.name[a]=#0) then b:=true else if b=false then
   user_first_name:=user_first_name+pcbsys.name[a] else user_last_name:=user_last_name+pcbsys.name[a];
- readln(f,s); val(s,i,code); baud_rate:=i;
- readln(f,s); val(s,i,code); com_port:=i;
- readln(f,s); val(s,i,code); user_access_level:=i;
+ readln(f,s); i := StrToIntDef(s, 0); baud_rate:=i;
+ readln(f,s); i := StrToIntDef(s, 0); com_port:=i;
+ readln(f,s); i := StrToIntDef(s, 0); user_access_level:=i;
  readln(f,s); s:=stu(s); if s='TRUE' then local:=true else local:=false;
  readln(f,s);
- readln(f,s); val(s,i,code); bbs_time_left:=i;
+ readln(f,s); i := StrToIntDef(s, 0); bbs_time_left:=i;
  readln(f,s);
  if s='TRUE' then graphics:=3 else graphics:=1;
  if s='TRUE' then color_chg:=true else color_chg:=false;
@@ -511,7 +511,7 @@ var
  b: boolean;
  f : text;
  s : string;
- code,i: integer;
+ i: integer;
  sint: word;
 
 begin;
@@ -531,7 +531,7 @@ begin;
  for i:=1 to 9 do begin;
   readln(f,s);
  end;
- val(s,sint,code);
+ sint := StrToIntDef(s, 0);
  user_access_level:=sint;
  readln(f,s);
  readln(f,s);
@@ -545,15 +545,15 @@ begin;
  readln(f,s);
  while (s<>'') and (s[1]=' ') do delete(s,1,1);
  delete(s,length(s)-3,3);
- val(s,sint,code);
+ sint := StrToIntDef(s, 0);
  bbs_time_left:=sint div 60;
  readln(f,s);
  readln(f,s);
  readln(f,s);
  readln(f,s);
- val(s,baud_rate,code);
+ baud_rate := StrToIntDef(s, 0);
  readln(f,s);
- val(s,sint,code);
+ sint := StrToIntDef(s, 0);
  com_port:=sint;
  readln(f,s);
  board_name:=s;
@@ -736,7 +736,6 @@ procedure Load_2am;
 var
  f: text;
  s,s2: string;
- a: integer;
 begin;
  local:=false;
  user_access_level:=0;
@@ -759,12 +758,12 @@ begin;
  readln(f,s);
 
  readln(f,s);
- val(s,bbs_time_left,a);
+ bbs_time_left := StrToIntDef(s, 0);
  readln(f,s);
- val(s,com_port,a);
+ com_port := StrToIntDef(s, 0);
  if com_port=0 then local:=true;
  readln(f,s);
- val(s,baud_rate,a);
+ baud_rate := StrToIntDef(s, 0);
  if baud_rate=0 then local:=true;
 
  readln(f,s);
@@ -836,11 +835,11 @@ end;
 
 procedure load_local;
 var
- a,b: integer;
+ a: integer;
  d: boolean;
  s: string;
 begin;
- val(paramstr(1),a,b);
+ a := StrToIntDef(ParamStr(1), 0);
  if a>0 then node_num:=a;
  local:=true;
  writeln;
