@@ -463,7 +463,7 @@ begin
 
              {npc is not with another team}
 
-             if (player.dark>1500) and (player0^.class=Paladin) then begin
+             if (player.dark>1500) and (player0^.classid=Paladin) then begin
               {NPC paladins don't like evil characters!}
               crlf;
               d(global_talkcol,'Get out of my face, You scum!');
@@ -473,7 +473,7 @@ begin
               crlf;
               pause;
              end
-             else if (player.dark>500) and (player0^.class=paladin) and (player.race=troll) then begin
+             else if (player.dark>500) and (player0^.classid=paladin) and (player.race=troll) then begin
               {NPC paladins don't like Trolls!}
               crlf;
               d(global_talkcol,'Get lost you pagan troll!');
@@ -636,7 +636,7 @@ begin
            sd(config.textcolor,copy(s,1,10));
 
            {class}
-           s:=classnames[player0^.class]+'            ';
+           s:=classnames[player0^.classid]+'            ';
            sd(config.textcolor,copy(s,1,11));
 
            {status}

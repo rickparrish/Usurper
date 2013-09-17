@@ -1272,7 +1272,7 @@ begin
 
             {class}
             sd(config.textcolor,' (');
-            sd(3,'level '+commastr(pl0^.level)+' '+classnames[pl0^.class]);
+            sd(3,'level '+commastr(pl0^.level)+' '+classnames[pl0^.classid]);
             sd(config.textcolor,') ');
 
             {married flag}

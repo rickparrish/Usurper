@@ -370,7 +370,7 @@ begin
      crlf;
     end;
    end;
-   if pl01^.class in [Cleric,Magician,Sage] then begin
+   if pl01^.classid in [Cleric,Magician,Sage] then begin
     if (pl01^.mana<pl01^.maxmana) and (random(2)=0) then begin
      sd(global_talkcol,'I don''t have full mana!');
      sd(config.textcolor,', ');
@@ -1443,7 +1443,7 @@ begin
     if custtemp^.hps>0 then begin
      {news-paper}
      newsy(false,
-     ' '+uplc+custtemp^.name2+config.textcol1+' the '+classnames[custtemp^.class]+' made it out alive from the Dungeons.',
+     ' '+uplc+custtemp^.name2+config.textcol1+' the '+classnames[custtemp^.classid]+' made it out alive from the Dungeons.',
      '',
      '',
      '',
@@ -1458,17 +1458,17 @@ begin
 
      {create random "news of death"}
      case random(6) of
-      0: s:=' '+uplc+custtemp^.name2+config.textcol1+' the '+classnames[custtemp^.class]+' was massacred by a '+umonc
+      0: s:=' '+uplc+custtemp^.name2+config.textcol1+' the '+classnames[custtemp^.classid]+' was massacred by a '+umonc
                +killed_by[i]+config.textcol1+'!';
-      1: s:=' '+uplc+custtemp^.name2+config.textcol1+' the '+classnames[custtemp^.class]+' encountered a '+umonc+killed_by[i]
+      1: s:=' '+uplc+custtemp^.name2+config.textcol1+' the '+classnames[custtemp^.classid]+' encountered a '+umonc+killed_by[i]
                +config.textcol1+' and was killed.';
-      2: s:=' '+uplc+custtemp^.name2+config.textcol1+' the '+classnames[custtemp^.class]+'s mutilated corpse was left behind.'
+      2: s:=' '+uplc+custtemp^.name2+config.textcol1+' the '+classnames[custtemp^.classid]+'s mutilated corpse was left behind.'
                +config.textcol1;
-      3: s:=' '+uplc+custtemp^.name2+config.textcol1+' the '+classnames[custtemp^.class]+' was killed by a '+umonc+killed_by[i]
+      3: s:=' '+uplc+custtemp^.name2+config.textcol1+' the '+classnames[custtemp^.classid]+' was killed by a '+umonc+killed_by[i]
                +config.textcol1+'.';
-      4: s:=' '+uplc+custtemp^.name2+config.textcol1+' the '+classnames[custtemp^.class]+'s life was taken by a '+umonc
+      4: s:=' '+uplc+custtemp^.name2+config.textcol1+' the '+classnames[custtemp^.classid]+'s life was taken by a '+umonc
                +killed_by[i]+config.textcol1+'.';
-      5: s:=' '+uplc+custtemp^.name2+config.textcol1+' the '+classnames[custtemp^.class]+' was mauled by a '+umonc+killed_by[i]
+      5: s:=' '+uplc+custtemp^.name2+config.textcol1+' the '+classnames[custtemp^.classid]+' was mauled by a '+umonc+killed_by[i]
                +config.textcol1+'.';
      end; {case .end.}
 

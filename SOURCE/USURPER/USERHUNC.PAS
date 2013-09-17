@@ -35,7 +35,7 @@ Uses DDplus, Jakob, Cms,
      Various, Various2, Online,
      File_Io, SysUtils;
 
-Function User_Search;
+Function User_Search(var username:s70;enter_game_if_exists:boolean) : boolean; {returns TRUE if player exists, else new player}
 var
 
    s     : string;
@@ -720,55 +720,55 @@ end;
   case cho of
    '1':begin
         s:='a shy';
-        player.class:=Alchemist;
+        player.classid:=Alchemist;
        end;
    '2':begin
         s:='a hiding';
-        player.class:=Assassin;
+        player.classid:=Assassin;
        end;
    '3':begin
         s:='a powerful';
-        player.class:=Barbarian;
+        player.classid:=Barbarian;
        end;
    '4':begin
         s:='an entertaining';
-        player.class:=Bard;
+        player.classid:=Bard;
        end;
    '5':begin
         s:='a praying';
-        player.class:=Cleric;
+        player.classid:=Cleric;
        end;
    '6':begin
         s:='a foolish';
-        player.class:=Jester;
+        player.classid:=Jester;
        end;
    '7':begin
         s:='a secretive';
-        player.class:=Magician;
+        player.classid:=Magician;
        end;
    '8':begin
         s:='an honorable';
-        player.class:=Paladin;
+        player.classid:=Paladin;
        end;
    '9':begin
         s:='a fast';
-        player.class:=Ranger;
+        player.classid:=Ranger;
        end;
    '0':begin
         s:='a wise';
-        player.class:=Sage;
+        player.classid:=Sage;
        end;
    'W':begin
         s:='a brave';
-        player.class:=Warrior;
+        player.classid:=Warrior;
        end;
   end; {case .end.}
 
   if cho in ['1','2','3','4','5','6','7','8','9','0','W'] then begin
 
    crlf;
-   if confirm('Be '+s+' '+uyellow+classnames[player.class]+config.textcol1,'n')=true then begin
-    if (player.race in [Troll,Orc]) and (player.class=Paladin) then begin
+   if confirm('Be '+s+' '+uyellow+classnames[player.classid]+config.textcol1,'n')=true then begin
+    if (player.race in [Troll,Orc]) and (player.classid=Paladin) then begin
      crlf;
      d(config.textcolor,'Impossible combination!');
      d(config.textcolor,'You cannot be a Troll or Orc in combination with');
@@ -940,7 +940,7 @@ end;
 
 
  {*startvalues, based on Class*}
- case player.class of
+ case player.classid of
   Alchemist
   :begin
      player.hps:=1;
@@ -1470,7 +1470,7 @@ end;
   1:begin {news-paper}
      newsy(true,
      config.textcol1+'New Player!',
-     ' We welcome '+uplc+alias+config.textcol1+', a young brave '+classnames[player.class],
+     ' We welcome '+uplc+alias+config.textcol1+', a young brave '+classnames[player.classid],
      ' who seeks fortune and glory!',
      '',
      '',
@@ -1483,7 +1483,7 @@ end;
   2:begin {news-paper}
      newsy(true,
      config.textcol1+'New Player!',
-     ' We welcome '+uplc+alias+config.textcol1+' the '+classnames[player.class]+' to the realm!',
+     ' We welcome '+uplc+alias+config.textcol1+' the '+classnames[player.classid]+' to the realm!',
      '',
      '',
      '',

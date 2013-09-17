@@ -2664,7 +2664,7 @@ begin
             d(2,ukidc+child.name+config.textcol1+' is ready to cry when '+sex2[child.sex]
                      +' is dragged out by the royal servants.');
             d(2,ukidc+child.name+config.textcol1+' is transported to the Royal Castle.');
-            d(config.textcolor,'(you are a bad '+classnames[player.class]+'!)');
+            d(config.textcolor,'(you are a bad '+classnames[player.classid]+'!)');
             crlf;
 
             {update child}
@@ -2698,7 +2698,7 @@ begin
             player,
             ulred+'Your Children!'+config.textcol1,
             mkstring(14,underscore),
-            uplc+player.name2+config.textcol1+' the '+classnames[player.class]+' sent your '+sex7[child.sex]+' '+ukidc
+            uplc+player.name2+config.textcol1+' the '+classnames[player.classid]+' sent your '+sex7[child.sex]+' '+ukidc
                 +child.name+config.textcol1,
             'to the Royal Orphanage. '+ukidc+child.name+config.textcol1+' wants to come home to you!',
             '',
@@ -2784,7 +2784,7 @@ begin
            uwhite+'Child Released!'+config.textcol1,
            mkstring(15,underscore),
            'Your '+sex7[child.sex]+ukidc+' '+child.name+config.textcol1+' was released by '+sex3[child.sex]+' kidnapper!',
-           '('+uplc+player.name2+config.textcol1+' the '+classnames[player.class]+')',
+           '('+uplc+player.name2+config.textcol1+' the '+classnames[player.classid]+')',
            '',
            '',
            '',

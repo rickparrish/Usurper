@@ -1568,7 +1568,10 @@ begin
 
 end; {find_item_event *end*}
 
-Function Dungeon_Event;
+Function Dungeon_Event( var  pl1,
+                             pl2,
+                             pl3,
+                             pl4 : userrec) : boolean;
 var
 
     xx, x, y, i : longint;

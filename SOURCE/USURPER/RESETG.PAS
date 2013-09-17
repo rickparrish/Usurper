@@ -248,7 +248,7 @@ begin
   player.phr[i]:=emptystr;
  end;
  player.autoheal:=false;
- player.class:=Paladin;
+ player.classid:=Paladin;
  player.loyalty:=90;
  player.haunt:=3;
  player.master:='1';
@@ -407,7 +407,7 @@ begin
  end;
 
  player.autoheal:=false;
- player.class:=Warrior;
+ player.classid:=Warrior;
  player.loyalty:=90;
  player.haunt:=3;
  player.master:='2';
@@ -543,7 +543,7 @@ begin
   player.phr[i]:=emptystr;
  end;
  player.autoheal:=false;
- player.class:=Sage;
+ player.classid:=Sage;
  player.loyalty:=90;
  player.haunt:=3;
  player.master:='3';
@@ -680,7 +680,7 @@ begin
  end;
 
  player.autoheal:=false;
- player.class:=Ranger;
+ player.classid:=Ranger;
  player.loyalty:=10;
  player.haunt:=3;
  player.master:='4';
@@ -814,7 +814,7 @@ begin
   player.phr[i]:=emptystr;
  end;
  player.autoheal:=false;
- player.class:=Assassin;
+ player.classid:=Assassin;
  player.loyalty:=30;
  player.haunt:=3;
  player.master:='5';

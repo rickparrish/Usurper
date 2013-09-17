@@ -360,7 +360,7 @@ begin
      sd(itemcol(inweap.name),inweap.name);
     end;
     crlf;
-    sd(config.textcolor,ljust('Class      : '+classnames[player0.class],justval));
+    sd(config.textcolor,ljust('Class      : '+classnames[player0.classid],justval));
     sd(config.textcolor,'Armor      : ');
     if player0.armor=0 then begin
      sd(itemcol(nada),'skin');
@@ -398,7 +398,7 @@ begin
     d(config.textcolor,ljust('ArmorPower : '+commastr(player0.apow*11),justval));
 
     sd(config.textcolor,ljust('Trainings  : '+commastr(player0.trains),justval));
-    if player0.class in [Cleric,Sage,Magician] then begin
+    if player0.classid in [Cleric,Sage,Magician] then begin
      d(config.textcolor,ljust('Mana       : '+commastr(player0.mana)+'/'+commastr(player0.maxmana),justval));
     end
     else begin
@@ -432,7 +432,7 @@ begin
     sd(config.hotkeycolor,'L');
     sd(config.textcolor,')evel ');
 
-    if player0.class in [Cleric,Magician,Sage] then begin
+    if player0.classid in [Cleric,Magician,Sage] then begin
      menu2('(E) Spells');
     end;
 
@@ -498,7 +498,7 @@ begin
 
     {class}
     crlf;
-    sd(config.textcolor,ljust('Class      : '+classnames[player0.class],justval));
+    sd(config.textcolor,ljust('Class      : '+classnames[player0.classid],justval));
 
     {left hand}
     sd(config.textcolor,itemstr[1,1]^);
@@ -583,7 +583,7 @@ begin
     sd(config.textcolor,itemstr[14,1]^);
     d(itemcol(itemstr[14,2]^),itemstr[14,2]^);
 
-    if player0.class in [Cleric,Sage,Magician] then begin
+    if player0.classid in [Cleric,Sage,Magician] then begin
      sd(config.textcolor,ljust('Mana       : '+commastr(player0.mana)+'/'+commastr(player0.maxmana),justval));
     end
     else begin
@@ -623,7 +623,7 @@ crlf;
      sd(config.hotkeycolor,'L');
      sd(config.textcolor,')evel ');
 
-     if player0.class in [Cleric,Magician,Sage] then begin
+     if player0.classid in [Cleric,Magician,Sage] then begin
       menu('(E) Spells');
      end;
 
@@ -702,7 +702,7 @@ Begin
    end
    else if (ch='E') then begin
     ch:='-';
-    if (player0.class in [Cleric,Magician,Sage]) then begin
+    if (player0.classid in [Cleric,Magician,Sage]) then begin
      ch:='E';
     end;
    end;
@@ -1338,7 +1338,7 @@ Begin
        sd(config.textcolor,color[player0.skin]);
 
        {Alchemist Poison}
-       if player0.class=Alchemist then begin
+       if player0.classid=Alchemist then begin
         crlf;
         crlf;
         sd(config.textcolor,'Active Poison : ');

@@ -326,7 +326,7 @@ begin
   Pay_Royal_Guard(player,king);
 
   {bard songs}
-  if player.class=bard then begin
+  if player.classid=bard then begin
    player.bard_songs_left:=config.bardsongs;
   end;
 
@@ -371,7 +371,7 @@ begin
   player.wrestlings:=Config.MaxWrestlings; {when you change this value, check with UMAN.PAS
                          and the WWTRIES constant, they should match}
 
-  if player.class=Assassin then begin
+  if player.classid=Assassin then begin
    inc(player.thiefs,2);
   end;
 
@@ -565,7 +565,7 @@ begin
   {give player haggle turns}
   player.weaphag:=3;
   player.armhag:=4;
-  if player.class=Jester then begin
+  if player.classid=Jester then begin
    inc(player.weaphag);
    inc(player.armhag);
   end;

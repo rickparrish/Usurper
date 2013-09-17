@@ -29,15 +29,15 @@ Interface
 
 Uses Init;
 
-Procedure Spell_Description(class:classes ; spell:integer);
+Procedure Spell_Description(classid:classes ; spell:integer);
 Procedure List_of_Spells(var happy:userrec; all:boolean);
 Procedure Spell_List(var happy:userrec);
 Procedure Reset_Spells (var pl1,pl2,pl3,pl4 : userrec);
-Function Level_Needed(class:classes ; spell:byte) : integer;
-Function Spell_Cost  (class:classes ; spell:byte) : integer;
-Function Spell_Name  (class:classes ; spell:byte) : s70;
-Function Spell_Utter (class:classes ; spell:byte) : s70;
-Function Spell_Multi (class:classes ; spell:byte) : boolean;
+Function Level_Needed(classid:classes ; spell:byte) : integer;
+Function Spell_Cost  (classid:classes ; spell:byte) : integer;
+Function Spell_Name  (classid:classes ; spell:byte) : s70;
+Function Spell_Utter (classid:classes ; spell:byte) : s70;
+Function Spell_Multi (classid:classes ; spell:byte) : boolean;
 Function Spell_User (const ply:userrec):boolean; {is ply a spell user?}
 
 {Monster Spell}
@@ -55,14 +55,14 @@ Function Spell_User (const ply:userrec):boolean; {is ply a spell user?}
 var result : boolean;
 begin
 
- if ply.class in [Cleric,Magician,Sage] then result:=true
+ if ply.classid in [Cleric,Magician,Sage] then result:=true
                                         else result:=false;
  {return result}
  spell_user:=result;
 
 end; {spell_user .end.}
 
-Function Spell_Multi(class : classes ; spell : byte) : boolean;
+Function Spell_Multi(classid : classes ; spell : byte) : boolean;
 var x : boolean;
 begin
 
@@ -73,84 +73,84 @@ begin
  x:=false;
  case spell of
   1:begin
-     case class of
+     case classid of
       Cleric   : x:=false;
       Magician : x:=false;
       Sage     : x:=false;
      end;
     end;
   2:begin
-     case class of
+     case classid of
       Cleric   : x:=false;
       Magician : x:=false;
       Sage     : x:=false;
      end;
     end;
   3:begin
-     case class of
+     case classid of
       Cleric   : x:=false;
       Magician : x:=false;
       Sage     : x:=false;
      end;
     end;
   4:begin
-     case class of
+     case classid of
       Cleric   : x:=false;
       Magician : x:=false;
       Sage     : x:=false;
      end;
     end;
   5:begin
-     case class of
+     case classid of
       Cleric   : x:=false;
       Magician : x:=false;
       Sage     : x:=true; {wow! multi target spell!}
      end;
     end;
   6:begin
-     case class of
+     case classid of
       Cleric   : x:=true; {wow! multi target spell!}
       Magician : x:=false;
       Sage     : x:=false;
      end;
     end;
   7:begin
-     case class of
+     case classid of
       Cleric   : x:=false;
       Magician : x:=false;
       Sage     : x:=false;
      end;
     end;
   8:begin
-     case class of
+     case classid of
       Cleric   : x:=false; 
       Magician : x:=true; {wow! multi target spell!}
       Sage     : x:=false;
      end;
     end;
   9:begin
-     case class of
+     case classid of
       Cleric   : x:=false;
       Magician : x:=false;
       Sage     : x:=false;
      end;
     end;
  10:begin
-     case class of
+     case classid of
       Cleric   : x:=false;
       Magician : x:=false;
       Sage     : x:=false;
      end;
     end;
  11:begin
-     case class of
+     case classid of
       Cleric   : x:=false;
       Magician : x:=false;
       Sage     : x:=false;
      end;
     end;
  12:begin
-     case class of
+     case classid of
       Cleric   : x:=false;
       Magician : x:=false;
       Sage     : x:=false;
@@ -164,7 +164,7 @@ begin
 
 end; {spell_multi *end*}
 
-Function Level_Needed(class:classes ; spell:byte) : integer;
+Function Level_Needed(classid:classes ; spell:byte) : integer;
 var x : integer;
 begin
 
@@ -172,84 +172,84 @@ begin
  x:=0;
  case spell of
   1:begin
-     case class of
+     case classid of
       Cleric   : x:=1;
       Magician : x:=1;
       Sage     : x:=1;
      end;
     end;
   2:begin
-     case class of
+     case classid of
       Cleric   : x:=5;
       Magician : x:=5;
       Sage     : x:=5;
      end;
     end;
   3:begin
-     case class of
+     case classid of
       Cleric   : x:=10;
       Magician : x:=10;
       Sage     : x:=10;
      end;
     end;
   4:begin
-     case class of
+     case classid of
       Cleric   : x:=15;
       Magician : x:=15;
       Sage     : x:=15;
      end;
     end;
   5:begin
-     case class of
+     case classid of
       Cleric   : x:=20;
       Magician : x:=20;
       Sage     : x:=20;
      end;
     end;
   6:begin
-     case class of
+     case classid of
       Cleric   : x:=25;
       Magician : x:=25;
       Sage     : x:=25;
      end;
     end;
   7:begin
-     case class of
+     case classid of
       Cleric   : x:=30;
       Magician : x:=30;
       Sage     : x:=30;
      end;
     end;
   8:begin
-     case class of
+     case classid of
       Cleric   : x:=40;
       Magician : x:=40;
       Sage     : x:=40;
      end;
     end;
   9:begin
-     case class of
+     case classid of
       Cleric   : x:=50;
       Magician : x:=50;
       Sage     : x:=50;
      end;
     end;
  10:begin
-     case class of
+     case classid of
       Cleric   : x:=60;
       Magician : x:=60;
       Sage     : x:=60;
      end;
     end;
  11:begin
-     case class of
+     case classid of
       Cleric   : x:=70;
       Magician : x:=70;
       Sage     : x:=70;
      end;
     end;
  12:begin
-     case class of
+     case classid of
       Cleric   : x:=80;
       Magician : x:=80;
       Sage     : x:=80;
@@ -263,7 +263,7 @@ begin
 
 end; {Level_Needed .end.}
 
-Function Spell_Cost  (class:classes ; spell:byte) : integer;
+Function Spell_Cost  (classid:classes ; spell:byte) : integer;
 var x : integer;
 begin
 
@@ -272,84 +272,84 @@ begin
  x:=0;
  case spell of
   1:begin
-     case class of
+     case classid of
       Cleric   : x:=10;
       Magician : x:=10;
       Sage     : x:=10;
      end;
     end;
   2:begin
-     case class of
+     case classid of
       Cleric   : x:=20;
       Magician : x:=20;
       Sage     : x:=20;
      end;
     end;
   3:begin
-     case class of
+     case classid of
       Cleric   : x:=30;
       Magician : x:=30;
       Sage     : x:=30;
      end;
     end;
   4:begin
-     case class of
+     case classid of
       Cleric   : x:=40;
       Magician : x:=40;
       Sage     : x:=40;
      end;
     end;
   5:begin
-     case class of
+     case classid of
       Cleric   : x:=50;
       Magician : x:=50;
       Sage     : x:=50;
      end;
     end;
   6:begin
-     case class of
+     case classid of
       Cleric   : x:=60;
       Magician : x:=60;
       Sage     : x:=60;
      end;
     end;
   7:begin
-     case class of
+     case classid of
       Cleric   : x:=70;
       Magician : x:=70;
       Sage     : x:=70;
      end;
     end;
   8:begin
-     case class of
+     case classid of
       Cleric   : x:=80;
       Magician : x:=80;
       Sage     : x:=80;
      end;
     end;
   9:begin
-     case class of
+     case classid of
       Cleric   : x:=90;
       Magician : x:=90;
       Sage     : x:=90;
      end;
     end;
  10:begin
-     case class of
+     case classid of
       Cleric   : x:=100;
       Magician : x:=100;
       Sage     : x:=100;
      end;
     end;
  11:begin
-     case class of
+     case classid of
       Cleric   : x:=110;
       Magician : x:=110;
       Sage     : x:=110;
      end;
     end;
  12:begin
-     case class of
+     case classid of
       Cleric   : x:=120;
       Magician : x:=120;
       Sage     : x:=120;
@@ -362,7 +362,7 @@ begin
 
 end; {spell_cost .end.}
 
-Function Spell_Name  (class:classes ; spell:byte) : s70;
+Function Spell_Name  (classid:classes ; spell:byte) : s70;
 var s : s30;
 begin {returns NAME of spell for selected magic user}
 
@@ -371,84 +371,84 @@ begin {returns NAME of spell for selected magic user}
 
  case spell of
   1:begin
-     case class of
+     case classid of
       Cleric   : s:='Cure Light';
       Magician : s:='Magic Missile';
       Sage     : s:='Fog of War';
      end;
     end;
   2:begin
-     case class of
+     case classid of
       Cleric   : s:='Armor';
       Magician : s:='Shield';
       Sage     : s:='Poison';
      end;
     end;
   3:begin
-     case class of
+     case classid of
       Cleric   : s:='Baptize Monster';
       Magician : s:='Sleep';
       Sage     : s:='Freeze';
      end;
     end;
   4:begin
-     case class of
+     case classid of
       Cleric   : s:='Cure Critical';
       Magician : s:='Web';
       Sage     : s:='Duplicate';
      end;
     end;
   5:begin
-     case class of
+     case classid of
       Cleric   : s:='Disease';
       Magician : s:='Power Hat';
       Sage     : s:='Roast';
      end;
     end;
   6:begin
-     case class of
+     case classid of
       Cleric   : s:='Holy Explosion';
       Magician : s:='Fireball';
       Sage     : s:='Hit Self';
      end;
     end;
   7:begin
-     case class of
+     case classid of
       Cleric   : s:='Invisibility';
       Magician : s:='Fear';
       Sage     : s:='Escape';
      end;
     end;
   8:begin
-     case class of
+     case classid of
       Cleric   : s:='Angel';
       Magician : s:='Lightning Bolt';
       Sage     : s:='Giant';
      end;
     end;
   9:begin
-     case class of
+     case classid of
       Cleric   : s:='Call Lightning';
       Magician : s:='Prismatic Cage';
       Sage     : s:='Steal';
      end;
     end;
  10:begin
-     case class of
+     case classid of
       Cleric   : s:='Heal';
       Magician : s:='Pillar of Fire';
       Sage     : s:='Energy Drain';
      end;
     end;
  11:begin
-     case class of
+     case classid of
       Cleric   : s:='Divination';
       Magician : s:='Power word KILL';
       Sage     : s:='Summon Demon';
      end;
     end;
  12:begin
-     case class of
+     case classid of
       Cleric   : s:='Gods Finger';
       Magician : s:='Summon Demon';
       Sage     : s:='Death Kiss';
@@ -462,7 +462,7 @@ begin {returns NAME of spell for selected magic user}
 
 end; {SPELL_NAME **** END ****}
 
-Function Spell_Utter;
+Function Spell_Utter (classid:classes ; spell:byte) : s70;
 var s : s30;
 begin
 
@@ -471,84 +471,84 @@ begin
 
  case spell of
   1:begin
-     case class of
+     case classid of
       Cleric   : s:='Abrazak';
       Magician : s:='Zazzaknah';
       Sage     : s:='Umannaghra';
      end;
     end;
   2:begin
-     case class of
+     case classid of
       Cleric   : s:='Razzxixx';
       Magician : s:='Mokkoshu';
       Sage     : s:='Gonngexha';
      end;
     end;
   3:begin
-     case class of
+     case classid of
       Cleric   : s:='Ushmanikixz';
       Magician : s:='Sabdrak';
       Sage     : s:='Artizafisch';
      end;
     end;
   4:begin
-     case class of
+     case classid of
       Cleric   : s:='Garghamangan';
       Magician : s:='Sekaramata';
       Sage     : s:='Ishusabbhes';
      end;
     end;
   5:begin
-     case class of
+     case classid of
       Cleric   : s:='Meshushattagut';
       Magician : s:='Viloshmazza';
       Sage     : s:='Sheshnaxe';
      end;
     end;
   6:begin
-     case class of
+     case classid of
       Cleric   : s:='Kazarbah';
       Magician : s:='Zimmokoth';
       Sage     : s:='Xoxxammeuh';
      end;
     end;
   7:begin
-     case class of
+     case classid of
       Cleric   : s:='Xamientivah';
       Magician : s:='Urpashke';
       Sage     : s:='Reprusu';
      end;
     end;
   8:begin
-     case class of
+     case classid of
       Cleric   : s:='Bokajinnah';
       Magician : s:='Egribegah';
       Sage     : s:='Setuminahx';
      end;
     end;
   9:begin
-     case class of
+     case classid of
       Cleric   : s:='Tenibma';
       Magician : s:='Ynoskattarb';
       Sage     : s:='Algesmoxhu';
      end;
     end;
  10:begin
-     case class of
+     case classid of
       Cleric   : s:='Sondocesah';
       Magician : s:='Aivannaxievh';
       Sage     : s:='Noitarudamin';
      end;
     end;
  11:begin
-     case class of
+     case classid of
       Cleric   : s:='Swiillixtavh';
       Magician : s:='Gnisuremvenodh';
       Sage     : s:='Attigribinnizsch';
      end;
     end;
  12:begin
-     case class of
+     case classid of
       Cleric   : s:='Umbarakahstahx';
       Magician : s:='Mattravidduzzievh';
       Sage     : s:='Edujnomed';
@@ -562,7 +562,7 @@ begin
 
 end; {SPELL_UTTER **** END ****}
 
-Procedure Spell_Description(class:classes; spell:integer);
+Procedure Spell_Description(classid:classes; spell:integer);
 const m = '  ';
       m1= ' ';
       wh= '*multi target*';
@@ -582,15 +582,15 @@ begin
 
  case spell of
   1:begin {Level I Spells}
-     case class of
+     case classid of
       Cleric   :begin {Cure Light}
-                 d(c,m1+spell_name(class,spell));
+                 d(c,m1+spell_name(classid,spell));
                  d(t,m+'This spell is good for small wounds only.');
                  d(t,m+'Effect : caster regains 4-7 hps.');
                  d(t,m+'Duration : 1 turn.');
                 end;
       Magician :begin {Magic Missile}
-                 d(c,m1+spell_name(class,spell));
+                 d(c,m1+spell_name(classid,spell));
                  d(t,m+'This spell sends a steel arrow towards its target.');
                  d(t,m+'Because of the strong magic involved, few armor can');
                  d(t,m+'resist it.');
@@ -598,7 +598,7 @@ begin
                  d(t,m+'Duration : 1 turn.');
                 end;
       Sage     :begin {Fog of War}
-                 d(c,m1+spell_name(class,spell));
+                 d(c,m1+spell_name(classid,spell));
                  d(t,m+'When casted, a bank of mist lowers over the battle.');
                  d(t,m+'You, the caster, is the only one able to see clear');
                  d(t,m+'through it.');
@@ -608,9 +608,9 @@ begin
      end;
     end;
   2:begin {Level II Spells}
-     case class of
+     case classid of
       Cleric   :begin {Armor}
-                 d(c,m1+spell_name(class,spell));
+                 d(c,m1+spell_name(classid,spell));
                  d(t,m+'An invisible Armor is placed on the caster.');
                  d(t,m+'The armor is resistance to magic and repulses');
                  d(t,m+'a portion of the attack.');
@@ -618,7 +618,7 @@ begin
                  d(t,m+'Duration : Whole fight.');
                 end;
       Magician :begin {Shield}
-                 d(c,m1+spell_name(class,spell));
+                 d(c,m1+spell_name(classid,spell));
                  d(t,m+'The Shield spell is a first class choice for a Magician');
                  d(t,m+'fighting a close battle. An invisible shield appears');
                  d(t,m+'before the caster, blocking a portion of any attack.');
@@ -626,7 +626,7 @@ begin
                  d(t,m+'Duration : Whole fight.');
                 end;
       Sage     :begin {Poison}
-                 d(c,m1+spell_name(class,spell));
+                 d(c,m1+spell_name(classid,spell));
                  d(t,m+'Inserts poison into the opponents veins.');
                  d(t,m+'The poison is equivalent to the gnolls natural skill.');
                  d(t,m+'Damage : enemys lvl + 1');
@@ -635,9 +635,9 @@ begin
      end;
     end;
   3:begin {Level III Spells}
-     case class of
+     case classid of
       Cleric   :begin {Baptize Monster}
-                 d(c,m1+spell_name(class,spell));
+                 d(c,m1+spell_name(classid,spell));
                  d(t,m+'Works best on evil monsters, but other players');
                  d(t,m+'can be caught by this spell to. The baptizing');
                  d(t,m+'spell is a mind-controlling process, where the');
@@ -646,14 +646,14 @@ begin
                  d(t,m+'Duration : random.');
                 end;
       Magician :begin {Sleep}
-                 d(c,m1+spell_name(class,spell));
+                 d(c,m1+spell_name(classid,spell));
                  d(t,m+'The body goes to sleep, but the mind does not.');
                  d(t,m+'Effective against any type of monster.');
                  d(t,m+'Damage : enemy freezes');
                  d(t,m+'Duration : random.');
                 end;
       Sage     :begin {Freeze}
-                 d(c,m1+spell_name(class,spell));
+                 d(c,m1+spell_name(classid,spell));
                  d(t,m+'The Freeze spell turns the opponent into an');
                  d(t,m+'iced-block, preventing any action from his part');
                  d(t,m+'for one turn.');
@@ -663,9 +663,9 @@ begin
      end;
     end;
   4:begin {Level IV Spells}
-     case class of
+     case classid of
       Cleric   :begin {Cure Critical}
-                 d(c,m1+spell_name(class,spell));
+                 d(c,m1+spell_name(classid,spell));
                  d(t,m+'Heals medium wounds inflicted to its caster.');
                  d(t,m+'Since the spell derives from God, the caster');
                  d(t,m+'also receives a blessing. Thus relieving his');
@@ -674,7 +674,7 @@ begin
                  d(t,m+'Duration : 1 turn.');
                 end;
       Magician :begin {Web}
-                 d(c,m1+spell_name(class,spell));
+                 d(c,m1+spell_name(classid,spell));
                  d(t,m+'This spell causes a magic web to lower over');
                  d(t,m+'its target, making it impossible for it to');
                  d(t,m+'move. Originally being a spell developed by');
@@ -685,7 +685,7 @@ begin
                  d(t,m+'Duration : 1 turn.');
                 end;
       Sage     :begin {Duplicate}
-                 d(c,m1+spell_name(class,spell));
+                 d(c,m1+spell_name(classid,spell));
                  d(t,m+'A very powerful spell, which causes a hologram');
                  d(t,m+'of yourself to arrive. The hologram attacks with');
                  d(t,m+'the same strength as yourself. Thus making this');
@@ -697,9 +697,9 @@ begin
      end;
     end;
   5:begin {Level V Spells}
-     case class of
+     case classid of
       Cleric   :begin {Disease}
-                 d(c,m1+spell_name(class,spell));
+                 d(c,m1+spell_name(classid,spell));
                  d(t,m+'Inflicts a random disease on the target.');
                  d(t,m+'This spell provides a nice way of slowly');
                  d(t,m+'draining an enemys power. Depending on the');
@@ -709,7 +709,7 @@ begin
                  d(t,m+'Duration : 1 turn.');
                 end;
       Magician :begin {Power Hat}
-                 d(c,m1+spell_name(class,spell));
+                 d(c,m1+spell_name(classid,spell));
                  d(t,m+'One of few spells possessed by the magicians which');
                  d(t,m+'regenerates hitpoints. This one does it well');
                  d(t,m+'though, causing not only a quick refill of power,');
@@ -718,7 +718,7 @@ begin
                  d(t,m+'Duration : 1 turn (+ 10-13 protection every turn).');
                 end;
       Sage     :begin {Roast}
-                 d(c,m1+spell_name(class,spell));
+                 d(c,m1+spell_name(classid,spell));
                  d(t,m+'Sends a bolt of fire towards the target.');
                  d(t,m+'Regardless of armor, this stuff penetrates');
                  d(t,m+'everything until it comes down to the bare skin.');
@@ -730,9 +730,9 @@ begin
      end;
     end;
   6:begin {Level VI Spells}
-     case class of
+     case classid of
       Cleric   :begin {Holy Explosion}
-                 d(c,m1+spell_name(class,spell));
+                 d(c,m1+spell_name(classid,spell));
                  d(t,m+'A ball of holy energy which will burst into a');
                  d(t,m+'barrage of darts, causing damage and panic');
                  d(t,m+'among your foes.');
@@ -741,7 +741,7 @@ begin
                  d(whc,m+wh);
                 end;
       Magician :begin {Fireball}
-                 d(c,m1+spell_name(class,spell));
+                 d(c,m1+spell_name(classid,spell));
                  d(t,m+'From the Nature of Fire this spell was among the');
                  d(t,m+'first to be sought out and improved.');
                  d(t,m+'The target is swallowed up by this ball of fire.');
@@ -750,7 +750,7 @@ begin
                  d(t,m+'Duration : 1 turn.');
                 end;
       Sage     :begin {Hit Self}
-                 d(c,m1+spell_name(class,spell));
+                 d(c,m1+spell_name(classid,spell));
                  d(t,m+'Mind Bogy spell that goes straight to the targets');
                  d(t,m+'brain (if there is none) and shortcircuits some');
                  d(t,m+'vital nerves. For a brief moment the target loses');
@@ -761,9 +761,9 @@ begin
      end;
     end;
   7:begin {Level VII Spells}
-     case class of
+     case classid of
       Cleric   :begin {Invisibility}
-                 d(c,m1+spell_name(class,spell));
+                 d(c,m1+spell_name(classid,spell));
                  d(t,m+'Makes the caster almost invisible to his foes,');
                  d(t,m+'thus making him harder to hit.');
                  d(t,m+'The only problem is that his team members');
@@ -773,7 +773,7 @@ begin
                  d(t,m+'Duration : Whole fight.');
                 end;
       Magician :begin {Fear}
-                 d(c,m1+spell_name(class,spell));
+                 d(c,m1+spell_name(classid,spell));
                  d(t,m+'Incredible powerful spell (when it works).');
                  d(t,m+'It fills your enemy with such a great fear');
                  d(t,m+'that he freezes and does nothing for the rest');
@@ -782,7 +782,7 @@ begin
                  d(t,m+'Duration : Whole fight.');
                 end;
       Sage     :begin {Escape}
-                 d(c,m1+spell_name(class,spell));
+                 d(c,m1+spell_name(classid,spell));
                  d(t,m+'This spell makes your opponent want to run');
                  d(t,m+'away instead of fighting. However, the genius who');
                  d(t,m+'developed the spell saw to it that it was just');
@@ -795,9 +795,9 @@ begin
      end;
     end;
   8:begin {Level VIII Spells}
-     case class of
+     case classid of
       Cleric   :begin {Angel}
-                 d(c,m1+spell_name(class,spell));
+                 d(c,m1+spell_name(classid,spell));
                  d(t,m+'This spell calls out for one the Lords angels,');
                  d(t,m+'which will come to your rescue. The angel');
                  d(t,m+'that will arrive is not of top class, but');
@@ -808,7 +808,7 @@ begin
                  d(t,m+'Duration : Whole fight.');
                 end;
       Magician :begin {Lightning Bolt}
-                 d(c,m1+spell_name(class,spell));
+                 d(c,m1+spell_name(classid,spell));
                  d(t,m+'This spell was stolen from the Clerics guild');
                  d(t,m+'several centuries ago. Still, it makes a great');
                  d(t,m+'impact on any foe, since its not preceded by');
@@ -819,7 +819,7 @@ begin
                  d(t,m+'Duration : 1 turn.');
                 end;
       Sage     :begin {GIANT}
-                 d(c,m1+spell_name(class,spell));
+                 d(c,m1+spell_name(classid,spell));
                  d(t,m+'Metamorphosis spell. Turns its caster into a');
                  d(t,m+'Giant, armed with a club. Well, this is what');
                  d(t,m+'your opponent(s) will see. Behind the magic');
@@ -833,9 +833,9 @@ begin
      end;
     end;
   9:begin {Level IX Spells}
-     case class of
+     case classid of
       Cleric   :begin {Call Lightning}
-                 d(c,m1+spell_name(class,spell));
+                 d(c,m1+spell_name(classid,spell));
                  d(t,m+'Sends a lightning bolt right through the target.');
                  d(t,m+'Much greater effect than the similar spell possessed');
                  d(t,m+'by the magician guild.');
@@ -843,7 +843,7 @@ begin
                  d(t,m+'Duration : 1 turn.');
                 end;
       Magician :begin {Prismatic Cage}
-                 d(c,m1+spell_name(class,spell));
+                 d(c,m1+spell_name(classid,spell));
                  d(t,m+'Lowers a magic cage over its caster, thus');
                  d(t,m+'increasing his protection. The only drawback');
                  d(t,m+'is that that possible team members might have to');
@@ -853,7 +853,7 @@ begin
                  d(t,m+'Duration : whole fight.');
                 end;
       Sage     :begin {Steal}
-                 d(c,m1+spell_name(class,spell));
+                 d(c,m1+spell_name(classid,spell));
                  d(t,m+'Not being any attack or defence spell, this might');
                  d(t,m+'prove a more lucrative way of cursing your foes.');
                  d(t,m+'Rob them blind!');
@@ -863,16 +863,16 @@ begin
      end;
     end;
  10:begin {Level X Spells}
-     case class of
+     case classid of
       Cleric   :begin {Heal}
-                 d(c,m1+spell_name(class,spell));
+                 d(c,m1+spell_name(classid,spell));
                  d(t,m+'The most powerful healing spell.');
                  d(t,m+'Especially useful when fighthing alone.');
                  d(t,m+'Effect : caster regains 200 hps.');
                  d(t,m+'Duration : 1 turn.');
                 end;
       Magician :begin {Pillar of Fire}
-                 d(c,m1+spell_name(class,spell));
+                 d(c,m1+spell_name(classid,spell));
                  d(t,m+'Magicians love fire. This spell is a good');
                  d(t,m+'example. Makes the target burning from the');
                  d(t,m+'vicious fire, which sticks like glue to the');
@@ -881,7 +881,7 @@ begin
                  d(t,m+'Duration : 1 turn.');
                 end;
       Sage     :begin {Energy Drain}
-                 d(c,m1+spell_name(class,spell));
+                 d(c,m1+spell_name(classid,spell));
                  d(t,m+'As like many of the sages spells this to is a');
                  d(t,m+'mind boggling one. Using the classical perpetual');
                  d(t,m+'damnation technique, the victim is forced');
@@ -896,9 +896,9 @@ begin
      end;
     end;
  11:begin {Level XI Spells}
-     case class of
+     case classid of
       Cleric   :begin {Divination}
-                 d(c,m1+spell_name(class,spell));
+                 d(c,m1+spell_name(classid,spell));
                  d(t,m+'Divine intervention, here we go again...');
                  d(t,m+'Causes its caster to become a mini God, a good');
                  d(t,m+'one. You are forgiven some of your older sins,');
@@ -908,7 +908,7 @@ begin
                  d(t,m+'Duration : random.');
                 end;
       Magician :begin {Power word KILL}
-                 d(c,m1+spell_name(class,spell));
+                 d(c,m1+spell_name(classid,spell));
                  d(t,m+'Drives the spirit from the flesh and attempts to');
                  d(t,m+'shut down the body and the mind.');
                  d(t,m+'Works extremely well when dealing with animlas.');
@@ -916,7 +916,7 @@ begin
                  d(t,m+'Duration : 1 turn.');
                 end;
       Sage     :begin {Summon Demon}
-                 d(c,m1+spell_name(class,spell));
+                 d(c,m1+spell_name(classid,spell));
                  d(t,m+'Calls upon a Demon from the higher regions of hell.');
                  d(t,m+'Usually, what you will get is a normal Servant-Demon.');
                  d(t,m+'Nothing fancy, but they are often keen to get the job');
@@ -927,9 +927,9 @@ begin
      end;
     end;
  12:begin {Level XII Spells}
-     case class of
+     case classid of
       Cleric   :begin {Gods Finger}
-                 d(c,m1+spell_name(class,spell));
+                 d(c,m1+spell_name(classid,spell));
                  d(t,m+'If not actually Gods real finger, this spell');
                  d(t,m+'sends an energy blast right through the targets');
                  d(t,m+'body. It''s not a clean way of dealing with your');
@@ -942,7 +942,7 @@ begin
                  d(t,m+'Duration : 1 turn.');
                 end;
       Magician :begin {Summon Demon}
-                 d(c,m1+spell_name(class,spell));
+                 d(c,m1+spell_name(classid,spell));
                  d(t,m+'Calls upon a Demon from the mid-sections of hell.');
                  d(t,m+'The demons stay all battle long, and are great');
                  d(t,m+'with their claws. A better companion is hard to');
@@ -951,7 +951,7 @@ begin
                  d(t,m+'Duration : whole fight.');
                 end;
       Sage :    begin {Death Kiss}
-                 d(c,m1+spell_name(class,spell));
+                 d(c,m1+spell_name(classid,spell));
                  d(t,m+'The Force of Death is strong in this case.');
                  d(t,m+'This spell will summon a undead spirit which');
                  d(t,m+'will enter the targets body and try to bring');
@@ -994,7 +994,7 @@ begin {displays a list of available spells}
 
  for i:=1 to global_maxspells do begin
 
-  if happy.mana>=spell_cost(happy.class,i) then afford_it:=true
+  if happy.mana>=spell_cost(happy.classid,i) then afford_it:=true
                                            else afford_it:=false;
 
   {spell}
@@ -1030,7 +1030,7 @@ begin {displays a list of available spells}
     justval:=18;
    end;
 
-   sd(c,ljust(spell_name(happy.class,i),justval));
+   sd(c,ljust(spell_name(happy.classid,i),justval));
 
    {level needed or LEARNED}
    if happy.spell[i,1] then begin
@@ -1041,7 +1041,7 @@ begin {displays a list of available spells}
      sd(shadcol,ljust('(xx)',justval));
     end
     else begin
-     j:=level_needed(happy.class,i);
+     j:=level_needed(happy.classid,i);
      x:=How_Many_XP_Left(j,happy.exp);
 
      s:='('+commastr(x)+' xp left';
@@ -1055,8 +1055,8 @@ begin {displays a list of available spells}
 
    {MANA cost}
    if happy.spell[i,1] then begin
-    sd(15,commastr(spell_cost(happy.class,i))+' mana');
-    if spell_multi(happy.class,i)=true then begin
+    sd(15,commastr(spell_cost(happy.classid,i))+' mana');
+    if spell_multi(happy.classid,i)=true then begin
      sd(11,'  *multi target*');
     end;
    end
@@ -1095,7 +1095,7 @@ begin
 
  repeat
   sd(config.textcolor,'(');
-  sd(10,classnames[happy.class]);
+  sd(10,classnames[happy.classid]);
   sd(config.textcolor,' Spells, A..L, ?=list, Enter) :');
   ch:=upcase(getchar);
 
@@ -1116,7 +1116,7 @@ begin
               'K': i:=11;
               'L': i:=12;
              end;
-             spell_description(happy.class,i);
+             spell_description(happy.classid,i);
              crlf;
             end;
    '?':begin
@@ -1132,7 +1132,7 @@ end; {SPELL_LIST .end.}
 
 {*** Monster Spell relating functions ***}
 
-Function Spell_Name_Monster;
+Function Spell_Name_Monster (nr:integer) : s70;
 var s : s30;
 begin
 
@@ -1150,7 +1150,7 @@ begin
 
 end; {spell_name_monster *end*}
 
-Function Spell_Cost_Monster;
+Function Spell_Cost_Monster (nr:integer) : integer;
 var x : integer;
 begin
 
@@ -1169,7 +1169,7 @@ begin
 
 end; {spell_cost_monster .end.}
 
-Function Spell_Multi_Monster;
+Function Spell_Multi_Monster(nr:integer) : boolean;
 var x : boolean;
 begin
 

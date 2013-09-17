@@ -1015,7 +1015,7 @@ begin {called from npcmaint.pas. player marries the first girl/boy he can find}
            uyellow+'Happy Child!'+config.textcol1,
            'You receive '+uwhite+commastr(x)+config.textcol1+' experience points for making your',
            sex7[child.sex]+' '+ukidc+child.name+config.textcol1+' extremely happy by marrying',
-           uplc+marry.name2+config.textcol1+' the '+classnames[marry.class]+'.',
+           uplc+marry.name2+config.textcol1+' the '+classnames[marry.classid]+'.',
            '',
            '',
            '',

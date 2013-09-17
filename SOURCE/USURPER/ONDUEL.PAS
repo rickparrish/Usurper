@@ -418,12 +418,12 @@ begin
      menu2('(S)tatus  ');
      menu2('(B)eg for Mercy  ');
 
-     if player.class in [Cleric,Magician,Sage] then begin
+     if player.classid in [Cleric,Magician,Sage] then begin
       menu2('(C)ast Spell  ');
      end;
 
-     if player.class=Paladin  then menu2('(1) Soul Strike  ');
-     if player.class=Assassin then menu2('(1) Backstab  ');
+     if player.classid=Paladin  then menu2('(1) Soul Strike  ');
+     if player.classid=Assassin then menu2('(1) Backstab  ');
      crlf;
      sd(config.textcolor,':');
     end;
@@ -528,7 +528,7 @@ begin
          end;
      'C':begin {cast spell}
           ch:=' ';
-          if player.class in [Cleric,Magician,Sage] then begin
+          if player.classid in [Cleric,Magician,Sage] then begin
            cast_spell(false,1,2,player,enemy,imp,dummy);
            if player.casted=true then begin
             user_save(enemy);
@@ -541,7 +541,7 @@ begin
          end;
      '1':begin  {special attack: backstab/soul strike}
           ch:=' ';
-          if player.class=Paladin then begin
+          if player.classid=Paladin then begin
            if player.hps<2 then begin
             crlf;
             d(12,'Sorry, too few hitpoints left!');
@@ -550,7 +550,7 @@ begin
             ch:='1';
            end;
           end
-          else if player.class=Assassin then begin
+          else if player.classid=Assassin then begin
            if config.classic then begin
             if player.weapon=0 then begin
              crlf;
@@ -589,7 +589,7 @@ begin
          {}
         end;
     '1':begin
-         case player.class of
+         case player.classid of
           Assassin:begin
                     nr1:=0;
                     nr2:=0;
@@ -681,7 +681,7 @@ begin
          d(12,' quaffed some healing potions.');
         end;
     '1':begin
-         case enemy.class of
+         case enemy.classid of
           Assassin:begin
                     if nr1>0 then begin
                      sd(global_plycol,oppo);
@@ -746,7 +746,7 @@ begin
           'K': i:=11;
           'L': i:=12;
          end;
-         s:=spell_utter(enemy.class,i);
+         s:=spell_utter(enemy.classid,i);
          d(global_talkcol,s);
          d(5,outmessage[1]);
          d(5,outmessage[2]);

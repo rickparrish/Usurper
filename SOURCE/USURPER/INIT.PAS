@@ -711,7 +711,7 @@ type {online character/record definition}
   shadow   : boolean; {if true then this character is computer controlled}
   dead     : boolean; {is this being used?? check this one out jakob! i don't think its being used}
   race     : races; {race}
-  class    : classes; {class}
+  classid  : classes; {class}
   sex      : byte; {sex, 1=male 2=female}
   initiator: string[31]; {who created this record, could be a "GHOST"}
   doing    : string[40]; {status of player, what is he doing}
@@ -818,7 +818,7 @@ type {Player/Npc Record}
    5. what to say when you spare opponents life
    6. what to say when you don't spare opponents life}
   autoheal : boolean; {autoheal in battle?}
-  class    : classes; {class}
+  classid  : classes; {class}
   loyalty  : SmallInt; {loayalty% (0-100)}
   haunt    : SmallInt; {how many demons are set to haunt player}
   master   : char;    {who is the level master player uses}

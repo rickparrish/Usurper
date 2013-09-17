@@ -527,7 +527,7 @@ begin
            '',
            ulmag+s+config.textcol1,
            cool_string(length(s),'=','-',2,10),
-           'Your '+sex5[player.sex]+' '+uplc+player.name2+config.textcol1+' the '+classnames[player.class]
+           'Your '+sex5[player.sex]+' '+uplc+player.name2+config.textcol1+' the '+classnames[player.classid]
                   +' arranged a party for some children.',
            mail_string[1]^,
            mail_string[2]^,
@@ -586,7 +586,7 @@ begin
              cool_string(length(s),'=','-',2,10),
              'Your '+sex7[child_array[i]^.sex]+ukidc+' '+child_array[i]^.name+config.textcol1+' was invited to a Childrens'
                   +' Party held',
-             'by '+uplc+player.name2+config.textcol1+' the '+classnames[player.class]+'.',
+             'by '+uplc+player.name2+config.textcol1+' the '+classnames[player.classid]+'.',
              child_fate_array[i]^,
              xp_string,
              '',

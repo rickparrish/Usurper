@@ -143,19 +143,19 @@ begin
     menu2('(B)eg for Mercy  ');
     menu2('(U)se Item  ');
 
-    if player.class in [Cleric,Magician,Sage] then begin
+    if player.classid in [Cleric,Magician,Sage] then begin
      menu2('(C)ast Spell  ');
     end;
 
-    if player.class=Paladin then menu2('(1) Soul Strike  ');
-    if player.class=Assassin then menu2('(1) Backstab  ');
+    if player.classid=Paladin then menu2('(1) Soul Strike  ');
+    if player.classid=Assassin then menu2('(1) Backstab  ');
     crlf;
     sd(6,':');
    end
    else begin
     sd(config.textcolor,'Fight (A,H,Q,F,S,B,U,*');
-    if player.class in [Cleric,Magician,Sage] then sd(config.textcolor,',C');
-    if player.class in [Paladin,Assassin] then sd(config.textcolor,',1');
+    if player.classid in [Cleric,Magician,Sage] then sd(config.textcolor,',C');
+    if player.classid in [Paladin,Assassin] then sd(config.textcolor,',1');
     sd(config.textcolor,',?) :');
    end;
 
@@ -170,7 +170,7 @@ begin
    end
    else if cho='C' then begin
     cho:=' ';
-    if player.class in [Cleric,Magician,Sage] then begin
+    if player.classid in [Cleric,Magician,Sage] then begin
      player.casted:=false;
 
      cast_spell(fastgame,1,2,player,pl2,false,dummy);
@@ -186,7 +186,7 @@ begin
 
    if cho='1' then begin
     cho:=' ';
-    if (player.class=Assassin) or (player.class=Paladin) then begin
+    if (player.classid=Assassin) or (player.classid=Paladin) then begin
      cho:='1';
     end;
    end;
@@ -446,7 +446,7 @@ begin
 
   stab1:=0;
   {*Attacking player uses Backstab*}
-  if (cho='1') and (player.class=Assassin) then begin
+  if (cho='1') and (player.classid=Assassin) then begin
    backstab:=false;
    if config.classic then begin
     if player.weapon=0 then begin
@@ -486,7 +486,7 @@ begin
   end;
 
   {*Attacking player uses soul strike*}
-  if (cho='1') and (player.class=Paladin) then begin
+  if (cho='1') and (player.classid=Paladin) then begin
    if player.hps<2 then begin
     d(12,'Too few hitpoints left!')
    end

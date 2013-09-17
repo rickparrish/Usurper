@@ -315,7 +315,7 @@ begin
    writeln_to_text(txt,s);
 
    {#2, writing class,race,}
-   s:='           ('+classnames[player.class]+', '+race_display(2,player.race,0)+')';
+   s:='           ('+classnames[player.classid]+', '+race_display(2,player.race,0)+')';
    writeln_to_text(txt,s);
 
    {#3, writing kids}

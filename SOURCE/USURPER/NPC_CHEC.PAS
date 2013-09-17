@@ -306,7 +306,7 @@ begin
       end;
  end; {case .end.}
 
- if class_restricted(gubbe.class,o2,0)=true then begin
+ if class_restricted(gubbe.classid,o2,0)=true then begin
   {item is class restricted}
   go:=false;
  end
@@ -323,7 +323,7 @@ begin
   end;
  end;
 
- if (gubbe.class in [Magician,Cleric,Sage]) and (o2.mana<0) then begin
+ if (gubbe.classid in [Magician,Cleric,Sage]) and (o2.mana<0) then begin
   go:=false;
  end;
 
@@ -359,7 +359,7 @@ begin
   go:=false;
  end;
 
- if (gubbe.class in [Magician,Cleric,Sage]) and (o2.mana<0) then begin
+ if (gubbe.classid in [Magician,Cleric,Sage]) and (o2.mana<0) then begin
   go:=false;
  end;
 
@@ -367,7 +367,7 @@ begin
   go:=false;
  end;
 
- if class_restricted(gubbe.class,o2,0)=true then begin
+ if class_restricted(gubbe.classid,o2,0)=true then begin
   {item is class restricted}
   go:=false;
  end;

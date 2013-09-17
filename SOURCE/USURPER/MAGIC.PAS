@@ -485,7 +485,7 @@ begin
            d(12,'This item is too heavy for you to use!');
           end;
 
-          if class_restricted(player.class,objekt^,0) then begin
+          if class_restricted(player.classid,objekt^,0) then begin
            d(12,'This item is class restricted and cannot be used by you!');
           end;
 
@@ -583,7 +583,7 @@ begin
            inc(cc);
 
            restrict:=false;
-           if class_restricted(player.class,objekt^,0)=true then begin
+           if class_restricted(player.classid,objekt^,0)=true then begin
             restrict:=true;
            end;
 
@@ -616,7 +616,7 @@ begin
            sd(col,s);
 
            {restrictions}
-           if class_restricted(player.class,objekt^,0)=true then begin
+           if class_restricted(player.classid,objekt^,0)=true then begin
             d(7,' *Class Restricted*');
            end
            else begin
@@ -820,7 +820,7 @@ begin
 
              first:=true;
              for i:=1 to global_maxclasses do begin
-              if class_restricted(player.class,objekt^,i) then begin
+              if class_restricted(player.classid,objekt^,i) then begin
                if first then begin
                 d(12,'This item is class restricted!');
                 first:=false;

@@ -33,7 +33,7 @@ type BarrelRec = Record {Barrel Lifter top list, record structure}
       id     : s15; {player id}
       level  : longint; {player level}
       race   : races;  {player race}
-      class  : classes; {player class}
+      classid: classes; {player class}
       deleted: boolean; {has record been deleted}
       datee  : udate; {date when record was set}
       barrels: word; {how many barrels did player lift}
@@ -75,7 +75,7 @@ begin {change in file_io.pas if you decide to change struct here}
   id     :='';
   level  :=1;
   race   :=human;
-  class  :=Warrior;
+  classid:=Warrior;
   deleted:=true;        {has record been deleted?}
   datee  :=todays_date; {date}
   barrels:=0;           {how many barrels did player lift}
@@ -167,7 +167,7 @@ begin
   barrel_star[i].id     :=id;
   barrel_star[i].level  :=level;
   barrel_star[i].race   :=ply_race;
-  barrel_star[i].class  :=ply_class;
+  barrel_star[i].classid:=ply_class;
   barrel_star[i].deleted:=false; {has record been deleted}
   barrel_star[i].datee  :=todays_date; {date}
   barrel_star[i].barrels:=lifted; {how many barrels}
@@ -1797,7 +1797,7 @@ begin
 
  {did player make it to the hall of fame}
  x:=barrel_fame_rating(player.name2,player.id,player.level,player.race,
-                       player.class,brls);
+                       player.classid,brls);
 
  if x>0 then begin
   d(15,'Congratulations!!');

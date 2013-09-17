@@ -257,7 +257,7 @@ begin
        if config.print_kingpolls=true then begin
          newsy(true,
          'The Royal Family is supported',
-         ' '+uplc+player.name2+config.textcol1+' the '+classnames[player.class]+' supports '+kingstring(king.sexy)+' '+ukingc
+         ' '+uplc+player.name2+config.textcol1+' the '+classnames[player.classid]+' supports '+kingstring(king.sexy)+' '+ukingc
             +king.name+config.textcol1+'.',
          '',
          '',
@@ -279,7 +279,7 @@ begin
        if config.print_kingpolls=true then begin
          newsy(true,
          'The Royal Family is loved',
-         ' '+uplc+player.name2+config.textcol1+' the '+classnames[player.class]+' pleads loyalty to '+kingstring(king.sexy)+' '
+         ' '+uplc+player.name2+config.textcol1+' the '+classnames[player.classid]+' pleads loyalty to '+kingstring(king.sexy)+' '
             +ukingc+king.name+config.textcol1+'.',
          '',
          '',
@@ -310,7 +310,7 @@ begin
        if config.print_kingpolls=true then begin
          newsy(true,
          'The Royal Family is disliked!',
-         ' '+uplc+player.name2+config.textcol1+' the '+classnames[player.class]+' would like to see another '
+         ' '+uplc+player.name2+config.textcol1+' the '+classnames[player.classid]+' would like to see another '
             +kingstring(king.sexy)+' in office!',
          '',
          '',
@@ -343,7 +343,7 @@ begin
           0:begin
              newsy(true,
              'Royal Family challenged!',
-             ' '+uplc+player.name2+config.textcol1+' the '+classnames[player.class]+' hates '+kingstring(king.sexy)+ukingc+' '
+             ' '+uplc+player.name2+config.textcol1+' the '+classnames[player.classid]+' hates '+kingstring(king.sexy)+ukingc+' '
                 +king.name+config.textcol1+'!',
              '',
              '',
@@ -357,7 +357,7 @@ begin
           1:begin
              newsy(true,
              'Royal Family challenged!',
-             ' '+uplc+player.name2+config.textcol1+' the '+classnames[player.class]+' spits on the Royal Family!',
+             ' '+uplc+player.name2+config.textcol1+' the '+classnames[player.classid]+' spits on the Royal Family!',
              '',
              '',
              '',
@@ -1341,7 +1341,7 @@ begin
 
   sd(global_talkcol,'You are now a level ');
   d(15,commastr(happy.level+right));
-  d(global_talkcol,classnames[happy.class]+'!');
+  d(global_talkcol,classnames[happy.classid]+'!');
 
   if right=1 then begin
    sd(config.textcolor,'You raised ');
@@ -1370,7 +1370,7 @@ begin
  {** increase of abilities depending on class **}
  inc(happy.level,right);
  cp:=0;
- case happy.class of
+ case happy.classid of
   Alchemist
   :begin
     i:=2;
@@ -1758,15 +1758,15 @@ begin
  end;
 
  {spell training?}
- if happy.class in [Cleric,Magician,Sage] then begin
+ if happy.classid in [Cleric,Magician,Sage] then begin
   q:=0;
   for nec:=1 to global_maxspells do begin
-   if happy.level>=level_needed(happy.class,nec) then begin
+   if happy.level>=level_needed(happy.classid,nec) then begin
     if happy.spell[nec,1]=false then begin
      happy.spell[nec,1]:=true;
      if realtime then begin
       sd(14,'You have learned a new spell - ');
-      d(11,spell_name(happy.class,nec));
+      d(11,spell_name(happy.classid,nec));
      end;
     end;
    end;
@@ -1881,19 +1881,19 @@ begin
        end;
      4:begin {alternatives..}
         if right=1 then begin
-         s:=' '+uplc+happy.name2+config.textcol1+' the '+classnames[happy.class]+' went up a level!';
+         s:=' '+uplc+happy.name2+config.textcol1+' the '+classnames[happy.classid]+' went up a level!';
         end
         else begin
-         s:=' '+uplc+happy.name2+config.textcol1+' the '+classnames[happy.class]+' went up '+uwhite+commastr(right)
+         s:=' '+uplc+happy.name2+config.textcol1+' the '+classnames[happy.classid]+' went up '+uwhite+commastr(right)
             +config.textcol1+' levels!';
         end;
        end;
      5:begin
         if right=1 then begin
-         s:=' '+uplc+happy.name2+config.textcol1+' the '+classnames[happy.class]+' raised a level!';
+         s:=' '+uplc+happy.name2+config.textcol1+' the '+classnames[happy.classid]+' raised a level!';
         end
         else begin
-         s:=' '+uplc+happy.name2+config.textcol1+' the '+classnames[happy.class]+' raised '+uwhite+commastr(right)
+         s:=' '+uplc+happy.name2+config.textcol1+' the '+classnames[happy.classid]+' raised '+uwhite+commastr(right)
               +config.textcol1+' levels!';
         end;
        end;
@@ -1942,19 +1942,19 @@ begin
        end;
      4:begin {alternatives..}
         if right=1 then begin
-         s:=' '+uplc+happy.name2+config.textcol1+' the '+classnames[happy.class]+' went up a level!';
+         s:=' '+uplc+happy.name2+config.textcol1+' the '+classnames[happy.classid]+' went up a level!';
         end
         else begin
-         s:=' '+uplc+happy.name2+config.textcol1+' the '+classnames[happy.class]+' went up '+uwhite+commastr(right)
+         s:=' '+uplc+happy.name2+config.textcol1+' the '+classnames[happy.classid]+' went up '+uwhite+commastr(right)
             +config.textcol1+' levels!';
         end;
        end;
      5:begin
         if right=1 then begin
-         s:=' '+uplc+happy.name2+config.textcol1+' the '+classnames[happy.class]+' raised a level!';
+         s:=' '+uplc+happy.name2+config.textcol1+' the '+classnames[happy.classid]+' raised a level!';
         end
         else begin
-         s:=' '+uplc+happy.name2+config.textcol1+' the '+classnames[happy.class]+' raised '+uwhite+commastr(right)
+         s:=' '+uplc+happy.name2+config.textcol1+' the '+classnames[happy.classid]+' raised '+uwhite+commastr(right)
               +config.textcol1+' levels!';
         end;
        end;
@@ -2875,7 +2875,7 @@ begin
 
 end; {bad_news *end*}
 
-Function The_Bad; {The not so gentle descriptions...}
+Function The_Bad : s30; {returns random "the ill-mannered ", "the ugly "}
 var s : s30;
 begin
 
@@ -2909,7 +2909,7 @@ begin
 end; {the_bad *end*}
 
 
-Function Get_NpcInnComment; {get random Npc comment, chatting at the Inn}
+Function Get_NpcInnComment : s90; {get random Npc comment, chatting at the Inn}
 const maxcomment = 200;
       npcchatfile= global_datadir+'NPCCHAT.DAT';
       {npc chat comments, when chatting at the Inn}

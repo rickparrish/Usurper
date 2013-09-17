@@ -640,12 +640,12 @@ begin
  }
  killed:=false;
 
- if (InAmount.amount[10]>0) and (drinker.class=Assassin) then killed:=true;
+ if (InAmount.amount[10]>0) and (drinker.classid=Assassin) then killed:=true;
 
  {Elf Water}
  if InAmount.amount[11]>0 then begin
-  if (drinker.class=Cleric) or
-     (drinker.class=Jester) or
+  if (drinker.classid=Cleric) or
+     (drinker.classid=Jester) or
      (drinker.race=Troll) then killed:=true;
  end;
 
@@ -1559,7 +1559,7 @@ begin {*MAIN PROCEDURE*}
              (pl0^.hps>0) and
              (pl0^.deleted=false) then begin
 
-           if confirm(uplc+pl0^.name2+config.textcol1+', the '+classnames[pl0^.class],'N')=true then begin
+           if confirm(uplc+pl0^.name2+config.textcol1+', the '+classnames[pl0^.classid],'N')=true then begin
             found:=true;
             break;
            end
@@ -2007,7 +2007,7 @@ begin {*MAIN PROCEDURE*}
                      else begin
                       xx:=player.level*100;
                      end;
-                     if (random(2)=0) and (player.class<>Assassin) then begin
+                     if (random(2)=0) and (player.classid<>Assassin) then begin
 
                       if player.dark>player.chiv then begin
                        d(config.textcolor,'Your powers are increasing!');
@@ -2086,7 +2086,7 @@ begin {*MAIN PROCEDURE*}
                      else begin
                       if random(2)=0 then begin
                        d(config.textcolor,'Whooopps! JACKPOT! That drink hit the right spot alright!');
-                       if player.class in [Cleric,Magician,Sage] then begin
+                       if player.classid in [Cleric,Magician,Sage] then begin
                         player.maxmana:=player.maxmana+10;
                        end
                        else begin
@@ -2353,7 +2353,7 @@ begin {*MAIN PROCEDURE*}
                      player.agility:=player.agility+2;
                      player.dex:=player.dex+2;
                      player.wisdom:=player.wisdom+2;
-                     if player.class in [Cleric,Magician,Sage] then begin
+                     if player.classid in [Cleric,Magician,Sage] then begin
                       player.maxmana:=player.maxmana+20;
                      end;
                      d(config.textcolor,'Your experience raised!');

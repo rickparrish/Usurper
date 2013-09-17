@@ -70,22 +70,22 @@ begin
   menu2('(B)eg for Mercy  ');
   menu2('(U)se Item  ');
 
-  if player1.class in [Cleric,Magician,Sage] then begin
+  if player1.classid in [Cleric,Magician,Sage] then begin
    menu2('(C)ast Spell  ');
   end;
 
-  if player1.class=Paladin  then menu2('(1) Soul Strike  ');
-  if player1.class=Assassin then menu2('(1) Backstab  ');
+  if player1.classid=Paladin  then menu2('(1) Soul Strike  ');
+  if player1.classid=Assassin then menu2('(1) Backstab  ');
   crlf;
   sd(config.textcolor,':');
  end
  else begin
   expert_press:=false;
   sd(config.textcolor,'Fight (A,H,Q,F,S,B,U,*');
-  if player1.class in [Cleric,Magician,Sage] then begin
+  if player1.classid in [Cleric,Magician,Sage] then begin
    sd(config.textcolor,',C');
   end;
-  if player1.class in [Paladin,Assassin] then begin
+  if player1.classid in [Paladin,Assassin] then begin
    sd(config.textcolor,',1');
   end;
   sd(config.textcolor,',?) :');
@@ -93,7 +93,9 @@ begin
 
 end; {shared_menu *end*}
 
-Function Player_Computer;
+Function Player_Computer( var player1, player2 : UserRec;
+                          fastgame : boolean; {display actions}
+                          battletype : byte) : boolean;
 const soulstrike:longint=0;
 var
     stab1,stab2 : longint;
@@ -276,7 +278,7 @@ begin
 
 if cho='C' then begin
    cho:=' ';
-   if player1.class in [Cleric,Magician,Sage] then begin
+   if player1.classid in [Cleric,Magician,Sage] then begin
     cast_spell(fastgame,1,2,player1,player2,false,dummy);
 
     if player1.casted=true then begin
@@ -290,12 +292,12 @@ if cho='C' then begin
 
   if cho='1' then begin
    cho:=' ';
-   if (player1.class=Paladin) or (player1.class=Assassin) then begin
+   if (player1.classid=Paladin) or (player1.classid=Assassin) then begin
     cho:='1';
    end;
   end;
 
-  if (cho='1') and (player1.class=Paladin) and (player1.hps<2) then begin
+  if (cho='1') and (player1.classid=Paladin) and (player1.hps<2) then begin
    crlf;
    d(12,'Too few hitpoints left!');
    cho:=' ';
@@ -306,7 +308,7 @@ if cho='C' then begin
  stab1:=0;
  stab2:=0;
  {*Attacking player uses Backstab*}
- if (cho='1') and (player1.class=Assassin) then begin
+ if (cho='1') and (player1.classid=Assassin) then begin
   backstab:=false;
   if config.classic then begin
    if player1.weapon=0 then begin
@@ -379,7 +381,7 @@ if cho='C' then begin
 
    {*should npc use spells?*}
    if (player2.used_item=false) and (player2.casted=false) then begin
-    if player2.class in [Cleric,Magician,Sage] then begin
+    if player2.classid in [Cleric,Magician,Sage] then begin
      cast_spell(fastgame,1,2,player2,player1,false,dummy);
     end;
    end;
@@ -444,7 +446,7 @@ if cho='C' then begin
    end;
  {*should computer controlled player ues Backstab?*}
  if config.classic then begin
-  if (player2.class=Assassin) and (random(3)=0) and (player2.used_item=false) and
+  if (player2.classid=Assassin) and (random(3)=0) and (player2.used_item=false) and
      (player2.casted=false) and (player2.weapon>0) then begin
 
    sd(global_plycol,player2.name2);
@@ -462,7 +464,7 @@ if cho='C' then begin
   end;
  end
  else begin
-  if (player2.class=Assassin) and (random(3)=0) and (player2.used_item=false) and
+  if (player2.classid=Assassin) and (random(3)=0) and (player2.used_item=false) and
      (player2.casted=false) and (player2.rhand+player2.lhand>0) then begin
 
    sd(global_plycol,player2.name2);
@@ -483,7 +485,7 @@ if cho='C' then begin
 
 
    {*should NPC use soul strike?*}
-   if (player2.class=Paladin) and (player2.hps>100) and (random(3)=0) and
+   if (player2.classid=Paladin) and (player2.hps>100) and (random(3)=0) and
       (player2.used_item=false) and (player2.casted=false) then begin
     zz:=player2.hps div 3;
     soulstrike:=zz;

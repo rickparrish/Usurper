@@ -115,7 +115,7 @@ begin
   go:=false;
  end;
 
- if (gubbe.class in [Magician,Cleric,Sage]) and (o2.mana<0) then begin
+ if (gubbe.classid in [Magician,Cleric,Sage]) and (o2.mana<0) then begin
   go:=false;
  end;
 

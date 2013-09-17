@@ -54,7 +54,7 @@ Function Online_Release(const target:s30) : boolean;
 {send messages}
 Procedure Online_Message; {send message to online player}
 Procedure Online_Send_To_Player(const target:s30; desttype:onlinetypes;const message:s100);
-Procedure Online_Send_To_All (const message:s100; const from:s30; const except:s30);
+Procedure Online_Send_To_All (const message:s100; const from:s30; const DontSendTo:s30);
 Procedure Send_to_location(const mess : s100; const from:s30);
 Function Tell_Onliner_Compact(const sender:onlinerec;const receiver:s30; const mess:s70):boolean;
 
@@ -215,7 +215,7 @@ begin {see the related "tell_onliner" routine for details...}
 
 end; {tell_onliner_compact *end*}
 
-Procedure Online_Send_To_All (const message:s100; const from:s30; const except:s30);
+Procedure Online_Send_To_All (const message:s100; const from:s30; const DontSendTo:s30);
 {broadcasts a message to ALL online players except persons "FROM" and "EXCEPT"}
 var
     i,
@@ -237,7 +237,7 @@ begin
    load_onlinefile(fload,person,i);
 
    if (person.name<>from) and
-      (person.name<>except) and
+      (person.name<>DontSendTo) and
       (person.ear=global_ear_all) then begin
 
     for j:=1 to global_maxnod do begin
@@ -817,7 +817,7 @@ begin
         shadow^.race     :=chimp.race;
         if action=SAddFake then shadow^.fake:=true
                            else shadow^.fake:=false;
-        shadow^.class    :=chimp.class;
+        shadow^.classid    :=chimp.classid;
         shadow^.node     :='XXX';
         shadow^.arrived  :=give_me_time;
         case action of
@@ -1094,7 +1094,7 @@ begin
      end
      else begin
       sd(global_plycol,gubbe.name);
-      d(config.textcolor,' the '+classnames[gubbe.class]+' is here');
+      d(config.textcolor,' the '+classnames[gubbe.classid]+' is here');
      end;
     end;
 
@@ -1167,7 +1167,7 @@ begin
 
 end; {Who_is_On *end*}
 
-Function AnyBody_on_Location;
+Function Anybody_on_Location(location:integer;exclude:s30):boolean;
 var
     i     : longint;
     gubbe : onlinerec;
@@ -1620,7 +1620,7 @@ begin
                   loc4:=onloc_orbs;
                   loc5:=onloc_madmage; {groggo}
                   loc6:=onloc_bobsbeer;
-                  if caller.class=Alchemist then begin
+                  if caller.classid=Alchemist then begin
                    loc7:=onloc_alchemist;
                   end;
                  end;
@@ -3026,7 +3026,7 @@ begin
 end; {Node Check *end*}
 
 
-Function Location_Desc;  {returns a 30 characters string with description
+Function Location_Desc(const mode:integer) : s70;  {returns a 30 characters string with description
                           of what a player is currently at/doing}
 var
    s : s70;

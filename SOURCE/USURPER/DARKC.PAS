@@ -196,7 +196,7 @@ begin
        {news-paper}
        newsy(true,
        'Kidnapper caught!',
-       ' '+the_bad+lowercase(classnames[player.class])+' '+uplc+player.name2+config.textcol1+' was caught attempting',
+       ' '+the_bad+lowercase(classnames[player.classid])+' '+uplc+player.name2+config.textcol1+' was caught attempting',
        ' to run off with '+ukidc+child.name+config.textcol1+', the '+sex7[child.sex]+' of '+uplc+child.mother
         +config.textcol1+' and '+uplc+child.father+config.textcol1+'.',
        '',
@@ -214,7 +214,7 @@ begin
        mailrequest_nothing,
        umailheadc+'Child in danger!'+config.textcol1,
        mkstring(16,underscore),
-       uplc+player.name2+config.textcol1+' the '+classnames[player.class]+' made an attempt to kidnap your '+sex7[child.sex]
+       uplc+player.name2+config.textcol1+' the '+classnames[player.classid]+' made an attempt to kidnap your '+sex7[child.sex]
            +ukidc+' '+child.name+config.textcol1+'!',
        'Fortunately the attempt failed and '+uplc+player.name2+config.textcol1+' was jailed!',
        '',

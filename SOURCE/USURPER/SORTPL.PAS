@@ -139,7 +139,7 @@ begin
       write_to_text(ansifile,'  '+copy(s^,1,10));
 
       {class}
-      s^:=classnames[cust0.class]+mkstring(22,' ');
+      s^:=classnames[cust0.classid]+mkstring(22,' ');
       write_to_text(ansifile,copy(s^,1,10));
 
       {experience}
@@ -348,7 +348,7 @@ begin
       sd(config.textcolor,'  '+copy(s^,1,10));
 
       {class}
-      s^:=classnames[cust0.class]+mkstring(21,' ');
+      s^:=classnames[cust0.classid]+mkstring(21,' ');
       sd(config.textcolor,copy(s^,1,10));
 
       {experience}
@@ -492,7 +492,7 @@ begin
         write_to_text(ascifile,'  '+copy(s^,1,10));
 
         {class}
-        s^:=classnames[cust0.class]+mkstring(21,' ');
+        s^:=classnames[cust0.classid]+mkstring(21,' ');
         write_to_text(ascifile,copy(s^,1,10));
 
         {experience}

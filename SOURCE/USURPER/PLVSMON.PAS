@@ -725,22 +725,22 @@ begin {MAIN PROC **START**}
      menu2('(B)eg for Mercy  ');
      menu2('(*) Team command ');
 
-     if player.class in [Cleric,Magician,Sage] then begin
+     if player.classid in [Cleric,Magician,Sage] then begin
       menu2('(C)ast Spell  ');
      end;
 
-     if player.class=Paladin  then menu2('(1) Soul Strike  ');
-     if player.class=Assassin then menu2('(1) Backstab  ');
+     if player.classid=Paladin  then menu2('(1) Soul Strike  ');
+     if player.classid=Assassin then menu2('(1) Backstab  ');
      crlf;
      sd(6,':');
     end
     else begin
      crlf;
      sd(config.textcolor,'Dng Fight (A,R,H,Q,D,S,F,B,*');
-     if player.class in [Cleric,Magician,Sage] then begin
+     if player.classid in [Cleric,Magician,Sage] then begin
       sd(config.textcolor,',C');
      end;
-     if player.class in [Paladin,Assassin] then begin
+     if player.classid in [Paladin,Assassin] then begin
        sd(config.textcolor,',1');
      end;
      sd(config.textcolor,',?) :');
@@ -945,7 +945,7 @@ begin {MAIN PROC **START**}
     'C':begin {can spells be used?}
 
          cho:=' ';
-         if player.class in [Cleric,Magician,Sage] then begin
+         if player.classid in [Cleric,Magician,Sage] then begin
           player.casted:=false;
 
           cast_spell(false,1,1,player,player,false,mon);
@@ -961,7 +961,7 @@ begin {MAIN PROC **START**}
          end;
         end;
     '1':begin {Backstab, poison option available?}
-         if (player.race=Gnoll) or (player.class in [Paladin,Assassin]) then begin
+         if (player.race=Gnoll) or (player.classid in [Paladin,Assassin]) then begin
           {}
          end
          else begin
@@ -1071,7 +1071,7 @@ begin {MAIN PROC **START**}
        end;
 
    '1':begin {*Attacking player uses Backstab*}
-        if player.class=Assassin then begin
+        if player.classid=Assassin then begin
          stab1:=0;
          if config.classic then begin
            if player.weapon=0 then begin
@@ -1111,7 +1111,7 @@ begin {MAIN PROC **START**}
          end;
         end;
 
-        if player.class=Paladin then begin
+        if player.classid=Paladin then begin
          crlf;
          if player.hps<2 then begin
           d(config.textcolor,'Sorry, too few hitpoints left!')
@@ -1379,7 +1379,7 @@ end;
 
        norm_att:=true;
        {*soul strike?*}
-       if (tempman.class=Paladin) and (tempman.hps>100) and
+       if (tempman.classid=Paladin) and (tempman.hps>100) and
           (random(3)=0) and (tempman.casted=false) then begin
 
         zz:=tempman.hps div 3;
@@ -1396,7 +1396,7 @@ end;
         norm_att:=false;
        end
 
-       else if (tempman.class=Assassin) and (random(3)=0) and
+       else if (tempman.classid=Assassin) and (random(3)=0) and
                (tempman.rhand+tempman.lhand>0) then begin
         {*Backstab?*}
         sd(global_plycol,tempman.name2);
@@ -1411,7 +1411,7 @@ end;
         end;
         norm_att:=false;
        end
-       else if tempman.class in [Cleric,Magician,Sage] then begin
+       else if tempman.classid in [Cleric,Magician,Sage] then begin
         if (tempman.mana>15) and (random(3)=0) then begin
          {spell casting?}
          tempman.absorb:=0;

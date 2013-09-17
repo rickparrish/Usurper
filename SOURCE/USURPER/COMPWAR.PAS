@@ -142,21 +142,21 @@ begin
 
  {*should player1 use spells?*}
  if (player1.used_item=false) and (player1.casted=false) then begin
-  if player1.class in [Cleric,Magician,Sage] then begin
+  if player1.classid in [Cleric,Magician,Sage] then begin
    cast_spell(fastgame,1,2,player1,player2,false,dummy);
   end;
  end;
 
  {*should player2 use spells?*}
  if (player2.used_item=false) and (player2.casted=false) then begin
-  if player1.class in [Cleric,Magician,Sage] then begin
+  if player1.classid in [Cleric,Magician,Sage] then begin
    cast_spell(fastgame,1,2,player2,player1,false,dummy);
   end;
  end;
 
  {*should player1 use Backstab?*}
  if config.classic then begin
-  if (player1.class=Assassin) and (random(3)=0) and
+  if (player1.classid=Assassin) and (random(3)=0) and
      (player1.used_item=false) and (player1.casted=false) and
      (player1.rhand+player1.lhand>0) then begin
    if skrik then begin
@@ -178,7 +178,7 @@ begin
   end;
  end
  else begin
-  if (player1.class=Assassin) and (random(3)=0) and
+  if (player1.classid=Assassin) and (random(3)=0) and
      (player1.used_item=false) and (player1.casted=false) and
      (player1.weapon>0) then begin
 
@@ -202,7 +202,7 @@ begin
  end;
 
  {*should player1 use soul strike? *}
- if (player1.class=Paladin) and (player1.hps>100) and (random(3)=0) and (player1.used_item=false)
+ if (player1.classid=Paladin) and (player1.hps>100) and (random(3)=0) and (player1.used_item=false)
  and (player1.casted=false) then begin
   zz:=player1.hps div 3;
   dec(player1.hps,zz);
@@ -249,7 +249,7 @@ begin
 
  {*Should player2 use Backstab?*}
  if config.classic then begin
-  if (player2.class=Assassin) and (random(3)=0) and
+  if (player2.classid=Assassin) and (random(3)=0) and
      (player2.used_item=false) and (player2.casted=false) and
      (player2.rhand+player2.lhand>0) then begin
    if skrik then begin
@@ -271,7 +271,7 @@ begin
   end;
  end
  else begin
-  if (player2.class=Assassin) and (random(3)=0) and
+  if (player2.classid=Assassin) and (random(3)=0) and
      (player2.used_item=false) and (player2.casted=false) and
      (player2.weapon>0) then begin
 
@@ -296,7 +296,7 @@ begin
  end;
 
  {*should player2 use soul strike? *}
- if (player2.class=Paladin) and (player2.hps>100) and (random(3)=0) and
+ if (player2.classid=Paladin) and (player2.hps>100) and (random(3)=0) and
     (player2.used_item=false) and (player2.casted=false) then begin
   zz:=player2.hps div 3;
   dec(player2.hps,zz);

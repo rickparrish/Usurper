@@ -67,7 +67,7 @@ begin
 
  {*should pl0. use spells?*}
  if (pl0.used_item=false) and (pl0.casted=false) then begin
-  if pl0.class in [Cleric,Magician,Sage] then begin
+  if pl0.classid in [Cleric,Magician,Sage] then begin
    cast_spell(fastgame,1,2,pl0,player,false,dummy);
   end;
  end;
@@ -135,7 +135,7 @@ begin
 
  {*should computer controlled player ues Backstab?*}
  if config.classic then begin
-  if (pl0.class=Assassin) and (random(3)=0) and (pl0.used_item=false) and
+  if (pl0.classid=Assassin) and (random(3)=0) and (pl0.used_item=false) and
      (pl0.casted=false) and (pl0.weapon>0) then begin
 
    sd(global_plycol,pl0.name2);
@@ -153,7 +153,7 @@ begin
   end;
  end
  else begin
-  if (pl0.class=Assassin) and (random(3)=0) and (pl0.used_item=false) and
+  if (pl0.classid=Assassin) and (random(3)=0) and (pl0.used_item=false) and
      (pl0.casted=false) and (pl0.rhand+pl0.lhand>0) then begin
 
    sd(global_plycol,pl0.name2);
@@ -173,7 +173,7 @@ begin
  end;
 
  {*should computer controlled player use soul strike? *}
- if (pl0.class=Paladin) and (pl0.hps>100) and (random(3)=0) and
+ if (pl0.classid=Paladin) and (pl0.hps>100) and (random(3)=0) and
  (pl0.used_item=false) and (pl0.casted=false) then begin
   zz:=pl0.hps div 3;
   soulstrike:=zz;

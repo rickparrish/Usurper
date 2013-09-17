@@ -179,7 +179,7 @@ begin
         end;
        end;
    'A':begin {alchemist secret order}
-        if player.class<>Alchemist then begin
+        if player.classid<>Alchemist then begin
          crlf;
          d(5,'The guards outside the building humiliate you and block the entrance.');
          d(5,'It seems as only Alchemists are allowed.');

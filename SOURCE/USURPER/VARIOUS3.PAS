@@ -163,7 +163,7 @@ begin
 
 end; {SAVE_TEAM **END**}
 
-Function Get_Teamname; {returns a teamname}
+Function Get_TeamName : s70; {returns a teamname}
 var
     result : s70;
 
@@ -713,7 +713,7 @@ begin
 
  {class}
  justval:=10;
- sd(config.textcolor,ljust(classnames[gnugge.class],justval));
+ sd(config.textcolor,ljust(classnames[gnugge.classid],justval));
 
  {weapon/armor}
  justval:=5;

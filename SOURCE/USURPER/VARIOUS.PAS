@@ -123,8 +123,8 @@ Procedure Create_Monster(nr            : byte;
 {Race & Class}
 Function Race_Display(const mode:byte; race:races; const racenr:byte) : s10;
 Function Class_Corr2(i: byte) : classes;
-Function Class_Corr(class: classes) : byte;
-Function Class_Restricted(class:classes; var o : orec;instead:byte):boolean;
+Function Class_Corr(classid: classes) : byte;
+Function Class_Restricted(classid:classes; var o : orec;instead:byte):boolean;
 
 {Help Texts}
 Function Numeric_Help : s90;
@@ -379,11 +379,11 @@ begin {pretty meaningless function. used in dungeon events}
 
 end; {random_path *end*}
 
-Function Class_Corr(class: classes) : byte;
+Function Class_Corr(classid: classes) : byte;
 var i : byte;
 begin
 
-  case class of
+  case classid of
    Alchemist : i:=1;
    Assassin  : i:=2;
    Barbarian : i:=3;
@@ -423,7 +423,7 @@ begin
 
 end; {class_corr2 *end*}
 
-Function Class_Restricted(class:classes;var o : orec;instead:byte):boolean;
+Function Class_Restricted(classid:classes;var o : orec;instead:byte):boolean;
 var i : byte;
 begin
 
@@ -431,7 +431,7 @@ begin
  {returns true if item cannot be used by class}
  i:=instead;
  if instead=0 then begin
-  i:=class_corr(class);
+  i:=class_corr(classid);
  end;
 
  {return result}
@@ -469,7 +469,7 @@ begin {calculates monster #mnr powers..depending on weappower & hps}
 
 end; {monster_power *end*}
 
-Function Target_Monster;
+Function Target_Monster:byte;
 var
     done : boolean;
     k, ii, rad, temp : integer;
@@ -660,7 +660,7 @@ begin
 end;
 {*** END *** Monster related procs / functions *** END ***}
 
-Function Normal_Attack;
+Function Normal_Attack( silent:boolean; var attacker:UserRec) : longint;
 var
    temp : ^longint;
 begin
@@ -767,7 +767,7 @@ begin
  inc(defender.absorb,yy);
 
  {regenerar mana}
- if defender.class in [Cleric,Magician,Sage] then begin
+ if defender.classid in [Cleric,Magician,Sage] then begin
   if defender.mana<defender.maxmana then begin
    inc(defender.mana);
    if defender.mana>defender.maxmana then begin
@@ -844,7 +844,7 @@ begin {fakeplayer sends nonsense first message to online human player}
   0: s:='Hi there!';
   1: s:='Your mother is ugly!';
   2: s:='I hate '+race_display(3,receiver.race,0)+'!';
-  3: s:='I hate '+classnames[receiver.class]+'s !';
+  3: s:='I hate '+classnames[receiver.classid]+'s !';
   4: s:='Why don''t you quit when you can!';
   5: s:='Cheater!';
   6: s:='Wanna kiss me?';
@@ -1063,39 +1063,39 @@ begin
   end;
 
   {lets read the .class variable}
-  fake.class:=Warrior; {default}
+  fake.classid:=Warrior; {default}
   if findsub(classnames[Alchemist],result)=true then begin
-   fake.class:=Alchemist;
+   fake.classid:=Alchemist;
   end
   else if findsub(classnames[Assassin],result)=true then begin
-   fake.class:=Assassin;
+   fake.classid:=Assassin;
   end
   else if findsub(classnames[Barbarian],result)=true then begin
-   fake.class:=Barbarian;
+   fake.classid:=Barbarian;
   end
   else if findsub(classnames[Bard],result)=true then begin
-   fake.class:=Bard;
+   fake.classid:=Bard;
   end
   else if findsub(classnames[Cleric],result)=true then begin
-   fake.class:=Cleric;
+   fake.classid:=Cleric;
   end
   else if findsub(classnames[Jester],result)=true then begin
-   fake.class:=Jester;
+   fake.classid:=Jester;
   end
   else if findsub(classnames[Magician],result)=true then begin
-   fake.class:=Magician;
+   fake.classid:=Magician;
   end
   else if findsub(classnames[Paladin],result)=true then begin
-   fake.class:=Paladin;
+   fake.classid:=Paladin;
   end
   else if findsub(classnames[Ranger],result)=true then begin
-   fake.class:=Ranger;
+   fake.classid:=Ranger;
   end
   else if findsub(classnames[Sage],result)=true then begin
-   fake.class:=Sage;
+   fake.classid:=Sage;
   end
   else if findsub(classnames[Warrior],result)=true then begin
-   fake.class:=Warrior;
+   fake.classid:=Warrior;
   end;
 
   {lets setup the name and clense it from the rest of the data info}
@@ -1127,7 +1127,7 @@ begin
 
 end;
 
-Function Immunity; {immunity to diseases}
+Function Immunity(def : longint) : s70; {immunity to diseases}
 
 var
    t : s70;
@@ -1149,7 +1149,7 @@ begin
 
 end;
 
-Function HitChance;
+Function HitChance(var nr:SmallInt) : integer;
 var y : integer;
 begin
  hitchance:=8;
@@ -1176,7 +1176,7 @@ begin
  hitchance:=y;
 end;
 
-Function Condition;
+Function Condition(now, max : longint ) : s70;
 var h  : s70;
     rr : real;
     x  : longint;
@@ -1199,7 +1199,7 @@ begin
  condition:=h;
 end; {condition *end*}
 
-Function Bash_Name;
+Function Bash_Name(nr:integer) : s70;
 var s : string[15];
 begin
 
@@ -1226,7 +1226,7 @@ begin
 
 end; {bash_name *end*}
 
-Function Bash_Rank;
+Function Bash_Rank(nr:integer) : s70;
 var s : string[15];
 begin
  case nr of
@@ -1351,7 +1351,7 @@ begin
 
 end; {infections *end*}
 
-Function Dungeon_Reward;
+Function Dungeon_Reward(dungeon : integer) : longint;
 var x : longint;
 begin
 
@@ -1429,7 +1429,7 @@ begin
 
 end; {quick_healing *end*}
 
-Function Soul_Effect; {effect of soulstrike from popy}
+Function Soul_Effect(var paladin : userrec; soul:longint) : longint; {effect of soulstrike from popy}
 begin
 
  {return result}
@@ -1771,7 +1771,7 @@ begin
 
 end; {Replace_a_String *end*}
 
-Function Remove_BadWords; {check and remove bad words}
+Function Remove_BadWords(const s:string) : string; {check string for bad words}
 const seperator = '|';
 var
    txt : text; {textfile}
@@ -3026,7 +3026,7 @@ begin
 
 end;
 
-Function IncPlayerMoney; {increase player money}
+Function IncPlayerMoney(var ply:UserRec;coins:longint) : boolean; {increase player money}
 var mum1,mum2,mum3 : real;
     result : boolean;
 begin
@@ -3061,7 +3061,7 @@ begin
 
 end; {decplayermoney *end*}
 
-Function IncBankMoney; {increase bank money}
+Function IncBankMoney(var ply:UserRec;coins:longint) : boolean; {increase bank money}
 var mum1,mum2,mum3 : real;
     result : boolean;
 begin
@@ -3097,7 +3097,7 @@ begin
 
 end; {decbankmoney *end*}
 
-Function IncInterest; {increase bank interest}
+Function IncInterest(var ply:UserRec;coins:longint) : boolean; {increase bank interest}
 var mum1,mum2,mum3 : real;
     result : boolean;
 begin
@@ -3123,7 +3123,7 @@ begin
 
 end; {incinterest *end*}
 
-Function IncBankWage; {increase bank guard Wage}
+Function IncBankWage(var ply:UserRec;coins:longint) : boolean; {increase bank guard Wage}
 var mum1,mum2,mum3 : real;
     result : boolean;
 begin
@@ -3146,7 +3146,7 @@ begin
 
 end; {incbankwage *end*}
 
-Function IncKingTreasury2; {increase royal treasury}
+Function IncKingTreasury2(var king:KingRec;coins:longint) : boolean; {increase royal treasury}
 var
     mum1,mum2,mum3 : real;
     result : boolean;
@@ -3291,7 +3291,7 @@ begin
     s:=s+commastr(ply^.level)+' ';
 
     {race}
-    s:=s+config.textcol1+classnames[ply^.class]+config.textcol1;
+    s:=s+config.textcol1+classnames[ply^.classid]+config.textcol1;
 
     {display produced string}
     s:=s+' ';
@@ -3861,7 +3861,7 @@ begin
 
 end; {king_is_gone *end*}
 
-Function KingString;
+Function KingString(const sex:byte) : s30; {returns either 1=KING or 2=QUEEN}
 var s : string[5];
 begin
 

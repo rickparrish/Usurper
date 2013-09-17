@@ -118,7 +118,7 @@ begin
 
  if (fastgame=false) or (foe=yo1) then begin
   if (magic_res[mon]<>no_effect) or (place=2) then begin
-   if (spell_multi(temp1.class,ii)=false) or (place=2) then begin
+   if (spell_multi(temp1.classid,ii)=false) or (place=2) then begin
     case random(2) of
      0:begin
         sd(global_moncol,foe);
@@ -135,7 +135,7 @@ begin
 
  case place of
   1:begin
-     if spell_multi(temp1.class,ii)=false then begin
+     if spell_multi(temp1.classid,ii)=false then begin
       if magic_res[mon]<>no_effect then begin
        dec(monster[mon]^.hps,damage);
       end;
@@ -264,7 +264,7 @@ begin {Cast_Spell *begin*}
    if the_choice>0 then begin
     if player.spell[the_choice,2]=true then use:=true;
     if (player.spell[the_choice,1]=true) and
-       (player.mana<spell_cost(player.class,the_choice)) then begin
+       (player.mana<spell_cost(player.classid,the_choice)) then begin
         cost:=true;
     end;
 
@@ -279,7 +279,7 @@ begin {Cast_Spell *begin*}
     end
     else begin
      if player.spell[the_choice,1]=true then begin
-      sd(14,spell_name(player.class,the_choice));
+      sd(14,spell_name(player.classid,the_choice));
       break;
      end;
     end;
@@ -307,7 +307,7 @@ begin {Cast_Spell *begin*}
   {caster is a computer player, checking possibilities to cast spell.}
   for i := 12 downto 1 do
    if (temp1.spell[i,1]=true) and (temp1.spell[i,2]=false) and
-    (temp1.mana>=spell_cost(temp1.class,i)) and (random(2)=0) then begin
+    (temp1.mana>=spell_cost(temp1.classid,i)) and (random(2)=0) then begin
    cho:=chr(ord('A')+i-1);
    break;
   end;
@@ -364,13 +364,13 @@ end;
  if (fastgame=false) and (att<>yo2) then begin
   sd(global_plycol,temp1.name2);
   sd(config.textcolor,' utters ');
-  d(global_talkcol,spell_utter(temp1.class,ii));
+  d(global_talkcol,spell_utter(temp1.classid,ii));
  end
  else if fastgame=false then begin
-  d(global_talkcol,spell_utter(temp1.class,ii));
+  d(global_talkcol,spell_utter(temp1.classid,ii));
  end;
 
- dec(temp1.mana,spell_cost(temp1.class,ii));
+ dec(temp1.mana,spell_cost(temp1.classid,ii));
 
  {the spell can be a multi target spell!}
  if place=1 then begin
@@ -408,7 +408,7 @@ end;
  case ii of
 
   1:begin {***** LEVEL 1 SPELLS *****}
-     case temp1.class of
+     case temp1.classid of
       Cleric:begin
 
               inc(temp1.hps,4);
@@ -469,7 +469,7 @@ end;
     end;
 
   2:begin {***** LEVEL 2 SPELLS *****}
-     case temp1.class of
+     case temp1.classid of
       Cleric:begin
               temp1.spell[2,2]:=true;
               if (att=player.name2) and (fastgame=false) then begin
@@ -518,7 +518,7 @@ end;
      end;
 
   3:begin {***** LEVEL 3 SPELLS *****}
-     case temp1.class of
+     case temp1.classid of
       Cleric:begin
               if (fastgame=false) or (foe=yo1) then begin
                if (place=2) or (magic_res[mon]<>no_effect) then begin
@@ -576,7 +576,7 @@ end;
      end;
 
   4:begin {***** LEVEL 4 SPELLS *****}
-     case temp1.class of
+     case temp1.classid of
       Cleric:begin
               if (att=player.name2) and (fastgame=false) then begin
                d(4,'You feel stronger!');
@@ -638,7 +638,7 @@ end;
      end;
 
   5:begin {***** LEVEL 5 SPELLS *****}
-     case temp1.class of
+     case temp1.classid of
       Cleric:begin
          if place=1 then begin
           if monster[mon]^.disease=true then begin
@@ -734,7 +734,7 @@ end;
      end;
 
   6:begin {***** LEVEL 6 SPELLS *****}
-     case temp1.class of
+     case temp1.classid of
       Cleric:begin
 
               damage:=20+random(11);
@@ -786,7 +786,7 @@ end;
      end;
 
   7:begin {***** LEVEL 7 SPELLS *****}
-     case temp1.class of
+     case temp1.classid of
       Cleric:begin
 
               if (fastgame=false) or (foe=yo1) then begin
@@ -841,7 +841,7 @@ end;
 
 
   8:begin {***** LEVEL 8 SPELLS *****}
-     case temp1.class of
+     case temp1.classid of
       Cleric:begin
               if (fastgame=false) or (foe=yo1) then begin
                d(config.textcolor,'An Angel suddenly arrives!');
@@ -883,7 +883,7 @@ end;
      end;
 
   9:begin  {***** LEVEL 9 SPELLS *****}
-     case temp1.class of
+     case temp1.classid of
       Cleric:begin
 
               damage:=80+random(10);
@@ -944,7 +944,7 @@ end;
      end;
 
  10:begin  {***** LEVEL 10 SPELLS *****}
-     case temp1.class of
+     case temp1.classid of
       Cleric:begin
               inc(temp1.hps,200);
               if temp1.hps>temp1.maxhps then temp1.hps:=temp1.maxhps;
@@ -989,7 +989,7 @@ end;
      end;
 
  11:begin  {***** LEVEL 11 SPELLS *****}
-     case temp1.class of
+     case temp1.classid of
       Cleric:begin
               if (att=player.name2) and (fastgame=false) then begin
                d(config.textcolor,'You feel protected!');
@@ -1025,7 +1025,7 @@ end;
      end;
 
  12:begin  {***** LEVEL 12 SPELLS *****}
-     case temp1.class of
+     case temp1.classid of
       Cleric:begin
               damage:=220+random(31);
 
@@ -1094,22 +1094,22 @@ end;
  mon2:=mode-9999;
 
  {1}
- if (temp1.class=Sage) and (temp1.spell[1,1]=true) and (temp1.spell[1,2]=true) then begin
+ if (temp1.classid=Sage) and (temp1.spell[1,1]=true) and (temp1.spell[1,2]=true) then begin
   inc(temp1.absorb,3);
  end;
 
  {2}
- if (temp1.class=Cleric) and (temp1.spell[2,1]=true) and (temp1.spell[2,2]=true) then begin
+ if (temp1.classid=Cleric) and (temp1.spell[2,1]=true) and (temp1.spell[2,2]=true) then begin
   inc(temp1.absorb,5);
  end;
 
- if (temp1.class=Magician) and (temp1.spell[2,1]=true) and (temp1.spell[2,2]=true) then begin
+ if (temp1.classid=Magician) and (temp1.spell[2,1]=true) and (temp1.spell[2,2]=true) then begin
   inc(temp1.absorb,4);
  end;
 
 
  {3}
- if (temp1.class=Cleric) and (temp1.spell[3,1]=true) and (temp1.spell[3,2]=true) then begin
+ if (temp1.classid=Cleric) and (temp1.spell[3,1]=true) and (temp1.spell[3,2]=true) then begin
   if random(2)=0 then begin
    temp1.spell[3,2]:=false;
   end;
@@ -1122,7 +1122,7 @@ end;
   end;
  end;
 
- if (temp1.class=Magician) and (temp1.spell[3,1]=true) and (temp1.spell[3,2]=true) then begin
+ if (temp1.classid=Magician) and (temp1.spell[3,1]=true) and (temp1.spell[3,2]=true) then begin
   if random(2)=0 then begin
    temp1.spell[3,2]:=false;
   end;
@@ -1135,7 +1135,7 @@ end;
   end;
  end;
 
- if (temp1.class=Sage) and (temp1.spell[3,1]=true) and (temp1.spell[3,2]=true) then begin
+ if (temp1.classid=Sage) and (temp1.spell[3,1]=true) and (temp1.spell[3,2]=true) then begin
   temp1.spell[3,2]:=false;
   if place=2 then begin
    temp2.punch:=0;
@@ -1146,7 +1146,7 @@ end;
  end;
 
  {4}
- if (temp1.class=Magician) and (temp1.spell[4,1]=true) and (temp1.spell[4,2]=true) then begin
+ if (temp1.classid=Magician) and (temp1.spell[4,1]=true) and (temp1.spell[4,2]=true) then begin
   temp1.spell[4,2]:=false;
   if place=2 then begin
    temp2.punch:=0;
@@ -1156,7 +1156,7 @@ end;
   end;
  end;
 
- if (temp1.class=Sage) and (temp1.spell[4,1]=true) and (temp1.spell[4,2]=true) then begin
+ if (temp1.classid=Sage) and (temp1.spell[4,1]=true) and (temp1.spell[4,2]=true) then begin
   if place=2 then begin
    if fastgame=false then begin
     d(config.textcolor,att+' '+uplc+'Duplicate'+config.textcol1+' hits '+foe+'!');
@@ -1193,24 +1193,24 @@ end;
  end;
 
  {5}
- if (temp1.class=Magician) and (temp1.spell[5,1]=true) and (temp1.spell[5,2]=true) then begin
+ if (temp1.classid=Magician) and (temp1.spell[5,1]=true) and (temp1.spell[5,2]=true) then begin
   inc(temp1.absorb,(random(10)+3));
  end;
 
  {6}
 
  {7}
- if (temp1.class=Cleric) and (temp1.spell[7,1]=true) and (temp1.spell[7,2]=true) then begin
+ if (temp1.classid=Cleric) and (temp1.spell[7,1]=true) and (temp1.spell[7,2]=true) then begin
   inc(temp1.absorb,(random(15)+11));
  end;
 
- if (temp1.class=Magician) and (temp1.spell[7,1]=true) and (temp1.spell[7,2]=true) then begin
+ if (temp1.classid=Magician) and (temp1.spell[7,1]=true) and (temp1.spell[7,2]=true) then begin
   {fear spell}
   if place=2 then temp2.punch:=0
              else monster[mon2]^.punch:=0;
  end;
 
- if (temp1.class=Sage) and (temp1.spell[7,1]=true) and (temp1.spell[7,2]=true) then begin
+ if (temp1.classid=Sage) and (temp1.spell[7,1]=true) and (temp1.spell[7,2]=true) then begin
   if place=2 then begin
    temp2.punch:=0;
   end
@@ -1220,7 +1220,7 @@ end;
  end;
 
  {8}
- if (temp1.class=Cleric) and (temp1.spell[8,1]=true) and (temp1.spell[8,2]=true) then begin
+ if (temp1.classid=Cleric) and (temp1.spell[8,1]=true) and (temp1.spell[8,2]=true) then begin
   if place=2 then begin
    if fastgame=false then begin
     d(config.textcolor,'The Angel hits '+uplc+foe+config.textcol1+' hard!');
@@ -1254,7 +1254,7 @@ end;
   end;
  end;
 
- if (temp1.class=Sage) and (temp1.spell[8,1]=true) and (temp1.spell[8,2]=true) then begin
+ if (temp1.classid=Sage) and (temp1.spell[8,1]=true) and (temp1.spell[8,2]=true) then begin
   if fastgame=false then begin
    d(config.textcolor,uplc+att+'s'+config.textcol1+' Transformation protects '+sex[temp1.sex]+'!');
   end;
@@ -1263,7 +1263,7 @@ end;
  end;
 
  {9}
- if (temp1.class=Magician) and (temp1.spell[9,1]=true) and (temp1.spell[9,2]=true) then begin
+ if (temp1.classid=Magician) and (temp1.spell[9,1]=true) and (temp1.spell[9,2]=true) then begin
   temp1.spell[9,2]:=false;
   inc(temp1.absorb,20);
  end;
@@ -1271,7 +1271,7 @@ end;
  {10}
 
  {11}
- if (temp1.class=Cleric) and (temp1.spell[11,1]=true) and (temp1.spell[11,2]=true) then begin
+ if (temp1.classid=Cleric) and (temp1.spell[11,1]=true) and (temp1.spell[11,2]=true) then begin
   if place=2 then begin
    if random(3)=0 then begin
     if temp1.chiv<30000 then begin
@@ -1299,7 +1299,7 @@ end;
   end;
  end;
 
- if (temp1.class=Sage) and
+ if (temp1.classid=Sage) and
     (temp1.spell[11,1]=true) and
     (temp1.spell[11,2]=true) then begin
   if place=2 then begin
@@ -1346,7 +1346,7 @@ end;
  end;
 
  {12}
- if (temp1.class=Magician) and (temp1.spell[12,1]=true) and (temp1.spell[12,2]=true) then begin
+ if (temp1.classid=Magician) and (temp1.spell[12,1]=true) and (temp1.spell[12,2]=true) then begin
 
   if place=2 then begin
    if fastgame=false then begin

@@ -360,7 +360,7 @@ begin
  emptystr:=s;
 end;
 
-Function Replace_String;
+Function Replace_String(Source:string; const old,new : string) : string;
 var p : INTEGER;
 begin
 
@@ -373,7 +373,7 @@ begin
 
 end; { Replace String }
 
-Function GetChar; {get a character from the local or remote keyboard}
+Function GetChar : char; {get a character from local or remote keyboard}
 var temp : char;
 begin
 
@@ -532,7 +532,7 @@ begin
 
 end;
 
-Function Confirm;
+Function Confirm(const text: string; default:char):boolean; {Y/N confirmation}
 const Yadd = ' ? ([Y]/N)';
       Nadd = ' ? (Y/[N])';
 
@@ -581,7 +581,7 @@ begin
 
 end; {confirm *end*}
 
-Function Confirm2;
+Function Confirm2(const text: string; default:char):char; {Y/N/= confirmation}
 const Yadd = ' ? ([Y]/N/=)';
       Nadd = ' ? (Y/[N]/=)';
       Eadd = ' ? (Y/N/[=])';
@@ -647,7 +647,7 @@ begin
  packed_date:=DaysSince1Jan0001;
 end;
 
-Function MkString;
+Function MkString( nr : integer;const s:string) :string;
 var
     i : integer;
     temp : string;
@@ -696,7 +696,7 @@ begin
 
 end; {cool_string *end*}
 
-Function Ljust;
+Function Ljust(const s:string; max:integer) :string;
 var temp : string;
     diff : integer;
 begin
@@ -717,7 +717,7 @@ begin
 
 end; {ljust *end*}
 
-Function Rjust;
+Function Rjust(const s:string; max:integer) :string;
 var temp : string;
     diff : integer;
 begin
@@ -1074,7 +1074,7 @@ begin
 
 end; {clearscreen *end*}
 
-Function Strip; {strips string from Usurper ANSI codes}
+Function Strip(const out : string) : string; {remove all Usurper ansi}
 var
     i : integer;
     s : string;
@@ -1209,7 +1209,7 @@ begin
 
 end; {backcolr *end*}
 
-Function Uconv; {converts Usurper ANSI codes to real ANSI}
+Function Uconv(const out : string) : string; {Usurper ANSI -> standard ANSI}
 var
     i : integer;
     s : string;
@@ -1280,7 +1280,7 @@ begin
 
 end; {uconv *end*}
 
-Procedure Get_StringW;
+Procedure Get_StringW(var s :string;maxlength:integer);
 var s2 : string;
 begin
 
@@ -1298,7 +1298,7 @@ begin
 
 end; {get_stringw *end*}
 
-Function Get_StringSec; {get a string, chars are echoed back as CH}
+Function Get_StringSec(maxlength:integer;ch:char):string; {get a string, chars are echoed back as CH}
 var result : string;
 begin
 
@@ -1315,7 +1315,7 @@ begin
 
 end; {get_stringsec *end*}
 
-Function Get_String;
+Function Get_String(maxlength:byte):string;
 var result : string;
 begin
 
@@ -1517,7 +1517,7 @@ begin
 
 end; {get_a_number *end*}
 
-Function Get_Number;
+Function Get_Number(rmin,rmax:longint):longint;
 var result : longint;
 begin
 
@@ -1529,7 +1529,7 @@ begin
 
 end; {get_number *end*}
 
-Function Get_Number2; {same as get_number, but with ability to accept a
+Function Get_Number2(rmin,rmax,default:longint):longint; {same as get_number, but with ability to accept a
                        default value in the parameter list}
 var result : longint;
 begin
@@ -1542,7 +1542,7 @@ begin
 
 end; {get_number2 *end*}
 
-Function Get_Number_Old; {get a number from the user}
+Function Get_Number_Old(rmin,rmax:longint):longint; {old routine} {get a number from the user}
 var s : string;
     x : longint;
     bye:boolean;
@@ -1805,22 +1805,22 @@ begin
 
 end; {give_me_time *end*}
 
-Function HeartSign; {used in relation procs to indicate LOVE situations}
+Function HeartSign : char; {returns a ''} {used in relation procs to indicate LOVE situations}
 begin
  HeartSign:=chr(3);
 end;
 
-Function DeathSign; {used in relation procs to indicate DEATH/HATE situations}
+Function DeathSign : char; {returns a ''} {used in relation procs to indicate DEATH/HATE situations}
 begin
  DeathSign:='+';
 end;
 
-Function UnderScore; {character used to represent underscore sign}
+Function UnderScore : char; {returns a '_'} {character used to represent underscore sign}
 begin
  underscore:=chr(196);
 end;
 
-Function Todays_Time; {time string[8]}
+Function Todays_Time:string; {time string[8]}
 var
  hour, min, sec, sec100: word;
  result: string[8];
@@ -1837,7 +1837,7 @@ begin  {original code taken from the "date" function in ddscott.pas}
 
 end; {todays_time *end*}
 
-Function Todays_Date; {date string[8] american, mm dd yyyy}
+Function Todays_Date:string; {date string[8] american, mm dd yyyy}
 var
  d,m,y,dow: word;
  s,s2: string[8];
@@ -1861,7 +1861,7 @@ begin  {original code taken from the "date" function in ddscott.pas}
 
 end; {todays_date *end*}
 
-Function Fix_Date; {fixes 8 string date strings}
+Function Fix_Date(const s:string): string; {fixes 8 string date strings}
 begin
  fix_date:=s[1]+s[2]+'-'+s[3]+s[4]+'-'+s[5]+s[6]+s[7]+s[8];
 end;
@@ -1934,7 +1934,7 @@ begin
  if (statline) then display_status(force);
 end;
 
-Function Param_Hunt; {checking for Command Line parameters}
+Function Param_Hunt(const h:string) : boolean; {checking for Command Line parameters}
 var i : byte;
 begin
 

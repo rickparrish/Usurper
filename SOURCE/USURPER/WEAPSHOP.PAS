@@ -260,7 +260,7 @@ Begin {Weapon Shop}
       inc(cc);
 
       restrict:=false;
-      if class_restricted(player.class,objekt^,0)=true then begin
+      if class_restricted(player.classid,objekt^,0)=true then begin
        restrict:=true;
       end;
 
@@ -293,7 +293,7 @@ Begin {Weapon Shop}
       sd(col,s);
 
       {restrictions}
-      if class_restricted(player.class,objekt^,0)=true then begin
+      if class_restricted(player.classid,objekt^,0)=true then begin
        d(shadcol,' *class restricted*');
       end
       else begin
@@ -570,7 +570,7 @@ Begin {Weapon Shop}
              else if (objekt^.evil=true) and (player.chiv>0) and (player.dark<1) then begin
               go_ahead:=false;
              end
-             else if class_restricted(player.class,objekt^,0)=true then begin
+             else if class_restricted(player.classid,objekt^,0)=true then begin
               go_ahead:=false;
              end;
              if objekt^.str_need>player.strength then begin

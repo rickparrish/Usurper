@@ -110,7 +110,7 @@ begin {returns true if player0's inventory is empty}
 
 end; {Is_Inventory_Empty .end.}
 
-Function Inventory_Empty; {returns a empty inventory location,
+Function  Inventory_Empty   (const player0 : UserRec) : byte; {returns a empty inventory location,
                            if there's no empty then result=0}
 var
     i,
@@ -226,7 +226,7 @@ Begin
 
 end; {inventory_display *end*}
 
-Function Item_Select;
+Function  Item_Select (var player0:UserRec) : longint;
 var s : s70;
     i,result : longint;
 begin
@@ -261,7 +261,7 @@ begin
 
 end; {item_select *end*}
 
-Function Item_Search;
+Function  Item_Search (item : longint; var player0 : UserRec ) : boolean;
 var i : integer;
    result : boolean;
 begin
@@ -836,7 +836,7 @@ begin
 
    load_objekt(objekt^,player.itemtype[i],player.item[i]);
 
-   if class_restricted(player.class,objekt^,0)=true then begin
+   if class_restricted(player.classid,objekt^,0)=true then begin
     d(12,'Impossible! This item is class restricted!');
     pause;
    end
@@ -1853,7 +1853,7 @@ begin
 
 end; {Check_Valid_Equipment *end*}
 
-Function Allowed_To_Use;
+Function  Allowed_To_Use(typ:objtype) : boolean;
 var a : boolean;
 
 begin

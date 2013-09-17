@@ -767,7 +767,7 @@ begin {given the ingold value this routine returns the power increase
 
 end; {sacrifice_gold_return .end.}
 
-Function Player_Has_A_God;
+Function Player_Has_A_God(const name:s90) : boolean;
 var result : boolean;
  i : word;
 

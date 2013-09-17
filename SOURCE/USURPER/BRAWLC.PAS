@@ -222,7 +222,7 @@ begin
  if yy>60 then yy:=60;
  if player.level>30 then yy:=player.level+random(10);
 
- if player.class in [Barbarian,Paladin,Warrior] then begin
+ if player.classid in [Barbarian,Paladin,Warrior] then begin
   inc(yy,random(7));
  end;
 
@@ -374,7 +374,7 @@ begin
     if x=0 then begin
      d(config.textcolor,'It''s aimed for you!');
      y:=2;
-     if player.class=Jester  then inc(y);
+     if player.classid=Jester  then inc(y);
      if stamina<2 then dec(y);
      if player.agility>50 then inc(y);
      if player.agility>200 then inc(y);
@@ -457,7 +457,7 @@ begin
    d(config.textcolor,' swings his Club! He looks angrily at you!');
    y:=0;
    if stamina>5 then inc(y);
-   if player.class=Jester then inc(y);
+   if player.classid=Jester then inc(y);
    if player.agility>50   then inc(y);
    if player.agility>200  then inc(y);
    if player.agility>700  then inc(y);
@@ -595,7 +595,7 @@ begin
        end; {case .end.}
        y:=1;
        if stamina>5 then inc(y);
-       if player.class=Jester then inc(y);
+       if player.classid=Jester then inc(y);
        if player.agility>50   then inc(y);
        if player.agility>200  then inc(y);
        if player.agility>700  then inc(y);

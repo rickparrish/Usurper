@@ -217,7 +217,7 @@ begin
              d(config.textcolor,'.');
              crlf;
 
-             if class_restricted(pl0^.class,objekt^,0) then begin
+             if class_restricted(pl0^.classid,objekt^,0) then begin
               sd(global_talkcol,'I can''t use this! It''s class restricted!');
               sd(config.textcolor,', ');
               sd(global_plycol,pl0^.name2);
@@ -463,4 +463,3 @@ begin
 end; {Team_Transfer *end*}
 
 end. {Unit SendItem .end.}
-

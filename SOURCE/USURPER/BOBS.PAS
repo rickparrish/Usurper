@@ -1053,7 +1053,7 @@ begin
 
      y:=1;
      if pstam>5 then y:=y+1;
-     if (player.class=Assassin) or (player.class=Jester) then y:=y+1;
+     if (player.classid=Assassin) or (player.classid=Jester) then y:=y+1;
      if player.agility>50 then y:=y+1;
      if player.agility>200 then y:=y+1;
      if player.agility>700 then y:=y+1;
@@ -1242,7 +1242,7 @@ end
        end
        else begin
         y:=10;
-        if player.class=Assassin then y:=y-1;
+        if player.classid=Assassin then y:=y-1;
         if player.dex>10 then dec(y);
         if player.dex>20 then dec(y);
         if player.dex>40 then dec(y);

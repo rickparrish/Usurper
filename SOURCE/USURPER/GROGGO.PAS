@@ -367,7 +367,7 @@ begin
                 found:=false;
                end;
 
-               if (found) and (pl0^.class in [Alchemist,Cleric,Magician,Sage]) or
+               if (found) and (pl0^.classid in [Alchemist,Cleric,Magician,Sage]) or
                   (pl0^.disres>75) then begin
 
                 sd(global_talkcol,'There is a great risk of failure here!');
@@ -406,7 +406,7 @@ begin
                 dec(player.darknr);
 
                 x:=5;
-                case pl0^.class of
+                case pl0^.classid of
                  Alchemist : x:=8;
                  Assassin  : x:=5;
                  Barbarian : x:=1;
@@ -555,7 +555,7 @@ begin
                   break;
                  end;
 
-                 if pl0^.class in [Alchemist,Cleric,Magician,Sage] then begin
+                 if pl0^.classid in [Alchemist,Cleric,Magician,Sage] then begin
                   sd(global_talkcol,'There is a great risk of failure here!');
                   sd(config.textcolor,', ');
                   sd(global_plycol,owner);
@@ -588,7 +588,7 @@ begin
 
                  x:=5;
 
-                 case pl0^.class of
+                 case pl0^.classid of
                   Alchemist : x:=10;
                   Assassin  : x:=7;
                   Barbarian : x:=1;

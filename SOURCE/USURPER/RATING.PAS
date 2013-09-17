@@ -235,7 +235,7 @@ begin
       (ply0^.name2<>global_delname2) then begin
 
     inc(ids);
-    case ply0^.class of
+    case ply0^.classid of
      Alchemist : inc(cla[1]);
      Assassin  : inc(cla[2]);
      Barbarian : inc(cla[3]);
@@ -260,7 +260,7 @@ begin
        (ply0^.name1<>global_delname1) and
        (ply0^.name2<>global_delname2) then begin
      inc(ids);
-     case ply0^.class of
+     case ply0^.classid of
       Alchemist : inc(cla[1]);
       Assassin  : inc(cla[2]);
       Barbarian : inc(cla[3]);
@@ -700,7 +700,7 @@ begin
     s:=s+commastr(ply^.level)+' ';
 
     {race}
-    s:=s+config.textcol1+classnames[ply^.class]+config.textcol1;
+    s:=s+config.textcol1+classnames[ply^.classid]+config.textcol1;
 
     {display produced string}
     if ply^.sex=1 then s:=s+' is father to '

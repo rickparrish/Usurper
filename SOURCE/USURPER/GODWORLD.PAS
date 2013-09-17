@@ -1273,7 +1273,7 @@ begin
  onliner.shadow  :=false;
  onliner.dead    :=false;
  onliner.race    :=human;
- onliner.class   :=warrior;
+ onliner.classid :=warrior;
  for i:=1 to global_maxnod do begin
   onliner.chatline[i]:=emptystr;
   onliner.chatsend[i]:=emptystr;

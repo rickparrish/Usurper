@@ -78,7 +78,7 @@ begin
 
  if (o.shop) and (o.armor>minarmor) and
     (o.armor<=maxarmor) and (o.cursed=false) and
-    (class_restricted(pl0.class,o,0)=false) and
+    (class_restricted(pl0.classid,o,0)=false) and
     (pl0.strength>=o.str_need) then begin
   ok_to_buy:=true;
  end
@@ -1192,7 +1192,7 @@ begin
   Pay_Royal_Guard(pl0^,King);
 
   {bard songs}
-  if pl0^.class=bard then begin
+  if pl0^.classid=bard then begin
    pl0^.bard_songs_left:=config.bardsongs;
   end;
 
@@ -1456,7 +1456,7 @@ begin
   if pl0^.leprosy=true then pl0^.leprosy:=false;
 
   {become a member of the Alchemist guild}
-  if (pl0^.class=Alchemist) and
+  if (pl0^.classid=Alchemist) and
      (pl0^.level>11) and
      (player_active(pl0^,false)=true) and
      (random(6)=0) then begin
@@ -1551,7 +1551,7 @@ begin
   end;
 
   {is it time for spell training as well?}
-  if pl0^.class in [Cleric,Magician,Sage] then begin
+  if pl0^.classid in [Cleric,Magician,Sage] then begin
    pl0^.spell[1,1]:=true;
    if pl0^.level>=5 then pl0^.spell[2,1]:=true;
    if pl0^.level>=10 then pl0^.spell[3,1]:=true;
@@ -1875,7 +1875,7 @@ begin
 
       pl0^.team:=s;
       inc(x);
-      member[x]:=pl0^.name2+' (lvl '+commastr(pl0^.level)+' '+classnames[pl0^.class]+')';
+      member[x]:=pl0^.name2+' (lvl '+commastr(pl0^.level)+' '+classnames[pl0^.classid]+')';
       user_save(pl0^);
 
      end;

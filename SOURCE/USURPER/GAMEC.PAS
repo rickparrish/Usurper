@@ -209,7 +209,7 @@ begin
  onliner.dead    :=false;
  onliner.sex     :=player.sex;
  onliner.race    :=player.race;
- onliner.class   :=player.class;
+ onliner.classid :=player.classid;
  for i:=1 to global_maxnod do begin
   onliner.chatline[i]:=emptystr;
   onliner.chatsend[i]:=emptystr;

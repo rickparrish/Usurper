@@ -233,16 +233,16 @@ Function Error_Message(const code: Integer): s70;
       {return message text for a given runtime error code
        this proc was taken from the elog.pas (DDplus doordriver}
 Var
- Class:  s70;
+ ErrorClass:  s70;
  Msg:    s70;
 begin
 
  case code of
-  1.. 99  : Class := 'DOS ERROR #'+long2str(code)+' :';
-  100..149: Class := 'I/O ERROR #'+long2str(code)+' :';
-  150..199: Class := 'CRITICAL ERROR #'+long2str(code)+' :';
-  200..249: Class := 'FATAL ERROR #'+long2str(code)+' :';
-  else      Class := 'UNKNOWN ERROR #'+long2str(code)+' :';
+  1.. 99  : ErrorClass := 'DOS ERROR #'+long2str(code)+' :';
+  100..149: ErrorClass := 'I/O ERROR #'+long2str(code)+' :';
+  150..199: ErrorClass := 'CRITICAL ERROR #'+long2str(code)+' :';
+  200..249: ErrorClass := 'FATAL ERROR #'+long2str(code)+' :';
+  else      ErrorClass := 'UNKNOWN ERROR #'+long2str(code)+' :';
  end; {case .end.}
 
  case Code of
@@ -291,7 +291,7 @@ begin
  end; {case .end.}
 
  {return result}
- Error_message := Class + Msg;
+ Error_message := ErrorClass + Msg;
 
 end; {error_message **END**}
 
@@ -1996,7 +1996,7 @@ end; { DirExist END, from SWAG }
 
 
 {-----FILESIZE START-----}
-Function Fs;
+Function Fs (filtyp:filsize) : word; {file size of particular record file}
 var
     memmy,
     i      : integer;
@@ -2305,7 +2305,7 @@ begin
              newbarrel.id:='AMIGA_RULES!!!!';
              newbarrel.level:=15;
              newbarrel.race:=Human;
-             newbarrel.class:=Warrior;
+             newbarrel.classid:=Warrior;
              newbarrel.deleted:=false;
              newbarrel.datee:=todays_date;
              newbarrel.barrels:=12;
@@ -2633,7 +2633,7 @@ end; {-----FILESIZE END-----}
 
 
 {-----ITEM FILESIZE START-----}
-Function FsOb;
+Function FsOb(otyp:objtype) : word; {file size of particular item file}
 var
     memmy,
     i      : integer;
@@ -2702,7 +2702,7 @@ begin
 end; {-----ITEM FILESIZE END-----}
 
 {-----LOAD OBJEKT START------}
-Function Load_Objekt;
+Function Load_Objekt   (var Objektt:orec;otyp:objtype;filnr:word) : boolean;
 var
     x,i,
     memmy,
@@ -3155,7 +3155,7 @@ begin
  if result=ok then begin
 
   {set correct spell levels. this isn't really necessary}
-  if slask.class in [Cleric,Magician,Sage] then begin
+  if slask.classid in [Cleric,Magician,Sage] then begin
    if slask.level>=5 then slask.spell[2,1]:=true;
    if slask.level>=10 then slask.spell[3,1]:=true;
    if slask.level>=15 then slask.spell[4,1]:=true;
@@ -3975,7 +3975,7 @@ end;
 {------LOAD MARKET END------}
 
 {------LOAD DRINK START------}
-Function Load_Drink;
+Function Load_Drink    (action:filaction;var slask:DrinkRec;   filnr:word):boolean;
 var
     ok,
     result : boolean;
@@ -4135,7 +4135,7 @@ end;
 {------LOAD DRINK END------}
 
 {------LOAD RELATION START------}
-Function Load_Relation;
+Function Load_Relation (action:filaction;var slask:RelationRec;filnr:word):boolean;
 var
     ok,
     result : boolean;
@@ -4242,7 +4242,7 @@ begin
 end; {load_bardsong *end*}
 
 {------LOAD CHILD START------}
-Function Load_Child;
+Function Load_Child    (action:filaction;var slask:ChildRec;   filnr:word):boolean;
 var
     ok,
     result : boolean;
@@ -4417,7 +4417,7 @@ begin
 end; {------LOAD BARREL END------}
 
 {------LOAD GOD START------}
-Function Load_God;
+Function Load_God      (action:filaction;var slask:GodRec;     filnr:word):boolean;
 var
     ok,
     result : boolean;
@@ -4843,7 +4843,7 @@ begin
 end;
 
 {---LOCK_ONLINEFILE START-----}
-Function Lock_OnlineFile;
+Function Lock_OnlineFile(action:filaction) : boolean;
 var
     result : boolean;
     memmy : integer;
@@ -4932,7 +4932,7 @@ end;
 {---LOCK_ONLINEFILE END-----}
 
 {---LOAD ONLINEFILE START----}
-Function Load_OnlineFile;
+Function Load_OnlineFile(action:filaction;var slask:onlinerec;filnr:longint) : boolean;
 var x : longint;
    error : integer;
    result: boolean;
@@ -5004,7 +5004,7 @@ end;
 {---LOAD ONLINEFILE END----}
 
 {---LOCK_QUEST-FILE START-----}
-Function Lock_QuestFile;
+Function Lock_QuestFile(action:filaction) : boolean;
 var ok : boolean;
     error : integer;
     memmy : integer;
@@ -5086,7 +5086,7 @@ end;
 {---LOAD QUEST-FILE END----}
 
 {---LOCK_RELATION-FILE START-----}
-Function Lock_RelationFile;
+Function Lock_RelationFile(action:filaction) : boolean;
 var
     ok : boolean;
     error : integer;
@@ -5187,7 +5187,7 @@ end;
 {---LOAD RELATION-FILE END----}
 
 {---LOCK MAIL-FILE START-----}
-Function Lock_MailFile;
+Function Lock_MailFile(action:filaction) : boolean;
 var ok : boolean;
     memmy : integer;
     i,
@@ -5290,7 +5290,7 @@ end;
 
 
 {---LOAD ONLINER START----}
-Function Load_Onliner;
+Function Load_Onliner  (action:filaction;var slask:OnlineRec;  filnr:longint):boolean;
 var
     ok,
     result : boolean;
@@ -5652,7 +5652,7 @@ begin
 end;
 
 {---LOCK_ONDUEL-FILE START-----}
-Function Lock_OnDuelFile;
+Function Lock_OnDuelFile(action:filaction) : boolean;
 var ok : boolean;
     memmy : integer;
     error : integer;

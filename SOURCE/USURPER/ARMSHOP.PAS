@@ -168,7 +168,7 @@ begin
 
    ok:=true;
 
-   if class_restricted(player.class,objekt^,0)=true then ok:=false;
+   if class_restricted(player.classid,objekt^,0)=true then ok:=false;
    if (player.dark>0) and (objekt^.good) then ok:=false;
    if (player.chiv>0) and (objekt^.evil) then ok:=false;
    if player.gold<objekt^.value then ok:=false;
@@ -449,7 +449,7 @@ begin
      inc(cc,1);
 
      restrict:=false;
-     if class_restricted(player.class,objekt^,0)=true then begin
+     if class_restricted(player.classid,objekt^,0)=true then begin
       restrict:=true;
      end;
 
@@ -480,7 +480,7 @@ begin
      sd(col,s);
 
      {restrictions}
-     if class_restricted(player.class,objekt^,0)=true then begin
+     if class_restricted(player.classid,objekt^,0)=true then begin
       d(7,' *Class Restricted*');
      end
      else begin

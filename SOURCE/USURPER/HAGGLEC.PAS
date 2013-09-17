@@ -34,7 +34,9 @@ Implementation
 
 Uses Init, Jakob, News;
 
-Function Haggle;
+Function Haggle(shop     : char;
+                origcost : longint;
+                const keeper : string ) : longint;
 var
     offer,
     temp,

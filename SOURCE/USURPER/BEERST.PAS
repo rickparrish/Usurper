@@ -262,7 +262,7 @@ procedure battle_dogs;
 begin
 pstam:=player.stamina;
 risk:=2;
-                       if (player.class=Assassin) or (player.class=Jester) then risk:=risk+2;
+                       if (player.classid=Assassin) or (player.classid=Jester) then risk:=risk+2;
                        if player.agility>10 then inc(risk);
                        if player.agility>20 then inc(risk);
                        if player.agility>30 then inc(risk);

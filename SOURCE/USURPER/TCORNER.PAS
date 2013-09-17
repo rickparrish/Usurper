@@ -971,7 +971,7 @@ begin
 
           {news paper}
           Newsy(true,'Gang Deserter!',
-          ' '+uplc+player.name2+config.textcol1+' the '+classnames[player.class]+' left '+utec+player.team+config.textcol1+'.',
+          ' '+uplc+player.name2+config.textcol1+' the '+classnames[player.classid]+' left '+utec+player.team+config.textcol1+'.',
           '',
           '',
           '',
@@ -1089,7 +1089,7 @@ begin
              '',
              umailheadc+'Team'+config.textcol1,
              mkstring(4,underscore),
-             uplc+player.name2+config.textcol1+' the '+classnames[player.class]+' has left the team!',
+             uplc+player.name2+config.textcol1+' the '+classnames[player.classid]+' has left the team!',
              '',
              '',
              '',
@@ -1281,7 +1281,7 @@ begin
            {inform offline team members of failed attempt}
            Team_Report_All(pl0.team,'','Turned down',
            mailrequest_nothing,
-           uplc+player.name2+config.textcol1+' the '+classnames[player.class]+' attempted to join your team.',
+           uplc+player.name2+config.textcol1+' the '+classnames[player.classid]+' attempted to join your team.',
            'The attempt failed since your team is full!',
            '',
            '');
@@ -1372,7 +1372,7 @@ begin
             {inform offline team members of failed attempt}
             Team_Report_All(pl0.team,'','Intruder',
             mailrequest_nothing,
-            uplc+player.name2+config.textcol1+' the '+classnames[player.class]+' entered the wrong password',
+            uplc+player.name2+config.textcol1+' the '+classnames[player.classid]+' entered the wrong password',
             'required to join your team.',
             '',
             '');
