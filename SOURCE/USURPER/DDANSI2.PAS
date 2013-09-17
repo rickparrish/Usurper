@@ -48,10 +48,10 @@ var
 procedure change_color(c: integer);
 begin
  case c of
-  00: beginany:=true;blink:=false;high:=false;norm:=true;end;
-  01: beginhigh:=true;end;
-  02: beginclrscr;any:=true;end;
-  05: beginblink:=true;any:=true;end;
+  00: begin any:=true;blink:=false;high:=false;norm:=true;end;
+  01: begin high:=true;end;
+  02: begin clrscr;any:=true;end;
+  05: begin blink:=true;any:=true;end;
  end;
  if (c>29) and (c<38) then begin
   any:=true;
@@ -104,12 +104,12 @@ begin
             cp:=cp+1;
            until cp>=length(s);
            if norm then begin
-             if (fflag=false) and (gflag=false) then begintextcolor(7);textbackground(0);curcolor:=7;end;
-             if (fflag=false) and (gflag=true) then begintextcolor(7);curcolor:=7;end;
+             if (fflag=false) and (gflag=false) then begin textcolor(7);textbackground(0);curcolor:=7;end;
+             if (fflag=false) and (gflag=true) then begin textcolor(7);curcolor:=7;end;
              if (high=true) and (fflag=false) then textcolor(scaleh[curcolor]);
              if (blink=true) and (fflag=false) then textcolor(scale[curcolor]+32);
              if (blink=true) and (high=true) and (fflag=false) then textcolor(scaleh[curcolor]+32);
-             if (fflag=true) and (gflag=false) then begintextbackground(0);end;
+             if (fflag=true) and (gflag=false) then begin textbackground(0);end;
             end;
            if any=false then textcolor(scaleh[curcolor]);
 { 5/12/95 srl }
