@@ -21,52 +21,53 @@ Copyright 2007 Jakob Dangarden
 }
 
 
-Unit Shady; {Usurper - Shady Shops}
+unit Shady; {Usurper - Shady Shops}
 
-Interface
+interface
 
-Procedure Shady_Shops;
+procedure Shady_Shops;
 
-Implementation
+implementation
 
-Uses Init, Cms, Jakob,
-     Groggo, Bobs, Alchemi,
-     Orb,
-     Drugs, Steroids, Various,
-     Various2, Online, File_Io, SysUtils;
+uses
+  Init, Cms, Jakob,
+  Groggo, Bobs, Alchemi,
+  Orb,
+  Drugs, Steroids, Various,
+  Various2, Online, File_Io, SysUtils;
 
 var
-   owner   : s70;
-   refresh : boolean;
+  owner:   s70;
+  refresh: boolean;
 
-Procedure Meny; {shady shops menu}
+procedure Meny; {shady shops menu}
 const offset = 25;
 begin
 
- clearscreen;
- crlf;
- d(5,'-*- Shady Shops -*-');
- crlf;
- d(config.textcolor,'You stumble in to the dark areas of the town.');
- d(config.textcolor,'It is here where you can get what you want, without');
- d(config.textcolor,'any questions being asked. Trouble is never far away in these');
- d(config.textcolor,'neighbourhoods.');
- crlf;
+  clearscreen;
+  crlf;
+  d(5, '-*- Shady Shops -*-');
+  crlf;
+  d(config.textcolor, 'You stumble in to the dark areas of the town.');
+  d(config.textcolor, 'It is here where you can get what you want, without');
+  d(config.textcolor, 'any questions being asked. Trouble is never far away in these');
+  d(config.textcolor, 'neighbourhoods.');
+  crlf;
 
- menu2(ljust('(D)rug Palace',offset));
- menu('(S)teroid Shop');
+  menu2(ljust('(D)rug Palace', offset));
+  menu('(S)teroid Shop');
 
- menu2(ljust('(O)rbs Health Club',offset));
- menu('(G) '+uplc+owner+config.textcol1+' Magic Services');
+  menu2(ljust('(O)rbs Health Club', offset));
+  menu('(G) ' + uplc + owner + config.textcol1 + ' Magic Services');
 
- menu2(ljust('(B)eer Hut',offset));
- menu('(A)lchemists Heaven');
+  menu2(ljust('(B)eer Hut', offset));
+  menu('(A)lchemists Heaven');
 
- menu('(R)eturn to street');
+  menu('(R)eturn to street');
 
 end; {meny .end.}
 
-Procedure Display_Menu(force,short : boolean);
+procedure Display_Menu(force, short: boolean);
 begin
 
  {sethotkeys_on(NoKill,['B',
@@ -79,177 +80,190 @@ begin
                        chr(13),
                        '?']);}
 
- if short=true then begin
-  if player.expert=false then begin
-   if (refresh) and (player.auto_meny) then begin
-    refresh:=false;
-    meny;
-   end;
-   crlf;
-   sd(config.textcolor,'Shady Shops (');
-   sd(config.hotkeycolor,'?');
-   sd(config.textcolor,' for menu) :');
-  end
-  else begin
-   crlf;
-   sd(config.textcolor,'Shady Shops (B,A,G,O,S,D,R,?) :');
+  if short = True then
+  begin
+    if player.expert = False then
+    begin
+      if (refresh) and (player.auto_meny) then
+      begin
+        refresh := False;
+        meny;
+      end;
+      crlf;
+      sd(config.textcolor, 'Shady Shops (');
+      sd(config.hotkeycolor, '?');
+      sd(config.textcolor, ' for menu) :');
+    end else
+    begin
+      crlf;
+      sd(config.textcolor, 'Shady Shops (B,A,G,O,S,D,R,?) :');
+    end;
+  end else
+  begin
+    if (player.expert = False) or (force = True) then
+    begin
+      meny;
+    end;
   end;
- end
- else begin
-  if (player.expert=false) or (force=true) then begin
-   meny;
-  end;
- end;
 
 end; {display_menu *end*}
 
-Procedure Shady_Shops;
+procedure Shady_Shops;
 var
-    cho : char;
-   done : boolean;
+  cho:  char;
+  done: boolean;
 
-   king : kingrec;
-
+  king: kingrec;
 
 begin
 
- {fetching Groggos name from .CFG}
- owner:=cfg_string(21);
- if owner='' then begin
-  owner:='Groggo';
- end;
-
- done:=false;
- repeat
-
-  {update online location, if necessary}
-  if onliner.location<>onloc_darkalley then begin
-   refresh:=true;
-   onliner.location:=onloc_darkalley;
-   onliner.doing   :=location_desc(onliner.location);
-   add_onliner(OUpdateLocation,onliner);
+  {fetching Groggos name from .CFG}
+  owner := cfg_string(21);
+  if owner = '' then
+  begin
+    owner := 'Groggo';
   end;
 
-  {auto-travel}
-  case global_auto_probe of
-   NoWhere:begin
-            display_menu(true,true);
-            cho:=upcase(getchar);
-           end;
-   UmanCave:begin
-             cho:='R';
-            end;
-  end; {case .end.}
+  done := False;
+  repeat
 
-  {filter out disabled options}
-  if (cho='D') and (config.allow_drugs=false) then begin
-   crlf;
-   d(12,'Drugs are banned in this game.');
-   pause;
-   cho:=' ';
-  end
-  else if (cho='S') and (config.allow_steroids=false) then begin
-   crlf;
-   d(12,'Steroids are banned in this game.');
-   pause;
-   cho:=' ';
-  end;
+    {update online location, if necessary}
+    if onliner.location <> onloc_darkalley then
+    begin
+      refresh := True;
+      onliner.location := onloc_darkalley;
+      onliner.doing := location_desc(onliner.location);
+      add_onliner(OUpdateLocation, onliner);
+    end;
 
-  case cho of
-   '?':begin
-        if player.expert=true then display_menu(true,false)
-                              else display_menu(false,false);
-       end;
-   'R':begin {return}
-        done:=true;
-       end;
-   'O':begin {orbs drink center}
+    {auto-travel}
+    case global_auto_probe of
+      NoWhere: begin
+        display_menu(True, True);
+        cho := upcase(getchar);
+      end;
+      UmanCave: begin
+        cho := 'R';
+      end;
+    end; {case .end.}
 
-        load_king(fload,king);
+    {filter out disabled options}
+    if (cho = 'D') and (config.allow_drugs = False) then
+    begin
+      crlf;
+      d(12, 'Drugs are banned in this game.');
+      pause;
+      cho := ' ';
+    end else if (cho = 'S') and (config.allow_steroids = False) then
+    begin
+      crlf;
+      d(12, 'Steroids are banned in this game.');
+      pause;
+      cho := ' ';
+    end;
 
-        if (king.shop_orbs=false) and (player.king=false) then begin
-         crlf;
-         d(12,'Orbs Health Club is closed! (The '+UpperCase(kingstring(king.sexy))+'s order!)');
-        end
-        else begin
-         crlf;
-         crlf;
-         d(config.textcolor,'You decide to enter this somewhat dubious place.');
-         orb_center;
+    case cho of
+      '?': begin
+        if player.expert = True then display_menu(True, False)
+        else display_menu(False, False);
+      end;
+      'R': begin {return}
+        done := True;
+      end;
+      'O': begin {orbs drink center}
+
+        load_king(fload, king);
+
+        if (king.shop_orbs = False) and (player.king = False) then
+        begin
+          crlf;
+          d(12, 'Orbs Health Club is closed! (The ' + UpperCase(kingstring(king.sexy)) + 's order!)');
+        end else
+        begin
+          crlf;
+          crlf;
+          d(config.textcolor, 'You decide to enter this somewhat dubious place.');
+          orb_center;
         end;
-       end;
-   'A':begin {alchemist secret order}
-        if player.classid<>Alchemist then begin
-         crlf;
-         d(5,'The guards outside the building humiliate you and block the entrance.');
-         d(5,'It seems as only Alchemists are allowed.');
-        end
-        else begin
-         alchemisty;
+      end;
+      'A': begin {alchemist secret order}
+        if player.classid <> Alchemist then
+        begin
+          crlf;
+          d(5, 'The guards outside the building humiliate you and block the entrance.');
+          d(5, 'It seems as only Alchemists are allowed.');
+        end else
+        begin
+          alchemisty;
         end;
-       end;
-   'B':begin {Bobs Beer Hut}
+      end;
+      'B': begin {Bobs Beer Hut}
 
         muffis;
-        if global_registered=true then begin
-         load_king(fload,king);
+        if global_registered = True then
+        begin
+          load_king(fload, king);
 
-         if (king.shop_bobs=false) and (player.king=false) then begin
+          if (king.shop_bobs = False) and (player.king = False) then
+          begin
+            crlf;
+            d(12, config.bobsplace + ' is closed! (The ' + UpperCase(kingstring(king.sexy)) + 's order!)');
+          end else
+          begin
+            crlf;
+            crlf;
+            d(config.textcolor, 'You enter ' + ulcyan + config.bobsplace);
+            bobs_inn;
+          end;
+        end else
+        begin
           crlf;
-          d(12,config.bobsplace+' is closed! (The '+UpperCase(kingstring(king.sexy))+'s order!)');
-         end
-         else begin
-          crlf;
-          crlf;
-          d(config.textcolor,'You enter '+ulcyan+config.bobsplace);
-          bobs_inn;
-         end;
-        end
-        else begin
-         crlf;
-         d(12,'Sorry, only available in the registered version.');
-         pause;
+          d(12, 'Sorry, only available in the registered version.');
+          pause;
         end;
 
-       end;
-   'G':begin {Evil Magic}
+      end;
+      'G': begin {Evil Magic}
 
-         load_king(fload,king);
+        load_king(fload, king);
 
-         if (king.shop_evilmagic=false) and (player.king=false) then begin
+        if (king.shop_evilmagic = False) and (player.king = False) then
+        begin
           crlf;
-          d(12,owner+'s place is closed! (The '+UpperCase(kingstring(king.sexy))+'s order!)');
-         end
-         else begin
+          d(12, owner + 's place is closed! (The ' + UpperCase(kingstring(king.sexy)) + 's order!)');
+        end else
+        begin
           Groggos_Magic;
-         end;
-       end;
-   'D':begin {Drugs}
-        load_king(fload,king);
-
-        if (king.shop_drugs=false) and (player.king=false) then begin
-         crlf;
-         d(12,'The Drug Palace is closed! (The '+UpperCase(kingstring(king.sexy))+'s order!)');
-        end
-        else begin
-         Drug_Store;
         end;
-       end;
-   'S':begin {Steroids}
-        load_king(fload,king);
+      end;
+      'D': begin {Drugs}
+        load_king(fload, king);
 
-        if (king.shop_steroids=false) and (player.king=false) then begin
-         crlf;
-         d(12,'The Steroid Shop is closed! (The '+UpperCase(kingstring(king.sexy))+'s order!)');
-        end
-        else begin
-         Steroid_Store;
+        if (king.shop_drugs = False) and (player.king = False) then
+        begin
+          crlf;
+          d(12, 'The Drug Palace is closed! (The ' + UpperCase(kingstring(king.sexy)) + 's order!)');
+        end else
+        begin
+          Drug_Store;
         end;
-       end;
-  end; {case .end.}
+      end;
+      'S': begin {Steroids}
+        load_king(fload, king);
 
- until done;
- crlf;
+        if (king.shop_steroids = False) and (player.king = False) then
+        begin
+          crlf;
+          d(12, 'The Steroid Shop is closed! (The ' + UpperCase(kingstring(king.sexy)) + 's order!)');
+        end else
+        begin
+          Steroid_Store;
+        end;
+      end;
+    end; {case .end.}
+
+  until done;
+  crlf;
 
 end; {shady_shops *end*}
 

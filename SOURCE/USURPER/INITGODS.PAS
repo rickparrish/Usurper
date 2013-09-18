@@ -22,36 +22,37 @@ Copyright 2007 Jakob Dangarden
 
 
 
-Unit InitGods; {Usurper - God init/structure code}
+unit InitGods; {Usurper - God init/structure code}
 
-Interface
+interface
 
-Uses Init;
+uses
+  Init;
 
 const global_supreme_creator = 'Manwe'; {the boss God}
 
 type {see vargods.pas => become_god}
- GodRec = Record {God record}
-  realname : s30;  {real (user/bbs) name}
-  name : s30;      {alias}
-  id   : s15;      {unique ID tag, this id follows the player from the
+  GodRec = record {God record}
+    realname:  s30;  {real (user/bbs) name}
+    Name:      s30;      {alias}
+    id:        s15;      {unique ID tag, this id follows the player from the
                     user file!}
-  recnr: word;      {rec # in file}
-  age  : word;      {age}
-  sex  : byte;      {sex, 1=male, 2=female}
-  ai   : char;      {ai: 'H'uman or 'C'omputer }
-  level: word;      {level}
-  exp  : longint;   {experience, power}
-  deedsleft : word; {deedsleft today, new ones given at maintenance}
-  deleted  : boolean; {deleted}
-  believers: word;    {believers, disciples, # of players who worship this god}
-  darkness : longint; {good points, follows from the player time}
-  goodness : longint; {dark points, follows from the player time}
- end; {godrec *end*}
+    recnr:     word;      {rec # in file}
+    age:       word;      {age}
+    sex:       byte;      {sex, 1=male, 2=female}
+    ai:        char;      {ai: 'H'uman or 'C'omputer }
+    level:     word;      {level}
+    exp:       longint;   {experience, power}
+    deedsleft: word; {deedsleft today, new ones given at maintenance}
+    deleted:   boolean; {deleted}
+    believers: word;    {believers, disciples, # of players who worship this god}
+    darkness:  longint; {good points, follows from the player time}
+    goodness:  longint; {dark points, follows from the player time}
+  end; {godrec *end*}
 
-var God : GodRec; {used by God in game}
+var God: GodRec; {used by God in game}
 
-Implementation
+implementation
 
 begin
 

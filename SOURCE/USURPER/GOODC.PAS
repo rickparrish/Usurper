@@ -22,36 +22,37 @@ Copyright 2007 Jakob Dangarden
 
 
 
-Unit GoodC; {Usurper - good deeds}
+unit GoodC; {Usurper - good deeds}
 
-Interface
+interface
 
-Procedure Good_Deeds;
+procedure Good_Deeds;
 
-Implementation
+implementation
 
-Uses Init, Cms, Jakob,
-     News, Various, Various2,
-     Online;
+uses
+  Init, Cms, Jakob,
+  News, Various, Various2,
+  Online;
 
-var refresh : boolean;
+var refresh: boolean;
 
-Procedure Meny;
+procedure Meny;
 begin
- clearscreen;
- crlf;
- d(5,'-*- Good Deeds -*-');
- crlf;
- d(config.textcolor,'You feel that your soul is in need of salvation.');
- d(config.textcolor,'Doing good is a virtue.');
- crlf;
- menu('(G)ive to the poor');
- menu('(C)hurch collect');
- menu('(B)lessing');
- menu('(R)eturn to street');
+  clearscreen;
+  crlf;
+  d(5, '-*- Good Deeds -*-');
+  crlf;
+  d(config.textcolor, 'You feel that your soul is in need of salvation.');
+  d(config.textcolor, 'Doing good is a virtue.');
+  crlf;
+  menu('(G)ive to the poor');
+  menu('(C)hurch collect');
+  menu('(B)lessing');
+  menu('(R)eturn to street');
 end;
 
-Procedure Display_Menu(force,short : boolean);
+procedure Display_Menu(force, short: boolean);
 begin
 
  {sethotkeys_on(NoKill,['G',
@@ -61,193 +62,196 @@ begin
                        chr(13),
                        '?']);}
 
- if short=true then begin
-  if player.expert=false then begin
-   if (refresh) and (player.auto_meny) then begin
-    refresh:=false;
-    meny;
-   end;
+  if short = True then
+  begin
+    if player.expert = False then
+    begin
+      if (refresh) and (player.auto_meny) then
+      begin
+        refresh := False;
+        meny;
+      end;
 
-   crlf;
-   sd(config.textcolor,'Good Deeds (');
-   sd(config.hotkeycolor,'?');
-   sd(config.textcolor,' for menu) :');
-  end
-  else begin
+      crlf;
+      sd(config.textcolor, 'Good Deeds (');
+      sd(config.hotkeycolor, '?');
+      sd(config.textcolor, ' for menu) :');
+    end else
+    begin
 
-   crlf;
-   sd(config.textcolor,'Good Deeds (G,C,B,R,?) :');
+      crlf;
+      sd(config.textcolor, 'Good Deeds (G,C,B,R,?) :');
+    end;
+  end else
+  begin
+    if (player.expert = False) or (force = True) then
+    begin
+      meny;
+    end;
   end;
- end
- else begin
-  if (player.expert=false) or (force=true) then begin
-   meny;
-  end;
- end;
 end;
 
-Procedure Good_Deeds;
-const never : boolean = false;
+procedure Good_Deeds;
+const never: boolean = False;
 var
-   cho : char;
-    xx : longint;
+  cho: char;
+  xx:  longint;
 
 begin
 
- repeat
+  repeat
 
-  {update player location, if necessary}
-  if onliner.location<>onloc_church then begin
-   refresh:=true;
-   onliner.location :=onloc_church;
-   onliner.doing    :=location_desc(onliner.location);
-   add_onliner(OUpdateLocation,Onliner);
-  end;
+    {update player location, if necessary}
+    if onliner.location <> onloc_church then
+    begin
+      refresh := True;
+      onliner.location := onloc_church;
+      onliner.doing := location_desc(onliner.location);
+      add_onliner(OUpdateLocation, Onliner);
+    end;
 
-  display_menu(true,true);
+    display_menu(True, True);
 
-  cho:=upcase(getchar);
+    cho := upcase(getchar);
 
-  case cho of
-   '?':begin {menu}
-        if player.expert=true then display_menu(true,false)
-                              else display_menu(false,false);
-       end;
-   'G':begin {give to the poor .start.}
+    case cho of
+      '?': begin {menu}
+        if player.expert = True then display_menu(True, False)
+        else display_menu(False, False);
+      end;
+      'G': begin {give to the poor .start.}
         crlf;
         crlf;
-        d(config.textcolor,'You have '+uyellow+commastr(player.gold)+config.textcol1+' '+many_money(player.gold));
-        d(config.textcolor,'How much can you spare to the poor');
-        sd(config.textcolor,':');
+        d(config.textcolor, 'You have ' + uyellow + commastr(player.gold) + config.textcol1 + ' ' + many_money(player.gold));
+        d(config.textcolor, 'How much can you spare to the poor');
+        sd(config.textcolor, ':');
 
-        xx:=get_number(0,player.gold);
+        xx := get_number(0, player.gold);
 
-        if (xx<=player.gold) and (xx>0) then begin
-         crlf;
-         d(config.textcolor,'Your contribution of '+uyellow+commastr(xx)+config.textcol1+' '+many_money(xx)
-           +' is appreciated.');
-         d(config.textcolor,'You feel a bit better inside now.');
-         decplayermoney(player,xx);
-         xx:=xx div 10;
-         if xx<1 then xx:=1;
-         Give_Chivalry(player,xx);
-         dec(player.chivnr);
-
-         {news-paper}
-         newsy(true,
-         'Good-Doer',
-         ' '+uplc+player.name2+config.textcol1+' gave money to the poor.',
-         '',
-         '',
-         '',
-         '',
-         '',
-         '',
-         '',
-         '');
-
-
-        end;
-
-       end;
-   'C':begin {church collect .start.}
-        crlf;
-        crlf;
-        d(config.textcolor,'You have '+uyellow+commastr(player.gold)+config.textcol1+' '+many_money(player.gold));
-        d(config.textcolor,'How much do you want to give to the Church');
-        sd(config.textcolor,':');
-        xx:=get_number(0,player.gold);
-
-        if xx>player.gold then begin
-         d(12,'Scoundrel! You don''t have that much!');
-        end
-        else if (xx<=player.gold) and (xx>0) then begin
-
-         crlf;
-         d(config.textcolor,'Your contribution of '+uyellow+commastr(xx)+config.textcol1+' '+many_money(xx)
-           +' is appreciated.');
-         d(config.textcolor,'Your virtue and support from the Church increase.');
-         crlf;
-         d(config.textcolor,'You are blessed by Bishop '+uplc+config.bishop+config.textcol1+'.');
-
-         decplayermoney(player,xx);
-         xx:=xx div 11;
-         if xx<1 then xx:=1;
-
-         Give_Chivalry(player,xx);
-         dec(player.chivnr);
-
-         {news-paper}
-         newsy(true,
-         'Good-Doer',
-         ' '+uplc+player.name2+config.textcol1+' donated money to the Church.',
-         '',
-         '',
-         '',
-         '',
-         '',
-         '',
-         '',
-         '');
-
-
-        end;
-
-       end; {church collect .end.}
-
-   'B':begin {blessing .start.}
-        if player.dark<1 then begin
-         crlf;
-         d(14,'Your soul is in no need of salvation (lucky you).');
-        end
-        else begin
-         crlf;
-         d(config.textcolor,'You have '+uyellow+commastr(player.gold)+config.textcol1+' '+many_money(player.gold));
-         d(config.textcolor,'How much do you want to give for a blessing');
-         sd(config.textcolor,':');
-         xx:=get_number(0,player.gold);
-
-         if (xx<=player.gold) and (xx>0) then begin
+        if (xx <= player.gold) and (xx > 0) then
+        begin
           crlf;
-          d(config.textcolor,'Your contribution of '+uyellow+commastr(xx)+config.textcol1+' '+many_money(xx)
-           +' give you salvation.');
-          d(config.textcolor,'Your dark soul lightens.');
-
-          decplayermoney(player,xx);
-
-          xx:=xx div 15;
-          if xx<1 then xx:=1;
-
-          Give_Chivalry(player,xx);
-
-          dec(player.chivnr);
+          d(config.textcolor, 'Your contribution of ' + uyellow + commastr(xx) + config.textcol1 + ' ' + many_money(xx) + ' is appreciated.');
+          d(config.textcolor, 'You feel a bit better inside now.');
+          decplayermoney(player, xx);
+          xx := xx div 10;
+          if xx < 1 then xx := 1;
+          Give_Chivalry(player, xx);
+          Dec(player.chivnr);
 
           {news-paper}
-          newsy(true,
-          'Blessed',
-          ' '+uplc+player.name2+config.textcol1+' purchased a blessing.',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '');
+          newsy(True,
+            'Good-Doer',
+            ' ' + uplc + player.name2 + config.textcol1 + ' gave money to the poor.',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '');
 
-
-         end;
         end;
-       end; {blessing .end.}
-   'R':begin {return}
+
+      end;
+      'C': begin {church collect .start.}
+        crlf;
+        crlf;
+        d(config.textcolor, 'You have ' + uyellow + commastr(player.gold) + config.textcol1 + ' ' + many_money(player.gold));
+        d(config.textcolor, 'How much do you want to give to the Church');
+        sd(config.textcolor, ':');
+        xx := get_number(0, player.gold);
+
+        if xx > player.gold then
+        begin
+          d(12, 'Scoundrel! You don''t have that much!');
+        end else if (xx <= player.gold) and (xx > 0) then
+        begin
+
+          crlf;
+          d(config.textcolor, 'Your contribution of ' + uyellow + commastr(xx) + config.textcol1 + ' ' + many_money(xx) + ' is appreciated.');
+          d(config.textcolor, 'Your virtue and support from the Church increase.');
+          crlf;
+          d(config.textcolor, 'You are blessed by Bishop ' + uplc + config.bishop + config.textcol1 + '.');
+
+          decplayermoney(player, xx);
+          xx := xx div 11;
+          if xx < 1 then xx := 1;
+
+          Give_Chivalry(player, xx);
+          Dec(player.chivnr);
+
+          {news-paper}
+          newsy(True,
+            'Good-Doer',
+            ' ' + uplc + player.name2 + config.textcol1 + ' donated money to the Church.',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '');
+
+        end;
+
+      end; {church collect .end.}
+
+      'B': begin {blessing .start.}
+        if player.dark < 1 then
+        begin
+          crlf;
+          d(14, 'Your soul is in no need of salvation (lucky you).');
+        end else
+        begin
+          crlf;
+          d(config.textcolor, 'You have ' + uyellow + commastr(player.gold) + config.textcol1 + ' ' + many_money(player.gold));
+          d(config.textcolor, 'How much do you want to give for a blessing');
+          sd(config.textcolor, ':');
+          xx := get_number(0, player.gold);
+
+          if (xx <= player.gold) and (xx > 0) then
+          begin
+            crlf;
+            d(config.textcolor, 'Your contribution of ' + uyellow + commastr(xx) + config.textcol1 + ' ' + many_money(xx) + ' give you salvation.');
+            d(config.textcolor, 'Your dark soul lightens.');
+
+            decplayermoney(player, xx);
+
+            xx := xx div 15;
+            if xx < 1 then xx := 1;
+
+            Give_Chivalry(player, xx);
+
+            Dec(player.chivnr);
+
+            {news-paper}
+            newsy(True,
+              'Blessed',
+              ' ' + uplc + player.name2 + config.textcol1 + ' purchased a blessing.',
+              '',
+              '',
+              '',
+              '',
+              '',
+              '',
+              '',
+              '');
+
+          end;
+        end;
+      end; {blessing .end.}
+      'R': begin {return}
         break;
-       end;
+      end;
 
-  end; {case .end.}
+    end; {case .end.}
 
- until never; {never leave this loop}
+  until never; {never leave this loop}
 
- crlf;
+  crlf;
 
 end; {Good_Deeds *end*}
 

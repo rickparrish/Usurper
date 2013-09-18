@@ -22,27 +22,28 @@ Copyright 2007 Jakob Dangarden
 }
 
 
-Unit JakeLock; {Usurper - Filelocking routine used when
+unit JakeLock; {Usurper - Filelocking routine used when
                           Config.NetShareMethod=RecordLocking}
 
-Interface
+interface
 
-Uses Init;
+uses
+  Init;
 
-function File_Lock(var F; Action: filAction; FPos,Len: Longint): Word;
+function File_Lock(var F; Action: filAction; FPos, Len: longint): word;
 
-Implementation
+implementation
 
-Uses Dos, FileUtils;
+uses
+  Dos, FileUtils;
 
 {this routine was taken from the SWAG archive, locks records AND files}
-function File_Lock(var F; Action: filAction; FPos,Len: Longint): Word;
+function File_Lock(var F; Action: filAction; FPos, Len: longint): word;
 begin
   if (Action = FLock) then
   begin
     File_Lock := LockFile(FileRec(F).Handle, FPos, Len);
-  end else
-  if (Action = FUnlock) then
+  end else if (Action = FUnlock) then
   begin
     File_Lock := UnLockFile(FileRec(F).Handle, FPos, Len);
   end;

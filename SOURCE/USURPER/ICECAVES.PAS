@@ -22,117 +22,124 @@ Copyright 2007 Jakob Dangarden
 }
 
 
-Unit IceCaves; {Usurper - Ice Caves}
+unit IceCaves; {Usurper - Ice Caves}
 
-Interface
+interface
 
-Uses Init;
+uses
+  Init;
 
-Procedure Ice_Caves(var pl1,pl2,pl3,pl4 : Userrec); {Ice Caves}  {TEAM?}
+procedure Ice_Caves(var pl1, pl2, pl3, pl4: Userrec); {Ice Caves}  {TEAM?}
 
-Implementation
+implementation
 
-Uses Cms, Jakob, Statusc,
-     Various, Online, File_io;
+uses
+  Cms, Jakob, Statusc,
+  Various, Online, File_io;
 
 const place = 'Ice-Caves';
 var
-    refresh : boolean;
+  refresh: boolean;
 
-Procedure Meny;
+procedure Meny;
 const offset = 22;
 begin
- clearscreen;
- crlf;
- d(5,'-*- The '+place+' -*-');
- crlf;
- crlf;
+  clearscreen;
+  crlf;
+  d(5, '-*- The ' + place + ' -*-');
+  crlf;
+  crlf;
 
- menu('(S)tatus');
- menu('(R)eturn to Dungeons');
+  menu('(S)tatus');
+  menu('(R)eturn to Dungeons');
 
 end; {meny *end*}
 
-Procedure Display_Menu(force,short : boolean);
+procedure Display_Menu(force, short: boolean);
 begin
 
- if short=true then begin
-  if player.expert=false then begin
-   if (refresh) and (player.auto_meny) then begin
-    refresh:=false;
-    meny;
-   end;
+  if short = True then
+  begin
+    if player.expert = False then
+    begin
+      if (refresh) and (player.auto_meny) then
+      begin
+        refresh := False;
+        meny;
+      end;
 
-   crlf;
-   sd(config.textcolor,ulcyan+place+config.textcol1+' ('+config.textcol2+'?'+config.textcol1+' for menu) :');
-  end
-  else begin
+      crlf;
+      sd(config.textcolor, ulcyan + place + config.textcol1 + ' (' + config.textcol2 + '?' + config.textcol1 + ' for menu) :');
+    end else
+    begin
 
-   crlf;
-   sd(15,place+config.textcol1+' (S,R,?) :');
+      crlf;
+      sd(15, place + config.textcol1 + ' (S,R,?) :');
+    end;
+  end else
+  begin
+    if (player.expert = False) or (force = True) then
+    begin
+      meny;
+    end;
   end;
- end
- else begin
-  if (player.expert=false) or (force=true) then begin
-   meny;
-  end;
- end;
 
 end; {display_menu *end*}
 
-Procedure Ice_Caves;
+procedure Ice_Caves;
 var
-    ice_caves_done : boolean;
+  ice_caves_done: boolean;
 
-    ch : char;
+  ch: char;
 
 begin
 
- {intro.text}
- crlf;
- crlf;
- d(config.textcolor,'You enter the '+ulcyan+place+config.textcol1);
- crlf;
- pause;
+  {intro.text}
+  crlf;
+  crlf;
+  d(config.textcolor, 'You enter the ' + ulcyan + place + config.textcol1);
+  crlf;
+  pause;
 
- ice_caves_done:=false;
- repeat
+  ice_caves_done := False;
+  repeat
 
-  {update online location, if necessary}
-  if onliner.location<>onloc_icecaves then begin
-   refresh:=true;
-   onliner.location:=onloc_icecaves;
-   onliner.doing   :=location_desc(onliner.location);
-   add_onliner(OUpdateLocation,Onliner);
-  end;
+    {update online location, if necessary}
+    if onliner.location <> onloc_icecaves then
+    begin
+      refresh := True;
+      onliner.location := onloc_icecaves;
+      onliner.doing := location_desc(onliner.location);
+      add_onliner(OUpdateLocation, Onliner);
+    end;
 
-  display_menu(true,true);
+    display_menu(True, True);
 
-  {get user-input}
-  ch:=upcase(getchar);
+    {get user-input}
+    ch := upcase(getchar);
 
-  {evaluate user input}
-  case ch of
+    {evaluate user input}
+    case ch of
 
-   '?':begin {menu}
-        if player.expert=true then display_menu(true,false)
-                              else display_menu(false,false);
-       end;
-   'R':begin {return}
-        ice_caves_done:=true;
-       end;
-   'S':begin {status}
+      '?': begin {menu}
+        if player.expert = True then display_menu(True, False)
+        else display_menu(False, False);
+      end;
+      'R': begin {return}
+        ice_caves_done := True;
+      end;
+      'S': begin {status}
         status(player);
-       end;
+      end;
 
-  end; {case .end.}
+    end; {case .end.}
 
- until ice_caves_done=true;
+  until ice_caves_done = True;
 
- crlf;
- crlf;
- d(config.textcolor,'You leave the '+ulcyan+place+config.textcol1+'.');
- crlf;
+  crlf;
+  crlf;
+  d(config.textcolor, 'You leave the ' + ulcyan + place + config.textcol1 + '.');
+  crlf;
 
 end;
 

@@ -5,41 +5,40 @@
 (*   Utility Module             *)
 (********************************)
 
-UNIT Elog;
+unit Elog;
 
-INTERFACE
+interface
 
 
-VAR
- SaveExitProc: POINTER;
-
-PROCEDURE Terminate (N:Byte);
-PROCEDURE TrapExit;
-PROCEDURE MyExit1;
-
-IMPLEMENTATION   (********************************)
-
-Uses Crt, Dos, DDPlus,
-     Jakob, File_Io, SysUtils; {jakob}
-
-Procedure GetDate1(VAR Month:Word;
-                   VAR day:Word;
-                   VAR year:Word);
 var
-  DOW: Word;
+  SaveExitProc: POINTER;
+
+procedure Terminate(N: byte);
+procedure TrapExit;
+procedure MyExit1;
+
+implementation   (********************************)
+
+uses
+  Crt, Dos, DDPlus,
+  Jakob, File_Io, SysUtils; {jakob}
+
+procedure GetDate1(var Month: word; var day: word; var year: word);
+var
+  DOW: word;
 begin
   GetDate(Year, Month, Day, DOW);
 end;
 
-PROCEDURE Terminate (N:Byte);
- Begin
-   CASE N OF
-     0:Begin {} End;{SWriteln('Normal Termination'); jakob remmar bort}
-     1:Begin SWriteln('Carrier lost'); End;
-     2:Begin SWriteln('*** TIME LIMIT HAS EXPIRED ***'); End;
-     3:Begin SWriteln('User Inactive for 5+ minutes'); End;
-   End
- End;
+procedure Terminate(N: byte);
+begin
+  case N of
+    0: begin  end;{SWriteln('Normal Termination'); jakob remmar bort}
+    1: begin SWriteln('Carrier lost'); end;
+    2: begin SWriteln('*** TIME LIMIT HAS EXPIRED ***'); end;
+    3: begin SWriteln('User Inactive for 5+ minutes'); end;
+  end;
+end;
 
 (* This exit procedure may be used to trap HALT codes.  If defined in the
    main body of your program (DoorExit := TrapExit), this procedure will be
@@ -58,187 +57,191 @@ PROCEDURE Terminate (N:Byte);
 *)
 
 
-PROCEDURE TrapExit;
+procedure TrapExit;
 
-CONST
-   {Replace GodFather with the name of your program}
+const
+  {Replace GodFather with the name of your program}
 
-   ProductName='Usurper'; {jakob}
-   logname    ='ERROR.LOG'; {jakob}
+  ProductName = 'Usurper'; {jakob}
+  logname     = 'ERROR.LOG'; {jakob}
 
-VAR
-   ErrFile    : TEXT ;
-   OpenAttempts: Integer;
-   GoAhead:Boolean;
-   Year,Month,Day: Word;
-
-
-   FUNCTION Exit_message(Code: Integer): STRING;
-      {return message text for a given exit code}
-   VAR
-      Msg:    STRING;
-   BEGIN
-      CASE Code OF
-           0: Msg := ''; {'Normal Termination'; jaokb tar bort}
-           1: Msg := 'Carrier Lost';
-           2: Msg := 'Time Limit Exceeded';
-           3: Msg := 'User Inactivity Timeout';
-           4: Msg := 'Cannot Find Dorinfo1.def';
-           5: Msg := 'Cannot Find ExitInfo.Bbs';
-           6: Msg := 'Directory Change/Read Error';
-           7: Msg := 'CTS Timeout';
-           8: Msg := 'Forced Exit via RAXIT Semaphore';
-           9: Msg := 'Cannot Find Door.Sys';
-         ELSE STR(Code,Msg);
-      END;
-      Exit_Message := Msg;
-   END;
+var
+  ErrFile:          Text;
+  OpenAttempts:     integer;
+  GoAhead:          boolean;
+  Year, Month, Day: word;
 
 
-   FUNCTION Itoh(W: Integer): STRING;
-      {hex conversion}
-   CONST
-      Hex: ARRAY[0..15] OF CHAR = '0123456789ABCDEF';
-   VAR
-      H: STRING[4];
-   BEGIN
-      H[0] := CHR(4);
-      H[1] := Hex[(W SHR 12) AND $0f];
-      H[2] := Hex[(W SHR  8) AND $0f];
-      H[3] := Hex[(W SHR  4) AND $0f];
-      H[4] := Hex[W          AND $0f];
-      Itoh := H;
-   END;
+  function Exit_message(Code: integer): string;
+    {return message text for a given exit code}
+  var
+    Msg: string;
+  begin
+    case Code of
+      0: Msg := ''; {'Normal Termination'; jaokb tar bort}
+      1: Msg := 'Carrier Lost';
+      2: Msg := 'Time Limit Exceeded';
+      3: Msg := 'User Inactivity Timeout';
+      4: Msg := 'Cannot Find Dorinfo1.def';
+      5: Msg := 'Cannot Find ExitInfo.Bbs';
+      6: Msg := 'Directory Change/Read Error';
+      7: Msg := 'CTS Timeout';
+      8: Msg := 'Forced Exit via RAXIT Semaphore';
+      9: Msg := 'Cannot Find Door.Sys';
+      else STR(Code, Msg);
+    end;
+    Exit_Message := Msg;
+  end;
 
-BEGIN
-   GetDate1(Month,day,year);
-   IF ErrorAddr = NIL THEN
-    Begin
-     If ExitCode = 0 then
-      Begin
-       Terminate(0) ;
-       Exit;
-      End;
-     
-     {Replace the next line with the name of YOUR save procedure}
-     {This ones save my game information should something go wrong}
-     {I have left it so you see what I did, although it IS commented out}
 
-     {SaveGame(Player,PlayerFile,TempP,Country,CountryFile,Map1,MapFile);}
-     
-     ASSIGN(ErrFile,logname);
-     IF F_EXISTS(logname) THEN
-      Begin
-       OpenAttempts:=1;
-       Repeat
+  function Itoh(W: integer): string;
+    {hex conversion}
+  const
+    Hex: array[0..15] of char = '0123456789ABCDEF';
+  var
+    H: string[4];
+  begin
+    H[0] := CHR(4);
+    H[1] := Hex[(W shr 12) and $0f];
+    H[2] := Hex[(W shr 8) and $0f];
+    H[3] := Hex[(W shr 4) and $0f];
+    H[4] := Hex[W and $0f];
+    Itoh := H;
+  end;
+
+begin
+  GetDate1(Month, day, year);
+  if ErrorAddr = nil then
+  begin
+    if ExitCode = 0 then
+    begin
+      Terminate(0);
+      Exit;
+    end;
+
+    {Replace the next line with the name of YOUR save procedure}
+    {This ones save my game information should something go wrong}
+    {I have left it so you see what I did, although it IS commented out}
+
+    {SaveGame(Player,PlayerFile,TempP,Country,CountryFile,Map1,MapFile);}
+
+    Assign(ErrFile, logname);
+    if F_EXISTS(logname) then
+    begin
+      OpenAttempts := 1;
+      repeat
         {$I-}
         Append(ErrFile);
         {$I+}
-        GoAhead:= (IOResult = 0);
-        If Not GoAhead then begin
-         OpenAttempts :=OpenAttempts+1;
-         Sleep(1); {jakob}
+        GoAhead := (IOResult = 0);
+        if not GoAhead then
+        begin
+          OpenAttempts := OpenAttempts + 1;
+          Sleep(1); {jakob}
         end;
-       Until (GoAhead) or (OpenAttempts>15);
-      End;
-     IF NOT F_EXISTS(logname) THEN
-      Begin
-       OpenAttempts:=1;
-       Repeat
+      until (GoAhead) or (OpenAttempts > 15);
+    end;
+    if not F_EXISTS(logname) then
+    begin
+      OpenAttempts := 1;
+      repeat
         {$I-}Rewrite(ErrFile);{$I+}
-        GoAhead:= (IOResult = 0);
-        If Not GoAhead then begin
-         OpenAttempts :=OpenAttempts+1;
-         Sleep(1); {jakob}
+        GoAhead := (IOResult = 0);
+        if not GoAhead then
+        begin
+          OpenAttempts := OpenAttempts + 1;
+          Sleep(1); {jakob}
         end;
-       Until (GoAhead) or (OpenAttempts>15);
-      End;
-     If ProductName <> '' then
-      Begin
-       Writeln_to_text(ErrFile,' ');
-       Writeln_to_text(ErrFile,'Error Log Generated by '+ProductName);
-      End;
-     WRITELN('Date : ',Month,'/',Day,'/',Year);
-     WRITELN(' ');
-     WRITELN('Program Termination');
-     WRITELN(Exit_Message(Exitcode));
-     WRITELN_to_text(ErrFile,'Date : '+commastr(Month)+'/'+commastr(Day)+'/'+commastr(Year)); {jakob}
-     WRITELN_to_text(ErrFile,'Program Termination');
-     WRITELN_to_text(ErrFile,Exit_Message(Exitcode));
-     Close_text(ErrFile); {jakob}
-     {be sure to uncomment this if using RipLink}
+      until (GoAhead) or (OpenAttempts > 15);
+    end;
+    if ProductName <> '' then
+    begin
+      Writeln_to_text(ErrFile, ' ');
+      Writeln_to_text(ErrFile, 'Error Log Generated by ' + ProductName);
+    end;
+    WRITELN('Date : ', Month, '/', Day, '/', Year);
+    WRITELN(' ');
+    WRITELN('Program Termination');
+    WRITELN(Exit_Message(Exitcode));
+    WRITELN_to_text(ErrFile, 'Date : ' + commastr(Month) + '/' + commastr(Day) + '/' + commastr(Year)); {jakob}
+    WRITELN_to_text(ErrFile, 'Program Termination');
+    WRITELN_to_text(ErrFile, Exit_Message(Exitcode));
+    Close_text(ErrFile); {jakob}
+    {be sure to uncomment this if using RipLink}
      {if RIP <> nil then
       Dispose(RIP, Done);}
-     Terminate(ExitCode);
-     Sleep(1000);
-     End ELSE
-      BEGIN
+    Terminate(ExitCode);
+    Sleep(1000);
+  end else
+  begin
 
-     {Replace the next line with the name of YOUR save procedure}
-     {This ones save my game information should something go wrong}
-     {I have left it so you see what I did, although it IS commented out}
+    {Replace the next line with the name of YOUR save procedure}
+    {This ones save my game information should something go wrong}
+    {I have left it so you see what I did, although it IS commented out}
 
-       {SaveGame(Player,PlayerFile,TempP,Country,CountryFile,Map1,MapFile);}
+    {SaveGame(Player,PlayerFile,TempP,Country,CountryFile,Map1,MapFile);}
 
-       ASSIGN(ErrFile,logname);
-       IF F_EXISTS(logname) THEN
-        Begin
-         OpenAttempts:=1;
-         Repeat
+    Assign(ErrFile, logname);
+    if F_EXISTS(logname) then
+    begin
+      OpenAttempts := 1;
+      repeat
           {$I-}
-          Append(ErrFile);
+        Append(ErrFile);
           {$I+}
-          GoAhead:= (IOResult = 0);
-          If Not GoAhead then begin
-           OpenAttempts :=OpenAttempts+1;
-           Sleep(1); {jakob}
-          end;
-         Until (GoAhead) or (OpenAttempts>15);
-        End;
-       IF NOT F_EXISTS(logname) THEN
-        Begin
-         OpenAttempts:=1;
-         Repeat
+        GoAhead := (IOResult = 0);
+        if not GoAhead then
+        begin
+          OpenAttempts := OpenAttempts + 1;
+          Sleep(1); {jakob}
+        end;
+      until (GoAhead) or (OpenAttempts > 15);
+    end;
+    if not F_EXISTS(logname) then
+    begin
+      OpenAttempts := 1;
+      repeat
           {$I-}Rewrite(ErrFile);{$I+}
-          GoAhead:= (IOResult = 0);
-          If Not GoAhead then begin
-           OpenAttempts :=OpenAttempts+1;
-           Sleep(1); {jakob}
-          end;
-         Until (GoAhead) or (OpenAttempts>15);
-        End;
-      If ProductName <> '' then
-       Begin
-        Writeln_to_text(ErrFile,' ');
-        Writeln_to_text(ErrFile,'Error Log Generated by '+ProductName);
-       End;
-       WRITELN('Date : ',Month,'/',Day,'/',Year);
-       WRITELN('Run-time error occurred');
-       WRITELN('Exitcode = ', exitcode);
-       WRITELN(Error_Message(Exitcode));
-       WRITELN('Address of error:');
-       WRITELN('  Segment: ', ItoH(seg(erroraddr^)));
-       WRITELN('  Offset:  ', ItoH(ofs(erroraddr^))) ;
-       WRITELN_to_text(ErrFile,'Date : '+commastr(Month)+'/'+commastr(Day)+'/'+commastr(Year));
-       WRITELN_to_text(ErrFile,'Run-time error occurred');
-       WRITELN_to_text(ErrFile,'Exitcode = '+commastr(exitcode));
-       WRITELN_to_text(ErrFile,Error_Message(Exitcode));
-       WRITELN_to_text(ErrFile,'Address of error:');
-       WRITELN(ErrFile,'  Segment: ', ItoH(seg(erroraddr^)));
-       WRITELN(ErrFile,'  Offset:  ', ItoH(ofs(erroraddr^))) ;
-       WRITELN_to_text(ErrFile,'------------------------------------------------');
-       Close_text(ErrFile);
-      END ;
-   ErrorAddr := NIL ;
-   {be sure to uncomment this if using RipLink}
+        GoAhead := (IOResult = 0);
+        if not GoAhead then
+        begin
+          OpenAttempts := OpenAttempts + 1;
+          Sleep(1); {jakob}
+        end;
+      until (GoAhead) or (OpenAttempts > 15);
+    end;
+    if ProductName <> '' then
+    begin
+      Writeln_to_text(ErrFile, ' ');
+      Writeln_to_text(ErrFile, 'Error Log Generated by ' + ProductName);
+    end;
+    WRITELN('Date : ', Month, '/', Day, '/', Year);
+    WRITELN('Run-time error occurred');
+    WRITELN('Exitcode = ', exitcode);
+    WRITELN(Error_Message(Exitcode));
+    WRITELN('Address of error:');
+    WRITELN('  Segment: ', ItoH(seg(erroraddr^)));
+    WRITELN('  Offset:  ', ItoH(ofs(erroraddr^)));
+    WRITELN_to_text(ErrFile, 'Date : ' + commastr(Month) + '/' + commastr(Day) + '/' + commastr(Year));
+    WRITELN_to_text(ErrFile, 'Run-time error occurred');
+    WRITELN_to_text(ErrFile, 'Exitcode = ' + commastr(exitcode));
+    WRITELN_to_text(ErrFile, Error_Message(Exitcode));
+    WRITELN_to_text(ErrFile, 'Address of error:');
+    WRITELN(ErrFile, '  Segment: ', ItoH(seg(erroraddr^)));
+    WRITELN(ErrFile, '  Offset:  ', ItoH(ofs(erroraddr^)));
+    WRITELN_to_text(ErrFile, '------------------------------------------------');
+    Close_text(ErrFile);
+  end;
+  ErrorAddr := nil;
+  {be sure to uncomment this if using RipLink}
    {if RIP <> nil then
      Dispose(RIP, Done);}
-  END;
+end;
 
-Procedure MyExit1;
+procedure MyExit1;
 begin
- TrapExit;
- SaveExitProc:=Exitproc;
-End;
+  TrapExit;
+  SaveExitProc := Exitproc;
+end;
 
-END.
+end.

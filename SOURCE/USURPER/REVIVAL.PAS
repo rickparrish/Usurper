@@ -22,235 +22,243 @@ Copyright 2007 Jakob Dangarden
 
 
 
-Unit Revival; {Usurper - Revival, called from Team Corner}
+unit Revival; {Usurper - Revival, called from Team Corner}
 
-Interface
+interface
 
-Procedure Resurrect;
+procedure Resurrect;
 
-Implementation
+implementation
 
-Uses Init, Cms, Jakob,
-     Online, Mail, News,
-     Various, Various2, Various3,
-     File_Io, SysUtils;
+uses
+  Init, Cms, Jakob,
+  Online, Mail, News,
+  Various, Various2, Various3,
+  File_Io, SysUtils;
 
-Procedure Resurrect;
+procedure Resurrect;
 var
-    a : s70;
+  a:          s70;
 
-    yy : longint;
+  yy:         longint;
 
-    i, j,
-    size : word;
+  i, j, size: word;
 
-    done,
-    big_done : boolean;
+  done, big_done: boolean;
 
-    pl0 : ^UserRec;
+  pl0:        ^UserRec;
 
 begin
 
- {init pointer var}
- new(pl0);
+  {init pointer var}
+  new(pl0);
 
- big_done:=false;
- repeat
- crlf;
- d(config.textcolor,'Who do you wish to Resurrect? (enter '+config.textcol2+'?'+config.textcol1+' to see your team)');
- sd(config.textcolor,':');
- a:=get_string(20);
- a:=UpperCase(a);
+  big_done := False;
+  repeat
+    crlf;
+    d(config.textcolor, 'Who do you wish to Resurrect? (enter ' + config.textcol2 + '?' + config.textcol1 + ' to see your team)');
+    sd(config.textcolor, ':');
+    a := get_string(20);
+    a := UpperCase(a);
 
- done:=false;
+    done := False;
 
- if a='?' then begin
-  display_members(player.team,true);
- end
- else begin
-  big_done:=true;
+    if a = '?' then
+    begin
+      display_members(player.team, True);
+    end else
+    begin
+      big_done := True;
 
- for i:=1 to 2 do begin
+      for i := 1 to 2 do
+      begin
 
-  if done then break;
+        if done then break;
 
-  case i of
-   1: size:=fs(FsPlayer);
-   2: size:=fs(FsNpc);
-  end;
+        case i of
+          1: size := fs(FsPlayer);
+          2: size := fs(FsNpc);
+        end;
 
-  for j:=1 to SIZE do begin
+        for j := 1 to SIZE do
+        begin
 
-   if done then break;
+          if done then break;
 
-   load_character(pl0^,i,j);
+          load_character(pl0^, i, j);
 
-   if (findsub(a,pl0^.name2)) and
-      (pl0^.name2<>player.name2) and
-      (player_active(pl0^,false)=true) and
-      (pl0^.team=player.team) then begin
+          if (findsub(a, pl0^.name2)) and
+            (pl0^.name2 <> player.name2) and
+            (player_active(pl0^, False) = True) and
+            (pl0^.team = player.team) then
+          begin
 
-    if confirm(uplc+pl0^.name2+config.textcol1,'N')=false then begin
-     done:=true;
-    end
-    else begin
+            if confirm(uplc + pl0^.name2 + config.textcol1, 'N') = False then
+            begin
+              done := True;
+            end else
+            begin
 
-     if pl0^.location=offloc_prison then begin
-               sd(global_plycol,pl0^.name2);
-          d(config.textcolor,' is in prison and cannot be resurrected!');
-end
-     else if pl0^.hps>0 then begin
-      case random(5) of
-       0:begin
-          sd(global_talkcol,'I feel fine! I don''t need your Hocus Pocus!');
-          sd(config.textcolor,', ');
-          sd(global_plycol,pl0^.name2);
-          d(config.textcolor,' says.');
-         end;
-       1:begin
-          sd(global_talkcol,'I''m alive and well!');
-          sd(config.textcolor,', ');
-          sd(global_plycol,pl0^.name2);
-          d(config.textcolor,' says.');
-         end;
-       2:begin
-          sd(global_talkcol,'Don''t worry! I feel fine!');
-          sd(config.textcolor,', ');
-          sd(global_plycol,pl0^.name2);
-          d(config.textcolor,' says.');
-         end;
-       3:begin
-          sd(global_talkcol,'Resurrect the DEAD! I''m not dead!');
-          sd(config.textcolor,', ');
-          sd(global_plycol,pl0^.name2);
-          d(config.textcolor,' explains.');
-         end;
-       4:begin
-          sd(global_talkcol,'Nice thought, but I feel alright!');
-          sd(config.textcolor,', ');
-          sd(global_plycol,pl0^.name2);
-          d(config.textcolor,' mutters.');
-         end;
-      end;
-     end
-     else begin
+              if pl0^.location = offloc_prison then
+              begin
+                sd(global_plycol, pl0^.name2);
+                d(config.textcolor, ' is in prison and cannot be resurrected!');
+              end else if pl0^.hps > 0 then
+              begin
+                case random(5) of
+                  0: begin
+                    sd(global_talkcol, 'I feel fine! I don''t need your Hocus Pocus!');
+                    sd(config.textcolor, ', ');
+                    sd(global_plycol, pl0^.name2);
+                    d(config.textcolor, ' says.');
+                  end;
+                  1: begin
+                    sd(global_talkcol, 'I''m alive and well!');
+                    sd(config.textcolor, ', ');
+                    sd(global_plycol, pl0^.name2);
+                    d(config.textcolor, ' says.');
+                  end;
+                  2: begin
+                    sd(global_talkcol, 'Don''t worry! I feel fine!');
+                    sd(config.textcolor, ', ');
+                    sd(global_plycol, pl0^.name2);
+                    d(config.textcolor, ' says.');
+                  end;
+                  3: begin
+                    sd(global_talkcol, 'Resurrect the DEAD! I''m not dead!');
+                    sd(config.textcolor, ', ');
+                    sd(global_plycol, pl0^.name2);
+                    d(config.textcolor, ' explains.');
+                  end;
+                  4: begin
+                    sd(global_talkcol, 'Nice thought, but I feel alright!');
+                    sd(config.textcolor, ', ');
+                    sd(global_plycol, pl0^.name2);
+                    d(config.textcolor, ' mutters.');
+                  end;
+                end;
+              end else
+              begin
 
-      yy:=pl0^.level*2500;
-      crlf;
-      sd(config.textcolor,'The revival process of ');
-      sd(global_plycol,pl0^.name2);
-      sd(config.textcolor,' will cost ');
-      sd(14,commastr(yy));
-      d(config.textcolor,' '+many_money(yy)+'.');
+                yy := pl0^.level * 2500;
+                crlf;
+                sd(config.textcolor, 'The revival process of ');
+                sd(global_plycol, pl0^.name2);
+                sd(config.textcolor, ' will cost ');
+                sd(14, commastr(yy));
+                d(config.textcolor, ' ' + many_money(yy) + '.');
 
-      if player.gold<yy then begin
-       d(config.textcolor,'And You don''t have that kind of '+config.moneytype+'!');
-       done:=true;
-       break;
-      end
-      else begin
-       if confirm('Pay ','N')=false then break;
-      end;
+                if player.gold < yy then
+                begin
+                  d(config.textcolor, 'And You don''t have that kind of ' + config.moneytype + '!');
+                  done := True;
+                  break;
+                end else
+                begin
+                  if confirm('Pay ', 'N') = False then break;
+                end;
 
-      decplayermoney(player,yy);
+                decplayermoney(player, yy);
 
-      crlf;
-      sd(config.textcolor,'Approaching ');
-      sd(global_plycol,pl0^.name2+'s ');
-      d(config.textcolor,'coffin you');
-      d(config.textcolor,'recollect all your knowledge of healing.');
-      d(config.textcolor,'The revival process takes a couple of hours');
-      sd(config.textcolor,'But then suddenly ');
-      sd(global_plycol,pl0^.name2);
-      d(config.textcolor,' opens');
-      d(config.textcolor,sex3[pl0^.sex]+' eyes and speaks!');
-      d(config.textcolor,'Although looking very pale and worn out,');
-      crlf;
-      sd(global_plycol,pl0^.name2);
-      d(config.textcolor,' seems to be fit for fight!');
-      crlf;
+                crlf;
+                sd(config.textcolor, 'Approaching ');
+                sd(global_plycol, pl0^.name2 + 's ');
+                d(config.textcolor, 'coffin you');
+                d(config.textcolor, 'recollect all your knowledge of healing.');
+                d(config.textcolor, 'The revival process takes a couple of hours');
+                sd(config.textcolor, 'But then suddenly ');
+                sd(global_plycol, pl0^.name2);
+                d(config.textcolor, ' opens');
+                d(config.textcolor, sex3[pl0^.sex] + ' eyes and speaks!');
+                d(config.textcolor, 'Although looking very pale and worn out,');
+                crlf;
+                sd(global_plycol, pl0^.name2);
+                d(config.textcolor, ' seems to be fit for fight!');
+                crlf;
 
-      if pl0^.ai='H' then begin
-       post(MailSend,
-           pl0^.name2,
-           pl0^.ai,
-           false,
-           mailrequest_nothing,
-           '',
-           umailheadc+'Team-Report'+config.textcol1,
-           mkstring(11,underscore),
-           'You were resurrected by '+uplc+player.name2+config.textcol1+'!',
-           '',
-           '',
-           '',
-           '',
-           '',
-           '',
-           '',
-           '',
-           '',
-           '',
-           '',
-           '');
-      end; {post message .end. only necessary if resurrected is human}
+                if pl0^.ai = 'H' then
+                begin
+                  post(MailSend,
+                    pl0^.name2,
+                    pl0^.ai,
+                    False,
+                    mailrequest_nothing,
+                    '',
+                    umailheadc + 'Team-Report' + config.textcol1,
+                    mkstring(11, underscore),
+                    'You were resurrected by ' + uplc + player.name2 + config.textcol1 + '!',
+                    '',
+                    '',
+                    '',
+                    '',
+                    '',
+                    '',
+                    '',
+                    '',
+                    '',
+                    '',
+                    '',
+                    '');
+                end; {post message .end. only necessary if resurrected is human}
 
-      pl0^.hps:=pl0^.maxhps;
-      pl0^.allowed:=true;
-      pl0^.resurrections:=config.resurrections;
+                pl0^.hps := pl0^.maxhps;
+                pl0^.allowed := True;
+                pl0^.resurrections := config.resurrections;
 
-      {save resurrected player}
-      user_save(pl0^);
+                {save resurrected player}
+                user_save(pl0^);
 
-      {put the event in the news}
-      case random(2) of
-       0:begin
-          newsy(true,
-          'Return from the Dead',
-          ' '+uplc+player.name2+config.textcol1+' resurrected '+uplc+pl0^.name2+config.textcol1+'!',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '');
-         end;
-       1:begin
-          newsy(true,
-          'Revival',
-          ' '+uplc+player.name2+config.textcol1+' brought '+uplc+pl0^.name2+config.textcol1+' back from the grave!',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '');
-         end;
-      end; {case .end}
+                {put the event in the news}
+                case random(2) of
+                  0: begin
+                    newsy(True,
+                      'Return from the Dead',
+                      ' ' + uplc + player.name2 + config.textcol1 + ' resurrected ' + uplc + pl0^.name2 + config.textcol1 + '!',
+                      '',
+                      '',
+                      '',
+                      '',
+                      '',
+                      '',
+                      '',
+                      '');
+                  end;
+                  1: begin
+                    newsy(True,
+                      'Revival',
+                      ' ' + uplc + player.name2 + config.textcol1 + ' brought ' + uplc + pl0^.name2 + config.textcol1 + ' back from the grave!',
+                      '',
+                      '',
+                      '',
+                      '',
+                      '',
+                      '',
+                      '',
+                      '');
+                  end;
+                end; {case .end}
 
-      {tell other online players about this event}
-      online_send_to_all(uplc+pl0^.name2+config.textcol1+' has been resurrected!',player.name2,'');
+                {tell other online players about this event}
+                online_send_to_all(uplc + pl0^.name2 + config.textcol1 + ' has been resurrected!', player.name2, '');
 
-      crlf;
-      if confirm('Continue Search for dead members','Y')=false then begin
-       done:=true;
-       break;
-      end;
+                crlf;
+                if confirm('Continue Search for dead members', 'Y') = False then
+                begin
+                  done := True;
+                  break;
+                end;
 
-     end;
-    end; {confirm .end.}
-   end;
-  end; {for j:= .end.}
- end; {for i:= .end.}
- end;
+              end;
+            end; {confirm .end.}
+          end;
+        end; {for j:= .end.}
+      end; {for i:= .end.}
+    end;
 
- until big_done;
+  until big_done;
 
- {dispose of pointer variables}
- dispose(pl0);
+  {dispose of pointer variables}
+  dispose(pl0);
 
 end; {Resurrect *end*}
 
