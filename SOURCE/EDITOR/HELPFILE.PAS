@@ -426,27 +426,6 @@ var
     IsBlank := (Ch = ' ') or (Ch = #13) or (Ch = #10);
   end;
 
-{$IFDEF MSDOS}
-  function Scan(var P; Offset, Size: integer; C: char): integer; assembler;
-  asm
-           CLD
-           LES     DI,P
-           ADD     DI,&Offset
-           MOV  DX,Size
-           SUB     DX,&Offset
-           OR  DH,DH
-           JZ      @@1
-           MOV     DX,256
-           @@1:
-           MOV     CX,DX
-           MOV     AL, C
-           REPNE   SCASB
-           SUB     CX,DX
-           NEG     CX
-           XCHG    AX,CX
-  end;
-{$ENDIF}
-{$IFNDEF MSDOS}
   function Scan(var P; Offset, Size: integer; C: char): integer; assembler;
            {&USES esi,edi}{&FRAME-}
   asm
@@ -467,25 +446,7 @@ var
            XCHG    EAX,ECX
 
   end;
-{$ENDIF}
 
-{$IFDEF MSDOS}
-  procedure TextToLine(var Text; Offset, Length: integer; var Line: string);
-  assembler;
-  asm
-           CLD
-           PUSH    DS
-           LDS     SI,Text
-           ADD     SI,&Offset
-           LES     DI,Line
-           MOV     AX,Length
-           STOSB
-           XCHG    AX,CX
-           REP     MOVSB
-           POP     DS
-  end;
-{$ENDIF}
-{$IFNDEF MSDOS}
   procedure TextToLine(var Text; Offset, Length: integer; var Line: string);
   assembler;
   {&USES esi,edi}{&FRAME-}
@@ -499,7 +460,6 @@ var
            XCHG    EAX,ECX
            REP     movsb
   end;
-{$ENDIF}
 
 begin
   I := Scan(Text, Offset, Size, #13);
