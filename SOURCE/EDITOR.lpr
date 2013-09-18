@@ -20,8 +20,9 @@ Copyright 2007 Jakob Dangarden
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 }
 
-Program Editor; {Usurper - DoorGame Editor}
-                {Tools:Borland Pascal 7.0 and TurboVision 2.0}
+program Editor;
+{Usurper - DoorGame Editor}
+{Tools:Borland Pascal 7.0 and TurboVision 2.0}
 
                 {to change version and year: look for uver in init.pas
                  and extra.pas}
@@ -32,123 +33,134 @@ Program Editor; {Usurper - DoorGame Editor}
 
 
 
-Uses Init, CfgVal,
-     JakobE, muffi2, extra,
-     file_io, Upgrade;
+uses
+  Init, CfgVal, JakobE, muffi2, extra, file_io, Upgrade;
 
 var
-   i : Longint;
+  i:   longint;
 
-   s : string;
+  s:   string;
 
-   txt : text;
+  txt: Text;
 
-Begin
+begin
   UpgradeIfNecessary;
 
-filemode:=66;
+  filemode := 66;
 
- {Assign some files}
- assign(monsterfile,monfile);
- assign(guardfile,gufile);
- assign(levelfile,lvlfile);
+  {Assign some files}
+  Assign(monsterfile, monfile);
+  Assign(guardfile, gufile);
+  Assign(levelfile, lvlfile);
 
- {Checking if DATA, SCORES and NODE directories exist}
- if direxist(global_datadir)=false then begin
-  wrl('Directory "'+global_datadir+'" doesn''t exist!');
-  wrl('Creating...');
-  s:=copy(global_datadir,1,length(global_datadir)-1);
-  if make_dir(s)=false then begin
-   unable_to_createdir(global_datadir);
-   halt;
-  end;
- end;
-
- if direxist(global_nodedir)=false then begin
-  wrl('Directory "'+global_nodedir+'" doesn''t exist!');
-  wrl('Creating...');
-  s:=copy(global_nodedir,1,length(global_nodedir)-1);
-  if make_dir(s)=false then begin
-   unable_to_createdir(global_nodedir);
-   halt;
-  end;
- end;
-
- if direxist(global_scoredir)=false then begin
-  wrl('Directory "'+global_scoredir+'" doesn''t exist!');
-  wrl('Creating...');
-  s:=copy(global_scoredir,1,length(global_scoredir)-1);
-  if make_dir(s)=false then begin
-   unable_to_createdir(global_scoredir);
-   halt;
-  end;
- end;
-
- {Check if the the datafiles should be created}
- Rewrite_DatFiles(false);
-
- add_fake:=false;
- registered:=0;
- if f_exists(ucfg)=true then begin
-  terminate;
- end;
-
- {new editor stuff}
- cfgchang:=false;
- if f_exists(ucfg) then begin
-  load_config;
- end
- else begin
-
-  for i:=1 to maxallows do begin
-   allowitem[i]:=true;
+  {Checking if DATA, SCORES and NODE directories exist}
+  if direxist(global_datadir) = False then
+  begin
+    wrl('Directory "' + global_datadir + '" doesn''t exist!');
+    wrl('Creating...');
+    s := copy(global_datadir, 1, length(global_datadir) - 1);
+    if make_dir(s) = False then
+    begin
+      unable_to_createdir(global_datadir);
+      halt;
+    end;
   end;
 
-  create_default_config(false);
-
- end;
-
- {creating ORIGINAL BACKUP, which saves changes before exit of program}
- for i:=1 to global_maxcdef do begin
-  cfgurb[i]:=cfgvalue[i];
- end;
-
- {bad solution here, should use streams I guess.}
- currp:=1;    {pointer to current user in NPC/PLAYER Editor}
- currg:=1;    {pointer to current doorguard in doorguard editor}
- currd:=1;    {pointer to current drink in drink editor}
- currm:=1;    {pointer to current monster in monster editor}
- curri:=1;    {pointer to current item in item editor}
- currmoat:=1; {pointer to current moat creature in the moat editor}
- currgod:=1; {pointer to current god in the god editor}
- currchild:=1; {pointer to current child in the children editor}
-
- depend:=false;
-
- {Reading NEW or OLD Game mode}
- if open_txtfile(treset,txt,ucfg) then begin
-  for i:=1 to 91 do begin
-   readln_from_text(txt,s);
+  if direxist(global_nodedir) = False then
+  begin
+    wrl('Directory "' + global_nodedir + '" doesn''t exist!');
+    wrl('Creating...');
+    s := copy(global_nodedir, 1, length(global_nodedir) - 1);
+    if make_dir(s) = False then
+    begin
+      unable_to_createdir(global_nodedir);
+      halt;
+    end;
   end;
-  close_text(txt);
- end
- else begin
-  {unable to open Usurper.cfg}
-  unable_To_access(ucfg);
- end;
 
- if upcasestr(s)='CLASSIC' then classic:=true
-                           else classic:=false;
+  if direxist(global_scoredir) = False then
+  begin
+    wrl('Directory "' + global_scoredir + '" doesn''t exist!');
+    wrl('Creating...');
+    s := copy(global_scoredir, 1, length(global_scoredir) - 1);
+    if make_dir(s) = False then
+    begin
+      unable_to_createdir(global_scoredir);
+      halt;
+    end;
+  end;
 
- {the standard pascal randomize routine}
- Randomize;
+  {Check if the the datafiles should be created}
+  Rewrite_DatFiles(False);
 
- {turbo vision is running!}
- vision_is_running:=true;
+  add_fake := False;
+  registered := 0;
+  if f_exists(ucfg) = True then
+  begin
+    terminate;
+  end;
 
- {Run the Editor Application}
- MyApp.init;
- MyApp.run;
- MyApp.done;
+  {new editor stuff}
+  cfgchang := False;
+  if f_exists(ucfg) then
+  begin
+    load_config;
+  end else
+  begin
 
-End. {End Of Program}
+    for i := 1 to maxallows do
+    begin
+      allowitem[i] := True;
+    end;
+
+    create_default_config(False);
+
+  end;
+
+  {creating ORIGINAL BACKUP, which saves changes before exit of program}
+  for i := 1 to global_maxcdef do
+  begin
+    cfgurb[i] := cfgvalue[i];
+  end;
+
+  {bad solution here, should use streams I guess.}
+  currp := 1;    {pointer to current user in NPC/PLAYER Editor}
+  currg := 1;    {pointer to current doorguard in doorguard editor}
+  currd := 1;    {pointer to current drink in drink editor}
+  currm := 1;    {pointer to current monster in monster editor}
+  curri := 1;    {pointer to current item in item editor}
+  currmoat := 1; {pointer to current moat creature in the moat editor}
+  currgod := 1; {pointer to current god in the god editor}
+  currchild := 1; {pointer to current child in the children editor}
+
+  depend := False;
+
+  {Reading NEW or OLD Game mode}
+  if open_txtfile(treset, txt, ucfg) then
+  begin
+    for i := 1 to 91 do
+    begin
+      readln_from_text(txt, s);
+    end;
+    close_text(txt);
+  end else
+  begin
+    {unable to open Usurper.cfg}
+    unable_To_access(ucfg);
+  end;
+
+  if upcasestr(s) = 'CLASSIC' then classic := True
+  else classic := False;
+
+  {the standard pascal randomize routine}
+  Randomize;
+
+  {turbo vision is running!}
+  vision_is_running := True;
+
+  {Run the Editor Application}
+  MyApp.init;
+  MyApp.run;
+  MyApp.done;
+
+end. {End Of Program}

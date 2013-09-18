@@ -1,5 +1,6 @@
 {$I DEFINES.INC}
 unit ShadMenu;
+
 {***********************************************************************
  TMenuBoxShadow  SHADOW CLASS
  This shadow class patches an undesirbale behavior in the TMenuBar Class
@@ -20,22 +21,26 @@ unit ShadMenu;
  ***********************************************************************}
 {$X+}
 interface
-	{Nothing Needed Here}
-implementation
-	uses Menus,views,objects,Shadow;
-	type
-		TMenuBoxShadow = object(TMenuBox)
-			function GetPalette:PPalette; virtual;
-			end;
-	function TMenuBoxShadow.GetPalette:PPalette;
-		begin
-		if ParentMenu=Nil then
-			GetPalette := TMenuView.GetPalette
-		else
-			GetPalette := ParentMenu^.GetPalette;
-		end;
 
-	begin
-{ Install the New GetPallette }
-	ReplaceMethod(typeof(TMenuBox),@TMenuBox.GetPalette,@TMenuBoxShadow.GetPalette);
-	end.
+{Nothing Needed Here}
+implementation
+
+uses
+  Menus, views, objects, Shadow;
+
+type
+  TMenuBoxShadow = object(TMenuBox)
+    function GetPalette: PPalette; virtual;
+  end;
+
+function TMenuBoxShadow.GetPalette: PPalette;
+begin
+  if ParentMenu = nil then GetPalette := TMenuView.GetPalette
+  else
+    GetPalette := ParentMenu^.GetPalette;
+end;
+
+begin
+  { Install the New GetPallette }
+  ReplaceMethod(typeof(TMenuBox), @TMenuBox.GetPalette, @TMenuBoxShadow.GetPalette);
+end.

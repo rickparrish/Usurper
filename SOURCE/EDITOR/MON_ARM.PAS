@@ -20,82 +20,89 @@ Copyright 2007 Jakob Dangarden
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 }
 
-Unit Mon_Arm;
+unit Mon_Arm;
 
-Interface
+interface
 
-Procedure Arm_Monsters;
+procedure Arm_Monsters;
 
-Implementation
+implementation
 
-Uses Init, jakobe, file_io;
+uses
+  Init, jakobe, file_io;
 
-Procedure Arm_Monsters;
+procedure Arm_Monsters;
 var
-    ready1 : boolean;
-    cc,
-    cc2    : longint;
-    i,
-    j      : integer;
+  ready1:  boolean;
+  cc, cc2: longint;
+  i, j:    integer;
 
 begin
 
- cc:=1;
- cc2:=0;
- counter:=0;
+  cc := 1;
+  cc2 := 0;
+  counter := 0;
 
- for i:=1 to fs(FsMonster) do begin
+  for i := 1 to fs(FsMonster) do
+  begin
 
-  inc(cc2);
-  if cc2>23 then begin
-   cc2:=0;
-   inc(cc);
+    Inc(cc2);
+    if cc2 > 23 then
+    begin
+      cc2 := 0;
+      Inc(cc);
+    end;
+
+    {load monster}
+    load_monster(fload, monster, i);
+
+    if monster.weapnr > 0 then
+    begin
+
+      {load monster weapon}
+      load_objekt(fload, objekt, weapon, monster.weapnr);
+
+      {set monster weapon power}
+      monster.weappow := objekt.attack;
+
+      {save monster}
+      load_monster(fsave, monster, i);
+
+    end;
+
+
+    if (monster.wuser) and (monster.weapnr = 0) then
+    begin
+      ready1 := False;
+
+      for j := 1 to fso(Weapon) do
+      begin
+
+        load_objekt(fload, objekt, weapon, j);
+
+        if (objekt.ttype = Weapon) and
+          (objekt.attack >= cc) and
+          (objekt.attack < cc + 4) and (random(2) = 0) then
+        begin
+          monster.weapnr := j;
+          monster.weappow := objekt.attack;
+          ready1 := True;
+        end;
+
+        if ready1 then
+        begin
+          load_monster(fsave, monster, i);
+          break;
+        end;
+      end; {for j:= .end.}
+    end;
+
+
+    Inc(counter);
+    Statbar(Counter, totobj, global_masterx, global_mastery, 1, 1);
+
   end;
-
-  {load monster}
-  load_monster(fload,monster,i);
-
-  if monster.weapnr>0 then begin
-
-   {load monster weapon}
-   load_objekt(fload,objekt,weapon,monster.weapnr);
-
-   {set monster weapon power}
-   monster.weappow:=objekt.attack;
-
-   {save monster}
-   load_monster(fsave,monster,i);
-
-  end;
-
-
-   if (monster.wuser) and (monster.weapnr=0) then begin
-     ready1:=false;
-
-    for j:=1 to fso(Weapon) do begin
-
-     load_objekt(fload,objekt,weapon,j);
-
-     if (objekt.ttype=Weapon) and
-        (objekt.attack>=cc) and
-        (objekt.attack<cc+4) and (random(2)=0) then begin
-      monster.weapnr:=j;
-      monster.weappow:=objekt.attack;
-      ready1:=true;
-     end;
-
-     if ready1 then begin
-      load_monster(fsave,monster,i);
-      break;
-     end;
-    end; {for j:= .end.}
-   end;
-  
-
-  inc(counter);
-  Statbar(Counter,totobj,global_masterx,global_mastery,1,1);
-
- end;
 
 end;
+
 end.

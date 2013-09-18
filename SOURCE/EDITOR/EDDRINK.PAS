@@ -20,14 +20,16 @@ Copyright 2007 Jakob Dangarden
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 }
 
-Unit EdDrink;
+unit EdDrink;
 
-Interface
+interface
 
 procedure Reset_Drink;
 
 implementation
-uses init, obj_ad;
+
+uses
+  init, obj_ad;
 
 procedure Reset_Drink;
 begin
@@ -48,245 +50,244 @@ begin
   13. dryck
   14. vapen}
 
- {** Dryck **}
- Add_Object('Red Bottle',   {name}
-         Drink,     {typ}
-         50,        {v„rde i gold}
-         0,         {”ka/minska hps}
-         0,         {”ka stamina}
-         0,         {”ka agility}
-         0,         {”ka charisma}
-         0,         {”ka dexterity}
-         0,         {”ka wisdom}
-         0,         {”ka mana}
-         0,         {”ka armor v„rde}
-         0,         {”ka attack v„rde}
-         '',        {„gd av?}
-         False,     {bara EN i spelet}
-         Blindness, {kurerar}
-         False,     {finnas i shoppen}
-         True,      {kunna hittas i dungeons?}
-         False,     {cursed item?}
-         1,         {min level att hittas i dngs}
-         99,        {max level att hittas i dngs}
-         'It contains a strange yellow liquid. Looks disgusting!',
-         '',        {normal beskrivning 2}
-         '',        {normal beskrivning 3}
-         '',        {normal beskrivning 4}
-         '',        {normal beskrivning 5}
-         'Cure for Blindness.',
-         '',
-         '',        {detaljerad beskrivning 3}
-         '',        {detaljerad beskrivning 4}
-         '',        {detaljerad beskrivning 5}
-         0,         {”ka strength}
-         0,         {”ka defence}
-         0);        {strength demanded to use object}
+  {** Dryck **}
+  Add_Object('Red Bottle',   {name}
+    Drink,     {typ}
+    50,        {v„rde i gold}
+    0,         {”ka/minska hps}
+    0,         {”ka stamina}
+    0,         {”ka agility}
+    0,         {”ka charisma}
+    0,         {”ka dexterity}
+    0,         {”ka wisdom}
+    0,         {”ka mana}
+    0,         {”ka armor v„rde}
+    0,         {”ka attack v„rde}
+    '',        {„gd av?}
+    False,     {bara EN i spelet}
+    Blindness, {kurerar}
+    False,     {finnas i shoppen}
+    True,      {kunna hittas i dungeons?}
+    False,     {cursed item?}
+    1,         {min level att hittas i dngs}
+    99,        {max level att hittas i dngs}
+    'It contains a strange yellow liquid. Looks disgusting!',
+    '',        {normal beskrivning 2}
+    '',        {normal beskrivning 3}
+    '',        {normal beskrivning 4}
+    '',        {normal beskrivning 5}
+    'Cure for Blindness.',
+    '',
+    '',        {detaljerad beskrivning 3}
+    '',        {detaljerad beskrivning 4}
+    '',        {detaljerad beskrivning 5}
+    0,         {”ka strength}
+    0,         {”ka defence}
+    0);        {strength demanded to use object}
 
- Add_Object('Bottle',   {name}
-         Drink,     {typ}
-         50,        {v„rde i gold}
-         0,         {”ka/minska hps}
-         0,         {”ka stamina}
-         0,         {”ka agility}
-         0,         {”ka charisma}
-         0,         {”ka dexterity}
-         0,         {”ka wisdom}
-         0,         {”ka mana}
-         0,         {”ka armor v„rde}
-         0,         {”ka attack v„rde}
-         '',        {„gd av?}
-         False,     {bara EN i spelet}
-         Plague,    {kurerar}
-         False,     {finnas i shoppen}
-         True,      {kunna hittas i dungeons?}
-         False,     {cursed item?}
-         1,         {min level att hittas i dngs}
-         99,        {max level att hittas i dngs}
-         'It is green and has a large "X" written on it.',
-         '',        {normal beskrivning 2}
-         '',        {normal beskrivning 3}
-         '',        {normal beskrivning 4}
-         '',        {normal beskrivning 5}
-         'Cure for Plague.',
-         '',
-         '',        {detaljerad beskrivning 3}
-         '',        {detaljerad beskrivning 4}
-         '',        {detaljerad beskrivning 5}
-         0,         {”ka strength}
-         0,         {”ka defence}
-         0);        {strength demanded to use object}
+  Add_Object('Bottle',   {name}
+    Drink,     {typ}
+    50,        {v„rde i gold}
+    0,         {”ka/minska hps}
+    0,         {”ka stamina}
+    0,         {”ka agility}
+    0,         {”ka charisma}
+    0,         {”ka dexterity}
+    0,         {”ka wisdom}
+    0,         {”ka mana}
+    0,         {”ka armor v„rde}
+    0,         {”ka attack v„rde}
+    '',        {„gd av?}
+    False,     {bara EN i spelet}
+    Plague,    {kurerar}
+    False,     {finnas i shoppen}
+    True,      {kunna hittas i dungeons?}
+    False,     {cursed item?}
+    1,         {min level att hittas i dngs}
+    99,        {max level att hittas i dngs}
+    'It is green and has a large "X" written on it.',
+    '',        {normal beskrivning 2}
+    '',        {normal beskrivning 3}
+    '',        {normal beskrivning 4}
+    '',        {normal beskrivning 5}
+    'Cure for Plague.',
+    '',
+    '',        {detaljerad beskrivning 3}
+    '',        {detaljerad beskrivning 4}
+    '',        {detaljerad beskrivning 5}
+    0,         {”ka strength}
+    0,         {”ka defence}
+    0);        {strength demanded to use object}
 
- Add_Object('Bottle',   {name}
-         Drink,     {typ}
-         50,        {v„rde i gold}
-         0,         {”ka/minska hps}
-         0,         {”ka stamina}
-         0,         {”ka agility}
-         0,         {”ka charisma}
-         0,         {”ka dexterity}
-         0,         {”ka wisdom}
-         0,         {”ka mana}
-         0,         {”ka armor v„rde}
-         0,         {”ka attack v„rde}
-         '',        {„gd av?}
-         False,     {bara EN i spelet}
-         Smallpox,  {kurerar}
-         False,     {finnas i shoppen}
-         True,      {kunna hittas i dungeons?}
-         False,     {cursed item?}
-         1,         {min level att hittas i dngs}
-         99,        {max level att hittas i dngs}
-         'Looks like water...',
-         '',        {normal beskrivning 2}
-         '',        {normal beskrivning 3}
-         '',        {normal beskrivning 4}
-         '',        {normal beskrivning 5}
-         'Cure for Smallpox.',
-         '',
-         '',        {detaljerad beskrivning 3}
-         '',        {detaljerad beskrivning 4}
-         '',        {detaljerad beskrivning 5}
-         0,         {”ka strength}
-         0,         {”ka defence}
-         0);        {strength demanded to use object}
+  Add_Object('Bottle',   {name}
+    Drink,     {typ}
+    50,        {v„rde i gold}
+    0,         {”ka/minska hps}
+    0,         {”ka stamina}
+    0,         {”ka agility}
+    0,         {”ka charisma}
+    0,         {”ka dexterity}
+    0,         {”ka wisdom}
+    0,         {”ka mana}
+    0,         {”ka armor v„rde}
+    0,         {”ka attack v„rde}
+    '',        {„gd av?}
+    False,     {bara EN i spelet}
+    Smallpox,  {kurerar}
+    False,     {finnas i shoppen}
+    True,      {kunna hittas i dungeons?}
+    False,     {cursed item?}
+    1,         {min level att hittas i dngs}
+    99,        {max level att hittas i dngs}
+    'Looks like water...',
+    '',        {normal beskrivning 2}
+    '',        {normal beskrivning 3}
+    '',        {normal beskrivning 4}
+    '',        {normal beskrivning 5}
+    'Cure for Smallpox.',
+    '',
+    '',        {detaljerad beskrivning 3}
+    '',        {detaljerad beskrivning 4}
+    '',        {detaljerad beskrivning 5}
+    0,         {”ka strength}
+    0,         {”ka defence}
+    0);        {strength demanded to use object}
 
- Add_Object('Bottle',   {name}
-         Drink,     {typ}
-         50,        {v„rde i gold}
-         0,         {”ka/minska hps}
-         0,         {”ka stamina}
-         0,         {”ka agility}
-         0,         {”ka charisma}
-         0,         {”ka dexterity}
-         0,         {”ka wisdom}
-         0,         {”ka mana}
-         0,         {”ka armor v„rde}
-         0,         {”ka attack v„rde}
-         '',        {„gd av?}
-         False,     {bara EN i spelet}
-         Measles,   {kurerar}
-         False,     {finnas i shoppen}
-         True,      {kunna hittas i dungeons?}
-         False,     {cursed item?}
-         1,         {min level att hittas i dngs}
-         99,        {max level att hittas i dngs}
-         'Its a round bottle with a tiny label stuck to the front.',
-         '',        {normal beskrivning 2}
-         '',        {normal beskrivning 3}
-         '',        {normal beskrivning 4}
-         '',        {normal beskrivning 5}
-         'Cure for Measles.',
-         '',
-         '',        {detaljerad beskrivning 3}
-         '',        {detaljerad beskrivning 4}
-         '',        {detaljerad beskrivning 5}
-         0,         {”ka strength}
-         0,         {”ka defence}
-         0);        {strength demanded to use object}
+  Add_Object('Bottle',   {name}
+    Drink,     {typ}
+    50,        {v„rde i gold}
+    0,         {”ka/minska hps}
+    0,         {”ka stamina}
+    0,         {”ka agility}
+    0,         {”ka charisma}
+    0,         {”ka dexterity}
+    0,         {”ka wisdom}
+    0,         {”ka mana}
+    0,         {”ka armor v„rde}
+    0,         {”ka attack v„rde}
+    '',        {„gd av?}
+    False,     {bara EN i spelet}
+    Measles,   {kurerar}
+    False,     {finnas i shoppen}
+    True,      {kunna hittas i dungeons?}
+    False,     {cursed item?}
+    1,         {min level att hittas i dngs}
+    99,        {max level att hittas i dngs}
+    'Its a round bottle with a tiny label stuck to the front.',
+    '',        {normal beskrivning 2}
+    '',        {normal beskrivning 3}
+    '',        {normal beskrivning 4}
+    '',        {normal beskrivning 5}
+    'Cure for Measles.',
+    '',
+    '',        {detaljerad beskrivning 3}
+    '',        {detaljerad beskrivning 4}
+    '',        {detaljerad beskrivning 5}
+    0,         {”ka strength}
+    0,         {”ka defence}
+    0);        {strength demanded to use object}
 
- Add_Object('Old Bottle',   {name}
-         Drink,     {typ}
-         50,        {v„rde i gold}
-         0,         {”ka/minska hps}
-         0,         {”ka stamina}
-         0,         {”ka agility}
-         0,         {”ka charisma}
-         0,         {”ka dexterity}
-         0,         {”ka wisdom}
-         0,         {”ka mana}
-         0,         {”ka armor v„rde}
-         0,         {”ka attack v„rde}
-         '',        {„gd av?}
-         False,     {bara EN i spelet}
-         Leprosy,   {kurerar}
-         False,     {finnas i shoppen}
-         True,      {kunna hittas i dungeons?}
-         False,     {cursed item?}
-         1,         {min level att hittas i dngs}
-         99,        {max level att hittas i dngs}
-         'Hmm... Could be wine, but it smells like rotten fish.',
-         '',        {normal beskrivning 2}
-         '',        {normal beskrivning 3}
-         '',        {normal beskrivning 4}
-         '',        {normal beskrivning 5}
-         'Cure for Leprosy.',
-         '',
-         '',        {detaljerad beskrivning 3}
-         '',        {detaljerad beskrivning 4}
-         '',        {detaljerad beskrivning 5}
-         0,         {”ka strength}
-         0,         {”ka defence}
-         0);        {strength demanded to use object}
+  Add_Object('Old Bottle',   {name}
+    Drink,     {typ}
+    50,        {v„rde i gold}
+    0,         {”ka/minska hps}
+    0,         {”ka stamina}
+    0,         {”ka agility}
+    0,         {”ka charisma}
+    0,         {”ka dexterity}
+    0,         {”ka wisdom}
+    0,         {”ka mana}
+    0,         {”ka armor v„rde}
+    0,         {”ka attack v„rde}
+    '',        {„gd av?}
+    False,     {bara EN i spelet}
+    Leprosy,   {kurerar}
+    False,     {finnas i shoppen}
+    True,      {kunna hittas i dungeons?}
+    False,     {cursed item?}
+    1,         {min level att hittas i dngs}
+    99,        {max level att hittas i dngs}
+    'Hmm... Could be wine, but it smells like rotten fish.',
+    '',        {normal beskrivning 2}
+    '',        {normal beskrivning 3}
+    '',        {normal beskrivning 4}
+    '',        {normal beskrivning 5}
+    'Cure for Leprosy.',
+    '',
+    '',        {detaljerad beskrivning 3}
+    '',        {detaljerad beskrivning 4}
+    '',        {detaljerad beskrivning 5}
+    0,         {”ka strength}
+    0,         {”ka defence}
+    0);        {strength demanded to use object}
 
- Add_Object('Dusty Bottle',   {name}
-         Drink,     {typ}
-         5,         {v„rde i gold}
-         -25,       {”ka/minska hps}
-         0,         {”ka stamina}
-         0,         {”ka agility}
-         0,         {”ka charisma}
-         0,         {”ka dexterity}
-         0,         {”ka wisdom}
-         0,         {”ka mana}
-         0,         {”ka armor v„rde}
-         0,         {”ka attack v„rde}
-         '',        {„gd av?}
-         False,     {bara EN i spelet}
-         Nothing,   {kurerar}
-         False,     {finnas i shoppen}
-         True,      {kunna hittas i dungeons?}
-         False,     {cursed item?}
-         1,         {min level att hittas i dngs}
-         99,        {max level att hittas i dngs}
-         'Its half full with a thick grey liquid.',
-         '',        {normal beskrivning 2}
-         '',        {normal beskrivning 3}
-         '',        {normal beskrivning 4}
-         '',        {normal beskrivning 5}
-         'This is poison.',
-         '',
-         '',        {detaljerad beskrivning 3}
-         '',        {detaljerad beskrivning 4}
-         '',        {detaljerad beskrivning 5}
-         0,         {”ka strength}
-         0,         {”ka defence}
-         0);        {strength demanded to use object}
+  Add_Object('Dusty Bottle',   {name}
+    Drink,     {typ}
+    5,         {v„rde i gold} -25,       {”ka/minska hps}
+    0,         {”ka stamina}
+    0,         {”ka agility}
+    0,         {”ka charisma}
+    0,         {”ka dexterity}
+    0,         {”ka wisdom}
+    0,         {”ka mana}
+    0,         {”ka armor v„rde}
+    0,         {”ka attack v„rde}
+    '',        {„gd av?}
+    False,     {bara EN i spelet}
+    Nothing,   {kurerar}
+    False,     {finnas i shoppen}
+    True,      {kunna hittas i dungeons?}
+    False,     {cursed item?}
+    1,         {min level att hittas i dngs}
+    99,        {max level att hittas i dngs}
+    'Its half full with a thick grey liquid.',
+    '',        {normal beskrivning 2}
+    '',        {normal beskrivning 3}
+    '',        {normal beskrivning 4}
+    '',        {normal beskrivning 5}
+    'This is poison.',
+    '',
+    '',        {detaljerad beskrivning 3}
+    '',        {detaljerad beskrivning 4}
+    '',        {detaljerad beskrivning 5}
+    0,         {”ka strength}
+    0,         {”ka defence}
+    0);        {strength demanded to use object}
 
- Add_Object('Blue Bottle',   {name}
-         Drink,     {typ}
-         15000,     {v„rde i gold}
-         0,         {”ka/minska hps}
-         0,         {”ka stamina}
-         0,         {”ka agility}
-         0,         {”ka charisma}
-         0,         {”ka dexterity}
-         0,         {”ka wisdom}
-         1500,      {”ka mana}
-         0,         {”ka armor v„rde}
-         0,         {”ka attack v„rde}
-         '',        {„gd av?}
-         False,     {bara EN i spelet}
-         Nothing,   {kurerar}
-         True,     {finnas i shoppen}
-         True,      {kunna hittas i dungeons?}
-         False,     {cursed item?}
-         15,         {min level att hittas i dngs}
-         99,        {max level att hittas i dngs}
-         'The bottle is only half-full with some liquid.',
-         '',        {normal beskrivning 2}
-         '',        {normal beskrivning 3}
-         '',        {normal beskrivning 4}
-         '',        {normal beskrivning 5}
-         'This is a mana restorer.',
-         '',
-         '',        {detaljerad beskrivning 3}
-         '',        {detaljerad beskrivning 4}
-         '',        {detaljerad beskrivning 5}
-         0,         {”ka strength}
-         0,         {”ka defence}
-         0);        {strength demanded to use object}
-
+  Add_Object('Blue Bottle',   {name}
+    Drink,     {typ}
+    15000,     {v„rde i gold}
+    0,         {”ka/minska hps}
+    0,         {”ka stamina}
+    0,         {”ka agility}
+    0,         {”ka charisma}
+    0,         {”ka dexterity}
+    0,         {”ka wisdom}
+    1500,      {”ka mana}
+    0,         {”ka armor v„rde}
+    0,         {”ka attack v„rde}
+    '',        {„gd av?}
+    False,     {bara EN i spelet}
+    Nothing,   {kurerar}
+    True,     {finnas i shoppen}
+    True,      {kunna hittas i dungeons?}
+    False,     {cursed item?}
+    15,         {min level att hittas i dngs}
+    99,        {max level att hittas i dngs}
+    'The bottle is only half-full with some liquid.',
+    '',        {normal beskrivning 2}
+    '',        {normal beskrivning 3}
+    '',        {normal beskrivning 4}
+    '',        {normal beskrivning 5}
+    'This is a mana restorer.',
+    '',
+    '',        {detaljerad beskrivning 3}
+    '',        {detaljerad beskrivning 4}
+    '',        {detaljerad beskrivning 5}
+    0,         {”ka strength}
+    0,         {”ka defence}
+    0);        {strength demanded to use object}
 
 end;
+
 end.

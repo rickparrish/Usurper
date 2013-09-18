@@ -12,11 +12,11 @@ uses
   Drivers, VideoUtils, Crt;
 
 var
-  SavedScreen: TScreenBuffer;
+  SavedScreen:    TScreenBuffer;
 
 var
-  ExitSave: Pointer;
-  SavedX, SavedY: Integer;
+  ExitSave:       Pointer;
+  SavedX, SavedY: integer;
 
 { Exit code performed on program exit }
 procedure MyExitProc;

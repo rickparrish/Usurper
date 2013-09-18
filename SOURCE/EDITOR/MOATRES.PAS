@@ -20,104 +20,104 @@ Copyright 2007 Jakob Dangarden
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 }
 
-Unit MoatRes; {Usurper Editor - Reset MoatCreatures}
+unit MoatRes; {Usurper Editor - Reset MoatCreatures}
 
-Interface
+interface
 
-Procedure Reset_MoatCreatures;
+procedure Reset_MoatCreatures;
 
-Implementation
+implementation
 
-uses Init, jakobe, file_io;
+uses
+  Init, jakobe, file_io;
 
-var     c : integer;
-
-
-Procedure Add_Creature( const name : s30;
-                           cost    : longint;
-                           hps     : longint;
-                           basearm : longint;
-                           baseatt : longint;
-                           const desc1 : s70;
-                           const desc2 : s70;
-                           const desc3 : s70;
-                           const desc4 : s70;
-                           const desc5 : s70);
+var  c: integer;
 
 
-var moaty : MoatRec; {moat creature}
+procedure Add_Creature(const Name: s30; cost: longint; hps: longint; basearm: longint; baseatt: longint; const desc1: s70; const desc2: s70; const desc3: s70; const desc4: s70; const desc5: s70);
+
+var moaty: MoatRec; {moat creature}
 
 begin
 
- moaty.name    :=name;
- moaty.id      :=crypt(15); {if tag, to ease identification}
- moaty.cost    :=cost;
- moaty.hps     :=hps;
- moaty.deleted :=false;
- moaty.barmor  :=basearm;
- moaty.battack :=baseatt;
+  moaty.Name := Name;
+  moaty.id := crypt(15); {if tag, to ease identification}
+  moaty.cost := cost;
+  moaty.hps := hps;
+  moaty.deleted := False;
+  moaty.barmor := basearm;
+  moaty.battack := baseatt;
 
- moaty.descp[1]:=desc1;
- moaty.descp[2]:=desc2;
- moaty.descp[3]:=desc3;
- moaty.descp[4]:=desc4;
- moaty.descp[5]:=desc5;
+  moaty.descp[1] := desc1;
+  moaty.descp[2] := desc2;
+  moaty.descp[3] := desc3;
+  moaty.descp[4] := desc4;
+  moaty.descp[5] := desc5;
 
- for c:=1 to 5 do begin
-  if moaty.descp[c]='' then moaty.descp[c]:=emptystr;
- end;
+  for c := 1 to 5 do
+  begin
+    if moaty.descp[c] = '' then moaty.descp[c] := emptystr;
+  end;
 
- {$I-}write(moatfile,moaty);{$I+}
- if IOResult<>0 then unable_to_write(gufile);
+ {$I-}Write(moatfile, moaty);{$I+}
+  if IOResult <> 0 then unable_to_write(gufile);
 
 end; {add_creature}
 
-Procedure Reset_MoatCreatures;
+procedure Reset_MoatCreatures;
 begin
 
- c:=0;
+  c := 0;
 
- assign(moatfile,motfile);
+  Assign(moatfile, motfile);
  {$I-}rewrite(moatfile);{$I+}
- if IOResult<>0 then unable_to_create(motfile);
+  if IOResult <> 0 then unable_to_create(motfile);
 
- add_creature('Eel',2500,50,15,15,
-              'the black eel. using its jagged theeth the eel can',
-              'prove to be disastrous to any careless swimmer.',
-              '',
-              '',
-              '');
+  add_creature('Eel', 2500, 50, 15, 15,
+    'the black eel. using its jagged theeth the eel can',
+    'prove to be disastrous to any careless swimmer.',
+    '',
+    '',
+    '');
 
- add_creature('Crocodile',15000,90,25,25,
-              '',
-              '',
-              '',
-              '',
-              '');
+  add_creature('Crocodile', 15000, 90, 25, 25,
+    '',
+    '',
+    '',
+    '',
+    '');
 
- add_creature('Giant Octopussy',50000,150,30,30,
-              '',
-              '',
-              '',
-              '',
-              '');
+  add_creature('Giant Octopussy', 50000, 150, 30, 30,
+    '',
+    '',
+    '',
+    '',
+    '');
 
- add_creature('Hippo',125000,300,32,32,
-              'the hippo likes to squash his enemies.',
-              'try to keep the Hippos in large numbers, they don''t',
-              'like to be by themselves.',
-              '',
-              '');
+  add_creature('Hippo', 125000, 300, 32, 32,
+    'the hippo likes to squash his enemies.',
+    'try to keep the Hippos in large numbers, they don''t',
+    'like to be by themselves.',
+    '',
+    '');
 
- add_creature('Lake Monster',1100000,950,55,55,
-              'this hideous creature lurks at the bottom of',
-              'the murky lakes in the land. The Lake Monster is',
-              'so big that it just fits in a Castle moat.',
-              '',
-              '');
+  add_creature('Lake Monster', 1100000, 950, 55, 55,
+    'this hideous creature lurks at the bottom of',
+    'the murky lakes in the land. The Lake Monster is',
+    'so big that it just fits in a Castle moat.',
+    '',
+    '');
 
- {$I-}close(moatfile);{$I+}
- if IOResult<>0 then unable_to_close(motfile);
+ {$I-}Close(moatfile);{$I+}
+  if IOResult <> 0 then unable_to_close(motfile);
+
+
+
+
+
+
+
+
 
 end; {reset_moatcreatures}
 

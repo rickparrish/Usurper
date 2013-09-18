@@ -21,88 +21,86 @@ Copyright 2007 Jakob Dangarden
 }
 
 
-Unit AddMonst;
+unit AddMonst;
 
-Interface
+interface
 
-Uses Init;
+uses
+  Init;
 
-Procedure Add_Monster( armoruser   : boolean;
-                       weaponuser  : boolean;
-                       weapon      : longint;
-                       armor       : longint;
-                       strength    : integer;
-                       const name  : s70;
-                       grabweap    : boolean;
-                       grabarm     : boolean;
-                       const phrase: s70);
+procedure Add_Monster(armoruser: boolean; weaponuser: boolean; weapon: longint; armor: longint; strength: integer; const Name: s70; grabweap: boolean; grabarm: boolean; const phrase: s70);
 
-Implementation
+implementation
 
-Uses JakobE, File_IO;
+uses
+  JakobE, File_IO;
 
-Procedure Add_Monster;
-var i : byte;
+procedure Add_Monster;
+var i: byte;
 begin
 
- if add_fake then begin
-  inc(counter);
-  exit;
- end;
+  if add_fake then
+  begin
+    Inc(counter);
+    exit;
+  end;
 
- monster.name    :=name;
- monster.weapnr  :=weapon;
- monster.armnr   :=armor;
- monster.grabweap:=grabweap; {kan man ta vapnet}
- monster.grabarm :=grabarm;
- monster.phrase  :=phrase;     {vad s„ger odjuret?}
- if monster.phrase='' then monster.phrase:=emptystr;
- monster.wuser   :=weaponuser;
- monster.auser   :=armoruser;
+  monster.Name := Name;
+  monster.weapnr := weapon;
+  monster.armnr := armor;
+  monster.grabweap := grabweap; {kan man ta vapnet}
+  monster.grabarm := grabarm;
+  monster.phrase := phrase;     {vad s„ger odjuret?}
+  if monster.phrase = '' then monster.phrase := emptystr;
+  monster.wuser := weaponuser;
+  monster.auser := armoruser;
 
- monster.magicres:=random(50);
+  monster.magicres := random(50);
 
- monster.strength:=strength+random(10);
+  monster.strength := strength + random(10);
 
- if weaponuser=false then monster.strength:=monster.strength+random(20);
+  if weaponuser = False then monster.strength := monster.strength + random(20);
 
 
- {all of Jakob's monsters had strength*3}
- monster.hps      :=monster.strength*3;
- monster.punch    :=0;
- monster.poisoned :=false;
- monster.weapon   :=emptystr;
- monster.armor    :=emptystr;
- monster.disease  :=false;
- monster.target   :=0;
- monster.weappow  :=0;
- monster.armpow   :=0;
- monster.iq       :=random(100);
- monster.evil     :=random(11);
+  {all of Jakob's monsters had strength*3}
+  monster.hps := monster.strength * 3;
+  monster.punch := 0;
+  monster.poisoned := False;
+  monster.weapon := emptystr;
+  monster.armor := emptystr;
+  monster.disease := False;
+  monster.target := 0;
+  monster.weappow := 0;
+  monster.armpow := 0;
+  monster.iq := random(100);
+  monster.evil := random(11);
 
- if counter>=10 then begin
-  monster.magiclevel:=counter div 10;
- end
- else begin
-  monster.magiclevel:=1;
- end;
- if monster.magiclevel>100 then monster.magiclevel:=100;
+  if counter >= 10 then
+  begin
+    monster.magiclevel := counter div 10;
+  end else
+  begin
+    monster.magiclevel := 1;
+  end;
+  if monster.magiclevel > 100 then monster.magiclevel := 100;
 
- monster.mana      :=0;
- monster.maxmana   :=0;
+  monster.mana := 0;
+  monster.maxmana := 0;
 
- {giving monsters random spell capability}
- for i:=1 to maxmspells do begin
-  if random(10)=0 then monster.spell[i]:=true
-                  else monster.spell[i]:=false;
- end;
+  {giving monsters random spell capability}
+  for i := 1 to maxmspells do
+  begin
+    if random(10) = 0 then monster.spell[i] := True
+    else monster.spell[i] := False;
+  end;
 
- {write to disk}
- {$I-}write(monsterfile,monster);{$I-}
- if IOResult<>0 then unable_to_write(monfile);
+  {write to disk}
+ {$I-}Write(monsterfile, monster);{$I-}
+  if IOResult <> 0 then unable_to_write(monfile);
 
- inc(counter); {statbar must have the exact amount of posts..}
- Statbar(Counter,totobj,global_masterx,global_mastery,1,1);
+  Inc(counter); {statbar must have the exact amount of posts..}
+  Statbar(Counter, totobj, global_masterx, global_mastery, 1, 1);
 
 end;
+
 end.
