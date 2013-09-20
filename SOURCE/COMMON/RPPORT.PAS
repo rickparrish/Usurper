@@ -46,7 +46,7 @@ implementation
 
 {$IFDEF FPC}
   uses
-    Crt;
+    Crt {$IFDEF GO32V2}, SysUtils{$ENDIF};
 {$ENDIF}
 {$IFDEF VPASCAL}
   uses
@@ -81,11 +81,18 @@ begin
 end;
 {$ENDIF}
 {$IFNDEF WIN32}
-procedure RPHideCursor;
-begin
-  HideCursor;
-end;
-
+  {$IFDEF FPC}
+  procedure RPHideCursor;
+  begin
+    cursoroff;
+  end;
+  {$ENDIF}
+  {$IFDEF VPASCAL}
+  procedure RPHideCursor;
+  begin
+    HideCursor;
+  end;
+  {$ENDIF}
 {$ENDIF}
 
 function RPLockFile(handle, start, length: longint): longint;
@@ -142,6 +149,12 @@ begin
   end;
 end;
 {$ENDIF}
+{$IFDEF GO32V2}
+procedure RPRestoreScreen(var screenBuf: TScreenBuf);
+begin
+  // REETODO WriteLn('RPPORT RPPORT RPRestoreScreen'); Halt;
+end;
+{$ENDIF}
 
 { REETODO Should detect screen size }
 {$IFDEF WIN32}
@@ -178,6 +191,12 @@ begin
   Move(SysTVGetSrcBuf^, screenBuf, SizeOf(TScreenBuf));
 end;
 {$ENDIF}
+{$IFDEF GO32V2}
+procedure RPSaveScreen(var screenBuf: TScreenBuf);
+begin
+  // REETODO WriteLn('RPPORT RPPORT RPSaveScreen'); Halt;
+end;
+{$ENDIF}
 
 {$IFDEF WIN32}
 function RPScreenSizeX: word;
@@ -189,14 +208,23 @@ begin
 end;
 {$ENDIF}
 {$IFNDEF WIN32}
-function RPScreenSizeX: word;
-var
-  Size: TSysPoint;
-begin
-  SysTVGetScrMode(@Size, False);
-  RPScreenSizeX := Size.X;
-end;
+  {$IFDEF FPC}
+  function RPScreenSizeX: word;
+  begin
+    RPScreenSizeX := ScreenWidth;
+  end;
+  {$ENDIF}
+  {$IFDEF VPASCAL}
+  function RPScreenSizeX: word;
+  var
+    Size: TSysPoint;
+  begin
+    SysTVGetScrMode(@Size, False);
+    RPScreenSizeX := Size.X;
+  end;
+  {$ENDIF}
 {$ENDIF}
+
 {$IFDEF WIN32}
 function RPScreenSizeY: word;
 var
@@ -207,13 +235,21 @@ begin
 end;
 {$ENDIF}
 {$IFNDEF WIN32}
-function RPScreenSizeY: word;
-var
-  Size: TSysPoint;
-begin
-  SysTVGetScrMode(@Size, False);
-  RPScreenSizeY := Size.Y;
-end;
+  {$IFDEF FPC}
+  function RPScreenSizeY: word;
+  begin
+    RPScreenSizeY := ScreenHeight;
+  end;
+  {$ENDIF}
+  {$IFDEF VPASCAL}
+    function RPScreenSizeY: word;
+    var
+      Size: TSysPoint;
+    begin
+      SysTVGetScrMode(@Size, False);
+      RPScreenSizeY := Size.Y;
+    end;
+  {$ENDIF}
 {$ENDIF}
 
 {$IFDEF WIN32}
@@ -228,13 +264,21 @@ begin
 end;
 {$ENDIF}
 {$IFNDEF WIN32}
-procedure RPSetAttrAt(x, y: SmallWord; attr: byte);
-var
-  Ch: char;
-begin
-  Ch := SysReadCharAt(x, y);
-  SysWrtCharStrAtt(@Ch, 1, x, y, attr);
-end;
+  {$IFDEF FPC}
+  procedure RPSetAttrAt(x, y: SmallWord; attr: byte);
+  begin
+    WriteLn('RPPORT RPPORT RPSetAttrAt'); Halt;
+  end;
+  {$ENDIF}
+  {$IFDEF VPASCAL}
+  procedure RPSetAttrAt(x, y: SmallWord; attr: byte);
+  var
+    Ch: char;
+  begin
+    Ch := SysReadCharAt(x, y);
+    SysWrtCharStrAtt(@Ch, 1, x, y, attr);
+  end;
+  {$ENDIF}
 {$ENDIF}
 
 {$IFDEF WIN32}
@@ -248,10 +292,18 @@ begin
 end;
 {$ENDIF}
 {$IFNDEF WIN32}
-procedure RPShowCursor;
-begin
-  ShowCursor;
-end;
+  {$IFDEF FPC}
+  procedure RPShowCursor;
+  begin
+    cursoron;
+  end;
+  {$ENDIF}
+  {$IFDEF VPASCAL}
+  procedure RPShowCursor;
+  begin
+    ShowCursor;
+  end;
+  {$ENDIF}
 {$ENDIF}
 
 procedure RPSleep(ms: word);
