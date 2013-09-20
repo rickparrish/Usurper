@@ -22,17 +22,19 @@ Copyright 2007 Jakob Dangarden
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 }
 
-Unit EdBody;
+unit EdBody;
 
-Interface
+interface
 
-Procedure Reset_Body;
+procedure Reset_Body;
 
-Implementation
-uses init, obj_ad;
+implementation
 
-Procedure Reset_Body;
-Begin
+uses
+  init, obj_ad;
+
+procedure Reset_Body;
+begin
               {typ av objekt :
                                1. head
                                2. body
@@ -50,821 +52,817 @@ Begin
                               14. vapen
                               15. around body }
 
- Add_Object('Grass Coat',   {name}
-            Body,      {typ}
-            50,        {v„rde i gold}
-            0,         {”ka/minska hps}
-            0,         {”ka stamina}
-            0,         {”ka agility}
-            0,         {”ka charisma}
-            0,         {”ka dexterity}
-            0,         {”ka wisdom}
-            0,         {”ka mana}
-            1,         {”ka armor v„rde}
-            0,         {”ka attack v„rde}
-            '',        {„gd av?}
-            False,     {bara EN i spelet}
-            Nothing,   {kurerar}
-            True,      {finnas i shoppen}
-            True,      {kunna hittas i dungeons?}
-            False,     {cursed item?}
-            1,         {min level att hittas i dngs}
-            10,        {max level att hittas i dngs}
-            'You see nothing special.',
-            '',
-            '',
-            '',        {normal beskrivning 4}
-            '',        {normal beskrivning 5}
-            '',        {detaljerad beskrivning 1}
-            '',        {detaljerad beskrivning 2}
-            '',        {detaljerad beskrivning 3}
-            '',        {detaljerad beskrivning 4}
-            '',        {detaljerad beskrivning 5}
-            0,         {”ka strength}
-            0,         {”ka defence}
-            0);        {strength demanded to use object}
+  Add_Object('Grass Coat',   {name}
+    Body,      {typ}
+    50,        {v„rde i gold}
+    0,         {”ka/minska hps}
+    0,         {”ka stamina}
+    0,         {”ka agility}
+    0,         {”ka charisma}
+    0,         {”ka dexterity}
+    0,         {”ka wisdom}
+    0,         {”ka mana}
+    1,         {”ka armor v„rde}
+    0,         {”ka attack v„rde}
+    '',        {„gd av?}
+    False,     {bara EN i spelet}
+    Nothing,   {kurerar}
+    True,      {finnas i shoppen}
+    True,      {kunna hittas i dungeons?}
+    False,     {cursed item?}
+    1,         {min level att hittas i dngs}
+    10,        {max level att hittas i dngs}
+    'You see nothing special.',
+    '',
+    '',
+    '',        {normal beskrivning 4}
+    '',        {normal beskrivning 5}
+    '',        {detaljerad beskrivning 1}
+    '',        {detaljerad beskrivning 2}
+    '',        {detaljerad beskrivning 3}
+    '',        {detaljerad beskrivning 4}
+    '',        {detaljerad beskrivning 5}
+    0,         {”ka strength}
+    0,         {”ka defence}
+    0);        {strength demanded to use object}
 
- Add_Object('Wool Coat',   {name}
-            Body,      {typ}
-            300,       {v„rde i gold}
-            1,         {”ka/minska hps}
-            1,         {”ka stamina}
-            0,         {”ka agility}
-            0,         {”ka charisma}
-            0,         {”ka dexterity}
-            0,         {”ka wisdom}
-            0,         {”ka mana}
-            2,         {”ka armor v„rde}
-            0,         {”ka attack v„rde}
-            '',        {„gd av?}
-            False,     {bara EN i spelet}
-            Nothing,   {kurerar}
-            True,      {finnas i shoppen}
-            True,      {kunna hittas i dungeons?}
-            False,     {cursed item?}
-            6,         {min level att hittas i dngs}
-            15,        {max level att hittas i dngs}
-            'An ugly wool coat ...',
-            '',
-            '',
-            '',        {normal beskrivning 4}
-            '',        {normal beskrivning 5}
-            '',        {detaljerad beskrivning 1}
-            '',        {detaljerad beskrivning 2}
-            '',        {detaljerad beskrivning 3}
-            '',        {detaljerad beskrivning 4}
-            '',        {detaljerad beskrivning 5}
-            0,         {”ka strength}
-            0,         {”ka defence}
-            0);        {strength demanded to use object}
+  Add_Object('Wool Coat',   {name}
+    Body,      {typ}
+    300,       {v„rde i gold}
+    1,         {”ka/minska hps}
+    1,         {”ka stamina}
+    0,         {”ka agility}
+    0,         {”ka charisma}
+    0,         {”ka dexterity}
+    0,         {”ka wisdom}
+    0,         {”ka mana}
+    2,         {”ka armor v„rde}
+    0,         {”ka attack v„rde}
+    '',        {„gd av?}
+    False,     {bara EN i spelet}
+    Nothing,   {kurerar}
+    True,      {finnas i shoppen}
+    True,      {kunna hittas i dungeons?}
+    False,     {cursed item?}
+    6,         {min level att hittas i dngs}
+    15,        {max level att hittas i dngs}
+    'An ugly wool coat ...',
+    '',
+    '',
+    '',        {normal beskrivning 4}
+    '',        {normal beskrivning 5}
+    '',        {detaljerad beskrivning 1}
+    '',        {detaljerad beskrivning 2}
+    '',        {detaljerad beskrivning 3}
+    '',        {detaljerad beskrivning 4}
+    '',        {detaljerad beskrivning 5}
+    0,         {”ka strength}
+    0,         {”ka defence}
+    0);        {strength demanded to use object}
 
- Add_Object('Cloth',   {name}
-            Body,      {typ}
-            250,       {v„rde i gold}
-            0,         {”ka/minska hps}
-            0,         {”ka stamina}
-            0,         {”ka agility}
-            0,         {”ka charisma}
-            0,         {”ka dexterity}
-            0,         {”ka wisdom}
-            0,         {”ka mana}
-            1,         {”ka armor v„rde}
-            0,         {”ka attack v„rde}
-            '',        {„gd av?}
-            False,     {bara EN i spelet}
-            Nothing,   {kurerar}
-            True,      {finnas i shoppen}
-            False,     {kunna hittas i dungeons?}
-            False,     {cursed item?}
-            1,         {min level att hittas i dngs}
-            99,        {max level att hittas i dngs}
-            'You see nothing special.',
-            '',        {normal beskrivning 2}
-            '',        {normal beskrivning 3}
-            '',        {normal beskrivning 4}
-            '',        {normal beskrivning 5}
-            '',        {detaljerad beskrivning 1}
-            '',        {detaljerad beskrivning 2}
-            '',        {detaljerad beskrivning 3}
-            '',        {detaljerad beskrivning 4}
-            '',        {detaljerad beskrivning 5}
-            0,         {”ka strength}
-            0,         {”ka defence}
-            0);        {strength demanded to use object}
+  Add_Object('Cloth',   {name}
+    Body,      {typ}
+    250,       {v„rde i gold}
+    0,         {”ka/minska hps}
+    0,         {”ka stamina}
+    0,         {”ka agility}
+    0,         {”ka charisma}
+    0,         {”ka dexterity}
+    0,         {”ka wisdom}
+    0,         {”ka mana}
+    1,         {”ka armor v„rde}
+    0,         {”ka attack v„rde}
+    '',        {„gd av?}
+    False,     {bara EN i spelet}
+    Nothing,   {kurerar}
+    True,      {finnas i shoppen}
+    False,     {kunna hittas i dungeons?}
+    False,     {cursed item?}
+    1,         {min level att hittas i dngs}
+    99,        {max level att hittas i dngs}
+    'You see nothing special.',
+    '',        {normal beskrivning 2}
+    '',        {normal beskrivning 3}
+    '',        {normal beskrivning 4}
+    '',        {normal beskrivning 5}
+    '',        {detaljerad beskrivning 1}
+    '',        {detaljerad beskrivning 2}
+    '',        {detaljerad beskrivning 3}
+    '',        {detaljerad beskrivning 4}
+    '',        {detaljerad beskrivning 5}
+    0,         {”ka strength}
+    0,         {”ka defence}
+    0);        {strength demanded to use object}
 
- Add_Object('Leather Vest',   {name}
-            Body,      {typ}
-            500,       {v„rde i gold}
-            0,         {”ka/minska hps}
-            0,         {”ka stamina}
-            0,         {”ka agility}
-            0,         {”ka charisma}
-            0,         {”ka dexterity}
-            0,         {”ka wisdom}
-            0,         {”ka mana}
-            2,         {”ka armor v„rde}
-            0,         {”ka attack v„rde}
-            '',        {„gd av?}
-            False,     {bara EN i spelet}
-            Nothing,   {kurerar}
-            True,      {finnas i shoppen}
-            False,     {kunna hittas i dungeons?}
-            False,     {cursed item?}
-            1,         {min level att hittas i dngs}
-            99,        {max level att hittas i dngs}
-            'You see nothing special.',
-            '',        {normal beskrivning 2}
-            '',        {normal beskrivning 3}
-            '',        {normal beskrivning 4}
-            '',        {normal beskrivning 5}
-            '',        {detaljerad beskrivning 1}
-            '',        {detaljerad beskrivning 2}
-            '',        {detaljerad beskrivning 3}
-            '',        {detaljerad beskrivning 4}
-            '',        {detaljerad beskrivning 5}
-            0,         {”ka strength}
-            0,         {”ka defence}
-            0);        {strength demanded to use object}
+  Add_Object('Leather Vest',   {name}
+    Body,      {typ}
+    500,       {v„rde i gold}
+    0,         {”ka/minska hps}
+    0,         {”ka stamina}
+    0,         {”ka agility}
+    0,         {”ka charisma}
+    0,         {”ka dexterity}
+    0,         {”ka wisdom}
+    0,         {”ka mana}
+    2,         {”ka armor v„rde}
+    0,         {”ka attack v„rde}
+    '',        {„gd av?}
+    False,     {bara EN i spelet}
+    Nothing,   {kurerar}
+    True,      {finnas i shoppen}
+    False,     {kunna hittas i dungeons?}
+    False,     {cursed item?}
+    1,         {min level att hittas i dngs}
+    99,        {max level att hittas i dngs}
+    'You see nothing special.',
+    '',        {normal beskrivning 2}
+    '',        {normal beskrivning 3}
+    '',        {normal beskrivning 4}
+    '',        {normal beskrivning 5}
+    '',        {detaljerad beskrivning 1}
+    '',        {detaljerad beskrivning 2}
+    '',        {detaljerad beskrivning 3}
+    '',        {detaljerad beskrivning 4}
+    '',        {detaljerad beskrivning 5}
+    0,         {”ka strength}
+    0,         {”ka defence}
+    0);        {strength demanded to use object}
 
   Add_Object('Heavy Leather Vest',
-             Body,      {typ}
-             1300,      {v„rde i gold}
-             5,         {”ka/minska hps}
-             0,         {”ka stamina}
-             0,         {”ka agility}
-             0,         {”ka charisma}
-             8,         {”ka dexterity}
-             0,         {”ka wisdom}
-             0,         {”ka mana}
-             2,         {”ka armor v„rde}
-             0,         {”ka attack v„rde}
-             '',        {„gd av?}
-             False,     {bara EN i spelet}
-             Blindness, {kurerar}
-             True,      {finnas i shoppen}
-             True,      {kunna hittas i dungeons?}
-             False,     {cursed item?}
-             5,         {min level att hittas i dngs}
-             7,         {max level att hittas i dngs}
-             'Reinforced leather vest. Can stop arrows.',
-             '',        {normal beskrivning 2}
-             '',        {normal beskrivning 3}
-             '',        {normal beskrivning 4}
-             '',        {normal beskrivning 5}
-             '',        {detaljerad beskrivning 1}
-             '',        {detaljerad beskrivning 2}
-             '',        {detaljerad beskrivning 3}
-             '',        {detaljerad beskrivning 4}
-             '',        {detaljerad beskrivning 5}
-             0,         {”ka strength}
-             0,         {”ka defence}
-             3);        {strength demanded to use object}
+    Body,      {typ}
+    1300,      {v„rde i gold}
+    5,         {”ka/minska hps}
+    0,         {”ka stamina}
+    0,         {”ka agility}
+    0,         {”ka charisma}
+    8,         {”ka dexterity}
+    0,         {”ka wisdom}
+    0,         {”ka mana}
+    2,         {”ka armor v„rde}
+    0,         {”ka attack v„rde}
+    '',        {„gd av?}
+    False,     {bara EN i spelet}
+    Blindness, {kurerar}
+    True,      {finnas i shoppen}
+    True,      {kunna hittas i dungeons?}
+    False,     {cursed item?}
+    5,         {min level att hittas i dngs}
+    7,         {max level att hittas i dngs}
+    'Reinforced leather vest. Can stop arrows.',
+    '',        {normal beskrivning 2}
+    '',        {normal beskrivning 3}
+    '',        {normal beskrivning 4}
+    '',        {normal beskrivning 5}
+    '',        {detaljerad beskrivning 1}
+    '',        {detaljerad beskrivning 2}
+    '',        {detaljerad beskrivning 3}
+    '',        {detaljerad beskrivning 4}
+    '',        {detaljerad beskrivning 5}
+    0,         {”ka strength}
+    0,         {”ka defence}
+    3);        {strength demanded to use object}
 
   Add_Object('Ma''s Protection',
-             Body,      {typ}
-             1200,      {v„rde i gold}
-             0,         {”ka/minska hps}
-             0,         {”ka stamina}
-             0,         {”ka agility}
-             0,         {”ka charisma}
-             0,         {”ka dexterity}
-             0,         {”ka wisdom}
-             0,         {”ka mana}
-             1,         {”ka armor v„rde}
-             0,         {”ka attack v„rde}
-             '',        {„gd av?}
-             False,     {bara EN i spelet}
-             Nothing,   {kurerar}
-             True,      {finnas i shoppen}
-             False,     {kunna hittas i dungeons?}
-             False,     {cursed item?}
-             1,         {min level att hittas i dngs}
-             99,        {max level att hittas i dngs}
-             'Enchanted coat of unknown origin. Will last a lifetime',
-             '',        {normal beskrivning 2}
-             '',        {normal beskrivning 3}
-             '',        {normal beskrivning 4}
-             '',        {normal beskrivning 5}
-             '',        {detaljerad beskrivning 1}
-             '',        {detaljerad beskrivning 2}
-             '',        {detaljerad beskrivning 3}
-             '',        {detaljerad beskrivning 4}
-             '',        {detaljerad beskrivning 5}
-             10,        {”ka strength}
-             0,         {”ka defence}
-             2);        {strength demanded to use object}
+    Body,      {typ}
+    1200,      {v„rde i gold}
+    0,         {”ka/minska hps}
+    0,         {”ka stamina}
+    0,         {”ka agility}
+    0,         {”ka charisma}
+    0,         {”ka dexterity}
+    0,         {”ka wisdom}
+    0,         {”ka mana}
+    1,         {”ka armor v„rde}
+    0,         {”ka attack v„rde}
+    '',        {„gd av?}
+    False,     {bara EN i spelet}
+    Nothing,   {kurerar}
+    True,      {finnas i shoppen}
+    False,     {kunna hittas i dungeons?}
+    False,     {cursed item?}
+    1,         {min level att hittas i dngs}
+    99,        {max level att hittas i dngs}
+    'Enchanted coat of unknown origin. Will last a lifetime',
+    '',        {normal beskrivning 2}
+    '',        {normal beskrivning 3}
+    '',        {normal beskrivning 4}
+    '',        {normal beskrivning 5}
+    '',        {detaljerad beskrivning 1}
+    '',        {detaljerad beskrivning 2}
+    '',        {detaljerad beskrivning 3}
+    '',        {detaljerad beskrivning 4}
+    '',        {detaljerad beskrivning 5}
+    10,        {”ka strength}
+    0,         {”ka defence}
+    2);        {strength demanded to use object}
 
   Add_Object('Plate Mail',   {name}
-            Body,      {typ}
-            1500,      {v„rde i gold}
-            0,         {”ka/minska hps}
-            0,         {”ka stamina}
-            0,         {”ka agility}
-            0,         {”ka charisma}
-            0,         {”ka dexterity}
-            0,         {”ka wisdom}
-            0,         {”ka mana}
-            4,         {”ka armor v„rde}
-            0,         {”ka attack v„rde}
-            '',        {„gd av?}
-            False,     {bara EN i spelet}
-            Nothing,   {kurerar}
-            True,      {finnas i shoppen}
-            False,     {kunna hittas i dungeons?}
-            False,     {cursed item?}
-            1,         {min level att hittas i dngs}
-            99,        {max level att hittas i dngs}
-            'You see nothing special.',
-            '',        {normal beskrivning 2}
-            '',        {normal beskrivning 3}
-            '',        {normal beskrivning 4}
-            '',        {normal beskrivning 5}
-            '',        {detaljerad beskrivning 1}
-            '',        {detaljerad beskrivning 2}
-            '',        {detaljerad beskrivning 3}
-            '',        {detaljerad beskrivning 4}
-            '',        {detaljerad beskrivning 5}
-            0,         {”ka strength}
-            0,         {”ka defence}
-            0);        {strength demanded to use object}
+    Body,      {typ}
+    1500,      {v„rde i gold}
+    0,         {”ka/minska hps}
+    0,         {”ka stamina}
+    0,         {”ka agility}
+    0,         {”ka charisma}
+    0,         {”ka dexterity}
+    0,         {”ka wisdom}
+    0,         {”ka mana}
+    4,         {”ka armor v„rde}
+    0,         {”ka attack v„rde}
+    '',        {„gd av?}
+    False,     {bara EN i spelet}
+    Nothing,   {kurerar}
+    True,      {finnas i shoppen}
+    False,     {kunna hittas i dungeons?}
+    False,     {cursed item?}
+    1,         {min level att hittas i dngs}
+    99,        {max level att hittas i dngs}
+    'You see nothing special.',
+    '',        {normal beskrivning 2}
+    '',        {normal beskrivning 3}
+    '',        {normal beskrivning 4}
+    '',        {normal beskrivning 5}
+    '',        {detaljerad beskrivning 1}
+    '',        {detaljerad beskrivning 2}
+    '',        {detaljerad beskrivning 3}
+    '',        {detaljerad beskrivning 4}
+    '',        {detaljerad beskrivning 5}
+    0,         {”ka strength}
+    0,         {”ka defence}
+    0);        {strength demanded to use object}
 
   Add_Object('Smears Plate',   {name}
-            Body,      {typ}
-            2500,      {v„rde i gold}
-            0,         {”ka/minska hps}
-            5,         {”ka stamina}
-            0,         {”ka agility}
-            5,         {”ka charisma}
-            0,         {”ka dexterity}
-            5,         {”ka wisdom}
-            0,         {”ka mana}
-            2,         {”ka armor v„rde}
-            0,         {”ka attack v„rde}
-            '',        {„gd av?}
-            False,     {bara EN i spelet}
-            Nothing,   {kurerar}
-            True,      {finnas i shoppen}
-            True,      {kunna hittas i dungeons?}
-            False,     {cursed item?}
-            2,         {min level att hittas i dngs}
-            3,         {max level att hittas i dngs}
-            'You see nothing special.',
-            '',        {normal beskrivning 2}
-            '',        {normal beskrivning 3}
-            '',        {normal beskrivning 4}
-            '',        {normal beskrivning 5}
-            '',        {detaljerad beskrivning 1}
-            '',        {detaljerad beskrivning 2}
-            '',        {detaljerad beskrivning 3}
-            '',        {detaljerad beskrivning 4}
-            '',        {detaljerad beskrivning 5}
-            0,         {”ka strength}
-            0,         {”ka defence}
-            0);        {strength demanded to use object}
+    Body,      {typ}
+    2500,      {v„rde i gold}
+    0,         {”ka/minska hps}
+    5,         {”ka stamina}
+    0,         {”ka agility}
+    5,         {”ka charisma}
+    0,         {”ka dexterity}
+    5,         {”ka wisdom}
+    0,         {”ka mana}
+    2,         {”ka armor v„rde}
+    0,         {”ka attack v„rde}
+    '',        {„gd av?}
+    False,     {bara EN i spelet}
+    Nothing,   {kurerar}
+    True,      {finnas i shoppen}
+    True,      {kunna hittas i dungeons?}
+    False,     {cursed item?}
+    2,         {min level att hittas i dngs}
+    3,         {max level att hittas i dngs}
+    'You see nothing special.',
+    '',        {normal beskrivning 2}
+    '',        {normal beskrivning 3}
+    '',        {normal beskrivning 4}
+    '',        {normal beskrivning 5}
+    '',        {detaljerad beskrivning 1}
+    '',        {detaljerad beskrivning 2}
+    '',        {detaljerad beskrivning 3}
+    '',        {detaljerad beskrivning 4}
+    '',        {detaljerad beskrivning 5}
+    0,         {”ka strength}
+    0,         {”ka defence}
+    0);        {strength demanded to use object}
 
   Add_Object('Hedgehog Defence',   {name}
-            Body,      {typ}
-            5500,      {v„rde i gold}
-            0,         {”ka/minska hps}
-            0,         {”ka stamina}
-            0,         {”ka agility}
-            0,         {”ka charisma}
-            0,         {”ka dexterity}
-            0,         {”ka wisdom}
-            0,         {”ka mana}
-            4,         {”ka armor v„rde}
-            0,         {”ka attack v„rde}
-            '',        {„gd av?}
-            False,     {bara EN i spelet}
-            Nothing,   {kurerar}
-            True,      {finnas i shoppen}
-            False,     {kunna hittas i dungeons?}
-            False,     {cursed item?}
-            1,         {min level att hittas i dngs}
-            99,        {max level att hittas i dngs}
-            'Can sting opponents.',
-            '',        {normal beskrivning 2}
-            '',        {normal beskrivning 3}
-            '',        {normal beskrivning 4}
-            '',        {normal beskrivning 5}
-            '',        {detaljerad beskrivning 1}
-            '',        {detaljerad beskrivning 2}
-            '',        {detaljerad beskrivning 3}
-            '',        {detaljerad beskrivning 4}
-            '',        {detaljerad beskrivning 5}
-            5,         {”ka strength}
-            5,         {”ka defence}
-            3);        {strength demanded to use object}
+    Body,      {typ}
+    5500,      {v„rde i gold}
+    0,         {”ka/minska hps}
+    0,         {”ka stamina}
+    0,         {”ka agility}
+    0,         {”ka charisma}
+    0,         {”ka dexterity}
+    0,         {”ka wisdom}
+    0,         {”ka mana}
+    4,         {”ka armor v„rde}
+    0,         {”ka attack v„rde}
+    '',        {„gd av?}
+    False,     {bara EN i spelet}
+    Nothing,   {kurerar}
+    True,      {finnas i shoppen}
+    False,     {kunna hittas i dungeons?}
+    False,     {cursed item?}
+    1,         {min level att hittas i dngs}
+    99,        {max level att hittas i dngs}
+    'Can sting opponents.',
+    '',        {normal beskrivning 2}
+    '',        {normal beskrivning 3}
+    '',        {normal beskrivning 4}
+    '',        {normal beskrivning 5}
+    '',        {detaljerad beskrivning 1}
+    '',        {detaljerad beskrivning 2}
+    '',        {detaljerad beskrivning 3}
+    '',        {detaljerad beskrivning 4}
+    '',        {detaljerad beskrivning 5}
+    5,         {”ka strength}
+    5,         {”ka defence}
+    3);        {strength demanded to use object}
 
   Add_Object('Asylum Coat',   {name}
-             Body,      {typ}
-             19800,     {v„rde i gold}
-             35,        {”ka/minska hps}
-             0,         {”ka stamina}
-             0,         {”ka agility}
-             0,         {”ka charisma}
-             0,         {”ka dexterity}
-             0,         {”ka wisdom}
-             0,         {”ka mana}
-             14,        {”ka armor v„rde}
-             0,         {”ka attack v„rde}
-             '',        {„gd av?}
-             False,     {bara EN i spelet}
-             Nothing,   {kurerar}
-             True,      {finnas i shoppen}
-             False,     {kunna hittas i dungeons?}
-             False,     {cursed item?}
-             1,         {min level att hittas i dngs}
-             99,        {max level att hittas i dngs}
-             'Nothing special.',
-             '',        {normal beskrivning 2}
-             '',        {normal beskrivning 3}
-             '',        {normal beskrivning 4}
-             '',        {normal beskrivning 5}
-             '',        {detaljerad beskrivning 1}
-             '',        {detaljerad beskrivning 2}
-             '',        {detaljerad beskrivning 3}
-             '',        {detaljerad beskrivning 4}
-             '',        {detaljerad beskrivning 5}
-             15,        {”ka strength}
-             15,        {”ka defence}
-             45);       {strength demanded to use object}
+    Body,      {typ}
+    19800,     {v„rde i gold}
+    35,        {”ka/minska hps}
+    0,         {”ka stamina}
+    0,         {”ka agility}
+    0,         {”ka charisma}
+    0,         {”ka dexterity}
+    0,         {”ka wisdom}
+    0,         {”ka mana}
+    14,        {”ka armor v„rde}
+    0,         {”ka attack v„rde}
+    '',        {„gd av?}
+    False,     {bara EN i spelet}
+    Nothing,   {kurerar}
+    True,      {finnas i shoppen}
+    False,     {kunna hittas i dungeons?}
+    False,     {cursed item?}
+    1,         {min level att hittas i dngs}
+    99,        {max level att hittas i dngs}
+    'Nothing special.',
+    '',        {normal beskrivning 2}
+    '',        {normal beskrivning 3}
+    '',        {normal beskrivning 4}
+    '',        {normal beskrivning 5}
+    '',        {detaljerad beskrivning 1}
+    '',        {detaljerad beskrivning 2}
+    '',        {detaljerad beskrivning 3}
+    '',        {detaljerad beskrivning 4}
+    '',        {detaljerad beskrivning 5}
+    15,        {”ka strength}
+    15,        {”ka defence}
+    45);       {strength demanded to use object}
 
   Add_Object('Sable Coat',   {name}
-            Body,      {typ}
-            3700,      {v„rde i gold}
-            0,         {”ka/minska hps}
-            0,         {”ka stamina}
-            0,         {”ka agility}
-            0,         {”ka charisma}
-            0,         {”ka dexterity}
-            0,         {”ka wisdom}
-            0,         {”ka mana}
-            5,         {”ka armor v„rde}
-            0,         {”ka attack v„rde}
-            '',        {„gd av?}
-            False,     {bara EN i spelet}
-            Nothing,   {kurerar}
-            True,      {finnas i shoppen}
-            False,     {kunna hittas i dungeons?}
-            False,     {cursed item?}
-            1,         {min level att hittas i dngs}
-            99,        {max level att hittas i dngs}
-            'A very elegant coat.',
-            '',        {normal beskrivning 2}
-            '',        {normal beskrivning 3}
-            '',        {normal beskrivning 4}
-            '',        {normal beskrivning 5}
-            '',        {detaljerad beskrivning 1}
-            '',        {detaljerad beskrivning 2}
-            '',        {detaljerad beskrivning 3}
-            '',        {detaljerad beskrivning 4}
-            '',        {detaljerad beskrivning 5}
-            0,         {”ka strength}
-            0,         {”ka defence}
-            0);        {strength demanded to use object}
+    Body,      {typ}
+    3700,      {v„rde i gold}
+    0,         {”ka/minska hps}
+    0,         {”ka stamina}
+    0,         {”ka agility}
+    0,         {”ka charisma}
+    0,         {”ka dexterity}
+    0,         {”ka wisdom}
+    0,         {”ka mana}
+    5,         {”ka armor v„rde}
+    0,         {”ka attack v„rde}
+    '',        {„gd av?}
+    False,     {bara EN i spelet}
+    Nothing,   {kurerar}
+    True,      {finnas i shoppen}
+    False,     {kunna hittas i dungeons?}
+    False,     {cursed item?}
+    1,         {min level att hittas i dngs}
+    99,        {max level att hittas i dngs}
+    'A very elegant coat.',
+    '',        {normal beskrivning 2}
+    '',        {normal beskrivning 3}
+    '',        {normal beskrivning 4}
+    '',        {normal beskrivning 5}
+    '',        {detaljerad beskrivning 1}
+    '',        {detaljerad beskrivning 2}
+    '',        {detaljerad beskrivning 3}
+    '',        {detaljerad beskrivning 4}
+    '',        {detaljerad beskrivning 5}
+    0,         {”ka strength}
+    0,         {”ka defence}
+    0);        {strength demanded to use object}
 
   Add_Object('Razor shirt', {name}
-            Body,      {typ}
-            150,       {v„rde i gold}
-            0,         {”ka/minska hps}
-            0,         {”ka stamina}
-            0,         {”ka agility}
-            0,         {”ka charisma}
-            0,         {”ka dexterity}
-            0,         {”ka wisdom}
-            0,         {”ka mana}
-            1,         {”ka armor v„rde}
-            0,         {”ka attack v„rde}
-            '',        {„gd av?}
-            False,     {bara EN i spelet}
-            Nothing,   {kurerar}
-            True,      {finnas i shoppen}
-            False,     {kunna hittas i dungeons?}
-            False,     {cursed item?}
-            1,         {min level att hittas i dngs}
-            10,        {max level att hittas i dngs}
-            '',
-            '',
-            '',
-            '',        {normal beskrivning 4}
-            '',        {normal beskrivning 5}
-            '',        {detaljerad beskrivning 1}
-            '',        {detaljerad beskrivning 2}
-            '',        {detaljerad beskrivning 3}
-            '',        {detaljerad beskrivning 4}
-            '',        {detaljerad beskrivning 5}
-            0,         {”ka strength}
-            0,         {”ka defence}
-            0);        {strength demanded to use object}
+    Body,      {typ}
+    150,       {v„rde i gold}
+    0,         {”ka/minska hps}
+    0,         {”ka stamina}
+    0,         {”ka agility}
+    0,         {”ka charisma}
+    0,         {”ka dexterity}
+    0,         {”ka wisdom}
+    0,         {”ka mana}
+    1,         {”ka armor v„rde}
+    0,         {”ka attack v„rde}
+    '',        {„gd av?}
+    False,     {bara EN i spelet}
+    Nothing,   {kurerar}
+    True,      {finnas i shoppen}
+    False,     {kunna hittas i dungeons?}
+    False,     {cursed item?}
+    1,         {min level att hittas i dngs}
+    10,        {max level att hittas i dngs}
+    '',
+    '',
+    '',
+    '',        {normal beskrivning 4}
+    '',        {normal beskrivning 5}
+    '',        {detaljerad beskrivning 1}
+    '',        {detaljerad beskrivning 2}
+    '',        {detaljerad beskrivning 3}
+    '',        {detaljerad beskrivning 4}
+    '',        {detaljerad beskrivning 5}
+    0,         {”ka strength}
+    0,         {”ka defence}
+    0);        {strength demanded to use object}
 
   Add_Object('Heavy Leather Vest',   {name}
-            Body,      {typ}
-            3000,      {v„rde i gold}
-            0,         {”ka/minska hps}
-            0,         {”ka stamina}
-            0,         {”ka agility}
-            0,         {”ka charisma}
-            0,         {”ka dexterity}
-            0,         {”ka wisdom}
-            0,         {”ka mana}
-            5,         {”ka armor v„rde}
-            0,         {”ka attack v„rde}
-            '',        {„gd av?}
-            False,     {bara EN i spelet}
-            Nothing,   {kurerar}
-            True,      {finnas i shoppen}
-            False,     {kunna hittas i dungeons?}
-            False,     {cursed item?}
-            1,         {min level att hittas i dngs}
-            99,        {max level att hittas i dngs}
-            'You see nothing special.',
-            '',        {normal beskrivning 2}
-            '',        {normal beskrivning 3}
-            '',        {normal beskrivning 4}
-            '',        {normal beskrivning 5}
-            '',        {detaljerad beskrivning 1}
-            '',        {detaljerad beskrivning 2}
-            '',        {detaljerad beskrivning 3}
-            '',        {detaljerad beskrivning 4}
-            '',        {detaljerad beskrivning 5}
-            0,         {”ka strength}
-            0,         {”ka defence}
-            0);        {strength demanded to use object}
+    Body,      {typ}
+    3000,      {v„rde i gold}
+    0,         {”ka/minska hps}
+    0,         {”ka stamina}
+    0,         {”ka agility}
+    0,         {”ka charisma}
+    0,         {”ka dexterity}
+    0,         {”ka wisdom}
+    0,         {”ka mana}
+    5,         {”ka armor v„rde}
+    0,         {”ka attack v„rde}
+    '',        {„gd av?}
+    False,     {bara EN i spelet}
+    Nothing,   {kurerar}
+    True,      {finnas i shoppen}
+    False,     {kunna hittas i dungeons?}
+    False,     {cursed item?}
+    1,         {min level att hittas i dngs}
+    99,        {max level att hittas i dngs}
+    'You see nothing special.',
+    '',        {normal beskrivning 2}
+    '',        {normal beskrivning 3}
+    '',        {normal beskrivning 4}
+    '',        {normal beskrivning 5}
+    '',        {detaljerad beskrivning 1}
+    '',        {detaljerad beskrivning 2}
+    '',        {detaljerad beskrivning 3}
+    '',        {detaljerad beskrivning 4}
+    '',        {detaljerad beskrivning 5}
+    0,         {”ka strength}
+    0,         {”ka defence}
+    0);        {strength demanded to use object}
 
   Add_Object('Banded Mail',   {name}
-            Body,      {typ}
-            4500,      {v„rde i gold}
-            0,         {”ka/minska hps}
-            0,         {”ka stamina}
-            0,         {”ka agility}
-            0,         {”ka charisma}
-            0,         {”ka dexterity}
-            0,         {”ka wisdom}
-            0,         {”ka mana}
-            6,         {”ka armor v„rde}
-            0,         {”ka attack v„rde}
-            '',        {„gd av?}
-            False,     {bara EN i spelet}
-            Nothing,   {kurerar}
-            True,      {finnas i shoppen}
-            False,     {kunna hittas i dungeons?}
-            False,     {cursed item?}
-            1,         {min level att hittas i dngs}
-            99,        {max level att hittas i dngs}
-            'You see nothing special.',
-            '',        {normal beskrivning 2}
-            '',        {normal beskrivning 3}
-            '',        {normal beskrivning 4}
-            '',        {normal beskrivning 5}
-            '',        {detaljerad beskrivning 1}
-            '',        {detaljerad beskrivning 2}
-            '',        {detaljerad beskrivning 3}
-            '',        {detaljerad beskrivning 4}
-            '',        {detaljerad beskrivning 5}
-            0,         {”ka strength}
-            0,         {”ka defence}
-            0);        {strength demanded to use object}
+    Body,      {typ}
+    4500,      {v„rde i gold}
+    0,         {”ka/minska hps}
+    0,         {”ka stamina}
+    0,         {”ka agility}
+    0,         {”ka charisma}
+    0,         {”ka dexterity}
+    0,         {”ka wisdom}
+    0,         {”ka mana}
+    6,         {”ka armor v„rde}
+    0,         {”ka attack v„rde}
+    '',        {„gd av?}
+    False,     {bara EN i spelet}
+    Nothing,   {kurerar}
+    True,      {finnas i shoppen}
+    False,     {kunna hittas i dungeons?}
+    False,     {cursed item?}
+    1,         {min level att hittas i dngs}
+    99,        {max level att hittas i dngs}
+    'You see nothing special.',
+    '',        {normal beskrivning 2}
+    '',        {normal beskrivning 3}
+    '',        {normal beskrivning 4}
+    '',        {normal beskrivning 5}
+    '',        {detaljerad beskrivning 1}
+    '',        {detaljerad beskrivning 2}
+    '',        {detaljerad beskrivning 3}
+    '',        {detaljerad beskrivning 4}
+    '',        {detaljerad beskrivning 5}
+    0,         {”ka strength}
+    0,         {”ka defence}
+    0);        {strength demanded to use object}
 
   Add_Object('SnakeSkin Jacket',   {name}
-            Body,      {typ}
-            10500,     {v„rde i gold}
-            5,         {”ka/minska hps}
-            0,         {”ka stamina}
-            0,         {”ka agility}
-            0,         {”ka charisma}
-            5,         {”ka dexterity}
-            5,         {”ka wisdom}
-            15,        {”ka mana}
-            7,         {”ka armor v„rde}
-            0,         {”ka attack v„rde}
-            '',        {„gd av?}
-            False,     {bara EN i spelet}
-            Measles,   {kurerar}
-            False,     {finnas i shoppen}
-            True,      {kunna hittas i dungeons?}
-            False,     {cursed item?}
-            25,        {min level att hittas i dngs}
-            45,        {max level att hittas i dngs}
-            'A typical Ranger Jacket. Popular among hunters.',
-            '',        {normal beskrivning 2}
-            '',        {normal beskrivning 3}
-            '',        {normal beskrivning 4}
-            '',        {normal beskrivning 5}
-            '',        {detaljerad beskrivning 1}
-            '',        {detaljerad beskrivning 2}
-            '',        {detaljerad beskrivning 3}
-            '',        {detaljerad beskrivning 4}
-            '',        {detaljerad beskrivning 5}
-            0,         {”ka strength}
-            0,         {”ka defence}
-            0);        {strength demanded to use object}
+    Body,      {typ}
+    10500,     {v„rde i gold}
+    5,         {”ka/minska hps}
+    0,         {”ka stamina}
+    0,         {”ka agility}
+    0,         {”ka charisma}
+    5,         {”ka dexterity}
+    5,         {”ka wisdom}
+    15,        {”ka mana}
+    7,         {”ka armor v„rde}
+    0,         {”ka attack v„rde}
+    '',        {„gd av?}
+    False,     {bara EN i spelet}
+    Measles,   {kurerar}
+    False,     {finnas i shoppen}
+    True,      {kunna hittas i dungeons?}
+    False,     {cursed item?}
+    25,        {min level att hittas i dngs}
+    45,        {max level att hittas i dngs}
+    'A typical Ranger Jacket. Popular among hunters.',
+    '',        {normal beskrivning 2}
+    '',        {normal beskrivning 3}
+    '',        {normal beskrivning 4}
+    '',        {normal beskrivning 5}
+    '',        {detaljerad beskrivning 1}
+    '',        {detaljerad beskrivning 2}
+    '',        {detaljerad beskrivning 3}
+    '',        {detaljerad beskrivning 4}
+    '',        {detaljerad beskrivning 5}
+    0,         {”ka strength}
+    0,         {”ka defence}
+    0);        {strength demanded to use object}
 
   Add_Object('Chain Shirt',   {name}
-            Body,      {typ}
-            22000,     {v„rde i gold}
-            10,        {”ka/minska hps}
-            0,         {”ka stamina}
-            0,         {”ka agility}
-            0,         {”ka charisma}
-            0,         {”ka dexterity}
-            0,         {”ka wisdom}
-            -10,       {”ka mana}
-            8,         {”ka armor v„rde}
-            0,         {”ka attack v„rde}
-            '',        {„gd av?}
-            False,     {bara EN i spelet}
-            Nothing,   {kurerar}
-            False,     {finnas i shoppen}
-            True,      {kunna hittas i dungeons?}
-            False,     {cursed item?}
-            15,        {min level att hittas i dngs}
-            55,        {max level att hittas i dngs}
-            'This shirt looks as if it could stop a few blows ...',
-            '',        {normal beskrivning 2}
-            '',        {normal beskrivning 3}
-            '',        {normal beskrivning 4}
-            '',        {normal beskrivning 5}
-            '',        {detaljerad beskrivning 1}
-            '',        {detaljerad beskrivning 2}
-            '',        {detaljerad beskrivning 3}
-            '',        {detaljerad beskrivning 4}
-            '',        {detaljerad beskrivning 5}
-            0,         {”ka strength}
-            0,         {”ka defence}
-            0);        {strength demanded to use object}
+    Body,      {typ}
+    22000,     {v„rde i gold}
+    10,        {”ka/minska hps}
+    0,         {”ka stamina}
+    0,         {”ka agility}
+    0,         {”ka charisma}
+    0,         {”ka dexterity}
+    0,         {”ka wisdom} -10,       {”ka mana}
+    8,         {”ka armor v„rde}
+    0,         {”ka attack v„rde}
+    '',        {„gd av?}
+    False,     {bara EN i spelet}
+    Nothing,   {kurerar}
+    False,     {finnas i shoppen}
+    True,      {kunna hittas i dungeons?}
+    False,     {cursed item?}
+    15,        {min level att hittas i dngs}
+    55,        {max level att hittas i dngs}
+    'This shirt looks as if it could stop a few blows ...',
+    '',        {normal beskrivning 2}
+    '',        {normal beskrivning 3}
+    '',        {normal beskrivning 4}
+    '',        {normal beskrivning 5}
+    '',        {detaljerad beskrivning 1}
+    '',        {detaljerad beskrivning 2}
+    '',        {detaljerad beskrivning 3}
+    '',        {detaljerad beskrivning 4}
+    '',        {detaljerad beskrivning 5}
+    0,         {”ka strength}
+    0,         {”ka defence}
+    0);        {strength demanded to use object}
 
   Add_Object('Heavy Chain Shirt',   {name}
-            Body,      {typ}
-            45000,     {v„rde i gold}
-            20,        {”ka/minska hps}
-            0,         {”ka stamina}
-            0,         {”ka agility}
-            0,         {”ka charisma}
-            0,         {”ka dexterity}
-            0,         {”ka wisdom}
-            -20,       {”ka mana}
-            10,        {”ka armor v„rde}
-            0,         {”ka attack v„rde}
-            '',        {„gd av?}
-            False,     {bara EN i spelet}
-            Nothing,   {kurerar}
-            False,     {finnas i shoppen}
-            True,      {kunna hittas i dungeons?}
-            False,     {cursed item?}
-            35,        {min level att hittas i dngs}
-            65,        {max level att hittas i dngs}
-            'This shirt looks as if it could stop quite a few blows ...',
-            '',        {normal beskrivning 2}
-            '',        {normal beskrivning 3}
-            '',        {normal beskrivning 4}
-            '',        {normal beskrivning 5}
-            '',        {detaljerad beskrivning 1}
-            '',        {detaljerad beskrivning 2}
-            '',        {detaljerad beskrivning 3}
-            '',        {detaljerad beskrivning 4}
-            '',        {detaljerad beskrivning 5}
-            0,         {”ka strength}
-            0,         {”ka defence}
-            0);        {strength demanded to use object}
+    Body,      {typ}
+    45000,     {v„rde i gold}
+    20,        {”ka/minska hps}
+    0,         {”ka stamina}
+    0,         {”ka agility}
+    0,         {”ka charisma}
+    0,         {”ka dexterity}
+    0,         {”ka wisdom} -20,       {”ka mana}
+    10,        {”ka armor v„rde}
+    0,         {”ka attack v„rde}
+    '',        {„gd av?}
+    False,     {bara EN i spelet}
+    Nothing,   {kurerar}
+    False,     {finnas i shoppen}
+    True,      {kunna hittas i dungeons?}
+    False,     {cursed item?}
+    35,        {min level att hittas i dngs}
+    65,        {max level att hittas i dngs}
+    'This shirt looks as if it could stop quite a few blows ...',
+    '',        {normal beskrivning 2}
+    '',        {normal beskrivning 3}
+    '',        {normal beskrivning 4}
+    '',        {normal beskrivning 5}
+    '',        {detaljerad beskrivning 1}
+    '',        {detaljerad beskrivning 2}
+    '',        {detaljerad beskrivning 3}
+    '',        {detaljerad beskrivning 4}
+    '',        {detaljerad beskrivning 5}
+    0,         {”ka strength}
+    0,         {”ka defence}
+    0);        {strength demanded to use object}
 
   Add_Object('Coat of Mail',   {name}
-             Body,      {typ}
-             250000,    {v„rde i gold}
-             75,        {”ka/minska hps}
-             20,        {”ka stamina}
-             0,         {”ka agility}
-             5,         {”ka charisma}
-             0,         {”ka dexterity}
-             0,         {”ka wisdom}
-             0,         {”ka mana}
-             25,        {”ka armor v„rde}
-             0,         {”ka attack v„rde}
-             '',        {„gd av?}
-             False,     {bara EN i spelet}
-             Nothing,   {kurerar}
-             False,     {finnas i shoppen}
-             True,      {kunna hittas i dungeons?}
-             False,     {cursed item?}
-             90,        {min level att hittas i dngs}
-             95,        {max level att hittas i dngs}
-             'You see nothing special.',
-             '',        {normal beskrivning 2}
-             '',        {normal beskrivning 3}
-             '',        {normal beskrivning 4}
-             '',        {normal beskrivning 5}
-             '',        {detaljerad beskrivning 1}
-             '',        {detaljerad beskrivning 2}
-             '',        {detaljerad beskrivning 3}
-             '',        {detaljerad beskrivning 4}
-             '',        {detaljerad beskrivning 5}
-             15,        {”ka strength}
-             15,        {”ka defence}
-             100);      {strength demanded to use object}
+    Body,      {typ}
+    250000,    {v„rde i gold}
+    75,        {”ka/minska hps}
+    20,        {”ka stamina}
+    0,         {”ka agility}
+    5,         {”ka charisma}
+    0,         {”ka dexterity}
+    0,         {”ka wisdom}
+    0,         {”ka mana}
+    25,        {”ka armor v„rde}
+    0,         {”ka attack v„rde}
+    '',        {„gd av?}
+    False,     {bara EN i spelet}
+    Nothing,   {kurerar}
+    False,     {finnas i shoppen}
+    True,      {kunna hittas i dungeons?}
+    False,     {cursed item?}
+    90,        {min level att hittas i dngs}
+    95,        {max level att hittas i dngs}
+    'You see nothing special.',
+    '',        {normal beskrivning 2}
+    '',        {normal beskrivning 3}
+    '',        {normal beskrivning 4}
+    '',        {normal beskrivning 5}
+    '',        {detaljerad beskrivning 1}
+    '',        {detaljerad beskrivning 2}
+    '',        {detaljerad beskrivning 3}
+    '',        {detaljerad beskrivning 4}
+    '',        {detaljerad beskrivning 5}
+    15,        {”ka strength}
+    15,        {”ka defence}
+    100);      {strength demanded to use object}
 
   Add_Object('Unfinished Breast Plate',   {name}
-             Body,      {typ}
-             30000,     {v„rde i gold}
-             5,         {”ka/minska hps}
-             5,         {”ka stamina}
-             5,         {”ka agility}
-             5,         {”ka charisma}
-             0,         {”ka dexterity}
-             5,         {”ka wisdom}
-             5,         {”ka mana}
-             9,         {”ka armor v„rde}
-             0,         {”ka attack v„rde}
-             '',        {„gd av?}
-             False,     {bara EN i spelet}
-             Nothing,   {kurerar}
-             False,     {finnas i shoppen}
-             True,      {kunna hittas i dungeons?}
-             False,     {cursed item?}
-             20,        {min level att hittas i dngs}
-             25,        {max level att hittas i dngs}
-             'The plate looks as if it could protect you well.',
-             '',        {normal beskrivning 2}
-             '',        {normal beskrivning 3}
-             '',        {normal beskrivning 4}
-             '',        {normal beskrivning 5}
-             '',        {detaljerad beskrivning 1}
-             '',        {detaljerad beskrivning 2}
-             '',        {detaljerad beskrivning 3}
-             '',        {detaljerad beskrivning 4}
-             '',        {detaljerad beskrivning 5}
-             0,         {”ka strength}
-             0,         {”ka defence}
-             0);        {strength demanded to use object}
+    Body,      {typ}
+    30000,     {v„rde i gold}
+    5,         {”ka/minska hps}
+    5,         {”ka stamina}
+    5,         {”ka agility}
+    5,         {”ka charisma}
+    0,         {”ka dexterity}
+    5,         {”ka wisdom}
+    5,         {”ka mana}
+    9,         {”ka armor v„rde}
+    0,         {”ka attack v„rde}
+    '',        {„gd av?}
+    False,     {bara EN i spelet}
+    Nothing,   {kurerar}
+    False,     {finnas i shoppen}
+    True,      {kunna hittas i dungeons?}
+    False,     {cursed item?}
+    20,        {min level att hittas i dngs}
+    25,        {max level att hittas i dngs}
+    'The plate looks as if it could protect you well.',
+    '',        {normal beskrivning 2}
+    '',        {normal beskrivning 3}
+    '',        {normal beskrivning 4}
+    '',        {normal beskrivning 5}
+    '',        {detaljerad beskrivning 1}
+    '',        {detaljerad beskrivning 2}
+    '',        {detaljerad beskrivning 3}
+    '',        {detaljerad beskrivning 4}
+    '',        {detaljerad beskrivning 5}
+    0,         {”ka strength}
+    0,         {”ka defence}
+    0);        {strength demanded to use object}
 
-   Add_Object('Air Elite',   {name}
-              Body,      {typ}
-              16000,     {v„rde i gold}
-              0,         {”ka/minska hps}
-              0,         {”ka stamina}
-              0,         {”ka agility}
-              25,        {”ka charisma}
-              0,         {”ka dexterity}
-              0,         {”ka wisdom}
-              0,         {”ka mana}
-              7,         {”ka armor v„rde}
-              0,         {”ka attack v„rde}
-              '',        {„gd av?}
-              False,     {bara EN i spelet}
-              Nothing,   {kurerar}
-              True,      {finnas i shoppen}
-              False,     {kunna hittas i dungeons?}
-              False,     {cursed item?}
-              1,         {min level att hittas i dngs}
-              99,        {max level att hittas i dngs}
-              'Defence of the unborn...',
-              '',        {normal beskrivning 2}
-              '',        {normal beskrivning 3}
-              '',        {normal beskrivning 4}
-              '',        {normal beskrivning 5}
-              '',        {detaljerad beskrivning 1}
-              '',        {detaljerad beskrivning 2}
-              '',        {detaljerad beskrivning 3}
-              '',        {detaljerad beskrivning 4}
-              '',        {detaljerad beskrivning 5}
-              15,        {”ka strength}
-              15,        {”ka defence}
-              5);        {strength demanded to use object}
+  Add_Object('Air Elite',   {name}
+    Body,      {typ}
+    16000,     {v„rde i gold}
+    0,         {”ka/minska hps}
+    0,         {”ka stamina}
+    0,         {”ka agility}
+    25,        {”ka charisma}
+    0,         {”ka dexterity}
+    0,         {”ka wisdom}
+    0,         {”ka mana}
+    7,         {”ka armor v„rde}
+    0,         {”ka attack v„rde}
+    '',        {„gd av?}
+    False,     {bara EN i spelet}
+    Nothing,   {kurerar}
+    True,      {finnas i shoppen}
+    False,     {kunna hittas i dungeons?}
+    False,     {cursed item?}
+    1,         {min level att hittas i dngs}
+    99,        {max level att hittas i dngs}
+    'Defence of the unborn...',
+    '',        {normal beskrivning 2}
+    '',        {normal beskrivning 3}
+    '',        {normal beskrivning 4}
+    '',        {normal beskrivning 5}
+    '',        {detaljerad beskrivning 1}
+    '',        {detaljerad beskrivning 2}
+    '',        {detaljerad beskrivning 3}
+    '',        {detaljerad beskrivning 4}
+    '',        {detaljerad beskrivning 5}
+    15,        {”ka strength}
+    15,        {”ka defence}
+    5);        {strength demanded to use object}
 
   Add_Object('Breast Plate',   {name}
-            Body,      {typ}
-            40000,     {v„rde i gold}
-            0,         {”ka/minska hps}
-            0,         {”ka stamina}
-            0,         {”ka agility}
-            0,         {”ka charisma}
-            0,         {”ka dexterity}
-            0,         {”ka wisdom}
-            -15,       {”ka mana}
-            13,        {”ka armor v„rde}
-            0,         {”ka attack v„rde}
-            '',        {„gd av?}
-            False,     {bara EN i spelet}
-            Nothing,   {kurerar}
-            False,     {finnas i shoppen}
-            True,      {kunna hittas i dungeons?}
-            False,     {cursed item?}
-            50,        {min level att hittas i dngs}
-            70,        {max level att hittas i dngs}
-            'The standard "Warrior Plate" model.',
-            'Heavy, but with very good absorbation capability.',
-            '',        {normal beskrivning 3}
-            '',        {normal beskrivning 4}
-            '',        {normal beskrivning 5}
-            '',        {detaljerad beskrivning 1}
-            '',        {detaljerad beskrivning 2}
-            '',        {detaljerad beskrivning 3}
-            '',        {detaljerad beskrivning 4}
-            '',        {detaljerad beskrivning 5}
-            0,         {”ka strength}
-            0,         {”ka defence}
-            0);        {strength demanded to use object}
+    Body,      {typ}
+    40000,     {v„rde i gold}
+    0,         {”ka/minska hps}
+    0,         {”ka stamina}
+    0,         {”ka agility}
+    0,         {”ka charisma}
+    0,         {”ka dexterity}
+    0,         {”ka wisdom} -15,       {”ka mana}
+    13,        {”ka armor v„rde}
+    0,         {”ka attack v„rde}
+    '',        {„gd av?}
+    False,     {bara EN i spelet}
+    Nothing,   {kurerar}
+    False,     {finnas i shoppen}
+    True,      {kunna hittas i dungeons?}
+    False,     {cursed item?}
+    50,        {min level att hittas i dngs}
+    70,        {max level att hittas i dngs}
+    'The standard "Warrior Plate" model.',
+    'Heavy, but with very good absorbation capability.',
+    '',        {normal beskrivning 3}
+    '',        {normal beskrivning 4}
+    '',        {normal beskrivning 5}
+    '',        {detaljerad beskrivning 1}
+    '',        {detaljerad beskrivning 2}
+    '',        {detaljerad beskrivning 3}
+    '',        {detaljerad beskrivning 4}
+    '',        {detaljerad beskrivning 5}
+    0,         {”ka strength}
+    0,         {”ka defence}
+    0);        {strength demanded to use object}
 
   Add_Object('Heavy Breast Plate',   {name}
-            Body,      {typ}
-            90000,     {v„rde i gold}
-            0,         {”ka/minska hps}
-            0,         {”ka stamina}
-            0,         {”ka agility}
-            0,         {”ka charisma}
-            0,         {”ka dexterity}
-            0,         {”ka wisdom}
-            -55,       {”ka mana}
-            16,        {”ka armor v„rde}
-            0,         {”ka attack v„rde}
-            '',        {„gd av?}
-            False,     {bara EN i spelet}
-            Nothing,   {kurerar}
-            False,     {finnas i shoppen}
-            True,      {kunna hittas i dungeons?}
-            False,     {cursed item?}
-            40,        {min level att hittas i dngs}
-            99,        {max level att hittas i dngs}
-            'The model above the "Warrior Plate" model.',
-            'Very heavy, but with extreme absorbation capability.',
-            '',        {normal beskrivning 3}
-            '',        {normal beskrivning 4}
-            '',        {normal beskrivning 5}
-            '',        {detaljerad beskrivning 1}
-            '',        {detaljerad beskrivning 2}
-            '',        {detaljerad beskrivning 3}
-            '',        {detaljerad beskrivning 4}
-            '',        {detaljerad beskrivning 5}
-            0,         {”ka strength}
-            0,         {”ka defence}
-            0);        {strength demanded to use object}
+    Body,      {typ}
+    90000,     {v„rde i gold}
+    0,         {”ka/minska hps}
+    0,         {”ka stamina}
+    0,         {”ka agility}
+    0,         {”ka charisma}
+    0,         {”ka dexterity}
+    0,         {”ka wisdom} -55,       {”ka mana}
+    16,        {”ka armor v„rde}
+    0,         {”ka attack v„rde}
+    '',        {„gd av?}
+    False,     {bara EN i spelet}
+    Nothing,   {kurerar}
+    False,     {finnas i shoppen}
+    True,      {kunna hittas i dungeons?}
+    False,     {cursed item?}
+    40,        {min level att hittas i dngs}
+    99,        {max level att hittas i dngs}
+    'The model above the "Warrior Plate" model.',
+    'Very heavy, but with extreme absorbation capability.',
+    '',        {normal beskrivning 3}
+    '',        {normal beskrivning 4}
+    '',        {normal beskrivning 5}
+    '',        {detaljerad beskrivning 1}
+    '',        {detaljerad beskrivning 2}
+    '',        {detaljerad beskrivning 3}
+    '',        {detaljerad beskrivning 4}
+    '',        {detaljerad beskrivning 5}
+    0,         {”ka strength}
+    0,         {”ka defence}
+    0);        {strength demanded to use object}
 
   Add_Object('Dwarven Body Armor',   {name}
-            Body,      {typ}
-            190000,    {v„rde i gold}
-            0,         {”ka/minska hps}
-            0,         {”ka stamina}
-            0,         {”ka agility}
-            0,         {”ka charisma}
-            0,         {”ka dexterity}
-            0,         {”ka wisdom}
-            0,         {”ka mana}
-            35,        {”ka armor v„rde}
-            0,         {”ka attack v„rde}
-            '',        {„gd av?}
-            False,     {bara EN i spelet}
-            Nothing,   {kurerar}
-            False,     {finnas i shoppen}
-            True,      {kunna hittas i dungeons?}
-            False,     {cursed item?}
-            50,        {min level att hittas i dngs}
-            70,        {max level att hittas i dngs}
-            'You see nothing special.',
-            '',
-            '',        {normal beskrivning 3}
-            '',        {normal beskrivning 4}
-            '',        {normal beskrivning 5}
-            '',        {detaljerad beskrivning 1}
-            '',        {detaljerad beskrivning 2}
-            '',        {detaljerad beskrivning 3}
-            '',        {detaljerad beskrivning 4}
-            '',        {detaljerad beskrivning 5}
-            0,         {”ka strength}
-            0,         {”ka defence}
-            0);        {strength demanded to use object}
+    Body,      {typ}
+    190000,    {v„rde i gold}
+    0,         {”ka/minska hps}
+    0,         {”ka stamina}
+    0,         {”ka agility}
+    0,         {”ka charisma}
+    0,         {”ka dexterity}
+    0,         {”ka wisdom}
+    0,         {”ka mana}
+    35,        {”ka armor v„rde}
+    0,         {”ka attack v„rde}
+    '',        {„gd av?}
+    False,     {bara EN i spelet}
+    Nothing,   {kurerar}
+    False,     {finnas i shoppen}
+    True,      {kunna hittas i dungeons?}
+    False,     {cursed item?}
+    50,        {min level att hittas i dngs}
+    70,        {max level att hittas i dngs}
+    'You see nothing special.',
+    '',
+    '',        {normal beskrivning 3}
+    '',        {normal beskrivning 4}
+    '',        {normal beskrivning 5}
+    '',        {detaljerad beskrivning 1}
+    '',        {detaljerad beskrivning 2}
+    '',        {detaljerad beskrivning 3}
+    '',        {detaljerad beskrivning 4}
+    '',        {detaljerad beskrivning 5}
+    0,         {”ka strength}
+    0,         {”ka defence}
+    0);        {strength demanded to use object}
 
   Add_Object('White Body Armor',   {name}
-            Body,      {typ}
-            50000,     {v„rde i gold}
-            0,         {”ka/minska hps}
-            25,        {”ka stamina}
-            25,        {”ka agility}
-            0,         {”ka charisma}
-            0,         {”ka dexterity}
-            0,         {”ka wisdom}
-            0,         {”ka mana}
-            15,        {”ka armor v„rde}
-            0,         {”ka attack v„rde}
-            '',        {„gd av?}
-            False,     {bara EN i spelet}
-            Nothing,   {kurerar}
-            False,     {finnas i shoppen}
-            True,      {kunna hittas i dungeons?}
-            False,     {cursed item?}
-            75,        {min level att hittas i dngs}
-            80,        {max level att hittas i dngs}
-            'You see nothing special.',
-            '',
-            '',        {normal beskrivning 3}
-            '',        {normal beskrivning 4}
-            '',        {normal beskrivning 5}
-            '',        {detaljerad beskrivning 1}
-            '',        {detaljerad beskrivning 2}
-            '',        {detaljerad beskrivning 3}
-            '',        {detaljerad beskrivning 4}
-            '',        {detaljerad beskrivning 5}
-            0,         {”ka strength}
-            0,         {”ka defence}
-            0);        {strength demanded to use object}
+    Body,      {typ}
+    50000,     {v„rde i gold}
+    0,         {”ka/minska hps}
+    25,        {”ka stamina}
+    25,        {”ka agility}
+    0,         {”ka charisma}
+    0,         {”ka dexterity}
+    0,         {”ka wisdom}
+    0,         {”ka mana}
+    15,        {”ka armor v„rde}
+    0,         {”ka attack v„rde}
+    '',        {„gd av?}
+    False,     {bara EN i spelet}
+    Nothing,   {kurerar}
+    False,     {finnas i shoppen}
+    True,      {kunna hittas i dungeons?}
+    False,     {cursed item?}
+    75,        {min level att hittas i dngs}
+    80,        {max level att hittas i dngs}
+    'You see nothing special.',
+    '',
+    '',        {normal beskrivning 3}
+    '',        {normal beskrivning 4}
+    '',        {normal beskrivning 5}
+    '',        {detaljerad beskrivning 1}
+    '',        {detaljerad beskrivning 2}
+    '',        {detaljerad beskrivning 3}
+    '',        {detaljerad beskrivning 4}
+    '',        {detaljerad beskrivning 5}
+    0,         {”ka strength}
+    0,         {”ka defence}
+    0);        {strength demanded to use object}
 
 
     { 4: armor_name:='Dusty Coat';
@@ -1006,4 +1004,6 @@ Begin
  addrec2('Supreme Protector',900000000,918); }
 
 end;
+
+
 end.

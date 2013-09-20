@@ -2,19 +2,20 @@
 {$I DEFINES.INC}
 {$ENDIF}
 {************************************************}
-{                                                }
+
 {   Turbo Vision Demo                            }
 {   Copyright (c) 1992 by Borland International  }
-{                                                }
+
 {************************************************}
 
-Unit HelpFile;
+unit HelpFile;
 
 {$F+,O+,X+,S-,R-}
 
-Interface
+interface
 
-Uses Objects, Drivers, Views;
+uses
+  Objects, Drivers, Views;
 
 {const
   CHelpColor      = #$37#$3F#$3A#$13#$13#$30#$3E#$1E;
@@ -25,27 +26,27 @@ Uses Objects, Drivers, Views;
 }
 type
 
-{ TParagraph }
+  { TParagraph }
 
   PParagraph = ^TParagraph;
   TParagraph = record
     Next: PParagraph;
-    Wrap: Boolean;
-    Size: Word;
+    Wrap: boolean;
+    Size: word;
     Text: record end;
   end;
 
-{ THelpTopic }
+  { THelpTopic }
 
   TCrossRef = record
-    Ref: Word;
-    Offset: Integer;
-    Length: Byte;
+    Ref:    word;
+    Offset: integer;
+    Length: byte;
   end;
 
-  PCrossRefs = ^TCrossRefs;
-  TCrossRefs = array[1..10000] of TCrossRef;
-  TCrossRefHandler = procedure (var S: TStream; XRefValue: Integer);
+  PCrossRefs       = ^TCrossRefs;
+  TCrossRefs       = array[1..10000] of TCrossRef;
+  TCrossRefHandler = procedure(var S: TStream; XRefValue: integer);
 
   PHelpTopic = ^THelpTopic;
   THelpTopic = object(TObject)
@@ -54,109 +55,106 @@ type
     destructor Done; virtual;
     procedure AddCrossRef(Ref: TCrossRef);
     procedure AddParagraph(P: PParagraph);
-    procedure GetCrossRef(I: Integer; var Loc: TPoint; var Length: Byte;
-      var Ref: Word);
-    function GetLine(Line: Integer): String;
-    function GetNumCrossRefs: Integer;
-    function NumLines: Integer;
-    procedure SetCrossRef(I: Integer; var Ref: TCrossRef);
-    procedure SetNumCrossRefs(I: Integer);
-    procedure SetWidth(AWidth: Integer);
+    procedure GetCrossRef(I: integer; var Loc: TPoint; var Length: byte; var Ref: word);
+    function GetLine(Line: integer): string;
+    function GetNumCrossRefs: integer;
+    function NumLines: integer;
+    procedure SetCrossRef(I: integer; var Ref: TCrossRef);
+    procedure SetNumCrossRefs(I: integer);
+    procedure SetWidth(AWidth: integer);
     procedure Store(var S: TStream);
   private
-    Paragraphs: PParagraph;
-    NumRefs: Integer;
-    CrossRefs: PCrossRefs;
-    Width: Integer;
-    LastOffset: Integer;
-    LastLine: Integer;
+    Paragraphs:    PParagraph;
+    NumRefs:       integer;
+    CrossRefs:     PCrossRefs;
+    Width:         integer;
+    LastOffset:    integer;
+    LastLine:      integer;
     LastParagraph: PParagraph;
-    function WrapText(var Text; Size: Integer; var Offset: Integer;
-      Wrap: Boolean): String;
+    function WrapText(var Text; Size: integer; var Offset: integer; Wrap: boolean): string;
   end;
 
-{ THelpIndex }
+  { THelpIndex }
 
   PIndexArray = ^TIndexArray;
-  TIndexArray = array[0..16380] of LongInt;
+  TIndexArray = array[0..16380] of longint;
 
   PContextArray = ^TContextArray;
-  TContextArray = array[0..16380] of Word;
+  TContextArray = array[0..16380] of word;
 
   PHelpIndex = ^THelpIndex;
   THelpIndex = object(TObject)
     constructor Init;
     constructor Load(var S: TStream);
     destructor Done; virtual;
-    function Position(I: Word): Longint;
-    procedure Add(I: Word; Val: Longint);
+    function Position(I: word): longint;
+    procedure Add(I: word; Val: longint);
     procedure Store(var S: TStream);
   private
-    Size: Word;
-    Used: Word;
+    Size:     word;
+    Used:     word;
     Contexts: PContextArray;
-    Index: PIndexArray;
-    function Find(I: Word): Word;
+    Index:    PIndexArray;
+    function Find(I: word): word;
   end;
 
-{ THelpFile }
+  { THelpFile }
 
   PHelpFile = ^THelpFile;
   THelpFile = object(TObject)
-    Stream: PStream;
-    Modified: Boolean;
+    Stream:   PStream;
+    Modified: boolean;
     constructor Init(S: PStream);
     destructor Done; virtual;
-    function GetTopic(I: Word): PHelpTopic;
+    function GetTopic(I: word): PHelpTopic;
     function InvalidTopic: PHelpTopic;
-    procedure RecordPositionInIndex(I: Integer);
+    procedure RecordPositionInIndex(I: integer);
     procedure PutTopic(Topic: PHelpTopic);
   private
-    Index: PHelpIndex;
-    IndexPos: LongInt;
+    Index:    PHelpIndex;
+    IndexPos: longint;
   end;
 
-{ THelpViewer }
+  { THelpViewer }
 
   PHelpViewer = ^THelpViewer;
   THelpViewer = object(TScroller)
-    HFile: PHelpFile;
-    Topic: PHelpTopic;
-    Selected: Integer;
-    constructor Init(var Bounds: TRect; AHScrollBar,
-      AVScrollBar: PScrollBar; AHelpFile: PHelpFile; Context: Word);
+    HFile:    PHelpFile;
+    Topic:    PHelpTopic;
+    Selected: integer;
+    constructor Init(var Bounds: TRect; AHScrollBar, AVScrollBar: PScrollBar; AHelpFile: PHelpFile; Context: word);
     destructor Done; virtual;
     procedure ChangeBounds(var Bounds: TRect); virtual;
     procedure Draw; virtual;
     procedure HandleEvent(var Event: TEvent); virtual;
   end;
 
-{ THelpWindow }
+  { THelpWindow }
 
   PHelpWindow = ^THelpWindow;
   THelpWindow = object(TWindow)
-    constructor Init(HFile: PHelpFile; Context: Word);
+    constructor Init(HFile: PHelpFile; Context: word);
   end;
 
 const
   RHelpTopic: TStreamRec = (
-     ObjType: 10000;
-     VmtLink: Ofs(TypeOf(THelpTopic)^);
-     Load:    @THelpTopic.Load;
-     Store:   @THelpTopic.Store
-  );
+    ObjType: 10000;
+    VmtLink: Ofs(TypeOf(THelpTopic)^);
+    Load: @THelpTopic.Load;
+    Store: @THelpTopic.Store
+    );
 
 const
   RHelpIndex: TStreamRec = (
-     ObjType: 10001;
-     VmtLink: Ofs(TypeOf(THelpIndex)^);
-     Load:    @THelpIndex.Load;
-     Store:   @THelpIndex.Store
-  );
+    ObjType: 10001;
+    VmtLink: Ofs(TypeOf(THelpIndex)^);
+    Load: @THelpIndex.Load;
+    Store: @THelpIndex.Store
+    );
 
 procedure RegisterHelpFile;
 
-procedure NotAssigned(var S: TStream; Value: Integer);
+procedure NotAssigned(var S: TStream; Value: integer);
 
 const
   CrossRefHandler: TCrossRefHandler = NotAssigned;
@@ -173,33 +171,32 @@ end;
 
 constructor THelpTopic.Load(var S: TStream);
 
-procedure ReadParagraphs;
-var
-  I, Size: Integer;
-  PP: ^PParagraph;
-begin
-  S.Read(I, SizeOf(I));
-  PP := @Paragraphs;
-  while I > 0 do
+  procedure ReadParagraphs;
+  var
+    I, Size: integer;
+    PP:      ^PParagraph;
   begin
-    S.Read(Size, SizeOf(Size));
-    GetMem(PP^, SizeOf(PP^^) + Size);
-    PP^^.Size := Size;
-    S.Read(PP^^.Wrap, SizeOf(Boolean));
-    S.Read(PP^^.Text, Size);
-    PP := @PP^^.Next;
-    Dec(I);
+    S.Read(I, SizeOf(I));
+    PP := @Paragraphs;
+    while I > 0 do
+    begin
+      S.Read(Size, SizeOf(Size));
+      GetMem(PP^, SizeOf(PP^^) + Size);
+      PP^^.Size := Size;
+      S.Read(PP^^.Wrap, SizeOf(boolean));
+      S.Read(PP^^.Text, Size);
+      PP := @PP^^.Next;
+      Dec(I);
+    end;
+    PP^ := nil;
   end;
-  PP^ := nil;
-end;
 
-procedure ReadCrossRefs;
-begin
-  S.Read(NumRefs, SizeOf(Integer));
-  GetMem(CrossRefs, SizeOf(TCrossRef) * NumRefs);
-  if CrossRefs <> nil then
-    S.Read(CrossRefs^, SizeOf(TCrossRef) * NumRefs);
-end;
+  procedure ReadCrossRefs;
+  begin
+    S.Read(NumRefs, SizeOf(integer));
+    GetMem(CrossRefs, SizeOf(TCrossRef) * NumRefs);
+    if CrossRefs <> nil then S.Read(CrossRefs^, SizeOf(TCrossRef) * NumRefs);
+  end;
 
 begin
   ReadParagraphs;
@@ -210,30 +207,30 @@ end;
 
 destructor THelpTopic.Done;
 
-procedure DisposeParagraphs;
-var
-  P, T: PParagraph;
-begin
-  P := Paragraphs;
-  while P <> nil do
+  procedure DisposeParagraphs;
+  var
+    P, T: PParagraph;
   begin
-    T := P;
-    P := P^.Next;
-    FreeMem(T, SizeOf(T^) + T^.Size);
+    P := Paragraphs;
+    while P <> nil do
+    begin
+      T := P;
+      P := P^.Next;
+      FreeMem(T, SizeOf(T^) + T^.Size);
+    end;
   end;
-end;
 
 begin
   DisposeParagraphs;
   FreeMem(CrossRefs, SizeOf(TCrossRef) * NumRefs);
-  inherited Done
+  inherited Done;
 end;
 
 procedure THelpTopic.AddCrossRef(Ref: TCrossRef);
 var
   P: PCrossRefs;
 begin
-  GetMem(P, (NumRefs+1) * SizeOf(TCrossRef));
+  GetMem(P, (NumRefs + 1) * SizeOf(TCrossRef));
   if NumRefs > 0 then
   begin
     Move(CrossRefs^, P^, NumRefs * SizeOf(TCrossRef));
@@ -249,18 +246,16 @@ var
   PP: ^PParagraph;
 begin
   PP := @Paragraphs;
-  while PP^ <> nil do
-    PP := @PP^^.Next;
+  while PP^ <> nil do PP := @PP^^.Next;
   PP^ := P;
   P^.Next := nil;
 end;
 
-procedure THelpTopic.GetCrossRef(I: Integer; var Loc: TPoint;
-  var Length: Byte; var Ref: Word);
+procedure THelpTopic.GetCrossRef(I: integer; var Loc: TPoint; var Length: byte; var Ref: word);
 var
-  OldOffset, CurOffset, Offset, ParaOffset: Integer;
-  P: PParagraph;
-  Line: Integer;
+  OldOffset, CurOffset, Offset, ParaOffset: integer;
+  P:    PParagraph;
+  Line: integer;
 begin
   ParaOffset := 0;
   CurOffset := 0;
@@ -268,7 +263,7 @@ begin
   Line := 0;
   Offset := CrossRefs^[I].Offset;
   P := Paragraphs;
-  while ParaOffset+CurOffset < Offset do
+  while ParaOffset + CurOffset < Offset do
   begin
     OldOffset := ParaOffset + CurOffset;
     WrapText(P^.Text, P^.Size, CurOffset, P^.Wrap);
@@ -286,10 +281,10 @@ begin
   Ref := CrossRefs^[I].Ref;
 end;
 
-function THelpTopic.GetLine(Line: Integer): String;
+function THelpTopic.GetLine(Line: integer): string;
 var
-  Offset, I: Integer;
-  P: PParagraph;
+  Offset, I: integer;
+  P:         PParagraph;
 begin
   if LastLine < Line then
   begin
@@ -298,8 +293,7 @@ begin
     LastLine := I;
     Offset := LastOffset;
     P := LastParagraph;
-  end
-  else
+  end else
   begin
     P := Paragraphs;
     Offset := 0;
@@ -325,14 +319,14 @@ begin
   GetLine := '';
 end;
 
-function THelpTopic.GetNumCrossRefs: Integer;
+function THelpTopic.GetNumCrossRefs: integer;
 begin
   GetNumCrossRefs := NumRefs;
 end;
 
-function THelpTopic.NumLines: Integer;
+function THelpTopic.NumLines: integer;
 var
-  Offset, Lines: Integer;
+  Offset, Lines: integer;
   P: PParagraph;
 begin
   Offset := 0;
@@ -351,12 +345,12 @@ begin
   NumLines := Lines;
 end;
 
-procedure THelpTopic.SetCrossRef(I: Integer; var Ref: TCrossRef);
+procedure THelpTopic.SetCrossRef(I: integer; var Ref: TCrossRef);
 begin
   if I <= NumRefs then CrossRefs^[I] := Ref;
 end;
 
-procedure THelpTopic.SetNumCrossRefs(I: Integer);
+procedure THelpTopic.SetNumCrossRefs(I: integer);
 var
   P: PCrossRefs;
 begin
@@ -372,173 +366,173 @@ begin
   NumRefs := I;
 end;
 
-procedure THelpTopic.SetWidth(AWidth: Integer);
+procedure THelpTopic.SetWidth(AWidth: integer);
 begin
   Width := AWidth;
 end;
 
 procedure THelpTopic.Store(var S: TStream);
 
-procedure WriteParagraphs;
-var
-  I: Integer;
-  P: PParagraph;
-begin
-  P := Paragraphs;
-  I := 0;
-  while P <> nil do
+  procedure WriteParagraphs;
+  var
+    I: integer;
+    P: PParagraph;
   begin
-    Inc(I);
-    P := P^.Next;
-  end;
-  S.Write(I, SizeOf(I));
-  P := Paragraphs;
-  while P <> nil do
-  begin
-    S.Write(P^.Size, SizeOf(Integer));
-    S.Write(P^.Wrap, SizeOf(Boolean));
-    S.Write(P^.Text, P^.Size);
-    P := P^.Next;
-  end;
-end;
-
-procedure WriteCrossRefs;
-var
-  I: Integer;
-begin
-  S.Write(NumRefs, SizeOf(Integer));
-  if @CrossRefHandler = @NotAssigned then
-    S.Write(CrossRefs^, SizeOf(TCrossRef) * NumRefs)
-  else
-    for I := 1 to NumRefs do
+    P := Paragraphs;
+    I := 0;
+    while P <> nil do
     begin
-      CrossRefHandler(S, CrossRefs^[I].Ref);
-      S.Write(CrossRefs^[I].Offset, SizeOf(Integer) + SizeOf(Byte));
+      Inc(I);
+      P := P^.Next;
     end;
-end;
+    S.Write(I, SizeOf(I));
+    P := Paragraphs;
+    while P <> nil do
+    begin
+      S.Write(P^.Size, SizeOf(integer));
+      S.Write(P^.Wrap, SizeOf(boolean));
+      S.Write(P^.Text, P^.Size);
+      P := P^.Next;
+    end;
+  end;
+
+  procedure WriteCrossRefs;
+  var
+    I: integer;
+  begin
+    S.Write(NumRefs, SizeOf(integer));
+    if @CrossRefHandler = @NotAssigned then S.Write(CrossRefs^, SizeOf(TCrossRef) * NumRefs)
+    else
+      for I := 1 to NumRefs do
+      begin
+        CrossRefHandler(S, CrossRefs^[I].Ref);
+        S.Write(CrossRefs^[I].Offset, SizeOf(integer) + SizeOf(byte));
+      end;
+  end;
 
 begin
   WriteParagraphs;
   WriteCrossRefs;
 end;
 
-function THelpTopic.WrapText(var Text; Size: Integer;
-  var Offset: Integer; Wrap: Boolean): String;
+function THelpTopic.WrapText(var Text; Size: integer; var Offset: integer; Wrap: boolean): string;
 type
   PCArray = ^CArray;
-  CArray = array[0..32767] of Char;
+  CArray  = array[0..32767] of char;
 var
-  Line: String;
-  I, P: Integer;
+  Line: string;
+  I, P: integer;
 
-function IsBlank(Ch: Char): Boolean;
-begin
-  IsBlank := (Ch = ' ') or (Ch = #13) or (Ch = #10);
-end;
-
-{$IFDEF MSDOS}
-function Scan(var P; Offset, Size: Integer; C: Char): Integer; assembler;
-asm
-	CLD
-	LES	DI,P
-        ADD	DI,&Offset
-        MOV	DX,Size
-        SUB	DX,&Offset
-        OR	DH,DH
-        JZ	@@1
-        MOV	DX,256
-@@1:    MOV	CX,DX
-	MOV	AL, C
-        REPNE	SCASB
-	SUB	CX,DX
-        NEG	CX
-        XCHG	AX,CX
-end;
-{$ENDIF}
-{$IFNDEF MSDOS}
-function Scan(var P; Offset, Size: Integer; C: Char): Integer; assembler;
-{$IFDEF USE32}
-        {&USES esi,edi} {&FRAME-}
-asm
-        cld
-        mov     edi,P
-        add     edi,&Offset
-        mov     edx,Size
-        sub     edx,&Offset
-        test    dh,dh
-        jz      @@1
-        mov     edx,256
-      @@1:
-        mov     ecx,edx
-        mov     al,C
-        repne   scasb
-        sub     ecx,edx
-        neg     ecx
-        xchg    eax,ecx
-{$ELSE}
-asm
-        CLD
-        LES     DI,P
-        ADD     DI,&Offset
-        MOV     DX,Size
-        SUB     DX,&Offset
-        OR      DH,DH
-        JZ      @@1
-        MOV     DX,256
-@@1:    MOV     CX,DX
-        MOV     AL, C
-        REPNE   SCASB
-        SUB     CX,DX
-        NEG     CX
-        XCHG    AX,CX
-{$ENDIF}
-end;
-{$ENDIF}
+  function IsBlank(Ch: char): boolean;
+  begin
+    IsBlank := (Ch = ' ') or (Ch = #13) or (Ch = #10);
+  end;
 
 {$IFDEF MSDOS}
-procedure TextToLine(var Text; Offset, Length: Integer; var Line: String);
-  assembler;
-asm
-	CLD
-	PUSH	DS
-	LDS	SI,Text
-        ADD	SI,&Offset
-        LES     DI,Line
-        MOV	AX,Length
-        STOSB
-        XCHG	AX,CX
-        REP	MOVSB
-        POP	DS
-end;
+  function Scan(var P; Offset, Size: integer; C: char): integer; assembler;
+  asm
+           CLD
+           LES     DI,P
+           ADD     DI,&Offset
+           MOV  DX,Size
+           SUB     DX,&Offset
+           OR  DH,DH
+           JZ      @@1
+           MOV     DX,256
+           @@1:
+           MOV     CX,DX
+           MOV     AL, C
+           REPNE   SCASB
+           SUB     CX,DX
+           NEG     CX
+           XCHG    AX,CX
+  end;
 {$ENDIF}
 {$IFNDEF MSDOS}
-procedure TextToLine(var Text; Offset, Length: Integer; var Line: String);
+  function Scan(var P; Offset, Size: integer; C: char): integer; assembler;
+{$IFDEF USE32}
+           {&USES esi,edi}{&FRAME-}
+  asm
+           CLD
+           MOV     EDI,P
+           ADD     EDI,&Offset
+           mov     EDX,Size
+           SUB     EDX,&Offset
+           test    DH,DH
+           JZ      @@1
+           MOV     EDX,256
+           @@1:
+           MOV     ECX,EDX
+           MOV     AL,C
+           REPNE   scasb
+           SUB     ECX,EDX
+           NEG     ECX
+           XCHG    EAX,ECX
+{$ELSE}
+  asm
+           CLD
+           LES     DI,P
+           ADD     DI,&Offset
+           MOV     DX,Size
+           SUB     DX,&Offset
+           OR      DH,DH
+           JZ      @@1
+           MOV     DX,256
+           @@1:
+           MOV     CX,DX
+           MOV     AL, C
+           REPNE   SCASB
+           SUB     CX,DX
+           NEG     CX
+           XCHG    AX,CX
+{$ENDIF}
+  end;
+{$ENDIF}
+
+{$IFDEF MSDOS}
+  procedure TextToLine(var Text; Offset, Length: integer; var Line: string);
+  assembler;
+  asm
+           CLD
+           PUSH    DS
+           LDS     SI,Text
+           ADD     SI,&Offset
+           LES     DI,Line
+           MOV     AX,Length
+           STOSB
+           XCHG    AX,CX
+           REP     MOVSB
+           POP     DS
+  end;
+{$ENDIF}
+{$IFNDEF MSDOS}
+  procedure TextToLine(var Text; Offset, Length: integer; var Line: string);
   assembler;
 {$IFDEF USE32}
-       {&USES esi,edi} {&FRAME-}
-asm
-        cld
-        mov     esi,Text
-        add     esi,&Offset
-        mov     edi,Line
-        mov     eax,Length
-        stosb
-        xchg    eax,ecx
-        rep     movsb
+  {&USES esi,edi}{&FRAME-}
+  asm
+           CLD
+           MOV     ESI,Text
+           ADD     ESI,&Offset
+           mov     EDI,Line
+           MOV     EAX,Length
+           STOSB
+           XCHG    EAX,ECX
+           REP     movsb
 {$ELSE}
-asm
-        CLD
-        PUSH    DS
-        LDS     SI,Text
-        ADD     SI,&Offset
-        LES     DI,Line
-        MOV     AX,Length
-        STOSB
-        XCHG    AX,CX
-        REP     MOVSB
-        POP     DS
+  asm
+           CLD
+           PUSH    DS
+           LDS     SI,Text
+           ADD     SI,&Offset
+           LES     DI,Line
+           MOV     AX,Length
+           STOSB
+           XCHG    AX,CX
+           REP     MOVSB
+           POP     DS
 {$ENDIF}
-end;
+  end;
 {$ENDIF}
 
 begin
@@ -580,8 +574,7 @@ begin
   begin
     Contexts := nil;
     Index := nil;
-  end
-  else
+  end else
   begin
     GetMem(Contexts, SizeOf(Contexts^[0]) * Size);
     S.Read(Contexts^, SizeOf(Contexts^[0]) * Size);
@@ -597,9 +590,9 @@ begin
   inherited Done;
 end;
 
-function THelpIndex.Find(I: Word): Word;
+function THelpIndex.Find(I: word): word;
 var
-  Hi, Lo, Pos: Integer;
+  Hi, Lo, Pos: integer;
 begin
   Lo := 0;
   if Used > 0 then
@@ -608,41 +601,38 @@ begin
     while Lo <= Hi do
     begin
       Pos := (Lo + Hi) div 2;
-      if I > Contexts^[Pos] then
-        Lo := Pos + 1
+      if I > Contexts^[Pos] then Lo := Pos + 1
       else
       begin
         Hi := Pos - 1;
-        if I = Contexts^[Pos] then
-          Lo := Pos;
+        if I = Contexts^[Pos] then Lo := Pos;
       end;
     end;
   end;
   Find := Lo;
 end;
 
-function THelpIndex.Position(I: Word): Longint;
+function THelpIndex.Position(I: word): longint;
 begin
   Position := Index^[Find(I)];
 end;
 
-procedure THelpIndex.Add(I: Word; Val: Longint);
+procedure THelpIndex.Add(I: word; Val: longint);
 const
   Delta = 10;
 var
-  P: PIndexArray;
-  NewSize: Integer;
-  Pos: Integer;
+  P:       PIndexArray;
+  NewSize: integer;
+  Pos:     integer;
 
-  function Grow(P: Pointer; OldSize, NewSize, ElemSize: Integer): Pointer;
+  function Grow(P: Pointer; OldSize, NewSize, ElemSize: integer): Pointer;
   var
     NewP: PByteArray;
   begin
     GetMem(NewP, NewSize * ElemSize);
     if NewP <> nil then
     begin
-      if P <> nil then
-        Move(P^, NewP^, OldSize * ElemSize);
+      if P <> nil then Move(P^, NewP^, OldSize * ElemSize);
       FillChar(NewP^[OldSize * ElemSize], (NewSize - Size) * ElemSize, $FF);
     end;
     if OldSize > 0 then FreeMem(P, OldSize * ElemSize);
@@ -688,20 +678,18 @@ const
 
 constructor THelpFile.Init(S: PStream);
 var
-  Magic: Longint;
+  Magic: longint;
 begin
   Magic := 0;
   S^.Seek(0);
-  if S^.GetSize > SizeOf(Magic) then
-    S^.Read(Magic, SizeOf(Magic));
+  if S^.GetSize > SizeOf(Magic) then S^.Read(Magic, SizeOf(Magic));
   if Magic <> MagicHeader then
   begin
     IndexPos := 12;
     S^.Seek(IndexPos);
     Index := New(PHelpIndex, Init);
     Modified := True;
-  end
-  else
+  end else
   begin
     S^.Seek(8);
     S^.Read(IndexPos, SizeOf(IndexPos));
@@ -714,7 +702,7 @@ end;
 
 destructor THelpFile.Done;
 var
-  Magic, Size: Longint;
+  Magic, Size: longint;
 begin
   if Modified then
   begin
@@ -731,26 +719,25 @@ begin
   Dispose(Index, Done);
 end;
 
-function THelpFile.GetTopic(I: Word): PHelpTopic;
+function THelpFile.GetTopic(I: word): PHelpTopic;
 var
-  Pos: Longint;
+  Pos: longint;
 begin
   Pos := Index^.Position(I);
   if Pos > 0 then
   begin
     Stream^.Seek(Pos);
     GetTopic := PHelpTopic(Stream^.Get);
-  end
-  else GetTopic := InvalidTopic;
+  end else GetTopic := InvalidTopic;
 end;
 
 function THelpFile.InvalidTopic: PHelpTopic;
 var
   Topic: PHelpTopic;
-  Para: PParagraph;
+  Para:  PParagraph;
 const
   InvalidStr = #13' No help available.';
-  InvalidText: array[1..Length(InvalidStr)] of Char = InvalidStr;
+  InvalidText: array[1..Length(InvalidStr)] of char = InvalidStr;
 begin
   Topic := New(PHelpTopic, Init);
   GetMem(Para, SizeOf(Para^) + SizeOf(InvalidText));
@@ -762,7 +749,7 @@ begin
   InvalidTopic := Topic;
 end;
 
-procedure THelpFile.RecordPositionInIndex(I: Integer);
+procedure THelpFile.RecordPositionInIndex(I: integer);
 begin
   Index^.Add(I, IndexPos);
   Modified := True;
@@ -778,8 +765,7 @@ end;
 
 { THelpViewer }
 
-constructor THelpViewer.Init(var Bounds: TRect; AHScrollBar,
-  AVScrollBar: PScrollBar; AHelpFile: PHelpFile; Context: Word);
+constructor THelpViewer.Init(var Bounds: TRect; AHScrollBar, AVScrollBar: PScrollBar; AHelpFile: PHelpFile; Context: word);
 begin
   inherited Init(Bounds, AHScrollBar, AVScrollBar);
   Options := Options or ofSelectable;
@@ -807,28 +793,27 @@ end;
 
 procedure THelpViewer.Draw;
 var
-  B: TDrawBuffer;
-  Line: String;
-  I, J, L: Integer;
-  KeyCount: Integer;
-  Normal, Keyword, SelKeyword, C: Byte;
-  KeyPoint: TPoint;
-  KeyLength: Byte;
-  KeyRef: Word;
+  B:         TDrawBuffer;
+  Line:      string;
+  I, J, L:   integer;
+  KeyCount:  integer;
+  Normal, Keyword, SelKeyword, C: byte;
+  KeyPoint:  TPoint;
+  KeyLength: byte;
+  KeyRef:    word;
 begin
 
-  Normal     := GetColor(1);
-  Keyword    := GetColor(2);
+  Normal := GetColor(1);
+  Keyword := GetColor(2);
   SelKeyword := GetColor(3);
 
-  SelKeyWord:=30; {jakob}
+  SelKeyWord := 30; {jakob}
 
   KeyCount := 0;
   KeyPoint.X := 0;
   KeyPoint.Y := 0;
   Topic^.SetWidth(Size.X);
-  if Topic^.GetNumCrossRefs > 0 then
-    repeat
+  if Topic^.GetNumCrossRefs > 0 then repeat
       Inc(KeyCount);
       Topic^.GetCrossRef(KeyCount, KeyPoint, KeyLength, KeyRef);
     until (KeyCount >= Topic^.GetNumCrossRefs) or (KeyPoint.Y > Delta.Y);
@@ -836,7 +821,7 @@ begin
   begin
     MoveChar(B, ' ', Normal, Size.X);
     Line := Topic^.GetLine(I + Delta.Y);
-    MoveStr(B, Copy(Line, Delta.X+1, Size.X), Normal);
+    MoveStr(B, Copy(Line, Delta.X + 1, Size.X), Normal);
     while I + Delta.Y = KeyPoint.Y do
     begin
       L := KeyLength;
@@ -846,111 +831,100 @@ begin
         KeyPoint.X := Delta.X;
       end;
       if KeyCount = Selected then C := SelKeyword
-                             else C := Keyword;
-      for J := 0 to L-1 do
-        WordRec(B[KeyPoint.X - Delta.X + J]).Hi := C;
+      else C := Keyword;
+      for J := 0 to L - 1 do WordRec(B[KeyPoint.X - Delta.X + J]).Hi := C;
       Inc(KeyCount);
-      if KeyCount <= Topic^.GetNumCrossRefs then
-        Topic^.GetCrossRef(KeyCount, KeyPoint, KeyLength, KeyRef)
+      if KeyCount <= Topic^.GetNumCrossRefs then Topic^.GetCrossRef(KeyCount, KeyPoint, KeyLength, KeyRef)
       else KeyPoint.Y := 0;
     end;
-    WriteLine(0, I-1, Size.X, 1, B);
+    WriteLine(0, I - 1, Size.X, 1, B);
   end;
 end;
 
 procedure THelpViewer.HandleEvent(var Event: TEvent);
 var
   KeyPoint, Mouse: TPoint;
-  KeyLength: Byte;
-  KeyRef: Word;
-  KeyCount: Integer;
+  KeyLength:       byte;
+  KeyRef:          word;
+  KeyCount:        integer;
 
-procedure MakeSelectVisible;
-var
-  D: TPoint;
-begin
-  Topic^.GetCrossRef(Selected, KeyPoint, KeyLength, KeyRef);
-  D := Delta;
-  if KeyPoint.X < D.X then D.X := KeyPoint.X
-  else if KeyPoint.X + KeyLength > D.X + Size.X then
-    D.X := KeyPoint.X + KeyLength - Size.X + 1;
-  if KeyPoint.Y <= D.Y then D.Y := KeyPoint.Y - 1;
-  if KeyPoint.Y > D.Y + Size.Y then D.Y := KeyPoint.Y - Size.Y;
-  if (D.X <> Delta.X) or (D.Y <> Delta.Y) then ScrollTo(D.X, D.Y);
-end;
+  procedure MakeSelectVisible;
+  var
+    D: TPoint;
+  begin
+    Topic^.GetCrossRef(Selected, KeyPoint, KeyLength, KeyRef);
+    D := Delta;
+    if KeyPoint.X < D.X then D.X := KeyPoint.X
+    else if KeyPoint.X + KeyLength > D.X + Size.X then D.X := KeyPoint.X + KeyLength - Size.X + 1;
+    if KeyPoint.Y <= D.Y then D.Y := KeyPoint.Y - 1;
+    if KeyPoint.Y > D.Y + Size.Y then D.Y := KeyPoint.Y - Size.Y;
+    if (D.X <> Delta.X) or (D.Y <> Delta.Y) then ScrollTo(D.X, D.Y);
+  end;
 
-procedure SwitchToTopic(KeyRef: Integer);
-begin
-  if Topic <> nil then Dispose(Topic, Done);
-  Topic := HFile^.GetTopic(KeyRef);
-  Topic^.SetWidth(Size.X);
-  ScrollTo(0, 0);
-  SetLimit(Limit.X, Topic^.NumLines);
-  Selected := 1;
-  DrawView;
-end;
+  procedure SwitchToTopic(KeyRef: integer);
+  begin
+    if Topic <> nil then Dispose(Topic, Done);
+    Topic := HFile^.GetTopic(KeyRef);
+    Topic^.SetWidth(Size.X);
+    ScrollTo(0, 0);
+    SetLimit(Limit.X, Topic^.NumLines);
+    Selected := 1;
+    DrawView;
+  end;
 
 begin
   inherited HandleEvent(Event);
   case Event.What of
-    evKeyDown:
-      begin
-        case Event.KeyCode of
-          kbUp:begin  {jakob added this Kbup event}
-                Dec(Selected);
-                if Selected <1 then Selected :=Topic^.GetNumCrossRefs;
-                MakeSelectVisible;
-               end;
-          kbTab,Kbdown:
-            if Topic^.GetNumCrossRefs > 0 then
-            begin
-              Inc(Selected);
-              if Selected > Topic^.GetNumCrossRefs then Selected := 1;
-              MakeSelectVisible;
-            end;
-          kbShiftTab:
-            if Topic^.GetNumCrossRefs > 0 then
-            begin
-              Dec(Selected);
-              if Selected = 0 then Selected := Topic^.GetNumCrossRefs;
-              MakeSelectVisible;
-            end;
-          kbEnter:
-            if Selected <= Topic^.GetNumCrossRefs then
-            begin
-              Topic^.GetCrossRef(Selected, KeyPoint, KeyLength, KeyRef);
-              SwitchToTopic(KeyRef);
-            end;
-          kbEsc:
-            begin
-              Event.What := evCommand;
-              Event.Command := cmClose;
-              PutEvent(Event);
-            end;
-        else
-          Exit;
+    evKeyDown: begin
+      case Event.KeyCode of
+        kbUp: begin  {jakob added this Kbup event}
+          Dec(Selected);
+          if Selected < 1 then Selected := Topic^.GetNumCrossRefs;
+          MakeSelectVisible;
         end;
-        DrawView;
-        ClearEvent(Event);
+        kbTab, Kbdown: if Topic^.GetNumCrossRefs > 0 then
+          begin
+            Inc(Selected);
+            if Selected > Topic^.GetNumCrossRefs then Selected := 1;
+            MakeSelectVisible;
+          end;
+        kbShiftTab: if Topic^.GetNumCrossRefs > 0 then
+          begin
+            Dec(Selected);
+            if Selected = 0 then Selected := Topic^.GetNumCrossRefs;
+            MakeSelectVisible;
+          end;
+        kbEnter: if Selected <= Topic^.GetNumCrossRefs then
+          begin
+            Topic^.GetCrossRef(Selected, KeyPoint, KeyLength, KeyRef);
+            SwitchToTopic(KeyRef);
+          end;
+        kbEsc: begin
+          Event.What := evCommand;
+          Event.Command := cmClose;
+          PutEvent(Event);
+        end;
+        else Exit;
       end;
-    evMouseDown:
-      begin
-        MakeLocal(Event.Where, Mouse);
-        Inc(Mouse.X, Delta.X); Inc(Mouse.Y, Delta.Y);
-        KeyCount := 0;
-        repeat
-          Inc(KeyCount);
-          if KeyCount > Topic^.GetNumCrossRefs then Exit;
-          Topic^.GetCrossRef(KeyCount, KeyPoint, KeyLength, KeyRef);
-        until (KeyPoint.Y = Mouse.Y+1) and (Mouse.X >= KeyPoint.X) and
-          (Mouse.X < KeyPoint.X + KeyLength);
-        Selected := KeyCount;
-        DrawView;
-        if Event.Double then SwitchToTopic(KeyRef);
-        ClearEvent(Event);
-      end;
-    evCommand:
-      if (Event.Command = cmClose) and (Owner^.State and sfModal <> 0) then
+      DrawView;
+      ClearEvent(Event);
+    end;
+    evMouseDown: begin
+      MakeLocal(Event.Where, Mouse);
+      Inc(Mouse.X, Delta.X); Inc(Mouse.Y, Delta.Y);
+      KeyCount := 0;
+      repeat
+        Inc(KeyCount);
+        if KeyCount > Topic^.GetNumCrossRefs then Exit;
+        Topic^.GetCrossRef(KeyCount, KeyPoint, KeyLength, KeyRef);
+      until (KeyPoint.Y = Mouse.Y + 1) and (Mouse.X >= KeyPoint.X) and
+        (Mouse.X < KeyPoint.X + KeyLength);
+      Selected := KeyCount;
+      DrawView;
+      if Event.double then SwitchToTopic(KeyRef);
+      ClearEvent(Event);
+    end;
+    evCommand: if (Event.Command = cmClose) and (Owner^.State and sfModal <> 0) then
       begin
         EndModal(cmClose);
         ClearEvent(Event);
@@ -960,14 +934,14 @@ end;
 
 { THelpWindow }
 
-constructor THelpWindow.Init(HFile: PHelpFile; Context: Word);
+constructor THelpWindow.Init(HFile: PHelpFile; Context: word);
 var
   R: TRect;
 begin
   R.Assign(0, 0, 50, 18);
   TWindow.Init(R, 'Help', wnNoNumber);
   Options := Options or ofCentered;
-  R.Grow(-2,-1);
+  R.Grow(-2, -1);
   Insert(New(PHelpViewer, Init(R,
     StandardScrollBar(sbHorizontal + sbHandleKeyboard),
     StandardScrollBar(sbVertical + sbHandleKeyboard), HFile, Context)));
@@ -979,7 +953,33 @@ begin
   RegisterType(RHelpIndex);
 end;
 
-procedure NotAssigned(var S: TStream; Value: Integer);
+procedure NotAssigned(var S: TStream; Value: integer);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 begin
 end;
 

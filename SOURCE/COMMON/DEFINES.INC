@@ -5,3 +5,9 @@
   {$H-}
   {$V-}
 {$ENDIF}
+
+{$IFDEF FPC}
+  {$mode tp}
+  {$H-}
+  {$V-}
+{$ENDIF}

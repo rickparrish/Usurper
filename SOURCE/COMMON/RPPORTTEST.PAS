@@ -3,23 +3,23 @@ program RPPortTest;
 uses
   Crt, RPPort, VpSysLow;
 
-procedure PauseOrQuit;
-var
-  Ch: Char;
-begin
-  WriteLn('Hit a key to continue or Q to quit');
-  Ch := ReadKey;
-  if (UpCase(Ch) = 'Q') then Halt;
-end;
+  procedure PauseOrQuit;
+  var
+    Ch: char;
+  begin
+    WriteLn('Hit a key to continue or Q to quit');
+    Ch := ReadKey;
+    if (UpCase(Ch) = 'Q') then Halt;
+  end;
 
 var
-  Attr: Byte;
-  Ch: Char;
-  X, Y, XY: SmallWord;
+  Attr:        byte;
+  Ch:          char;
+  X, Y, XY:    SmallWord;
   SavedScreen: TScreenBuf;
 begin
   TextAttr := 7;
-  
+
   ClrScr;
   WriteLn('Test #1: RPGotoXY and RPWhereXY');
   XY := RPWhereXY;
@@ -54,8 +54,8 @@ begin
     for X := 1 to 80 do
     begin
       XY := (X - 1) + ((Y - 1) * 80);
-      Ch := Chr(65 + (XY MOD 26));
-      SysWrtCharStrAtt(@Ch, 1, X-1, Y-1, Attr);
+      Ch := Chr(65 + (XY mod 26));
+      SysWrtCharStrAtt(@Ch, 1, X - 1, Y - 1, Attr);
     end;
   end;
   RPSaveScreen(SavedScreen);
@@ -67,7 +67,7 @@ begin
     for X := 1 to 80 do
     begin
       Ch := Chr(65 + Random(26));
-      SysWrtCharStrAtt(@Ch, 1, X-1, Y-1, Attr);
+      SysWrtCharStrAtt(@Ch, 1, X - 1, Y - 1, Attr);
     end;
   end;
   ReadKey;
@@ -84,17 +84,17 @@ begin
   WriteLn;
   WriteLn('Test #5: RPSetAttrAt and RPSleep');
   WriteLn('  The "X Size" text above should slowly become white on blue');
-  RPSleep(500);  
+  RPSleep(500);
   RPSetAttrAt(2, 1, 31);
-  RPSleep(500);  
+  RPSleep(500);
   RPSetAttrAt(3, 1, 31);
-  RPSleep(500);  
+  RPSleep(500);
   RPSetAttrAt(4, 1, 31);
-  RPSleep(500);  
+  RPSleep(500);
   RPSetAttrAt(5, 1, 31);
-  RPSleep(500);  
+  RPSleep(500);
   RPSetAttrAt(6, 1, 31);
-  RPSleep(500);  
+  RPSleep(500);
   RPSetAttrAt(7, 1, 31);
   PauseOrQuit;
 end.

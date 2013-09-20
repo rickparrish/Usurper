@@ -38,13 +38,13 @@ const
 
 {$ifdef VER60}
 var
-  Seg0040, SegB000, SegB800: Word;
+  Seg0040, SegB000, SegB800: word;
 {$endif}
 
 var
-  Loop: Byte;
-  P: Pointer;
-  CursorCoords, Segment, RowSize, Index: Word;
+  Loop:     byte;
+  P:        Pointer;
+  CursorCoords, Segment, RowSize, Index: word;
   ExitSave: Pointer;
 
 { Exit code performed on program exit }
@@ -57,7 +57,7 @@ begin
   begin
     P := Ptr(Segment, Index);
     Move(PScreen^[Loop], P^, RowSize);
-    Inc(Index, RowSize)
+    Inc(Index, RowSize);
   end;
   { Free buffer }
   Dispose(PScreen);
@@ -68,7 +68,7 @@ begin
   RPRestoreScreen(SavedScreen);
   RPGotoXY(CursorCoords);
 {$ENDIF}
-  ExitProc := ExitSave
+  ExitProc := ExitSave;
 end; { MyExitProc }
 
 { Initialization code performed on program startup }
@@ -98,7 +98,7 @@ begin
   begin
     P := Ptr(Segment, Index);
     Move(P^, PScreen^[Loop], RowSize);
-    Inc(Index, RowSize)
+    Inc(Index, RowSize);
   end;
 {$ENDIF}
 {$IFNDEF MSDOS}

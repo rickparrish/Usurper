@@ -1,44 +1,45 @@
 {$IFNDEF MSDOS}
 {$I DEFINES.INC}
 {$ENDIF}
-Unit SwagDate;
+unit SwagDate;
 
-Interface
+interface
 
-Function Swag_Date : longint;
+function Swag_Date: longint;
 
-Implementation
+implementation
 
-Uses DOS;
+uses
+  DOS;
 
-CONST DaysPerYear = 365;
+const DaysPerYear = 365;
 
-TYPE Month = (Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec);
-             (* REMEMBER: ORD values for Month are 0..11 - NOT 1..12 ! *)
-     Date = RECORD
-              da: 1..31;
-              mo: Month;
-              yr: 1..9999
-            END;
+type Month = (Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec);
+  (* REMEMBER: ORD values for Month are 0..11 - NOT 1..12 ! *)
+  Date     = record
+    da: 1..31;
+    mo: Month;
+    yr: 1..9999
+  end;
 
- VAR maxDay: ARRAY [Month] OF INTEGER;
-     daysBefore: ARRAY [Month] OF INTEGER;
+var maxDay:   array [Month] of integer;
+  daysBefore: array [Month] of integer;
 
-PROCEDURE GetSysDate(VAR d: Date);
+procedure GetSysDate(var d: Date);
   (* Reads the system clock and assigns the date to d
      and the day of the week to dayOfWeek.            *)
-  VAR SysYear,SysMonth,SysDay,SysDOW : word;
-BEGIN
- GetDate(SysYear,SysMonth,SysDay,SysDOW);
- d.yr := SysYear;
- d.mo := Month(SysMonth-1);
- d.da := SysDay
-{ dayOfWeek := DayType(SysDOW+1);   }
-END;
+var SysYear, SysMonth, SysDay, SysDOW: word;
+begin
+  GetDate(SysYear, SysMonth, SysDay, SysDOW);
+  d.yr := SysYear;
+  d.mo := Month(SysMonth - 1);
+  d.da := SysDay;
+  { dayOfWeek := DayType(SysDOW+1);   }
+end;
 
-PROCEDURE MonthsInit;
-  VAR mo: Month;
-BEGIN
+procedure MonthsInit;
+var mo: Month;
+begin
   maxDay[Jan] := 31;
   maxDay[Feb] := 28;  (* adjust for leap years later *)
   maxDay[Mar] := 31;
@@ -53,39 +54,39 @@ BEGIN
   maxDay[Dec] := 31;
 
   daysBefore[Jan] := 0;
-  FOR mo := Jan TO Nov DO
-    daysBefore[Month(ORD(mo)+1)] := daysBefore[mo] + maxDay[mo]
-END;
+  for mo := Jan to Nov do daysBefore[Month(Ord(mo) + 1)] := daysBefore[mo] + maxDay[mo];
+end;
 
-FUNCTION IsLeapYear(Const yr: INTEGER): BOOLEAN;
-BEGIN
-  IsLeapYear := ((yr MOD 4 = 0) AND (yr MOD 100 <> 0)) OR (yr MOD 400 = 0)
-END;
+function IsLeapYear(const yr: integer): boolean;
+begin
+  IsLeapYear := ((yr mod 4 = 0) and (yr mod 100 <> 0)) or (yr mod 400 = 0);
+end;
 
-FUNCTION NumDays(CONST d: Date): LONGINT;
+function NumDays(const d: Date): longint;
   (* NumDays returns an ordinal value for the date
      with January 1, 0001 assigned the value 1.    *)
-  VAR result, leapYears, lYr: LONGINT;
-BEGIN
-  WITH d DO BEGIN
-    lYr:=yr-1;
-    result := (da);
-    INC(result, daysBefore[mo]);
-    INC(result,lYr * DaysPerYear);
-    leapYears := (lYr DIV 4) - (lYr DIV 100) + (lYr DIV 400);
-    INC(result, leapYears);
-    IF (mo > Feb) AND IsLeapYear(yr) THEN INC(result)
-  END;
-  NumDays := result
-END;
+var Result, leapYears, lYr: longint;
+begin
+  with d do
+  begin
+    lYr := yr - 1;
+    Result := (da);
+    Inc(Result, daysBefore[mo]);
+    Inc(Result, lYr * DaysPerYear);
+    leapYears := (lYr div 4) - (lYr div 100) + (lYr div 400);
+    Inc(Result, leapYears);
+    if (mo > Feb) and IsLeapYear(yr) then Inc(Result);
+  end;
+  NumDays := Result;
+end;
 
-VAR currentDay : date;
+var currentDay: date;
 
-Function Swag_Date;
+function Swag_Date;
 begin
   GetSysDate(currentDay);
   MonthsInit;
-  swag_date:=NumDays(currentDay);
+  swag_date := NumDays(currentDay);
 end;
-end.
 
+end.

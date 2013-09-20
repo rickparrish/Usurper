@@ -2,23 +2,24 @@
 {$I DEFINES.INC}
 {$ENDIF}
 {************************************************}
-{                                                }
+
 {   Turbo Vision File Manager Demo               }
 {   Copyright (c) 1992 by Borland International  }
-{                                                }
+
 {************************************************}
 
  {slightly modified by Jakob, search for 'Jakob' to see where he has
   added / changed stuff}
 
 
-Unit ViewText;
+unit ViewText;
 
 {$F+,O+,X+,S-,D-}
 
 interface
 
-uses Objects, Views, Dos, Drivers;
+uses
+  Objects, Views, Dos, Drivers;
 
 type
 
@@ -33,18 +34,17 @@ type
 
   PFileViewer = ^TFileViewer;
   TFileViewer = object(TScroller)
-    FileName: PString;
+    FileName:  PString;
     FileLines: PCollection;
-    IsValid: Boolean;
-    constructor Init(var Bounds: TRect; AHScrollBar, AVScrollBar: PScrollBar;
-      const AFileName: PathStr);
+    IsValid:   boolean;
+    constructor Init(var Bounds: TRect; AHScrollBar, AVScrollBar: PScrollBar; const AFileName: PathStr);
     constructor Load(var S: TStream);
     destructor Done; virtual;
     procedure Draw; virtual;
     procedure ReadFile(const FName: PathStr);
-    procedure SetState(AState: Word; Enable: Boolean); virtual;
+    procedure SetState(AState: word; Enable: boolean); virtual;
     procedure Store(var S: TStream);
-    function Valid(Command: Word): Boolean; virtual;
+    function Valid(Command: word): boolean; virtual;
   end;
 
   { TTextWindow }
@@ -52,29 +52,30 @@ type
   PTextWindow = ^TTextWindow;
   TTextWindow = object(TWindow)
     constructor Init(R: TRect; const FileName: PathStr);
-    Procedure HandleEvent(var Event: TEvent); Virtual; {Jakob added this}
+    procedure HandleEvent(var Event: TEvent); virtual; {Jakob added this}
   end;
 
 const
 
   RFileViewer: TStreamRec = (
-     ObjType: 10080;
-     VmtLink: Ofs(TypeOf(TFileViewer)^);
-     Load:    @TFileViewer.Load;
-     Store:   @TFileViewer.Store
-  );
+    ObjType: 10080;
+    VmtLink: Ofs(TypeOf(TFileViewer)^);
+    Load: @TFileViewer.Load;
+    Store: @TFileViewer.Store
+    );
   RTextWindow: TStreamRec = (
-     ObjType: 10081;
-     VmtLink: Ofs(TypeOf(TTextWindow)^);
-     Load:    @TTextWindow.Load;
-     Store:   @TTextWindow.Store
-  );
+    ObjType: 10081;
+    VmtLink: Ofs(TypeOf(TTextWindow)^);
+    Load: @TTextWindow.Load;
+    Store: @TTextWindow.Store
+    );
 
 procedure RegisterFViewer;
 
 implementation
 
-uses Memory, MsgBox, App;
+uses
+  Memory, MsgBox, App;
 
 { TLineCollection }
 procedure TLineCollection.FreeItem(P: Pointer);
@@ -83,8 +84,7 @@ begin
 end;
 
 { TFileViewer }
-constructor TFileViewer.Init(var Bounds: TRect; AHScrollBar,
-  AVScrollBar: PScrollBar; const AFileName: PathStr);
+constructor TFileViewer.Init(var Bounds: TRect; AHScrollBar, AVScrollBar: PScrollBar; const AFileName: PathStr);
 begin
   TScroller.Init(Bounds, AHScrollbar, AVScrollBar);
   GrowMode := gfGrowHiX + gfGrowHiY;
@@ -112,9 +112,9 @@ end;
 procedure TFileViewer.Draw;
 var
   B: TDrawBuffer;
-  C: Byte;
-  I: Integer;
-  S: String;
+  C: byte;
+  I: integer;
+  S: string;
   P: PString;
 begin
   C := GetColor(1);
@@ -135,26 +135,25 @@ end;
 procedure TFileViewer.ReadFile(const FName: PathStr);
 var
   FileToView: Text;
-  Line: String;
-  MaxWidth: Integer;
-  E: TEvent;
+  Line:       string;
+  MaxWidth:   integer;
+  E:          TEvent;
 begin
   IsValid := True;
   if FileName <> nil then DisposeStr(FileName);
   FileName := NewStr(FName);
-  FileLines := New(PLineCollection, Init(5,5));
+  FileLines := New(PLineCollection, Init(5, 5));
   {$I-}
   Assign(FileToView, FName);
   Reset(FileToView);
   if IOResult <> 0 then
   begin
-    MessageBox('Cannot open file '+FName+'.', nil, mfError + mfOkButton);
+    MessageBox('Cannot open file ' + FName + '.', nil, mfError + mfOkButton);
     IsValid := False;
-  end
-  else
+  end else
   begin
     MaxWidth := 0;
-    while not Eof(FileToView) and not LowMemory do
+    while not EOF(FileToView) and not LowMemory do
     begin
       Readln(FileToView, Line);
       if Length(Line) > MaxWidth then MaxWidth := Length(Line);
@@ -167,11 +166,10 @@ begin
   Limit.Y := FileLines^.Count;
 end;
 
-procedure TFileViewer.SetState(AState: Word; Enable: Boolean);
+procedure TFileViewer.SetState(AState: word; Enable: boolean);
 begin
   TScroller.SetState(AState, Enable);
-  if Enable and (AState and sfExposed <> 0) then
-     SetLimit(Limit.X, Limit.Y);
+  if Enable and (AState and sfExposed <> 0) then SetLimit(Limit.X, Limit.Y);
 end;
 
 procedure TFileViewer.Store(var S: TStream);
@@ -180,41 +178,43 @@ begin
   S.WriteStr(FileName);
 end;
 
-function TFileViewer.Valid(Command: Word): Boolean;
+function TFileViewer.Valid(Command: word): boolean;
 begin
   Valid := IsValid;
 end;
 
 { TTextWindow }
-Procedure TTextWindow.HandleEvent(var Event:TEvent); {Jakob added this proc}
-Begin
+procedure TTextWindow.HandleEvent(var Event: TEvent); {Jakob added this proc}
+begin
 
- inherited HandleEvent(event);
+  inherited HandleEvent(event);
 
   case event.what of
-   EvKeyDown:begin
-              case Event.KeyCode of
-               kbEsc:begin
-                      Event.What := evCommand;
-                      Event.Command := cmClose;
-                      PutEvent(Event);
-                     end;
-              end;
-              DrawView;
-              ClearEvent(Event);
-             end;
-   EvCommand:begin
-              case Event.Command of
-               CmCancel:begin
-                         EndModal(CmClose);
-                        end;
-              end;
-              DrawView;
-              ClearEvent(Event);
-             end;
+    EvKeyDown: begin
+      case Event.KeyCode of
+        kbEsc: begin
+          Event.What := evCommand;
+          Event.Command := cmClose;
+          PutEvent(Event);
+        end;
+      end;
+      DrawView;
+      ClearEvent(Event);
+    end;
+    EvCommand: begin
+      case Event.Command of
+        CmCancel: begin
+          EndModal(CmClose);
+        end;
+      end;
+      DrawView;
+      ClearEvent(Event);
+    end;
   end;
 
-End;
+end;
+
+
 
 constructor TTextWindow.Init(R: TRect; const FileName: PathStr);
 begin

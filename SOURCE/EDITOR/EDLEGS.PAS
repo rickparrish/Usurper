@@ -22,17 +22,19 @@ Copyright 2007 Jakob Dangarden
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 }
 
-Unit EdLegs;
+unit EdLegs;
 
-Interface
+interface
 
-Procedure Reset_Legs;
+procedure Reset_Legs;
 
-Implementation
-uses init, obj_ad;
+implementation
 
-Procedure Reset_Legs;
-Begin
+uses
+  init, obj_ad;
+
+procedure Reset_Legs;
+begin
               {typ av objekt :
                                1. head
                                2. body
@@ -49,414 +51,412 @@ Begin
                               13. dryck
                               14. vapen }
 
- Add_Object('Grass Pants',   {name}
-            Legs,     {typ}
-            250,       {v„rde i gold}
-            0,         {”ka/minska hps}
-            0,         {”ka stamina}
-            0,         {”ka agility}
-            0,         {”ka charisma}
-            0,         {”ka dexterity}
-            0,         {”ka wisdom}
-            0,         {”ka mana}
-            1,         {”ka armor v„rde}
-            0,         {”ka attack v„rde}
-            '',        {„gd av?}
-            False,     {bara EN i spelet}
-            Nothing,   {kurerar}
-            True,      {finnas i shoppen}
-            True,      {kunna hittas i dungeons?}
-            False,     {cursed item?}
-            1,         {min level att hittas i dngs}
-            5,        {max level att hittas i dngs}
-            'Ordinary Grass Pants.',
-            '',        {normal beskrivning 2}
-            '',        {normal beskrivning 3}
-            '',        {normal beskrivning 4}
-            '',        {normal beskrivning 5}
-            '',        {detaljerad beskrivning 1}
-            '',        {detaljerad beskrivning 2}
-            '',        {detaljerad beskrivning 3}
-            '',        {detaljerad beskrivning 4}
-            '',        {detaljerad beskrivning 5}
-            0,         {”ka strength}
-            0,         {”ka defence}
-            0);        {strength demanded to use object}
+  Add_Object('Grass Pants',   {name}
+    Legs,     {typ}
+    250,       {v„rde i gold}
+    0,         {”ka/minska hps}
+    0,         {”ka stamina}
+    0,         {”ka agility}
+    0,         {”ka charisma}
+    0,         {”ka dexterity}
+    0,         {”ka wisdom}
+    0,         {”ka mana}
+    1,         {”ka armor v„rde}
+    0,         {”ka attack v„rde}
+    '',        {„gd av?}
+    False,     {bara EN i spelet}
+    Nothing,   {kurerar}
+    True,      {finnas i shoppen}
+    True,      {kunna hittas i dungeons?}
+    False,     {cursed item?}
+    1,         {min level att hittas i dngs}
+    5,        {max level att hittas i dngs}
+    'Ordinary Grass Pants.',
+    '',        {normal beskrivning 2}
+    '',        {normal beskrivning 3}
+    '',        {normal beskrivning 4}
+    '',        {normal beskrivning 5}
+    '',        {detaljerad beskrivning 1}
+    '',        {detaljerad beskrivning 2}
+    '',        {detaljerad beskrivning 3}
+    '',        {detaljerad beskrivning 4}
+    '',        {detaljerad beskrivning 5}
+    0,         {”ka strength}
+    0,         {”ka defence}
+    0);        {strength demanded to use object}
 
- Add_Object('Wool Pants',   {name}
-            Legs,      {typ}
-            750,       {v„rde i gold}
-            0,         {”ka/minska hps}
-            0,         {”ka stamina}
-            0,         {”ka agility}
-            0,         {”ka charisma}
-            0,         {”ka dexterity}
-            0,         {”ka wisdom}
-            0,         {”ka mana}
-            2,         {”ka armor v„rde}
-            0,         {”ka attack v„rde}
-            '',        {„gd av?}
-            False,     {bara EN i spelet}
-            Nothing,   {kurerar}
-            True,      {finnas i shoppen}
-            True,      {kunna hittas i dungeons?}
-            False,     {cursed item?}
-            3,         {min level att hittas i dngs}
-            15,        {max level att hittas i dngs}
-            'You see nothing special.',
-            '',        {normal beskrivning 2}
-            '',        {normal beskrivning 3}
-            '',        {normal beskrivning 4}
-            '',        {normal beskrivning 5}
-            '',        {detaljerad beskrivning 1}
-            '',        {detaljerad beskrivning 2}
-            '',        {detaljerad beskrivning 3}
-            '',        {detaljerad beskrivning 4}
-            '',        {detaljerad beskrivning 5}
-            0,         {”ka strength}
-            0,         {”ka defence}
-            0);        {strength demanded to use object}
+  Add_Object('Wool Pants',   {name}
+    Legs,      {typ}
+    750,       {v„rde i gold}
+    0,         {”ka/minska hps}
+    0,         {”ka stamina}
+    0,         {”ka agility}
+    0,         {”ka charisma}
+    0,         {”ka dexterity}
+    0,         {”ka wisdom}
+    0,         {”ka mana}
+    2,         {”ka armor v„rde}
+    0,         {”ka attack v„rde}
+    '',        {„gd av?}
+    False,     {bara EN i spelet}
+    Nothing,   {kurerar}
+    True,      {finnas i shoppen}
+    True,      {kunna hittas i dungeons?}
+    False,     {cursed item?}
+    3,         {min level att hittas i dngs}
+    15,        {max level att hittas i dngs}
+    'You see nothing special.',
+    '',        {normal beskrivning 2}
+    '',        {normal beskrivning 3}
+    '',        {normal beskrivning 4}
+    '',        {normal beskrivning 5}
+    '',        {detaljerad beskrivning 1}
+    '',        {detaljerad beskrivning 2}
+    '',        {detaljerad beskrivning 3}
+    '',        {detaljerad beskrivning 4}
+    '',        {detaljerad beskrivning 5}
+    0,         {”ka strength}
+    0,         {”ka defence}
+    0);        {strength demanded to use object}
 
- Add_Object('Psycho Skin',   {name}
-            Legs,      {typ}
-            1750,      {v„rde i gold}
-            10,        {”ka/minska hps}
-            5,         {”ka stamina}
-            0,         {”ka agility}
-            0,         {”ka charisma}
-            0,         {”ka dexterity}
-            0,         {”ka wisdom}
-            0,         {”ka mana}
-            1,         {”ka armor v„rde}
-            0,         {”ka attack v„rde}
-            '',        {„gd av?}
-            False,     {bara EN i spelet}
-            Nothing,   {kurerar}
-            True,      {finnas i shoppen}
-            False,     {kunna hittas i dungeons?}
-            False,     {cursed item?}
-            1,         {min level att hittas i dngs}
-            99,        {max level att hittas i dngs}
-            'Reinforced human skin.',
-            '',        {normal beskrivning 2}
-            '',        {normal beskrivning 3}
-            '',        {normal beskrivning 4}
-            '',        {normal beskrivning 5}
-            '',        {detaljerad beskrivning 1}
-            '',        {detaljerad beskrivning 2}
-            '',        {detaljerad beskrivning 3}
-            '',        {detaljerad beskrivning 4}
-            '',        {detaljerad beskrivning 5}
-            0,         {”ka strength}
-            2,         {”ka defence}
-            5);        {strength demanded to use object}
+  Add_Object('Psycho Skin',   {name}
+    Legs,      {typ}
+    1750,      {v„rde i gold}
+    10,        {”ka/minska hps}
+    5,         {”ka stamina}
+    0,         {”ka agility}
+    0,         {”ka charisma}
+    0,         {”ka dexterity}
+    0,         {”ka wisdom}
+    0,         {”ka mana}
+    1,         {”ka armor v„rde}
+    0,         {”ka attack v„rde}
+    '',        {„gd av?}
+    False,     {bara EN i spelet}
+    Nothing,   {kurerar}
+    True,      {finnas i shoppen}
+    False,     {kunna hittas i dungeons?}
+    False,     {cursed item?}
+    1,         {min level att hittas i dngs}
+    99,        {max level att hittas i dngs}
+    'Reinforced human skin.',
+    '',        {normal beskrivning 2}
+    '',        {normal beskrivning 3}
+    '',        {normal beskrivning 4}
+    '',        {normal beskrivning 5}
+    '',        {detaljerad beskrivning 1}
+    '',        {detaljerad beskrivning 2}
+    '',        {detaljerad beskrivning 3}
+    '',        {detaljerad beskrivning 4}
+    '',        {detaljerad beskrivning 5}
+    0,         {”ka strength}
+    2,         {”ka defence}
+    5);        {strength demanded to use object}
 
   Add_Object('Sacred Scare',   {name}
-             Legs,      {typ}
-             1500,      {v„rde i gold}
-             0,         {”ka/minska hps}
-             0,         {”ka stamina}
-             0,         {”ka agility}
-             0,         {”ka charisma}
-             0,         {”ka dexterity}
-             0,         {”ka wisdom}
-             0,         {”ka mana}
-             3,         {”ka armor v„rde}
-             0,         {”ka attack v„rde}
-             '',        {„gd av?}
-             False,     {bara EN i spelet}
-             Nothing,   {kurerar}
-             True,      {finnas i shoppen}
-             False,     {kunna hittas i dungeons?}
-             False,     {cursed item?}
-             10,        {min level att hittas i dngs}
-             12,        {max level att hittas i dngs}
-             'You see nothing special.',
-             '',        {normal beskrivning 2}
-             '',        {normal beskrivning 3}
-             '',        {normal beskrivning 4}
-             '',        {normal beskrivning 5}
-             '',        {detaljerad beskrivning 1}
-             '',        {detaljerad beskrivning 2}
-             '',        {detaljerad beskrivning 3}
-             '',        {detaljerad beskrivning 4}
-             '',        {detaljerad beskrivning 5}
-             0,         {”ka strength}
-             0,         {”ka defence}
-             0);        {strength demanded to use object}
+    Legs,      {typ}
+    1500,      {v„rde i gold}
+    0,         {”ka/minska hps}
+    0,         {”ka stamina}
+    0,         {”ka agility}
+    0,         {”ka charisma}
+    0,         {”ka dexterity}
+    0,         {”ka wisdom}
+    0,         {”ka mana}
+    3,         {”ka armor v„rde}
+    0,         {”ka attack v„rde}
+    '',        {„gd av?}
+    False,     {bara EN i spelet}
+    Nothing,   {kurerar}
+    True,      {finnas i shoppen}
+    False,     {kunna hittas i dungeons?}
+    False,     {cursed item?}
+    10,        {min level att hittas i dngs}
+    12,        {max level att hittas i dngs}
+    'You see nothing special.',
+    '',        {normal beskrivning 2}
+    '',        {normal beskrivning 3}
+    '',        {normal beskrivning 4}
+    '',        {normal beskrivning 5}
+    '',        {detaljerad beskrivning 1}
+    '',        {detaljerad beskrivning 2}
+    '',        {detaljerad beskrivning 3}
+    '',        {detaljerad beskrivning 4}
+    '',        {detaljerad beskrivning 5}
+    0,         {”ka strength}
+    0,         {”ka defence}
+    0);        {strength demanded to use object}
 
- Add_Object('Tog Protection',   {name}
-            Legs,      {typ}
-            1250,      {v„rde i gold}
-            0,         {”ka/minska hps}
-            0,         {”ka stamina}
-            0,         {”ka agility}
-            0,         {”ka charisma}
-            0,         {”ka dexterity}
-            0,         {”ka wisdom}
-            0,         {”ka mana}
-            3,         {”ka armor v„rde}
-            0,         {”ka attack v„rde}
-            '',        {„gd av?}
-            False,     {bara EN i spelet}
-            Nothing,   {kurerar}
-            True,      {finnas i shoppen}
-            True,      {kunna hittas i dungeons?}
-            False,     {cursed item?}
-            1,         {min level att hittas i dngs}
-            10,        {max level att hittas i dngs}
-            '',
-            '',        {normal beskrivning 2}
-            '',        {normal beskrivning 3}
-            '',        {normal beskrivning 4}
-            '',        {normal beskrivning 5}
-            '',        {detaljerad beskrivning 1}
-            '',        {detaljerad beskrivning 2}
-            '',        {detaljerad beskrivning 3}
-            '',        {detaljerad beskrivning 4}
-            '',        {detaljerad beskrivning 5}
-            0,         {”ka strength}
-            0,         {”ka defence}
-            0);        {strength demanded to use object}
+  Add_Object('Tog Protection',   {name}
+    Legs,      {typ}
+    1250,      {v„rde i gold}
+    0,         {”ka/minska hps}
+    0,         {”ka stamina}
+    0,         {”ka agility}
+    0,         {”ka charisma}
+    0,         {”ka dexterity}
+    0,         {”ka wisdom}
+    0,         {”ka mana}
+    3,         {”ka armor v„rde}
+    0,         {”ka attack v„rde}
+    '',        {„gd av?}
+    False,     {bara EN i spelet}
+    Nothing,   {kurerar}
+    True,      {finnas i shoppen}
+    True,      {kunna hittas i dungeons?}
+    False,     {cursed item?}
+    1,         {min level att hittas i dngs}
+    10,        {max level att hittas i dngs}
+    '',
+    '',        {normal beskrivning 2}
+    '',        {normal beskrivning 3}
+    '',        {normal beskrivning 4}
+    '',        {normal beskrivning 5}
+    '',        {detaljerad beskrivning 1}
+    '',        {detaljerad beskrivning 2}
+    '',        {detaljerad beskrivning 3}
+    '',        {detaljerad beskrivning 4}
+    '',        {detaljerad beskrivning 5}
+    0,         {”ka strength}
+    0,         {”ka defence}
+    0);        {strength demanded to use object}
 
- Add_Object('Short Pants',   {name}
-            Legs,     {typ}
-            5000,     {v„rde i gold}
-            0,        {”ka/minska hps}
-            5,        {”ka stamina}
-            0,        {”ka agility}
-            0,        {”ka charisma}
-            0,        {”ka dexterity}
-            0,        {”ka wisdom}
-            0,        {”ka mana}
-            6,        {”ka armor v„rde}
-            0,        {”ka attack v„rde}
-            '',       {„gd av?}
-            False,    {bara EN i spelet}
-            Nothing,  {kurerar}
-            True,     {finnas i shoppen}
-            False,    {kunna hittas i dungeons?}
-            False,    {cursed item?}
-            1,        {min level att hittas i dngs}
-            99,       {max level att hittas i dngs}
-            'Dwarven Scout model with suspenders.',
-            'The pants are brown and made of cotton.',
-            '',        {normal beskrivning 3}
-            '',        {normal beskrivning 4}
-            '',        {normal beskrivning 5}
-            '',        {detaljerad beskrivning 1}
-            '',        {detaljerad beskrivning 2}
-            '',        {detaljerad beskrivning 3}
-            '',        {detaljerad beskrivning 4}
-            '',        {detaljerad beskrivning 5}
-            0,         {”ka strength}
-            0,         {”ka defence}
-            0);        {strength demanded to use object}
+  Add_Object('Short Pants',   {name}
+    Legs,     {typ}
+    5000,     {v„rde i gold}
+    0,        {”ka/minska hps}
+    5,        {”ka stamina}
+    0,        {”ka agility}
+    0,        {”ka charisma}
+    0,        {”ka dexterity}
+    0,        {”ka wisdom}
+    0,        {”ka mana}
+    6,        {”ka armor v„rde}
+    0,        {”ka attack v„rde}
+    '',       {„gd av?}
+    False,    {bara EN i spelet}
+    Nothing,  {kurerar}
+    True,     {finnas i shoppen}
+    False,    {kunna hittas i dungeons?}
+    False,    {cursed item?}
+    1,        {min level att hittas i dngs}
+    99,       {max level att hittas i dngs}
+    'Dwarven Scout model with suspenders.',
+    'The pants are brown and made of cotton.',
+    '',        {normal beskrivning 3}
+    '',        {normal beskrivning 4}
+    '',        {normal beskrivning 5}
+    '',        {detaljerad beskrivning 1}
+    '',        {detaljerad beskrivning 2}
+    '',        {detaljerad beskrivning 3}
+    '',        {detaljerad beskrivning 4}
+    '',        {detaljerad beskrivning 5}
+    0,         {”ka strength}
+    0,         {”ka defence}
+    0);        {strength demanded to use object}
 
- Add_Object('Leather Pants',   {name}
-            Legs,     {typ}
-            2000,      {v„rde i gold}
-            0,         {”ka/minska hps}
-            0,         {”ka stamina}
-            0,         {”ka agility}
-            0,         {”ka charisma}
-            0,         {”ka dexterity}
-            0,         {”ka wisdom}
-            0,         {”ka mana}
-            3,         {”ka armor v„rde}
-            0,         {”ka attack v„rde}
-            '',        {„gd av?}
-            False,     {bara EN i spelet}
-            Nothing,   {kurerar}
-            True,      {finnas i shoppen}
-            False,     {kunna hittas i dungeons?}
-            False,     {cursed item?}
-            1,         {min level att hittas i dngs}
-            99,        {max level att hittas i dngs}
-            'A pair of sexy leather pants.',
-            '',        {normal beskrivning 2}
-            '',        {normal beskrivning 3}
-            '',        {normal beskrivning 4}
-            '',        {normal beskrivning 5}
-            '',        {detaljerad beskrivning 1}
-            '',        {detaljerad beskrivning 2}
-            '',        {detaljerad beskrivning 3}
-            '',        {detaljerad beskrivning 4}
-            '',        {detaljerad beskrivning 5}
-            0,         {”ka strength}
-            0,         {”ka defence}
-            0);        {strength demanded to use object}
+  Add_Object('Leather Pants',   {name}
+    Legs,     {typ}
+    2000,      {v„rde i gold}
+    0,         {”ka/minska hps}
+    0,         {”ka stamina}
+    0,         {”ka agility}
+    0,         {”ka charisma}
+    0,         {”ka dexterity}
+    0,         {”ka wisdom}
+    0,         {”ka mana}
+    3,         {”ka armor v„rde}
+    0,         {”ka attack v„rde}
+    '',        {„gd av?}
+    False,     {bara EN i spelet}
+    Nothing,   {kurerar}
+    True,      {finnas i shoppen}
+    False,     {kunna hittas i dungeons?}
+    False,     {cursed item?}
+    1,         {min level att hittas i dngs}
+    99,        {max level att hittas i dngs}
+    'A pair of sexy leather pants.',
+    '',        {normal beskrivning 2}
+    '',        {normal beskrivning 3}
+    '',        {normal beskrivning 4}
+    '',        {normal beskrivning 5}
+    '',        {detaljerad beskrivning 1}
+    '',        {detaljerad beskrivning 2}
+    '',        {detaljerad beskrivning 3}
+    '',        {detaljerad beskrivning 4}
+    '',        {detaljerad beskrivning 5}
+    0,         {”ka strength}
+    0,         {”ka defence}
+    0);        {strength demanded to use object}
 
- Add_Object('Reinforced Leather Pants',   {name}
-            Legs,     {typ}
-            5500,      {v„rde i gold}
-            0,         {”ka/minska hps}
-            0,         {”ka stamina}
-            0,         {”ka agility}
-            0,         {”ka charisma}
-            0,         {”ka dexterity}
-            0,         {”ka wisdom}
-            0,         {”ka mana}
-            4,         {”ka armor v„rde}
-            0,         {”ka attack v„rde}
-            '',        {„gd av?}
-            False,     {bara EN i spelet}
-            Nothing,   {kurerar}
-            True,      {finnas i shoppen}
-            True,      {kunna hittas i dungeons?}
-            False,     {cursed item?}
-            10,        {min level att hittas i dngs}
-            30,        {max level att hittas i dngs}
-            'You see nothing special.',
-            '',        {normal beskrivning 2}
-            '',        {normal beskrivning 3}
-            '',        {normal beskrivning 4}
-            '',        {normal beskrivning 5}
-            '',        {detaljerad beskrivning 1}
-            '',        {detaljerad beskrivning 2}
-            '',        {detaljerad beskrivning 3}
-            '',        {detaljerad beskrivning 4}
-            '',        {detaljerad beskrivning 5}
-            0,         {”ka strength}
-            0,         {”ka defence}
-            0);        {strength demanded to use object}
+  Add_Object('Reinforced Leather Pants',   {name}
+    Legs,     {typ}
+    5500,      {v„rde i gold}
+    0,         {”ka/minska hps}
+    0,         {”ka stamina}
+    0,         {”ka agility}
+    0,         {”ka charisma}
+    0,         {”ka dexterity}
+    0,         {”ka wisdom}
+    0,         {”ka mana}
+    4,         {”ka armor v„rde}
+    0,         {”ka attack v„rde}
+    '',        {„gd av?}
+    False,     {bara EN i spelet}
+    Nothing,   {kurerar}
+    True,      {finnas i shoppen}
+    True,      {kunna hittas i dungeons?}
+    False,     {cursed item?}
+    10,        {min level att hittas i dngs}
+    30,        {max level att hittas i dngs}
+    'You see nothing special.',
+    '',        {normal beskrivning 2}
+    '',        {normal beskrivning 3}
+    '',        {normal beskrivning 4}
+    '',        {normal beskrivning 5}
+    '',        {detaljerad beskrivning 1}
+    '',        {detaljerad beskrivning 2}
+    '',        {detaljerad beskrivning 3}
+    '',        {detaljerad beskrivning 4}
+    '',        {detaljerad beskrivning 5}
+    0,         {”ka strength}
+    0,         {”ka defence}
+    0);        {strength demanded to use object}
 
- Add_Object('Troll Pants',   {name}
-            Legs,     {typ}
-            9500,      {v„rde i gold}
-            5,         {”ka/minska hps}
-            0,         {”ka stamina}
-            0,         {”ka agility}
-            0,         {”ka charisma}
-            0,         {”ka dexterity}
-            0,         {”ka wisdom}
-            0,         {”ka mana}
-            6,         {”ka armor v„rde}
-            0,         {”ka attack v„rde}
-            '',        {„gd av?}
-            False,     {bara EN i spelet}
-            Nothing,   {kurerar}
-            True,      {finnas i shoppen}
-            True,      {kunna hittas i dungeons?}
-            False,     {cursed item?}
-            15,        {min level att hittas i dngs}
-            45,        {max level att hittas i dngs}
-            'Heavy Trolly pants. Awful design...',
-            '',        {normal beskrivning 2}
-            '',        {normal beskrivning 3}
-            '',        {normal beskrivning 4}
-            '',        {normal beskrivning 5}
-            '',        {detaljerad beskrivning 1}
-            '',        {detaljerad beskrivning 2}
-            '',        {detaljerad beskrivning 3}
-            '',        {detaljerad beskrivning 4}
-            '',        {detaljerad beskrivning 5}
-            0,         {”ka strength}
-            0,         {”ka defence}
-            0);        {strength demanded to use object}
+  Add_Object('Troll Pants',   {name}
+    Legs,     {typ}
+    9500,      {v„rde i gold}
+    5,         {”ka/minska hps}
+    0,         {”ka stamina}
+    0,         {”ka agility}
+    0,         {”ka charisma}
+    0,         {”ka dexterity}
+    0,         {”ka wisdom}
+    0,         {”ka mana}
+    6,         {”ka armor v„rde}
+    0,         {”ka attack v„rde}
+    '',        {„gd av?}
+    False,     {bara EN i spelet}
+    Nothing,   {kurerar}
+    True,      {finnas i shoppen}
+    True,      {kunna hittas i dungeons?}
+    False,     {cursed item?}
+    15,        {min level att hittas i dngs}
+    45,        {max level att hittas i dngs}
+    'Heavy Trolly pants. Awful design...',
+    '',        {normal beskrivning 2}
+    '',        {normal beskrivning 3}
+    '',        {normal beskrivning 4}
+    '',        {normal beskrivning 5}
+    '',        {detaljerad beskrivning 1}
+    '',        {detaljerad beskrivning 2}
+    '',        {detaljerad beskrivning 3}
+    '',        {detaljerad beskrivning 4}
+    '',        {detaljerad beskrivning 5}
+    0,         {”ka strength}
+    0,         {”ka defence}
+    0);        {strength demanded to use object}
 
- Add_Object('Silk Pants',   {name}
-            Legs,     {typ}
-            25000,     {v„rde i gold}
-            15,        {”ka/minska hps}
-            0,         {”ka stamina}
-            0,         {”ka agility}
-            0,         {”ka charisma}
-            0,         {”ka dexterity}
-            0,         {”ka wisdom}
-            20,        {”ka mana}
-            3,         {”ka armor v„rde}
-            0,         {”ka attack v„rde}
-            '',        {„gd av?}
-            False,     {bara EN i spelet}
-            Nothing,   {kurerar}
-            False,     {finnas i shoppen}
-            True,      {kunna hittas i dungeons?}
-            False,     {cursed item?}
-            25,        {min level att hittas i dngs}
-            70,        {max level att hittas i dngs}
-            'Very comfortable silk pants.',
-            '',        {normal beskrivning 2}
-            '',        {normal beskrivning 3}
-            '',        {normal beskrivning 4}
-            '',        {normal beskrivning 5}
-            '',        {detaljerad beskrivning 1}
-            '',        {detaljerad beskrivning 2}
-            '',        {detaljerad beskrivning 3}
-            '',        {detaljerad beskrivning 4}
-            '',        {detaljerad beskrivning 5}
-            0,         {”ka strength}
-            0,         {”ka defence}
-            0);        {strength demanded to use object}
+  Add_Object('Silk Pants',   {name}
+    Legs,     {typ}
+    25000,     {v„rde i gold}
+    15,        {”ka/minska hps}
+    0,         {”ka stamina}
+    0,         {”ka agility}
+    0,         {”ka charisma}
+    0,         {”ka dexterity}
+    0,         {”ka wisdom}
+    20,        {”ka mana}
+    3,         {”ka armor v„rde}
+    0,         {”ka attack v„rde}
+    '',        {„gd av?}
+    False,     {bara EN i spelet}
+    Nothing,   {kurerar}
+    False,     {finnas i shoppen}
+    True,      {kunna hittas i dungeons?}
+    False,     {cursed item?}
+    25,        {min level att hittas i dngs}
+    70,        {max level att hittas i dngs}
+    'Very comfortable silk pants.',
+    '',        {normal beskrivning 2}
+    '',        {normal beskrivning 3}
+    '',        {normal beskrivning 4}
+    '',        {normal beskrivning 5}
+    '',        {detaljerad beskrivning 1}
+    '',        {detaljerad beskrivning 2}
+    '',        {detaljerad beskrivning 3}
+    '',        {detaljerad beskrivning 4}
+    '',        {detaljerad beskrivning 5}
+    0,         {”ka strength}
+    0,         {”ka defence}
+    0);        {strength demanded to use object}
 
- Add_Object('Cotton Pants',   {name}
-            Legs,     {typ}
-            3500,      {v„rde i gold}
-            0,         {”ka/minska hps}
-            5,         {”ka stamina}
-            0,         {”ka agility}
-            0,         {”ka charisma}
-            0,         {”ka dexterity}
-            0,         {”ka wisdom}
-            0,         {”ka mana}
-            3,         {”ka armor v„rde}
-            0,         {”ka attack v„rde}
-            '',        {„gd av?}
-            False,     {bara EN i spelet}
-            Nothing,   {kurerar}
-            True,      {finnas i shoppen}
-            True,      {kunna hittas i dungeons?}
-            False,     {cursed item?}
-            1,         {min level att hittas i dngs}
-            40,        {max level att hittas i dngs}
-            'You see nothing special.',
-            '',        {normal beskrivning 2}
-            '',        {normal beskrivning 3}
-            '',        {normal beskrivning 4}
-            '',        {normal beskrivning 5}
-            '',        {detaljerad beskrivning 1}
-            '',        {detaljerad beskrivning 2}
-            '',        {detaljerad beskrivning 3}
-            '',        {detaljerad beskrivning 4}
-            '',        {detaljerad beskrivning 5}
-            0,         {”ka strength}
-            0,         {”ka defence}
-            0);        {strength demanded to use object}
+  Add_Object('Cotton Pants',   {name}
+    Legs,     {typ}
+    3500,      {v„rde i gold}
+    0,         {”ka/minska hps}
+    5,         {”ka stamina}
+    0,         {”ka agility}
+    0,         {”ka charisma}
+    0,         {”ka dexterity}
+    0,         {”ka wisdom}
+    0,         {”ka mana}
+    3,         {”ka armor v„rde}
+    0,         {”ka attack v„rde}
+    '',        {„gd av?}
+    False,     {bara EN i spelet}
+    Nothing,   {kurerar}
+    True,      {finnas i shoppen}
+    True,      {kunna hittas i dungeons?}
+    False,     {cursed item?}
+    1,         {min level att hittas i dngs}
+    40,        {max level att hittas i dngs}
+    'You see nothing special.',
+    '',        {normal beskrivning 2}
+    '',        {normal beskrivning 3}
+    '',        {normal beskrivning 4}
+    '',        {normal beskrivning 5}
+    '',        {detaljerad beskrivning 1}
+    '',        {detaljerad beskrivning 2}
+    '',        {detaljerad beskrivning 3}
+    '',        {detaljerad beskrivning 4}
+    '',        {detaljerad beskrivning 5}
+    0,         {”ka strength}
+    0,         {”ka defence}
+    0);        {strength demanded to use object}
 
- Add_Object('Old Pants',   {name}
-            Legs,     {typ}
-            50,        {v„rde i gold}
-            -5,        {”ka/minska hps}
-            -5,        {”ka stamina}
-            0,         {”ka agility}
-            0,         {”ka charisma}
-            0,         {”ka dexterity}
-            0,         {”ka wisdom}
-            -5,        {”ka mana}
-            -3,        {”ka armor v„rde}
-            0,         {”ka attack v„rde}
-            '',        {„gd av?}
-            False,     {bara EN i spelet}
-            Nothing,   {kurerar}
-            False,     {finnas i shoppen}
-            True,      {kunna hittas i dungeons?}
-            True,      {cursed item?}
-            1,         {min level att hittas i dngs}
-            99,        {max level att hittas i dngs}
-            'A dirty pair of cotton pants.',
-            '',        {normal beskrivning 2}
-            '',        {normal beskrivning 3}
-            '',        {normal beskrivning 4}
-            '',        {normal beskrivning 5}
-            '',        {detaljerad beskrivning 1}
-            '',        {detaljerad beskrivning 2}
-            '',        {detaljerad beskrivning 3}
-            '',        {detaljerad beskrivning 4}
-            '',        {detaljerad beskrivning 5}
-            0,         {”ka strength}
-            0,         {”ka defence}
-            0);        {strength demanded to use object}
-
+  Add_Object('Old Pants',   {name}
+    Legs,     {typ}
+    50,        {v„rde i gold} -5,        {”ka/minska hps} -5,        {”ka stamina}
+    0,         {”ka agility}
+    0,         {”ka charisma}
+    0,         {”ka dexterity}
+    0,         {”ka wisdom} -5,        {”ka mana} -3,        {”ka armor v„rde}
+    0,         {”ka attack v„rde}
+    '',        {„gd av?}
+    False,     {bara EN i spelet}
+    Nothing,   {kurerar}
+    False,     {finnas i shoppen}
+    True,      {kunna hittas i dungeons?}
+    True,      {cursed item?}
+    1,         {min level att hittas i dngs}
+    99,        {max level att hittas i dngs}
+    'A dirty pair of cotton pants.',
+    '',        {normal beskrivning 2}
+    '',        {normal beskrivning 3}
+    '',        {normal beskrivning 4}
+    '',        {normal beskrivning 5}
+    '',        {detaljerad beskrivning 1}
+    '',        {detaljerad beskrivning 2}
+    '',        {detaljerad beskrivning 3}
+    '',        {detaljerad beskrivning 4}
+    '',        {detaljerad beskrivning 5}
+    0,         {”ka strength}
+    0,         {”ka defence}
+    0);        {strength demanded to use object}
 
 end;
+
+
+
 end.
