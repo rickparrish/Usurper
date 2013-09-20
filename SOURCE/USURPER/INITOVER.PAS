@@ -2,15 +2,16 @@
 {$I DEFINES.INC}
 {$ENDIF}
 
-Unit InitOver;
+unit InitOver;
 
-(**) INTERFACE (**)
+(**) interface (**)
 
-Uses Overlay, OverXms, DOS;
+uses
+  Overlay, OverXms, DOS;
 
-Var Over_Ems, Over_Xms : boolean;
+var Over_Ems, Over_Xms: boolean;
 
-(**) Implementation (**)
+(**) implementation (**)
 
   (*NOTE: You will have to choose the buffer size
     for each particular program.  The bigger it is,
@@ -21,10 +22,10 @@ Var Over_Ems, Over_Xms : boolean;
     by the program.*)
 
 
-Const
- HeapNeeded = 180000; {Change this to suit your own heap requirements}
+const
+  HeapNeeded = 180000; {Change this to suit your own heap requirements}
 
-Procedure Upper4(var Str: String);
+procedure Upper4(var Str: string);
 InLine(
  $8C/$DA/               {      mov   DX,DS               }
  $5E/                   {      pop   SI                  }
@@ -44,126 +45,133 @@ InLine(
  $E2/$F1/               { @28: loop  @15                 }
  $8E/$DA);              { @30: mov   DS,DX               }
 
-
-procedure wrl(const s:string);
+procedure wrl(const s: string);
 begin
- writeln(s);
+  writeln(s);
 end;
 
-Function UpCaseStr(s : string ) : string;
+function UpCaseStr(s: string): string;
 begin
- upper4(s);
- UpcaseStr:=s;
+  upper4(s);
+  UpcaseStr := s;
 end;
 
-Function Param_Hunt(const h:string) : boolean; {checking for Command Line parameters}
-var i : byte;
+function Param_Hunt(const h: string): boolean; {checking for Command Line parameters}
+var i: byte;
 begin
 
- param_hunt:=false;
- if paramcount>0 then begin
-  for i:=1 to paramcount do begin
-   if upcasestr(paramstr(i))=h then begin
-    param_hunt:=true;
-    break;
-   end;
-  end; {for i:= .end.}
- end;
+  param_hunt := False;
+  if paramcount > 0 then
+  begin
+    for i := 1 to paramcount do
+    begin
+      if upcasestr(ParamStr(i)) = h then
+      begin
+        param_hunt := True;
+        break;
+      end;
+    end; {for i:= .end.}
+  end;
 
 end; {param_hunt .end.}
 
-PROCEDURE SetUpOverlay;
-Const
- {Overlay file Environment variable, jakob}
- USU_OVR_SET  ='USUOVR';
+procedure SetUpOverlay;
+const
+  {Overlay file Environment variable, jakob}
+  USU_OVR_SET = 'USUOVR';
 
-VAR
- emsok,xmsok :boolean; {jakob}
+var
+  emsok, xmsok: boolean; {jakob}
 
- OverlayName    : String[79];
- OverlayPath    : string[79]; {jakob}
+  OverlayName: string[79];
+  OverlayPath: string[79]; {jakob}
 
- BufferSize,
- OrigBufferSize : LongInt;
- N              : Word;
- X              : LongInt;
-BEGIN
+  BufferSize, OrigBufferSize: longint;
+  N: word;
+  X: longint;
+begin
 
- {used by Usurper prog to display whether ems or xms is used}
- over_ems:=false;
- over_xms:=false;
+  {used by Usurper prog to display whether ems or xms is used}
+  over_ems := False;
+  over_xms := False;
 
- {Get USUOVR environment variable}
- overlaypath:='';
- for x:=1 to envcount do begin
-  if pos(USU_OVR_SET,ENVSTR(x))>0 then begin
-   {bingo!}
-   overlaypath:=copy(envstr(x),length(usu_ovr_set)+2,99);
-   if overlaypath[length(overlaypath)]<>'\' then begin
-    overlaypath:=overlaypath+'\';
-   end;
-  end;
- end; {for x:= .end.}
+  {Get USUOVR environment variable}
+  overlaypath := '';
+  for x := 1 to envcount do
+  begin
+    if pos(USU_OVR_SET, ENVSTR(x)) > 0 then
+    begin
+      {bingo!}
+      overlaypath := copy(envstr(x), length(usu_ovr_set) + 2, 99);
+      if overlaypath[length(overlaypath)] <> '\' then
+      begin
+        overlaypath := overlaypath + '\';
+      end;
+    end;
+  end; {for x:= .end.}
 
- {OverlayPath:=''; {skit jakob! this line should be commented out in release version}
- OverlayName := OverLayPath+'USURPER.OVR';
- OvrInit(OverlayName); {Initializes the overlay manager and opens
+  {OverlayPath:=''; {skit jakob! this line should be commented out in release version}
+  OverlayName := OverLayPath + 'USURPER.OVR';
+  OvrInit(OverlayName); {Initializes the overlay manager and opens
                         the overlay file}
 
- if OvrResult = OvrNotFound then begin
-  Write('Overlay file not found: ');
-  WriteLn(OverlayName);
-  Halt( 2 );
- end;
+  if OvrResult = OvrNotFound then
+  begin
+    Write('Overlay file not found: ');
+    WriteLn(OverlayName);
+    Halt(2);
+  end;
 
- if OvrResult <> OvrOK then begin
-  WriteLn('Error loading overlay file: ');
-  WriteLn(OverlayName);
-  Halt( 3 );
- end;
+  if OvrResult <> OvrOK then
+  begin
+    WriteLn('Error loading overlay file: ');
+    WriteLn(OverlayName);
+    Halt(3);
+  end;
 
- xmsok:=false;
- emsok:=false;
+  xmsok := False;
+  emsok := False;
 
- if param_hunt('/X') then xmsok:=true;
- if param_hunt('/E') then emsok:=true;
+  if param_hunt('/X') then xmsok := True;
+  if param_hunt('/E') then emsok := True;
 
- if XMSOk then begin
-  wrl('Detecting XMS capability ...');
-  OvrInitXMS;
+  if XMSOk then
+  begin
+    wrl('Detecting XMS capability ...');
+    OvrInitXMS;
 
-  case OvrResult of
-   ovrIOError    : Wrl('Overlay file I/O error.');
-   ovrNoEMSDriver: Wrl('XMS driver not installed.');
-   ovrNoEMSMemory: Wrl('Not enough XMS memory.');
-   else begin
-    Wrl('Using XMS for faster overlay swapping.');
-    over_xms:=true;
-   end;
-  end; {case .end.}
+    case OvrResult of
+      ovrIOError: Wrl('Overlay file I/O error.');
+      ovrNoEMSDriver: Wrl('XMS driver not installed.');
+      ovrNoEMSMemory: Wrl('Not enough XMS memory.');
+      else begin
+        Wrl('Using XMS for faster overlay swapping.');
+        over_xms := True;
+      end;
+    end; {case .end.}
 
- end
- else IF EMSOK then begin
-  OvrInitEMS; {Loads the overlay file into EMS
+  end else if EMSOK then
+  begin
+    OvrInitEMS; {Loads the overlay file into EMS
                - EMSOK is variable flag set by
                Sysop using the /E parameter to
                tell us it's OK to use EMS}
 
-  case OvrResult of
-   ovrIOError    : Wrl('Overlay file I/O error.');
-   ovrNoEMSDriver: Wrl('EMSS driver not installed.');
-   ovrNoEMSMemory: Wrl('Not enough EMS memory.');
-   else begin
-    Wrl('Using EMS for faster overlay swapping.');
-    over_ems:=true;
-   end;
-  end; {case .end.}
+    case OvrResult of
+      ovrIOError: Wrl('Overlay file I/O error.');
+      ovrNoEMSDriver: Wrl('EMSS driver not installed.');
+      ovrNoEMSMemory: Wrl('Not enough EMS memory.');
+      else begin
+        Wrl('Using EMS for faster overlay swapping.');
+        over_ems := True;
+      end;
+    end; {case .end.}
 
- End;
+  end;
 
- OrigBufferSize := OvrGetBuf;
- BufferSize:=MaxAvail-HeapNeeded;
- OvrSetBuf(BufferSize);
+  OrigBufferSize := OvrGetBuf;
+  BufferSize := MaxAvail - HeapNeeded;
+  OvrSetBuf(BufferSize);
 
 { IF OvrResult <> OvrOK THEN BEGIN
   Write('Could not set overlay buffer to ');

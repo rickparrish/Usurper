@@ -31,99 +31,100 @@
 
 {$R-,V-,B-,S-}
 
-Unit ASYNC2;
+unit ASYNC2;
 
-INTERFACE
-
-{----------------------------------------------------------------------------}
-
-Const
-  C_MinBaud = 300;
-  C_MaxBaud = 115200;
-  C_MaxPort = 4;
-  C_MaxCom : byte = C_MaxPort;
-  D_PortAddr : Array[1..C_MaxPort] Of Word = ($03F8,$02F8,$03E8,$02E8);
-  D_PortInt  : Array[1..C_MaxPort] Of Byte = (4,3,4,3);
+interface
 
 {----------------------------------------------------------------------------}
 
-Type
-  C_VectorArray  = Array[0..15] Of Pointer;
-  C_PointerArray = Array[1..C_MaxPort]  Of Pointer;
-  C_WordArray    = Array[1..C_MaxPort] Of Word;
-  C_ByteArray    = Array[1..C_MaxPort] Of Byte;
-  C_CharArray    = Array[1..C_MaxPort] Of Char;
-  C_BooleanArray = Array[1..C_MaxPort] Of Boolean;
+const
+  C_MinBaud      = 300;
+  C_MaxBaud      = 115200;
+  C_MaxPort      = 4;
+  C_MaxCom: byte = C_MaxPort;
+  D_PortAddr: array[1..C_MaxPort] of word = ($03F8, $02F8, $03E8, $02E8);
+  D_PortInt: array[1..C_MaxPort] of byte = (4, 3, 4, 3);
 
 {----------------------------------------------------------------------------}
 
-Var
+type
+  C_VectorArray  = array[0..15] of Pointer;
+  C_PointerArray = array[1..C_MaxPort] of Pointer;
+  C_WordArray    = array[1..C_MaxPort] of word;
+  C_ByteArray    = array[1..C_MaxPort] of byte;
+  C_CharArray    = array[1..C_MaxPort] of char;
+  C_BooleanArray = array[1..C_MaxPort] of boolean;
+
+{----------------------------------------------------------------------------}
+
+var
   { Base port addresses & interrupt usage }
-  C_PortAddr : Array[1..C_MaxPort] Of Word;
-  C_PortInt  : Array[1..C_MaxPort] Of Byte;
-  ComPort  : Byte;
-  C_InBufPtr,C_OutBufPtr : C_PointerArray;    { Input/output buffer pointers }
-  C_InHead,C_OutHead     : C_WordArray;       { Input/output head pointers }
-  C_InTail,C_OutTail     : C_WordArray;       { Input/output tail pointers }
-  C_InSize,C_OutSize     : C_WordArray;       { Input/output buffer sizes }
-  C_RTSOn,C_RTSOff       : C_WordArray;       { RTS assert/drop buffer points }
-  C_StartChar,C_StopChar : C_CharArray;       { Soft hndshake start/stop char }
-  C_Status,C_Ctrl        : C_ByteArray;       { STATUS and CONTROL registers }
-  C_XL3Ptr               : C_ByteArray;
-  C_PortOpen             : C_BooleanArray;    { Port open/close flags }
-  C_Temp                 : Word;              { Used for debugging }
-  C_msrport              : word;
-{ RTSOn,RTSOff           : Word;}             { RTS assert/drop buffer points }
-  oldier,oldmcr          : byte;
-  c_buffull              : c_wordarray;
-  C_Cascade              : Byte;              { Flag set 0 normally }
-  C_CascadeOK            : boolean;           { Flag if IRQ > 7 }
+  C_PortAddr:     array[1..C_MaxPort] of word;
+  C_PortInt:      array[1..C_MaxPort] of byte;
+  ComPort:        byte;
+  C_InBufPtr, C_OutBufPtr: C_PointerArray;    { Input/output buffer pointers }
+  C_InHead, C_OutHead: C_WordArray;       { Input/output head pointers }
+  C_InTail, C_OutTail: C_WordArray;       { Input/output tail pointers }
+  C_InSize, C_OutSize: C_WordArray;       { Input/output buffer sizes }
+  C_RTSOn, C_RTSOff: C_WordArray;       { RTS assert/drop buffer points }
+  C_StartChar, C_StopChar: C_CharArray;       { Soft hndshake start/stop char }
+  C_Status, C_Ctrl: C_ByteArray;       { STATUS and CONTROL registers }
+  C_XL3Ptr:       C_ByteArray;
+  C_PortOpen:     C_BooleanArray;    { Port open/close flags }
+  C_Temp:         word;              { Used for debugging }
+  C_msrport:      word;
+  { RTSOn,RTSOff           : Word;}{ RTS assert/drop buffer points }
+  oldier, oldmcr: byte;
+  c_buffull:      c_wordarray;
+  C_Cascade:      byte;              { Flag set 0 normally }
+  C_CascadeOK:    boolean;           { Flag if IRQ > 7 }
 
 {----------------------------------------------------------------------------}
 
-Function  ComReadCh(ComPort:Byte) : Char;
-Function  ComReadChW(ComPort:Byte) : Char;
+function ComReadCh(ComPort: byte): char;
+function ComReadChW(ComPort: byte): char;
 { Procedure ComWriteCh(ComPort:Byte; Ch:Char); }
-Procedure ComWriteChW(ComPort:Byte; Ch:Char);
-Procedure SetDTR(ComPort:Byte; Assert:Boolean);
-Procedure SetRTS(ComPort:Byte; Assert:Boolean);
+procedure ComWriteChW(ComPort: byte; Ch: char);
+procedure SetDTR(ComPort: byte; Assert: boolean);
+procedure SetRTS(ComPort: byte; Assert: boolean);
 {
 Procedure SetOUT1(ComPort:Byte; Assert:Boolean);
 Procedure SetOUT2(ComPort:Byte; Assert:Boolean);
  }
-Function  CTSStat(ComPort:Byte) : Boolean;
-Function  RTSStat(ComPort:Byte) : Boolean;
-Function  DSRStat(ComPort:Byte) : Boolean;
-Function  RIStat(ComPort:Byte) : Boolean;
-Function  DCDStat(ComPort:Byte) : Boolean;
-Procedure SetRTSMode(ComPort:Byte; Mode:Boolean; RTSOn,RTSOff:Word);
-Procedure SetCTSMode(ComPort:Byte; Mode:Boolean);
-Procedure SoftHandshake(ComPort:Byte; Mode:Boolean; Start,Stop:Char);
-Procedure ClearCom(ComPort:Byte; IO:Char);
-Function  ComBufferLeft(ComPort:Byte; IO:Char) : Word;
-Procedure ComWaitForClear(ComPort:Byte);
-Procedure ComWrite(ComPort:Byte; St:String);
-Procedure ComWriteln(ComPort:Byte; St:String);
-Procedure ComWriteWithDelay(ComPort:Byte; St:String; Dly:Word);
-Procedure ComReadln(ComPort:Byte; Var St:String; Size:Byte; Echo:Boolean);
-Function  ComExist(ComPort:Byte) : Boolean;
-Function  ComTrueBaud(Baud:Longint) : Real;
-Procedure ComParams(ComPort:Byte; Baud:LongInt; WordSize:Byte; Parity:Char; StopBits:Byte);
-Function  OpenCom(ComPort:Byte; InBufferSize,OutBufferSize:Word) : Boolean;
-Procedure CloseCom(ComPort:Byte);
-Procedure CloseAllComs;
+function CTSStat(ComPort: byte): boolean;
+function RTSStat(ComPort: byte): boolean;
+function DSRStat(ComPort: byte): boolean;
+function RIStat(ComPort: byte): boolean;
+function DCDStat(ComPort: byte): boolean;
+procedure SetRTSMode(ComPort: byte; Mode: boolean; RTSOn, RTSOff: word);
+procedure SetCTSMode(ComPort: byte; Mode: boolean);
+procedure SoftHandshake(ComPort: byte; Mode: boolean; Start, Stop: char);
+procedure ClearCom(ComPort: byte; IO: char);
+function ComBufferLeft(ComPort: byte; IO: char): word;
+procedure ComWaitForClear(ComPort: byte);
+procedure ComWrite(ComPort: byte; St: string);
+procedure ComWriteln(ComPort: byte; St: string);
+procedure ComWriteWithDelay(ComPort: byte; St: string; Dly: word);
+procedure ComReadln(ComPort: byte; var St: string; Size: byte; Echo: boolean);
+function ComExist(ComPort: byte): boolean;
+function ComTrueBaud(Baud: longint): real;
+procedure ComParams(ComPort: byte; Baud: longint; WordSize: byte; Parity: char; StopBits: byte);
+function OpenCom(ComPort: byte; InBufferSize, OutBufferSize: word): boolean;
+procedure CloseCom(ComPort: byte);
+procedure CloseAllComs;
 
 {----------------------------------------------------------------------------}
 
-IMPLEMENTATION
+implementation
 
-Uses DOS,CRT;
+uses
+  DOS, CRT;
 
 {$IFDEF MSDOS}
 {$L SLASYNC.OBJ}
 {$ENDIF}
 
-Const
+const
   C_IER = 1;                           { 8250 register offsets }
   C_IIR = 2;
   C_LCR = 3;
@@ -132,9 +133,9 @@ Const
   C_MSR = 6;
   C_SCR = 7;
 
-Var
-  C_OldINTVec : C_VectorArray;        { Storage for old hardware INT vectors }
-  X : Byte;                            { Used by initialization code }
+var
+  C_OldINTVec: C_VectorArray;        { Storage for old hardware INT vectors }
+  X:           byte;                            { Used by initialization code }
 
 {****************************************************************************}
 {*                                                                          *}
@@ -146,11 +147,12 @@ Var
 {*                                                                          *}
 {****************************************************************************}
 
-Procedure INT_Handler; {$IFDEF MSDOS}External;{$ENDIF}
+procedure INT_Handler; {$IFDEF MSDOS}External;{$ENDIF}
 {$IFNDEF MSDOS}
 begin
   WriteLn('REEPORT ASYNC2 INT_Handler');
 end;
+
 {$ENDIF}
 
 {****************************************************************************}
@@ -165,11 +167,12 @@ end;
 {*                                                                          *}
 {****************************************************************************}
 
-Function ComReadCh(ComPort:Byte) : Char; {$IFDEF MSDOS}External;{$ENDIF}
+function ComReadCh(ComPort: byte): char; {$IFDEF MSDOS}External;{$ENDIF}
 {$IFNDEF MSDOS}
 begin
   WriteLn('REEPORT ASYNC2 ComReadCh');
 end;
+
 {$ENDIF}
 
 {****************************************************************************}
@@ -185,11 +188,12 @@ end;
 {*                                                                          *}
 {****************************************************************************}
 
-Function ComReadChW(ComPort:Byte) : Char; {$IFDEF MSDOS}External;{$ENDIF}
+function ComReadChW(ComPort: byte): char; {$IFDEF MSDOS}External;{$ENDIF}
 {$IFNDEF MSDOS}
 begin
   WriteLn('REEPORT ASYNC2 ComReadChW');
 end;
+
 {$ENDIF}
 
 {****************************************************************************}
@@ -206,11 +210,12 @@ end;
 {*                                                                          *}
 {****************************************************************************}
 
-Procedure ComWriteCh(ComPort:Byte; Ch:Char); {$IFDEF MSDOS}External;{$ENDIF}
+procedure ComWriteCh(ComPort: byte; Ch: char); {$IFDEF MSDOS}External;{$ENDIF}
 {$IFNDEF MSDOS}
 begin
   WriteLn('REEPORT ASYNC2 ComWriteCh');
 end;
+
 {$ENDIF}
 
 {****************************************************************************}
@@ -228,11 +233,12 @@ end;
 {*                                                                          *}
 {****************************************************************************}
 
-Procedure ComWriteChW(ComPort:Byte; Ch:Char); {$IFDEF MSDOS}External;{$ENDIF}
+procedure ComWriteChW(ComPort: byte; Ch: char); {$IFDEF MSDOS}External;{$ENDIF}
 {$IFNDEF MSDOS}
 begin
   WriteLn('REEPORT ASYNC2 ComWriteChW');
 end;
+
 {$ENDIF}
 
 {****************************************************************************}
@@ -250,22 +256,21 @@ end;
 {*                                                                          *}
 {****************************************************************************}
 
-Procedure SetDTR(ComPort:Byte; Assert:Boolean);
+procedure SetDTR(ComPort: byte; Assert: boolean);
 
-Var
-  P,X : Integer;
+var
+  P, X: integer;
 
-Begin
-  If (ComPort<1) Or (ComPort>C_MaxCom) Then Exit;
+begin
+  if (ComPort < 1) or (ComPort > C_MaxCom) then Exit;
   P := C_PortAddr[ComPort];
 
-  X := Port[P+C_MCR];
-  If Assert Then
-    X := X Or $01
-  Else
-    X := X And $FE;
-  Port[P+C_MCR] := X;
-End;
+  X := Port[P + C_MCR];
+  if Assert then X := X or $01
+  else
+    X := X and $FE;
+  Port[P + C_MCR] := X;
+end;
 
 {****************************************************************************}
 {*                                                                          *}
@@ -282,22 +287,21 @@ End;
 {*                                                                          *}
 {****************************************************************************}
 
-Procedure SetRTS(ComPort:Byte; Assert:Boolean);
+procedure SetRTS(ComPort: byte; Assert: boolean);
 
-Var
-  P,X : Integer;
+var
+  P, X: integer;
 
-Begin
-  If (ComPort<1) Or (ComPort>C_MaxCom) Then Exit;
+begin
+  if (ComPort < 1) or (ComPort > C_MaxCom) then Exit;
   P := C_PortAddr[ComPort];
 
-  X := Port[P+C_MCR];
-  If Assert Then
-    X := X Or $02
-  Else
-    X := X And $FD;
-  Port[P+C_MCR] := X;
-End;
+  X := Port[P + C_MCR];
+  if Assert then X := X or $02
+  else
+    X := X and $FD;
+  Port[P + C_MCR] := X;
+end;
 
 {****************************************************************************}
 {*                                                                          *}
@@ -385,14 +389,13 @@ End;
 {*                                                                          *}
 {****************************************************************************}
 
-Function CTSStat(ComPort:Byte) : Boolean;
+function CTSStat(ComPort: byte): boolean;
 
-Begin
-  If (ComPort<1) Or (ComPort>C_MaxCom) Then
-    CTSStat := False
-  Else
-    CTSStat := (Port[C_PortAddr[ComPort]+C_MSR] And $10 <> $10);
-End;
+begin
+  if (ComPort < 1) or (ComPort > C_MaxCom) then CTSStat := False
+  else
+    CTSStat := (Port[C_PortAddr[ComPort] + C_MSR] and $10 <> $10);
+end;
 
 {****************************************************************************}
 {*                                                                          *}
@@ -405,14 +408,13 @@ End;
 {****************************************************************************}
 
 
-Function RTSStat(ComPort:Byte) : Boolean;
+function RTSStat(ComPort: byte): boolean;
 
-Begin
-  If (ComPort<1) Or (ComPort>C_MaxCom) Then
-    RTSStat := False
-  Else
-    RTSStat := (Port[C_PortAddr[ComPort]+C_LSR] And $20 <> $20);
-End;
+begin
+  if (ComPort < 1) or (ComPort > C_MaxCom) then RTSStat := False
+  else
+    RTSStat := (Port[C_PortAddr[ComPort] + C_LSR] and $20 <> $20);
+end;
 
 {****************************************************************************}
 {*                                                                          *}
@@ -429,14 +431,13 @@ End;
 {*                                                                          *}
 {****************************************************************************}
 
-Function DSRStat(ComPort:Byte) : Boolean;
+function DSRStat(ComPort: byte): boolean;
 
-Begin
-  If (ComPort<1) Or (ComPort>C_MaxCom) Then
-    DSRStat := False
-  Else
-    DSRStat := (Port[C_PortAddr[ComPort]+C_MSR] And $20) > 0;
-End;
+begin
+  if (ComPort < 1) or (ComPort > C_MaxCom) then DSRStat := False
+  else
+    DSRStat := (Port[C_PortAddr[ComPort] + C_MSR] and $20) > 0;
+end;
 
 {****************************************************************************}
 {*                                                                          *}
@@ -451,14 +452,13 @@ End;
 {*                                                                          *}
 {****************************************************************************}
 
-Function RIStat(ComPort:Byte) : Boolean;
+function RIStat(ComPort: byte): boolean;
 
-Begin
-  If (ComPort<1) Or (ComPort>C_MaxCom) Then
-    RIStat := False
-  Else
-    RIStat := (Port[C_PortAddr[ComPort]+C_MSR] And $40) > 0;
-End;
+begin
+  if (ComPort < 1) or (ComPort > C_MaxCom) then RIStat := False
+  else
+    RIStat := (Port[C_PortAddr[ComPort] + C_MSR] and $40) > 0;
+end;
 
 {****************************************************************************}
 {*                                                                          *}
@@ -474,14 +474,13 @@ End;
 {*                                                                          *}
 {****************************************************************************}
 
-Function DCDStat(ComPort:Byte) : Boolean;
+function DCDStat(ComPort: byte): boolean;
 
-Begin
-  If (ComPort<1) Or (ComPort>C_MaxCom) Then
-    DCDStat := False
-  Else
-    DCDStat := (Port[C_PortAddr[ComPort]+C_MSR] And $80) > 0;
-End;
+begin
+  if (ComPort < 1) or (ComPort > C_MaxCom) then DCDStat := False
+  else
+    DCDStat := (Port[C_PortAddr[ComPort] + C_MSR] and $80) > 0;
+end;
 
 {****************************************************************************}
 {*                                                                          *}
@@ -505,26 +504,26 @@ End;
 {*                                                                          *}
 {****************************************************************************}
 
-Procedure SetRTSMode(ComPort:Byte; Mode:Boolean; RTSOn,RTSOff:Word);
+procedure SetRTSMode(ComPort: byte; Mode: boolean; RTSOn, RTSOff: word);
 
-Var
-  X : Byte;
+var
+  X: byte;
 
-Begin
-  If (ComPort<1) Or (ComPort>C_MaxPort) Or (Not C_PortOpen[ComPort]) Then Exit;
+begin
+  if (ComPort < 1) or (ComPort > C_MaxPort) or (not C_PortOpen[ComPort]) then Exit;
 
   X := C_Ctrl[ComPort];
-  If Mode Then X := X Or $01 Else X := X And $FE;
+  if Mode then X := X or $01 else X := X and $FE;
   C_Ctrl[ComPort] := X;
 
-  If Mode Then
-    Begin
-      If (RTSOff >= C_InSize[ComPort]) Then RTSOff := C_InSize[ComPort] - 1;
-      If (RTSOn > RTSOff) Then RTSOff := RTSOn;
-      C_RTSOn[ComPort] := RTSOn;
-      C_RTSOff[ComPort] := RTSOff;
-    End;
-End;
+  if Mode then
+  begin
+    if (RTSOff >= C_InSize[ComPort]) then RTSOff := C_InSize[ComPort] - 1;
+    if (RTSOn > RTSOff) then RTSOff := RTSOn;
+    C_RTSOn[ComPort] := RTSOn;
+    C_RTSOff[ComPort] := RTSOff;
+  end;
+end;
 
 {****************************************************************************}
 {*                                                                          *}
@@ -545,18 +544,18 @@ End;
 {*                                                                          *}
 {****************************************************************************}
 
-Procedure SetCTSMode(ComPort:Byte; Mode:Boolean);
+procedure SetCTSMode(ComPort: byte; Mode: boolean);
 
-Var
-  X : Byte;
+var
+  X: byte;
 
-Begin
-  If (ComPort<1) Or (ComPort>C_MaxPort) Or (Not C_PortOpen[ComPort]) Then Exit;
+begin
+  if (ComPort < 1) or (ComPort > C_MaxPort) or (not C_PortOpen[ComPort]) then Exit;
 
   X := C_Ctrl[ComPort];
-  If Mode Then X := X Or $02 Else X := X And $FD;
+  if Mode then X := X or $02 else X := X and $FD;
   C_Ctrl[ComPort] := X;
-End;
+end;
 
 {****************************************************************************}
 {*                                                                          *}
@@ -583,28 +582,28 @@ End;
 {*                                                                          *}
 {****************************************************************************}
 
-Procedure SoftHandshake(ComPort:Byte; Mode:Boolean; Start,Stop:Char);
+procedure SoftHandshake(ComPort: byte; Mode: boolean; Start, Stop: char);
 
-Var
-  X : Byte;
+var
+  X: byte;
 
-Begin
-  If (ComPort<1) Or (ComPort>C_MaxPort) Or (Not C_PortOpen[ComPort]) Then Exit;
+begin
+  if (ComPort < 1) or (ComPort > C_MaxPort) or (not C_PortOpen[ComPort]) then Exit;
 
   X := C_Ctrl[ComPort];
-  If Mode Then
-    Begin
-      X := X Or $04;
-      If Start=Stop Then Begin Start := ^Q; Stop := ^S; End;
-      If Start>#32 Then Start := ^Q;
-      If Stop>#32 Then Stop := ^S;
-      C_StartChar[ComPort] := Start;
-      C_StopChar[ComPort] := Stop;
-    End
-  Else
-    X := X And $FB;
+  if Mode then
+  begin
+    X := X or $04;
+    if Start = Stop then
+    begin Start := ^Q; Stop := ^S; end;
+    if Start > #32 then Start := ^Q;
+    if Stop > #32 then Stop := ^S;
+    C_StartChar[ComPort] := Start;
+    C_StopChar[ComPort] := Stop;
+  end else
+    X := X and $FB;
   C_Ctrl[ComPort] := X;
-End;
+end;
 
 {****************************************************************************}
 {*                                                                          *}
@@ -624,39 +623,39 @@ End;
 {*                                                                          *}
 {****************************************************************************}
 
-Procedure ClearCom(ComPort:Byte; IO:Char);
+procedure ClearCom(ComPort: byte; IO: char);
 
-Var
-  P,X : Word;
+var
+  P, X: word;
 
-Begin
-  If (ComPort<1) Or (ComPort>C_MaxCom) Or (Not C_PortOpen[ComPort]) Then Exit;
+begin
+  if (ComPort < 1) or (ComPort > C_MaxCom) or (not C_PortOpen[ComPort]) then Exit;
 
   IO := Upcase(IO);
   P := C_PortAddr[ComPort];
 
 {$IFDEF MSDOS}
-  Inline($FA);
-  If (IO='I') Or (IO='B') Then
-    Begin
-      C_InHead[ComPort] := 0;
-      C_InTail[ComPort] := 0;
-      C_Status[ComPort] := (C_Status[ComPort] And $EC) Or $01;
-      X := Port[P] + Port[P+C_LSR] + Port[P+C_MSR] + Port[P+C_IIR];
-    End;
-  If (IO='O') Or (IO='B') Then
-    Begin
-      C_OutHead[ComPort] := 0;
-      C_OutTail[ComPort] := 0;
-      C_Status[ComPort] := (C_Status[ComPort] And $D3) Or $04;
-      X := Port[P+C_LSR] + Port[P+C_MSR] + Port[P+C_IIR];
-    End;
-  Inline($FB);
+  inline($FA);
+  if (IO = 'I') or (IO = 'B') then
+  begin
+    C_InHead[ComPort] := 0;
+    C_InTail[ComPort] := 0;
+    C_Status[ComPort] := (C_Status[ComPort] and $EC) or $01;
+    X := Port[P] + Port[P + C_LSR] + Port[P + C_MSR] + Port[P + C_IIR];
+  end;
+  if (IO = 'O') or (IO = 'B') then
+  begin
+    C_OutHead[ComPort] := 0;
+    C_OutTail[ComPort] := 0;
+    C_Status[ComPort] := (C_Status[ComPort] and $D3) or $04;
+    X := Port[P + C_LSR] + Port[P + C_MSR] + Port[P + C_IIR];
+  end;
+  inline($FB);
 {$ENDIF}
 {$IFNDEF MSDOS}
   WriteLn('REEPORT ASYNC2 ClearCom');
 {$ENDIF}
-End;
+end;
 
 {****************************************************************************}
 {*                                                                          *}
@@ -676,25 +675,21 @@ End;
 {*                                                                          *}
 {****************************************************************************}
 
-Function ComBufferLeft(ComPort:Byte; IO:Char) : Word;
+function ComBufferLeft(ComPort: byte; IO: char): word;
 
-Begin
+begin
   ComBufferLeft := 0;
-  If (ComPort<1) Or (ComPort>C_MaxCom) Or (Not C_PortOpen[ComPort]) Then Exit;
+  if (ComPort < 1) or (ComPort > C_MaxCom) or (not C_PortOpen[ComPort]) then Exit;
   IO := Upcase(IO);
 
-  If IO = 'I' Then
-    If C_InHead[ComPort] >= C_InTail[ComPort] Then
-      ComBufferLeft := C_InSize[ComPort]-(C_InHead[ComPort]-C_InTail[ComPort])
-    Else
-      ComBufferLeft := C_InTail[ComPort]-C_InHead[ComPort];
+  if IO = 'I' then if C_InHead[ComPort] >= C_InTail[ComPort] then ComBufferLeft := C_InSize[ComPort] - (C_InHead[ComPort] - C_InTail[ComPort])
+    else
+      ComBufferLeft := C_InTail[ComPort] - C_InHead[ComPort];
 
-  If IO = 'O' Then
-    If C_OutHead[ComPort] >= C_OutTail[ComPort] Then
-      ComBufferLeft := C_OutHead[ComPort]-C_OutTail[ComPort]
-    Else
-      ComBufferLeft := C_OutSize[ComPort]-(C_OutTail[ComPort]-C_OutHead[ComPort]);
-End;
+  if IO = 'O' then if C_OutHead[ComPort] >= C_OutTail[ComPort] then ComBufferLeft := C_OutHead[ComPort] - C_OutTail[ComPort]
+    else
+      ComBufferLeft := C_OutSize[ComPort] - (C_OutTail[ComPort] - C_OutHead[ComPort]);
+end;
 
 {****************************************************************************}
 {*                                                                          *}
@@ -710,18 +705,18 @@ End;
 {*                                                                          *}
 {****************************************************************************}
 
-Procedure ComWaitForClear(ComPort:Byte);
+procedure ComWaitForClear(ComPort: byte);
 
-Var
-  Empty : Boolean;
+var
+  Empty: boolean;
 
-Begin
-  If (ComPort<1) Or (ComPort>C_MaxCom) Or (Not C_PortOpen[ComPort]) Then Exit;
-  Repeat
-    Empty := (C_Status[ComPort] And $04) = $04;
-    Empty := Empty And ((Port[C_PortAddr[ComPort]+C_IER] And $02) = $00);
-  Until Empty;
-End;
+begin
+  if (ComPort < 1) or (ComPort > C_MaxCom) or (not C_PortOpen[ComPort]) then Exit;
+  repeat
+    Empty := (C_Status[ComPort] and $04) = $04;
+    Empty := Empty and ((Port[C_PortAddr[ComPort] + C_IER] and $02) = $00);
+  until Empty;
+end;
 
 {****************************************************************************}
 {*                                                                          *}
@@ -735,17 +730,16 @@ End;
 {*                                                                          *}
 {****************************************************************************}
 
-Procedure ComWrite(ComPort:Byte; St:String);
+procedure ComWrite(ComPort: byte; St: string);
 
-Var
-  X : Byte;
+var
+  X: byte;
 
-Begin
-  If (ComPort<1) Or (ComPort>C_MaxCom) Or (Not C_PortOpen[ComPort]) Then Exit;
+begin
+  if (ComPort < 1) or (ComPort > C_MaxCom) or (not C_PortOpen[ComPort]) then Exit;
 
-  For X := 1 To Length(St) Do
-    ComWriteChW(ComPort,St[X]);
-End;
+  for X := 1 to Length(St) do ComWriteChW(ComPort, St[X]);
+end;
 
 {****************************************************************************}
 {*                                                                          *}
@@ -759,19 +753,18 @@ End;
 {*                                                                          *}
 {****************************************************************************}
 
-Procedure ComWriteln(ComPort:Byte; St:String);
+procedure ComWriteln(ComPort: byte; St: string);
 
-Var
-  X : Byte;
+var
+  X: byte;
 
-Begin
-  If (ComPort<1) Or (ComPort>C_MaxCom) Or (Not C_PortOpen[ComPort]) Then Exit;
+begin
+  if (ComPort < 1) or (ComPort > C_MaxCom) or (not C_PortOpen[ComPort]) then Exit;
 
-  For X := 1 To Length(St) Do
-    ComWriteChW(ComPort,St[X]);
-  ComWriteChW(ComPort,#13);
-  ComWriteChW(ComPort,#10);
-End;
+  for X := 1 to Length(St) do ComWriteChW(ComPort, St[X]);
+  ComWriteChW(ComPort, #13);
+  ComWriteChW(ComPort, #10);
+end;
 
 {****************************************************************************}
 {*                                                                          *}
@@ -788,22 +781,22 @@ End;
 {*                                                                          *}
 {****************************************************************************}
 
-Procedure ComWriteWithDelay(ComPort:Byte; St:String; Dly:Word);
+procedure ComWriteWithDelay(ComPort: byte; St: string; Dly: word);
 
-Var
-  X : Byte;
+var
+  X: byte;
 
-Begin
-  If (ComPort<1) Or (ComPort>C_MaxCom) Or (Not C_PortOpen[ComPort]) Then Exit;
+begin
+  if (ComPort < 1) or (ComPort > C_MaxCom) or (not C_PortOpen[ComPort]) then Exit;
 
   ComWaitForClear(ComPort);
-  For X := 1 To Length(St) Do
-    Begin
-      ComWriteChW(ComPort,St[X]);
-      ComWaitForClear(ComPort);
-      Delay(Dly);
-    End;
-End;
+  for X := 1 to Length(St) do
+  begin
+    ComWriteChW(ComPort, St[X]);
+    ComWaitForClear(ComPort);
+    Delay(Dly);
+  end;
+end;
 
 {****************************************************************************}
 {*                                                                          *}
@@ -826,57 +819,48 @@ End;
 {*                                                                          *}
 {****************************************************************************}
 
-Procedure ComReadln(ComPort:Byte; Var St:String; Size:Byte; Echo:Boolean);
+procedure ComReadln(ComPort: byte; var St: string; Size: byte; Echo: boolean);
 
-Var
-  Len,X : Byte;
-  Ch : Char;
-  Done : Boolean;
+var
+  Len, X: byte;
+  Ch:     char;
+  Done:   boolean;
 
-Begin
+begin
   St := '';
-  If (ComPort<1) Or (ComPort>C_MaxCom) Or (Not C_PortOpen[ComPort]) Then Exit;
+  if (ComPort < 1) or (ComPort > C_MaxCom) or (not C_PortOpen[ComPort]) then Exit;
 
   Done := False;
-  Repeat
+  repeat
     Len := Length(St);
-    Ch := Chr(Ord(ComReadChW(ComPort)) And $7F);
+    Ch := Chr(Ord(ComReadChW(ComPort)) and $7F);
 
-    Case Ch Of
-      ^H : If Len > 0 Then
-             Begin
-               Dec(Len);
-               St[0] := Chr(Len);
-               If Echo Then ComWrite(ComPort,#8#32#8);
-             End
-           Else
-             ComWriteChW(ComPort,^G);
-      ^M : Begin
-             Done := True;
-             If Echo Then ComWrite(ComPort,#13#10);
-           End;
-      ^X : Begin
-             St := '';
-             If Len = 0 Then ComWriteCh(ComPort,^G);
-             If Echo Then
-               For X := 1 to Len Do
-                 ComWrite(ComPort,#8#32#8);
-           End;
-      #32..#127 : If Len < Size Then
-                    Begin
-                      Inc(Len);
-                      St[Len] := Ch;
-                      St[0] := Chr(Len);
-                      If Echo Then ComWriteChW(ComPort,Ch);
-                    End
-                  Else
-                    If Echo Then ComWriteChW(ComPort,^G);
-    Else
-      If Echo Then ComWriteChW(ComPort,^G)
-    End;
+    case Ch of ^H: if Len > 0 then
+        begin
+          Dec(Len);
+          St[0] := Chr(Len);
+          if Echo then ComWrite(ComPort, #8#32#8);
+        end else
+          ComWriteChW(ComPort, ^G);  ^M: begin
+        Done := True;
+        if Echo then ComWrite(ComPort, #13#10);
+      end;  ^X: begin
+        St := '';
+        if Len = 0 then ComWriteCh(ComPort, ^G);
+        if Echo then for X := 1 to Len do ComWrite(ComPort, #8#32#8);
+      end;
+      #32..#127: if Len < Size then
+        begin
+          Inc(Len);
+          St[Len] := Ch;
+          St[0] := Chr(Len);
+          if Echo then ComWriteChW(ComPort, Ch);
+        end else if Echo then ComWriteChW(ComPort, ^G);
+      else if Echo then ComWriteChW(ComPort, ^G)
+    end;
 
-  Until Done;
-End;
+  until Done;
+end;
 
 {****************************************************************************}
 {*                                                                          *}
@@ -897,45 +881,45 @@ End;
 {*                                                                          *}
 {****************************************************************************}
 
-Function ComExist(ComPort:Byte) : Boolean;
+function ComExist(ComPort: byte): boolean;
 
-Const
-  TestByte1 : Byte = $0F;
-  TestByte2 : Byte = $F1;
+const
+  TestByte1: byte = $0F;
+  TestByte2: byte = $F1;
 
-Var
-  P : Word;
-  M,L,B1,B2 : Byte;
+var
+  P: word;
+  M, L, B1, B2: byte;
 
-Begin
+begin
   ComExist := False;
-  If (ComPort<1) Or (ComPort>C_MaxPort) Then Exit;
+  if (ComPort < 1) or (ComPort > C_MaxPort) then Exit;
 
   P := C_PortAddr[ComPort];
-  M := Port[P+C_MCR];                            { Save MCR }
-  L := Port[P+C_LCR];                            { Save LCR }
-  Port[P+C_MCR] := $10;                          { Enable loopback mode }
-  Port[P+C_LCR] := $80;                          { Enable divisor latch mode }
+  M := Port[P + C_MCR];                            { Save MCR }
+  L := Port[P + C_LCR];                            { Save LCR }
+  Port[P + C_MCR] := $10;                          { Enable loopback mode }
+  Port[P + C_LCR] := $80;                          { Enable divisor latch mode }
   B1 := Port[P];                                 { Save current baud rate }
-  B2 := Port[P+1];
+  B2 := Port[P + 1];
   Port[P] := 4;                                  { Set baud rate to 28000 }
-  Port[P+1] := 0;
-  Port[P+C_LCR] := $03;                          { Transmit mode 28000:8N1 }
+  Port[P + 1] := 0;
+  Port[P + C_LCR] := $03;                          { Transmit mode 28000:8N1 }
 
   Port[P] := TestByte1;                          { Test byte #1 }
   Delay(20);                                     { Wait a bit for loopback }
-  If Port[P] <> TestByte1 Then Exit;             { Exit w/error if not echoed }
+  if Port[P] <> TestByte1 then Exit;             { Exit w/error if not echoed }
   Port[P] := TestByte2;                          { Test byte #2 }
   Delay(20);                                     { Wait a bit for loopback }
-  If Port[P] <> TestByte2 Then Exit;             { Exit w/error if not echoed }
+  if Port[P] <> TestByte2 then Exit;             { Exit w/error if not echoed }
 
   ComExist := True;                              { Test passed: Port exists }
-  Port[P+C_LCR] := $80;                          { Restore baud rate }
+  Port[P + C_LCR] := $80;                          { Restore baud rate }
   Port[P] := B1;
-  Port[P+1] := B2;
-  Port[P+C_LCR] := L;                            { Restore parameters }
-  Port[P+C_MCR] := M;                            { Restore control lines }
-End;
+  Port[P + 1] := B2;
+  Port[P + C_LCR] := L;                            { Restore parameters }
+  Port[P + C_MCR] := M;                            { Restore control lines }
+end;
 
 {****************************************************************************}
 {*                                                                          *}
@@ -956,18 +940,18 @@ End;
 {*                                                                          *}
 {****************************************************************************}
 
-Function ComTrueBaud(Baud:Longint) : Real;
+function ComTrueBaud(Baud: longint): real;
 
-Var
-  X : Real;
-  Y : Word;
+var
+  X: real;
+  Y: word;
 
-Begin
+begin
   X := Baud;
-  If X < C_MinBaud Then X := C_MinBaud;
-  If X > C_MaxBaud Then X := C_MaxBaud;
-  ComTrueBaud := 115200 / Round($900/(X/50));
-End;
+  if X < C_MinBaud then X := C_MinBaud;
+  if X > C_MaxBaud then X := C_MaxBaud;
+  ComTrueBaud := 115200 / Round($900 / (X / 50));
+end;
 
 {****************************************************************************}
 {*                                                                          *}
@@ -994,9 +978,9 @@ End;
 {*                                                                          *}
 {****************************************************************************}
 
-Procedure ComParams(ComPort:Byte; Baud:LongInt; WordSize:Byte; Parity:Char; StopBits:Byte);
+procedure ComParams(ComPort: byte; Baud: longint; WordSize: byte; Parity: char; StopBits: byte);
 
-Const
+const
   C_Stopbit1    = $00;                 { Bit masks for parity, stopbits }
   C_Stopbit2    = $04;
   C_NoParity    = $00;
@@ -1005,91 +989,87 @@ Const
   C_MarkParity  = $28;
   C_SpaceParity = $38;
 
-Var
-  X : Real;
-  Y,P : Word;
-  DivMSB,DivLSB,BaudB : Byte;
-  WS,SB,PTY : Byte;
+var
+  X:           real;
+  Y, P:        word;
+  DivMSB, DivLSB, BaudB: byte;
+  WS, SB, PTY: byte;
 
-Begin
-  If (ComPort<1) Or (ComPort>C_MaxPort) Or (Not C_PortOpen[ComPort]) Then Exit;
+begin
+  if (ComPort < 1) or (ComPort > C_MaxPort) or (not C_PortOpen[ComPort]) then Exit;
 
 {$IFDEF MSDOS}
-  Inline($FA);
+  inline($FA);
   P := C_PortAddr[ComPort];
 
   { Calculate baud rate divisors }
 
   X := Baud;
-  If X < C_MinBaud Then X := C_MinBaud;
-  If X > C_MaxBaud Then X := C_MaxBaud;
+  if X < C_MinBaud then X := C_MinBaud;
+  if X > C_MaxBaud then X := C_MaxBaud;
 
-  Y := Round($900/(X/50));
+  Y := Round($900 / (X / 50));
   DivMSB := Hi(Y);
   DivLSB := Lo(Y);
 
   { Determine parity mask }
   { Default if unknown: No parity }
 
-  Case UpCase(Parity) Of
-    'N' : PTY := C_NoParity;
-    'E' : PTY := C_EvenParity;
-    'O' : PTY := C_OddParity;
-    'M' : PTY := C_MarkParity;
-    'S' : PTY := C_SpaceParity;
-  Else
-    PTY := C_NoParity;
-  End;
+  case UpCase(Parity) of
+    'N': PTY := C_NoParity;
+    'E': PTY := C_EvenParity;
+    'O': PTY := C_OddParity;
+    'M': PTY := C_MarkParity;
+    'S': PTY := C_SpaceParity;
+    else PTY := C_NoParity;
+  end;
 
   { Determine stop-bit mask }
   { Default if out of range: 1 Stop bit }
 
-  Case StopBits Of
-    1 : SB := C_StopBit1;
-    2 : SB := C_StopBit2;
-  Else
-    SB := C_StopBit1;
-  End;
+  case StopBits of
+    1: SB := C_StopBit1;
+    2: SB := C_StopBit2;
+    else SB := C_StopBit1;
+  end;
 
   { Determine word-size mask }
   { Default if out of range: 8 bit word size }
 
-  If (WordSize >= 5) And (WordSize <= 8) Then
-    WS := WordSize - 5
-  Else
+  if (WordSize >= 5) and (WordSize <= 8) then WS := WordSize - 5
+  else
     WS := 3;
 
   { Initialize line-control register }
 
-  Y := Port[P] + Port[P+C_LSR];
+  Y := Port[P] + Port[P + C_LSR];
 
-  Port[P+C_LCR] := WS + SB + PTY;
+  Port[P + C_LCR] := WS + SB + PTY;
 
   { Initialize baud rate divisor latches }
 
-  Port[P+C_LCR] := Port[P+C_LCR] Or $80;
+  Port[P + C_LCR] := Port[P + C_LCR] or $80;
   Port[P] := DivLSB;
-  Port[P+1] := DivMSB;
-  Port[P+C_LCR] := Port[P+C_LCR] And $7F;
-  X := Port[P] + Port[P+C_LSR] + Port[P+C_MSR] + Port[P+C_IIR];
+  Port[P + 1] := DivMSB;
+  Port[P + C_LCR] := Port[P + C_LCR] and $7F;
+  X := Port[P] + Port[P + C_LSR] + Port[P + C_MSR] + Port[P + C_IIR];
 
   { Assert RS323 control lines (DTR,RTS,OUT2) & exit }
 
-  Port[P+C_MCR] := $0B;
-  ClearCom(ComPort,'B');
+  Port[P + C_MCR] := $0B;
+  ClearCom(ComPort, 'B');
 
   {begin new stuff srl*}
   Port[$20] := $20;
-  If C_CascadeOK then
-    Port[$A0] := $20;
+  if C_CascadeOK then Port[$A0] := $20;
   {end new stuff srl*}
 
-  Inline($FB);
+  inline($FB);
 {$ENDIF}
 {$IFNDEF MSDOS}
   WriteLn('REEPORT ASYNC2 ComParams');
 {$ENDIF}
-End;
+end;
 
 {****************************************************************************}
 {*                                                                          *}
@@ -1114,74 +1094,72 @@ End;
 {*                                                                          *}
 {****************************************************************************}
 
-Function OpenCom(ComPort:Byte; InBufferSize,OutBufferSize:Word) : Boolean;
+function OpenCom(ComPort: byte; InBufferSize, OutBufferSize: word): boolean;
 
-Var
-  TempVec : Pointer;
-  P : Word;
-  IntLn,Cas_IntLn,X : Byte;
+var
+  TempVec: Pointer;
+  P:       word;
+  IntLn, Cas_IntLn, X: byte;
 
-Begin
+begin
   { Ensure that port was not previously open }
 
   OpenCom := False;
   C_CascadeOK := False;
-  C_cascade :=0;
-  If (ComPort<1) Or (ComPort>C_MaxPort) Or C_PortOpen[ComPort] Then Exit;
-  C_msrport:=c_portaddr[comport]+c_msr;
+  C_cascade := 0;
+  if (ComPort < 1) or (ComPort > C_MaxPort) or C_PortOpen[ComPort] then Exit;
+  C_msrport := c_portaddr[comport] + c_msr;
 
   { Clear any pending activity from 8250 interrupt queue }
 
 {$IFDEF MSDOS}
-  Inline($FA);
+  inline($FA);
 
   { Set up interrupt vectors & 8259 PIC }
   P := C_PortAddr[ComPort];
-  oldier:=port[P+c_ier];
-  oldmcr:=port[P+c_mcr];
-  Port[P+C_IER] := $0D;
-  X := Port[P] + Port[P+C_LSR] + Port[P+C_MSR] + Port[P+C_IIR];
+  oldier := port[P + c_ier];
+  oldmcr := port[P + c_mcr];
+  Port[P + C_IER] := $0D;
+  X := Port[P] + Port[P + C_LSR] + Port[P + C_MSR] + Port[P + C_IIR];
 
   IntLn := C_PortInt[ComPort];
-  If IntLn > 7 then
-     C_CascadeOK := true;
+  if IntLn > 7 then C_CascadeOK := True;
 
-  If C_CascadeOK then
-    Begin
-      Cas_IntLn := IntLn-8;
-      GetIntVec($70+Cas_IntLn,TempVec);
-      If C_OldINTVec[IntLn] <> TempVec Then
-        Begin
-          C_Cascade := 1;
-          C_OldINTVec[IntLn] := TempVec;
-          SetIntVec($70+Cas_IntLn,@Int_Handler);
-          Port[$21] := Port[$21] And (($01 SHL $02) XOR $FF);
-          X := Port[$21];
-          Port[$A1] := Port[$A1] And (($01 SHL Cas_IntLn) XOR $FF);
-          X := Port[$A1];
-        End;
-    End
-  else
-    Begin
-      GetIntVec(8+IntLn,TempVec);
-      If C_OldINTVec[IntLn] <> TempVec Then
-        Begin
-          C_OldINTVec[IntLn] := TempVec;
-          SetIntVec(8+IntLn,@Int_Handler);
-          Port[$21] := Port[$21] And (($01 SHL IntLn) XOR $FF);
-          X := Port[$21];
-        End;
-    End;
+  if C_CascadeOK then
+  begin
+    Cas_IntLn := IntLn - 8;
+    GetIntVec($70 + Cas_IntLn, TempVec);
+    if C_OldINTVec[IntLn] <> TempVec then
+    begin
+      C_Cascade := 1;
+      C_OldINTVec[IntLn] := TempVec;
+      SetIntVec($70 + Cas_IntLn, @Int_Handler);
+      Port[$21] := Port[$21] and (($01 shl $02) xor $FF);
+      X := Port[$21];
+      Port[$A1] := Port[$A1] and (($01 shl Cas_IntLn) xor $FF);
+      X := Port[$A1];
+    end;
+  end else
+  begin
+    GetIntVec(8 + IntLn, TempVec);
+    if C_OldINTVec[IntLn] <> TempVec then
+    begin
+      C_OldINTVec[IntLn] := TempVec;
+      SetIntVec(8 + IntLn, @Int_Handler);
+      Port[$21] := Port[$21] and (($01 shl IntLn) xor $FF);
+      X := Port[$21];
+    end;
+  end;
 
   { new stuff srl*}
-  Port[P+C_MCR] := $0B;
+  Port[P + C_MCR] := $0B;
 
   { Allocate memory for I/O buffers }
 
   C_InSize[ComPort] := InBufferSize;
   C_OutSize[ComPort] := OutBufferSize;
-  GetMem(C_InBufPtr[ComPort],InBufferSize);
-  GetMem(C_OutBufPtr[ComPort],OutBufferSize);
+  GetMem(C_InBufPtr[ComPort], InBufferSize);
+  GetMem(C_OutBufPtr[ComPort], OutBufferSize);
 
   { Set up default parameters for port }
 
@@ -1192,12 +1170,12 @@ Begin
   C_PortOpen[ComPort] := True;
   OpenCom := True;
 
-  Inline($FB);
+  inline($FB);
 {$ENDIF}
 {$IFNDEF MSDOS}
   WriteLn('REEPORT ASYNC2 OpenCom');
 {$ENDIF}
-End;
+end;
 
 {****************************************************************************}
 {*                                                                          *}
@@ -1217,60 +1195,56 @@ End;
 {*                                                                          *}
 {****************************************************************************}
 
-Procedure CloseCom(ComPort:Byte);
+procedure CloseCom(ComPort: byte);
 
-Var
-  ClosePort : Boolean;
-  P,IntLn,Cas_IntLn,X : Word;
+var
+  ClosePort: boolean;
+  P, IntLn, Cas_IntLn, X: word;
 
-Begin
-  If (ComPort<1) Or (ComPort>C_MaxPort) Or (Not C_PortOpen[ComPort]) Then Exit;
+begin
+  if (ComPort < 1) or (ComPort > C_MaxPort) or (not C_PortOpen[ComPort]) then Exit;
 
   { Drop RS232 control lines (DTR,RTS,OUT2) and reset 8250 interrupt mode }
 
 {$IFDEF MSDOS}
-  Inline($FA);
+  inline($FA);
   P := C_PortAddr[ComPort];
-  Port[P+C_IER] := oldier;
+  Port[P + C_IER] := oldier;
   C_PortOpen[ComPort] := False;
 
   { Reset INT vectors & 8259 PIC if all COMs on selected INT are closed }
 
   IntLn := C_PortInt[ComPort];
   ClosePort := True;
-  For X := 1 To C_MaxCom Do
-    If C_PortOpen[X] And (C_PortInt[X] = IntLn) Then
-      ClosePort := False;
+  for X := 1 to C_MaxCom do if C_PortOpen[X] and (C_PortInt[X] = IntLn) then ClosePort := False;
 
-  If ClosePort Then
-    If C_CascadeOk then
-      Begin
-        Cas_IntLn := IntLn-8;
-        Port[$21] := Port[$21] Or ($01 SHR $02);
-        X := Port[$21];
-        Port[$A1] := Port[$A1] Or ($01 SHR Cas_IntLn);
-        X := Port[$A1];
-        SetIntVec($70+Cas_IntLn,C_OldINTVec[IntLn]);
-      End
-    else
-      Begin
-        Port[$21] := Port[$21] Or ($01 SHR IntLn);
-        X := Port[$21];
-        SetIntVec(8+IntLn,C_OldINTVec[IntLn]);
-      End;
+  if ClosePort then if C_CascadeOk then
+    begin
+      Cas_IntLn := IntLn - 8;
+      Port[$21] := Port[$21] or ($01 shr $02);
+      X := Port[$21];
+      Port[$A1] := Port[$A1] or ($01 shr Cas_IntLn);
+      X := Port[$A1];
+      SetIntVec($70 + Cas_IntLn, C_OldINTVec[IntLn]);
+    end else
+    begin
+      Port[$21] := Port[$21] or ($01 shr IntLn);
+      X := Port[$21];
+      SetIntVec(8 + IntLn, C_OldINTVec[IntLn]);
+    end;
 
-  X := Port[P] + Port[P+C_LSR] + Port[P+C_MSR] + Port[P+C_IIR];
+  X := Port[P] + Port[P + C_LSR] + Port[P + C_MSR] + Port[P + C_IIR];
 
   { Deallocate buffers }
 
-  FreeMem(C_InBufPtr[ComPort],C_InSize[ComPort]);
-  FreeMem(C_OutBufPtr[ComPort],C_OutSize[ComPort]);
-  Inline($FB);
+  FreeMem(C_InBufPtr[ComPort], C_InSize[ComPort]);
+  FreeMem(C_OutBufPtr[ComPort], C_OutSize[ComPort]);
+  inline($FB);
 {$ENDIF}
 {$IFNDEF MSDOS}
   WriteLn('REEPORT ASYNC2 CloseCom');
 {$ENDIF}
-End;
+end;
 
 {****************************************************************************}
 {*                                                                          *}
@@ -1281,16 +1255,14 @@ End;
 {*                                                                          *}
 {****************************************************************************}
 
-Procedure CloseAllComs;
+procedure CloseAllComs;
 
-Var
-  X : Byte;
+var
+  X: byte;
 
-Begin
-  For X := 1 To C_MaxCom Do
-    If C_PortOpen[X] Then
-      CloseCom(X);
-End;
+begin
+  for X := 1 to C_MaxCom do if C_PortOpen[X] then CloseCom(X);
+end;
 
 {****************************************************************************}
 {*                                                                          *}
@@ -1298,27 +1270,27 @@ End;
 {*                                                                          *}
 {****************************************************************************}
 
-Begin
-  For x := 1 to C_MaxPort Do
-    Begin
-      C_PortOpen[x] := False;
-      C_InBufPtr[x] := Nil;
-      C_OutBufPtr[x] := Nil;
-      C_OldIntVec[x] := Nil;
-      C_InHead[x] := 0;
-      C_OutHead[x] := 0;
-      C_InTail[x] := 0;
-      C_OutTail[x] := 0;
-      C_InSize[x] := 0;
-      C_OutSize[x] := 0;
-      C_RTSOn[x] := $FFFF;
-      C_RTSOff[x] := $FFFF;
-      C_StartChar[x] := ^Q;
-      C_StopChar[x] := ^S;
-      C_Status[x] := $05;
-      C_Ctrl[x] := 0;
-      C_XL3Ptr[x] := 0;
-      C_buffull[x]:=0;
-      C_cascade := 0;
-    End;
-End.
+begin
+  for x := 1 to C_MaxPort do
+  begin
+    C_PortOpen[x] := False;
+    C_InBufPtr[x] := nil;
+    C_OutBufPtr[x] := nil;
+    C_OldIntVec[x] := nil;
+    C_InHead[x] := 0;
+    C_OutHead[x] := 0;
+    C_InTail[x] := 0;
+    C_OutTail[x] := 0;
+    C_InSize[x] := 0;
+    C_OutSize[x] := 0;
+    C_RTSOn[x] := $FFFF;
+    C_RTSOff[x] := $FFFF;
+    C_StartChar[x] := ^Q;
+    C_StopChar[x] := ^S;
+    C_Status[x] := $05;
+    C_Ctrl[x] := 0;
+    C_XL3Ptr[x] := 0;
+    C_buffull[x] := 0;
+    C_cascade := 0;
+  end;
+end.

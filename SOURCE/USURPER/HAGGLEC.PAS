@@ -24,196 +24,202 @@ Copyright 2007 Jakob Dangarden
 }
 
 
-Unit HaggleC; {Usurper - Haggle routines}
+unit HaggleC; {Usurper - Haggle routines}
 
-Interface
+interface
 
-Function Haggle(shop     : char;
-                origcost : longint;
-                const keeper : string ) : longint;
+function Haggle(shop: char; origcost: longint; const keeper: string): longint;
 
-Implementation
+implementation
 
-Uses Init, Jakob, News;
+uses
+  Init, Jakob, News;
 
-Function Haggle;
+function Haggle;
 var
-    diff,
-    offer,
-    temp,
-    cost : longint;
+  diff, offer, temp, cost: longint;
 
-    accept : boolean;
+  accept: boolean;
 
-    rr : real;
+  rr:     real;
 
 begin
 
- {init}
- accept:=false;
- cost:=origcost;
+  {init}
+  accept := False;
+  cost := origcost;
 
- d(15,'Haggle');
- crlf;
+  d(15, 'Haggle');
+  crlf;
 
- if (config.classic) and (player.race=troll) and (shop='W') then begin
-  d(global_talkcol,'Hey! I''ve already given you a discount!');
-  d(global_talkcol,'Don''t expect any more! Get out!');
- end
- else begin
-  if (shop='W') and (player.weaphag=0) then begin
-   d(global_talkcol,'You are making me very angry ');
-   sd(global_plycol,player.name2);
-   d(config.textcolor,' !');
-   d(global_talkcol,'Accept my offer or leave!');
-   crlf;
-   sd(global_plycol,keeper+'s');
-   d(config.textcolor,' face turns unhealthy red...');
+  if (config.classic) and (player.race = troll) and (shop = 'W') then
+  begin
+    d(global_talkcol, 'Hey! I''ve already given you a discount!');
+    d(global_talkcol, 'Don''t expect any more! Get out!');
+  end else
+  begin
+    if (shop = 'W') and (player.weaphag = 0) then
+    begin
+      d(global_talkcol, 'You are making me very angry ');
+      sd(global_plycol, player.name2);
+      d(config.textcolor, ' !');
+      d(global_talkcol, 'Accept my offer or leave!');
+      crlf;
+      sd(global_plycol, keeper + 's');
+      d(config.textcolor, ' face turns unhealthy red...');
 
-   d(config.textcolor,'What are you going to do? Insist once more or leave?');
-   if confirm('Insist ','N')=true then begin
-    d(15,'You have been kicked out!');
+      d(config.textcolor, 'What are you going to do? Insist once more or leave?');
+      if confirm('Insist ', 'N') = True then
+      begin
+        d(15, 'You have been kicked out!');
 
-    {news-paper}
-    newsy(true,
-    'Haggler kicked out',
-    ' '+uplc+player.name2+config.textcol1+' was kicked out from the '+ulcyan+'Weaponshop'+config.textcol1+'!',
-    ' ',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '');
-
-
-    pause;
-   end
-   else begin
-    d(config.textcolor,'End of discussion.');
-    pause;
-   end;
-  end
-  else if (shop='A') and (player.armhag=0) then begin
-   sd(global_talkcol,'Damn you ');
-   sd(global_plycol,player.name2);
-   d(global_talkcol,'!');
-   d(global_talkcol,' Accept my offer or leave!');
-   crlf;
-   sd(global_plycol,keeper+'s');
-   d(config.textcolor,' seems to be quite upset with your behaviour.');
-   d(config.textcolor,'What are you going to do? Insist once more or leave?');
-
-   if confirm('Insist ','N')=true then begin
-    d(15,'You have been kicked out!');
-
-    {news-paper}
-    newsy(true,
-    'Haggler kicked out',
-    ' '+uplc+player.name2+config.textcol1+' was kicked out from the '+ulcyan+'Armor Shop'+config.textcol1+'!',
-    ' ',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '');
+        {news-paper}
+        newsy(True,
+          'Haggler kicked out',
+          ' ' + uplc + player.name2 + config.textcol1 + ' was kicked out from the ' + ulcyan + 'Weaponshop' + config.textcol1 + '!',
+          ' ',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '');
 
 
-    pause;
-   end
-   else begin
-    d(config.textcolor,'No deal.');
-    pause;
-   end;
+        pause;
+      end else
+      begin
+        d(config.textcolor, 'End of discussion.');
+        pause;
+      end;
+    end else if (shop = 'A') and (player.armhag = 0) then
+    begin
+      sd(global_talkcol, 'Damn you ');
+      sd(global_plycol, player.name2);
+      d(global_talkcol, '!');
+      d(global_talkcol, ' Accept my offer or leave!');
+      crlf;
+      sd(global_plycol, keeper + 's');
+      d(config.textcolor, ' seems to be quite upset with your behaviour.');
+      d(config.textcolor, 'What are you going to do? Insist once more or leave?');
 
-  end
-  else begin
-   {main haggle routine b”rjar h„r}
+      if confirm('Insist ', 'N') = True then
+      begin
+        d(15, 'You have been kicked out!');
 
-   case shop of
-    'W': dec(player.weaphag);
-    'A': dec(player.armhag);
-   end;
+        {news-paper}
+        newsy(True,
+          'Haggler kicked out',
+          ' ' + uplc + player.name2 + config.textcol1 + ' was kicked out from the ' + ulcyan + 'Armor Shop' + config.textcol1 + '!',
+          ' ',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '');
 
-   d(global_talkcol,'Alright, give me an offer');
 
-   sd(config.textcolor,':');
-   offer:=get_number(0,global_maxinput);
+        pause;
+      end else
+      begin
+        d(config.textcolor, 'No deal.');
+        pause;
+      end;
 
-   if (offer>0) and (offer<2000000000) then begin
-    offer:=offer;
-   end
-   else begin
-    offer:=0;
-   end;
+    end else
+    begin
+      {main haggle routine b”rjar h„r}
 
-   if offer>=origcost then begin
-    offer:=0;
-   end;
+      case shop of
+        'W': Dec(player.weaphag);
+        'A': Dec(player.armhag);
+      end;
 
-   {chans att lyckas beror p† charisma och tur}
-   {max 20 % kan prutas}
-   if offer>0 then begin
-    rr:=0.20*origcost;
-    temp:=origcost-round(rr);
+      d(global_talkcol, 'Alright, give me an offer');
 
-    if offer<temp then begin
-     accept:=false;
-    end
-    else begin
-     rr:=origcost/offer;
-     rr:=rr-1;
-     temp:=round(rr*100);
+      sd(config.textcolor, ':');
+      offer := get_number(0, global_maxinput);
 
-     {kollar charisman}
-     {d(15,commastr(temp)+'%');}
-     case player.charisma of
-         1..25: if temp<=4  then accept:=true;
-        26..75: if temp<=7  then accept:=true;
-       76..125: if temp<=10 then accept:=true;
-      126..175: if temp<=13 then accept:=true;
-      176..200: if temp<=17 then accept:=true;
-      201..999: if temp<=20 then accept:=true;
-     end;
+      if (offer > 0) and (offer < 2000000000) then
+      begin
+        offer := offer;
+      end else
+      begin
+        offer := 0;
+      end;
 
-    end;
+      if offer >= origcost then
+      begin
+        offer := 0;
+      end;
+
+      {chans att lyckas beror p† charisma och tur}
+      {max 20 % kan prutas}
+      if offer > 0 then
+      begin
+        rr := 0.20 * origcost;
+        temp := origcost - round(rr);
+
+        if offer < temp then
+        begin
+          accept := False;
+        end else
+        begin
+          rr := origcost / offer;
+          rr := rr - 1;
+          temp := round(rr * 100);
+
+          {kollar charisman}
+          {d(15,commastr(temp)+'%');}
+          case player.charisma of
+            1..25: if temp <= 4 then accept := True;
+            26..75: if temp <= 7 then accept := True;
+            76..125: if temp <= 10 then accept := True;
+            126..175: if temp <= 13 then accept := True;
+            176..200: if temp <= 17 then accept := True;
+            201..999: if temp <= 20 then accept := True;
+          end;
+
+        end;
 
     {rr:=(origcost*rr);
     dec(origcost,round(rr));}
-   end
-   else begin
-    accept:=false;
-   end;
+      end else
+      begin
+        accept := False;
+      end;
 
-   if accept=false then begin
-    case shop of
-     'W':begin
-          d(global_talkcol,'Haha! You think you''re funny huh!?');
-          d(global_talkcol,'Get out of here before I get nasty!');
-         end;
-     'A':begin
-          d(global_talkcol,'Stop kidding around and get out, so I can');
-          d(global_talkcol,'do some serious business!');
-         end;
-    end;
-   end
-   else begin
-    sd(global_talkcol,'Alright ');
-    sd(global_plycol,player.name2);
-    d(global_talkcol,' ! You''ve got a deal!');
-    if confirm('Accept ','N')=true then begin
-     cost:=offer;
-    end;
-   end;
+      if accept = False then
+      begin
+        case shop of
+          'W': begin
+            d(global_talkcol, 'Haha! You think you''re funny huh!?');
+            d(global_talkcol, 'Get out of here before I get nasty!');
+          end;
+          'A': begin
+            d(global_talkcol, 'Stop kidding around and get out, so I can');
+            d(global_talkcol, 'do some serious business!');
+          end;
+        end;
+      end else
+      begin
+        sd(global_talkcol, 'Alright ');
+        sd(global_plycol, player.name2);
+        d(global_talkcol, ' ! You''ve got a deal!');
+        if confirm('Accept ', 'N') = True then
+        begin
+          cost := offer;
+        end;
+      end;
 
+    end;
   end;
- end;
 
- {return result}
- haggle:=cost;
+  {return result}
+  haggle := cost;
 
 end; {Haggle *end*}
 

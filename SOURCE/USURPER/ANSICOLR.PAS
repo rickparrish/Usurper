@@ -15,7 +15,7 @@
 { combination to be the output.  Hopfully this unit will  }
 { accomplish this task making ANSI colors easier for the  }
 { programmer.                                             }
-{                                                         }
+
 { The naming conventions of ANSICOLR are similar to that  }
 { of OPCOLOR except that all names begin with a lower     }
 { case "a" (ie. aRedOnBlack).  This will return the ANSI  }
@@ -27,1913 +27,1913 @@
 { (ie. abRedOnBlue).  Each low intensity color combination}
 { is 10 char., each high intensity color set is 12 char.  }
 { and each blinking color set is 14 char. long.           }
-{                                                         }
+
 { I retain the copyright for this unit, but release it for}
 { public use with no royalties required.  You may use it  }
 { in any program that it would be of assistance to you.   }
 { In the same regard, I offer NO WARANTEE what so ever    }
 { either express or implied.                              }
-{                                                         }
+
 { If you come up with enhancements or changes to this unit}
 { I would appreciate knowing about them as I would like to}
 { keep the unit up to date.  I can be reached at the      }
 { places listed below:                                    }
-{                                                         }
+
 { ·ETATech Computer Consulting           The Paradigm BBS }
 { P. O. Box 566742                           404/671-1581 }
 { Atlanta, GA  30356-6013                  1200-19200 HST }
 {*********************************************************}
 
-UNIT AnsiColr; {Usurper - this ansi unit was taken from the SWAG archive}
-
-INTERFACE
-
-CONST
-
-  aBlink    : BYTE =  16;
-  
-  aSt       : STRING [2] = #27'[';
-  aEnd      : STRING [1] = 'm';
-  aDef      : STRING [4] = #27'[0m';
-  
-  fgCol     : ARRAY [0..31] OF STRING [8] =
-    ('0;30',   '0;34',   '0;32',   '0;36',
-     '0;31',   '0;35',   '0;33',   '0;37',
-     '0;1;30', '0;1;34', '0;1;32', '0;1;36', 
-     '0;1;31', '0;1;35', '0;1;33', '0;1;37',
-     '0;5;30', '0;5;34', '0;5;32', '0;5;36',
-     '0;5;31', '0;5;35', '0;5;33', '0;5;37',
-     '0;1;5;30', '0;1;5;34', '0;1;5;32', '0;1;5;36', 
-     '0;1;5;31', '0;1;5;35', '0;1;5;33', '0;1;5;37');
-
-  bgCol     : ARRAY [0..7] OF STRING [4] =
-    (';40',   ';44',   ';42',   ';46',   ';41',   ';45',   ';43',   ';47');
-
-TYPE
-  Str14     = STRING [14];
-
-  {Black background}
-  FUNCTION aBlackOnBlack :       Str14;
-  FUNCTION abBlackOnBlack :      Str14;
-  FUNCTION aBlueOnBlack :        Str14;
-  FUNCTION abBlueOnBlack :       Str14;
-  FUNCTION aGreenOnBlack :       Str14;       
-  FUNCTION abGreenOnBlack :      Str14;       
-  FUNCTION aCyanOnBlack :        Str14;
-  FUNCTION abCyanOnBlack :       Str14;
-  FUNCTION aRedOnBlack :         Str14; 
-  FUNCTION abRedOnBlack :        Str14; 
-  FUNCTION aMagentaOnBlack :     Str14;      
-  FUNCTION abMagentaOnBlack :    Str14;      
-  FUNCTION aBrownOnBlack :       Str14;     
-  FUNCTION abBrownOnBlack :      Str14;     
-  FUNCTION aLtGrayOnBlack :      Str14; 
-  FUNCTION abLtGrayOnBlack :     Str14; 
-  FUNCTION aDkGrayOnBlack :      Str14;        
-  FUNCTION abDkGrayOnBlack :     Str14;        
-  FUNCTION aLtBlueOnBlack :      Str14;
-  FUNCTION abLtBlueOnBlack :     Str14;
-  FUNCTION aLtGreenOnBlack :     Str14;
-  FUNCTION abLtGreenOnBlack :    Str14;
-  FUNCTION aLtCyanOnBlack :      Str14;
-  FUNCTION abLtCyanOnBlack :     Str14;
-  FUNCTION aLtRedOnBlack :       Str14;      
-  FUNCTION abLtRedOnBlack :      Str14;       
-  FUNCTION aLtMagentaOnBlack :   Str14;    
-  FUNCTION abLtMagentaOnBlack :  Str14;    
-  FUNCTION aYellowOnBlack :      Str14;      
-  FUNCTION abYellowOnBlack :     Str14;    
-  FUNCTION aWhiteOnBlack :       Str14;       
-  FUNCTION abWhiteOnBlack :      Str14;       
-
-  {Blue background}
-  FUNCTION aBlackOnBlue :        Str14; 
-  FUNCTION abBlackOnBlue :       Str14;  
-  FUNCTION aBlueOnBlue :         Str14; 
-  FUNCTION abBlueOnBlue :        Str14;  
-  FUNCTION aGreenOnBlue :        Str14; 
-  FUNCTION abGreenOnBlue :       Str14;  
-  FUNCTION aCyanOnBlue :         Str14; 
-  FUNCTION abCyanOnBlue :        Str14;  
-  FUNCTION aRedOnBlue :          Str14; 
-  FUNCTION abRedOnBlue :         Str14;  
-  FUNCTION aMagentaOnBlue :      Str14; 
-  FUNCTION abMagentaOnBlue :     Str14;  
-  FUNCTION aBrownOnBlue :        Str14; 
-  FUNCTION abBrownOnBlue :       Str14;  
-  FUNCTION aLtGrayOnBlue :       Str14; 
-  FUNCTION abLtGrayOnBlue :      Str14;  
-  FUNCTION aDkGrayOnBlue :       Str14; 
-  FUNCTION abDkGrayOnBlue :      Str14;  
-  FUNCTION aLtBlueOnBlue :       Str14; 
-  FUNCTION abLtBlueOnBlue :      Str14;  
-  FUNCTION aLtGreenOnBlue :      Str14; 
-  FUNCTION abLtGreenOnBlue :     Str14;  
-  FUNCTION aLtCyanOnBlue :       Str14; 
-  FUNCTION abLtCyanOnBlue :      Str14;  
-  FUNCTION aLtRedOnBlue :        Str14; 
-  FUNCTION abLtRedOnBlue :       Str14;  
-  FUNCTION aLtMagentaOnBlue :    Str14; 
-  FUNCTION abLtMagentaOnBlue :   Str14;  
-  FUNCTION aYellowOnBlue :       Str14; 
-  FUNCTION abYellowOnBlue :      Str14;  
-  FUNCTION aWhiteOnBlue :        Str14; 
-  FUNCTION abWhiteOnBlue :       Str14;  
-
-  {Green background}
-  FUNCTION aBlackOnGreen :       Str14; 
-  FUNCTION abBlackOnGreen :      Str14;  
-  FUNCTION aBlueOnGreen :        Str14; 
-  FUNCTION abBlueOnGreen :       Str14;  
-  FUNCTION aGreenOnGreen :       Str14; 
-  FUNCTION abGreenOnGreen :      Str14;  
-  FUNCTION aCyanOnGreen :        Str14; 
-  FUNCTION abCyanOnGreen :       Str14;  
-  FUNCTION aRedOnGreen :         Str14; 
-  FUNCTION abRedOnGreen :        Str14;  
-  FUNCTION aMagentaOnGreen :     Str14; 
-  FUNCTION abMagentaOnGreen :    Str14;  
-  FUNCTION aBrownOnGreen :       Str14; 
-  FUNCTION abBrownOnGreen :      Str14;  
-  FUNCTION aLtGrayOnGreen :      Str14; 
-  FUNCTION abLtGrayOnGreen :     Str14;  
-  FUNCTION aDkGrayOnGreen :      Str14; 
-  FUNCTION abDkGrayOnGreen :     Str14;  
-  FUNCTION aLtBlueOnGreen :      Str14; 
-  FUNCTION abLtBlueOnGreen :     Str14;  
-  FUNCTION aLtGreenOnGreen :     Str14; 
-  FUNCTION abLtGreenOnGreen :    Str14;  
-  FUNCTION aLtCyanOnGreen :      Str14; 
-  FUNCTION abLtCyanOnGreen :     Str14;  
-  FUNCTION aLtRedOnGreen :       Str14; 
-  FUNCTION abLtRedOnGreen :      Str14;  
-  FUNCTION aLtMagentaOnGreen :   Str14; 
-  FUNCTION abLtMagentaOnGreen :  Str14;  
-  FUNCTION aYellowOnGreen :      Str14; 
-  FUNCTION abYellowOnGreen :     Str14;  
-  FUNCTION aWhiteOnGreen :       Str14; 
-  FUNCTION abWhiteOnGreen :      Str14;  
-
-  {Cyan background}
-  FUNCTION aBlackOnCyan :        Str14; 
-  FUNCTION abBlackOnCyan :       Str14;  
-  FUNCTION aBlueOnCyan :         Str14; 
-  FUNCTION abBlueOnCyan :        Str14;  
-  FUNCTION aGreenOnCyan :        Str14; 
-  FUNCTION abGreenOnCyan :       Str14;  
-  FUNCTION aCyanOnCyan :         Str14; 
-  FUNCTION abCyanOnCyan :        Str14;  
-  FUNCTION aRedOnCyan :          Str14; 
-  FUNCTION abRedOnCyan :         Str14;  
-  FUNCTION aMagentaOnCyan :      Str14; 
-  FUNCTION abMagentaOnCyan :     Str14;  
-  FUNCTION aBrownOnCyan :        Str14; 
-  FUNCTION abBrownOnCyan :       Str14;  
-  FUNCTION aLtGrayOnCyan :       Str14; 
-  FUNCTION abLtGrayOnCyan :      Str14;  
-  FUNCTION aDkGrayOnCyan :       Str14; 
-  FUNCTION abDkGrayOnCyan :      Str14;  
-  FUNCTION aLtBlueOnCyan :       Str14; 
-  FUNCTION abLtBlueOnCyan :      Str14;  
-  FUNCTION aLtGreenOnCyan :      Str14; 
-  FUNCTION abLtGreenOnCyan :     Str14;  
-  FUNCTION aLtCyanOnCyan :       Str14; 
-  FUNCTION abLtCyanOnCyan :      Str14;  
-  FUNCTION aLtRedOnCyan :        Str14; 
-  FUNCTION abLtRedOnCyan :       Str14;  
-  FUNCTION aLtMagentaOnCyan :    Str14; 
-  FUNCTION abLtMagentaOnCyan :   Str14;  
-  FUNCTION aYellowOnCyan :       Str14; 
-  FUNCTION abYellowOnCyan :      Str14;  
-  FUNCTION aWhiteOnCyan :        Str14; 
-  FUNCTION abWhiteOnCyan :       Str14;  
-
-  {Red background}
-  FUNCTION aBlackOnRed :         Str14; 
-  FUNCTION abBlackOnRed :        Str14;  
-  FUNCTION aBlueOnRed :          Str14; 
-  FUNCTION abBlueOnRed :         Str14;  
-  FUNCTION aGreenOnRed :         Str14; 
-  FUNCTION abGreenOnRed :        Str14;  
-  FUNCTION aCyanOnRed :          Str14; 
-  FUNCTION abCyanOnRed :         Str14;  
-  FUNCTION aRedOnRed :           Str14; 
-  FUNCTION abRedOnRed :          Str14;  
-  FUNCTION aMagentaOnRed :       Str14; 
-  FUNCTION abMagentaOnRed :      Str14;  
-  FUNCTION aBrownOnRed :         Str14; 
-  FUNCTION abBrownOnRed :        Str14;  
-  FUNCTION aLtGrayOnRed :        Str14; 
-  FUNCTION abLtGrayOnRed :       Str14;  
-  FUNCTION aDkGrayOnRed :        Str14; 
-  FUNCTION abDkGrayOnRed :       Str14;  
-  FUNCTION aLtBlueOnRed :        Str14; 
-  FUNCTION abLtBlueOnRed :       Str14;  
-  FUNCTION aLtGreenOnRed :       Str14; 
-  FUNCTION abLtGreenOnRed :      Str14;  
-  FUNCTION aLtCyanOnRed :        Str14; 
-  FUNCTION abLtCyanOnRed :       Str14;  
-  FUNCTION aLtRedOnRed :         Str14; 
-  FUNCTION abLtRedOnRed :        Str14;  
-  FUNCTION aLtMagentaOnRed :     Str14; 
-  FUNCTION abLtMagentaOnRed :    Str14;  
-  FUNCTION aYellowOnRed :        Str14; 
-  FUNCTION abYellowOnRed :       Str14;  
-  FUNCTION aWhiteOnRed :         Str14; 
-  FUNCTION abWhiteOnRed :        Str14;  
-
-  {Magenta background}
-  FUNCTION aBlackOnMagenta :     Str14; 
-  FUNCTION abBlackOnMagenta :    Str14;  
-  FUNCTION aBlueOnMagenta :      Str14; 
-  FUNCTION abBlueOnMagenta :     Str14;  
-  FUNCTION aGreenOnMagenta :     Str14; 
-  FUNCTION abGreenOnMagenta :    Str14;  
-  FUNCTION aCyanOnMagenta :      Str14; 
-  FUNCTION abCyanOnMagenta :     Str14;  
-  FUNCTION aRedOnMagenta :       Str14; 
-  FUNCTION abRedOnMagenta :      Str14;  
-  FUNCTION aMagentaOnMagenta :   Str14; 
-  FUNCTION abMagentaOnMagenta :  Str14;  
-  FUNCTION aBrownOnMagenta :     Str14; 
-  FUNCTION abBrownOnMagenta :    Str14;  
-  FUNCTION aLtGrayOnMagenta :    Str14; 
-  FUNCTION abLtGrayOnMagenta :   Str14;  
-  FUNCTION aDkGrayOnMagenta :    Str14; 
-  FUNCTION abDkGrayOnMagenta :   Str14;  
-  FUNCTION aLtBlueOnMagenta :    Str14; 
-  FUNCTION abLtBlueOnMagenta :   Str14;  
-  FUNCTION aLtGreenOnMagenta :   Str14; 
-  FUNCTION abLtGreenOnMagenta :  Str14;  
-  FUNCTION aLtCyanOnMagenta :    Str14; 
-  FUNCTION abLtCyanOnMagenta :   Str14;  
-  FUNCTION aLtRedOnMagenta :     Str14; 
-  FUNCTION abLtRedOnMagenta :    Str14;  
-  FUNCTION aLtMagentaOnMagenta : Str14; 
-  FUNCTION abLtMagentaOnMagenta : Str14;   
-  FUNCTION aYellowOnMagenta :    Str14; 
-  FUNCTION abYellowOnMagenta :   Str14;  
-  FUNCTION aWhiteOnMagenta :     Str14; 
-  FUNCTION abWhiteOnMagenta :    Str14;  
-
-  {Brown background}
-  FUNCTION aBlackOnBrown :       Str14; 
-  FUNCTION abBlackOnBrown :      Str14;  
-  FUNCTION aBlueOnBrown :        Str14; 
-  FUNCTION abBlueOnBrown :       Str14;  
-  FUNCTION aGreenOnBrown :       Str14; 
-  FUNCTION abGreenOnBrown :      Str14;  
-  FUNCTION aCyanOnBrown :        Str14; 
-  FUNCTION abCyanOnBrown :       Str14;  
-  FUNCTION aRedOnBrown :         Str14; 
-  FUNCTION abRedOnBrown :        Str14;  
-  FUNCTION aMagentaOnBrown :     Str14; 
-  FUNCTION abMagentaOnBrown :    Str14;  
-  FUNCTION aBrownOnBrown :       Str14; 
-  FUNCTION abBrownOnBrown :      Str14;  
-  FUNCTION aLtGrayOnBrown :      Str14; 
-  FUNCTION abLtGrayOnBrown :     Str14;  
-  FUNCTION aDkGrayOnBrown :      Str14; 
-  FUNCTION abDkGrayOnBrown :     Str14;  
-  FUNCTION aLtBlueOnBrown :      Str14; 
-  FUNCTION abLtBlueOnBrown :     Str14;  
-  FUNCTION aLtGreenOnBrown :     Str14; 
-  FUNCTION abLtGreenOnBrown :    Str14;  
-  FUNCTION aLtCyanOnBrown :      Str14; 
-  FUNCTION abLtCyanOnBrown :     Str14;  
-  FUNCTION aLtRedOnBrown :       Str14; 
-  FUNCTION abLtRedOnBrown :      Str14;  
-  FUNCTION aLtMagentaOnBrown :   Str14; 
-  FUNCTION abLtMagentaOnBrown :  Str14;  
-  FUNCTION aYellowOnBrown :      Str14; 
-  FUNCTION abYellowOnBrown :     Str14;  
-  FUNCTION aWhiteOnBrown :       Str14; 
-  FUNCTION abWhiteOnBrown :      Str14;  
-
-  {Light gray backgrouund}
-  FUNCTION aBlackOnLtGray :      Str14; 
-  FUNCTION abBlackOnLtGray :     Str14;  
-  FUNCTION aBlueOnLtGray :       Str14; 
-  FUNCTION abBlueOnLtGray :      Str14;  
-  FUNCTION aGreenOnLtGray :      Str14; 
-  FUNCTION abGreenOnLtGray :     Str14;  
-  FUNCTION aCyanOnLtGray :       Str14; 
-  FUNCTION abCyanOnLtGray :      Str14;  
-  FUNCTION aRedOnLtGray :        Str14; 
-  FUNCTION abRedOnLtGray :       Str14;  
-  FUNCTION aMagentaOnLtGray :    Str14; 
-  FUNCTION abMagentaOnLtGray :   Str14;  
-  FUNCTION aBrownOnLtGray :      Str14; 
-  FUNCTION abBrownOnLtGray :     Str14;  
-  FUNCTION aLtGrayOnLtGray :     Str14; 
-  FUNCTION abLtGrayOnLtGray :    Str14;  
-  FUNCTION aDkGrayOnLtGray :     Str14; 
-  FUNCTION abDkGrayOnLtGray :    Str14;  
-  FUNCTION aLtBlueOnLtGray :     Str14; 
-  FUNCTION abLtBlueOnLtGray :    Str14;  
-  FUNCTION aLtGreenOnLtGray :    Str14; 
-  FUNCTION abLtGreenOnLtGray :   Str14;  
-  FUNCTION aLtCyanOnLtGray :     Str14; 
-  FUNCTION abLtCyanOnLtGray :    Str14;  
-  FUNCTION aLtRedOnLtGray :      Str14; 
-  FUNCTION abLtRedOnLtGray :     Str14;  
-  FUNCTION aLtMagentaOnLtGray :  Str14; 
-  FUNCTION abLtMagentaOnLtGray : Str14;  
-  FUNCTION aYellowOnLtGray :     Str14; 
-  FUNCTION abYellowOnLtGray :    Str14;  
-  FUNCTION aWhiteOnLtGray :      Str14; 
-  FUNCTION abWhiteOnLtGray :     Str14;  
-
-  {==========================================================================}
-
-IMPLEMENTATION
-
-CONST
-
-{ Foreground and background color constants }
-
-  Black         : BYTE =  0;
-  Blue          : BYTE =  1;
-  Green         : BYTE =  2;
-  Cyan          : BYTE =  3;
-  Red           : BYTE =  4;
-  Magenta       : BYTE =  5;
-  Brown         : BYTE =  6;
-  LightGray     : BYTE =  7;
-
-{ Foreground color constants }
-
-  DarkGray      : BYTE =  8;
-  LightBlue     : BYTE =  9;
-  LightGreen    : BYTE = 10;
-  LightCyan     : BYTE = 11;
-  LightRed      : BYTE = 12;
-  LightMagenta  : BYTE = 13;
-  Yellow        : BYTE = 14;
-  White         : BYTE = 15;
-
-
-
-  FUNCTION MakeAnsiString (ForeG, BackG : BYTE) : Str14;
-    BEGIN
-      MakeAnsiString := aSt + fgCol [ForeG] + bgCol [BackG] + aEnd;
-    END;
-    
-
-
-  {Black background}
-  FUNCTION aBlackOnBlack :       Str14;
-    BEGIN
-      aBlackOnBlack := MakeAnsiString (Black, Black);
-    END;
-    
-
-  FUNCTION abBlackOnBlack :      Str14;
-    BEGIN
-      abBlackOnBlack := MakeAnsiString (Black + aBlink, Black);
-    END;
-    
-
-  FUNCTION aBlueOnBlack :        Str14;
-    BEGIN
-      aBlueOnBlack := MakeAnsiString (Blue, Black);
-    END;
-    
-
-  FUNCTION abBlueOnBlack :       Str14;
-    BEGIN
-      abBlueOnBlack := MakeAnsiString (Blue + aBlink, Black);
-    END;
-    
-
-  FUNCTION aGreenOnBlack :       Str14;       
-    BEGIN
-      aGreenOnBlack := MakeAnsiString (Green, Black);
-    END;
-    
-
-  FUNCTION abGreenOnBlack :      Str14;       
-    BEGIN
-      abGreenOnBlack := MakeAnsiString (Green + aBlink, Black);
-    END;
-    
-
-  FUNCTION aCyanOnBlack :        Str14;
-    BEGIN
-      aCyanOnBlack := MakeAnsiString (Cyan, Black);
-    END;
-    
-
-  FUNCTION abCyanOnBlack :       Str14;
-    BEGIN
-      abCyanOnBlack := MakeAnsiString (Cyan + aBlink, Black);
-    END;
-    
-
-  FUNCTION aRedOnBlack :         Str14; 
-    BEGIN
-      aRedOnBlack := MakeAnsiString (Red, Black);
-    END;
-    
-
-  FUNCTION abRedOnBlack :        Str14; 
-    BEGIN
-      abRedOnBlack := MakeAnsiString (Red + aBlink, Black);
-    END;
-    
-
-  FUNCTION aMagentaOnBlack :     Str14;      
-    BEGIN
-      aMagentaOnBlack := MakeAnsiString (Magenta, Black);
-    END;
-    
-
-  FUNCTION abMagentaOnBlack :    Str14;      
-    BEGIN
-      abMagentaOnBlack := MakeAnsiString (Magenta + aBlink, Black);
-    END;
-    
-
-  FUNCTION aBrownOnBlack :       Str14;
-    BEGIN
-      aBrownOnBlack := MakeAnsiString (Brown, Black);
-    END;
-    
-
-  FUNCTION abBrownOnBlack :      Str14;     
-    BEGIN
-      abBrownOnBlack := MakeAnsiString (Brown + aBlink, Black);
-    END;
-    
-
-  FUNCTION aLtGrayOnBlack :      Str14; 
-    BEGIN
-      aLtGrayOnBlack := MakeAnsiString (LightGray, Black);
-    END;
-    
-
-  FUNCTION abLtGrayOnBlack :     Str14; 
-    BEGIN
-      abLtGrayOnBlack := MakeAnsiString (LightGray + aBlink, Black);
-    END;
-    
-
-  FUNCTION aDkGrayOnBlack :      Str14;        
-    BEGIN
-      aDkGrayOnBlack := MakeAnsiString (DarkGray, Black);
-    END;
-    
-
-  FUNCTION abDkGrayOnBlack :     Str14;        
-    BEGIN
-      abDkGrayOnBlack := MakeAnsiString (DarkGray + aBlink, Black);
-    END;
-    
-
-  FUNCTION aLtBlueOnBlack :      Str14;
-    BEGIN
-      aLtBlueOnBlack := MakeAnsiString (LightBlue, Black);
-    END;
-    
-
-  FUNCTION abLtBlueOnBlack :     Str14;
-    BEGIN
-      abLtBlueOnBlack := MakeAnsiString (LightBlue + aBlink, Black);
-    END;
-    
-
-  FUNCTION aLtGreenOnBlack :     Str14;
-    BEGIN
-      aLtGreenOnBlack := MakeAnsiString (LightGreen, Black);
-    END;
-    
-
-  FUNCTION abLtGreenOnBlack :    Str14;
-    BEGIN
-      abLtGreenOnBlack := MakeAnsiString (LightGreen + aBlink, Black);
-    END;
-    
-
-  FUNCTION aLtCyanOnBlack :      Str14;
-    BEGIN
-      aLtCyanOnBlack := MakeAnsiString (LightCyan, Black);
-    END;
-    
-
-  FUNCTION abLtCyanOnBlack :     Str14;
-    BEGIN
-      abLtCyanOnBlack := MakeAnsiString (LightCyan + aBlink, Black);
-    END;
-    
-
-  FUNCTION aLtRedOnBlack :       Str14;      
-    BEGIN
-      aLtRedOnBlack := MakeAnsiString (LightRed, Black);
-    END;
-    
-
-  FUNCTION abLtRedOnBlack :      Str14;       
-    BEGIN
-      abLtRedOnBlack := MakeAnsiString (LightRed + aBlink, Black);
-    END;
-    
-
-  FUNCTION aLtMagentaOnBlack :   Str14;    
-    BEGIN
-      aLtMagentaOnBlack := MakeAnsiString (LightMagenta, Black);
-    END;
-    
-
-  FUNCTION abLtMagentaOnBlack :  Str14;    
-    BEGIN
-      abLtMagentaOnBlack := MakeAnsiString (LightMagenta + aBlink, Black);
-    END;
-    
-
-  FUNCTION aYellowOnBlack :      Str14;      
-    BEGIN
-      aYellowOnBlack := MakeAnsiString (Yellow, Black);
-    END;
-    
-
-  FUNCTION abYellowOnBlack :     Str14;    
-    BEGIN
-      abYellowOnBlack := MakeAnsiString (Yellow + aBlink, Black);
-    END;
-    
-
-  FUNCTION aWhiteOnBlack :       Str14;       
-    BEGIN
-      aWhiteOnBlack := MakeAnsiString (White, Black);
-    END;
-    
-
-  FUNCTION abWhiteOnBlack :      Str14;       
-    BEGIN
-      abWhiteOnBlack := MakeAnsiString (White + aBlink, Black);
-    END;
-    
-
-
-  {Blue background}
-  FUNCTION aBlackOnBlue :        Str14; 
-    BEGIN
-      aBlackOnBlue := MakeAnsiString (Black, Blue);
-    END;
-    
-
-  FUNCTION abBlackOnBlue :       Str14;  
-    BEGIN
-      abBlackOnBlue := MakeAnsiString (Black + aBlink, Blue);
-    END;
-    
-
-  FUNCTION aBlueOnBlue :         Str14; 
-    BEGIN
-      aBlueOnBlue := MakeAnsiString (Blue, Blue);
-    END;
-    
-
-  FUNCTION abBlueOnBlue :        Str14;  
-    BEGIN
-      abBlueOnBlue := MakeAnsiString (Blue + aBlink, Blue);
-    END;
-    
-
-  FUNCTION aGreenOnBlue :        Str14; 
-    BEGIN
-      aGreenOnBlue := MakeAnsiString (Green, Blue);
-    END;
-    
-
-  FUNCTION abGreenOnBlue :       Str14;  
-    BEGIN
-      abGreenOnBlue := MakeAnsiString (Green + aBlink, Blue);
-    END;
-    
-
-  FUNCTION aCyanOnBlue :         Str14; 
-    BEGIN
-      aCyanOnBlue := MakeAnsiString (Cyan, Blue);
-    END;
-    
-
-  FUNCTION abCyanOnBlue :        Str14;  
-    BEGIN
-      abCyanOnBlue := MakeAnsiString (Cyan + aBlink, Blue);
-    END;
-    
-
-  FUNCTION aRedOnBlue :          Str14; 
-    BEGIN
-      aRedOnBlue := MakeAnsiString (Red, Blue);
-    END;
-    
-
-  FUNCTION abRedOnBlue :         Str14;  
-    BEGIN
-      abRedOnBlue := MakeAnsiString (Red + aBlink, Blue);
-    END;
-    
-
-  FUNCTION aMagentaOnBlue :      Str14; 
-    BEGIN
-      aMagentaOnBlue := MakeAnsiString (Magenta, Blue);
-    END;
-    
-
-  FUNCTION abMagentaOnBlue :     Str14;  
-    BEGIN
-      abMagentaOnBlue := MakeAnsiString (Magenta + aBlink, Blue);
-    END;
-    
-
-  FUNCTION aBrownOnBlue :        Str14; 
-    BEGIN
-      aBrownOnBlue := MakeAnsiString (Brown, Blue);
-    END;
-    
-
-  FUNCTION abBrownOnBlue :       Str14;  
-    BEGIN
-      abBrownOnBlue := MakeAnsiString (Brown + aBlink, Blue);
-    END;
-    
-
-  FUNCTION aLtGrayOnBlue :       Str14; 
-    BEGIN
-      aLtGrayOnBlue := MakeAnsiString (LightGray, Blue);
-    END;
-    
-
-  FUNCTION abLtGrayOnBlue :      Str14;  
-    BEGIN
-      abLtGrayOnBlue := MakeAnsiString (LightGray + aBlink, Blue);
-    END;
-    
-
-  FUNCTION aDkGrayOnBlue :       Str14; 
-    BEGIN
-      aDkGrayOnBlue := MakeAnsiString (DarkGray, Blue);
-    END;
-    
-
-  FUNCTION abDkGrayOnBlue :      Str14;  
-    BEGIN
-      abDkGrayOnBlue := MakeAnsiString (DarkGray + aBlink, Blue);
-    END;
-    
-
-  FUNCTION aLtBlueOnBlue :       Str14; 
-    BEGIN
-      aLtBlueOnBlue := MakeAnsiString (LightBlue, Blue);
-    END;
-    
-
-  FUNCTION abLtBlueOnBlue :      Str14;  
-    BEGIN
-      abLtBlueOnBlue := MakeAnsiString (LightBlue + aBlink, Blue);
-    END;
-    
-
-  FUNCTION aLtGreenOnBlue :      Str14; 
-    BEGIN
-      aLtGreenOnBlue := MakeAnsiString (LightGreen, Blue);
-    END;
-    
-
-  FUNCTION abLtGreenOnBlue :     Str14;  
-    BEGIN
-      abLtGreenOnBlue := MakeAnsiString (LightGreen + aBlink, Blue);
-    END;
-    
-
-  FUNCTION aLtCyanOnBlue :       Str14; 
-    BEGIN
-      aLtCyanOnBlue := MakeAnsiString (LightCyan, Blue);
-    END;
-    
-
-  FUNCTION abLtCyanOnBlue :      Str14;  
-    BEGIN
-      abLtCyanOnBlue := MakeAnsiString (LightCyan + aBlink, Blue);
-    END;
-    
-
-  FUNCTION aLtRedOnBlue :        Str14; 
-    BEGIN
-      aLtRedOnBlue := MakeAnsiString (LightRed, Blue);
-    END;
-    
-
-  FUNCTION abLtRedOnBlue :       Str14;  
-    BEGIN
-      abLtRedOnBlue := MakeAnsiString (LightRed + aBlink, Blue);
-    END;
-    
-
-  FUNCTION aLtMagentaOnBlue :    Str14; 
-    BEGIN
-      aLtMagentaOnBlue := MakeAnsiString (LightMagenta, Blue);
-    END;
-    
-
-  FUNCTION abLtMagentaOnBlue :   Str14;  
-    BEGIN
-      abLtMagentaOnBlue := MakeAnsiString (LightMagenta + aBlink, Blue);
-    END;
-    
-
-  FUNCTION aYellowOnBlue :       Str14; 
-    BEGIN
-      aYellowOnBlue := MakeAnsiString (Yellow, Blue);
-    END;
-    
-
-  FUNCTION abYellowOnBlue :      Str14;  
-    BEGIN
-      abYellowOnBlue := MakeAnsiString (Yellow + aBlink, Blue);
-    END;
-    
-
-  FUNCTION aWhiteOnBlue :        Str14; 
-    BEGIN
-      aWhiteOnBlue := MakeAnsiString (White, Blue);
-    END;
-    
-
-  FUNCTION abWhiteOnBlue :       Str14;  
-    BEGIN
-      abWhiteOnBlue := MakeAnsiString (White + aBlink, Blue);
-    END;
-    
-
-
-  {Green background}
-  FUNCTION aBlackOnGreen :       Str14; 
-    BEGIN
-      aBlackOnGreen := MakeAnsiString (Black, Green);
-    END;
-    
-
-  FUNCTION abBlackOnGreen :      Str14;  
-    BEGIN
-      abBlackOnGreen := MakeAnsiString (Black + aBlink, Green);
-    END;
-    
-
-  FUNCTION aBlueOnGreen :        Str14; 
-    BEGIN
-      aBlueOnGreen := MakeAnsiString (Blue, Green);
-    END;
-    
-
-  FUNCTION abBlueOnGreen :       Str14;  
-    BEGIN
-      abBlueOnGreen := MakeAnsiString (Blue + aBlink, Green);
-    END;
-    
-
-  FUNCTION aGreenOnGreen :       Str14; 
-    BEGIN
-      aGreenOnGreen := MakeAnsiString (Green, Green);
-    END;
-    
-
-  FUNCTION abGreenOnGreen :      Str14;  
-    BEGIN
-      abGreenOnGreen := MakeAnsiString (Green + aBlink, Green);
-    END;
-    
-
-  FUNCTION aCyanOnGreen :        Str14; 
-    BEGIN
-      aCyanOnGreen := MakeAnsiString (Cyan, Green);
-    END;
-    
-
-  FUNCTION abCyanOnGreen :       Str14;  
-    BEGIN
-      abCyanOnGreen := MakeAnsiString (Cyan + aBlink, Green);
-    END;
-    
-
-  FUNCTION aRedOnGreen :         Str14; 
-    BEGIN
-      aRedOnGreen := MakeAnsiString (Red, Green);
-    END;
-    
-
-  FUNCTION abRedOnGreen :        Str14;  
-    BEGIN
-      abRedOnGreen := MakeAnsiString (Red + aBlink, Green);
-    END;
-    
-
-  FUNCTION aMagentaOnGreen :     Str14; 
-    BEGIN
-      aMagentaOnGreen := MakeAnsiString (Magenta, Green);
-    END;
-    
-
-  FUNCTION abMagentaOnGreen :    Str14;  
-    BEGIN
-      abMagentaOnGreen := MakeAnsiString (Magenta + aBlink, Green);
-    END;
-    
-
-  FUNCTION aBrownOnGreen :       Str14; 
-    BEGIN
-      aBrownOnGreen := MakeAnsiString (Brown, Green);
-    END;
-    
-
-  FUNCTION abBrownOnGreen :      Str14;  
-    BEGIN
-      abBrownOnGreen := MakeAnsiString (Brown + aBlink, Green);
-    END;
-    
-
-  FUNCTION aLtGrayOnGreen :      Str14; 
-    BEGIN
-      aLtGrayOnGreen := MakeAnsiString (LightGray, Green);
-    END;
-    
-
-  FUNCTION abLtGrayOnGreen :     Str14;  
-    BEGIN
-      abLtGrayOnGreen := MakeAnsiString (LightGray + aBlink, Green);
-    END;
-    
-
-  FUNCTION aDkGrayOnGreen :      Str14; 
-    BEGIN
-      aDkGrayOnGreen := MakeAnsiString (DarkGray, Green);
-    END;
-    
-
-  FUNCTION abDkGrayOnGreen :     Str14;  
-    BEGIN
-      abDkGrayOnGreen := MakeAnsiString (DarkGray + aBlink, Green);
-    END;
-    
-
-  FUNCTION aLtBlueOnGreen :      Str14; 
-    BEGIN
-      aLtBlueOnGreen := MakeAnsiString (LightBlue, Green);
-    END;
-    
-
-  FUNCTION abLtBlueOnGreen :     Str14;  
-    BEGIN
-      abLtBlueOnGreen := MakeAnsiString (LightBlue + aBlink, Green);
-    END;
-    
-
-  FUNCTION aLtGreenOnGreen :     Str14; 
-    BEGIN
-      aLtGreenOnGreen := MakeAnsiString (LightGreen, Green);
-    END;
-    
-
-  FUNCTION abLtGreenOnGreen :    Str14;  
-    BEGIN
-      abLtGreenOnGreen := MakeAnsiString (LightGreen + aBlink, Green);
-    END;
-    
-
-  FUNCTION aLtCyanOnGreen :      Str14; 
-    BEGIN
-      aLtCyanOnGreen := MakeAnsiString (LightCyan, Green);
-    END;
-    
-
-  FUNCTION abLtCyanOnGreen :     Str14;  
-    BEGIN
-      abLtCyanOnGreen := MakeAnsiString (LightCyan + aBlink, Green);
-    END;
-    
-
-  FUNCTION aLtRedOnGreen :       Str14; 
-    BEGIN
-      aLtRedOnGreen := MakeAnsiString (LightRed, Green);
-    END;
-    
-
-  FUNCTION abLtRedOnGreen :      Str14;  
-    BEGIN
-      abLtRedOnGreen := MakeAnsiString (LightRed + aBlink, Green);
-    END;
-    
-
-  FUNCTION aLtMagentaOnGreen :   Str14; 
-    BEGIN
-      aLtMagentaOnGreen := MakeAnsiString (LightMagenta, Green);
-    END;
-    
-
-  FUNCTION abLtMagentaOnGreen :  Str14;  
-    BEGIN
-      abLtMagentaOnGreen := MakeAnsiString (LightMagenta + aBlink, Green);
-    END;
-    
-
-  FUNCTION aYellowOnGreen :      Str14; 
-    BEGIN
-      aYellowOnGreen := MakeAnsiString (Yellow, Green);
-    END;
-    
-
-  FUNCTION abYellowOnGreen :     Str14;  
-    BEGIN
-      abYellowOnGreen := MakeAnsiString (Yellow + aBlink, Green);
-    END;
-    
-
-  FUNCTION aWhiteOnGreen :       Str14; 
-    BEGIN
-      aWhiteOnGreen := MakeAnsiString (White, Green);
-    END;
-    
-
-  FUNCTION abWhiteOnGreen :      Str14;  
-    BEGIN
-      abWhiteOnGreen := MakeAnsiString (White + aBlink, Green);
-    END;
-    
-
-
-  {Cyan background}
-  FUNCTION aBlackOnCyan :        Str14; 
-    BEGIN
-      aBlackOnCyan := MakeAnsiString (Black, Cyan);
-    END;
-    
-
-  FUNCTION abBlackOnCyan :       Str14;  
-    BEGIN
-      abBlackOnCyan := MakeAnsiString (Black + aBlink, Cyan);
-    END;
-    
-
-  FUNCTION aBlueOnCyan :         Str14; 
-    BEGIN
-      aBlueOnCyan := MakeAnsiString (Blue, Cyan);
-    END;
-    
-
-  FUNCTION abBlueOnCyan :        Str14;  
-    BEGIN
-      abBlueOnCyan := MakeAnsiString (Blue + aBlink, Cyan);
-    END;
-    
-
-  FUNCTION aGreenOnCyan :        Str14; 
-    BEGIN
-      aGreenOnCyan := MakeAnsiString (Green, Cyan);
-    END;
-    
-
-  FUNCTION abGreenOnCyan :       Str14;  
-    BEGIN
-      abGreenOnCyan := MakeAnsiString (Green + aBlink, Cyan);
-    END;
-    
-
-  FUNCTION aCyanOnCyan :         Str14; 
-    BEGIN
-      aCyanOnCyan := MakeAnsiString (Cyan, Cyan);
-    END;
-    
-
-  FUNCTION abCyanOnCyan :        Str14;  
-    BEGIN
-      abCyanOnCyan := MakeAnsiString (Cyan + aBlink, Cyan);
-    END;
-    
-
-  FUNCTION aRedOnCyan :          Str14; 
-    BEGIN
-      aRedOnCyan := MakeAnsiString (Red, Cyan);
-    END;
-    
-
-  FUNCTION abRedOnCyan :         Str14;  
-    BEGIN
-      abRedOnCyan := MakeAnsiString (Red + aBlink, Cyan);
-    END;
-    
-
-  FUNCTION aMagentaOnCyan :      Str14; 
-    BEGIN
-      aMagentaOnCyan := MakeAnsiString (Magenta, Cyan);
-    END;
-    
-
-  FUNCTION abMagentaOnCyan :     Str14;  
-    BEGIN
-      abMagentaOnCyan := MakeAnsiString (Magenta + aBlink, Cyan);
-    END;
-    
-
-  FUNCTION aBrownOnCyan :        Str14; 
-    BEGIN
-      aBrownOnCyan := MakeAnsiString (Brown, Cyan);
-    END;
-    
-
-  FUNCTION abBrownOnCyan :       Str14;  
-    BEGIN
-      abBrownOnCyan := MakeAnsiString (Brown + aBlink, Cyan);
-    END;
-    
-
-  FUNCTION aLtGrayOnCyan :       Str14; 
-    BEGIN
-      aLtGrayOnCyan := MakeAnsiString (LightGray, Cyan);
-    END;
-    
-
-  FUNCTION abLtGrayOnCyan :      Str14;  
-    BEGIN
-      abLtGrayOnCyan := MakeAnsiString (LightGray + aBlink, Cyan);
-    END;
-    
-
-  FUNCTION aDkGrayOnCyan :       Str14; 
-    BEGIN
-      aDkGrayOnCyan := MakeAnsiString (DarkGray, Cyan);
-    END;
-    
-
-  FUNCTION abDkGrayOnCyan :      Str14;  
-    BEGIN
-      abDkGrayOnCyan := MakeAnsiString (DarkGray + aBlink, Cyan);
-    END;
-    
-
-  FUNCTION aLtBlueOnCyan :       Str14; 
-    BEGIN
-      aLtBlueOnCyan := MakeAnsiString (LightBlue, Cyan);
-    END;
-    
-
-  FUNCTION abLtBlueOnCyan :      Str14;  
-    BEGIN
-      abLtBlueOnCyan := MakeAnsiString (LightBlue + aBlink, Cyan);
-    END;
-    
-
-  FUNCTION aLtGreenOnCyan :      Str14; 
-    BEGIN
-      aLtGreenOnCyan := MakeAnsiString (LightGreen, Cyan);
-    END;
-    
-
-  FUNCTION abLtGreenOnCyan :     Str14;  
-    BEGIN
-      abLtGreenOnCyan := MakeAnsiString (LightGreen + aBlink, Cyan);
-    END;
-    
-
-  FUNCTION aLtCyanOnCyan :       Str14; 
-    BEGIN
-      aLtCyanOnCyan := MakeAnsiString (LightCyan, Cyan);
-    END;
-    
-
-  FUNCTION abLtCyanOnCyan :      Str14;  
-    BEGIN
-      abLtCyanOnCyan := MakeAnsiString (LightCyan + aBlink, Cyan);
-    END;
-    
-
-  FUNCTION aLtRedOnCyan :        Str14; 
-    BEGIN
-      aLtRedOnCyan := MakeAnsiString (LightRed, Cyan);
-    END;
-    
-
-  FUNCTION abLtRedOnCyan :       Str14;  
-    BEGIN
-      abLtRedOnCyan := MakeAnsiString (LightRed + aBlink, Cyan);
-    END;
-    
-
-  FUNCTION aLtMagentaOnCyan :    Str14; 
-    BEGIN
-      aLtMagentaOnCyan := MakeAnsiString (LightMagenta, Cyan);
-    END;
-    
-
-  FUNCTION abLtMagentaOnCyan :   Str14;  
-    BEGIN
-      abLtMagentaOnCyan := MakeAnsiString (LightMagenta + aBlink, Cyan);
-    END;
-    
-
-  FUNCTION aYellowOnCyan :       Str14; 
-    BEGIN
-      aYellowOnCyan := MakeAnsiString (Yellow, Cyan);
-    END;
-    
-
-  FUNCTION abYellowOnCyan :      Str14;  
-    BEGIN
-      abYellowOnCyan := MakeAnsiString (Yellow + aBlink, Cyan);
-    END;
-    
-
-  FUNCTION aWhiteOnCyan :        Str14; 
-    BEGIN
-      aWhiteOnCyan := MakeAnsiString (White, Cyan);
-    END;
-    
-
-  FUNCTION abWhiteOnCyan :       Str14;  
-    BEGIN
-      abWhiteOnCyan := MakeAnsiString (White + aBlink, Cyan);
-    END;
-    
-
-
-  {Red background}
-  FUNCTION aBlackOnRed :         Str14; 
-    BEGIN
-      aBlackOnRed := MakeAnsiString (Black, Red);
-    END;
-    
-
-  FUNCTION abBlackOnRed :        Str14;  
-    BEGIN
-      abBlackOnRed := MakeAnsiString (Black + aBlink, Red);
-    END;
-    
-
-  FUNCTION aBlueOnRed :          Str14; 
-    BEGIN
-      aBlueOnRed := MakeAnsiString (Blue, Red);
-    END;
-    
-
-  FUNCTION abBlueOnRed :         Str14;  
-    BEGIN
-      abBlueOnRed := MakeAnsiString (Blue + aBlink, Red);
-    END;
-    
-
-  FUNCTION aGreenOnRed :         Str14; 
-    BEGIN
-      aGreenOnRed := MakeAnsiString (Green, Red);
-    END;
-    
-
-  FUNCTION abGreenOnRed :        Str14;  
-    BEGIN
-      abGreenOnRed := MakeAnsiString (Green + aBlink, Red);
-    END;
-    
-
-  FUNCTION aCyanOnRed :          Str14; 
-    BEGIN
-      aCyanOnRed := MakeAnsiString (Cyan, Red);
-    END;
-    
-
-  FUNCTION abCyanOnRed :         Str14;  
-    BEGIN
-      abCyanOnRed := MakeAnsiString (Cyan + aBlink, Red);
-    END;
-    
-
-  FUNCTION aRedOnRed :           Str14; 
-    BEGIN
-      aRedOnRed := MakeAnsiString (Red, Red);
-    END;
-    
-
-  FUNCTION abRedOnRed :          Str14;  
-    BEGIN
-      abRedOnRed := MakeAnsiString (Red + aBlink, Red);
-    END;
-    
-
-  FUNCTION aMagentaOnRed :       Str14; 
-    BEGIN
-      aMagentaOnRed := MakeAnsiString (Magenta, Red);
-    END;
-    
-
-  FUNCTION abMagentaOnRed :      Str14;  
-    BEGIN
-      abMagentaOnRed := MakeAnsiString (Magenta + aBlink, Red);
-    END;
-    
-
-  FUNCTION aBrownOnRed :         Str14; 
-    BEGIN
-      aBrownOnRed := MakeAnsiString (Brown, Red);
-    END;
-    
-
-  FUNCTION abBrownOnRed :        Str14;  
-    BEGIN
-      abBrownOnRed := MakeAnsiString (Brown + aBlink, Red);
-    END;
-    
-
-  FUNCTION aLtGrayOnRed :        Str14; 
-    BEGIN
-      aLtGrayOnRed := MakeAnsiString (LightGray, Red);
-    END;
-    
-
-  FUNCTION abLtGrayOnRed :       Str14;  
-    BEGIN
-      abLtGrayOnRed := MakeAnsiString (LightGray + aBlink, Red);
-    END;
-    
-
-  FUNCTION aDkGrayOnRed :        Str14; 
-    BEGIN
-      aDkGrayOnRed := MakeAnsiString (DarkGray, Red);
-    END;
-    
-
-  FUNCTION abDkGrayOnRed :       Str14;  
-    BEGIN
-      abDkGrayOnRed := MakeAnsiString (DarkGray + aBlink, Red);
-    END;
-    
-
-  FUNCTION aLtBlueOnRed :        Str14; 
-    BEGIN
-      aLtBlueOnRed := MakeAnsiString (LightBlue, Red);
-    END;
-    
-
-  FUNCTION abLtBlueOnRed :       Str14;  
-    BEGIN
-      abLtBlueOnRed := MakeAnsiString (LightBlue + aBlink, Red);
-    END;
-    
-
-  FUNCTION aLtGreenOnRed :       Str14; 
-    BEGIN
-      aLtGreenOnRed := MakeAnsiString (LightGreen, Red);
-    END;
-    
-
-  FUNCTION abLtGreenOnRed :      Str14;  
-    BEGIN
-      abLtGreenOnRed := MakeAnsiString (LightGreen + aBlink, Red);
-    END;
-    
-
-  FUNCTION aLtCyanOnRed :        Str14; 
-    BEGIN
-      aLtCyanOnRed := MakeAnsiString (LightCyan, Red);
-    END;
-    
-
-  FUNCTION abLtCyanOnRed :       Str14;  
-    BEGIN
-      abLtCyanOnRed := MakeAnsiString (LightCyan + aBlink, Red);
-    END;
-    
-
-  FUNCTION aLtRedOnRed :         Str14; 
-    BEGIN
-      aLtRedOnRed := MakeAnsiString (LightRed, Red);
-    END;
-    
-
-  FUNCTION abLtRedOnRed :        Str14;  
-    BEGIN
-      abLtRedOnRed := MakeAnsiString (LightRed + aBlink, Red);
-    END;
-    
-
-  FUNCTION aLtMagentaOnRed :     Str14; 
-    BEGIN
-      aLtMagentaOnRed := MakeAnsiString (LightMagenta, Red);
-    END;
-    
-
-  FUNCTION abLtMagentaOnRed :    Str14;  
-    BEGIN
-      abLtMagentaOnRed := MakeAnsiString (LightMagenta + aBlink, Red);
-    END;
-    
-
-  FUNCTION aYellowOnRed :        Str14; 
-    BEGIN
-      aYellowOnRed := MakeAnsiString (Yellow, Red);
-    END;
-    
-
-  FUNCTION abYellowOnRed :       Str14;  
-    BEGIN
-      abYellowOnRed := MakeAnsiString (Yellow + aBlink, Red);
-    END;
-    
-
-  FUNCTION aWhiteOnRed :         Str14; 
-    BEGIN
-      aWhiteOnRed := MakeAnsiString (White, Red);
-    END;
-    
-
-  FUNCTION abWhiteOnRed :        Str14;  
-    BEGIN
-      abWhiteOnRed := MakeAnsiString (White + aBlink, Red);
-    END;
-    
-
-
-  {Magenta background}
-  FUNCTION aBlackOnMagenta :     Str14; 
-    BEGIN
-      aBlackOnMagenta := MakeAnsiString (Black, Magenta);
-    END;
-    
-
-  FUNCTION abBlackOnMagenta :    Str14;  
-    BEGIN
-      abBlackOnMagenta := MakeAnsiString (Black + aBlink, Magenta);
-    END;
-    
-
-  FUNCTION aBlueOnMagenta :      Str14; 
-    BEGIN
-      aBlueOnMagenta := MakeAnsiString (Blue, Magenta);
-    END;
-    
-
-  FUNCTION abBlueOnMagenta :     Str14;  
-    BEGIN
-      abBlueOnMagenta := MakeAnsiString (Blue + aBlink, Magenta);
-    END;
-    
-
-  FUNCTION aGreenOnMagenta :     Str14; 
-    BEGIN
-      aGreenOnMagenta := MakeAnsiString (Green, Magenta);
-    END;
-    
-
-  FUNCTION abGreenOnMagenta :    Str14;  
-    BEGIN
-      abGreenOnMagenta := MakeAnsiString (Green + aBlink, Magenta);
-    END;
-    
-
-  FUNCTION aCyanOnMagenta :      Str14; 
-    BEGIN
-      aCyanOnMagenta := MakeAnsiString (Cyan, Magenta);
-    END;
-    
-
-  FUNCTION abCyanOnMagenta :     Str14;  
-    BEGIN
-      abCyanOnMagenta := MakeAnsiString (Cyan + aBlink, Magenta);
-    END;
-    
-
-  FUNCTION aRedOnMagenta :       Str14; 
-    BEGIN
-      aRedOnMagenta := MakeAnsiString (Red, Magenta);
-    END;
-    
-
-  FUNCTION abRedOnMagenta :      Str14;  
-    BEGIN
-      abRedOnMagenta := MakeAnsiString (Red + aBlink, Magenta);
-    END;
-    
-
-  FUNCTION aMagentaOnMagenta :   Str14; 
-    BEGIN
-      aMagentaOnMagenta := MakeAnsiString (Magenta, Magenta);
-    END;
-    
-
-  FUNCTION abMagentaOnMagenta :  Str14;  
-    BEGIN
-      abMagentaOnMagenta := MakeAnsiString (Magenta + aBlink, Magenta);
-    END;
-    
-
-  FUNCTION aBrownOnMagenta :     Str14; 
-    BEGIN
-      aBrownOnMagenta := MakeAnsiString (Brown, Magenta);
-    END;
-    
-
-  FUNCTION abBrownOnMagenta :    Str14;  
-    BEGIN
-      abBrownOnMagenta := MakeAnsiString (Brown + aBlink, Magenta);
-    END;
-    
-
-  FUNCTION aLtGrayOnMagenta :    Str14; 
-    BEGIN
-      aLtGrayOnMagenta := MakeAnsiString (LightGray, Magenta);
-    END;
-    
-
-  FUNCTION abLtGrayOnMagenta :   Str14;  
-    BEGIN
-      abLtGrayOnMagenta := MakeAnsiString (LightGray + aBlink, Magenta);
-    END;
-    
-
-  FUNCTION aDkGrayOnMagenta :    Str14; 
-    BEGIN
-      aDkGrayOnMagenta := MakeAnsiString (DarkGray, Magenta);
-    END;
-    
-
-  FUNCTION abDkGrayOnMagenta :   Str14;  
-    BEGIN
-      abDkGrayOnMagenta := MakeAnsiString (DarkGray + aBlink, Magenta);
-    END;
-    
-
-  FUNCTION aLtBlueOnMagenta :    Str14; 
-    BEGIN
-      aLtBlueOnMagenta := MakeAnsiString (LightBlue, Magenta);
-    END;
-    
-
-  FUNCTION abLtBlueOnMagenta :   Str14;  
-    BEGIN
-      abLtBlueOnMagenta := MakeAnsiString (LightBlue + aBlink, Magenta);
-    END;
-    
-
-  FUNCTION aLtGreenOnMagenta :   Str14; 
-    BEGIN
-      aLtGreenOnMagenta := MakeAnsiString (LightGreen, Magenta);
-    END;
-    
-
-  FUNCTION abLtGreenOnMagenta :  Str14;  
-    BEGIN
-      abLtGreenOnMagenta := MakeAnsiString (LightGreen + aBlink, Magenta);
-    END;
-    
-
-  FUNCTION aLtCyanOnMagenta :    Str14; 
-    BEGIN
-      aLtCyanOnMagenta := MakeAnsiString (LightCyan, Magenta);
-    END;
-    
-
-  FUNCTION abLtCyanOnMagenta :   Str14;  
-    BEGIN
-      abLtCyanOnMagenta := MakeAnsiString (Lightcyan + aBlink, Magenta);
-    END;
-    
-
-  FUNCTION aLtRedOnMagenta :     Str14; 
-    BEGIN
-      aLtRedOnMagenta := MakeAnsiString (LightRed, Magenta);
-    END;
-    
-
-  FUNCTION abLtRedOnMagenta :    Str14;  
-    BEGIN
-      abLtRedOnMagenta := MakeAnsiString (LightRed + aBlink, Magenta);
-    END;
-    
-
-  FUNCTION aLtMagentaOnMagenta : Str14; 
-    BEGIN
-      aLtMagentaOnMagenta := MakeAnsiString (LightMagenta, Magenta);
-    END;
-    
-
-  FUNCTION abLtMagentaOnMagenta : Str14;   
-    BEGIN
-      abLtMagentaOnMagenta := MakeAnsiString (LightMagenta + aBlink, Magenta);
-    END;
-    
-
-  FUNCTION aYellowOnMagenta :    Str14; 
-    BEGIN
-      aYellowOnMagenta := MakeAnsiString (Yellow, Magenta);
-    END;
-    
-
-  FUNCTION abYellowOnMagenta :   Str14;  
-    BEGIN
-      abYellowOnMagenta := MakeAnsiString (Yellow + aBlink, Magenta);
-    END;
-    
-
-  FUNCTION aWhiteOnMagenta :     Str14; 
-    BEGIN
-      aWhiteOnMagenta := MakeAnsiString (White, Magenta);
-    END;
-    
-
-  FUNCTION abWhiteOnMagenta :    Str14;  
-    BEGIN
-      abWhiteOnMagenta := MakeAnsiString (White + aBlink, Magenta);
-    END;
-    
-
-
-  {Brown background}
-  FUNCTION aBlackOnBrown :       Str14; 
-    BEGIN
-      aBlackOnBrown := MakeAnsiString (Black, Brown);
-    END;
-    
-
-  FUNCTION abBlackOnBrown :      Str14;  
-    BEGIN
-      abBlackOnBrown := MakeAnsiString (Black + aBlink, Brown);
-    END;
-    
-
-  FUNCTION aBlueOnBrown :        Str14; 
-    BEGIN
-      aBlueOnBrown := MakeAnsiString (Blue, Brown);
-    END;
-    
-
-  FUNCTION abBlueOnBrown :       Str14;  
-    BEGIN
-      abBlueOnBrown := MakeAnsiString (Blue + aBlink, Brown);
-    END;
-    
-
-  FUNCTION aGreenOnBrown :       Str14; 
-    BEGIN
-      aGreenOnBrown := MakeAnsiString (Green, Brown);
-    END;
-    
-
-  FUNCTION abGreenOnBrown :      Str14;  
-    BEGIN
-      abGreenOnBrown := MakeAnsiString (Green + aBlink, Brown);
-    END;
-    
-
-  FUNCTION aCyanOnBrown :        Str14; 
-    BEGIN
-      aCyanOnBrown := MakeAnsiString (Cyan, Brown);
-    END;
-    
-
-  FUNCTION abCyanOnBrown :       Str14;  
-    BEGIN
-      abCyanOnBrown := MakeAnsiString (Cyan + aBlink, Brown);
-    END;
-    
-
-  FUNCTION aRedOnBrown :         Str14; 
-    BEGIN
-      aRedOnBrown := MakeAnsiString (Red, Brown);
-    END;
-    
-
-  FUNCTION abRedOnBrown :        Str14;  
-    BEGIN
-      abRedOnBrown := MakeAnsiString (Red + aBlink, Brown);
-    END;
-    
-
-  FUNCTION aMagentaOnBrown :     Str14; 
-    BEGIN
-      aMagentaOnBrown := MakeAnsiString (Magenta, Brown);
-    END;
-    
-
-  FUNCTION abMagentaOnBrown :    Str14;  
-    BEGIN
-      abMagentaOnBrown := MakeAnsiString (Magenta + aBlink, Brown);
-    END;
-    
-
-  FUNCTION aBrownOnBrown :       Str14; 
-    BEGIN
-      aBrownOnBrown := MakeAnsiString (Brown, Brown);
-    END;
-    
-
-  FUNCTION abBrownOnBrown :      Str14;  
-    BEGIN
-      abBrownOnBrown := MakeAnsiString (Brown + aBlink, Brown);
-    END;
-    
-
-  FUNCTION aLtGrayOnBrown :      Str14; 
-    BEGIN
-      aLtGrayOnBrown := MakeAnsiString (LightGray, Brown);
-    END;
-    
-
-  FUNCTION abLtGrayOnBrown :     Str14;  
-    BEGIN
-      abLtGrayOnBrown := MakeAnsiString (LightGray + aBlink, Brown);
-    END;
-    
-
-  FUNCTION aDkGrayOnBrown :      Str14; 
-    BEGIN
-      aDkGrayOnBrown := MakeAnsiString (DarkGray, Brown);
-    END;
-    
-
-  FUNCTION abDkGrayOnBrown :     Str14;  
-    BEGIN
-      abDkGrayOnBrown := MakeAnsiString (DarkGray + aBlink, Brown);
-    END;
-    
-
-  FUNCTION aLtBlueOnBrown :      Str14; 
-    BEGIN
-      aLtBlueOnBrown := MakeAnsiString (LightBlue, Brown);
-    END;
-    
-
-  FUNCTION abLtBlueOnBrown :     Str14;  
-    BEGIN
-      abLtBlueOnBrown := MakeAnsiString (LightBlue + aBlink, Brown);
-    END;
-    
-
-  FUNCTION aLtGreenOnBrown :     Str14; 
-    BEGIN
-      aLtGreenOnBrown := MakeAnsiString (LightGreen, Brown);
-    END;
-    
-
-  FUNCTION abLtGreenOnBrown :    Str14;  
-    BEGIN
-      abLtGreenOnBrown := MakeAnsiString (LightGreen + aBlink, Brown);
-    END;
-    
-
-  FUNCTION aLtCyanOnBrown :      Str14; 
-    BEGIN
-      aLtCyanOnBrown := MakeAnsiString (LightCyan, Brown);
-    END;
-    
-
-  FUNCTION abLtCyanOnBrown :     Str14;  
-    BEGIN
-      abLtCyanOnBrown := MakeAnsiString (LightCyan + aBlink, Brown);
-    END;
-    
-
-  FUNCTION aLtRedOnBrown :       Str14; 
-    BEGIN
-      aLtRedOnBrown := MakeAnsiString (LightRed, Brown);
-    END;
-    
-
-  FUNCTION abLtRedOnBrown :      Str14;  
-    BEGIN
-      abLtRedOnBrown := MakeAnsiString (LightRed + aBlink, Brown);
-    END;
-    
-
-  FUNCTION aLtMagentaOnBrown :   Str14; 
-    BEGIN
-      aLtMagentaOnBrown := MakeAnsiString (LightMagenta, Brown);
-    END;
-    
-
-  FUNCTION abLtMagentaOnBrown :  Str14;  
-    BEGIN
-      abLtMagentaOnBrown := MakeAnsiString (LightMagenta + aBlink, Brown);
-    END;
-    
-
-  FUNCTION aYellowOnBrown :      Str14; 
-    BEGIN
-      aYellowOnBrown := MakeAnsiString (Yellow, Brown);
-    END;
-    
-
-  FUNCTION abYellowOnBrown :     Str14;  
-    BEGIN
-      abYellowOnBrown := MakeAnsiString (Yellow + aBlink, Brown);
-    END;
-    
-
-  FUNCTION aWhiteOnBrown :       Str14; 
-    BEGIN
-      aWhiteOnBrown := MakeAnsiString (White, Brown);
-    END;
-    
-
-  FUNCTION abWhiteOnBrown :      Str14;  
-    BEGIN
-      abWhiteOnBrown := MakeAnsiString (White + aBlink, Brown);
-    END;
-    
-
-
-  {Light gray backgrouund}
-  FUNCTION aBlackOnLtGray :      Str14; 
-    BEGIN
-      aBlackOnLtGray := MakeAnsiString (Black, LightGray);
-    END;
-    
-
-  FUNCTION abBlackOnLtGray :     Str14;  
-    BEGIN
-      abBlackOnLtGray := MakeAnsiString (Black + aBlink, LightGray);
-    END;
-    
-
-  FUNCTION aBlueOnLtGray :       Str14; 
-    BEGIN
-      aBlueOnLtGray := MakeAnsiString (Blue, LightGray);
-    END;
-    
-
-  FUNCTION abBlueOnLtGray :      Str14;  
-    BEGIN
-      abBlueOnLtGray := MakeAnsiString (Blue + aBlink, LightGray);
-    END;
-    
-
-  FUNCTION aGreenOnLtGray :      Str14; 
-    BEGIN
-      aGreenOnLtGray := MakeAnsiString (Green, LightGray);
-    END;
-    
-
-  FUNCTION abGreenOnLtGray :     Str14;  
-    BEGIN
-      abGreenOnLtGray := MakeAnsiString (Green + aBlink, LightGray);
-    END;
-    
-
-  FUNCTION aCyanOnLtGray :       Str14; 
-    BEGIN
-      aCyanOnLtGray := MakeAnsiString (Cyan, LightGray);
-    END;
-    
-
-  FUNCTION abCyanOnLtGray :      Str14;  
-    BEGIN
-      abCyanOnLtGray := MakeAnsiString (Cyan + aBlink, LightGray);
-    END;
-    
-
-  FUNCTION aRedOnLtGray :        Str14; 
-    BEGIN
-      aRedOnLtGray := MakeAnsiString (Red, LightGray);
-    END;
-    
-
-  FUNCTION abRedOnLtGray :       Str14;  
-    BEGIN
-      abRedOnLtGray := MakeAnsiString (Red + aBlink, LightGray);
-    END;
-    
-
-  FUNCTION aMagentaOnLtGray :    Str14; 
-    BEGIN
-      aMagentaOnLtGray := MakeAnsiString (Magenta, LightGray);
-    END;
-    
-
-  FUNCTION abMagentaOnLtGray :   Str14;  
-    BEGIN
-      abMagentaOnLtGray := MakeAnsiString (Magenta + aBlink, LightGray);
-    END;
-    
-
-  FUNCTION aBrownOnLtGray :      Str14; 
-    BEGIN
-      aBrownOnLtGray := MakeAnsiString (Brown, LightGray);
-    END;
-    
-
-  FUNCTION abBrownOnLtGray :     Str14;  
-    BEGIN
-      abBrownOnLtGray := MakeAnsiString (Brown + aBlink, LightGray);
-    END;
-    
-
-  FUNCTION aLtGrayOnLtGray :     Str14; 
-    BEGIN
-      aLtGrayOnLtGray := MakeAnsiString (LightGray, LightGray);
-    END;
-    
-
-  FUNCTION abLtGrayOnLtGray :    Str14;  
-    BEGIN
-      abLtGrayOnLtGray := MakeAnsiString (LightGray + aBlink, LightGray);
-    END;
-    
-
-  FUNCTION aDkGrayOnLtGray :     Str14; 
-    BEGIN
-      aDkGrayOnLtGray := MakeAnsiString (DarkGray, LightGray);
-    END;
-    
-
-  FUNCTION abDkGrayOnLtGray :    Str14;  
-    BEGIN
-      abDkGrayOnLtGray := MakeAnsiString (DarkGray + aBlink, LightGray);
-    END;
-    
-
-  FUNCTION aLtBlueOnLtGray :     Str14; 
-    BEGIN
-      aLtBlueOnLtGray := MakeAnsiString (LightBlue, LightGray);
-    END;
-    
-
-  FUNCTION abLtBlueOnLtGray :    Str14;  
-    BEGIN
-      abLtBlueOnLtGray := MakeAnsiString (LightBlue + aBlink, LightGray);
-    END;
-    
-
-  FUNCTION aLtGreenOnLtGray :    Str14; 
-    BEGIN
-      aLtGreenOnLtGray := MakeAnsiString (LightGreen, LightGray);
-    END;
-    
-
-  FUNCTION abLtGreenOnLtGray :   Str14;  
-    BEGIN
-      abLtGreenOnLtGray := MakeAnsiString (LightGreen + aBlink, LightGray);
-    END;
-    
-
-  FUNCTION aLtCyanOnLtGray :     Str14; 
-    BEGIN
-      aLtCyanOnLtGray := MakeAnsiString (LightCyan, LightGray);
-    END;
-    
-
-  FUNCTION abLtCyanOnLtGray :    Str14;  
-    BEGIN
-      abLtCyanOnLtGray := MakeAnsiString (LightCyan + aBlink, LightGray);
-    END;
-    
-
-  FUNCTION aLtRedOnLtGray :      Str14; 
-    BEGIN
-      aLtRedOnLtGray := MakeAnsiString (LightRed, LightGray);
-    END;
-    
-
-  FUNCTION abLtRedOnLtGray :     Str14;  
-    BEGIN
-      abLtRedOnLtGray := MakeAnsiString (LightRed + aBlink, LightGray);
-    END;
-    
-
-  FUNCTION aLtMagentaOnLtGray :  Str14; 
-    BEGIN
-      aLtMagentaOnLtGray := MakeAnsiString (LightMagenta, LightGray);
-    END;
-    
-
-  FUNCTION abLtMagentaOnLtGray : Str14;  
-    BEGIN
-      abLtMagentaOnLtGray := MakeAnsiString (LightMagenta + aBlink, LightGray);
-    END;
-    
-
-  FUNCTION aYellowOnLtGray :     Str14; 
-    BEGIN
-      aYellowOnLtGray := MakeAnsiString (Yellow, LightGray);
-    END;
-    
-
-  FUNCTION abYellowOnLtGray :    Str14;  
-    BEGIN
-      abYellowOnLtGray := MakeAnsiString (Yellow + aBlink, LightGray);
-    END;
-    
-
-  FUNCTION aWhiteOnLtGray :      Str14; 
-    BEGIN
-      aWhiteOnLtGray := MakeAnsiString (White, LightGray);
-    END;
-    
-
-  FUNCTION abWhiteOnLtGray :     Str14;  
-    BEGIN
-      abWhiteOnLtGray := MakeAnsiString (White + aBlink, LightGray);
-    END;
-    
-
-
-
-BEGIN
-
-END. {Unit AnsiColr .end.}
+unit AnsiColr; {Usurper - this ansi unit was taken from the SWAG archive}
+
+interface
+
+const
+
+  aBlink: byte     = 16;
+
+  aSt: string [2]  = #27'[';
+  aEnd: string [1] = 'm';
+  aDef: string [4] = #27'[0m';
+
+  fgCol: array [0..31] of string [8] =
+    ('0;30', '0;34', '0;32', '0;36',
+    '0;31', '0;35', '0;33', '0;37',
+    '0;1;30', '0;1;34', '0;1;32', '0;1;36',
+    '0;1;31', '0;1;35', '0;1;33', '0;1;37',
+    '0;5;30', '0;5;34', '0;5;32', '0;5;36',
+    '0;5;31', '0;5;35', '0;5;33', '0;5;37',
+    '0;1;5;30', '0;1;5;34', '0;1;5;32', '0;1;5;36',
+    '0;1;5;31', '0;1;5;35', '0;1;5;33', '0;1;5;37');
+
+  bgCol: array [0..7] of string [4] =
+    (';40', ';44', ';42', ';46', ';41', ';45', ';43', ';47');
+
+type
+  Str14 = string [14];
+
+{Black background}
+function aBlackOnBlack: Str14;
+function abBlackOnBlack: Str14;
+function aBlueOnBlack: Str14;
+function abBlueOnBlack: Str14;
+function aGreenOnBlack: Str14;
+function abGreenOnBlack: Str14;
+function aCyanOnBlack: Str14;
+function abCyanOnBlack: Str14;
+function aRedOnBlack: Str14;
+function abRedOnBlack: Str14;
+function aMagentaOnBlack: Str14;
+function abMagentaOnBlack: Str14;
+function aBrownOnBlack: Str14;
+function abBrownOnBlack: Str14;
+function aLtGrayOnBlack: Str14;
+function abLtGrayOnBlack: Str14;
+function aDkGrayOnBlack: Str14;
+function abDkGrayOnBlack: Str14;
+function aLtBlueOnBlack: Str14;
+function abLtBlueOnBlack: Str14;
+function aLtGreenOnBlack: Str14;
+function abLtGreenOnBlack: Str14;
+function aLtCyanOnBlack: Str14;
+function abLtCyanOnBlack: Str14;
+function aLtRedOnBlack: Str14;
+function abLtRedOnBlack: Str14;
+function aLtMagentaOnBlack: Str14;
+function abLtMagentaOnBlack: Str14;
+function aYellowOnBlack: Str14;
+function abYellowOnBlack: Str14;
+function aWhiteOnBlack: Str14;
+function abWhiteOnBlack: Str14;
+
+{Blue background}
+function aBlackOnBlue: Str14;
+function abBlackOnBlue: Str14;
+function aBlueOnBlue: Str14;
+function abBlueOnBlue: Str14;
+function aGreenOnBlue: Str14;
+function abGreenOnBlue: Str14;
+function aCyanOnBlue: Str14;
+function abCyanOnBlue: Str14;
+function aRedOnBlue: Str14;
+function abRedOnBlue: Str14;
+function aMagentaOnBlue: Str14;
+function abMagentaOnBlue: Str14;
+function aBrownOnBlue: Str14;
+function abBrownOnBlue: Str14;
+function aLtGrayOnBlue: Str14;
+function abLtGrayOnBlue: Str14;
+function aDkGrayOnBlue: Str14;
+function abDkGrayOnBlue: Str14;
+function aLtBlueOnBlue: Str14;
+function abLtBlueOnBlue: Str14;
+function aLtGreenOnBlue: Str14;
+function abLtGreenOnBlue: Str14;
+function aLtCyanOnBlue: Str14;
+function abLtCyanOnBlue: Str14;
+function aLtRedOnBlue: Str14;
+function abLtRedOnBlue: Str14;
+function aLtMagentaOnBlue: Str14;
+function abLtMagentaOnBlue: Str14;
+function aYellowOnBlue: Str14;
+function abYellowOnBlue: Str14;
+function aWhiteOnBlue: Str14;
+function abWhiteOnBlue: Str14;
+
+{Green background}
+function aBlackOnGreen: Str14;
+function abBlackOnGreen: Str14;
+function aBlueOnGreen: Str14;
+function abBlueOnGreen: Str14;
+function aGreenOnGreen: Str14;
+function abGreenOnGreen: Str14;
+function aCyanOnGreen: Str14;
+function abCyanOnGreen: Str14;
+function aRedOnGreen: Str14;
+function abRedOnGreen: Str14;
+function aMagentaOnGreen: Str14;
+function abMagentaOnGreen: Str14;
+function aBrownOnGreen: Str14;
+function abBrownOnGreen: Str14;
+function aLtGrayOnGreen: Str14;
+function abLtGrayOnGreen: Str14;
+function aDkGrayOnGreen: Str14;
+function abDkGrayOnGreen: Str14;
+function aLtBlueOnGreen: Str14;
+function abLtBlueOnGreen: Str14;
+function aLtGreenOnGreen: Str14;
+function abLtGreenOnGreen: Str14;
+function aLtCyanOnGreen: Str14;
+function abLtCyanOnGreen: Str14;
+function aLtRedOnGreen: Str14;
+function abLtRedOnGreen: Str14;
+function aLtMagentaOnGreen: Str14;
+function abLtMagentaOnGreen: Str14;
+function aYellowOnGreen: Str14;
+function abYellowOnGreen: Str14;
+function aWhiteOnGreen: Str14;
+function abWhiteOnGreen: Str14;
+
+{Cyan background}
+function aBlackOnCyan: Str14;
+function abBlackOnCyan: Str14;
+function aBlueOnCyan: Str14;
+function abBlueOnCyan: Str14;
+function aGreenOnCyan: Str14;
+function abGreenOnCyan: Str14;
+function aCyanOnCyan: Str14;
+function abCyanOnCyan: Str14;
+function aRedOnCyan: Str14;
+function abRedOnCyan: Str14;
+function aMagentaOnCyan: Str14;
+function abMagentaOnCyan: Str14;
+function aBrownOnCyan: Str14;
+function abBrownOnCyan: Str14;
+function aLtGrayOnCyan: Str14;
+function abLtGrayOnCyan: Str14;
+function aDkGrayOnCyan: Str14;
+function abDkGrayOnCyan: Str14;
+function aLtBlueOnCyan: Str14;
+function abLtBlueOnCyan: Str14;
+function aLtGreenOnCyan: Str14;
+function abLtGreenOnCyan: Str14;
+function aLtCyanOnCyan: Str14;
+function abLtCyanOnCyan: Str14;
+function aLtRedOnCyan: Str14;
+function abLtRedOnCyan: Str14;
+function aLtMagentaOnCyan: Str14;
+function abLtMagentaOnCyan: Str14;
+function aYellowOnCyan: Str14;
+function abYellowOnCyan: Str14;
+function aWhiteOnCyan: Str14;
+function abWhiteOnCyan: Str14;
+
+{Red background}
+function aBlackOnRed: Str14;
+function abBlackOnRed: Str14;
+function aBlueOnRed: Str14;
+function abBlueOnRed: Str14;
+function aGreenOnRed: Str14;
+function abGreenOnRed: Str14;
+function aCyanOnRed: Str14;
+function abCyanOnRed: Str14;
+function aRedOnRed: Str14;
+function abRedOnRed: Str14;
+function aMagentaOnRed: Str14;
+function abMagentaOnRed: Str14;
+function aBrownOnRed: Str14;
+function abBrownOnRed: Str14;
+function aLtGrayOnRed: Str14;
+function abLtGrayOnRed: Str14;
+function aDkGrayOnRed: Str14;
+function abDkGrayOnRed: Str14;
+function aLtBlueOnRed: Str14;
+function abLtBlueOnRed: Str14;
+function aLtGreenOnRed: Str14;
+function abLtGreenOnRed: Str14;
+function aLtCyanOnRed: Str14;
+function abLtCyanOnRed: Str14;
+function aLtRedOnRed: Str14;
+function abLtRedOnRed: Str14;
+function aLtMagentaOnRed: Str14;
+function abLtMagentaOnRed: Str14;
+function aYellowOnRed: Str14;
+function abYellowOnRed: Str14;
+function aWhiteOnRed: Str14;
+function abWhiteOnRed: Str14;
+
+{Magenta background}
+function aBlackOnMagenta: Str14;
+function abBlackOnMagenta: Str14;
+function aBlueOnMagenta: Str14;
+function abBlueOnMagenta: Str14;
+function aGreenOnMagenta: Str14;
+function abGreenOnMagenta: Str14;
+function aCyanOnMagenta: Str14;
+function abCyanOnMagenta: Str14;
+function aRedOnMagenta: Str14;
+function abRedOnMagenta: Str14;
+function aMagentaOnMagenta: Str14;
+function abMagentaOnMagenta: Str14;
+function aBrownOnMagenta: Str14;
+function abBrownOnMagenta: Str14;
+function aLtGrayOnMagenta: Str14;
+function abLtGrayOnMagenta: Str14;
+function aDkGrayOnMagenta: Str14;
+function abDkGrayOnMagenta: Str14;
+function aLtBlueOnMagenta: Str14;
+function abLtBlueOnMagenta: Str14;
+function aLtGreenOnMagenta: Str14;
+function abLtGreenOnMagenta: Str14;
+function aLtCyanOnMagenta: Str14;
+function abLtCyanOnMagenta: Str14;
+function aLtRedOnMagenta: Str14;
+function abLtRedOnMagenta: Str14;
+function aLtMagentaOnMagenta: Str14;
+function abLtMagentaOnMagenta: Str14;
+function aYellowOnMagenta: Str14;
+function abYellowOnMagenta: Str14;
+function aWhiteOnMagenta: Str14;
+function abWhiteOnMagenta: Str14;
+
+{Brown background}
+function aBlackOnBrown: Str14;
+function abBlackOnBrown: Str14;
+function aBlueOnBrown: Str14;
+function abBlueOnBrown: Str14;
+function aGreenOnBrown: Str14;
+function abGreenOnBrown: Str14;
+function aCyanOnBrown: Str14;
+function abCyanOnBrown: Str14;
+function aRedOnBrown: Str14;
+function abRedOnBrown: Str14;
+function aMagentaOnBrown: Str14;
+function abMagentaOnBrown: Str14;
+function aBrownOnBrown: Str14;
+function abBrownOnBrown: Str14;
+function aLtGrayOnBrown: Str14;
+function abLtGrayOnBrown: Str14;
+function aDkGrayOnBrown: Str14;
+function abDkGrayOnBrown: Str14;
+function aLtBlueOnBrown: Str14;
+function abLtBlueOnBrown: Str14;
+function aLtGreenOnBrown: Str14;
+function abLtGreenOnBrown: Str14;
+function aLtCyanOnBrown: Str14;
+function abLtCyanOnBrown: Str14;
+function aLtRedOnBrown: Str14;
+function abLtRedOnBrown: Str14;
+function aLtMagentaOnBrown: Str14;
+function abLtMagentaOnBrown: Str14;
+function aYellowOnBrown: Str14;
+function abYellowOnBrown: Str14;
+function aWhiteOnBrown: Str14;
+function abWhiteOnBrown: Str14;
+
+{Light gray backgrouund}
+function aBlackOnLtGray: Str14;
+function abBlackOnLtGray: Str14;
+function aBlueOnLtGray: Str14;
+function abBlueOnLtGray: Str14;
+function aGreenOnLtGray: Str14;
+function abGreenOnLtGray: Str14;
+function aCyanOnLtGray: Str14;
+function abCyanOnLtGray: Str14;
+function aRedOnLtGray: Str14;
+function abRedOnLtGray: Str14;
+function aMagentaOnLtGray: Str14;
+function abMagentaOnLtGray: Str14;
+function aBrownOnLtGray: Str14;
+function abBrownOnLtGray: Str14;
+function aLtGrayOnLtGray: Str14;
+function abLtGrayOnLtGray: Str14;
+function aDkGrayOnLtGray: Str14;
+function abDkGrayOnLtGray: Str14;
+function aLtBlueOnLtGray: Str14;
+function abLtBlueOnLtGray: Str14;
+function aLtGreenOnLtGray: Str14;
+function abLtGreenOnLtGray: Str14;
+function aLtCyanOnLtGray: Str14;
+function abLtCyanOnLtGray: Str14;
+function aLtRedOnLtGray: Str14;
+function abLtRedOnLtGray: Str14;
+function aLtMagentaOnLtGray: Str14;
+function abLtMagentaOnLtGray: Str14;
+function aYellowOnLtGray: Str14;
+function abYellowOnLtGray: Str14;
+function aWhiteOnLtGray: Str14;
+function abWhiteOnLtGray: Str14;
+
+{==========================================================================}
+
+implementation
+
+const
+
+  { Foreground and background color constants }
+
+  Black: byte     = 0;
+  Blue: byte      = 1;
+  Green: byte     = 2;
+  Cyan: byte      = 3;
+  Red: byte       = 4;
+  Magenta: byte   = 5;
+  Brown: byte     = 6;
+  LightGray: byte = 7;
+
+  { Foreground color constants }
+
+  DarkGray: byte     = 8;
+  LightBlue: byte    = 9;
+  LightGreen: byte   = 10;
+  LightCyan: byte    = 11;
+  LightRed: byte     = 12;
+  LightMagenta: byte = 13;
+  Yellow: byte       = 14;
+  White: byte        = 15;
+
+
+
+function MakeAnsiString(ForeG, BackG: byte): Str14;
+begin
+  MakeAnsiString := aSt + fgCol[ForeG] + bgCol[BackG] + aEnd;
+end;
+
+
+
+{Black background}
+function aBlackOnBlack: Str14;
+begin
+  aBlackOnBlack := MakeAnsiString(Black, Black);
+end;
+
+
+function abBlackOnBlack: Str14;
+begin
+  abBlackOnBlack := MakeAnsiString(Black + aBlink, Black);
+end;
+
+
+function aBlueOnBlack: Str14;
+begin
+  aBlueOnBlack := MakeAnsiString(Blue, Black);
+end;
+
+
+function abBlueOnBlack: Str14;
+begin
+  abBlueOnBlack := MakeAnsiString(Blue + aBlink, Black);
+end;
+
+
+function aGreenOnBlack: Str14;
+begin
+  aGreenOnBlack := MakeAnsiString(Green, Black);
+end;
+
+
+function abGreenOnBlack: Str14;
+begin
+  abGreenOnBlack := MakeAnsiString(Green + aBlink, Black);
+end;
+
+
+function aCyanOnBlack: Str14;
+begin
+  aCyanOnBlack := MakeAnsiString(Cyan, Black);
+end;
+
+
+function abCyanOnBlack: Str14;
+begin
+  abCyanOnBlack := MakeAnsiString(Cyan + aBlink, Black);
+end;
+
+
+function aRedOnBlack: Str14;
+begin
+  aRedOnBlack := MakeAnsiString(Red, Black);
+end;
+
+
+function abRedOnBlack: Str14;
+begin
+  abRedOnBlack := MakeAnsiString(Red + aBlink, Black);
+end;
+
+
+function aMagentaOnBlack: Str14;
+begin
+  aMagentaOnBlack := MakeAnsiString(Magenta, Black);
+end;
+
+
+function abMagentaOnBlack: Str14;
+begin
+  abMagentaOnBlack := MakeAnsiString(Magenta + aBlink, Black);
+end;
+
+
+function aBrownOnBlack: Str14;
+begin
+  aBrownOnBlack := MakeAnsiString(Brown, Black);
+end;
+
+
+function abBrownOnBlack: Str14;
+begin
+  abBrownOnBlack := MakeAnsiString(Brown + aBlink, Black);
+end;
+
+
+function aLtGrayOnBlack: Str14;
+begin
+  aLtGrayOnBlack := MakeAnsiString(LightGray, Black);
+end;
+
+
+function abLtGrayOnBlack: Str14;
+begin
+  abLtGrayOnBlack := MakeAnsiString(LightGray + aBlink, Black);
+end;
+
+
+function aDkGrayOnBlack: Str14;
+begin
+  aDkGrayOnBlack := MakeAnsiString(DarkGray, Black);
+end;
+
+
+function abDkGrayOnBlack: Str14;
+begin
+  abDkGrayOnBlack := MakeAnsiString(DarkGray + aBlink, Black);
+end;
+
+
+function aLtBlueOnBlack: Str14;
+begin
+  aLtBlueOnBlack := MakeAnsiString(LightBlue, Black);
+end;
+
+
+function abLtBlueOnBlack: Str14;
+begin
+  abLtBlueOnBlack := MakeAnsiString(LightBlue + aBlink, Black);
+end;
+
+
+function aLtGreenOnBlack: Str14;
+begin
+  aLtGreenOnBlack := MakeAnsiString(LightGreen, Black);
+end;
+
+
+function abLtGreenOnBlack: Str14;
+begin
+  abLtGreenOnBlack := MakeAnsiString(LightGreen + aBlink, Black);
+end;
+
+
+function aLtCyanOnBlack: Str14;
+begin
+  aLtCyanOnBlack := MakeAnsiString(LightCyan, Black);
+end;
+
+
+function abLtCyanOnBlack: Str14;
+begin
+  abLtCyanOnBlack := MakeAnsiString(LightCyan + aBlink, Black);
+end;
+
+
+function aLtRedOnBlack: Str14;
+begin
+  aLtRedOnBlack := MakeAnsiString(LightRed, Black);
+end;
+
+
+function abLtRedOnBlack: Str14;
+begin
+  abLtRedOnBlack := MakeAnsiString(LightRed + aBlink, Black);
+end;
+
+
+function aLtMagentaOnBlack: Str14;
+begin
+  aLtMagentaOnBlack := MakeAnsiString(LightMagenta, Black);
+end;
+
+
+function abLtMagentaOnBlack: Str14;
+begin
+  abLtMagentaOnBlack := MakeAnsiString(LightMagenta + aBlink, Black);
+end;
+
+
+function aYellowOnBlack: Str14;
+begin
+  aYellowOnBlack := MakeAnsiString(Yellow, Black);
+end;
+
+
+function abYellowOnBlack: Str14;
+begin
+  abYellowOnBlack := MakeAnsiString(Yellow + aBlink, Black);
+end;
+
+
+function aWhiteOnBlack: Str14;
+begin
+  aWhiteOnBlack := MakeAnsiString(White, Black);
+end;
+
+
+function abWhiteOnBlack: Str14;
+begin
+  abWhiteOnBlack := MakeAnsiString(White + aBlink, Black);
+end;
+
+
+
+{Blue background}
+function aBlackOnBlue: Str14;
+begin
+  aBlackOnBlue := MakeAnsiString(Black, Blue);
+end;
+
+
+function abBlackOnBlue: Str14;
+begin
+  abBlackOnBlue := MakeAnsiString(Black + aBlink, Blue);
+end;
+
+
+function aBlueOnBlue: Str14;
+begin
+  aBlueOnBlue := MakeAnsiString(Blue, Blue);
+end;
+
+
+function abBlueOnBlue: Str14;
+begin
+  abBlueOnBlue := MakeAnsiString(Blue + aBlink, Blue);
+end;
+
+
+function aGreenOnBlue: Str14;
+begin
+  aGreenOnBlue := MakeAnsiString(Green, Blue);
+end;
+
+
+function abGreenOnBlue: Str14;
+begin
+  abGreenOnBlue := MakeAnsiString(Green + aBlink, Blue);
+end;
+
+
+function aCyanOnBlue: Str14;
+begin
+  aCyanOnBlue := MakeAnsiString(Cyan, Blue);
+end;
+
+
+function abCyanOnBlue: Str14;
+begin
+  abCyanOnBlue := MakeAnsiString(Cyan + aBlink, Blue);
+end;
+
+
+function aRedOnBlue: Str14;
+begin
+  aRedOnBlue := MakeAnsiString(Red, Blue);
+end;
+
+
+function abRedOnBlue: Str14;
+begin
+  abRedOnBlue := MakeAnsiString(Red + aBlink, Blue);
+end;
+
+
+function aMagentaOnBlue: Str14;
+begin
+  aMagentaOnBlue := MakeAnsiString(Magenta, Blue);
+end;
+
+
+function abMagentaOnBlue: Str14;
+begin
+  abMagentaOnBlue := MakeAnsiString(Magenta + aBlink, Blue);
+end;
+
+
+function aBrownOnBlue: Str14;
+begin
+  aBrownOnBlue := MakeAnsiString(Brown, Blue);
+end;
+
+
+function abBrownOnBlue: Str14;
+begin
+  abBrownOnBlue := MakeAnsiString(Brown + aBlink, Blue);
+end;
+
+
+function aLtGrayOnBlue: Str14;
+begin
+  aLtGrayOnBlue := MakeAnsiString(LightGray, Blue);
+end;
+
+
+function abLtGrayOnBlue: Str14;
+begin
+  abLtGrayOnBlue := MakeAnsiString(LightGray + aBlink, Blue);
+end;
+
+
+function aDkGrayOnBlue: Str14;
+begin
+  aDkGrayOnBlue := MakeAnsiString(DarkGray, Blue);
+end;
+
+
+function abDkGrayOnBlue: Str14;
+begin
+  abDkGrayOnBlue := MakeAnsiString(DarkGray + aBlink, Blue);
+end;
+
+
+function aLtBlueOnBlue: Str14;
+begin
+  aLtBlueOnBlue := MakeAnsiString(LightBlue, Blue);
+end;
+
+
+function abLtBlueOnBlue: Str14;
+begin
+  abLtBlueOnBlue := MakeAnsiString(LightBlue + aBlink, Blue);
+end;
+
+
+function aLtGreenOnBlue: Str14;
+begin
+  aLtGreenOnBlue := MakeAnsiString(LightGreen, Blue);
+end;
+
+
+function abLtGreenOnBlue: Str14;
+begin
+  abLtGreenOnBlue := MakeAnsiString(LightGreen + aBlink, Blue);
+end;
+
+
+function aLtCyanOnBlue: Str14;
+begin
+  aLtCyanOnBlue := MakeAnsiString(LightCyan, Blue);
+end;
+
+
+function abLtCyanOnBlue: Str14;
+begin
+  abLtCyanOnBlue := MakeAnsiString(LightCyan + aBlink, Blue);
+end;
+
+
+function aLtRedOnBlue: Str14;
+begin
+  aLtRedOnBlue := MakeAnsiString(LightRed, Blue);
+end;
+
+
+function abLtRedOnBlue: Str14;
+begin
+  abLtRedOnBlue := MakeAnsiString(LightRed + aBlink, Blue);
+end;
+
+
+function aLtMagentaOnBlue: Str14;
+begin
+  aLtMagentaOnBlue := MakeAnsiString(LightMagenta, Blue);
+end;
+
+
+function abLtMagentaOnBlue: Str14;
+begin
+  abLtMagentaOnBlue := MakeAnsiString(LightMagenta + aBlink, Blue);
+end;
+
+
+function aYellowOnBlue: Str14;
+begin
+  aYellowOnBlue := MakeAnsiString(Yellow, Blue);
+end;
+
+
+function abYellowOnBlue: Str14;
+begin
+  abYellowOnBlue := MakeAnsiString(Yellow + aBlink, Blue);
+end;
+
+
+function aWhiteOnBlue: Str14;
+begin
+  aWhiteOnBlue := MakeAnsiString(White, Blue);
+end;
+
+
+function abWhiteOnBlue: Str14;
+begin
+  abWhiteOnBlue := MakeAnsiString(White + aBlink, Blue);
+end;
+
+
+
+{Green background}
+function aBlackOnGreen: Str14;
+begin
+  aBlackOnGreen := MakeAnsiString(Black, Green);
+end;
+
+
+function abBlackOnGreen: Str14;
+begin
+  abBlackOnGreen := MakeAnsiString(Black + aBlink, Green);
+end;
+
+
+function aBlueOnGreen: Str14;
+begin
+  aBlueOnGreen := MakeAnsiString(Blue, Green);
+end;
+
+
+function abBlueOnGreen: Str14;
+begin
+  abBlueOnGreen := MakeAnsiString(Blue + aBlink, Green);
+end;
+
+
+function aGreenOnGreen: Str14;
+begin
+  aGreenOnGreen := MakeAnsiString(Green, Green);
+end;
+
+
+function abGreenOnGreen: Str14;
+begin
+  abGreenOnGreen := MakeAnsiString(Green + aBlink, Green);
+end;
+
+
+function aCyanOnGreen: Str14;
+begin
+  aCyanOnGreen := MakeAnsiString(Cyan, Green);
+end;
+
+
+function abCyanOnGreen: Str14;
+begin
+  abCyanOnGreen := MakeAnsiString(Cyan + aBlink, Green);
+end;
+
+
+function aRedOnGreen: Str14;
+begin
+  aRedOnGreen := MakeAnsiString(Red, Green);
+end;
+
+
+function abRedOnGreen: Str14;
+begin
+  abRedOnGreen := MakeAnsiString(Red + aBlink, Green);
+end;
+
+
+function aMagentaOnGreen: Str14;
+begin
+  aMagentaOnGreen := MakeAnsiString(Magenta, Green);
+end;
+
+
+function abMagentaOnGreen: Str14;
+begin
+  abMagentaOnGreen := MakeAnsiString(Magenta + aBlink, Green);
+end;
+
+
+function aBrownOnGreen: Str14;
+begin
+  aBrownOnGreen := MakeAnsiString(Brown, Green);
+end;
+
+
+function abBrownOnGreen: Str14;
+begin
+  abBrownOnGreen := MakeAnsiString(Brown + aBlink, Green);
+end;
+
+
+function aLtGrayOnGreen: Str14;
+begin
+  aLtGrayOnGreen := MakeAnsiString(LightGray, Green);
+end;
+
+
+function abLtGrayOnGreen: Str14;
+begin
+  abLtGrayOnGreen := MakeAnsiString(LightGray + aBlink, Green);
+end;
+
+
+function aDkGrayOnGreen: Str14;
+begin
+  aDkGrayOnGreen := MakeAnsiString(DarkGray, Green);
+end;
+
+
+function abDkGrayOnGreen: Str14;
+begin
+  abDkGrayOnGreen := MakeAnsiString(DarkGray + aBlink, Green);
+end;
+
+
+function aLtBlueOnGreen: Str14;
+begin
+  aLtBlueOnGreen := MakeAnsiString(LightBlue, Green);
+end;
+
+
+function abLtBlueOnGreen: Str14;
+begin
+  abLtBlueOnGreen := MakeAnsiString(LightBlue + aBlink, Green);
+end;
+
+
+function aLtGreenOnGreen: Str14;
+begin
+  aLtGreenOnGreen := MakeAnsiString(LightGreen, Green);
+end;
+
+
+function abLtGreenOnGreen: Str14;
+begin
+  abLtGreenOnGreen := MakeAnsiString(LightGreen + aBlink, Green);
+end;
+
+
+function aLtCyanOnGreen: Str14;
+begin
+  aLtCyanOnGreen := MakeAnsiString(LightCyan, Green);
+end;
+
+
+function abLtCyanOnGreen: Str14;
+begin
+  abLtCyanOnGreen := MakeAnsiString(LightCyan + aBlink, Green);
+end;
+
+
+function aLtRedOnGreen: Str14;
+begin
+  aLtRedOnGreen := MakeAnsiString(LightRed, Green);
+end;
+
+
+function abLtRedOnGreen: Str14;
+begin
+  abLtRedOnGreen := MakeAnsiString(LightRed + aBlink, Green);
+end;
+
+
+function aLtMagentaOnGreen: Str14;
+begin
+  aLtMagentaOnGreen := MakeAnsiString(LightMagenta, Green);
+end;
+
+
+function abLtMagentaOnGreen: Str14;
+begin
+  abLtMagentaOnGreen := MakeAnsiString(LightMagenta + aBlink, Green);
+end;
+
+
+function aYellowOnGreen: Str14;
+begin
+  aYellowOnGreen := MakeAnsiString(Yellow, Green);
+end;
+
+
+function abYellowOnGreen: Str14;
+begin
+  abYellowOnGreen := MakeAnsiString(Yellow + aBlink, Green);
+end;
+
+
+function aWhiteOnGreen: Str14;
+begin
+  aWhiteOnGreen := MakeAnsiString(White, Green);
+end;
+
+
+function abWhiteOnGreen: Str14;
+begin
+  abWhiteOnGreen := MakeAnsiString(White + aBlink, Green);
+end;
+
+
+
+{Cyan background}
+function aBlackOnCyan: Str14;
+begin
+  aBlackOnCyan := MakeAnsiString(Black, Cyan);
+end;
+
+
+function abBlackOnCyan: Str14;
+begin
+  abBlackOnCyan := MakeAnsiString(Black + aBlink, Cyan);
+end;
+
+
+function aBlueOnCyan: Str14;
+begin
+  aBlueOnCyan := MakeAnsiString(Blue, Cyan);
+end;
+
+
+function abBlueOnCyan: Str14;
+begin
+  abBlueOnCyan := MakeAnsiString(Blue + aBlink, Cyan);
+end;
+
+
+function aGreenOnCyan: Str14;
+begin
+  aGreenOnCyan := MakeAnsiString(Green, Cyan);
+end;
+
+
+function abGreenOnCyan: Str14;
+begin
+  abGreenOnCyan := MakeAnsiString(Green + aBlink, Cyan);
+end;
+
+
+function aCyanOnCyan: Str14;
+begin
+  aCyanOnCyan := MakeAnsiString(Cyan, Cyan);
+end;
+
+
+function abCyanOnCyan: Str14;
+begin
+  abCyanOnCyan := MakeAnsiString(Cyan + aBlink, Cyan);
+end;
+
+
+function aRedOnCyan: Str14;
+begin
+  aRedOnCyan := MakeAnsiString(Red, Cyan);
+end;
+
+
+function abRedOnCyan: Str14;
+begin
+  abRedOnCyan := MakeAnsiString(Red + aBlink, Cyan);
+end;
+
+
+function aMagentaOnCyan: Str14;
+begin
+  aMagentaOnCyan := MakeAnsiString(Magenta, Cyan);
+end;
+
+
+function abMagentaOnCyan: Str14;
+begin
+  abMagentaOnCyan := MakeAnsiString(Magenta + aBlink, Cyan);
+end;
+
+
+function aBrownOnCyan: Str14;
+begin
+  aBrownOnCyan := MakeAnsiString(Brown, Cyan);
+end;
+
+
+function abBrownOnCyan: Str14;
+begin
+  abBrownOnCyan := MakeAnsiString(Brown + aBlink, Cyan);
+end;
+
+
+function aLtGrayOnCyan: Str14;
+begin
+  aLtGrayOnCyan := MakeAnsiString(LightGray, Cyan);
+end;
+
+
+function abLtGrayOnCyan: Str14;
+begin
+  abLtGrayOnCyan := MakeAnsiString(LightGray + aBlink, Cyan);
+end;
+
+
+function aDkGrayOnCyan: Str14;
+begin
+  aDkGrayOnCyan := MakeAnsiString(DarkGray, Cyan);
+end;
+
+
+function abDkGrayOnCyan: Str14;
+begin
+  abDkGrayOnCyan := MakeAnsiString(DarkGray + aBlink, Cyan);
+end;
+
+
+function aLtBlueOnCyan: Str14;
+begin
+  aLtBlueOnCyan := MakeAnsiString(LightBlue, Cyan);
+end;
+
+
+function abLtBlueOnCyan: Str14;
+begin
+  abLtBlueOnCyan := MakeAnsiString(LightBlue + aBlink, Cyan);
+end;
+
+
+function aLtGreenOnCyan: Str14;
+begin
+  aLtGreenOnCyan := MakeAnsiString(LightGreen, Cyan);
+end;
+
+
+function abLtGreenOnCyan: Str14;
+begin
+  abLtGreenOnCyan := MakeAnsiString(LightGreen + aBlink, Cyan);
+end;
+
+
+function aLtCyanOnCyan: Str14;
+begin
+  aLtCyanOnCyan := MakeAnsiString(LightCyan, Cyan);
+end;
+
+
+function abLtCyanOnCyan: Str14;
+begin
+  abLtCyanOnCyan := MakeAnsiString(LightCyan + aBlink, Cyan);
+end;
+
+
+function aLtRedOnCyan: Str14;
+begin
+  aLtRedOnCyan := MakeAnsiString(LightRed, Cyan);
+end;
+
+
+function abLtRedOnCyan: Str14;
+begin
+  abLtRedOnCyan := MakeAnsiString(LightRed + aBlink, Cyan);
+end;
+
+
+function aLtMagentaOnCyan: Str14;
+begin
+  aLtMagentaOnCyan := MakeAnsiString(LightMagenta, Cyan);
+end;
+
+
+function abLtMagentaOnCyan: Str14;
+begin
+  abLtMagentaOnCyan := MakeAnsiString(LightMagenta + aBlink, Cyan);
+end;
+
+
+function aYellowOnCyan: Str14;
+begin
+  aYellowOnCyan := MakeAnsiString(Yellow, Cyan);
+end;
+
+
+function abYellowOnCyan: Str14;
+begin
+  abYellowOnCyan := MakeAnsiString(Yellow + aBlink, Cyan);
+end;
+
+
+function aWhiteOnCyan: Str14;
+begin
+  aWhiteOnCyan := MakeAnsiString(White, Cyan);
+end;
+
+
+function abWhiteOnCyan: Str14;
+begin
+  abWhiteOnCyan := MakeAnsiString(White + aBlink, Cyan);
+end;
+
+
+
+{Red background}
+function aBlackOnRed: Str14;
+begin
+  aBlackOnRed := MakeAnsiString(Black, Red);
+end;
+
+
+function abBlackOnRed: Str14;
+begin
+  abBlackOnRed := MakeAnsiString(Black + aBlink, Red);
+end;
+
+
+function aBlueOnRed: Str14;
+begin
+  aBlueOnRed := MakeAnsiString(Blue, Red);
+end;
+
+
+function abBlueOnRed: Str14;
+begin
+  abBlueOnRed := MakeAnsiString(Blue + aBlink, Red);
+end;
+
+
+function aGreenOnRed: Str14;
+begin
+  aGreenOnRed := MakeAnsiString(Green, Red);
+end;
+
+
+function abGreenOnRed: Str14;
+begin
+  abGreenOnRed := MakeAnsiString(Green + aBlink, Red);
+end;
+
+
+function aCyanOnRed: Str14;
+begin
+  aCyanOnRed := MakeAnsiString(Cyan, Red);
+end;
+
+
+function abCyanOnRed: Str14;
+begin
+  abCyanOnRed := MakeAnsiString(Cyan + aBlink, Red);
+end;
+
+
+function aRedOnRed: Str14;
+begin
+  aRedOnRed := MakeAnsiString(Red, Red);
+end;
+
+
+function abRedOnRed: Str14;
+begin
+  abRedOnRed := MakeAnsiString(Red + aBlink, Red);
+end;
+
+
+function aMagentaOnRed: Str14;
+begin
+  aMagentaOnRed := MakeAnsiString(Magenta, Red);
+end;
+
+
+function abMagentaOnRed: Str14;
+begin
+  abMagentaOnRed := MakeAnsiString(Magenta + aBlink, Red);
+end;
+
+
+function aBrownOnRed: Str14;
+begin
+  aBrownOnRed := MakeAnsiString(Brown, Red);
+end;
+
+
+function abBrownOnRed: Str14;
+begin
+  abBrownOnRed := MakeAnsiString(Brown + aBlink, Red);
+end;
+
+
+function aLtGrayOnRed: Str14;
+begin
+  aLtGrayOnRed := MakeAnsiString(LightGray, Red);
+end;
+
+
+function abLtGrayOnRed: Str14;
+begin
+  abLtGrayOnRed := MakeAnsiString(LightGray + aBlink, Red);
+end;
+
+
+function aDkGrayOnRed: Str14;
+begin
+  aDkGrayOnRed := MakeAnsiString(DarkGray, Red);
+end;
+
+
+function abDkGrayOnRed: Str14;
+begin
+  abDkGrayOnRed := MakeAnsiString(DarkGray + aBlink, Red);
+end;
+
+
+function aLtBlueOnRed: Str14;
+begin
+  aLtBlueOnRed := MakeAnsiString(LightBlue, Red);
+end;
+
+
+function abLtBlueOnRed: Str14;
+begin
+  abLtBlueOnRed := MakeAnsiString(LightBlue + aBlink, Red);
+end;
+
+
+function aLtGreenOnRed: Str14;
+begin
+  aLtGreenOnRed := MakeAnsiString(LightGreen, Red);
+end;
+
+
+function abLtGreenOnRed: Str14;
+begin
+  abLtGreenOnRed := MakeAnsiString(LightGreen + aBlink, Red);
+end;
+
+
+function aLtCyanOnRed: Str14;
+begin
+  aLtCyanOnRed := MakeAnsiString(LightCyan, Red);
+end;
+
+
+function abLtCyanOnRed: Str14;
+begin
+  abLtCyanOnRed := MakeAnsiString(LightCyan + aBlink, Red);
+end;
+
+
+function aLtRedOnRed: Str14;
+begin
+  aLtRedOnRed := MakeAnsiString(LightRed, Red);
+end;
+
+
+function abLtRedOnRed: Str14;
+begin
+  abLtRedOnRed := MakeAnsiString(LightRed + aBlink, Red);
+end;
+
+
+function aLtMagentaOnRed: Str14;
+begin
+  aLtMagentaOnRed := MakeAnsiString(LightMagenta, Red);
+end;
+
+
+function abLtMagentaOnRed: Str14;
+begin
+  abLtMagentaOnRed := MakeAnsiString(LightMagenta + aBlink, Red);
+end;
+
+
+function aYellowOnRed: Str14;
+begin
+  aYellowOnRed := MakeAnsiString(Yellow, Red);
+end;
+
+
+function abYellowOnRed: Str14;
+begin
+  abYellowOnRed := MakeAnsiString(Yellow + aBlink, Red);
+end;
+
+
+function aWhiteOnRed: Str14;
+begin
+  aWhiteOnRed := MakeAnsiString(White, Red);
+end;
+
+
+function abWhiteOnRed: Str14;
+begin
+  abWhiteOnRed := MakeAnsiString(White + aBlink, Red);
+end;
+
+
+
+{Magenta background}
+function aBlackOnMagenta: Str14;
+begin
+  aBlackOnMagenta := MakeAnsiString(Black, Magenta);
+end;
+
+
+function abBlackOnMagenta: Str14;
+begin
+  abBlackOnMagenta := MakeAnsiString(Black + aBlink, Magenta);
+end;
+
+
+function aBlueOnMagenta: Str14;
+begin
+  aBlueOnMagenta := MakeAnsiString(Blue, Magenta);
+end;
+
+
+function abBlueOnMagenta: Str14;
+begin
+  abBlueOnMagenta := MakeAnsiString(Blue + aBlink, Magenta);
+end;
+
+
+function aGreenOnMagenta: Str14;
+begin
+  aGreenOnMagenta := MakeAnsiString(Green, Magenta);
+end;
+
+
+function abGreenOnMagenta: Str14;
+begin
+  abGreenOnMagenta := MakeAnsiString(Green + aBlink, Magenta);
+end;
+
+
+function aCyanOnMagenta: Str14;
+begin
+  aCyanOnMagenta := MakeAnsiString(Cyan, Magenta);
+end;
+
+
+function abCyanOnMagenta: Str14;
+begin
+  abCyanOnMagenta := MakeAnsiString(Cyan + aBlink, Magenta);
+end;
+
+
+function aRedOnMagenta: Str14;
+begin
+  aRedOnMagenta := MakeAnsiString(Red, Magenta);
+end;
+
+
+function abRedOnMagenta: Str14;
+begin
+  abRedOnMagenta := MakeAnsiString(Red + aBlink, Magenta);
+end;
+
+
+function aMagentaOnMagenta: Str14;
+begin
+  aMagentaOnMagenta := MakeAnsiString(Magenta, Magenta);
+end;
+
+
+function abMagentaOnMagenta: Str14;
+begin
+  abMagentaOnMagenta := MakeAnsiString(Magenta + aBlink, Magenta);
+end;
+
+
+function aBrownOnMagenta: Str14;
+begin
+  aBrownOnMagenta := MakeAnsiString(Brown, Magenta);
+end;
+
+
+function abBrownOnMagenta: Str14;
+begin
+  abBrownOnMagenta := MakeAnsiString(Brown + aBlink, Magenta);
+end;
+
+
+function aLtGrayOnMagenta: Str14;
+begin
+  aLtGrayOnMagenta := MakeAnsiString(LightGray, Magenta);
+end;
+
+
+function abLtGrayOnMagenta: Str14;
+begin
+  abLtGrayOnMagenta := MakeAnsiString(LightGray + aBlink, Magenta);
+end;
+
+
+function aDkGrayOnMagenta: Str14;
+begin
+  aDkGrayOnMagenta := MakeAnsiString(DarkGray, Magenta);
+end;
+
+
+function abDkGrayOnMagenta: Str14;
+begin
+  abDkGrayOnMagenta := MakeAnsiString(DarkGray + aBlink, Magenta);
+end;
+
+
+function aLtBlueOnMagenta: Str14;
+begin
+  aLtBlueOnMagenta := MakeAnsiString(LightBlue, Magenta);
+end;
+
+
+function abLtBlueOnMagenta: Str14;
+begin
+  abLtBlueOnMagenta := MakeAnsiString(LightBlue + aBlink, Magenta);
+end;
+
+
+function aLtGreenOnMagenta: Str14;
+begin
+  aLtGreenOnMagenta := MakeAnsiString(LightGreen, Magenta);
+end;
+
+
+function abLtGreenOnMagenta: Str14;
+begin
+  abLtGreenOnMagenta := MakeAnsiString(LightGreen + aBlink, Magenta);
+end;
+
+
+function aLtCyanOnMagenta: Str14;
+begin
+  aLtCyanOnMagenta := MakeAnsiString(LightCyan, Magenta);
+end;
+
+
+function abLtCyanOnMagenta: Str14;
+begin
+  abLtCyanOnMagenta := MakeAnsiString(Lightcyan + aBlink, Magenta);
+end;
+
+
+function aLtRedOnMagenta: Str14;
+begin
+  aLtRedOnMagenta := MakeAnsiString(LightRed, Magenta);
+end;
+
+
+function abLtRedOnMagenta: Str14;
+begin
+  abLtRedOnMagenta := MakeAnsiString(LightRed + aBlink, Magenta);
+end;
+
+
+function aLtMagentaOnMagenta: Str14;
+begin
+  aLtMagentaOnMagenta := MakeAnsiString(LightMagenta, Magenta);
+end;
+
+
+function abLtMagentaOnMagenta: Str14;
+begin
+  abLtMagentaOnMagenta := MakeAnsiString(LightMagenta + aBlink, Magenta);
+end;
+
+
+function aYellowOnMagenta: Str14;
+begin
+  aYellowOnMagenta := MakeAnsiString(Yellow, Magenta);
+end;
+
+
+function abYellowOnMagenta: Str14;
+begin
+  abYellowOnMagenta := MakeAnsiString(Yellow + aBlink, Magenta);
+end;
+
+
+function aWhiteOnMagenta: Str14;
+begin
+  aWhiteOnMagenta := MakeAnsiString(White, Magenta);
+end;
+
+
+function abWhiteOnMagenta: Str14;
+begin
+  abWhiteOnMagenta := MakeAnsiString(White + aBlink, Magenta);
+end;
+
+
+
+{Brown background}
+function aBlackOnBrown: Str14;
+begin
+  aBlackOnBrown := MakeAnsiString(Black, Brown);
+end;
+
+
+function abBlackOnBrown: Str14;
+begin
+  abBlackOnBrown := MakeAnsiString(Black + aBlink, Brown);
+end;
+
+
+function aBlueOnBrown: Str14;
+begin
+  aBlueOnBrown := MakeAnsiString(Blue, Brown);
+end;
+
+
+function abBlueOnBrown: Str14;
+begin
+  abBlueOnBrown := MakeAnsiString(Blue + aBlink, Brown);
+end;
+
+
+function aGreenOnBrown: Str14;
+begin
+  aGreenOnBrown := MakeAnsiString(Green, Brown);
+end;
+
+
+function abGreenOnBrown: Str14;
+begin
+  abGreenOnBrown := MakeAnsiString(Green + aBlink, Brown);
+end;
+
+
+function aCyanOnBrown: Str14;
+begin
+  aCyanOnBrown := MakeAnsiString(Cyan, Brown);
+end;
+
+
+function abCyanOnBrown: Str14;
+begin
+  abCyanOnBrown := MakeAnsiString(Cyan + aBlink, Brown);
+end;
+
+
+function aRedOnBrown: Str14;
+begin
+  aRedOnBrown := MakeAnsiString(Red, Brown);
+end;
+
+
+function abRedOnBrown: Str14;
+begin
+  abRedOnBrown := MakeAnsiString(Red + aBlink, Brown);
+end;
+
+
+function aMagentaOnBrown: Str14;
+begin
+  aMagentaOnBrown := MakeAnsiString(Magenta, Brown);
+end;
+
+
+function abMagentaOnBrown: Str14;
+begin
+  abMagentaOnBrown := MakeAnsiString(Magenta + aBlink, Brown);
+end;
+
+
+function aBrownOnBrown: Str14;
+begin
+  aBrownOnBrown := MakeAnsiString(Brown, Brown);
+end;
+
+
+function abBrownOnBrown: Str14;
+begin
+  abBrownOnBrown := MakeAnsiString(Brown + aBlink, Brown);
+end;
+
+
+function aLtGrayOnBrown: Str14;
+begin
+  aLtGrayOnBrown := MakeAnsiString(LightGray, Brown);
+end;
+
+
+function abLtGrayOnBrown: Str14;
+begin
+  abLtGrayOnBrown := MakeAnsiString(LightGray + aBlink, Brown);
+end;
+
+
+function aDkGrayOnBrown: Str14;
+begin
+  aDkGrayOnBrown := MakeAnsiString(DarkGray, Brown);
+end;
+
+
+function abDkGrayOnBrown: Str14;
+begin
+  abDkGrayOnBrown := MakeAnsiString(DarkGray + aBlink, Brown);
+end;
+
+
+function aLtBlueOnBrown: Str14;
+begin
+  aLtBlueOnBrown := MakeAnsiString(LightBlue, Brown);
+end;
+
+
+function abLtBlueOnBrown: Str14;
+begin
+  abLtBlueOnBrown := MakeAnsiString(LightBlue + aBlink, Brown);
+end;
+
+
+function aLtGreenOnBrown: Str14;
+begin
+  aLtGreenOnBrown := MakeAnsiString(LightGreen, Brown);
+end;
+
+
+function abLtGreenOnBrown: Str14;
+begin
+  abLtGreenOnBrown := MakeAnsiString(LightGreen + aBlink, Brown);
+end;
+
+
+function aLtCyanOnBrown: Str14;
+begin
+  aLtCyanOnBrown := MakeAnsiString(LightCyan, Brown);
+end;
+
+
+function abLtCyanOnBrown: Str14;
+begin
+  abLtCyanOnBrown := MakeAnsiString(LightCyan + aBlink, Brown);
+end;
+
+
+function aLtRedOnBrown: Str14;
+begin
+  aLtRedOnBrown := MakeAnsiString(LightRed, Brown);
+end;
+
+
+function abLtRedOnBrown: Str14;
+begin
+  abLtRedOnBrown := MakeAnsiString(LightRed + aBlink, Brown);
+end;
+
+
+function aLtMagentaOnBrown: Str14;
+begin
+  aLtMagentaOnBrown := MakeAnsiString(LightMagenta, Brown);
+end;
+
+
+function abLtMagentaOnBrown: Str14;
+begin
+  abLtMagentaOnBrown := MakeAnsiString(LightMagenta + aBlink, Brown);
+end;
+
+
+function aYellowOnBrown: Str14;
+begin
+  aYellowOnBrown := MakeAnsiString(Yellow, Brown);
+end;
+
+
+function abYellowOnBrown: Str14;
+begin
+  abYellowOnBrown := MakeAnsiString(Yellow + aBlink, Brown);
+end;
+
+
+function aWhiteOnBrown: Str14;
+begin
+  aWhiteOnBrown := MakeAnsiString(White, Brown);
+end;
+
+
+function abWhiteOnBrown: Str14;
+begin
+  abWhiteOnBrown := MakeAnsiString(White + aBlink, Brown);
+end;
+
+
+
+{Light gray backgrouund}
+function aBlackOnLtGray: Str14;
+begin
+  aBlackOnLtGray := MakeAnsiString(Black, LightGray);
+end;
+
+
+function abBlackOnLtGray: Str14;
+begin
+  abBlackOnLtGray := MakeAnsiString(Black + aBlink, LightGray);
+end;
+
+
+function aBlueOnLtGray: Str14;
+begin
+  aBlueOnLtGray := MakeAnsiString(Blue, LightGray);
+end;
+
+
+function abBlueOnLtGray: Str14;
+begin
+  abBlueOnLtGray := MakeAnsiString(Blue + aBlink, LightGray);
+end;
+
+
+function aGreenOnLtGray: Str14;
+begin
+  aGreenOnLtGray := MakeAnsiString(Green, LightGray);
+end;
+
+
+function abGreenOnLtGray: Str14;
+begin
+  abGreenOnLtGray := MakeAnsiString(Green + aBlink, LightGray);
+end;
+
+
+function aCyanOnLtGray: Str14;
+begin
+  aCyanOnLtGray := MakeAnsiString(Cyan, LightGray);
+end;
+
+
+function abCyanOnLtGray: Str14;
+begin
+  abCyanOnLtGray := MakeAnsiString(Cyan + aBlink, LightGray);
+end;
+
+
+function aRedOnLtGray: Str14;
+begin
+  aRedOnLtGray := MakeAnsiString(Red, LightGray);
+end;
+
+
+function abRedOnLtGray: Str14;
+begin
+  abRedOnLtGray := MakeAnsiString(Red + aBlink, LightGray);
+end;
+
+
+function aMagentaOnLtGray: Str14;
+begin
+  aMagentaOnLtGray := MakeAnsiString(Magenta, LightGray);
+end;
+
+
+function abMagentaOnLtGray: Str14;
+begin
+  abMagentaOnLtGray := MakeAnsiString(Magenta + aBlink, LightGray);
+end;
+
+
+function aBrownOnLtGray: Str14;
+begin
+  aBrownOnLtGray := MakeAnsiString(Brown, LightGray);
+end;
+
+
+function abBrownOnLtGray: Str14;
+begin
+  abBrownOnLtGray := MakeAnsiString(Brown + aBlink, LightGray);
+end;
+
+
+function aLtGrayOnLtGray: Str14;
+begin
+  aLtGrayOnLtGray := MakeAnsiString(LightGray, LightGray);
+end;
+
+
+function abLtGrayOnLtGray: Str14;
+begin
+  abLtGrayOnLtGray := MakeAnsiString(LightGray + aBlink, LightGray);
+end;
+
+
+function aDkGrayOnLtGray: Str14;
+begin
+  aDkGrayOnLtGray := MakeAnsiString(DarkGray, LightGray);
+end;
+
+
+function abDkGrayOnLtGray: Str14;
+begin
+  abDkGrayOnLtGray := MakeAnsiString(DarkGray + aBlink, LightGray);
+end;
+
+
+function aLtBlueOnLtGray: Str14;
+begin
+  aLtBlueOnLtGray := MakeAnsiString(LightBlue, LightGray);
+end;
+
+
+function abLtBlueOnLtGray: Str14;
+begin
+  abLtBlueOnLtGray := MakeAnsiString(LightBlue + aBlink, LightGray);
+end;
+
+
+function aLtGreenOnLtGray: Str14;
+begin
+  aLtGreenOnLtGray := MakeAnsiString(LightGreen, LightGray);
+end;
+
+
+function abLtGreenOnLtGray: Str14;
+begin
+  abLtGreenOnLtGray := MakeAnsiString(LightGreen + aBlink, LightGray);
+end;
+
+
+function aLtCyanOnLtGray: Str14;
+begin
+  aLtCyanOnLtGray := MakeAnsiString(LightCyan, LightGray);
+end;
+
+
+function abLtCyanOnLtGray: Str14;
+begin
+  abLtCyanOnLtGray := MakeAnsiString(LightCyan + aBlink, LightGray);
+end;
+
+
+function aLtRedOnLtGray: Str14;
+begin
+  aLtRedOnLtGray := MakeAnsiString(LightRed, LightGray);
+end;
+
+
+function abLtRedOnLtGray: Str14;
+begin
+  abLtRedOnLtGray := MakeAnsiString(LightRed + aBlink, LightGray);
+end;
+
+
+function aLtMagentaOnLtGray: Str14;
+begin
+  aLtMagentaOnLtGray := MakeAnsiString(LightMagenta, LightGray);
+end;
+
+
+function abLtMagentaOnLtGray: Str14;
+begin
+  abLtMagentaOnLtGray := MakeAnsiString(LightMagenta + aBlink, LightGray);
+end;
+
+
+function aYellowOnLtGray: Str14;
+begin
+  aYellowOnLtGray := MakeAnsiString(Yellow, LightGray);
+end;
+
+
+function abYellowOnLtGray: Str14;
+begin
+  abYellowOnLtGray := MakeAnsiString(Yellow + aBlink, LightGray);
+end;
+
+
+function aWhiteOnLtGray: Str14;
+begin
+  aWhiteOnLtGray := MakeAnsiString(White, LightGray);
+end;
+
+
+function abWhiteOnLtGray: Str14;
+begin
+  abWhiteOnLtGray := MakeAnsiString(White + aBlink, LightGray);
+end;
+
+
+
+
+begin
+
+end. {Unit AnsiColr .end.}

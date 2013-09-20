@@ -24,52 +24,53 @@ Copyright 2007 Jakob Dangarden
 }
 
 
-Unit JakeLock; {Usurper - Filelocking routine used when
+unit JakeLock; {Usurper - Filelocking routine used when
                           Config.NetShareMethod=RecordLocking}
 
-Interface
+interface
 
-Uses Init;
+uses
+  Init;
 
-function File_Lock(var F; Action: filAction; FPos,Len: Longint): Word;
+function File_Lock(var F; Action: filAction; FPos, Len: longint): word;
 
-Implementation
+implementation
 
-Uses Dos {$IFNDEF MSDOS}, RPPort{$ENDIF};
+uses
+  Dos {$IFNDEF MSDOS}, RPPort{$ENDIF};
 
 {this routine was taken from the SWAG archive, locks records AND files}
 {$IFDEF MSDOS}
-function File_Lock(var F; Action: filAction; FPos,Len: Longint): Word;
- assembler;
+function File_Lock(var F; Action: filAction; FPos, Len: longint): word;
+  assembler;
 asm
-  je @@End
-  mov al, Action  {0=Lock,1=Unlock}
-  mov ah, $5C     {Dos lock function}
-  les si, F       {Load F}
-  mov bx, es:[si] {Get file handle}
-  les dx, Fpos
-  mov cx, es      {CX:DI=Begin position}
-  les di, len
-  mov si, es      {SI:DI length lock area}
-  int 21h         {MS-DOS}
-  jc @@End        {If error, return AX}
-  xor ax, ax      {Else, return 0}
-@@End:
-
+         JE      @@end
+         MOV     AL, Action  {0=Lock,1=Unlock}
+         MOV     AH, $5C     {Dos lock function}
+         LES     SI, F       {Load F}
+         MOV     BX, ES:[SI] {Get file handle}
+         LES     DX, Fpos
+         MOV     CX, ES      {CX:DI=Begin position}
+         LES     DI, len
+         MOV     SI, ES      {SI:DI length lock area}
+         INT     21h         {MS-DOS}
+         JC      @@end        {If error, return AX}
+         XOR     AX, AX      {Else, return 0}
+         @@end:
 end; {File_Lock *end*}
 {$ENDIF}
 {$IFNDEF MSDOS}
-function File_Lock(var F; Action: filAction; FPos,Len: Longint): Word;
+function File_Lock(var F; Action: filAction; FPos, Len: longint): word;
 begin
   if (Action = FLock) then
   begin
     File_Lock := RPLockFile(FileRec(F).Handle, FPos, Len);
-  end else
-  if (Action = FUnlock) then
+  end else if (Action = FUnlock) then
   begin
     File_Lock := RPUnLockFile(FileRec(F).Handle, FPos, Len);
   end;
-end; { func. LockFile }
+end;
+{ func. LockFile }
 {$ENDIF}
 
 end. {Unit JakeLock .end.}

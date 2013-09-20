@@ -3,22 +3,24 @@
 {$ENDIF}
 { OVERXMS - Loads overlays in XMS.  Written by Wilbert van Leijen }
 
-Unit OverXMS;
+unit OverXMS;
 
 {$O- }
 
-Interface
-uses Overlay;
+interface
 
-Const
+uses
+  Overlay;
+
+const
   ovrNoXMSDriver = -7;  { No XMS driver installed }
   ovrNoXMSMemory = -8;  { Insufficient XMS memory available }
 
-Procedure OvrInitXMS;
+procedure OvrInitXMS;
 
-Implementation
+implementation
 
-Procedure OvrInitXMS; External;
+procedure OvrInitXMS; external;
 {$L OVERXMS.OBJ }
 
 end.  { OverXMS }
