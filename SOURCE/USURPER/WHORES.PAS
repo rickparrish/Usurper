@@ -138,7 +138,8 @@ begin
 
     case cho of
       '?': begin
-        if player.expert = True then display_menu(True, False)
+        if player.expert = True then
+          display_menu(True, False)
         else display_menu(False, False);
       end;
       'R': begin
@@ -222,7 +223,8 @@ begin
               clearscreen;
               crlf;
               d(config.textcolor, 'The mutant woman takes you upstairs and into a small and dirty room.');
-              d(global_plycol, my_whore + config.textcol1 + ' wants to see ' + uyellow + '500' + config.textcol1 + ' ' + many_money(500) + ' before you' + ' can get what you want.');
+              d(global_plycol, my_whore + config.textcol1 + ' wants to see ' + uyellow + '500' +
+                config.textcol1 + ' ' + many_money(500) + ' before you' + ' can get what you want.');
 
               if confirm('Pay ' + uplc + my_whore + config.textcol1, 'n') = True then
               begin
@@ -230,7 +232,8 @@ begin
                 begin
                   crlf;
                   d(config.textcolor, 'When she sees that you don not posess this amount, she starts to scream');
-                  d(config.textcolor, 'for ' + uplc + 'Clarissa' + config.textcol1 + ' to throw you out. ' + utalkc + 'Ha! this dork can''t' + ' pay!' + config.textcol1 + ' she shouts down');
+                  d(config.textcolor, 'for ' + uplc + 'Clarissa' + config.textcol1 + ' to throw you out. ' +
+                    utalkc + 'Ha! this dork can''t' + ' pay!' + config.textcol1 + ' she shouts down');
                   d(config.textcolor, 'the stairs. You feel like a dork to...');
                   crlf;
                   pause;
@@ -239,7 +242,8 @@ begin
                 if player.gold >= 500 then
                 begin
                   crlf;
-                  d(config.textcolor, 'You give the greedy whore the ' + config.moneytype + '. ' + uplc + my_whore + config.textcol1 + ' then gives you');
+                  d(config.textcolor, 'You give the greedy whore the ' + config.moneytype + '. ' +
+                    uplc + my_whore + config.textcol1 + ' then gives you');
                   d(config.textcolor, 'an hour of sexual satisfaction....You feel tired when you');
                   d(config.textcolor, 'leave and hope that you don''t will get any disease');
                   d(config.textcolor, 'from the whore...you promise yourself to strangle the bitch');
@@ -279,15 +283,19 @@ begin
 
               clearscreen;
               d(global_plycol, my_whore + config.textcol1 + ' takes your hand and lead you upstairs into a room.');
-              d(config.textcolor, 'She demands to see the ' + uyellow + '2000' + config.textcol1 + ' ' + many_money(2000) + ' first!');
+              d(config.textcolor, 'She demands to see the ' + uyellow + '2000' + config.textcol1 +
+                ' ' + many_money(2000) + ' first!');
               if confirm('Pay ' + uplc + my_whore + config.textcol1, 'n') = True then
               begin
                 if player.gold < 2000 then
                 begin
                   crlf;
-                  d(config.textcolor, utalkc + 'You little rascal!' + uplc + ' ' + my_whore + config.textcol1 + ' screams. A couple of ' + 'trolls');
-                  d(config.textcolor, 'arrive and throw you out in the muddy street. ' + utalkc + 'Come back when' + config.textcol1);
-                  d(global_talkcol, 'you can pay!' + uplc + ' Clarissa' + config.textcol1 + ' shouts before she close the door.');
+                  d(config.textcolor, utalkc + 'You little rascal!' + uplc + ' ' + my_whore +
+                    config.textcol1 + ' screams. A couple of ' + 'trolls');
+                  d(config.textcolor, 'arrive and throw you out in the muddy street. ' + utalkc +
+                    'Come back when' + config.textcol1);
+                  d(global_talkcol, 'you can pay!' + uplc + ' Clarissa' + config.textcol1 +
+                    ' shouts before she close the door.');
                   crlf;
                   pause;
                   adios := True;
@@ -298,7 +306,8 @@ begin
                   d(config.textcolor, 'You give her the ' + config.moneytype + '. Then she undress you and');
                   d(config.textcolor, 'give you a couple of hours filled with troll-sex.');
                   d(config.textcolor, 'You leave with a smile on your face. That was good!');
-                  d(config.textcolor, 'You just hope that ' + uplc + my_whore + config.textcol1 + ' is still free from diseases...');
+                  d(config.textcolor, 'You just hope that ' + uplc + my_whore + config.textcol1 +
+                    ' is still free from diseases...');
                   crlf;
                   pause;
                   yy := 2;
@@ -330,14 +339,17 @@ begin
               clearscreen;
               crlf;
               d(config.textcolor, 'The gnoll girl lead you up to the rooms on the second floor.');
-              d(global_talkcol, 'Do you have ' + uyellow + '5,000' + utalkc + ' in ' + config.moneytype + '?' + uplc + ' ' + my_whore + config.textcol1 + ' asks.');
+              d(global_talkcol, 'Do you have ' + uyellow + '5,000' + utalkc + ' in ' + config.moneytype +
+                '?' + uplc + ' ' + my_whore + config.textcol1 + ' asks.');
               if confirm('Pay the Gnoll-girl', 'n') = True then
               begin
                 if player.gold < 5000 then
                 begin
                   crlf;
-                  d(global_talkcol, 'But ' + uplc + player.name2 + utalkc + '! You have not enough ' + config.moneytype + ' to enjoy my body' + config.textcol1);
-                  d(global_plycol, my_whore + config.textcol1 + ' says. ' + utalkc + 'Get out from here and don''t take up my' + config.textcol1);
+                  d(global_talkcol, 'But ' + uplc + player.name2 + utalkc + '! You have not enough ' +
+                    config.moneytype + ' to enjoy my body' + config.textcol1);
+                  d(global_plycol, my_whore + config.textcol1 + ' says. ' + utalkc +
+                    'Get out from here and don''t take up my' + config.textcol1);
                   d(global_talkcol, 'valuable time, you pathetic ' + race_display(2, player.race, 0) + '!' + config.textcol1);
                   d(config.textcolor, 'She slams the door in your face, and you stand there like a sheep...');
                   crlf;
@@ -349,7 +361,8 @@ begin
                   crlf;
                   d(config.textcolor, 'With a deep sigh you give her the ' + config.moneytype + '. ' + utalkc +
                     'You are robbing me blind' + config.textcol1);
-                  d(config.textcolor, 'you cry...But you soon feel better when ' + uplc + my_whore + config.textcol1 + ' gives you');
+                  d(config.textcolor, 'you cry...But you soon feel better when ' + uplc + my_whore +
+                    config.textcol1 + ' gives you');
                   d(config.textcolor, 'a lesson in fearless Gnoll-sex. Afterwards you don''t regret');
                   d(config.textcolor, 'paying a lesser fortune for this exciting adventure, and you promise');
                   d(config.textcolor, 'yourself to return to ' + uplc + my_whore + config.textcol1 + '...');
@@ -387,17 +400,21 @@ begin
               clearscreen;
               crlf;
               d(global_plycol, my_whore + config.textcol1 + ' gives you a tired smile and then guides you to her room.');
-              d(global_talkcol, 'Alright Jimbo, show me ' + uyellow + '10,000' + utalkc + ' in pure ' + config.moneytype + '!' + config.textcol1 + ' the dwarf-slut demands.');
+              d(global_talkcol, 'Alright Jimbo, show me ' + uyellow + '10,000' + utalkc + ' in pure ' +
+                config.moneytype + '!' + config.textcol1 + ' the dwarf-slut demands.');
 
               if confirm('Pay ' + uplc + my_whore + uyellow + ' 10,000' + config.textcol1, 'n') = True then
               begin
                 if player.gold < 10000 then
                 begin
                   crlf;
-                  d(global_talkcol, 'Hey you damn Clown! You don''t have the ' + config.moneytype + ' to get my pleasure!' + config.textcol1);
+                  d(global_talkcol, 'Hey you damn Clown! You don''t have the ' + config.moneytype +
+                    ' to get my pleasure!' + config.textcol1);
                   d(config.textcolor, 'You stand there looking like a fool. ' + utalkc + 'So so, get out here and make');
-                  d(global_talkcol, 'some ' + config.moneytype + ' and then come back! Mama ' + uplc + my_whore + config.textcol1 + ' will take care of you then!' + config.textcol1);
-                  d(config.textcolor, 'You conclude that you are a poor ' + race_display(2, player.race, 0) + ' without ' + config.moneytype + '...');
+                  d(global_talkcol, 'some ' + config.moneytype + ' and then come back! Mama ' +
+                    uplc + my_whore + config.textcol1 + ' will take care of you then!' + config.textcol1);
+                  d(config.textcolor, 'You conclude that you are a poor ' + race_display(2, player.race, 0) +
+                    ' without ' + config.moneytype + '...');
                   crlf;
                   pause;
                   adios := True;
@@ -405,8 +422,10 @@ begin
                 if player.gold >= 10000 then
                 begin
                   crlf;
-                  d(config.textcolor, 'With a deep sigh you give her the ' + config.moneytype + '. ' + utalkc + 'You are robbing me blind!' + config.textcol1);
-                  d(config.textcolor, 'you cry...But you soon feel better when ' + uplc + my_whore + config.textcol1 + ' gives you');
+                  d(config.textcolor, 'With a deep sigh you give her the ' + config.moneytype +
+                    '. ' + utalkc + 'You are robbing me blind!' + config.textcol1);
+                  d(config.textcolor, 'you cry...But you soon feel better when ' + uplc + my_whore +
+                    config.textcol1 + ' gives you');
                   d(config.textcolor, 'a lesson in fearless Gnoll-sex. Afterwards you don''t regret');
                   d(config.textcolor, 'paying a lesser fortune for this exciting adventure, and you promise');
                   d(config.textcolor, 'yourself to return to ' + uplc + my_whore + config.textcol1 + '...');
@@ -441,16 +460,20 @@ begin
               my_whore := 'Melissa';
               clearscreen;
               crlf;
-              d(config.textcolor, 'Your knees start to shake when you see ' + uplc + my_whore + config.textcol1 + ' approaching.');
+              d(config.textcolor, 'Your knees start to shake when you see ' + uplc + my_whore +
+                config.textcol1 + ' approaching.');
               d(config.textcolor, 'Gee, this lady don''t belong here! You think for');
-              d(config.textcolor, 'yourself. ' + utalkc + 'My services cost ' + uyellow + '20,000 ' + config.textcol1 + many_money(20000) + uplc + ' ' + my_whore + config.textcol1 + ' says.');
+              d(config.textcolor, 'yourself. ' + utalkc + 'My services cost ' + uyellow + '20,000 ' +
+                config.textcol1 + many_money(20000) + uplc + ' ' + my_whore + config.textcol1 + ' says.');
               if confirm('Pay ' + uplc + my_whore + config.textcol1, 'n') = True then
               begin
                 if player.gold < 20000 then
                 begin
                   crlf;
-                  d(global_talkcol, 'It seems like you don''t have the ' + config.moneytype + '!' + uplc + ' ' + my_whore + config.textcol1 + ' whispers.');
-                  d(global_talkcol, 'Maybe later my brave warrior... ' + config.textcol1 + 'You just stand there for along ' + 'time longing');
+                  d(global_talkcol, 'It seems like you don''t have the ' + config.moneytype +
+                    '!' + uplc + ' ' + my_whore + config.textcol1 + ' whispers.');
+                  d(global_talkcol, 'Maybe later my brave warrior... ' + config.textcol1 +
+                    'You just stand there for along ' + 'time longing');
                   d(config.textcolor, 'for the elf-girl. You could pay just too looking at her! Those elves sure');
                   d(config.textcolor, 'are filled with hot magic, you conclude before you leave...');
                   crlf;
@@ -460,9 +483,11 @@ begin
                 if player.gold >= 20000 then
                 begin
                   crlf;
-                  d(config.textcolor, 'You gladly give the beautiful woman the ' + config.moneytype + '. ' + uplc + my_whore + config.textcol1 + ' put them');
+                  d(config.textcolor, 'You gladly give the beautiful woman the ' + config.moneytype +
+                    '. ' + uplc + my_whore + config.textcol1 + ' put them');
                   d(config.textcolor, 'under the bed and then puts out the light. ' + uplc + 'I hope you will approve');
-                  d(config.textcolor, 'of my ways' + config.textcol1 + ' she says in a sad voice. A couple of hours later you');
+                  d(config.textcolor, 'of my ways' + config.textcol1 +
+                    ' she says in a sad voice. A couple of hours later you');
                   d(config.textcolor, 'feel totally refreshed. It must be that elf-magic...');
                   d(global_plycol, my_whore + config.textcol1 + ' gives you a glance before you leave...');
                   crlf;
@@ -495,9 +520,11 @@ begin
               my_whore := 'Sarah';
               clearscreen;
               crlf;
-              d(global_plycol, my_whore + config.textcol1 + ' examines you and seems to be quite pleased with what she sees.');
+              d(global_plycol, my_whore + config.textcol1 +
+                ' examines you and seems to be quite pleased with what she sees.');
               d(global_talkcol, 'Come with me and we have some fun stranger!' + config.textcol1 + ' Yeah, you bet we gonna');
-              d(config.textcolor, 'have fun, you think for yourself. ' + uyellow + '30,000' + utalkc + ' in ' + many_money(30000) + ' first!' + uplc + ' ' + my_whore + config.textcol1 + ' reminds you.');
+              d(config.textcolor, 'have fun, you think for yourself. ' + uyellow + '30,000' +
+                utalkc + ' in ' + many_money(30000) + ' first!' + uplc + ' ' + my_whore + config.textcol1 + ' reminds you.');
 
               if confirm('Pay the Whore', 'n') = True then
               begin
@@ -515,11 +542,14 @@ begin
                 if player.gold >= 30000 then
                 begin
                   crlf;
-                  d(config.textcolor, 'You hand ' + uplc + my_whore + config.textcol1 + ' the ' + config.moneytype + ' which she carefully hides in her');
-                  d(config.textcolor, 'clothes. ' + utalkc + 'Come over here sailor!' + config.textcol1 + ' she then says in a caring' + ' voice.');
+                  d(config.textcolor, 'You hand ' + uplc + my_whore + config.textcol1 + ' the ' +
+                    config.moneytype + ' which she carefully hides in her');
+                  d(config.textcolor, 'clothes. ' + utalkc + 'Come over here sailor!' + config.textcol1 +
+                    ' she then says in a caring' + ' voice.');
                   d(config.textcolor, 'You approach the bed and she starts to undress you...');
                   d(config.textcolor, 'You awake early in the morning and try to recollect your evening');
-                  d(config.textcolor, 'with ' + uplc + my_whore + config.textcol1 + ', but it''s all like a dream filled with ' + 'pleasure...');
+                  d(config.textcolor, 'with ' + uplc + my_whore + config.textcol1 +
+                    ', but it''s all like a dream filled with ' + 'pleasure...');
                   crlf;
                   pause;
 
@@ -555,16 +585,20 @@ begin
               d(config.textcolor, 'This must be the first whore you''ve seen that smokes a pipe!');
               d(config.textcolor, 'Hell, you thought that elves didn''t smoke...but this proves to be somehting special!');
 
-              d(global_talkcol, 'Ok kid, wanna have some fun with mother ' + uplc + my_whore + utalkc + '? show me ' + uyellow + '40,000' + utalkc + ' ' + many_money(40000) + '!' + config.textcol1);
+              d(global_talkcol, 'Ok kid, wanna have some fun with mother ' + uplc + my_whore +
+                utalkc + '? show me ' + uyellow + '40,000' + utalkc + ' ' + many_money(40000) + '!' + config.textcol1);
 
               if confirm('Pay', 'n') = True then
               begin
                 if player.gold < 40000 then
                 begin
                   crlf;
-                  d(global_talkcol, 'Sorry kid, no pesetas no pleasure!' + uplc + ' ' + my_whore + config.textcol1 + ' declares in a tired voice.');
-                  d(config.textcolor, 'Well, to pay ' + uyellow + '40,000' + config.textcol1 + ' ' + many_money(40000) + ' for an old smoking elf, that sounds crazy!');
-                  d(config.textcolor, 'What does she except to get for that kind of appearance you wonder as you walk down the' + ' stairs.');
+                  d(global_talkcol, 'Sorry kid, no pesetas no pleasure!' + uplc + ' ' + my_whore +
+                    config.textcol1 + ' declares in a tired voice.');
+                  d(config.textcolor, 'Well, to pay ' + uyellow + '40,000' + config.textcol1 +
+                    ' ' + many_money(40000) + ' for an old smoking elf, that sounds crazy!');
+                  d(config.textcolor, 'What does she except to get for that kind of appearance you wonder as you walk down the'
+                    + ' stairs.');
                   d(config.textcolor, 'Bye bye ' + uplc + my_whore + config.textcol1 + '!...');
                   crlf;
                   pause;
@@ -573,11 +607,13 @@ begin
                 if player.gold >= 40000 then
                 begin
                   crlf;
-                  d(global_plycol, my_whore + config.textcol1 + ' grabs the ' + config.moneytype + ' before you can say ' + utalkc + 'Prosit' + config.textcol1 + '!');
+                  d(global_plycol, my_whore + config.textcol1 + ' grabs the ' + config.moneytype +
+                    ' before you can say ' + utalkc + 'Prosit' + config.textcol1 + '!');
                   d(global_talkcol, 'Let mother show you how to do...' + config.textcol1 + ' she then says in a commanding');
                   d(config.textcolor, 'voice. You let your wild lusts burst in the night...');
                   d(config.textcolor, 'In the morning you wake up with a big smile on your face.');
-                  d(global_talkcol, 'Come back when you can kid ' + uplc + my_whore + config.textcol1 + ' whispers before you go.');
+                  d(global_talkcol, 'Come back when you can kid ' + uplc + my_whore + config.textcol1 +
+                    ' whispers before you go.');
                   crlf;
                   pause;
                   yy := 7;
@@ -616,7 +652,8 @@ begin
                 if player.gold < 70000 then
                 begin
                   crlf;
-                  d(global_talkcol, 'I am sorry my dear young man. But you seem to have a cash problem?' + uplc + ' ' + my_whore + config.textcol1 + ' says with a smile.');
+                  d(global_talkcol, 'I am sorry my dear young man. But you seem to have a cash problem?' +
+                    uplc + ' ' + my_whore + config.textcol1 + ' says with a smile.');
                   d(config.textcolor, 'You promise to be back with more ' + config.moneytype + ' and then leave...');
                   d(config.textcolor, 'Bye bye ' + uplc + my_whore + config.textcol1 + '!...');
                   crlf;
@@ -626,11 +663,14 @@ begin
                 if player.gold >= 70000 then
                 begin
                   crlf;
-                  d(global_plycol, my_whore + config.textcol1 + ' grabs the ' + config.moneytype + ' before you get the chance to' + ' anything.');
-                  d(global_talkcol, 'Let mother show you how to go about' + config.textcol1 + ' she then says in a commanding');
+                  d(global_plycol, my_whore + config.textcol1 + ' grabs the ' + config.moneytype +
+                    ' before you get the chance to' + ' anything.');
+                  d(global_talkcol, 'Let mother show you how to go about' + config.textcol1 +
+                    ' she then says in a commanding');
                   d(config.textcolor, 'voice. You let your wild lusts burst in the night...');
                   d(config.textcolor, 'In the morning you wake up with a big smile on your face.');
-                  d(global_talkcol, 'Come back when you can kid' + uplc + ' ' + my_whore + config.textcol1 + ' whispers before you go.');
+                  d(global_talkcol, 'Come back when you can kid' + uplc + ' ' + my_whore +
+                    config.textcol1 + ' whispers before you go.');
                   crlf;
                   pause;
                   yy := 8;
@@ -668,7 +708,8 @@ begin
                 if player.gold < 100000 then
                 begin
                   crlf;
-                  d(global_talkcol, 'No ' + config.moneytype + ', no ' + my_whore + '!' + uplc + ' Clarissa' + config.textcol1 + ' says!');
+                  d(global_talkcol, 'No ' + config.moneytype + ', no ' + my_whore + '!' + uplc +
+                    ' Clarissa' + config.textcol1 + ' says!');
                   d(config.textcolor, 'You sigh, and leave with your head deep between your shoulders.');
                   d(config.textcolor, 'Bye sweet jewel...');
                   crlf;
@@ -678,10 +719,13 @@ begin
                 if player.gold >= 100000 then
                 begin
                   crlf;
-                  d(global_talkcol, 'So, a ' + race_display(2, player.race, 0) + ' has come to visit me' + uplc + ' ' + my_whore + config.textcol1 + ' says in a');
-                  d(config.textcolor, 'dreaming voice. ' + utalkc + 'I will give you a night to remember! ' + config.textcol1 + 'she then says with');
+                  d(global_talkcol, 'So, a ' + race_display(2, player.race, 0) + ' has come to visit me' +
+                    uplc + ' ' + my_whore + config.textcol1 + ' says in a');
+                  d(config.textcolor, 'dreaming voice. ' + utalkc + 'I will give you a night to remember! ' +
+                    config.textcol1 + 'she then says with');
                   d(config.textcolor, 'a strange look in her eyes. Gee, she must be on drugs, you think for');
-                  d(config.textcolor, 'yourself. Drugs or not, ' + uplc + my_whore + config.textcol1 + ' gives you a new perspective of' + ' what pleasure two');
+                  d(config.textcolor, 'yourself. Drugs or not, ' + uplc + my_whore + config.textcol1 +
+                    ' gives you a new perspective of' + ' what pleasure two');
                   d(config.textcolor, 'individuals can give each other...well at least what one part can give the');
                   d(config.textcolor, 'other...');
                   crlf;
@@ -832,7 +876,8 @@ begin
       {news-paper}
       newsy(True,
         'Lover Boy',
-        ' ' + uplc + player.name2 + config.textcol1 + ' spent the night with ' + uplc + my_whore + config.textcol1 + ', the whore.',
+        ' ' + uplc + player.name2 + config.textcol1 + ' spent the night with ' + uplc + my_whore +
+        config.textcol1 + ', the whore.',
         ' ' + s,
         '',
         '',

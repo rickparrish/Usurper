@@ -86,7 +86,7 @@ const setcol = ulcyan; {what color the settings should be displayed in}
   setcol2    = 11; {same as above but numerical}
 
 
-{*** VARIOUS3 ***}
+      {*** VARIOUS3 ***}
 procedure settings_header(const head: string);
 begin {display game settings routine}
   d(10, head);
@@ -127,12 +127,14 @@ begin
         end;
       end;
 
-      if found then break;
+      if found then
+        break;
     end; {for j:= .end.}
-    if found then break;
+    if found then
+      break;
   end; {for i:= .end.}
 
-end; {load_teammember *end*}
+end;   {load_teammember *end*}
 
 procedure Transfer_TeamStatus(var Source, target: userrec);
 begin
@@ -157,15 +159,24 @@ begin
   pl8.gnollp := 0;
   pl9.gnollp := 0;
 
-  if (pl1.name1 <> '') and (pl1.name2 <> '') then user_save(pl1);
-  if (pl2.name1 <> '') and (pl2.name2 <> '') then user_save(pl2);
-  if (pl3.name1 <> '') and (pl3.name2 <> '') then user_save(pl3);
-  if (pl4.name1 <> '') and (pl4.name2 <> '') then user_save(pl4);
-  if (pl5.name1 <> '') and (pl5.name2 <> '') then user_save(pl5);
-  if (pl6.name1 <> '') and (pl6.name2 <> '') then user_save(pl6);
-  if (pl7.name1 <> '') and (pl7.name2 <> '') then user_save(pl7);
-  if (pl8.name1 <> '') and (pl8.name2 <> '') then user_save(pl8);
-  if (pl9.name1 <> '') and (pl9.name2 <> '') then user_save(pl9);
+  if (pl1.name1 <> '') and (pl1.name2 <> '') then
+    user_save(pl1);
+  if (pl2.name1 <> '') and (pl2.name2 <> '') then
+    user_save(pl2);
+  if (pl3.name1 <> '') and (pl3.name2 <> '') then
+    user_save(pl3);
+  if (pl4.name1 <> '') and (pl4.name2 <> '') then
+    user_save(pl4);
+  if (pl5.name1 <> '') and (pl5.name2 <> '') then
+    user_save(pl5);
+  if (pl6.name1 <> '') and (pl6.name2 <> '') then
+    user_save(pl6);
+  if (pl7.name1 <> '') and (pl7.name2 <> '') then
+    user_save(pl7);
+  if (pl8.name1 <> '') and (pl8.name2 <> '') then
+    user_save(pl8);
+  if (pl9.name1 <> '') and (pl9.name2 <> '') then
+    user_save(pl9);
 
 end; {SAVE_TEAM **END**}
 
@@ -215,7 +226,7 @@ begin
     end;
   end; {case .end.}
 
-  {name=player who shall receive message in lines nice[1-lines]}
+       {name=player who shall receive message in lines nice[1-lines]}
 
   for i := 1 to fs(FsPlayer) do
   begin;
@@ -254,7 +265,7 @@ begin
     end;
   end; {for i:= .end.}
 
-end; {Team_Report *end*}
+end;   {Team_Report *end*}
 
 procedure Team_Online_Report_All(const team: s40; const excluded, message: s90);
 var
@@ -268,7 +279,8 @@ begin
   {init}
   new(pl0);
   counter := 0;
-  if excluded <> '' then Inc(counter);
+  if excluded <> '' then
+    Inc(counter);
 
   for i := 1 to fs(FsPlayer) do
   begin
@@ -287,12 +299,13 @@ begin
         online_send_to_player(pl0^.name2, online_player, message);
 
         Inc(counter);
-        if counter >= global_maxteammembers then break;
+        if counter >= global_maxteammembers then
+          break;
       end;
     end;
   end; {for i:= .end.}
 
-  {dispose pointer vars}
+       {dispose pointer vars}
   dispose(pl0);
 
 end; {team_online_report_all *end*}
@@ -312,7 +325,8 @@ begin
   {init}
   new(pl0);
   counter := 0;
-  if exclude <> '' then Inc(counter);
+  if exclude <> '' then
+    Inc(counter);
 
   {send message to ALL human players in team TEAM}
   for i := 1 to fs(FsPlayer) do
@@ -351,14 +365,15 @@ begin
           '');
 
         Inc(counter);
-        if counter >= global_maxteammembers then break;
+        if counter >= global_maxteammembers then
+          break;
 
       end;
     end;
 
   end; {for i:= .end.}
 
-  {dispose pointer vars}
+       {dispose pointer vars}
   dispose(pl0);
 
 end; {Team_Report_All *end*}
@@ -460,11 +475,13 @@ begin
         end;
       end;
 
-      if break_out then break;
+      if break_out then
+        break;
 
     end; {for j:= .end.}
 
-    if break_out then break;
+    if break_out then
+      break;
 
   end; {for i:= .end.}
 
@@ -616,7 +633,8 @@ begin
 
           for j := 1 to size do
           begin
-            if x + y > 9 then break;
+            if x + y > 9 then
+              break;
 
             if load_character(player0^, i, j) = True then
             begin
@@ -635,7 +653,8 @@ begin
             end;
 
           end; {for j:= .end.}
-          if x + y > 9 then break;
+          if x + y > 9 then
+            break;
         end; {for j:= .end.}
 
         if xx - yy > config.teamdiff then
@@ -721,7 +740,7 @@ begin
         end;
       end;
     end; {for j:= .end.}
-  end; {for i:= .end.}
+  end;   {for i:= .end.}
 
 end;
 
@@ -747,10 +766,12 @@ begin
   if (gnugge.hps > 0) and (is_online(gnugge.name2, online_player)) then
   begin
     sd(15, ljust('Online', justval));
-  end else if gnugge.location = offloc_prison then
+  end else
+  if gnugge.location = offloc_prison then
   begin
     sd(13, ljust('Prison', justval));
-  end else if gnugge.hps > 0 then
+  end else
+  if gnugge.hps > 0 then
   begin
     if gnugge.location = offloc_home then
     begin
@@ -759,10 +780,12 @@ begin
     begin
       sd(14, ljust('Alive', justval));
     end;
-  end else if gnugge.hps = -9000 then
+  end else
+  if gnugge.hps = -9000 then
   begin
     sd(4, ljust('Drugged', justval));
-  end else if gnugge.hps < 1 then
+  end else
+  if gnugge.hps < 1 then
   begin
     sd(4, ljust('Dead', justval));
   end;
@@ -838,9 +861,9 @@ begin
         end;
       end;
     end; {for j:= .end.}
-  end; {for i:= .end.}
+  end;   {for i:= .end.}
 
-  {return result}
+         {return result}
   team_members := Result;
 
 end; {team_members *end*}
@@ -851,10 +874,14 @@ begin
 
   c := 1;
 
-  if player_active(pl1, True) then Inc(c);
-  if player_active(pl2, True) then Inc(c);
-  if player_active(pl3, True) then Inc(c);
-  if player_active(pl4, True) then Inc(c);
+  if player_active(pl1, True) then
+    Inc(c);
+  if player_active(pl2, True) then
+    Inc(c);
+  if player_active(pl3, True) then
+    Inc(c);
+  if player_active(pl4, True) then
+    Inc(c);
 
   {return result}
   team_active := c;
@@ -919,9 +946,11 @@ begin
 
         end;
       end;
-      if (abort) or (found) then break;
+      if (abort) or (found) then
+        break;
     end; {for j:= .end.}
-    if (abort) or (found) then break;
+    if (abort) or (found) then
+      break;
   end; {for i:= .end.}
 
 
@@ -952,7 +981,8 @@ begin
   Result := False;
 
   left_to_add := global_maxteammembers;
-  if one_already then Dec(left_to_add);
+  if one_already then
+    Dec(left_to_add);
 
   {searching among the humans and NPCs}
   for i := 1 to 2 do
@@ -987,12 +1017,15 @@ begin
         end;
       end;
 
-      if left_to_add < 1 then break;
+      if left_to_add < 1 then
+        break;
     end; {for j:= .end.}
-    if left_to_add < 1 then break;
+    if left_to_add < 1 then
+      break;
   end; {for i:= .end.}
 
-  if left_to_add < 1 then Result := True
+  if left_to_add < 1 then
+    Result := True
   else Result := False;
 
   {return result}
@@ -1012,7 +1045,8 @@ begin
 
   {determine if we should read player from user- or npcfile}
   pltype := plytype;
-  if pltype = 3 then pltype := random(2) + 1;
+  if pltype = 3 then
+    pltype := random(2) + 1;
 
   {determine size of file}
   case pltype of
@@ -1084,8 +1118,10 @@ var Result: word;
         begin
 
           ok := True;
-          if (alias <> '') and (pl0.name2 <> alias) then ok := False;
-          if (Name <> '') and (pl0.name1 <> Name) then ok := False;
+          if (alias <> '') and (pl0.name2 <> alias) then
+            ok := False;
+          if (Name <> '') and (pl0.name1 <> Name) then
+            ok := False;
 
           if ok then
           begin
@@ -1119,7 +1155,7 @@ begin
     'C': look_for_person2(2);
   end; {case .end.}
 
-  {return result}
+       {return result}
   look_for_person := Result;
 
 end; {look_for_person2 *end*}
@@ -1166,15 +1202,17 @@ begin
 
       end;
 
-      if found = True then break;
+      if found = True then
+        break;
 
     end; {for j:= .end.}
 
-    if found = True then break;
+    if found = True then
+      break;
 
   end; {for i:= .end.}
 
-  {return result}
+       {return result}
   look_for_id := number;
 
 end; {look for ID *END*}
@@ -1238,11 +1276,12 @@ begin
       end;
     end; {for j:= .end.}
 
-    if found then break;
+    if found then
+      break;
 
   end; {for i:= .end.}
 
-  {return result}
+       {return result}
   look_for_alias := number;
 
 end; {look for alias **END**}
@@ -1279,7 +1318,7 @@ begin
     3: d(config.textcolor, 'Who must die?');
   end; {case .end.}
 
-  {get user-input}
+       {get user-input}
   sd(config.textcolor, ':');
   s := get_string(30);
   s := upcasestr(s);
@@ -1291,7 +1330,8 @@ begin
 
   {searching among the humans and NPCs}
   ii := 2;
-  if not npckill then Dec(ii);
+  if not npckill then
+    Dec(ii);
 
   for i := 1 to ii do
   begin
@@ -1340,17 +1380,21 @@ begin
                     if Is_Player_Married(player.name2, player.id) = pl0^.name2 then
                     begin
                       cannot_attack_husband(player, pl0^);
-                    end else if (x > config.leveldiff) and (config.leveldiff <> 0) then
+                    end else
+                    if (x > config.leveldiff) and (config.leveldiff <> 0) then
                     begin
                       d(12, 'Nah, that wouldn''t be a fair fight!');
-                    end else if (player.team = pl0^.team) and (player.team <> '') and (teamkill = False) then
+                    end else
+                    if (player.team = pl0^.team) and (player.team <> '') and (teamkill = False) then
                     begin
                       d(12, 'You are not allowed to attack your own teammates!');
-                    end else if pl0^.location = offloc_prison then
+                    end else
+                    if pl0^.location = offloc_prison then
                     begin
                       sd(global_plycol, pl0^.name2);
                       d(config.textcolor, ' is residing in prison!');
-                    end else if pl0^.location = offloc_home then
+                    end else
+                    if pl0^.location = offloc_home then
                     begin
                       sd(global_plycol, pl0^.name2);
                       d(config.textcolor, ' is home!');
@@ -1376,13 +1420,14 @@ begin
         end;
       end; {for j:= .end.}
     end;
-  end; {for i:= .end.}
+  end;     {for i:= .end.}
 
   crlf;
   if (found = False) and (abort = False) then
   begin
     Could_Not_Locate_Challengable_Character;
-  end else if (found = True) and (abort = False) then
+  end else
+  if (found = True) and (abort = False) then
   begin
 
     {set online locations}
@@ -1438,7 +1483,8 @@ begin
           pause;
           cho := '?';
 
-        end else if (cho = 'P') and (pl0^.gold < 1) and (pl0^.healing < 1) then
+        end else
+        if (cho = 'P') and (pl0^.gold < 1) and (pl0^.healing < 1) then
         begin
           crlf;
           crlf;
@@ -1447,7 +1493,8 @@ begin
           d(config.textcolor, ' has nothing of value.');
           pause;
           cho := '?';
-        end else if cho = ReturnKey then
+        end else
+        if cho = ReturnKey then
         begin
           cho := '?';
         end;
@@ -1462,7 +1509,7 @@ begin
         end;
         'P': begin {pick-pocket}
 
-          {decrease daily number of pick pockets attempts}
+                   {decrease daily number of pick pockets attempts}
           Dec(player.pickpocketattempts);
 
           {update player}
@@ -1509,7 +1556,8 @@ begin
                   d(15, 'Potions');
                   crlf;
                   sd(global_plycol, pl0^.name2);
-                  d(config.textcolor, ' keeps ' + sex3[pl0^.sex] + ' belt with Potions stuck under ' + sex3[pl0^.sex] + ' pillow.');
+                  d(config.textcolor, ' keeps ' + sex3[pl0^.sex] + ' belt with Potions stuck under ' +
+                    sex3[pl0^.sex] + ' pillow.');
                   crlf;
                   steal_potions := True;
                   steal_money := False;
@@ -1542,13 +1590,15 @@ begin
 
           if steal_potions then
           begin
-            sd(config.textcolor, 'You cautiously lift ' + uplc + pl0^.name2 + 's' + config.textcol1 + ' head from the pillow.');
+            sd(config.textcolor, 'You cautiously lift ' + uplc + pl0^.name2 + 's' + config.textcol1 +
+              ' head from the pillow.');
             make_delay_dots(2, 8, 600);
             crlf;
           end;
 
           {chance of success}
-          if random(3) = 0 then ok := True
+          if random(3) = 0 then
+            ok := True
           else ok := False;
 
 
@@ -1564,7 +1614,8 @@ begin
               crlf;
               d(15, 'Good work!');
               pause;
-            end else if steal_potions then
+            end else
+            if steal_potions then
             begin
               sd(config.textcolor, 'You took ');
               sd(14, commastr(pl0^.healing));
@@ -1578,7 +1629,8 @@ begin
             begin
               {inc player money}
               IncPlayerMoney(player, pl0^.gold);
-            end else if steal_potions then
+            end else
+            if steal_potions then
             begin
               player.healing := player.healing + pl0^.healing;
             end;
@@ -1594,7 +1646,8 @@ begin
               {News-Paper}
               Newsy(True,
                 headline,
-                ' ' + uplc + pl0^.name2 + config.textcol1 + ' woke up at the Dormitory, noticing ' + sex3[pl0^.sex] + ' purse missing.',
+                ' ' + uplc + pl0^.name2 + config.textcol1 + ' woke up at the Dormitory, noticing ' +
+                sex3[pl0^.sex] + ' purse missing.',
                 '',
                 '',
                 '',
@@ -1603,7 +1656,8 @@ begin
                 '',
                 '',
                 '');
-            end else if steal_potions then
+            end else
+            if steal_potions then
             begin
               {News Paper}
               Newsy(True,
@@ -1637,7 +1691,8 @@ begin
                 ulred + headline + config.textcol1,
                 mkstring(length(headline), underscore),
                 'Some malicious character emptied your purse while you',
-                'were sleeping. The thief got away with ' + uyellow + commastr(pl0^.gold) + config.textcol1 + ' ' + many_money(pl0^.gold) + '.',
+                'were sleeping. The thief got away with ' + uyellow + commastr(pl0^.gold) +
+                config.textcol1 + ' ' + many_money(pl0^.gold) + '.',
                 '',
                 '',
                 '',
@@ -1649,7 +1704,8 @@ begin
                 '',
                 '',
                 '');
-            end else if steal_potions then
+            end else
+            if steal_potions then
             begin
               {mail victim}
               post(MailSend,
@@ -1679,7 +1735,8 @@ begin
             if steal_money then
             begin
               pl0^.gold := 0;
-            end else if steal_potions then
+            end else
+            if steal_potions then
             begin
               pl0^.healing := 0;
             end;
@@ -1710,9 +1767,10 @@ begin
               end;
             end; {case .end.}
 
-            {worsen pl0:s attitude to player}
+                 {worsen pl0:s attitude to player}
             Update_Relation(Relation_Worsen, 2, pl0^, player, False, False);
-            for i := 1 to global_maxspells do player.spell[i, 2] := False;
+            for i := 1 to global_maxspells do
+              player.spell[i, 2] := False;
 
             to_death := False;
             repeat
@@ -1737,8 +1795,10 @@ begin
                 {News Paper}
                 Newsy(True,
                   headline,
-                  ' ' + uplc + player.name2 + config.textcol1 + ' was caught trying to steal money from ' + uplc + pl0^.name2 + config.textcol1 + '.',
-                  ' ' + uplc + pl0^.name2 + config.textcol1 + ' woke up and fought ' + uplc + player.name2 + config.textcol1 + '.',
+                  ' ' + uplc + player.name2 + config.textcol1 + ' was caught trying to steal money from ' +
+                  uplc + pl0^.name2 + config.textcol1 + '.',
+                  ' ' + uplc + pl0^.name2 + config.textcol1 + ' woke up and fought ' + uplc +
+                  player.name2 + config.textcol1 + '.',
                   ' ' + ulred + 'They were both killed!' + config.textcol1,
                   '',
                   '',
@@ -1746,13 +1806,16 @@ begin
                   '',
                   '',
                   '');
-              end else if steal_potions then
+              end else
+              if steal_potions then
               begin
                 {News Paper}
                 Newsy(True,
                   headline,
-                  ' ' + uplc + player.name2 + config.textcol1 + ' was caught trying to steal healing potions from ' + uplc + pl0^.name2 + config.textcol1 + '.',
-                  ' ' + uplc + pl0^.name2 + config.textcol1 + ' woke up and fought ' + uplc + player.name2 + config.textcol1 + '.',
+                  ' ' + uplc + player.name2 + config.textcol1 + ' was caught trying to steal healing potions from ' +
+                  uplc + pl0^.name2 + config.textcol1 + '.',
+                  ' ' + uplc + pl0^.name2 + config.textcol1 + ' woke up and fought ' + uplc +
+                  player.name2 + config.textcol1 + '.',
                   ' ' + ulred + 'They were both killed!' + config.textcol1,
                   '',
                   '',
@@ -1768,7 +1831,7 @@ begin
                 1: headline := 'Kleptomaniac!';
               end; {case .end.}
 
-              {mail to offline player}
+                   {mail to offline player}
               if steal_money then
               begin
                 post(MailSend,
@@ -1792,7 +1855,8 @@ begin
                   '',
                   '',
                   '');
-              end else if steal_potions then
+              end else
+              if steal_potions then
               begin
                 post(MailSend,
                   pl0^.name2,
@@ -1844,7 +1908,8 @@ begin
               pause;
               normal_exit;
 
-            end else if player.hps < 1 then
+            end else
+            if player.hps < 1 then
             begin
 
               {player died}
@@ -1868,9 +1933,11 @@ begin
                   sd(global_plycol, pl0^.name2);
                   d(12, ' took your ' + many_money(player.gold) + '!');
                   {create string to be used in the mail to victor}
-                  s1 := 'You took ' + uyellow + commastr(player.gold) + config.textcol1 + ' ' + many_money(player.gold) + ' from the corpse.';
+                  s1 := 'You took ' + uyellow + commastr(player.gold) + config.textcol1 + ' ' +
+                    many_money(player.gold) + ' from the corpse.';
                 end;
-              end else if steal_potions then
+              end else
+              if steal_potions then
               begin
                 if player.healing > 0 then
                 begin
@@ -1888,7 +1955,8 @@ begin
                 Newsy(True,
                   'Thieves at the Dormitory!',
                   ' ' + ulred + player.name2 + config.textcol1 + ' was caught trying to steal money from',
-                  ' ' + uplc + pl0^.name2 + config.textcol1 + ', who woke up and killed ' + ulred + player.name2 + config.textcol1 + '.',
+                  ' ' + uplc + pl0^.name2 + config.textcol1 + ', who woke up and killed ' + ulred +
+                  player.name2 + config.textcol1 + '.',
                   '',
                   '',
                   '',
@@ -1896,13 +1964,15 @@ begin
                   '',
                   '',
                   '');
-              end else if steal_potions then
+              end else
+              if steal_potions then
               begin
                 {News-Paper}
                 Newsy(True,
                   'Muggers at the Dormitory!',
                   ' ' + uplc + player.name2 + config.textcol1 + ' was caught trying to steal Healing Potions from',
-                  ' ' + uplc + pl0^.name2 + config.textcol1 + ', who woke up and killed ' + ulred + player.name2 + config.textcol1 + '.',
+                  ' ' + uplc + pl0^.name2 + config.textcol1 + ', who woke up and killed ' + ulred +
+                  player.name2 + config.textcol1 + '.',
                   '',
                   '',
                   '',
@@ -1937,7 +2007,8 @@ begin
                   '',
                   '',
                   '');
-              end else if steal_potions then
+              end else
+              if steal_potions then
               begin
                 {mail to victor}
                 s := 'Muggers!';
@@ -1970,7 +2041,8 @@ begin
                 IncPlayermoney(pl0^, player.gold);
 
                 player.gold := 0;
-              end else if steal_potions then
+              end else
+              if steal_potions then
               begin
 
                 Inc(pl0^.healing, player.healing);
@@ -2006,7 +2078,8 @@ begin
                 sd(config.textcolor, 'You take ');
                 sd(14, commastr(pl0^.gold));
                 d(config.textcolor, ' ' + many_money(pl0^.gold) + ' from the corpse.');
-              end else if (steal_potions) and (pl0^.healing > 0) then
+              end else
+              if (steal_potions) and (pl0^.healing > 0) then
               begin
                 sd(config.textcolor, 'You take ');
                 sd(15, commastr(pl0^.healing));
@@ -2027,7 +2100,8 @@ begin
               {News Paper}
               Newsy(True,
                 'Murder at the Dormitory!',
-                ' ' + ulred + pl0^.name2 + config.textcol1 + ' was found murdered in ' + sex3[pl0^.sex] + ' bed this morning!',
+                ' ' + ulred + pl0^.name2 + config.textcol1 + ' was found murdered in ' + sex3[pl0^.sex] +
+                ' bed this morning!',
                 ' The guests and staff at the Dorm are horrified.',
                 '',
                 '',
@@ -2062,7 +2136,8 @@ begin
                   '',
                   '',
                   '');
-              end else if steal_potions then
+              end else
+              if steal_potions then
               begin
                 {mail to victor}
                 s := 'Muggers!';
@@ -2096,7 +2171,8 @@ begin
                 IncPlayerMoney(player, pl0^.gold);
                 pl0^.gold := 0;
                 pl0^.hps := 0;
-              end else if steal_potions then
+              end else
+              if steal_potions then
               begin
                 Inc(player.healing, pl0^.healing);
                 pl0^.healing := 0;
@@ -2115,14 +2191,15 @@ begin
 
           end;
 
-        end; {pick-pocket END}
+        end;       {pick-pocket END}
 
         'M': begin {murder}
           if player.pfights < 1 then
           begin
             d(config.textcolor, 'Sorry, but you have run out of player fights.');
             pause;
-          end else if player.darknr < 1 then
+          end else
+          if player.darknr < 1 then
           begin
             d(config.textcolor, 'Sorry, but you have run out of Dark Deeds.');
             pause;
@@ -2168,7 +2245,8 @@ begin
               {news-paper}
               newsy(True,
                 'Attempted Murder!',
-                ' The evil ' + urac + race_display(2, player.race, 0) + uplc + ' ' + player.name2 + config.textcol1 + ' tried to murder ' + uplc + pl0^.name2 + config.textcol1 + '!',
+                ' The evil ' + urac + race_display(2, player.race, 0) + uplc + ' ' + player.name2 +
+                config.textcol1 + ' tried to murder ' + uplc + pl0^.name2 + config.textcol1 + '!',
                 '',
                 '',
                 '',
@@ -2222,7 +2300,8 @@ begin
               player.gnollp := 0;
               x := 0;
 
-            end else if (cho = 'Y') and (x = 0) then
+            end else
+            if (cho = 'Y') and (x = 0) then
             begin
 
               d(7, 'Evil Deed');
@@ -2266,8 +2345,10 @@ begin
               {news-paper}
               newsy(True,
                 'Murder!',
-                ' Somebody put ' + sex3[player.sex] + ' hands around ' + uplc + pl0^.name2 + 's' + config.textcol1 + ' throat and squeezed!',
-                ' Rumours has it that the ' + urac + race_display(2, player.race, 0) + uplc + ' ' + player.name2 + config.textcol1 + ' had something to do with it!',
+                ' Somebody put ' + sex3[player.sex] + ' hands around ' + uplc + pl0^.name2 + 's' +
+                config.textcol1 + ' throat and squeezed!',
+                ' Rumours has it that the ' + urac + race_display(2, player.race, 0) + uplc +
+                ' ' + player.name2 + config.textcol1 + ' had something to do with it!',
                 '',
                 '',
                 '',
@@ -2331,7 +2412,8 @@ begin
             d(7, '"Wake up you sloppy pig! Time to die!" You scream in ' + sex3[pl0^.sex] + ' ear.');
             d(global_plycol, s + ulgray + ' doesn''t seem to be very frightened of your threats.');
             d(7, sex2[pl0^.sex] + ' grins as ' + sex2[pl0^.sex] + ' straps on ' + sex3[pl0^.sex] + ' equipment...');
-            d(7, sex3[pl0^.sex] + ' ' + race_display(2, pl0^.race, 0) + ' buddies cheer when ' + sex2[pl0^.sex] + ' makes a couple of');
+            d(7, sex3[pl0^.sex] + ' ' + race_display(2, pl0^.race, 0) + ' buddies cheer when ' +
+              sex2[pl0^.sex] + ' makes a couple of');
 
             if ((config.classic = False) and (pl0^.rhand + pl0^.lhand > 0)) or
               ((config.classic = True) and (pl0^.weapon > 0)) then
@@ -2357,7 +2439,7 @@ begin
 
       end; {case .end.}
 
-      {remove shadow player, (sleeper) }
+           {remove shadow player, (sleeper) }
       add_shadow(SRemove, pl0^, '', '', 0);
 
     end; {for i:= .end.}
@@ -2377,7 +2459,7 @@ var
   s:          s70;
   ok, begg:   boolean;
 
-  roster:     array[1..4] of s30; {keep plys team-mates}
+  roster:     array[1..4] of s30;  {keep plys team-mates}
   rosterx:    array[1..4] of byte; {1=player file,2=npc file}
   rosternr:   array[1..4] of word; {filex, position in file}
 
@@ -2447,7 +2529,7 @@ begin
 
     end; {for j:= .end.}
 
-    {we break out if member roster is filled}
+         {we break out if member roster is filled}
     if (roster[1] <> '') and (roster[2] <> '') and
       (roster[3] <> '') and (roster[4] <> '') then
     begin
@@ -2456,11 +2538,12 @@ begin
 
   end; {for i:= .end.}
 
-  {count found members}
+       {count found members}
   k := 0;
   for i := 1 to 4 do
   begin
-    if roster[i] <> '' then Inc(k);
+    if roster[i] <> '' then
+      Inc(k);
   end; {for i:= .end.}
 
   if k > 0 then
@@ -2510,13 +2593,15 @@ begin
 
         {shit text}
         d(12, 'Damn!');
-        d(global_plycol, ply.name2 + 's' + config.textcol1 + ' teammate ' + uplc + mate.name2 + config.textcol1 + ' was hiding');
+        d(global_plycol, ply.name2 + 's' + config.textcol1 + ' teammate ' + uplc + mate.name2 +
+          config.textcol1 + ' was hiding');
         d(config.textcolor, s + ' Now you must fight ' + sex[mate.sex] + ' too!');
         pause;
 
         {player versus team-mate}
         to_death := False;
-        for i := 1 to global_maxspells do player.spell[i, 2] := False;
+        for i := 1 to global_maxspells do
+          player.spell[i, 2] := False;
         repeat
           player_computer(player, mate, False, 4);
         until (player.hps < 1) or (mate.hps < 1);
@@ -2529,10 +2614,12 @@ begin
           {news-paper}
           newsy(True,
             'Friends',
-            ' ' + uplc + player.name2 + config.textcol1 + ' stalked ' + uplc + ply.name2 + config.textcol1 + ' at the Dormitory.',
+            ' ' + uplc + player.name2 + config.textcol1 + ' stalked ' + uplc + ply.name2 +
+            config.textcol1 + ' at the Dormitory.',
             ' ' + uplc + ply.name2 + config.textcol1 + ' was sleeping and would have been killed if it hadn''t',
             ' been for the brave ' + uplc + mate.name2 + config.textcol1 + ' who rushed to ' + sex3[mate.sex] + ' friend''s',
-            ' rescue. Both the evil ' + uplc + player.name2 + config.textcol1 + ' and ' + uplc + mate.name2 + config.textcol1 + ' were killed.',
+            ' rescue. Both the evil ' + uplc + player.name2 + config.textcol1 + ' and ' + uplc +
+            mate.name2 + config.textcol1 + ' were killed.',
             '',
             '',
             '',
@@ -2572,7 +2659,8 @@ begin
             '',
             umailheadc + 'Team' + config.textcol1,
             mkstring(4, underscore),
-            the_bad + uplc + player.name2 + config.textcol1 + ' attacked your team-mate ' + uplc + ply.name2 + config.textcol1 + ' in the Dormitory!',
+            the_bad + uplc + player.name2 + config.textcol1 + ' attacked your team-mate ' + uplc +
+            ply.name2 + config.textcol1 + ' in the Dormitory!',
             'You engaged ' + uplc + player.name2 + config.textcol1 + '!',
             'You killed ' + uplc + player.name2 + config.textcol1 + '!',
             ulred + 'Unfortunately you died of your wounds only moments later...' + config.textcol1,
@@ -2602,14 +2690,16 @@ begin
           pause;
           normal_exit;
 
-        end else if player.hps < 1 then
+        end else
+        if player.hps < 1 then
         begin
           {player died}
 
           {news-paper}
           newsy(True,
             'Helping Hand',
-            ' ' + uplc + player.name2 + config.textcol1 + ' stalked ' + uplc + ply.name2 + config.textcol1 + ' at the Dormitory.',
+            ' ' + uplc + player.name2 + config.textcol1 + ' stalked ' + uplc + ply.name2 +
+            config.textcol1 + ' at the Dormitory.',
             ' ' + uplc + ply.name2 + config.textcol1 + ' was sleeping and would have been killed if it hadn''t',
             ' been for the brave ' + uplc + mate.name2 + config.textcol1 + ' who rushed to ' + sex3[mate.sex] + ' friend''s',
             ' rescue. The evil ' + ulred + player.name2 + config.textcol1 + ' was defeated!',
@@ -2652,7 +2742,8 @@ begin
             '',
             umailheadc + 'Team' + config.textcol1,
             mkstring(4, underscore),
-            the_bad + uplc + player.name2 + config.textcol1 + ' attacked your team-mate ' + uplc + ply.name2 + config.textcol1 + ' in the Dormitory!',
+            the_bad + uplc + player.name2 + config.textcol1 + ' attacked your team-mate ' + uplc +
+            ply.name2 + config.textcol1 + ' in the Dormitory!',
             'You engaged ' + uplc + player.name2 + config.textcol1 + '!',
             'You killed ' + ulred + player.name2 + config.textcol1 + '!',
             '',
@@ -2688,7 +2779,8 @@ begin
           {news-paper}
           newsy(True,
             'Not enough',
-            ' ' + uplc + player.name2 + config.textcol1 + ' stalked ' + uplc + ply.name2 + config.textcol1 + ' at the Dormitory.',
+            ' ' + uplc + player.name2 + config.textcol1 + ' stalked ' + uplc + ply.name2 +
+            config.textcol1 + ' at the Dormitory.',
             ' ' + uplc + ply.name2 + config.textcol1 + ' was sleeping and would have been killed if it hadn''t',
             ' been for the brave ' + uplc + mate.name2 + config.textcol1 + ' who rushed to ' + sex3[mate.sex] + ' friend''s',
             ' rescue. Unfortunately ' + ulred + mate.name2 + config.textcol1 + ' was defeated.',
@@ -2731,7 +2823,8 @@ begin
             '',
             umailheadc + 'Team' + config.textcol1,
             mkstring(4, underscore),
-            the_bad + uplc + player.name2 + config.textcol1 + ' attacked your team-mate ' + uplc + ply.name2 + config.textcol1 + ' in the Dormitory!',
+            the_bad + uplc + player.name2 + config.textcol1 + ' attacked your team-mate ' + uplc +
+            ply.name2 + config.textcol1 + ' in the Dormitory!',
             'You engaged ' + uplc + player.name2 + config.textcol1 + '!',
             'You were butchered!',
             '',
@@ -2776,14 +2869,15 @@ begin
   begin
 
     Result := True;
-    if (hps_req) and (pl.hps < 1) then Result := False;
+    if (hps_req) and (pl.hps < 1) then
+      Result := False;
 
   end else
   begin
     Result := False;
   end;
 
-  {return result}
+     {return result}
   player_active := Result;
 end; {player_active *end*}
 
@@ -2835,7 +2929,8 @@ begin
   d(2, config_nr(166));
 
   {acts of intimacy/day a player has}
-  sd(config.textcolor, 'Players have ' + setcol + commastr(config.IntimacyActs) + config.textcol1 + ' Intimacy acts per day.');
+  sd(config.textcolor, 'Players have ' + setcol + commastr(config.IntimacyActs) + config.textcol1 +
+    ' Intimacy acts per day.');
   d(2, config_nr(189));
 
   {homo/bi relations allowed}
@@ -2861,16 +2956,20 @@ begin
 
 
   {put moodswings in the news? 0=no,1=yes}
-  if config.RelationChangesNews = 1 then sd(config.textcolor, 'Relation changes between players are logged in the News.')
-  else sd(config.textcolor, 'Relation changes between players are ' + ulred + 'not' + config.textcol1 + ' logged in the News.');
+  if config.RelationChangesNews = 1 then
+    sd(config.textcolor, 'Relation changes between players are logged in the News.')
+  else sd(config.textcolor, 'Relation changes between players are ' + ulred + 'not' + config.textcol1 +
+      ' logged in the News.');
   d(2, config_nr(173));
 
   {# human of children allowed}
-  sd(config.textcolor, 'Human players are allowed to have a maximum of ' + setcol + commastr(config.MaxHumanChildren) + config.textcol1 + ' children.');
+  sd(config.textcolor, 'Human players are allowed to have a maximum of ' + setcol +
+    commastr(config.MaxHumanChildren) + config.textcol1 + ' children.');
   d(2, config_nr(174));
 
   {# of npc children allowed **this display is duplicated in settings_npc}
-  sd(config.textcolor, 'NPCs are allowed to have a maximum of ' + setcol + commastr(config.MaxNPCChildren) + config.textcol1 + ' children.');
+  sd(config.textcolor, 'NPCs are allowed to have a maximum of ' + setcol + commastr(config.MaxNPCChildren) +
+    config.textcol1 + ' children.');
   d(2, config_nr(175));
 
 end; {settings_relations .end.}
@@ -2960,7 +3059,8 @@ begin
   d(2, config_nr(47));
 
   {team difficulty in dungeons 1..20, #48}
-  sd(config.textcolor, 'Team difficulty in the Dungeons is ' + setcol + cfg_string(48) + config.textcol1 + ' (1-20, default is 5)');
+  sd(config.textcolor, 'Team difficulty in the Dungeons is ' + setcol + cfg_string(48) + config.textcol1 +
+    ' (1-20, default is 5)');
   d(2, config_nr(48));
 
   {town reward, #89}
@@ -3004,7 +3104,8 @@ begin
   case config.soulneededking of
     1: sd(config.textcolor, 'To become King you must be ' + setcol + 'GOOD' + config.textcol1 + '.');
     2: sd(config.textcolor, 'To become King you must be ' + setcol + 'EVIL' + config.textcol1 + '.');
-    3: sd(config.textcolor, 'To become King you can be ' + setcol + 'GOOD' + config.textcol1 + ' or ' + setcol + 'EVIL' + config.textcol1 + '.');
+    3: sd(config.textcolor, 'To become King you can be ' + setcol + 'GOOD' + config.textcol1 +
+        ' or ' + setcol + 'EVIL' + config.textcol1 + '.');
   end; {case .end.}
   d(2, config_nr(122));
 
@@ -3035,7 +3136,8 @@ begin
     sd(config.textcolor, 'The King is ' + ulred + 'NOT' + config.textcol1 + ' allowed to imprison players.');
   end else
   begin
-    sd(config.textcolor, 'The King is allowed to imprison players for ' + setcol + commastr(config.allowkingtoimprison) + config.textcol1 + ' day(s).');
+    sd(config.textcolor, 'The King is allowed to imprison players for ' + setcol +
+      commastr(config.allowkingtoimprison) + config.textcol1 + ' day(s).');
   end;
   d(2, config_nr(138));
 
@@ -3052,20 +3154,24 @@ begin
 
  {allow the King to "take away" a child from its parents and place it in the
   Royal Orphanage}
-  if config.allowroyaladoption > 1 then s := ' children'
+  if config.allowroyaladoption > 1 then
+    s := ' children'
   else s := ' child';
 
   if config.AllowRoyalAdoption = 0 then
   begin
-    sd(config.textcolor, 'The King is ' + ulred + 'NOT' + config.textcol1 + ' allowed to place Children in the Royal Orphanage.');
+    sd(config.textcolor, 'The King is ' + ulred + 'NOT' + config.textcol1 +
+      ' allowed to place Children in the Royal Orphanage.');
   end else
   begin
-    sd(config.textcolor, 'The King can place ' + setcol + commastr(config.allowroyaladoption) + config.textcol1 + s + ' in the Royal Orphanage per day.');
+    sd(config.textcolor, 'The King can place ' + setcol + commastr(config.allowroyaladoption) +
+      config.textcol1 + s + ' in the Royal Orphanage per day.');
   end;
   d(2, config_nr(185));
 
   {allow the king to feed the wolves with X children per day}
-  if config.allowfeedingthewolves > 1 then s := ' children'
+  if config.allowfeedingthewolves > 1 then
+    s := ' children'
   else s := ' child';
 
   if Config.allowFeedingTheWolves = 0 then
@@ -3073,7 +3179,8 @@ begin
     sd(config.textcolor, 'The King is ' + ulred + 'NOT' + config.textcol1 + ' allowed to toss children to the Wolves.');
   end else
   begin
-    sd(config.textcolor, 'The King is allowed to toss ' + setcol + commastr(config.allowfeedingthewolves) + config.textcol1 + s + ' to the Wolves every day.');
+    sd(config.textcolor, 'The King is allowed to toss ' + setcol + commastr(config.allowfeedingthewolves) +
+      config.textcol1 + s + ' to the Wolves every day.');
   end;
   d(2, config_nr(183));
 
@@ -3083,7 +3190,8 @@ begin
     sd(config.textcolor, 'The King is ' + ulred + 'NOT' + config.textcol1 + ' allowed to Ban or Dissolve marriages.');
   end else
   begin
-    sd(config.textcolor, 'The King can ban and dissolve ' + setcol + commastr(config.marryactionsperday) + config.textcol1 + ' marriages every day.');
+    sd(config.textcolor, 'The King can ban and dissolve ' + setcol + commastr(config.marryactionsperday) +
+      config.textcol1 + ' marriages every day.');
   end;
   d(2, config_nr(184));
 
@@ -3108,7 +3216,8 @@ begin
   settings_header('miscellaneous');
 
   {Game mode}
-  if config.classic then sd(config.textcolor, config.textcol1 + 'Usurper is running in ' + setcol + 'CLASSIC' + config.textcol1 + ' mode.')
+  if config.classic then
+    sd(config.textcolor, config.textcol1 + 'Usurper is running in ' + setcol + 'CLASSIC' + config.textcol1 + ' mode.')
   else sd(config.textcolor, config.textcol1 + 'Usurper is running in ' + setcol + 'NEW' + config.textcol1 + ' mode.');
   d(2, config_nr(91));
 
@@ -3129,20 +3238,24 @@ begin
   d(2, config_nr(4));
 
   {days to keep items in player market}
-  sd(config.textcolor, 'Items at Player Market are deleted after ' + setcol + commastr(config.maxmarket) + config.textcol1 + ' day(s)');
+  sd(config.textcolor, 'Items at Player Market are deleted after ' + setcol + commastr(config.maxmarket) +
+    config.textcol1 + ' day(s)');
   d(2, config_nr(3));
 
   {player resurrections}
-  sd(config.textcolor, 'Players have ' + setcol + commastr(config.resurrections) + config.textcol1 + ' resurrections every day.');
+  sd(config.textcolor, 'Players have ' + setcol + commastr(config.resurrections) + config.textcol1 +
+    ' resurrections every day.');
   d(2, config_nr(191));
 
   {pick-pocket attempts # day}
-  sd(config.textcolor, 'Players have ' + setcol + commastr(config.pickpocketattempts) + config.textcol1 + ' Pick-Pocket attempts every day.');
+  sd(config.textcolor, 'Players have ' + setcol + commastr(config.pickpocketattempts) + config.textcol1 +
+    ' Pick-Pocket attempts every day.');
   d(2, config_nr(195));
 
 
   {bank robbery attempts # day}
-  sd(config.textcolor, 'Players have ' + setcol + commastr(config.bankrobberyattempts) + config.textcol1 + ' Bank Robbery attempts every day.');
+  sd(config.textcolor, 'Players have ' + setcol + commastr(config.bankrobberyattempts) + config.textcol1 +
+    ' Bank Robbery attempts every day.');
   d(2, config_nr(198));
 
 end; {settings_miscellaneous .end.}
@@ -3160,7 +3273,8 @@ begin
   d(config.textcolor, ' (1 easy...5 medium...10 hard)' + config_nr(10));
 
   {dungeon fights per day, (#6)}
-  d(config.textcolor, 'Players have ' + setcol + cfg_string(6) + config.textcol1 + ' dungeon fights every day' + config_nr(6));
+  d(config.textcolor, 'Players have ' + setcol + cfg_string(6) + config.textcol1 + ' dungeon fights every day' +
+    config_nr(6));
 
   {allow teams to fight in the dungeons?, (#47)  DUPLICATED in teams}
   if upcasestr(cfg_string(47)) = 'YES' then
@@ -3193,10 +3307,17 @@ begin
 
   {(#8) npcs are vicious 0.passive 1.random 2.annoying 3.persecution}
   sd(config.textcolor, 'NPCs are set to be ');
-  if cfg_string(8) = '0' then d(setcol2, 'passive')
-  else if cfg_string(8) = '1' then sd(setcol2, 'randomly disturbing')
-  else if cfg_string(8) = '2' then sd(setcol2, 'annoying')
-  else if cfg_string(8) = '3' then sd(setcol2, 'aggressive')
+  if cfg_string(8) = '0' then
+    d(setcol2, 'passive')
+  else
+  if cfg_string(8) = '1' then
+    sd(setcol2, 'randomly disturbing')
+  else
+  if cfg_string(8) = '2' then
+    sd(setcol2, 'annoying')
+  else
+  if cfg_string(8) = '3' then
+    sd(setcol2, 'aggressive')
 
   else
   begin
@@ -3236,7 +3357,8 @@ begin
 
  {(#175) npc children allowed **this display is duplicated in
   settings_relations}
-  d(config.textcolor, 'NPCs are allowed to have a maximum of ' + setcol + commastr(config.MaxNPCChildren) + config.textcol1 + ' children.' + config_nr(175));
+  d(config.textcolor, 'NPCs are allowed to have a maximum of ' + setcol + commastr(config.MaxNPCChildren) +
+    config.textcol1 + ' children.' + config_nr(175));
 
   {(#182) allow npc to usurp throne, duplicated in settings_king}
   if Config.AllowNpcUsurping = True then
@@ -3275,14 +3397,16 @@ begin
   {registered}
   if global_registered then
   begin
-    d(config.textcolor, 'Game is registered to ' + setcol + cfg_string(1) + config.textcol1 + ' and ' + setcol + cfg_string(2));
+    d(config.textcolor, 'Game is registered to ' + setcol + cfg_string(1) + config.textcol1 +
+      ' and ' + setcol + cfg_string(2));
   end else
   begin
     d(config.textcolor, 'This is a ' + ulred + 'Unregistered' + config.textcol1 + ' copy');
   end;
 
   {Share}
-  if global_ushare then d(setcol2, 'SHARE' + config.textcol1 + ' is loaded. Filesharing routines are active');
+  if global_ushare then
+    d(setcol2, 'SHARE' + config.textcol1 + ' is loaded. Filesharing routines are active');
 
   {Doordriver in user}
   d(config.textcolor, 'Doordriver detected is ' + setcol + 'DDPLUS 7.1');
@@ -3290,7 +3414,8 @@ begin
   {Multi Node Processing every X second}
   if config.multicheck > 0 then
   begin
-    sd(config.textcolor, 'Multi-Node activity is processed every ' + setcol + commastr(config.multicheck) + config.textcol1 + ' second.');
+    sd(config.textcolor, 'Multi-Node activity is processed every ' + setcol + commastr(config.multicheck) +
+      config.textcol1 + ' second.');
   end else
   begin
     sd(config.textcolor, 'Multi-Node processing has been ' + ulred + 'DISABLED.');
@@ -3300,7 +3425,8 @@ begin
   {disconnected after X minutes of inactivity, (#178)}
   if config.inactivity > 0 then
   begin
-    sd(config.textcolor, 'Players are disconnected after ' + setcol + commastr(config.inactivity) + config.textcol1 + ' minutes of inactivity.');
+    sd(config.textcolor, 'Players are disconnected after ' + setcol + commastr(config.inactivity) +
+      config.textcol1 + ' minutes of inactivity.');
   end else
   begin
     sd(config.textcolor, 'Players are ' + ulred + 'NOT' + config.textcol1 + ' disconnected for inactivity.');
@@ -3316,13 +3442,16 @@ begin
   d(2, config_nr(139));
 
   {Lock-Delay}
-  sd(config.textcolor, 'Delay between File/Record-Locking attempts is ' + setcol + commastr(Config.LockDelay) + config.textcol1 + ' milliseconds.');
+  sd(config.textcolor, 'Delay between File/Record-Locking attempts is ' + setcol + commastr(Config.LockDelay) +
+    config.textcol1 + ' milliseconds.');
   d(2, config_nr(140));
 
 {$IFDEF MSDOS}
   {EMS/XMS}
-  if over_ems then d(setcol2, 'EMS' + config.textcol1 + ' memory utilized for speed.');
-  if over_xms then d(setcol2, 'XMS' + config.textcol1 + ' memory utilized for speed.');
+  if over_ems then
+    d(setcol2, 'EMS' + config.textcol1 + ' memory utilized for speed.');
+  if over_xms then
+    d(setcol2, 'XMS' + config.textcol1 + ' memory utilized for speed.');
 {$ENDIF}
 
   {memory availible}
@@ -3464,7 +3593,8 @@ begin
         if is_online(prisoner.name2, online_player) then
         begin
           sd(14, ' (awake)');
-        end else if prisoner.hps < 1 then
+        end else
+        if prisoner.hps < 1 then
         begin
           sd(config.textcolor, ' (' + ulred + 'dead' + config.textcol1 + ')');
         end else
@@ -3474,8 +3604,10 @@ begin
 
         {days left in prison}
         x := prisoner.daysinprison;
-        if x = 0 then x := 1;
-        if x = 1 then daystr := 'day'
+        if x = 0 then
+          x := 1;
+        if x = 1 then
+          daystr := 'day'
         else daystr := 'days';
 
         d(config.textcolor, ' (' + uwhite + commastr(x) + config.textcol1 + ' ' + daystr + ' left)');
@@ -3492,9 +3624,11 @@ begin
 
       end;
 
-      if abort then break;
+      if abort then
+        break;
     end; {for j:= .end.}
-    if abort then break;
+    if abort then
+      break;
   end; {for i:= .end.}
 
   if (k = 0) and (abort = False) then
@@ -3563,7 +3697,7 @@ begin
 
   end; {for i:= .end.}
 
-  {no empty quest-slot found, we place the quest at the end of file}
+       {no empty quest-slot found, we place the quest at the end of file}
   if not saved then
   begin
     Empty_QuestSlot := fs(FsQuest) + 1;

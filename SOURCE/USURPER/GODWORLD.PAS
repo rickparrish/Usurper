@@ -93,7 +93,7 @@ begin
 
         list_of_prisoners;
 
-      end; {view prisoners *end*}
+      end;       {view prisoners *end*}
 
       'H': begin {help prisoner escape}
 
@@ -240,7 +240,7 @@ begin
 
       end; {help prisoner escape *end*}
 
-    end; {case .end.}
+    end;   {case .end.}
 
   until done = True;
 
@@ -342,7 +342,8 @@ begin
 
                 crlf;
 
-                if confirm('Setup ' + uplc + pl0^.name2 + config.textcol1 + ' against ' + uplc + pl1^.name2 + config.textcol1, 'Y') = True then
+                if confirm('Setup ' + uplc + pl0^.name2 + config.textcol1 + ' against ' + uplc +
+                  pl1^.name2 + config.textcol1, 'Y') = True then
                 begin
 
                   {deeds left}
@@ -428,7 +429,8 @@ begin
                     {news-paper}
                     newsy(True,
                       'Disagreement',
-                      ' ' + uplc + pl0^.name2 + config.textcol1 + ' and ' + uplc + pl1^.name2 + config.textcol1 + ' had an argument.',
+                      ' ' + uplc + pl0^.name2 + config.textcol1 + ' and ' + uplc + pl1^.name2 +
+                      config.textcol1 + ' had an argument.',
                       '',
                       '',
                       '',
@@ -511,7 +513,8 @@ begin
                     {informing pl0, if online}
                     if is_online(pl0^.name2, online_player) = True then
                     begin
-                      online_send_to_player(pl0^.name2, online_player, ugodc + god.Name + config.textcol1 + ' tried to poison your' + ' relation with ' + uplc + pl1^.name2 + config.textcol1 + '!');
+                      online_send_to_player(pl0^.name2, online_player, ugodc + god.Name + config.textcol1 +
+                        ' tried to poison your' + ' relation with ' + uplc + pl1^.name2 + config.textcol1 + '!');
                     end;
 
                     if pl0^.ai = 'H' then
@@ -525,7 +528,8 @@ begin
                         '',
                         ulred + 'Failed Attempt!' + config.textcol1,
                         mkstring(15, underscore),
-                        ugodc + god.Name + config.textcol1 + ' tried to poison your relation with ' + uplc + pl1^.name2 + config.textcol1 + '!',
+                        ugodc + god.Name + config.textcol1 + ' tried to poison your relation with ' +
+                        uplc + pl1^.name2 + config.textcol1 + '!',
                         'But the weak immortal failed miserably.',
                         '',
                         '',
@@ -545,7 +549,9 @@ begin
                       {informing pl1, if online}
                       if is_online(pl1^.name2, online_player) = True then
                       begin
-                        online_send_to_player(pl1^.name2, online_player, ugodc + god.Name + config.textcol1 + ' tried to poison your' + ' relation with ' + uplc + pl0^.name2 + config.textcol1 + '!');
+                        online_send_to_player(pl1^.name2, online_player, ugodc + god.Name +
+                          config.textcol1 + ' tried to poison your' + ' relation with ' + uplc + pl0^.name2 +
+                          config.textcol1 + '!');
                       end;
 
 
@@ -558,7 +564,8 @@ begin
                         '',
                         ulred + 'Failed Attempt!' + config.textcol1,
                         mkstring(15, underscore),
-                        ugodc + god.Name + config.textcol1 + ' tried to poison your relation with ' + uplc + pl0^.name2 + config.textcol1 + '!',
+                        ugodc + god.Name + config.textcol1 + ' tried to poison your relation with ' +
+                        uplc + pl0^.name2 + config.textcol1 + '!',
                         'But the weak immortal failed miserably.',
                         '',
                         '',
@@ -576,7 +583,8 @@ begin
                     {news-paper}
                     newsy(True,
                       'Troublemaker Exposed',
-                      config.textcol1 + ' The immortal ' + ugodc + god.Name + config.textcol1 + ' was exposed trying to poison the relation',
+                      config.textcol1 + ' The immortal ' + ugodc + god.Name + config.textcol1 +
+                      ' was exposed trying to poison the relation',
                       ' between ' + uplc + pl0^.name2 + config.textcol1 + ' and ' + uplc + pl1^.name2 + config.textcol1 + '.',
                       '',
                       '',
@@ -597,8 +605,8 @@ begin
 
       'G': begin {recruite}
 
-        {threat or promise}
-        {recruit a believer to a rivaling immo. consequences?}
+                 {threat or promise}
+                 {recruit a believer to a rivaling immo. consequences?}
 
         crlf;
         crlf;
@@ -625,7 +633,8 @@ begin
               go_ahead := False;
 
 
-              if confirm(uplc + mortal.name2 + config.textcol1 + ' is already a believer in ' + ugodc + mortal.god + config.textcol1 + '! Continue', 'N') = True then
+              if confirm(uplc + mortal.name2 + config.textcol1 + ' is already a believer in ' +
+                ugodc + mortal.god + config.textcol1 + '! Continue', 'N') = True then
               begin
                 d(config.textcolor, 'You are not afraid of ' + ugodc + mortal.god + config.textcol1 + '!');
                 go_ahead := True;
@@ -670,7 +679,8 @@ begin
 
 
               {hey i use N}
-              if ch = 'J' then ch := 'N';
+              if ch = 'J' then
+                ch := 'N';
 
               case ch of
 
@@ -684,11 +694,13 @@ begin
 
                   if ch = 'T' then
                   begin
-                    d(12, 'You send word to ' + uplc + mortal.name2 + ulred + ' that ' + sex3[mortal.sex] + ' situation will become unpleasant unless');
+                    d(12, 'You send word to ' + uplc + mortal.name2 + ulred + ' that ' + sex3[mortal.sex] +
+                      ' situation will become unpleasant unless');
                     d(12, sex2[mortal.sex] + ' join your ranks.');
                   end else
                   begin
-                    d(config.textcolor, 'You let ' + uplc + mortal.name2 + config.textcol1 + ' know that you wish ' + sex[mortal.sex] + ' to become a follower.');
+                    d(config.textcolor, 'You let ' + uplc + mortal.name2 + config.textcol1 +
+                      ' know that you wish ' + sex[mortal.sex] + ' to become a follower.');
                   end;
 
                   crlf;
@@ -760,16 +772,21 @@ begin
                           begin
                             s := 'Treachery';
 
-                            ss1 := 'One of your followers; ' + uplc + mortal.name2 + config.textcol1 + ' was threatened by ' + ugodc + god.Name + config.textcol1 + '!';
-                            ss2 := uplc + mortal.name2 + config.textcol1 + ' has left your flock for the vicious ' + ugodc + god.Name + config.textcol1 + '!';
+                            ss1 := 'One of your followers; ' + uplc + mortal.name2 + config.textcol1 +
+                              ' was threatened by ' + ugodc + god.Name + config.textcol1 + '!';
+                            ss2 := uplc + mortal.name2 + config.textcol1 + ' has left your flock for the vicious ' +
+                              ugodc + god.Name + config.textcol1 + '!';
                             ss3 := '';
                           end else
                           begin
                             s := 'Convert';
 
-                            ss1 := 'One of your followers; ' + uplc + mortal.name2 + config.textcol1 + ' has lost faith in you!';
-                            ss2 := uplc + mortal.name2 + config.textcol1 + ' has left your flock for the insidious ' + ugodc + god.Name + config.textcol1 + '!';
-                            ss3 := ugodc + god.Name + ' persuaded ' + uplc + mortal.name2 + config.textcol1 + ' to desert you!';
+                            ss1 := 'One of your followers; ' + uplc + mortal.name2 + config.textcol1 +
+                              ' has lost faith in you!';
+                            ss2 := uplc + mortal.name2 + config.textcol1 + ' has left your flock for the insidious ' +
+                              ugodc + god.Name + config.textcol1 + '!';
+                            ss3 := ugodc + god.Name + ' persuaded ' + uplc + mortal.name2 +
+                              config.textcol1 + ' to desert you!';
                           end;
 
 
@@ -799,7 +816,8 @@ begin
                           {news-paper}
                           Newsy(True,
                             'Lost Faith',
-                            ' ' + uplc + mortal.name2 + config.textcol1 + ' lost faith in ' + ugodc + god0.Name + config.textcol1 + '!',
+                            ' ' + uplc + mortal.name2 + config.textcol1 + ' lost faith in ' +
+                            ugodc + god0.Name + config.textcol1 + '!',
                             '',
                             '',
                             '',
@@ -815,8 +833,10 @@ begin
                             {news-paper}
                             Newsy(True,
                               'Trickery in Heaven',
-                              ' ' + uplc + mortal.name2 + config.textcol1 + ' found faith in ' + ugodc + god.Name + config.textcol1 + '!',
-                              ' Evil tounges claim that ' + uplc + mortal.name2 + config.textcol1 + ' was forced into ' + ugodc + god.Name + 's' + config.textcol1 + ' flock.',
+                              ' ' + uplc + mortal.name2 + config.textcol1 + ' found faith in ' +
+                              ugodc + god.Name + config.textcol1 + '!',
+                              ' Evil tounges claim that ' + uplc + mortal.name2 + config.textcol1 +
+                              ' was forced into ' + ugodc + god.Name + 's' + config.textcol1 + ' flock.',
                               '',
                               '',
                               '',
@@ -829,8 +849,10 @@ begin
                             {news-paper}
                             Newsy(True,
                               'Fight For Souls',
-                              ' ' + uplc + mortal.name2 + config.textcol1 + ' found faith in ' + ugodc + god.Name + config.textcol1 + '!',
-                              ' Evil tounges claim that ' + ugodc + god0.Name + config.textcol1 + ' played an active part in this.',
+                              ' ' + uplc + mortal.name2 + config.textcol1 + ' found faith in ' +
+                              ugodc + god.Name + config.textcol1 + '!',
+                              ' Evil tounges claim that ' + ugodc + god0.Name + config.textcol1 +
+                              ' played an active part in this.',
                               '',
                               '',
                               '',
@@ -855,7 +877,8 @@ begin
                               '',
                               ulred + s + config.textcol1,
                               mkstring(length(s), underscore),
-                              uplc + mortal.name2 + config.textcol1 + ' was threatened by ' + ugodc + god.Name + config.textcol1 + '!',
+                              uplc + mortal.name2 + config.textcol1 + ' was threatened by ' +
+                              ugodc + god.Name + config.textcol1 + '!',
                               uplc + mortal.name2 + config.textcol1 + ' decided to stay with you!',
                               '',
                               '',
@@ -873,7 +896,8 @@ begin
                             {news-paper}
                             Newsy(True,
                               'Divine Intervention Failed',
-                              ' The no-good immortal ' + ugodc + god.Name + config.textcol1 + ' tried to force ' + uplc + mortal.name2 + config.textcol1 + ' to',
+                              ' The no-good immortal ' + ugodc + god.Name + config.textcol1 +
+                              ' tried to force ' + uplc + mortal.name2 + config.textcol1 + ' to',
                               '  give up ' + sex3[mortal.sex] + ' faith in ' + ugodc + god0.Name + config.textcol1 + '!',
                               ' The attempt failed!',
                               '',
@@ -895,7 +919,8 @@ begin
                               '',
                               ulred + s + config.textcol1,
                               mkstring(length(s), underscore),
-                              uplc + mortal.name2 + config.textcol1 + ' was approached by ' + ugodc + god.Name + config.textcol1 + '!',
+                              uplc + mortal.name2 + config.textcol1 + ' was approached by ' +
+                              ugodc + god.Name + config.textcol1 + '!',
                               uplc + mortal.name2 + config.textcol1 + ' decided to continue to have faith in you!',
                               config.textcol1 + 'The pathetic attempt to steal one of your followers failed!',
                               '',
@@ -913,7 +938,8 @@ begin
                             {news-paper}
                             Newsy(True,
                               'Fight over Power in Heaven',
-                              ' The insidious demi-god ' + ugodc + god.Name + config.textcol1 + ' tried to sway ' + uplc + mortal.name2 + config.textcol1 + ' to',
+                              ' The insidious demi-god ' + ugodc + god.Name + config.textcol1 +
+                              ' tried to sway ' + uplc + mortal.name2 + config.textcol1 + ' to',
                               ' ' + sex3[god.sex] + ' flock!',
                               ' The attempt failed!',
                               '',
@@ -967,8 +993,10 @@ begin
                         begin
                           Newsy(True,
                             'Salvation',
-                            ' ' + uplc + mortal.name2 + config.textcol1 + ' found faith in ' + ugodc + god.Name + config.textcol1 + '!',
-                            ' Evil tongues claim that ' + uplc + mortal.name2 + config.textcol1 + ' was forced into ' + ugodc + god.Name + 's' + config.textcol1 + ' flock.',
+                            ' ' + uplc + mortal.name2 + config.textcol1 + ' found faith in ' +
+                            ugodc + god.Name + config.textcol1 + '!',
+                            ' Evil tongues claim that ' + uplc + mortal.name2 + config.textcol1 +
+                            ' was forced into ' + ugodc + god.Name + 's' + config.textcol1 + ' flock.',
                             '',
                             '',
                             '',
@@ -980,8 +1008,10 @@ begin
                         begin
                           Newsy(True,
                             'Salvation',
-                            ' ' + uplc + mortal.name2 + config.textcol1 + ' found faith in ' + ugodc + god.Name + config.textcol1 + '!',
-                            ' Evil tongues claim that ' + ugodc + god.Name + config.textcol1 + ' played an active part in this!',
+                            ' ' + uplc + mortal.name2 + config.textcol1 + ' found faith in ' +
+                            ugodc + god.Name + config.textcol1 + '!',
+                            ' Evil tongues claim that ' + ugodc + god.Name + config.textcol1 +
+                            ' played an active part in this!',
                             '',
                             '',
                             '',
@@ -1008,7 +1038,8 @@ begin
 
                           {news-paper}
                           newsy(True, +config.textcol1 + 'Pathetic Recruitment Attempt',
-                            config.textcol1 + ' The immortal ' + ugodc + god.Name + config.textcol1 + ' attempted scare tactics to make ',
+                            config.textcol1 + ' The immortal ' + ugodc + god.Name + config.textcol1 +
+                            ' attempted scare tactics to make ',
                             ' ' + uplc + mortal.name2 + config.textcol1 + ' join ' + sex3[god.sex] + ' ranks.',
                             ' The attempt failed miserably.',
                             '',
@@ -1028,7 +1059,8 @@ begin
 
                           {news-paper}
                           newsy(True, +config.textcol1 + 'Pathetic Recruitment Attempt',
-                            config.textcol1 + ' The immortal ' + ugodc + god.Name + config.textcol1 + ' attempted to recruit ',
+                            config.textcol1 + ' The immortal ' + ugodc + god.Name + config.textcol1 +
+                            ' attempted to recruit ',
                             ' ' + uplc + mortal.name2 + config.textcol1 + '.',
                             ' The attempt failed miserably.',
                             '',
@@ -1046,8 +1078,7 @@ begin
 
                     end;
 
-                  end
-                  else
+                  end else
                   begin
 
                     {mail 'H'uman mortal receiver}
@@ -1082,15 +1113,16 @@ begin
                       '');
 
                     d(15, 'Done!');
-                    d(config.textcolor, 'You will be informed of ' + uplc + mortal.name2 + config.textcol1 + ' decision later.');
+                    d(config.textcolor, 'You will be informed of ' + uplc + mortal.name2 +
+                      config.textcol1 + ' decision later.');
                     pause;
 
                   end;
                 end; {threat & normal .end.}
 
-              end; {case .end.}
+              end;   {case .end.}
 
-              {remove shadow}
+                     {remove shadow}
               add_shadow(SRemove, mortal, '', '', 0);
 
             end; {go_ahead .end.}
@@ -1101,7 +1133,7 @@ begin
 
       end; {recruite *end*}
 
-    end; {case .end.}
+    end;   {case .end.}
 
   until done;
 
@@ -1176,7 +1208,7 @@ begin
         end;
       end; {curse children end}
 
-    end; {case .end.}
+    end;   {case .end.}
 
   until done = True;
 
@@ -1278,7 +1310,8 @@ begin
   display_bar_status(True);
 
   {Setup Online Record}
-  if local then onliner.node := global_onlocal
+  if local then
+    onliner.node := global_onlocal
   else onliner.node := global_cnode;
 
   onliner.Name := player.name2;
@@ -1332,7 +1365,7 @@ begin
     2: d(12, 'Verifying events ...');
   end; {case .end.}
 
-  {read mail}
+       {read mail}
   post(MailRead,
     player.name2,
     player.ai,
@@ -1376,7 +1409,8 @@ begin
     d(14, s);
     d(14, mkstring(length(s), '*'));
     pause;
-  end else if x < god.believers then
+  end else
+  if x < god.believers then
   begin
     s := 'You have lost believers since your last visit!';
     crlf;
@@ -1397,7 +1431,8 @@ begin
       d(12, s);
       d(12, mkstring(length(s), '*'));
       pause;
-    end else if x < 4 then
+    end else
+    if x < 4 then
     begin
       s := 'You should recruit new disciples! Seek among the mortals to expand your flock.';
       crlf;
@@ -1452,7 +1487,8 @@ begin
     {evaluate user-input}
     case ch of
       '?': begin {menu}
-        if player.expert = True then display_menu(True, False)
+        if player.expert = True then
+          display_menu(True, False)
         else display_menu(False, False);
       end;
       'S': begin {status}
@@ -1464,7 +1500,8 @@ begin
       '1': begin {immortal news}
         d(11, 'Immortal News');
         crlf;
-        if global_ansi then display_file(global_GodsANSI)
+        if global_ansi then
+          display_file(global_GodsANSI)
         else display_file(global_GodsASCI);
         crlf;
         pause;
@@ -1587,7 +1624,7 @@ begin
               end;
             end;
           end; {for j:= .end.}
-        end; {for i:= .end.}
+        end;   {for i:= .end.}
 
         if god.believers = 0 then
         begin
@@ -1723,7 +1760,7 @@ begin
       end;
       'N': begin {read news-paper}
 
-        {update player location & doing}
+                 {update player location & doing}
         onliner.location := onloc_readingnews;
         onliner.doing := location_desc(onliner.location);
         add_onliner(OUpdateLocation, onliner);
@@ -1777,7 +1814,8 @@ begin
                 {inform the subject who was spied upon}
                 if is_online(player0.name2, online_player) = True then
                 begin
-                  online_send_to_player(player0.name2, online_player, ugodc + player.name2 + config.textcol1 + ' spied on you!');
+                  online_send_to_player(player0.name2, online_player, ugodc + player.name2 +
+                    config.textcol1 + ' spied on you!');
                 end else
                 begin
                   post(MailSend,
@@ -1818,7 +1856,8 @@ begin
 
           end; {for j:= .end.}
 
-          if (found) or (abort) then break;
+          if (found) or (abort) then
+            break;
 
         end; {for i:= .end.}
 
@@ -1860,7 +1899,7 @@ begin
 
             'R': done := True; {return}
 
-            'H': begin {help}
+            'H': begin         {help}
               crlf;
               crlf;
               d(11, 'Chose category of people to use your powers on.');
@@ -1875,7 +1914,7 @@ begin
 
       end; {divine_intervention *end*}
 
-    end; {case .end.}
+    end;   {case .end.}
 
   until EndGodWorld;
   {BIG LOOP *END*}

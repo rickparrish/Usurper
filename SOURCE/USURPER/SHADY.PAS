@@ -151,14 +151,15 @@ begin
       end;
     end; {case .end.}
 
-    {filter out disabled options}
+         {filter out disabled options}
     if (cho = 'D') and (config.allow_drugs = False) then
     begin
       crlf;
       d(12, 'Drugs are banned in this game.');
       pause;
       cho := ' ';
-    end else if (cho = 'S') and (config.allow_steroids = False) then
+    end else
+    if (cho = 'S') and (config.allow_steroids = False) then
     begin
       crlf;
       d(12, 'Steroids are banned in this game.');
@@ -168,7 +169,8 @@ begin
 
     case cho of
       '?': begin
-        if player.expert = True then display_menu(True, False)
+        if player.expert = True then
+          display_menu(True, False)
         else display_menu(False, False);
       end;
       'R': begin {return}

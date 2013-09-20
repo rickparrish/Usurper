@@ -26,7 +26,7 @@ const
   nak = #21;
   sot = #1;
 var
-  lockbaud: longint;                 {lock baud rate                          }
+  lockbaud: longint;                   {lock baud rate                          }
   com1, com2, com3, com4: byte;        { temporary non-std comports             }
   port1, port2, port3, port4: word;
   irq1, irq2, irq3, irq4: byte;
@@ -122,10 +122,11 @@ procedure promptj(var s: string; le: integer; pc: boolean; get_stack: boolean);
 procedure promptsec(var s: string; le: integer; pc: boolean; sec: char); {jakobs own edited version}
 procedure promptwr(var s: string; le: integer; pc: boolean); {jakobs own edited version}
 
-procedure elapsed(time1_hour, time1_min, time1_sec, time2_hour, time2_min, time2_sec: longint; var elap_hour, elap_min, elap_sec: longint);  {jakob, var word egentligen}
+procedure elapsed(time1_hour, time1_min, time1_sec, time2_hour, time2_min, time2_sec: longint;
+  var elap_hour, elap_min, elap_sec: longint);  {jakob, var word egentligen}
 procedure get_stacked(var s: string);
 procedure sread_char_filtered(var ch: char);
-procedure display_status(force: boolean); {jakob added force!}
+procedure display_status(force: boolean);    {jakob added force!}
 procedure Displayfile1(const filen: string); {jakobs special! remove original!}
 procedure SelectAnsi(chflag: char; filenm: string);
 procedure DDAssignSoutput(var f: Text);
@@ -168,7 +169,8 @@ procedure Dos_Sleep;
 var
   Regs: Registers;
 begin
-  with Regs do Intr($28, Regs);
+  with Regs do
+    Intr($28, Regs);
 end;
 
 {$ENDIF}
@@ -233,7 +235,9 @@ begin
     Clear_Region(1, 19, 21);
     SGoto_XY(1, 19);
     Swrite('¯');
-  end else if flag = 1 then swriteln('');
+  end else
+  if flag = 1 then
+    swriteln('');
   if wherey = 22 then
   begin
     Clear_Region(1, 22, 24);
@@ -241,11 +245,11 @@ begin
   end;
 end;
 
-{ This is the new formated chat that uses lines 19-24 for a chat   }
-{ window that rolls from 19-24 and back again.                     }
+ { This is the new formated chat that uses lines 19-24 for a chat   }
+ { window that rolls from 19-24 and back again.                     }
 
-{ Remember to check for #3 when this returns so you can refresh the }
-{ area this has colored black.                                      }
+ { Remember to check for #3 when this returns so you can refresh the }
+ { area this has colored black.                                      }
 procedure forced_chat;
 var
   i, x, y, cx, cy, oldy: byte;
@@ -271,7 +275,9 @@ begin;
 
   repeat;
     sread_char(ch);
-    if charorigin <> old_origin then if charorigin = localchar then set_foreground(11)
+    if charorigin <> old_origin then
+      if charorigin = localchar then
+        set_foreground(11)
       else
         set_foreground(14);
     old_origin := charorigin;
@@ -279,23 +285,27 @@ begin;
     if ch = #8 then
     begin
       swrite(' ' + #8);
-      if length(word) > 0 then Delete(word, 1, 1);
+      if length(word) > 0 then
+        Delete(word, 1, 1);
     end;
 
     if ch = #13 then
     begin
-      if wherey > 23 then Chat_Eof(0)
+      if wherey > 23 then
+        Chat_Eof(0)
       else
       begin
         swrite(#10);
-        if wherey = 22 then Chat_Eof(0);
+        if wherey = 22 then
+          Chat_Eof(0);
         swrite('¯');
       end;
       lastspace := 0;
       word := '';
     end;
 
-    if (ch <> ' ') and (ch <> #8) and (ch <> #13) then word := word + ch;
+    if (ch <> ' ') and (ch <> #8) and (ch <> #13) then
+      word := word + ch;
     if ch = ' ' then
     begin
       lastspace := wherex;
@@ -304,10 +314,12 @@ begin;
 
     if wherex > 75 then
     begin
-      if lastspace = 0 then Chat_Eof(1)
+      if lastspace = 0 then
+        Chat_Eof(1)
       else
       begin
-        while wherex > lastspace do swrite(#8 + ' ' + #8);
+        while wherex > lastspace do
+          swrite(#8 + ' ' + #8);
         Chat_Eof(1);
         swrite(word);
       end;
@@ -327,7 +339,8 @@ begin;
   writeln('Carrier Dropped. [Maintenance is running]');
   writeln('Returning to BBS when maintenance is done.');}
     global_carrierdropped := True;
-  end else if global_checkcarrier = True then
+  end else
+  if global_checkcarrier = True then
   begin
     writeln;
     writeln('Carrier Dropped, returning to BBS.');
@@ -363,21 +376,25 @@ end;
 
 procedure textcolor(i: byte);
 begin;
-  if localcol then crt.textcolor(i);
+  if localcol then
+    crt.textcolor(i);
   tcolor := i;
 end;
 
 procedure textbackground(i: byte);
 begin;
-  if localcol then crt.textbackground(i);
+  if localcol then
+    crt.textbackground(i);
   bcolor := i;
 end;
 
-procedure elapsed(time1_hour, time1_min, time1_sec, time2_hour, time2_min, time2_sec: longint; var elap_hour, elap_min, elap_sec: longint);
+procedure elapsed(time1_hour, time1_min, time1_sec, time2_hour, time2_min, time2_sec: longint;
+  var elap_hour, elap_min, elap_sec: longint);
 var
   a, b, c: longint;
 begin;
-  if time1_hour < time2_hour then time1_hour := time1_hour + 24;
+  if time1_hour < time2_hour then
+    time1_hour := time1_hour + 24;
   a := (time1_hour * 3600) + (time1_min * 60) + time1_sec;
   b := (time2_hour * 3600) + (time2_min * 60) + time2_sec;
   c := a - b;
@@ -425,13 +442,16 @@ begin;
   textbackground(statback);
   gotoxy(1, numlines);
   clreol;                          {jakob drop-dos}
-  if f1toggle = 0 then Write(' F1=Help Toggle ³ F2=Chat ³ F6=Dos ³ F7=+5Min ³ F8=-5Min ³ F10=Eject ³');
+  if f1toggle = 0 then
+    Write(' F1=Help Toggle ³ F2=Chat ³ F6=Dos ³ F7=+5Min ³ F8=-5Min ³ F10=Eject ³');
   window(1, 1, 80, numlines - 1);
   gotoxy(x, y);
   textcolor(a);
   textbackground(b);
-  if not NoLocal then cursoron;
-  if f1toggle = 0 then f1toggle := 1
+  if not NoLocal then
+    cursoron;
+  if f1toggle = 0 then
+    f1toggle := 1
   else
   begin
     firsttime := True;
@@ -467,7 +487,8 @@ begin;
     begin
       alias := god.Name;
       Write(alias + ' (' + user_first_name + ' ' + user_last_name + ')'); {jakob}
-    end else if player.name2 = '' then
+    end else
+    if player.name2 = '' then
     begin
       alias := 'Unknown';
       Write(user_first_name + ' ' + user_last_name + ' (' + alias + ')'); {jakob}
@@ -489,7 +510,8 @@ begin;
   if (time_left < mintime) and (time_check) then
   begin
     cursoron;
-    if notime <> '' then swriteln('(*** Time limit exceeded ***)');
+    if notime <> '' then
+      swriteln('(*** Time limit exceeded ***)');
     swriteln('');
     tdropped := True;
     halt;
@@ -503,7 +525,8 @@ begin;
     clreol;
     gotoxy(74, numlines);
     Write(c, ':');
-    if d < 10 then Write('0');
+    if d < 10 then
+      Write('0');
     Write(d);
     save_sc := d;
   end;
@@ -512,7 +535,8 @@ begin;
   textbackground(b);
   window(1, 1, 80, numlines - 1);
   gotoxy(x, y);
-  if not NoLocal then cursoron;
+  if not NoLocal then
+    cursoron;
 {$ENDIF}
 end;
 
@@ -541,7 +565,8 @@ begin
   k := ' ';
 
   Assign(f, 'ERROR');
-  if pos('.', filenm) <> 0 then Assign(f, filenm) else
+  if pos('.', filenm) <> 0 then
+    Assign(f, filenm) else
   begin
     while (g >= 0) and (not c) do
     begin
@@ -587,13 +612,17 @@ begin
     Read(f, ch);
     if chcount > 0 then
     begin
-      if swon then swritec(ch);
+      if swon then
+        swritec(ch);
     end else
     begin
       if swon then
       begin
-        if ch <> chflag then quit := True;
-      end else if ch = chflag then swon := True;
+        if ch <> chflag then
+          quit := True;
+      end else
+      if ch = chflag then
+        swon := True;
     end;
     Inc(chcount);
   end;
@@ -638,7 +667,8 @@ begin
     begin
       if exist(filen + graphics_codes[g]) then
       begin
-        if g in [2, 3, 5] then nonstop := True;
+        if g in [2, 3, 5] then
+          nonstop := True;
         nyfil := filen + graphics_codes[g];
         c := True;
       end;
@@ -650,24 +680,31 @@ begin
 
   while (not EOF(f)) and (not quit) do
   begin
-    if ch = #10 then Inc(counter);
+    if ch = #10 then
+      Inc(counter);
     if (counter > global_screenlines - 1) and (not nonstop) then
     begin
       counter := 1;
       swrite('(C)ontinue, (N)on-stop, (S)top ? ');
       sread_char(ch);
-      for b := 1 to 33 do swrite(chr(8));
+      for b := 1 to 33 do
+        swrite(chr(8));
       clreol;
-      if ch in ['S', 's'] then Quit := True;
-      if ch in ['N', 'n'] then nonstop := True;
+      if ch in ['S', 's'] then
+        Quit := True;
+      if ch in ['N', 'n'] then
+        nonstop := True;
     end;
 
   {$I-}Read(f, ch);{$I+}
     error := IOREsult;
-    if error <> 0 then unable_to_read(nyfil, error);
+    if error <> 0 then
+      unable_to_read(nyfil, error);
 
-    if skeypressed then sread_char(k);
-    if k = ^S then sread_char(k);
+    if skeypressed then
+      sread_char(k);
+    if k = ^S then
+      sread_char(k);
     if (k = ^k) or (k = ^c) or (K = 's') then
     begin {sista ifet „r jakobs verk}
       close_text(f);
@@ -676,7 +713,8 @@ begin
       ansion := ansisave;
       exit;
     end;
-    if not quit then swritec(ch);
+    if not quit then
+      swritec(ch);
   end;
 
   close_text(f);
@@ -695,7 +733,8 @@ begin;
     DropMessage;
   end else
   begin
-    for a := 1 to length(s) do AsyncSendChar(s[a]);
+    for a := 1 to length(s) do
+      AsyncSendChar(s[a]);
   end;
 
 end;
@@ -712,7 +751,8 @@ begin;
     ch := badchar[1];
     Delete(badchar, 1, 1);
     charin := True;
-  end else if AsyncCharPresent then
+  end else
+  if AsyncCharPresent then
   begin;
     AsyncReceiveChar(ch);
     charin := True;
@@ -721,14 +761,17 @@ end;
 
 procedure CloseDown;
 begin;
-  if buffered then AsyncFlushOutput;
-  if not noFossinit then AsyncCloseCom(com_port);
+  if buffered then
+    AsyncFlushOutput;
+  if not noFossinit then
+    AsyncCloseCom(com_port);
   buffered := False;
 end;
 
 procedure sclrscr;
 begin
-  if not local then sendtext(#27'[2J');
+  if not local then
+    sendtext(#27'[2J');
   if NoLocal then
   begin
     TextColor(statfore);
@@ -736,14 +779,16 @@ begin
   end;
 
   clrscr;
-  if NoLocal then BlankScreenMessage;
+  if NoLocal then
+    BlankScreenMessage;
   curlinenum := 1;
   lastsetfore := 99;
 end;
 
 procedure sclreol;
 begin;
-  if not local then sendtext(#27'[K');
+  if not local then
+    sendtext(#27'[K');
   clreol;
 end;
 
@@ -760,36 +805,43 @@ end;
 
 procedure swritec(ch: char);
 begin;
-  if not local then AsyncSendChar(ch);
+  if not local then
+    AsyncSendChar(ch);
   if NoLocal then
   begin
     gotoxy(Wherex + 1, Wherey);
     exit;
   end;
-  if ansion then ansi_write(ch)
+  if ansion then
+    ansi_write(ch)
   else
     Write(ch);
 end;
 
 procedure swrite(s: string);
 begin;
-  if hexon then hexfilt(s);
-  if not local then sendtext(s);
+  if hexon then
+    hexfilt(s);
+  if not local then
+    sendtext(s);
   if NoLocal then
   begin
     GotoXY(wherex + length(s), wherey);
     exit;
   end;
 
-  if ansion then ansi_write_str(s)
+  if ansion then
+    ansi_write_str(s)
   else
     Write(s);
 end;
 
 procedure swriteln(s: string);
 begin;
-  if hexon then hexfilt(s);
-  if not local then sendtext(s + #13 + #10);
+  if hexon then
+    hexfilt(s);
+  if not local then
+    sendtext(s + #13 + #10);
   if NoLocal then
   begin
     GotoXY(wherex + length(s), wherey);
@@ -807,22 +859,26 @@ begin;
   if (curlinenum = (numlines - 1)) then
   begin;
     curlinenum := 1;
-    if moreok then morecheck;
+    if moreok then
+      morecheck;
   end;
 end;
 
 procedure swritexy;
 begin
   Sgoto_XY(x, y);
-  if hexon then hexfilt(s);
-  if not local then sendtext(s);
+  if hexon then
+    hexfilt(s);
+  if not local then
+    sendtext(s);
   if NoLocal then
   begin
     GotoXY(wherex + length(s), wherey);
     exit;
   end;
 
-  if ansion then ansi_write_str(s)
+  if ansion then
+    ansi_write_str(s)
   else
     Write(s);
 end;
@@ -850,8 +906,10 @@ end;
 
 procedure DDexit;
 begin;
-  if not local then CloseDown;
-  if lastmode <> oldtextmode then textmode(oldtextmode);
+  if not local then
+    CloseDown;
+  if lastmode <> oldtextmode then
+    textmode(oldtextmode);
   cursoron;
   { This should fix the problem OS/2 serial IO drivers are having exiting. }
   exitproc := exitsave;
@@ -876,7 +934,8 @@ begin
   case fkeyon of
     1: Display_Fkeys;
     2: begin
-      if inchat > 0 then exit;
+      if inchat > 0 then
+        exit;
       inchat := 1;
       Forced_Chat;
       inchat := 0;
@@ -911,7 +970,8 @@ begin
     #68: fkeyon := 10;
     else a := #0;
   end;
-  if a <> #0 then DefineFkeys(a, fkeyon);
+  if a <> #0 then
+    DefineFkeys(a, fkeyon);
 end;
 
 procedure ReadScanCode(var a: char);
@@ -945,20 +1005,28 @@ begin;
   repeat;
     if not local then
     begin
-      if (not AsyncCarrierPresent) then DropMessage;
-      if charin(a) then charorigin := remotechar;
+      if (not AsyncCarrierPresent) then
+        DropMessage;
+      if charin(a) then
+        charorigin := remotechar;
     end;
-    if keypressed then ReadScanCode(a);
+    if keypressed then
+      ReadScanCode(a);
 
-    if (a <> #0) then ch := a
-    else if cc mod 100 = 99 then ReleaseTimeSlice;
+    if (a <> #0) then
+      ch := a
+    else
+    if cc mod 100 = 99 then
+      ReleaseTimeSlice;
 
     Inc(cc);
-    if cc > 1000 then cc := 0;
+    if cc > 1000 then
+      cc := 0;
 
     if cc = 1 then
     begin
-      if statline then display_status(False);
+      if statline then
+        display_status(False);
       gettime(hour, minute, second, sec100);
 
       {online events}
@@ -995,7 +1063,8 @@ begin;
           d(12, 'You have been Disconnected for inactivity!');
 
           {inform other nodes}
-          online_send_to_all(uplc + player.name2 + ugreen + ' was kicked out from the game because of inactivity!', player.name2, '');
+          online_send_to_all(uplc + player.name2 + ugreen + ' was kicked out from the game because of inactivity!',
+            player.name2, '');
 
           {news-paper}
           newsy(True,
@@ -1038,7 +1107,8 @@ begin;
           {goodbye}
           normal_exit;
 
-        end else if (config.inactivity - el_mn2 < 2) and (minute_warning = False) then
+        end else
+        if (config.inactivity - el_mn2 < 2) and (minute_warning = False) then
         begin
           minute_warning := True;
           d(12, '***You are about to be disconnected for inactivity!***');
@@ -1058,7 +1128,8 @@ begin;
   if ch = #23 then
   begin {CTRL+W jakobs rutin}
     who_is_on(False, True);
-  end else if ch = #20 then
+  end else
+  if ch = #20 then
   begin {CTRL+T jakobs rutin}
     online_message;
   end;
@@ -1148,10 +1219,15 @@ begin;
   end;
   for a := 1 to length(stacked) do
   begin;
-    if stacked[a] = ';' then b := True else if not b then s := s + stacked[a];
-    if b then s2 := s2 + stacked[a];
+    if stacked[a] = ';' then
+      b := True else
+    if not b then
+      s := s + stacked[a];
+    if b then
+      s2 := s2 + stacked[a];
   end;
-  if length(s2) >= 1 then Delete(s2, 1, 1);
+  if length(s2) >= 1 then
+    Delete(s2, 1, 1);
   stacked := s2;
 end;
 
@@ -1165,7 +1241,8 @@ begin;
   curlinenum := 1;
   s := '';
   get_stacked(s);
-  if s <> '' then swrite(s) else
+  if s <> '' then
+    swrite(s) else
   begin;
     repeat;
       sread_char_filtered(ch);
@@ -1188,7 +1265,8 @@ begin;
   end;
   swriteln('');
   hexon := hexsave;
-  if hexon then hextodec(s);
+  if hexon then
+    hextodec(s);
 end;
 
 procedure sread_num(var n: integer);
@@ -1227,10 +1305,10 @@ begin;
   val(s, n, e);
 end;
 
-{ Speed read is a one time read of the comport.  What I have used it for }
-{ is part of another routine that reads for a number of seconds.  Here   }
-{ the caller must enter all his commands or info in that time allotment. }
-{ They cannot delay a multi-node game by not inputting a command.        }
+ { Speed read is a one time read of the comport.  What I have used it for }
+ { is part of another routine that reads for a number of seconds.  Here   }
+ { the caller must enter all his commands or info in that time allotment. }
+ { They cannot delay a multi-node game by not inputting a command.        }
 
 
 procedure SpeedRead(var ch: char);
@@ -1240,28 +1318,41 @@ begin
   Inc(cc);
   if statline then
   begin;
-    if cc = 1 then display_status(False);
-    if cc > 1000 then cc := 0;
+    if cc = 1 then
+      display_status(False);
+    if cc > 1000 then
+      cc := 0;
   end;
 
   ch := #0;
   a := #0;
   if local then
   begin
-    if KeyPressed then ReadScanCode(a);
-    if (a <> #0) then ch := a
-    else if cc mod 100 = 99 then ReleaseTimeSlice;
+    if KeyPressed then
+      ReadScanCode(a);
+    if (a <> #0) then
+      ch := a
+    else
+    if cc mod 100 = 99 then
+      ReleaseTimeSlice;
     exit;
   end;
 
   charorigin := localchar;
-  if (not AsyncCarrierPresent) then DropMessage;
+  if (not AsyncCarrierPresent) then
+    DropMessage;
 
-  if charin(a) then charorigin := remotechar
-  else if KeyPressed then ReadScanCode(a);
+  if charin(a) then
+    charorigin := remotechar
+  else
+  if KeyPressed then
+    ReadScanCode(a);
 
-  if (a <> #0) then ch := a
-  else if cc mod 100 = 99 then ReleaseTimeSlice;
+  if (a <> #0) then
+    ch := a
+  else
+  if cc mod 100 = 99 then
+    ReleaseTimeSlice;
 end;
 
 function va(i: integer): string;
@@ -1279,16 +1370,21 @@ const
 var
   s, sb: string;
 begin;
-  if f > 31 then exit;
-  if (f = current_foreground) then exit;
-  if not NoLocal then textcolor(f);
+  if f > 31 then
+    exit;
+  if (f = current_foreground) then
+    exit;
+  if not NoLocal then
+    textcolor(f);
 
   if not local then
   begin
-    if (f = 7) and (current_background = 0) then sendtext(#27 + '[0m')
+    if (f = 7) and (current_background = 0) then
+      sendtext(#27 + '[0m')
     else
     begin
-      if current_background = 0 then sb := ''
+      if current_background = 0 then
+        sb := ''
       else
         sb := ';' + va(colorb[current_background]);
       case f of
@@ -1336,11 +1432,16 @@ procedure set_background;  { b : byte }
 const
   colorb: array[0..7] of integer = (40, 44, 42, 46, 41, 45, 43, 47);
 begin;
-  if b > 7 then exit;
-  if (b = current_background) then exit;
-  if not NoLocal then textbackground(b);
+  if b > 7 then
+    exit;
+  if (b = current_background) then
+    exit;
+  if not NoLocal then
+    textbackground(b);
   current_background := b;
-  if not local then if (current_foreground = 7) and (b = 0) then sendtext(#27 + '[0m')
+  if not local then
+    if (current_foreground = 7) and (b = 0) then
+      sendtext(#27 + '[0m')
     else
       sendtext(#27 + '[' + va(colorb[b]) + 'm');
 end;
@@ -1354,8 +1455,10 @@ var
   s:          string;
   NoBackG_Ok: boolean;
 begin
-  if (f > 31) or (b > 7) then exit;
-  if (f = current_foreground) and (b = current_background) then exit;
+  if (f > 31) or (b > 7) then
+    exit;
+  if (f = current_foreground) and (b = current_background) then
+    exit;
   if (f <> current_foreground) and (b <> current_background) then
   begin
     if not NoLocal then
@@ -1363,7 +1466,9 @@ begin
       textcolor(f);
       textbackground(b);
     end;
-    if not local then if (f = 7) and (b = 0) then sendtext(#27 + '[0m')
+    if not local then
+      if (f = 7) and (b = 0) then
+        sendtext(#27 + '[0m')
       else
       begin
         s := '[';
@@ -1412,13 +1517,16 @@ begin
             end;
           end;
         end;
-        if NoBackG_OK and (b = 0) then sendtext(#27 + s + va(colorf[f1]) + 'm')
+        if NoBackG_OK and (b = 0) then
+          sendtext(#27 + s + va(colorf[f1]) + 'm')
         else
           sendtext(#27 + s + va(colorf[f1]) + ';' + va(colorb[b]) + 'm');
       end;
     current_foreground := f;
     current_background := b;
-  end else if (f <> current_foreground) then set_foreground(f)
+  end else
+  if (f <> current_foreground) then
+    set_foreground(f)
   else
     set_background(b);
 end;
@@ -1456,20 +1564,24 @@ begin;
   if s <> '' then
   begin;
     {set_foreground(promptcol3);}
-    while length(s) > le do Delete(s, length(s), 1);
+    while length(s) > le do
+      Delete(s, length(s), 1);
     swrite(s);
     jake := s;
     {set_foreground(fg);}
   end;
 
   s := jake;
-  if not color_chg then pc := False;
+  if not color_chg then
+    pc := False;
   if pc then
   begin;
     set_foreground(promptcol1);
     set_background(promptcol2);
-    for a := 1 to le do swrite(' ');
-    for a := 1 to le do swrite(#8);
+    for a := 1 to le do
+      swrite(' ');
+    for a := 1 to le do
+      swrite(#8);
     x := wherex;
     y := wherey;
   end;
@@ -1481,7 +1593,8 @@ begin;
       s := s + ch;
       swrite(ch); { write(ch);}
     end;
-    if length(s) > 200 then Delete(s, 1, 1);
+    if length(s) > 200 then
+      Delete(s, 1, 1);
     if (ch = chr(8)) and (length(s) > 0) then
     begin;
       Delete(s, length(s), 1);
@@ -1506,9 +1619,11 @@ begin;
   begin;
     set_foreground(promptcol3);
     set_background(bg);
-    while wherex > x do swrite(#8);
+    while wherex > x do
+      swrite(#8);
     swrite(s);                                      { write(s);}
-    while wherex < x + le do swrite(' ');               { write(' ');}
+    while wherex < x + le do
+      swrite(' ');               { write(' ');}
     set_foreground(fg);
   end;
   swriteln('');                                    { writeln('');}
@@ -1516,7 +1631,8 @@ begin;
   begin;
     stacked := s;
     get_stacked(s);
-    while length(s) > le do Delete(s, length(s), 1);
+    while length(s) > le do
+      Delete(s, length(s), 1);
   end;
   hexon := hexsave;
 
@@ -1542,18 +1658,22 @@ begin;
   if s <> '' then
   begin;
     set_foreground(promptcol3);
-    while length(s) > le do Delete(s, length(s), 1);
+    while length(s) > le do
+      Delete(s, length(s), 1);
     swrite(s);
     set_foreground(fg);
   end else
   begin;
-    if not color_chg then pc := False;
+    if not color_chg then
+      pc := False;
     if pc then
     begin;
       set_foreground(promptcol1);
       set_background(promptcol2);
-      for a := 1 to le do swrite(' ');
-      for a := 1 to le do swrite(#8);
+      for a := 1 to le do
+        swrite(' ');
+      for a := 1 to le do
+        swrite(#8);
       x := wherex;
       y := wherey;
     end;
@@ -1566,7 +1686,8 @@ begin;
         {swrite(ch);}{ write(ch);}
         swrite(sec);
       end;
-      if length(s) > 200 then Delete(s, 1, 1);
+      if length(s) > 200 then
+        Delete(s, 1, 1);
       if (ch = chr(8)) and (length(s) > 0) then
       begin;
         Delete(s, length(s), 1);
@@ -1579,9 +1700,11 @@ begin;
     begin;
       set_foreground(promptcol3);
       set_background(bg);
-      while wherex > x do swrite(#8);
+      while wherex > x do
+        swrite(#8);
       swrite(s);                                      { write(s);}
-      while wherex < x + le do swrite(' ');               { write(' ');}
+      while wherex < x + le do
+        swrite(' ');               { write(' ');}
       set_foreground(fg);
     end;
     swriteln('');                                    { writeln('');}
@@ -1589,7 +1712,8 @@ begin;
     begin;
       stacked := s;
       get_stacked(s);
-      while length(s) > le do Delete(s, length(s), 1);
+      while length(s) > le do
+        Delete(s, length(s), 1);
     end;
   end;
   hexon := hexsave;
@@ -1621,13 +1745,16 @@ begin;
 
   if s <> '†††' then
   begin;
-    if not color_chg then pc := False;
+    if not color_chg then
+      pc := False;
     if pc then
     begin;
       set_foreground(promptcol1);
       set_background(promptcol2);
-      for a := 1 to le do swrite(' ');
-      for a := 1 to le do swrite(#8);
+      for a := 1 to le do
+        swrite(' ');
+      for a := 1 to le do
+        swrite(#8);
       x := wherex;
       y := wherey;
     end;
@@ -1639,7 +1766,8 @@ begin;
         s := s + ch;
         swrite(ch);                                    { write(ch);}
       end;
-      if length(s) > 200 then Delete(s, 1, 1);
+      if length(s) > 200 then
+        Delete(s, 1, 1);
       if (ch = chr(8)) and (length(s) > 0) then
       begin;
         Delete(s, length(s), 1);
@@ -1653,9 +1781,11 @@ begin;
     begin;
       set_foreground(promptcol3);
       set_background(bg);
-      while wherex > x do swrite(#8);
+      while wherex > x do
+        swrite(#8);
       swrite(s);                                      { write(s);}
-      while wherex < x + le do swrite(' ');               { write(' ');}
+      while wherex < x + le do
+        swrite(' ');               { write(' ');}
       set_foreground(fg);
     end;
     {swriteln('');}{ writeln('');}
@@ -1681,7 +1811,8 @@ begin;
   s := s + s2;
   str(x, s2);
   s := s + ';' + s2 + 'f';
-  if not local then sendtext(s);
+  if not local then
+    sendtext(s);
 end;
 
 function skeypressed: boolean;
@@ -1689,9 +1820,12 @@ var
   b: boolean;
 begin;
   b := False;
-  if not local then b := AsyncCharPresent;
-  if not b then  b := keypressed;
-  if macro <> '' then b := True;
+  if not local then
+    b := AsyncCharPresent;
+  if not b then
+    b := keypressed;
+  if macro <> '' then
+    b := True;
   skeypressed := b;
 end;
 
@@ -1708,7 +1842,8 @@ end;
 procedure open_async_port;
 begin;
   AsyncSelectPort(com_port);
-  if lockbaud = 0 then AsyncSetBaud(baud_rate)
+  if lockbaud = 0 then
+    AsyncSetBaud(baud_rate)
   else
     AsyncSetBaud(lockbaud);
   buffered := True;   { Not set in original DD - this may not be the best }
@@ -1722,7 +1857,8 @@ function NewCrtOutPut(var f: textrec): integer;
 var
   p: integer;
 begin;
-  for p := 0 to f.bufpos - 1 do swrite(f.bufptr^[p]);
+  for p := 0 to f.bufpos - 1 do
+    swrite(f.bufptr^[p]);
   f.bufpos := 0;
   NewCrtOutPut := 0;
 end;
@@ -1742,12 +1878,15 @@ begin;
         Write(ch);
         bufptr^[p] := ch;
         Inc(p);
-        if ch = #13 then Write(#10);
+        if ch = #13 then
+          Write(#10);
         if ch = #8 then
         begin;
           Write(' '#8);
-          if p > 0 then Dec(p);
-          if p > 0 then Dec(p);
+          if p > 0 then
+            Dec(p);
+          if p > 0 then
+            Dec(p);
         end;
       until (p = bufsize - 1) or (ch = #13);
     bufpos := 0;
@@ -1806,16 +1945,19 @@ begin
     a := chr(0);
     Inc(i);
 
-    if (not AsyncCarrierPresent) then DropMessage;
+    if (not AsyncCarrierPresent) then
+      DropMessage;
 
-    if charin(a) then charorigin := remotechar;
+    if charin(a) then
+      charorigin := remotechar;
     if (a <> chr(0)) then
     begin
       s := s + a;
       Inc(j);
     end else
     begin
-      if (i mod 50 = 0) then ReleaseTimeSlice;
+      if (i mod 50 = 0) then
+        ReleaseTimeSlice;
     end;
     delay2(2);
   until (i > 666) or (j > 13);
@@ -1824,7 +1966,8 @@ begin
   begin
     RipYes := True;
     writeln('Rip Detected');
-    if charin(a) then charorigin := remotechar;
+    if charin(a) then
+      charorigin := remotechar;
   end;
   RipDetect := RipYes;
   Swriteln('');
@@ -1942,7 +2085,8 @@ begin;
   numlines := ScreenRows; {jakob}
   {numlines:=25; {ddplus original}
 
-  if nodirect then directvideo := False;
+  if nodirect then
+    directvideo := False;
   clrscr;
   window(1, 1, 80, numlines - 1);
   textcolor(7);
@@ -1973,19 +2117,24 @@ begin;
 
   if not local then
   begin;
-    if FossilIO then AsyncSelectFossil(fossilstr) else if DigiIO then AsyncSelectDigiBoard(fossilstr) else
+    if FossilIO then
+      AsyncSelectFossil(fossilstr) else
+    if DigiIO then
+      AsyncSelectDigiBoard(fossilstr) else
       AsyncSelectInternal;
     Open_Async_Port;
   end;
 
-  if not local then if not initok then
+  if not local then
+    if not initok then
     begin
       writeln('');
       if fossilio then
       begin
         writeln('Fossil was not initialized properly! You should change to INTERNAL');
         writeln('communications routines.');
-      end else if digiio then
+      end else
+      if digiio then
       begin
         writeln('DigiDriver was not initialized properly!');
       end;
@@ -1993,8 +2142,12 @@ begin;
       halt;
     end;
 
-  if GoRip = 4 then     { forces RipLink on } if Local then       { If local then forces it into graphics mode as well} Graphics := 5;
-  if Graphics <> 5 then if RipDetect then Graphics := 5;
+  if GoRip = 4 then
+    { forces RipLink on } if Local then
+      { If local then forces it into graphics mode as well} Graphics := 5;
+  if Graphics <> 5 then
+    if RipDetect then
+      Graphics := 5;
 
   DV_Aware_ON;
   current_foreground := default_fore;
@@ -2017,23 +2170,11 @@ begin;
   { if node_num=0 then node_num:=1; }
   ddassignsoutput(soutput);
   rewrite(soutput);
-  if not NetOk then if (Tasker = 5) then Inc(Tasker);
+  if not NetOk then
+    if (Tasker = 5) then
+      Inc(Tasker);
   StatusMess(fossilstr);
 
 end;
 
 end.
-
-
-
-
-
-
-
-
-
-
-
-
-
-

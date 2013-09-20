@@ -336,7 +336,8 @@ begin
           if monster[i]^.hps < 30 then
           begin
             monster[i]^.hps := 30;
-          end else if monster[i]^.hps > 200 then
+          end else
+          if monster[i]^.hps > 200 then
           begin
             monster[i]^.hps := 200;
           end;
@@ -488,9 +489,9 @@ begin
 
         if not Execute then
         begin
-          {prison sentence START}
-          {jakob}
-          {prison sentence END}
+               {prison sentence START}
+               {jakob}
+               {prison sentence END}
         end else
         begin  {execute = true, hehe}
           d(config.textcolor, '"Thou ' + player.name2 + ' have been sentenced to death by hanging!"');
@@ -550,7 +551,8 @@ begin
                 3: a2 := sex2[player.sex] + ' was arrested, and short after executed!';
               end;
 
-              s^ := 'The notorious ' + urac + race_display(2, player.race, 0) + ' ' + uplc + player.name2 + config.textcol1 + ' murdered ' + victim^ + '!';
+              s^ := 'The notorious ' + urac + race_display(2, player.race, 0) + ' ' + uplc +
+                player.name2 + config.textcol1 + ' murdered ' + victim^ + '!';
 
               newsy(True,
                 'Ruthless Murderer Hanged!',
@@ -648,7 +650,8 @@ begin
   end;
 
   {remove pointer vars}
-  for i := 1 to 4 do dispose(pl[i]);
+  for i := 1 to 4 do
+    dispose(pl[i]);
   dispose(victim);
   dispose(hang1);
   dispose(hang2);

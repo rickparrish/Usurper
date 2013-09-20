@@ -58,7 +58,8 @@ begin
   big_done := False;
   repeat
     crlf;
-    d(config.textcolor, 'Who do you wish to Resurrect? (enter ' + config.textcol2 + '?' + config.textcol1 + ' to see your team)');
+    d(config.textcolor, 'Who do you wish to Resurrect? (enter ' + config.textcol2 + '?' + config.textcol1 +
+      ' to see your team)');
     sd(config.textcolor, ':');
     a := get_string(20);
     a := upcasestr(a);
@@ -75,7 +76,8 @@ begin
       for i := 1 to 2 do
       begin
 
-        if done then break;
+        if done then
+          break;
 
         case i of
           1: size := fs(FsPlayer);
@@ -85,7 +87,8 @@ begin
         for j := 1 to SIZE do
         begin
 
-          if done then break;
+          if done then
+            break;
 
           load_character(pl0^, i, j);
 
@@ -105,7 +108,8 @@ begin
               begin
                 sd(global_plycol, pl0^.name2);
                 d(config.textcolor, ' is in prison and cannot be resurrected!');
-              end else if pl0^.hps > 0 then
+              end else
+              if pl0^.hps > 0 then
               begin
                 case random(5) of
                   0: begin
@@ -157,7 +161,8 @@ begin
                   break;
                 end else
                 begin
-                  if confirm('Pay ', 'N') = False then break;
+                  if confirm('Pay ', 'N') = False then
+                    break;
                 end;
 
                 decplayermoney(player, yy);
@@ -218,7 +223,8 @@ begin
                   0: begin
                     newsy(True,
                       'Return from the Dead',
-                      ' ' + uplc + player.name2 + config.textcol1 + ' resurrected ' + uplc + pl0^.name2 + config.textcol1 + '!',
+                      ' ' + uplc + player.name2 + config.textcol1 + ' resurrected ' + uplc +
+                      pl0^.name2 + config.textcol1 + '!',
                       '',
                       '',
                       '',
@@ -231,7 +237,8 @@ begin
                   1: begin
                     newsy(True,
                       'Revival',
-                      ' ' + uplc + player.name2 + config.textcol1 + ' brought ' + uplc + pl0^.name2 + config.textcol1 + ' back from the grave!',
+                      ' ' + uplc + player.name2 + config.textcol1 + ' brought ' + uplc + pl0^.name2 +
+                      config.textcol1 + ' back from the grave!',
                       '',
                       '',
                       '',
@@ -243,7 +250,7 @@ begin
                   end;
                 end; {case .end}
 
-                {tell other online players about this event}
+                     {tell other online players about this event}
                 online_send_to_all(uplc + pl0^.name2 + config.textcol1 + ' has been resurrected!', player.name2, '');
 
                 crlf;
@@ -256,7 +263,7 @@ begin
               end;
             end; {confirm .end.}
           end;
-        end; {for j:= .end.}
+        end;     {for j:= .end.}
       end; {for i:= .end.}
     end;
 

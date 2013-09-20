@@ -38,8 +38,9 @@ procedure Send_a_Letter(outside: boolean); {outside=true indicates that
 
 procedure Create_Letter(var new_letter: mailrec; const receiver: s100; {name of receiver}
   const Sender: s100; {name of sender}
-  const q1: s100; {message text follows...}
-  const q2: s100; const q3: s100; const q4: s100; const q5: s100; const q6: s100; const q7: s100; const q8: s100; const q9: s100; const q10: s100);
+  const q1: s100;     {message text follows...}
+  const q2: s100; const q3: s100; const q4: s100; const q5: s100; const q6: s100; const q7: s100;
+  const q8: s100; const q9: s100; const q10: s100);
 
 
 implementation
@@ -63,7 +64,7 @@ var
 
   memlocation: word;
 
-  mtext:       array [1..maxlin] of s100; {message text array}
+  mtext:       array [1..maxlin] of s100;   {message text array}
   qtext:       array [1..maxquote] of s100; {quote text array}
 
   multi_mem, abort_message: boolean;
@@ -97,34 +98,44 @@ begin
   end;
 
   {transfering param quote strings to array}
-  if q1 <> '' then qtext[1] := q1
+  if q1 <> '' then
+    qtext[1] := q1
   else qtext[1] := emptystr;
 
-  if q2 <> '' then qtext[2] := q2
+  if q2 <> '' then
+    qtext[2] := q2
   else qtext[2] := emptystr;
 
-  if q3 <> '' then qtext[3] := q3
+  if q3 <> '' then
+    qtext[3] := q3
   else qtext[3] := emptystr;
 
-  if q4 <> '' then qtext[4] := q4
+  if q4 <> '' then
+    qtext[4] := q4
   else qtext[4] := emptystr;
 
-  if q5 <> '' then qtext[5] := q5
+  if q5 <> '' then
+    qtext[5] := q5
   else qtext[5] := emptystr;
 
-  if q6 <> '' then qtext[6] := q6
+  if q6 <> '' then
+    qtext[6] := q6
   else qtext[6] := emptystr;
 
-  if q7 <> '' then qtext[7] := q7
+  if q7 <> '' then
+    qtext[7] := q7
   else qtext[7] := emptystr;
 
-  if q8 <> '' then qtext[8] := q8
+  if q8 <> '' then
+    qtext[8] := q8
   else qtext[8] := emptystr;
 
-  if q9 <> '' then qtext[9] := q9
+  if q9 <> '' then
+    qtext[9] := q9
   else qtext[9] := emptystr;
 
-  if q10 <> '' then qtext[10] := q10
+  if q10 <> '' then
+    qtext[10] := q10
   else qtext[10] := emptystr;
 
   {remove double quotes}
@@ -139,7 +150,8 @@ begin
       if j <> 0 then
       begin
         Inc(Count);
-        if Count > 1 then break;
+        if Count > 1 then
+          break;
       end;
     until (j = 0) or (y > 10);
     if Count > 1 then
@@ -148,7 +160,7 @@ begin
     end;
   end; {for i:= .end.}
 
-  {online player writes letter to RECEIVER}
+       {online player writes letter to RECEIVER}
   crlf;
   d(10, 'Enter your message  (max ' + commastr(maxlin) + ' lines, BLANK line to end) ');
   d(config.textcolor, '   I' + mkstring(68, underscore) + 'I');
@@ -159,7 +171,8 @@ begin
     if qtext[i] <> '' then
     begin
       e := commastr(line);
-      if length(e) = 1 then e := '0' + e;
+      if length(e) = 1 then
+        e := '0' + e;
       sd(config.textcolor, '[' + e + '] ');
 
       f := prefix;
@@ -201,7 +214,8 @@ begin
   abort_message := False;
   repeat
     e := commastr(line);
-    if length(e) = 1 then e := '0' + e;
+    if length(e) = 1 then
+      e := '0' + e;
     sd(config.textcolor, '[' + e + ']:');
 
     t := mtext[line];
@@ -468,7 +482,8 @@ begin
       sd(global_plycol, pl0^.name2);
       if pl0^.king then
       begin
-        if pl0^.sex = 1 then e := 'King'
+        if pl0^.sex = 1 then
+          e := 'King'
         else e := 'Queen';
         sd(14, ' (The ' + e + ')');
       end;
@@ -477,8 +492,7 @@ begin
       begin
         found := 1;
         break;
-      end
-      else
+      end else
       begin
         if confirm('Continue Search', 'y') = False then
         begin
@@ -527,18 +541,21 @@ begin
     if outside then
     begin
       crlf;
-      d(config.textcolor, 'What ' + uyellow + 'NAME' + config.textcol1 + ' or ' + uyellow + 'ALIAS' + config.textcol1 + ' do you wish to use?');
+      d(config.textcolor, 'What ' + uyellow + 'NAME' + config.textcol1 + ' or ' + uyellow +
+        'ALIAS' + config.textcol1 + ' do you wish to use?');
       sd(config.textcolor, ':');
       readln(alias);
     end;
 
     if outside = False then
     begin
-      if global_godactive then alias := god.Name
+      if global_godactive then
+        alias := god.Name
       else alias := player.name2;
     end else
     begin
-      if alias = '' then alias := 'GOD';
+      if alias = '' then
+        alias := 'GOD';
     end;
 
     case found of
@@ -552,7 +569,7 @@ begin
       end;
     end; {case .end.}
 
-    {let user write his letter}
+         {let user write his letter}
     a_letter.mess[1] := '';
 
  { debug check

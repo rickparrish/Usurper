@@ -70,15 +70,20 @@ begin
     '');
 
   {delete truth.ans/.asc}
-  if f_exists(global_truthfile1) then delete_file(global_truthfile1);
-  if f_exists(global_truthfile2) then delete_file(global_truthfile2);
+  if f_exists(global_truthfile1) then
+    delete_file(global_truthfile1);
+  if f_exists(global_truthfile2) then
+    delete_file(global_truthfile2);
 
   {delete inn chatfile}
-  if f_exists(global_innfile1) then delete_file(global_innfile1);
-  if f_exists(global_innfile2) then delete_file(global_innfile2);
+  if f_exists(global_innfile1) then
+    delete_file(global_innfile1);
+  if f_exists(global_innfile2) then
+    delete_file(global_innfile2);
 
   {Delete mailfile}
-  if f_exists(global_mafile) then delete_file(global_mafile);
+  if f_exists(global_mafile) then
+    delete_file(global_mafile);
 
   {Rewrite PlayerFile}
   ok := False;
@@ -174,9 +179,9 @@ begin
       37: cryptIt := cryptIt + '8';
       38: cryptIt := cryptIt + '9';
     end; {case .end.}
-  end; {for i:= .end.}
+  end;   {for i:= .end.}
 
-  {*Adding some Npcs to the empty userfile*}
+         {*Adding some Npcs to the empty userfile*}
   for i := 1 to 20 do
   begin
     player.medal[i] := False;
@@ -271,8 +276,11 @@ begin
   player.desc[4] := emptystr;
   player.poison := 0;
 
-  for i := 1 to global_maxspells do for j := 1 to 2 do player.spell[i, j] := False;
-  for i := 1 to global_maxcombat do player.skill[i] := 0;
+  for i := 1 to global_maxspells do
+    for j := 1 to 2 do
+      player.spell[i, j] := False;
+  for i := 1 to global_maxcombat do
+    player.skill[i] := 0;
 
   player.trains := 2;
   player.rhand := 0;
@@ -327,28 +335,29 @@ begin
   player.umanbeartries := 0;
   player.massage := 0;
   player.gym_sessions := config.gymsessions;
-  player.Gym_Owner := 0; {controller of the gym? has to be in a team}
-  player.Gym_Card := 0; {free card to the gym? if not gym_owner that is}
+  player.Gym_Owner := 0;      {controller of the gym? has to be in a team}
+  player.Gym_Card := 0;       {free card to the gym? if not gym_owner that is}
   player.royqueststoday := 0;
   player.KingVotePoll := 200; {how many days since voted for king popularity}
-  player.KingLastVote := 0; {how did player vote last time}
-  player.married := False; {married?}
-  player.Kids := 0; {how many kids this playeer is father/mother to}
+  player.KingLastVote := 0;   {how did player vote last time}
+  player.married := False;    {married?}
+  player.Kids := 0;           {how many kids this playeer is father/mother to}
   player.IntimacyActs := Config.IntimacyActs; {how many acts of intimacy has player left today?}
-  player.Pregnancy := 0; {is player pregnant? 0=no, 1...X = days pregnant}
+  player.Pregnancy := 0;      {is player pregnant? 0=no, 1...X = days pregnant}
   player.FatherID := emptystr;
   player.id := crypt(15);
   player.autohate := 1;
-  player.Tax_Relief := False; {free from tax?}
-  player.MarriedTimes := 0; {counter for marriages}
-  player.filtyp := 1; {1=player file, 2=npc file}
+  player.Tax_Relief := False;  {free from tax?}
+  player.MarriedTimes := 0;    {counter for marriages}
+  player.filtyp := 1;          {1=player file, 2=npc file}
   player.Bard_Songs_Left := 5; {ehhh..quite self-explanatory huh?}
   player.prison_escapes := config.prison_escapes; {attempts allowed to escape from prison}
 
 
  {$I-}Write(playerfile, player);{$I+}
   error := IoResult;
-  if error <> 0 then unable_to_write(global_pfile, error);
+  if error <> 0 then
+    unable_to_write(global_pfile, error);
 
   {*Computer Character nr 2*}
   player.Name1 := 'Computer2';
@@ -440,7 +449,8 @@ begin
     end;
   end;
 
-  for i := 1 to global_maxcombat do player.skill[i] := 0;
+  for i := 1 to global_maxcombat do
+    player.skill[i] := 0;
 
   player.trains := 2;
   player.m_kills := 0;
@@ -470,26 +480,27 @@ begin
   player.umanbeartries := 0;
   player.massage := 0;
   player.gym_sessions := config.gymsessions;
-  player.Gym_Owner := 0; {controller of the gym? has to be in a team}
-  player.Gym_Card := 0; {free card to the gym? if not gym_owner that is}
+  player.Gym_Owner := 0;      {controller of the gym? has to be in a team}
+  player.Gym_Card := 0;       {free card to the gym? if not gym_owner that is}
   player.royqueststoday := 0;
   player.KingVotePoll := 200; {how many days since voted for king popularity}
-  player.KingLastVote := 0; {how did player vote last time}
+  player.KingLastVote := 0;   {how did player vote last time}
   player.married := False;
-  player.Kids := 0; {how many kids this playeer is father/mother to}
+  player.Kids := 0;           {how many kids this playeer is father/mother to}
   player.IntimacyActs := Config.IntimacyActs; {how many acts of intimacy has player left today?}
-  player.Pregnancy := 0; {is player pregnant? 0=no, 1...X = days pregnant}
+  player.Pregnancy := 0;      {is player pregnant? 0=no, 1...X = days pregnant}
   player.FatherID := emptystr;
   player.daysinprison := 0;
   player.id := crypt(15);
   player.autohate := 1;
-  player.Tax_Relief := False; {free from tax?}
-  player.MarriedTimes := 0; {counter for marriages}
+  player.Tax_Relief := False;  {free from tax?}
+  player.MarriedTimes := 0;    {counter for marriages}
   player.Bard_Songs_Left := 5; {ehhh..quite self-explanatory huh?}
 
  {$I-}Write(playerfile, player);{$I+}
   error := IoResult;
-  if error <> 0 then unable_to_write(global_pfile, error);
+  if error <> 0 then
+    unable_to_write(global_pfile, error);
 
   {****** Computer Character nr 3 **********}
   player.Name1 := 'Computer3';
@@ -574,10 +585,12 @@ begin
 
   for i := 1 to global_maxspells do
   begin
-    for j := 1 to 2 do player.spell[i, j] := False;
+    for j := 1 to 2 do
+      player.spell[i, j] := False;
   end;
 
-  for i := 1 to global_maxcombat do player.skill[i] := 0;
+  for i := 1 to global_maxcombat do
+    player.skill[i] := 0;
 
   player.trains := 2;
   player.m_kills := 0;
@@ -608,25 +621,26 @@ begin
   player.umanbeartries := 0;
   player.massage := 0;
   player.gym_sessions := config.gymsessions;
-  player.Gym_Owner := 0; {controller of the gym? has to be in a team}
-  player.Gym_Card := 0; {free card to the gym? if not gym_owner that is}
+  player.Gym_Owner := 0;      {controller of the gym? has to be in a team}
+  player.Gym_Card := 0;       {free card to the gym? if not gym_owner that is}
   player.royqueststoday := 0;
   player.KingVotePoll := 200; {how many days since voted for king popularity}
-  player.KingLastVote := 0; {how did player vote last time}
+  player.KingLastVote := 0;   {how did player vote last time}
   player.married := False;
-  player.Kids := 0; {how many kids this playeer is father/mother to}
+  player.Kids := 0;           {how many kids this playeer is father/mother to}
   player.IntimacyActs := Config.IntimacyActs; {how many acts of intimacy has player left today?}
-  player.Pregnancy := 0; {is player pregnant? 0=no, 1...X = days pregnant}
+  player.Pregnancy := 0;      {is player pregnant? 0=no, 1...X = days pregnant}
   player.FatherID := emptystr;
   player.id := crypt(15);
   player.autohate := 1;
-  player.Tax_Relief := False; {free from tax?}
-  player.MarriedTimes := 0; {counter for marriages}
+  player.Tax_Relief := False;  {free from tax?}
+  player.MarriedTimes := 0;    {counter for marriages}
   player.Bard_Songs_Left := 5; {ehhh..quite self-explanatory huh?}
 
  {$I-}Write(playerfile, player);{$I+}
   error := IoResult;
-  if error <> 0 then unable_to_write(global_pfile, error);
+  if error <> 0 then
+    unable_to_write(global_pfile, error);
 
   {*Computer Character nr 4*}
   player.Name1 := 'Computer4';
@@ -714,10 +728,12 @@ begin
 
   for i := 1 to global_maxspells do
   begin
-    for j := 1 to 2 do player.spell[i, j] := False;
+    for j := 1 to 2 do
+      player.spell[i, j] := False;
   end;
 
-  for i := 1 to global_maxcombat do player.skill[i] := 0;
+  for i := 1 to global_maxcombat do
+    player.skill[i] := 0;
 
   player.trains := 2;
   player.m_kills := 0;
@@ -748,25 +764,26 @@ begin
   player.umanbeartries := 0;
   player.massage := 0;
   player.gym_sessions := config.gymsessions;
-  player.Gym_Owner := 0; {controller of the gym? has to be in a team}
-  player.Gym_Card := 0; {free card to the gym? if not gym_owner that is}
+  player.Gym_Owner := 0;      {controller of the gym? has to be in a team}
+  player.Gym_Card := 0;       {free card to the gym? if not gym_owner that is}
   player.royqueststoday := 0;
   player.KingVotePoll := 200; {how many days since voted for king popularity}
-  player.KingLastVote := 0; {how did player vote last time}
+  player.KingLastVote := 0;   {how did player vote last time}
   player.married := False;
-  player.Kids := 0; {how many kids this playeer is father/mother to}
+  player.Kids := 0;           {how many kids this playeer is father/mother to}
   player.IntimacyActs := Config.IntimacyActs; {how many acts of intimacy has player left today?}
-  player.Pregnancy := 0; {is player pregnant? 0=no, 1...X = days pregnant}
+  player.Pregnancy := 0;      {is player pregnant? 0=no, 1...X = days pregnant}
   player.FatherID := emptystr;
   player.id := crypt(15);
   player.autohate := 1;
-  player.Tax_Relief := False; {free from tax?}
-  player.MarriedTimes := 0; {counter for marriages}
+  player.Tax_Relief := False;  {free from tax?}
+  player.MarriedTimes := 0;    {counter for marriages}
   player.Bard_Songs_Left := 5; {ehhh..quite self-explanatory huh?}
 
  {$I-}Write(playerfile, player);{$I+}
   error := IoResult;
-  if error <> 0 then unable_to_write(global_pfile, error);
+  if error <> 0 then
+    unable_to_write(global_pfile, error);
 
   {*Computer Character nr 5*}
   player.Name1 := 'Computer5';
@@ -851,10 +868,12 @@ begin
 
   for i := 1 to global_maxspells do
   begin
-    for j := 1 to 2 do player.spell[i, j] := False;
+    for j := 1 to 2 do
+      player.spell[i, j] := False;
   end;
 
-  for i := 1 to global_maxcombat do player.skill[i] := 0;
+  for i := 1 to global_maxcombat do
+    player.skill[i] := 0;
 
   player.trains := 2;
   player.m_kills := 0;
@@ -885,25 +904,26 @@ begin
   player.umanbeartries := 0;
   player.massage := 0;
   player.gym_sessions := config.gymsessions;
-  player.Gym_Owner := 0; {controller of the gym? has to be in a team}
-  player.Gym_Card := 0; {free card to the gym? if not gym_owner that is}
+  player.Gym_Owner := 0;      {controller of the gym? has to be in a team}
+  player.Gym_Card := 0;       {free card to the gym? if not gym_owner that is}
   player.royqueststoday := 0;
   player.KingVotePoll := 200; {how many days since voted for king popularity}
-  player.KingLastVote := 0; {how did player vote last time}
+  player.KingLastVote := 0;   {how did player vote last time}
   player.married := False;
-  player.Kids := 0; {how many kids this playeer is father/mother to}
+  player.Kids := 0;           {how many kids this playeer is father/mother to}
   player.IntimacyActs := Config.IntimacyActs; {how many acts of intimacy has player left today?}
-  player.Pregnancy := 0; {is player pregnant? 0=no, 1...X = days pregnant}
+  player.Pregnancy := 0;      {is player pregnant? 0=no, 1...X = days pregnant}
   player.FatherID := emptystr;
   player.id := crypt(15);
   player.autohate := 1;
-  player.Tax_Relief := False; {free from tax?}
-  player.MarriedTimes := 0; {counter for marriages}
+  player.Tax_Relief := False;  {free from tax?}
+  player.MarriedTimes := 0;    {counter for marriages}
   player.Bard_Songs_Left := 5; {ehhh..quite self-explanatory huh?}
 
  {$I-}Write(playerfile, player);{$I+}
   error := IoResult;
-  if error <> 0 then unable_to_write(global_pfile, error);
+  if error <> 0 then
+    unable_to_write(global_pfile, error);
 
   {*************************************}
  {$I-}Close(playerfile);{$I+}

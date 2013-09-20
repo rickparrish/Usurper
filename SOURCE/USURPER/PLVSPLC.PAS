@@ -63,8 +63,10 @@ begin
   offkill := False;
 
   s := cfg_string(34);
-  if s = '' then offkill := False;
-  if upcasestr(s) = 'NO' then offkill := True;
+  if s = '' then
+    offkill := False;
+  if upcasestr(s) = 'NO' then
+    offkill := True;
 
   {resetting spells}
   for i := 1 to global_maxspells do
@@ -110,7 +112,8 @@ begin
     9: s := 'Scared?';
   end; {case .end.}
 
-  if pl2.phr[1] <> '' then s := pl2.phr[1];
+  if pl2.phr[1] <> '' then
+    s := pl2.phr[1];
 
   sd(global_talkcol, s);
   sd(config.textcolor, ', ');
@@ -155,15 +158,19 @@ begin
           menu2('(C)ast Spell  ');
         end;
 
-        if player.class = Paladin then menu2('(1) Soul Strike  ');
-        if player.class = Assassin then menu2('(1) Backstab  ');
+        if player.class = Paladin then
+          menu2('(1) Soul Strike  ');
+        if player.class = Assassin then
+          menu2('(1) Backstab  ');
         crlf;
         sd(6, ':');
       end else
       begin
         sd(config.textcolor, 'Fight (A,H,Q,F,S,B,U,*');
-        if player.class in [Cleric, Magician, Sage] then sd(config.textcolor, ',C');
-        if player.class in [Paladin, Assassin] then sd(config.textcolor, ',1');
+        if player.class in [Cleric, Magician, Sage] then
+          sd(config.textcolor, ',C');
+        if player.class in [Paladin, Assassin] then
+          sd(config.textcolor, ',1');
         sd(config.textcolor, ',?) :');
       end;
 
@@ -176,7 +183,8 @@ begin
       if cho = '?' then
       begin
         expert_press := True;
-      end else if cho = 'C' then
+      end else
+      if cho = 'C' then
       begin
         cho := ' ';
         if player.class in [Cleric, Magician, Sage] then
@@ -217,24 +225,29 @@ begin
       inventory_display(player);
       use_item(0);
       cho := 'A';
-    end else if cho = 'F' then
+    end else
+    if cho = 'F' then
     begin
       if confirm('Fight to Death', 'n') = True then
       begin
         to_death := True;
         cho := 'A';
       end;
-    end else if cho = 'S' then
+    end else
+    if cho = 'S' then
     begin
       status(player);
       s := player.name2;
-    end else if cho = 'H' then
+    end else
+    if cho = 'H' then
     begin
       healing(player);
-    end else if cho = 'Q' then
+    end else
+    if cho = 'Q' then
     begin
       quick_healing(player);
-    end else if cho = 'B' then
+    end else
+    if cho = 'B' then
     begin
 
       if confirm('Plead for Mercy', 'n') = True then
@@ -255,7 +268,8 @@ begin
             d(global_talkcol, pl2.phr[6]);
           end;
 
-          d(config.textcolor, 'They hand ' + uplc + pl2.name2 + config.textcol1 + ' a big axe... A quick swing, and your head');
+          d(config.textcolor, 'They hand ' + uplc + pl2.name2 + config.textcol1 +
+            ' a big axe... A quick swing, and your head');
           d(config.textcolor, 'is seperated from your body....');
           crlf;
           d(config.textcolor, 'Darkness surrounds you....');
@@ -276,7 +290,8 @@ begin
           {writing pl2:s record to disk}
           if player.gold > 0 then
           begin
-            gold_string := 'You emptied ' + uplc + player.name2 + 's' + config.textcol1 + ' purse and found ' + uyellow + commastr(player.gold) + config.textcol1 + ' ' + many_money(player.gold) + '!';
+            gold_string := 'You emptied ' + uplc + player.name2 + 's' + config.textcol1 +
+              ' purse and found ' + uyellow + commastr(player.gold) + config.textcol1 + ' ' + many_money(player.gold) + '!';
           end else
           begin
             gold_string := 'You took ' + uplc + player.name2 + 's' + config.textcol1 + ' purse but it was empty!';
@@ -333,8 +348,10 @@ begin
           {news-paper}
           newsy(True,
             'Player Fight!',
-            ' ' + uplc + player.name2 + config.textcol1 + ' challenged ' + uplc + pl2.name2 + config.textcol1 + ' but lost and begged for mercy!',
-            ' ' + uplc + pl2.name2 + config.textcol1 + ' showed no mercy. ' + uplc + player.name2 + config.textcol1 + ' was slaughtered!',
+            ' ' + uplc + player.name2 + config.textcol1 + ' challenged ' + uplc + pl2.name2 +
+            config.textcol1 + ' but lost and begged for mercy!',
+            ' ' + uplc + pl2.name2 + config.textcol1 + ' showed no mercy. ' + uplc + player.name2 +
+            config.textcol1 + ' was slaughtered!',
             '',
             '',
             '',
@@ -345,7 +362,8 @@ begin
 
           if gold_mem > 0 then
           begin
-            gold_string := uplc + pl2.name2 + config.textcol1 + ' emptied your purse. You lost ' + uyellow + commastr(gold_mem) + config.textcol1 + ' ' + many_money(gold_mem) + '!';
+            gold_string := uplc + pl2.name2 + config.textcol1 + ' emptied your purse. You lost ' +
+              uyellow + commastr(gold_mem) + config.textcol1 + ' ' + many_money(gold_mem) + '!';
           end else
           begin
             gold_string := '';
@@ -391,8 +409,10 @@ begin
           d(config.textcolor, '************');
           d(config.textcolor, 'You throw yourself to the ground and beg for mercy!');
           d(global_plycol, pl2.name2 + config.textcol1 + ' looks at you! The crowd around you scream for blood!');
-          d(config.textcolor, 'They hand ' + uplc + pl2.name2 + config.textcol1 + ' a big sword. You wait for the deathblow!');
-          d(config.textcolor, 'But you have been spared! ' + uplc + pl2.name2 + config.textcol1 + ' just looks at you with contempt.');
+          d(config.textcolor, 'They hand ' + uplc + pl2.name2 + config.textcol1 +
+            ' a big sword. You wait for the deathblow!');
+          d(config.textcolor, 'But you have been spared! ' + uplc + pl2.name2 + config.textcol1 +
+            ' just looks at you with contempt.');
 
           if pl2.phr[5] <> '' then
           begin
@@ -445,8 +465,10 @@ begin
           {news-paper}
           newsy(True,
             'Coward in action',
-            ' ' + uplc + player.name2 + config.textcol1 + ' challenged ' + uplc + pl2.name2 + config.textcol1 + ' but turned chicken and ' + 'begged for mercy!',
-            ' ' + uplc + pl2.name2 + config.textcol1 + ' decided to spare ' + uplc + player.name2 + 's' + config.textcol1 + ' miserable life!',
+            ' ' + uplc + player.name2 + config.textcol1 + ' challenged ' + uplc + pl2.name2 +
+            config.textcol1 + ' but turned chicken and ' + 'begged for mercy!',
+            ' ' + uplc + pl2.name2 + config.textcol1 + ' decided to spare ' + uplc + player.name2 +
+            's' + config.textcol1 + ' miserable life!',
             '',
             '',
             '',
@@ -703,7 +725,8 @@ begin
       gold_string := '';
       if pl2.gold > 0 then
       begin
-        d(global_plycol, pl2.name2 + 's' + config.textcol1 + ' purse has ' + uyellow + commastr(pl2.gold) + config.textcol1 + ' ' + many_money(pl2.gold) + ' in it!');
+        d(global_plycol, pl2.name2 + 's' + config.textcol1 + ' purse has ' + uyellow + commastr(pl2.gold) +
+          config.textcol1 + ' ' + many_money(pl2.gold) + ' in it!');
         if confirm('Take the ' + config.moneytype + ' ', 'Y') = True then
         begin
           gold_mem := pl2.gold;
@@ -783,7 +806,7 @@ begin
         6: s := ulred + pl2.name2 + 's' + config.textcol1 + ' skull was cut in two by a battleaxe!';
       end; {case .end.}
 
-      {news-paper}
+           {news-paper}
       newsy(True,
         'Player Fight!',
         ' ' + uplc + player.name2 + config.textcol1 + ' challenged ' + uplc + pl2.name2 + config.textcol1 + ' and won!',
@@ -799,11 +822,14 @@ begin
       if gold_mem > 0 then
       begin
         {player took opponents gold}
-        gold_string := uplc + player.name2 + config.textcol1 + ' emptied your purse, you lost ' + uyellow + commastr(gold_mem) + config.textcol1 + ' ' + many_money(gold_mem) + '!';
-      end else if gold_mem = 0 then
+        gold_string := uplc + player.name2 + config.textcol1 + ' emptied your purse, you lost ' +
+          uyellow + commastr(gold_mem) + config.textcol1 + ' ' + many_money(gold_mem) + '!';
+      end else
+      if gold_mem = 0 then
       begin
         {player was noble and didn't take opponents gold}
-        gold_string := uplc + player.name2 + config.textcol1 + ' let you keep your purse with ' + uyellow + commastr(pl2.gold) + config.textcol1 + ' ' + many_money(pl2.gold) + '.';
+        gold_string := uplc + player.name2 + config.textcol1 + ' let you keep your purse with ' +
+          uyellow + commastr(pl2.gold) + config.textcol1 + ' ' + many_money(pl2.gold) + '.';
       end;
 
       s := 'Defeat!';
@@ -891,7 +917,8 @@ begin
       if player.gold > 0 then
       begin
         gold_mem := player.gold;
-        gold_string := uplc + pl2.name2 + config.textcol1 + ' emptied your purse. You lost ' + uyellow + commastr(gold_mem) + config.textcol1 + ' ' + many_money(gold_mem) + '!';
+        gold_string := uplc + pl2.name2 + config.textcol1 + ' emptied your purse. You lost ' +
+          uyellow + commastr(gold_mem) + config.textcol1 + ' ' + many_money(gold_mem) + '!';
       end;
 
       s := 'Your Death';
@@ -925,23 +952,28 @@ begin
           s2 := ' ' + ulred + player.name2 + config.textcol1 + ' lost both the fight and ' + sex3[player.sex] + ' head!';
         end;
         1: begin
-          s := uplc + player.name2 + config.textcol1 + ' challenged ' + uplc + pl2.name2 + config.textcol1 + ' but was massacred!';
+          s := uplc + player.name2 + config.textcol1 + ' challenged ' + uplc + pl2.name2 +
+            config.textcol1 + ' but was massacred!';
         end;
         2: begin
-          s := uplc + player.name2 + config.textcol1 + ' assaulted ' + uplc + pl2.name2 + config.textcol1 + ' but died in the attempt!';
+          s := uplc + player.name2 + config.textcol1 + ' assaulted ' + uplc + pl2.name2 + config.textcol1 +
+            ' but died in the attempt!';
         end;
         3: begin
-          s := uplc + player.name2 + config.textcol1 + ' attacked ' + uplc + pl2.name2 + config.textcol1 + '! It was a mistake...';
+          s := uplc + player.name2 + config.textcol1 + ' attacked ' + uplc + pl2.name2 + config.textcol1 +
+            '! It was a mistake...';
         end;
         4: begin
           s := uplc + player.name2 + config.textcol1 + ' attacked ' + uplc + pl2.name2 + config.textcol1 + '! ';
           s2 := ' ' + ulred + pl2.name2 + config.textcol1 + ' was killed.';
         end;
         5: begin
-          s := uplc + player.name2 + config.textcol1 + ' attacked ' + uplc + pl2.name2 + config.textcol1 + ' but was terminated.';
+          s := uplc + player.name2 + config.textcol1 + ' attacked ' + uplc + pl2.name2 + config.textcol1 +
+            ' but was terminated.';
         end;
         6: begin
-          s := uplc + player.name2 + config.textcol1 + ' assaulted ' + uplc + pl2.name2 + config.textcol1 + ' but was defeated!';
+          s := uplc + player.name2 + config.textcol1 + ' assaulted ' + uplc + pl2.name2 + config.textcol1 +
+            ' but was defeated!';
         end;
         7: begin
           s := uplc + player.name2 + config.textcol1 + ' jumped ' + uplc + pl2.name2 + config.textcol1 + ' but was mangled!';
@@ -982,7 +1014,8 @@ begin
         gold_string := '';
         if gold_mem > 0 then
         begin
-          gold_string := 'You emptied ' + uplc + player.name2 + 's' + config.textcol1 + ' purse and found ' + uyellow + commastr(gold_mem) + config.textcol1 + ' ' + many_money(gold_mem) + '!';
+          gold_string := 'You emptied ' + uplc + player.name2 + 's' + config.textcol1 + ' purse and found ' +
+            uyellow + commastr(gold_mem) + config.textcol1 + ' ' + many_money(gold_mem) + '!';
         end else
         begin
           gold_string := 'You took ' + uplc + player.name2 + 's' + config.textcol1 + ' purse but it was empty!';
@@ -1030,7 +1063,7 @@ begin
     pause;
   end; {beg=false .end.}
 
-  {remove playerinfight flag}
+       {remove playerinfight flag}
   global_PlayerInFight := False;
 
 end; {Player_vs_Player *end*}

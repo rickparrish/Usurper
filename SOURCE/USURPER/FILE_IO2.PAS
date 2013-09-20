@@ -56,7 +56,7 @@ var
 
 begin {creates textfile with children data, names and stuff}
 
-  {set correct filename, male or female}
+      {set correct filename, male or female}
   case nr of
     1: tempfilename := global_childmalef;
     2: tempfilename := global_childfemalef;
@@ -375,44 +375,44 @@ begin {creates textfile with children data, names and stuff}
         ox('Glaurung'); {#299}
         ox('Glend'); {#300}
         ox('Lenny'); {#301}
-        {ox('Glorfindel'); {#302}
-        {ox('Gorgumoth'); {#303}
-        {ox('Abel'); {#304}
-        {ox('Kain'); {#305}
-        {ox('Gorlim'); {#306}
-        {ox('Gothmog'); {#307}
-        {ox('Grithnir'); {#308}
-        {ox('Gumlin'); {#309}
-        {ox('Gumniow'); {#310}
-        {ox('Grim'); {#311}
-        {ox('Gwindor'); {#312}
-        {ox('Hador'); {#313}
-        {ox('Ulmo'); {#314}
-        {ox('Hadar'); {#315}
-        {ox('Helgor'); {#316}
-        {ox('Hendor'); {#317}
-        {ox('Hengest'); {#318}
-        {ox('Heorrenda'); {#319}
-        {ox('Bernie'); {#320}
-        {ox('Huan'); {#321}
-        {ox('Hunthor'); {#322}
-        {ox('Hunter'); {#323}
-        {ox('Killer'); {#324}
-        {ox('Huor'); {#325}
-        {ox('H£rin'); {#326}
-        {ox('Ilfrin'); {#327}
-        {ox('Indor'); {#328}
-        {ox('Indorildo'); {#329}
-        {ox('Ignatius'); {#330}
-        {ox('Belsebub'); {#331}
-        {ox('Achmed'); {#332}
-        {ox('Attila'); {#333}
-        {ox('Ben'); {#334}
+               {ox('Glorfindel'); {#302}
+               {ox('Gorgumoth'); {#303}
+               {ox('Abel'); {#304}
+               {ox('Kain'); {#305}
+               {ox('Gorlim'); {#306}
+               {ox('Gothmog'); {#307}
+               {ox('Grithnir'); {#308}
+               {ox('Gumlin'); {#309}
+               {ox('Gumniow'); {#310}
+               {ox('Grim'); {#311}
+               {ox('Gwindor'); {#312}
+               {ox('Hador'); {#313}
+               {ox('Ulmo'); {#314}
+               {ox('Hadar'); {#315}
+               {ox('Helgor'); {#316}
+               {ox('Hendor'); {#317}
+               {ox('Hengest'); {#318}
+               {ox('Heorrenda'); {#319}
+               {ox('Bernie'); {#320}
+               {ox('Huan'); {#321}
+               {ox('Hunthor'); {#322}
+               {ox('Hunter'); {#323}
+               {ox('Killer'); {#324}
+               {ox('Huor'); {#325}
+               {ox('H£rin'); {#326}
+               {ox('Ilfrin'); {#327}
+               {ox('Indor'); {#328}
+               {ox('Indorildo'); {#329}
+               {ox('Ignatius'); {#330}
+               {ox('Belsebub'); {#331}
+               {ox('Achmed'); {#332}
+               {ox('Attila'); {#333}
+               {ox('Ben'); {#334}
 
-        {ox('Ingil'); {#334}
-        {forts„tt p† de f”rlorade sagornas bok 2, sid 472.. Ingil}
+               {ox('Ingil'); {#334}
+               {forts„tt p† de f”rlorade sagornas bok 2, sid 472.. Ingil}
 
-      end; {finished writing MALE children names}
+      end;     {finished writing MALE children names}
 
       2: begin {write the FEMALE children names}
         ox('Mina'); {#1}
@@ -707,7 +707,7 @@ begin {creates textfile with children data, names and stuff}
         ox('Sophie'); {#300}
         ox('Lorietta'); {#301}
 
-      end; {finished writing FEMALE children names}
+      end;     {finished writing FEMALE children names}
 
     end; {case .end.}
 

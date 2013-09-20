@@ -9,7 +9,8 @@ uses
   begin
     WriteLn('Hit a key to continue or Q to quit');
     Ch := ReadKey;
-    if (UpCase(Ch) = 'Q') then Halt;
+    if (UpCase(Ch) = 'Q') then
+      Halt;
   end;
 
 var

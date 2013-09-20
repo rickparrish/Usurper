@@ -153,7 +153,8 @@ begin
 
     case ch of
       '?': begin {menu}
-        if player.expert = True then display_menu(True, False)
+        if player.expert = True then
+          display_menu(True, False)
         else display_menu(False, False);
       end;
       'S': begin {status}
@@ -234,14 +235,14 @@ begin
 
         end; {for i .end.}
 
-        {did we found any items}
+             {did we found any items}
         if counter = 0 then
         begin
           d(12, 'Bah! You didn''t find any valuables!');
           pause;
         end;
 
-      end; {list targets *end*}
+      end;       {list targets *end*}
 
       'G': begin {grab loot from chest}
 
@@ -251,7 +252,8 @@ begin
           {no dark deeds left}
           no_dark_deeds;
           pause;
-        end else if inventory_empty(player) = 0 then
+        end else
+        if inventory_empty(player) = 0 then
         begin
           crlf;
           d(12, 'Your inventory is full!');
@@ -319,11 +321,13 @@ begin
 
               end;
 
-              if abort then break;
+              if abort then
+                break;
 
             end; {for j:= .end.}
 
-            if abort then break;
+            if abort then
+              break;
 
           end; {for i:= .end.}
 
@@ -331,7 +335,8 @@ begin
         if (found = False) and (abort = False) then
         begin
           could_not_locate_character;
-        end else if found then
+        end else
+        if found then
         begin
 
          {found a player. check if he/she has items
@@ -395,7 +400,7 @@ begin
 
           end; {for i .end.}
 
-          {did we found any items}
+               {did we found any items}
           if counter = 0 then
           begin
             d(12, 'Bah! You didn''t find any valuables stored in ' + uplc + ply2.name2 + 's' + config.textcol1 + ' house.');
@@ -465,7 +470,8 @@ begin
                 {jakob}
                 if (i = 1) and (ply2.hps > 0) and (ply2.location = offloc_home) then
                 begin
-                  if add_shadow(SAdd, ply2, player.name2, 'fighting ' + uplc + player.name2 + config.textcol1 + '!', 0) = True then
+                  if add_shadow(SAdd, ply2, player.name2, 'fighting ' + uplc + player.name2 +
+                    config.textcol1 + '!', 0) = True then
                   begin
 
                     spotted := True;
@@ -474,14 +480,18 @@ begin
                     d(config.textcolor, 'This is going to get ugly.');
                     pause;
                     to_death := False;
-                    for i := 1 to global_maxspells do player.spell[i, 2] := False;
+                    for i := 1 to global_maxspells do
+                      player.spell[i, 2] := False;
                     repeat
                       player_computer(player, ply2, False, 4);
                     until (player.hps < 1) or (ply2.hps < 1);
-                    if player.hps <= 0 then killed_by_stats(ply2, player);
-                    if ply2.hps <= 0 then killed_by_stats(player, ply2);
+                    if player.hps <= 0 then
+                      killed_by_stats(ply2, player);
+                    if ply2.hps <= 0 then
+                      killed_by_stats(player, ply2);
 
-                    if player.hps > 0 then sd(config.textcolor, 'Ahh, nothing like killing someone at home!')
+                    if player.hps > 0 then
+                      sd(config.textcolor, 'Ahh, nothing like killing someone at home!')
                     else
                     begin
                       reduce_player_resurrections(player, True);
@@ -537,7 +547,8 @@ begin
                   {news-paper}
                   newsy(True,
                     'Thief! Thief!',
-                    ' ' + uplc + player.name2 + config.textcol1 + ' was spotted stealing from ' + uplc + ply2.name2 + 's' + config.textcol1 + ' house.',
+                    ' ' + uplc + player.name2 + config.textcol1 + ' was spotted stealing from ' +
+                    uplc + ply2.name2 + 's' + config.textcol1 + ' house.',
                     '',
                     '',
                     '',
@@ -556,7 +567,8 @@ begin
                     '',
                     ulred + 'Dirty Thieves' + config.textcol1,
                     mkstring(13, underscore),
-                    uplc + player.name2 + config.textcol1 + ' stole the ' + uitemc + objekt^.Name + config.textcol1 + ' from your home!',
+                    uplc + player.name2 + config.textcol1 + ' stole the ' + uitemc + objekt^.Name +
+                    config.textcol1 + ' from your home!',
                     '',
                     '',
                     '',
@@ -595,7 +607,8 @@ begin
                     '',
                     ulred + 'Dirty Thieves' + config.textcol1,
                     mkstring(13, underscore),
-                    config.textcol1 + 'Somebody broke into your home and stole the ' + uitemc + objekt^.Name + config.textcol1 + '!',
+                    config.textcol1 + 'Somebody broke into your home and stole the ' + uitemc +
+                    objekt^.Name + config.textcol1 + '!',
                     '',
                     '',
                     '',
@@ -680,7 +693,8 @@ begin
       end;
 
     end; {for j:= .end.}
-    if found then break;
+    if found then
+      break;
   end; {for i:= .end.}
 
   Load_Chest_Item_Owner := found;

@@ -185,7 +185,8 @@ begin
 
     case ch of
       '?': begin {display menu}
-        if player.expert = True then display_menu(True, False)
+        if player.expert = True then
+          display_menu(True, False)
         else display_menu(False, False);
       end;
       'S': begin {status}

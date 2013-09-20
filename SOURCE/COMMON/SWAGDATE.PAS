@@ -54,7 +54,8 @@ begin
   maxDay[Dec] := 31;
 
   daysBefore[Jan] := 0;
-  for mo := Jan to Nov do daysBefore[Month(Ord(mo) + 1)] := daysBefore[mo] + maxDay[mo];
+  for mo := Jan to Nov do
+    daysBefore[Month(Ord(mo) + 1)] := daysBefore[mo] + maxDay[mo];
 end;
 
 function IsLeapYear(const yr: integer): boolean;
@@ -75,7 +76,8 @@ begin
     Inc(Result, lYr * DaysPerYear);
     leapYears := (lYr div 4) - (lYr div 100) + (lYr div 400);
     Inc(Result, leapYears);
-    if (mo > Feb) and IsLeapYear(yr) then Inc(Result);
+    if (mo > Feb) and IsLeapYear(yr) then
+      Inc(Result);
   end;
   NumDays := Result;
 end;

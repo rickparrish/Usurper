@@ -111,7 +111,8 @@ begin
 
       {news-paper}
       newsy(True, 'Royal Tax',
-        ' ' + s + ukingc + ' ' + ply.name2 + uwhite + ' lowered' + ugreen + ' the ' + ulgreen + 'Royal Tax to ' + ugreen + commastr(king.tax) + '% !',
+        ' ' + s + ukingc + ' ' + ply.name2 + uwhite + ' lowered' + ugreen + ' the ' + ulgreen +
+        'Royal Tax to ' + ugreen + commastr(king.tax) + '% !',
         ' People praise the wisdom of their beloved ' + KingString(ply.sex) + '!',
         '',
         '',
@@ -260,8 +261,9 @@ begin
             end;
           end; {case .end.}
 
-          {safety catch}
-          if monsters > global_maxmon then monsters := global_maxmon;
+               {safety catch}
+          if monsters > global_maxmon then
+            monsters := global_maxmon;
 
           {collect some monsters}
           done := False;
@@ -403,7 +405,8 @@ begin
 
           {news-paper}
           newsy(True, 'A Quest has been Issued',
-            ' Quest-Master ' + uplc + config.QuestMaster + config.textcol1 + ' has issued a ' + uquestc + 'Quest' + config.textcol1 + '!',
+            ' Quest-Master ' + uplc + config.QuestMaster + config.textcol1 + ' has issued a ' +
+            uquestc + 'Quest' + config.textcol1 + '!',
             '',
             '',
             '',
@@ -418,11 +421,11 @@ begin
       end;
     end; {for i .end.}
 
-  end; {Quests .end.}
+  end;   {Quests .end.}
 
-  {abdicate?}
+         {abdicate?}
 
-  {save king}
+         {save king}
   load_king(fsave, king);
 
 end; {King_Maintenance *end*}

@@ -155,7 +155,8 @@ begin
     {evaluate user input}
     case ch of
       '?': begin {menu}
-        if player.expert = True then display_menu(True, False)
+        if player.expert = True then
+          display_menu(True, False)
         else display_menu(False, False);
       end;
       'S': begin {status}
@@ -164,13 +165,13 @@ begin
       'Q': begin {list of top quest masters}
         quest_rankings;
       end;
-      'L': begin {list of quests}
+      'L': begin           {list of quests}
         list_quests(True); {display quests, true=include claimed quests}
       end;
-      'A': begin {abort a Quest}
+      'A': begin           {abort a Quest}
         list_quests(True); {display quests, true=include claimed quests}
       end;
-      'I': begin {initiate a quest}
+      'I': begin           {initiate a quest}
 
         crlf;
         crlf;
@@ -195,7 +196,8 @@ begin
             crlf;
             pause;
             go_ahead := False;
-          end else if (fs(fsquest) >= 65000) or
+          end else
+          if (fs(fsquest) >= 65000) or
             (fs(fsquest) >= Config.MaxQuestsAllowed) then
           begin
 
@@ -214,7 +216,7 @@ begin
               end;
             end; {for i:= .end.}
 
-            {database is full}
+                 {database is full}
             if no_more then
             begin
               d(12, 'Sorry, no more quests can be created right now.');
@@ -338,8 +340,9 @@ begin
                 end;
               end; {case .end.}
 
-              {safety catch}
-              if monsters > global_maxmon then monsters := global_maxmon;
+                   {safety catch}
+              if monsters > global_maxmon then
+                monsters := global_maxmon;
 
               {collect some monsters}
               done := False;
@@ -451,7 +454,8 @@ begin
                     crlf;
                   end;
 
-                  if mtemp2[i] = 1 then sd(global_moncol, mtemp1[i])
+                  if mtemp2[i] = 1 then
+                    sd(global_moncol, mtemp1[i])
                   else sd(global_moncol, commastr(mtemp2[i]) + ' ' + mtemp1[i]);
                   if mtemp2[i] > 1 then
                   begin
@@ -518,14 +522,17 @@ begin
               sd(3, 'Maximum (' + commastr(quest.minlevel) + '-100) [100]:');
               x := get_number2(quest.minlevel, 100, 100);
 
-              if x = 0 then x := 100;
+              if x = 0 then
+                x := 100;
 
               quest.maxlevel := x;
             end;
 
             {display min and max level}
             crlf;
-            d(config.textcolor, 'Characters between level ' + uwhite + commastr(quest.minlevel) + config.textcol1 + ' and ' + uwhite + commastr(quest.maxlevel) + config.textcol1 + ' are allowed to claim this Quest.');
+            d(config.textcolor, 'Characters between level ' + uwhite + commastr(quest.minlevel) +
+              config.textcol1 + ' and ' + uwhite + commastr(quest.maxlevel) + config.textcol1 +
+              ' are allowed to claim this Quest.');
 
 
           {h„r kan man ju l„gga till. Race/Class/Quests completed needed to
@@ -614,7 +621,8 @@ begin
 
               {penalty type}
               quest.penaltyType := qExp;
-              if confirm('Quest Penalty is ' + uwhite + 'Experience points' + config.textcol1 + ' is this ok', 'Y') = False then
+              if confirm('Quest Penalty is ' + uwhite + 'Experience points' + config.textcol1 +
+                ' is this ok', 'Y') = False then
               begin
                 done := False;
                 repeat
@@ -688,7 +696,8 @@ begin
               done := False;
               for i := 1 to fs(fsplayer) do
               begin
-                if done then break;
+                if done then
+                  break;
                 load_character(pl0^, 1, i);
 
                 if (findsub(s, pl0^.name2)) and
@@ -747,7 +756,8 @@ begin
                       {if recipent is online}
                       if is_online(pl0^.name2, online_player) then
                       begin
-                        online_send_to_player(pl0^.name2, online_player, uplc + player.name2 + config.textcol1 + ' has offered you a ' + uquestc + 'QUEST' + config.textcol1 + '!');
+                        online_send_to_player(pl0^.name2, online_player, uplc + player.name2 +
+                          config.textcol1 + ' has offered you a ' + uquestc + 'QUEST' + config.textcol1 + '!');
                       end;
 
                       done := True;
@@ -793,7 +803,8 @@ begin
               {news-paper}
               Newsy(True,
                 'New Quest',
-                ' ' + s + ' ' + uplc + player.name2 + config.textcol1 + ' initiated a ' + uquestc + 'Quest' + config.textcol1 + '!',
+                ' ' + s + ' ' + uplc + player.name2 + config.textcol1 + ' initiated a ' + uquestc +
+                'Quest' + config.textcol1 + '!',
                 '',
                 '',
                 '',
@@ -804,7 +815,8 @@ begin
                 '');
 
               {inform other nodes}
-              online_send_to_all(uplc + player.name2 + config.textcol1 + ' initiated a ' + uquestc + 'QUEST' + config.textcol1 + '!'
+              online_send_to_all(uplc + player.name2 + config.textcol1 + ' initiated a ' + uquestc +
+                'QUEST' + config.textcol1 + '!'
                 , player.name2, '');
 
               {quest has been added}
@@ -836,7 +848,15 @@ begin
 end; {Royal_Quests *end*}
 
 end. {RQuests .end.}
-{type QuestRec = Record Royal initiated Quests}{    Initiator   : s30; {name of (KING/QUEEN) who set this quest}{    date        : string[6]; {init date}{    QuestType   : QuestTypes; {single or team effort}{    QuestTarget : QuestTargets; {monsters,assassinatio,seduce,claim town,gang war}{    deleted     : boolean; {is this quest deleted}{    comment     : s90; {comment by initiator}{    occupier    : s30; {is quest taken at this moment/name of the person}{    occdays     : SmallWord; {quest has been occupied for X days}{    daystocomple: SmallWord; {days given to complete quest before failed}{    offerto     : s30; {is this quest an offer a player}{    offerrefused: byte; {if offer is refused (1=delete,2=add to list}{    forced      : boolean; {is quest forced upon OCCUPIER}{    minlevel    : SmallWord; {min level required to take on quest}{    maxlevel    : SmallWord; {max level required to take on quest}{    reward      : byte; {low,medium,high}  {    rewardtype  : qrewardtypes;
+{type QuestRec = Record Royal initiated Quests}{    Initiator   : s30; {name of (KING/QUEEN) who set this quest}
+{    date        : string[6]; {init date}{    QuestType   : QuestTypes; {single or team effort}
+{    QuestTarget : QuestTargets; {monsters,assassinatio,seduce,claim town,gang war}{    deleted     : boolean; {is this quest deleted}
+{    comment     : s90; {comment by initiator}{    occupier    : s30; {is quest taken at this moment/name of the person}
+     {    occdays     : SmallWord; {quest has been occupied for X days}
+{    daystocomple: SmallWord; {days given to complete quest before failed}{    offerto     : s30; {is this quest an offer a player}
+{    offerrefused: byte; {if offer is refused (1=delete,2=add to list}{    forced      : boolean; {is quest forced upon OCCUPIER}
+{    minlevel    : SmallWord; {min level required to take on quest}{    maxlevel    : SmallWord; {max level required to take on quest}
+{    reward      : byte; {low,medium,high}  {    rewardtype  : qrewardtypes;
 
       penalty     : byte; {low,medium,high}  {   penaltytype : qrewardtypes;
 

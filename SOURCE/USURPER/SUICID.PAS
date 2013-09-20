@@ -55,7 +55,8 @@ begin
   d(12, ' *** Suicide, The easy way out ***');
   crlf;
 
-  s1 := ' ' + uplc + player.name2 + config.textcol1 + ' is dead! ' + sex2[player.sex] + ' hanged ' + sex4[player.sex] + ' in the woods!';
+  s1 := ' ' + uplc + player.name2 + config.textcol1 + ' is dead! ' + sex2[player.sex] + ' hanged ' +
+    sex4[player.sex] + ' in the woods!';
 
   if confirm('ARE YOU SURE that you want to kill yourself', 'n') = True then
   begin
@@ -130,7 +131,8 @@ begin
 
     if player.king then
     begin
-      if player.sex = 1 then s := 'King'
+      if player.sex = 1 then
+        s := 'King'
       else s := 'Queen';
 
       {inform royal guards that they have been sacked}
@@ -220,7 +222,7 @@ begin
 
     end; {inform god .end.}
 
-    {deactivate player}
+         {deactivate player}
     deactivate_player(player);
 
     {save user}

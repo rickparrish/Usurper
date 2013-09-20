@@ -291,7 +291,7 @@ begin
           end;
         end;
       end; {for j:= .end.}
-    end; {for i:= .end.}
+    end;   {for i:= .end.}
 
 
     {display teams}
@@ -350,7 +350,8 @@ begin
               if ch = 'N' then
               begin
                 break;
-              end else if ch = '=' then
+              end else
+              if ch = '=' then
               begin
                 pause_check := False;
               end;
@@ -430,7 +431,7 @@ begin
         end;
 
       end; {for j:= .end.}
-    end; {for i:= .end.}
+    end;   {for i:= .end.}
 
     if currentmax > 0 then
     begin
@@ -451,7 +452,8 @@ begin
             if ch = 'N' then
             begin
               break;
-            end else if ch = '=' then
+            end else
+            if ch = '=' then
             begin
               pause_check := False;
             end;
@@ -470,7 +472,7 @@ begin
     exit;
   end; {Info On Teams .end.}
 
-  {sort_teams continues...}
+       {sort_teams continues...}
 
   for i := 1 to 2 do
   begin
@@ -521,9 +523,9 @@ begin
         end;
       end;
     end; {for j:= .end.}
-  end; {for i:= .end.}
+  end;   {for i:= .end.}
 
-  {sort teams}
+         {sort teams}
   x := currentmax - 1;
   gap := x div 2;
   while gap > 0 do
@@ -564,7 +566,8 @@ begin
       begin
 
         {top team color}
-        if i = 1 then col := 14;
+        if i = 1 then
+          col := 14;
 
         {#}
         if i < 10 then
@@ -608,14 +611,16 @@ begin
             if ch = 'N' then
             begin
               break;
-            end else if ch = '=' then
+            end else
+            if ch = '=' then
             begin
               pause_check := False;
             end;
           end;
         end;
 
-        if i = 1 then col := config.textcolor;
+        if i = 1 then
+          col := config.textcolor;
       end; {for i:= .end.}
 
     end else

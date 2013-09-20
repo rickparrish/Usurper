@@ -25,8 +25,9 @@ Copyright 2007 Jakob Dangarden
 
 
 unit Npc_Chec;
-{Usurper - Npcs and offline players Check their Inventory}
-{"the computer players are not very smart" - jakob}
+
+ {Usurper - Npcs and offline players Check their Inventory}
+ {"the computer players are not very smart" - jakob}
 interface
 
 uses
@@ -45,13 +46,14 @@ uses
 var
   objekt, objekt2: ^orec; {Items}
 
-procedure Dispose_Vars; {dispose of pointer variables}
+procedure Dispose_Vars;   {dispose of pointer variables}
 begin
   dispose(objekt);
   dispose(objekt2);
 end;
 
-procedure Inform_By_Mail(const location: byte; const newitem: orec; const olditem: orec; const situation: byte; const ply: userrec);
+procedure Inform_By_Mail(const location: byte; const newitem: orec; const olditem: orec;
+  const situation: byte; const ply: userrec);
 
   function Random_Header: s30;
   var Result: s30;
@@ -63,7 +65,7 @@ procedure Inform_By_Mail(const location: byte; const newitem: orec; const oldite
       3: Result := 'New Stuff!';
     end; {case .end.}
 
-    {return result}
+         {return result}
     random_header := Result;
 
   end; {random_header *end*}
@@ -79,7 +81,7 @@ begin {inform offline player by mail how new item was found and how he
 
   case location of
 
-    1: begin {finding item in the dungeons}
+    1: begin     {finding item in the dungeons}
       case situation of
         1: begin {nothing similar used on body...and item is ok! starts to use it!}
 
@@ -95,7 +97,8 @@ begin {inform offline player by mail how new item was found and how he
             mkstring(length(s), underscore),
             'You found ' + uitemc + newitem.Name + config.textcol1 + ' in the Dungeons.',
             'You started to use it immediately.',
-            'The ' + uitemc + newitem.Name + config.textcol1 + ' is worth approximately ' + uyellow + commastr(newitem.Value) + config.textcol1 + ' ' + many_money(newitem.Value) + '.',
+            'The ' + uitemc + newitem.Name + config.textcol1 + ' is worth approximately ' +
+            uyellow + commastr(newitem.Value) + config.textcol1 + ' ' + many_money(newitem.Value) + '.',
             '',
             '',
             '',
@@ -122,7 +125,8 @@ begin {inform offline player by mail how new item was found and how he
             mkstring(length(s), underscore),
             'You found ' + uitemc + newitem.Name + config.textcol1 + ' in the Dungeons.',
             'You started to use it instead of your old ' + uitemc + olditem.Name + config.textcol1 + '.',
-            'The ' + uitemc + newitem.Name + config.textcol1 + ' is worth approximately ' + uyellow + commastr(newitem.Value) + config.textcol1 + ' ' + many_money(newitem.Value) + '.',
+            'The ' + uitemc + newitem.Name + config.textcol1 + ' is worth approximately ' +
+            uyellow + commastr(newitem.Value) + config.textcol1 + ' ' + many_money(newitem.Value) + '.',
             '',
             '',
             '',
@@ -137,7 +141,7 @@ begin {inform offline player by mail how new item was found and how he
       end; {case .end.}
     end;
 
-    3: begin {finding item after killing monster (monster weapon/armor) }
+    3: begin     {finding item after killing monster (monster weapon/armor) }
       case situation of
         1: begin {nothing similar used on body...and item is ok! starts to use it!}
 
@@ -153,7 +157,8 @@ begin {inform offline player by mail how new item was found and how he
             mkstring(length(s), underscore),
             'After killing a monster You found ' + uitemc + newitem.Name + config.textcol1 + '.',
             'You started to use it immediately.',
-            'The ' + uitemc + newitem.Name + config.textcol1 + ' is worth approximately ' + uyellow + commastr(newitem.Value) + config.textcol1 + ' ' + many_money(newitem.Value) + '.',
+            'The ' + uitemc + newitem.Name + config.textcol1 + ' is worth approximately ' +
+            uyellow + commastr(newitem.Value) + config.textcol1 + ' ' + many_money(newitem.Value) + '.',
             '',
             '',
             '',
@@ -180,7 +185,8 @@ begin {inform offline player by mail how new item was found and how he
             mkstring(length(s), underscore),
             'After killing a monster You found ' + uitemc + newitem.Name + config.textcol1 + '.',
             'You started to use it instead of your old ' + uitemc + olditem.Name + config.textcol1 + '.',
-            'The ' + uitemc + newitem.Name + config.textcol1 + ' is worth approximately ' + uyellow + commastr(newitem.Value) + config.textcol1 + ' ' + many_money(newitem.Value) + '.',
+            'The ' + uitemc + newitem.Name + config.textcol1 + ' is worth approximately ' +
+            uyellow + commastr(newitem.Value) + config.textcol1 + ' ' + many_money(newitem.Value) + '.',
             '',
             '',
             '',
@@ -212,7 +218,8 @@ begin {inform offline player by mail how new item was found and how he
             mkstring(length(s), underscore),
             'After your party killed a monster You claimed its ' + uitemc + newitem.Name + config.textcol1 + '.',
             'You started to use it immediately.',
-            'The ' + uitemc + newitem.Name + config.textcol1 + ' is worth approximately ' + uyellow + commastr(newitem.Value) + config.textcol1 + ' ' + many_money(newitem.Value) + '.',
+            'The ' + uitemc + newitem.Name + config.textcol1 + ' is worth approximately ' +
+            uyellow + commastr(newitem.Value) + config.textcol1 + ' ' + many_money(newitem.Value) + '.',
             '',
             '',
             '',
@@ -239,7 +246,8 @@ begin {inform offline player by mail how new item was found and how he
             mkstring(length(s), underscore),
             'After your party killed a monster You claimed its ' + uitemc + newitem.Name + config.textcol1 + '.',
             'You started to use it instead of your old ' + uitemc + olditem.Name + config.textcol1 + '.',
-            'The ' + uitemc + newitem.Name + config.textcol1 + ' is worth approximately ' + uyellow + commastr(newitem.Value) + config.textcol1 + ' ' + many_money(newitem.Value) + '.',
+            'The ' + uitemc + newitem.Name + config.textcol1 + ' is worth approximately ' +
+            uyellow + commastr(newitem.Value) + config.textcol1 + ' ' + many_money(newitem.Value) + '.',
             '',
             '',
             '',
@@ -253,7 +261,7 @@ begin {inform offline player by mail how new item was found and how he
         end;
       end; {case .end.}
     end;
-  end; {case .end.}
+  end;     {case .end.}
 
 end; {inform_by_mail *end*}
 
@@ -303,14 +311,16 @@ begin
   begin
     {item is class restricted}
     go := False;
-  end else if (o2.good = True) and (gubbe.chiv < 1) and (gubbe.dark > 0) then
+  end else
+  if (o2.good = True) and (gubbe.chiv < 1) and (gubbe.dark > 0) then
   begin
     {player too evil for object}
     if o2.Value < 15000 then
     begin
       go := False;
     end;
-  end else if (o2.evil = True) and (gubbe.chiv > 0) and (gubbe.dark < 1) then
+  end else
+  if (o2.evil = True) and (gubbe.chiv > 0) and (gubbe.dark < 1) then
   begin
     {player too good for object}
     if o2.Value < 15000 then
@@ -352,7 +362,8 @@ begin
   begin
     {player too evil for object}
     go := False;
-  end else if (o2.evil = True) and (gubbe.chiv > 0) and (gubbe.dark < 1) then
+  end else
+  if (o2.evil = True) and (gubbe.chiv > 0) and (gubbe.dark < 1) then
   begin
     {player too good for object}
     go := False;
@@ -432,7 +443,8 @@ begin {gubbe kan inte ha prylen p† sig, inventoryt „r fullt! kan n†t sl„ngas?}
     load_objekt(objekt2^, gubbe.itemtype[q], gubbe.item[q]);
     if objekt_test('G', gubbe, objekt2^, objekt) = True then
     begin
-      if shout then back_pack(gubbe, objekt);
+      if shout then
+        back_pack(gubbe, objekt);
       gubbe.item[q] := onr;
       gubbe.itemtype[q] := objekt.ttype;
 
@@ -442,7 +454,8 @@ begin {gubbe kan inte ha prylen p† sig, inventoryt „r fullt! kan n†t sl„ngas?}
     end;
   end; {for q:= .end.}
 
-  if (discard) and (shout) then throw_away(gubbe, objekt);
+  if (discard) and (shout) then
+    throw_away(gubbe, objekt);
 
 end; {stuff_item *end*}
 
@@ -541,8 +554,10 @@ begin
       Head: begin
         if config.allowitem[2] = False then
         begin
-          if shout then d(config.textcolor, 'I can''t use this type of item!');
-        end else if gubbe.head > 0 then
+          if shout then
+            d(config.textcolor, 'I can''t use this type of item!');
+        end else
+        if gubbe.head > 0 then
         begin
 
           {gubbe har redan objekt, kollar om nya prylen „r b„ttre}
@@ -569,7 +584,8 @@ begin
             gubbe.head := onr;
             if i > 0 then
             begin
-              if shout then back_pack(gubbe, objekt2^);
+              if shout then
+                back_pack(gubbe, objekt2^);
               gubbe.item[i] := j;
               gubbe.itemtype[i] := head;
             end else
@@ -582,7 +598,8 @@ begin
             {„r det inte ok att byta kan man iaf stoppa det i ryggs„cken}
             if i > 0 then
             begin
-              if shout then back_pack(gubbe, objekt^);
+              if shout then
+                back_pack(gubbe, objekt^);
               gubbe.item[i] := onr;
               gubbe.itemtype[i] := head;
             end else
@@ -616,7 +633,8 @@ begin
             begin
               gubbe.item[i] := onr;
               gubbe.itemtype[i] := head;
-              if shout then back_pack(gubbe, objekt^);
+              if shout then
+                back_pack(gubbe, objekt^);
             end else
             begin
               stuffit1 := True;
@@ -627,7 +645,8 @@ begin
         {item f†r inte plats, kolla om n†git i ryggs„cken kan ers„ttas}
         if (stuffit1) or (stuffit2) then
         begin
-          if stuffit2 then objekt^ := objekt2^;
+          if stuffit2 then
+            objekt^ := objekt2^;
           stuff_item(gubbe, shout, onr, objekt^);
         end;
 
@@ -635,8 +654,10 @@ begin
       Body: begin
         if config.allowitem[3] = False then
         begin
-          if shout then d(config.textcolor, 'I can''t use this type of item!');
-        end else if gubbe.body > 0 then
+          if shout then
+            d(config.textcolor, 'I can''t use this type of item!');
+        end else
+        if gubbe.body > 0 then
         begin
           {gubbe har redan objekt, kollar om nya prylen „r b„ttre}
           load_objekt(objekt2^, body, gubbe.body);
@@ -661,7 +682,8 @@ begin
             gubbe.body := onr;
             if i > 0 then
             begin
-              if shout then back_pack(gubbe, objekt2^);
+              if shout then
+                back_pack(gubbe, objekt2^);
               gubbe.item[i] := j;
               gubbe.itemtype[i] := body;
             end else
@@ -674,7 +696,8 @@ begin
             {„r det inte ok att byta kan man iaf stoppa det i ryggs„cken}
             if i > 0 then
             begin
-              if shout then back_pack(gubbe, objekt^);
+              if shout then
+                back_pack(gubbe, objekt^);
               gubbe.item[i] := onr;
               gubbe.itemtype[i] := body;
             end else
@@ -707,7 +730,8 @@ begin
             begin
               gubbe.item[i] := onr;
               gubbe.itemtype[i] := body;
-              if shout then back_pack(gubbe, objekt^);
+              if shout then
+                back_pack(gubbe, objekt^);
             end else
             begin
               stuffit1 := True;
@@ -718,7 +742,8 @@ begin
         {item f†r inte plats, kolla om n†git i ryggs„cken kan ers„ttas}
         if (stuffit1) or (stuffit2) then
         begin
-          if stuffit2 then objekt^ := objekt2^;
+          if stuffit2 then
+            objekt^ := objekt2^;
           stuff_item(gubbe, shout, onr, objekt^);
         end;
 
@@ -726,8 +751,10 @@ begin
       Arms: begin
         if config.allowitem[4] = False then
         begin
-          if shout then d(config.textcolor, 'I can''t use this type of item!');
-        end else if gubbe.arms > 0 then
+          if shout then
+            d(config.textcolor, 'I can''t use this type of item!');
+        end else
+        if gubbe.arms > 0 then
         begin
           {gubbe har redan objekt, kollar om nya prylen „r b„ttre}
           load_objekt(objekt2^, arms, gubbe.arms);
@@ -752,7 +779,8 @@ begin
             gubbe.arms := onr;
             if i > 0 then
             begin
-              if shout then back_pack(gubbe, objekt2^);
+              if shout then
+                back_pack(gubbe, objekt2^);
               gubbe.item[i] := j;
               gubbe.itemtype[i] := arms;
             end else
@@ -765,7 +793,8 @@ begin
             {„r det inte ok att byta kan man iaf stoppa det i ryggs„cken}
             if i > 0 then
             begin
-              if shout then back_pack(gubbe, objekt^);
+              if shout then
+                back_pack(gubbe, objekt^);
               gubbe.item[i] := onr;
               gubbe.itemtype[i] := arms;
             end else
@@ -798,7 +827,8 @@ begin
             begin
               gubbe.item[i] := onr;
               gubbe.itemtype[i] := arms;
-              if shout then back_pack(gubbe, objekt^);
+              if shout then
+                back_pack(gubbe, objekt^);
             end else
             begin
               stuffit1 := True;
@@ -809,7 +839,8 @@ begin
         {item f†r inte plats, kolla om n†git i ryggs„cken kan ers„ttas}
         if (stuffit1) or (stuffit2) then
         begin
-          if stuffit2 then objekt^ := objekt2^;
+          if stuffit2 then
+            objekt^ := objekt2^;
           stuff_item(gubbe, shout, onr, objekt^);
         end;
 
@@ -817,8 +848,10 @@ begin
       Hands: begin
         if config.allowitem[1] = False then
         begin
-          if shout then d(config.textcolor, 'I can''t use this type of item!');
-        end else if gubbe.hands > 0 then
+          if shout then
+            d(config.textcolor, 'I can''t use this type of item!');
+        end else
+        if gubbe.hands > 0 then
         begin
           {gubbe har redan objekt, kollar om nya prylen „r b„ttre}
           load_objekt(objekt2^, hands, gubbe.hands);
@@ -843,7 +876,8 @@ begin
             gubbe.hands := onr;
             if i > 0 then
             begin
-              if shout then back_pack(gubbe, objekt2^);
+              if shout then
+                back_pack(gubbe, objekt2^);
               gubbe.item[i] := j;
               gubbe.itemtype[i] := hands;
             end else
@@ -856,7 +890,8 @@ begin
             {„r det inte ok att byta kan man iaf stoppa det i ryggs„cken}
             if i > 0 then
             begin
-              if shout then back_pack(gubbe, objekt^);
+              if shout then
+                back_pack(gubbe, objekt^);
               gubbe.item[i] := onr;
               gubbe.itemtype[i] := hands;
             end else
@@ -889,7 +924,8 @@ begin
             begin
               gubbe.item[i] := onr;
               gubbe.itemtype[i] := hands;
-              if shout then back_pack(gubbe, objekt^);
+              if shout then
+                back_pack(gubbe, objekt^);
             end else
             begin
               stuffit1 := True;
@@ -900,7 +936,8 @@ begin
         {item f†r inte plats, kolla om n†git i ryggs„cken kan ers„ttas}
         if (stuffit1) or (stuffit2) then
         begin
-          if stuffit2 then objekt^ := objekt2^;
+          if stuffit2 then
+            objekt^ := objekt2^;
           stuff_item(gubbe, shout, onr, objekt^);
         end;
 
@@ -908,8 +945,10 @@ begin
       Legs: begin
         if config.allowitem[7] = False then
         begin
-          if shout then d(config.textcolor, 'I can''t use this type of item!');
-        end else if gubbe.legs > 0 then
+          if shout then
+            d(config.textcolor, 'I can''t use this type of item!');
+        end else
+        if gubbe.legs > 0 then
         begin
           {gubbe har redan objekt, kollar om nya prylen „r b„ttre}
           load_objekt(objekt2^, legs, gubbe.legs);
@@ -934,7 +973,8 @@ begin
             gubbe.legs := onr;
             if i > 0 then
             begin
-              if shout then back_pack(gubbe, objekt2^);
+              if shout then
+                back_pack(gubbe, objekt2^);
               gubbe.item[i] := j;
               gubbe.itemtype[i] := legs;
             end else
@@ -947,7 +987,8 @@ begin
             {„r det inte ok att byta kan man iaf stoppa det i ryggs„cken}
             if i > 0 then
             begin
-              if shout then back_pack(gubbe, objekt^);
+              if shout then
+                back_pack(gubbe, objekt^);
               gubbe.item[i] := onr;
               gubbe.itemtype[i] := legs;
             end else
@@ -980,7 +1021,8 @@ begin
             begin
               gubbe.item[i] := onr;
               gubbe.itemtype[i] := legs;
-              if shout then back_pack(gubbe, objekt^);
+              if shout then
+                back_pack(gubbe, objekt^);
             end else
             begin
               stuffit1 := True;
@@ -991,7 +1033,8 @@ begin
         {item f†r inte plats, kolla om n†git i ryggs„cken kan ers„ttas}
         if (stuffit1) or (stuffit2) then
         begin
-          if stuffit2 then objekt^ := objekt2^;
+          if stuffit2 then
+            objekt^ := objekt2^;
           stuff_item(gubbe, shout, onr, objekt^);
         end;
 
@@ -999,8 +1042,10 @@ begin
       Feet: begin
         if config.allowitem[8] = False then
         begin
-          if shout then d(config.textcolor, 'I can''t use this type of item!');
-        end else if gubbe.feet > 0 then
+          if shout then
+            d(config.textcolor, 'I can''t use this type of item!');
+        end else
+        if gubbe.feet > 0 then
         begin
           {gubbe har redan objekt, kollar om nya prylen „r b„ttre}
           load_objekt(objekt2^, feet, gubbe.feet);
@@ -1025,7 +1070,8 @@ begin
             gubbe.feet := onr;
             if i > 0 then
             begin
-              if shout then back_pack(gubbe, objekt2^);
+              if shout then
+                back_pack(gubbe, objekt2^);
               gubbe.item[i] := j;
               gubbe.itemtype[i] := feet;
             end else
@@ -1038,7 +1084,8 @@ begin
             {„r det inte ok att byta kan man iaf stoppa det i ryggs„cken}
             if i > 0 then
             begin
-              if shout then back_pack(gubbe, objekt^);
+              if shout then
+                back_pack(gubbe, objekt^);
               gubbe.item[i] := onr;
               gubbe.itemtype[i] := feet;
             end else
@@ -1072,7 +1119,8 @@ begin
             begin
               gubbe.item[i] := onr;
               gubbe.itemtype[i] := feet;
-              if shout then back_pack(gubbe, objekt^);
+              if shout then
+                back_pack(gubbe, objekt^);
             end else
             begin
               stuffit1 := True;
@@ -1083,7 +1131,8 @@ begin
         {item f†r inte plats, kolla om n†git i ryggs„cken kan ers„ttas}
         if (stuffit1) or (stuffit2) then
         begin
-          if stuffit2 then objekt^ := objekt2^;
+          if stuffit2 then
+            objekt^ := objekt2^;
           stuff_item(gubbe, shout, onr, objekt^);
         end;
 
@@ -1091,8 +1140,10 @@ begin
       Waist: begin
         if config.allowitem[9] = False then
         begin
-          if shout then d(config.textcolor, 'I can''t use this type of item!');
-        end else if gubbe.waist > 0 then
+          if shout then
+            d(config.textcolor, 'I can''t use this type of item!');
+        end else
+        if gubbe.waist > 0 then
         begin
           {gubbe har redan objekt, kollar om nya prylen „r b„ttre}
           load_objekt(objekt2^, waist, gubbe.waist);
@@ -1117,7 +1168,8 @@ begin
             gubbe.waist := onr;
             if i > 0 then
             begin
-              if shout then back_pack(gubbe, objekt2^);
+              if shout then
+                back_pack(gubbe, objekt2^);
               gubbe.item[i] := j;
               gubbe.itemtype[i] := waist;
             end else
@@ -1130,7 +1182,8 @@ begin
             {„r det inte ok att byta kan man iaf stoppa det i ryggs„cken}
             if i > 0 then
             begin
-              if shout then back_pack(gubbe, objekt^);
+              if shout then
+                back_pack(gubbe, objekt^);
               gubbe.item[i] := onr;
               gubbe.itemtype[i] := waist;
             end else
@@ -1162,7 +1215,8 @@ begin
             begin
               gubbe.item[i] := onr;
               gubbe.itemtype[i] := waist;
-              if shout then back_pack(gubbe, objekt^);
+              if shout then
+                back_pack(gubbe, objekt^);
             end else
             begin
               stuffit1 := True;
@@ -1173,7 +1227,8 @@ begin
         {item f†r inte plats, kolla om n†git i ryggs„cken kan ers„ttas}
         if (stuffit1) or (stuffit2) then
         begin
-          if stuffit2 then objekt^ := objekt2^;
+          if stuffit2 then
+            objekt^ := objekt2^;
           stuff_item(gubbe, shout, onr, objekt^);
         end;
 
@@ -1181,8 +1236,10 @@ begin
       Neck: begin
         if (config.allowitem[10] = False) and (config.allowitem[11] = False) then
         begin
-          if shout then d(config.textcolor, 'I can''t use this type of item!');
-        end else if (gubbe.neck > 0) and (config.allowitem[10] = True) then
+          if shout then
+            d(config.textcolor, 'I can''t use this type of item!');
+        end else
+        if (gubbe.neck > 0) and (config.allowitem[10] = True) then
         begin
           {gubbe har redan objekt, kollar om nya prylen „r b„ttre}
           load_objekt(objekt2^, neck, gubbe.neck);
@@ -1207,7 +1264,8 @@ begin
             gubbe.neck := onr;
             if i > 0 then
             begin
-              if shout then back_pack(gubbe, objekt2^);
+              if shout then
+                back_pack(gubbe, objekt2^);
               gubbe.item[i] := j;
               gubbe.itemtype[i] := neck;
             end else
@@ -1220,7 +1278,8 @@ begin
             {„r det inte ok att byta kan man iaf stoppa det i ryggs„cken}
             if i > 0 then
             begin
-              if shout then back_pack(gubbe, objekt^);
+              if shout then
+                back_pack(gubbe, objekt^);
               gubbe.item[i] := onr;
               gubbe.itemtype[i] := neck;
             end else
@@ -1228,7 +1287,8 @@ begin
               stuffit1 := True;
             end;
           end;
-        end else if (gubbe.neck2 > 0) and (config.allowitem[11] = True) then
+        end else
+        if (gubbe.neck2 > 0) and (config.allowitem[11] = True) then
         begin
           {gubbe har redan objekt, kollar om nya prylen „r b„ttre}
           load_objekt(objekt2^, neck, gubbe.neck2);
@@ -1253,7 +1313,8 @@ begin
             gubbe.neck2 := onr;
             if i > 0 then
             begin
-              if shout then back_pack(gubbe, objekt2^);
+              if shout then
+                back_pack(gubbe, objekt2^);
               gubbe.item[i] := j;
               gubbe.itemtype[i] := neck;
             end else
@@ -1266,7 +1327,8 @@ begin
             {„r det inte ok att byta kan man iaf stoppa det i ryggs„cken}
             if i > 0 then
             begin
-              if shout then back_pack(gubbe, objekt^);
+              if shout then
+                back_pack(gubbe, objekt^);
               gubbe.item[i] := onr;
               gubbe.itemtype[i] := neck;
             end else
@@ -1293,7 +1355,8 @@ begin
                 inform_by_mail(location, objekt^, objekt2^, 1, gubbe);
               end;
 
-            end else if (gubbe.neck2 = 0) and (config.allowitem[11] = True) then
+            end else
+            if (gubbe.neck2 = 0) and (config.allowitem[11] = True) then
             begin
               gubbe.neck2 := onr;
               objekt_affect(1, gubbe.neck2, neck, gubbe, shout_affect);
@@ -1309,7 +1372,8 @@ begin
             begin
               gubbe.item[i] := onr;
               gubbe.itemtype[i] := neck;
-              if shout then back_pack(gubbe, objekt^);
+              if shout then
+                back_pack(gubbe, objekt^);
             end else
             begin
               stuffit1 := True;
@@ -1319,7 +1383,8 @@ begin
         {item f†r inte plats, kolla om n†git i ryggs„cken kan ers„ttas}
         if (stuffit1) or (stuffit2) then
         begin
-          if stuffit2 then objekt^ := objekt2^;
+          if stuffit2 then
+            objekt^ := objekt2^;
           stuff_item(gubbe, shout, onr, objekt^);
         end;
 
@@ -1327,8 +1392,10 @@ begin
       Face: begin
         if config.allowitem[12] = False then
         begin
-          if shout then d(config.textcolor, 'I can''t use this type of item!');
-        end else if gubbe.face > 0 then
+          if shout then
+            d(config.textcolor, 'I can''t use this type of item!');
+        end else
+        if gubbe.face > 0 then
         begin
           {gubbe har redan objekt, kollar om nya prylen „r b„ttre}
           load_objekt(objekt2^, face, gubbe.face);
@@ -1353,7 +1420,8 @@ begin
             gubbe.face := onr;
             if i > 0 then
             begin
-              if shout then back_pack(gubbe, objekt2^);
+              if shout then
+                back_pack(gubbe, objekt2^);
               gubbe.item[i] := j;
               gubbe.itemtype[i] := face;
             end else
@@ -1366,7 +1434,8 @@ begin
             {„r det inte ok att byta kan man iaf stoppa det i ryggs„cken}
             if i > 0 then
             begin
-              if shout then back_pack(gubbe, objekt^);
+              if shout then
+                back_pack(gubbe, objekt^);
               gubbe.item[i] := onr;
               gubbe.itemtype[i] := face;
             end else
@@ -1400,7 +1469,8 @@ begin
             begin
               gubbe.item[i] := onr;
               gubbe.itemtype[i] := face;
-              if shout then back_pack(gubbe, objekt^);
+              if shout then
+                back_pack(gubbe, objekt^);
             end else
             begin
               stuffit1 := True;
@@ -1410,7 +1480,8 @@ begin
         {item f†r inte plats, kolla om n†git i ryggs„cken kan ers„ttas}
         if (stuffit1) or (stuffit2) then
         begin
-          if stuffit2 then objekt^ := objekt2^;
+          if stuffit2 then
+            objekt^ := objekt2^;
           stuff_item(gubbe, shout, onr, objekt^);
         end;
 
@@ -1418,8 +1489,10 @@ begin
       Shield: begin
         if config.allowitem[13] = False then
         begin
-          if shout then d(config.textcolor, 'I can''t use this type of item!');
-        end else if gubbe.shield > 0 then
+          if shout then
+            d(config.textcolor, 'I can''t use this type of item!');
+        end else
+        if gubbe.shield > 0 then
         begin
           {gubbe har redan objekt, kollar om nya prylen „r b„ttre}
           load_objekt(objekt2^, shield, gubbe.shield);
@@ -1444,7 +1517,8 @@ begin
             gubbe.shield := onr;
             if i > 0 then
             begin
-              if shout then back_pack(gubbe, objekt2^);
+              if shout then
+                back_pack(gubbe, objekt2^);
               gubbe.item[i] := j;
               gubbe.itemtype[i] := shield;
             end else
@@ -1457,7 +1531,8 @@ begin
             {„r det inte ok att byta kan man iaf stoppa det i ryggs„cken}
             if i > 0 then
             begin
-              if shout then back_pack(gubbe, objekt^);
+              if shout then
+                back_pack(gubbe, objekt^);
               gubbe.item[i] := onr;
               gubbe.itemtype[i] := shield;
             end else
@@ -1489,7 +1564,8 @@ begin
             begin
               gubbe.item[i] := onr;
               gubbe.itemtype[i] := shield;
-              if shout then back_pack(gubbe, objekt^);
+              if shout then
+                back_pack(gubbe, objekt^);
             end else
             begin
               stuffit1 := True;
@@ -1499,7 +1575,8 @@ begin
         {item f†r inte plats, kolla om n†git i ryggs„cken kan ers„ttas}
         if (stuffit1) or (stuffit2) then
         begin
-          if stuffit2 then objekt^ := objekt2^;
+          if stuffit2 then
+            objekt^ := objekt2^;
           stuff_item(gubbe, shout, onr, objekt^);
         end;
 
@@ -1507,8 +1584,10 @@ begin
       Fingers: begin
         if (config.allowitem[5] = False) and (config.allowitem[6] = False) then
         begin
-          if shout then d(config.textcolor, 'I can''t use this type of item!');
-        end else if (gubbe.lfinger = 0) and (config.allowitem[5] = True) then
+          if shout then
+            d(config.textcolor, 'I can''t use this type of item!');
+        end else
+        if (gubbe.lfinger = 0) and (config.allowitem[5] = True) then
         begin
           {kolla om plagget „r ok.}
           if objekt_test2(gubbe, objekt^) = True then
@@ -1526,13 +1605,15 @@ begin
             begin
               gubbe.item[i] := onr;
               gubbe.itemtype[i] := fingers;
-              if shout then back_pack(gubbe, objekt^);
+              if shout then
+                back_pack(gubbe, objekt^);
             end else
             begin
               stuffit1 := True;
             end;
           end;
-        end else if (gubbe.rfinger = 0) and (config.allowitem[6] = True) then
+        end else
+        if (gubbe.rfinger = 0) and (config.allowitem[6] = True) then
         begin
           {h”gra fingret „r tomt, put it there?}
           {kolla om plagget „r ok.}
@@ -1551,7 +1632,8 @@ begin
             begin
               gubbe.item[i] := onr;
               gubbe.itemtype[i] := fingers;
-              if shout then back_pack(gubbe, objekt^);
+              if shout then
+                back_pack(gubbe, objekt^);
             end else
             begin
               stuffit1 := True;
@@ -1587,7 +1669,8 @@ begin
               gubbe.lfinger := onr;
               if i > 0 then
               begin
-                if shout then back_pack(gubbe, objekt2^);
+                if shout then
+                  back_pack(gubbe, objekt2^);
                 gubbe.item[i] := j;
                 gubbe.itemtype[i] := fingers;
               end else
@@ -1596,7 +1679,8 @@ begin
               end;
               objekt_affect(1, gubbe.lfinger, fingers, gubbe, shout_affect);
             end;
-          end else if (gubbe.rfinger > 0) and (config.allowitem[6] = True) then
+          end else
+          if (gubbe.rfinger > 0) and (config.allowitem[6] = True) then
           begin
             {testa om nya prylen „r b„ttre „n h”gra ringen}
             load_objekt(objekt2^, fingers, gubbe.rfinger);
@@ -1621,7 +1705,8 @@ begin
               gubbe.rfinger := onr;
               if i > 0 then
               begin
-                if shout then back_pack(gubbe, objekt2^);
+                if shout then
+                  back_pack(gubbe, objekt2^);
                 gubbe.item[i] := j;
                 gubbe.itemtype[i] := fingers;
               end else
@@ -1636,7 +1721,8 @@ begin
         {item f†r inte plats, kolla om n†git i ryggs„cken kan ers„ttas}
         if (stuffit1) or (stuffit2) then
         begin
-          if stuffit2 then objekt^ := objekt2^;
+          if stuffit2 then
+            objekt^ := objekt2^;
           stuff_item(gubbe, shout, onr, objekt^);
         end;
 
@@ -1667,7 +1753,8 @@ begin
             gubbe.rhand := onr;
             if i > 0 then
             begin
-              if shout then back_pack(gubbe, objekt2^);
+              if shout then
+                back_pack(gubbe, objekt2^);
               gubbe.item[i] := j;
               gubbe.itemtype[i] := weapon;
             end else
@@ -1680,7 +1767,8 @@ begin
             {„r det inte ok att byta kan man iaf stoppa det i ryggs„cken}
             if i > 0 then
             begin
-              if shout then back_pack(gubbe, objekt^);
+              if shout then
+                back_pack(gubbe, objekt^);
               gubbe.item[i] := onr;
               gubbe.itemtype[i] := weapon;
             end else
@@ -1714,7 +1802,8 @@ begin
             begin
               gubbe.item[i] := onr;
               gubbe.itemtype[i] := weapon;
-              if shout then back_pack(gubbe, objekt^);
+              if shout then
+                back_pack(gubbe, objekt^);
             end else
             begin
               stuffit1 := True;
@@ -1725,7 +1814,8 @@ begin
         {item f†r inte plats, kolla om n†got i ryggs„cken kan ers„ttas}
         if (stuffit1) or (stuffit2) then
         begin
-          if stuffit2 then objekt^ := objekt2^;
+          if stuffit2 then
+            objekt^ := objekt2^;
           stuff_item(gubbe, shout, onr, objekt^);
         end;
 

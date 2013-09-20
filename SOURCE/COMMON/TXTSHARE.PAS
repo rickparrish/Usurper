@@ -3,26 +3,26 @@
 {$ENDIF}
 unit TxtShare;
 
-{ This UNIT implements a TEXT file device driver to access TEXT files with a }
-{ user specified network access mode (see DOS Technical Reference for DOS }
-{ function 3Dh).  This can be accomplished for non-TEXT files by setting the }
+ { This UNIT implements a TEXT file device driver to access TEXT files with a }
+ { user specified network access mode (see DOS Technical Reference for DOS }
+ { function 3Dh).  This can be accomplished for non-TEXT files by setting the }
 { standard global variable "FileMode" (part of the System unit) to the desired
 }
 { value, and then calling the appropriate open function. This is not supported
 }
-{ for TEXT files in Turbo Pascal v4.0. }
+ { for TEXT files in Turbo Pascal v4.0. }
 
-{ To open a Text file with a user specified access mode, place a call to the }
-{ procedure AssignText to associate a filename with the text file variable. }
-{ Next, set the standard global variable FileMode with the desired DOS access }
-{ mode value.  RESET, REWRITE, and APPEND will now use the access mode }
-{ assigned to the FileMode variable when opening the file. }
+ { To open a Text file with a user specified access mode, place a call to the }
+ { procedure AssignText to associate a filename with the text file variable. }
+ { Next, set the standard global variable FileMode with the desired DOS access }
+ { mode value.  RESET, REWRITE, and APPEND will now use the access mode }
+ { assigned to the FileMode variable when opening the file. }
 
 { By default, no EOF marker is written to text files that have been "assigned"
 }
-{ using this unit's routines.  If you require a ^Z at the end of any file }
-{ opened for output, set the global variable WriteTextEofChar to TRUE before }
-{ closing the file. }
+ { using this unit's routines.  If you require a ^Z at the end of any file }
+ { opened for output, set the global variable WriteTextEofChar to TRUE before }
+ { closing the file. }
 
 interface
 
@@ -52,7 +52,7 @@ begin
 value}
     $C5 / $76 / $06 /           {       lds      si,[bp+6]   ;Address the file var
 structure}
-    $AD /                   {       lodsw                ;Pick up file handle}
+    $AD /                     {       lodsw                ;Pick up file handle}
     $89 / $C3 /               {       mov      bx,ax       ; ... and store in bx}
     $46 /                   {       inc      si          ;Skip past the Mode
 field}
@@ -89,7 +89,7 @@ actually read}
 BufEnd field}
     $31 / $C0 /               {       xor      ax,ax       ;Return 0 ==> no
 errors}
-    $1F /                   {Error: pop      ds          ;Restore ds value}
+    $1F /                      {Error: pop      ds          ;Restore ds value}
     $89 / $46 / $FE);          {       mov      [bp-2],ax   ;Store returned value}
 end {ReadText};
 
@@ -100,14 +100,14 @@ begin
 seg register}
     $C5 / $76 / $06 /           {       lds      si,[bp+6]   ;DS:SI points to
 TextRec structure}
-    $AD /                   {       lodsw                ;Pick up file handle}
+    $AD /                     {       lodsw                ;Pick up file handle}
     $89 / $C3 /               {       mov      bx,ax       ; ... and store in BX}
     $81 / $C6 / $06 / $00 /       {       add      si,6        ;DS:SI points to
 BufPos field}
     $AD /                   {       lodsw                ;Pick up # of bytes to
 write}
     $89 / $C1 /               {       mov      cx,ax       ; ... and store in CX}
-    $46 /                   {       inc      si}
+    $46 /                     {       inc      si}
     $46 /                   {       inc      si          ;DS:SI points to
 BufPtr field}
     $AD /                   {       lodsw                ;Pick up offset part
@@ -156,7 +156,7 @@ and CX:DX=0, will seek eof}
     $B8 / $02 / $42 /             {        mov      ax,$4202}
     $CD / $21 /                 {        int      $21                  ;DX:AX
 should now contain filesize}
-    $72 / $7B /                 {        jc       Error}
+    $72 / $7B /                   {        jc       Error}
     $2D / $80 / $00 /             {        sub      ax,128
 ;Reposition to read the last 128 bytes of}
     $81 / $DA / $00 / $00 /         {        sbb      dx,0                 ;the file
@@ -200,14 +200,14 @@ offset}
 will point at the buffer of data}
     $4F /                     {        dec      di                   ;  that
 was just read in}
-    $01 / $CF /                 {        add      di,cx}
+    $01 / $CF /                   {        add      di,cx}
     $8B / $44 / $0E /             {        mov word ax,[si+14]}
-    $8E / $C0 /                 {        mov      es,ax}
-    $B0 / $1A /                 {        mov      al,$1A}
-    $FD /                     {        std}
+    $8E / $C0 /                   {        mov      es,ax}
+    $B0 / $1A /                   {        mov      al,$1A}
+    $FD /                         {        std}
     $F2 / $AE /                 {  repnz scasb                         ;Search
 buffer for a ^Z}
-    $FC /                     {        cld}
+    $FC /                         {        cld}
     $75 / $2F /                 {        jnz      Done                 ;If no ^Z
 found, then we're done}
     $C4 / $7E / $06 /             {        les      di,[bp+6]            ;Back to
@@ -240,11 +240,11 @@ call to write routine}
     $FF / $1E / > WRITETEXT_ADDR / {        call far [>WriteText_Addr]}
     $09 / $C0 /                 {        or       ax,ax                ;Any
 errors}
-    $75 / $02 /                 {        jnz      Error}
+    $75 / $02 /                    {        jnz      Error}
     $31 / $C0 /                 {Done:   xor      ax,ax                ;Return 0
 if no errors}
-    $1F /                     {Error:  pop      ds}
-    $89 / $46 / $FE);            {        mov      [bp-2],ax}
+    $1F /                          {Error:  pop      ds}
+    $89 / $46 / $FE);              {        mov      [bp-2],ax}
 end {SeekEofText};
 
 function CloseText(var F: TextRec): word;
@@ -267,10 +267,10 @@ begin
     $26 / $8B / $45 / $0C /               {     es: mov word ax,[di+12]
 ;Get address of output buffer}
     $26 / $8B / $5D / $0E /               {     es: mov word bx,[di+14]}
-    $89 / $C7 /                       {         mov      di,ax}
+    $89 / $C7 /                           {         mov      di,ax}
     $8E / $C3 /                       {         mov      es,bx
 ;ES:DI points to buffer now}
-    $B8 / $1A / $00 /                   {         mov      ax,$1A}
+    $B8 / $1A / $00 /                     {         mov      ax,$1A}
     $AB /                           {         stosw
 ;Put a ^Z into the buffer}
     $C4 / $7E / $06 /                   {         les      di,[bp+6]
@@ -297,13 +297,13 @@ begin
 ;Close the file}
     $72 / $10 /                       {         jc       Error
 ;If error, exit with code in AX}
-    $31 / $C0 /                       {         xor      ax,ax}
+    $31 / $C0 /                           {         xor      ax,ax}
     $26 / $89 / $45 / $08 /               {     es: mov word [di+8],ax
 ;Stuff zeros in BufPos and BufEnd}
     $26 / $89 / $45 / $0A /               {     es: mov word [di+10],ax}
     $26 / $C7 / $45 / $02 / > FMCLOSED /     {     es: mov word [di+2],>fmClosed
 ;Reset the magic number}
-    $1F /                           {Error:   pop      ds}
+    $1F /                                 {Error:   pop      ds}
     $89 / $46 / $FE);                  {         mov      [bp-2],ax
 ;Store function result}
 end {CloseText};
@@ -430,7 +430,8 @@ begin
     BufSize := SizeOf(Buffer);         { Set size of default buffer (128)  }
     BufPtr := @Buffer;                { Set up pointer to default buffer  }
     OpenFunc := @OpenText;              { Set up pointer to OPEN function   }
-    for I := 1 to Length(FileName) do   { Set up asciiz filename            } Name[I - 1] := FileName[I];
+    for I := 1 to Length(FileName) do
+      { Set up asciiz filename            } Name[I - 1] := FileName[I];
     Name[Length(FileName)] := Chr(0);
   end {with};
 end {AssignText};
@@ -448,5 +449,4 @@ begin
   CloseText_Addr := Addr(CloseText);
 end {Unit TxtShare}.
 {$F-}{end}
-
 

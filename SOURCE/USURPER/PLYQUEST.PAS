@@ -134,7 +134,7 @@ begin
     end;
   end; {case .end.}
 
-  {return result}
+       {return result}
   mini_menu := Result;
 
 end; {mini_menu *end*}
@@ -196,7 +196,8 @@ begin
     case ch of
 
       '?': begin {menu}
-        if player.expert = True then display_menu(True, False)
+        if player.expert = True then
+          display_menu(True, False)
         else display_menu(False, False);
       end;
       'S': begin {status}
@@ -259,7 +260,8 @@ begin
             begin
               {abort}
               break;
-            end else if r = 1 then
+            end else
+            if r = 1 then
             begin
               {pick quest to finish}
               crlf;
@@ -271,7 +273,8 @@ begin
                 crlf;
                 d(12, 'You may only complete ' + uwhite + commastr(Config.MaxCompletedQuests) + ulred + ' quests per day.');
                 pause;
-              end else if x > 0 then
+              end else
+              if x > 0 then
               begin
 
                 counter2 := 0;
@@ -327,7 +330,7 @@ begin
                                 Inc(x);
                               end; {for l:= .end.}
                             end;
-                          end; {for k:= .end.}
+                          end;     {for k:= .end.}
 
                           global_escape := False;
                           global_begged := False;
@@ -354,7 +357,8 @@ begin
                             {News-Paper}
                             Newsy(True,
                               'Failed Quest',
-                              ' ' + uplc + player.name2 + config.textcol1 + ' died on a ' + uquestc + 'Quest' + config.textcol1 + ' in the mountains.',
+                              ' ' + uplc + player.name2 + config.textcol1 + ' died on a ' +
+                              uquestc + 'Quest' + config.textcol1 + ' in the mountains.',
                               '',
                               '',
                               '',
@@ -380,7 +384,9 @@ begin
 
                                 d(12, 'QUEST FAILED!');
                                 d(5, mkstring(16, underscore));
-                                d(config.textcolor, 'The ' + ulgray + 'PENALTY' + config.textcol1 + ' for failing the Quest is ' + uwhite + commastr(x) + config.textcol1 + ' experience points!');
+                                d(config.textcolor, 'The ' + ulgray + 'PENALTY' + config.textcol1 +
+                                  ' for failing the Quest is ' + uwhite + commastr(x) + config.textcol1 +
+                                  ' experience points!');
                                 DecPlayerExp(player, x);
                               end;
                               QMoney: begin
@@ -391,7 +397,9 @@ begin
                                   3: x := player.level * 25000;{high}
                                 end;
 
-                                d(config.textcolor, 'The ' + ulgray + 'PENALTY' + config.textcol1 + ' for failing the Quest is ' + uyellow + commastr(x) + config.textcol1 + ' ' + many_money(x) + '!');
+                                d(config.textcolor, 'The ' + ulgray + 'PENALTY' + config.textcol1 +
+                                  ' for failing the Quest is ' + uyellow + commastr(x) + config.textcol1 + ' ' +
+                                  many_money(x) + '!');
                                 DecPlayerExp(player, x);
                               end;
                               QPotions: begin
@@ -403,33 +411,37 @@ begin
                                   3: x := 200; {high}
                                 end;
 
-                                d(config.textcolor, 'The ' + ulgray + 'PENALTY' + config.textcol1 + ' for failing the Quest is ' + uwhite + commastr(x) + config.textcol1 + ' healing potions!');
+                                d(config.textcolor, 'The ' + ulgray + 'PENALTY' + config.textcol1 +
+                                  ' for failing the Quest is ' + uwhite + commastr(x) + config.textcol1 + ' healing potions!');
                                 Dec(player.healing, x);
-                                if player.healing < 0 then player.healing := 0;
+                                if player.healing < 0 then
+                                  player.healing := 0;
                               end;
                               QDarkness: begin
                                 x := 0;
                                 case quest.penalty of
                                   1: x := 25;  {low}
-                                  2: x := 75; {medium}
+                                  2: x := 75;  {medium}
                                   3: x := 110; {high}
                                 end;
-                                d(config.textcolor, 'The ' + ulgray + 'PENALTY' + config.textcol1 + ' for failing the Quest is ' + ulgray + commastr(x) + config.textcol1 + ' Darkness points!');
+                                d(config.textcolor, 'The ' + ulgray + 'PENALTY' + config.textcol1 +
+                                  ' for failing the Quest is ' + ulgray + commastr(x) + config.textcol1 + ' Darkness points!');
                                 Give_Darkness(Player, x);
                               end;
                               QChivalry: begin
                                 x := 0;
                                 case quest.penalty of
                                   1: x := 25;  {low}
-                                  2: x := 75; {medium}
+                                  2: x := 75;  {medium}
                                   3: x := 110; {high}
                                 end;
-                                d(config.textcolor, 'The ' + ulgray + 'PENALTY' + config.textcol1 + ' for failing the Quest is ' + uwhite + commastr(x) + config.textcol1 + ' Chivalry points!');
+                                d(config.textcolor, 'The ' + ulgray + 'PENALTY' + config.textcol1 +
+                                  ' for failing the Quest is ' + uwhite + commastr(x) + config.textcol1 + ' Chivalry points!');
                                 Give_Chivalry(Player, x);
                               end;
                             end; {case .end.}
 
-                            {set player flags}
+                                 {set player flags}
                             if not Config.AllowFailQuestReturn then
                             begin
                               Reduce_Player_Resurrections(player, True);
@@ -450,8 +462,10 @@ begin
                             {News-Paper}
                             Newsy(True,
                               'Successful Quest!',
-                              ' ' + uplc + player.name2 + config.textcol1 + ' completed a ' + uquestc + 'Quest' + config.textcol1 + ' in the mountains.',
-                              ' ' + uplc + player.name2 + config.textcol1 + ' returned home and received a ' + uwhite + 'reward' + config.textcol1 + '.',
+                              ' ' + uplc + player.name2 + config.textcol1 + ' completed a ' +
+                              uquestc + 'Quest' + config.textcol1 + ' in the mountains.',
+                              ' ' + uplc + player.name2 + config.textcol1 + ' returned home and received a ' +
+                              uwhite + 'reward' + config.textcol1 + '.',
                               '',
                               '',
                               '',
@@ -491,8 +505,10 @@ begin
                                   2: x := player.level * 500;{medium}
                                   3: x := player.level * 1000;{high}
                                 end;
-                                d(config.textcolor, 'The ' + ulgray + 'REWARD' + config.textcol1 + ' for this Quest is ' + uwhite + commastr(x) + config.textcol1 + ' experience points!');
-                                d(config.textcolor, 'Congratulations! You have now completed ' + uwhite + commastr(player.royquests) + config.textcol1 + ' Quests in your career.');
+                                d(config.textcolor, 'The ' + ulgray + 'REWARD' + config.textcol1 +
+                                  ' for this Quest is ' + uwhite + commastr(x) + config.textcol1 + ' experience points!');
+                                d(config.textcolor, 'Congratulations! You have now completed ' +
+                                  uwhite + commastr(player.royquests) + config.textcol1 + ' Quests in your career.');
                                 Inc(player.exp, x);
 
                                 info := uwhite + commastr(x) + config.textcol1 + ' experience points.';
@@ -507,8 +523,10 @@ begin
                                   3: x := player.level * 11000;{high}
                                 end;
 
-                                d(config.textcolor, 'The ' + ulgray + 'REWARD' + config.textcol1 + ' for this Quest is ' + uyellow + commastr(x) + config.textcol1 + ' ' + many_money(x) + '!');
-                                d(config.textcolor, 'Congratulations! You have now completed ' + uwhite + commastr(player.royquests) + config.textcol1 + ' Quests in your career.');
+                                d(config.textcolor, 'The ' + ulgray + 'REWARD' + config.textcol1 +
+                                  ' for this Quest is ' + uyellow + commastr(x) + config.textcol1 + ' ' + many_money(x) + '!');
+                                d(config.textcolor, 'Congratulations! You have now completed ' +
+                                  uwhite + commastr(player.royquests) + config.textcol1 + ' Quests in your career.');
                                 IncPlayerMoney(player, x);
 
                                 info := uyellow + commastr(x) + config.textcol1 + ' ' + many_money(x) + '.';
@@ -523,8 +541,10 @@ begin
                                   3: x := 200; {high}
                                 end;
 
-                                d(config.textcolor, 'The ' + ulgray + 'REWARD' + config.textcol1 + ' for this Quest is ' + uwhite + commastr(x) + config.textcol1 + ' healing potions!');
-                                d(config.textcolor, 'Congratulations! You have now completed ' + uwhite + commastr(player.royquests) + config.textcol1 + ' Quests in your career.');
+                                d(config.textcolor, 'The ' + ulgray + 'REWARD' + config.textcol1 +
+                                  ' for this Quest is ' + uwhite + commastr(x) + config.textcol1 + ' healing potions!');
+                                d(config.textcolor, 'Congratulations! You have now completed ' +
+                                  uwhite + commastr(player.royquests) + config.textcol1 + ' Quests in your career.');
                                 Inc(Player.healing, x);
 
                                 info := uwhite + commastr(x) + config.textcol1 + ' healing potions.';
@@ -534,11 +554,13 @@ begin
                                 x := 0;
                                 case quest.reward of
                                   1: x := 25;  {low}
-                                  2: x := 75; {medium}
+                                  2: x := 75;  {medium}
                                   3: x := 110; {high}
                                 end;
-                                d(config.textcolor, 'The ' + ulgray + 'REWARD' + config.textcol1 + ' for this Quest is ' + ulgray + commastr(x) + config.textcol1 + ' Darkness points!');
-                                d(config.textcolor, 'Congratulations! You have now completed ' + uwhite + commastr(player.royquests) + config.textcol1 + ' Quests in your career.');
+                                d(config.textcolor, 'The ' + ulgray + 'REWARD' + config.textcol1 +
+                                  ' for this Quest is ' + ulgray + commastr(x) + config.textcol1 + ' Darkness points!');
+                                d(config.textcolor, 'Congratulations! You have now completed ' +
+                                  uwhite + commastr(player.royquests) + config.textcol1 + ' Quests in your career.');
                                 Inc(Player.dark, x);
 
                                 info := uwhite + commastr(x) + config.textcol1 + ' darkness points.';
@@ -548,11 +570,13 @@ begin
                                 x := 0;
                                 case quest.reward of
                                   1: x := 25;  {low}
-                                  2: x := 75; {medium}
+                                  2: x := 75;  {medium}
                                   3: x := 110; {high}
                                 end;
-                                d(config.textcolor, 'The ' + ulgray + 'REWARD' + config.textcol1 + ' for this Quest is ' + uwhite + commastr(x) + config.textcol1 + ' Chivalry points!');
-                                d(config.textcolor, 'Congratulations! You have now completed ' + uwhite + commastr(player.royquests) + config.textcol1 + ' Quests in your career.');
+                                d(config.textcolor, 'The ' + ulgray + 'REWARD' + config.textcol1 +
+                                  ' for this Quest is ' + uwhite + commastr(x) + config.textcol1 + ' Chivalry points!');
+                                d(config.textcolor, 'Congratulations! You have now completed ' +
+                                  uwhite + commastr(player.royquests) + config.textcol1 + ' Quests in your career.');
                                 Inc(Player.chiv, x);
 
                                 info := uwhite + commastr(x) + config.textcol1 + ' chivalry points.';
@@ -560,12 +584,13 @@ begin
                               end;
                             end; {case .end.}
 
-                            {update quest-file}
+                                 {update quest-file}
                             quest.deleted := True;
                             load_quest(fsave, quest, j);
 
                             {tell other nodes}
-                            online_send_to_all(uplc + player.name2 + config.textcol1 + ' completed a ' + uquestc + 'QUEST' + config.textcol1 + '!'
+                            online_send_to_all(uplc + player.name2 + config.textcol1 + ' completed a ' +
+                              uquestc + 'QUEST' + config.textcol1 + '!'
                               , player.name2, '');
 
                             {mail the king, if he's online}
@@ -587,7 +612,8 @@ begin
                                   '',
                                   uquestc + 'QUEST' + umailheadc + ' Completed' + config.textcol1,
                                   mkstring(length(s), underscore),
-                                  uplc + player.name2 + config.textcol1 + ' completed a ' + uquestc + 'QUEST' + config.textcol1 + ' in the Mountains!',
+                                  uplc + player.name2 + config.textcol1 + ' completed a ' +
+                                  uquestc + 'QUEST' + config.textcol1 + ' in the Mountains!',
                                   uplc + player.name2 + config.textcol1 + ' received a Reward of ' + info,
                                   '', {this is info of reward and its size}
                                   '',
@@ -654,4 +680,4 @@ begin
 
 end; {Player_Quest *end*}
 
-end.{Unit PlyQuest .end.}
+end. {Unit PlyQuest .end.}

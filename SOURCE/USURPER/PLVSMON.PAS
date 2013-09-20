@@ -143,7 +143,7 @@ begin
     end;
   end; {case .end.}
 
-end; {retreat **end**}
+end;   {retreat **end**}
 
 procedure Monster_Charge(mode: integer);
 var i: longint;
@@ -155,9 +155,11 @@ begin
       for i := 1 to global_maxmon do
       begin
         xx := 3;
-        if monster[i]^.strength < 10 then monster[i]^.strength := 10;
+        if monster[i]^.strength < 10 then
+          monster[i]^.strength := 10;
         monster[i]^.punch := 0;
-        if monster[i]^.weappow > 32000 then monster[i]^.weappow := 32000;
+        if monster[i]^.weappow > 32000 then
+          monster[i]^.weappow := 32000;
         monster[i]^.punch := monster[i]^.weappow + (random(monster[i]^.weappow));
         monster[i]^.punch := monster[i]^.punch + (monster[i]^.strength div xx);
 
@@ -167,7 +169,7 @@ begin
           monster[i]^.punch := monster[i]^.punch + random(5) + 1;
         end;
 
-      end; {for i:= .end.}
+      end;   {for i:= .end.}
     end;
     2: begin {player versus doorguard(s)}
       for i := 1 to global_maxmon do
@@ -198,7 +200,8 @@ begin
         begin
           d(15, 'The White Staff starts to glow before you!');
           Dec(monster[i]^.punch, 50);
-          if monster[i]^.punch < 0 then monster[i]^.punch := 0;
+          if monster[i]^.punch < 0 then
+            monster[i]^.punch := 0;
           dispat := True;
         end;
         if (global_s_bstaff = True) and (dispat = False) then
@@ -222,16 +225,18 @@ begin
       for i := 1 to global_maxmon do
       begin
         xx := 3;
-        if monster[i]^.strength < 10 then monster[i]^.strength := 10;
+        if monster[i]^.strength < 10 then
+          monster[i]^.strength := 10;
         monster[i]^.punch := 0;
 
-        if monster[i]^.weappow > 32000 then monster[i]^.weappow := 32000;
+        if monster[i]^.weappow > 32000 then
+          monster[i]^.weappow := 32000;
 
         monster[i]^.punch := monster[i]^.weappow + (random(monster[i]^.weappow));
         monster[i]^.punch := monster[i]^.punch + (monster[i]^.strength div xx);
       end; {for i:= .end.}
     end;
-  end; {case .end.}
+  end;     {case .end.}
 
 end; {monster_charge **end**}
 
@@ -270,7 +275,8 @@ begin         {monster #i casts monster_spell against tempman}
   end else
   begin
     sd(15, ' casts a SPELL on ');
-    if tempman.name2 = player.name2 then sd(15, 'You!')
+    if tempman.name2 = player.name2 then
+      sd(15, 'You!')
     else sd(global_plycol, tempman.name2);
   end;
 
@@ -287,7 +293,8 @@ begin         {monster #i casts monster_spell against tempman}
     case monster_spell of
       1: begin {Spell : CAUSE DAMAGE}
         damage := monster[i]^.magiclevel * 3; {damage}
-        if tempman.name2 = player.name2 then s := 'You are'
+        if tempman.name2 = player.name2 then
+          s := 'You are'
         else s := tempman.name2 + ' is';
 
         d(11, s + ' hurt for ' + commastr(damage) + ' damage!');
@@ -296,7 +303,8 @@ begin         {monster #i casts monster_spell against tempman}
       2: begin {Spell : Snakes}
         d(12, 'Silver Snakes appear in a puff of smoke!');
         damage := monster[i]^.magiclevel * 2; {damage}
-        if tempman.name2 = player.name2 then s := 'You are'
+        if tempman.name2 = player.name2 then
+          s := 'You are'
         else s := tempman.name2 + ' is';
 
         d(11, s + ' bitten for ' + commastr(damage) + ' damage!');
@@ -306,7 +314,8 @@ begin         {monster #i casts monster_spell against tempman}
       3: begin  {Spell : Cyclone}
         d(12, 'They have summoned a CYCLONE!');
         damage := monster[i]^.magiclevel * 2; {damage}
-        if tempman.name2 = player.name2 then s := 'You are'
+        if tempman.name2 = player.name2 then
+          s := 'You are'
         else s := tempman.name2 + ' is';
 
         d(11, s + ' swept away and hurt for ' + commastr(damage) + ' damage!');
@@ -315,7 +324,7 @@ begin         {monster #i casts monster_spell against tempman}
       end;
       4: begin {Spell : Summon Undead}
 
-        {decide undead type}
+               {decide undead type}
         case random(2) of
           0: begin
             s := 'Zombie';
@@ -360,7 +369,8 @@ begin         {monster #i casts monster_spell against tempman}
         d(12, tempman.name2 + ' is incapaciated!');
 
         damage := monster[i]^.magiclevel * 2; {damage}
-        if tempman.name2 = player.name2 then s := 'You are'
+        if tempman.name2 = player.name2 then
+          s := 'You are'
         else s := tempman.name2 + ' is';
 
         d(11, s + ' hurt for ' + commastr(damage) + ' damage!');
@@ -371,7 +381,8 @@ begin         {monster #i casts monster_spell against tempman}
         d(12, 'A bright spark of red energy hits ' + tempman.name2 + '!');
 
         damage := monster[i]^.magiclevel * 1; {damage}
-        if tempman.name2 = player.name2 then s := 'You are'
+        if tempman.name2 = player.name2 then
+          s := 'You are'
         else s := tempman.name2 + ' is';
 
         d(11, s + ' zapped for ' + commastr(damage) + ' damage!');
@@ -435,26 +446,36 @@ var
 
       {does XP haves to be split with teammates?}
       yy := 1;
-      if player_active(pl1, True) then Inc(yy);
-      if player_active(pl2, True) then Inc(yy);
-      if player_active(pl3, True) then Inc(yy);
-      if player_active(pl4, True) then Inc(yy);
+      if player_active(pl1, True) then
+        Inc(yy);
+      if player_active(pl2, True) then
+        Inc(yy);
+      if player_active(pl3, True) then
+        Inc(yy);
+      if player_active(pl4, True) then
+        Inc(yy);
 
-      if yy > 1 then d(3, 'The experience and ' + config.moneytype + ' are split equally...');
+      if yy > 1 then
+        d(3, 'The experience and ' + config.moneytype + ' are split equally...');
 
       xx := xx div yy;
       incplayerexp(player, xx);
 
-      if yy > 1 then sd(config.textcolor, 'You receive your share of ')
+      if yy > 1 then
+        sd(config.textcolor, 'You receive your share of ')
       else sd(config.textcolor, 'You receive ');
 
       sd(14, commastr(xx));
       d(config.textcolor, ' experience points!');
 
-      if player_active(pl1, True) then incplayerexp(pl1, xx);
-      if player_active(pl2, True) then incplayerexp(pl2, xx);
-      if player_active(pl3, True) then incplayerexp(pl3, xx);
-      if player_active(pl4, True) then incplayerexp(pl4, xx);
+      if player_active(pl1, True) then
+        incplayerexp(pl1, xx);
+      if player_active(pl2, True) then
+        incplayerexp(pl2, xx);
+      if player_active(pl3, True) then
+        incplayerexp(pl3, xx);
+      if player_active(pl4, True) then
+        incplayerexp(pl4, xx);
 
       xx := random(300) * global_dungeonlevel;
       Inc(xx, random(500));
@@ -471,10 +492,14 @@ var
         sd(14, commastr(xx));
         d(config.textcolor, ' ' + many_money(xx) + '!');
       end;
-      if player_active(pl1, True) then incplayermoney(pl1, xx);
-      if player_active(pl2, True) then incplayermoney(pl2, xx);
-      if player_active(pl3, True) then incplayermoney(pl3, xx);
-      if player_active(pl4, True) then incplayermoney(pl4, xx);
+      if player_active(pl1, True) then
+        incplayermoney(pl1, xx);
+      if player_active(pl2, True) then
+        incplayermoney(pl2, xx);
+      if player_active(pl3, True) then
+        incplayermoney(pl3, xx);
+      if player_active(pl4, True) then
+        incplayermoney(pl4, xx);
 
       {should player take monster weapon/armor?}
       if (random(5) = 0) and (monster[mon]^.weapon <> '') and
@@ -628,9 +653,9 @@ var
 
   end; {has_monster_died **end**}
 
-begin {MAIN PROC **START**}
+begin  {MAIN PROC **START**}
 
-  {init}
+       {init}
   attack_order := 1;
   healed := False;
   to_death := False;
@@ -712,7 +737,8 @@ begin {MAIN PROC **START**}
           crlf;
         end;
 
-        if mtemp2[i] = 1 then sd(global_moncol, mtemp1[i])
+        if mtemp2[i] = 1 then
+          sd(global_moncol, mtemp1[i])
         else sd(global_moncol, commastr(mtemp2[i]) + ' ' + mtemp1[i]);
         if mtemp2[i] > 1 then
         begin
@@ -752,7 +778,8 @@ begin {MAIN PROC **START**}
     end;
 
     expert_press := False;
-    if to_death = False then cho := '?'
+    if to_death = False then
+      cho := '?'
     else cho := 'A';
 
     repeat
@@ -779,8 +806,10 @@ begin {MAIN PROC **START**}
             menu2('(C)ast Spell  ');
           end;
 
-          if player.class = Paladin then menu2('(1) Soul Strike  ');
-          if player.class = Assassin then menu2('(1) Backstab  ');
+          if player.class = Paladin then
+            menu2('(1) Soul Strike  ');
+          if player.class = Assassin then
+            menu2('(1) Backstab  ');
           crlf;
           sd(6, ':');
         end else
@@ -806,7 +835,8 @@ begin {MAIN PROC **START**}
 
         cho := upcase(getchar);
 
-        if cho = chr(13) then cho := 'A';
+        if cho = chr(13) then
+          cho := 'A';
 
 
         if cho = '?' then
@@ -926,22 +956,30 @@ begin {MAIN PROC **START**}
                 end;
                 'D': begin
                   crlf;
-                  if player_active(pl1, True) then menu('[1] ' + pl1.name2)
+                  if player_active(pl1, True) then
+                    menu('[1] ' + pl1.name2)
                   else menu('[1] ---');
-                  if player_active(pl2, True) then menu('[2] ' + pl2.name2)
+                  if player_active(pl2, True) then
+                    menu('[2] ' + pl2.name2)
                   else menu('[2] ---');
-                  if player_active(pl3, True) then menu('[3] ' + pl3.name2)
+                  if player_active(pl3, True) then
+                    menu('[3] ' + pl3.name2)
                   else menu('[3] ---');
-                  if player_active(pl4, True) then menu('[4] ' + pl4.name2)
+                  if player_active(pl4, True) then
+                    menu('[4] ' + pl4.name2)
                   else menu('[4] ---');
                   sd(config.textcolor, ':');
                   cho := upcase(getchar);
 
                   case cho of
-                    '1': if player_active(pl1, True) then status(pl1);
-                    '2': if player_active(pl2, True) then status(pl2);
-                    '3': if player_active(pl3, True) then status(pl3);
-                    '4': if player_active(pl4, True) then status(pl4);
+                    '1': if player_active(pl1, True) then
+                        status(pl1);
+                    '2': if player_active(pl2, True) then
+                        status(pl2);
+                    '3': if player_active(pl3, True) then
+                        status(pl3);
+                    '4': if player_active(pl4, True) then
+                        status(pl4);
                   end;
                   cho := ' ';
 
@@ -1055,7 +1093,7 @@ begin {MAIN PROC **START**}
         quick_healing(player);
         case config.quaffopt of
           1: begin {player Quaffs potion and then autoattacks}
-            {healed:=true;}
+                   {healed:=true;}
             cho := 'A';
           end;
           2: begin {player Quaffs potion and then monster attack}
@@ -1063,7 +1101,7 @@ begin {MAIN PROC **START**}
             cho := 'A';
           end;
           3: begin {player Quaffs potion and then chooses another option}
-            {healed:=true;}
+                   {healed:=true;}
             cho := '?';
           end;
         end;
@@ -1098,11 +1136,13 @@ begin {MAIN PROC **START**}
           global_begged := True;
           global_PlayerInFight := False;
           exit;
-        end else if (global_nobeg) or (monster_mode <> pl_vs_monster) then
+        end else
+        if (global_nobeg) or (monster_mode <> pl_vs_monster) then
         begin
           d(15, 'No Mercy is given here!');
           cho := 'A';
-        end else if monster_mode = pl_vs_monster then
+        end else
+        if monster_mode = pl_vs_monster then
         begin
           crlf;
           if confirm('Beg for Mercy', 'N') = True then
@@ -1243,7 +1283,8 @@ begin {MAIN PROC **START**}
         begin
           if monster[i]^.hps > 0 then
           begin
-            if x < 1 then mon := i;
+            if x < 1 then
+              mon := i;
             Inc(x);
           end;
         end; {for i:= .end.}
@@ -1313,10 +1354,12 @@ begin {MAIN PROC **START**}
       end;
 
       {restoring overmaxed hps}
-      if player.hps > player.maxhps then player.hps := player.maxhps;
+      if player.hps > player.maxhps then
+        player.hps := player.maxhps;
 
       {backstab effect}
-      if stab1 > 0 then player.punch := player.punch + stab1;
+      if stab1 > 0 then
+        player.punch := player.punch + stab1;
 
       if stab1 = -1 then
       begin
@@ -1367,7 +1410,8 @@ begin {MAIN PROC **START**}
           begin
 
             {kludge, the programmer (jakob) is sloppy, he admits!}
-            if x > player.punch then x := player.punch;
+            if x > player.punch then
+              x := player.punch;
             Dec(player.punch, x);
             d(3, monster[mon]^.Name + 's armor absorbed ' + commastr(x) + ' points!');
 
@@ -1396,12 +1440,13 @@ begin {MAIN PROC **START**}
           x := tempman.healing;
           {need to heal?}
           computer_healing(True, tempman);
-          if (x <> tempman.healing) and (config.quaffopt = 2) then x := -1;
+          if (x <> tempman.healing) and (config.quaffopt = 2) then
+            x := -1;
 
           if x <> -1 then
           begin {quaff=2 inneb„r n„mligen att spelaren binds en runda}
 
-            {picks monster dependending on attack_order [1..4] }
+                {picks monster dependending on attack_order [1..4] }
             j := 0;
             case attack_order of
               1: begin {pick the first monster available}
@@ -1530,8 +1575,8 @@ begin {MAIN PROC **START**}
                 sd(global_moncol, monster[j]^.Name);
                 d(config.textcolor, ' for ' + s + ' damage!');
                 norm_att := False;
-              end
-              else if (tempman.class = Assassin) and (random(3) = 0) and
+              end else
+              if (tempman.class = Assassin) and (random(3) = 0) and
                 (tempman.rhand + tempman.lhand > 0) then
               begin
                 {*Backstab?*}
@@ -1547,7 +1592,8 @@ begin {MAIN PROC **START**}
                   d(3, 'But misses!');
                 end;
                 norm_att := False;
-              end else if tempman.class in [Cleric, Magician, Sage] then
+              end else
+              if tempman.class in [Cleric, Magician, Sage] then
               begin
                 if (tempman.mana > 15) and (random(3) = 0) then
                 begin
@@ -1572,7 +1618,8 @@ begin {MAIN PROC **START**}
 
                 if x > 0 then
                 begin
-                  if x > zz then x := zz;
+                  if x > zz then
+                    x := zz;
 
                   Dec(zz, x);
                 end;
@@ -1612,17 +1659,23 @@ begin {MAIN PROC **START**}
 
                 kill_comment(tempman, monster[j]^.Name);
                 monster[j]^.Name := '';
-                if j = mon then mon := 0;
+                if j = mon then
+                  mon := 0;
 
                 xx := dungeon_reward(global_dungeonlevel);
                 {does the XP have to be split with teammates?}
                 yy := 1;
-                if player_active(pl1, True) then Inc(yy);
-                if player_active(pl2, True) then Inc(yy);
-                if player_active(pl3, True) then Inc(yy);
-                if player_active(pl4, True) then Inc(yy);
+                if player_active(pl1, True) then
+                  Inc(yy);
+                if player_active(pl2, True) then
+                  Inc(yy);
+                if player_active(pl3, True) then
+                  Inc(yy);
+                if player_active(pl4, True) then
+                  Inc(yy);
 
-                if yy > 1 then d(3, 'The Experience and ' + config.moneytype + ' are split equally...');
+                if yy > 1 then
+                  d(3, 'The Experience and ' + config.moneytype + ' are split equally...');
 
                 xx := xx div yy;
                 incplayerexp(player, xx);
@@ -1631,10 +1684,14 @@ begin {MAIN PROC **START**}
                 sd(14, commastr(xx));
                 d(config.textcolor, ' experience points!');
 
-                if player_active(pl1, True) then incplayerexp(pl1, xx);
-                if player_active(pl2, True) then incplayerexp(pl2, xx);
-                if player_active(pl3, True) then incplayerexp(pl3, xx);
-                if player_active(pl4, True) then incplayerexp(pl4, xx);
+                if player_active(pl1, True) then
+                  incplayerexp(pl1, xx);
+                if player_active(pl2, True) then
+                  incplayerexp(pl2, xx);
+                if player_active(pl3, True) then
+                  incplayerexp(pl3, xx);
+                if player_active(pl4, True) then
+                  incplayerexp(pl4, xx);
 
                 {search monster corpse for gold}
                 xx := random(300) * global_dungeonlevel;
@@ -1651,10 +1708,14 @@ begin {MAIN PROC **START**}
                 sd(14, commastr(xx));
                 d(config.textcolor, ' ' + many_money(xx) + '!');
 
-                if player_active(pl1, True) then incplayermoney(pl1, xx);
-                if player_active(pl2, True) then incplayermoney(pl2, xx);
-                if player_active(pl3, True) then incplayermoney(pl3, xx);
-                if player_active(pl4, True) then incplayermoney(pl4, xx);
+                if player_active(pl1, True) then
+                  incplayermoney(pl1, xx);
+                if player_active(pl2, True) then
+                  incplayermoney(pl2, xx);
+                if player_active(pl3, True) then
+                  incplayermoney(pl3, xx);
+                if player_active(pl4, True) then
+                  incplayermoney(pl4, xx);
 
                 {should the player take monster weapon/armor?}
                 if (monster[j]^.weapon <> '') and (monster[j]^.grabweap = True) and
@@ -1883,7 +1944,8 @@ begin {MAIN PROC **START**}
                   killed_by[1] := monster[i]^.Name;
 
                   {announce it node-wide}
-                  online_send_to_all(uplc + player.name2 + config.textcol1 + ' has been killed by a ' + umonc + monster[i]^.Name + config.textcol1, player.name2, '');
+                  online_send_to_all(uplc + player.name2 + config.textcol1 + ' has been killed by a ' +
+                    umonc + monster[i]^.Name + config.textcol1, player.name2, '');
 
                   xplose(tempman);
                   Inc(tempman.m_defeats);
@@ -1919,7 +1981,8 @@ begin {MAIN PROC **START**}
                   killed_by[monster[i]^.target] := monster[i]^.Name;
 
                   {announce it node-wide}
-                  online_send_to_all(uplc + tempman.name2 + config.textcol1 + ' has been killed by a ' + umonc + monster[i]^.Name +
+                  online_send_to_all(uplc + tempman.name2 + config.textcol1 + ' has been killed by a ' +
+                    umonc + monster[i]^.Name +
                     config.textcol1, player.name2, player.name2);
 
                   if tempman.name2 <> player.name2 then
@@ -1937,15 +2000,18 @@ begin {MAIN PROC **START**}
                       (pl1.hps > 0) then
                     begin
                       s := pl1.name2;
-                    end else if (pl2.name2 <> '') and (pl2.name2 <> tempman.name2) and
+                    end else
+                    if (pl2.name2 <> '') and (pl2.name2 <> tempman.name2) and
                       (pl2.hps > 0) then
                     begin
                       s := pl2.name2;
-                    end else if (pl3.name2 <> '') and (pl3.name2 <> tempman.name2) and
+                    end else
+                    if (pl3.name2 <> '') and (pl3.name2 <> tempman.name2) and
                       (pl3.hps > 0) then
                     begin
                       s := pl3.name2;
-                    end else if (pl4.name2 <> '') and (pl4.name2 <> tempman.name2) and
+                    end else
+                    if (pl4.name2 <> '') and (pl4.name2 <> tempman.name2) and
                       (pl4.hps > 0) then
                     begin
                       s := pl4.name2;
@@ -2022,7 +2088,8 @@ begin {MAIN PROC **START**}
       begin
         d(12, 'YOU CAN''T ESCAPE!');
         cho := 'A';
-      end else if monster_mode = pl_vs_monster then
+      end else
+      if monster_mode = pl_vs_monster then
       begin
         if Retreat = True then
         begin

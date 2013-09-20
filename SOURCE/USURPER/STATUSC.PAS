@@ -65,7 +65,8 @@ var
 function ItemCol(const s: s70): byte;
 begin
 
-  if s = nada then itemcol := 8
+  if s = nada then
+    itemcol := 8
   else itemcol := global_itemcol;
 
 end; {itemcol *end*}
@@ -372,7 +373,8 @@ begin
 
           if player0.king = True then
           begin
-            if player0.sex = 1 then sd(14, ' (THE KING)')
+            if player0.sex = 1 then
+              sd(14, ' (THE KING)')
             else sd(14, ' (THE QUEEN)');
           end;
 
@@ -380,7 +382,8 @@ begin
           if x = 0 then
           begin
             d(10, ' ' + global_levelraise);
-          end else if player0.trains > 0 then
+          end else
+          if player0.trains > 0 then
           begin
             d(10, ' (you should train some moves!)');
           end else
@@ -509,7 +512,8 @@ begin
           {King?}
           if player0.king then
           begin
-            if player0.sex = 1 then sd(14, ' (THE KING)')
+            if player0.sex = 1 then
+              sd(14, ' (THE KING)')
             else sd(14, ' (THE QUEEN)');
           end;
 
@@ -518,7 +522,8 @@ begin
           if x = 0 then
           begin
             d(10, ' (you are eligible for a level raise!)');
-          end else if player0.trains > 0 then
+          end else
+          if player0.trains > 0 then
           begin
             d(10, ' (you should train some moves!)');
           end else
@@ -610,7 +615,8 @@ begin
         if length(s) > 17 then
         begin
           s := copy(s, 1, 17);
-        end else if length(s) < 17 then
+        end else
+        if length(s) < 17 then
         begin
           x := 17 - length(s);
           s := s + mkstring(x, ' ');
@@ -719,7 +725,7 @@ begin
     itemstr[i, 2]^ := '';
   end; {for i:= .end.}
 
-  {game registration check}
+       {game registration check}
   muffis;
 
   for i := 1 to global_maxallows do
@@ -760,7 +766,8 @@ begin
       if (ch = 'I') and (config.classic = True) then
       begin
         ch := '-';
-      end else if (ch = 'E') then
+      end else
+      if (ch = 'E') then
       begin
         ch := '-';
         if (player0.class in [Cleric, Magician, Sage]) then
@@ -786,7 +793,8 @@ begin
         spell_list(player0);
       end;
       '?': begin {expert menues}
-        if player.expert = True then display_menu(player0, True, False)
+        if player.expert = True then
+          display_menu(player0, True, False)
         else display_menu(player0, False, False);
       end;
 
@@ -816,7 +824,8 @@ begin
         d(10, mkstring(10, underscore));
         x := level_raise(player0.level, player0.exp);
 
-        d(config.textcolor, 'You are a level ' + uyellow + commastr(player0.level) + config.textcol1 + ' ' + race_display(2, player0.race, 0) + '.');
+        d(config.textcolor, 'You are a level ' + uyellow + commastr(player0.level) + config.textcol1 +
+          ' ' + race_display(2, player0.race, 0) + '.');
         if x <> 0 then
         begin
           sd(config.textcolor, 'You need ');
@@ -829,7 +838,7 @@ begin
         crlf;
         pause;
 
-      end; {xp left to level raise info *end*}
+      end;       {xp left to level raise info *end*}
 
       'H': begin {healing}
         repeat
@@ -888,11 +897,16 @@ begin
               crlf;
               d(5, 'Affecting Diseases:');
               d(5, '=-=-=-=-=-=-=-=-=-=');
-              if player0.blind then d(4, '*Blindness*');
-              if player0.plague then d(4, '*Plague*');
-              if player0.smallpox then d(4, '*Smallpox*');
-              if player0.measles then d(4, '*Measles*');
-              if player0.leprosy then d(4, '*Leprosy*');
+              if player0.blind then
+                d(4, '*Blindness*');
+              if player0.plague then
+                d(4, '*Plague*');
+              if player0.smallpox then
+                d(4, '*Smallpox*');
+              if player0.measles then
+                d(4, '*Measles*');
+              if player0.leprosy then
+                d(4, '*Leprosy*');
 
               if (player0.blind = False) and (player0.plague = False) and
                 (player0.smallpox = False) and (player0.measles = False) and
@@ -962,13 +976,15 @@ begin
 
               menu2('(0) Ansi Graphics is currently : ');
 
-              if global_ansi then sd(15, 'On')
+              if global_ansi then
+                sd(15, 'On')
               else sd(15, 'Off');
               crlf;
 
               menu2('(1) Buy new healing potions when needed : ');
 
-              if player0.autoheal = True then sd(15, 'Yes')
+              if player0.autoheal = True then
+                sd(15, 'Yes')
               else sd(15, 'No');
               crlf;
 
@@ -996,7 +1012,8 @@ begin
               {phrases end}
 
               menu2('(A) Expert Menus : ');
-              if player0.expert = True then d(15, 'On')
+              if player0.expert = True then
+                d(15, 'On')
               else d(15, 'Off');
               menu2('(B) Online Ear   : ');
               case player0.ear of
@@ -1005,14 +1022,16 @@ begin
                 global_ear_quiet: d(11, '*Quiet* (no information)');
               end; {case .end.}
 
-              {auto display menus}
+                   {auto display menus}
               menu2('(C) Auto-Display menus   : ');
-              if player0.auto_meny then d(15, 'Yes')
+              if player0.auto_meny then
+                d(15, 'Yes')
               else d(15, 'No');
 
               {auto hate}
               menu2('(D) Auto Hate : ');
-              if player0.autohate = 0 then sd(15, 'Off')
+              if player0.autohate = 0 then
+                sd(15, 'Off')
               else sd(15, 'On');
 
             end;
@@ -1038,7 +1057,8 @@ begin
 
           for i := 1 to 6 do
           begin
-            if player0.phr[i] = '' then player0.phr[i] := emptystr;
+            if player0.phr[i] = '' then
+              player0.phr[i] := emptystr;
           end;
 
           {evaluate user-input}
@@ -1065,7 +1085,8 @@ begin
 
             end;
             '1': begin {autoheal}
-              if player0.autoheal = True then player0.autoheal := False
+              if player0.autoheal = True then
+                player0.autoheal := False
               else player0.autoheal := True;
             end;
             '2': begin {attack phrase}
@@ -1141,7 +1162,8 @@ begin
                   sd(config.textcolor, '[' + commastr(x) + ']:');
                   a2 := get_string(70);
                   player0.desc[x] := a2;
-                  if player0.desc[x] <> '' then x := x + 1
+                  if player0.desc[x] <> '' then
+                    x := x + 1
                   else player0.desc[x] := emptystr;
 
                 until (a2 = '') or (x > 4);
@@ -1162,7 +1184,8 @@ begin
               begin
                 player0.battlecry := a2;
               end;
-              if player0.battlecry = '' then player0.battlecry := emptystr;
+              if player0.battlecry = '' then
+                player0.battlecry := emptystr;
             end;
             '8': begin
               crlf;
@@ -1190,7 +1213,8 @@ begin
               end;
             end;
             'A': begin {expert on/off}
-              if player0.expert = True then player0.expert := False
+              if player0.expert = True then
+                player0.expert := False
               else player0.expert := True;
             end;
             'B': begin

@@ -68,21 +68,21 @@ begin
 end;
 
 procedure Add_Npc(const Name: s70;   {name of NPC}
-  race: races;    {race}
-  maxhps: integer;  {maxhps}
-  strength: integer;  {strength}
-  defin: integer;  {defence}
-  loyin: integer;  {loyalty}
+  race: races;             {race}
+  maxhps: integer;         {maxhps}
+  strength: integer;       {strength}
+  defin: integer;          {defence}
+  loyin: integer;          {loyalty}
   class: classes;  {class}
-  agein: integer;  {age}
-  const teamin: s70;      {team}
-  sex: gender;   {gender}
-  exp: longint;  {experience}
-  const cry: s70;      {battle cry}
-  addict: integer;  {drug addiction}
-  mental: integer;  {mental stability}
-  darkness: longint;  {darkness}
-  chivalry: longint); {chivalry}
+  agein: integer;          {age}
+  const teamin: s70;       {team}
+  sex: gender;             {gender}
+  exp: longint;            {experience}
+  const cry: s70;          {battle cry}
+  addict: integer;         {drug addiction}
+  mental: integer;         {mental stability}
+  darkness: longint;       {darkness}
+  chivalry: longint);      {chivalry}
 
 begin
 
@@ -252,7 +252,7 @@ begin
     player0.medal[i] := False;
   end; {for i:= .end.}
 
-  {dress up}
+       {dress up}
   player0.rhand := 0;
   player0.lhand := 0;
   player0.head := 0;
@@ -302,7 +302,8 @@ begin
   {*** Character definition ***END***}
 
  {$I-}Write(playerfile, player0);{$I+}
-  if IOResult <> 0 then unable_to_write(global_npfile);
+  if IOResult <> 0 then
+    unable_to_write(global_npfile);
 
   Inc(counter);   {statbaren m†ste ha exakt antal poster..}
   Statbar(Counter, totobj, global_masterx, global_mastery, 1, 1);
@@ -317,28 +318,29 @@ begin
     totobj := totobj * 2;
     Assign(playerfile, global_npfile);
   {$I-}rewrite(playerfile);{$I+}
-    if IOResult <> 0 then unable_to_create(global_npfile);
+    if IOResult <> 0 then
+      unable_to_create(global_npfile);
   end;
 
   {*** START of Npc LIST ***}
 
 
   Add_Npc('Pogo',   {name}
-    Troll,    {race}
-    50,       {maxhps}
-    19,       {strength}
-    19,       {defence}
-    10,       {loyalty}
-    Warrior,  {class}
-    24,       {age}
-    emptystr, {team}
-    Male,     {Gender}
-    9560,     {experience}
-    scream,   {battle cry}
-    0,        {drug addiction}
-    100,      {mental stability}
-    7590,     {darkness}
-    0);       {chivalry}
+    Troll,          {race}
+    50,             {maxhps}
+    19,             {strength}
+    19,             {defence}
+    10,             {loyalty}
+    Warrior,        {class}
+    24,             {age}
+    emptystr,       {team}
+    Male,           {Gender}
+    9560,           {experience}
+    scream,         {battle cry}
+    0,              {drug addiction}
+    100,            {mental stability}
+    7590,           {darkness}
+    0);             {chivalry}
 
   Add_Npc('Guillame',
     Gnome,
@@ -594,121 +596,224 @@ begin
 
 
   {add_fake tells us if we are just here to count the number of npcs}
-  if add_fake then exit;
+  if add_fake then
+    exit;
 
   {writing right LEVEL depending on experience points}
   {also writing in start money}
   {also writing weapon & armor}
 
  {$I-}Close(playerfile);{$I+}
-  if IOResult <> 0 then unable_to_close(global_npfile);
+  if IOResult <> 0 then
+    unable_to_close(global_npfile);
 
   for i := 1 to fs(fsplayer) do
   begin
     load_player(fload, player0, i);
 
     player0.level := 1;
-    if player0.exp >= 900 then player0.level := 2;
-    if player0.exp >= 5000 then player0.level := 3;
-    if player0.exp >= 10000 then player0.level := 4;
-    if player0.exp >= 15000 then player0.level := 5;
-    if player0.exp >= 20000 then player0.level := 6;
-    if player0.exp >= 30000 then player0.level := 7;
-    if player0.exp >= 40000 then player0.level := 8;
-    if player0.exp >= 60000 then player0.level := 9;
-    if player0.exp >= 85000 then player0.level := 10;
-    if player0.exp >= 120000 then player0.level := 11;
-    if player0.exp >= 140000 then player0.level := 12;
-    if player0.exp >= 180000 then player0.level := 13;
-    if player0.exp >= 240000 then player0.level := 14;
-    if player0.exp >= 290000 then player0.level := 15;
-    if player0.exp >= 340000 then player0.level := 16;
-    if player0.exp >= 400000 then player0.level := 17;
-    if player0.exp >= 500000 then player0.level := 18;
-    if player0.exp >= 600000 then player0.level := 19;
-    if player0.exp >= 850000 then player0.level := 20;
-    if player0.exp >= 1000000 then player0.level := 21;
-    if player0.exp >= 1200000 then player0.level := 22;
-    if player0.exp >= 1400000 then player0.level := 23;
-    if player0.exp >= 1600000 then player0.level := 24;
-    if player0.exp >= 1800000 then player0.level := 25;
-    if player0.exp >= 2200000 then player0.level := 26;
-    if player0.exp >= 2500000 then player0.level := 27;
-    if player0.exp >= 2700000 then player0.level := 28;
-    if player0.exp >= 2900000 then player0.level := 29;
-    if player0.exp >= 3200000 then player0.level := 30;
-    if player0.exp >= 3400000 then player0.level := 31;
-    if player0.exp >= 3600000 then player0.level := 32;
-    if player0.exp >= 3800000 then player0.level := 33;
-    if player0.exp >= 4200000 then player0.level := 34;
-    if player0.exp >= 4400000 then player0.level := 35;
-    if player0.exp >= 4600000 then player0.level := 36;
-    if player0.exp >= 4800000 then player0.level := 37;
-    if player0.exp >= 5000000 then player0.level := 38;
-    if player0.exp >= 5200000 then player0.level := 39;
-    if player0.exp >= 5400000 then player0.level := 40;
-    if player0.exp >= 5600000 then player0.level := 41;
-    if player0.exp >= 5800000 then player0.level := 42;
-    if player0.exp >= 6000000 then player0.level := 43;
-    if player0.exp >= 6200000 then player0.level := 44;
-    if player0.exp >= 6500000 then player0.level := 45;
-    if player0.exp >= 6800000 then player0.level := 46;
-    if player0.exp >= 7200000 then player0.level := 47;
-    if player0.exp >= 7500000 then player0.level := 48;
-    if player0.exp >= 8000000 then player0.level := 49;
-    if player0.exp >= 8500000 then player0.level := 50;
-    if player0.exp >= 9000000 then player0.level := 51;
-    if player0.exp >= 10000000 then player0.level := 52;
-    if player0.exp >= 12000000 then player0.level := 53;
-    if player0.exp >= 14000000 then player0.level := 54;
-    if player0.exp >= 16000000 then player0.level := 55;
-    if player0.exp >= 18000000 then player0.level := 56;
-    if player0.exp >= 20000000 then player0.level := 57;
-    if player0.exp >= 22000000 then player0.level := 58;
-    if player0.exp >= 24000000 then player0.level := 59;
-    if player0.exp >= 26000000 then player0.level := 60;
-    if player0.exp >= 28000000 then player0.level := 61;
-    if player0.exp >= 30000000 then player0.level := 62;
-    if player0.exp >= 31000000 then player0.level := 63;
-    if player0.exp >= 32000000 then player0.level := 64;
-    if player0.exp >= 33000000 then player0.level := 65;
-    if player0.exp >= 34000000 then player0.level := 66;
-    if player0.exp >= 36000000 then player0.level := 67;
-    if player0.exp >= 38000000 then player0.level := 68;
-    if player0.exp >= 40000000 then player0.level := 69;
-    if player0.exp >= 41000000 then player0.level := 70;
-    if player0.exp >= 42000000 then player0.level := 71;
-    if player0.exp >= 44000000 then player0.level := 72;
-    if player0.exp >= 47000000 then player0.level := 73;
-    if player0.exp >= 50000000 then player0.level := 74;
-    if player0.exp >= 55000000 then player0.level := 75;
-    if player0.exp >= 60000000 then player0.level := 76;
-    if player0.exp >= 65000000 then player0.level := 77;
-    if player0.exp >= 75000000 then player0.level := 78;
-    if player0.exp >= 80000000 then player0.level := 79;
-    if player0.exp >= 85000000 then player0.level := 80;
-    if player0.exp >= 90000000 then player0.level := 81;
-    if player0.exp >= 95000000 then player0.level := 82;
-    if player0.exp >= 100000000 then player0.level := 83;
-    if player0.exp >= 120000000 then player0.level := 84;
-    if player0.exp >= 130000000 then player0.level := 85;
-    if player0.exp >= 140000000 then player0.level := 86;
-    if player0.exp >= 150000000 then player0.level := 87;
-    if player0.exp >= 160000000 then player0.level := 88;
-    if player0.exp >= 170000000 then player0.level := 89;
-    if player0.exp >= 180000000 then player0.level := 90;
-    if player0.exp >= 190000000 then player0.level := 91;
-    if player0.exp >= 200000000 then player0.level := 92;
-    if player0.exp >= 210000000 then player0.level := 93;
-    if player0.exp >= 220000000 then player0.level := 94;
-    if player0.exp >= 230000000 then player0.level := 95;
-    if player0.exp >= 240000000 then player0.level := 96;
-    if player0.exp >= 250000000 then player0.level := 97;
-    if player0.exp >= 260000000 then player0.level := 98;
-    if player0.exp >= 270000000 then player0.level := 99;
-    if player0.exp >= 280000000 then player0.level := 100;
-    if player0.exp >= 300000000 then player0.level := 101;
-    if player0.exp >= 310000000 then player0.level := 102;
+    if player0.exp >= 900 then
+      player0.level := 2;
+    if player0.exp >= 5000 then
+      player0.level := 3;
+    if player0.exp >= 10000 then
+      player0.level := 4;
+    if player0.exp >= 15000 then
+      player0.level := 5;
+    if player0.exp >= 20000 then
+      player0.level := 6;
+    if player0.exp >= 30000 then
+      player0.level := 7;
+    if player0.exp >= 40000 then
+      player0.level := 8;
+    if player0.exp >= 60000 then
+      player0.level := 9;
+    if player0.exp >= 85000 then
+      player0.level := 10;
+    if player0.exp >= 120000 then
+      player0.level := 11;
+    if player0.exp >= 140000 then
+      player0.level := 12;
+    if player0.exp >= 180000 then
+      player0.level := 13;
+    if player0.exp >= 240000 then
+      player0.level := 14;
+    if player0.exp >= 290000 then
+      player0.level := 15;
+    if player0.exp >= 340000 then
+      player0.level := 16;
+    if player0.exp >= 400000 then
+      player0.level := 17;
+    if player0.exp >= 500000 then
+      player0.level := 18;
+    if player0.exp >= 600000 then
+      player0.level := 19;
+    if player0.exp >= 850000 then
+      player0.level := 20;
+    if player0.exp >= 1000000 then
+      player0.level := 21;
+    if player0.exp >= 1200000 then
+      player0.level := 22;
+    if player0.exp >= 1400000 then
+      player0.level := 23;
+    if player0.exp >= 1600000 then
+      player0.level := 24;
+    if player0.exp >= 1800000 then
+      player0.level := 25;
+    if player0.exp >= 2200000 then
+      player0.level := 26;
+    if player0.exp >= 2500000 then
+      player0.level := 27;
+    if player0.exp >= 2700000 then
+      player0.level := 28;
+    if player0.exp >= 2900000 then
+      player0.level := 29;
+    if player0.exp >= 3200000 then
+      player0.level := 30;
+    if player0.exp >= 3400000 then
+      player0.level := 31;
+    if player0.exp >= 3600000 then
+      player0.level := 32;
+    if player0.exp >= 3800000 then
+      player0.level := 33;
+    if player0.exp >= 4200000 then
+      player0.level := 34;
+    if player0.exp >= 4400000 then
+      player0.level := 35;
+    if player0.exp >= 4600000 then
+      player0.level := 36;
+    if player0.exp >= 4800000 then
+      player0.level := 37;
+    if player0.exp >= 5000000 then
+      player0.level := 38;
+    if player0.exp >= 5200000 then
+      player0.level := 39;
+    if player0.exp >= 5400000 then
+      player0.level := 40;
+    if player0.exp >= 5600000 then
+      player0.level := 41;
+    if player0.exp >= 5800000 then
+      player0.level := 42;
+    if player0.exp >= 6000000 then
+      player0.level := 43;
+    if player0.exp >= 6200000 then
+      player0.level := 44;
+    if player0.exp >= 6500000 then
+      player0.level := 45;
+    if player0.exp >= 6800000 then
+      player0.level := 46;
+    if player0.exp >= 7200000 then
+      player0.level := 47;
+    if player0.exp >= 7500000 then
+      player0.level := 48;
+    if player0.exp >= 8000000 then
+      player0.level := 49;
+    if player0.exp >= 8500000 then
+      player0.level := 50;
+    if player0.exp >= 9000000 then
+      player0.level := 51;
+    if player0.exp >= 10000000 then
+      player0.level := 52;
+    if player0.exp >= 12000000 then
+      player0.level := 53;
+    if player0.exp >= 14000000 then
+      player0.level := 54;
+    if player0.exp >= 16000000 then
+      player0.level := 55;
+    if player0.exp >= 18000000 then
+      player0.level := 56;
+    if player0.exp >= 20000000 then
+      player0.level := 57;
+    if player0.exp >= 22000000 then
+      player0.level := 58;
+    if player0.exp >= 24000000 then
+      player0.level := 59;
+    if player0.exp >= 26000000 then
+      player0.level := 60;
+    if player0.exp >= 28000000 then
+      player0.level := 61;
+    if player0.exp >= 30000000 then
+      player0.level := 62;
+    if player0.exp >= 31000000 then
+      player0.level := 63;
+    if player0.exp >= 32000000 then
+      player0.level := 64;
+    if player0.exp >= 33000000 then
+      player0.level := 65;
+    if player0.exp >= 34000000 then
+      player0.level := 66;
+    if player0.exp >= 36000000 then
+      player0.level := 67;
+    if player0.exp >= 38000000 then
+      player0.level := 68;
+    if player0.exp >= 40000000 then
+      player0.level := 69;
+    if player0.exp >= 41000000 then
+      player0.level := 70;
+    if player0.exp >= 42000000 then
+      player0.level := 71;
+    if player0.exp >= 44000000 then
+      player0.level := 72;
+    if player0.exp >= 47000000 then
+      player0.level := 73;
+    if player0.exp >= 50000000 then
+      player0.level := 74;
+    if player0.exp >= 55000000 then
+      player0.level := 75;
+    if player0.exp >= 60000000 then
+      player0.level := 76;
+    if player0.exp >= 65000000 then
+      player0.level := 77;
+    if player0.exp >= 75000000 then
+      player0.level := 78;
+    if player0.exp >= 80000000 then
+      player0.level := 79;
+    if player0.exp >= 85000000 then
+      player0.level := 80;
+    if player0.exp >= 90000000 then
+      player0.level := 81;
+    if player0.exp >= 95000000 then
+      player0.level := 82;
+    if player0.exp >= 100000000 then
+      player0.level := 83;
+    if player0.exp >= 120000000 then
+      player0.level := 84;
+    if player0.exp >= 130000000 then
+      player0.level := 85;
+    if player0.exp >= 140000000 then
+      player0.level := 86;
+    if player0.exp >= 150000000 then
+      player0.level := 87;
+    if player0.exp >= 160000000 then
+      player0.level := 88;
+    if player0.exp >= 170000000 then
+      player0.level := 89;
+    if player0.exp >= 180000000 then
+      player0.level := 90;
+    if player0.exp >= 190000000 then
+      player0.level := 91;
+    if player0.exp >= 200000000 then
+      player0.level := 92;
+    if player0.exp >= 210000000 then
+      player0.level := 93;
+    if player0.exp >= 220000000 then
+      player0.level := 94;
+    if player0.exp >= 230000000 then
+      player0.level := 95;
+    if player0.exp >= 240000000 then
+      player0.level := 96;
+    if player0.exp >= 250000000 then
+      player0.level := 97;
+    if player0.exp >= 260000000 then
+      player0.level := 98;
+    if player0.exp >= 270000000 then
+      player0.level := 99;
+    if player0.exp >= 280000000 then
+      player0.level := 100;
+    if player0.exp >= 300000000 then
+      player0.level := 101;
+    if player0.exp >= 310000000 then
+      player0.level := 102;
 
     {distributing charisma, agility,dex,wisdom ... depending on level}
     player0.stamina := player0.level * random(3) + 1;

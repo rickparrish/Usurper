@@ -162,13 +162,15 @@ begin
 
   { fetch Ravanellas name from .CFG }
   owner := cfg_string(18);
-  if owner = '' then owner := 'Ravanella';
+  if owner = '' then
+    owner := 'Ravanella';
 
   {fetc ID cost from .CFG}
   idcost := 1500;
   s := cfg_string(52);
   idcost := str_to_nr(s);
-  if (idcost < 1) or (idcost > 2000000000) then idcost := 1500;
+  if (idcost < 1) or (idcost > 2000000000) then
+    idcost := 1500;
 
   if owner = '' then
   begin
@@ -194,7 +196,8 @@ begin
     z := 0;
     case cho of
       '?': begin
-        if player.expert = True then display_menu(True, False)
+        if player.expert = True then
+          display_menu(True, False)
         else display_menu(False, False);
       end;
       'R': begin
@@ -313,7 +316,8 @@ begin
                   begin
                     sd(global_itemcol, objekt^.Name);
                     sd(config.textcolor, ' is worthless!, ' + owner + ' says.');
-                  end else if objekt^.cursed = True then
+                  end else
+                  if objekt^.cursed = True then
                   begin
                     sd(global_itemcol, objekt^.Name);
                     d(config.textcolor, ' is cursed!');
@@ -362,7 +366,8 @@ begin
                   begin
                     sd(global_talkcol, 'That item is worthless!');
                     d(config.textcolor, ', ' + owner + ' says.');
-                  end else if objekt^.cursed = True then
+                  end else
+                  if objekt^.cursed = True then
                   begin
                     sd(global_talkcol, 'I don''t buy cursed items!');
                     d(config.textcolor, ', ' + owner + ' says.');
@@ -425,8 +430,7 @@ begin
                       end;
                     end;
                   end;
-                end
-                else
+                end else
                 begin
                   sd(global_talkcol, 'I don''t buy that kind of items');
                   d(config.textcolor, ', ' + uplc + owner + config.textcol1 + ' says.');
@@ -444,7 +448,8 @@ begin
         begin
           crlf;
           d(15, 'Not available in Classic mode.');
-        end else if (config.allowitem[10] = False) and
+        end else
+        if (config.allowitem[10] = False) and
           (config.allowitem[11] = False) and
           (config.allowitem[5] = False) and
           (config.allowitem[6] = False) and
@@ -512,7 +517,8 @@ begin
               begin
                 d(12, 'This item is charmed for good characters.');
                 d(12, 'You can buy it, but you not use it!');
-              end else if (objekt^.evil = True) and (player.chiv > 0) and (player.dark < 1) then
+              end else
+              if (objekt^.evil = True) and (player.chiv > 0) and (player.dark < 1) then
               begin
                 d(12, 'This item is enchanted and can be used by evil characters only.');
                 d(12, 'You can buy it, but not use it!');
@@ -582,7 +588,8 @@ begin
         begin
           crlf;
           d(15, 'Not available in Usurper Classic mode.');
-        end else if (config.allowitem[10] = False) and
+        end else
+        if (config.allowitem[10] = False) and
           (config.allowitem[11] = False) and
           (config.allowitem[5] = False) and
           (config.allowitem[6] = False) and
@@ -593,8 +600,7 @@ begin
           d(15, 'The store is closed! Some boring fool from the outside has');
           d(15, 'removed all items that are usually sold here.');
           crlf;
-        end
-        else
+        end else
         begin
           clearscreen;
           j := 0;
@@ -641,7 +647,8 @@ begin
                 normcol := 3;
                 shadcol := 8;
 
-                if restrict then col := shadcol
+                if restrict then
+                  col := shadcol
                 else col := normcol;
 
                 {#}
@@ -656,13 +663,15 @@ begin
 
                 {name}
                 normcol := global_itemcol;
-                if restrict then col := shadcol
+                if restrict then
+                  col := shadcol
                 else col := normcol;
                 sd(col, s);
 
                 {price}
                 normcol := 14;
-                if restrict then col := shadcol
+                if restrict then
+                  col := shadcol
                 else col := normcol;
                 s := commastr(objekt^.Value);
                 sd(col, s);
@@ -680,7 +689,8 @@ begin
                 if cc > global_screenlines - 2 then
                 begin
                   crlf;
-                  if confirm('Continue ', 'Y') = False then break;
+                  if confirm('Continue ', 'Y') = False then
+                    break;
                   crlf;
                   cc := 1;
                 end;
@@ -943,18 +953,22 @@ begin
           xx := config.maxheals - player.healing;
         end;
 
-        if xx < 0 then xx := 0;
+        if xx < 0 then
+          xx := 0;
 
         if player.gold < z then
         begin
           d(12, 'You don''t have enough ' + config.moneytype + '!');
-        end else if xx = 0 then
+        end else
+        if xx = 0 then
         begin
           d(12, 'You already have the maximum number of healing potions!');
-        end else if player.gold = 0 then
+        end else
+        if player.gold = 0 then
         begin
           d(12, 'You don''t have any ' + config.moneytype + '!');
-        end else if player.gold < z then
+        end else
+        if player.gold < z then
         begin
           if xx = 0 then
           begin
@@ -969,10 +983,12 @@ begin
           d(5, 'You can''t afford anything!');
           crlf;
           pause;
-        end else if player.healing >= config.maxheals then
+        end else
+        if player.healing >= config.maxheals then
         begin
           d(5, 'You already have the maximum number of healing potions.');
-        end else if player.gold >= z then
+        end else
+        if player.gold >= z then
         begin
 
           sd(config.textcolor, 'Current price is ');
@@ -1023,7 +1039,7 @@ begin
         end;
       end;
 
-    end; {case .end.}
+    end;       {case .end.}
 
   until never; {main loop}
   crlf;

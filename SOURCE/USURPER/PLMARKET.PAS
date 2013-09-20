@@ -52,7 +52,7 @@ var i:   word;
   pitem: MarketItemRec;
 begin {executed when a player is deactivated from the game}
 
-  {we remove plys items from the market-place}
+      {we remove plys items from the market-place}
   for i := 1 to fs(fsmarket) do
   begin
     load_market(Fload, pitem, i);
@@ -66,7 +66,7 @@ begin {executed when a player is deactivated from the game}
     end;
   end; {for i:= .end.}
 
-end; {remove_playermarketitems *end*}
+end;   {remove_playermarketitems *end*}
 
 
 procedure Meny;
@@ -216,7 +216,8 @@ begin
 
     case cho of
       '?': begin
-        if player.expert = True then display_menu(True, False)
+        if player.expert = True then
+          display_menu(True, False)
         else display_menu(False, False);
       end;
       'S': begin
@@ -298,7 +299,8 @@ begin
                   {news-paper}
                   newsy(True,
                     'Bargain',
-                    ' ' + uplc + player.name2 + config.textcol1 + ' is selling ' + uitemc + objekt^.Name + config.textcol1 + ' at the Market.',
+                    ' ' + uplc + player.name2 + config.textcol1 + ' is selling ' + uitemc +
+                    objekt^.Name + config.textcol1 + ' at the Market.',
                     '',
                     '',
                     '',
@@ -319,7 +321,7 @@ begin
           end;
         until cc = 0;
 
-      end; {add item .end.}
+      end;       {add item .end.}
 
       'B': begin {buy item}
         if inventory_empty(player) = 0 then
@@ -369,7 +371,8 @@ begin
                 if player.gold < pitem.price then
                 begin
                   d(15, 'You don''t have enough ' + config.moneytype + '!');
-                end else if allowed_to_use(pitem.ityp) = False then
+                end else
+                if allowed_to_use(pitem.ityp) = False then
                 begin
                   d(15, 'This type of items are no longer permitted in the game.');
                   d(15, 'Your Sysop has disabled the use of them.');
@@ -406,7 +409,8 @@ begin
                   {news-paper}
                   newsy(True,
                     'Purchase',
-                    ' ' + uplc + player.name2 + config.textcol1 + ' bought the ' + uitemc + objekt^.Name + config.textcol1 + ' at the Market.',
+                    ' ' + uplc + player.name2 + config.textcol1 + ' bought the ' + uitemc +
+                    objekt^.Name + config.textcol1 + ' at the Market.',
                     '',
                     '',
                     '',
@@ -433,7 +437,9 @@ begin
                           '',
                           umailheadc + 'The Market' + config.textcol1,
                           mkstring(10, underscore),
-                          uplc + player.name2 + config.textcol1 + ' purchased your ' + uitemc + objekt^.Name + config.textcol1 + ' for ' + uyellow + commastr(pitem.price) + config.textcol1 + ' ' + many_money(pitem.price) + '.',
+                          uplc + player.name2 + config.textcol1 + ' purchased your ' + uitemc +
+                          objekt^.Name + config.textcol1 + ' for ' + uyellow + commastr(pitem.price) + config.textcol1 +
+                          ' ' + many_money(pitem.price) + '.',
                           '',
                           '',
                           '',

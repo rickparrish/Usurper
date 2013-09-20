@@ -56,7 +56,8 @@ begin
   crlf;
 
   {is player a worshipper?}
-  if player.god = '' then d(config.textcolor, 'You are not a believer.')
+  if player.god = '' then
+    d(config.textcolor, 'You are not a believer.')
   else d(config.textcolor, 'You worship ' + ugodc + player.god + config.textcol1 + '.');
   crlf;
 
@@ -195,7 +196,8 @@ begin
               begin
                 d(config.textcolor, 'Item Sacrifices are only available in Usurper Game Mode : ' + ulcyan + 'NEW');
                 pause;
-              end else if is_inventory_empty(player) then
+              end else
+              if is_inventory_empty(player) then
               begin
                 d(12, 'Your inventory is empty! You have nothing to sacrifice!');
                 pause;
@@ -208,7 +210,8 @@ begin
                 repeat
                   inventory_sort(player);
 
-                  d(config.textcolor, 'Item # to Sacrifice (' + config.textcol2 + '?' + config.textcol1 + '=list, Enter=abort)');
+                  d(config.textcolor, 'Item # to Sacrifice (' + config.textcol2 + '?' + config.textcol1 +
+                    '=list, Enter=abort)');
                   sd(config.textcolor, ':');
 
                   s := get_String(5);
@@ -217,13 +220,16 @@ begin
                   if s = '?' then
                   begin
                     inventory_display(player);
-                  end else if s = '' then
+                  end else
+                  if s = '' then
                   begin
                     d(12, 'Aborted.');
-                  end else if s <> '' then
+                  end else
+                  if s <> '' then
                   begin
                     y := str_to_nr(s);
-                    if (y < 1) or (y > global_maxitem) then y := 0;
+                    if (y < 1) or (y > global_maxitem) then
+                      y := 0;
                   end;
 
                   if y > 0 then
@@ -236,7 +242,9 @@ begin
                       begin
 
                         crlf;
-                        d(global_itemcol, objekt^.Name + config.textcol1 + ' is worth ' + uyellow + commastr(objekt^.Value) + config.textcol1 + ' ' + config.moneytype + ' ' + many_money(objekt^.Value) + '.');
+                        d(global_itemcol, objekt^.Name + config.textcol1 + ' is worth ' + uyellow +
+                          commastr(objekt^.Value) + config.textcol1 + ' ' + config.moneytype + ' ' +
+                          many_money(objekt^.Value) + '.');
 
                         if confirm('Sacrifice ' + uitemc + objekt^.Name + config.textcol1, 'N') = True then
                         begin
@@ -253,7 +261,8 @@ begin
                           {increase deity power}
                           if is_online(god0.Name, online_god) = True then
                           begin
-                            online_send_to_player(god0.Name, online_god, uplc + player.name2 + config.textcol1H + ' sacrificed at your altar!');
+                            online_send_to_player(god0.Name, online_god, uplc + player.name2 +
+                              config.textcol1H + ' sacrificed at your altar!');
                             online_send_to_player(god0.Name, online_god, broadcast_GodSacrificed + commastr(y));
                           end else
                           begin
@@ -277,12 +286,14 @@ begin
                             s := 'Sacrifice!';
                             if player.god <> god0.Name then
                             begin
-                              s2 := uplc + player.name2 + config.textcol1 + ' is ' + ulred + 'NOT' + config.textcol1 + ' one of your disciples.';
+                              s2 := uplc + player.name2 + config.textcol1 + ' is ' + ulred + 'NOT' +
+                                config.textcol1 + ' one of your disciples.';
                             end;
                           end else
                           begin
                             s := 'Unexepected Sacrifce!';
-                            s2 := uplc + player.name2 + config.textcol1 + ' is a believer in ' + ugodc + god0.Name + config.textcol1 + '.';
+                            s2 := uplc + player.name2 + config.textcol1 + ' is a believer in ' +
+                              ugodc + god0.Name + config.textcol1 + '.';
                           end;
 
                           {mail god}
@@ -294,7 +305,8 @@ begin
                             '',
                             uyellow + s + config.textcol1,
                             mkstring(length(s), underscore),
-                            uplc + player.name2 + config.textcol1 + ' sacrificed a ' + uitemc + objekt^.Name + config.textcol1 + ' on your altar!',
+                            uplc + player.name2 + config.textcol1 + ' sacrificed a ' + uitemc +
+                            objekt^.Name + config.textcol1 + ' on your altar!',
                             '',
                             'Your power increased by ' + uwhite + commastr(y) + config.textcol1 + ' point(s)!',
                             '',
@@ -322,7 +334,8 @@ begin
                               '',
                               ulred + s + config.textcol1,
                               mkstring(length(s), underscore),
-                              uplc + player.name2 + config.textcol1 + ' sacrificed a ' + uitemc + objekt^.Name + config.textcol1 + ' at the altar of ' + ugodc + god0.Name + config.textcol1 + '!',
+                              uplc + player.name2 + config.textcol1 + ' sacrificed a ' + uitemc +
+                              objekt^.Name + config.textcol1 + ' at the altar of ' + ugodc + god0.Name + config.textcol1 + '!',
                               'You should punish the disloyal ' + uplc + player.name2 + config.textcol1 + ' immediately!',
                               '',
                               '',
@@ -340,7 +353,9 @@ begin
                           {news-paper}
                           newsy(True,
                             'Altar Sacrifice',
-                            ' ' + uplc + player.name2 + config.textcol1 + ' sacrificed a ' + uitemc + objekt^.Name + config.textcol1 + ' at the altar of ' + ugodc + god0.Name + config.textcol1 + '.',
+                            ' ' + uplc + player.name2 + config.textcol1 + ' sacrificed a ' +
+                              uitemc + objekt^.Name + config.textcol1 + ' at the altar of ' + ugodc + god0.Name +
+                              config.textcol1 + '.',
                             '',
                             '',
                             '',
@@ -351,8 +366,10 @@ begin
                             '');
 
                           {decrease good deeds}
-                          if global_utest = False then Dec(player.chivnr);
-                          d(config.textcolor, 'You have ' + uwhite + commastr(player.chivnr) + config.textcol1 + ' Good Deeds left today.');
+                          if global_utest = False then
+                            Dec(player.chivnr);
+                          d(config.textcolor, 'You have ' + uwhite + commastr(player.chivnr) +
+                            config.textcol1 + ' Good Deeds left today.');
 
                           pause;
                           crlf;
@@ -403,7 +420,8 @@ begin
 
                 if x > 0 then
                 begin
-                  if confirm('Sacrifice ' + uyellow + commastr(x) + config.textcol1 + ' ' + many_money(x) + ' to ' + ugodc + god0.Name + config.textcol1, 'N') = True then
+                  if confirm('Sacrifice ' + uyellow + commastr(x) + config.textcol1 + ' ' +
+                    many_money(x) + ' to ' + ugodc + god0.Name + config.textcol1, 'N') = True then
                   begin
 
                     {decrease player money}
@@ -415,7 +433,8 @@ begin
                     {increase deity power}
                     if is_online(god0.Name, online_god) = True then
                     begin
-                      online_send_to_player(god0.Name, online_god, uplc + player.name2 + config.textcol1H + ' sacrificed at your altar!');
+                      online_send_to_player(god0.Name, online_god, uplc + player.name2 + config.textcol1H +
+                        ' sacrificed at your altar!');
                       online_send_to_player(god0.Name, online_god, broadcast_GodSacrificed + commastr(y));
                     end else
                     begin
@@ -439,12 +458,14 @@ begin
                       s := 'Sacrifice!';
                       if player.god <> god0.Name then
                       begin
-                        s2 := uplc + player.name2 + config.textcol1 + ' is ' + ulred + 'NOT' + config.textcol1 + ' one of your disciples.';
+                        s2 := uplc + player.name2 + config.textcol1 + ' is ' + ulred + 'NOT' +
+                          config.textcol1 + ' one of your disciples.';
                       end;
                     end else
                     begin
                       s := 'Unexepected Sacrifce!';
-                      s2 := uplc + player.name2 + config.textcol1 + ' is a believer in ' + ugodc + god0.Name + config.textcol1 + '.';
+                      s2 := uplc + player.name2 + config.textcol1 + ' is a believer in ' + ugodc +
+                        god0.Name + config.textcol1 + '.';
                     end;
 
                     {mail god}
@@ -456,7 +477,8 @@ begin
                       '',
                       uyellow + s + config.textcol1,
                       mkstring(length(s), underscore),
-                      uplc + player.name2 + config.textcol1 + ' sacrificed ' + uyellow + commastr(x) + config.textcol1 + ' ' + many_money(x) + ' on your altar!',
+                      uplc + player.name2 + config.textcol1 + ' sacrificed ' + uyellow + commastr(x) +
+                      config.textcol1 + ' ' + many_money(x) + ' on your altar!',
                       '',
                       'Your power increased by ' + uwhite + commastr(y) + config.textcol1 + ' point(s)!',
                       '',
@@ -484,7 +506,9 @@ begin
                         '',
                         ulred + s + config.textcol1,
                         mkstring(length(s), underscore),
-                        uplc + player.name2 + config.textcol1 + ' sacrificed ' + uyellow + commastr(x) + config.textcol1 + ' ' + many_money(x) + ' at the altar of ' + ugodc + god0.Name + config.textcol1 + '!',
+                        uplc + player.name2 + config.textcol1 + ' sacrificed ' + uyellow +
+                          commastr(x) + config.textcol1 + ' ' + many_money(x) + ' at the altar of ' + ugodc + god0.Name +
+                          config.textcol1 + '!',
                         'You should punish the disloyal ' + uplc + player.name2 + config.textcol1 + ' immediately!',
                         '',
                         '',
@@ -502,7 +526,8 @@ begin
                     {news-paper}
                     newsy(True,
                       'Altar Sacrifice',
-                      ' ' + uplc + player.name2 + config.textcol1 + ' sacrificed ' + config.moneytype + ' at the altar of ' + ugodc + god0.Name + config.textcol1 + '.',
+                      ' ' + uplc + player.name2 + config.textcol1 + ' sacrificed ' + config.moneytype +
+                      ' at the altar of ' + ugodc + god0.Name + config.textcol1 + '.',
                       '',
                       '',
                       '',
@@ -514,8 +539,10 @@ begin
 
 
                     {decrease good deeds}
-                    if global_utest = False then Dec(player.chivnr);
-                    d(config.textcolor, 'You have ' + uwhite + commastr(player.chivnr) + config.textcol1 + ' Good Deeds left today.');
+                    if global_utest = False then
+                      Dec(player.chivnr);
+                    d(config.textcolor, 'You have ' + uwhite + commastr(player.chivnr) + config.textcol1 +
+                      ' Good Deeds left today.');
 
                   end;
                 end else
@@ -555,7 +582,7 @@ var
   x:         longint;
   y:         longint;
 
-  god0:      GodRec; {temporary god record}
+  god0:      GodRec;   {temporary god record}
   pl0:       ^UserRec; {temporary user record}
 
 begin
@@ -599,7 +626,8 @@ begin
     {evaluate user-input}
     case cho of
       '?': begin {display menu}
-        if player.expert = True then display_menu(True, False)
+        if player.expert = True then
+          display_menu(True, False)
         else display_menu(False, False);
       end;
 
@@ -619,7 +647,8 @@ begin
       end;
       'H': begin {holy news}
         clearscreen;
-        if global_ansi then display_file(global_GodsANSI)
+        if global_ansi then
+          display_file(global_GodsANSI)
         else display_file(global_GodsASCI);
         crlf;
         pause;
@@ -724,7 +753,8 @@ begin
                   {inform god}
                   if is_online(god0.Name, online_god) = True then
                   begin
-                    online_send_to_player(god0.Name, online_god, uplc + player.name2 + config.textcol1H + ' desecrated your altar!');
+                    online_send_to_player(god0.Name, online_god, uplc + player.name2 + config.textcol1H +
+                      ' desecrated your altar!');
                     online_send_to_player(god0.Name, online_god, broadcast_GodDesecrated + commastr(y));
                   end else
                   begin
@@ -776,7 +806,8 @@ begin
                       {player}
                       if is_online(pl0^.name2, online_player) = True then
                       begin
-                        online_send_to_player(pl0^.name2, online_player, uplc + player.name2 + config.textcol1 + ' desecrated the altar of your ' + ugodc + 'GOD' + config.textcol1 + '!');
+                        online_send_to_player(pl0^.name2, online_player, uplc + player.name2 +
+                          config.textcol1 + ' desecrated the altar of your ' + ugodc + 'GOD' + config.textcol1 + '!');
                       end else
                       begin
 
@@ -790,7 +821,8 @@ begin
                           '',
                           ulred + s + config.textcol1,
                           mkstring(length(s), underscore),
-                          uplc + player.name2 + config.textcol1 + ' desecrated the altar of ' + ugodc + god0.Name + config.textcol1 + ', your god!',
+                          uplc + player.name2 + config.textcol1 + ' desecrated the altar of ' +
+                          ugodc + god0.Name + config.textcol1 + ', your god!',
                           'You must protect your master!',
                           '',
                           '',
@@ -819,7 +851,7 @@ begin
           end;
         end;
 
-      end; {desecrate altar *end*}
+      end;       {desecrate altar *end*}
 
       'A': begin {altars [view]}
 
@@ -907,7 +939,8 @@ begin
               '');
 
             {tell other nodes}
-            online_send_to_all(uplc + player.name2 + config.textcol1 + ' lost ' + sex3[player.sex] + ' faith', player.name2, '');
+            online_send_to_all(uplc + player.name2 + config.textcol1 + ' lost ' + sex3[player.sex] +
+              ' faith', player.name2, '');
 
             {reset players faith}
             player.god := '';
@@ -946,7 +979,8 @@ begin
               uyellow + s + config.textcol1,
               mkstring(length(s), underscore),
               uplc + player.name2 + config.textcol1 + ' worships you!',
-              uplc + player.name2 + config.textcol1 + ' grovels on ' + sex3[player.sex] + ' hands and knees before your altar.',
+              uplc + player.name2 + config.textcol1 + ' grovels on ' + sex3[player.sex] +
+              ' hands and knees before your altar.',
               '',
               '',
               '',

@@ -37,7 +37,7 @@ procedure Cast_Spell(fastgame: boolean; mode: integer;  {1=casting, >1 checking 
                                                2 = Player vs Player}
 
   var temp1: UserRec; var temp2: UserRec; imp: boolean; var mon: byte); {pointing to online comfile}
-{only important if online duel is going on}
+ {only important if online duel is going on}
 
 implementation
 
@@ -57,7 +57,8 @@ var
 
 begin
 
-  if imp = True then i := 2
+  if imp = True then
+    i := 2
   else i := 1;
 
 
@@ -172,9 +173,9 @@ var
 
     end; {case .end.}
 
-  end; {Do_the_Damage *end*}
+  end;   {Do_the_Damage *end*}
 
-begin {Cast_Spell *begin*}
+begin    {Cast_Spell *begin*}
 
  {Computer Controlled Player (temp1) casts a spell against player2 (temp2)
  temp1 versus temp2}
@@ -183,7 +184,8 @@ begin {Cast_Spell *begin*}
 
   spell_menu := 'Cast spell (A..L, ' + config.textcol2 + '?' + config.textcol1 + '=list, Enter=abort) :';
 
-  if place = 2 then mon := 1;
+  if place = 2 then
+    mon := 1;
 
   online := False;
   if onliner.comfile <> '' then
@@ -195,12 +197,15 @@ begin {Cast_Spell *begin*}
   end;
 
   {oops! bad programming! a GOTO - almost BASIC again :( sorry for this!}
-  if mode > 1 then goto spell_check;
+  if mode > 1 then
+    goto spell_check;
 
   att := temp1.name2;
-  if (temp1.name2 = player.name2) and (global_maintrunning = False) then att := yo2;
+  if (temp1.name2 = player.name2) and (global_maintrunning = False) then
+    att := yo2;
   foe := temp2.name2;
-  if (temp2.name2 = player.name2) and (global_maintrunning = False) then foe := yo1;
+  if (temp2.name2 = player.name2) and (global_maintrunning = False) then
+    foe := yo1;
 
   cho := ReturnKey;
 
@@ -225,7 +230,7 @@ begin {Cast_Spell *begin*}
         end;
       end; {for ii:= .end.}
 
-      {more than 1 monsters active, user must pick target}
+           {more than 1 monsters active, user must pick target}
       if cr > 1 then
       begin
         mon := target_monster; { target is a function}
@@ -270,7 +275,8 @@ begin {Cast_Spell *begin*}
 
       if the_choice > 0 then
       begin
-        if player.spell[the_choice, 2] = True then use := True;
+        if player.spell[the_choice, 2] = True then
+          use := True;
         if (player.spell[the_choice, 1] = True) and
           (player.mana < spell_cost(player.class, the_choice)) then
         begin
@@ -281,7 +287,8 @@ begin {Cast_Spell *begin*}
         begin
           d(config.textcolor, 'Spell already active!');
           sd(config.textcolor, spell_menu);
-        end else if (cost = True) and (use = False) then
+        end else
+        if (cost = True) and (use = False) then
         begin
           crlf;
           d(12, 'Not enough mana!');
@@ -319,7 +326,8 @@ begin {Cast_Spell *begin*}
     end;
 
     {caster is a computer player, checking possibilities to cast spell.}
-    for i := 12 downto 1 do if (temp1.spell[i, 1] = True) and (temp1.spell[i, 2] = False) and
+    for i := 12 downto 1 do
+      if (temp1.spell[i, 1] = True) and (temp1.spell[i, 2] = False) and
         (temp1.mana >= spell_cost(temp1.class, i)) and (random(2) = 0) then
       begin
         cho := chr(Ord('A') + i - 1);
@@ -386,7 +394,8 @@ begin {Cast_Spell *begin*}
     sd(global_plycol, temp1.name2);
     sd(config.textcolor, ' utters ');
     d(global_talkcol, spell_utter(temp1.class, ii));
-  end else if fastgame = False then
+  end else
+  if fastgame = False then
   begin
     d(global_talkcol, spell_utter(temp1.class, ii));
   end;
@@ -443,7 +452,8 @@ begin {Cast_Spell *begin*}
           Inc(temp1.hps, 4);
           Inc(temp1.hps, random(3));
 
-          if temp1.hps > temp1.maxhps then temp1.hps := temp1.maxhps;
+          if temp1.hps > temp1.maxhps then
+            temp1.hps := temp1.maxhps;
 
           if (att = player.name2) and (fastgame = False) then
           begin
@@ -649,7 +659,8 @@ begin {Cast_Spell *begin*}
           if temp1.dark > 0 then
           begin
             Dec(temp1.dark, 15);
-            if temp1.dark < 0 then temp1.dark := 0;
+            if temp1.dark < 0 then
+              temp1.dark := 0;
           end else
           begin
             Inc(temp1.chiv, 15);
@@ -697,7 +708,8 @@ begin {Cast_Spell *begin*}
 
           if online then
           begin
-            put_out(imp, 'A ' + uplc + 'duplicate' + config.textcol1 + ' of ' + uplc + foe + config.textcol1 + ' suddenly arrives!', '', '');
+            put_out(imp, 'A ' + uplc + 'duplicate' + config.textcol1 + ' of ' + uplc + foe +
+              config.textcol1 + ' suddenly arrives!', '', '');
           end;
         end;
       end;
@@ -728,21 +740,32 @@ begin {Cast_Spell *begin*}
           if place = 2 then
           begin
             def := 0;
-            if temp2.disres > 10 then Inc(def);
-            if temp2.disres > 30 then Inc(def);
-            if temp2.disres > 60 then Inc(def);
-            if temp2.disres > 100 then Inc(def);
-            if temp2.disres > 150 then Inc(def);
-            if temp2.disres > 240 then Inc(def);
+            if temp2.disres > 10 then
+              Inc(def);
+            if temp2.disres > 30 then
+              Inc(def);
+            if temp2.disres > 60 then
+              Inc(def);
+            if temp2.disres > 100 then
+              Inc(def);
+            if temp2.disres > 150 then
+              Inc(def);
+            if temp2.disres > 240 then
+              Inc(def);
 
             if random(def) = 0 then
             begin
               rad := random(5);
-              if rad = 0 then temp2.blind := True;
-              if rad = 1 then temp2.plague := True;
-              if rad = 2 then temp2.smallpox := True;
-              if rad = 3 then temp2.measles := True;
-              if rad = 4 then temp2.leprosy := True;
+              if rad = 0 then
+                temp2.blind := True;
+              if rad = 1 then
+                temp2.plague := True;
+              if rad = 2 then
+                temp2.smallpox := True;
+              if rad = 3 then
+                temp2.measles := True;
+              if rad = 4 then
+                temp2.leprosy := True;
               def := 0;
             end else
             begin
@@ -891,7 +914,8 @@ begin {Cast_Spell *begin*}
           begin
             if (place = 2) or (magic_res[mon] <> no_effect) then
             begin
-              d(config.textcolor, uplc + foe + config.textcol1 + ' screams in fear from ' + uplc + att + config.textcol1 + ' presence!');
+              d(config.textcolor, uplc + foe + config.textcol1 + ' screams in fear from ' + uplc +
+                att + config.textcol1 + ' presence!');
               temp1.spell[ii, 2] := True;
             end;
           end;
@@ -913,7 +937,8 @@ begin {Cast_Spell *begin*}
           begin
             if (place = 2) or (magic_res[mon] <> no_effect) then
             begin
-              d(config.textcolor, uplc + foe + config.textcol1 + ' kindly asks ' + uplc + att + config.textcol1 + ' to stop the fight!');
+              d(config.textcolor, uplc + foe + config.textcol1 + ' kindly asks ' + uplc + att +
+                config.textcol1 + ' to stop the fight!');
               temp1.spell[ii, 2] := True;
             end;
           end;
@@ -1022,17 +1047,20 @@ begin {Cast_Spell *begin*}
         end;
 
         Sage: begin
-          if place = 1 then rad := random(10000);
+          if place = 1 then
+            rad := random(10000);
           if place = 2 then
           begin
             rad := temp2.level * 9504;
-            if temp2.gold < rad then rad := temp2.gold;
+            if temp2.gold < rad then
+              rad := temp2.gold;
             decplayermoney(temp2, rad);
           end;
 
           if (fastgame = False) or (foe = yo1) then
           begin
-            d(config.textcolor, uplc + att + config.textcol1 + ' manages to steal ' + uyellow + commastr(rad) + config.textcol1 + ' ' + many_money(rad) + ' from ' + uplc + foe + config.textcol1 + '!');
+            d(config.textcolor, uplc + att + config.textcol1 + ' manages to steal ' + uyellow +
+              commastr(rad) + config.textcol1 + ' ' + many_money(rad) + ' from ' + uplc + foe + config.textcol1 + '!');
           end;
 
 
@@ -1040,7 +1068,8 @@ begin {Cast_Spell *begin*}
 
           if online then
           begin
-            put_out(imp, uplc + foe + ' managed to steal ' + uyellow + commastr(rad) + config.textcol1 + ' ' + many_money(rad) + ' from you!', '', '');
+            put_out(imp, uplc + foe + ' managed to steal ' + uyellow + commastr(rad) + config.textcol1 +
+              ' ' + many_money(rad) + ' from you!', '', '');
           end;
 
         end;
@@ -1051,7 +1080,8 @@ begin {Cast_Spell *begin*}
       case temp1.class of
         Cleric: begin
           Inc(temp1.hps, 200);
-          if temp1.hps > temp1.maxhps then temp1.hps := temp1.maxhps;
+          if temp1.hps > temp1.maxhps then
+            temp1.hps := temp1.maxhps;
           if (att = player.name2) and (fastgame = False) then
           begin
             d(4, 'You regain some hitpoints!');
@@ -1196,8 +1226,7 @@ begin {Cast_Spell *begin*}
  }
 
   {a label. called by GOTO statement earlier}
-  Spell_Check:
-    {deduct for Player spells}
+  Spell_Check: {deduct for Player spells}
 
     att := temp1.name2;
   foe := temp2.name2;
@@ -1320,7 +1349,8 @@ begin {Cast_Spell *begin*}
 
         if fastgame = False then
         begin
-          d(config.textcolor, att + ' ' + uplc + 'Duplicate' + config.textcol1 + ' hits ' + umonc + monster[newmon]^.Name + config.textcol1 + '!');
+          d(config.textcolor, att + ' ' + uplc + 'Duplicate' + config.textcol1 + ' hits ' + umonc +
+            monster[newmon]^.Name + config.textcol1 + '!');
         end;
         Dec(monster[newmon]^.hps, player.punch);
       end;
@@ -1346,7 +1376,8 @@ begin {Cast_Spell *begin*}
   if (temp1.class = Magician) and (temp1.spell[7, 1] = True) and (temp1.spell[7, 2] = True) then
   begin
     {fear spell}
-    if place = 2 then temp2.punch := 0
+    if place = 2 then
+      temp2.punch := 0
     else monster[mon2]^.punch := 0;
   end;
 
@@ -1396,7 +1427,8 @@ begin {Cast_Spell *begin*}
 
         if fastgame = False then
         begin
-          d(global_plycol, 'The Angel' + config.textcol1 + ' hits ' + umonc + monster[newmon]^.Name + config.textcol1 + ' hard!');
+          d(global_plycol, 'The Angel' + config.textcol1 + ' hits ' + umonc + monster[newmon]^.Name +
+            config.textcol1 + ' hard!');
         end;
         Dec(monster[newmon]^.hps, 100);
       end;
@@ -1410,7 +1442,8 @@ begin {Cast_Spell *begin*}
     begin
       d(config.textcolor, uplc + att + 's' + config.textcol1 + ' Transformation protects ' + sex[temp1.sex] + '!');
     end;
-    if place = 2 then Dec(temp2.hps, 10);
+    if place = 2 then
+      Dec(temp2.hps, 10);
     Inc(temp1.absorb, 50);
   end;
 
@@ -1445,16 +1478,19 @@ begin {Cast_Spell *begin*}
         temp1.dark := 0;
       end;
       Dec(temp2.punch, 110);
-      if temp2.punch < 0 then temp2.punch := 0;
+      if temp2.punch < 0 then
+        temp2.punch := 0;
 
     end else
     begin
       player.spell[11, 2] := False;
       Inc(player.chiv, 50);
       Dec(player.dark, 50);
-      if player.dark < 0 then player.dark := 0;
+      if player.dark < 0 then
+        player.dark := 0;
       Dec(monster[mon2]^.punch, 110);
-      if monster[mon2]^.punch < 0 then monster[mon2]^.punch := 0;
+      if monster[mon2]^.punch < 0 then
+        monster[mon2]^.punch := 0;
     end;
   end;
 
@@ -1503,7 +1539,8 @@ begin {Cast_Spell *begin*}
       begin
         if fastgame = False then
         begin
-          d(global_moncol, 'The Demon' + config.textcol1 + ' claws ' + umonc + monster[newmon]^.Name + config.textcol1 + ' extremely hard!');
+          d(global_moncol, 'The Demon' + config.textcol1 + ' claws ' + umonc + monster[newmon]^.Name +
+            config.textcol1 + ' extremely hard!');
         end;
         Dec(monster[newmon]^.hps, (100 + random(21)));
       end;
@@ -1547,7 +1584,8 @@ begin {Cast_Spell *begin*}
       begin
         if fastgame = False then
         begin
-          d(global_moncol, 'The Demon' + config.textcol1 + ' claws ' + umonc + monster[newmon]^.Name + config.textcol1 + ' extremely Hard!');
+          d(global_moncol, 'The Demon' + config.textcol1 + ' claws ' + umonc + monster[newmon]^.Name +
+            config.textcol1 + ' extremely Hard!');
         end;
         Dec(monster[newmon]^.hps, (200 + random(101)));
       end;

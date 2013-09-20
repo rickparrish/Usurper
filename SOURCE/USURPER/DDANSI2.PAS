@@ -8,27 +8,27 @@ interface
 uses
   dos, crt;
 
-{----------------------------------------------------------------------------}
-{                       Ansi screen emulation routines                       }
-{                              By Scott Baker                                }
+ {----------------------------------------------------------------------------}
+ {                       Ansi screen emulation routines                       }
+ {                              By Scott Baker                                }
 {                        Revised By Derrick Parkhurst
 {----------------------------------------------------------------------------}
 
-{ Purpose: to execute ansi escape sequences locally. This includes changing  }
-{          color, moving the cursor, setting high/low intensity, setting     }
-{          blinking, and playing music.                                      }
+ { Purpose: to execute ansi escape sequences locally. This includes changing  }
+ {          color, moving the cursor, setting high/low intensity, setting     }
+ {          blinking, and playing music.                                      }
 
-{ Remarks: These routines use a few global variables which are defined       }
-{          below. So far, only ESC m, J, f, C, and ^N are supported by these }
-{          routines. I hope to include more in the future.                   }
+ { Remarks: These routines use a few global variables which are defined       }
+ {          below. So far, only ESC m, J, f, C, and ^N are supported by these }
+ {          routines. I hope to include more in the future.                   }
 
-{ Routines: Here is a listing of the subroutines:                            }
+ { Routines: Here is a listing of the subroutines:                            }
 
-{             change_color(x):      Change to ansi color code X.             }
-{             Eval_string(s):       Evaluate/execute ansi string             }
-{             ansi_write(ch):       Write a character with ansi checking     }
+ {             change_color(x):      Change to ansi color code X.             }
+ {             Eval_string(s):       Evaluate/execute ansi string             }
+ {             ansi_write(ch):       Write a character with ansi checking     }
 
-{----------------------------------------------------------------------------}
+ {----------------------------------------------------------------------------}
 
 var
   escape, blink, high, norm, any, any2, fflag, gflag: boolean;
@@ -66,10 +66,14 @@ begin;
     any2 := True;
     c := c - 30;
     curcolor := c;
-    if (high = True) and (blink = True) then textcolor(scaleh[c] + 32);
-    if (high = True) and (blink = False) then textcolor(scaleh[c]);
-    if (high = False) and (blink = True) then textcolor(scale[c] + 32);
-    if (high = False) and (blink = False) then textcolor(scale[c]);
+    if (high = True) and (blink = True) then
+      textcolor(scaleh[c] + 32);
+    if (high = True) and (blink = False) then
+      textcolor(scaleh[c]);
+    if (high = False) and (blink = True) then
+      textcolor(scale[c] + 32);
+    if (high = False) and (blink = False) then
+      textcolor(scale[c]);
     fflag := True;
   end;
   if (c > 39) and (c < 48) then
@@ -121,20 +125,28 @@ begin;
         begin;textcolor(7);textbackground(0);curcolor := 7;end;
         if (fflag = False) and (gflag = True) then
         begin;textcolor(7);curcolor := 7;end;
-        if (high = True) and (fflag = False) then textcolor(scaleh[curcolor]);
-        if (blink = True) and (fflag = False) then textcolor(scale[curcolor] + 32);
-        if (blink = True) and (high = True) and (fflag = False) then textcolor(scaleh[curcolor] + 32);
+        if (high = True) and (fflag = False) then
+          textcolor(scaleh[curcolor]);
+        if (blink = True) and (fflag = False) then
+          textcolor(scale[curcolor] + 32);
+        if (blink = True) and (high = True) and (fflag = False) then
+          textcolor(scaleh[curcolor] + 32);
         if (fflag = True) and (gflag = False) then
         begin;textbackground(0);end;
       end;
-      if any = False then textcolor(scaleh[curcolor]);
+      if any = False then
+        textcolor(scaleh[curcolor]);
       { 5/12/95 srl }
-      if (any2 = False) then if (high = True) then
+      if (any2 = False) then
+        if (high = True) then
         begin
-          if (blink = True) then textcolor(scaleh[curcolor] + 32)
+          if (blink = True) then
+            textcolor(scaleh[curcolor] + 32)
           else
             textcolor(scaleh[curcolor]);
-        end else if (blink = True) then textcolor(scale[curcolor] + 32);
+        end else
+        if (blink = True) then
+          textcolor(scale[curcolor] + 32);
 
       any2 := False;any := False;fflag := False;gflag := False;norm := False;
     end;
@@ -152,7 +164,8 @@ begin;
         end;
       end else a := 1;
       ttt := wherex;
-      if a + ttt <= 80 then gotoxy(a + ttt, wherey);
+      if a + ttt <= 80 then
+        gotoxy(a + ttt, wherey);
     end;
     'D': begin;
       a := 1;
@@ -168,7 +181,8 @@ begin;
         end;
       end else a := 1;
       ttt := wherex;
-      if ttt - a >= 1 then gotoxy(ttt - a, wherey);
+      if ttt - a >= 1 then
+        gotoxy(ttt - a, wherey);
     end;
     'A': begin;
       a := 1;
@@ -184,7 +198,8 @@ begin;
         end;
       end else a := 1;
       ttt := wherey;
-      if ttt - a >= 1 then gotoxy(wherex, ttt - a);
+      if ttt - a >= 1 then
+        gotoxy(wherex, ttt - a);
     end;
     'B': begin;
       a := 1;
@@ -200,7 +215,8 @@ begin;
         end;
       end else a := 1;
       ttt := wherey;
-      if ttt + a <= 25 then gotoxy(wherex, ttt + a);
+      if ttt + a <= 25 then
+        gotoxy(wherex, ttt + a);
     end;
     'f', 'H': begin;
       flag1 := False;
@@ -218,8 +234,10 @@ begin;
         end;
       end else a := 1;
       jj := a;
-      if flag1 = False then cp := cp + 1;
-      if flag1 = True then cp := cp + 2;
+      if flag1 = False then
+        cp := cp + 1;
+      if flag1 = True then
+        cp := cp + 2;
       if cp < length(s) then
       begin;
         a := 1;
@@ -262,7 +280,8 @@ begin;
         if escape then
         begin;
           ansi_string := ansi_string + ch;
-          if ch = #13 then escape := False;
+          if ch = #13 then
+            escape := False;
           if (ch in ['u', 's', 'A', 'B', 'C', 'D', 'H', 'm', 'J', 'f', 'K', 'k', #14]) then
           begin;
             escape := False;
@@ -300,7 +319,8 @@ begin;
           if escape then
           begin;
             ansi_string := ansi_string + s[a];
-            if s[a] = #13 then escape := False;
+            if s[a] = #13 then
+              escape := False;
             if (s[a] in ['u', 's', 'A', 'B', 'C', 'D', 'H', 'm', 'J', 'f', 'K', 'k', #14]) then
             begin;
               escape := False;

@@ -144,7 +144,8 @@ begin
     {evaluate user input}
     case ch of
       '?': begin {menu}
-        if player.expert = True then display_menu(True, False)
+        if player.expert = True then
+          display_menu(True, False)
         else display_menu(False, False);
       end;
       'S': begin {status}
@@ -211,9 +212,11 @@ begin
                   end;
 
                 end;
-                if abort then break;
+                if abort then
+                  break;
               end; {for j:= .end.}
-              if abort then break;
+              if abort then
+                break;
             end; {for i:= .end.}
 
 
@@ -332,9 +335,11 @@ begin
                   end;
 
                 end;
-                if abort then break;
+                if abort then
+                  break;
               end; {for j:= .end.}
-              if abort then break;
+              if abort then
+                break;
             end; {for i:= .end.}
 
 

@@ -109,106 +109,106 @@ begin
     99,        {max level att hittas i dngs}
     'A dusty old crown. Looks like a medieval type of crown.',
     '',
-    '',        {normal beskrivning 3}
-    '',        {normal beskrivning 4}
-    '',        {normal beskrivning 5}
-    '',        {detaljerad beskrivning 1}
-    '',        {detaljerad beskrivning 2}
-    '',        {detaljerad beskrivning 3}
-    '',        {detaljerad beskrivning 4}
-    '',        {detaljerad beskrivning 5}
-    0,         {”ka strength}
-    0,         {”ka defence}
-    0);        {strength demanded to use object}
+    '',         {normal beskrivning 3}
+    '',         {normal beskrivning 4}
+    '',         {normal beskrivning 5}
+    '',         {detaljerad beskrivning 1}
+    '',         {detaljerad beskrivning 2}
+    '',         {detaljerad beskrivning 3}
+    '',         {detaljerad beskrivning 4}
+    '',         {detaljerad beskrivning 5}
+    0,          {”ka strength}
+    0,          {”ka defence}
+    0);         {strength demanded to use object}
 
   Add_Object('Black Crown', {name}
-    Head,      {typ}
+    Head,       {typ}
     5000,       {v„rde i gold}
-    15,        {”ka/minska hps}
-    0,         {”ka stamina}
-    0,         {”ka agility}
-    0,         {”ka charisma}
-    0,         {”ka dexterity}
-    0,         {”ka wisdom}
-    0,         {”ka mana}
-    2,         {”ka armor v„rde}
-    0,         {”ka attack v„rde}
-    '',        {„gd av?}
-    False,     {bara EN i spelet}
-    Nothing,   {kurerar}
-    False,     {finnas i shoppen}
-    True,      {kunna hittas i dungeons?}
-    False,     {cursed item?}
-    1,         {min level att hittas i dngs}
-    99,        {max level att hittas i dngs}
+    15,         {”ka/minska hps}
+    0,          {”ka stamina}
+    0,          {”ka agility}
+    0,          {”ka charisma}
+    0,          {”ka dexterity}
+    0,          {”ka wisdom}
+    0,          {”ka mana}
+    2,          {”ka armor v„rde}
+    0,          {”ka attack v„rde}
+    '',         {„gd av?}
+    False,      {bara EN i spelet}
+    Nothing,    {kurerar}
+    False,      {finnas i shoppen}
+    True,       {kunna hittas i dungeons?}
+    False,      {cursed item?}
+    1,          {min level att hittas i dngs}
+    99,         {max level att hittas i dngs}
     'You see nothing special.',
     '',
-    '',        {normal beskrivning 3}
-    '',        {normal beskrivning 4}
-    '',        {normal beskrivning 5}
-    '',        {detaljerad beskrivning 1}
-    '',        {detaljerad beskrivning 2}
-    '',        {detaljerad beskrivning 3}
-    '',        {detaljerad beskrivning 4}
-    '',        {detaljerad beskrivning 5}
-    0,         {”ka strength}
-    0,         {”ka defence}
-    0);        {strength demanded to use object}
+    '',                  {normal beskrivning 3}
+    '',                  {normal beskrivning 4}
+    '',                  {normal beskrivning 5}
+    '',                  {detaljerad beskrivning 1}
+    '',                  {detaljerad beskrivning 2}
+    '',                  {detaljerad beskrivning 3}
+    '',                  {detaljerad beskrivning 4}
+    '',                  {detaljerad beskrivning 5}
+    0,                   {”ka strength}
+    0,                   {”ka defence}
+    0);                  {strength demanded to use object}
 
   Add_Object('Flat Cap', {name}
-    Head,      {typ}
-    2500,      {v„rde i gold}
-    0,         {”ka/minska hps}
-    0,         {”ka stamina}
-    0,         {”ka agility}
-    0,         {”ka charisma}
-    0,         {”ka dexterity}
-    0,         {”ka wisdom}
-    0,         {”ka mana}
-    2,         {”ka armor v„rde}
-    0,         {”ka attack v„rde}
-    '',        {„gd av?}
-    False,     {bara EN i spelet}
-    Nothing,   {kurerar}
-    True,      {finnas i shoppen}
-    False,     {kunna hittas i dungeons?}
-    False,     {cursed item?}
-    1,         {min level att hittas i dngs}
-    99,        {max level att hittas i dngs}
+    Head,                {typ}
+    2500,                {v„rde i gold}
+    0,                   {”ka/minska hps}
+    0,                   {”ka stamina}
+    0,                   {”ka agility}
+    0,                   {”ka charisma}
+    0,                   {”ka dexterity}
+    0,                   {”ka wisdom}
+    0,                   {”ka mana}
+    2,                   {”ka armor v„rde}
+    0,                   {”ka attack v„rde}
+    '',                  {„gd av?}
+    False,               {bara EN i spelet}
+    Nothing,             {kurerar}
+    True,                {finnas i shoppen}
+    False,               {kunna hittas i dungeons?}
+    False,               {cursed item?}
+    1,                   {min level att hittas i dngs}
+    99,                  {max level att hittas i dngs}
     'A grey dull cap. Used by peasants.',
     '',
-    '',        {normal beskrivning 3}
-    '',        {normal beskrivning 4}
-    '',        {normal beskrivning 5}
-    '',        {detaljerad beskrivning 1}
-    '',        {detaljerad beskrivning 2}
-    '',        {detaljerad beskrivning 3}
-    '',        {detaljerad beskrivning 4}
-    '',        {detaljerad beskrivning 5}
-    0,         {”ka strength}
-    0,         {”ka defence}
-    0);        {strength demanded to use object}
+    '',                  {normal beskrivning 3}
+    '',                  {normal beskrivning 4}
+    '',                  {normal beskrivning 5}
+    '',                  {detaljerad beskrivning 1}
+    '',                  {detaljerad beskrivning 2}
+    '',                  {detaljerad beskrivning 3}
+    '',                  {detaljerad beskrivning 4}
+    '',                  {detaljerad beskrivning 5}
+    0,                   {”ka strength}
+    0,                   {”ka defence}
+    0);                  {strength demanded to use object}
 
   Add_Object('Evil Cap', {name}
-    Head,      {typ}
-    7500,      {v„rde i gold}
-    15,        {”ka/minska hps}
-    0,         {”ka stamina}
-    0,         {”ka agility}
-    0,         {”ka charisma}
-    0,         {”ka dexterity}
-    0,         {”ka wisdom}
-    0,         {”ka mana}
-    4,         {”ka armor v„rde}
-    0,         {”ka attack v„rde}
-    '',        {„gd av?}
-    False,     {bara EN i spelet}
-    Smallpox,  {kurerar}
-    True,      {finnas i shoppen}
-    False,     {kunna hittas i dungeons?}
-    False,     {cursed item?}
-    1,         {min level att hittas i dngs}
-    99,        {max level att hittas i dngs}
+    Head,                {typ}
+    7500,                {v„rde i gold}
+    15,                  {”ka/minska hps}
+    0,                   {”ka stamina}
+    0,                   {”ka agility}
+    0,                   {”ka charisma}
+    0,                   {”ka dexterity}
+    0,                   {”ka wisdom}
+    0,                   {”ka mana}
+    4,                   {”ka armor v„rde}
+    0,                   {”ka attack v„rde}
+    '',                  {„gd av?}
+    False,               {bara EN i spelet}
+    Smallpox,            {kurerar}
+    True,                {finnas i shoppen}
+    False,               {kunna hittas i dungeons?}
+    False,               {cursed item?}
+    1,                   {min level att hittas i dngs}
+    99,                  {max level att hittas i dngs}
     'A Bathing Cap.',
     '',
     '',        {normal beskrivning 3}
@@ -447,72 +447,72 @@ begin
     25,        {max level att hittas i dngs}
     'You see nothing special.',
     '',
-    '',        {normal beskrivning 3}
-    '',        {normal beskrivning 4}
-    '',        {normal beskrivning 5}
-    '',        {detaljerad beskrivning 1}
-    '',        {detaljerad beskrivning 2}
-    '',        {detaljerad beskrivning 3}
-    '',        {detaljerad beskrivning 4}
-    '',        {detaljerad beskrivning 5}
-    0,         {”ka strength}
-    0,         {”ka defence}
-    0);        {strength demanded to use object}
+    '',         {normal beskrivning 3}
+    '',         {normal beskrivning 4}
+    '',         {normal beskrivning 5}
+    '',         {detaljerad beskrivning 1}
+    '',         {detaljerad beskrivning 2}
+    '',         {detaljerad beskrivning 3}
+    '',         {detaljerad beskrivning 4}
+    '',         {detaljerad beskrivning 5}
+    0,          {”ka strength}
+    0,          {”ka defence}
+    0);         {strength demanded to use object}
 
   Add_Object('Woolly Hat', {name}
-    Head,      {typ}
+    Head,       {typ}
     1700,       {v„rde i gold}
-    0,         {”ka/minska hps}
-    0,         {”ka stamina}
-    0,         {”ka agility}
-    0,         {”ka charisma}
-    0,         {”ka dexterity}
-    0,         {”ka wisdom}
-    0,         {”ka mana}
-    3,         {”ka armor v„rde}
-    0,         {”ka attack v„rde}
-    '',        {„gd av?}
-    False,     {bara EN i spelet}
-    Nothing,   {kurerar}
-    True,      {finnas i shoppen}
-    False,     {kunna hittas i dungeons?}
-    False,     {cursed item?}
-    1,         {min level att hittas i dngs}
-    99,        {max level att hittas i dngs}
+    0,          {”ka/minska hps}
+    0,          {”ka stamina}
+    0,          {”ka agility}
+    0,          {”ka charisma}
+    0,          {”ka dexterity}
+    0,          {”ka wisdom}
+    0,          {”ka mana}
+    3,          {”ka armor v„rde}
+    0,          {”ka attack v„rde}
+    '',         {„gd av?}
+    False,      {bara EN i spelet}
+    Nothing,    {kurerar}
+    True,       {finnas i shoppen}
+    False,      {kunna hittas i dungeons?}
+    False,      {cursed item?}
+    1,          {min level att hittas i dngs}
+    99,         {max level att hittas i dngs}
     'The woolly is purple and quite ugly.',
     'However, a perfect choice during cold winterdays.',
-    '',        {normal beskrivning 3}
-    '',        {normal beskrivning 4}
-    '',        {normal beskrivning 5}
-    '',        {detaljerad beskrivning 1}
-    '',        {detaljerad beskrivning 2}
-    '',        {detaljerad beskrivning 3}
-    '',        {detaljerad beskrivning 4}
-    '',        {detaljerad beskrivning 5}
-    0,         {”ka strength}
-    0,         {”ka defence}
-    0);        {strength demanded to use object}
+    '',         {normal beskrivning 3}
+    '',         {normal beskrivning 4}
+    '',         {normal beskrivning 5}
+    '',         {detaljerad beskrivning 1}
+    '',         {detaljerad beskrivning 2}
+    '',         {detaljerad beskrivning 3}
+    '',         {detaljerad beskrivning 4}
+    '',         {detaljerad beskrivning 5}
+    0,          {”ka strength}
+    0,          {”ka defence}
+    0);         {strength demanded to use object}
 
   Add_Object('Deerstalker', {name}
-    Head,      {typ}
-    190000,    {v„rde i gold}
-    0,         {”ka/minska hps}
-    0,         {”ka stamina}
-    0,         {”ka agility}
-    0,         {”ka charisma}
-    0,         {”ka dexterity}
-    0,         {”ka wisdom}
-    0,         {”ka mana}
+    Head,       {typ}
+    190000,     {v„rde i gold}
+    0,          {”ka/minska hps}
+    0,          {”ka stamina}
+    0,          {”ka agility}
+    0,          {”ka charisma}
+    0,          {”ka dexterity}
+    0,          {”ka wisdom}
+    0,          {”ka mana}
     30,         {”ka armor v„rde}
-    0,         {”ka attack v„rde}
-    '',        {„gd av?}
-    False,     {bara EN i spelet}
-    Nothing,   {kurerar}
-    False,     {finnas i shoppen}
-    True,      {kunna hittas i dungeons?}
-    False,     {cursed item?}
+    0,          {”ka attack v„rde}
+    '',         {„gd av?}
+    False,      {bara EN i spelet}
+    Nothing,    {kurerar}
+    False,      {finnas i shoppen}
+    True,       {kunna hittas i dungeons?}
+    False,      {cursed item?}
     80,         {min level att hittas i dngs}
-    99,        {max level att hittas i dngs}
+    99,         {max level att hittas i dngs}
     'You see nothing special.',
     '',
     '',        {normal beskrivning 3}
@@ -549,38 +549,38 @@ begin
     99,        {max level att hittas i dngs}
     '',
     '',
-    '',        {normal beskrivning 3}
-    '',        {normal beskrivning 4}
-    '',        {normal beskrivning 5}
-    '',        {detaljerad beskrivning 1}
-    '',        {detaljerad beskrivning 2}
-    '',        {detaljerad beskrivning 3}
-    '',        {detaljerad beskrivning 4}
-    '',        {detaljerad beskrivning 5}
-    0,         {”ka strength}
-    0,         {”ka defence}
-    0);        {strength demanded to use object}
+    '',          {normal beskrivning 3}
+    '',          {normal beskrivning 4}
+    '',          {normal beskrivning 5}
+    '',          {detaljerad beskrivning 1}
+    '',          {detaljerad beskrivning 2}
+    '',          {detaljerad beskrivning 3}
+    '',          {detaljerad beskrivning 4}
+    '',          {detaljerad beskrivning 5}
+    0,           {”ka strength}
+    0,           {”ka defence}
+    0);          {strength demanded to use object}
 
   Add_Object('Crystal Crown', {name}
-    Head,      {typ}
+    Head,        {typ}
     15000,       {v„rde i gold}
-    0,         {”ka/minska hps}
-    0,         {”ka stamina}
-    0,         {”ka agility}
-    0,         {”ka charisma}
-    0,         {”ka dexterity}
-    0,         {”ka wisdom}
-    50,        {”ka mana}
-    3,         {”ka armor v„rde}
-    0,         {”ka attack v„rde}
-    '',        {„gd av?}
-    False,     {bara EN i spelet}
-    Nothing,   {kurerar}
-    False,     {finnas i shoppen}
-    True,      {kunna hittas i dungeons?}
-    False,     {cursed item?}
-    20,        {min level att hittas i dngs}
-    70,        {max level att hittas i dngs}
+    0,           {”ka/minska hps}
+    0,           {”ka stamina}
+    0,           {”ka agility}
+    0,           {”ka charisma}
+    0,           {”ka dexterity}
+    0,           {”ka wisdom}
+    50,          {”ka mana}
+    3,           {”ka armor v„rde}
+    0,           {”ka attack v„rde}
+    '',          {„gd av?}
+    False,       {bara EN i spelet}
+    Nothing,     {kurerar}
+    False,       {finnas i shoppen}
+    True,        {kunna hittas i dungeons?}
+    False,       {cursed item?}
+    20,          {min level att hittas i dngs}
+    70,          {max level att hittas i dngs}
     'You see nothing special.',
     '',
     '',        {normal beskrivning 3}
@@ -598,7 +598,8 @@ begin
 
   Add_Object('Stone Crown', {name}
     Head,      {typ}
-    5,         {v„rde i gold} -15,       {”ka/minska hps} -5,        {”ka stamina} -5,        {”ka agility} -5,        {”ka charisma}
+    5,         {v„rde i gold} -15,       {”ka/minska hps} -5,        {”ka stamina} -5,
+    {”ka agility} -5,        {”ka charisma}
     0,         {”ka dexterity}
     0,         {”ka wisdom}
     0,         {”ka mana} -4,        {”ka armor v„rde}
@@ -613,38 +614,38 @@ begin
     99,        {max level att hittas i dngs}
     'Big and ugly Crown. It is extremely heavy!',
     '',
-    '',        {normal beskrivning 3}
-    '',        {normal beskrivning 4}
-    '',        {normal beskrivning 5}
-    '',        {detaljerad beskrivning 1}
-    '',        {detaljerad beskrivning 2}
-    '',        {detaljerad beskrivning 3}
-    '',        {detaljerad beskrivning 4}
-    '',        {detaljerad beskrivning 5}
-    0,         {”ka strength}
-    0,         {”ka defence}
-    0);        {strength demanded to use object}
+    '',                  {normal beskrivning 3}
+    '',                  {normal beskrivning 4}
+    '',                  {normal beskrivning 5}
+    '',                  {detaljerad beskrivning 1}
+    '',                  {detaljerad beskrivning 2}
+    '',                  {detaljerad beskrivning 3}
+    '',                  {detaljerad beskrivning 4}
+    '',                  {detaljerad beskrivning 5}
+    0,                   {”ka strength}
+    0,                   {”ka defence}
+    0);                  {strength demanded to use object}
 
   Add_Object('Wool Cap', {name}
-    Head,      {typ}
-    150,       {v„rde i gold}
-    0,         {”ka/minska hps}
-    0,         {”ka stamina}
-    0,         {”ka agility}
-    0,         {”ka charisma}
-    0,         {”ka dexterity}
-    0,         {”ka wisdom}
-    0,         {”ka mana}
-    1,         {”ka armor v„rde}
-    0,         {”ka attack v„rde}
-    '',        {„gd av?}
-    False,     {bara EN i spelet}
-    Nothing,   {kurerar}
-    True,      {finnas i shoppen}
-    False,     {kunna hittas i dungeons?}
-    False,     {cursed item?}
-    1,         {min level att hittas i dngs}
-    99,        {max level att hittas i dngs}
+    Head,                {typ}
+    150,                 {v„rde i gold}
+    0,                   {”ka/minska hps}
+    0,                   {”ka stamina}
+    0,                   {”ka agility}
+    0,                   {”ka charisma}
+    0,                   {”ka dexterity}
+    0,                   {”ka wisdom}
+    0,                   {”ka mana}
+    1,                   {”ka armor v„rde}
+    0,                   {”ka attack v„rde}
+    '',                  {„gd av?}
+    False,               {bara EN i spelet}
+    Nothing,             {kurerar}
+    True,                {finnas i shoppen}
+    False,               {kunna hittas i dungeons?}
+    False,               {cursed item?}
+    1,                   {min level att hittas i dngs}
+    99,                  {max level att hittas i dngs}
     'A standard Wool Cap.',
     'Used by shepherds and peasants. Warm and cosy.',
     '',        {normal beskrivning 3}
@@ -681,38 +682,38 @@ begin
     99,        {max level att hittas i dngs}
     'A rugged Straw. Nice to have when going fishing.',
     'Also often used for romantic escapades. Good charm effect.',
-    '',        {normal beskrivning 3}
-    '',        {normal beskrivning 4}
-    '',        {normal beskrivning 5}
-    '',        {detaljerad beskrivning 1}
-    '',        {detaljerad beskrivning 2}
-    '',        {detaljerad beskrivning 3}
-    '',        {detaljerad beskrivning 4}
-    '',        {detaljerad beskrivning 5}
-    0,         {”ka strength}
-    0,         {”ka defence}
-    0);        {strength demanded to use object}
+    '',         {normal beskrivning 3}
+    '',         {normal beskrivning 4}
+    '',         {normal beskrivning 5}
+    '',         {detaljerad beskrivning 1}
+    '',         {detaljerad beskrivning 2}
+    '',         {detaljerad beskrivning 3}
+    '',         {detaljerad beskrivning 4}
+    '',         {detaljerad beskrivning 5}
+    0,          {”ka strength}
+    0,          {”ka defence}
+    0);         {strength demanded to use object}
 
   Add_Object('Leather Helmet', {name}
-    Head,      {typ}
+    Head,       {typ}
     1000,       {v„rde i gold}
-    0,         {”ka/minska hps}
-    0,         {”ka stamina}
-    0,         {”ka agility}
-    0,         {”ka charisma}
-    0,         {”ka dexterity}
-    0,         {”ka wisdom}
-    0,         {”ka mana}
-    5,         {”ka armor v„rde}
-    0,         {”ka attack v„rde}
-    '',        {„gd av?}
-    False,     {bara EN i spelet}
-    Nothing,   {kurerar}
-    True,      {finnas i shoppen}
-    False,     {kunna hittas i dungeons?}
-    False,     {cursed item?}
-    1,         {min level att hittas i dngs}
-    99,        {max level att hittas i dngs}
+    0,          {”ka/minska hps}
+    0,          {”ka stamina}
+    0,          {”ka agility}
+    0,          {”ka charisma}
+    0,          {”ka dexterity}
+    0,          {”ka wisdom}
+    0,          {”ka mana}
+    5,          {”ka armor v„rde}
+    0,          {”ka attack v„rde}
+    '',         {„gd av?}
+    False,      {bara EN i spelet}
+    Nothing,    {kurerar}
+    True,       {finnas i shoppen}
+    False,      {kunna hittas i dungeons?}
+    False,      {cursed item?}
+    1,          {min level att hittas i dngs}
+    99,         {max level att hittas i dngs}
     'The most popular light weight helmet right now.',
     'Rangers are especially fond of it, because of its color',
     '',        {normal beskrivning 3}
@@ -729,24 +730,24 @@ begin
 
 
   Add_Object('Stone Helmet', {name}
-    Head,      {typ}
+    Head,       {typ}
     2500,       {v„rde i gold}
     0,         {”ka/minska hps} -2,        {”ka stamina}
-    0,         {”ka agility}
-    0,         {”ka charisma}
-    0,         {”ka dexterity}
-    0,         {”ka wisdom}
-    0,         {”ka mana}
-    10,        {”ka armor v„rde}
-    0,         {”ka attack v„rde}
-    '',        {„gd av?}
-    False,     {bara EN i spelet}
-    Nothing,   {kurerar}
-    True,      {finnas i shoppen}
-    False,     {kunna hittas i dungeons?}
-    False,     {cursed item?}
-    1,         {min level att hittas i dngs}
-    99,        {max level att hittas i dngs}
+    0,          {”ka agility}
+    0,          {”ka charisma}
+    0,          {”ka dexterity}
+    0,          {”ka wisdom}
+    0,          {”ka mana}
+    10,         {”ka armor v„rde}
+    0,          {”ka attack v„rde}
+    '',         {„gd av?}
+    False,      {bara EN i spelet}
+    Nothing,    {kurerar}
+    True,       {finnas i shoppen}
+    False,      {kunna hittas i dungeons?}
+    False,      {cursed item?}
+    1,          {min level att hittas i dngs}
+    99,         {max level att hittas i dngs}
     'The helmet is grey and rugged. It looks heavy and robust.',
     'As there are no openings for the mouth or nose, you could',
     'expect it to get very warm during a fight.',
@@ -868,25 +869,25 @@ begin
 
 
   Add_Object('Bowler', {name}
-    Head,      {typ}
-    550,       {v„rde i gold}
-    0,         {”ka/minska hps}
-    0,         {”ka stamina}
-    10,        {”ka agility}
-    0,         {”ka charisma}
-    0,         {”ka dexterity}
-    0,         {”ka wisdom}
-    0,         {”ka mana}
-    1,         {”ka armor v„rde}
-    0,         {”ka attack v„rde}
-    '',        {„gd av?}
-    False,     {bara EN i spelet}
-    Nothing,   {kurerar}
-    True,      {finnas i shoppen}
-    False,     {kunna hittas i dungeons?}
-    False,     {cursed item?}
-    1,         {min level att hittas i dngs}
-    99,        {max level att hittas i dngs}
+    Head,              {typ}
+    550,               {v„rde i gold}
+    0,                 {”ka/minska hps}
+    0,                 {”ka stamina}
+    10,                {”ka agility}
+    0,                 {”ka charisma}
+    0,                 {”ka dexterity}
+    0,                 {”ka wisdom}
+    0,                 {”ka mana}
+    1,                 {”ka armor v„rde}
+    0,                 {”ka attack v„rde}
+    '',                {„gd av?}
+    False,             {bara EN i spelet}
+    Nothing,           {kurerar}
+    True,              {finnas i shoppen}
+    False,             {kunna hittas i dungeons?}
+    False,             {cursed item?}
+    1,                 {min level att hittas i dngs}
+    99,                {max level att hittas i dngs}
     'Your standard black bowler. With this on you can walk the',
     'streets like a gentleman. It is doubtful however, if it can',
     'stop an axe or something more vicious.',
@@ -903,25 +904,25 @@ begin
 
 
   Add_Object('Bronze Helmet', {name}
-    Head,      {typ}
-    17900,     {v„rde i gold}
-    0,         {”ka/minska hps}
-    0,         {”ka stamina}
-    0,         {”ka agility}
-    0,         {”ka charisma}
-    0,         {”ka dexterity}
-    0,         {”ka wisdom}
-    0,         {”ka mana}
+    Head,       {typ}
+    17900,      {v„rde i gold}
+    0,          {”ka/minska hps}
+    0,          {”ka stamina}
+    0,          {”ka agility}
+    0,          {”ka charisma}
+    0,          {”ka dexterity}
+    0,          {”ka wisdom}
+    0,          {”ka mana}
     20,         {”ka armor v„rde}
-    0,         {”ka attack v„rde}
-    '',        {„gd av?}
-    False,     {bara EN i spelet}
-    Nothing,   {kurerar}
-    True,      {finnas i shoppen}
-    False,     {kunna hittas i dungeons?}
-    False,     {cursed item?}
-    1,         {min level att hittas i dngs}
-    99,        {max level att hittas i dngs}
+    0,          {”ka attack v„rde}
+    '',         {„gd av?}
+    False,      {bara EN i spelet}
+    Nothing,    {kurerar}
+    True,       {finnas i shoppen}
+    False,      {kunna hittas i dungeons?}
+    False,      {cursed item?}
+    1,          {min level att hittas i dngs}
+    99,         {max level att hittas i dngs}
     'Also called "The Dragon Slayer". This is the first in the',
     'series of Bronze Deluxe Wares from Gato Blacksmith.',
     'When it arrived 50 years ago it was state of the art in',
@@ -973,25 +974,25 @@ begin
 
 
   Add_Object('Top Hat', {name}
-    Head,      {typ}
-    7500,      {v„rde i gold}
-    5,         {”ka/minska hps}
-    0,         {”ka stamina}
-    0,         {”ka agility}
-    0,         {”ka charisma}
-    5,         {”ka dexterity}
-    15,        {”ka wisdom}
-    15,        {”ka mana}
-    5,         {”ka armor v„rde}
-    0,         {”ka attack v„rde}
-    '',        {„gd av?}
-    False,     {bara EN i spelet}
-    Nothing,   {kurerar}
-    True,      {finnas i shoppen}
-    False,     {kunna hittas i dungeons?}
-    False,     {cursed item?}
-    1,         {min level att hittas i dngs}
-    99,        {max level att hittas i dngs}
+    Head,               {typ}
+    7500,               {v„rde i gold}
+    5,                  {”ka/minska hps}
+    0,                  {”ka stamina}
+    0,                  {”ka agility}
+    0,                  {”ka charisma}
+    5,                  {”ka dexterity}
+    15,                 {”ka wisdom}
+    15,                 {”ka mana}
+    5,                  {”ka armor v„rde}
+    0,                  {”ka attack v„rde}
+    '',                 {„gd av?}
+    False,              {bara EN i spelet}
+    Nothing,            {kurerar}
+    True,               {finnas i shoppen}
+    False,              {kunna hittas i dungeons?}
+    False,              {cursed item?}
+    1,                  {min level att hittas i dngs}
+    99,                 {max level att hittas i dngs}
     'Classic "Gandalf" model. It is blue with a yellow border',
     'at the brim.',
     '',        {normal beskrivning 3}
@@ -1172,13 +1173,12 @@ begin
     '',        {detaljerad beskrivning 2}
     '',        {detaljerad beskrivning 3}
     '',        {detaljerad beskrivning 4}
-    '',       {detaljerad beskrivning 5}
+    '',        {detaljerad beskrivning 5}
     0,         {”ka strength}
     0,         {”ka defence}
     0);        {strength demanded to use object}
 
 end;
-
 
 
 

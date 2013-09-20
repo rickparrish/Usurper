@@ -139,14 +139,16 @@ begin
     begin
 
       {lets find this guard in the player/npc file}
-      if king.guardai[i] = 'H' then firstlook := 1
+      if king.guardai[i] = 'H' then
+        firstlook := 1
       else firstlook := 2;
 
 
       found := False;
       for j := 1 to 2 do
       begin
-        if found then break;
+        if found then
+          break;
         case firstlook of
           1: begin
             firstlook := 2;
@@ -160,7 +162,8 @@ begin
 
         for k := 1 to size do
         begin
-          if found then break;
+          if found then
+            break;
           load_character(pl0, j, k);
           if pl0.name2 = king.guard[i] then
           begin
@@ -169,9 +172,9 @@ begin
           end;
         end; {for k:= .end.}
 
-      end; {for j:= .end.}
+      end;   {for j:= .end.}
 
-      {display guard}
+             {display guard}
       if found then
       begin
 
@@ -291,7 +294,7 @@ begin
           ch := '?';
           repeat {"outside the gym" loop *start*}
 
-            {updating online location, only if necessary}
+                 {updating online location, only if necessary}
             if onliner.location <> onloc_outsidegym then
             begin
               onliner.location := onloc_outsidegym;
@@ -334,18 +337,21 @@ begin
               d(12, 'Hey bird-brain! You already ARE a member here!');
               pause;
               ch := ' ';
-            end else if (ch = 'A') and (player.gym_card = 0) and (s = '') then
+            end else
+            if (ch = 'A') and (player.gym_card = 0) and (s = '') then
             begin
               d(12, 'There is nobody to send the application to! The Gym is not owned by anyone right now!');
               d(12, 'Why don''t you take over the Gym now when you have the chance!?');
               pause;
               ch := ' ';
-            end else if (ch = 'T') and (player.team = '') then
+            end else
+            if (ch = 'T') and (player.team = '') then
             begin
               d(12, 'You must be in a Team to be able to take over the Gym!');
               pause;
               ch := ' ';
-            end else if (ch = 'T') and (s <> '') then
+            end else
+            if (ch = 'T') and (s <> '') then
             begin
               crlf;
               d(12, 'FIGHT!');
@@ -354,7 +360,8 @@ begin
                 d(12, 'CHICKEN!');
                 ch := ' ';
               end;
-            end else if (ch = 'T') and (s = '') then
+            end else
+            if (ch = 'T') and (s = '') then
             begin
               {take over the gym without opposition [the gym is not owned by anyone]}
               crlf;
@@ -395,7 +402,8 @@ begin
                     begin
                       {send online mess}
                       online_send_to_player(pl0.name2, online_player, BroadCast_AddGym);
-                      online_send_to_player(pl0.name2, online_player, uplc + player.name2 + config.textcol1 + ' took over the ' + gymcol + 'Gym' + config.textcol1 + '!');
+                      online_send_to_player(pl0.name2, online_player, uplc + player.name2 +
+                        config.textcol1 + ' took over the ' + gymcol + 'Gym' + config.textcol1 + '!');
                     end else
                     begin
                       {mail team-mate}
@@ -407,7 +415,8 @@ begin
                         '',
                         uyellow + 'Gym Take-Over!' + config.textcol1,
                         mkstring(14, underscore),
-                        uplc + player.name2 + config.textcol1 + ' led your crew in the take-over of ' + gymcol + 'The Gym' + config.textcol1 + '!',
+                        uplc + player.name2 + config.textcol1 + ' led your crew in the take-over of ' +
+                        gymcol + 'The Gym' + config.textcol1 + '!',
                         '',
                         '',
                         '',
@@ -424,12 +433,13 @@ begin
                   end;
 
                 end; {for j:= .end.}
-              end; {for i:= .end.}
+              end;   {for i:= .end.}
 
-              {news-paper}
+                     {news-paper}
               Newsy(True,
                 'New Gym Owners!' + config.textcol1,
-                ' The ' + utec + player.team + config.textcol1 + ' crew took over the ' + gymcol + 'Gym' + config.textcol1 + '.',
+                ' The ' + utec + player.team + config.textcol1 + ' crew took over the ' + gymcol +
+                'Gym' + config.textcol1 + '.',
                 ' Old members may have to re-apply for new membership cards.',
                 '',
                 '',
@@ -502,7 +512,9 @@ begin
                       if is_online(pl0.name2, online_player) = True then
                       begin
                         {send online mess}
-                        online_send_to_player(pl0.name2, online_player, uplc + player.name2 + ulred + ' has sent you an application' + ' for ' + gymcol + 'Gym' + config.textcol1 + ' membership.');
+                        online_send_to_player(pl0.name2, online_player, uplc + player.name2 +
+                          ulred + ' has sent you an application' + ' for ' + gymcol + 'Gym' + config.textcol1 +
+                          ' membership.');
                       end;
 
                       {mail team-mate}
@@ -529,7 +541,7 @@ begin
                         '');
                     end;
                   end; {for j:= .end.}
-                end; {for i:= .end.}
+                end;   {for i:= .end.}
                 d(15, 'Done.');
                 crlf;
                 d(config.textcolor, 'The ' + utec + s + config.textcol1 + ' crew will get back to you.');
@@ -537,7 +549,7 @@ begin
                 pause;
               end;
             end; {apply for membership *end*}
-          end; {case .end.}
+          end;   {case .end.}
 
         end;
 
@@ -568,7 +580,8 @@ begin
           if get_king(pl0) = True then
           begin
             s := pl0.name2;
-            if pl0.sex = 2 then male := False;
+            if pl0.sex = 2 then
+              male := False;
           end;
 
           if s <> '' then
@@ -588,7 +601,8 @@ begin
         {the player is the king}
         if player.king then
         begin
-          if player.team <> '' then player.team := '';
+          if player.team <> '' then
+            player.team := '';
 
           if f_exists(global_kingf) = False then
           begin
@@ -629,7 +643,7 @@ begin
         end else
         begin {a throne pretender has arrived}
 
-          {set online location}
+              {set online location}
           onliner.location := onloc_outcastle;
           onliner.doing := location_desc(onliner.location);
           add_onliner(OUpdateLocation, onliner);
@@ -678,7 +692,8 @@ begin
                 d(config.textcolor, 'Benevolence towards the Monarchy might prove to be a');
                 d(config.textcolor, 'good investment for the future.');
                 crlf;
-                d(config.textcolor, 'You have ' + uyellow + commastr(player.gold) + config.textcol1 + ' ' + many_money(player.gold) + '.');
+                d(config.textcolor, 'You have ' + uyellow + commastr(player.gold) + config.textcol1 +
+                  ' ' + many_money(player.gold) + '.');
                 d(config.textcolor, 'How much will you donate?');
                 sd(config.textcolor, ':');
 
@@ -689,7 +704,8 @@ begin
                 begin
                   crlf;
                   d(12, 'Grr! Get out of here!');
-                end else if x > 0 then
+                end else
+                if x > 0 then
                 begin
                   if confirm('Donate ' + uyellow + commastr(x) + config.textcol1 + ' ' + many_money(x), 'Y') = True then
                   begin
@@ -707,7 +723,8 @@ begin
 
                       crlf;
                       d(config.textcolor, 'Your donation has been recorded.');
-                      d(config.textcolor, kingstring(king.sexy) + ' ' + uplc + king.Name + config.textcol1 + ' has been informed.');
+                      d(config.textcolor, kingstring(king.sexy) + ' ' + uplc + king.Name +
+                        config.textcol1 + ' has been informed.');
 
 
                       case player.sex of
@@ -718,7 +735,8 @@ begin
                       {news-paper}
                       Newsy(True,
                         'Glory ' + s,
-                        ' ' + uplc + player.name2 + config.textcol1 + ' donated ' + uyellow + commastr(x) + config.textcol1 + ' ' + many_money(x) + ' to the Royal Purse!',
+                        ' ' + uplc + player.name2 + config.textcol1 + ' donated ' + uyellow +
+                        commastr(x) + config.textcol1 + ' ' + many_money(x) + ' to the Royal Purse!',
                         ' The Royal Family is grateful.',
                         '',
                         '',
@@ -734,7 +752,9 @@ begin
 
                         if is_online(king.Name, online_player) then
                         begin
-                          online_send_to_player(king.Name, online_player, uplc + player.name2 + config.textcol1 + ' donated ' + uyellow + commastr(x) + config.textcol1 + ' ' + many_money(x) + ' to the Royal Purse!');
+                          online_send_to_player(king.Name, online_player, uplc + player.name2 +
+                            config.textcol1 + ' donated ' + uyellow + commastr(x) + config.textcol1 + ' ' + many_money(x) +
+                            ' to the Royal Purse!');
                         end else
                         begin
 
@@ -748,7 +768,8 @@ begin
                             '',
                             uyellow + s + config.textcol1,
                             mkstring(length(s), underscore),
-                            uplc + player.name2 + config.textcol1 + ' donated ' + uyellow + commastr(x) + config.textcol1 + ' ' + many_money(x) + ' to the Royal Purse!',
+                            uplc + player.name2 + config.textcol1 + ' donated ' + uyellow +
+                            commastr(x) + config.textcol1 + ' ' + many_money(x) + ' to the Royal Purse!',
                             '',
                             '',
                             '',
@@ -792,7 +813,7 @@ begin
                 end;
               end; {for i:= .end.}
 
-              {is player a guard / or does he want to apply for duty}
+                   {is player a guard / or does he want to apply for duty}
               if found then
               begin
 
@@ -824,7 +845,7 @@ begin
                   case ch of
 
                     'Q': begin {quit guard job}
-                      {text}
+                               {text}
                       crlf;
                       d(config.textcolor, 'You resign from your employment.');
                       crlf;
@@ -921,7 +942,7 @@ begin
 
                     'A': begin {apply for Guard Duty}
 
-                      {any vacancies?}
+                               {any vacancies?}
                       load_king(fload, king);
 
                       if king.Name = '' then
@@ -962,7 +983,8 @@ begin
 
                             d(config.textcolor, 'You are lucky, there are vacancies for brave soldiers');
                             d(config.textcolor, 'right now. You need to fill out this application and');
-                            d(config.textcolor, 'then await The Royal Office decision. The ' + kingstring(king.sexy) + ' also has to approve');
+                            d(config.textcolor, 'then await The Royal Office decision. The ' +
+                              kingstring(king.sexy) + ' also has to approve');
                             d(config.textcolor, 'your application.');
                             crlf;
                             d(config.textcolor, 'How much do you demand for Daily Salary?');
@@ -984,7 +1006,7 @@ begin
                                   False,
                                   mailrequest_IWantGuard,
                                   player.name2,
-                                  long2str(j), {first message line has the salary offer}
+                                  long2str(j),          {first message line has the salary offer}
                                   long2str(player.sex), {secon message line has player sex}
                                   '',
                                   '',
@@ -1003,7 +1025,8 @@ begin
                                 {news-paper}
                                 Newsy(True,
                                   'Applicant',
-                                  ' ' + uplc + player.name2 + config.textcol1 + ', the ' + urac + race_display(2, player.race, 0) + ',' +
+                                  ' ' + uplc + player.name2 + config.textcol1 + ', the ' + urac +
+                                  race_display(2, player.race, 0) + ',' +
                                   ' applied for a job at the ' + ulcyan + 'Royal Guard' + config.textcol1 + '.',
                                   '',
                                   '',
@@ -1058,7 +1081,8 @@ begin
                                   {news-paper}
                                   Newsy(True,
                                     'Royal Employment' + config.textcol1,
-                                    ' ' + uplc + player.name2 + config.textcol1 + ' became a ' + ulcyan + 'Royal Guard' + config.textcol1 + '!',
+                                    ' ' + uplc + player.name2 + config.textcol1 + ' became a ' +
+                                    ulcyan + 'Royal Guard' + config.textcol1 + '!',
                                     '',
                                     '',
                                     '',
@@ -1068,7 +1092,8 @@ begin
                                     '',
                                     '');
 
-                                  online_send_to_all(uplc + player.name2 + config.textcol1 + ' became a Royal Guard!', player.name2, '');
+                                  online_send_to_all(uplc + player.name2 + config.textcol1 +
+                                    ' became a Royal Guard!', player.name2, '');
 
                                   pause;
 
@@ -1099,7 +1124,7 @@ begin
                 until ch = 'R';
               end;
 
-            end; {body-guard .end.}
+            end;       {body-guard .end.}
 
             'I': begin {infiltrate the castle}
               crlf;
@@ -1111,24 +1136,28 @@ begin
                 d(12, '(your beloved sysop has decided this)');
                 go := False;
                 pause;
-              end else if player.level < config.MinLevelKing then
+              end else
+              if player.level < config.MinLevelKing then
               begin
                 d(15, 'NO WAY! You must be at least a level ' + commastr(config.MinLevelKing) + ' character!');
                 go := False;
                 pause;
-              end else if (player.dark > player.chiv) and (config.SoulNeededKing = 1) then
+              end else
+              if (player.dark > player.chiv) and (config.SoulNeededKing = 1) then
               begin
                 d(15, 'Only players with a clear conscience may attempt this!');
                 d(15, 'Your acts of evil disqualify you!');
                 go := False;
                 pause;
-              end else if (player.chiv > player.dark) and (config.SoulNeededKing = 2) then
+              end else
+              if (player.chiv > player.dark) and (config.SoulNeededKing = 2) then
               begin
                 d(15, 'Only players with an evil mind may attempt this!');
                 d(15, 'Your soul needs to be darkened, I can tell...');
                 go := False;
                 pause;
-              end else if player.team <> '' then
+              end else
+              if player.team <> '' then
               begin
                 crlf;
                 d(15, 'Quit your team first! If you''re going up against the Royals');
@@ -1160,7 +1189,8 @@ begin
                 begin
 
                   {become king by default}
-                  if player.sex = 1 then s := 'KING'
+                  if player.sex = 1 then
+                    s := 'KING'
                   else s := 'QUEEN';
 
                   {set user flags}
@@ -1201,7 +1231,8 @@ begin
                     crlf;
 
                     {put the event in the news}
-                    newsy(True, uwhite + 'NEW ' + s + '! --- NEW ' + s + '! --- NEW ' + s + '! --- NEW ' + s + '!' + config.textcol1,
+                    newsy(True, uwhite + 'NEW ' + s + '! --- NEW ' + s + '! --- NEW ' + s +
+                      '! --- NEW ' + s + '!' + config.textcol1,
                       ' ' + ukingc + player.name2 + config.textcol1 + ' usurped the thone today!',
                       ' May the new rulers reign be long and prosperous!',
                       '',
@@ -1223,7 +1254,8 @@ begin
                     {put the news in the Monarch News-file}
                     Generic_News(RoyalNews,
                       True,
-                      config.textcol1 + ' The ' + race_display(2, player.race, 0) + ' ' + ukingc + player.name2 + config.textcol1 + ' was elected ' + s + '.',
+                      config.textcol1 + ' The ' + race_display(2, player.race, 0) + ' ' + ukingc +
+                      player.name2 + config.textcol1 + ' was elected ' + s + '.',
                       '',
                       '',
                       '',
@@ -1237,16 +1269,19 @@ begin
                     pause;
                   end;
 
-                end else if anybody_on_location(onloc_castle, player.name2) = True then
+                end else
+                if anybody_on_location(onloc_castle, player.name2) = True then
                 begin
                   d(15, 'The Castle is under attack!');
                   d(config.textcolor, 'Security is tight right now, You must come back at a later moment.');
                   crlf;
                   pause;
-                end else if is_online(s, online_player) = True then
+                end else
+                if is_online(s, online_player) = True then
                 begin
                   {king online, challenge called off}
-                  if male then d(15, 'The King is online minding his business.')
+                  if male then
+                    d(15, 'The King is online minding his business.')
                   else d(15, 'The Queen is online minding her business.');
                   d(12, 'Sorry, try again later!');
                 end else
@@ -1301,10 +1336,10 @@ begin
                 end;
 
               end; {sista}
-            end; {infiltrate castle .end.}
+            end;   {infiltrate castle .end.}
           end; {case .end.}
         end;
-      end; {KINGS CASTLE *END*}
+      end;       {KINGS CASTLE *END*}
       'J': begin {Journey to the Gods .start.}
         if global_ubeta then
         begin
@@ -1315,7 +1350,7 @@ begin
           pause;
         end;
 
-      end; {Journey to the Gods .end.}
+      end;       {Journey to the Gods .end.}
       'B': begin {Bounty Hunting}
         muffis;
         if global_registered then
@@ -1368,7 +1403,8 @@ begin
                 crlf;
                 sd(global_plycol, only.Name);
                 d(config.textcolor, ' is busy and can''t accept the challenge right now.');
-              end else if only.location in [onloc_mainstreet,
+              end else
+              if only.location in [onloc_mainstreet,
                 onloc_theinn,
                 onloc_darkalley,
                 onloc_church,
@@ -1418,7 +1454,7 @@ begin
 
         end; {for i:= .end.}
 
-        {found a player to poll}
+             {found a player to poll}
         if great = True then
         begin
 
@@ -1482,7 +1518,8 @@ begin
               global_multi := False;
               online_duel(True);
 
-            end else if onliner.com = intercom_decline then
+            end else
+            if onliner.com = intercom_decline then
             begin
               d(15, 'Your opponent has declined! (what a CHICKEN!)');
             end else
@@ -1492,7 +1529,8 @@ begin
             end;
           end;
 
-        end else if found = False then
+        end else
+        if found = False then
         begin
           d(15, 'Couldn''t locate that character.');
         end;
@@ -1508,7 +1546,8 @@ begin
         exit;
       end;
       '?': begin {Menu}
-        if player.expert = True then display_menu(True, False)
+        if player.expert = True then
+          display_menu(True, False)
         else display_menu(False, False);
       end;
 
@@ -1620,7 +1659,7 @@ begin
           d(12, 'You don''t belong to a team!');
         end;
         cho := ' ';
-      end; {Gangwars .end.}
+      end;       {Gangwars .end.}
 
       'F': begin {Flee town control}
 
@@ -1628,7 +1667,8 @@ begin
         begin
           crlf;
           d(config.textcolor, 'Your team doesn''t control the town.');
-        end else if player.team = '' then
+        end else
+        if player.team = '' then
         begin
           crlf;
           d(5, 'You don''t belong to a team!');
@@ -1666,10 +1706,11 @@ begin
               end;
             end; {for i:= .end.}
 
-            {news-paper}
+                 {news-paper}
             newsy(True,
               'Team withdrawal from Town Control!' + config.textcol1,
-              ' ' + uplc + player.name2 + config.textcol1 + ' decided to remove ' + sex3[player.sex] + ' team from Town Control.',
+              ' ' + uplc + player.name2 + config.textcol1 + ' decided to remove ' + sex3[player.sex] +
+              ' team from Town Control.',
               '',
               '',
               '',
@@ -1691,11 +1732,13 @@ begin
         begin
           crlf;
           d(12, 'Your team already control the town!');
-        end else if player.team = '' then
+        end else
+        if player.team = '' then
         begin
           crlf;
           d(12, 'You are not a member of a team!');
-        end else if player.tfights < 1 then
+        end else
+        if player.tfights < 1 then
         begin
           crlf;
           d(12, 'Sorry, but you have no team-fights left.');
@@ -1720,7 +1763,7 @@ begin
           end;
         end;
       end;
-    end; {case .end.}
+    end;       {case .end.}
 
   until Never; {MAIN-LOOP *end*}
 

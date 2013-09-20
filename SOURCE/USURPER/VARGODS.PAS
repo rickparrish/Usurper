@@ -67,7 +67,8 @@ function God_Active(const tgod: godrec): boolean;
 var Result: boolean;
 begin
 
-  if (tgod.deleted) or (tgod.Name = '') then Result := False
+  if (tgod.deleted) or (tgod.Name = '') then
+    Result := False
   else Result := True;
 
   {return result}
@@ -142,7 +143,7 @@ var
 
 begin {verify that a God by the name NAME exists, and is not deleted}
 
-  {init}
+      {init}
   Result := False;
 
   for i := 1 to fs(FsGod) do
@@ -162,7 +163,7 @@ begin {verify that a God by the name NAME exists, and is not deleted}
 
   end; {for i:= .end.}
 
-  {return result}
+       {return result}
   Verify_Gods_Existance := Result;
 
 end; {Verify_Gods_Existance *end*}
@@ -228,7 +229,7 @@ begin
 
   end; {for i:= .end.}
 
-  {return result}
+       {return result}
   select_a_god := Result;
 
 end; {select_a_god *end*}
@@ -243,7 +244,7 @@ var
 
 begin {how many followers has deity GODNAME?, we list the followers if LISTEM is true}
 
-  {init}
+      {init}
   Result := 0;
   new(pl0);
 
@@ -286,11 +287,11 @@ begin {how many followers has deity GODNAME?, we list the followers if LISTEM is
 
     end; {for j:= .end.}
 
-  end; {for i:= .end.}
+  end;   {for i:= .end.}
 
-  {remove pointer variables}
+         {remove pointer variables}
   dispose(pl0);
-  {return result}
+         {return result}
   god_believers := Result;
 
 end; {god_believers *end*}
@@ -439,7 +440,8 @@ begin
       end;
     end; {for i:= .end.}
 
-    if found then continue;
+    if found then
+      continue;
 
     crlf;
     sd(global_godcol, alias);
@@ -460,17 +462,17 @@ begin
   with God do
   begin
     realname := User_Name; {real (user/bbs) name}
-    Name := alias; {alias}
-    id := player.id; {player.id sec tag}
-    recnr := 1; {rec # in file}
+    Name := alias;        {alias}
+    id := player.id;      {player.id sec tag}
+    recnr := 1;           {rec # in file}
     age := random(5) + 2; {age}
     sex := insex;
     ai := 'H';
-    level := 1; {level}
-    exp := 1; {experience}
+    level := 1;       {level}
+    exp := 1;         {experience}
     deedsleft := config.gods_deedsleft; {deeds left today}
     deleted := False; {deleted}
-    believers := 0; {believers, disciples, players who worships this god}
+    believers := 0;   {believers, disciples, players who worships this god}
     darkness := player.dark; {good points}
     goodness := player.chiv; {dark points}
   end;
@@ -552,14 +554,22 @@ begin {calculates and returns the levels tempgod should have based on
   currexp := tempgod.exp;
 
   {check exp}
-  if currexp > 5000 then Result := 2;
-  if currexp > 15000 then Result := 3;
-  if currexp > 50000 then Result := 4;
-  if currexp > 70000 then Result := 5;
-  if currexp > 90000 then Result := 6;
-  if currexp > 110000 then Result := 7;
-  if currexp > 550000 then Result := 8;
-  if currexp > 1000500 then Result := 9;
+  if currexp > 5000 then
+    Result := 2;
+  if currexp > 15000 then
+    Result := 3;
+  if currexp > 50000 then
+    Result := 4;
+  if currexp > 70000 then
+    Result := 5;
+  if currexp > 90000 then
+    Result := 6;
+  if currexp > 110000 then
+    Result := 7;
+  if currexp > 550000 then
+    Result := 8;
+  if currexp > 1000500 then
+    Result := 9;
 
   {return result}
   god_level_raise := Result;
@@ -583,7 +593,7 @@ begin
 
   end; {case of .end.}
 
-  {return result}
+       {return result}
   god_title := s;
 
 end; {god_title *end*}
@@ -602,7 +612,7 @@ var
 
 begin {input parameter : numbered}
 
-  {display god rankings to screen}
+      {display god rankings to screen}
 
   crlf;
   s := '   Immortals                Rank                Followers  ';
@@ -663,11 +673,12 @@ begin {input parameter : numbered}
       end;
     end;
 
-    if abort then break;
+    if abort then
+      break;
 
   end; {for i:= .end}
 
-end; {list_gods *end*}
+end;   {list_gods *end*}
 
 procedure God_Status;
 begin
@@ -715,7 +726,8 @@ var
 begin
 
   {we exit if no gods exist}
-  if f_exists(global_godfil) = False then exit;
+  if f_exists(global_godfil) = False then
+    exit;
 
   xx := fs(FsNPC);
   mem := xx;
@@ -759,7 +771,7 @@ begin
     end;
 
   end; {for i:= .end.}
-  {BIG_LOOP *end*}
+       {BIG_LOOP *end*}
 
 end; {god_maintenance *end*}
 
@@ -773,25 +785,32 @@ begin {given the ingold value this routine returns the power increase
   if ingold <= 20 then
   begin
     Result := 1;
-  end else if (ingold >= 21) and (ingold <= 2000) then
+  end else
+  if (ingold >= 21) and (ingold <= 2000) then
   begin
     Result := 2;
-  end else if (ingold >= 2001) and (ingold <= 45000) then
+  end else
+  if (ingold >= 2001) and (ingold <= 45000) then
   begin
     Result := 3;
-  end else if (ingold >= 45001) and (ingold <= 150000) then
+  end else
+  if (ingold >= 45001) and (ingold <= 150000) then
   begin
     Result := 4;
-  end else if (ingold >= 150001) and (ingold <= 900000) then
+  end else
+  if (ingold >= 150001) and (ingold <= 900000) then
   begin
     Result := 5;
-  end else if (ingold >= 900001) and (ingold <= 15000000) then
+  end else
+  if (ingold >= 900001) and (ingold <= 15000000) then
   begin
     Result := 6;
-  end else if (ingold >= 15000001) and (ingold <= 110000000) then
+  end else
+  if (ingold >= 15000001) and (ingold <= 110000000) then
   begin
     Result := 7;
-  end else if ingold >= 110000001 then
+  end else
+  if ingold >= 110000001 then
   begin
     Result := 8;
   end;
@@ -814,7 +833,7 @@ var Result: boolean;
 
 begin {checks is NAME has immortal characters}
 
-  {init vars}
+      {init vars}
   Result := False;
 
   for i := 1 to fs(FsGod) do
@@ -834,7 +853,7 @@ begin {checks is NAME has immortal characters}
 
   end; {for i:= .end.}
 
-  {return result}
+       {return result}
   player_has_a_god := Result;
 
 end; {player_has_a_god .end.}
@@ -846,7 +865,7 @@ var Result: boolean;
 
 begin {attempts to load a god by NAME}
 
-  {init vars}
+      {init vars}
   Result := False;
 
   for i := 1 to fs(FsGod) do
@@ -866,7 +885,7 @@ begin {attempts to load a god by NAME}
 
   end; {for i:= .end.}
 
-  {return result}
+       {return result}
   load_god_by_name := Result;
 
 end; {load_god_by_name .end.}
@@ -905,9 +924,9 @@ begin
         end;
       end;
     end; {for j:= .end.}
-  end; {for i:= .end.}
+  end;   {for i:= .end.}
 
-  {return result}
+         {return result}
   How_Many_Believers := Result;
 end; {How_Many_Believers *end*}
 
@@ -992,7 +1011,8 @@ begin {the boss god!}
     {evaluate user-input}
     case ch of
       '?': begin {menu}
-        if player.expert = True then display_menu(refresh, True, False)
+        if player.expert = True then
+          display_menu(refresh, True, False)
         else display_menu(refresh, False, False);
       end;
       'S': begin {status}
@@ -1022,7 +1042,8 @@ begin {the boss god!}
           end; {case .end.}
           pause;
 
-        end else if x > god.level then
+        end else
+        if x > god.level then
         begin
 
           {level raise}
@@ -1041,7 +1062,8 @@ begin {the boss god!}
           {news-paper}
           newsy(True,
             config.textcol1 + 'Divine Ranks!',
-            ' ' + ugodc + god.Name + config.textcol1 + ' has been granted a new rank; ' + ulgreen + god_title(god.level) + config.textcol1 + '!',
+            ' ' + ugodc + god.Name + config.textcol1 + ' has been granted a new rank; ' + ulgreen +
+            god_title(god.level) + config.textcol1 + '!',
             '',
             '',
             '',
@@ -1068,7 +1090,7 @@ begin {the boss god!}
 
       end; {ask for power .end.}
 
-    end; {case .end}
+    end;   {case .end}
 
   until end_boss_visit;
 
@@ -1121,7 +1143,8 @@ begin
         if nr = 0 then
         begin
           sd(8, '  (not worshipped)');
-        end else if nr = 1 then
+        end else
+        if nr = 1 then
         begin
           sd(7, '  (' + commastr(nr) + ' believer)');
         end else
@@ -1145,7 +1168,7 @@ begin
 
   end; {for i:= .end.}
 
-end; {list_altars *end*}
+end;   {list_altars *end*}
 
 procedure Inform_Disciples(const god1: godrec; const header: s40; const lin1, lin2, lin3, lin4: s100);
 {Sends report to all discples of god GOD1}
@@ -1199,7 +1222,7 @@ begin
 
   end; {for i:= .end.}
 
-  {dispose pointer vars}
+       {dispose pointer vars}
   dispose(pl0);
 
 end; {Team_Report_All *end*}

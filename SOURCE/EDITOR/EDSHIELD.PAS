@@ -478,7 +478,7 @@ begin
     0,         {”ka dexterity}
     0,         {”ka wisdom}
     10,        {”ka mana}
-    3,        {”ka armor v„rde}
+    3,         {”ka armor v„rde}
     0,         {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
@@ -634,12 +634,11 @@ begin
     '',        {detaljerad beskrivning 2}
     '',        {detaljerad beskrivning 3}
     '',        {detaljerad beskrivning 4}
-    '',       {detaljerad beskrivning 5}
+    '',        {detaljerad beskrivning 5}
     0,         {”ka strength}
     0,         {”ka defence}
     0);        {strength demanded to use object}
 
 end;
-
 
 end.

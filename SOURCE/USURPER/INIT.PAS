@@ -35,7 +35,7 @@ type
   SmallWord = System.word;
 {$ENDIF}
 
-{Uses}
+  {Uses}
 type
   {String types}
   s3   = string[3];
@@ -238,12 +238,12 @@ const
   {chat routines globals}
   global_emptyline: boolean = False; {set to true when user has a blank line}
 
-{file related constants}
+  {file related constants}
 const global_ushare: boolean = True; {is share installed}
 const global_lockmode: byte = 0; {keeps track of filemode}
 const global_cnode: string[3] = '001'; {which BBS # node is this}
-{becomes "Loc" if local}
-{game related constants}
+  {becomes "Loc" if local}
+  {game related constants}
 const global_screenlines: byte = 25; {used in the games display routines}
 const global_multi: boolean = False; {if false then no multinode operations are allowed}
 const global_fakeplayers: byte = 0; {active fake players in this player session}
@@ -267,7 +267,8 @@ const global_cback: byte = 0; {background color, used together with ddplus}
 const global_ubeta: boolean = False; {is this a beta version?}
 const global_utest: boolean = False; {is this a Jakob test version?}
 const global_maintrunning: boolean = False; {set to true when Maintenance is running}
-const global_carrierdropped: boolean = False; {set to true when ddplus reports carried dropped, see ddplus.pas=proc dropmessage}
+const global_carrierdropped: boolean = False;
+                            {set to true when ddplus reports carried dropped, see ddplus.pas=proc dropmessage}
 const global_checkcarrier: boolean = False; {set to false when command line options are running}
 const global_mainttxt = 10; {color of p† maint text, when its running}
 const global_webaddress = 'http://www.randm.ca/usurper.aspx';
@@ -328,7 +329,7 @@ type
     UmanCave,
     AtHome);
 
-  Classes = (Alchemist, {change RATING.PAS and VARIOUS.PAS when changing # of classes}
+  classes = (Alchemist, {change RATING.PAS and VARIOUS.PAS when changing # of classes}
     Assassin,
     Barbarian, {no special ability}
     Bard,      {no special ability}
@@ -340,10 +341,10 @@ type
     Sage,
     Warrior);  {no special ability}
 
-{When AutoProbe is set to a direction the player auto travels there}
+ {When AutoProbe is set to a direction the player auto travels there}
 const global_auto_probe: Places = NoWhere;
 
-const ClassNames: array[Classes] of string[9] = ('Alchemist',
+const classNames: array[classes] of string[9] = ('Alchemist',
     'Assassin',
     'Barbarian',
     'Bard',
@@ -414,15 +415,15 @@ const ipcpath: s90 = global_nodedir; {dir to .ipc files, inc RAM drive support!!
 
 type {the ipc routines are taken from John Stephensons Jsdoor package
       the structure has been modified to suit the needs of Usurper}
-  IPCType = record {Multi node Chat record}
+  IPCType = record           {Multi node Chat record}
     Node:          SmallWord;    {Node number for this record}
-    Username:      S30;     {Users Name}
-    Available:     boolean; {Is user available for chat}
-    In_chat:       boolean; {Whether user is in chat}
+    Username:      S30;      {Users Name}
+    Available:     boolean;  {Is user available for chat}
+    In_chat:       boolean;  {Whether user is in chat}
     Conference:    SmallWord;     {Conference number}
     ConfName:      s30;      {Conference name}
     ConfPassW:     string[8];{Conference password}
-    MessColor:     byte;    {this is MY color, as displayed to other players}
+    MessColor:     byte;     {this is MY color, as displayed to other players}
     Message_waiting: array[1..ipc_maxmsg] of boolean; {Whether the message is waiting or not }
     Message_to_user: array[1..ipc_maxmsg] of string; {Message to our user? }
     Message_from:  array[1..ipc_maxmsg] of s30; {who sent the mess}
@@ -445,7 +446,7 @@ type {used by temporary com-files at online duels/trading}
   end;
 
 type {used to issue King orders, open shoppes etc etc}
-  {this record is reset when a new king is elected/usurps power}
+     {this record is reset when a new king is elected/usurps power}
      {update :
                various.pas  => new_king
                maint.pas    => update king record
@@ -486,7 +487,7 @@ type {used to issue King orders, open shoppes etc etc}
     shop_gigolos: boolean; {is gigolos place open}
   end; {kingrec .end.}
 
-type {see Questrec specs for connections to these QuestTypes}
+type   {see Questrec specs for connections to these QuestTypes}
   QuestTypes   = (SingleQuest, TeamQuest);
   QuestTargets = (qMonster, qAssassin, qSeduce, qClaimTown, qGangWar);
   {quest reward types}
@@ -539,17 +540,17 @@ type {Orbs Bar, Special Drinks, made by Players => saved to drinkfile}
     amount:  array[1..17] of smallint; {ingredients}
   end;
 
-{type {Bard Songs, made by game/players/sysop => saved to global_bardsongf}
-{ BardSongRec = record  {bards can create their own songs!}
-{a new place only for the Bards! guilds}
-{  title  : s30; {song-title}
-{  creator: s30; {creator: *game* *editor* *name of player(bard)*}
-{  date   : Udate; {when was the song created}
-{  level  : SmallWord; {level needed to sing}
-{  available: byte; {1=always,2=training,3=quest,4=disabled}
-{  deleted  : boolean; {deleted?}
-{  goodbad  : byte; {1=good,2=bad,3=any alignment can sing this song}
-{  songtype : byte; {1=healing,2=aggressive,3=calling deity}
+ {type {Bard Songs, made by game/players/sysop => saved to global_bardsongf}
+ { BardSongRec = record  {bards can create their own songs!}
+ {a new place only for the Bards! guilds}
+ {  title  : s30; {song-title}
+ {  creator: s30; {creator: *game* *editor* *name of player(bard)*}
+ {  date   : Udate; {when was the song created}
+ {  level  : SmallWord; {level needed to sing}
+ {  available: byte; {1=always,2=training,3=quest,4=disabled}
+ {  deleted  : boolean; {deleted?}
+ {  goodbad  : byte; {1=good,2=bad,3=any alignment can sing this song}
+ {  songtype : byte; {1=healing,2=aggressive,3=calling deity}
 {  songtext : array[1..5] of s70;
  end;}
 
@@ -593,14 +594,14 @@ type {bank vault}
     Value: longint; {money in the vault}
   end;
 
-type  {Weapons in CLASSIC mode}
+type            {Weapons in classIC mode}
   WeapRec = record
     Name:  s30; {name of weapon}
     Value: longint; {value}
     pow:   longint; {power}
   end;
 
-type {Armors in CLASSIC mode}
+type {Armors in classIC mode}
   ArmRec = record
     Name:  s30; {name of armor}
     Value: longint; {value}
@@ -648,11 +649,11 @@ type {item definition}
     maxlev:   smallint;    {max level to be found in the dungoens}
     desc1:    array [1..5] of s70; {normal description}
     desc2:    array [1..5] of s70; {detailed description}
-    strength: smallint;{can object increase/decrease strength}
+    strength: smallint; {can object increase/decrease strength}
     defence:  smallint; {can object increase/decrease defence}
     str_need: smallint; {strength needed to wear object}
-    good:     boolean; {does character need to be good to use item?}
-    evil:     boolean; {does character need to be evil to use item?}
+    good:     boolean;  {does character need to be good to use item?}
+    evil:     boolean;  {does character need to be evil to use item?}
     restrict: array[1..global_maxclasses] of boolean;
   end;
 
@@ -721,10 +722,10 @@ type {online character/record definition}
     chatsend:  array[1..global_maxnod] of s30;
     info:      array[1..global_maxnod] of s90;
     infosend:  array[1..global_maxnod] of s30;
-    ear:       byte; {how much info does the player want to get when online, see cms.pas and ear constants}
-    bname:     s30; {online opponents name}
-    comfile:   s90; {name of file in which online comm will take place}
-    com:       char; {used in player<=>player online routines}
+    ear:       byte;     {how much info does the player want to get when online, see cms.pas and ear constants}
+    bname:     s30;      {online opponents name}
+    comfile:   s90;      {name of file in which online comm will take place}
+    com:       char;     {used in player<=>player online routines}
     location:  smallint; {location in game, see onloc_?? constants}
   end;
 
@@ -997,25 +998,25 @@ type {Social Relations, how characters relate to each other}
     prepare_relation   => relation.pas
    }
 
-    name1:        s30;  {player 1 name}
-    name2:        s30;  {player 2 name}
-    ai1:          char; {player 1 ai}
-    ai2:          char; {player 2 ai}
-    race1:        races; {pl1 race}
-    race2:        races; {pl2 race}
+    name1:        s30;       {player 1 name}
+    name2:        s30;       {player 2 name}
+    ai1:          char;      {player 1 ai}
+    ai2:          char;      {player 2 ai}
+    race1:        races;     {pl1 race}
+    race2:        races;     {pl2 race}
     relation1:    SmallWord; {pl1s relation to pl2 ,see:relation constants}
     relation2:    SmallWord; {pl2s relation to pl1 ,see:relation constants}
-    idtag1:       s15; {holds pl1.id - necessary when identifying kids parents}
-    idtag2:       s15; {holds pl2.id - necessary when identifying kids parents}
+    idtag1:       s15;       {holds pl1.id - necessary when identifying kids parents}
+    idtag2:       s15;       {holds pl2.id - necessary when identifying kids parents}
     recnr1:       SmallWord; {pl1 recnr in userfile}
     recnr2:       SmallWord; {pl2 recnr in userfile}
-    filetype1:    byte; {pl1 is residing in (1)user/(2)npc file}
-    filetype2:    byte; {pl1 is residing in (1)user/(2)npc file}
-    deleted:      boolean; {this relation record is deleted}
+    filetype1:    byte;      {pl1 is residing in (1)user/(2)npc file}
+    filetype2:    byte;      {pl1 is residing in (1)user/(2)npc file}
+    deleted:      boolean;   {this relation record is deleted}
     recnr:        SmallWord; {record #, file position of relation record}
-    bannedmarry:  boolean; {not allowed to marry, only the King can set this flag}
+    bannedmarry:  boolean;   {not allowed to marry, only the King can set this flag}
     marriedtimes: SmallWord; {how many times have this couple been married}
-    marrieddays:  longint; {how many days has the current marriage lasted}
+    marrieddays:  longint;   {how many days has the current marriage lasted}
     kids:         SmallWord; {# of children this relation has produced}
     killedby1:    SmallWord; {name2 has been killed this many times by name1}
     killedby2:    SmallWord; {name1 has been killed this many times by name2}
@@ -1236,11 +1237,11 @@ type {Config Reocrd}
 var Config:       ConfigRecord; {holds global settings from the usurper.cfg file}
 var Hittas:       array [1..15, 1..global_maxhittas] of boolean;
 
-var Player:       UserRec; {this is the record used by the player online}
+var Player:       UserRec;   {this is the record used by the player online}
 var Onliner:      OnlineRec; {this is the record used by the player online}
 var DungeonQuest: DungeonQuestRec;
 
-var ExitSave:     pointer; {points to current exitprocedure}
+var ExitSave:     pointer;  {points to current exitprocedure}
 
 var global_nwfileasc:  s70; {newsfile ASCII}
 var global_nwfileans:  s70; {newsfile ANSI}
@@ -1286,36 +1287,36 @@ begin
   Config.Anchor := 'Anchor road';
   Config.SimulNode := True;
   Config.AutoMaint := True;
-  Config.Maxmail := 15; {how many days should player mail be kept, config option}
-  Config.Maxmarket := 30; {how many days should player market items stay}
-  Config.Maxwanted := 30; {how many days should wanted posters stay up}
-  Config.Abase := 0;  {armorbase, base armor}
-  Config.MaxHeals := 75; {max # of healing potions}
-  Config.Classic := False; {OLD or NEW game type}
-  Config.TeamAssist := True;  {allow team mates to help mates attacked at the Dorm?}
-  Config.TeamDiff := 5;  {how many levels more can attacker have, *team fights*}
-  Config.MultiCheck := 5;  {read onliners.dat every MultiCheck second}
-  Config.InnKeeper := 'Grull'; {name of InnKeeper}
-  Config.OneManShow := True; {allow "onemane teams" to fight?}
-  Config.Semaphore := ''; {path to semaphore directory}
-  Config.Errors := False; {display file-error messages to the screen}
-  Config.Mon_Talk := True; {should the monster speak}
-  Config.QuaffOpt := 1; {quaffing healing potions in the dungeons selection}
+  Config.Maxmail := 15;         {how many days should player mail be kept, config option}
+  Config.Maxmarket := 30;       {how many days should player market items stay}
+  Config.Maxwanted := 30;       {how many days should wanted posters stay up}
+  Config.Abase := 0;            {armorbase, base armor}
+  Config.MaxHeals := 75;        {max # of healing potions}
+  Config.classic := False;  {OLD or NEW game type}
+  Config.TeamAssist := True;    {allow team mates to help mates attacked at the Dorm?}
+  Config.TeamDiff := 5;         {how many levels more can attacker have, *team fights*}
+  Config.MultiCheck := 5;       {read onliners.dat every MultiCheck second}
+  Config.InnKeeper := 'Grull';  {name of InnKeeper}
+  Config.OneManShow := True;    {allow "onemane teams" to fight?}
+  Config.Semaphore := '';       {path to semaphore directory}
+  Config.Errors := False;       {display file-error messages to the screen}
+  Config.Mon_Talk := True;      {should the monster speak}
+  Config.QuaffOpt := 1;         {quaffing healing potions in the dungeons selection}
   Config.dormpocketattackallow := True; {allow losing attackers from pick pocket attacks in the dorm to enter again}
   Config.dormwakeupcallallow := True; {defeated guys from dorm wake up calls}
-  Config.BardSongs := 5; {# of Bard Songs / day}
+  Config.BardSongs := 5;        {# of Bard Songs / day}
   Config.Bard_Songs_Allowed := True; {allow bards to use sing.NOT added to Editor!}
-  Config.DrinksAtOrbs := 3; {drinks per day at Orbs}
-  Config.MaxWrestlings := 5; {indian wrestling bouts a player can go / day}
+  Config.DrinksAtOrbs := 3;     {drinks per day at Orbs}
+  Config.MaxWrestlings := 5;    {indian wrestling bouts a player can go / day}
   Config.PunishCarrierDroppers := 0; {punish player who drop carrier during fight}
   Config.Allow_Steroids := True; {#154, allow players to visit shop}
-  Config.Allow_Whores := True; {#155, allow players to visit whores}
-  Config.Allow_Drugs := True; {#156, allow players to buy drugs}
-  Config.Allow_Murder := True; {#157, allow players to murder innocent people}
+  Config.Allow_Whores := True;  {#155, allow players to visit whores}
+  Config.Allow_Drugs := True;   {#156, allow players to buy drugs}
+  Config.Allow_Murder := True;  {#157, allow players to murder innocent people}
   Config.Print_KingPolls := True; {#158, put players opinions of the ruler in the news?}
-  Config.FakePlayers := 2; {#159, fake players per player session (0-100)}
-  Config.FakeSChatty := True; {#188, fake players are chatty}
-  Config.MaxFakePlayers := 10; {#160, max fake players per game session! (0-100)}
+  Config.FakePlayers := 2;      {#159, fake players per player session (0-100)}
+  Config.FakeSChatty := True;   {#188, fake players are chatty}
+  Config.MaxFakePlayers := 10;  {#160, max fake players per game session! (0-100)}
 
   Config.ResurrectTheKing := True; {resurrect the King when castle is infiltrated}
   Config.AllowKingtoInitQuests := True; {allow king/queen to create quests}
@@ -1327,7 +1328,7 @@ begin
   Config.AllowCloseShops := True; {allowed to close shops}
   Config.AllowRoyalAdoption := 1; {allow the King to put X children in the royal orphanage}
 
-  Config.ForceQuests := False; {allow the king to force missions upon players}
+  Config.ForceQuests := False;  {allow the king to force missions upon players}
   Config.AllowFailQuestReturn := False; {allow players who die on quests to enter again the same day}
 
   Config.AllowKingtoImprison := 1; {allow the king to imprison players for how many days}
@@ -1424,7 +1425,6 @@ end. {Unit Init *end*}
           300-..., ice caves
 
         }
-
 
 
 

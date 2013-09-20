@@ -25,8 +25,9 @@ Copyright 2007 Jakob Dangarden
 
 
 unit SpellsU;
-{Usurper - Spell Unit, not all of them though :)}
-{"Get the future started!"}
+
+ {Usurper - Spell Unit, not all of them though :)}
+ {"Get the future started!"}
 
 interface
 
@@ -44,7 +45,7 @@ function Spell_Utter(class: classes; spell: byte): s70;
 function Spell_Multi(class: classes; spell: byte): boolean;
 function Spell_User(const ply: userrec): boolean; {is ply a spell user?}
 
-{Monster Spell}
+ {Monster Spell}
 function Spell_Name_Monster(nr: integer): s70;
 function Spell_Cost_Monster(nr: integer): integer;
 function Spell_Multi_Monster(nr: integer): boolean;
@@ -59,7 +60,8 @@ function Spell_User(const ply: userrec): boolean; {is ply a spell user?}
 var Result: boolean;
 begin
 
-  if ply.class in [Cleric, Magician, Sage] then Result := True
+  if ply.class in [Cleric, Magician, Sage] then
+    Result := True
   else Result := False;
   {return result}
   spell_user := Result;
@@ -163,7 +165,7 @@ begin
 
   end; {case .end.}
 
-  {return result}
+       {return result}
   spell_multi := x;
 
 end; {spell_multi *end*}
@@ -262,7 +264,7 @@ begin
 
   end; {case .end.}
 
-  {return result}
+       {return result}
   level_needed := x;
 
 end; {Level_Needed .end.}
@@ -361,7 +363,7 @@ begin
     end;
   end; {case .end.}
 
-  {return result}
+       {return result}
   spell_cost := x;
 
 end; {spell_cost .end.}
@@ -370,7 +372,7 @@ function Spell_Name(class: classes; spell: byte): s70;
 var s: s30;
 begin {returns NAME of spell for selected magic user}
 
-  {The names of the Spells}
+      {The names of the Spells}
   s := 'I love Jakob!';
 
   case spell of
@@ -461,7 +463,7 @@ begin {returns NAME of spell for selected magic user}
 
   end; {case .end.}
 
-  {return result}
+       {return result}
   spell_name := s;
 
 end; {SPELL_NAME **** END ****}
@@ -561,7 +563,7 @@ begin
 
   end; {case .end.}
 
-  {return result}
+       {return result}
   spell_utter := s;
 
 end; {SPELL_UTTER **** END ****}
@@ -576,16 +578,16 @@ var
   whc: byte;
 begin
 
-  {Displays text description of selected spell}
+           {Displays text description of selected spell}
 
   c := 11; {spell name color}
-  t := 4; {description color}
+  t := 4;  {description color}
   whc := 10; {'affects whole group' color}
 
   crlf;
 
   case spell of
-    1: begin {Level I Spells}
+    1: begin          {Level I Spells}
       case class of
         Cleric: begin {Cure Light}
           d(c, m1 + spell_name(class, spell));
@@ -611,7 +613,7 @@ begin
         end;
       end;
     end;
-    2: begin {Level II Spells}
+    2: begin          {Level II Spells}
       case class of
         Cleric: begin {Armor}
           d(c, m1 + spell_name(class, spell));
@@ -638,7 +640,7 @@ begin
         end;
       end;
     end;
-    3: begin {Level III Spells}
+    3: begin          {Level III Spells}
       case class of
         Cleric: begin {Baptize Monster}
           d(c, m1 + spell_name(class, spell));
@@ -666,7 +668,7 @@ begin
         end;
       end;
     end;
-    4: begin {Level IV Spells}
+    4: begin          {Level IV Spells}
       case class of
         Cleric: begin {Cure Critical}
           d(c, m1 + spell_name(class, spell));
@@ -700,7 +702,7 @@ begin
         end;
       end;
     end;
-    5: begin {Level V Spells}
+    5: begin          {Level V Spells}
       case class of
         Cleric: begin {Disease}
           d(c, m1 + spell_name(class, spell));
@@ -733,7 +735,7 @@ begin
         end;
       end;
     end;
-    6: begin {Level VI Spells}
+    6: begin          {Level VI Spells}
       case class of
         Cleric: begin {Holy Explosion}
           d(c, m1 + spell_name(class, spell));
@@ -764,7 +766,7 @@ begin
         end;
       end;
     end;
-    7: begin {Level VII Spells}
+    7: begin          {Level VII Spells}
       case class of
         Cleric: begin {Invisibility}
           d(c, m1 + spell_name(class, spell));
@@ -798,7 +800,7 @@ begin
         end;
       end;
     end;
-    8: begin {Level VIII Spells}
+    8: begin          {Level VIII Spells}
       case class of
         Cleric: begin {Angel}
           d(c, m1 + spell_name(class, spell));
@@ -836,7 +838,7 @@ begin
         end;
       end;
     end;
-    9: begin {Level IX Spells}
+    9: begin          {Level IX Spells}
       case class of
         Cleric: begin {Call Lightning}
           d(c, m1 + spell_name(class, spell));
@@ -866,7 +868,7 @@ begin
         end;
       end;
     end;
-    10: begin {Level X Spells}
+    10: begin         {Level X Spells}
       case class of
         Cleric: begin {Heal}
           d(c, m1 + spell_name(class, spell));
@@ -899,7 +901,7 @@ begin
         end;
       end;
     end;
-    11: begin {Level XI Spells}
+    11: begin         {Level XI Spells}
       case class of
         Cleric: begin {Divination}
           d(c, m1 + spell_name(class, spell));
@@ -930,7 +932,7 @@ begin
         end;
       end;
     end;
-    12: begin {Level XII Spells}
+    12: begin         {Level XII Spells}
       case class of
         Cleric: begin {Gods Finger}
           d(c, m1 + spell_name(class, spell));
@@ -969,7 +971,7 @@ begin
     end;
   end; {case .end.}
 
-end; {SPELL_DESCRIPTION **** END ****}
+end;   {SPELL_DESCRIPTION **** END ****}
 
 procedure List_of_Spells(var happy: userrec; all: boolean);
 const shadcol = 7;
@@ -994,7 +996,8 @@ begin {displays a list of available spells}
   for i := 1 to global_maxspells do
   begin
 
-    if happy.mana >= spell_cost(happy.class, i) then afford_it := True
+    if happy.mana >= spell_cost(happy.class, i) then
+      afford_it := True
     else afford_it := False;
 
     {spell}
@@ -1013,13 +1016,15 @@ begin {displays a list of available spells}
       12: s := 'L';
     end; {case .end.}
 
-    if happy.spell[i, 1] then c := 11
+    if happy.spell[i, 1] then
+      c := 11
     else c := shadcol;
 
     if (all) or (happy.spell[i, 1]) then
     begin
 
-      if afford_it then sd(c, '(' + s + ') ')
+      if afford_it then
+        sd(c, '(' + s + ') ')
       else sd(shadcol, '(' + s + ') ');
 
       if happy.spell[i, 1] then
@@ -1049,7 +1054,8 @@ begin {displays a list of available spells}
           x := How_Many_XP_Left(j, happy.exp);
 
           s := '(' + commastr(x) + ' xp left';
-          if x = 0 then s := s + '! Visit your Level Master!)'
+          if x = 0 then
+            s := s + '! Visit your Level Master!)'
           else s := s + ')';
 
           sd(shadcol, s);
@@ -1073,7 +1079,7 @@ begin {displays a list of available spells}
       crlf;
     end; {if ALL end}
 
-  end; {for i:= .end.}
+  end;   {for i:= .end.}
   crlf;
 
 end;  {list_of_spells .end.}
@@ -1093,7 +1099,7 @@ begin
     pl4.spell[i, 2] := False;
   end; {for i:= .end.}
 
-end; {reset_spells .end.}
+end;   {reset_spells .end.}
 
 procedure Spell_List(var happy: userrec);
 var ch: char;
@@ -1152,7 +1158,7 @@ begin
     6: s := 'Drain Life';
   end; {case .end.}
 
-  {return result}
+       {return result}
   spell_name_monster := s;
 
 end; {spell_name_monster *end*}

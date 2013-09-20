@@ -102,17 +102,20 @@ begin
   {fetching dungeon fights/day 6}
   s := cfg_string(6);
   dngfights := str_to_nr(s);
-  if (dngfights < 1) or (dngfights > 99) then dngfights := 10;
+  if (dngfights < 1) or (dngfights > 99) then
+    dngfights := 10;
 
   {fetching player fights 40}
   s := cfg_string(40);
   plfights := str_to_nr(s);
-  if (plfights < 1) or (plfights > 99) then plfights := 3;
+  if (plfights < 1) or (plfights > 99) then
+    plfights := 3;
 
   {we fetch Bank Interest 41}
   s := cfg_string(41);
   interest := str_to_nr(s);
-  if (interest < 1) or (interest > 15) then interest := 3;
+  if (interest < 1) or (interest > 15) then
+    interest := 3;
 
   {we fetch player fights 89}
   s := cfg_string(89);
@@ -134,24 +137,29 @@ begin
   maxtime := 999;
   s := cfg_string(87);
   x := str_to_nr(s);
-  if (x > 0) and (x < 10000) then maxtime := x;
+  if (x > 0) and (x < 10000) then
+    maxtime := x;
 
   {we fetch inactivity before deletion - from .cfg #7}
   s := cfg_string(7);
   inact := str_to_nr(s);
-  if (inact < 15) or (inact > 999) then inact := 30;
+  if (inact < 15) or (inact > 999) then
+    inact := 30;
 
   {we fetch teamfights/day - from #13}
   s := cfg_string(13);
   tfights := str_to_nr(s);
-  if (tfights < 1) or (tfights > 99) then tfights := 2;
+  if (tfights < 1) or (tfights > 99) then
+    tfights := 2;
 
   {new bank safe value}
   Safe_Reset;
 
   {Reset Truth files}
-  if f_exists(global_truthfile1) then Delete_File(global_truthfile1);
-  if f_exists(global_truthfile2) then Delete_File(global_truthfile2);
+  if f_exists(global_truthfile1) then
+    Delete_File(global_truthfile1);
+  if f_exists(global_truthfile2) then
+    Delete_File(global_truthfile2);
   Check_TruthFile(True); {make empty truth file}
   {add some NPC comments to the Inn Chat file}
   if Config.AddNpcInnComments > 0 then
@@ -165,7 +173,7 @@ begin
       case config.AddNpcInnComments of
         1: x := random(15); {seldom}
         2: x := random(10); {sometimes}
-        3: x := random(5); {often}
+        3: x := random(5);  {often}
       end;
 
       if x = 0 then
@@ -179,7 +187,8 @@ begin
           Write_To_Inn_File(pl0.name2, s, '', '', '', '');
         end;
 
-      end else if x = 1 then
+      end else
+      if x = 1 then
       begin
         {add some text to the truthfile}
         s := '';
@@ -219,7 +228,8 @@ begin
           Write_to_Truth_File(pl0.name2, s);
         end;
 
-        if random(5) = 0 then break;
+        if random(5) = 0 then
+          break;
 
       end;
 
@@ -229,8 +239,10 @@ begin
   {*Creating Yesterdays News File*}
   sd(global_mainttxt, 'Updating News files ... ');
 
-  if f_exists(global_ynwfileans) then delete_file(global_ynwfileans);
-  if f_exists(global_ynwfileasc) then delete_file(global_ynwfileasc);
+  if f_exists(global_ynwfileans) then
+    delete_file(global_ynwfileans);
+  if f_exists(global_ynwfileasc) then
+    delete_file(global_ynwfileasc);
 
   if (f_exists(global_nwfileans)) and (global_ynwfileans <> '') then
   begin
@@ -392,7 +404,8 @@ begin
     if (player.king) and (king_found) then
     begin
       player.king := False;
-    end else if (player.king) and
+    end else
+    if (player.king) and
       (player_active(player, False) = True) and
       (king_found = False) then
     begin
@@ -403,12 +416,14 @@ begin
 
       x := king.daysinpower + 1;
       s := 'day';
-      if x > 1 then s := s + 's';
+      if x > 1 then
+        s := s + 's';
 
       {news-paper}
       newsy(True, 'The ' + s1,
         ' Long live ' + s1 + ukingc + ' ' + player.name2 + config.textcol1 + '! Hooray, Hooray, Hooray!',
-        ' ' + ukingc + player.name2 + config.textcol1 + ' has ruled the land for ' + uwhite + commastr(x) + config.textcol1 + ' ' + s + '.',
+        ' ' + ukingc + player.name2 + config.textcol1 + ' has ruled the land for ' + uwhite +
+        commastr(x) + config.textcol1 + ' ' + s + '.',
         '',
         '',
         '',
@@ -452,7 +467,8 @@ begin
         if player.armor = 0 then
         begin
           x := player.level + random(5) + 3;
-          if x > 100 then x := 90;
+          if x > 100 then
+            x := 90;
 
           load_armor(x, aarmor);
           player.armor := x;
@@ -460,8 +476,10 @@ begin
         end;
       end;
 
-      if player.gold > 1000000000 then player.gold := 1000000000;
-      if player.bankgold > 1000000000 then player.bankgold := 1000000000;
+      if player.gold > 1000000000 then
+        player.gold := 1000000000;
+      if player.bankgold > 1000000000 then
+        player.bankgold := 1000000000;
 
       if random(3) = 0 then
       begin
@@ -506,7 +524,8 @@ begin
       {have to check if you are allowed to rent more than one
        see config.file}
             load_guard(Fload, guard, x);
-            if guard.multiple then player.bguardnr := random(10) + 1
+            if guard.multiple then
+              player.bguardnr := random(10) + 1
             else player.bguardnr := 1;
           end;
         end;
@@ -528,7 +547,8 @@ begin
         '',
         umailheadc + 'Team Income' + config.textcol1,
         mkstring(11, underscore),
-        'You received ' + uyellow + commastr(townpot) + config.textcol1 + ' ' + many_money(townpot) + ' for controlling the Town',
+        'You received ' + uyellow + commastr(townpot) + config.textcol1 + ' ' + many_money(townpot) +
+        ' for controlling the Town',
         '',
         '',
         '',
@@ -580,7 +600,8 @@ begin
     end;
 
     {a clumsy way to set back player.haunts, demons}
-    if player.haunt > 30000 then player.haunt := 30000;
+    if player.haunt > 30000 then
+      player.haunt := 30000;
 
     {reset mana}
     player.mana := player.maxmana;
@@ -691,7 +712,8 @@ begin
       case random(2) of
         0: begin
           newsy(True, 'Birthday',
-            ' ' + uplc + player.name2 + config.textcol1 + ' has come to be ' + uwhite + commastr(player.age) + config.textcol1 + ' years old.',
+            ' ' + uplc + player.name2 + config.textcol1 + ' has come to be ' + uwhite + commastr(player.age) +
+            config.textcol1 + ' years old.',
             s,
             '',
             '',
@@ -703,7 +725,8 @@ begin
         end;
         1: begin
           newsy(True, 'Birthday',
-            ' ' + uplc + player.name2 + config.textcol1 + ' celebrated ' + sex3[player.sex] + ' ' + uwhite + commastr(player.age) + config.textcol1 + ' birthday.',
+            ' ' + uplc + player.name2 + config.textcol1 + ' celebrated ' + sex3[player.sex] +
+            ' ' + uwhite + commastr(player.age) + config.textcol1 + ' birthday.',
             s,
             '',
             '',
@@ -715,7 +738,7 @@ begin
         end;
       end; {case .end.}
 
-    end; {birthday *END*}
+    end;   {birthday *END*}
 
 
     {** Should player get salary from the bank (guard duty) ? **}
@@ -743,8 +766,10 @@ begin
     begin
 
       pay := True;
-      if (king.taxalignment = 1) and (player.chiv < player.dark) then pay := False;
-      if (king.taxalignment = 2) and (player.dark < player.chiv) then pay := False;
+      if (king.taxalignment = 1) and (player.chiv < player.dark) then
+        pay := False;
+      if (king.taxalignment = 2) and (player.dark < player.chiv) then
+        pay := False;
 
       if (pay) and (player.bankgold > 100) then
       begin
@@ -767,7 +792,8 @@ begin
           begin
             DecBankMoney(player, yy);
 
-            if player.bankgold < 0 then player.bankgold := 0;
+            if player.bankgold < 0 then
+              player.bankgold := 0;
 
             {store accumulated}
             if player.RoyTaxPaied < 2000000000 then
@@ -917,7 +943,8 @@ begin
   begin
     load_character(player, 1, i);
 
-    if player.teamrec > 1 then s := 'days'
+    if player.teamrec > 1 then
+      s := 'days'
     else s := 'day';
 
     if player.cturf = True then

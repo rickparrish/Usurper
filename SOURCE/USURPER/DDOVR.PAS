@@ -12,9 +12,19 @@ uses
 
 {procedure showhelp;}
 
-procedure GetBBSInfo(bbstype: word; var user_first_name, user_last_name: string; var user_access_level: word; var bbs_time_left: integer; var com_port: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}integer{$ENDIF}; var baud_rate: longint; var node_num: integer; var local: boolean; var Graphics: byte; var color1: boolean; var color_chg: boolean; var board_name: string; var sysop_first_name: string; var sysop_last_name: string; var maxtime: word; var dropfilepath: string; var lockbaud: longint);
+procedure GetBBSInfo(bbstype: word; var user_first_name, user_last_name: string; var user_access_level: word;
+  var bbs_time_left: integer;
+  var com_port: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}integer{$ENDIF}; var baud_rate: longint; var node_num: integer;
+  var local: boolean; var Graphics: byte; var color1: boolean; var color_chg: boolean; var board_name: string;
+  var sysop_first_name: string; var sysop_last_name: string; var maxtime: word; var dropfilepath: string;
+  var lockbaud: longint);
 
-procedure MakeInfoStrings(bbstype: word; var user_first_name, user_last_name: string; var user_access_level: word; var bbs_time_left: integer; var com_port: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}integer{$ENDIF}; var baud_rate, baud_modem: longint; var node_num: integer; var local: boolean; var Graphics: byte; var color1: boolean; var color_chg: boolean; var board_name: string; var sysop_first_name: string; var sysop_last_name: string; var maxtime: word; var dropfilepath: string; var lockbaud: longint);
+procedure MakeInfoStrings(bbstype: word; var user_first_name, user_last_name: string;
+  var user_access_level: word; var bbs_time_left: integer;
+  var com_port: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}integer{$ENDIF}; var baud_rate, baud_modem: longint;
+  var node_num: integer; var local: boolean; var Graphics: byte; var color1: boolean; var color_chg: boolean;
+  var board_name: string; var sysop_first_name: string; var sysop_last_name: string; var maxtime: word;
+  var dropfilepath: string; var lockbaud: longint);
 
 const
   numddovrstr = 11;
@@ -26,7 +36,12 @@ var
 
 implementation
 
-procedure GetBBSInfo(bbstype: word; var user_first_name, user_last_name: string; var user_access_level: word; var bbs_time_left: integer; var com_port: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}integer{$ENDIF}; var baud_rate: longint; var node_num: integer; var local: boolean; var Graphics: byte; var color1: boolean; var color_chg: boolean; var board_name: string; var sysop_first_name: string; var sysop_last_name: string; var maxtime: word; var dropfilepath: string; var lockbaud: longint);
+procedure GetBBSInfo(bbstype: word; var user_first_name, user_last_name: string; var user_access_level: word;
+  var bbs_time_left: integer;
+  var com_port: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}integer{$ENDIF}; var baud_rate: longint; var node_num: integer;
+  var local: boolean; var Graphics: byte; var color1: boolean; var color_chg: boolean; var board_name: string;
+  var sysop_first_name: string; var sysop_last_name: string; var maxtime: word; var dropfilepath: string;
+  var lockbaud: longint);
 
 type
 
@@ -49,18 +64,18 @@ type
   {layout of the PCBOARD12.SYS file while doors are open}
 
   pcb_sys_rec12 = record
-    display:    char2;          {display on console?  -1 or 0}
-    printer:    char2;          {print log?           -1 or 0}
-    page_bell:  char2;          {bother sysop?        -1 or 0}
-    alarm:      char2;          {caller alarm sound?  -1 or 0}
-    sysop_next: char2;          {force sysop on next? 'N ', 'X ' or '  '}
+    display:    char2;             {display on console?  -1 or 0}
+    printer:    char2;             {print log?           -1 or 0}
+    page_bell:  char2;             {bother sysop?        -1 or 0}
+    alarm:      char2;             {caller alarm sound?  -1 or 0}
+    sysop_next: char2;             {force sysop on next? 'N ', 'X ' or '  '}
 
     baud:          array [1..4] of char;       {caller's baud rate}
     Name:          char25;         {caller's name}
     xpert:         char;           {pcb/pro's own expert flag}
     nulls:         char;           {pcb/pro's own nulls flag}
     firstname:     array [1..15] of char;      {caller's first name}
-    Graphics:      char2;       {ansi graphics mode?  '-1',' 0', or '7E'}
+    Graphics:      char2;          {ansi graphics mode?  '-1',' 0', or '7E'}
     password:      array [1..12] of char;      {caller's password (last 2 chars redef'd}
     usernum:       integer;        {record number in user file}
     time_on:       Basic_real_type;
@@ -97,7 +112,8 @@ var
     ch: char;
   begin
     ch := '1';
-    if num in [0..35] then ch := Array36[num + 1];
+    if num in [0..35] then
+      ch := Array36[num + 1];
     In36 := ch;
   end;
 
@@ -116,7 +132,8 @@ var
   var
     a: integer;
   begin;
-    for a := 1 to length(s) do s[a] := upcase(s[a]);
+    for a := 1 to length(s) do
+      s[a] := upcase(s[a]);
     stu := s;
   end;
 
@@ -169,7 +186,8 @@ var
     time_used := basic_real(pcbsys.open_time) - basic_real(pcbsys.time_on);
     time_left := basic_Real(pcbsys.time_limit) - (time_used);
     tl := round(time_left / 60);
-    if tl > 255 then tl := 255;
+    if tl > 255 then
+      tl := 255;
     pcboard_time_left := tl;
   end;
 
@@ -294,7 +312,8 @@ var
  {$I-}
     Reset(PCBFile);
  {$I+}
-    if (IOResult <> 0) then dderror('... Unable to open pcboard.sys file...');
+    if (IOResult <> 0) then
+      dderror('... Unable to open pcboard.sys file...');
     BlockRead(PCBFile, PCB14, 1);
     Close(PCBFile);
     Name := pcb14.Name;
@@ -305,11 +324,15 @@ var
     s := s + Pcb14.SComPort;
     Val(s, ComPort, I);
     s := '';
-    for a := 1 to 5 do s := s + Pcb14.openbps[a];
-    while s[length(s)] = ' ' do Delete(s, length(s), 1);
+    for a := 1 to 5 do
+      s := s + Pcb14.openbps[a];
+    while s[length(s)] = ' ' do
+      Delete(s, length(s), 1);
     val(s, baud, i);
-    if PCB14.connectbps = 'Local' then baud := 0;
-    if (baud = 0) then ComPort := 0;
+    if PCB14.connectbps = 'Local' then
+      baud := 0;
+    if (baud = 0) then
+      ComPort := 0;
 
     case Pcb14.Graphics of
       'Y': begin
@@ -322,14 +345,22 @@ var
         Graphics := 0;
       end;
     end; {Case}
-    if BBStype = 6 then if (PCB14.Bitmap and $02 = $02) then Graphics := 4;
+    if BBStype = 6 then
+      if (PCB14.Bitmap and $02 = $02) then
+        Graphics := 4;
     TLeft := pcb14.sminsleft;
-    while ((fname[1] = #0) or (fname[1] = #32)) and (length(fname) > 1) do Delete(fname, 1, 1);
-    while ((fname[length(fname)] = #0) or (fname[length(fname)] = #32)) and (length(fname) > 1) do Delete(fname, length(fname), 1);
-    while ((lname[1] = #0) or (lname[1] = #32)) and (length(lname) > 1) do Delete(lname, 1, 1);
-    while ((lname[length(lname)] = #0) or (lname[length(lname)] = #32)) and (length(lname) > 1) do Delete(lname, length(lname), 1);
-    for a := 1 to length(fname) do fname[a] := upcase(fname[a]);
-    for a := 1 to length(lname) do lname[a] := upcase(lname[a]);
+    while ((fname[1] = #0) or (fname[1] = #32)) and (length(fname) > 1) do
+      Delete(fname, 1, 1);
+    while ((fname[length(fname)] = #0) or (fname[length(fname)] = #32)) and (length(fname) > 1) do
+      Delete(fname, length(fname), 1);
+    while ((lname[1] = #0) or (lname[1] = #32)) and (length(lname) > 1) do
+      Delete(lname, 1, 1);
+    while ((lname[length(lname)] = #0) or (lname[length(lname)] = #32)) and (length(lname) > 1) do
+      Delete(lname, length(lname), 1);
+    for a := 1 to length(fname) do
+      fname[a] := upcase(fname[a]);
+    for a := 1 to length(lname) do
+      lname[a] := upcase(lname[a]);
   end;
 
   procedure load_rbbs16;
@@ -339,46 +370,61 @@ var
     info_num: byte;
     s, s2:    string;
   begin
-    if BBStype in [3, 9] then color1 := True;
+    if BBStype in [3, 9] then
+      color1 := True;
     info_num := node_num;
-    if BBStype = 9 then info_num := 1;
+    if BBStype = 9 then
+      info_num := 1;
     Assign(fd, dropfilepath + 'DORINFO' + w36(info_num) + '.DEF');
  {$i-}
     reset(fd);
  {$i+}
-    if ioresult <> 0 then dderror('Can''t open DORINFO' + w36(info_num) + '.DEF');
+    if ioresult <> 0 then
+      dderror('Can''t open DORINFO' + w36(info_num) + '.DEF');
     local := False;
     readln(fd, s);
     readln(fd, s);
     readln(fd, s);
     readln(fd, s);
     val(s[4], com_port, a);
-    if com_port = 0 then local := True;
+    if com_port = 0 then
+      local := True;
     readln(fd, s);
     s2 := '';
     s := stu(s);
-    for a := 1 to pos('BAUD', s) - 2 do s2 := s2 + s[a];
-    if s2[1] = ' ' then Delete(s2, 1, 1);
+    for a := 1 to pos('BAUD', s) - 2 do
+      s2 := s2 + s[a];
+    if s2[1] = ' ' then
+      Delete(s2, 1, 1);
     val(s2, baud_rate, a);
-    if (stu(s2) = 'LOCA') or (stu(s2) = 'LOCAL') then local := True;
-    if baud_rate = 0 then local := True;
+    if (stu(s2) = 'LOCA') or (stu(s2) = 'LOCAL') then
+      local := True;
+    if baud_rate = 0 then
+      local := True;
     readln(fd, s);
     readln(fd, user_first_name);
     readln(fd, user_last_name);
     readln(fd, s);
     readln(fd, s);
-    if s[1] = ' ' then Delete(s, 1, 1);
-    while s[length(s)] = ' ' do Delete(s, length(s), 1);
+    if s[1] = ' ' then
+      Delete(s, 1, 1);
+    while s[length(s)] = ' ' do
+      Delete(s, length(s), 1);
     val(s, Graphics, a);
     Inc(Graphics);
-    if color1 then Inc(Graphics);
+    if color1 then
+      Inc(Graphics);
     readln(fd, s);
-    if s[1] = ' ' then Delete(s, 1, 1);
-    while s[length(s)] = ' ' do Delete(s, length(s), 1);
+    if s[1] = ' ' then
+      Delete(s, 1, 1);
+    while s[length(s)] = ' ' do
+      Delete(s, length(s), 1);
     val(s, user_access_level, a);
     readln(fd, s);
-    if s[1] = ' ' then Delete(s, 1, 1);
-    while s[length(s)] = ' ' do Delete(s, length(s), 1);
+    if s[1] = ' ' then
+      Delete(s, 1, 1);
+    while s[length(s)] = ' ' do
+      Delete(s, length(s), 1);
     val(s, bbs_time_left, a);
     Close(fd);
     user_first_name := stu(user_first_name);
@@ -397,7 +443,8 @@ var
     bbs_time_left := tleft;
     user_access_level := 50;
     Inc(Graphics);
-    if (baud_rate = 0) or (com_port = 0) then local := True else local := False;
+    if (baud_rate = 0) or (com_port = 0) then
+      local := True else local := False;
   end;
 
   procedure load_pcboard;
@@ -412,15 +459,26 @@ var
     b := False;
     user_first_name := '';
     user_last_name := '';
-    for a := 1 to 25 do if (pcbsys.Name[a] = ' ') or (pcbsys.Name[a] = #0) then b := True else if b = False then user_first_name := user_first_name + pcbsys.Name[a] else user_last_name := user_last_name + pcbsys.Name[a];
+    for a := 1 to 25 do
+      if (pcbsys.Name[a] = ' ') or (pcbsys.Name[a] = #0) then
+        b := True else
+      if b = False then
+        user_first_name := user_first_name + pcbsys.Name[a] else user_last_name := user_last_name + pcbsys.Name[a];
     baud_rate := 300;
-    if (pcbsys.baud[1] = '1') and (pcbsys.baud[2] = '2') then baud_rate := 1200;
-    if pcbsys.baud[1] = '2' then baud_rate := 2400;
-    if pcbsys.baud[1] = '4' then baud_rate := 4800;
-    if pcbsys.baud[1] = '9' then baud_rate := 9600;
-    if (pcbsys.baud[1] = '1') and (pcbsys.baud[2] = '9') then baud_rate := 19200;
-    if pcbsys.baud[1] = 'L' then local := True;
-    if pcbsys.Graphics[2] = '0' then Graphics := 1 else Graphics := 3;
+    if (pcbsys.baud[1] = '1') and (pcbsys.baud[2] = '2') then
+      baud_rate := 1200;
+    if pcbsys.baud[1] = '2' then
+      baud_rate := 2400;
+    if pcbsys.baud[1] = '4' then
+      baud_rate := 4800;
+    if pcbsys.baud[1] = '9' then
+      baud_rate := 9600;
+    if (pcbsys.baud[1] = '1') and (pcbsys.baud[2] = '9') then
+      baud_rate := 19200;
+    if pcbsys.baud[1] = 'L' then
+      local := True;
+    if pcbsys.Graphics[2] = '0' then
+      Graphics := 1 else Graphics := 3;
     bbs_time_left := pcboard_time_left;
     user_first_name := stu(user_first_name);
     user_last_name := stu(user_last_name);
@@ -439,21 +497,29 @@ var
  {$I-}
     reset(f);
  {$I+}
-    if ioresult <> 0 then dderror('Error in opening "info.bbs"');
+    if ioresult <> 0 then
+      dderror('Error in opening "info.bbs"');
     readln(f, s);
     b := False;
     user_first_name := '';
     user_last_name := '';
-    for a := 1 to 25 do if (pcbsys.Name[a] = ' ') or (pcbsys.Name[a] = #0) then b := True else if b = False then user_first_name := user_first_name + pcbsys.Name[a] else user_last_name := user_last_name + pcbsys.Name[a];
+    for a := 1 to 25 do
+      if (pcbsys.Name[a] = ' ') or (pcbsys.Name[a] = #0) then
+        b := True else
+      if b = False then
+        user_first_name := user_first_name + pcbsys.Name[a] else user_last_name := user_last_name + pcbsys.Name[a];
     readln(f, s); val(s, i, code); baud_rate := i;
     readln(f, s); val(s, i, code); com_port := i;
     readln(f, s); val(s, i, code); user_access_level := i;
-    readln(f, s); s := stu(s); if s = 'TRUE' then local := True else local := False;
+    readln(f, s); s := stu(s); if s = 'TRUE' then
+      local := True else local := False;
     readln(f, s);
     readln(f, s); val(s, i, code); bbs_time_left := i;
     readln(f, s);
-    if s = 'TRUE' then Graphics := 3 else Graphics := 1;
-    if s = 'TRUE' then color_chg := True else color_chg := False;
+    if s = 'TRUE' then
+      Graphics := 3 else Graphics := 1;
+    if s = 'TRUE' then
+      color_chg := True else color_chg := False;
     readln(f, s);
     Close(f);
   end;
@@ -473,13 +539,18 @@ var
  {$I-}
     reset(f);
  {$I+}
-    if ioresult <> 0 then dderror('Error in opening "Chain.txt"');
+    if ioresult <> 0 then
+      dderror('Error in opening "Chain.txt"');
     readln(f, s);
     readln(f, s);
     user_first_name := '';
     user_last_name := '';
     b := False;
-    for a := 1 to length(s) do if s[a] = ' ' then b := True else if b then user_last_name := user_last_name + s[a] else user_first_name := user_first_name + s[a];
+    for a := 1 to length(s) do
+      if s[a] = ' ' then
+        b := True else
+      if b then
+        user_last_name := user_last_name + s[a] else user_first_name := user_first_name + s[a];
     for i := 1 to 9 do
     begin;
       readln(f, s);
@@ -496,9 +567,11 @@ var
       color_chg := False;
     end;
     readln(f, s);
-    if s <> '0' then local := False else local := True;
+    if s <> '0' then
+      local := False else local := True;
     readln(f, s);
-    while (s <> '') and (s[1] = ' ') do Delete(s, 1, 1);
+    while (s <> '') and (s[1] = ' ') do
+      Delete(s, 1, 1);
     Delete(s, length(s) - 3, 3);
     val(s, sint, code);
     bbs_time_left := sint div 60;
@@ -516,7 +589,11 @@ var
     sysop_first_name := '';
     sysop_last_name := '';
     b := False;
-    for a := 1 to length(s) do if s[a] = ' ' then b := True else if b then sysop_last_name := sysop_last_name + s[a] else sysop_first_name := sysop_first_name + s[a];
+    for a := 1 to length(s) do
+      if s[a] = ' ' then
+        b := True else
+      if b then
+        sysop_last_name := sysop_last_name + s[a] else sysop_first_name := sysop_first_name + s[a];
     Close(f);
   end;
 
@@ -533,10 +610,12 @@ var
  {$I-}
     reset(F);
  {$I+}
-    if ioresult <> 0 then dderror('Cannot load DOOR32.SYS');
+    if ioresult <> 0 then
+      dderror('Cannot load DOOR32.SYS');
 
     readln(f, s); { 1 - Comm Type (0=Local, 1=Serial, 2=Telnet) }
-    if (s = '0') then local := True else local := False;
+    if (s = '0') then
+      local := True else local := False;
 
     readln(f, s); { 2 - Comm Or Socket Handle }
     val(s, com_port, a);
@@ -553,7 +632,11 @@ var
     b := False;
     user_first_name := '';
     user_last_name := '';
-    for a := 1 to length(s) do if s[a] = ' ' then b := True else if b then user_last_name := user_last_name + upcase(s[a]) else user_first_name := user_first_name + upcase(s[a]);
+    for a := 1 to length(s) do
+      if s[a] = ' ' then
+        b := True else
+      if b then
+        user_last_name := user_last_name + upcase(s[a]) else user_first_name := user_first_name + upcase(s[a]);
 
     readln(f, s); { 7 - User's Handle/Alias }
 
@@ -564,7 +647,8 @@ var
     val(s, bbs_time_left, a);
 
     readln(f, s); { 10 - Emulation (0=Ascii, 1=Ansi, 2=Avatar, 3=RIP, 4=MaxGfx) }
-    if (s = '0') then Graphics := 2 else Graphics := 3;
+    if (s = '0') then
+      Graphics := 2 else Graphics := 3;
 
     readln(f, s); { 11 - Current Node Number }
 
@@ -585,13 +669,15 @@ var
  {$I-}
     reset(F);
  {$I+}
-    if ioresult <> 0 then dderror('Cannot load DOOR.SYS');
+    if ioresult <> 0 then
+      dderror('Cannot load DOOR.SYS');
 
     readln(f, s); {Com Port}
     Delete(s, 1, 3);
     Delete(s, 2, 1);
     val(s, com_port, a);
-    if com_port = 0 then local := True else local := False;
+    if com_port = 0 then
+      local := True else local := False;
 
     readln(f, s); { remote baud rate}
     readln(f, s); {dbits}
@@ -609,7 +695,11 @@ var
     b := False;
     user_first_name := '';
     user_last_name := '';
-    for a := 1 to length(s) do if s[a] = ' ' then b := True else if b then user_last_name := user_last_name + upcase(s[a]) else user_first_name := user_first_name + upcase(s[a]);
+    for a := 1 to length(s) do
+      if s[a] = ' ' then
+        b := True else
+      if b then
+        user_last_name := user_last_name + upcase(s[a]) else user_first_name := user_first_name + upcase(s[a]);
 
     readln(f, s); {city,state}
     readln(f, s); {home phone}
@@ -627,8 +717,11 @@ var
     val(s, bbs_time_left, a);
 
     readln(f, s); {graphics code}
-    if s = 'GR' then Graphics := 3
-    else if s = 'RIP' then Graphics := 5
+    if s = 'GR' then
+      Graphics := 3
+    else
+    if s = 'RIP' then
+      Graphics := 5
     else Graphics := 1;
 
     readln(f, s); {#21, screen length, jakob added this line}
@@ -649,7 +742,8 @@ var
  {$I-}
     reset(F);
  {$I+}
-    if ioresult <> 0 then dderror('Cannot load SFDOORS.DAT');
+    if ioresult <> 0 then
+      dderror('Cannot load SFDOORS.DAT');
 
     readln(f, s);
     readln(f, s); {name}
@@ -657,17 +751,23 @@ var
     b := False;
     user_first_name := '';
     user_last_name := '';
-    for a := 1 to length(s) do if s[a] = ' ' then b := True else if b then user_last_name := user_last_name + upcase(s[a]) else user_first_name := user_first_name + upcase(s[a]);
+    for a := 1 to length(s) do
+      if s[a] = ' ' then
+        b := True else
+      if b then
+        user_last_name := user_last_name + upcase(s[a]) else user_first_name := user_first_name + upcase(s[a]);
 
     readln(f, s);
     readln(f, s);
     readln(f, s); {baud}
     val(s, baud_rate, a);
-    if baud_rate = 0 then local := True else local := False;
+    if baud_rate = 0 then
+      local := True else local := False;
 
     readln(f, s); {cport}
     val(s, com_port, a);
-    if com_port = 0 then local := True else local := False;
+    if com_port = 0 then
+      local := True else local := False;
 
     readln(f, s); {time left}
     val(s, bbs_time_left, a);
@@ -675,7 +775,8 @@ var
     readln(f, s);
     readln(f, s);
     readln(f, s); {ansi}
-    if stu(s) = 'TRUE' then Graphics := 3 else Graphics := 1;
+    if stu(s) = 'TRUE' then
+      Graphics := 3 else Graphics := 1;
 
     readln(f, s); {sec}
     val(s, user_access_level, a);
@@ -696,7 +797,8 @@ var
  {$I-}
     reset(F);
  {$I+}
-    if ioresult <> 0 then dderror('Cannot open JUMPER.DAT');
+    if ioresult <> 0 then
+      dderror('Cannot open JUMPER.DAT');
     readln(f, s);
     readln(f, s);
     readln(f, s);
@@ -713,10 +815,12 @@ var
     val(s, bbs_time_left, a);
     readln(f, s);
     val(s, com_port, a);
-    if com_port = 0 then local := True;
+    if com_port = 0 then
+      local := True;
     readln(f, s);
     val(s, baud_rate, a);
-    if baud_rate = 0 then local := True;
+    if baud_rate = 0 then
+      local := True;
 
     readln(f, s);
     readln(f, s);
@@ -726,8 +830,10 @@ var
     readln(f, s);
     readln(f, s2);
     Graphics := 1;
-    if (s = 'TRUE') and (s2 = 'FALSE') then Graphics := 2;
-    if (s2 = 'TRUE') then Graphics := 3;
+    if (s = 'TRUE') and (s2 = 'FALSE') then
+      Graphics := 2;
+    if (s2 = 'TRUE') then
+      Graphics := 3;
     Close(f);
   end;
 
@@ -745,41 +851,50 @@ var
  {$I-}
     reset(F);
  {$I+}
-    if ioresult <> 0 then dderror('Cannot open TRIBBS.SYS');
+    if ioresult <> 0 then
+      dderror('Cannot open TRIBBS.SYS');
     readln(f, s);
     readln(f, s); {user name}
     s := stu(s);
     b := False;
     user_first_name := '';
     user_last_name := '';
-    for a := 1 to length(s) do if s[a] = ' ' then b := True else if b then user_last_name := user_last_name + upcase(s[a]) else user_first_name := user_first_name + upcase(s[a]);
+    for a := 1 to length(s) do
+      if s[a] = ' ' then
+        b := True else
+      if b then
+        user_last_name := user_last_name + upcase(s[a]) else user_first_name := user_first_name + upcase(s[a]);
     readln(f, s);  {password }
     readln(f, s);  {security}
     readln(f, s);  {help lev}
     readln(f, s);  {graphics}
-    if s = 'Y' then Graphics := 3
+    if s = 'Y' then
+      Graphics := 3
     else
       Graphics := 1;
 
     readln(f, s); {minutes left}
     val(s, bbs_time_left, a);
 
-    readln(f, s); {phonenumber}
-    readln(f, s); {citystate  }
-    readln(f, s); {birthdate  }
-    readln(f, s); {nodenumber }
+    readln(f, s);  {phonenumber}
+    readln(f, s);  {citystate  }
+    readln(f, s);  {birthdate  }
+    readln(f, s);  {nodenumber }
     val(s, node_num, a);
     readln(f, s);  {comportno }
     val(s, com_port, a);
-    if com_port = 0 then local := True;
+    if com_port = 0 then
+      local := True;
 
     readln(f, s); {modembaud rate }
     val(s, baud_rate, a);
-    if baud_rate = 0 then local := True;
+    if baud_rate = 0 then
+      local := True;
     readln(f, s); {baud rate }
     val(s, baud_rate, a);
     lockbaud := baud_rate;
-    if baud_rate = 0 then local := True;
+    if baud_rate = 0 then
+      local := True;
     Close(f);
   end;
 
@@ -790,7 +905,8 @@ var
     s:    string;
   begin;
     val(ParamStr(1), a, b);
-    if a > 0 then node_num := a;
+    if a > 0 then
+      node_num := a;
     local := True;
     writeln;
     writeln('旼컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴�');
@@ -809,7 +925,11 @@ var
       user_first_name := '';
       user_last_name := '';
       d := False;
-      for a := 1 to length(s) do if s[a] = ' ' then d := True else if d = False then user_first_name := user_first_name + upcase(s[a])
+      for a := 1 to length(s) do
+        if s[a] = ' ' then
+          d := True else
+        if d = False then
+          user_first_name := user_first_name + upcase(s[a])
         else
           user_last_name := user_last_name + upcase(s[a]);
       if user_last_name = '' then
@@ -836,28 +956,45 @@ var
 
 begin;
   baud_rate := 0;
-  if bbstype = 0 then load_maint;
-  if bbstype = 1 then load_local;
-  if bbstype = 3 then load_rbbs16;
-  if bbstype = 4 then load_pcboard;
-  if bbstype = 5 then load_WWIV;
-  if bbstype = 6 then load_pcboard14;
-  if bbstype = 7 then load_rbbs16;
-  if bbstype = 8 then load_phnx;
-  if bbstype = 9 then load_rbbs16;
-  if bbstype = 10 then load_pcboard14;
-  if bbstype = 11 then load_doorsys;
-  if bbstype = 12 then load_spitfire;
-  if bbstype = 13 then load_2am;
-  if bbstype = 14 then load_TriBBS;
+  if bbstype = 0 then
+    load_maint;
+  if bbstype = 1 then
+    load_local;
+  if bbstype = 3 then
+    load_rbbs16;
+  if bbstype = 4 then
+    load_pcboard;
+  if bbstype = 5 then
+    load_WWIV;
+  if bbstype = 6 then
+    load_pcboard14;
+  if bbstype = 7 then
+    load_rbbs16;
+  if bbstype = 8 then
+    load_phnx;
+  if bbstype = 9 then
+    load_rbbs16;
+  if bbstype = 10 then
+    load_pcboard14;
+  if bbstype = 11 then
+    load_doorsys;
+  if bbstype = 12 then
+    load_spitfire;
+  if bbstype = 13 then
+    load_2am;
+  if bbstype = 14 then
+    load_TriBBS;
 {$IFNDEF MSDOS}
-  if bbstype = 15 then load_door32;
+  if bbstype = 15 then
+    load_door32;
 {$ENDIF}
   user_first_name := stu(user_first_name);
   user_last_name := stu(user_last_name);
   {if node_num=0 then node_num:=1; }
-  if Graphics >= 3 then color_chg := True else color_chg := False;
-  if bbs_time_left > maxtime then bbs_time_left := maxtime;
+  if Graphics >= 3 then
+    color_chg := True else color_chg := False;
+  if bbs_time_left > maxtime then
+    bbs_time_left := maxtime;
 end;
 
 function wva(w: word): string;
@@ -874,7 +1011,12 @@ begin;
   move(s, ddovrinfo[n]^, length(s) + 1);
 end;
 
-procedure MakeInfoStrings(bbstype: word; var user_first_name, user_last_name: string; var user_access_level: word; var bbs_time_left: integer; var com_port: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}integer{$ENDIF}; var baud_rate, baud_modem: longint; var node_num: integer; var local: boolean; var Graphics: byte; var color1: boolean; var color_chg: boolean; var board_name: string; var sysop_first_name: string; var sysop_last_name: string; var maxtime: word; var dropfilepath: string; var lockbaud: longint);
+procedure MakeInfoStrings(bbstype: word; var user_first_name, user_last_name: string;
+  var user_access_level: word; var bbs_time_left: integer;
+  var com_port: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}integer{$ENDIF}; var baud_rate, baud_modem: longint;
+  var node_num: integer; var local: boolean; var Graphics: byte; var color1: boolean; var color_chg: boolean;
+  var board_name: string; var sysop_first_name: string; var sysop_last_name: string; var maxtime: word;
+  var dropfilepath: string; var lockbaud: longint);
 
 const
 {$IFDEF MSDOS}
@@ -912,7 +1054,8 @@ begin;
   stuffstr(6, '     User: ' + user_first_name + ' ' + user_last_name);
   stuffstr(7, 'Access lv: ' + wva(user_access_level));
   stuffstr(8, ' Node num: ' + wva(node_num));
-  if lockbaud = 0 then s := 'Not Locked' else s := wva(lockbaud);
+  if lockbaud = 0 then
+    s := 'Not Locked' else s := wva(lockbaud);
   stuffstr(9, 'Lock Baud: ' + s);
   stuffstr(10, ' Software: ' + software_names[bbstype]);
   s := drop_files[bbstype];

@@ -139,7 +139,7 @@ var
   MoatGuard: ^MoatRec; {moat guard record}
   A_Letter:  ^MailRec; {mail record}
 
-  procedure Disposal; {dispose pointer variables}
+  procedure Disposal;  {dispose pointer variables}
   begin
     dispose(pl0);
     dispose(pl1);
@@ -200,12 +200,14 @@ var
           end;
         end;
 
-        if (abort) or (found) then break;
+        if (abort) or (found) then
+          break;
       end; {for j:= .end.}
-      if (abort) or (found) then break;
+      if (abort) or (found) then
+        break;
     end; {for i:= .end.}
 
-    {return result}
+         {return result}
     get_person := Result;
 
   end; {get_person *end*}
@@ -292,7 +294,8 @@ var
               begin
                 {not banned}
                 crlf;
-                d(global_plycol, pl0^.name2 + config.textcol1 + ' and ' + uplc + pl1^.name2 + config.textcol1 + ' relationship is not ' + 'banned' + config.textcol1 + '! (dummy)');
+                d(global_plycol, pl0^.name2 + config.textcol1 + ' and ' + uplc + pl1^.name2 +
+                  config.textcol1 + ' relationship is not ' + 'banned' + config.textcol1 + '! (dummy)');
                 pause;
               end else
               begin
@@ -310,7 +313,8 @@ var
               view_one_relation(pl0^.name2, pl1^.name2, True);
 
               crlf;
-              if confirm('Remove ' + ulred + 'ban' + config.textcol1 + ' on ' + uplc + pl0^.name2 + config.textcol1 + ' and ' + uplc + pl1^.name2 + config.textcol1 + '', 'Y') = True then
+              if confirm('Remove ' + ulred + 'ban' + config.textcol1 + ' on ' + uplc + pl0^.name2 +
+                config.textcol1 + ' and ' + uplc + pl1^.name2 + config.textcol1 + '', 'Y') = True then
               begin
 
                 d(15, 'Done!');
@@ -330,7 +334,8 @@ var
                 {news-paper}
                 Newsy(True,
                   'Couple Redeemed from Sin',
-                  ' ' + s + ' has forgiven ' + uplc + pl0^.name2 + config.textcol1 + ' and ' + uplc + pl1^.name2 + config.textcol1,
+                  ' ' + s + ' has forgiven ' + uplc + pl0^.name2 + config.textcol1 + ' and ' +
+                  uplc + pl1^.name2 + config.textcol1,
                   ' for their earlier life of immorality.',
                   '',
                   '',
@@ -343,12 +348,14 @@ var
                 {mail pl0 and pl1 if they are online}
                 if is_online(pl0^.name2, online_player) = True then
                 begin
-                  online_send_to_player(pl0^.name2, online_player, 'Your sins with ' + uplc + pl1^.name2 + config.textcol1 + ' has been ' + uyellow + ' forgiven' + config.textcol1 + '!');
+                  online_send_to_player(pl0^.name2, online_player, 'Your sins with ' + uplc +
+                    pl1^.name2 + config.textcol1 + ' has been ' + uyellow + ' forgiven' + config.textcol1 + '!');
                 end;
 
                 if is_online(pl1^.name2, online_player) = True then
                 begin
-                  online_send_to_player(pl1^.name2, online_player, 'Your sins with ' + uplc + pl0^.name2 + config.textcol1 + ' has been ' + ulred + ' forgiven' + config.textcol1 + '!');
+                  online_send_to_player(pl1^.name2, online_player, 'Your sins with ' + uplc +
+                    pl0^.name2 + config.textcol1 + ' has been ' + ulred + ' forgiven' + config.textcol1 + '!');
                 end;
 
                 {mail pl0}
@@ -361,7 +368,8 @@ var
                   '',
                   uyellow + s + config.textcol1,
                   mkstring(length(s), underscore),
-                  kingstring(player.sex) + ' ' + ukingc + player.name2 + config.textcol1 + ' has forgiven the immoral relationship',
+                  kingstring(player.sex) + ' ' + ukingc + player.name2 + config.textcol1 +
+                  ' has forgiven the immoral relationship',
                   'between you and ' + uplc + pl1^.name2 + config.textcol1 + '!',
                   'Try to act decent in the future, or you will be banned forever!',
                   '',
@@ -385,7 +393,8 @@ var
                   '',
                   uyellow + s + config.textcol1,
                   mkstring(length(s), underscore),
-                  kingstring(player.sex) + ' ' + ukingc + player.name2 + config.textcol1 + ' has forgiven the immoral relationship',
+                  kingstring(player.sex) + ' ' + ukingc + player.name2 + config.textcol1 +
+                  ' has forgiven the immoral relationship',
                   'between you and ' + uplc + pl0^.name2 + config.textcol1 + '!',
                   'Try to act decent in the future, or you will be banned forever!',
                   '',
@@ -408,10 +417,10 @@ var
 
           end;
 
-        end; {remove ban *end*}
+        end;       {remove ban *end*}
         'B': begin {ban, a relation [not able to marry]}
 
-          {any marital options left today?}
+                   {any marital options left today?}
           load_king(fload, king^);
 
           if king^.MarryActions < 1 then
@@ -451,7 +460,8 @@ var
                 if (pl0^.sex = pl1^.sex) and (Config.AllowHomoRelations = False) then
                 begin
                   {same sex and Homo not allowed. no need for banning}
-                  d(config.textcolor, 'Why bother, ' + uplc + pl0^.name2 + config.textcol1 + ' and ' + uplc + pl1^.name2 + config.textcol1 + ' can''t marry anyway.');
+                  d(config.textcolor, 'Why bother, ' + uplc + pl0^.name2 + config.textcol1 +
+                    ' and ' + uplc + pl1^.name2 + config.textcol1 + ' can''t marry anyway.');
                   pause;
                 end else
                 begin
@@ -464,9 +474,11 @@ var
                   begin
                     {already banned}
                     crlf;
-                    d(global_plycol, pl0^.name2 + config.textcol1 + ' and ' + uplc + pl1^.name2 + config.textcol1 + ' relationship is already ' + ulred + 'banned' + config.textcol1 + '!');
+                    d(global_plycol, pl0^.name2 + config.textcol1 + ' and ' + uplc + pl1^.name2 +
+                      config.textcol1 + ' relationship is already ' + ulred + 'banned' + config.textcol1 + '!');
                     pause;
-                  end else if (Relation.Relation1 = global_RelationMarried) and
+                  end else
+                  if (Relation.Relation1 = global_RelationMarried) and
                     (Relation.Relation2 = global_RelationMarried) then
                   begin
                     crlf;
@@ -489,7 +501,8 @@ var
                 view_one_relation(pl0^.name2, pl1^.name2, True);
 
                 crlf;
-                if confirm('Forbid ' + uplc + pl0^.name2 + config.textcol1 + ' and ' + uplc + pl1^.name2 + config.textcol1 + ' to marry', 'Y') = True then
+                if confirm('Forbid ' + uplc + pl0^.name2 + config.textcol1 + ' and ' + uplc +
+                  pl1^.name2 + config.textcol1 + ' to marry', 'Y') = True then
                 begin
 
                   d(15, 'Banned!');
@@ -518,7 +531,8 @@ var
                   {news-paper}
                   Newsy(True,
                     'Undesirable Couple',
-                    ' ' + uplc + pl0^.name2 + config.textcol1 + ' and ' + uplc + pl1^.name2 + config.textcol1 + ' have been barred from the Church.',
+                    ' ' + uplc + pl0^.name2 + config.textcol1 + ' and ' + uplc + pl1^.name2 +
+                    config.textcol1 + ' have been barred from the Church.',
                     '' + s,
                     '',
                     '',
@@ -531,12 +545,14 @@ var
                   {mail pl0 and pl1 if they are online}
                   if is_online(pl0^.name2, online_player) = True then
                   begin
-                    online_send_to_player(pl0^.name2, online_player, 'Your relation with ' + uplc + pl1^.name2 + config.textcol1 + ' has been ' + ulred + ' banned' + config.textcol1 + '!');
+                    online_send_to_player(pl0^.name2, online_player, 'Your relation with ' + uplc +
+                      pl1^.name2 + config.textcol1 + ' has been ' + ulred + ' banned' + config.textcol1 + '!');
                   end;
 
                   if is_online(pl1^.name2, online_player) = True then
                   begin
-                    online_send_to_player(pl1^.name2, online_player, 'Your relation with ' + uplc + pl0^.name2 + config.textcol1 + ' has been ' + ulred + ' banned' + config.textcol1 + '!');
+                    online_send_to_player(pl1^.name2, online_player, 'Your relation with ' + uplc +
+                      pl0^.name2 + config.textcol1 + ' has been ' + ulred + ' banned' + config.textcol1 + '!');
                   end;
 
                   {mail pl0}
@@ -549,7 +565,8 @@ var
                     '',
                     ulred + s + config.textcol1,
                     mkstring(length(s), underscore),
-                    kingstring(player.sex) + ' ' + ukingc + player.name2 + config.textcol1 + ' has barred you and ' + uplc + pl1^.name2,
+                    kingstring(player.sex) + ' ' + ukingc + player.name2 + config.textcol1 +
+                    ' has barred you and ' + uplc + pl1^.name2,
                     'from the Church.',
                     '',
                     '',
@@ -573,7 +590,8 @@ var
                     '',
                     ulred + s + config.textcol1,
                     mkstring(length(s), underscore),
-                    kingstring(player.sex) + ' ' + ukingc + player.name2 + config.textcol1 + ' has barred you and ' + uplc + pl0^.name2,
+                    kingstring(player.sex) + ' ' + ukingc + player.name2 + config.textcol1 +
+                    ' has barred you and ' + uplc + pl0^.name2,
                     'from the Church.',
                     '',
                     '',
@@ -597,11 +615,11 @@ var
 
           end;
 
-        end; {ban *end*}
+        end;       {ban *end*}
 
         'D': begin {dissolve marriage}
 
-          {any marital options left today?}
+                   {any marital options left today?}
           load_king(fload, king^);
           if king^.MarryActions < 1 then
           begin
@@ -615,7 +633,8 @@ var
             crlf;
             d(5, 'Dissolve Marriage');
             d(config.textcolor, 'Destryoing a marriage is considered an act of evil.');
-            d(config.textcolor, 'Your soul will ' + ulgray + 'darken' + config.textcol1 + ' and the press will not be merciful.');
+            d(config.textcolor, 'Your soul will ' + ulgray + 'darken' + config.textcol1 +
+              ' and the press will not be merciful.');
 
             crlf;
             d(config.textcolor, 'Whose marriage would you like to abolish?');
@@ -666,7 +685,8 @@ var
                 view_one_relation(pl0^.name2, pl1^.name2, True);
 
                 crlf;
-                if confirm('Dissolve the marriage between ' + uplc + pl0^.name2 + config.textcol1 + ' and ' + uplc + pl1^.name2 + config.textcol1
+                if confirm('Dissolve the marriage between ' + uplc + pl0^.name2 + config.textcol1 +
+                  ' and ' + uplc + pl1^.name2 + config.textcol1
                   , 'Y') = True then
                 begin
 
@@ -703,7 +723,8 @@ var
                   {news-paper}
                   Newsy(True,
                     'Abuse of Power',
-                    ' The marriage between ' + uplc + pl0^.name2 + config.textcol1 + ' and ' + uplc + pl1^.name2 + config.textcol1 + ' has been dissolved.',
+                    ' The marriage between ' + uplc + pl0^.name2 + config.textcol1 + ' and ' +
+                    uplc + pl1^.name2 + config.textcol1 + ' has been dissolved.',
                     '' + s,
                     '',
                     '',
@@ -716,12 +737,14 @@ var
                   {mail pl0 and pl1 if they are online}
                   if is_online(pl0^.name2, online_player) = True then
                   begin
-                    online_send_to_player(pl0^.name2, online_player, 'Your marriage to ' + uplc + pl1^.name2 + config.textcol1 + ' has been ' + ulred + ' dissolved' + config.textcol1 + '!');
+                    online_send_to_player(pl0^.name2, online_player, 'Your marriage to ' + uplc +
+                      pl1^.name2 + config.textcol1 + ' has been ' + ulred + ' dissolved' + config.textcol1 + '!');
                   end;
 
                   if is_online(pl1^.name2, online_player) = True then
                   begin
-                    online_send_to_player(pl1^.name2, online_player, 'Your marriage to ' + uplc + pl0^.name2 + config.textcol1 + ' has been ' + ulred + ' dissolved' + config.textcol1 + '!');
+                    online_send_to_player(pl1^.name2, online_player, 'Your marriage to ' + uplc +
+                      pl0^.name2 + config.textcol1 + ' has been ' + ulred + ' dissolved' + config.textcol1 + '!');
                   end;
 
                   {mail pl0}
@@ -734,7 +757,8 @@ var
                     '',
                     ulred + s + config.textcol1,
                     mkstring(length(s), underscore),
-                    kingstring(player.sex) + ' ' + ukingc + player.name2 + config.textcol1 + ' has dissolved your marriage to ' + uplc + pl1^.name2 + config.textcol1 + '!',
+                    kingstring(player.sex) + ' ' + ukingc + player.name2 + config.textcol1 +
+                    ' has dissolved your marriage to ' + uplc + pl1^.name2 + config.textcol1 + '!',
                     '',
                     '',
                     '',
@@ -758,7 +782,8 @@ var
                     '',
                     ulred + s + config.textcol1,
                     mkstring(length(s), underscore),
-                    kingstring(player.sex) + ' ' + ukingc + player.name2 + config.textcol1 + ' has dissolved your marriage to ' + uplc + pl0^.name2 + config.textcol1,
+                    kingstring(player.sex) + ' ' + ukingc + player.name2 + config.textcol1 +
+                    ' has dissolved your marriage to ' + uplc + pl0^.name2 + config.textcol1,
                     '',
                     '',
                     '',
@@ -783,7 +808,7 @@ var
           end;
 
         end; {dissolove marriage *end*}
-      end; {case .end.}
+      end;   {case .end.}
 
     until done;
 
@@ -850,11 +875,11 @@ var
           orders_done := True;
         end;
         'L': begin {level masters .start.}
-          crlf; {jakob, fixa!}
+          crlf;    {jakob, fixa!}
           d(7, 'This part is still under construction.');
           crlf;
           pause;
-        end; {level masters .end.}
+        end;       {level masters .end.}
         'M': begin {matrimonial decisions}
           royal_matrimonial;
         end;
@@ -933,7 +958,8 @@ var
                     {online mess to reciever, only if he is online (of course)}
                     if (is_online(pl0^.name2, online_player)) and (pl0^.name2 <> player.name2) then
                     begin
-                      online_send_to_player(pl0^.name2, online_player, uplc + player.name2 + config.textcol1 + ' posted a letter to you.');
+                      online_send_to_player(pl0^.name2, online_player, uplc + player.name2 +
+                        config.textcol1 + ' posted a letter to you.');
                     end;
                     crlf;
                   end;
@@ -948,7 +974,7 @@ var
 
           end;
 
-        end; {royal proclamation .end.}
+        end;       {royal proclamation .end.}
         'E': begin {establishments .start.}
 
           repeat
@@ -963,67 +989,80 @@ var
 
             {weapon shop}
             sd(13, ljust('1. Weapon Shop', offset));
-            if king^.shop_weapon then sd(opencol, ljust(opentxt, offset2))
+            if king^.shop_weapon then
+              sd(opencol, ljust(opentxt, offset2))
             else sd(closecol, ljust(closetxt, offset2));
 
             {evil mage}
             sd(13, ljust('A. Evil Mage', offset));
-            if king^.shop_evilmagic then d(opencol, opentxt)
+            if king^.shop_evilmagic then
+              d(opencol, opentxt)
             else d(closecol, closetxt);
 
             {armor shop}
             sd(13, ljust('2. Armor Shop', offset));
-            if king^.shop_armor then sd(opencol, ljust(opentxt, offset2))
+            if king^.shop_armor then
+              sd(opencol, ljust(opentxt, offset2))
             else sd(closecol, ljust(closetxt, offset2));
 
             {Bobs Beer}
             sd(13, ljust('B. Bobs Beer', offset));
-            if king^.shop_bobs then d(opencol, opentxt)
+            if king^.shop_bobs then
+              d(opencol, opentxt)
             else d(closecol, closetxt);
 
             {Magic shop}
             sd(13, ljust('3. Magic Shop', offset));
-            if king^.shop_magic then sd(opencol, ljust(opentxt, offset2))
+            if king^.shop_magic then
+              sd(opencol, ljust(opentxt, offset2))
             else sd(closecol, ljust(closetxt, offset2));
 
             {Whore House}
             sd(13, ljust('C. Whore house', offset));
-            if king^.shop_whores then d(opencol, opentxt)
+            if king^.shop_whores then
+              d(opencol, opentxt)
             else d(closecol, closetxt);
 
             {Alabats shop}
             sd(13, ljust('4. Alabats Shop', offset));
-            if king^.shop_alabat then sd(opencol, ljust(opentxt, offset2))
+            if king^.shop_alabat then
+              sd(opencol, ljust(opentxt, offset2))
             else sd(closecol, ljust(closetxt, offset2));
 
             {Gigolos place}
             sd(13, ljust('D. Gigolos Nest', offset));
-            if king^.shop_gigolos then d(opencol, opentxt)
+            if king^.shop_gigolos then
+              d(opencol, opentxt)
             else d(closecol, closetxt);
 
             {Player Market shop}
             sd(13, ljust('5. Player Market', offset));
-            if king^.shop_plmarket then d(opencol, opentxt)
+            if king^.shop_plmarket then
+              d(opencol, opentxt)
             else d(closecol, closetxt);
 
             {Healing Center}
             sd(13, ljust('6. Healing Center', offset));
-            if king^.shop_healing then d(opencol, opentxt)
+            if king^.shop_healing then
+              d(opencol, opentxt)
             else d(closecol, closetxt);
 
             {Drug Palace}
             sd(13, ljust('7. Drug Palace', offset));
-            if king^.shop_drugs then d(opencol, opentxt)
+            if king^.shop_drugs then
+              d(opencol, opentxt)
             else d(closecol, closetxt);
 
             {Steroid Shop}
             sd(13, ljust('8. Steroid Shop', offset));
-            if king^.shop_steroids then d(opencol, opentxt)
+            if king^.shop_steroids then
+              d(opencol, opentxt)
             else d(closecol, closetxt);
 
             {Orbs Health Club}
             sd(13, ljust('9. Orbs Club', offset));
-            if king^.shop_orbs then d(opencol, opentxt)
+            if king^.shop_orbs then
+              d(opencol, opentxt)
             else d(closecol, closetxt);
 
             d(11, '0. done');
@@ -1041,7 +1080,8 @@ var
                 cho := ' ';
                 crlf;
                 sd(13, ':');
-              end else if (cho <> '0') and (cho <> ' ') and (cho <> '?') and
+              end else
+              if (cho <> '0') and (cho <> ' ') and (cho <> '?') and
                 (config.allowcloseshops = False) then
               begin
                 d(12, 'Sorry, the System Operator (SYSOP) has ruled that the Shops');
@@ -1326,10 +1366,11 @@ var
 
             end; {case .end.}
 
-            {save king order file}
+                 {save king order file}
             if action <> 0 then
             begin
-              if player.sex = 1 then s := 'King'
+              if player.sex = 1 then
+                s := 'King'
               else s := 'Queen';
 
               case action of
@@ -1337,8 +1378,9 @@ var
                 2: s2 := 'opened';
               end; {case .end.}
 
-              {inform other nodes}
-              online_send_to_all(ukingc + player.name2 + ugreen + ' ' + s2 + ' the ' + uestabc + s3 + ugreen + '!', player.name2, '');
+                   {inform other nodes}
+              online_send_to_all(ukingc + player.name2 + ugreen + ' ' + s2 + ' the ' + uestabc +
+                s3 + ugreen + '!', player.name2, '');
 
               {news-paper}
               newsy(True, 'Royal Decree!',
@@ -1359,7 +1401,7 @@ var
           until cho = '0';
 
         end; {establishments .end.}
-      end; {case .end.}
+      end;   {case .end.}
 
     until orders_done;
 
@@ -1468,14 +1510,17 @@ var
            {perhaps this child has nowhere to go...both parents could be
             dead...or the child could be rejected}
 
-                if confirm(ukidc + child^.Name + config.textcol1 + ' (' + sex7[child^.sex] + ' to ' + uplc + child^.mother + config.textcol1 + ' and ' + uplc + child^.father + config.textcol1 + ')', 'N') = True then
+                if confirm(ukidc + child^.Name + config.textcol1 + ' (' + sex7[child^.sex] +
+                  ' to ' + uplc + child^.mother + config.textcol1 + ' and ' + uplc + child^.father +
+                  config.textcol1 + ')', 'N') = True then
                 begin
 
             {d(7,'Evil Deed');
             show_usurper_data(picture_DEATH_HEAD,false);
             }
 
-                  d(15, 'Ok. ' + ukidc + child^.Name + config.textcol1 + ' has been sent home to ' + sex3[child^.sex] + ' parents!');
+                  d(15, 'Ok. ' + ukidc + child^.Name + config.textcol1 + ' has been sent home to ' +
+                    sex3[child^.sex] + ' parents!');
                   crlf;
 
                   {update child}
@@ -1483,7 +1528,8 @@ var
                   load_child(fsave, child^, child^.recnr);
 
                   {inform parents}
-                  inform_parents_online(child^, ukidc + child^.Name + config.textcol1 + ' was sent home by ' + kingstring(player.sex) + uplc + player.name2 + config.textcol1 + '!');
+                  inform_parents_online(child^, ukidc + child^.Name + config.textcol1 + ' was sent home by ' +
+                    kingstring(player.sex) + uplc + player.name2 + config.textcol1 + '!');
 
                   inform_parents(child^,
                     mailrequest_nothing,
@@ -1534,13 +1580,14 @@ var
                 end;
               end;
             end;
-            if done then break;
+            if done then
+              break;
           end; {for i:= .end.}
 
         end;
         'F': begin {let the wolves have a feast}
 
-          {load king}
+                   {load king}
           load_king(fload, king^);
 
           {is the King allowed to put children to death?}
@@ -1550,7 +1597,8 @@ var
             d(12, 'Your Sysop has disabled this function.');
             d(12, 'You are not allowed to feed the wolves with tasty children');
             pause;
-          end else if king^.wolffeed < 1 then
+          end else
+          if king^.wolffeed < 1 then
           begin
             crlf;
             d(12, 'The wolves are not hungry. They sleep.');
@@ -1577,7 +1625,9 @@ var
                 (child^.location = ChildLocation_Orphanage) then
               begin
 
-                if confirm(ukidc + child^.Name + config.textcol1 + ' (' + sex7[child^.sex] + ' to ' + uplc + child^.mother + config.textcol1 + ' and ' + uplc + child^.father + config.textcol1 + ')', 'N') = True then
+                if confirm(ukidc + child^.Name + config.textcol1 + ' (' + sex7[child^.sex] +
+                  ' to ' + uplc + child^.mother + config.textcol1 + ' and ' + uplc + child^.father +
+                  config.textcol1 + ')', 'N') = True then
                 begin
 
                   {evil deed}
@@ -1602,7 +1652,8 @@ var
                   load_child(fsave, child^, child^.recnr);
 
                   {inform parents}
-                  inform_parents_online(child^, ukidc + child^.Name + config.textcol1 + ' was killed by ' + kingstring(player.sex) + uplc + player.name2 + config.textcol1 + '!');
+                  inform_parents_online(child^, ukidc + child^.Name + config.textcol1 + ' was killed by ' +
+                    kingstring(player.sex) + uplc + player.name2 + config.textcol1 + '!');
 
                   inform_parents(child^,
                     mailrequest_nothing,
@@ -1638,13 +1689,15 @@ var
                     '',
                     '');
 
-                  if player.sex = 1 then s := 'King'
+                  if player.sex = 1 then
+                    s := 'King'
                   else s := 'Queen';
 
                   {child-birth/death log}
                   Generic_News(ChildBirthNews,
                     False,
-                    ugreen + '[' + fix_date(todays_date) + '] ' + ukidc + child^.Name + ugreen + ' was killed by the evil ' + s + ' ' + player.name2 + ugreen + '!',
+                    ugreen + '[' + fix_date(todays_date) + '] ' + ukidc + child^.Name + ugreen +
+                    ' was killed by the evil ' + s + ' ' + player.name2 + ugreen + '!',
                     '',
                     '',
                     '',
@@ -1671,7 +1724,8 @@ var
                   end;
                 end;
               end;
-              if done then break;
+              if done then
+                break;
             end; {for i:= .end.}
 
             crlf;
@@ -1680,7 +1734,7 @@ var
         end;
         'P': begin {put a in the Orphanage, probably agains the wills of the parents}
 
-          {load king}
+                   {load king}
           load_king(fload, king^);
 
           {is king allowed to do this?}
@@ -1690,7 +1744,8 @@ var
             d(12, 'Your SYSOP has disabled this function.');
             d(12, 'You are ' + ulred + 'NOT' + ulred + ' allowed to put children in the Royal Orphange.');
             pause;
-          end else if king^.royaladoptions < 1 then
+          end else
+          if king^.royaladoptions < 1 then
           begin
             crlf;
             d(12, 'You have used up your actions for today. Come back tomorrow.');
@@ -1716,7 +1771,9 @@ var
                 (child^.location = ChildLocation_Home) then
               begin
 
-                if confirm(ukidc + child^.Name + config.textcol1 + ' (' + sex7[child^.sex] + ' of ' + uplc + child^.mother + config.textcol1 + ' and ' + uplc + child^.father + config.textcol1 + ')', 'N') = True then
+                if confirm(ukidc + child^.Name + config.textcol1 + ' (' + sex7[child^.sex] +
+                  ' of ' + uplc + child^.mother + config.textcol1 + ' and ' + uplc + child^.father +
+                  config.textcol1 + ')', 'N') = True then
                 begin
 
                   if my_child(player, child^) then
@@ -1729,8 +1786,10 @@ var
 
                     d(15, 'Done Sir!');
                     d(config.textcolor, 'The Royal Guards have taken the child to your Castle.');
-                    d(2, ukidc + child^.Name + config.textcol1 + ' has been separated from ' + sex3[child^.sex] + ' parents!');
-                    d(2, ukidc + child^.Name + config.textcol1 + ' is now a permanent guest at the ' + ulcyan + 'Orphanage' + config.textcol1 + '!');
+                    d(2, ukidc + child^.Name + config.textcol1 + ' has been separated from ' +
+                      sex3[child^.sex] + ' parents!');
+                    d(2, ukidc + child^.Name + config.textcol1 + ' is now a permanent guest at the ' +
+                      ulcyan + 'Orphanage' + config.textcol1 + '!');
                     crlf;
 
                     {load king}
@@ -1753,7 +1812,8 @@ var
                       mailrequest_nothing,
                       ulred + 'Royal Abduction' + config.textcol1,
                       mkstring(15, underscore),
-                      'Your ' + sex7[child^.sex] + ' ' + ukidc + child^.Name + config.textcol1 + ' has been transfered to the Royal Orphanage.',
+                      'Your ' + sex7[child^.sex] + ' ' + ukidc + child^.Name + config.textcol1 +
+                      ' has been transfered to the Royal Orphanage.',
                       kingstring(player.sex) + ' ' + ukingc + player.name2 + config.textcol1 + ' made this happen.',
                       '',
                       '',
@@ -1770,8 +1830,11 @@ var
                     {news-paper}
                     newsy(True,
                       'Child separated from Parents!',
-                      ' ' + ukidc + child^.Name + config.textcol1 + ' (' + sex7[child^.sex] + ' to ' + uplc + child^.mother + config.textcol1 + ' and ' + uplc + child^.father + config.textcol1 + ') was sent',
-                      ' to the ' + ulcyan + 'Royal Orphanage' + config.textcol1 + ' on direct orders from ' + kingstring(player.sex) + uplc + ' ' + player.name2 + config.textcol1 + '.',
+                      ' ' + ukidc + child^.Name + config.textcol1 + ' (' + sex7[child^.sex] +
+                      ' to ' + uplc + child^.mother + config.textcol1 + ' and ' + uplc + child^.father +
+                      config.textcol1 + ') was sent',
+                      ' to the ' + ulcyan + 'Royal Orphanage' + config.textcol1 + ' on direct orders from ' +
+                      kingstring(player.sex) + uplc + ' ' + player.name2 + config.textcol1 + '.',
                       '',
                       '',
                       '',
@@ -1793,17 +1856,19 @@ var
 
               end;
 
-              if done then break;
+              if done then
+                break;
 
             end; {for i:= .end.}
 
           end;
-        end; {Put child in royal orphange .end.}
+        end;       {Put child in royal orphange .end.}
 
         'E': begin {expenses, grand total cost for feeding the children here}
           crlf;
           cost := 5500; {5500 is also delcared in relation.pas}
-          d(config.textcolor, 'The Orphanage expanditures amounts to ' + uyellow + commastr(numbers_in_orphanage * cost) + config.textcol1 + ' ' + many_money(numbers_in_orphanage * cost) + '.');
+          d(config.textcolor, 'The Orphanage expanditures amounts to ' + uyellow +
+            commastr(numbers_in_orphanage * cost) + config.textcol1 + ' ' + many_money(numbers_in_orphanage * cost) + '.');
           crlf;
 
         end;
@@ -1871,7 +1936,8 @@ var
         clearscreen;
         crlf;
         crlf;
-        d(11, 'The Royal Treasury' + config.textcol1 + ' holds ' + uyellow + commastr(king^.treasury) + config.textcol1 + ' ' + many_money(king^.treasury) + '.');
+        d(11, 'The Royal Treasury' + config.textcol1 + ' holds ' + uyellow + commastr(king^.treasury) +
+          config.textcol1 + ' ' + many_money(king^.treasury) + '.');
         crlf;
         menu('(T)axes' + s);
         menu('(S)et tax privileges.');
@@ -1959,7 +2025,8 @@ var
                       '',
                       ulred + s + config.textcol1,
                       mkstring(length(s), underscore),
-                      kingstring(player.sex) + ' ' + uplc + player.name2 + config.textcol1 + ' decided you unworthy of any Tax Privileges!',
+                      kingstring(player.sex) + ' ' + uplc + player.name2 + config.textcol1 +
+                      ' decided you unworthy of any Tax Privileges!',
                       'You should be grateful contributing to maintaining a prosperous Realm.',
                       'Paying taxes is a privilege in itself.',
                       'Long Live the ' + kingstring(player.sex) + '!',
@@ -1981,7 +2048,8 @@ var
                     newsy(True,
                       'Privilege Revoked',
                       ' ' + uplc + pl0^.name2 + config.textcol1 + ' is no longer relieved from Royal Taxes!',
-                      ' ' + kingstring(player.sex) + ' ' + uplc + player.name2 + config.textcol1 + ' revoked ' + uplc + pl0^.name2 + 's' + config.textcol1 + ' privileges.',
+                      ' ' + kingstring(player.sex) + ' ' + uplc + player.name2 + config.textcol1 +
+                      ' revoked ' + uplc + pl0^.name2 + 's' + config.textcol1 + ' privileges.',
                       '',
                       '',
                       '',
@@ -2038,7 +2106,8 @@ var
                       '',
                       uyellow + s + config.textcol1,
                       mkstring(length(s), underscore),
-                      kingstring(player.sex) + ' ' + uplc + player.name2 + config.textcol1 + ' decided you worthy of Tax Relief!',
+                      kingstring(player.sex) + ' ' + uplc + player.name2 + config.textcol1 +
+                      ' decided you worthy of Tax Relief!',
                       'You should feel very grateful, being one of a few chosen ones.',
                       'Long Live the ' + kingstring(player.sex) + '!',
                       '',
@@ -2053,14 +2122,16 @@ var
                       '');
 
                     {inform other nodes}
-                    online_send_to_all(uplc + pl0^.name2 + config.textcol1 + ' has been relieved from Royal Tax!', player.name2,
+                    online_send_to_all(uplc + pl0^.name2 + config.textcol1 + ' has been relieved from Royal Tax!',
+                      player.name2,
                       pl0^.name2);
 
                     {news-paper}
                     newsy(True,
                       'Special Treatment',
                       ' ' + uplc + pl0^.name2 + config.textcol1 + ' was relieved from the Royal Tax!',
-                      ' ' + uplc + pl0^.name2 + config.textcol1 + ' has a special place in ' + kingstring(player.sex) + ' ' + uplc + player.name2 + config.textcol1 + ' heart.',
+                      ' ' + uplc + pl0^.name2 + config.textcol1 + ' has a special place in ' +
+                      kingstring(player.sex) + ' ' + uplc + player.name2 + config.textcol1 + ' heart.',
                       '',
                       '',
                       '',
@@ -2144,9 +2215,11 @@ var
 
                         end;
                       end;
-                      if abort then break;
+                      if abort then
+                        break;
                     end; {for j:= .end.}
-                    if abort then break;
+                    if abort then
+                      break;
                   end; {for i:= .end.}
 
                   if counter = 0 then
@@ -2211,7 +2284,8 @@ var
               begin
                 {news-paper}
                 newsy(True, 'Royal Tax',
-                  ' ' + s + ukingc + ' ' + player.name2 + ugreen + uwhite + ' removed' + ugreen + ' the ' + ulgreen + 'Royal Tax!' + ugreen,
+                  ' ' + s + ukingc + ' ' + player.name2 + ugreen + uwhite + ' removed' + ugreen +
+                  ' the ' + ulgreen + 'Royal Tax!' + ugreen,
                   ' The people are happy!',
                   '',
                   '',
@@ -2221,12 +2295,14 @@ var
                   '',
                   '');
 
-              end else if x > king^.tax then
+              end else
+              if x > king^.tax then
               begin
 
                 {news-paper}
                 newsy(True, 'Royal Tax',
-                  ' ' + s + ukingc + ' ' + player.name2 + ugreen + ulred + ' raised' + ugreen + ' the ' + ulgreen + 'Royal Tax' + ugreen +
+                  ' ' + s + ukingc + ' ' + player.name2 + ugreen + ulred + ' raised' + ugreen +
+                  ' the ' + ulgreen + 'Royal Tax' + ugreen +
                   ' to ' + commastr(x) + '% !',
                   ' The people are not happy!',
                   '',
@@ -2236,12 +2312,14 @@ var
                   '',
                   '',
                   '');
-              end else if x < king^.tax then
+              end else
+              if x < king^.tax then
               begin
 
                 {news-paper}
                 newsy(True, 'Royal Tax',
-                  ' ' + s + ukingc + ' ' + player.name2 + uwhite + ' lowered' + ugreen + ' the ' + ulgreen + 'Royal Tax to ' + ugreen + commastr(x) + '% !',
+                  ' ' + s + ukingc + ' ' + player.name2 + uwhite + ' lowered' + ugreen + ' the ' +
+                  ulgreen + 'Royal Tax to ' + ugreen + commastr(x) + '% !',
                   ' The people are pleased.',
                   '',
                   '',
@@ -2266,7 +2344,7 @@ var
 
           end;
 
-        end; {taxes .end.}
+        end;       {taxes .end.}
         'A': begin {Add money to the Treasury, from personal funds}
           if player.gold <= 0 then
           begin
@@ -2307,7 +2385,8 @@ var
                   {news-paper}
                   Newsy(True,
                     'Royal Donator',
-                    ' ' + kingstring(player.sex) + ' ' + ukingc + player.name2 + ugreen + ' donated ' + uyellow + commastr(x) + ugreen + ' ' + many_money(x) + ' to the Royal Treasury!',
+                    ' ' + kingstring(player.sex) + ' ' + ukingc + player.name2 + ugreen + ' donated ' +
+                    uyellow + commastr(x) + ugreen + ' ' + many_money(x) + ' to the Royal Treasury!',
                     ' The People are ' + s + '!',
                     '',
                     '',
@@ -2318,7 +2397,8 @@ var
                     '');
 
                   {tell other nodes}
-                  online_send_to_all(uplc + player.name2 + ugreen + ' donated to the Royal Treasury from ' + sex3[player.sex] + ' own purse.', player.name2, '');
+                  online_send_to_all(uplc + player.name2 + ugreen + ' donated to the Royal Treasury from ' +
+                    sex3[player.sex] + ' own purse.', player.name2, '');
 
                   d(15, 'The People rejoice!');
                   pause;
@@ -2334,7 +2414,7 @@ var
         end;
         'W': begin {Transfer from Treasury to Personal account (stealing)}
 
-          {load king}
+                   {load king}
           load_king(fload, king^);
           if king^.treasury <= 0 then
           begin
@@ -2347,7 +2427,8 @@ var
             crlf;
             d(2, 'You decide to put your hand in the cookie-jar.');
             crlf;
-            d(2, 'The ' + ulgreen + 'Royal Treasury' + ugreen + ' has ' + uyellow + commastr(king^.treasury) + ugreen + ' ' + many_money(king^.treasury) + '.');
+            d(2, 'The ' + ulgreen + 'Royal Treasury' + ugreen + ' has ' + uyellow + commastr(king^.treasury) +
+              ugreen + ' ' + many_money(king^.treasury) + '.');
             crlf;
 
             d(2, 'How much will you take for yourself?');
@@ -2362,7 +2443,8 @@ var
               {should it leak to the Press?}
               detected := False;
               i := random(2);
-              if i = 0 then detected := True;
+              if i = 0 then
+                detected := True;
 
               if detected then
               begin
@@ -2382,7 +2464,8 @@ var
                 {news-paper}
                 Newsy(True,
                   'Royal Embezzler',
-                  ' ' + kingstring(player.sex) + ' ' + ukingc + player.name2 + ugreen + ' transfered a considerable amount of ' + config.moneytype,
+                  ' ' + kingstring(player.sex) + ' ' + ukingc + player.name2 + ugreen +
+                  ' transfered a considerable amount of ' + config.moneytype,
                   ' from the Royal Treasury to ' + sex3[player.sex] + ' personal account!',
                   ' The people are ' + s + '!',
                   '',
@@ -2393,7 +2476,8 @@ var
                   '');
 
                 {tell other nodes}
-                online_send_to_all(uplc + player.name2 + ugreen + ' transfered public funds to ' + sex3[player.sex] + ' own account!', player.name2, '');
+                online_send_to_all(uplc + player.name2 + ugreen + ' transfered public funds to ' +
+                  sex3[player.sex] + ' own account!', player.name2, '');
 
               end;
 
@@ -2486,7 +2570,7 @@ var
 
     end; {for i:= .end.}
 
-  end; {List_of_Creatures *end*}
+  end;   {List_of_Creatures *end*}
 
 var
 
@@ -2502,7 +2586,7 @@ var
 
 begin {THE_CASTLE, MAIN PROC **START**}
 
-  {init pointer vars}
+      {init pointer vars}
   new(pl0);
   new(pl1);
   new(King);
@@ -2541,7 +2625,8 @@ begin {THE_CASTLE, MAIN PROC **START**}
 
     case cho of
       '?': begin {display menu}
-        if player.expert = True then display_menu(True, False)
+        if player.expert = True then
+          display_menu(True, False)
         else display_menu(False, False);
       end;
       'S': begin {status}
@@ -2558,7 +2643,8 @@ begin {THE_CASTLE, MAIN PROC **START**}
         crlf;
         d(11, 'List of Monarchs');
         crlf;
-        if global_ansi then display_file(global_MonarchsANSI)
+        if global_ansi then
+          display_file(global_MonarchsANSI)
         else display_file(global_MonarchsASCI);
         crlf;
         pause;
@@ -2580,11 +2666,11 @@ begin {THE_CASTLE, MAIN PROC **START**}
         {lets read our mail}
         read_my_mail(player);
 
-      end;  {mail scan .end.}
+      end;       {mail scan .end.}
       'C': begin {check security .start.}
 
-        {royal war chamber}
-        {Update player location & doing}
+                 {royal war chamber}
+                 {Update player location & doing}
         onliner.location := onloc_warchamber;
         onliner.doing := location_desc(onliner.location);
         add_onliner(OUpdateLocation, onliner);
@@ -2736,19 +2822,22 @@ begin {THE_CASTLE, MAIN PROC **START**}
                 end;
 
                 {send news to all + news paper}
-                online_send_to_all(uplc + king^.guard[k] + ugreen + ' was SACKED from the Royal Guard!', player.name2, king^.guard[k]);
+                online_send_to_all(uplc + king^.guard[k] + ugreen + ' was SACKED from the Royal Guard!',
+                  player.name2, king^.guard[k]);
 
                 case random(4) of
                   0: s := utalkc + ' This isn''t fair!  ' + uplc + king^.guard[k] + ugreen + ' cries.';
                   1: s := uplc + ' ' + king^.guard[k] + ugreen + ' was not pleased with the decision.';
                   2: s := uplc + ' ' + king^.guard[k] + ugreen + ' hates ' + uplc + player.name2 + 's' + ugreen + ' guts!';
-                  3: s := uplc + ' ' + king^.guard[k] + ugreen + ' was furious when ' + sex2[king^.guardsex[k]] + ' found out!';
+                  3: s := uplc + ' ' + king^.guard[k] + ugreen + ' was furious when ' +
+                      sex2[king^.guardsex[k]] + ' found out!';
                 end;
 
                 {news-paper}
                 Newsy(True,
                   'Royal Dismissal',
-                  ' ' + uplc + king^.guard[k] + ugreen + ' was fired from ' + sex3[king^.guardsex[k]] + ' job as ' + ulcyan + 'Royal Guard' + ugreen + '!',
+                  ' ' + uplc + king^.guard[k] + ugreen + ' was fired from ' + sex3[king^.guardsex[k]] +
+                  ' job as ' + ulcyan + 'Royal Guard' + ugreen + '!',
                   s,
                   '',
                   '',
@@ -2767,11 +2856,11 @@ begin {THE_CASTLE, MAIN PROC **START**}
 
               end;
 
-            end; {sack guard *end*}
+            end;       {sack guard *end*}
 
             'H': begin {recruit personal guard}
 
-              {load king record}
+                       {load king record}
               load_king(fload, king^);
 
               {are there any vacancies?}
@@ -2809,7 +2898,8 @@ begin {THE_CASTLE, MAIN PROC **START**}
                     2: size := fs(FsNpc);
                   end;
 
-                  if search then break;
+                  if search then
+                    break;
 
                   for j := 1 to size do
                   begin
@@ -2898,7 +2988,7 @@ begin {THE_CASTLE, MAIN PROC **START**}
 
                   end; {for j:= .end.}
 
-                end; {for i:= .end.}
+                end;   {for i:= .end.}
 
 
                 {target found}
@@ -2939,15 +3029,16 @@ begin {THE_CASTLE, MAIN PROC **START**}
                         online_send_to_player(pl0^.name2, online_player, broadcast_kingWantsYou);
                       end;
 
-                    end; {human player .end.}
+                    end;       {human player .end.}
                     'C': begin {computer player}
 
-                      {npcs must be bargained with}
+                               {npcs must be bargained with}
 
                       if is_online(pl0^.name2, online_player) then
                       begin
                         d(12, pl0^.name2 + ' is busy right now, try again later.');
-                      end else if pl0^.hps < 1 then
+                      end else
+                      if pl0^.hps < 1 then
                       begin
                         d(12, pl0^.name2 + ' is DEAD. try again tomorrow.');
                       end else
@@ -3006,8 +3097,10 @@ begin {THE_CASTLE, MAIN PROC **START**}
 
                               {send news to all + news paper}
                               case random(2) of
-                                0: online_send_to_all(uplc + pl0^.name2 + ugreen + ' became a Royal Guard!', player.name2, pl0^.name2);
-                                1: online_send_to_all(uplc + pl0^.name2 + ugreen + ' joined the Royal Guard!', player.name2, pl0^.name2);
+                                0: online_send_to_all(uplc + pl0^.name2 + ugreen + ' became a Royal Guard!',
+                                    player.name2, pl0^.name2);
+                                1: online_send_to_all(uplc + pl0^.name2 + ugreen + ' joined the Royal Guard!',
+                                    player.name2, pl0^.name2);
                               end;
 
                               case random(9) of
@@ -3026,7 +3119,8 @@ begin {THE_CASTLE, MAIN PROC **START**}
                                 0: begin
                                   Newsy(True,
                                     'Royal Employment',
-                                    ' The ' + s + ' ' + urac + race_display(2, pl0^.race, 0) + ' ' + uplc + pl0^.name2 + ugreen + ' became a ' + ulcyan + 'Royal Guard' + ugreen + '!',
+                                    ' The ' + s + ' ' + urac + race_display(2, pl0^.race, 0) +
+                                    ' ' + uplc + pl0^.name2 + ugreen + ' became a ' + ulcyan + 'Royal Guard' + ugreen + '!',
                                     '',
                                     '',
                                     '',
@@ -3039,7 +3133,8 @@ begin {THE_CASTLE, MAIN PROC **START**}
                                 1: begin
                                   Newsy(True,
                                     'Royal Employment',
-                                    ' The ' + s + ' ' + urac + race_display(2, pl0^.race, 0) + ' ' + uplc + pl0^.name2 + ugreen + ' joined the ' + ulcyan + 'Royal Guard' + ugreen + '!',
+                                    ' The ' + s + ' ' + urac + race_display(2, pl0^.race, 0) +
+                                    ' ' + uplc + pl0^.name2 + ugreen + ' joined the ' + ulcyan + 'Royal Guard' + ugreen + '!',
                                     '',
                                     '',
                                     '',
@@ -3057,7 +3152,7 @@ begin {THE_CASTLE, MAIN PROC **START**}
                       end;
 
                     end; {computer player .end.}
-                  end; {case .end.}
+                  end;   {case .end.}
                 end;
 
               end; {recruit guard .end.}
@@ -3136,11 +3231,11 @@ begin {THE_CASTLE, MAIN PROC **START**}
 
               pause;
 
-            end; {body-guards .end.}
+            end;       {body-guards .end.}
 
             'M': begin {moat security}
 
-              {check if current moat guards are valid}
+                       {check if current moat guards are valid}
               if king^.moatnr > 0 then
               begin
                 if Find_MoatID(king^.MoatID) = False then
@@ -3248,7 +3343,7 @@ begin {THE_CASTLE, MAIN PROC **START**}
                                   end;
                                 end; {for k:=}
 
-                                {confirm selection}
+                                     {confirm selection}
                                 if confirm('Buy some ' + umonc + moatguard^.Name + ugreen, 'Y') = True then
                                 begin
                                   found := True;
@@ -3299,7 +3394,8 @@ begin {THE_CASTLE, MAIN PROC **START**}
                                 {news-paper}
                                 Newsy(True,
                                   'Royal Embezzler',
-                                  ' ' + s + ' ' + ukingc + player.name2 + ugreen + ' used the Royal Treasury for ' + sex3[player.sex] + ' own personal use.',
+                                  ' ' + s + ' ' + ukingc + player.name2 + ugreen +
+                                  ' used the Royal Treasury for ' + sex3[player.sex] + ' own personal use.',
                                   ' The People will certainly not accept this kind of misuse much longer.',
                                   '',
                                   '',
@@ -3327,7 +3423,8 @@ begin {THE_CASTLE, MAIN PROC **START**}
                           2: i := king^.treasury div moatguard^.Cost;
                         end;
 
-                        if i > global_maxmon then i := global_maxmon;
+                        if i > global_maxmon then
+                          i := global_maxmon;
 
                         sd(11, moatguard^.Name + ' cost ');
                         sd(14, commastr(moatguard^.Cost));
@@ -3362,7 +3459,8 @@ begin {THE_CASTLE, MAIN PROC **START**}
                               sd(11, ' ' + moatguard^.Name);
 
                               king^.moatnr := x;
-                              if king^.moatnr < 2 then s := ' is '
+                              if king^.moatnr < 2 then
+                                s := ' is '
                               else s := ' are ';
 
                               sd(11, s + 'swimming in the moat.');
@@ -3449,7 +3547,8 @@ begin {THE_CASTLE, MAIN PROC **START**}
                                 d(15, '(ops! it leaked to the press)');
                                 Newsy(True,
                                   'Royal Embezzler',
-                                  ' ' + s + ' ' + ukingc + player.name2 + ugreen + ' used the Royal Treasury for ' + sex3[player.sex] + ' own personal use.',
+                                  ' ' + s + ' ' + ukingc + player.name2 + ugreen +
+                                  ' used the Royal Treasury for ' + sex3[player.sex] + ' own personal use.',
                                   ' The People will certainly not accept this kind of misuse much longer.',
                                   '',
                                   '',
@@ -3461,7 +3560,7 @@ begin {THE_CASTLE, MAIN PROC **START**}
                               end;
                             end; {case random .end.}
                           end;
-                        end; {case .end.}
+                        end;     {case .end.}
 
                         load_king(fload, king^);
 
@@ -3650,16 +3749,16 @@ begin {THE_CASTLE, MAIN PROC **START**}
           d(15, 'Phew! Thank you!');
         end;
 
-      end; {Abdicate .end.}
+      end;       {Abdicate .end.}
       'P': begin {Prison START}
         royal_prison;
-      end; {Prison END}
+      end;       {Prison END}
       'Q': begin {QUESTS .start.}
         royal_quests;
-      end; {QUESTS .end.}
+      end;       {QUESTS .end.}
       'O': begin {Orders .start.}
         royal_orders;
-      end;  {Order .end.}
+      end;       {Order .end.}
       'G': begin {Get Some Sleep .start.}
         crlf;
         crlf;
@@ -3687,7 +3786,7 @@ begin {THE_CASTLE, MAIN PROC **START**}
 
       end; {get some sleep .end.}
 
-    end; {case .end.}
+    end;   {case .end.}
 
   until cho = 'R';
 

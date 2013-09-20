@@ -85,7 +85,8 @@ begin
         {PutEvent(Event);}
         {ClearEvent(Event);}
 
-      end else if Event.KeyCode = KbUp then
+      end else
+      if Event.KeyCode = KbUp then
       begin
         with Event do
         begin
@@ -102,9 +103,9 @@ begin
 
 end;
 
-{----JAKE CHECKBOXES END------}
+ {----JAKE CHECKBOXES END------}
 
-{----MY INPUTLINE START------}
+ {----MY INPUTLINE START------}
 procedure TMyInputLine.HandleEvent(var Event: Tevent);
 begin
 
@@ -186,7 +187,8 @@ begin
           if (errorl <> 0) then
           begin
             messagebox('Error!', nil, mfokbutton);
-          end else if (l < small) or (l > big) then
+          end else
+          if (l < small) or (l > big) then
           begin
             Data^ := def;
             messagebox('Enter a Number between ' + n1 + ' and ' + n2 + '!', nil, mfokbutton);
@@ -376,10 +378,12 @@ begin;
     z := 1;
   end;
 
-  if txt <> '' then y2 := 1
+  if txt <> '' then
+    y2 := 1
   else y2 := 0;
 
-  if top then R.Assign(x, y + y2, x + (w + 3) + 1, y + z + y2)
+  if top then
+    R.Assign(x, y + y2, x + (w + 3) + 1, y + z + y2)
   else R.Assign(x + 1 + length(txt), y, length(txt) + x + (w + 3) + 1 + 1 + 1, y + z);
 
   ID := New(PRadioButtons, Init(R, Items));

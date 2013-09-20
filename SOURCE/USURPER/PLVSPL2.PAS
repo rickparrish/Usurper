@@ -61,8 +61,10 @@ begin
   {This unit is called upon from Pl_vs_plc, when 'A'ttack is chosen}
 
   {restoring overmaxed hps}
-  if pl0.hps > pl0.maxhps then pl0.hps := pl0.maxhps;
-  if player.hps > player.maxhps then player.hps := player.maxhps;
+  if pl0.hps > pl0.maxhps then
+    pl0.hps := pl0.maxhps;
+  if player.hps > player.maxhps then
+    player.hps := player.maxhps;
 
   {*does player2 need to quaff potions?*}
   computer_healing(True, pl0);
@@ -227,7 +229,8 @@ begin
 
     normal_defence(pl0);
 
-    if pl0.absorb > player.punch then pl0.absorb := player.punch;
+    if pl0.absorb > player.punch then
+      pl0.absorb := player.punch;
     if pl0.absorb > 0 then
     begin
       sd(global_plycol, pl0.name2 + 's');
@@ -235,7 +238,8 @@ begin
       sd(15, commastr(pl0.absorb));
       d(config.textcolor, ' points!');
       player.punch := player.punch - pl0.absorb;
-      if player.punch < 0 then player.punch := 0;
+      if player.punch < 0 then
+        player.punch := 0;
     end;
   end;
   if (pl0.punch + pl0.poison = 0) and (pl0.used_item = False) and (pl0.casted = False) and (stab2 <> -1) then
@@ -255,12 +259,14 @@ begin
 
     normal_defence(player);
 
-    if player.absorb > pl0.punch then player.absorb := pl0.punch;
+    if player.absorb > pl0.punch then
+      player.absorb := pl0.punch;
     if player.absorb > 0 then
     begin
       d(config.textcolor, 'Your armor absorbed ' + uwhite + commastr(player.absorb) + config.textcol1 + ' points!');
       pl0.punch := pl0.punch - player.absorb;
-      if pl0.punch < 0 then pl0.punch := 0;
+      if pl0.punch < 0 then
+        pl0.punch := 0;
     end;
   end;
 
@@ -271,8 +277,10 @@ begin
   {„ntligen kan slagen f† effekt!}
 
   {backstab effekt}
-  if stab1 > 0 then player.punch := player.punch + stab1;
-  if stab2 > 0 then pl0.punch := pl0.punch + stab2;
+  if stab1 > 0 then
+    player.punch := player.punch + stab1;
+  if stab2 > 0 then
+    pl0.punch := pl0.punch + stab2;
 
   if stab1 = -1 then
   begin
@@ -288,11 +296,15 @@ begin
 
 
   {poison effect}
-  if player.poison > 0 then player.punch := player.punch + player.poison;
-  if pl0.poison > 0 then pl0.punch := pl0.punch + pl0.poison;
+  if player.poison > 0 then
+    player.punch := player.punch + player.poison;
+  if pl0.poison > 0 then
+    pl0.punch := pl0.punch + pl0.poison;
 
-  if player.punch < 0 then player.punch := 0;
-  if pl0.punch < 0 then pl0.punch := 0;
+  if player.punch < 0 then
+    player.punch := 0;
+  if pl0.punch < 0 then
+    pl0.punch := 0;
 
   {eternal fight ?}
   if (player.punch < 2) and (pl0.punch < 2) then
@@ -384,7 +396,8 @@ begin
       {news-paper}
       newsy(True,
         'Player Fight!',
-        ' ' + uplc + player.name2 + config.textcol1 + ' challenged ' + uplc + pl0.name2 + config.textcol1 + ' and won! ' + uplc + pl0.name2 + config.textcol1 + ' begged for mercy!',
+        ' ' + uplc + player.name2 + config.textcol1 + ' challenged ' + uplc + pl0.name2 + config.textcol1 +
+        ' and won! ' + uplc + pl0.name2 + config.textcol1 + ' begged for mercy!',
         ' and ' + uplc + player.name2 + config.textcol1 + ' spared his life! What an act of chivalry!',
         '',
         '',
@@ -424,7 +437,8 @@ begin
       gold_string := '';
       if pl0.gold > 0 then
       begin
-        d(global_plycol, pl0.name2 + 's' + config.textcol1 + ' purse has ' + uyellow + commastr(pl0.gold) + config.textcol1 + ' ' + many_money(pl0.gold) + ' in it!');
+        d(global_plycol, pl0.name2 + 's' + config.textcol1 + ' purse has ' + uyellow + commastr(pl0.gold) +
+          config.textcol1 + ' ' + many_money(pl0.gold) + ' in it!');
         if confirm('Take the ' + config.moneytype + ' ', 'Y') = True then
         begin
           gold_mem := pl0.gold;
@@ -468,11 +482,14 @@ begin
         if gold_mem > 0 then
         begin
           {player took opponents gold}
-          gold_string := uplc + player.name2 + config.textcol1 + ' emptied your purse, you lost ' + uyellow + commastr(gold_mem) + config.textcol1 + ' ' + many_money(gold_mem) + '!';
-        end else if gold_mem = 0 then
+          gold_string := uplc + player.name2 + config.textcol1 + ' emptied your purse, you lost ' +
+            uyellow + commastr(gold_mem) + config.textcol1 + ' ' + many_money(gold_mem) + '!';
+        end else
+        if gold_mem = 0 then
         begin
           {player was noble and didn't take opponents gold}
-          gold_string := uplc + player.name2 + config.textcol1 + ' let you keep your purse with ' + uyellow + commastr(pl0.gold) + config.textcol1 + ' ' + many_money(pl0.gold) + '.';
+          gold_string := uplc + player.name2 + config.textcol1 + ' let you keep your purse with ' +
+            uyellow + commastr(pl0.gold) + config.textcol1 + ' ' + many_money(pl0.gold) + '.';
         end;
 
         {inform other player}
@@ -504,8 +521,10 @@ begin
         0: begin
           newsy(True,
             'Player Fight!',
-            ' ' + uplc + player.name2 + config.textcol1 + ' challenged ' + uplc + pl0.name2 + config.textcol1 + ' and won! ' + uplc + pl0.name2 + config.textcol1 + ' begged for mercy!',
-            ' ' + uplc + player.name2 + config.textcol1 + ' showed no mercy. ' + uplc + pl0.name2 + config.textcol1 + ' was slaughtered!',
+            ' ' + uplc + player.name2 + config.textcol1 + ' challenged ' + uplc + pl0.name2 +
+            config.textcol1 + ' and won! ' + uplc + pl0.name2 + config.textcol1 + ' begged for mercy!',
+            ' ' + uplc + player.name2 + config.textcol1 + ' showed no mercy. ' + uplc + pl0.name2 +
+            config.textcol1 + ' was slaughtered!',
             '',
             '',
             '',
@@ -517,8 +536,10 @@ begin
         1: begin
           newsy(True,
             'Player Fight!',
-            ' ' + uplc + player.name2 + config.textcol1 + ' challenged ' + uplc + pl0.name2 + config.textcol1 + ' and won! ' + uplc + pl0.name2 + config.textcol1 + ' begged for mercy!',
-            ' ' + uplc + player.name2 + config.textcol1 + ' showed no pity. ' + uplc + pl0.name2 + 's' + config.textcol1 + ' head was cut off!',
+            ' ' + uplc + player.name2 + config.textcol1 + ' challenged ' + uplc + pl0.name2 +
+            config.textcol1 + ' and won! ' + uplc + pl0.name2 + config.textcol1 + ' begged for mercy!',
+            ' ' + uplc + player.name2 + config.textcol1 + ' showed no pity. ' + uplc + pl0.name2 +
+            's' + config.textcol1 + ' head was cut off!',
             '',
             '',
             '',
@@ -530,8 +551,10 @@ begin
         2: begin
           newsy(True,
             'Player Fight!',
-            ' ' + uplc + player.name2 + config.textcol1 + ' challenged ' + uplc + pl0.name2 + config.textcol1 + ' and won! ' + uplc + pl0.name2 + config.textcol1 + ' begged for mercy!',
-            ' ' + uplc + player.name2 + config.textcol1 + ' was merciless, and put ' + uplc + pl0.name2 + config.textcol1 + ' out of ' + sex3[pl0.sex] + ' misery!',
+            ' ' + uplc + player.name2 + config.textcol1 + ' challenged ' + uplc + pl0.name2 +
+            config.textcol1 + ' and won! ' + uplc + pl0.name2 + config.textcol1 + ' begged for mercy!',
+            ' ' + uplc + player.name2 + config.textcol1 + ' was merciless, and put ' + uplc +
+            pl0.name2 + config.textcol1 + ' out of ' + sex3[pl0.sex] + ' misery!',
             '',
             '',
             '',

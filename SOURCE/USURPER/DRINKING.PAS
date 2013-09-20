@@ -56,7 +56,8 @@ procedure Dispose_Vars;
 var i: byte;
 begin
   dispose(pl0);
-  for i := 1 to maxopp do dispose(pl[i]);
+  for i := 1 to maxopp do
+    dispose(pl[i]);
 end;
 
 function Experience_Reward(var pl: userrec; round: integer): longint;
@@ -77,7 +78,8 @@ begin
     exit;
   end;
 
-  if sober < 1 then d(12, ' *Blind drunk, out of competition*');
+  if sober < 1 then
+    d(12, ' *Blind drunk, out of competition*');
 
   case sober of
     1: d(global_talkcol, 'Burp. WhheramIi?3$œ???');
@@ -198,7 +200,7 @@ begin
 
   end; {case .end.}
 
-end; {howdy_message *end*}
+end;   {howdy_message *end*}
 
 
 function Name_Comparison: boolean;
@@ -213,7 +215,8 @@ begin
     (pl[6]^.name2 = pl0^.name2) or
     (pl[7]^.name2 = pl0^.name2) or
     (pl[8]^.name2 = pl0^.name2) or
-    (pl[9]^.name2 = pl0^.name2) then name_comparison := True;
+    (pl[9]^.name2 = pl0^.name2) then
+    name_comparison := True;
 
 end; {name_comparison *end*}
 
@@ -225,25 +228,32 @@ begin
   if pl[1]^.name2 = '' then
   begin
     p := 1;
-  end else if pl[2]^.name2 = '' then
+  end else
+  if pl[2]^.name2 = '' then
   begin
     p := 2;
-  end else if pl[3]^.name2 = '' then
+  end else
+  if pl[3]^.name2 = '' then
   begin
     p := 3;
-  end else if pl[4]^.name2 = '' then
+  end else
+  if pl[4]^.name2 = '' then
   begin
     p := 4;
-  end else if pl[5]^.name2 = '' then
+  end else
+  if pl[5]^.name2 = '' then
   begin
     p := 5;
-  end else if pl[6]^.name2 = '' then
+  end else
+  if pl[6]^.name2 = '' then
   begin
     p := 6;
-  end else if pl[7]^.name2 = '' then
+  end else
+  if pl[7]^.name2 = '' then
   begin
     p := 7;
-  end else if pl[8]^.name2 = '' then
+  end else
+  if pl[8]^.name2 = '' then
   begin
     p := 8;
   end else
@@ -309,7 +319,7 @@ begin
 
   end; {case .end.}
 
-end; {get_random_opponent *end*}
+end;   {get_random_opponent *end*}
 
 procedure Drinking_Competition;
 var
@@ -332,7 +342,8 @@ begin
   {get Losers gonna get kicked out from .CFG}
   losers_out := False;
   s := cfg_string(85);
-  if upcasestr(s) = 'NO' then losers_out := True;
+  if upcasestr(s) = 'NO' then
+    losers_out := True;
 
   {Init pointer vars}
   new(pl0);
@@ -355,7 +366,8 @@ begin
 
   togo := maxopp;
 
-  if range1 + range2 < maxopp then togo := range1 + range2;
+  if range1 + range2 < maxopp then
+    togo := range1 + range2;
   if togo < 1 then
   begin
     d(12, 'Too few opponents in the Bar!');
@@ -380,7 +392,8 @@ begin
       (is_online(pl0^.name2, online_player) = False) then
     begin
       Inc(round);
-      if round >= maxopp then break;
+      if round >= maxopp then
+        break;
     end;
   end;
 
@@ -396,7 +409,8 @@ begin
       (is_online(pl0^.name2, online_player) = False) then
     begin
       Inc(round);
-      if round >= maxopp then break;
+      if round >= maxopp then
+        break;
     end;
   end;
 
@@ -437,15 +451,24 @@ begin
   end;
 
   crlf;
-  if pl[1]^.name2 <> '' then Howdy_Message(1);
-  if pl[2]^.name2 <> '' then Howdy_Message(2);
-  if pl[3]^.name2 <> '' then Howdy_Message(3);
-  if pl[4]^.name2 <> '' then Howdy_Message(4);
-  if pl[5]^.name2 <> '' then Howdy_Message(5);
-  if pl[6]^.name2 <> '' then Howdy_Message(6);
-  if pl[7]^.name2 <> '' then Howdy_Message(7);
-  if pl[8]^.name2 <> '' then Howdy_Message(8);
-  if pl[9]^.name2 <> '' then Howdy_Message(9);
+  if pl[1]^.name2 <> '' then
+    Howdy_Message(1);
+  if pl[2]^.name2 <> '' then
+    Howdy_Message(2);
+  if pl[3]^.name2 <> '' then
+    Howdy_Message(3);
+  if pl[4]^.name2 <> '' then
+    Howdy_Message(4);
+  if pl[5]^.name2 <> '' then
+    Howdy_Message(5);
+  if pl[6]^.name2 <> '' then
+    Howdy_Message(6);
+  if pl[7]^.name2 <> '' then
+    Howdy_Message(7);
+  if pl[8]^.name2 <> '' then
+    Howdy_Message(8);
+  if pl[9]^.name2 <> '' then
+    Howdy_Message(9);
 
   {let user swap oppponents}
   crlf;
@@ -486,13 +509,15 @@ begin
             2: size := fs(fsnpc);
           end;
 
-          if (found) or (finito) then break;
+          if (found) or (finito) then
+            break;
 
           for j := 1 to Size do
           begin
             load_character(pl0^, i, j);
 
-            if found then break;
+            if found then
+              break;
 
             if (findsub(s, pl0^.name2)) and
               (pl0^.name2 <> player.name2) and
@@ -508,7 +533,8 @@ begin
               {king?}
               if pl0^.king then
               begin
-                if pl0^.sex = 1 then e := 'King'
+                if pl0^.sex = 1 then
+                  e := 'King'
                 else e := 'Queen';
                 sd(14, ' (The ' + e + ') ');
               end;
@@ -572,7 +598,7 @@ begin
             end;
           end; {for j .end.}
 
-        end; {for i .end.}
+        end;   {for i .end.}
       end;
 
     until done;
@@ -633,7 +659,8 @@ begin
   begin
     if pl[i]^.name2 <> '' then
     begin
-      if pl[i]^.sex = 2 then male[i] := False;
+      if pl[i]^.sex = 2 then
+        male[i] := False;
       cname[i] := pl[i]^.name2;
       cvalue[i] := (pl[i]^.stamina + pl[i]^.strength + pl[i]^.charisma + 10) div 10;
     end;
@@ -642,10 +669,12 @@ begin
   round := 0;
   pvalue := (player.stamina + player.strength + player.charisma + 10) div 10;
 
-  if pvalue > 100 then pvalue := 100;
+  if pvalue > 100 then
+    pvalue := 100;
   for i := 1 to maxopp do
   begin
-    if cvalue[i] > 100 then cvalue[i] := 100;
+    if cvalue[i] > 100 then
+      cvalue[i] := 100;
   end;
 
   crlf;
@@ -771,10 +800,13 @@ begin
     Count := 0;
     for i := 1 to maxopp do
     begin
-      if (cname[i] <> '') and (cvalue[i] > 0) then Count := Count + 1;
+      if (cname[i] <> '') and (cvalue[i] > 0) then
+        Count := Count + 1;
     end;
-    if pvalue > 0 then Count := Count + 1;
-    if Count > 1 then exit_ok := False;
+    if pvalue > 0 then
+      Count := Count + 1;
+    if Count > 1 then
+      exit_ok := False;
 
   until exit_ok;
 
@@ -800,7 +832,8 @@ begin
     begin
       newsy(False,
         ' ' + uplc + cname[i] + config.textcol1 + ' - reeled drunkenly down the road as a WINNER!',
-        ' (it took ' + commastr(round) + ' rounds for ' + uplc + cname[i] + config.textcol1 + ' to finish off the competition)',
+        ' (it took ' + commastr(round) + ' rounds for ' + uplc + cname[i] + config.textcol1 +
+        ' to finish off the competition)',
         '',
         '',
         '',
@@ -823,7 +856,8 @@ begin
   if pvalue < 1 then
   begin
     newsy(False,
-      ' Poor ' + ulred + player.name2 + config.textcol1 + '....turned Blind Drunk after ' + commastr(player_gone) + ' rounds of Beer!',
+      ' Poor ' + ulred + player.name2 + config.textcol1 + '....turned Blind Drunk after ' +
+      commastr(player_gone) + ' rounds of Beer!',
       s2,
       '',
       '',
@@ -837,7 +871,8 @@ begin
   begin
     newsy(False,
       ' ' + uplc + player.name2 + config.textcol1 + ' - reeled drunkenly down the road as a WINNER!',
-      ' (it took ' + commastr(round) + ' rounds for ' + uplc + player.name2 + config.textcol1 + ' to finish off the competition)',
+      ' (it took ' + commastr(round) + ' rounds for ' + uplc + player.name2 + config.textcol1 +
+      ' to finish off the competition)',
       '',
       '',
       '',
@@ -896,8 +931,10 @@ begin
           '',
           umailheadc + 'Beer Drinking Competition' + config.textcol1,
           mkstring(25, underscore),
-          'You were invited by ' + uplc + player.name2 + config.textcol1 + ' to drink beer (' + ulred + drink + config.textcol1 + ').',
-          'You ' + uyellow + 'WON' + config.textcol1 + '! It took you ' + commastr(round) + ' rounds to finish off the competition.',
+          'You were invited by ' + uplc + player.name2 + config.textcol1 + ' to drink beer (' +
+          ulred + drink + config.textcol1 + ').',
+          'You ' + uyellow + 'WON' + config.textcol1 + '! It took you ' + commastr(round) +
+          ' rounds to finish off the competition.',
           'You earned ' + uwhite + commastr(xp) + config.textcol1 + ' experience points!',
           '',
           '',
@@ -916,7 +953,8 @@ begin
         if s2 = '' then
         begin
           s2 := player.name2;
-          if pvalue < 1 then s2 := '(No winner was found)';
+          if pvalue < 1 then
+            s2 := '(No winner was found)';
         end;
 
         post(MailSend,
@@ -927,7 +965,8 @@ begin
           '',
           umailheadc + 'Beer Drinking Competition' + config.textcol1,
           mkstring(25, underscore),
-          'You were invited by ' + uplc + player.name2 + config.textcol1 + ' to drink beer (' + ulred + drink + config.textcol1 + ').',
+          'You were invited by ' + uplc + player.name2 + config.textcol1 + ' to drink beer (' +
+          ulred + drink + config.textcol1 + ').',
           'You ' + ulred + 'lost' + config.textcol1 + '. You lasted a few rounds.',
           'Winner was ' + uplc + s2 + config.textcol1 + '.',
           '',

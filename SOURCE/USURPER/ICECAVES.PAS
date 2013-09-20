@@ -71,7 +71,8 @@ begin
       end;
 
       crlf;
-      sd(config.textcolor, ulcyan + place + config.textcol1 + ' (' + config.textcol2 + '?' + config.textcol1 + ' for menu) :');
+      sd(config.textcolor, ulcyan + place + config.textcol1 + ' (' + config.textcol2 + '?' +
+        config.textcol1 + ' for menu) :');
     end else
     begin
 
@@ -124,7 +125,8 @@ begin
     case ch of
 
       '?': begin {menu}
-        if player.expert = True then display_menu(True, False)
+        if player.expert = True then
+          display_menu(True, False)
         else display_menu(False, False);
       end;
       'R': begin {return}

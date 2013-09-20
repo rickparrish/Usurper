@@ -146,11 +146,13 @@ begin
 
   {$I-}reset(rekordfil);{$I+}
     error := Ioresult;
-    if error <> 0 then unable_to_access(global_teamrecordf, error);
+    if error <> 0 then
+      unable_to_access(global_teamrecordf, error);
 
   {$I-}Read(rekordfil, rekord^);{$I+}
     error := IOresult;
-    if error <> 0 then unable_to_read(global_teamrecordf, error);
+    if error <> 0 then
+      unable_to_read(global_teamrecordf, error);
 
     if (ctr > rekord^.days) and (pl0^.team <> rekord^.team) then
     begin
@@ -199,17 +201,20 @@ begin
 
    {$I-}rewrite(rekordfil);{$I+}
       error := Ioresult;
-      if error <> 0 then unable_to_create(global_teamrecordf, error);
+      if error <> 0 then
+        unable_to_create(global_teamrecordf, error);
 
    {$I-}Write(rekordfil, rekord^);{$I+}
       error := Ioresult;
-      if error <> 0 then unable_to_write(global_teamrecordf, error);
+      if error <> 0 then
+        unable_to_write(global_teamrecordf, error);
 
     end;
 
   {$I-}Close(rekordfil);{$I+}
     error := Ioresult;
-    if error <> 0 then unable_to_close(global_teamrecordf, error);
+    if error <> 0 then
+      unable_to_close(global_teamrecordf, error);
 
   end;
 

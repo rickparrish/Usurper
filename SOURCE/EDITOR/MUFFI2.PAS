@@ -74,7 +74,8 @@ begin
   end;
 
   val(a, regnr, j);
-  if j <> 0 then regnr := 0;
+  if j <> 0 then
+    regnr := 0;
 
   {bbs, sysop, regnr}
   registered := 0;
@@ -117,12 +118,13 @@ begin
 
     goto 8088;
     8088: x := x + yy + 1;
-    if (x = regnr) and (x <> 0) then registered := 1;
+    if (x = regnr) and (x <> 0) then
+      registered := 1;
   end;
 
-  if registered = 1 then goto 9045;
-  9045:
-    {registration is free, from 0.18}
+  if registered = 1 then
+    goto 9045;
+  9045: {registration is free, from 0.18}
     registered := 1;
 
 end;

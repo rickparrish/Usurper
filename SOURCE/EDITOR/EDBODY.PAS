@@ -109,84 +109,84 @@ begin
     'An ugly wool coat ...',
     '',
     '',
-    '',        {normal beskrivning 4}
-    '',        {normal beskrivning 5}
-    '',        {detaljerad beskrivning 1}
-    '',        {detaljerad beskrivning 2}
-    '',        {detaljerad beskrivning 3}
-    '',        {detaljerad beskrivning 4}
-    '',        {detaljerad beskrivning 5}
-    0,         {”ka strength}
-    0,         {”ka defence}
-    0);        {strength demanded to use object}
+    '',                 {normal beskrivning 4}
+    '',                 {normal beskrivning 5}
+    '',                 {detaljerad beskrivning 1}
+    '',                 {detaljerad beskrivning 2}
+    '',                 {detaljerad beskrivning 3}
+    '',                 {detaljerad beskrivning 4}
+    '',                 {detaljerad beskrivning 5}
+    0,                  {”ka strength}
+    0,                  {”ka defence}
+    0);                 {strength demanded to use object}
 
   Add_Object('Cloth',   {name}
-    Body,      {typ}
-    250,       {v„rde i gold}
-    0,         {”ka/minska hps}
-    0,         {”ka stamina}
-    0,         {”ka agility}
-    0,         {”ka charisma}
-    0,         {”ka dexterity}
-    0,         {”ka wisdom}
-    0,         {”ka mana}
-    1,         {”ka armor v„rde}
-    0,         {”ka attack v„rde}
-    '',        {„gd av?}
-    False,     {bara EN i spelet}
-    Nothing,   {kurerar}
-    True,      {finnas i shoppen}
-    False,     {kunna hittas i dungeons?}
-    False,     {cursed item?}
-    1,         {min level att hittas i dngs}
-    99,        {max level att hittas i dngs}
+    Body,               {typ}
+    250,                {v„rde i gold}
+    0,                  {”ka/minska hps}
+    0,                  {”ka stamina}
+    0,                  {”ka agility}
+    0,                  {”ka charisma}
+    0,                  {”ka dexterity}
+    0,                  {”ka wisdom}
+    0,                  {”ka mana}
+    1,                  {”ka armor v„rde}
+    0,                  {”ka attack v„rde}
+    '',                 {„gd av?}
+    False,              {bara EN i spelet}
+    Nothing,            {kurerar}
+    True,               {finnas i shoppen}
+    False,              {kunna hittas i dungeons?}
+    False,              {cursed item?}
+    1,                  {min level att hittas i dngs}
+    99,                 {max level att hittas i dngs}
     'You see nothing special.',
-    '',        {normal beskrivning 2}
-    '',        {normal beskrivning 3}
-    '',        {normal beskrivning 4}
-    '',        {normal beskrivning 5}
-    '',        {detaljerad beskrivning 1}
-    '',        {detaljerad beskrivning 2}
-    '',        {detaljerad beskrivning 3}
-    '',        {detaljerad beskrivning 4}
-    '',        {detaljerad beskrivning 5}
-    0,         {”ka strength}
-    0,         {”ka defence}
-    0);        {strength demanded to use object}
+    '',                 {normal beskrivning 2}
+    '',                 {normal beskrivning 3}
+    '',                 {normal beskrivning 4}
+    '',                 {normal beskrivning 5}
+    '',                 {detaljerad beskrivning 1}
+    '',                 {detaljerad beskrivning 2}
+    '',                 {detaljerad beskrivning 3}
+    '',                 {detaljerad beskrivning 4}
+    '',                 {detaljerad beskrivning 5}
+    0,                  {”ka strength}
+    0,                  {”ka defence}
+    0);                 {strength demanded to use object}
 
   Add_Object('Leather Vest',   {name}
-    Body,      {typ}
-    500,       {v„rde i gold}
-    0,         {”ka/minska hps}
-    0,         {”ka stamina}
-    0,         {”ka agility}
-    0,         {”ka charisma}
-    0,         {”ka dexterity}
-    0,         {”ka wisdom}
-    0,         {”ka mana}
-    2,         {”ka armor v„rde}
-    0,         {”ka attack v„rde}
-    '',        {„gd av?}
-    False,     {bara EN i spelet}
-    Nothing,   {kurerar}
-    True,      {finnas i shoppen}
-    False,     {kunna hittas i dungeons?}
-    False,     {cursed item?}
-    1,         {min level att hittas i dngs}
-    99,        {max level att hittas i dngs}
+    Body,               {typ}
+    500,                {v„rde i gold}
+    0,                  {”ka/minska hps}
+    0,                  {”ka stamina}
+    0,                  {”ka agility}
+    0,                  {”ka charisma}
+    0,                  {”ka dexterity}
+    0,                  {”ka wisdom}
+    0,                  {”ka mana}
+    2,                  {”ka armor v„rde}
+    0,                  {”ka attack v„rde}
+    '',                 {„gd av?}
+    False,              {bara EN i spelet}
+    Nothing,            {kurerar}
+    True,               {finnas i shoppen}
+    False,              {kunna hittas i dungeons?}
+    False,              {cursed item?}
+    1,                  {min level att hittas i dngs}
+    99,                 {max level att hittas i dngs}
     'You see nothing special.',
-    '',        {normal beskrivning 2}
-    '',        {normal beskrivning 3}
-    '',        {normal beskrivning 4}
-    '',        {normal beskrivning 5}
-    '',        {detaljerad beskrivning 1}
-    '',        {detaljerad beskrivning 2}
-    '',        {detaljerad beskrivning 3}
-    '',        {detaljerad beskrivning 4}
-    '',        {detaljerad beskrivning 5}
-    0,         {”ka strength}
-    0,         {”ka defence}
-    0);        {strength demanded to use object}
+    '',                 {normal beskrivning 2}
+    '',                 {normal beskrivning 3}
+    '',                 {normal beskrivning 4}
+    '',                 {normal beskrivning 5}
+    '',                 {detaljerad beskrivning 1}
+    '',                 {detaljerad beskrivning 2}
+    '',                 {detaljerad beskrivning 3}
+    '',                 {detaljerad beskrivning 4}
+    '',                 {detaljerad beskrivning 5}
+    0,                  {”ka strength}
+    0,                  {”ka defence}
+    0);                 {strength demanded to use object}
 
   Add_Object('Heavy Leather Vest',
     Body,      {typ}

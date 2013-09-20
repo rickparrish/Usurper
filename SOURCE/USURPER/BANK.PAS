@@ -101,7 +101,7 @@ begin
 
   end; {for i:= .end.}
 
-end; {fri *end*}
+end;   {fri *end*}
 
 procedure Withdraw_Money;
 begin
@@ -117,7 +117,8 @@ begin
     crlf;
 
     d(config.textcolor, 'The ' + uplc + 'gnome' + config.textcol1 + ' looks disappointed...');
-    if player.sex = 1 then d(global_talkcol, 'How much would you like to withdraw, sir?')
+    if player.sex = 1 then
+      d(global_talkcol, 'How much would you like to withdraw, sir?')
     else d(global_talkcol, 'How much would you like to withdraw, madam?');
 
     crlf;
@@ -141,7 +142,8 @@ begin
     if zz = 0 then
     begin
       d(11, 'Dummy! Get real!');
-    end else if (zz <= player.bankgold) and (zz > 0) then
+    end else
+    if (zz <= player.bankgold) and (zz > 0) then
     begin
       rr := zz + 0.0;
       rr := rr + player.gold;
@@ -192,7 +194,8 @@ begin
     crlf;
     d(config.textcolor, 'The ' + uplc + 'gnome' + config.textcol1 + ' gets a greedy look in his eyes.');
 
-    if player.sex = 1 then d(global_talkcol, 'How much would you like to deposit, sir?')
+    if player.sex = 1 then
+      d(global_talkcol, 'How much would you like to deposit, sir?')
     else d(global_talkcol, 'How much would you like to deposit, madam?');
     crlf;
 
@@ -220,7 +223,8 @@ begin
     if zz = 0 then
     begin
       d(11, 'Squid-brain.');
-    end else if (zz <= player.gold) and (zz > 0) then
+    end else
+    if (zz <= player.gold) and (zz > 0) then
     begin
       rr := zz + 0.0;
       rr := rr + player.bankgold;
@@ -273,7 +277,7 @@ begin
     6: d(global_talkcol, '"GIVE UP OR PERISH!"');
   end; {case .end.}
 
-end; {outburst *end*}
+end;   {outburst *end*}
 
 procedure Load_PlayerGuards;
 var
@@ -325,7 +329,7 @@ begin
     end;
   end; {for i:= .end.}
 
-  {look among the NPCs}
+       {look among the NPCs}
   if f < 6 then
   begin
     for i := 1 to fs(FsNpc) do
@@ -370,8 +374,10 @@ begin
   d(config.textcolor, 'You can also see some guards posted around the place.');
   d(config.textcolor, 'An old gnome appears and asks you of your business.');
   crlf;
-  d(config.textcolor, config.moneytype + ' on hand .. ' + uyellow + commastr(player.gold) + config.textcol1 + ' ' + many_money(player.gold) + '.');
-  d(config.textcolor, config.moneytype + ' in bank .. ' + uyellow + commastr(player.bankgold) + config.textcol1 + ' ' + many_money(player.bankgold) + '.');
+  d(config.textcolor, config.moneytype + ' on hand .. ' + uyellow + commastr(player.gold) +
+    config.textcol1 + ' ' + many_money(player.gold) + '.');
+  d(config.textcolor, config.moneytype + ' in bank .. ' + uyellow + commastr(player.bankgold) +
+    config.textcol1 + ' ' + many_money(player.bankgold) + '.');
   crlf;
 
   menu2(ljust('(D)eposit ' + config.moneytype, offset));
@@ -438,7 +444,7 @@ var
 
   adios, found2, battle_over, no_robbery: boolean;
 
-  safet: saferec; {BankSafe record}
+  safet: saferec;   {BankSafe record}
   gubbe: onlinerec; {onlinerecord}
 
 begin
@@ -488,7 +494,8 @@ begin
     {evaluate user-input}
     case ch of
       '?': begin {display menu}
-        if player.expert = True then display_menu(True, False)
+        if player.expert = True then
+          display_menu(True, False)
         else display_menu(False, False);
       end;
       'S': begin {status}
@@ -713,7 +720,7 @@ begin
               end;
             end; {for i:= .end.}
 
-            {not robbery attempts left?}
+                 {not robbery attempts left?}
             if player.bankrobberyattempts < 1 then
             begin
               d(12, 'You have exhausted your robbery attempts for today!');
@@ -734,14 +741,21 @@ begin
               load_safe(Fload, Safet);
 
               guards := 2;
-              if safet.Value > 50000 then Inc(guards, 2);
-              if safet.Value > 100000 then Inc(guards, 2);
-              if safet.Value > 250000 then Inc(guards, 2);
-              if safet.Value > 500000 then Inc(guards, 2);
-              if safet.Value > 750000 then Inc(guards, 2);
-              if safet.Value > 1000000 then Inc(guards, 2);
+              if safet.Value > 50000 then
+                Inc(guards, 2);
+              if safet.Value > 100000 then
+                Inc(guards, 2);
+              if safet.Value > 250000 then
+                Inc(guards, 2);
+              if safet.Value > 500000 then
+                Inc(guards, 2);
+              if safet.Value > 750000 then
+                Inc(guards, 2);
+              if safet.Value > 1000000 then
+                Inc(guards, 2);
 
-              if guards > global_maxmon then guards := global_maxmon;
+              if guards > global_maxmon then
+                guards := global_maxmon;
 
               sd(config.textcolor, 'Safe contains    : ');
               sd(14, commastr(safet.Value));
@@ -771,37 +785,37 @@ begin
                 begin
                   create_monster(i,             {#}
                     'Captain of the Guard', {name}
-                    75,            {hps}
-                    25,            {strength}
+                    75,                {hps}
+                    25,                {strength}
                     {15} 0,            {defence}
-                    'Stop!',       {phrase}
-                    False,         {grabweap}
-                    False,         {grabarm}
-                    'Broadsword',  {weapon-string}
-                    'Chainmail',   {armor-string}
-                    False,         {poisoned-should be false}
-                    False,         {disease -should be false}
-                    75,            {punch}
-                    15,            {armpow}
-                    25);           {weappow}
+                    'Stop!',           {phrase}
+                    False,             {grabweap}
+                    False,             {grabarm}
+                    'Broadsword',      {weapon-string}
+                    'Chainmail',       {armor-string}
+                    False,             {poisoned-should be false}
+                    False,             {disease -should be false}
+                    75,                {punch}
+                    15,                {armpow}
+                    25);               {weappow}
 
                 end else
                 begin
                   create_monster(i,             {#}
-                    'Guard',       {name}
-                    50,            {hps}
-                    20,            {strength}
+                    'Guard',           {name}
+                    50,                {hps}
+                    20,                {strength}
                     {10} 0,            {defence}
-                    'Robbery',     {phrase}
-                    False,         {grabweap}
-                    False,         {grabarm}
-                    'Halberd',     {weapon-string}
-                    'Ringmail',    {armor-string}
-                    False,         {poisoned-should be false}
-                    False,         {disease -should be false}
-                    50,            {punch}
-                    10,            {armpow}
-                    15);            {weappow}
+                    'Robbery',         {phrase}
+                    False,             {grabweap}
+                    False,             {grabarm}
+                    'Halberd',         {weapon-string}
+                    'Ringmail',        {armor-string}
+                    False,             {poisoned-should be false}
+                    False,             {disease -should be false}
+                    50,                {punch}
+                    10,                {armpow}
+                    15);               {weappow}
 
                 end;
 
@@ -814,20 +828,20 @@ begin
                 Inc(guards);
 
                 create_monster(guards,         {#}
-                  'Pitbull',     {name}
-                  95,            {hps}
-                  40,            {strength}
+                  'Pitbull',         {name}
+                  95,                {hps}
+                  40,                {strength}
                   {20} 0,            {defence}
-                  'Grrrr..',     {phrase}
-                  False,         {grabweap}
-                  False,         {grabarm}
-                  'Jaws',        {weapon-string}
-                  'skin',        {armor-string}
-                  False,         {poisoned-should be false}
-                  False,         {disease -should be false}
-                  80,            {punch}
-                  7,             {armpow}
-                  45);           {weappow}
+                  'Grrrr..',         {phrase}
+                  False,             {grabweap}
+                  False,             {grabarm}
+                  'Jaws',            {weapon-string}
+                  'skin',            {armor-string}
+                  False,             {poisoned-should be false}
+                  False,             {disease -should be false}
+                  80,                {punch}
+                  7,                 {armpow}
+                  45);               {weappow}
 
               end;
 
@@ -1045,7 +1059,8 @@ begin
                       '');
                   end;
 
-                  if team then d(global_talkcol, 'GIVE US THE ' + upcasestr(config.moneytype) + ' OR DIE!')
+                  if team then
+                    d(global_talkcol, 'GIVE US THE ' + upcasestr(config.moneytype) + ' OR DIE!')
                   else d(global_talkcol, 'GIVE ME THE ' + upcasestr(config.moneytype) + ' OR DIE!');
 
 
@@ -1086,7 +1101,8 @@ begin
                         '',
                         '');
 
-                    end else if (pl[i]^.name2 <> '') and (pl[i]^.hps > 0) then
+                    end else
+                    if (pl[i]^.name2 <> '') and (pl[i]^.hps > 0) then
                     begin
 
                       post(MailSend,
@@ -1123,10 +1139,14 @@ begin
                     ss := emptystr;
                     s2 := emptystr;
 
-                    if pl[1]^.name2 <> '' then a := '  ' + pl[1]^.name2;
-                    if pl[2]^.name2 <> '' then s := '  ' + pl[2]^.name2;
-                    if pl[3]^.name2 <> '' then ss := '  ' + pl[3]^.name2;
-                    if pl[4]^.name2 <> '' then s2 := '  ' + pl[4]^.name2;
+                    if pl[1]^.name2 <> '' then
+                      a := '  ' + pl[1]^.name2;
+                    if pl[2]^.name2 <> '' then
+                      s := '  ' + pl[2]^.name2;
+                    if pl[3]^.name2 <> '' then
+                      ss := '  ' + pl[3]^.name2;
+                    if pl[4]^.name2 <> '' then
+                      s2 := '  ' + pl[4]^.name2;
 
                     {player.allowed:=false;}
                     Reduce_Player_Resurrections(player, True);
@@ -1159,7 +1179,7 @@ begin
                       end;
                     end; {for i:= .end.}
 
-                    {remove pointer variables}
+                         {remove pointer variables}
                     disposal;
                     pause;
                     normal_exit;
@@ -1208,11 +1228,16 @@ begin
                       repeat
                         ch := upcase(getchar);
                         case ch of
-                          '1': if (op[fri(1)]^.name2 = '') or (op[fri(1)]^.hps < 1) then ch := ' ';
-                          '2': if (op[fri(2)]^.name2 = '') or (op[fri(2)]^.hps < 1) then ch := ' ';
-                          '3': if (op[fri(3)]^.name2 = '') or (op[fri(3)]^.hps < 1) then ch := ' ';
-                          '4': if (op[fri(4)]^.name2 = '') or (op[fri(4)]^.hps < 1) then ch := ' ';
-                          '5': if (op[fri(5)]^.name2 = '') or (op[fri(5)]^.hps < 1) then ch := ' ';
+                          '1': if (op[fri(1)]^.name2 = '') or (op[fri(1)]^.hps < 1) then
+                              ch := ' ';
+                          '2': if (op[fri(2)]^.name2 = '') or (op[fri(2)]^.hps < 1) then
+                              ch := ' ';
+                          '3': if (op[fri(3)]^.name2 = '') or (op[fri(3)]^.hps < 1) then
+                              ch := ' ';
+                          '4': if (op[fri(4)]^.name2 = '') or (op[fri(4)]^.hps < 1) then
+                              ch := ' ';
+                          '5': if (op[fri(5)]^.name2 = '') or (op[fri(5)]^.hps < 1) then
+                              ch := ' ';
                         end;
                       until ch in ['1', '2', '3', '4', '5'];
 
@@ -1236,7 +1261,8 @@ begin
                       begin
                         newsy(True,
                           'Killings in the Bank!',
-                          ' ' + uplc + player.name2 + config.textcol1 + ' and ' + uplc + op[sel]^.name2 + config.textcol1 + ' killed each other!',
+                          ' ' + uplc + player.name2 + config.textcol1 + ' and ' + uplc + op[sel]^.name2 +
+                          config.textcol1 + ' killed each other!',
                           '',
                           '',
                           '',
@@ -1245,11 +1271,13 @@ begin
                           '',
                           '',
                           '');
-                      end else if player.hps < 1 then
+                      end else
+                      if player.hps < 1 then
                       begin
                         newsy(True,
                           'Killings in the Bank!',
-                          ' ' + uplc + player.name2 + config.textcol1 + ' was killed by ' + uplc + op[sel]^.name2 + config.textcol1 + ' (guard)',
+                          ' ' + uplc + player.name2 + config.textcol1 + ' was killed by ' + uplc +
+                          op[sel]^.name2 + config.textcol1 + ' (guard)',
                           '',
                           '',
                           '',
@@ -1262,7 +1290,8 @@ begin
                       begin
                         newsy(True,
                           'Killings in the Bank!',
-                          uplc + ' ' + op[sel]^.name2 + config.textcol1 + ' (guard) was killed by ' + uplc + player.name2 + config.textcol1,
+                          uplc + ' ' + op[sel]^.name2 + config.textcol1 + ' (guard) was killed by ' +
+                          uplc + player.name2 + config.textcol1,
                           '',
                           '',
                           '',
@@ -1367,7 +1396,8 @@ begin
                             begin
                               newsy(True,
                                 'Killings in the Bank!',
-                                ' ' + uplc + pl[i]^.name2 + config.textcol1 + ' and ' + uplc + op[sel]^.name2 + config.textcol1 + ' killed each other!',
+                                ' ' + uplc + pl[i]^.name2 + config.textcol1 + ' and ' + uplc +
+                                op[sel]^.name2 + config.textcol1 + ' killed each other!',
                                 '',
                                 '',
                                 '',
@@ -1379,11 +1409,13 @@ begin
                               Inc(vic2);
                               Inc(vic3);
 
-                            end else if pl[i]^.hps < 1 then
+                            end else
+                            if pl[i]^.hps < 1 then
                             begin
                               newsy(True,
                                 'Killings in the Bank!',
-                                uplc + ' ' + pl[i]^.name2 + config.textcol1 + ' was killed by ' + uplc + op[sel]^.name2 + config.textcol1 + ' (guard)',
+                                uplc + ' ' + pl[i]^.name2 + config.textcol1 + ' was killed by ' +
+                                uplc + op[sel]^.name2 + config.textcol1 + ' (guard)',
                                 '',
                                 '',
                                 '',
@@ -1397,7 +1429,8 @@ begin
                             begin
                               newsy(True,
                                 'Killings in the Bank!',
-                                uplc + ' ' + op[sel]^.name2 + config.textcol1 + ' (guard) was killed by ' + uplc + pl[i]^.name2 + config.textcol1,
+                                uplc + ' ' + op[sel]^.name2 + config.textcol1 + ' (guard) was killed by ' +
+                                uplc + pl[i]^.name2 + config.textcol1,
                                 '',
                                 '',
                                 '',
@@ -1583,10 +1616,14 @@ begin
 
                   {lets grab the money in the safe!}
                   i := 1;
-                  if (pl[1]^.name2 <> '') and (pl[1]^.hps > 0) then Inc(i);
-                  if (pl[2]^.name2 <> '') and (pl[2]^.hps > 0) then Inc(i);
-                  if (pl[3]^.name2 <> '') and (pl[3]^.hps > 0) then Inc(i);
-                  if (pl[4]^.name2 <> '') and (pl[4]^.hps > 0) then Inc(i);
+                  if (pl[1]^.name2 <> '') and (pl[1]^.hps > 0) then
+                    Inc(i);
+                  if (pl[2]^.name2 <> '') and (pl[2]^.hps > 0) then
+                    Inc(i);
+                  if (pl[3]^.name2 <> '') and (pl[3]^.hps > 0) then
+                    Inc(i);
+                  if (pl[4]^.name2 <> '') and (pl[4]^.hps > 0) then
+                    Inc(i);
 
                   if safet.Value >= 5 then
                   begin
@@ -1643,7 +1680,7 @@ begin
                     end;
                   end; {for i:= .end.}
 
-                  {reset bank safe value}
+                       {reset bank safe value}
                   safet.Value := 0;
 
                   load_safe(FSave, Safet);
@@ -1721,7 +1758,8 @@ begin
 
               xx := 2000000000 - pl[1]^.bankgold;
 
-              if player.gold < xx then xx := player.gold;
+              if player.gold < xx then
+                xx := player.gold;
 
               crlf;
               sd(config.textcolor, 'You can send a maximum of ');
@@ -1768,7 +1806,8 @@ begin
                     '',
                     umailheadc + s + config.textcol1,
                     mkstring(length(s), underscore),
-                    uplc + player.name2 + config.textcol1 + ' has sent you ' + uyellow + commastr(zz) + config.textcol1 + ' ' + many_money(zz) + '.',
+                    uplc + player.name2 + config.textcol1 + ' has sent you ' + uyellow + commastr(zz) +
+                    config.textcol1 + ' ' + many_money(zz) + '.',
                     '',
                     '',
                     '',

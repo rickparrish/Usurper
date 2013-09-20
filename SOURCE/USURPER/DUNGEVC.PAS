@@ -213,7 +213,7 @@ procedure ManNeeding_Healing(pl1, pl2, pl3, pl4: userrec);
         s,              {name}
         hps,            {hps}
         global_dungeonlevel * 3,          {strength}
-        0,          {defence}
+        0,              {defence}
         'bloody liar!', {phrase}
         False,          {grabweap}
         False,          {grabarm}
@@ -231,13 +231,17 @@ procedure ManNeeding_Healing(pl1, pl2, pl3, pl4: userrec);
     global_begged := False;
     global_nobeg := True;
 
-    if player_active(pl1, True) then alivebefore1 := True
+    if player_active(pl1, True) then
+      alivebefore1 := True
     else alivebefore1 := False;
-    if player_active(pl2, True) then alivebefore2 := True
+    if player_active(pl2, True) then
+      alivebefore2 := True
     else alivebefore2 := False;
-    if player_active(pl3, True) then alivebefore3 := True
+    if player_active(pl3, True) then
+      alivebefore3 := True
     else alivebefore3 := False;
-    if player_active(pl4, True) then alivebefore4 := True
+    if player_active(pl4, True) then
+      alivebefore4 := True
     else alivebefore4 := False;
 
     player_vs_monsters(pl_vs_monster, pl1, pl2, pl3, pl4);
@@ -351,7 +355,8 @@ procedure ManNeeding_Healing(pl1, pl2, pl3, pl4: userrec);
           '',
           '',
           '');
-      end else if (alivebefore = True) and (player_active(player0^, True) = False) then
+      end else
+      if (alivebefore = True) and (player_active(player0^, True) = False) then
       begin
 
         {team mate died in the fight}
@@ -362,7 +367,7 @@ procedure ManNeeding_Healing(pl1, pl2, pl3, pl4: userrec);
           3: s := 'In the battle, a troll broke your neck!';
         end; {case .end.}
 
-        {inform player}
+             {inform player}
         post(MailSend,
           player0^.name2,
           player0^.ai,
@@ -394,7 +399,7 @@ procedure ManNeeding_Healing(pl1, pl2, pl3, pl4: userrec);
 
   end; {do_battle (fight troll war-party) *end*}
 
-  {Dungeon_Event *START*}
+       {Dungeon_Event *START*}
 
 const stranger = 'Rodrik'; {strangers namn}
   bandit       = 'Rugwar'; {bandits name, if you change here, change in magic shoppe to!}
@@ -716,13 +721,13 @@ begin
         end;
       end;
 
-    end;  {talk to stranger *end*}
+    end;       {talk to stranger *end*}
     'M': begin {murder *start*}
       murder;
-    end;  {murder *end*}
+    end;       {murder *end*}
     'W': begin {walk away *start*}
       walk_away;
-    end;  {walk away *end*}
+    end;       {walk away *end*}
   end;
 
 end;
@@ -832,7 +837,7 @@ var ch: char;
           pause;
         end;
 
-      end; {rape time *end*}
+      end;       {rape time *end*}
       'R': begin {rough her up *start*}
         d(config.textcolor, 'Instead of taking advantage of the girl sexually, you');
         d(config.textcolor, 'decide to satisfy your sadistic inclinations.');
@@ -848,7 +853,8 @@ var ch: char;
           d(config.textcolor, '(crazy fool!)');
 
           Dec(player.mental, 5);
-          if player.mental < 0 then player.mental := 0;
+          if player.mental < 0 then
+            player.mental := 0;
 
           newsy(True,
             'Evil-Doer',
@@ -889,10 +895,10 @@ var ch: char;
         sd(global_plycol, leader[boss]);
         d(config.textcolor, ' comes forward and shakes your blood-stained hand.');
         pause;
-      end;  {rough her up *end*}
+      end;       {rough her up *end*}
       'W': begin {walk away *start*}
         d(config.textcolor, 'You walk away in disgust.');
-        {scorned only if male character}
+                 {scorned only if male character}
         if player.sex = 1 then
         begin
           sd(config.textcolor, 'You receive a torrent of abuse from ');
@@ -900,7 +906,7 @@ var ch: char;
           d(config.textcolor, ' men. In their eyes you are not a man.');
         end;
       end;  {walk away *end*}
-    end; {case ch of END}
+    end;    {case ch of END}
 
  {team mates decide if they are going to be good or bad, regardless of what
   their immoral leader has acheived}
@@ -1003,7 +1009,7 @@ var ch: char;
   end; {rape_girl *END*}
 
   procedure fight_orcs(evil_minded: boolean); {fight the orcish scum}
-  {if evil_minded=true then player tried to join the orcs in the beginning, but was turned down by them}
+       {if evil_minded=true then player tried to join the orcs in the beginning, but was turned down by them}
   var i:     byte;
     x:       longint;
     s, s2, msg1, msg2: s70;
@@ -1051,7 +1057,7 @@ var ch: char;
         s,              {name}
         hps,            {hps}
         global_dungeonlevel * 2,          {strength}
-        0,          {defence}
+        0,              {defence}
         'trespasser!',  {phrase}
         False,          {grabweap}
         False,          {grabarm}
@@ -1069,13 +1075,17 @@ var ch: char;
     global_begged := False;
     global_nobeg := True;
 
-    if player_active(pl1, True) then alivebefore1 := True
+    if player_active(pl1, True) then
+      alivebefore1 := True
     else alivebefore1 := False;
-    if player_active(pl2, True) then alivebefore2 := True
+    if player_active(pl2, True) then
+      alivebefore2 := True
     else alivebefore2 := False;
-    if player_active(pl3, True) then alivebefore3 := True
+    if player_active(pl3, True) then
+      alivebefore3 := True
     else alivebefore3 := False;
-    if player_active(pl4, True) then alivebefore4 := True
+    if player_active(pl4, True) then
+      alivebefore4 := True
     else alivebefore4 := False;
 
     player_vs_monsters(pl_vs_monster, pl1, pl2, pl3, pl4);
@@ -1093,7 +1103,8 @@ var ch: char;
         '',
         '',
         '');
-    end else if global_killed then
+    end else
+    if global_killed then
     begin
       newsy(True,
         'Desperate Attempt',
@@ -1242,7 +1253,8 @@ var ch: char;
           '',
           '',
           '');
-      end else if (alivebefore = True) and (player_active(player0^, True) = False) then
+      end else
+      if (alivebefore = True) and (player_active(player0^, True) = False) then
       begin
         {team mate died in the fight}
         if not evil_minded then
@@ -1298,7 +1310,8 @@ var evil_minded: boolean;
 begin {RAPE_GIRL event *START*.... a woman is being harassed by local militia}
 
   foes := random(5) + 5; {decide how many enemies}
-  if foes > global_maxmon then foes := global_maxmon;
+  if foes > global_maxmon then
+    foes := global_maxmon;
   evil_minded := False;
 
   crlf;
@@ -1333,7 +1346,7 @@ begin {RAPE_GIRL event *START*.... a woman is being harassed by local militia}
       pause;
       fight_orcs(evil_minded);
 
-    end;  {rescue woman *end*}
+    end;       {rescue woman *end*}
     'J': begin {join orcs *start*}
       evil_minded := True;
 
@@ -1387,11 +1400,11 @@ begin {RAPE_GIRL event *START*.... a woman is being harassed by local militia}
                   rape_girl;
                 end;
               end;
-            end;  {insist end}
+            end;       {insist end}
             'A': begin {attack start}
               d(15, 'TAKE NO PRISONERS!');
               fight_orcs(evil_minded);
-            end;  {attack end}
+            end;       {attack end}
             'L': begin {leave start}
               sd(config.textcolor, 'You take ');
               sd(global_plycol, leader[boss] + 's');
@@ -1401,7 +1414,7 @@ begin {RAPE_GIRL event *START*.... a woman is being harassed by local militia}
             end;  {leave end}
           end;
 
-        end;  {suspicious *end*}
+        end;     {suspicious *end*}
         2: begin {hostile *start*}
           d(15, 'Idiot! They are HOSTILE!');
           sd(config.textcolor, 'You are being attacked by ');
@@ -1409,7 +1422,7 @@ begin {RAPE_GIRL event *START*.... a woman is being harassed by local militia}
           d(config.textcolor, ' party!');
           pause;
           fight_orcs(evil_minded);
-        end;  {hostile *end*}
+        end;     {hostile *end*}
         3: begin {friendly *start*}
           sd(global_plycol, leader[boss]);
           d(config.textcolor, ' seems to be in a good mood. He invites you to his');
@@ -1428,7 +1441,7 @@ begin {RAPE_GIRL event *START*.... a woman is being harassed by local militia}
         Give_Darkness(player, 150);
       end;
 
-    end;  {join orcs *end*}
+    end;       {join orcs *end*}
     'L': begin {leave *start*}
       d(config.textcolor, 'You leave the ravine with the poor girl''s agonizing screams');
       d(config.textcolor, 'ringing in your ears...');
@@ -1439,7 +1452,8 @@ begin {RAPE_GIRL event *START*.... a woman is being harassed by local militia}
       begin
         d(15, 'Your Chivalry went down after this cowardly behaviour!');
         player.chiv := player.chiv - 75;
-        if player.chiv < 0 then player.chiv := 0;
+        if player.chiv < 0 then
+          player.chiv := 0;
       end;
 
     end;  {leave *end*}
@@ -1565,7 +1579,7 @@ begin
 
         end; {case .end.}
 
-        {offline character evaluates new item}
+             {offline character evaluates new item}
         check_inventory(player0^, found, objekt^.ttype, True, 1);
 
         case active of
@@ -1575,10 +1589,11 @@ begin
           5: pl4 := player0^;
         end; {case .end.}
 
-        {dispose pointer var}
+             {dispose pointer var}
         dispose(player0);
 
-      end else if active = 1 then
+      end else
+      if active = 1 then
       begin
 
         {Online Player finds an item}
@@ -1838,9 +1853,9 @@ begin
     exit;
   end; {**WISHING WELL END**}
 
-  {*Should player (and team) be caught in something... an event}
+       {*Should player (and team) be caught in something... an event}
 
-  {if random(1)=0 then begin {cheat, jakob}
+       {if random(1)=0 then begin {cheat, jakob}
 
   if random(8) = 1 then
   begin
@@ -1962,12 +1977,14 @@ begin
                 Reset_Spells(pl1, pl2, pl3, pl4);
 
                 foes := global_maxmon - random(7);
-                if foes < 3 then foes := 3;
+                if foes < 3 then
+                  foes := 3;
 
                 for i := 1 to foes do
                 begin
                   monster[i]^.hps := player.level * 5;
-                  if monster[i]^.hps < 25 then monster[i]^.hps := 35;
+                  if monster[i]^.hps < 25 then
+                    monster[i]^.hps := 35;
                   monster[i]^.phrase := 'sssss!';
                   case random(2) of
                     0: monster[i]^.Name := 'Giant-Worm';
@@ -2016,7 +2033,7 @@ begin
 
                 end else
                 begin {failed mission}
-                  {haha...byebye}
+                      {haha...byebye}
                 end;
 
               end else
@@ -2129,7 +2146,8 @@ begin
             for i := 1 to foes do
             begin
               monster[i]^.hps := player.level * 5;
-              if monster[i]^.hps < 25 then monster[i]^.hps := 35;
+              if monster[i]^.hps < 25 then
+                monster[i]^.hps := 35;
               case random(3) of
                 0: monster[i]^.phrase := 'Ambush!';
                 1: monster[i]^.phrase := 'Attack!';
@@ -2201,13 +2219,13 @@ begin
               reset_spells(pl1, pl2, pl3, pl4);
             end else
             begin {failed mission}
-              {haha...byebye...avslutningsrutiner i dungeonc.pas}
+                  {haha...byebye...avslutningsrutiner i dungeonc.pas}
             end;
 
           end;
         end;
 
-      end; {**WOUNDED WARRIOR END**}
+      end;     {**WOUNDED WARRIOR END**}
 
       2: begin {**TREASURE CHEST START**}
         clearscreen;
@@ -2260,17 +2278,20 @@ begin
             sd(11, pl1.name2);
             d(config.textcolor, ' interprets the signs...');
             visit := True;
-          end else if (pl2.name2 <> '') and (pl2.hps > 0) and (pl2.race = elf) then
+          end else
+          if (pl2.name2 <> '') and (pl2.hps > 0) and (pl2.race = elf) then
           begin
             sd(11, pl2.name2);
             d(config.textcolor, ' interprets the signs...');
             visit := True;
-          end else if (pl3.name2 <> '') and (pl3.hps > 0) and (pl3.race = elf) then
+          end else
+          if (pl3.name2 <> '') and (pl3.hps > 0) and (pl3.race = elf) then
           begin
             sd(11, pl3.name2);
             d(config.textcolor, ' interprets the signs...');
             visit := True;
-          end else if (pl4.name2 <> '') and (pl4.hps > 0) and (pl4.race = elf) then
+          end else
+          if (pl4.name2 <> '') and (pl4.hps > 0) and (pl4.race = elf) then
           begin
             sd(11, pl4.name2);
             d(config.textcolor, ' interprets the signs...');
@@ -2300,7 +2321,8 @@ begin
               d(config.textcolor, 'You try to escape this deadly threat....');
 
               xx := random(player.level);
-              if xx < 5 then xx := 5;
+              if xx < 5 then
+                xx := 5;
 
               if random(2) = 0 then
               begin
@@ -2359,7 +2381,7 @@ begin
 
             end;
             2: begin {scroll}
-              {type of scroll}
+                     {type of scroll}
               y := random(3);
               case y of
                 0: begin {blessing scroll}
@@ -2392,10 +2414,14 @@ begin
 
                     d(config.textcolor, 'You feel a cool breeze, and your heart feels a bit stronger!');
 
-                    if player_active(pl1, True) then give_chivalry(pl1, xx);
-                    if player_active(pl2, True) then give_chivalry(pl2, xx);
-                    if player_active(pl3, True) then give_chivalry(pl3, xx);
-                    if player_active(pl4, True) then give_chivalry(pl4, xx);
+                    if player_active(pl1, True) then
+                      give_chivalry(pl1, xx);
+                    if player_active(pl2, True) then
+                      give_chivalry(pl2, xx);
+                    if player_active(pl3, True) then
+                      give_chivalry(pl3, xx);
+                    if player_active(pl4, True) then
+                      give_chivalry(pl4, xx);
 
                   end;
                   1: begin {summonar ett g„ng undeads}
@@ -2408,12 +2434,14 @@ begin
                     Reset_Spells(pl1, pl2, pl3, pl4);
 
                     foes := global_maxmon - random(7);
-                    if foes < 3 then foes := 3;
+                    if foes < 3 then
+                      foes := 3;
 
                     for i := 1 to foes do
                     begin
                       monster[i]^.hps := player.level * 5;
-                      if monster[i]^.hps < 25 then monster[i]^.hps := 35;
+                      if monster[i]^.hps < 25 then
+                        monster[i]^.hps := 35;
                       monster[i]^.phrase := '...';
                       case random(2) of
                         0: monster[i]^.Name := 'Undead';
@@ -2497,7 +2525,7 @@ begin
 
       3: begin {SURROUNDED BY STRANGERS}
         strangers(pl1, pl2, pl3, pl4);
-      end; {SURROUNDED BY STRANGERS}
+      end;     {SURROUNDED BY STRANGERS}
 
       4: begin {Find item}
         Dungeon_Event := Find_Item_Event(pl1, pl2, pl3, pl4);
@@ -2540,17 +2568,17 @@ begin
         }
       end; {**MONSTER JOIN END**}
 
-      {satan}
-      {charma monster}
-      {t”rstig man ber om vatten...egentligen ett test om godhet??}
-      {man guarding cave...don''t go inside!}
-      {windbag}
-      {knight in white shiny armor. guarding a gate}
-      {man hanging off a cliff. help or push}
-      {knock off wino, please don't leave me alone he whimpered}
-      {more harrasment av kvinnor}
-      {astrolog beh”ver ingredienser, quest}
-      {obnoxious man = otrevlig man}
+           {satan}
+           {charma monster}
+           {t”rstig man ber om vatten...egentligen ett test om godhet??}
+           {man guarding cave...don''t go inside!}
+           {windbag}
+           {knight in white shiny armor. guarding a gate}
+           {man hanging off a cliff. help or push}
+           {knock off wino, please don't leave me alone he whimpered}
+           {more harrasment av kvinnor}
+           {astrolog beh”ver ingredienser, quest}
+           {obnoxious man = otrevlig man}
             {saker du inte gjort sl”fock : teamet f†r dela p† rewards
                                    man b”r inte uppleva samma quest
                                    fler g†nger samma entry, eller?}
@@ -2589,4 +2617,4 @@ begin
 
 end; {Dungeon_Event *end*}
 
-end.{Unit DungEvc .end.}
+end. {Unit DungEvc .end.}

@@ -29,7 +29,8 @@ interface
 uses
   Init;
 
-function User_Search(var username: s70; enter_game_if_exists: boolean): boolean; {returns TRUE if player exists, else new player}
+function User_Search(var username: s70; enter_game_if_exists: boolean): boolean;
+{returns TRUE if player exists, else new player}
 
 implementation
 
@@ -74,17 +75,20 @@ begin
   {we read starting amount of money}
   s := cfg_string(14);
   startm := str_to_nr(s);
-  if (startm < 100) or (startm > 1000000) then startm := 10000;
+  if (startm < 100) or (startm > 1000000) then
+    startm := 10000;
 
   {we read # of dungeon fights}
   s := cfg_string(6);
   dngfights := str_to_nr(s);
-  if (dngfights < 1) or (dngfights > 99) then dngfights := 10;
+  if (dngfights < 1) or (dngfights > 99) then
+    dngfights := 10;
 
   {we read # of player fights}
   s := cfg_string(40);
   plfights := str_to_nr(s);
-  if (plfights < 1) or (plfights > 99) then plfights := 3;
+  if (plfights < 1) or (plfights > 99) then
+    plfights := 3;
 
   {get MaxTime fr†n USURP.CTL}
   maxtime := time_left;
@@ -148,7 +152,8 @@ begin
             '',
             umailheadc + 'Royal Tax' + config.textcol1,
             cool_string(9, '=', '-', 10, 2),
-            'You had to pay ' + uyellow + commastr(player.roytaxpaied) + config.textcol1 + ' coins to ' + kingstring(king.sexy) + ukingc + ' ' + king.Name + config.textcol1 + '.',
+            'You had to pay ' + uyellow + commastr(player.roytaxpaied) + config.textcol1 +
+            ' coins to ' + kingstring(king.sexy) + ukingc + ' ' + king.Name + config.textcol1 + '.',
             '',
             '',
             '',
@@ -180,7 +185,8 @@ begin
             '',
             umailheadc + 'Bank Interest' + config.textcol1,
             cool_string(13, '=', '-', 10, 2),
-            'You received ' + uyellow + commastr(player.interest) + config.textcol1 + ' ' + many_money(player.interest) + ' in Bank Interest.',
+            'You received ' + uyellow + commastr(player.interest) + config.textcol1 + ' ' +
+            many_money(player.interest) + ' in Bank Interest.',
             '',
             '',
             '',
@@ -211,7 +217,8 @@ begin
             '',
             umailheadc + 'Bank salary' + config.textcol1,
             mkstring(11, underscore),
-            'You received ' + uyellow + commastr(player.bankwage) + config.textcol1 + ' ' + many_money(player.bankwage) + ' for your bank employment.',
+            'You received ' + uyellow + commastr(player.bankwage) + config.textcol1 + ' ' +
+            many_money(player.bankwage) + ' for your bank employment.',
             '',
             '',
             '',
@@ -242,7 +249,8 @@ begin
             '',
             umailheadc + 'Bonus Money' + config.textcol1,
             mkstring(11, underscore),
-            'You received ' + uyellow + commastr(player.alive_bonus) + config.textcol1 + ' ' + many_money(player.alive_bonus) + ' in Staying-Alive bonus!',
+            'You received ' + uyellow + commastr(player.alive_bonus) + config.textcol1 + ' ' +
+            many_money(player.alive_bonus) + ' in Staying-Alive bonus!',
             '',
             '',
             '',
@@ -333,29 +341,34 @@ begin
       end;
 
     end;
-    if found_user > 0 then break;
+    if found_user > 0 then
+      break;
   end;
 
   if found_user > 0 then
   begin
 
-    if player.hps < 1 then player.hps := player.maxhps;
+    if player.hps < 1 then
+      player.hps := player.maxhps;
 
     if player.location = offloc_dormitory then
     begin
       global_auto_probe := Dormy;
-    end else if player.location = offloc_home then
+    end else
+    if player.location = offloc_home then
     begin
       global_auto_probe := AtHome;
     end
-
-    else if player.location in [offloc_innroom1..offloc_innroom4] then
+    else
+    if player.location in [offloc_innroom1..offloc_innroom4] then
     begin
       global_auto_probe := Inn;
-    end else if player.location = offloc_Castle then
+    end else
+    if player.location = offloc_Castle then
     begin {castle}
       global_auto_probe := Slottet;
-    end else if player.location = offloc_Prison then
+    end else
+    if player.location = offloc_Prison then
     begin
       global_auto_probe := Prison;
     end;
@@ -461,7 +474,8 @@ begin
       end;
     end; {for i:= .end.}
 
-    if no_play then d(12, 'Not found.')
+    if no_play then
+      d(12, 'Not found.')
     else d(14, 'Found!');
 
   end;
@@ -542,7 +556,8 @@ begin
       end;
     end; {for i:= .end.}
 
-    if x = 999 then continue;
+    if x = 999 then
+      continue;
 
     if x = 0 then
     begin
@@ -561,7 +576,8 @@ begin
       end; {for i:= .end.}
     end;
 
-    if x = 999 then continue;
+    if x = 999 then
+      continue;
 
     if x = 0 then
     begin
@@ -702,7 +718,8 @@ begin
       display_text('RACEHELP');
       pause;
       cho := '?';
-    end else if cho = 'A' then
+    end else
+    if cho = 'A' then
     begin
       crlf;
       crlf;
@@ -823,14 +840,16 @@ begin
       begin
         cho := '?';
       end;
-    end else if cho = 'H' then
+    end else
+    if cho = 'H' then
     begin
       s := 'Yes';
       clearscreen;
       display_text('CLASSHELP');
       pause;
       cho := '?';
-    end else if cho = 'A' then
+    end else
+    if cho = 'A' then
     begin
       crlf;
       crlf;
@@ -877,7 +896,8 @@ begin
       sd(config.textcolor, '[' + commastr(x) + ']:');
       s := get_string(70);
       player.desc[x] := s;
-      if player.desc[x] <> '' then x := x + 1;
+      if player.desc[x] <> '' then
+        x := x + 1;
     until (s = '') or (x > 4);
   end;
   clearscreen;
@@ -1122,7 +1142,7 @@ begin
     end;
   end; {case .end.}
 
-  {*start values, based on Race*}
+       {*start values, based on Race*}
   case player.race of
     Human: begin
       player.age := random(5) + 15;
@@ -1326,15 +1346,15 @@ begin
   player.umanbeartries := 0;
   player.massage := 0;
   player.gym_sessions := Config.GymSessions;
-  player.Gym_Owner := 0; {controller of the gym? has to be in a team}
-  player.Gym_Card := 0; {free card to the gym? if not gym_owner that is}
+  player.Gym_Owner := 0;    {controller of the gym? has to be in a team}
+  player.Gym_Card := 0;     {free card to the gym? if not gym_owner that is}
   player.royqueststoday := 0;
   player.KingVotePoll := 0; {how many days since voted for king popularity}
   player.KingLastVote := 0; {how did player vote last time}
-  player.married := False; {is player married, only used when creating scores}
-  player.Kids := 0; {how many kids this playeer is father/mother to}
+  player.married := False;  {is player married, only used when creating scores}
+  player.Kids := 0;         {how many kids this playeer is father/mother to}
   player.IntimacyActs := Config.IntimacyActs; {how many acts of intimacy has player left today?}
-  player.Pregnancy := 0; {is player pregnant? 0=no, 1...X = days pregnant}
+  player.Pregnancy := 0;    {is player pregnant? 0=no, 1...X = days pregnant}
   player.FatherID := emptystr;
   player.id := crypt(15);
   player.autohate := 0; {automatically dislike attacking player}
@@ -1489,7 +1509,8 @@ begin
     0: begin {news-paper}
       newsy(True,
         config.textcol1 + 'New Player!',
-        ' We welcome ' + uplc + alias + config.textcol1 + ', a young brave ' + urac + race_display(2, player.race, 0) + config.textcol1,
+        ' We welcome ' + uplc + alias + config.textcol1 + ', a young brave ' + urac +
+        race_display(2, player.race, 0) + config.textcol1,
         ' who seeks fortune and glory!',
         '',
         '',
@@ -1528,8 +1549,9 @@ begin
 
   end; {case .end.}
 
-  {send message to online players}
-  online_send_to_all(uwhite + '*NEW PLAYER*' + uplc + ' ' + player.name2 + config.textcol1 + ' has joined us!', player.name2, '');
+       {send message to online players}
+  online_send_to_all(uwhite + '*NEW PLAYER*' + uplc + ' ' + player.name2 + config.textcol1 +
+    ' has joined us!', player.name2, '');
 
   {a little welcome text}
  { male

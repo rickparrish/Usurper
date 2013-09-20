@@ -357,25 +357,25 @@ begin
 
 
   Add_Object('Steel Ring', {name}
-    Fingers,   {typ}
-    25000,     {v„rde i gold}
-    10,        {”ka/minska hps}
-    0,         {”ka stamina}
-    15,        {”ka agility}
-    0,         {”ka charisma}
-    0,         {”ka dexterity}
-    0,         {”ka wisdom}
-    0,         {”ka mana}
-    0,         {”ka armor v„rde}
-    0,         {”ka attack v„rde}
-    '',        {„gd av?}
-    False,     {bara EN i spelet}
-    Smallpox,  {kurerar}
-    True,      {finnas i shoppen}
-    True,      {kunna hittas i dungeons?}
-    False,     {cursed item?}
+    Fingers,    {typ}
+    25000,      {v„rde i gold}
+    10,         {”ka/minska hps}
+    0,          {”ka stamina}
+    15,         {”ka agility}
+    0,          {”ka charisma}
+    0,          {”ka dexterity}
+    0,          {”ka wisdom}
+    0,          {”ka mana}
+    0,          {”ka armor v„rde}
+    0,          {”ka attack v„rde}
+    '',         {„gd av?}
+    False,      {bara EN i spelet}
+    Smallpox,   {kurerar}
+    True,       {finnas i shoppen}
+    True,       {kunna hittas i dungeons?}
+    False,      {cursed item?}
     10,         {min level att hittas i dngs}
-    90,        {max level att hittas i dngs}
+    90,         {max level att hittas i dngs}
     'You see nothing special.',
     '',
     '',
@@ -461,25 +461,25 @@ begin
 
 
   Add_Object('Green Ring', {name}
-    Fingers,   {typ}
-    10000,     {v„rde i gold}
-    0,         {”ka/minska hps}
-    0,         {”ka stamina}
-    0,         {”ka agility}
-    0,         {”ka charisma}
-    0,         {”ka dexterity}
-    0,         {”ka wisdom}
-    15,        {”ka mana}
-    7,         {”ka armor v„rde}
-    0,         {”ka attack v„rde}
-    '',        {„gd av?}
-    False,     {bara EN i spelet}
-    Nothing,   {kurerar}
-    False,     {finnas i shoppen}
-    True,      {kunna hittas i dungeons?}
-    False,     {cursed item?}
+    Fingers,    {typ}
+    10000,      {v„rde i gold}
+    0,          {”ka/minska hps}
+    0,          {”ka stamina}
+    0,          {”ka agility}
+    0,          {”ka charisma}
+    0,          {”ka dexterity}
+    0,          {”ka wisdom}
+    15,         {”ka mana}
+    7,          {”ka armor v„rde}
+    0,          {”ka attack v„rde}
+    '',         {„gd av?}
+    False,      {bara EN i spelet}
+    Nothing,    {kurerar}
+    False,      {finnas i shoppen}
+    True,       {kunna hittas i dungeons?}
+    False,      {cursed item?}
     10,         {min level att hittas i dngs}
-    50,        {max level att hittas i dngs}
+    50,         {max level att hittas i dngs}
     'There are strange symbols inscribed on the inside of the ring.',
     '',
     '',
@@ -563,7 +563,5 @@ begin
     0);        {strength demanded to use object}
 
 end;
-
-
 
 end.

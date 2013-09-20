@@ -52,7 +52,7 @@ begin
                               14. vapen }
 
   Add_Object('Grass Pants',   {name}
-    Legs,     {typ}
+    Legs,      {typ}
     250,       {v„rde i gold}
     0,         {”ka/minska hps}
     0,         {”ka stamina}
@@ -70,7 +70,7 @@ begin
     True,      {kunna hittas i dungeons?}
     False,     {cursed item?}
     1,         {min level att hittas i dngs}
-    5,        {max level att hittas i dngs}
+    5,         {max level att hittas i dngs}
     'Ordinary Grass Pants.',
     '',        {normal beskrivning 2}
     '',        {normal beskrivning 3}
@@ -222,25 +222,25 @@ begin
     0);        {strength demanded to use object}
 
   Add_Object('Short Pants',   {name}
-    Legs,     {typ}
-    5000,     {v„rde i gold}
-    0,        {”ka/minska hps}
-    5,        {”ka stamina}
-    0,        {”ka agility}
-    0,        {”ka charisma}
-    0,        {”ka dexterity}
-    0,        {”ka wisdom}
-    0,        {”ka mana}
-    6,        {”ka armor v„rde}
-    0,        {”ka attack v„rde}
-    '',       {„gd av?}
-    False,    {bara EN i spelet}
-    Nothing,  {kurerar}
-    True,     {finnas i shoppen}
-    False,    {kunna hittas i dungeons?}
-    False,    {cursed item?}
-    1,        {min level att hittas i dngs}
-    99,       {max level att hittas i dngs}
+    Legs,      {typ}
+    5000,      {v„rde i gold}
+    0,         {”ka/minska hps}
+    5,         {”ka stamina}
+    0,         {”ka agility}
+    0,         {”ka charisma}
+    0,         {”ka dexterity}
+    0,         {”ka wisdom}
+    0,         {”ka mana}
+    6,         {”ka armor v„rde}
+    0,         {”ka attack v„rde}
+    '',        {„gd av?}
+    False,     {bara EN i spelet}
+    Nothing,   {kurerar}
+    True,      {finnas i shoppen}
+    False,     {kunna hittas i dungeons?}
+    False,     {cursed item?}
+    1,         {min level att hittas i dngs}
+    99,        {max level att hittas i dngs}
     'Dwarven Scout model with suspenders.',
     'The pants are brown and made of cotton.',
     '',        {normal beskrivning 3}
@@ -256,7 +256,7 @@ begin
     0);        {strength demanded to use object}
 
   Add_Object('Leather Pants',   {name}
-    Legs,     {typ}
+    Legs,      {typ}
     2000,      {v„rde i gold}
     0,         {”ka/minska hps}
     0,         {”ka stamina}
@@ -290,7 +290,7 @@ begin
     0);        {strength demanded to use object}
 
   Add_Object('Reinforced Leather Pants',   {name}
-    Legs,     {typ}
+    Legs,      {typ}
     5500,      {v„rde i gold}
     0,         {”ka/minska hps}
     0,         {”ka stamina}
@@ -324,7 +324,7 @@ begin
     0);        {strength demanded to use object}
 
   Add_Object('Troll Pants',   {name}
-    Legs,     {typ}
+    Legs,      {typ}
     9500,      {v„rde i gold}
     5,         {”ka/minska hps}
     0,         {”ka stamina}
@@ -358,7 +358,7 @@ begin
     0);        {strength demanded to use object}
 
   Add_Object('Silk Pants',   {name}
-    Legs,     {typ}
+    Legs,      {typ}
     25000,     {v„rde i gold}
     15,        {”ka/minska hps}
     0,         {”ka stamina}
@@ -392,7 +392,7 @@ begin
     0);        {strength demanded to use object}
 
   Add_Object('Cotton Pants',   {name}
-    Legs,     {typ}
+    Legs,      {typ}
     3500,      {v„rde i gold}
     0,         {”ka/minska hps}
     5,         {”ka stamina}
@@ -426,7 +426,7 @@ begin
     0);        {strength demanded to use object}
 
   Add_Object('Old Pants',   {name}
-    Legs,     {typ}
+    Legs,      {typ}
     50,        {v„rde i gold} -5,        {”ka/minska hps} -5,        {”ka stamina}
     0,         {”ka agility}
     0,         {”ka charisma}
@@ -456,7 +456,5 @@ begin
     0);        {strength demanded to use object}
 
 end;
-
-
 
 end.

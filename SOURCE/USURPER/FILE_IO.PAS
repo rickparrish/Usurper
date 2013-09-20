@@ -38,17 +38,17 @@ var  {Global_Textbuffer:
   Global_TextBuffer:        array[1..1024] of char; {speeds up textfile handling}
   global_lockdelay:         word; {how long should filelocking procs pause/milliseconds}
   global_online_poll_delay: word; {how long should online polls pause (in milliseconds) before next poll}
-{see various.pas for init value}
+                             {see various.pas for init value}
 
 const global_locknrs: byte = 75; {how many times should filelocking be attempted}
-  access_error = 5; {unable_to_access(filename). generic error mess}
+  access_error = 5;          {unable_to_access(filename). generic error mess}
 
 const global_bardlines = 12; {change text in create_bardsongfile also}
 type bardtype = array [1..global_bardlines] of s70;
 
 {FilSize: used by the fs(xx) function}
 type FilSize = (FsPlayer, FsNPC, FsLevel, FsGuard, FsMonster,
-    FsArmorClassic, FsWeaponClassic, FsMail, FsMarket,
+    FsArmorclassic, FsWeaponclassic, FsMail, FsMarket,
     FsBrawl, FsOnline, FsWanted, FsDrink, FsQuest,
     FsMoat, FsRelation, FsChildren, FsGod, FsBarrel, FsChestItem);
 
@@ -70,7 +70,7 @@ var Global_MailFileSize: longint; {global_mailfile filesize}
 var Global_OnDuelfile: file of ComRec; {used to lock online duels com file}
 var Global_QuestFile:  file of QuestRec; {royal quest-file}
 
-{File I/O Error Messages}
+ {File I/O Error Messages}
 function Error_Message(const code: integer): s70; {Borland Pascal Error Messages}
 procedure Unable_to_Access(const s: s70; const error: integer);
 procedure Unable_to_Write(const s: s70; const error: integer);
@@ -94,7 +94,7 @@ procedure Init_Ipc(const ply: UserRec); {preparing a IPC record for use}
 procedure Multi_Chat; {Chat with user(s) in a conference}
 procedure IPCHook; {called upon from DDplus.pas to check for pending messages}
 
-{Lock Record Procs}
+ {Lock Record Procs}
 function Lock_OnlineRecord(action: filaction; filnr: longint): boolean;
 function Lock_UserRecord(var fil; const infil: s70; action: filaction; filnr: longint): boolean;
 function Lock_MailRecord(var fil; action: filaction; filnr: longint): boolean;
@@ -141,15 +141,15 @@ procedure Load_Level(filnr: word; var lev: LevelRec);
 procedure User_Save(var Save_Me: UserRec);
 procedure Save_New_Guy(slot: word);
 
-{Filesize functions}
+ {Filesize functions}
 function Fs(filtyp: filsize): word; {file size of particular record file}
 function FsOb(otyp: objtype): word; {file size of particular item file}
 
-{Bank Safe}
+ {Bank Safe}
 procedure Safe_Reset; {reset the bank safe, after a robbery...}
 procedure Load_Safe(action: filaction; var slask: saferec);
 
-{Pack Record files}
+ {Pack Record files}
 procedure Pack_Gods; {pack gods data-file with /DO_PACKGODS command line parameter}
 procedure Pack_Children; {pack children data-file file with /DO_PACKCHILDREN command line parameter}
 procedure Pack_Relations; {pack relations file with /DO_PACKRELATIONS command line parameter}
@@ -157,7 +157,7 @@ procedure Pack_Mail; {pack mailfile with /DO_PACKMAIL command line parameter}
 procedure Pack_Moat; {pack moat file with /DO_PACKMOAT command line parameter}
 procedure Pack_Users(action: packaction); {pack userfile with /DO_PACKUSERS command line parameter}
 
-{Inter-Comm procs, node to node}
+ {Inter-Comm procs, node to node}
 procedure LoadSave_Com(action: filaction; var commy: comrec; filnr: byte; save_mess: s70);
 
 {Misc}
@@ -228,7 +228,7 @@ const {coming from FILSHAR.PAS, SWAG}
   fmDenyNone  = $40;  (* *)
 
   fmNoInherit = $70;  (* Set For "No inheritance"         *)
-{coming from FILSHAR.PAS, SWAG .. END}
+      {coming from FILSHAR.PAS, SWAG .. END}
 
 const error_col = 12; {display color of i/o errors}
   error_mes     = 'File-Alert! '; {displayed before actual error message}
@@ -237,16 +237,16 @@ function Error_Message(const code: integer): s70;
       {return message text for a given runtime error code
        this proc was taken from the elog.pas (DDplus doordriver}
 var
-  Class: s70;
-  Msg:        s70;
+  class: s70;
+  Msg:       s70;
 begin
 
   case code of
-    1.. 99: Class := 'DOS ERROR #' + long2str(code) + ' :';
-    100..149: Class := 'I/O ERROR #' + long2str(code) + ' :';
-    150..199: Class := 'CRITICAL ERROR #' + long2str(code) + ' :';
-    200..249: Class := 'FATAL ERROR #' + long2str(code) + ' :';
-    else Class := 'UNKNOWN ERROR #' + long2str(code) + ' :';
+    1.. 99: class := 'DOS ERROR #' + long2str(code) + ' :';
+    100..149: class := 'I/O ERROR #' + long2str(code) + ' :';
+    150..199: class := 'CRITICAL ERROR #' + long2str(code) + ' :';
+    200..249: class := 'FATAL ERROR #' + long2str(code) + ' :';
+    else class := 'UNKNOWN ERROR #' + long2str(code) + ' :';
   end; {case .end.}
 
   case Code of
@@ -294,8 +294,8 @@ begin
     else str(Code, Msg);
   end; {case .end.}
 
-  {return result}
-  Error_message := Class + Msg;
+       {return result}
+  Error_message := class + Msg;
 
 end; {error_message **END**}
 
@@ -826,11 +826,13 @@ begin
 
  {$I-}rewrite(onlinefile);{$I+}
   error := IoResult;
-  if error <> 0 then unable_to_create(global_onfile, error);
+  if error <> 0 then
+    unable_to_create(global_onfile, error);
 
  {$I-}Close(onlinefile);{$I+}
   error := IoResult;
-  if error <> 0 then unable_to_close(global_onfile, error);
+  if error <> 0 then
+    unable_to_close(global_onfile, error);
 
 end; {create_onlinefile *end*}
 
@@ -1523,7 +1525,7 @@ begin
 
 end; {pack_txtfile *end*}
 
-{The Inn Chatfile - procs - START}
+     {The Inn Chatfile - procs - START}
 procedure Write_To_Inn_File;
 var
   txt: Text;
@@ -1559,11 +1561,13 @@ begin
     ok := False;
     case i of
       1: begin
-        if open_txtfile(tappend, txt, global_innfile1) then ok := True
+        if open_txtfile(tappend, txt, global_innfile1) then
+          ok := True
         else ok := False;
       end;
       2: begin
-        if open_txtfile(tappend, txt, global_innfile2) then ok := True
+        if open_txtfile(tappend, txt, global_innfile2) then
+          ok := True
         else ok := False;
       end;
     end; {case .end.}
@@ -1582,25 +1586,30 @@ begin
         write_to_text(txt, aGreenOnBlack);
       end;
 
-      if m1 <> '' then writeln_to_text(txt, m1);
-      if m2 <> '' then writeln_to_text(txt, m2);
-      if m3 <> '' then writeln_to_text(txt, m3);
-      if m4 <> '' then writeln_to_text(txt, m4);
-      if m5 <> '' then writeln_to_text(txt, m5);
+      if m1 <> '' then
+        writeln_to_text(txt, m1);
+      if m2 <> '' then
+        writeln_to_text(txt, m2);
+      if m3 <> '' then
+        writeln_to_text(txt, m3);
+      if m4 <> '' then
+        writeln_to_text(txt, m4);
+      if m5 <> '' then
+        writeln_to_text(txt, m5);
 
       close_text(txt);
     end else
     begin
-      {Unable to Write File}
+         {Unable to Write File}
       unable_to_access(global_innfile1 + '/' + global_innfile2, access_error);
     end; {if ok .end.}
   end;
 
 end;
 
-{The Inn Chatfile - procs - END}
+ {The Inn Chatfile - procs - END}
 
-{The Daily TRUTHs files - procs - START}
+ {The Daily TRUTHs files - procs - START}
 
 
 
@@ -1629,12 +1638,13 @@ var txt: Text;
         end;
       end; {case .end.}
 
-    end; {for i:= .end.}
+    end;   {for i:= .end.}
 
-    {return result}
+           {return result}
     cool_line := s;
 
   end;
+
   {cool_line *end*}
 begin
 
@@ -1642,7 +1652,8 @@ begin
   begin
 
     {remove ascii file if it exists}
-    if f_exists(global_truthfile2) then delete_file(global_truthfile2);
+    if f_exists(global_truthfile2) then
+      delete_file(global_truthfile2);
 
     if not inmaint then
     begin
@@ -1686,7 +1697,7 @@ var txt: Text;
 
 begin {write_to_truth_file}
 
-  {create files if non-existant}
+      {create files if non-existant}
   check_truthfile(False);
 
   for i := 1 to 2 do
@@ -1759,7 +1770,7 @@ var
 
 begin {save new user at position SLOT}
 
-  {init}
+      {init}
   i := 0;
   error := 0;
   memmy := filemode;
@@ -1792,17 +1803,20 @@ begin {save new user at position SLOT}
   {seek}
  {$I-}Seek(playerfile, slot - 1);{$I+}
   error := IoResult;
-  if error <> 0 then unable_to_seek(global_pfile, slot - 1);
+  if error <> 0 then
+    unable_to_seek(global_pfile, slot - 1);
 
   {write}
  {$I-}Write(playerfile, player);{$I+}
   error := IoResult;
-  if error <> 0 then unable_to_write(global_pfile, error);
+  if error <> 0 then
+    unable_to_write(global_pfile, error);
 
   {close}
  {$I-}Close(playerfile);{$I+}
   error := IoResult;
-  if error <> 0 then unable_to_close(global_pfile, error);
+  if error <> 0 then
+    unable_to_close(global_pfile, error);
 
   {reset filemode}
   filemode := memmy;
@@ -1821,7 +1835,7 @@ var
 
 begin; {well, this routine deletes file FN, what a surprise huh!}
 
-  {init vars}
+       {init vars}
   i := 0;
   ok := False;
   error := 0;
@@ -1887,7 +1901,8 @@ begin
       end;
 
       {safety measure}
-      if counter > 10000 then break;
+      if counter > 10000 then
+        break;
 
     end; {while .end.}
     close_text(txt);
@@ -1978,7 +1993,8 @@ begin {this routine deals with all textfile related stuff.
     end;
   {$I-}Close(txt);{$I+}
     error := IoResult;
-    if error <> 0 then unable_to_close(fname, error);
+    if error <> 0 then
+      unable_to_close(fname, error);
   end;
 
   global_lockmode := filemode;
@@ -2056,12 +2072,14 @@ begin {this routine deals with all textfile related stuff.
       Tappend: begin
              {$I-}append(Text(f));{$I+}
         error := IoResult;
-        if error <> 0 then unable_to_append(fname);
+        if error <> 0 then
+          unable_to_append(fname);
       end;
       TDelete: begin
              {$I-}Close(Text(f));{$I+}
         error := IoResult;
-        if error <> 0 then unable_to_close(fname, error);
+        if error <> 0 then
+          unable_to_close(fname, error);
         delete_file(fname);
       end;
       TReset: begin
@@ -2080,7 +2098,8 @@ begin {this routine deals with all textfile related stuff.
 {$ENDIF}
 
   {return result}
-  if error <> 0 then Open_TxtFile := False
+  if error <> 0 then
+    Open_TxtFile := False
   else Open_Txtfile := True;
 
 end; {OPEN_TXTFILE **END**}
@@ -2128,7 +2147,8 @@ var
 begin
   Assign(fi_Temp, (st_Dir + '.'));
   getfattr(fi_Temp, wo_Fattr);
-  if (Doserror <> 0) then DirExist := False
+  if (Doserror <> 0) then
+    DirExist := False
   else
     DirExist := ((wo_Fattr and directory) <> 0);
 end; { DirExist END, from SWAG }
@@ -2150,8 +2170,8 @@ var
   BrevFile:     file of MailRec;       {** Mail file           **}
   WantedFile:   file of WantedRec;     {** Wanted file         **}
   Monsterfile:  file of MonsterRec;    {** Monster file        **}
-  Weapfile:     file of WeapRec;       {** Weapon file CLASSIC **}
-  Armfile:      file of ArmRec;        {** Armor file CLASSIC  **}
+  Weapfile:     file of WeapRec;       {** Weapon file classIC **}
+  Armfile:      file of ArmRec;        {** Armor file classIC  **}
   PMFile:       file of MarketItemRec; {** PlayerMarket file   **}
   ChestFile:    file of ChestItemRec;  {** Home Chest file     **}
   NpcFile:      file of UserRec;       {** Npc file            **}
@@ -2202,11 +2222,13 @@ begin
 
             {$I-}Result := filesize(playerfile);{$I+}
       error := IoResult;
-      if error <> 0 then unable_to_filesize(global_pfile);
+      if error <> 0 then
+        unable_to_filesize(global_pfile);
 
             {$I-}Close(playerfile);{$I+}
       error := IoResult;
-      if error <> 0 then unable_to_close(global_pfile, error);
+      if error <> 0 then
+        unable_to_close(global_pfile, error);
 
     end;
     FsNpc: begin {size of npcfile}
@@ -2225,11 +2247,13 @@ begin
 
          {$I-}Result := filesize(npcfile);{$I+}
       error := IoResult;
-      if error <> 0 then unable_to_filesize(global_npfile);
+      if error <> 0 then
+        unable_to_filesize(global_npfile);
 
          {$I-}Close(npcfile);{$I+}
       error := IoResult;
-      if error <> 0 then unable_to_close(global_npfile, error);
+      if error <> 0 then
+        unable_to_close(global_npfile, error);
 
     end;
     FsChestItem: begin {home chest items}
@@ -2239,11 +2263,13 @@ begin
 
                 {$I-}rewrite(chestfile);{$I+}
         error := IoResult;
-        if error <> 0 then unable_to_create(global_chestfile, error);
+        if error <> 0 then
+          unable_to_create(global_chestfile, error);
 
                 {$I-}Close(chestfile);{$I+}
         error := IoResult;
-        if error <> 0 then unable_to_close(global_chestfile, error);
+        if error <> 0 then
+          unable_to_close(global_chestfile, error);
 
       end;
 
@@ -2262,11 +2288,13 @@ begin
 
                {$I-}Result := filesize(chestfile);{$I+}
       error := IoResult;
-      if error <> 0 then unable_to_filesize(global_chestfile);
+      if error <> 0 then
+        unable_to_filesize(global_chestfile);
 
                {$I-}Close(chestfile);{$I+}
       error := IoResult;
-      if error <> 0 then unable_to_close(global_chestfile, error);
+      if error <> 0 then
+        unable_to_close(global_chestfile, error);
 
     end; {home chest items .end.}
     FsMarket: begin {players market file}
@@ -2277,11 +2305,13 @@ begin
 
              {$I-}rewrite(pmfile);{$I+}
         error := IoResult;
-        if error <> 0 then unable_to_create(global_marketfile, error);
+        if error <> 0 then
+          unable_to_create(global_marketfile, error);
 
              {$I-}Close(pmfile);{$I+}
         error := IoResult;
-        if error <> 0 then unable_to_close(global_marketfile, error);
+        if error <> 0 then
+          unable_to_close(global_marketfile, error);
 
       end;
 
@@ -2300,11 +2330,13 @@ begin
 
             {$I-}Result := filesize(pmfile);{$I+}
       error := IoResult;
-      if error <> 0 then unable_to_filesize(global_marketfile);
+      if error <> 0 then
+        unable_to_filesize(global_marketfile);
 
             {$I-}Close(pmfile);{$I+}
       error := IoResult;
-      if error <> 0 then unable_to_close(global_marketfile, error);
+      if error <> 0 then
+        unable_to_close(global_marketfile, error);
 
     end;
     FsGuard: begin {door guard file}
@@ -2324,11 +2356,13 @@ begin
 
            {$I-}Result := filesize(guardfile);{$I+}
       error := IoResult;
-      if error <> 0 then unable_to_filesize(global_gufile);
+      if error <> 0 then
+        unable_to_filesize(global_gufile);
 
            {$I-}Close(guardfile);{$I+}
       error := IoResult;
-      if error <> 0 then unable_to_close(global_gufile, error);
+      if error <> 0 then
+        unable_to_close(global_gufile, error);
 
     end;
     FsQuest: begin {quest file}
@@ -2339,11 +2373,13 @@ begin
 
             {$I-}rewrite(questfile);{$I+}
         error := IoResult;
-        if error <> 0 then unable_to_create(global_rquestf, error);
+        if error <> 0 then
+          unable_to_create(global_rquestf, error);
 
             {$I-}Close(questfile);{$I+}
         error := IoResult;
-        if error <> 0 then unable_to_close(global_rquestf, error);
+        if error <> 0 then
+          unable_to_close(global_rquestf, error);
 
       end;
 
@@ -2362,11 +2398,13 @@ begin
 
            {$I-}Result := filesize(questfile);{$I+}
       error := IoResult;
-      if error <> 0 then unable_to_filesize(global_rquestf);
+      if error <> 0 then
+        unable_to_filesize(global_rquestf);
 
            {$I-}Close(questfile);{$I+}
       error := IoResult;
-      if error <> 0 then unable_to_close(global_rquestf, error);
+      if error <> 0 then
+        unable_to_close(global_rquestf, error);
 
     end;
     FsRelation: begin {social relations file}
@@ -2377,11 +2415,13 @@ begin
 
             {$I-}rewrite(relationfile);{$I+}
         error := IoResult;
-        if error <> 0 then unable_to_create(global_relationf, error);
+        if error <> 0 then
+          unable_to_create(global_relationf, error);
 
             {$I-}Close(relationfile);{$I+}
         error := IoResult;
-        if error <> 0 then unable_to_close(global_relationf, error);
+        if error <> 0 then
+          unable_to_close(global_relationf, error);
 
       end;
 
@@ -2400,11 +2440,13 @@ begin
 
            {$I-}Result := filesize(relationfile);{$I+}
       error := IoResult;
-      if error <> 0 then unable_to_filesize(global_relationf);
+      if error <> 0 then
+        unable_to_filesize(global_relationf);
 
            {$I-}Close(relationfile);{$I+}
       error := IoResult;
-      if error <> 0 then unable_to_close(global_relationf, error);
+      if error <> 0 then
+        unable_to_close(global_relationf, error);
 
     end;
     FsChildren: begin {children file}
@@ -2415,11 +2457,13 @@ begin
 
             {$I-}rewrite(childrenfile);{$I+}
         error := IoResult;
-        if error <> 0 then unable_to_create(global_childrenf, error);
+        if error <> 0 then
+          unable_to_create(global_childrenf, error);
 
             {$I-}Close(childrenfile);{$I+}
         error := IoResult;
-        if error <> 0 then unable_to_close(global_childrenf, error);
+        if error <> 0 then
+          unable_to_close(global_childrenf, error);
 
       end;
 
@@ -2438,11 +2482,13 @@ begin
 
            {$I-}Result := filesize(childrenfile);{$I+}
       error := IoResult;
-      if error <> 0 then unable_to_filesize(global_childrenf);
+      if error <> 0 then
+        unable_to_filesize(global_childrenf);
 
            {$I-}Close(childrenfile);{$I+}
       error := IoResult;
-      if error <> 0 then unable_to_close(global_childrenf, error);
+      if error <> 0 then
+        unable_to_close(global_childrenf, error);
 
     end;
     FsBarrel: begin {beer barrel lifters top list file}
@@ -2471,12 +2517,14 @@ begin
 
              {$I-}Write(barrelfile, newbarrel);{$I+}
           error := IoResult;
-          if error <> 0 then unable_to_write(global_barrelf, error);
+          if error <> 0 then
+            unable_to_write(global_barrelf, error);
         end;
 
             {$I-}Close(barrelfile);{$I+}
         error := IoResult;
-        if error <> 0 then unable_to_close(global_barrelf, error);
+        if error <> 0 then
+          unable_to_close(global_barrelf, error);
       end;
 
       repeat
@@ -2494,11 +2542,13 @@ begin
 
            {$I-}Result := filesize(barrelfile);{$I+}
       error := IoResult;
-      if error <> 0 then unable_to_filesize(global_barrelf);
+      if error <> 0 then
+        unable_to_filesize(global_barrelf);
 
            {$I-}Close(barrelfile);{$I+}
       error := IoResult;
-      if error <> 0 then unable_to_close(global_barrelf, error);
+      if error <> 0 then
+        unable_to_close(global_barrelf, error);
 
     end;
 
@@ -2510,11 +2560,13 @@ begin
 
             {$I-}rewrite(godfile);{$I+}
         error := IoResult;
-        if error <> 0 then unable_to_create(global_godfil, error);
+        if error <> 0 then
+          unable_to_create(global_godfil, error);
 
             {$I-}Close(godfile);{$I+}
         error := IoResult;
-        if error <> 0 then unable_to_close(global_godfil, error);
+        if error <> 0 then
+          unable_to_close(global_godfil, error);
 
       end;
 
@@ -2533,11 +2585,13 @@ begin
 
            {$I-}Result := filesize(godfile);{$I+}
       error := IoResult;
-      if error <> 0 then unable_to_filesize(global_godfil);
+      if error <> 0 then
+        unable_to_filesize(global_godfil);
 
            {$I-}Close(godfile);{$I+}
       error := IoResult;
-      if error <> 0 then unable_to_close(global_godfil, error);
+      if error <> 0 then
+        unable_to_close(global_godfil, error);
 
     end;
 
@@ -2564,11 +2618,13 @@ begin
 
             {$I-}Result := filesize(onlinefile);{$I+}
       error := IoResult;
-      if error <> 0 then unable_to_filesize(global_onfile);
+      if error <> 0 then
+        unable_to_filesize(global_onfile);
 
             {$I-}Close(onlinefile);{$I+}
       error := IoResult;
-      if error <> 0 then unable_to_close(global_onfile, error);
+      if error <> 0 then
+        unable_to_close(global_onfile, error);
 
     end;
     FsMail: begin {mailfile}
@@ -2579,11 +2635,13 @@ begin
 
            {$I-}rewrite(brevfile);{$I+}
         error := IoResult;
-        if error <> 0 then unable_to_create(global_mafile, error);
+        if error <> 0 then
+          unable_to_create(global_mafile, error);
 
            {$I-}Close(brevfile);{$I+}
         error := IoResult;
-        if error <> 0 then unable_to_close(global_mafile, error);
+        if error <> 0 then
+          unable_to_close(global_mafile, error);
 
       end;
 
@@ -2602,11 +2660,13 @@ begin
 
           {$I-}Result := filesize(brevfile);{$I+}
       error := IoResult;
-      if error <> 0 then unable_to_filesize(global_mafile);
+      if error <> 0 then
+        unable_to_filesize(global_mafile);
 
           {$I-}Close(brevfile);{$I+}
       error := IoResult;
-      if error <> 0 then unable_to_close(global_mafile, error);
+      if error <> 0 then
+        unable_to_close(global_mafile, error);
 
     end;
     FsWanted: begin {wanted file}
@@ -2617,11 +2677,13 @@ begin
 
              {$I-}rewrite(wantedfile);{$I+}
         error := IoResult;
-        if error <> 0 then unable_to_create(global_wwfile, error);
+        if error <> 0 then
+          unable_to_create(global_wwfile, error);
 
              {$I-}Close(wantedfile);{$I+}
         error := IoResult;
-        if error <> 0 then unable_to_close(global_wwfile, error);
+        if error <> 0 then
+          unable_to_close(global_wwfile, error);
 
       end;
 
@@ -2641,11 +2703,13 @@ begin
 
             {$I-}Result := filesize(wantedfile);{$I+}
       error := IoResult;
-      if error <> 0 then unable_to_filesize(global_wwfile);
+      if error <> 0 then
+        unable_to_filesize(global_wwfile);
 
             {$I-}Close(wantedfile);{$I+}
       error := IoResult;
-      if error <> 0 then unable_to_close(global_wwfile, error);
+      if error <> 0 then
+        unable_to_close(global_wwfile, error);
 
     end;
     FsDrink: begin {Drink file, orbs bar, user customized drinks}
@@ -2656,11 +2720,13 @@ begin
 
              {$I-}rewrite(drinkf);{$I+}
         error := IoResult;
-        if error <> 0 then unable_to_create(global_drinkfile, error);
+        if error <> 0 then
+          unable_to_create(global_drinkfile, error);
 
              {$I-}Close(drinkf);{$I+}
         error := IoResult;
-        if error <> 0 then unable_to_close(global_drinkfile, error);
+        if error <> 0 then
+          unable_to_close(global_drinkfile, error);
 
       end;
 
@@ -2679,11 +2745,13 @@ begin
 
             {$I-}Result := filesize(drinkf);{$I+}
       error := IoResult;
-      if error <> 0 then unable_to_filesize(global_drinkfile);
+      if error <> 0 then
+        unable_to_filesize(global_drinkfile);
 
             {$I-}Close(drinkf);{$I+}
       error := IoResult;
-      if error <> 0 then unable_to_close(global_drinkfile, error);
+      if error <> 0 then
+        unable_to_close(global_drinkfile, error);
 
     end;
 
@@ -2695,11 +2763,13 @@ begin
 
              {$I-}rewrite(moatf);{$I+}
         error := IoResult;
-        if error <> 0 then unable_to_create(global_moatfile, error);
+        if error <> 0 then
+          unable_to_create(global_moatfile, error);
 
              {$I-}Close(moatf);{$I+}
         error := IoResult;
-        if error <> 0 then unable_to_close(global_moatfile, error);
+        if error <> 0 then
+          unable_to_close(global_moatfile, error);
 
       end;
 
@@ -2718,15 +2788,17 @@ begin
 
             {$I-}Result := filesize(moatf);{$I+}
       error := IoResult;
-      if error <> 0 then unable_to_filesize(global_moatfile);
+      if error <> 0 then
+        unable_to_filesize(global_moatfile);
 
             {$I-}Close(moatf);{$I+}
       error := IoResult; {get error}
-      if error <> 0 then unable_to_close(global_moatfile, error);
+      if error <> 0 then
+        unable_to_close(global_moatfile, error);
 
     end;
 
-    FsWeaponClassic: begin {weapon file, classic mode}
+    FsWeaponclassic: begin {weapon file, classic mode}
       repeat
         Assign(weapfile, global_weapofil);
         ok := True;
@@ -2742,14 +2814,16 @@ begin
 
                     {$I-}Result := filesize(weapfile);{$I+}
       error := IoResult; {get error}
-      if error <> 0 then unable_to_filesize(global_weapofil);
+      if error <> 0 then
+        unable_to_filesize(global_weapofil);
 
                     {$I-}Close(weapfile);{$I+}
       error := IoResult; {get error}
-      if error <> 0 then unable_to_close(global_weapofil, error);
+      if error <> 0 then
+        unable_to_close(global_weapofil, error);
 
     end;
-    FsArmorClassic: begin {armor file, classic mode}
+    FsArmorclassic: begin {armor file, classic mode}
       repeat
         Assign(armfile, global_armofile);
         ok := True;
@@ -2765,11 +2839,13 @@ begin
 
                   {$I-}Result := filesize(armfile);{$I+}
       error := IoResult; {get error}
-      if error <> 0 then unable_to_filesize(global_armofile);
+      if error <> 0 then
+        unable_to_filesize(global_armofile);
 
                   {$I-}Close(armfile);{$I+}
       error := IoResult; {get error}
-      if error <> 0 then unable_to_close(global_armofile, error);
+      if error <> 0 then
+        unable_to_close(global_armofile, error);
 
     end;
     FsMonster: begin {monster file}
@@ -2788,17 +2864,19 @@ begin
 
              {$I-}Result := filesize(monsterfile);{$I+}
       error := IoResult; {get error}
-      if error <> 0 then unable_to_filesize(global_monfile);
+      if error <> 0 then
+        unable_to_filesize(global_monfile);
 
              {$I-}Close(monsterfile);{$I+}
       error := IoResult; {get error}
-      if error <> 0 then unable_to_close(global_monfile, error);
+      if error <> 0 then
+        unable_to_close(global_monfile, error);
 
     end;
 
   end; {case .end.}
 
-  {reset filemode}
+       {reset filemode}
   filemode := memmy;
 {$IFNDEF MSDOS}
   FileModeReadWrite := FileMode;
@@ -2858,7 +2936,7 @@ begin
       Abody: s := objf15;
     end; {case .end.}
 
-    {assign objekt file}
+         {assign objekt file}
     Assign(ofil, s);
 
     ok := True;
@@ -2875,11 +2953,13 @@ begin
 
  {$I-}fsob := filesize(ofil);{$I+}
   error := IoResult; {get error}
-  if error <> 0 then unable_to_filesize(s);
+  if error <> 0 then
+    unable_to_filesize(s);
 
  {$I-}Close(ofil);{$I+}
   error := IoResult; {get error}
-  if error <> 0 then unable_to_close(s, error);
+  if error <> 0 then
+    unable_to_close(s, error);
 
   {reset filmode}
   filemode := memmy;
@@ -2888,7 +2968,7 @@ begin
 {$ENDIF}
 end; {-----ITEM FILESIZE END-----}
 
-{-----LOAD OBJEKT START------}
+     {-----LOAD OBJEKT START------}
 function Load_Objekt;
 var
   x, i, memmy, error: integer;
@@ -2927,7 +3007,7 @@ begin
     Abody: s := objf15;
   end; {case .end.}
 
-  {assign correct file}
+       {assign correct file}
   Assign(ofil, s);
 
   repeat
@@ -2958,7 +3038,8 @@ begin
   begin
   {$I-}x := filesize(ofil);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_filesize(s);
+    if error <> 0 then
+      unable_to_filesize(s);
 
     objektt.Name := 'Spade';
 
@@ -2985,7 +3066,8 @@ begin
 
   {$I-}Close(ofil);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_close(s, error);
+    if error <> 0 then
+      unable_to_close(s, error);
 
   end else
   begin
@@ -3066,12 +3148,12 @@ begin
     end;
   end; {case .end.}
 
-  {return result}
+       {return result}
   Lock_MailRecord := Result;
 
 end; {lock_mailrecord *end*}
 
-{-----LOAD MAIL START------}
+     {-----LOAD MAIL START------}
 procedure Load_Mail(action: filaction; var slask: mailrec; filnr: word);
 var ok:  boolean;
   memmy: integer;
@@ -3135,22 +3217,25 @@ begin
 
   {$I-}Seek(global_mailfile, filnr - 1);{$I+}
     error := IOResult;
-    if error <> 0 then unable_to_seek(global_mafile, filnr - 1);
+    if error <> 0 then
+      unable_to_seek(global_mafile, filnr - 1);
 
     case action of
       Fload: begin
           {$I-}Read(global_mailfile, slask);{$I+}
         error := IoResult;
-        if error <> 0 then unable_to_read(global_mafile, error);
+        if error <> 0 then
+          unable_to_read(global_mafile, error);
       end;
       Fsave: begin
           {$I-}Write(global_mailfile, slask);{$I+}
         error := IoResult;
-        if error <> 0 then unable_to_write(global_mafile, error);
+        if error <> 0 then
+          unable_to_write(global_mafile, error);
       end;
     end; {case .end.}
 
-    {unlock record}
+         {unlock record}
     if config.netsharemethod = RecordLocking then
     begin
       Lock_MailRecord(global_mailfile, funlock, filnr);
@@ -3158,7 +3243,8 @@ begin
 
   {$I-}Close(global_mailfile);{$I+}
     error := IOResult;
-    if error <> 0 then unable_to_close(global_mafile, error);
+    if error <> 0 then
+      unable_to_close(global_mafile, error);
 
   end else
   begin
@@ -3243,12 +3329,12 @@ begin
 
   end; {case .end.}
 
-  {return result}
+       {return result}
   lock_UserRecord := Result;
 
 end; {lock_userrecord *end*}
 
-{-------LOAD CHARACTER START---------}
+     {-------LOAD CHARACTER START---------}
 function Load_Character(var slask: userrec; filtyp: byte; recnr: word): boolean;
 var
   ok, Result: boolean;
@@ -3268,7 +3354,8 @@ begin
   Result := False;
   ok := False;
 
-  if recnr < 1 then recnr := 1;
+  if recnr < 1 then
+    recnr := 1;
   filnr := recnr - 1;
 
   if filnr < 0 then
@@ -3358,7 +3445,8 @@ begin
 
   {$I-}Close(workfile);{$I+}
     error := IoResult;
-    if error <> 0 then unable_to_close(workname, error);
+    if error <> 0 then
+      unable_to_close(workname, error);
 
   end else
   begin
@@ -3378,17 +3466,28 @@ begin
     {set correct spell levels. this isn't really necessary}
     if slask.class in [Cleric, Magician, Sage] then
     begin
-      if slask.level >= 5 then slask.spell[2, 1] := True;
-      if slask.level >= 10 then slask.spell[3, 1] := True;
-      if slask.level >= 15 then slask.spell[4, 1] := True;
-      if slask.level >= 20 then slask.spell[5, 1] := True;
-      if slask.level >= 25 then slask.spell[6, 1] := True;
-      if slask.level >= 30 then slask.spell[7, 1] := True;
-      if slask.level >= 40 then slask.spell[8, 1] := True;
-      if slask.level >= 50 then slask.spell[9, 1] := True;
-      if slask.level >= 60 then slask.spell[10, 1] := True;
-      if slask.level >= 70 then slask.spell[11, 1] := True;
-      if slask.level >= 80 then slask.spell[12, 1] := True;
+      if slask.level >= 5 then
+        slask.spell[2, 1] := True;
+      if slask.level >= 10 then
+        slask.spell[3, 1] := True;
+      if slask.level >= 15 then
+        slask.spell[4, 1] := True;
+      if slask.level >= 20 then
+        slask.spell[5, 1] := True;
+      if slask.level >= 25 then
+        slask.spell[6, 1] := True;
+      if slask.level >= 30 then
+        slask.spell[7, 1] := True;
+      if slask.level >= 40 then
+        slask.spell[8, 1] := True;
+      if slask.level >= 50 then
+        slask.spell[9, 1] := True;
+      if slask.level >= 60 then
+        slask.spell[10, 1] := True;
+      if slask.level >= 70 then
+        slask.spell[11, 1] := True;
+      if slask.level >= 80 then
+        slask.spell[12, 1] := True;
     end;
 
     {remove active spells, this shouldn't be necessary either}
@@ -3397,11 +3496,12 @@ begin
       slask.spell[i, 2] := False;
     end; {for i:= .end.}
 
-    {check if player has equipment that has been excluded from the editor.}
+         {check if player has equipment that has been excluded from the editor.}
     check_valid_equipment(slask);
 
     {sex set. this should never need to be corrected}
-    if (slask.sex < 1) or (slask.sex > 2) then slask.sex := 1;
+    if (slask.sex < 1) or (slask.sex > 2) then
+      slask.sex := 1;
 
   end else
   begin
@@ -3443,7 +3543,8 @@ procedure User_Save;
       mem := 1;
     end else
     begin
-      if mem > fs(FsPlayer) then mem := 1;
+      if mem > fs(FsPlayer) then
+        mem := 1;
     end;
 
     if load_character(dummy, 1, mem) = True then
@@ -3524,11 +3625,13 @@ procedure User_Save;
 
    {$I-}seek(playerfile, power - 1);{$I+}
         error := IoResult; {get error}
-        if error <> 0 then unable_to_seek(global_pfile, power - 1);
+        if error <> 0 then
+          unable_to_seek(global_pfile, power - 1);
 
    {$I-}Write(playerfile, target);{$I+}
         error := IoResult; {get error}
-        if error <> 0 then unable_to_write(global_pfile, error);
+        if error <> 0 then
+          unable_to_write(global_pfile, error);
 
         {unlock record}
         if config.netsharemethod = RecordLocking then
@@ -3538,7 +3641,8 @@ procedure User_Save;
 
    {$I-}Close(playerfile);{$I+}
         error := IoResult; {get error}
-        if error <> 0 then unable_to_close(global_pfile, error);
+        if error <> 0 then
+          unable_to_close(global_pfile, error);
 
       end else
       begin
@@ -3579,7 +3683,8 @@ procedure User_Save;
       mem := 1;
     end else
     begin
-      if mem > fs(FsNpc) then mem := 1;
+      if mem > fs(FsNpc) then
+        mem := 1;
     end;
 
     if load_character(dummy, 2, mem) = True then
@@ -3658,11 +3763,13 @@ procedure User_Save;
 
    {$I-}seek(npcfile, power - 1);{$I+}
         error := IoResult; {get error}
-        if error <> 0 then unable_to_seek(global_npfile, power - 1);
+        if error <> 0 then
+          unable_to_seek(global_npfile, power - 1);
 
    {$I-}Write(npcfile, target);{$I+}
         error := IoResult; {get error}
-        if error <> 0 then unable_to_write(global_npfile, error);
+        if error <> 0 then
+          unable_to_write(global_npfile, error);
 
         {unlock record}
         if config.netsharemethod = RecordLocking then
@@ -3672,7 +3779,8 @@ procedure User_Save;
 
    {$I-}Close(npcfile);{$I+}
         error := IoResult; {get error}
-        if error <> 0 then unable_to_close(global_npfile, error);
+        if error <> 0 then
+          unable_to_close(global_npfile, error);
 
       end else
       begin
@@ -3735,7 +3843,7 @@ begin
 
 end; {append_onlineguy *end*}
 
-{------LOAD WANTED START---------}
+     {------LOAD WANTED START---------}
 procedure Load_Wanted;
 var
   ok:         boolean;
@@ -3787,24 +3895,28 @@ begin
 
   {$I-}Seek(wantedfile, filnr - 1);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_seek(global_wwfile, filnr - 1);
+    if error <> 0 then
+      unable_to_seek(global_wwfile, filnr - 1);
 
     case action of
       Fload: begin
           {$I-}Read(wantedfile, slask);{$I+}
         error := IoResult; {get error}
-        if error <> 0 then unable_to_read(global_wwfile, error);
+        if error <> 0 then
+          unable_to_read(global_wwfile, error);
       end;
       Fsave: begin
           {$I-}Write(wantedfile, slask);{$I+}
         error := IoResult; {get error}
-        if error <> 0 then unable_to_write(global_wwfile, error);
+        if error <> 0 then
+          unable_to_write(global_wwfile, error);
       end;
     end;
 
   {$I-}Close(wantedfile);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_close(global_wwfile, error);
+    if error <> 0 then
+      unable_to_close(global_wwfile, error);
 
   end else
   begin
@@ -3823,9 +3935,9 @@ begin
 {$ENDIF}
 end;
 
-{------LOAD WANTED END---------}
+ {------LOAD WANTED END---------}
 
-{------LOAD KING START---------}
+ {------LOAD KING START---------}
 procedure Load_King;
 var ok:     boolean;
   i:        integer;
@@ -3865,18 +3977,20 @@ begin
 
     {$I-}Write(kingfile, king);{$I+}
         error := IoResult; {get error}
-        if error <> 0 then unable_to_write(global_kingf, error);
+        if error <> 0 then
+          unable_to_write(global_kingf, error);
 
     {$I-}Close(kingfile);{$I+}
         error := IoResult; {get error}
-        if error <> 0 then unable_to_close(global_kingf, error);
+        if error <> 0 then
+          unable_to_close(global_kingf, error);
 
         ok := True;
       end;
     until (Ok) or (i > global_locknrs);
   end; {file does not exist .end.}
 
-  {read/write}
+       {read/write}
   i := 0;
   repeat
     ok := True;
@@ -3910,24 +4024,28 @@ begin
   begin
   {$I-}Seek(kingfile, 0);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_seek(global_kingf, 0);
+    if error <> 0 then
+      unable_to_seek(global_kingf, 0);
 
     case action of
       Fload: begin
           {$I-}Read(kingfile, king);{$I+}
         error := IoResult; {get error}
-        if error <> 0 then unable_to_read(global_kingf, error);
+        if error <> 0 then
+          unable_to_read(global_kingf, error);
       end;
       Fsave: begin
           {$I-}Write(kingfile, king);{$I+}
         error := IoResult; {get error}
-        if error <> 0 then unable_to_write(global_kingf, error);
+        if error <> 0 then
+          unable_to_write(global_kingf, error);
       end;
     end; {case .end.}
 
   {$I-}Close(kingfile);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_close(global_kingf, error);
+    if error <> 0 then
+      unable_to_close(global_kingf, error);
 
   end else
   begin
@@ -3944,9 +4062,9 @@ begin
 {$ENDIF}
 end;
 
-{------LOAD KING END---------}
+ {------LOAD KING END---------}
 
-{------LOAD GUARD START--------}
+ {------LOAD GUARD START--------}
 procedure Load_Guard;
 var ok:      boolean;
   i:         integer;
@@ -3996,24 +4114,28 @@ begin
   begin
   {$I-}Seek(guardfile, filnr - 1);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_seek(global_gufile, filnr - 1);
+    if error <> 0 then
+      unable_to_seek(global_gufile, filnr - 1);
 
     case action of
       Fload: begin
           {$I-}Read(guardfile, slask);{$I+}
         error := IoResult; {get error}
-        if error <> 0 then unable_to_read(global_gufile, error);
+        if error <> 0 then
+          unable_to_read(global_gufile, error);
       end;
       Fsave: begin
           {$I-}Write(guardfile, slask);{$I+}
         error := IoResult; {get error}
-        if error <> 0 then unable_to_write(global_gufile, error);
+        if error <> 0 then
+          unable_to_write(global_gufile, error);
       end;
     end; {case .end.}
 
   {$I-}Close(guardfile);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_close(global_gufile, error);
+    if error <> 0 then
+      unable_to_close(global_gufile, error);
   end else
   begin
     case action of
@@ -4029,9 +4151,9 @@ begin
 {$ENDIF}
 end;
 
-{------LOAD GUARD END--------}
+ {------LOAD GUARD END--------}
 
-{------LOAD QUEST START--------}
+ {------LOAD QUEST START--------}
 procedure Load_Quest;
 var ok:      boolean;
   i:         integer;
@@ -4081,24 +4203,28 @@ begin
 
   {$I-}Seek(questfile, filnr - 1);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_seek(global_rquestf, filnr - 1);
+    if error <> 0 then
+      unable_to_seek(global_rquestf, filnr - 1);
 
     case action of
       Fload: begin
           {$I-}Read(questfile, slask);{$I+}
         error := IoResult; {get error}
-        if error <> 0 then unable_to_read(global_rquestf, error);
+        if error <> 0 then
+          unable_to_read(global_rquestf, error);
       end;
       Fsave: begin
           {$I-}Write(questfile, slask);{$I+}
         error := IoResult; {get error}
-        if error <> 0 then unable_to_write(global_rquestf, error);
+        if error <> 0 then
+          unable_to_write(global_rquestf, error);
       end;
     end; {case .end.}
 
   {$I-}Close(questfile);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_close(global_rquestf, error);
+    if error <> 0 then
+      unable_to_close(global_rquestf, error);
 
   end else
   begin
@@ -4170,24 +4296,28 @@ begin
 
   {$I-}Seek(pmfile, filnr - 1);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_seek(global_chestfile, filnr - 1);
+    if error <> 0 then
+      unable_to_seek(global_chestfile, filnr - 1);
 
     case action of
       FLoad: begin
           {$I-}Read(pmfile, slask);{$I+}
         error := IoResult; {get error}
-        if error <> 0 then unable_to_read(global_chestfile, error);
+        if error <> 0 then
+          unable_to_read(global_chestfile, error);
       end;
       FSave: begin
           {$I-}Write(pmfile, slask);{$I+}
         error := IoResult; {get error}
-        if error <> 0 then unable_to_write(global_chestfile, error);
+        if error <> 0 then
+          unable_to_write(global_chestfile, error);
       end;
     end; {case .end.}
 
   {$I-}Close(pmfile);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_close(global_chestfile, error);
+    if error <> 0 then
+      unable_to_close(global_chestfile, error);
   end else
   begin
 
@@ -4262,24 +4392,28 @@ begin
 
   {$I-}Seek(pmfile, filnr - 1);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_seek(global_marketfile, filnr - 1);
+    if error <> 0 then
+      unable_to_seek(global_marketfile, filnr - 1);
 
     case action of
       FLoad: begin
           {$I-}Read(pmfile, slask);{$I+}
         error := IoResult; {get error}
-        if error <> 0 then unable_to_read(global_marketfile, error);
+        if error <> 0 then
+          unable_to_read(global_marketfile, error);
       end;
       FSave: begin
           {$I-}Write(pmfile, slask);{$I+}
         error := IoResult; {get error}
-        if error <> 0 then unable_to_write(global_marketfile, error);
+        if error <> 0 then
+          unable_to_write(global_marketfile, error);
       end;
     end; {case .end.}
 
   {$I-}Close(pmfile);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_close(global_marketfile, error);
+    if error <> 0 then
+      unable_to_close(global_marketfile, error);
   end else
   begin
 
@@ -4297,9 +4431,9 @@ begin
 {$ENDIF}
 end;
 
-{------LOAD MARKET END------}
+ {------LOAD MARKET END------}
 
-{------LOAD DRINK START------}
+ {------LOAD DRINK START------}
 function Load_Drink;
 var
   ok, Result: boolean;
@@ -4349,26 +4483,30 @@ begin
 
   {$I-}Seek(drfile, filnr - 1);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_seek(global_drinkfile, filnr - 1);
+    if error <> 0 then
+      unable_to_seek(global_drinkfile, filnr - 1);
 
     case action of
       FLoad: begin
           {$I-}Read(drfile, slask);{$I+}
         error := IoResult; {get error}
-        if error <> 0 then unable_to_read(global_drinkfile, error)
+        if error <> 0 then
+          unable_to_read(global_drinkfile, error)
         else Result := True;
       end;
       FSave: begin
           {$I-}Write(drfile, slask);{$I+}
         error := IoResult; {get error}
-        if error <> 0 then unable_to_write(global_drinkfile, error)
+        if error <> 0 then
+          unable_to_write(global_drinkfile, error)
         else Result := True;
       end;
     end; {case .end.}
 
   {$I-}Close(drfile);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_close(global_drinkfile, error);
+    if error <> 0 then
+      unable_to_close(global_drinkfile, error);
 
   end else
   begin
@@ -4389,9 +4527,9 @@ begin
 
 end;
 
-{------LOAD DRINK END------}
+ {------LOAD DRINK END------}
 
-{------LOAD MOAT CREATURE START------}
+ {------LOAD MOAT CREATURE START------}
 procedure Load_Moat;
 var
   ok:      boolean;
@@ -4442,24 +4580,28 @@ begin
 
   {$I-}Seek(motfile, filnr - 1);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_seek(global_moatfile, filnr - 1);
+    if error <> 0 then
+      unable_to_seek(global_moatfile, filnr - 1);
 
     case action of
       FLoad: begin
           {$I-}Read(motfile, slask);{$I+}
         error := IoResult; {get error}
-        if error <> 0 then unable_to_read(global_moatfile, error);
+        if error <> 0 then
+          unable_to_read(global_moatfile, error);
       end;
       FSave: begin
           {$I-}Write(motfile, slask);{$I+}
         error := IoResult; {get error}
-        if error <> 0 then unable_to_write(global_moatfile, error);
+        if error <> 0 then
+          unable_to_write(global_moatfile, error);
       end;
     end; {case .end.}
 
   {$I-}Close(motfile);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_close(global_moatfile, error);
+    if error <> 0 then
+      unable_to_close(global_moatfile, error);
 
   end else
   begin
@@ -4476,9 +4618,9 @@ begin
 {$ENDIF}
 end;
 
-{------LOAD DRINK END------}
+ {------LOAD DRINK END------}
 
-{------LOAD RELATION START------}
+ {------LOAD RELATION START------}
 function Load_Relation;
 var
   ok, Result: boolean;
@@ -4530,7 +4672,8 @@ begin
 
   {$I-}Seek(REfile, filnr - 1);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_seek(global_relationf, filnr - 1);
+    if error <> 0 then
+      unable_to_seek(global_relationf, filnr - 1);
 
     case action of
       FLoad: begin
@@ -4538,20 +4681,23 @@ begin
         error := IoResult; {get error}
         slask.recnr := filnr;
 
-        if error <> 0 then unable_to_read(global_relationf, error)
+        if error <> 0 then
+          unable_to_read(global_relationf, error)
         else Result := True;
       end;
       FSave: begin
           {$I-}Write(REfile, slask);{$I+}
         error := IoResult; {get error}
-        if error <> 0 then unable_to_write(global_relationf, error)
+        if error <> 0 then
+          unable_to_write(global_relationf, error)
         else Result := True;
       end;
     end; {case .end.}
 
   {$I-}Close(REfile);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_close(global_relationf, error);
+    if error <> 0 then
+      unable_to_close(global_relationf, error);
 
   end else
   begin
@@ -4595,7 +4741,7 @@ begin
 
 end; {load_bardsong *end*}
 
-{------LOAD CHILD START------}
+     {------LOAD CHILD START------}
 function Load_Child;
 var
   ok, Result:      boolean;
@@ -4647,7 +4793,8 @@ begin
 
   {$I-}Seek(CHfile, filnr - 1);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_seek(global_childrenf, filnr - 1);
+    if error <> 0 then
+      unable_to_seek(global_childrenf, filnr - 1);
 
     case action of
       FLoad: begin
@@ -4679,7 +4826,8 @@ begin
 
   {$I-}Close(CHfile);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_close(global_childrenf, error);
+    if error <> 0 then
+      unable_to_close(global_childrenf, error);
 
   end else
   begin
@@ -4700,7 +4848,7 @@ begin
 
 end; {------LOAD CHILD END------}
 
-{------LOAD BARREL START------}
+     {------LOAD BARREL START------}
 procedure Load_Barrel;
 var
   ok:         boolean;
@@ -4751,26 +4899,30 @@ begin
 
   {$I-}Seek(Barrelfile, filnr - 1);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_seek(global_barrelf, filnr - 1);
+    if error <> 0 then
+      unable_to_seek(global_barrelf, filnr - 1);
 
     case action of
       FLoad: begin
           {$I-}Read(Barrelfile, slask);{$I+}
         error := IoResult; {get error}
 
-        if error <> 0 then unable_to_read(global_barrelf, error);
+        if error <> 0 then
+          unable_to_read(global_barrelf, error);
 
       end;
       FSave: begin
           {$I-}Write(Barrelfile, slask);{$I+}
         error := IoResult; {get error}
-        if error <> 0 then unable_to_write(global_barrelf, error);
+        if error <> 0 then
+          unable_to_write(global_barrelf, error);
       end;
     end; {case .end.}
 
   {$I-}Close(Barrelfile);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_close(global_barrelf, error);
+    if error <> 0 then
+      unable_to_close(global_barrelf, error);
 
   end else
   begin
@@ -4787,7 +4939,7 @@ begin
 {$ENDIF}
 end; {------LOAD BARREL END------}
 
-{------LOAD GOD START------}
+     {------LOAD GOD START------}
 function Load_God;
 var
   ok, Result:      boolean;
@@ -4839,7 +4991,8 @@ begin
 
   {$I-}Seek(Godfile, filnr - 1);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_seek(global_godfil, filnr - 1);
+    if error <> 0 then
+      unable_to_seek(global_godfil, filnr - 1);
 
     case action of
       FLoad: begin
@@ -4872,7 +5025,8 @@ begin
 
   {$I-}Close(Godfile);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_close(global_godfil, error);
+    if error <> 0 then
+      unable_to_close(global_godfil, error);
 
   end else
   begin
@@ -4893,9 +5047,9 @@ begin
 
 end;
 
-{------LOAD GOD END------}
+ {------LOAD GOD END------}
 
-{---LOAD CLASSIC WEAPON START-----}
+ {---LOAD classIC WEAPON START-----}
 procedure Load_Weapon;
 var i, error: integer;
   memmy:      integer;
@@ -4939,15 +5093,18 @@ begin
 
   {$I-}Seek(weapfile, filnr - 1);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_seek(global_weapofil, filnr - 1);
+    if error <> 0 then
+      unable_to_seek(global_weapofil, filnr - 1);
 
   {$I-}Read(weapfile, inweap);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_read(global_weapofil, error);
+    if error <> 0 then
+      unable_to_read(global_weapofil, error);
 
   {$I-}Close(weapfile);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_close(global_weapofil, error);
+    if error <> 0 then
+      unable_to_close(global_weapofil, error);
 
   end else
   begin
@@ -4961,9 +5118,9 @@ begin
 {$ENDIF}
 end;
 
-{---LOAD CLASSIC WEAPON END-----}
+ {---LOAD classIC WEAPON END-----}
 
-{---LOAD CLASSIC ARMOR START----}
+ {---LOAD classIC ARMOR START----}
 procedure Load_Armor;
 var i, error: integer;
   memmy:      integer;
@@ -5007,15 +5164,18 @@ begin
 
   {$I-}Seek(armfile, filnr - 1);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_seek(global_armofile, filnr - 1);
+    if error <> 0 then
+      unable_to_seek(global_armofile, filnr - 1);
 
   {$I-}Read(armfile, inarm);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_read(global_armofile, error);
+    if error <> 0 then
+      unable_to_read(global_armofile, error);
 
   {$I-}Close(armfile);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_close(global_armofile, error);
+    if error <> 0 then
+      unable_to_close(global_armofile, error);
 
   end else
   begin
@@ -5029,9 +5189,9 @@ begin
 {$ENDIF}
 end;
 
-{---LOAD CLASSIC ARMOR END----}
+ {---LOAD classIC ARMOR END----}
 
-{---LOAD MONSTER START----}
+ {---LOAD MONSTER START----}
 procedure Load_Monster;
 var
   i:           longint;
@@ -5075,17 +5235,20 @@ begin
 
  {$I-}seek(monsterfile, filnr);{$I+}
   error := IoResult; {get error}
-  if error <> 0 then unable_to_seek(global_monfile, filnr);
+  if error <> 0 then
+    unable_to_seek(global_monfile, filnr);
 
  {$I-}Read(monsterfile, monster[monnr]^);{$I+}
 
 
   error := IoResult; {get error}
-  if error <> 0 then unable_to_read(global_monfile, error);
+  if error <> 0 then
+    unable_to_read(global_monfile, error);
 
  {$I-}Close(monsterfile);{$I+}
   error := IoResult; {get error}
-  if error <> 0 then unable_to_close(global_monfile, error);
+  if error <> 0 then
+    unable_to_close(global_monfile, error);
 
   {reset filemode}
   filemode := memmy;
@@ -5119,9 +5282,9 @@ begin
 
 end;
 
-{---LOAD MONSTER END----}
+ {---LOAD MONSTER END----}
 
-{---LOAD LEVEL START-----}
+ {---LOAD LEVEL START-----}
 procedure Load_Level;
 var i, error, memmy: integer;
   ok:        boolean;
@@ -5164,15 +5327,18 @@ begin
 
   {$I-}Seek(levelfile, filnr - 1);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_seek(global_lvlfile, filnr - 1);
+    if error <> 0 then
+      unable_to_seek(global_lvlfile, filnr - 1);
 
   {$I-}Read(levelfile, lev);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_read(global_lvlfile, error);
+    if error <> 0 then
+      unable_to_read(global_lvlfile, error);
 
   {$I-}Close(levelfile);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_close(global_lvlfile, error);
+    if error <> 0 then
+      unable_to_close(global_lvlfile, error);
 
   end else
   begin
@@ -5258,7 +5424,7 @@ begin
     end;
   end; {case .end.}
 
-  {return result}
+       {return result}
   Lock_OnlineRecord := Result;
 
 end;
@@ -5299,11 +5465,13 @@ begin
 
           {$I-}rewrite(global_onlinefile);{$I+}
         error := IoResult; {get error}
-        if error <> 0 then unable_to_create(global_onfile, error);
+        if error <> 0 then
+          unable_to_create(global_onfile, error);
 
           {$I-}Close(global_onlinefile);{$I+}
         error := IoResult; {get error}
-        if error <> 0 then unable_to_close(global_onfile, error);
+        if error <> 0 then
+          unable_to_close(global_onfile, error);
 
       end;
 
@@ -5351,7 +5519,7 @@ begin
     end;
   end; {case .end.}
 
-  {reset filemode}
+       {reset filemode}
   filemode := memmy;
 {$IFNDEF MSDOS}
   FileModeReadWrite := FileMode;
@@ -5362,9 +5530,9 @@ begin
 
 end;
 
-{---LOCK_ONLINEFILE END-----}
+ {---LOCK_ONLINEFILE END-----}
 
-{---LOAD ONLINEFILE START----}
+ {---LOAD ONLINEFILE START----}
 function Load_OnlineFile;
 var x:      longint;
   error:    integer;
@@ -5435,16 +5603,16 @@ begin
         end;
       end; {case .end.}
     end;
-  end; {go_ahead}
+  end;     {go_ahead}
 
-  {return result}
+           {return result}
   load_onlinefile := Result;
 
 end;
 
-{---LOAD ONLINEFILE END----}
+ {---LOAD ONLINEFILE END----}
 
-{---LOCK_QUEST-FILE START-----}
+ {---LOCK_QUEST-FILE START-----}
 function Lock_QuestFile;
 var ok:  boolean;
   error: integer;
@@ -5462,7 +5630,8 @@ begin
     FUnlock: begin
            {$I-}Close(global_questfile);{$I-}
       error := IoResult; {get error}
-      if error <> 0 then unable_to_close(global_rquestf, error)
+      if error <> 0 then
+        unable_to_close(global_rquestf, error)
       else ok := True;
     end;
     FLock: begin
@@ -5494,7 +5663,7 @@ begin
     end;
   end; {case .end.}
 
-  {reset filemode}
+       {reset filemode}
   filemode := memmy;
 {$IFNDEF MSDOS}
   FileModeReadWrite := FileMode;
@@ -5505,9 +5674,9 @@ begin
 
 end;
 
-{---LOCK_QUEST-FILE END-----}
+ {---LOCK_QUEST-FILE END-----}
 
-{---LOAD QUEST-FILE START----}
+ {---LOAD QUEST-FILE START----}
 procedure Load_QuestFile;
 var error: integer;
 begin
@@ -5517,26 +5686,29 @@ begin
 
  {$I-}seek(global_questfile, filnr - 1);{$I+}
   error := IoResult; {get error}
-  if error <> 0 then unable_to_seek(global_rquestf, filnr - 1);
+  if error <> 0 then
+    unable_to_seek(global_rquestf, filnr - 1);
 
   case action of
     Fload: begin
          {$I-}Read(global_questfile, slask);{$I+}
       error := IoResult; {get error}
-      if error <> 0 then unable_to_read(global_rquestf, error);
+      if error <> 0 then
+        unable_to_read(global_rquestf, error);
     end;
     Fsave: begin
          {$I-}Write(global_questfile, slask);{$I+}
       error := IoResult; {get error}
-      if error <> 0 then unable_to_write(global_rquestf, error);
+      if error <> 0 then
+        unable_to_write(global_rquestf, error);
     end;
   end; {case .end.}
 
 end;
 
-{---LOAD QUEST-FILE END----}
+ {---LOAD QUEST-FILE END----}
 
-{---LOCK_RELATION-FILE START-----}
+ {---LOCK_RELATION-FILE START-----}
 function Lock_RelationFile;
 var
   ok:    boolean;
@@ -5557,11 +5729,13 @@ begin
 
   {$I-}rewrite(global_relationfile);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_create(global_relationf, error);
+    if error <> 0 then
+      unable_to_create(global_relationf, error);
 
   {$I-}Close(global_relationfile);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_close(global_relationf, error);
+    if error <> 0 then
+      unable_to_close(global_relationf, error);
 
   end;
 
@@ -5569,7 +5743,8 @@ begin
     FUnlock: begin
            {$I-}Close(global_relationfile);{$I-}
       error := IoResult; {get error}
-      if error <> 0 then unable_to_close(global_relationf, error)
+      if error <> 0 then
+        unable_to_close(global_relationf, error)
       else ok := True;
     end;
     FLock: begin
@@ -5597,7 +5772,8 @@ begin
         begin
            {$I-}global_RelationFileSize := filesize(global_relationfile);{$I+}
           error := IoResult; {get error}
-          if error <> 0 then unable_to_filesize(global_relationf);
+          if error <> 0 then
+            unable_to_filesize(global_relationf);
 
           ok := True;
         end;
@@ -5605,7 +5781,7 @@ begin
     end;
   end; {case .end.}
 
-  {reset filemode}
+       {reset filemode}
   filemode := memmy;
 {$IFNDEF MSDOS}
   FileModeReadWrite := FileMode;
@@ -5616,9 +5792,9 @@ begin
 
 end;
 
-{---LOCK_RELATION-FILE END-----}
+ {---LOCK_RELATION-FILE END-----}
 
-{---LOAD RELATION-FILE START----}
+ {---LOAD RELATION-FILE START----}
 procedure Load_RelationFile;
 var error: integer;
 begin
@@ -5628,27 +5804,30 @@ begin
 
  {$I-}seek(global_relationfile, filnr - 1);{$I+}
   error := IoResult; {get error}
-  if error <> 0 then unable_to_seek(global_relationf, filnr - 1);
+  if error <> 0 then
+    unable_to_seek(global_relationf, filnr - 1);
 
   case action of
     Fload: begin
          {$I-}Read(global_relationfile, slask);{$I+}
       error := IoResult; {get error}
       slask.recnr := filnr;
-      if error <> 0 then unable_to_read(global_relationf, error);
+      if error <> 0 then
+        unable_to_read(global_relationf, error);
     end;
     Fsave: begin
          {$I-}Write(global_relationfile, slask);{$I+}
       error := IoResult; {get error}
-      if error <> 0 then unable_to_write(global_relationf, error);
+      if error <> 0 then
+        unable_to_write(global_relationf, error);
     end;
   end; {case .end.}
 
 end;
 
-{---LOAD RELATION-FILE END----}
+ {---LOAD RELATION-FILE END----}
 
-{---LOCK MAIL-FILE START-----}
+ {---LOCK MAIL-FILE START-----}
 function Lock_MailFile;
 var ok:     boolean;
   memmy:    integer;
@@ -5668,11 +5847,13 @@ begin
 
   {$I-}rewrite(global_mailfile);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_create(global_mafile, error);
+    if error <> 0 then
+      unable_to_create(global_mafile, error);
 
   {$I-}Close(global_mailfile);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_close(global_mafile, error);
+    if error <> 0 then
+      unable_to_close(global_mafile, error);
 
   end;
 
@@ -5680,7 +5861,8 @@ begin
     FUnlock: begin
            {$I-}Close(global_mailfile);{$I-}
       error := IoResult; {get error}
-      if error <> 0 then unable_to_close(global_mafile, error)
+      if error <> 0 then
+        unable_to_close(global_mafile, error)
       else ok := True;
     end;
     FLock: begin
@@ -5711,14 +5893,15 @@ begin
         begin
            {$I-}global_MailFileSize := filesize(global_mailfile);{$I+}
           error := IoResult; {get error}
-          if error <> 0 then unable_to_filesize(global_mafile);
+          if error <> 0 then
+            unable_to_filesize(global_mafile);
           ok := True;
         end;
       until (Ok) or (i > global_locknrs);
     end;
   end; {case .end.}
 
-  {reset filemode}
+       {reset filemode}
   filemode := memmy;
 {$IFNDEF MSDOS}
   FileModeReadWrite := FileMode;
@@ -5729,9 +5912,9 @@ begin
 
 end;
 
-{---LOCK MAIL-FILE END-----}
+ {---LOCK MAIL-FILE END-----}
 
-{---LOAD MAIL-FILE START----}
+ {---LOAD MAIL-FILE START----}
 procedure Load_MailFile;
 var error: integer;
 begin
@@ -5741,18 +5924,21 @@ begin
 
  {$I-}seek(global_mailfile, filnr - 1);{$I+}
   error := IoResult; {get error}
-  if error <> 0 then unable_to_seek(global_mafile, filnr - 1);
+  if error <> 0 then
+    unable_to_seek(global_mafile, filnr - 1);
 
   case action of
     Fload: begin
          {$I-}Read(global_mailfile, slask);{$I+}
       error := IoResult; {get error}
-      if error <> 0 then unable_to_read(global_mafile, error);
+      if error <> 0 then
+        unable_to_read(global_mafile, error);
     end;
     Fsave: begin
          {$I-}Write(global_mailfile, slask);{$I+}
       error := IoResult; {get error}
-      if error <> 0 then unable_to_write(global_mafile, error);
+      if error <> 0 then
+        unable_to_write(global_mafile, error);
     end;
   end; {case .end.}
 
@@ -5827,7 +6013,8 @@ begin
   begin
 
   {$I-}seek(onlinefile, x);{$I+}
-    if IOResult <> 0 then unable_to_seek(global_onfile, x);
+    if IOResult <> 0 then
+      unable_to_seek(global_onfile, x);
 
     if Config.NetShareMethod = RecordLocking then
     begin
@@ -5905,7 +6092,8 @@ begin
 
   {$I-}Close(onlinefile);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_close(global_onfile, error);
+    if error <> 0 then
+      unable_to_close(global_onfile, error);
 
   end else
   begin
@@ -5990,25 +6178,30 @@ begin
 
   {$I-}seek(comfile, filnr - 1);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_seek(onliner.comfile, filnr - 1);
+    if error <> 0 then
+      unable_to_seek(onliner.comfile, filnr - 1);
 
     case action of
       Fload: begin
           {$I-}Read(comfile, commy);{$I+}
         error := IoResult; {get error}
-        if error <> 0 then unable_to_read(onliner.comfile, error);
+        if error <> 0 then
+          unable_to_read(onliner.comfile, error);
       end;
       Fsave: begin
-        if save_mess <> '' then commy.mess[1] := save_mess; {trading}
+        if save_mess <> '' then
+          commy.mess[1] := save_mess; {trading}
           {$I-}Write(comfile, commy);{$I+}
         error := IoResult; {get error}
-        if error <> 0 then unable_to_write(onliner.comfile, error);
+        if error <> 0 then
+          unable_to_write(onliner.comfile, error);
       end;
     end; {case .end.}
 
   {$I-}Close(comfile);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_close(onliner.comfile, error);
+    if error <> 0 then
+      unable_to_close(onliner.comfile, error);
   end else
   begin
     {unable to access file}
@@ -6076,24 +6269,28 @@ begin
 
   {$I-}seek(safefile, 0);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_seek(global_saffile, 0);
+    if error <> 0 then
+      unable_to_seek(global_saffile, 0);
 
     case action of
       Fload: begin
           {$I-}Read(safefile, slask);{$I+}
         error := IoResult; {get error}
-        if error <> 0 then unable_to_read(global_saffile, error);
+        if error <> 0 then
+          unable_to_read(global_saffile, error);
       end;
       Fsave: begin
           {$I-}Write(safefile, slask);{$I+}
         error := IoResult; {get error}
-        if error <> 0 then unable_to_write(global_saffile, error);
+        if error <> 0 then
+          unable_to_write(global_saffile, error);
       end;
     end; {case .end.}
 
   {$I-}Close(safefile);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_close(global_saffile, error);
+    if error <> 0 then
+      unable_to_close(global_saffile, error);
   end else
   begin
     case action of
@@ -6136,11 +6333,13 @@ begin
 
    {$I-}Write(safefile, safet);{$I+}
       error := IoResult; {get error}
-      if error <> 0 then unable_to_write(global_saffile, error);
+      if error <> 0 then
+        unable_to_write(global_saffile, error);
 
    {$I-}Close(safefile);{$I+}
       error := IoResult; {get error}
-      if error <> 0 then unable_to_close(global_saffile, error);
+      if error <> 0 then
+        unable_to_close(global_saffile, error);
 
       bye := True;
 
@@ -6172,7 +6371,8 @@ begin
     FUnlock: begin
            {$I-}Close(global_onduelfile);{$I-}
       error := IoResult; {get error}
-      if error <> 0 then unable_to_close(onliner.comfile, error)
+      if error <> 0 then
+        unable_to_close(onliner.comfile, error)
       else ok := True;
     end;
     FLock: begin
@@ -6209,7 +6409,7 @@ begin
     end;
   end; {case .end.}
 
-  {reset filemode}
+       {reset filemode}
   filemode := memmy;
 {$IFNDEF MSDOS}
   FileModeReadWrite := FileMode;
@@ -6220,9 +6420,9 @@ begin
 
 end;
 
-{---LOCK_ONDUEL-FILE END-----}
+ {---LOCK_ONDUEL-FILE END-----}
 
-{---LOAD ONDUEL-FILE START----}
+ {---LOAD ONDUEL-FILE START----}
 procedure Load_OnDuelFile;
 var error: integer;
 begin
@@ -6232,18 +6432,21 @@ begin
 
  {$I-}seek(global_onduelfile, filnr - 1);{$I+}
   error := IoResult; {get error}
-  if error <> 0 then unable_to_seek(onliner.comfile, filnr - 1);
+  if error <> 0 then
+    unable_to_seek(onliner.comfile, filnr - 1);
 
   case action of
     Fload: begin
          {$I-}Read(global_onduelfile, slask);{$I+}
       error := IoResult; {get error}
-      if error <> 0 then unable_to_read(onliner.comfile, error);
+      if error <> 0 then
+        unable_to_read(onliner.comfile, error);
     end;
     Fsave: begin
          {$I-}Write(global_onduelfile, slask);{$I+}
       error := IoResult; {get error}
-      if error <> 0 then unable_to_write(onliner.comfile, error);
+      if error <> 0 then
+        unable_to_write(onliner.comfile, error);
     end;
   end; {case .end.}
 
@@ -6256,8 +6459,8 @@ function File_Stamp_Info2(const fname: string; inclusions: byte): s70;
              = 2 (time)
              = 3 (both)}
 var
-  f:      Text; {file to be checked}
-  ftime:  longint; { For Get/SetFTime}
+  f:      Text;     {file to be checked}
+  ftime:  longint;  { For Get/SetFTime}
   dt:     DateTime; { For Pack/UnpackTime}
 
   ok:     boolean;
@@ -6306,7 +6509,8 @@ begin
 
   {$I-}Close(f);{$I+}
     error := IoResult;
-    if error <> 0 then unable_to_close(fname, error);
+    if error <> 0 then
+      unable_to_close(fname, error);
 
     {unpack date of last modification/creation}
     UnpackTime(ftime, dt);
@@ -6317,9 +6521,11 @@ begin
       begin
         {display date string}
         s := va(month);
-        if length(s) = 1 then s := '0' + s;
+        if length(s) = 1 then
+          s := '0' + s;
         s2 := va(day);
-        if length(s2) = 1 then s2 := '0' + s2;
+        if length(s2) = 1 then
+          s2 := '0' + s2;
         s := s + '-' + s2;
         s2 := long2str(year);
         s := s + '-' + s2;
@@ -6330,7 +6536,8 @@ begin
       {create time string}
       if inclusions in [2, 3] then
       begin
-        if inclusions = 3 then Result := Result + ', ';
+        if inclusions = 3 then
+          Result := Result + ', ';
         Result := Result + LeadingZero(hour) + ':' +
           LeadingZero(min) + ':' +
           LeadingZero(sec);
@@ -6403,10 +6610,12 @@ begin
  {$I-}Close(f);{$I+}
   error := IoResult; {get error}
 {$IFDEF MSDOS}
-  if error <> 0 then unable_to_close(textrec(f).Name, error);
+  if error <> 0 then
+    unable_to_close(textrec(f).Name, error);
 {$ENDIF}
 {$IFNDEF MSDOS}
-  if error <> 0 then unable_to_close(StrPas(textrec(f).Name), error);
+  if error <> 0 then
+    unable_to_close(StrPas(textrec(f).Name), error);
 {$ENDIF}
 
 end; {close_text *end*}
@@ -6421,23 +6630,25 @@ begin
  {$I-}readln(f, s);{$I+}
   error := IoResult; {get error}
 {$IFDEF MSDOS}
-  if error <> 0 then unable_to_read(textrec(f).Name, error);
+  if error <> 0 then
+    unable_to_read(textrec(f).Name, error);
 {$ENDIF}
 {$IFNDEF MSDOS}
-  if error <> 0 then unable_to_read(StrPas(textrec(f).Name), error);
+  if error <> 0 then
+    unable_to_read(StrPas(textrec(f).Name), error);
 {$ENDIF}
 end; {readln_from_text *end*}
 
 procedure Write_To_Text(var f: Text; const s: string);
 begin
   Write(f, s);
-  {if IOResult<>0 then unable_to_write(textrec(f).name);}
+     {if IOResult<>0 then unable_to_write(textrec(f).name);}
 end; {write_to_text *end*}
 
 procedure Writeln_To_Text(var f: Text; const s: string);
 begin
   writeln(f, s);
-  {if IOResult<>0 then unable_to_write(textrec(f).name);}
+     {if IOResult<>0 then unable_to_write(textrec(f).name);}
 end; {writeln_to_text *end*}
 
 
@@ -6495,7 +6706,8 @@ begin
     blockwrite(f, IPC, sizeof(IPC));
   {$I-}Close(f);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_close(filename, error);
+    if error <> 0 then
+      unable_to_close(filename, error);
     writeIPC := True;
   end;
 
@@ -6587,7 +6799,8 @@ begin
     blockread(f, IPC, sizeof(IPC));
   {$I-}Close(f);{$I+}
     error := IoResult; {get error}
-    if error <> 0 then unable_to_close(filename, error);
+    if error <> 0 then
+      unable_to_close(filename, error);
     readIPC := True;
   end;
 
@@ -6716,7 +6929,7 @@ begin
             end;
           end; {for i:= .end.}
 
-          {no empty place found!}
+               {no empty place found!}
           if freemessage = 0 then
           begin
             freemessage := ipc_maxmsg; {put it at the back, unfortunately overwriting waiting mail!}
@@ -6780,8 +6993,8 @@ var
   i:        word;
   ch:       char;
   x:        longint;
-  conf:     word; {conference}
-  confnam:  s30; {conderence name}
+  conf:     word;          {conference}
+  confnam:  s30;           {conderence name}
   confpassword: string[8]; {conference password}
   current:  word;
   tries:    word;
@@ -6812,7 +7025,7 @@ var
       memlist3[i] := '';
     end; {for i:= .end.}
 
-    {init misc vars}
+         {init misc vars}
     counter := 0;
 
     FindFirst(IPCpath + 'IPC????.IPC', Anyfile - Directory, sr);
@@ -6873,7 +7086,7 @@ var
                 end;
               end; {for i:= .end.}
 
-              {should we pause the listing}
+                   {should we pause the listing}
               Inc(counter);
               if counter > 15 then
               begin
@@ -6900,15 +7113,15 @@ var
 
   end; {display_userconfs *end*}
 
-begin {multi-chat}
+begin  {multi-chat}
 
-  {Init}
+       {Init}
   go_ahead := True; {set this to false, and the no conference will be entered}
   conf := 1; {default conference}
   confnam := confs[1]; {default conferance name}
   confpassword := ''; {conference password}
 
-  {Display Hard-coded Conferences}
+       {Display Hard-coded Conferences}
   crlf;
   crlf;
   d(10, 'Chat Rooms:');
@@ -6921,7 +7134,7 @@ begin {multi-chat}
     d(3, ' . ' + confs[i]);
   end; {for i:= .end.}
 
-  {user created conferences}
+       {user created conferences}
   current := maxconf;
 
   display_userconfs;
@@ -6941,7 +7154,8 @@ begin {multi-chat}
   if s = '' then
   begin
     go_ahead := False;
-  end else if upcasestr(s) = 'C' then
+  end else
+  if upcasestr(s) = 'C' then
   begin
 
     {Create New CHAT-ROOM}
@@ -7022,7 +7236,8 @@ begin {multi-chat}
     if (x < 0) or (x > current) then
     begin
       x := 0;
-    end else if x > 1 then
+    end else
+    if x > 1 then
     begin
 
       {password protected?}
@@ -7127,7 +7342,8 @@ begin {multi-chat}
         crlf;
         d(11, '[Exit]');
         break;
-      end else if ch = ReturnKey then
+      end else
+      if ch = ReturnKey then
       begin
         crlf;
       end else
@@ -7178,7 +7394,8 @@ begin
   begin
     scanning := False;
     {CLine := Currline;}
-    if readIPC(myIPC, 'IPC' + inttohex(myIPC.node, 4) + '.IPC') then with myipc do
+    if readIPC(myIPC, 'IPC' + inttohex(myIPC.node, 4) + '.IPC') then
+      with myipc do
       begin
 
         {Different Sorts of Pagings}
@@ -7214,6 +7431,6 @@ end; {IPC-HOOK *end*}
 
 begin
 
-  {unit init code..}
+     {unit init code..}
 
 end. {Unit File_Io .end.}

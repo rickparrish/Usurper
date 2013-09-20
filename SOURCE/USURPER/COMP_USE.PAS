@@ -111,7 +111,8 @@ begin
   begin
     {player too evil for item}
     go := False;
-  end else if (o2.evil = True) and (gubbe.chiv > 0) and (gubbe.dark < 1) then
+  end else
+  if (o2.evil = True) and (gubbe.chiv > 0) and (gubbe.dark < 1) then
   begin
     {player too good for item}
     go := False;
@@ -159,7 +160,8 @@ begin
       load_objekt(objekt2^, player0.itemtype[q], player0.item[q]);
       if objekt_test('G', player0, objekt2^, objektx) = True then
       begin
-        if Text then back_pack(player0, objektx);
+        if Text then
+          back_pack(player0, objektx);
         player0.item[q] := objektnr;
         player0.itemtype[q] := objektx.ttype;
 
@@ -174,7 +176,8 @@ begin
     begin
       throw_away(player0, objektx);
     end;
-  end  {INVENTORY IS NOT FULL} else if (i > 0) and (objektx.cursed = False) then
+  end  {INVENTORY IS NOT FULL} else
+  if (i > 0) and (objektx.cursed = False) then
   begin
     player0.item[i] := objektnr;
 
@@ -191,21 +194,24 @@ begin
     if objektx.str_need > player0.strength then
     begin
       {too heavy to use}
-    end else if (objektx.good = True) and (player0.chiv < 1) and (player0.dark > 0) then
+    end else
+    if (objektx.good = True) and (player0.chiv < 1) and (player0.dark > 0) then
     begin
       {player is too evil for item}
       if Text then
       begin
         d(12, player0.name2 + ' is zapped by the ' + objektx.Name);
       end;
-    end else if (objektx.evil = True) and (player0.chiv > 0) and (player0.dark < 1) then
+    end else
+    if (objektx.evil = True) and (player0.chiv > 0) and (player0.dark < 1) then
     begin
       {spelaren f”r god f”r objektet}
       if Text then
       begin
         d(12, player0.name2 + ' is zapped by the ' + objektx.Name);
       end;
-    end else if allowed_to_use(objektx.ttype) = False then
+    end else
+    if allowed_to_use(objektx.ttype) = False then
     begin
       throw_away(player0, objektx);
     end else
@@ -371,7 +377,8 @@ begin
             player0.lfinger := player0.item[i];
             player0.item[i] := 0;
             objekt_affect(1, player0.lfinger, fingers, player0, loud_affect);
-          end else if (player0.rfinger = 0) and (config.allowitem[6] = True) then
+          end else
+          if (player0.rfinger = 0) and (config.allowitem[6] = True) then
           begin
             if Text = True then
             begin
@@ -385,7 +392,8 @@ begin
             player0.item[i] := 0;
 
             objekt_affect(1, player0.rfinger, fingers, player0, loud_affect);
-          end else if (player.lfinger > 0) and (config.allowitem[5] = True) then
+          end else
+          if (player.lfinger > 0) and (config.allowitem[5] = True) then
           begin
             load_objekt(objekt2^, fingers, player0.lfinger);
             if objektx.armor > objekt2^.armor then
@@ -405,7 +413,8 @@ begin
               player0.lfinger := y;
               objekt_affect(1, player0.lfinger, fingers, player0, loud_affect);
             end;
-          end else if (player.rfinger > 0) and (config.allowitem[6] = True) then
+          end else
+          if (player.rfinger > 0) and (config.allowitem[6] = True) then
           begin
             load_objekt(objekt2^, fingers, player0.rfinger);
             if objektx.armor > objekt2^.armor then
@@ -550,7 +559,8 @@ begin
             player0.neck := player0.item[i];
             player0.item[i] := 0;
             objekt_affect(1, player0.neck, neck, player0, loud_affect);
-          end else if (player0.neck2 = 0) and (config.allowitem[11] = True) then
+          end else
+          if (player0.neck2 = 0) and (config.allowitem[11] = True) then
           begin
             if Text then
             begin
@@ -585,7 +595,8 @@ begin
                 player0.neck := y;
                 objekt_affect(1, player0.neck, neck, player0, loud_affect);
               end;
-            end else if (player0.neck2 > 0) and (config.allowitem[11] = True) then
+            end else
+            if (player0.neck2 > 0) and (config.allowitem[11] = True) then
             begin
               load_objekt(objekt2^, neck, player0.neck2);
               if objektx.armor > objekt2^.armor then
@@ -693,7 +704,8 @@ begin
             player0.rhand := player0.item[i];
             player0.item[i] := 0;
             objekt_affect(1, player0.rhand, weapon, player0, loud_affect);
-          end else if (player0.lhand = 0) and (config.allowitem[15] = True) then
+          end else
+          if (player0.lhand = 0) and (config.allowitem[15] = True) then
           begin
             load_objekt(objekt2^, weapon, player0.rhand);
             if objektx.attack >= objekt2^.attack then
@@ -709,7 +721,8 @@ begin
               player0.lhand := player0.item[i];
               player0.item[i] := 0;
               objekt_affect(1, player0.lhand, weapon, player0, loud_affect);
-            end else if player0.rhand > 0 then
+            end else
+            if player0.rhand > 0 then
             begin
               load_objekt(objekt2^, weapon, player0.rhand);
               if objektx.attack > objekt2^.attack then
@@ -729,7 +742,8 @@ begin
                 player0.rhand := y;
                 objekt_affect(1, player0.rhand, weapon, player0, loud_affect);
               end;
-            end else if (player0.lhand > 0) and (config.allowitem[15] = True) then
+            end else
+            if (player0.lhand > 0) and (config.allowitem[15] = True) then
             begin
               load_objekt(objekt2^, weapon, player0.lhand);
               if objektx.attack > objekt2^.attack then

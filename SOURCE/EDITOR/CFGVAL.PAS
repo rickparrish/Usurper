@@ -24,6 +24,7 @@ Copyright 2007 Jakob Dangarden
 
 
 unit CfgVal;
+
 {Usurper Editor - Config file default values}
              {see cfgdef.pas for help regarding adding/editing/removing
              config options}
@@ -163,20 +164,20 @@ begin
     112: s := nop;
     113: s := nop;
     114: s := nop;
-    115: s := nop; {allow equipment / toggle on OFF}
+    115: s := nop;        {allow equipment / toggle on OFF}
     116: s := '30';
     117: s := nwfileasc;  {news file, asc}
     118: s := nwfileans;  {news file, ans}
     119: s := ynwfileasc; {yesterday -"-}
     120: s := ynwfileans; {yesterdat -"-}
-    121: s := '25'; {level needed to usurp the throne}
-    122: s := 'ANY'; {soul needed to usurp the throne}
-    123: s := yep; {should npcs marked with a '*' in the lists}
-    124: s := nop; {display error messages}
-    125: s := '90'; {days to keep cocktail recipes at Orbs Bar}
-    126: s := '50'; {max number of recipes allowed at Orbs Bar}
-    127: s := yep; {allow caught pick-pockets at the Dorm to enter again}
-    128: s := yep; {allow defeated trouble-makers in the Dorm to enter again}
+    121: s := '25';       {level needed to usurp the throne}
+    122: s := 'ANY';      {soul needed to usurp the throne}
+    123: s := yep;        {should npcs marked with a '*' in the lists}
+    124: s := nop;        {display error messages}
+    125: s := '90';       {days to keep cocktail recipes at Orbs Bar}
+    126: s := '50';       {max number of recipes allowed at Orbs Bar}
+    127: s := yep;        {allow caught pick-pockets at the Dorm to enter again}
+    128: s := yep;        {allow defeated trouble-makers in the Dorm to enter again}
     129: s := yep;
     130: s := '100';
     131: s := '3';
@@ -201,52 +202,52 @@ begin
     150: s := '5';
     151: s := yep;
     152: s := '0';
-    153: s := yep; {allow npcs to marry and have kids (YES/no)}
-    154: s := yep; {allow players to visit Steroid shop}
-    155: s := yep; {allow players to visit Whore house}
-    156: s := yep; {allow players to visit Drug Palace}
-    157: s := yep; {allow players to murder Innocent people}
-    158: s := yep; {put player opinions of the king in the news?}
-    159: s := '2'; {allow fake players to enter, per player session!}
-    160: s := 'gold'; {gold}
-    161: s := 'coin'; {coin}
+    153: s := yep;     {allow npcs to marry and have kids (YES/no)}
+    154: s := yep;     {allow players to visit Steroid shop}
+    155: s := yep;     {allow players to visit Whore house}
+    156: s := yep;     {allow players to visit Drug Palace}
+    157: s := yep;     {allow players to murder Innocent people}
+    158: s := yep;     {put player opinions of the king in the news?}
+    159: s := '2';     {allow fake players to enter, per player session!}
+    160: s := 'gold';  {gold}
+    161: s := 'coin';  {coin}
     162: s := 'coins'; {coins}
-    163: s := '5'; {Bard songs/day}
-    164: s := 'YES'; {log immortals entering game in the news}
-    165: s := 'Sly'; {name of Bartender at Orbs Bar}
-    166: s := '18'; {minimum age to marry}
+    163: s := '5';     {Bard songs/day}
+    164: s := 'YES';   {log immortals entering game in the news}
+    165: s := 'Sly';   {name of Bartender at Orbs Bar}
+    166: s := '18';    {minimum age to marry}
     167: s := 'Bobs Beer Hut';
     168: s := 'Bob';
     169: s := 'Jakobinus';
     170: s := 'Lydia';
     171: s := 'Ted';
-    172: s := 'Hazzan'; {gym-masseur}
-    173: s := 'Yes'; {put relation changes in the news}
-    174: s := '25'; {max number of human children}
-    175: s := '15'; {max number of npc children}
-    176: s := '3'; {max number prison escape attempts / day}
-    177: s := 'YES'; {allow players to view game settings}
-    178: s := '15'; {minutes before disconnected for inactivty}
+    172: s := 'Hazzan';     {gym-masseur}
+    173: s := 'Yes';        {put relation changes in the news}
+    174: s := '25';         {max number of human children}
+    175: s := '15';         {max number of npc children}
+    176: s := '3';          {max number prison escape attempts / day}
+    177: s := 'YES';        {allow players to view game settings}
+    178: s := '15';         {minutes before disconnected for inactivty}
     179: s := 'Rand the Human'; {Steroid Shop-Keeper}
-    180: s := 'Ordlof'; {Drug Shop-Keeper}
-    181: s := '5'; {Bear Taming attempts / day}
-    182: s := 'Yes'; {Allow NPCs to usurp the royal throne}
-    183: s := '0'; {Allow King to toss kids to the wolves}
-    184: s := '1'; {Allow King to ban/dissolve marriages per day}
-    185: s := '1'; {Allow King to put kids in the royal orphanage}
-    186: s := 'YES'; {Allow NPCs to interact with GODs}
+    180: s := 'Ordlof';     {Drug Shop-Keeper}
+    181: s := '5';          {Bear Taming attempts / day}
+    182: s := 'Yes';        {Allow NPCs to usurp the royal throne}
+    183: s := '0';          {Allow King to toss kids to the wolves}
+    184: s := '1';          {Allow King to ban/dissolve marriages per day}
+    185: s := '1';          {Allow King to put kids in the royal orphanage}
+    186: s := 'YES';        {Allow NPCs to interact with GODs}
     187: s := 'LightGreen'; {God color}
-    188: s := 'YES'; {fake players be chatty?}
-    189: s := '2'; {intimacy acts per day}
-    190: s := 'NO'; {homo relations allowed}
-    191: s := '3'; {resurrections / day}
-    192: s := 'YES'; {allow a user to have both immortal and mortal characters active}
-    193: s := '5'; {days of pregnancy, before the child pops out}
-    194: s := 'YES'; {allow adult options}
-    195: s := '5'; {pick-pocket attempts / day}
-    196: s := 'Ulgmog'; {Quest-Master}
-    197: s := '10'; {Store Items at Home}
-    198: s := '3'; {Bank Robbery attempts / day}
+    188: s := 'YES';        {fake players be chatty?}
+    189: s := '2';          {intimacy acts per day}
+    190: s := 'NO';         {homo relations allowed}
+    191: s := '3';          {resurrections / day}
+    192: s := 'YES';        {allow a user to have both immortal and mortal characters active}
+    193: s := '5';          {days of pregnancy, before the child pops out}
+    194: s := 'YES';        {allow adult options}
+    195: s := '5';          {pick-pocket attempts / day}
+    196: s := 'Ulgmog';     {Quest-Master}
+    197: s := '10';         {Store Items at Home}
+    198: s := '3';          {Bank Robbery attempts / day}
   end; {case .end.}
 
   {return result}

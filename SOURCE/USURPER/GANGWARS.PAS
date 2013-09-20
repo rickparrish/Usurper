@@ -142,7 +142,8 @@ begin
 
         end;
       end; {case .end.}
-    end else if (pl0.team = oppo) and (pl0.name2 <> player.name2) then
+    end else
+    if (pl0.team = oppo) and (pl0.name2 <> player.name2) then
     begin
       pl0.cturf := False;
       user_save(pl0);
@@ -179,7 +180,8 @@ begin
         end;
         2: begin {mail player of the opposing teams town takeover! this beacuse the defenders were killed}
           m1 := 'Lost Town Control!';
-          m2 := ulred + player.name2 + config.textcol1 + ' led ' + sex3[player.sex] + ' Team to a victory against your bunch!';
+          m2 := ulred + player.name2 + config.textcol1 + ' led ' + sex3[player.sex] +
+            ' Team to a victory against your bunch!';
           m3 := 'Your team was not able to fend off the attack! Everybody, inluding';
           m4 := 'yourself, was killed. The Town is no longer yours...';
 
@@ -221,14 +223,15 @@ begin
       pl0.cturf := True;
       pl0.teamrec := 0;
       user_save(pl0);
-    end else if (pl0.team = oppo) then
+    end else
+    if (pl0.team = oppo) then
     begin
       pl0.cturf := False;
       user_save(pl0);
     end;
   end; {for i:= .end.}
 
-end; {SetRemove_TurfFlags *end*}
+end;   {SetRemove_TurfFlags *end*}
 
 procedure Swap_Players(var one, two: userrec); {just swaps two player records}
 var slask: userrec;
@@ -256,7 +259,8 @@ var
   size: word;
 begin
 
-  if gang_nr = 1 then max := global_maxteammembers - 1
+  if gang_nr = 1 then
+    max := global_maxteammembers - 1
   else max := global_maxteammembers;
 
   pl0.name2 := '';
@@ -369,11 +373,12 @@ begin
       end;
     end; {for j:= .end.}
 
-    if a >= max then break;
+    if a >= max then
+      break;
 
   end; {for i:= .end.}
 
-  {shuffling team to get varied bouts}
+       {shuffling team to get varied bouts}
   a := 0;
   case gang_nr of
     1: begin
@@ -408,7 +413,7 @@ begin
     end;
   end; {case gang_nr .end.}
 
-end; {gang_load *end*}
+end;   {gang_load *end*}
 
 procedure Gang_Wars; {main proc}
 var
@@ -499,7 +504,8 @@ begin
       end else
       begin
 
-        if pl[2]^.name2 = '' then d(config.textcolor, 'You and ' + pl[1]^.name2);
+        if pl[2]^.name2 = '' then
+          d(config.textcolor, 'You and ' + pl[1]^.name2);
 
         if (pl[2]^.name2 <> '') and (pl[3]^.name2 <> '') then
         begin
@@ -517,7 +523,8 @@ begin
         begin
           d(config.textcolor, ' and ' + pl[3]^.name2);
         end;
-        if pl[4]^.name2 <> '' then d(config.textcolor, ' and ' + pl[4]^.name2);
+        if pl[4]^.name2 <> '' then
+          d(config.textcolor, ' and ' + pl[4]^.name2);
 
         d(config.textcolor, 'walk out and proclaim to the businessmen that the town now');
         d(config.textcolor, 'fall under your control. They must pay or get their shops burned.');
@@ -596,9 +603,9 @@ begin
       exit;
     end; {easy takeover .end.}
 
-    {Fight is coming up}
+         {Fight is coming up}
 
-    {display current Town controllers}
+         {display current Town controllers}
     sd(global_teamcol, upcasestr(oppo));
     d(15, ' holds the town!');
   end;
@@ -761,7 +768,8 @@ begin
     ch := upcase(getchar);
   until ch in ['F', 'D', chr(13)];
 
-  if (ch = 'F') or (ch = chr(13)) then fastgame := True
+  if (ch = 'F') or (ch = chr(13)) then
+    fastgame := True
   else fastgame := False;
 
   clearscreen;
@@ -900,7 +908,7 @@ begin
 
     end; {for i:= .end.}
 
-    {*Battle round summary*}
+         {*Battle round summary*}
     clearscreen;
     crlf;
     d(10, 'Battle-Results from encounter :');
@@ -1007,7 +1015,8 @@ begin
           begin
             x := random(50) + 250;
             x := x * pl[bflag[i + 1]]^.level;
-            nice2[2] := 'You attacked ' + uplc + pl[bflag[i + 1]]^.name2 + config.textcol1 + ' and wasted ' + sex[pl[bflag[i + 1]]^.sex] + '!';
+            nice2[2] := 'You attacked ' + uplc + pl[bflag[i + 1]]^.name2 + config.textcol1 +
+              ' and wasted ' + sex[pl[bflag[i + 1]]^.sex] + '!';
             nice2[3] := 'You received ' + uyellow + commastr(x) + config.textcol1 + ' experience points!';
             Inc(pl[i]^.exp, x);
             if pl[i]^.ai <> 'C' then
@@ -1026,7 +1035,8 @@ begin
         begin
           x := random(50) + 250;
           x := x * pl[i]^.level;
-          nice2[2] := 'You were attacked by ' + uplc + pl[i]^.name2 + config.textcol1 + ' but killed ' + sex[pl[i]^.sex] + '!';
+          nice2[2] := 'You were attacked by ' + uplc + pl[i]^.name2 + config.textcol1 + ' but killed ' +
+            sex[pl[i]^.sex] + '!';
           nice2[3] := 'You received ' + uyellow + commastr(x) + config.textcol1 + ' experience points!';
           Inc(pl[bflag[i + 1]]^.exp, x);
 
@@ -1074,16 +1084,26 @@ begin
 
     {*Have both gangs been wiped out*}
     x := 0;
-    if player.hps > 0 then x := 1;
-    if pl[1]^.hps > 0 then x := 1;
-    if pl[2]^.hps > 0 then x := 1;
-    if pl[3]^.hps > 0 then x := 1;
-    if pl[4]^.hps > 0 then x := 1;
-    if pl[5]^.hps > 0 then x := 1;
-    if pl[6]^.hps > 0 then x := 1;
-    if pl[7]^.hps > 0 then x := 1;
-    if pl[8]^.hps > 0 then x := 1;
-    if pl[9]^.hps > 0 then x := 1;
+    if player.hps > 0 then
+      x := 1;
+    if pl[1]^.hps > 0 then
+      x := 1;
+    if pl[2]^.hps > 0 then
+      x := 1;
+    if pl[3]^.hps > 0 then
+      x := 1;
+    if pl[4]^.hps > 0 then
+      x := 1;
+    if pl[5]^.hps > 0 then
+      x := 1;
+    if pl[6]^.hps > 0 then
+      x := 1;
+    if pl[7]^.hps > 0 then
+      x := 1;
+    if pl[8]^.hps > 0 then
+      x := 1;
+    if pl[9]^.hps > 0 then
+      x := 1;
 
     if x = 0 then
     begin
@@ -1126,11 +1146,16 @@ begin
 
     {*Is player gang wiped destroyed*}
     x := 0;
-    if player.hps > 0 then x := 1;
-    if pl[1]^.hps > 0 then x := 1;
-    if pl[2]^.hps > 0 then x := 1;
-    if pl[3]^.hps > 0 then x := 1;
-    if pl[4]^.hps > 0 then x := 1;
+    if player.hps > 0 then
+      x := 1;
+    if pl[1]^.hps > 0 then
+      x := 1;
+    if pl[2]^.hps > 0 then
+      x := 1;
+    if pl[3]^.hps > 0 then
+      x := 1;
+    if pl[4]^.hps > 0 then
+      x := 1;
 
     if x = 0 then
     begin
@@ -1231,11 +1256,16 @@ begin
     end;
 
     x := 0;
-    if (pl[5]^.hps > 0) and (pl[5]^.name2 <> '') then x := 1;
-    if (pl[6]^.hps > 0) and (pl[6]^.name2 <> '') then x := 1;
-    if (pl[7]^.hps > 0) and (pl[7]^.name2 <> '') then x := 1;
-    if (pl[8]^.hps > 0) and (pl[8]^.name2 <> '') then x := 1;
-    if (pl[9]^.hps > 0) and (pl[9]^.name2 <> '') then x := 1;
+    if (pl[5]^.hps > 0) and (pl[5]^.name2 <> '') then
+      x := 1;
+    if (pl[6]^.hps > 0) and (pl[6]^.name2 <> '') then
+      x := 1;
+    if (pl[7]^.hps > 0) and (pl[7]^.name2 <> '') then
+      x := 1;
+    if (pl[8]^.hps > 0) and (pl[8]^.name2 <> '') then
+      x := 1;
+    if (pl[9]^.hps > 0) and (pl[9]^.name2 <> '') then
+      x := 1;
 
     if x = 0 then
     begin
@@ -1426,7 +1456,7 @@ begin
 
     end; {for i:= .end.}
 
-  end; {if turfgo .end.}
+  end;   {if turfgo .end.}
 
 
   {dispose temporary pointer vars}

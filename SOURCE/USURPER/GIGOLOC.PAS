@@ -125,7 +125,8 @@ begin
     z := 0;
     case cho of
       '?': begin
-        if player.expert = True then display_menu(True, False)
+        if player.expert = True then
+          display_menu(True, False)
         else display_menu(False, False);
       end;
       'R': begin
@@ -305,7 +306,8 @@ begin
             '3': begin
               clearscreen;
               d(config.textcolor, 'You follow Mbuto downstairs into a dusty cell.');
-              d(config.textcolor, '"Do you have ' + uyellow + '5,000' + config.textcol1 + ' in ' + config.moneytype + '?" Mbuto mutters.');
+              d(config.textcolor, '"Do you have ' + uyellow + '5,000' + config.textcol1 + ' in ' +
+                config.moneytype + '?" Mbuto mutters.');
 
               if confirm('Pay', 'n') = True then
               begin
@@ -457,7 +459,8 @@ begin
               crlf;
               d(config.textcolor, 'Rasputin examines you and seems to be quite pleased with what he sees.');
               d(config.textcolor, '"Come with me and have some fun beauty!", he says.');
-              d(config.textcolor, '"' + uyellow + '30,000' + config.textcol1 + ' in ' + config.moneytype + ' first!" Rasputin reminds you.');
+              d(config.textcolor, '"' + uyellow + '30,000' + config.textcol1 + ' in ' + config.moneytype +
+                ' first!" Rasputin reminds you.');
 
               if confirm('Pay Rasputin', 'n') = True then
               begin
@@ -508,7 +511,8 @@ begin
             '7': begin
               clearscreen;
               crlf;
-              d(config.textcolor, '"Wanna have some fun with old Manhio? let me see ' + uyellow + '40,000 ' + config.textcol1 + many_money(40000) + '!"');
+              d(config.textcolor, '"Wanna have some fun with old Manhio? let me see ' + uyellow +
+                '40,000 ' + config.textcol1 + many_money(40000) + '!"');
 
               if confirm('Pay the elf', 'n') = True then
               begin

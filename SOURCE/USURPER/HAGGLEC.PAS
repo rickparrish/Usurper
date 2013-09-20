@@ -76,7 +76,8 @@ begin
         {news-paper}
         newsy(True,
           'Haggler kicked out',
-          ' ' + uplc + player.name2 + config.textcol1 + ' was kicked out from the ' + ulcyan + 'Weaponshop' + config.textcol1 + '!',
+          ' ' + uplc + player.name2 + config.textcol1 + ' was kicked out from the ' + ulcyan +
+          'Weaponshop' + config.textcol1 + '!',
           ' ',
           '',
           '',
@@ -93,7 +94,8 @@ begin
         d(config.textcolor, 'End of discussion.');
         pause;
       end;
-    end else if (shop = 'A') and (player.armhag = 0) then
+    end else
+    if (shop = 'A') and (player.armhag = 0) then
     begin
       sd(global_talkcol, 'Damn you ');
       sd(global_plycol, player.name2);
@@ -111,7 +113,8 @@ begin
         {news-paper}
         newsy(True,
           'Haggler kicked out',
-          ' ' + uplc + player.name2 + config.textcol1 + ' was kicked out from the ' + ulcyan + 'Armor Shop' + config.textcol1 + '!',
+          ' ' + uplc + player.name2 + config.textcol1 + ' was kicked out from the ' + ulcyan +
+          'Armor Shop' + config.textcol1 + '!',
           ' ',
           '',
           '',
@@ -175,12 +178,18 @@ begin
           {kollar charisman}
           {d(15,commastr(temp)+'%');}
           case player.charisma of
-            1..25: if temp <= 4 then accept := True;
-            26..75: if temp <= 7 then accept := True;
-            76..125: if temp <= 10 then accept := True;
-            126..175: if temp <= 13 then accept := True;
-            176..200: if temp <= 17 then accept := True;
-            201..999: if temp <= 20 then accept := True;
+            1..25: if temp <= 4 then
+                accept := True;
+            26..75: if temp <= 7 then
+                accept := True;
+            76..125: if temp <= 10 then
+                accept := True;
+            126..175: if temp <= 13 then
+                accept := True;
+            176..200: if temp <= 17 then
+                accept := True;
+            201..999: if temp <= 20 then
+                accept := True;
           end;
 
         end;

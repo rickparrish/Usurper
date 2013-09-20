@@ -42,18 +42,18 @@ uses
 const maxboys = 5; {max people that can be in a fist-fight}
 
 type
-  FistBoyRec = record  {Offline characters when fighting trouble-maker}
-    Name:      string[30]; {name}
-    filnr:     byte; {1=player file, 2=npc file}
-    recnr:     SmallWord; {record # in file}
-    ai:        char; {'H'uman or 'C'omputer}
-    sex:       byte; {1=male,2=female}
-    level:     SmallWord; {character level}
-    stamina:   smallint; {stamina}
-    strength:  smallint; {strength}
-    myexp:     longint; {experience earned during fight}
+  FistBoyRec = record       {Offline characters when fighting trouble-maker}
+    Name:      string[30];  {name}
+    filnr:     byte;        {1=player file, 2=npc file}
+    recnr:     SmallWord;   {record # in file}
+    ai:        char;        {'H'uman or 'C'omputer}
+    sex:       byte;        {1=male,2=female}
+    level:     SmallWord;   {character level}
+    stamina:   smallint;    {stamina}
+    strength:  smallint;    {strength}
+    myexp:     longint;     {experience earned during fight}
     myfate:    string[100]; {knocked out by whom? empty string means that he survived}
-    me_nailed: SmallWord; {i was nailed in this round}
+    me_nailed: SmallWord;   {i was nailed in this round}
     skill:     array[1..global_maxcombat] of smallint; {close-combat skills}
   end;
 
@@ -71,15 +71,15 @@ var
   allow_move:   array[1..global_maxcombat] of boolean;
   allow_char:   array[1..global_maxcombat] of char;
 
-  enemy_is_down: boolean; {set when all enemies are down}
+  enemy_is_down: boolean;  {set when all enemies are down}
   player_is_down: boolean; {set when player is down}
-  player_fled:  boolean; {set when player flees}
+  player_fled:  boolean;   {set when player flees}
 
-  round:        word; {fight round}
+  round:        word;      {fight round}
   player_stamina: integer; {player stamina}
-  player_exp:   longint; {player experience accumulated during fight}
+  player_exp:   longint;   {player experience accumulated during fight}
 
-  boy:          byte; {current enemy}
+  boy:          byte;      {current enemy}
   max_options:  byte; {max number of different moves available to player
                          every bout}
 
@@ -93,8 +93,8 @@ var
 
   s, myexp, myfate, player_fate: s100; {used when producing mail}
 
-  knocker:      s30; {string used to keep name of who knocked player out}
-  bash:         byte; {bash # used by offline kicker}
+  knocker:      s30;      {string used to keep name of who knocked player out}
+  bash:         byte;     {bash # used by offline kicker}
 
   pl0:          ^UserRec; {player record}
 
@@ -132,8 +132,8 @@ begin
     insert(')', move_string[i], 3);
   end; {for i:= .end.}
 
-  {strange comment from offline players before fight begins}
-  {just to scare the player a bit}
+       {strange comment from offline players before fight begins}
+       {just to scare the player a bit}
   for i := 1 to maxboys do
   begin
     if (fistboys[i]^.Name <> '') and (fistboys[i]^.stamina > 0) then
@@ -161,7 +161,7 @@ begin
     end;
   end; {for i:= .end.}
 
-  {fight-loop}
+       {fight-loop}
   repeat
     Inc(round);
 
@@ -257,7 +257,7 @@ begin
         end;
       until (ok) or (ch = 'F'); {'f'lee}
 
-      {evaluate user-input}
+               {evaluate user-input}
       case ch of
         'F': begin {player tries to flee}
           {chance of success}
@@ -294,7 +294,7 @@ begin
                     end;
                   end;
                 until ok;
-              end; {flee attempt 1 .end.}
+              end;     {flee attempt 1 .end.}
               1: begin {player tries to flee, but the exits are blocked}
                 crlf;
                 sd(12, 'You head for the exit...');
@@ -341,9 +341,9 @@ begin
 
           end;
         end; {player attack .end.}
-      end; {case ch .end.}
+      end;   {case ch .end.}
 
-      {let the offline guys make their moves}
+             {let the offline guys make their moves}
       for i := 1 to maxboys do
       begin
         if (fistboys[i]^.Name <> '') and (fistboys[i]^.stamina > 0) and
@@ -366,7 +366,7 @@ begin
             end;
           end; {case .end.}
 
-          {type of bash}
+               {type of bash}
           sd(global_bashcol, bash_name(bash));
           d(config.textcolor, '!');
 
@@ -389,8 +389,7 @@ begin
               knocker := fistboys[i]^.Name;
             end;
 
-          end {player evaded the attack}
-          else
+          end {player evaded the attack} else
           begin
 
             case random(2) of
@@ -453,7 +452,7 @@ begin
 
     end; {if go_ahead .end.}
 
-    {check if player is knocked out}
+         {check if player is knocked out}
     if player_stamina < 1 then
     begin
       player_is_down := True;
@@ -487,7 +486,8 @@ begin
 
   {roundstr is used to display number of fight rounds in the news}
   roundstr := 'round';
-  if round > 1 then roundstr := roundstr + 's';
+  if round > 1 then
+    roundstr := roundstr + 's';
 
   {creating news lines that are default in all news-paper events}
   s := '';
@@ -499,7 +499,8 @@ begin
       if s = '' then
       begin
         s := uplc + fistboys[i]^.Name + config.textcol1;
-      end else if fistboys[i]^.Name = lastboy then
+      end else
+      if fistboys[i]^.Name = lastboy then
       begin
         s := s + ' and ' + uplc + fistboys[i]^.Name + config.textcol1;
       end else
@@ -510,7 +511,7 @@ begin
     end;
   end; {for i:= .end.}
 
-  {save offline characters}
+       {save offline characters}
   for i := 1 to maxboys do
   begin
 
@@ -572,7 +573,8 @@ begin
         end;
 
         {player fate}
-        player_fate := uplc + player.name2 + config.textcol1 + ' fled after ' + commastr(round) + ' ' + roundstr + ' (the coward).';
+        player_fate := uplc + player.name2 + config.textcol1 + ' fled after ' + commastr(round) +
+          ' ' + roundstr + ' (the coward).';
 
         {mail}
         post(MailSend,
@@ -599,10 +601,12 @@ begin
       end;
     end; {for i:= .end.}
 
-  end {player fled *end*} else if (player_is_down) and (enemy_is_down) then
+  end {player fled *end*} else
+  if (player_is_down) and (enemy_is_down) then
   begin
     {should never happen}
-  end else if player_is_down then
+  end else
+  if player_is_down then
   begin
 
     {news-paper}
@@ -704,7 +708,8 @@ begin
     pause;
     normal_exit;
 
-  end else if enemy_is_down then
+  end else
+  if enemy_is_down then
   begin
 
     {news-paper}
@@ -771,7 +776,7 @@ begin
 
     end; {for i:= .end.}
 
-    {good work text and experience reward}
+         {good work text and experience reward}
     d(15, 'Good work!');
     sd(config.textcolor, 'You earned ');
 
@@ -820,7 +825,8 @@ begin
   found := False;
 
   ii := 2;
-  if not npckill then Dec(ii);
+  if not npckill then
+    Dec(ii);
 
   for i := 1 to ii do
   begin
@@ -868,10 +874,12 @@ begin
         end;
       end;
 
-      if found then break;
+      if found then
+        break;
 
     end; {for j:= .end.}
-    if found then break;
+    if found then
+      break;
   end; {for i:= .end.}
 
   if found = False then
@@ -976,12 +984,14 @@ begin
   {get 'kill teammates' from .CFG}
   s := cfg_string(35);
   teamkill := False;
-  if upcasestr(s) = 'YES' then teamkill := True;
+  if upcasestr(s) = 'YES' then
+    teamkill := True;
 
   {get 'kill npcs' from .CFG}
   s := cfg_string(39);
   npckill := False;
-  if upcasestr(s) = 'YES' then npckill := True;
+  if upcasestr(s) = 'YES' then
+    npckill := True;
 
   crlf;
   crlf;
@@ -1019,10 +1029,11 @@ begin
       end;
     end; {case .end.}
 
-    {evaluate user-input}
+         {evaluate user-input}
     case cho of
       '?': begin {display menu}
-        if player.expert = True then display_menu(True, False, refresh)
+        if player.expert = True then
+          display_menu(True, False, refresh)
         else display_menu(False, False, refresh);
       end;
       'G': begin {go to sleep in the dormitory, same as quitting from main menu}
@@ -1091,7 +1102,8 @@ begin
           begin
             crlf;
             d(15, 'Chicken!');
-          end else if player.darknr < 1 then
+          end else
+          if player.darknr < 1 then
           begin
             crlf;
             d(12, 'Sorry, you have no dark deeds left today.');
@@ -1107,7 +1119,8 @@ begin
 
             {how many enemies should wake up and confront player}
             givemeboys := random(5) + 1;
-            if givemeboys < 2 then givemeboys := 2;
+            if givemeboys < 2 then
+              givemeboys := 2;
 
             {init and reset pointer vars}
             for i := 1 to maxboys do
@@ -1116,7 +1129,7 @@ begin
               fistboys[i]^.Name := '';
             end; {for i:= .end.}
 
-            {reduce dark deeds left today}
+                 {reduce dark deeds left today}
             Dec(player.darknr);
 
             crlf;
@@ -1240,16 +1253,18 @@ begin
                     end;
                   end;
 
-                  if guys = givemeboys then break;
+                  if guys = givemeboys then
+                    break;
 
                 end; {for j:= .end.}
               end;
 
-              if guys = givemeboys then break;
+              if guys = givemeboys then
+                break;
 
             end; {for i:= .end.}
 
-            {if we couldn't find any opppents then there will be no fight}
+                 {if we couldn't find any opppents then there will be no fight}
             if guys = 0 then
             begin
               d(15, 'Apparently there is no one to fight here!');
@@ -1282,7 +1297,7 @@ begin
               end;
             end; {for i:= .end.}
 
-            {dispose pointer vars}
+                 {dispose pointer vars}
             for i := 1 to maxboys do
             begin
               dispose(fistboys[i]);
@@ -1329,7 +1344,8 @@ begin
           if (i = 2) and (npckill = False) then
           begin
             break;
-          end else if found then
+          end else
+          if found then
           begin
             break;
           end;
@@ -1371,7 +1387,8 @@ begin
                 {king}
                 if pl0^.king = True then
                 begin
-                  if pl0^.sex = 1 then sd(7, '<K>')
+                  if pl0^.sex = 1 then
+                    sd(7, '<K>')
                   else sd(7, '<Q>');
                 end;
 
@@ -1387,7 +1404,8 @@ begin
                   begin
                     ii := 0;
 
-                    sd(config.textcolor, 'Continue (' + config.textcol2 + 'e' + config.textcol1 + ')xamine (' + config.textcol2 + 'a' + config.textcol1 + ')ttack ? ([Y]/N/=)');
+                    sd(config.textcolor, 'Continue (' + config.textcol2 + 'e' + config.textcol1 +
+                      ')xamine (' + config.textcol2 + 'a' + config.textcol1 + ')ttack ? ([Y]/N/=)');
 
                     {get user-input}
                     repeat
@@ -1419,7 +1437,7 @@ begin
 
           end; {for j:= .end.}
 
-        end; {for i:= .end.}
+        end;   {for i:= .end.}
 
         crlf;
         pause;

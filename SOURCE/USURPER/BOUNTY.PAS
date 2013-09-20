@@ -149,7 +149,8 @@ begin
     {evaluate user-input}
     case cho of
       '?': begin {menu}
-        if player.expert = True then display_menu(True, False)
+        if player.expert = True then
+          display_menu(True, False)
         else display_menu(False, False);
       end;
       'R': begin
@@ -386,7 +387,8 @@ begin
                   {news}
                   newsy(True,
                     'Bounty',
-                    ' ' + uplc + pl0^.name2 + config.textcol1 + ' is wanted ' + ulred + 'DEAD' + config.textcol1 + ' by ' + uplc + player.name2 + config.textcol1 + '!',
+                    ' ' + uplc + pl0^.name2 + config.textcol1 + ' is wanted ' + ulred + 'DEAD' +
+                    config.textcol1 + ' by ' + uplc + player.name2 + config.textcol1 + '!',
                     '',
                     '',
                     '',
@@ -421,7 +423,8 @@ begin
                   '',
                   umailheadc + 'You are WANTED!' + config.textcol1,
                   mkstring(15, underscore),
-                  uplc + s2 + config.textcol1 + ' has set a ' + uyellow + commastr(x) + config.textcol1 + ' ' + many_money(x) + ' reward',
+                  uplc + s2 + config.textcol1 + ' has set a ' + uyellow + commastr(x) + config.textcol1 +
+                  ' ' + many_money(x) + ' reward',
                   'for your head.',
                   '',
                   '',
@@ -439,7 +442,8 @@ begin
                 d(config.textcolor, 'Let''s hope that some good citizen can get this creep!');
 
               end;
-            end else if (y = 0) and (x > player.gold) then
+            end else
+            if (y = 0) and (x > player.gold) then
             begin
               crlf;
               You_Cant_Afford_It;
@@ -524,7 +528,8 @@ begin
                 end;
               end;
 
-              if x = 0 then x := wanted.level;
+              if x = 0 then
+                x := wanted.level;
               sd(15, ljust(commastr(x), justval));
 
               s2 := commastr(wanted.gold);

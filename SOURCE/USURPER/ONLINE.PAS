@@ -38,18 +38,20 @@ type ShadowAction = (SAdd, SAddChild, SAddGod, SAddFake,
 
 {Maint}
 function Add_Onliner(action: OnlineAction; var player0: onlinerec): boolean;
-function Add_Shadow(action: shadowaction; var chimp: userrec; const creator: s30; const doing: s90; const loc: integer): boolean;
+function Add_Shadow(action: shadowaction; var chimp: userrec; const creator: s30; const doing: s90;
+  const loc: integer): boolean;
 
-function Add_Child(action: shadowaction; const child: childrec; const creator: s30; const doing: s90; const location: integer): boolean;
+function Add_Child(action: shadowaction; const child: childrec; const creator: s30; const doing: s90;
+  const location: integer): boolean;
 
 procedure Update_Shadow(const shadowname: s30; const doing: s90; dead: boolean);
 procedure Kick_Out_Old_Onliners;
 
 procedure Node_Check; {performed every X second, as defined in the .CFG}
 
-{send stuff online}
+ {send stuff online}
 procedure Send_Stuff_Online(utman: boolean); {trade stuff node-to-node}
-{release online prisoner}
+ {release online prisoner}
 function Online_Release(const target: s30): boolean;
 
 {send messages}
@@ -123,7 +125,7 @@ begin
 
     end; {for i:= .end.}
 
-    {unlock onlinefile so other nodes can process it}
+         {unlock onlinefile so other nodes can process it}
     Lock_OnlineFile(FUnlock);
 
   end else
@@ -196,7 +198,7 @@ begin {sends a message(chatline) to receiver. see also related routine:
 
     end; {for i:= .end.}
 
-    {unlock onlinefile so other nodes can process it}
+         {unlock onlinefile so other nodes can process it}
     Lock_OnlineFile(FUnlock);
 
   end else
@@ -267,7 +269,7 @@ begin
           end;
         end; {for j:= .end.}
 
-        {save}
+             {save}
         load_onlinefile(fsave, person, i);
 
       end;
@@ -277,7 +279,7 @@ begin
 
     end; {for i:= .end.}
 
-    {unlock onlinefile so other nodes can process the file}
+         {unlock onlinefile so other nodes can process the file}
     Lock_OnlineFile(FUnLock);
 
   end else
@@ -326,7 +328,7 @@ begin
           end;
         end; {for j:= .end.}
 
-        {save online record}
+             {save online record}
         load_onlinefile(fsave, person, i);
 
       end;
@@ -335,7 +337,7 @@ begin
 
     end; {for i:= .end.}
 
-    {unlock onlinefile so other nodes can process it}
+         {unlock onlinefile so other nodes can process it}
     Lock_OnlineFile(FUnlock);
 
   end else
@@ -402,7 +404,8 @@ begin
             begin
               sd(global_plycol, gubbe.Name);
               d(config.textcolor, ' doesn''t wanna listen to you right now!');
-            end else if gubbe.location = onloc_MultiChat then
+            end else
+            if gubbe.location = onloc_MultiChat then
             begin
               sd(global_plycol, gubbe.Name);
               d(config.textcolor, ' is in a chat conference right now!');
@@ -502,7 +505,7 @@ begin
           end;
         end; {for j:= .end.}
 
-        {save online record}
+             {save online record}
         load_onlinefile(fsave, temp_guy, i);
 
       end;
@@ -512,7 +515,7 @@ begin
 
     end; {for i:= .end.}
 
-    {unlock onlinefile so other nodes can process it}
+         {unlock onlinefile so other nodes can process it}
     Lock_OnlineFile(FUnlock);
 
   end else
@@ -564,7 +567,8 @@ begin
       begin
     {$I-}Close(onlinefile);{$I+}
         error := IoResult;
-        if error <> 0 then unable_to_close(global_onfile, error);
+        if error <> 0 then
+          unable_to_close(global_onfile, error);
       end;
 
     until (Ok) or (i > global_locknrs);
@@ -651,7 +655,7 @@ begin
         Append_OnlineGuy(player0);
       end;
 
-    end; {Oadd .end.}
+    end;           {Oadd .end.}
 
     ORemove: begin {remove player from list}
 
@@ -677,7 +681,7 @@ begin
 
         end; {for i:= .end.}
 
-        {unlock onlinefile}
+             {unlock onlinefile}
         lock_onlinefile(FUnlock);
 
       end else
@@ -689,7 +693,7 @@ begin
     end; {Oremove .end.}
     OUpdateLocation: begin {update player location & doing}
 
-      {lock}
+         {lock}
       if lock_onlinefile(Flock) then
       begin
 
@@ -722,7 +726,7 @@ begin
 
     OUpdateAll: begin {update player on list}
 
-      {lock}
+         {lock}
       if lock_onlinefile(Flock) = True then
       begin
 
@@ -750,7 +754,7 @@ begin
     end; {OupdateAll .end.}
     ORemoveMe: begin {clean up, remove player who is online}
 
-      {lock}
+         {lock}
       if lock_onlinefile(FLock) = True then
       begin
 
@@ -780,7 +784,7 @@ begin
           onlinne.infosend[j] := emptystr;
         end; {for j:= .end.}
 
-        {save}
+             {save}
         load_onlinefile(fsave, onlinne, onliner.recnr);
 
         {unlock record}
@@ -796,15 +800,16 @@ begin
 
     end; {ORemoveMe .end.}
 
-  end; {Case action .end.}
+  end;   {Case action .end.}
 
-  {return result}
+         {return result}
   add_onliner := Result;
 
 end; {Add_Onliner *end*}
 
 
-function Add_Child(action: shadowaction; const child: childrec; const creator: s30; const doing: s90; const location: integer): boolean;
+function Add_Child(action: shadowaction; const child: childrec; const creator: s30; const doing: s90;
+  const location: integer): boolean;
 var
   Result: boolean;
   ply:    userrec;
@@ -822,12 +827,13 @@ begin
     SRemoveChild: Result := add_shadow(SRemoveChild, ply, creator, doing, location);
   end; {case .end.}
 
-  {return result}
+       {return result}
   add_child := Result;
 
 end; {add_child *end*}
 
-function Add_Shadow(action: shadowaction; var chimp: userrec; const creator: s30; const doing: s90; const loc: integer): boolean;
+function Add_Shadow(action: shadowaction; var chimp: userrec; const creator: s30; const doing: s90;
+  const loc: integer): boolean;
 {shadow players are players/children offline, called to fight/trade by
  online player
  fake players are online as long as the player who created them is online
@@ -866,7 +872,8 @@ begin
       shadow^.Name := chimp.name2;
       shadow^.realname := chimp.name1;
       shadow^.race := chimp.race;
-      if action = SAddFake then shadow^.fake := True
+      if action = SAddFake then
+        shadow^.fake := True
       else shadow^.fake := False;
       shadow^.class := chimp.class;
       shadow^.node := 'XXX';
@@ -896,7 +903,7 @@ begin
         shadow^.infosend[i] := emptystr;
       end; {for i:= .end.}
 
-      {lock online file, so no other node may interfer}
+           {lock online file, so no other node may interfer}
       if lock_onlinefile(FLock) = True then
       begin
 
@@ -1012,10 +1019,14 @@ begin
             shadow^.ear := global_ear_all;
             shadow^.initiator := emptystr;
 
-            for j := 1 to global_maxnod do shadow^.chatline[j] := emptystr;
-            for j := 1 to global_maxnod do shadow^.chatsend[j] := emptystr;
-            for j := 1 to global_maxnod do shadow^.info[j] := emptystr;
-            for j := 1 to global_maxnod do shadow^.infosend[j] := emptystr;
+            for j := 1 to global_maxnod do
+              shadow^.chatline[j] := emptystr;
+            for j := 1 to global_maxnod do
+              shadow^.chatsend[j] := emptystr;
+            for j := 1 to global_maxnod do
+              shadow^.info[j] := emptystr;
+            for j := 1 to global_maxnod do
+              shadow^.infosend[j] := emptystr;
 
             {update record}
             load_onlinefile(fsave, shadow^, i);
@@ -1070,7 +1081,7 @@ begin
 
         end; {for i:= .end.}
 
-        {unlock file}
+             {unlock file}
         lock_onlinefile(FUnlock);
 
       end else
@@ -1106,7 +1117,7 @@ begin
 
         end; {for i:= .end.}
 
-        {unlock file}
+             {unlock file}
         lock_onlinefile(FUnlock);
 
       end else
@@ -1118,7 +1129,7 @@ begin
     end;
   end; {case .end.}
 
-  {dispose temporary variables}
+       {dispose temporary variables}
   dispose(temp);
   dispose(shadow);
 
@@ -1177,7 +1188,7 @@ begin
     end;
   end; {for i:= .end.}
 
-end; {who_is_here *end*}
+end;   {who_is_here *end*}
 
 procedure Who_is_On; {List of characters online}
 var
@@ -1210,7 +1221,8 @@ begin
     load_onliner(fload, ply, i);
 
     ok := True;
-    if ply.Name = '' then ok := False;
+    if ply.Name = '' then
+      ok := False;
 
     if ok then
     begin
@@ -1220,7 +1232,8 @@ begin
       if ply.shadow then
       begin
         sd(11, 'Ghost   ');
-      end else if ply.node = global_onlocal then
+      end else
+      if ply.node = global_onlocal then
       begin
         sd(11, 'Local   ');
       end else
@@ -1269,7 +1282,7 @@ begin
     end;
   end; {for i:= .end.}
 
-  {return result}
+       {return result}
   anybody_on_location := Result;
 
 end; {anybody_on_location *end*}
@@ -1349,7 +1362,8 @@ begin
           crlf;
           sd(global_plycol, only^.Name);
           d(config.textcolor, ' is busy and can''t talk to you right now.');
-        end else if only^.location in [onloc_mainstreet,
+        end else
+        if only^.location in [onloc_mainstreet,
           onloc_bank,
           onloc_recruit,
           onloc_church] then
@@ -1420,7 +1434,8 @@ begin
         sd(config.textcolor, '.');
       end;
 
-      if cc > global_online_maxwaits then abort := True;
+      if cc > global_online_maxwaits then
+        abort := True;
 
       {check if user has pressed A to abort the scan}
       if ukeypressed then
@@ -1445,7 +1460,8 @@ begin
         d(config.textcolor, ' has arrived!');
         global_multi := False;
         online_trade(True);
-      end else if onliner.com = intercom_decline then
+      end else
+      if onliner.com = intercom_decline then
       begin
         sd(global_plycol, only^.Name);
         d(15, ' is not interested! (how rude!)');
@@ -1456,7 +1472,8 @@ begin
       end;
     end;
 
-  end else if not found then
+  end else
+  if not found then
   begin
     d(15, 'couldn''t locate that character.');
   end;
@@ -1495,8 +1512,10 @@ begin
 
       if temp.Name = shadowname then
       begin
-        if doing <> '' then temp.doing := doing;
-        if dead = True then temp.dead := True;
+        if doing <> '' then
+          temp.doing := doing;
+        if dead = True then
+          temp.dead := True;
         load_onlinefile(fsave, temp, i);
         found := True;
       end;
@@ -1511,7 +1530,7 @@ begin
 
     end; {for i:= .end.}
 
-    {unlock onlinefile}
+         {unlock onlinefile}
     Lock_OnlineFile(FUnlock);
 
   end else
@@ -1531,8 +1550,8 @@ var
 
   online_minutes: longint;
   hour, minute, second, sec100: word; {current time}
-  ar_hr, ar_mn, ar_sc: word; {players arrival time}
-  el_hr, el_mn, el_sc: longint; {elapsed time}
+  ar_hr, ar_mn, ar_sc: word;          {players arrival time}
+  el_hr, el_mn, el_sc: longint;       {elapsed time}
 
 begin {scans the 'onliners.dat' file and deletes players who have
        been online longer than maxtime (defined in usurp.ctl). }
@@ -1567,7 +1586,8 @@ begin {scans the 'onliners.dat' file and deletes players who have
         elapsed(hour, minute, second, ar_hr, ar_mn, ar_sc, el_hr, el_mn, el_sc);
         {convert elapsed hours to minutes}
         online_minutes := 0;
-        if el_hr > 0 then online_minutes := el_hr * 60;
+        if el_hr > 0 then
+          online_minutes := el_hr * 60;
         online_minutes := online_minutes + el_mn;
         if online_minutes > maxtime then
         begin {maxtime is a ddplus variable}
@@ -1606,7 +1626,7 @@ begin {scans the 'onliners.dat' file and deletes players who have
 
     end; {for i:= .end.}
 
-    {unlock onlinefile}
+         {unlock onlinefile}
     Lock_OnlineFile(FUnlock);
 
   end else
@@ -1617,7 +1637,8 @@ begin {scans the 'onliners.dat' file and deletes players who have
 
 end; {kick_out_old_onliners *end*}
 
-procedure Give_Me_Exits_From(const caller: onlinerec; var loc1, loc2, loc3, loc4, loc5, loc6, loc7, loc8, loc9, loc10, loc11, loc12, loc13, loc14: integer);
+procedure Give_Me_Exits_From(const caller: onlinerec;
+  var loc1, loc2, loc3, loc4, loc5, loc6, loc7, loc8, loc9, loc10, loc11, loc12, loc13, loc14: integer);
 const location_exits = 14;
 var i: byte;
 begin
@@ -1677,7 +1698,8 @@ begin
     onloc_darkness: begin
       loc1 := onloc_mainstreet;
       loc2 := onloc_outsideinn;
-      if caller.sex = 1 then loc3 := onloc_whores
+      if caller.sex = 1 then
+        loc3 := onloc_whores
       else loc3 := onloc_gigolos;
       loc4 := onloc_chestloot;
     end;
@@ -1800,7 +1822,7 @@ begin
 
   end; {case .end.}
 
-  {debug}
+       {debug}
   if (loc1 = onloc_closed) and
     (loc2 = onloc_closed) and
     (loc3 = onloc_closed) and
@@ -1829,7 +1851,7 @@ var
   temp:         OnlineRec;
 begin {returns a random human online player, see "move_fakeplayers" for use}
 
-  {init variables}
+      {init variables}
   j := 0;
   for i := 1 to max_search do
   begin
@@ -1855,7 +1877,8 @@ begin {returns a random human online player, see "move_fakeplayers" for use}
     }
         Inc(j);
         get_me_array[j] := i;
-        if j = max_search then break;
+        if j = max_search then
+          break;
       end;
     end;
   end; {for i:= .end.}
@@ -1902,7 +1925,8 @@ begin
   if config.multicheck > 0 then
   begin
     elapsed(hour, minute, second, global_lasthour, global_lastminute, global_lastsecond, el_hr, el_mn, el_sc);
-    if el_sc < config.multicheck then exit;
+    if el_sc < config.multicheck then
+      exit;
   end;
 
   {scan fake players initiated by player}
@@ -1952,7 +1976,7 @@ begin
           end;
         end; {for j:= .end.}
 
-        {should we send some random mail to a human player?}
+             {should we send some random mail to a human player?}
         if config.fakeschatty then
         begin
           if random(40) = 0 then
@@ -1979,8 +2003,8 @@ begin
             loc_array[j] := onloc_closed;
           end; {for j:= .end.}
 
-          {set new location for fakeplayer}
-          {fetch possible exits from current location}
+               {set new location for fakeplayer}
+               {fetch possible exits from current location}
           give_me_exits_from(faker,
             loc_array[1],
             loc_array[2],
@@ -2001,7 +2025,8 @@ begin
           possible_exits := 0;
           for j := 1 to location_exits do
           begin
-            if loc_array[j] <> onloc_closed then Inc(possible_exits);
+            if loc_array[j] <> onloc_closed then
+              Inc(possible_exits);
           end; {for j:= .end.}
 
           if possible_exits > 0 then
@@ -2210,7 +2235,8 @@ begin
             break;
           end;
         end; {for g:= .end.}
-      end else if findsub(broadcast_JoinTeam, onliner.info[j]) then
+      end else
+      if findsub(broadcast_JoinTeam, onliner.info[j]) then
       begin
         {player has been allowed to join a team}
 
@@ -2226,8 +2252,8 @@ begin
           user_save(player);
         end;
 
-      end
-      else if findsub(broadcast_GodDesecrated, onliner.info[j]) then
+      end else
+      if findsub(broadcast_GodDesecrated, onliner.info[j]) then
       begin
         {Gods altar has been desecrated}
 
@@ -2242,7 +2268,8 @@ begin
         {decrease experience}
         DecGodExp(god, x);
 
-      end else if findsub(broadcast_GodSacrificed, onliner.info[j]) then
+      end else
+      if findsub(broadcast_GodSacrificed, onliner.info[j]) then
       begin
         {Sacrifice has been made at Gods altar}
 
@@ -2259,12 +2286,13 @@ begin
         {increase experience}
         IncGodExp(god, x);
 
-      end
-      else if findsub(broadcast_ResetKingVote, onliner.info[j]) then
+      end else
+      if findsub(broadcast_ResetKingVote, onliner.info[j]) then
       begin
         {king has been removed. lets reset DAYS SINCE VOTE FOR KING variable}
         player.KingVotePoll := 200;
-      end else if findsub(broadcast_Poison, onliner.info[j]) then
+      end else
+      if findsub(broadcast_Poison, onliner.info[j]) then
       begin
         {sender has drunk poison from player}
 
@@ -2287,7 +2315,8 @@ begin
 
         {increase experience}
         IncPlayerExp(player, x);
-      end else if findsub(broadcast_Poison, onliner.info[j]) then
+      end else
+      if findsub(broadcast_Poison, onliner.info[j]) then
       begin
         {sender has drunk poison from player}
 
@@ -2310,7 +2339,8 @@ begin
 
         {increase experience}
         IncPlayerExp(player, x);
-      end else if findsub(broadcast_ChildPartyExp, onliner.info[j]) then
+      end else
+      if findsub(broadcast_ChildPartyExp, onliner.info[j]) then
       begin
         {receivers child has earned XP from party going}
 
@@ -2332,7 +2362,8 @@ begin
 
         {increase experience}
         IncPlayerExp(player, x);
-      end else if findsub(broadcast_HoldingHands, onliner.info[j]) then
+      end else
+      if findsub(broadcast_HoldingHands, onliner.info[j]) then
       begin
         {sender has dated player, on players request}
 
@@ -2355,7 +2386,8 @@ begin
 
         {increase experience}
         IncPlayerExp(player, x);
-      end else if findsub(broadcast_HaveSex, onliner.info[j]) then
+      end else
+      if findsub(broadcast_HaveSex, onliner.info[j]) then
       begin
         {sender just had Sex with player, on players request}
 
@@ -2378,7 +2410,8 @@ begin
 
         {increase experience}
         IncPlayerExp(player, x);
-      end else if findsub(broadcast_HaveDiscreteSex, onliner.info[j]) then
+      end else
+      if findsub(broadcast_HaveDiscreteSex, onliner.info[j]) then
       begin
         {sender just had Sex with player, on players request}
 
@@ -2401,8 +2434,8 @@ begin
 
         {increase experience}
         IncPlayerExp(player, x);
-      end
-      else if findsub(broadcast_Dinner, onliner.info[j]) then
+      end else
+      if findsub(broadcast_Dinner, onliner.info[j]) then
       begin
         {sender has dated player(dinner), on players request}
 
@@ -2425,7 +2458,8 @@ begin
 
         {increase experience}
         IncPlayerExp(player, x);
-      end else if findsub(broadcast_Kiss, onliner.info[j]) then
+      end else
+      if findsub(broadcast_Kiss, onliner.info[j]) then
       begin
         {sender has kissed player, on players request}
 
@@ -2448,8 +2482,8 @@ begin
 
         {increase experience}
         IncPlayerExp(player, x);
-      end
-      else if findsub(broadcast_BouquetRoses, onliner.info[j]) then
+      end else
+      if findsub(broadcast_BouquetRoses, onliner.info[j]) then
       begin
         {sender has accepted flowers from player}
 
@@ -2472,8 +2506,8 @@ begin
 
         {increase experience}
         IncPlayerExp(player, x);
-      end
-      else if findsub(broadcast_HoldingHands, onliner.info[j]) then
+      end else
+      if findsub(broadcast_HoldingHands, onliner.info[j]) then
       begin
         {sender has dated player, on players request}
 
@@ -2496,8 +2530,8 @@ begin
 
         {increase experience}
         IncPlayerExp(player, x);
-      end
-      else if onliner.info[j] = broadcast_removeturf then
+      end else
+      if onliner.info[j] = broadcast_removeturf then
       begin
         {Town Control has been lost}
         crlf;
@@ -2509,7 +2543,8 @@ begin
         player.teamrec := 0;
         user_save(player);
 
-      end else if onliner.info[j] = broadcast_TaxRelieved then
+      end else
+      if onliner.info[j] = broadcast_TaxRelieved then
       begin
         {King has relieved player from Royal Tax}
         crlf;
@@ -2519,7 +2554,8 @@ begin
         player.tax_relief := True;
         user_save(player);
 
-      end else if onliner.info[j] = broadcast_TaxReinstate then
+      end else
+      if onliner.info[j] = broadcast_TaxReinstate then
       begin
         {King has reinstated player to Royal Tax}
         crlf;
@@ -2529,29 +2565,33 @@ begin
         player.tax_relief := False;
         user_save(player);
 
-      end else if onliner.info[j] = broadcast_addGym then
+      end else
+      if onliner.info[j] = broadcast_addGym then
       begin
         {Gym has been taken in players team control!}
         player.gym_owner := 1;
         player.gym_card := 0;
         user_save(player);
-      end else if onliner.info[j] = broadcast_removegymcard then
+      end else
+      if onliner.info[j] = broadcast_removegymcard then
       begin
         {player has been tossed out of the Gym, his membership has been revoked}
         player.gym_card := 0;
         user_save(player);
-      end else if onliner.info[j] = broadcast_newgymcard then
+      end else
+      if onliner.info[j] = broadcast_newgymcard then
       begin
         {player has invited to the Gym, new member}
         player.gym_card := 1;
         user_save(player);
-      end else if onliner.info[j] = broadcast_removegym then
+      end else
+      if onliner.info[j] = broadcast_removegym then
       begin
         {player is no longer a gym owner}
         player.gym_owner := 0;
         user_save(player);
-      end
-      else if findsub(broadcast_changeteampw, onliner.info[j]) then
+      end else
+      if findsub(broadcast_changeteampw, onliner.info[j]) then
       begin
         {Team Password has been changed by onliner.infosend[j]}
         {extract new team password from string}
@@ -2565,49 +2605,56 @@ begin
         player.teampw := onliner.info[j];
         user_save(player);
 
-      end else if findsub(broadcast_KingWantsYou, onliner.info[j]) then
+      end else
+      if findsub(broadcast_KingWantsYou, onliner.info[j]) then
       begin
         {King has posted a request to player to become his guard}
 
         crlf;
         sd(global_kingcol, onliner.infosend[j]);
         d(config.textcolor, ' just offered you to become a Royal Guard!');
-      end else if findsub(broadcast_RefusedGuard, onliner.info[j]) then
+      end else
+      if findsub(broadcast_RefusedGuard, onliner.info[j]) then
       begin
         {Player refused to become Royal Guard, this is sent to the king}
 
         crlf;
         sd(global_plycol, onliner.infosend[j]);
         d(config.textcolor, ' refused to become a Royal Guard!');
-      end else if findsub(broadcast_NoRoomForGuard, onliner.info[j]) then
+      end else
+      if findsub(broadcast_NoRoomForGuard, onliner.info[j]) then
       begin
         {Player tried to become Royal Guard, but there was no room}
 
         crlf;
         sd(global_plycol, onliner.infosend[j]);
         d(config.textcolor, ' tried to become a Royal Guard, but there were no vacancies!');
-      end else if findsub(broadcast_IbecameGuard, onliner.info[j]) then
+      end else
+      if findsub(broadcast_IbecameGuard, onliner.info[j]) then
       begin
         {Player became Royal Guard}
 
         crlf;
         sd(global_plycol, onliner.infosend[j]);
         d(config.textcolor, ' became a Royal Guard! (accepting your offer)');
-      end else if findsub(broadcast_YouAreSacked, onliner.info[j]) then
+      end else
+      if findsub(broadcast_YouAreSacked, onliner.info[j]) then
       begin
         {Player was sacked from Royal Guard duty}
 
         crlf;
         sd(global_kingcol, onliner.infosend[j]);
         d(config.textcolor, ' sacked you from your Guard duty! (what a pig)');
-      end else if findsub(broadcast_IQuitasGuard, onliner.info[j]) then
+      end else
+      if findsub(broadcast_IQuitasGuard, onliner.info[j]) then
       begin
         {Player quits his Royal Guard duty}
 
         crlf;
         sd(global_plycol, onliner.infosend[j]);
         d(config.textcolor, ' quit job as Royal Guard! (deserter)');
-      end else if (findsub(broadcast_IWantToBeGuard, onliner.info[j])) and
+      end else
+      if (findsub(broadcast_IWantToBeGuard, onliner.info[j])) and
         (player.king = True) then
       begin
         {Player has applied for Guard Duty}
@@ -2616,14 +2663,16 @@ begin
         sd(global_plycol, onliner.infosend[j]);
         d(config.textcolor, ' filed an application for Guard Duty!');
 
-      end else if findsub(broadcast_YouBecameGuard, onliner.info[j]) then
+      end else
+      if findsub(broadcast_YouBecameGuard, onliner.info[j]) then
       begin
         {Player became guard, accepted by KING on other node}
 
         crlf;
         sd(global_kingcol, onliner.infosend[j]);
         d(config.textcolor, ' accepted your application for Royal Guard Duty!');
-      end else if findsub(broadcast_NoRoomForYou, onliner.info[j]) then
+      end else
+      if findsub(broadcast_NoRoomForYou, onliner.info[j]) then
       begin
         {Player was accepted to become guard, but there was no ROOM}
 
@@ -2632,7 +2681,8 @@ begin
         d(config.textcolor, ' would like to see you in the Royal Guard.');
         d(12, 'BUT! There was no spare room in the Force.');
         d(12, 'Your offer was declined.');
-      end else if findsub(broadcast_sentmoney, onliner.info[j]) then
+      end else
+      if findsub(broadcast_sentmoney, onliner.info[j]) then
       begin
         {Money has been sent from player onliner.infosend[j]}
 
@@ -2649,18 +2699,21 @@ begin
         {receive money}
         incplayermoney(player, x);
 
-      end else if onliner.info[j] = broadcast_senttoprison then
+      end else
+      if onliner.info[j] = broadcast_senttoprison then
       begin
         crlf;
         sd(global_plycol, onliner.infosend[j]);
         d(config.textcolor, ' has been sent to PRISON.');
-      end else if onliner.info[j] = broadcast_RoyalAngel then
+      end else
+      if onliner.info[j] = broadcast_RoyalAngel then
       begin
 
         healing_royal_angel; {this proc is also called from mail.pas}
 
         {tell all nodes of this remarkable event}
-        online_send_to_all('a ' + uwhite + 'Angel' + config.textcol1 + ' visited ' + uplc + player.name2 + config.textcol1 + '!', player.name2,
+        online_send_to_all('a ' + uwhite + 'Angel' + config.textcol1 + ' visited ' + uplc +
+          player.name2 + config.textcol1 + '!', player.name2,
           onliner.infosend[j]);
 
         {we must send a reciept to the sender (the king or queen)}
@@ -2670,14 +2723,16 @@ begin
         end;
 
         pause;
-      end else if onliner.info[j] = broadcast_RoyalAngelLand then
+      end else
+      if onliner.info[j] = broadcast_RoyalAngelLand then
       begin
         crlf;
         sd(14, 'The ' + uwhite + 'Angel' + uyellow + ' has returned. ');
         sd(global_plycol, onliner.infosend[j]);
         d(14, ' has been healed!');
         pause;
-      end else if onliner.info[j] = broadcast_RoyalAvenger then
+      end else
+      if onliner.info[j] = broadcast_RoyalAvenger then
       begin
 
         hurting_royal_avenger; {this proc is also called from mail.pas}
@@ -2693,14 +2748,16 @@ begin
         end;
 
         pause;
-      end else if onliner.info[j] = broadcast_RoyalAvengerLand then
+      end else
+      if onliner.info[j] = broadcast_RoyalAvengerLand then
       begin
         crlf;
         sd(config.textcolor, 'The ' + ulred + 'Dark Avenger' + config.textcol1 + ' has returned. ');
         sd(global_plycol, onliner.infosend[j]);
         d(config.textcolor, ' has been hurt!');
         pause;
-      end else if onliner.info[j] = broadcast_CellDoorOpens then
+      end else
+      if onliner.info[j] = broadcast_CellDoorOpens then
       begin
 
         if onliner.location = onloc_prisoner then
@@ -2710,7 +2767,8 @@ begin
           d(15, '*****************************');
           d(15, '*******HELPING HAND *********');
           d(config.textcolor, 'Suddenly the cell door swings wide open!');
-          d(config.textcolor, 'In the dim light you can see ' + uplc + onliner.infosend[j] + config.textcol1 + ' standing in the hallway.');
+          d(config.textcolor, 'In the dim light you can see ' + uplc + onliner.infosend[j] +
+            config.textcol1 + ' standing in the hallway.');
           d(config.textcolor, 'You have been rescued!');
           crlf;
           if confirm('Go out to freedom', 'Y') = False then
@@ -2719,7 +2777,8 @@ begin
             {return receipt to rescuer}
             if is_online(onliner.infosend[j], online_player) then
             begin
-              online_send_to_player(onliner.infosend[j], online_player, uplc + player.name2 + config.textcol1 + ' refused to leave ' + sex3[player.sex] + ' cell!');
+              online_send_to_player(onliner.infosend[j], online_player, uplc + player.name2 +
+                config.textcol1 + ' refused to leave ' + sex3[player.sex] + ' cell!');
             end;
 
           end else
@@ -2733,7 +2792,8 @@ begin
 
             if is_online(onliner.infosend[j], online_player) then
             begin
-              online_send_to_player(onliner.infosend[j], online_player, uplc + player.name2 + config.textcol1 + ' left ' + sex3[player.sex] + ' cell!');
+              online_send_to_player(onliner.infosend[j], online_player, uplc + player.name2 +
+                config.textcol1 + ' left ' + sex3[player.sex] + ' cell!');
             end;
 
             {news-paper}
@@ -2786,7 +2846,8 @@ begin
           {we must send a reciept to the sender (the player who broke into JAIL)}
           if is_online(onliner.infosend[j], online_player) then
           begin
-            online_send_to_player(onliner.infosend[j], online_player, uplc + player.name2 + config.textcol1 + ' walked out of the cell!');
+            online_send_to_player(onliner.infosend[j], online_player, uplc + player.name2 +
+              config.textcol1 + ' walked out of the cell!');
           end;
 
           pause;
@@ -2796,38 +2857,40 @@ begin
           {player is no longer in his cell, return a receipt to rescuer}
           if is_online(onliner.infosend[j], online_player) then
           begin
-            online_send_to_player(onliner.infosend[j], online_player, uplc + player.name2 + config.textcol1 + ' is not in the Cell!');
+            online_send_to_player(onliner.infosend[j], online_player, uplc + player.name2 +
+              config.textcol1 + ' is not in the Cell!');
           end;
 
         end;
-      end
-      else if onliner.info[j] = broadcast_MortalEnteredGame then
+      end else
+      if onliner.info[j] = broadcast_MortalEnteredGame then
       begin
         crlf;
         d(transcol, transmission);
         sd(global_plycol, onliner.infosend[j]);
         d(config.textcolor, ' entered the game.');
-      end else if onliner.info[j] = broadcast_GodEnteredGame then
+      end else
+      if onliner.info[j] = broadcast_GodEnteredGame then
       begin
         crlf;
         d(transcol, transmission);
         sd(global_plycol, onliner.infosend[j]);
         d(config.textcolor, ' entered the game ' + ulcyan + '<IMMORTAL>' + config.textcol1 + '.');
-      end
-      else if onliner.info[j] = broadcast_kingenter then
+      end else
+      if onliner.info[j] = broadcast_kingenter then
       begin
         crlf;
         d(transcol, transmission);
         sd(global_kingcol, onliner.infosend[j]);
         d(config.textcolor, ', THE KING!, entered the game.');
-      end else if onliner.info[j] = broadcast_queenenter then
+      end else
+      if onliner.info[j] = broadcast_queenenter then
       begin
         crlf;
         d(transcol, transmission);
         sd(global_kingcol, onliner.infosend[j]);
         d(config.textcolor, ', THE QUEEN!, entered the game.');
-      end
-      else
+      end else
       begin
         {non-broadcast messages, STANDARD INFO STUFF}
         crlf;
@@ -2928,7 +2991,8 @@ begin
       onliner.bname := emptystr;
     end;
 
-  end else if (onliner.bname <> '') and (onliner.com = intercom_execute) then
+  end else
+  if (onliner.bname <> '') and (onliner.com = intercom_execute) then
   begin
     {kings guard come to fetch the prisoner to his execution!}
 
@@ -2998,7 +3062,8 @@ begin
     pause;
     halt;
 
-  end else if (onliner.bname <> '') and
+  end else
+  if (onliner.bname <> '') and
     (onliner.com = intercom_release) then
   begin
     {somebody opened the prison cell door!}
@@ -3066,7 +3131,8 @@ begin
       onliner.comfile := emptystr;
       onliner.bname := emptystr;
     end;
-  end else if (onliner.bname <> '') and (onliner.com = intercom_challenge) then
+  end else
+  if (onliner.bname <> '') and (onliner.com = intercom_challenge) then
   begin
 
     {somebody has challenged player to a online duel!}
@@ -3181,7 +3247,8 @@ begin
     onliner.comfile := emptystr;
     onliner.com := ' ';
     onliner.bname := emptystr;
-  end else if online_trade2 = True then
+  end else
+  if online_trade2 = True then
   begin
     online_trade(False);
     onliner.comfile := emptystr;
@@ -3206,7 +3273,7 @@ begin
     dispose(saved[j, 2]);
   end; {for j:= .end.}
 
-end; {Node Check *end*}
+end;   {Node Check *end*}
 
 
 function Location_Desc;  {returns a 30 characters string with description
@@ -3318,7 +3385,7 @@ begin
 
   end; {case .end.}
 
-  {return result}
+       {return result}
   location_desc := s;
 
 end; {location_desc *end*}

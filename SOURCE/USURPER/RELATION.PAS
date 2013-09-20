@@ -58,7 +58,8 @@ procedure Kill_Duplicate_Relations(const ply: userrec; howmany: byte); {debug!}
 procedure Remove_Relations(const ply: userrec); {remove plys relations}
 procedure Relation_Self_Mail(const pl1, pl2: userrec; newrel: word);
 procedure Relation_Change_Mail(const pl1, pl2: userrec; newrel: word);
-procedure Update_Relation(direction: RelationCommand; steps: byte; const pl1, pl2: userrec; overrideautohate, overridemaxfeeling: boolean);
+procedure Update_Relation(direction: RelationCommand; steps: byte; const pl1, pl2: userrec;
+  overrideautohate, overridemaxfeeling: boolean);
 
 procedure Killed_By_Stats(const pl1, pl2: userrec);
 procedure Summary_of_Player_Relations(const ply: userrec);
@@ -70,10 +71,12 @@ procedure Create_New_Relations(var ply: userrec; const goal_relations: byte; opp
 
 
 
-procedure Inform_Parent(const child: childrec; MailRequest: word; const ply: userrec; const line1, line2, line3, line4, line5, line6, line7, line8, line9, line10, line11, line12, line13, line14, line15: s90);
+procedure Inform_Parent(const child: childrec; MailRequest: word; const ply: userrec;
+  const line1, line2, line3, line4, line5, line6, line7, line8, line9, line10, line11, line12, line13, line14, line15: s90);
 
 procedure Inform_Parents_Online(const child: childrec; const mess: s100);
-procedure Inform_Parents(const child: childrec; MailRequest: word; const line1, line2, line3, line4, line5, line6, line7, line8, line9, line10, line11, line12, line13, line14, line15: s90);
+procedure Inform_Parents(const child: childrec; MailRequest: word;
+  const line1, line2, line3, line4, line5, line6, line7, line8, line9, line10, line11, line12, line13, line14, line15: s90);
 
 implementation
 
@@ -121,7 +124,7 @@ begin
 
   end; {for i:= .end.}
 
-end; {relation_maintenance *end*}
+end;   {relation_maintenance *end*}
 
 procedure List_Married_Couples; {list of married couples}
 var
@@ -160,7 +163,8 @@ begin
       begin
         found := True;
 
-        if relation^.marrieddays = 1 then s := 'day'
+        if relation^.marrieddays = 1 then
+          s := 'day'
         else s := 'days';
 
         sd(global_plycol, relation^.name1);
@@ -174,7 +178,8 @@ begin
         if relation^.race1 <> relation^.race2 then
         begin
           s := '';
-          d(config.textcolor, '(' + race_display(2, relation^.race1, 0) + ' and ' + race_display(2, relation^.race2, 0) + ' combination' + s + ')');
+          d(config.textcolor, '(' + race_display(2, relation^.race1, 0) + ' and ' +
+            race_display(2, relation^.race2, 0) + ' combination' + s + ')');
         end;
         crlf;
 
@@ -190,7 +195,8 @@ begin
 
       end;
 
-      if abort then break;
+      if abort then
+        break;
 
     end; {for i:= .end.}
   end;
@@ -238,7 +244,8 @@ begin
     begin
 
       {display banned relation}
-      d(global_plycol, relation.name1 + config.textcol1 + ' and ' + uplc + relation.name2 + config.textcol1 + ' are not allowed to marry.');
+      d(global_plycol, relation.name1 + config.textcol1 + ' and ' + uplc + relation.name2 +
+        config.textcol1 + ' are not allowed to marry.');
 
       any_found := True;
 
@@ -257,7 +264,8 @@ begin
 
     end;
 
-    if abort then break;
+    if abort then
+      break;
 
   end; {for i:= .end.}
 
@@ -284,7 +292,8 @@ begin
 
 end; {inform_parents_online *end*}
 
-procedure Inform_Parents(const child: childrec; MailRequest: word; const line1, line2, line3, line4, line5, line6, line7, line8, line9, line10, line11, line12, line13, line14, line15: s90);
+procedure Inform_Parents(const child: childrec; MailRequest: word;
+  const line1, line2, line3, line4, line5, line6, line7, line8, line9, line10, line11, line12, line13, line14, line15: s90);
 
 {mail parents to child with message}
 begin
@@ -341,7 +350,8 @@ begin
 
 end; {inform_parents *end*}
 
-procedure Inform_Parent(const child: childrec; MailRequest: word; const ply: userrec; const line1, line2, line3, line4, line5, line6, line7, line8, line9, line10, line11, line12, line13, line14, line15: s90);
+procedure Inform_Parent(const child: childrec; MailRequest: word; const ply: userrec;
+  const line1, line2, line3, line4, line5, line6, line7, line8, line9, line10, line11, line12, line13, line14, line15: s90);
 
 {mail parent to child (not Ply but the other)}
 begin
@@ -407,10 +417,10 @@ begin
 
   with Relation do
   begin
-    name1 := '';  {player 1}
-    name2 := '';  {player 2}
-    ai1 := 'H'; {ai}
-    ai2 := 'H'; {ai}
+    name1 := '';    {player 1}
+    name2 := '';    {player 2}
+    ai1 := 'H';     {ai}
+    ai2 := 'H';     {ai}
     race1 := Human; {race1}
     race2 := Human; {race2}
     relation1 := Global_RelationNormal; {pl1s relation to pl2 ,see:relation constants}
@@ -422,11 +432,11 @@ begin
     idtag1 := crypt(15);
     idtag2 := crypt(15);
     deleted := False; {deleted}
-    recnr := 1; {position in file, record #}
+    recnr := 1;     {position in file, record #}
     bannedmarry := False; {not allowed to marry? only the king can set this option}
     marriedtimes := 0; {this couple has been married # times}
     marrieddays := 0; {married for X days}
-    kids := 0; {kids produced in this relation}
+    kids := 0;      {kids produced in this relation}
     killedby1 := 0; {name2 has been killed this many times by name1}
     killedby2 := 0; {name1 has been killed this many times by name2}
   end;
@@ -483,7 +493,7 @@ var
 
 begin {Setup_Relation **start**}
 
-  {init vars}
+      {init vars}
   found := False;
 
   {set filesize}
@@ -562,11 +572,13 @@ begin
     global_RelationMarried: relation := global_RelationMarried; {no change}
     global_RelationLove: relation := global_RelationLove; {no change}
     global_RelationPassion: begin
-      if overridemaxfeeling then relation := global_RelationLove
+      if overridemaxfeeling then
+        relation := global_RelationLove
       else relation := global_RelationPassion; {no change}
     end;
     global_RelationFriendship: begin
-      if overridemaxfeeling then relation := global_RelationPassion
+      if overridemaxfeeling then
+        relation := global_RelationPassion
       else relation := global_RelationFriendship;
     end;
     global_RelationTrust: relation := global_RelationFriendship;
@@ -592,7 +604,7 @@ var
 
 begin {displays a summary of ply:s relations}
 
-  {init counter variables}
+      {init counter variables}
   love_nr := 0;
   passion_nr := 0;
   friends_nr := 0;
@@ -616,7 +628,8 @@ begin {displays a summary of ply:s relations}
       if (relation.name1 = ply.name2) and (relation.idtag1 = ply.id) then
       begin
         ok := True;
-      end else if (relation.name2 = ply.name2) and (relation.idtag2 = ply.id) then
+      end else
+      if (relation.name2 = ply.name2) and (relation.idtag2 = ply.id) then
       begin
         ok := True;
       end;
@@ -643,30 +656,35 @@ begin {displays a summary of ply:s relations}
     end;
   end; {for i:= .end.}
 
-  {display summary}
+       {display summary}
   if love_nr > 0 then
   begin
-    if love_nr = 1 then d(15, commastr(love_nr) + config.textcol1 + ' person loves you!')
+    if love_nr = 1 then
+      d(15, commastr(love_nr) + config.textcol1 + ' person loves you!')
     else d(15, commastr(love_nr) + config.textcol1 + ' people love you!');
   end;
   if passion_nr > 0 then
   begin
-    if passion_nr = 1 then d(15, commastr(passion_nr) + config.textcol1 + ' person likes you very much.')
+    if passion_nr = 1 then
+      d(15, commastr(passion_nr) + config.textcol1 + ' person likes you very much.')
     else d(15, commastr(passion_nr) + config.textcol1 + ' people like you very much.');
   end;
   if friends_nr > 0 then
   begin
-    if friends_nr = 1 then d(config.textcolor, 'You have ' + uwhite + commastr(friends_nr) + config.textcol1 + ' friend.')
+    if friends_nr = 1 then
+      d(config.textcolor, 'You have ' + uwhite + commastr(friends_nr) + config.textcol1 + ' friend.')
     else d(config.textcolor, 'You have ' + uwhite + commastr(friends_nr) + config.textcol1 + ' friends.');
   end;
   if trust_nr > 0 then
   begin
-    if trust_nr = 1 then d(15, commastr(trust_nr) + config.textcol1 + ' people trust you.')
+    if trust_nr = 1 then
+      d(15, commastr(trust_nr) + config.textcol1 + ' people trust you.')
     else d(15, commastr(trust_nr) + config.textcol1 + ' person trusts you.');
   end;
   if respect_nr > 0 then
   begin
-    if respect_nr = 1 then d(15, commastr(respect_nr) + config.textcol1 + ' person respects you.')
+    if respect_nr = 1 then
+      d(15, commastr(respect_nr) + config.textcol1 + ' person respects you.')
     else d(15, commastr(respect_nr) + config.textcol1 + ' people respect you.');
   end;
   if normal_nr > 0 then
@@ -675,22 +693,26 @@ begin {displays a summary of ply:s relations}
   end;
   if suspect_nr > 0 then
   begin
-    if suspect_nr = 1 then d(15, commastr(suspect_nr) + config.textcol1 + ' person doesn''t trust you.')
+    if suspect_nr = 1 then
+      d(15, commastr(suspect_nr) + config.textcol1 + ' person doesn''t trust you.')
     else d(15, commastr(suspect_nr) + config.textcol1 + ' people don''t trust you.');
   end;
   if anger_nr > 0 then
   begin
-    if anger_nr = 1 then d(15, commastr(anger_nr) + config.textcol1 + ' person is angry with you.')
+    if anger_nr = 1 then
+      d(15, commastr(anger_nr) + config.textcol1 + ' person is angry with you.')
     else d(15, commastr(anger_nr) + config.textcol1 + ' people are angry with you.');
   end;
   if enemy_nr > 0 then
   begin
-    if enemy_nr = 1 then d(config.textcolor, 'You have ' + uwhite + commastr(enemy_nr) + config.textcol1 + ' real enemy.')
+    if enemy_nr = 1 then
+      d(config.textcolor, 'You have ' + uwhite + commastr(enemy_nr) + config.textcol1 + ' real enemy.')
     else d(config.textcolor, 'You have ' + uwhite + commastr(enemy_nr) + config.textcol1 + ' real enemies.');
   end;
   if hate_nr > 0 then
   begin
-    if hate_nr = 1 then d(15, commastr(hate_nr) + config.textcol1 + ' person HATES you!')
+    if hate_nr = 1 then
+      d(15, commastr(hate_nr) + config.textcol1 + ' person HATES you!')
     else d(15, commastr(hate_nr) + config.textcol1 + ' people HATE you!');
   end;
 
@@ -721,7 +743,8 @@ begin
 
 end; {killed_by_stats *end*}
 
-procedure Update_Relation(direction: RelationCommand; steps: byte; const pl1, pl2: userrec; overrideautohate, overridemaxfeeling: boolean);
+procedure Update_Relation(direction: RelationCommand; steps: byte; const pl1, pl2: userrec;
+  overrideautohate, overridemaxfeeling: boolean);
 var
   i:        byte;
   mem:      byte;
@@ -766,9 +789,9 @@ begin {pl1 trust for pl2 increases/decreases by STEPS}
       Relation_Better: Increase_Relation(relation.relation1, overridemaxfeeling);
       Relation_Worsen: Decrease_Relation(relation.relation1);
     end; {case .end.}
-  end; {for i:= .end.}
+  end;   {for i:= .end.}
 
-  {only update if relation changed}
+         {only update if relation changed}
   if relation.relation1 <> mem then
   begin
 
@@ -822,7 +845,7 @@ begin
 
   end; {case .end.}
 
-  {inform other player about thee relation change}
+       {inform other player about thee relation change}
   post(MailSend,
     pl1.name2,
     pl1.ai,
@@ -877,7 +900,7 @@ begin
 
   end; {case .end.}
 
-  {inform other player about thee relation change}
+       {inform other player about thee relation change}
   post(MailSend,
     pl2.name2,
     pl2.ai,
@@ -917,7 +940,8 @@ begin {this is really a debug procedure. Good when testing new stuff
   hits := 0;
 
   {debug}
-  if global_utest then d(15, 'Scanning for duplicate relations.');
+  if global_utest then
+    d(15, 'Scanning for duplicate relations.');
 
   for i := 1 to fs(fsRelation) do
   begin
@@ -977,7 +1001,8 @@ begin {this is really a debug procedure. Good when testing new stuff
                   (relation.idtag2 = relation2.idtag2) then
                 begin
 
-                  if global_utest then d(14, 'Duplicate found!');
+                  if global_utest then
+                    d(14, 'Duplicate found!');
                   Inc(hits);
 
                 end;
@@ -991,7 +1016,7 @@ begin {this is really a debug procedure. Good when testing new stuff
 
   end; {for i:= .end.}
 
-  {debug}
+       {debug}
   if (hits > 0) and (global_utest) then
   begin
     d(14, commastr(hits) + ' duplicates found!');
@@ -1037,7 +1062,7 @@ begin
 
     end; {for i:= .end.}
 
-    {unlock relation file}
+         {unlock relation file}
     Lock_RelationFile(FUnlock);
 
   end;
@@ -1164,7 +1189,7 @@ begin
 
     end; {for i:= .end.}
 
-    {if no relation was found then we must setup a new one}
+         {if no relation was found then we must setup a new one}
     if found = False then
     begin
 
@@ -1198,16 +1223,17 @@ var
   var s: s30;
   begin
     s := commastr(age);
-    if age > 1 then s := s + ' years old'
+    if age > 1 then
+      s := s + ' years old'
     else s := s + ' year old';
 
-    {return result}
+       {return result}
     age_string := s;
   end; {age_string *end*}
 
-begin {displays ply:s looks depending upon age,race etc etc}
+begin  {displays ply:s looks depending upon age,race etc etc}
 
-  {init}
+       {init}
   Name := uplc + ply.name2 + config.textcol1;
   col := config.textcolor;
   crlf;
@@ -1367,7 +1393,7 @@ begin
     end;
   end; {for i:= .end.}
 
-end; {replace_all_relations *end*}
+end;   {replace_all_relations *end*}
 
 procedure Load_My_Spouse(const me: userrec; var spouse: userrec);
 var
@@ -1435,7 +1461,7 @@ begin {load spouse married to "me". if not found then spouse
 
   end; {for i:= .end.}
 
-end; {load_my_spouse *end*}
+end;   {load_my_spouse *end*}
 
 function Is_Player_Married(const plyname2: s30; const plyid: s15): s30;
 var
@@ -1446,7 +1472,7 @@ var
 
 begin {returns the name of spouse if player PLY is married}
 
-  {init}
+      {init}
   Result := '';
   found := False;
 
@@ -1477,7 +1503,8 @@ begin {returns the name of spouse if player PLY is married}
               (relation.relation2 = Global_RelationMarried) then
             begin
 
-              if relation.name1 <> plyname2 then Result := relation.name1
+              if relation.name1 <> plyname2 then
+                Result := relation.name1
               else Result := relation.name2;
               found := True;
             end;
@@ -1519,7 +1546,8 @@ begin
       if (rname1 = player.name2) and (UseYou) then
       begin
         s := s + 'You feel ' + urelationc + 'nothing special' + config.textcol1 + ' for ' + name2 + '.';
-      end else if (rname2 = player.name2) and (UseYou) then
+      end else
+      if (rname2 = player.name2) and (UseYou) then
       begin
         s := s + name1 + ' ' + urelationc + 'ignores' + config.textcol1 + ' you.';
       end else
@@ -1532,7 +1560,8 @@ begin
       if (rname1 = player.name2) and (UseYou) then
       begin
         s := s + 'You are not sure if ' + name2 + ' is ' + urelationc + 'reliable' + config.textcol1 + '.';
-      end else if (rname2 = player.name2) and (UseYou) then
+      end else
+      if (rname2 = player.name2) and (UseYou) then
       begin
         s := s + name1 + ' is ' + urelationc + 'suspicious' + config.textcol1 + ' of you.';
       end else
@@ -1545,7 +1574,8 @@ begin
       if (rname1 = player.name2) and (UseYou) then
       begin
         s := s + name2 + ' is your ' + urelationc + 'enemy' + config.textcol1 + '.';
-      end else if (rname2 = player.name2) and (UseYou) then
+      end else
+      if (rname2 = player.name2) and (UseYou) then
       begin
         s := s + name1 + ' is your ' + urelationc + 'enemy' + config.textcol1 + '.';
       end else
@@ -1558,7 +1588,8 @@ begin
       if (rname1 = player.name2) and (UseYou) then
       begin
         s := s + 'You are ' + urelationc + 'angry' + config.textcol1 + ' with ' + name2 + '.';
-      end else if (rname2 = player.name2) and (UseYou) then
+      end else
+      if (rname2 = player.name2) and (UseYou) then
       begin
         s := s + name1 + ' is ' + urelationc + 'angry' + config.textcol1 + ' with you.';
       end else
@@ -1572,7 +1603,8 @@ begin
       if (rname1 = player.name2) and (UseYou) then
       begin
         s := s + 'You ' + ulred + 'hate' + config.textcol1 + ' ' + name2 + '!';
-      end else if (rname2 = player.name2) and (UseYou) then
+      end else
+      if (rname2 = player.name2) and (UseYou) then
       begin
         s := s + name1 + ' ' + ulred + 'hates' + config.textcol1 + ' you!';
       end else
@@ -1587,7 +1619,8 @@ begin
       if (rname1 = player.name2) and (UseYou) then
       begin
         s := s + 'You are ' + uyellow + 'married' + config.textcol1 + ' to ' + name2 + '.';
-      end else if (rname2 = player.name2) and (UseYou) then
+      end else
+      if (rname2 = player.name2) and (UseYou) then
       begin
         s := s + name1 + ' is ' + uyellow + 'married' + config.textcol1 + ' to you!';
       end else
@@ -1600,7 +1633,8 @@ begin
       if (rname1 = player.name2) and (UseYou) then
       begin
         s := s + 'You are deeply ' + urelationc + 'IN LOVE' + config.textcol1 + ' with ' + name2 + '.';
-      end else if (rname2 = player.name2) and (UseYou) then
+      end else
+      if (rname2 = player.name2) and (UseYou) then
       begin
         s := s + name1 + ' is ' + urelationc + 'IN LOVE' + config.textcol1 + ' with you!';
       end else
@@ -1614,7 +1648,8 @@ begin
       if (rname1 = player.name2) and (UseYou) then
       begin
         s := s + 'Your ' + urelationc + 'passion' + config.textcol1 + ' is ' + name2 + '.';
-      end else if (rname2 = player.name2) and (UseYou) then
+      end else
+      if (rname2 = player.name2) and (UseYou) then
       begin
         s := s + name1 + 's ' + urelationc + 'passion' + config.textcol1 + ' is you!';
       end else
@@ -1628,7 +1663,8 @@ begin
       if (rname1 = player.name2) and (UseYou) then
       begin
         s := s + 'You ' + urelationc + 'trust' + config.textcol1 + ' ' + name2 + '.';
-      end else if (rname2 = player.name2) and (UseYou) then
+      end else
+      if (rname2 = player.name2) and (UseYou) then
       begin
         s := s + name1 + ' ' + urelationc + 'trusts' + config.textcol1 + ' you.';
       end else
@@ -1642,7 +1678,8 @@ begin
       if (rname1 = player.name2) and (UseYou) then
       begin
         s := s + name2 + ' is your ' + urelationc + 'friend' + config.textcol1 + '.';
-      end else if (rname2 = player.name2) and (UseYou) then
+      end else
+      if (rname2 = player.name2) and (UseYou) then
       begin
         s := s + name1 + ' sees you as a ' + urelationc + 'friend' + config.textcol1 + '.';
       end else
@@ -1656,7 +1693,8 @@ begin
       if (rname1 = player.name2) and (UseYou) then
       begin
         s := s + 'You ' + urelationc + 'respect' + config.textcol1 + ' ' + name2 + '.';
-      end else if (rname2 = player.name2) and (UseYou) then
+      end else
+      if (rname2 = player.name2) and (UseYou) then
       begin
         s := s + name1 + ' ' + urelationc + 'respects' + config.textcol1 + ' you.';
       end else
@@ -1683,30 +1721,38 @@ begin
 
   if relation.killedby1 > 0 then
   begin
-    if relation.killedby1 > 1 then s := 'times'
+    if relation.killedby1 > 1 then
+      s := 'times'
     else s := 'time';
 
-    if relation.name2 = player.name2 then s2 := 'You have'
+    if relation.name2 = player.name2 then
+      s2 := 'You have'
     else s2 := uplc + relation.name2 + config.textcol1 + ' has';
 
-    if relation.name1 = player.name2 then s3 := 'you'
+    if relation.name1 = player.name2 then
+      s3 := 'you'
     else s3 := uplc + relation.name1 + config.textcol1;
 
-    d(config.textcolor, s2 + ' been defeated by ' + s3 + ' ' + uwhite + commastr(relation.killedby1) + config.textcol1 + ' ' + s + '!');
+    d(config.textcolor, s2 + ' been defeated by ' + s3 + ' ' + uwhite + commastr(relation.killedby1) +
+      config.textcol1 + ' ' + s + '!');
   end;
 
   if relation.killedby2 > 0 then
   begin
-    if relation.killedby2 > 2 then s := 'times'
+    if relation.killedby2 > 2 then
+      s := 'times'
     else s := 'time';
 
-    if relation.name1 = player.name2 then s2 := 'You have'
+    if relation.name1 = player.name2 then
+      s2 := 'You have'
     else s2 := uplc + relation.name1 + config.textcol1 + ' has';
 
-    if relation.name2 = player.name2 then s3 := 'you'
+    if relation.name2 = player.name2 then
+      s3 := 'you'
     else s3 := uplc + relation.name2 + config.textcol1;
 
-    d(config.textcolor, s2 + ' been defeated by ' + s3 + ' ' + uwhite + commastr(relation.killedby2) + config.textcol1 + ' ' + s + '!');
+    d(config.textcolor, s2 + ' been defeated by ' + s3 + ' ' + uwhite + commastr(relation.killedby2) +
+      config.textcol1 + ' ' + s + '!');
   end;
 
 end;
@@ -1728,11 +1774,13 @@ begin {used internally by other relation routines, like personal_relations
     (relation.relation1 = global_RelationLove) then
   begin
     the_heart := True;
-  end else if (relation.relation2 = global_RelationMarried) or
+  end else
+  if (relation.relation2 = global_RelationMarried) or
     (relation.relation2 = global_RelationLove) then
   begin
     the_heart := True;
-  end else if (relation.relation1 = global_RelationHate) or
+  end else
+  if (relation.relation1 = global_RelationHate) or
     (relation.relation2 = global_RelationHate) then
   begin
     the_skull := True;
@@ -1741,7 +1789,8 @@ begin {used internally by other relation routines, like personal_relations
   if the_heart = True then
   begin
     show_usurper_data(picture_SMALL_HEART, False);
-  end else if the_skull = True then
+  end else
+  if the_skull = True then
   begin
     show_usurper_data(picture_DEATH_HEAD, False);
   end;
@@ -1752,14 +1801,17 @@ begin {used internally by other relation routines, like personal_relations
   {married before?}
   if relation.marriedtimes > 1 then
   begin
-    if relation.marriedtimes > 2 then s := 'times'
+    if relation.marriedtimes > 2 then
+      s := 'times'
     else s := 'time';
     if relation.name1 = player.name2 then
     begin
-      s := 'You and ' + uplc + relation.name2 + config.textcol1 + ' have been married ' + uwhite + commastr(relation.marriedtimes - 1) + config.textcol1 + ' ' + s + ' before.';
+      s := 'You and ' + uplc + relation.name2 + config.textcol1 + ' have been married ' + uwhite +
+        commastr(relation.marriedtimes - 1) + config.textcol1 + ' ' + s + ' before.';
     end else
     begin
-      s := uplc + relation.name1 + config.textcol1 + ' and ' + uplc + relation.name2 + config.textcol1 + ' have been married ' + uwhite + commastr(relation.marriedtimes - 1) + config.textcol1 + ' ' + s + ' times before.';
+      s := uplc + relation.name1 + config.textcol1 + ' and ' + uplc + relation.name2 + config.textcol1 +
+        ' have been married ' + uwhite + commastr(relation.marriedtimes - 1) + config.textcol1 + ' ' + s + ' times before.';
     end;
     d(config.textcolor, s);
 
@@ -1768,11 +1820,14 @@ begin {used internally by other relation routines, like personal_relations
   {children}
   if relation.kids > 0 then
   begin
-    if relation.kids = 1 then s := uwhite + commastr(relation.kids) + config.textcol1 + ' child.'
+    if relation.kids = 1 then
+      s := uwhite + commastr(relation.kids) + config.textcol1 + ' child.'
     else s := uwhite + commastr(relation.kids) + config.textcol1 + ' children.';
-    if relation.name1 = player.name2 then s2 := 'You'
+    if relation.name1 = player.name2 then
+      s2 := 'You'
     else s2 := uplc + relation.name1 + config.textcol1;
-    if relation.name2 = player.name2 then s3 := 'You'
+    if relation.name2 = player.name2 then
+      s3 := 'You'
     else s3 := uplc + relation.name2 + config.textcol1;
 
     d(config.textcolor, s2 + ' and ' + s3 + ' have ' + s);
@@ -1818,8 +1873,10 @@ begin {like personal_relations, but this proc only views ONE relation,
     begin
 
       ok := False;
-      if (relation.name1 = name1) and (relation.name2 = name2) then ok := True;
-      if (relation.name1 = name2) and (relation.name2 = name1) then ok := True;
+      if (relation.name1 = name1) and (relation.name2 = name2) then
+        ok := True;
+      if (relation.name1 = name2) and (relation.name2 = name1) then
+        ok := True;
 
       if ok then
       begin
@@ -1835,7 +1892,7 @@ begin {like personal_relations, but this proc only views ONE relation,
 
   end; {for i:= .end.}
 
-  {no relations found}
+       {no relations found}
   if ok = False then
   begin
     d(12, 'No relation established.');
@@ -1908,7 +1965,7 @@ begin
 
   end; {for i:= .end.}
 
-  {no relations found}
+       {no relations found}
   if counter = 0 then
   begin
     d(12, 'No interesting relations.');
@@ -1945,7 +2002,8 @@ begin
           '',
           ulred + 'Unknown Baby!' + config.textcol1,
           mkstring(13, underscore),
-          'Your ' + sex5[ply1.sex] + ' ' + uplc + ply1.name2 + config.textcol1 + ' and ' + uplc + ply2.name2 + config.textcol1,
+          'Your ' + sex5[ply1.sex] + ' ' + uplc + ply1.name2 + config.textcol1 + ' and ' + uplc +
+          ply2.name2 + config.textcol1,
           'have produced a baby!',
           uplc + ply1.name2 + config.textcol1 + ' has been cheating on you!',
           '',
@@ -1972,7 +2030,8 @@ begin
           '',
           ulred + 'Unknown Baby!' + config.textcol1,
           mkstring(13, underscore),
-          'Your ' + sex5[ply2.sex] + ' ' + uplc + ply2.name2 + config.textcol1 + ' and ' + uplc + ply1.name2 + config.textcol1,
+          'Your ' + sex5[ply2.sex] + ' ' + uplc + ply2.name2 + config.textcol1 + ' and ' + uplc +
+          ply1.name2 + config.textcol1,
           'have produced a baby!',
           uplc + ply2.name2 + config.textcol1 + ' has been cheating on you!',
           '',
@@ -1992,7 +2051,8 @@ begin
       if spouse1 <> '' then
       begin
 
-        if ply1.sex = 1 then s := 'He is cheating on you!'
+        if ply1.sex = 1 then
+          s := 'He is cheating on you!'
         else s := 'She is cheating on you!';
 
         {mail cheated spouse}
@@ -2004,7 +2064,8 @@ begin
           '',
           ulred + 'Cheating!' + config.textcol1,
           mkstring(9, underscore),
-          'Your ' + sex5[ply1.sex] + ' ' + uplc + ply1.name2 + config.textcol1 + ' is fooling around with a ' + race_display(2, ply2.race, 0) + '!',
+          'Your ' + sex5[ply1.sex] + ' ' + uplc + ply1.name2 + config.textcol1 + ' is fooling around with a ' +
+          race_display(2, ply2.race, 0) + '!',
           s,
           '',
           '',
@@ -2023,7 +2084,8 @@ begin
       if spouse2 <> '' then
       begin
 
-        if ply1.sex = 1 then s := 'He is cheating on you!'
+        if ply1.sex = 1 then
+          s := 'He is cheating on you!'
         else s := 'She is cheating on you!';
 
         {mail cheated spouse}
@@ -2035,7 +2097,8 @@ begin
           '',
           ulred + 'Cheating!' + config.textcol1,
           mkstring(9, underscore),
-          'Your ' + sex5[ply2.sex] + ' ' + uplc + ply2.name2 + config.textcol1 + ' is fooling around with a ' + race_display(2, ply1.race, 0) + '!',
+          'Your ' + sex5[ply2.sex] + ' ' + uplc + ply2.name2 + config.textcol1 + ' is fooling around with a ' +
+          race_display(2, ply1.race, 0) + '!',
           s,
           '',
           '',
@@ -2054,7 +2117,7 @@ begin
 
   end; {case .end.}
 
-end; {Jealousy *end*}
+end;   {Jealousy *end*}
 
 procedure Love_Header;
 begin
@@ -2073,7 +2136,7 @@ var
   Npc_Baby, ReturnFileId: byte; {1=plyerfile,2=npcfile}
 
   Relation: RelationRec; {father & mother relation}
-  Pl2:      UserRec; {father}
+  Pl2:      UserRec;  {father}
   Child:    ChildRec; {new born child}
 
   kids:     string[4];
@@ -2104,7 +2167,8 @@ begin
   end;
 
   {is pl1 pregnant?}
-  if pl1.pregnancy = 0 then go_ahead := False;
+  if pl1.pregnancy = 0 then
+    go_ahead := False;
 
   if go_ahead then
   begin
@@ -2162,7 +2226,8 @@ begin
       if pl1.ai = 'C' then
       begin
         npc_baby := 1;
-      end else if (father_exist) and (pl2.ai = 'C') then
+      end else
+      if (father_exist) and (pl2.ai = 'C') then
       begin
         npc_baby := 2;
       end;
@@ -2195,7 +2260,8 @@ begin
         begin
           x := pl2.level * 650;
           IncPlayerExp(pl2, x);
-          FatherExpString := 'You were present at the delivery and received ' + uwhite + commastr(x) + config.textcol1 + ' experience points.';
+          FatherExpString := 'You were present at the delivery and received ' + uwhite + commastr(x) +
+            config.textcol1 + ' experience points.';
           MotherString1 := uplc + pl2.name2 + config.textcol1 + ' was present at the delivery to support you.';
         end else
         begin
@@ -2206,8 +2272,8 @@ begin
       end;
 
       pl1.pregnancy := 0; {reset mothers pregnancy flag}
-      Inc(pl1.kids, 1);  {history of kids}
-      Inc(pl2.kids, 1);  {history of kids}
+      Inc(pl1.kids, 1);   {history of kids}
+      Inc(pl2.kids, 1);   {history of kids}
 
       user_save(pl1);
 
@@ -2227,7 +2293,8 @@ begin
       end;
 
       {inform father}
-      if pl2.kids = 1 then kids := 'kid'
+      if pl2.kids = 1 then
+        kids := 'kid'
       else kids := 'kids';
 
       if father_exist then
@@ -2257,7 +2324,8 @@ begin
       end;
 
       {inform mother}
-      if pl1.kids = 1 then kids := 'kid'
+      if pl1.kids = 1 then
+        kids := 'kid'
       else kids := 'kids';
 
       s := 'Childbirth!';
@@ -2358,7 +2426,8 @@ begin
       {royal text}
       if child.royal > 0 then
       begin
-        sr4 := ' The newborn has ' + uyellow + 'Royal' + config.textcol1 + ' blood floating in ' + sex3[child.sex] + ' veins!';
+        sr4 := ' The newborn has ' + uyellow + 'Royal' + config.textcol1 + ' blood floating in ' +
+          sex3[child.sex] + ' veins!';
       end else
       begin
         sr4 := '';
@@ -2366,7 +2435,8 @@ begin
 
       {news-paper}
       newsy(True, 'Childbirth!',
-        ' ' + uplc + pl1.name2 + config.textcol1 + ' the ' + +race_display(2, pl1.race, 0) + ', delivered a baby ' + sex6[child.sex] + '!',
+        ' ' + uplc + pl1.name2 + config.textcol1 + ' the ' + +race_display(2, pl1.race, 0) +
+        ', delivered a baby ' + sex6[child.sex] + '!',
         ' ' + s2,
         '' + sr3,
         '' + sr4,
@@ -2442,10 +2512,12 @@ begin {humans_involved=false when npcs call this routine}
   go_ahead := True;
 
   {homo}
-  if pl1.sex = pl2.sex then go_ahead := False;
+  if pl1.sex = pl2.sex then
+    go_ahead := False;
 
   {already pregnant}
-  if (pl1.pregnancy > 0) or (pl2.pregnancy > 0) then go_ahead := False;
+  if (pl1.pregnancy > 0) or (pl2.pregnancy > 0) then
+    go_ahead := False;
 
   {calculate maxkids}
   if (pl1.ai = 'C') and (pl2.ai = 'C') then
@@ -2459,10 +2531,13 @@ begin {humans_involved=false when npcs call this routine}
   {too young or too old, or too many kids already}
   if pl1.sex = 2 then
   begin
-    if (pl1.age < 14) or (pl1.age > 45) or (pl1.kids >= max_kids) then go_ahead := False;
-  end else if pl2.sex = 2 then
+    if (pl1.age < 14) or (pl1.age > 45) or (pl1.kids >= max_kids) then
+      go_ahead := False;
+  end else
+  if pl2.sex = 2 then
   begin
-    if (pl2.age < 14) or (pl2.age > 45) or (pl2.kids >= max_kids) then go_ahead := False;
+    if (pl2.age < 14) or (pl2.age > 45) or (pl2.kids >= max_kids) then
+      go_ahead := False;
   end;
 
   {baby boom randomizer}
@@ -2487,7 +2562,8 @@ begin {humans_involved=false when npcs call this routine}
       pl1.pregnancy := 1;
       pl1.fatherID := pl2.ID;
       user_save(pl1);
-    end else if pl2.sex = 2 then
+    end else
+    if pl2.sex = 2 then
     begin
       mother := pl2.name2;
       father := pl1.name2;
@@ -2571,13 +2647,17 @@ begin {humans_involved=false when npcs call this routine}
 
     {comment by mother to news-paper}
     case random(4) of
-      0: s := ' ' + uplc + father + config.textcol1 + utalkc + ' brought this to happen!' + config.textcol1 + ', ' + uplc + mother + config.textcol1 + ' twitters.';
-      1: s := ' ' + uplc + father + config.textcol1 + utalkc + ' forced me!' + config.textcol1 + ', ' + uplc + mother + config.textcol1 + ' cries.';
-      2: s := ' ' + utalkc + ' I forgot to take the Pill!' + config.textcol1 + ', ' + uplc + mother + config.textcol1 + ' laments.';
-      3: s := ' ' + uplc + father + config.textcol1 + utalkc + ' didn''t use a condom!' + config.textcol1 + ', ' + uplc + mother + config.textcol1 + ' moans.';
+      0: s := ' ' + uplc + father + config.textcol1 + utalkc + ' brought this to happen!' +
+          config.textcol1 + ', ' + uplc + mother + config.textcol1 + ' twitters.';
+      1: s := ' ' + uplc + father + config.textcol1 + utalkc + ' forced me!' + config.textcol1 +
+          ', ' + uplc + mother + config.textcol1 + ' cries.';
+      2: s := ' ' + utalkc + ' I forgot to take the Pill!' + config.textcol1 + ', ' + uplc +
+          mother + config.textcol1 + ' laments.';
+      3: s := ' ' + uplc + father + config.textcol1 + utalkc + ' didn''t use a condom!' + config.textcol1 +
+          ', ' + uplc + mother + config.textcol1 + ' moans.';
     end; {case .end.}
 
-    {news-paper}
+         {news-paper}
     newsy(True, 'Pregnancy',
       ' ' + uplc + mother + config.textcol1 + ' is going to have a baby!',
       s,
@@ -2631,7 +2711,8 @@ begin {npc character PLY maintains/creates/nurses/establishes/destroys
   end;
 
 
-  if global_utest then d(15, ply.name2 + ' STARTS to browse (all) relations');
+  if global_utest then
+    d(15, ply.name2 + ' STARTS to browse (all) relations');
 
   for i := 1 to fs(FsRelation) do
   begin
@@ -2647,7 +2728,8 @@ begin {npc character PLY maintains/creates/nurses/establishes/destroys
       if (relation.name1 = ply.name2) and (relation.idtag1 = ply.id) then
       begin
         go_ahead := True;
-      end else if (relation.name2 = ply.name2) and (relation.idtag2 = ply.id) then
+      end else
+      if (relation.name2 = ply.name2) and (relation.idtag2 = ply.id) then
       begin
         go_ahead := True;
       end;
@@ -2682,7 +2764,8 @@ begin {npc character PLY maintains/creates/nurses/establishes/destroys
               if (x < 6) and (married = True) then
               begin
                 x := 7;
-              end else if (x < 6) and (ply.sex = ply2.sex) then
+              end else
+              if (x < 6) and (ply.sex = ply2.sex) then
               begin
                 x := 7;
               end;
@@ -2748,7 +2831,7 @@ begin {npc character PLY maintains/creates/nurses/establishes/destroys
 
               end; {case .end.}
 
-              {set sessions #}
+                   {set sessions #}
               Inc(sessions);
               if sessions > max_sessions then
               begin
@@ -2763,7 +2846,8 @@ begin {npc character PLY maintains/creates/nurses/establishes/destroys
 
   end; {for i:= .end.}
 
-  if global_utest then d(15, ply.name2 + ' ENDS browsing (all) relations');
+  if global_utest then
+    d(15, ply.name2 + ' ENDS browsing (all) relations');
 
 
   if married = True then
@@ -2806,7 +2890,8 @@ begin {npc character PLY maintains/creates/nurses/establishes/destroys
       if relation.marrieddays < 1 then
       begin
         s := ' Their marriage lasted only a couple of hours!';
-      end else if relation.marrieddays < 30 then
+      end else
+      if relation.marrieddays < 30 then
       begin
         s := ' Their marriage lasted only ' + uwhite + commastr(relation.marrieddays) + config.textcol1 + ' days.';
       end else
@@ -2844,7 +2929,8 @@ begin {npc character PLY maintains/creates/nurses/establishes/destroys
       {divorce-log, see duplicate code in lovers.pas}
       Generic_News(MarriageDivorceNews,
         False,
-        ugreen + '[' + fix_date(todays_date) + '] ' + uplc + ply.name2 + ugreen + ' and ' + uplc + ply2.name2 + ugreen + ' were ' + ulred + 'Divorced' + ugreen + '!',
+        ugreen + '[' + fix_date(todays_date) + '] ' + uplc + ply.name2 + ugreen + ' and ' + uplc +
+        ply2.name2 + ugreen + ' were ' + ulred + 'Divorced' + ugreen + '!',
         '',
         '',
         '',
@@ -2881,13 +2967,16 @@ begin {npc character PLY maintains/creates/nurses/establishes/destroys
           begin
 
             {refuse player access to this child}
-            if ply.sex = 1 then child.fatheraccess := False;
-            if ply.sex = 2 then child.motheraccess := False;
+            if ply.sex = 1 then
+              child.fatheraccess := False;
+            if ply.sex = 2 then
+              child.motheraccess := False;
 
             {debug}
             if global_utest then
             begin
-              d(12, ply.name2 + ' lost custody of ' + sex3[ply.sex] + ' ' + sex7[child.sex] + ' ' + ukidc + child.Name + ulred + '!');
+              d(12, ply.name2 + ' lost custody of ' + sex3[ply.sex] + ' ' + sex7[child.sex] +
+                ' ' + ukidc + child.Name + ulred + '!');
             end;
 
             {set child to depressed}
@@ -2903,7 +2992,8 @@ begin {npc character PLY maintains/creates/nurses/establishes/destroys
               '',
               ulred + s + config.textcol1,
               mkstring(length(s), underscore),
-              ukidc + child.Name + config.textcol1 + ', your ' + sex7[child.sex] + ', is suffering from a ' + ulred + 'depression' + config.textcol1 + '!',
+              ukidc + child.Name + config.textcol1 + ', your ' + sex7[child.sex] + ', is suffering from a ' +
+              ulred + 'depression' + config.textcol1 + '!',
               'The divorce you are going through is not good for the children!!',
               '',
               '',
@@ -2944,7 +3034,8 @@ begin {npc character PLY maintains/creates/nurses/establishes/destroys
             {news-paper}
             Newsy(True,
               'Child depressed!',
-              ' ' + ukidc + child.Name + config.textcol1 + ', the ' + sex7[child.sex] + ' of ' + uplc + child.mother + config.textcol1 + ' and ' + uplc + child.father + config.textcol1 + ' is',
+              ' ' + ukidc + child.Name + config.textcol1 + ', the ' + sex7[child.sex] + ' of ' +
+              uplc + child.mother + config.textcol1 + ' and ' + uplc + child.father + config.textcol1 + ' is',
               ' suffering from a ' + ulred + 'depression' + config.textcol1 + ' as a direct result of the',
               ' parents divorce.',
               '',
@@ -2962,10 +3053,11 @@ begin {npc character PLY maintains/creates/nurses/establishes/destroys
 
       end; {for i:= .end.}
 
-      {debug}
+           {debug}
       if global_utest then
       begin
-        online_send_to_all(uplc + ply.name2 + config.textcol1 + ' divorced ' + uplc + ply2.name2 + config.textcol1 + '!', ply.name2, '');
+        online_send_to_all(uplc + ply.name2 + config.textcol1 + ' divorced ' + uplc + ply2.name2 +
+          config.textcol1 + '!', ply.name2, '');
       end;
 
       {mail ex-wife/husband}
@@ -3075,7 +3167,8 @@ begin
 
     {1=load from playerfile, 2=load from npc file}
     jj := random(prop) + 1;
-    if jj < temp then  i := 1
+    if jj < temp then
+      i := 1
     else
     begin
       i := 2;
@@ -3099,13 +3192,15 @@ begin
         {does ply and ply2 already have a relation? (load their relation)}
         RelationValue := Social_Relation(ply, ply2, relation);
 
-        if relationValue = global_relationNone then ok := True;
+        if relationValue = global_relationNone then
+          ok := True;
 
         {are they different sex?}
         if (ok = True) and (opposite_sex_only = True) then
         begin
           {sorry, these two are of the same sex...no relation created}
-          if ply.sex = ply2.sex then ok := False;
+          if ply.sex = ply2.sex then
+            ok := False;
         end;
 
         if ok then
@@ -3131,7 +3226,8 @@ begin
           {debug}
           if global_utest then
           begin
-            d(15, 'New Relation Created between ' + uplc + ply.name2 + config.textcol1 + ' and ' + uplc + ply2.name2 + config.textcol1 + '! ');
+            d(15, 'New Relation Created between ' + uplc + ply.name2 + config.textcol1 + ' and ' +
+              uplc + ply2.name2 + config.textcol1 + '! ');
           end;
 
           {update relation, save to file}

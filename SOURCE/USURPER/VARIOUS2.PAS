@@ -31,12 +31,12 @@ interface
 uses
   Init;
 
-{Crap}
+ {Crap}
 procedure Draw_Picture(const pic: string);
 procedure MemInfo; {only used when developing the program}
 function The_Bad: s30; {returns random "the ill-mannered ", "the ugly "}
 
-{Rewards}
+ {Rewards}
 procedure Reward_Check(speak: boolean; var winner, loser: UserRec);
 
 {Drinks, Orbs}
@@ -57,7 +57,8 @@ function Claimed_Quests(const Name: s30): word;
 procedure King_Popularity(var ply: userrec);
 procedure Healing_Royal_Angel;
 procedure Hurting_Royal_Avenger;
-procedure Inform_King(const line1, line2, line3, line4, line5, line6, line7, line8, line9, line10, line11, line12, line13, line14, line15: s100);
+procedure Inform_King(const line1, line2, line3, line4, line5, line6, line7, line8, line9, line10,
+  line11, line12, line13, line14, line15: s100);
 
 {Armor & Weapon Shops}
 procedure Bad_News(shop: char);
@@ -80,10 +81,10 @@ procedure Battle_Comment(mode: integer; const player: s70);
 procedure Chances_Eval(var ply: userrec);
 function Bash_Damage(instamina: integer): integer; {called from the dormitory}
 
-{Wanted}
+ {Wanted}
 procedure Remove_Wanted_Posters(const ply: userrec); {remove plys wanted posters}
 
-{Npc}
+ {Npc}
 function Get_NpcInnComment: s90;
 
 {Registration}
@@ -118,7 +119,8 @@ uses
   Orb, Relation, News,
   Children, Online, File_io;
 
-procedure Inform_King(const line1, line2, line3, line4, line5, line6, line7, line8, line9, line10, line11, line12, line13, line14, line15: s100);
+procedure Inform_King(const line1, line2, line3, line4, line5, line6, line7, line8, line9, line10,
+  line11, line12, line13, line14, line15: s100);
 
 var king: kingRec;
   {mail the Monarch with message}
@@ -187,11 +189,13 @@ begin
   begin
     king.Name := emptystr;
     load_king(fload, king);
-    if king.Name = '' then allowed := False;
+    if king.Name = '' then
+      allowed := False;
   end;
 
   {current ruler is not allowed to vote on himself [obvious]}
-  if ply.king = True then allowed := False;
+  if ply.king = True then
+    allowed := False;
 
   {is player entitled to vote? [20 days between polls]}
   if ply.KingVotePoll < 20 then
@@ -200,7 +204,8 @@ begin
   end;
 
   {exit if not allowed to vote}
-  if allowed = False then exit;
+  if allowed = False then
+    exit;
 
   done := False;
   vote := 0;
@@ -254,14 +259,16 @@ begin
     'F': begin {doing a fine job...}
       vote := 1;
       d(15, sex2[king.sexy] + '''s doing a fine job.');
-      s1 := uplc + ply.name2 + config.textcol1 + ' thinks you are doing a ' + uyellow + 'fine' + config.textcol1 + ' job as ' + kingstring(king.sexy);
+      s1 := uplc + ply.name2 + config.textcol1 + ' thinks you are doing a ' + uyellow + 'fine' +
+        config.textcol1 + ' job as ' + kingstring(king.sexy);
 
       {news-paper}
       if config.print_kingpolls = True then
       begin
         newsy(True,
           'The Royal Family is supported',
-          ' ' + uplc + player.name2 + config.textcol1 + ' the ' + classnames[player.class] + ' supports ' + kingstring(king.sexy) + ' ' + ukingc + king.Name + config.textcol1 + '.',
+          ' ' + uplc + player.name2 + config.textcol1 + ' the ' + classnames[player.class] +
+          ' supports ' + kingstring(king.sexy) + ' ' + ukingc + king.Name + config.textcol1 + '.',
           '',
           '',
           '',
@@ -276,13 +283,15 @@ begin
     'B': begin {best we've ever had...}
       vote := 2;
       d(15, 'I just love this ' + kingstring(king.sexy) + '!');
-      s1 := uplc + ply.name2 + config.textcol1 + ' thinks you are the ' + uyellow + 'FINEST ' + config.textcol1 + kingstring(king.sexy) + ' ever in office!';
+      s1 := uplc + ply.name2 + config.textcol1 + ' thinks you are the ' + uyellow + 'FINEST ' +
+        config.textcol1 + kingstring(king.sexy) + ' ever in office!';
       {news-paper}
       if config.print_kingpolls = True then
       begin
         newsy(True,
           'The Royal Family is loved',
-          ' ' + uplc + player.name2 + config.textcol1 + ' the ' + classnames[player.class] + ' pleads loyalty to ' + kingstring(king.sexy) + ' ' + ukingc + king.Name + config.textcol1 + '.',
+          ' ' + uplc + player.name2 + config.textcol1 + ' the ' + classnames[player.class] +
+          ' pleads loyalty to ' + kingstring(king.sexy) + ' ' + ukingc + king.Name + config.textcol1 + '.',
           '',
           '',
           '',
@@ -298,21 +307,25 @@ begin
       vote := 3;
       d(15, sex2[king.sexy] + '''s plain bad.');
       case random(4) of
-        0: s1 := uplc + ply.name2 + config.textcol1 + ' doesn''t think too highly of your effort as ' + kingstring(king.sexy) + '!';
-        1: s1 := uplc + ply.name2 + config.textcol1 + ' thinks you are doing a ' + ulred + 'poor' + config.textcol1 + ' job as ' + kingstring(king.sexy) + '!';
-        2: s1 := uplc + ply.name2 + config.textcol1 + ' would like to see ' + sex4[ply.sex] + ' on the throne, instead of you.';
+        0: s1 := uplc + ply.name2 + config.textcol1 + ' doesn''t think too highly of your effort as ' +
+            kingstring(king.sexy) + '!';
+        1: s1 := uplc + ply.name2 + config.textcol1 + ' thinks you are doing a ' + ulred + 'poor' +
+            config.textcol1 + ' job as ' + kingstring(king.sexy) + '!';
+        2: s1 := uplc + ply.name2 + config.textcol1 + ' would like to see ' + sex4[ply.sex] +
+            ' on the throne, instead of you.';
         3: begin
           s1 := uplc + ply.name2 + config.textcol1 + ' is not impressed.';
           s2 := 'Improve your ruling or face the consequences...';
         end;
       end; {case .end.}
 
-      {news-paper}
+           {news-paper}
       if config.print_kingpolls = True then
       begin
         newsy(True,
           'The Royal Family is disliked!',
-          ' ' + uplc + player.name2 + config.textcol1 + ' the ' + classnames[player.class] + ' would like to see another ' + kingstring(king.sexy) + ' in office!',
+          ' ' + uplc + player.name2 + config.textcol1 + ' the ' + classnames[player.class] +
+          ' would like to see another ' + kingstring(king.sexy) + ' in office!',
           '',
           '',
           '',
@@ -329,7 +342,8 @@ begin
       d(15, 'We deserve better than this! REBEL NOW!');
       case random(5) of
         0: s1 := uplc + ply.name2 + config.textcol1 + ' ' + ulred + 'hates' + config.textcol1 + ' your Royal governing!!';
-        1: s1 := uplc + ply.name2 + config.textcol1 + ' ' + ulred + 'detests' + config.textcol1 + ' your delusions of grandeur!';
+        1: s1 := uplc + ply.name2 + config.textcol1 + ' ' + ulred + 'detests' + config.textcol1 +
+            ' your delusions of grandeur!';
         2: s1 := uplc + ply.name2 + config.textcol1 + ' will sing and dance when you are removed from the Throne!';
         3: s1 := uplc + ply.name2 + config.textcol1 + ' wishes to remove you from the throne!';
         4: begin
@@ -338,14 +352,15 @@ begin
         end;
       end; {case .end.}
 
-      {news-paper}
+           {news-paper}
       if config.print_kingpolls = True then
       begin
         case random(3) of
           0: begin
             newsy(True,
               'Royal Family challenged!',
-              ' ' + uplc + player.name2 + config.textcol1 + ' the ' + classnames[player.class] + ' hates ' + kingstring(king.sexy) + ukingc + ' ' + king.Name + config.textcol1 + '!',
+              ' ' + uplc + player.name2 + config.textcol1 + ' the ' + classnames[player.class] +
+              ' hates ' + kingstring(king.sexy) + ukingc + ' ' + king.Name + config.textcol1 + '!',
               '',
               '',
               '',
@@ -358,7 +373,8 @@ begin
           1: begin
             newsy(True,
               'Royal Family challenged!',
-              ' ' + uplc + player.name2 + config.textcol1 + ' the ' + classnames[player.class] + ' spits on the Royal Family!',
+              ' ' + uplc + player.name2 + config.textcol1 + ' the ' + classnames[player.class] +
+              ' spits on the Royal Family!',
               '',
               '',
               '',
@@ -387,12 +403,13 @@ begin
     end;
   end; {case .end.}
 
-  {mail the result to current ruler}
+       {mail the result to current ruler}
   if ch = 'N' then
   begin
     d(15, 'Wimp!');
     vote := 0;
-  end else if king.ai = 'H' then
+  end else
+  if king.ai = 'H' then
   begin
     s := 'Popularity';
     post(MailSend,
@@ -536,7 +553,8 @@ begin
 
   {darkness points}
   x := player.level * 25;
-  d(config.textcolor, 'Your soul darkens from the ' + ulgray + 'Dark Avengers' + config.textcol1 + ' poison! (' + commastr(x) + ' points)');
+  d(config.textcolor, 'Your soul darkens from the ' + ulgray + 'Dark Avengers' + config.textcol1 +
+    ' poison! (' + commastr(x) + ' points)');
   give_darkness(player, x);
 
   {News-Paper}
@@ -598,7 +616,8 @@ begin
   if p_description = False then
   begin
     {no player description available...we make one ourselves here}
-    d(global_plycol, sleeper.name2 + config.textcol1 + ' is a ' + vicious_string(sleeper) + ' ' + race_display(2, sleeper.race, 0));
+    d(global_plycol, sleeper.name2 + config.textcol1 + ' is a ' + vicious_string(sleeper) + ' ' +
+      race_display(2, sleeper.race, 0));
     d(config.textcolor, 'In battle ' + uplc + sleeper.name2 + config.textcol1 + ' is ranked ' + battlemaster_string(sleeper));
   end;
 
@@ -640,7 +659,7 @@ begin
   end else
   begin {NEW game mode}
 
-    {init pointer variable}
+        {init pointer variable}
     new(objekt);
 
     if sleeper.rhand > 0 then
@@ -809,14 +828,16 @@ begin
   {purse with gold}
   if sleeper.gold > 0 then
   begin
-    d(config.textcolor, 'You also notice ' + uplc + sleeper.name2 + config.textcol1 + ' holding a ' + ucyan + 'purse' + config.textcol1 + ' in ' + sex3[sleeper.sex] + ' right hand.');
+    d(config.textcolor, 'You also notice ' + uplc + sleeper.name2 + config.textcol1 + ' holding a ' +
+      ucyan + 'purse' + config.textcol1 + ' in ' + sex3[sleeper.sex] + ' right hand.');
     d(config.textcolor, '(it might just be possible for you to snatch it!)');
   end;
 
   {married}
   if sleeper.married = True then
   begin
-    d(global_plycol, sleeper.name2 + config.textcol1 + ' is wearing a ' + uyellow + 'wedding ring' + config.textcol1 + ', and it''s made of solid gold.');
+    d(global_plycol, sleeper.name2 + config.textcol1 + ' is wearing a ' + uyellow + 'wedding ring' +
+      config.textcol1 + ', and it''s made of solid gold.');
   end;
 
   crlf;
@@ -839,7 +860,7 @@ begin
     end;
   end; {case .end.}
 
-  {could player beat sleeper?}
+       {could player beat sleeper?}
   crlf;
   pause;
 
@@ -849,13 +870,15 @@ procedure Chances_Eval(var ply: userrec);
 var s: s70;
 begin
   {can player kill this guy, used from the DORMITORY!}
-  if ply.sex = 1 then s := 'guy'
+  if ply.sex = 1 then
+    s := 'guy'
   else s := 'gal';
 
   if player.maxhps > ply.maxhps then
   begin
     d(9, ' - you can beat this ' + s + '!');
-  end else if player.maxhps < ply.maxhps then
+  end else
+  if player.maxhps < ply.maxhps then
   begin
     d(12, ' -  don''t even try...');
   end else
@@ -872,7 +895,7 @@ var
 
 begin
 
-  {* produces fit random comments during player_vs_player battle *}
+    {* produces fit random comments during player_vs_player battle *}
   case mode of
     {player uttalar bara generella elakheter}
     1: begin
@@ -1092,7 +1115,7 @@ begin
         end;
       end; {case .end.}
     end;
-  end; {case .end.}
+  end;     {case .end.}
 
 end;
 
@@ -1176,7 +1199,7 @@ begin
     end;
   end; {case .end.}
 
-end; {kill_comment}
+end;   {kill_comment}
 
 
 procedure Load_MoatId(var temp: MoatRec; IDTAG: s15);
@@ -1199,7 +1222,7 @@ begin
     end;
   end; {for i:= .end.}
 
-end; {load_moatid *end*}
+end;   {load_moatid *end*}
 
 function Find_MoatId(IDTAG: s15): boolean;
 var i:    word;
@@ -1222,7 +1245,7 @@ begin
     end;
   end; {for i:= .end.}
 
-  {return result}
+       {return result}
   find_moatid := Result;
 
 end; {find_moatid *end*}
@@ -1305,7 +1328,8 @@ begin
   load_level(desired_level, level);
 
   x := level.xpneed - my_exp;
-  if x < 0 then x := 0;
+  if x < 0 then
+    x := 0;
 
   {return result}
   how_many_xp_left := x;
@@ -1323,11 +1347,13 @@ begin
 
   exp := level.xpneed;
 
-  if inn < exp then level_raise := exp - inn
+  if inn < exp then
+    level_raise := exp - inn
   else level_raise := 0;
 
 
-  if levelst >= 100 then level_raise := 999999999;
+  if levelst >= 100 then
+    level_raise := 999999999;
 
 end; {level_raise *end*}
 
@@ -1580,7 +1606,8 @@ begin
         Inc(j);
         Inc(x);
         q := 0;
-        if cp > 0 then Dec(cp, 5);
+        if cp > 0 then
+          Dec(cp, 5);
       end;
     end;
     '2': begin {Ishana}
@@ -1593,7 +1620,8 @@ begin
         Inc(z);
         Inc(q);
         Inc(yy, 2);
-        if cp > 0 then Inc(cp, 5);
+        if cp > 0 then
+          Inc(cp, 5);
       end;
     end;
     '3': begin {Dzarrgo}
@@ -1606,7 +1634,8 @@ begin
         Inc(zz);
         Dec(z);
         yy := 0;
-        if cp > 0 then Inc(cp, 8);
+        if cp > 0 then
+          Inc(cp, 8);
       end;
     end;
     '4': begin {Agni}
@@ -1629,7 +1658,8 @@ begin
         rand := 1;
         z := 1;
         yy := 1;
-        if cp > 0 then Inc(cp, 7);
+        if cp > 0 then
+          Inc(cp, 7);
       end;
     end;
     '6': begin {Sachmez}
@@ -1642,7 +1672,8 @@ begin
         Inc(z, 3);
         Inc(yy, 3);
         Inc(zz, 3);
-        if cp > 0 then Inc(cp, 12);
+        if cp > 0 then
+          Inc(cp, 12);
       end;
     end;
     '7': begin {Umilak}
@@ -1655,7 +1686,8 @@ begin
         Inc(yy);
         zz := 0;
         q := 0;
-        if cp > 0 then Inc(cp, 14);
+        if cp > 0 then
+          Inc(cp, 14);
       end;
     end;
     '8': begin {Asanga}
@@ -1664,7 +1696,8 @@ begin
         Dec(i);
         Dec(j);
         Inc(q);
-        if cp > 0 then Inc(cp, 11);
+        if cp > 0 then
+          Inc(cp, 11);
       end;
     end;
     '9': begin {Gregorius}
@@ -1680,7 +1713,7 @@ begin
 
   end; {case .end.}
 
-  {Drug Users and Body Builders are punished!}
+       {Drug Users and Body Builders are punished!}
   if happy.mental < 70 then
   begin
     for nec := 1 to right do
@@ -1714,15 +1747,24 @@ begin
   end;
 
   {limits!}
-  if happy.hps > 5000 then i := 0;
-  if happy.strength > 5000 then j := 0;
-  if happy.defence > 5000 then x := 0;
-  if happy.stamina > 5000 then rand := 0;
-  if happy.agility > 5000 then z := 0;
-  if happy.charisma > 5000 then q := 0;
-  if happy.dex > 5000 then zz := 0;
-  if happy.wisdom > 5000 then yy := 0;
-  if happy.maxmana > 5000 then cp := 0;
+  if happy.hps > 5000 then
+    i := 0;
+  if happy.strength > 5000 then
+    j := 0;
+  if happy.defence > 5000 then
+    x := 0;
+  if happy.stamina > 5000 then
+    rand := 0;
+  if happy.agility > 5000 then
+    z := 0;
+  if happy.charisma > 5000 then
+    q := 0;
+  if happy.dex > 5000 then
+    zz := 0;
+  if happy.wisdom > 5000 then
+    yy := 0;
+  if happy.maxmana > 5000 then
+    cp := 0;
 
   if realtime then
   begin
@@ -1733,50 +1775,58 @@ begin
 
   if i > 0 then
   begin
-    if realtime then d(config.textcolor, 'Your hps increased by ' + commastr(i) + '!');
+    if realtime then
+      d(config.textcolor, 'Your hps increased by ' + commastr(i) + '!');
     Inc(happy.maxhps, i);
     happy.hps := happy.maxhps;
   end;
 
   if j > 0 then
   begin
-    if realtime then d(config.textcolor, 'Your strength increased by ' + commastr(j) + '!');
+    if realtime then
+      d(config.textcolor, 'Your strength increased by ' + commastr(j) + '!');
     Inc(happy.strength, j);
   end;
 
   if x > 0 then
   begin
-    if realtime then d(config.textcolor, 'Your defence increased by ' + commastr(x) + ' !');
+    if realtime then
+      d(config.textcolor, 'Your defence increased by ' + commastr(x) + ' !');
     Inc(happy.defence, x);
   end;
 
   if rand > 0 then
   begin
-    if realtime then d(config.textcolor, 'Your stamina increased by ' + commastr(rand) + ' !');
+    if realtime then
+      d(config.textcolor, 'Your stamina increased by ' + commastr(rand) + ' !');
     Inc(happy.stamina, rand);
   end;
 
   if z > 0 then
   begin
-    if realtime then d(config.textcolor, 'Your agility increased by ' + commastr(z) + ' !');
+    if realtime then
+      d(config.textcolor, 'Your agility increased by ' + commastr(z) + ' !');
     Inc(happy.agility, z);
   end;
 
   if q > 0 then
   begin
-    if realtime then d(config.textcolor, 'Your charisma increased by ' + commastr(q) + ' !');
+    if realtime then
+      d(config.textcolor, 'Your charisma increased by ' + commastr(q) + ' !');
     Inc(happy.charisma, q);
   end;
 
   if zz > 0 then
   begin
-    if realtime then d(config.textcolor, 'Your dexterity increased by ' + commastr(zz) + ' !');
+    if realtime then
+      d(config.textcolor, 'Your dexterity increased by ' + commastr(zz) + ' !');
     Inc(happy.dex, zz);
   end;
 
   if yy > 0 then
   begin
-    if realtime then d(config.textcolor, 'Your wisdom increased by ' + commastr(yy) + ' !');
+    if realtime then
+      d(config.textcolor, 'Your wisdom increased by ' + commastr(yy) + ' !');
     Inc(happy.wisdom, yy);
   end;
 
@@ -1785,9 +1835,11 @@ begin
     for nec := 1 to right do
     begin
       happy.addict := happy.addict - (random(5) + 1);
-      if happy.addict < 0 then happy.addict := 0;
+      if happy.addict < 0 then
+        happy.addict := 0;
     end;
-    if realtime then d(config.textcolor, 'Your Drug Addiction decreased!');
+    if realtime then
+      d(config.textcolor, 'Your Drug Addiction decreased!');
   end;
 
   if happy.mental < 100 then
@@ -1795,14 +1847,17 @@ begin
     for nec := 1 to right do
     begin
       happy.mental := happy.mental + (random(5) + 1);
-      if happy.mental > 100 then happy.mental := 100;
+      if happy.mental > 100 then
+        happy.mental := 100;
     end;
-    if realtime then d(config.textcolor, 'Your Mental Stability increased!');
+    if realtime then
+      d(config.textcolor, 'Your Mental Stability increased!');
   end;
 
   if cp > 0 then
   begin
-    if realtime then d(config.textcolor, 'Your mana increased by ' + commastr(cp) + ' !');
+    if realtime then
+      d(config.textcolor, 'Your mana increased by ' + commastr(cp) + ' !');
     Inc(happy.maxmana, cp);
     happy.mana := happy.maxmana;
   end;
@@ -1811,7 +1866,8 @@ begin
   for nec := 1 to right do
   begin
     xx := happy.level * 5000 + random(10000);
-    if happy.race = gnoll then xx := xx + random(22000);
+    if happy.race = gnoll then
+      xx := xx + random(22000);
     incplayermoney(happy, xx);
     Inc(memex, xx);
   end;
@@ -1916,10 +1972,12 @@ begin
     begin
       if right = 1 then
       begin
-        s := ' The famous ' + urac + race_display(2, happy.race, 0) + ' ' + uplc + happy.name2 + config.textcol1 + ' went up a level!';
+        s := ' The famous ' + urac + race_display(2, happy.race, 0) + ' ' + uplc + happy.name2 +
+          config.textcol1 + ' went up a level!';
       end else
       begin
-        s := ' The famous ' + urac + race_display(2, happy.race, 0) + ' ' + uplc + happy.name2 + config.textcol1 + ' raised ' + uyellow + commastr(right) + config.textcol1 + ' levels!';
+        s := ' The famous ' + urac + race_display(2, happy.race, 0) + ' ' + uplc + happy.name2 +
+          config.textcol1 + ' raised ' + uyellow + commastr(right) + config.textcol1 + ' levels!';
       end;
     end else
     begin
@@ -1930,37 +1988,45 @@ begin
           0: begin
             if right = 1 then
             begin
-              s := ' The glorious ' + urac + race_display(2, happy.race, 0) + ' ' + uplc + happy.name2 + config.textcol1 + ' went up a level!';
+              s := ' The glorious ' + urac + race_display(2, happy.race, 0) + ' ' + uplc +
+                happy.name2 + config.textcol1 + ' went up a level!';
             end else
             begin
-              s := ' The glorious ' + urac + race_display(2, happy.race, 0) + ' ' + uplc + happy.name2 + config.textcol1 + ' raised ' + uyellow + commastr(right) + config.textcol1 + ' levels!';
+              s := ' The glorious ' + urac + race_display(2, happy.race, 0) + ' ' + uplc +
+                happy.name2 + config.textcol1 + ' raised ' + uyellow + commastr(right) + config.textcol1 + ' levels!';
             end;
           end;
           1: begin
             if right = 1 then
             begin
-              s := ' The warm-hearted ' + urac + race_display(2, happy.race, 0) + ' ' + uplc + happy.name2 + config.textcol1 + ' went up a level!';
+              s := ' The warm-hearted ' + urac + race_display(2, happy.race, 0) + ' ' + uplc +
+                happy.name2 + config.textcol1 + ' went up a level!';
             end else
             begin
-              s := ' The warm-hearted ' + urac + race_display(2, happy.race, 0) + ' ' + uplc + happy.name2 + config.textcol1 + ' raised ' + uyellow + commastr(right) + config.textcol1 + ' levels!';
+              s := ' The warm-hearted ' + urac + race_display(2, happy.race, 0) + ' ' + uplc +
+                happy.name2 + config.textcol1 + ' raised ' + uyellow + commastr(right) + config.textcol1 + ' levels!';
             end;
           end;
           2: begin
             if right = 1 then
             begin
-              s := ' The kind ' + urac + race_display(2, happy.race, 0) + ' ' + uplc + happy.name2 + config.textcol1 + ' went up a level!';
+              s := ' The kind ' + urac + race_display(2, happy.race, 0) + ' ' + uplc + happy.name2 +
+                config.textcol1 + ' went up a level!';
             end else
             begin
-              s := ' The kind ' + urac + race_display(2, happy.race, 0) + ' ' + uplc + happy.name2 + config.textcol1 + ' raised ' + uyellow + commastr(right) + config.textcol1 + ' levels!';
+              s := ' The kind ' + urac + race_display(2, happy.race, 0) + ' ' + uplc + happy.name2 +
+                config.textcol1 + ' raised ' + uyellow + commastr(right) + config.textcol1 + ' levels!';
             end;
           end;
           3: begin
             if right = 1 then
             begin
-              s := ' The good ' + urac + race_display(2, happy.race, 0) + ' ' + uplc + happy.name2 + config.textcol1 + ' went up a level!';
+              s := ' The good ' + urac + race_display(2, happy.race, 0) + ' ' + uplc + happy.name2 +
+                config.textcol1 + ' went up a level!';
             end else
             begin
-              s := ' The good ' + urac + race_display(2, happy.race, 0) + ' ' + uplc + happy.name2 + config.textcol1 + ' raised ' + uyellow + commastr(right) + config.textcol1 + ' levels!';
+              s := ' The good ' + urac + race_display(2, happy.race, 0) + ' ' + uplc + happy.name2 +
+                config.textcol1 + ' raised ' + uyellow + commastr(right) + config.textcol1 + ' levels!';
             end;
           end;
           4: begin {alternatives..}
@@ -1969,7 +2035,8 @@ begin
               s := ' ' + uplc + happy.name2 + config.textcol1 + ' the ' + classnames[happy.class] + ' went up a level!';
             end else
             begin
-              s := ' ' + uplc + happy.name2 + config.textcol1 + ' the ' + classnames[happy.class] + ' went up ' + uwhite + commastr(right) + config.textcol1 + ' levels!';
+              s := ' ' + uplc + happy.name2 + config.textcol1 + ' the ' + classnames[happy.class] +
+                ' went up ' + uwhite + commastr(right) + config.textcol1 + ' levels!';
             end;
           end;
           5: begin
@@ -1978,7 +2045,8 @@ begin
               s := ' ' + uplc + happy.name2 + config.textcol1 + ' the ' + classnames[happy.class] + ' raised a level!';
             end else
             begin
-              s := ' ' + uplc + happy.name2 + config.textcol1 + ' the ' + classnames[happy.class] + ' raised ' + uwhite + commastr(right) + config.textcol1 + ' levels!';
+              s := ' ' + uplc + happy.name2 + config.textcol1 + ' the ' + classnames[happy.class] +
+                ' raised ' + uwhite + commastr(right) + config.textcol1 + ' levels!';
             end;
           end;
 
@@ -1991,37 +2059,45 @@ begin
           0: begin
             if right = 1 then
             begin
-              s := ' The infamous ' + urac + race_display(2, happy.race, 0) + ' ' + uplc + happy.name2 + config.textcol1 + ' went up a level!';
+              s := ' The infamous ' + urac + race_display(2, happy.race, 0) + ' ' + uplc +
+                happy.name2 + config.textcol1 + ' went up a level!';
             end else
             begin
-              s := ' The infamous ' + urac + race_display(2, happy.race, 0) + ' ' + uplc + happy.name2 + config.textcol1 + ' raised ' + uyellow + commastr(right) + config.textcol1 + ' levels!';
+              s := ' The infamous ' + urac + race_display(2, happy.race, 0) + ' ' + uplc +
+                happy.name2 + config.textcol1 + ' raised ' + uyellow + commastr(right) + config.textcol1 + ' levels!';
             end;
           end;
           1: begin
             if right = 1 then
             begin
-              s := ' The notorious ' + urac + race_display(2, happy.race, 0) + ' ' + uplc + happy.name2 + config.textcol1 + ' went up a level!';
+              s := ' The notorious ' + urac + race_display(2, happy.race, 0) + ' ' + uplc +
+                happy.name2 + config.textcol1 + ' went up a level!';
             end else
             begin
-              s := ' The notorious ' + urac + race_display(2, happy.race, 0) + ' ' + uplc + happy.name2 + config.textcol1 + ' raised ' + uyellow + commastr(right) + config.textcol1 + ' levels!';
+              s := ' The notorious ' + urac + race_display(2, happy.race, 0) + ' ' + uplc +
+                happy.name2 + config.textcol1 + ' raised ' + uyellow + commastr(right) + config.textcol1 + ' levels!';
             end;
           end;
           2: begin
             if right = 1 then
             begin
-              s := ' The self-absorbed ' + urac + race_display(2, happy.race, 0) + ' ' + uplc + happy.name2 + config.textcol1 + ' went up a level!';
+              s := ' The self-absorbed ' + urac + race_display(2, happy.race, 0) + ' ' + uplc +
+                happy.name2 + config.textcol1 + ' went up a level!';
             end else
             begin
-              s := ' The self-absorbed ' + urac + race_display(2, happy.race, 0) + ' ' + uplc + happy.name2 + config.textcol1 + ' raised ' + uyellow + commastr(right) + config.textcol1 + ' levels!';
+              s := ' The self-absorbed ' + urac + race_display(2, happy.race, 0) + ' ' + uplc +
+                happy.name2 + config.textcol1 + ' raised ' + uyellow + commastr(right) + config.textcol1 + ' levels!';
             end;
           end;
           3: begin
             if right = 1 then
             begin
-              s := ' The self-righteous ' + urac + race_display(2, happy.race, 0) + ' ' + uplc + happy.name2 + config.textcol1 + ' went up a level!';
+              s := ' The self-righteous ' + urac + race_display(2, happy.race, 0) + ' ' + uplc +
+                happy.name2 + config.textcol1 + ' went up a level!';
             end else
             begin
-              s := ' The self-righteous ' + urac + race_display(2, happy.race, 0) + ' ' + uplc + happy.name2 + config.textcol1 + ' raised ' + uyellow + commastr(right) + config.textcol1 + ' levels!';
+              s := ' The self-righteous ' + urac + race_display(2, happy.race, 0) + ' ' + uplc +
+                happy.name2 + config.textcol1 + ' raised ' + uyellow + commastr(right) + config.textcol1 + ' levels!';
             end;
           end;
           4: begin {alternatives..}
@@ -2030,7 +2106,8 @@ begin
               s := ' ' + uplc + happy.name2 + config.textcol1 + ' the ' + classnames[happy.class] + ' went up a level!';
             end else
             begin
-              s := ' ' + uplc + happy.name2 + config.textcol1 + ' the ' + classnames[happy.class] + ' went up ' + uwhite + commastr(right) + config.textcol1 + ' levels!';
+              s := ' ' + uplc + happy.name2 + config.textcol1 + ' the ' + classnames[happy.class] +
+                ' went up ' + uwhite + commastr(right) + config.textcol1 + ' levels!';
             end;
           end;
           5: begin
@@ -2039,7 +2116,8 @@ begin
               s := ' ' + uplc + happy.name2 + config.textcol1 + ' the ' + classnames[happy.class] + ' raised a level!';
             end else
             begin
-              s := ' ' + uplc + happy.name2 + config.textcol1 + ' the ' + classnames[happy.class] + ' raised ' + uwhite + commastr(right) + config.textcol1 + ' levels!';
+              s := ' ' + uplc + happy.name2 + config.textcol1 + ' the ' + classnames[happy.class] +
+                ' raised ' + uwhite + commastr(right) + config.textcol1 + ' levels!';
             end;
           end;
 
@@ -2057,11 +2135,13 @@ begin
       {make a phrase to put in the news}
       a := '';
       case random(20) of
-        0: a := ' ' + utalkc + 'Look at me! Look at me! I''m bad to the bone! ' + uplc + happy.name2 + config.textcol1 + ' boasts.';
+        0: a := ' ' + utalkc + 'Look at me! Look at me! I''m bad to the bone! ' + uplc + happy.name2 +
+            config.textcol1 + ' boasts.';
         1: a := ' ' + utalkc + 'I''m finally getting somewhere! ' + uplc + happy.name2 + config.textcol1 + ' mumbles.';
         2: a := ' ' + utalkc + 'I''m finally getting somewhere! ' + uplc + happy.name2 + config.textcol1 + ' mutters.';
         3: a := ' ' + utalkc + 'I''m calling the shots around here now! ' + uplc + happy.name2 + config.textcol1 + ' brags.';
-        4: a := ' ' + utalkc + 'Oh Boy! Finally level ' + commastr(happy.level) + '! ' + uplc + happy.name2 + config.textcol1 + ' sighs.';
+        4: a := ' ' + utalkc + 'Oh Boy! Finally level ' + commastr(happy.level) + '! ' + uplc +
+            happy.name2 + config.textcol1 + ' sighs.';
         5: a := ' ' + utalkc + 'Boy! I earned this! ' + uplc + happy.name2 + config.textcol1 + ' shouts with joy.';
         6: a := ' ' + utalkc + 'I deserved this. ' + uplc + happy.name2 + config.textcol1 + ' concludes.';
         7: a := ' ' + utalkc + 'You can''t push me around anymore. ' + uplc + happy.name2 + config.textcol1 + ' says.';
@@ -2105,11 +2185,13 @@ begin
 
   if mailman then
   begin
-    if helper <> '' then s := uplc + helper + config.textcol1 + ' took you to your Level Master!'
+    if helper <> '' then
+      s := uplc + helper + config.textcol1 + ' took you to your Level Master!'
     else s := '';
 
     a := 'level';
-    if right > 1 then a := a + 's';
+    if right > 1 then
+      a := a + 's';
 
     {post a letter to player}
     post(MailSend,
@@ -2156,43 +2238,52 @@ begin
     end;
     2: begin
       s := 'easy';
-      if recstr then s := s + '  (recommended to level +5 characters)';
+      if recstr then
+        s := s + '  (recommended to level +5 characters)';
     end;
     3: begin
       s := 'fairly easy';
-      if recstr then s := s + '  (recommended to level +15 characters)';
+      if recstr then
+        s := s + '  (recommended to level +15 characters)';
     end;
     4: begin
       s := 'moderate';
-      if recstr then s := s + '  (recommended to level +25 characters)';
+      if recstr then
+        s := s + '  (recommended to level +25 characters)';
     end;
     5: begin
       s := 'challenging';
-      if recstr then s := s + '  (recommended to level +35 characters)';
+      if recstr then
+        s := s + '  (recommended to level +35 characters)';
     end;
     6: begin
       s := 'complicated';
-      if recstr then s := s + '  (recommended to level +45 characters)';
+      if recstr then
+        s := s + '  (recommended to level +45 characters)';
     end;
     7: begin
       s := 'serious';
-      if recstr then s := s + '  (recommended to level +55 characters)';
+      if recstr then
+        s := s + '  (recommended to level +55 characters)';
     end;
     8: begin
       s := 'dangerous';
-      if recstr then s := s + '  (recommended to level +65 characters)';
+      if recstr then
+        s := s + '  (recommended to level +65 characters)';
     end;
     9: begin
       s := 'hard';
-      if recstr then s := s + '  (recommended to level +75 characters)';
+      if recstr then
+        s := s + '  (recommended to level +75 characters)';
     end;
     10: begin
       s := 'very hard';
-      if recstr then s := s + '  (recommended to level +85 characters)';
+      if recstr then
+        s := s + '  (recommended to level +85 characters)';
     end;
   end; {case .end.}
 
-  {return result}
+       {return result}
   quest_diffstring := s;
 
 end; {quest_diffstring *end*}
@@ -2236,7 +2327,7 @@ begin
 
   end; {for i:= .end}
 
-  {return result}
+       {return result}
   claimed_quests := Result;
 
 end; {claimed_quests *end*}
@@ -2265,7 +2356,8 @@ begin
   d(config.textcolor, '   Difficulty : ' + uwhite + s + config.textcol1);
 
   {claimed by}
-  if quest.occupier = '' then s := '{nobody}'
+  if quest.occupier = '' then
+    s := '{nobody}'
   else s := quest.occupier + config.textcol1 + ', the ' + race_display(2, quest.occrace, 0) + '.';
 
   d(config.textcolor, '   Claimed by : ' + uplc + s + config.textcol1);
@@ -2361,7 +2453,8 @@ var counter, counter2: word;
       if (ch = 'D') and (player.king = False) then
       begin
         ch := ' ';
-      end else if (ch = 'C') and (player.king = True) then
+      end else
+      if (ch = 'C') and (player.king = True) then
       begin
         ch := ' ';
       end;
@@ -2383,7 +2476,7 @@ var counter, counter2: word;
 
     end; {case .end.}
 
-    {return result}
+         {return result}
     mini_menu := Result;
 
   end; {mini_menu *end*}
@@ -2456,7 +2549,8 @@ begin {LIST_QUESTS **START**}
           if claimed_quests(player.name2) >= Config.MaxClaimedQuests then
           begin
             crlf;
-            d(12, 'Sorry, You may only be active on ' + uwhite + commastr(Config.MaxClaimedQuests) + ulred + ' Quests at the same time.');
+            d(12, 'Sorry, You may only be active on ' + uwhite + commastr(Config.MaxClaimedQuests) +
+              ulred + ' Quests at the same time.');
             pause;
           end else
           begin
@@ -2498,33 +2592,39 @@ begin {LIST_QUESTS **START**}
                       d(12, 'The Royals are forbidden by law to undertake Quests!');
                       crlf;
                       pause;
-                    end else if quest.initiator = player.name2 then
+                    end else
+                    if quest.initiator = player.name2 then
                     begin
                       d(12, 'You can''t undertake your own Quests!');
                       crlf;
                       pause;
-                    end else if quest.occupier = player.name2 then
+                    end else
+                    if quest.occupier = player.name2 then
                     begin
                       d(global_plycol, 'You' + ulred + ' have already claimed this Quest!');
                       crlf;
                       pause;
-                    end else if quest.occupier <> '' then
+                    end else
+                    if quest.occupier <> '' then
                     begin
                       d(global_plycol, quest.occupier + ulred + ' has claimed this Quest!');
                       crlf;
                       pause;
-                    end else if player.level < quest.minlevel then
+                    end else
+                    if player.level < quest.minlevel then
                     begin
                       d(12, 'Sorry, this Quest requires a character of at least level ' + commastr(quest.minlevel) + '.');
                       pause;
-                    end else if player.level > quest.maxlevel then
+                    end else
+                    if player.level > quest.maxlevel then
                     begin
                       d(12, 'Sorry, this Quest requires a character of max level ' + commastr(quest.maxlevel) + '.');
                       pause;
-                    end
-                    else if confirm('Claim this', 'N') = True then
+                    end else
+                    if confirm('Claim this', 'N') = True then
                     begin
-                      if quest.daystocomple = 1 then s := 'day'
+                      if quest.daystocomple = 1 then
+                        s := 'day'
                       else s := 'days';
 
 
@@ -2535,7 +2635,8 @@ begin {LIST_QUESTS **START**}
                         d(15, 'You have ' + commastr(quest.daystocomple) + ' ' + s + ' to complete this Quest.');
 
                         {tell other nodes}
-                        online_send_to_all(uplc + player.name2 + config.textcol1 + ' accepted a ' + uquestc + 'QUEST' + config.textcol1 + '!',
+                        online_send_to_all(uplc + player.name2 + config.textcol1 + ' accepted a ' +
+                          uquestc + 'QUEST' + config.textcol1 + '!',
                           player.name2, '');
 
                         {mail the king, if he's online}
@@ -2559,7 +2660,8 @@ begin {LIST_QUESTS **START**}
                               '',
                               uquestc + 'QUEST' + umailheadc + ' Accepted' + config.textcol1,
                               mkstring(length(s), underscore),
-                              uplc + player.name2 + config.textcol1 + ' accepted a ' + uquestc + 'QUEST' + config.textcol1 + '!',
+                              uplc + player.name2 + config.textcol1 + ' accepted a ' + uquestc +
+                              'QUEST' + config.textcol1 + '!',
                               '',
                               '',
                               '',
@@ -2585,7 +2687,8 @@ begin {LIST_QUESTS **START**}
                       {news-paper}
                       Newsy(True,
                         'Quest Accepted',
-                        ' ' + uplc + player.name2 + config.textcol1 + ' has undertaken a ' + uquestc + 'Quest' + config.textcol1 + '!',
+                        ' ' + uplc + player.name2 + config.textcol1 + ' has undertaken a ' +
+                        uquestc + 'Quest' + config.textcol1 + '!',
                         '',
                         '',
                         '',
@@ -2608,7 +2711,8 @@ begin {LIST_QUESTS **START**}
             end;
           end;
 
-        end else if r = 3 then
+        end else
+        if r = 3 then
         begin
           {delete quest}
           crlf;
@@ -2649,7 +2753,8 @@ begin {LIST_QUESTS **START**}
 
                       if is_online(quest.occupier, online_player) then
                       begin
-                        online_send_to_player(quest.occupier, online_player, uplc + player.name2 + config.textcol1 + ' revoked your ' + uquestc + 'QUEST' + config.textcol1 + '!');
+                        online_send_to_player(quest.occupier, online_player, uplc + player.name2 +
+                          config.textcol1 + ' revoked your ' + uquestc + 'QUEST' + config.textcol1 + '!');
                       end else
                       begin
                         {mail quest occupier}
@@ -2661,7 +2766,8 @@ begin {LIST_QUESTS **START**}
                           '',
                           ulred + 'QUEST gone' + config.textcol1,
                           mkstring(10, underscore),
-                          uplc + player.name2 + config.textcol1 + ' revoked your ' + uquestc + 'Quest' + config.textcol1 + '!',
+                          uplc + player.name2 + config.textcol1 + ' revoked your ' + uquestc +
+                          'Quest' + config.textcol1 + '!',
                           '',
                           '',
                           '',
@@ -2692,7 +2798,8 @@ begin {LIST_QUESTS **START**}
             end; {for j:= .end.}
           end;
 
-        end else if r = 2 then
+        end else
+        if r = 2 then
         begin
           {abort list}
           break;
@@ -2702,37 +2809,37 @@ begin {LIST_QUESTS **START**}
 
   end; {for i:= .end.}
 
-end; {list_quests *end*}
+end;   {list_quests *end*}
 
 
 procedure New_Quest(var quest: QuestRec); {init a Quest-Record}
 var i, j: word;
 begin
 
-  quest.id := crypt(20); {unique identification # number}
+  quest.id := crypt(20);     {unique identification # number}
   quest.Initiator := emptystr; {name of (KING/QUEEN) who set this quest}
   quest.date := todays_date; {init date}
   quest.QuestType := SingleQuest; {single or team effort}
   quest.QuestTarget := qMonster; {monsters,assassinatio,seduce,claim town,gang war}
-  quest.difficulty := 0; {difficulty, especially when encountering monsters}
-  quest.deleted := True; {is this quest deleted}
+  quest.difficulty := 0;     {difficulty, especially when encountering monsters}
+  quest.deleted := True;     {is this quest deleted}
   quest.comment := emptystr; {comment by initiator}
   quest.occupier := emptystr; {is quest taken at this moment/name of the person}
-  quest.occrace := Human; {occupying players race}
-  quest.occsex := 1; {occupying players sex 1=male,2=female}
-  quest.occdays := 0; {quest has been occupied for X days}
-  quest.daystocomple := 0; {days given to complete quest before failed}
+  quest.occrace := Human;    {occupying players race}
+  quest.occsex := 1;         {occupying players sex 1=male,2=female}
+  quest.occdays := 0;        {quest has been occupied for X days}
+  quest.daystocomple := 0;   {days given to complete quest before failed}
 
   quest.offerto := emptystr; {is this quest an offer a player}
-  quest.offerrefused := 0; {if offer is refused (1=delete,2=add to list}
-  quest.forced := False; {is quest forced upon OCCUPIER}
-  quest.minlevel := 0; {min level required to take on quest}
-  quest.maxlevel := 0; {max level required to take on quest}
+  quest.offerrefused := 0;   {if offer is refused (1=delete,2=add to list}
+  quest.forced := False;     {is quest forced upon OCCUPIER}
+  quest.minlevel := 0;       {min level required to take on quest}
+  quest.maxlevel := 0;       {max level required to take on quest}
 
-  quest.reward := 1; {low,medium,high}
+  quest.reward := 1;         {low,medium,high}
   quest.rewardtype := qNothing; {qRewardTypes}
 
-  quest.penalty := 1; {low,medium,high}
+  quest.penalty := 1;        {low,medium,high}
   quest.penaltytype := qNothing; {qRewardTypes}
 
   for i := 1 to global_maxmon do
@@ -2803,7 +2910,8 @@ begin
             '',
             ulred + 'Failed QUEST' + config.textcol1,
             mkstring(12, underscore),
-            uplc + quest.occupier + config.textcol1 + ' failed ' + sex3[quest.occsex] + uquestc + ' Quest' + config.textcol1 + '!',
+            uplc + quest.occupier + config.textcol1 + ' failed ' + sex3[quest.occsex] + uquestc +
+            ' Quest' + config.textcol1 + '!',
             uplc + quest.occupier + config.textcol1 + ' was unable to finish it in time!',
             '',
             '',
@@ -2821,7 +2929,8 @@ begin
         {news-paper}
         Newsy(True,
           'Quest Failure',
-          ' ' + uplc + quest.occupier + config.textcol1 + ' was unable to finish ' + sex3[quest.occsex] + uquestc + ' Quest' + config.textcol1 + 'in time.',
+          ' ' + uplc + quest.occupier + config.textcol1 + ' was unable to finish ' + sex3[quest.occsex] +
+          uquestc + ' Quest' + config.textcol1 + 'in time.',
           '',
           '',
           '',
@@ -2845,7 +2954,7 @@ begin
 
   end; {for i:= .end.}
 
-end; {quest_maintenance *end*}
+end;   {quest_maintenance *end*}
 
 function Random_Drink: s30;
 var s:   s30;
@@ -2866,7 +2975,8 @@ begin
 
     x := random(fs(fsdrink));
 
-    if x = 0 then x := 1;
+    if x = 0 then
+      x := 1;
 
     load_drink(fload, drink, x);
 
@@ -2938,7 +3048,7 @@ begin
 
   end; {for i:= .end.}
 
-end; {drink_maintenance **end**}
+end;   {drink_maintenance **end**}
 
 procedure Remove_Wanted_Posters(const ply: userrec);
 {remove plys wanted posters (on him)}
@@ -3032,7 +3142,7 @@ begin
     20: s := 'The shameless ';
   end; {case .end.}
 
-  {return result}
+       {return result}
   the_bad := s;
 end; {the_bad *end*}
 
@@ -3107,7 +3217,8 @@ begin
     close_text(txt);
 
     {reading random selected line number}
-    if x > maxcomment then x := maxcomment;
+    if x > maxcomment then
+      x := maxcomment;
     open_txtfile(treset, txt, npcchatfile);
     r := random(x) + 1;
     for i := 1 to r do
@@ -3195,11 +3306,12 @@ begin
   {writeln(x);
   readln(a2);}
 
-    if (x = regnr) and (x <> 0) then global_registered := True;
+    if (x = regnr) and (x <> 0) then
+      global_registered := True;
   end;
-  if global_registered = True then goto 9045;
-  9045:
-    global_registered := True;
+  if global_registered = True then
+    goto 9045;
+  9045: global_registered := True;
 
 end; {muffis *end*}
 
@@ -3217,7 +3329,8 @@ begin
 
  {depending on inval this function either returns config.moneytype2
   or config.moneytype3}
-  if inval <> 1 then Result := config.moneytype + ' ' + config.moneytype3
+  if inval <> 1 then
+    Result := config.moneytype + ' ' + config.moneytype3
   else Result := config.moneytype + ' ' + config.moneytype2;
 
   {return result}
@@ -3225,7 +3338,7 @@ begin
 
 end; {many_money *end*}
 
-{Generic Message Routines}
+     {Generic Message Routines}
 procedure No_Dark_Deeds;
 begin
   {no dark deeds left}
@@ -3345,7 +3458,8 @@ begin {winner has defeated loser. This proc checks if there are any
             uyellow + 'Reward collected' + ugreen,
             mkstring(16, underscore),
             'You were attacked by ' + uplc + loser.name2 + ugreen + '!',
-            'You killed ' + sex[loser.sex] + ' and collected ' + uyellow + commastr(wanted.gold) + ugreen + ' ' + many_money(wanted.gold) + ' in ' + ulblue + 'reward' + config.textcol1 + '!',
+            'You killed ' + sex[loser.sex] + ' and collected ' + uyellow + commastr(wanted.gold) +
+            ugreen + ' ' + many_money(wanted.gold) + ' in ' + ulblue + 'reward' + config.textcol1 + '!',
             '',
             '',
             '',
@@ -3369,7 +3483,8 @@ begin {winner has defeated loser. This proc checks if there are any
       {news-paper}
       newsy(True,
         'Reward',
-        ' ' + uplc + winner.name2 + ugreen + ' collected the ' + ulblue + 'Reward' + config.textcol1 + ' for ' + ulred + loser.name2 + ugreen + '.',
+        ' ' + uplc + winner.name2 + ugreen + ' collected the ' + ulblue + 'Reward' + config.textcol1 +
+        ' for ' + ulred + loser.name2 + ugreen + '.',
         '',
         '',
         '',
@@ -3385,7 +3500,8 @@ begin {winner has defeated loser. This proc checks if there are any
 
         if is_online(wanted.mad, online_player) then
         begin
-          online_send_to_player(wanted.mad, online_player, uplc + player.name2 + config.textcol1 + ' collected your ' + ulblue + 'Reward' + config.textcol1 + ' for ' + uplc + wanted.Name + config.textcol1);
+          online_send_to_player(wanted.mad, online_player, uplc + player.name2 + config.textcol1 +
+            ' collected your ' + ulblue + 'Reward' + config.textcol1 + ' for ' + uplc + wanted.Name + config.textcol1);
         end;
 
         {mail the guy who posted the reward}
@@ -3398,7 +3514,8 @@ begin {winner has defeated loser. This proc checks if there are any
           uyellow + 'Reward Collected' + ugreen,
           mkstring(16, underscore),
           uplc + winner.name2 + ugreen + ' attacked and killed ' + ulred + loser.name2 + ugreen + '!',
-          uplc + winner.name2 + ugreen + ' collected the reward set by You for ' + uyellow + commastr(wanted.gold) + ugreen + '.',
+          uplc + winner.name2 + ugreen + ' collected the reward set by You for ' + uyellow +
+          commastr(wanted.gold) + ugreen + '.',
           '',
           '',
           '',
@@ -3416,7 +3533,7 @@ begin {winner has defeated loser. This proc checks if there are any
     end;
   end; {for i:= .end.}
 
-end; {Reward_Check *end*}
+end;   {Reward_Check *end*}
 
 procedure Draw_Picture;
 begin
@@ -3450,8 +3567,8 @@ begin
 end;
 
 procedure Command_Help; {executed when : 'usurper ?' is typed}
-const tc = 2; {help text color}
-  hc     = 11; {keyword color}
+const tc = 2;           {help text color}
+  hc     = 11;          {keyword color}
 
   procedure my_pause;
   begin

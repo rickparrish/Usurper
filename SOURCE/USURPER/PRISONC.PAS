@@ -149,7 +149,8 @@ begin
     {evaluate user input}
     case cho of
       '?': begin {display menu}
-        if player.expert = True then display_menu(True, False)
+        if player.expert = True then
+          display_menu(True, False)
         else display_menu(False, False);
       end;
       'S': begin {status}
@@ -326,7 +327,7 @@ begin
 
         end;
 
-      end; {escape .end.}
+      end;       {escape .end.}
 
       'W': begin {list of prisoners}
         crlf;
@@ -364,7 +365,8 @@ begin
               if is_online(pl0.name2, online_player) then
               begin
                 sd(14, ' (awake)');
-              end else if pl0.hps < 1 then
+              end else
+              if pl0.hps < 1 then
               begin
                 sd(config.textcolor, ' (' + ulred + 'dead' + config.textcol1 + ')');
               end else
@@ -374,8 +376,10 @@ begin
 
               {days left in prison}
               x := pl0.daysinprison;
-              if x = 0 then x := 1;
-              if x = 1 then daystr := 'day'
+              if x = 0 then
+                x := 1;
+              if x = 1 then
+                daystr := 'day'
               else daystr := 'days';
 
               d(config.textcolor, ' (' + uwhite + commastr(x) + config.textcol1 + ' ' + daystr + ' left)');
@@ -393,11 +397,13 @@ begin
 
             end;
 
-            if abort then break;
+            if abort then
+              break;
 
           end; {for j:= .end.}
 
-          if abort then break;
+          if abort then
+            break;
 
         end; {for i:= .end.}
 
@@ -408,8 +414,10 @@ begin
 
         {display how many days player must stay in jail}
         x := player.daysinprison;
-        if x = 0 then x := 1;
-        if x = 1 then daystr := 'day'
+        if x = 0 then
+          x := 1;
+        if x = 1 then
+          daystr := 'day'
         else daystr := 'days';
 
         d(config.textcolor, 'You have ' + uwhite + commastr(x) + config.textcol1 + ' ' + daystr + ' left in prison.');

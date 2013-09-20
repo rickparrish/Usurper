@@ -219,7 +219,7 @@ begin
   case cm of
     'S': begin {external MOST WANTED list requested}
 
-      {sort}
+               {sort}
       SORT_WANTEDS;
 
       if (Name[1]^ <> '') and (money[1]^ > 0) then
@@ -227,7 +227,8 @@ begin
         {news-paper}
         newsy(True,
           'Most Wanted',
-          ' ' + uplc + Name[1]^ + 's' + config.textcol1 + ' life is worth ' + uyellow + commastr(money[1]^) + config.textcol1 + ' ' + many_money(money[1]^) + '!',
+          ' ' + uplc + Name[1]^ + 's' + config.textcol1 + ' life is worth ' + uyellow + commastr(money[1]^) +
+          config.textcol1 + ' ' + many_money(money[1]^) + '!',
           '',
           '',
           '',
@@ -322,31 +323,40 @@ begin
           if is_online(pl0^.name2, online_player) then
           begin
             d(14, ljust('Online', justval));
-          end else if (pl0^.location = offloc_prison) and (pl0^.hps > 0) then
+          end else
+          if (pl0^.location = offloc_prison) and (pl0^.hps > 0) then
           begin
             d(9, ljust('Prison', justval));
-          end else if (pl0^.location = offloc_home) and (pl0^.hps > 0) then
+          end else
+          if (pl0^.location = offloc_home) and (pl0^.hps > 0) then
           begin
             d(5, ljust('Home', justval));
-          end else if (pl0^.location = offloc_beggarwall) and (pl0^.hps > 0) then
+          end else
+          if (pl0^.location = offloc_beggarwall) and (pl0^.hps > 0) then
           begin
             d(5, ljust('Beggars Wall', justval));
-          end else if (pl0^.location = offloc_dormitory) and (pl0^.hps > 0) then
+          end else
+          if (pl0^.location = offloc_dormitory) and (pl0^.hps > 0) then
           begin
             d(10, ljust('Dormitory', justval));
-          end else if (pl0^.location in [offloc_innroom1..offloc_innroom4]) and (pl0^.hps > 0) then
+          end else
+          if (pl0^.location in [offloc_innroom1..offloc_innroom4]) and (pl0^.hps > 0) then
           begin
             d(5, ljust('The Inn', justval));
-          end else if (pl0^.location = offloc_castle) and (pl0^.hps > 0) then
+          end else
+          if (pl0^.location = offloc_castle) and (pl0^.hps > 0) then
           begin
             d(5, ljust('The Castle', justval));
-          end else if pl0^.hps > 0 then
+          end else
+          if pl0^.hps > 0 then
           begin
             d(15, ljust('Alive', justval));
-          end else if pl0^.hps = -9000 then
+          end else
+          if pl0^.hps = -9000 then
           begin
             d(12, ljust('Drugged', justval));
-          end else if pl0^.hps < 1 then
+          end else
+          if pl0^.hps < 1 then
           begin
             d(12, ljust('Dead', justval));
           end;

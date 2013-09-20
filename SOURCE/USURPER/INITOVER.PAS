@@ -110,7 +110,7 @@ begin
     end;
   end; {for x:= .end.}
 
-  {OverlayPath:=''; {skit jakob! this line should be commented out in release version}
+       {OverlayPath:=''; {skit jakob! this line should be commented out in release version}
   OverlayName := OverLayPath + 'USURPER.OVR';
   OvrInit(OverlayName); {Initializes the overlay manager and opens
                         the overlay file}
@@ -132,8 +132,10 @@ begin
   xmsok := False;
   emsok := False;
 
-  if param_hunt('/X') then xmsok := True;
-  if param_hunt('/E') then emsok := True;
+  if param_hunt('/X') then
+    xmsok := True;
+  if param_hunt('/E') then
+    emsok := True;
 
   if XMSOk then
   begin
@@ -150,7 +152,8 @@ begin
       end;
     end; {case .end.}
 
-  end else if EMSOK then
+  end else
+  if EMSOK then
   begin
     OvrInitEMS; {Loads the overlay file into EMS
                - EMSOK is variable flag set by

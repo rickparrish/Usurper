@@ -273,8 +273,10 @@ begin
     begin
       d(config.textcolor, 'Power Booster! Your hitpoints increase by 500!');
       gain := 32000 - player.maxhps;
-      if gain < 0 then gain := 0;
-      if gain > 500 then gain := 500;
+      if gain < 0 then
+        gain := 0;
+      if gain > 500 then
+        gain := 500;
       player.maxhps := player.maxhps + gain;
       player.hps := player.maxhps;
     end;
@@ -315,7 +317,8 @@ begin
     {news-paper}
     newsy(True,
       uyellow + 'Heroic Deed!' + config.textcol1,
-      ' ' + uplc + player.name2 + config.textcol1 + ' encountered the ' + supcol + 'Supreme Being' + config.textcol1 + +' and won!',
+      ' ' + uplc + player.name2 + config.textcol1 + ' encountered the ' + supcol + 'Supreme Being' +
+      config.textcol1 + +' and won!',
       ' ' + uplc + player.name2 + config.textcol1 + ' ended ' + sex3[player.sex] + ' career with',
       ' a brilliant victory!',
       '',
@@ -416,13 +419,15 @@ begin
         delete_file(global_kingf);
       end;
 
-      if player.sex = 1 then s := 'King'
+      if player.sex = 1 then
+        s := 'King'
       else s := 'Queen';
 
       {kings-news}
       Generic_News(RoyalNews,
         True,
-        ' ' + config.textcol1 + s + ' ' + ukingc + player.name2 + config.textcol1 + ' completed ' + sex3[player.sex] + ' last quest and abdicated.',
+        ' ' + config.textcol1 + s + ' ' + ukingc + player.name2 + config.textcol1 + ' completed ' +
+        sex3[player.sex] + ' last quest and abdicated.',
         '',
         '',
         '',
@@ -484,7 +489,7 @@ begin
 
         normal_exit;
 
-      end; {Rest In Peace .end.}
+      end;       {Rest In Peace .end.}
 
       'B': begin {Become a God}
 
@@ -526,7 +531,8 @@ begin
     {news-paper}
     newsy(True,
       'Tragic!',
-      ' ' + uplc + player.name2 + config.textcol1 + ' encountered the ' + supcol + 'Supreme Being' + config.textcol1 + ' and was',
+      ' ' + uplc + player.name2 + config.textcol1 + ' encountered the ' + supcol + 'Supreme Being' +
+      config.textcol1 + ' and was',
       ' destroyed. May the brutal monster be defeated soon.',
       '',
       '',

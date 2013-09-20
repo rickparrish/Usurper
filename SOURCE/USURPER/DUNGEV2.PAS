@@ -69,13 +69,15 @@ begin
     {become addicted}
     x := random(5) + 5;
     player.addict := player.addict + x;
-    if player.addict > 100 then player.addict := 100;
+    if player.addict > 100 then
+      player.addict := 100;
     d(12, 'YOUR DRUG ADDICTION RAISED TO ' + commastr(player.addict) + '% !');
 
     {news-paper}
     newsy(True,
       'Glue Sniffer',
-      ' ' + uplc + player.name2 + config.textcol1 + ' the ' + race_display(2, player.race, 0) + ' sniffed Glue in the dungeons.',
+      ' ' + uplc + player.name2 + config.textcol1 + ' the ' + race_display(2, player.race, 0) +
+      ' sniffed Glue in the dungeons.',
       '',
       '',
       '',
@@ -110,7 +112,8 @@ begin
     crlf;
     d(15, '-*Dungeon Event*-');
     d(config.textcolor, 'You meet with the evil Witch-Doctor ' + uplc + doctor + config.textcol1 + '.');
-    d(config.textcolor, uplc + doctor + config.textcol1 + ' wants ' + uyellow + commastr(cost) + config.textcol1 + ' of your hard ' + 'earned ' + many_money(cost) + '.');
+    d(config.textcolor, uplc + doctor + config.textcol1 + ' wants ' + uyellow + commastr(cost) +
+      config.textcol1 + ' of your hard ' + 'earned ' + many_money(cost) + '.');
     d(config.textcolor, 'If you don''t pay he will use his voodoo dolls and make you suffer!');
     crlf;
 
@@ -125,7 +128,8 @@ begin
         {news-paper}
         newsy(True,
           'Blackmail in the Dungeons',
-          ' ' + uplc + player.name2 + config.textcol1 + ' the ' + race_display(2, player.race, 0) + ' was forced to pay a heap of ' + config.moneytype + ' to',
+          ' ' + uplc + player.name2 + config.textcol1 + ' the ' + race_display(2, player.race, 0) +
+          ' was forced to pay a heap of ' + config.moneytype + ' to',
           ' ' + uplc + doctor + config.textcol1 + ' the witch-doctor!',
           '',
           '',
@@ -147,25 +151,28 @@ begin
             case random(3) of
               0: begin {lose xp}
                 cost := player.level * 1500;
-                if cost > player.exp then cost := player.exp;
+                if cost > player.exp then
+                  cost := player.exp;
                 d(12, 'YOU LOSE ' + commastr(cost) + ' EXPERIENCE POINTS!');
                 decplayerexp(player, cost);
               end;
               1: begin {lose dungeon fights}
                 cost := random(5) + 1;
-                if cost > player.fights then cost := player.fights;
+                if cost > player.fights then
+                  cost := player.fights;
                 d(12, 'YOU LOSE ' + commastr(cost) + ' DUNGEON FIGHTS!');
                 player.fights := player.fights - cost;
               end;
               2: begin {lose player fights}
                 cost := random(3) + 1;
-                if cost > player.pfights then cost := player.pfights;
+                if cost > player.pfights then
+                  cost := player.pfights;
                 d(12, 'YOU LOSE ' + commastr(cost) + ' PLAYER FIGHTS!');
                 player.pfights := player.pfights - cost;
               end;
             end; {case .end.}
 
-            {news-paper}
+                 {news-paper}
             newsy(True,
               'Cursed by Witch-Doctor',
               ' ' + uplc + player.name2 + config.textcol1 + ' was cursed when trying to escape from',
@@ -179,7 +186,7 @@ begin
               '');
 
           end; {escape failed *end*}
-        end; {case .end.}
+        end;   {case .end.}
 
       end
     end;
@@ -213,8 +220,10 @@ begin
 
   {number of strangers}
   foes := random(10) + 2;
-  if foes <= team_active(pl1, pl2, pl3, pl4) then foes := foes + 3;
-  if foes > global_maxmon then foes := global_maxmon;
+  if foes <= team_active(pl1, pl2, pl3, pl4) then
+    foes := foes + 3;
+  if foes > global_maxmon then
+    foes := global_maxmon;
 
   {type of strangers}
   y := random(4);
@@ -246,13 +255,14 @@ begin
           0: s := 'Orc';
           1: s := 'Half-Orc';
         end;
-        if i = 1 then s := 'Orc Leader'; {the boss}
+        if i = 1 then
+          s := 'Orc Leader'; {the boss}
 
         create_monster(i,              {#}
           s,              {name}
           global_dungeonlevel * 5,          {hps}
           global_dungeonlevel * 2,          {strength}
-          0,          {defence}
+          0,              {defence}
           'Husch Husch!', {phrase}
           False,          {grabweap}
           False,          {grabarm}
@@ -279,20 +289,21 @@ begin
           0: s := 'Troll';
           1: s := 'Half-Troll';
         end;
-        if i = 1 then s := 'Troll Leader'; {the boss}
+        if i = 1 then
+          s := 'Troll Leader'; {the boss}
 
         create_monster(i,              {#}
-          s,              {name}
+          s,                 {name}
           global_dungeonlevel * 9,          {hps}
           global_dungeonlevel * 3,          {strength}
-          0,          {defence}
+          0,                 {defence}
           'Gsawha! Stmack!', {phrase}
-          False,          {grabweap}
-          False,          {grabarm}
-          'Club',         {weapon-string}
-          'Skin',         {armor-string}
-          False,          {poisoned-should be false}
-          False,          {disease -should be false}
+          False,             {grabweap}
+          False,             {grabarm}
+          'Club',            {weapon-string}
+          'Skin',            {armor-string}
+          False,             {poisoned-should be false}
+          False,             {disease -should be false}
           global_dungeonlevel * 4,          {punch}
           global_dungeonlevel * 3,          {armpow}
           global_dungeonlevel * 3);         {weappow}
@@ -313,13 +324,14 @@ begin
           1: s := 'Thief';
           2: s := 'Pirate'
         end;
-        if i = 1 then s := 'Rogue Leader'; {the boss}
+        if i = 1 then
+          s := 'Rogue Leader'; {the boss}
 
         create_monster(i,              {#}
           s,              {name}
           global_dungeonlevel * 5,          {hps}
           global_dungeonlevel * 2,          {strength}
-          0,          {defence}
+          0,              {defence}
           'Shining gold!',{phrase}
           False,          {grabweap}
           False,          {grabarm}
@@ -344,20 +356,21 @@ begin
           0: s := 'Dwarf';
           1: s := 'Dwarf';
         end;
-        if i = 1 then s := 'Dwarf Leader'; {the boss}
+        if i = 1 then
+          s := 'Dwarf Leader'; {the boss}
 
         create_monster(i,              {#}
-          s,              {name}
+          s,                   {name}
           global_dungeonlevel * 6,          {hps}
           global_dungeonlevel * 3,          {strength}
-          0,          {defence}
+          0,                   {defence}
           'Take no prisoners!',{phrase}
-          False,          {grabweap}
-          False,          {grabarm}
-          'Axe',          {weapon-string}
-          'Chain-mail',   {armor-string}
-          False,          {poisoned-should be false}
-          False,          {disease -should be false}
+          False,               {grabweap}
+          False,               {grabarm}
+          'Axe',               {weapon-string}
+          'Chain-mail',        {armor-string}
+          False,               {poisoned-should be false}
+          False,               {disease -should be false}
           global_dungeonlevel * 3,          {punch}
           global_dungeonlevel * 3,          {armpow}
           global_dungeonlevel * 3);         {weappow}
@@ -366,7 +379,7 @@ begin
     end;
   end; {case .end.}
 
-  {give the player a chance to run away?}
+       {give the player a chance to run away?}
   goahead := True;
   crlf;
 
@@ -498,7 +511,7 @@ begin
             end;
           end;
         end;
-      end; {bandits demanding money *end*}
+      end;     {bandits demanding money *end*}
       1: begin {bandits offer Map *start*}
         x := random(5000) + 5000;
         crlf;
@@ -521,7 +534,8 @@ begin
             pause;
             s := 'deal';
             decplayermoney(player, x);
-          end else if player.gold < x then
+          end else
+          if player.gold < x then
           begin
             You_Cant_Afford_It;
 
@@ -697,7 +711,8 @@ begin
                   if (danger > 7) and (random(2) = 0) and (enemy_here = True) then
                   begin
                     {d(15,'high danger');}
-                  end else if (danger > 5) and (random(2) = 0) and (enemy_here = True) then
+                  end else
+                  if (danger > 5) and (random(2) = 0) and (enemy_here = True) then
                   begin
                     d(11, 'You can feel the presence of a spirit!');
                     d(5, 'The spirit speaks :');
@@ -721,7 +736,8 @@ begin
                         d(15, 'Oh no! The corpses and mummies are rising from their graves!');
 
                         foes := random(15) + 5;
-                        if foes > global_maxmon then foes := global_maxmon;
+                        if foes > global_maxmon then
+                          foes := global_maxmon;
 
                         for i := 1 to foes do
                         begin
@@ -747,30 +763,34 @@ begin
                           end;
 
                           Create_Monster(i,              {#}
-                            s,              {name}
-                            hps,            {hps}
+                            s,                   {name}
+                            hps,                 {hps}
                             global_dungeonlevel * 3,          {strength}
-                            0,          {defence}
-                            'Mmmm..',       {phrase}
-                            False,          {grabweap}
-                            False,          {grabarm}
-                            'Lance',        {weapon-string}
+                            0,                   {defence}
+                            'Mmmm..',            {phrase}
+                            False,               {grabweap}
+                            False,               {grabarm}
+                            'Lance',             {weapon-string}
                             'Shimmering Light',  {armor-string}
-                            False,          {poisoned-should be false}
-                            False,          {disease -should be false}
+                            False,               {poisoned-should be false}
+                            False,               {disease -should be false}
                             global_dungeonlevel * 3,          {punch}
                             global_dungeonlevel * 2,          {armpow}
                             global_dungeonlevel * 2);         {weappow}
                         end;
 
 
-                        if player_active(pl1, True) then alivebefore1 := True
+                        if player_active(pl1, True) then
+                          alivebefore1 := True
                         else alivebefore1 := False;
-                        if player_active(pl2, True) then alivebefore2 := True
+                        if player_active(pl2, True) then
+                          alivebefore2 := True
                         else alivebefore2 := False;
-                        if player_active(pl3, True) then alivebefore3 := True
+                        if player_active(pl3, True) then
+                          alivebefore3 := True
                         else alivebefore3 := False;
-                        if player_active(pl4, True) then alivebefore4 := True
+                        if player_active(pl4, True) then
+                          alivebefore4 := True
                         else alivebefore4 := False;
 
                         global_escape := False;
@@ -805,7 +825,8 @@ begin
                         d(config.textcolor, 'You leave quietly and without hearing from the Spirit.');
                       end;
                     end;
-                  end else if (danger > 3) and (random(3) = 0) and (enemy_here = True) then
+                  end else
+                  if (danger > 3) and (random(3) = 0) and (enemy_here = True) then
                   begin
                     d(11, 'You feel that something or someone is watching you...');
                   end;
@@ -844,10 +865,14 @@ begin
                   d(config.textcolor, ' ' + many_money(xx) + '!');
 
                   incplayermoney(player, xx);
-                  if player_active(pl1, True) then incplayermoney(pl1, xx);
-                  if player_active(pl2, True) then incplayermoney(pl2, xx);
-                  if player_active(pl3, True) then incplayermoney(pl3, xx);
-                  if player_active(pl4, True) then incplayermoney(pl4, xx);
+                  if player_active(pl1, True) then
+                    incplayermoney(pl1, xx);
+                  if player_active(pl2, True) then
+                    incplayermoney(pl2, xx);
+                  if player_active(pl3, True) then
+                    incplayermoney(pl3, xx);
+                  if player_active(pl4, True) then
+                    incplayermoney(pl4, xx);
 
                   {send a little message to team about this event}
                   new(player0);
@@ -897,7 +922,8 @@ begin
                         '',
                         '',
                         '');
-                    end else if (alivebefore = True) and
+                    end else
+                    if (alivebefore = True) and
                       (player_active(player0^, True) = False) then
                     begin
                       {team mate died in the last fight}
@@ -1107,7 +1133,7 @@ begin
                 pause;
               end;
 
-            end;  {give more money *end*}
+            end;       {give more money *end*}
             'C': begin {club beggar *start*}
               d(global_talkcol, 'Sure Sure! Old man! I will give you some more alright.');
               d(config.textcolor, 'You manage to draw the beggars attention to another direction.');
@@ -1147,12 +1173,12 @@ begin
         pause;
       end;
 
-    end;  {give money *end*}
+    end;       {give money *end*}
     'P': begin {push aside *start*}
       d(config.textcolor, 'You gently push the man aside and continue your journey.');
       d(config.textcolor, 'From behind you hear the beggar angrily muttering curses.');
       pause;
-    end;  {push aside *end*}
+    end;       {push aside *end*}
     'S': begin {stomp beggar *start*}
       crlf;
       d(global_talkcol, 'I''m gonna teach you a lesson old man!');
@@ -1176,7 +1202,7 @@ begin
       x := random(40) + 30;
       give_darkness(player, x);
       tell_the_news(KickAround);
-    end;  {stomp beggar *end*}
+    end;       {stomp beggar *end*}
     'K': begin {kill beggar *start*}
       crlf;
       case random(2) of
@@ -1256,7 +1282,7 @@ var mission_active: boolean;
               armor := 'Leather';
             end;
           end;
-        end; {mountains *end*}
+        end;          {mountains *end*}
         Desert: begin {desert *start*}
           case random(2) of
             0: s := 'Robber Knight';
@@ -1277,7 +1303,7 @@ var mission_active: boolean;
               armor := 'Leather';
             end;
           end;
-        end; {desert *end*}
+        end;           {desert *end*}
         Forests: begin {forest *start*}
           case random(2) of
             0: s := 'Tree Hunter';
@@ -1329,7 +1355,7 @@ var mission_active: boolean;
         end;
       end;
 
-      {let's create some monsters!}
+           {let's create some monsters!}
       Create_Monster(i,              {#}
         s,              {name}
         hps,            {hps}
@@ -1352,13 +1378,17 @@ var mission_active: boolean;
     global_nobeg := True;
     global_escape := False;
 
-    if player_active(pl1, True) then alivebefore1 := True
+    if player_active(pl1, True) then
+      alivebefore1 := True
     else alivebefore1 := False;
-    if player_active(pl2, True) then alivebefore2 := True
+    if player_active(pl2, True) then
+      alivebefore2 := True
     else alivebefore2 := False;
-    if player_active(pl3, True) then alivebefore3 := True
+    if player_active(pl3, True) then
+      alivebefore3 := True
     else alivebefore3 := False;
-    if player_active(pl4, True) then alivebefore4 := True
+    if player_active(pl4, True) then
+      alivebefore4 := True
     else alivebefore4 := False;
 
     player_vs_monsters(pl_vs_monster, pl1, pl2, pl3, pl4);
@@ -1465,7 +1495,8 @@ var mission_active: boolean;
           '',
           '',
           '');
-      end else if (alivebefore = True) and (player_active(player0^, True) = False) then
+      end else
+      if (alivebefore = True) and (player_active(player0^, True) = False) then
       begin
         {team mate died in the fight}
         case random(2) of
@@ -1628,13 +1659,13 @@ var mission_active: boolean;
         case ch of
           'A': begin {attack robbers *start*}
             fight_scum(mountains, foes);
-          end;  {attack robbers *end*}
+          end;       {attack robbers *end*}
           'R': begin {run away *start*}
             run_away(Mountains);
-          end;  {run away *end*}
+          end;       {run away *end*}
         end;
 
-      end; {mountains encounter *end*}
+      end;          {mountains encounter *end*}
       Desert: begin {desert encounter *start*}
         crlf;
         sd(3, 'You have spotted ');
@@ -1649,13 +1680,13 @@ var mission_active: boolean;
         case ch of
           'A': begin {attack robbers *start*}
             fight_scum(Desert, foes);
-          end;  {attack robbers *end*}
+          end;       {attack robbers *end*}
           'R': begin {run away *start*}
             run_away(Desert);
-          end;  {run away *end*}
+          end;       {run away *end*}
         end;
 
-      end; {desert encounter *end*}
+      end;           {desert encounter *end*}
       Forests: begin {forest encounter *start*}
         foes := global_maxmon;
         crlf;
@@ -1671,10 +1702,10 @@ var mission_active: boolean;
         case ch of
           'A': begin {attack robbers *start*}
             fight_scum(Forests, foes);
-          end;  {attack robbers *end*}
+          end;       {attack robbers *end*}
           'R': begin {run away *start*}
             run_away(Forests);
-          end;  {run away *end*}
+          end;       {run away *end*}
         end;
 
       end;  {forest encounter *end*}
@@ -1728,7 +1759,7 @@ var mission_active: boolean;
         s,              {name}
         hps,            {hps}
         global_dungeonlevel * 2,          {strength}
-        0,          {defence}
+        0,              {defence}
         'help me!',     {phrase}
         False,          {grabweap}
         False,          {grabarm}
@@ -1746,13 +1777,17 @@ var mission_active: boolean;
     global_begged := False;
     global_nobeg := True;
 
-    if player_active(pl1, True) then alivebefore1 := True
+    if player_active(pl1, True) then
+      alivebefore1 := True
     else alivebefore1 := False;
-    if player_active(pl2, True) then alivebefore2 := True
+    if player_active(pl2, True) then
+      alivebefore2 := True
     else alivebefore2 := False;
-    if player_active(pl3, True) then alivebefore3 := True
+    if player_active(pl3, True) then
+      alivebefore3 := True
     else alivebefore3 := False;
-    if player_active(pl4, True) then alivebefore4 := True
+    if player_active(pl4, True) then
+      alivebefore4 := True
     else alivebefore4 := False;
 
     player_vs_monsters(pl_vs_monster, pl1, pl2, pl3, pl4);
@@ -1875,7 +1910,8 @@ var mission_active: boolean;
           '',
           '',
           '');
-      end else if (alivebefore = True) and (player_active(player0^, True) = False) then
+      end else
+      if (alivebefore = True) and (player_active(player0^, True) = False) then
       begin
         {team mate died in the fight}
         case random(2) of
@@ -1973,7 +2009,8 @@ begin
           sd(config.textcolor, 'Day one...over the mountains');
           delay2(del);
           crlf;
-          if random(evil) = 0 then encounter(MOUNTAINS);
+          if random(evil) = 0 then
+            encounter(MOUNTAINS);
 
           if mission_active = True then
           begin
@@ -1981,7 +2018,8 @@ begin
             sd(config.textcolor, 'Day two...through the desert');
             delay2(del);
             crlf;
-            if random(evil) = 0 then encounter(DESERT);
+            if random(evil) = 0 then
+              encounter(DESERT);
           end;
 
           if mission_active = True then
@@ -1991,7 +2029,8 @@ begin
             sd(15, forest);
             delay2(del);
             crlf;
-            if random(evil) = 0 then encounter(FORESTS);
+            if random(evil) = 0 then
+              encounter(FORESTS);
           end;
 
           if mission_active = True then
@@ -2025,13 +2064,13 @@ begin
         end;
       end;
 
-    end;  {talk *end}
+    end;       {talk *end}
     'A': begin {attack *start*}
       do_battle;
-    end;  {attack *end*}
+    end;       {attack *end*}
     'W': begin {walk away *start*}
       walk_away;
-    end;  {walk away *end*}
+    end;       {walk away *end*}
 
   end; {case .end.}
 

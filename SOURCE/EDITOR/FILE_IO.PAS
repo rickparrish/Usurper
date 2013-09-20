@@ -24,7 +24,7 @@ Copyright 2007 Jakob Dangarden
 
 unit File_Io; {Usurper Editor - File I/O Routines}
 
-{NOTE that all textfile related I/O is handled in OPENTXT.PAS}
+ {NOTE that all textfile related I/O is handled in OPENTXT.PAS}
 
 interface
 
@@ -42,7 +42,7 @@ type FilAction = (FLoad, FSave, FLock, FUnlock);
     FSDrink,
     FSMoat); {Used by file procedures/functions}
 
-{used by opentxt.pas - textfile sharing routines, originally from SWAG}
+ {used by opentxt.pas - textfile sharing routines, originally from SWAG}
 type TShare = (Twhat,   {not used - free!}
     TRewrite,
     TAppend,
@@ -240,10 +240,12 @@ var
   Name:    NameStr;
   Ext:     ExtStr;
 begin
-  if Lo(DosVersion) >= 3 then EXEName := ParamStr(0)
+  if Lo(DosVersion) >= 3 then
+    EXEName := ParamStr(0)
   else EXEName := FSearch(Wanted, GetEnv('PATH'));
   FSplit(EXEName, Dir, Name, Ext);
-  if Dir[Length(Dir)] = DIRECTORY_SEPARATOR then Dec(Dir[0]);
+  if Dir[Length(Dir)] = DIRECTORY_SEPARATOR then
+    Dec(Dir[0]);
 
   CalcHelpName := FSearch(wanted, Dir);
 end;
@@ -273,7 +275,8 @@ end;
 function Make_Dir(const s: string): boolean;
 begin
  {$I-}mkdir(s);{$I+}
-  if IOResult <> 0 then make_dir := False
+  if IOResult <> 0 then
+    make_dir := False
   else make_dir := True;
 end;
 
@@ -308,7 +311,8 @@ var
 begin
   Assign(fi_Temp, (st_Dir + '.'));
   getfattr(fi_Temp, wo_Fattr);
-  if (Doserror <> 0) then DirExist := False
+  if (Doserror <> 0) then
+    DirExist := False
   else
     DirExist := ((wo_Fattr and directory) <> 0);
 end; { DirExist END, from SWAG }
@@ -368,10 +372,12 @@ begin
   until (ok) or (i > locknrs);
 
  {$I-}fso := filesize(ofil);{$I+}
-  if IOResult <> 0 then unable_to_filesize(fname);
+  if IOResult <> 0 then
+    unable_to_filesize(fname);
 
  {$I-}Close(ofil);{$I+}
-  if IOResult <> 0 then unable_to_close(fname);
+  if IOResult <> 0 then
+    unable_to_close(fname);
 
   {reset filemode}
   filemode := memmy;
@@ -392,7 +398,8 @@ var {Classic Weapon and Armor files}
 
 begin
 
-  if weapon then Assign(weapfile, weapofile)
+  if weapon then
+    Assign(weapfile, weapofile)
   else Assign(armfile, armofile);
 
   dum := 0;
@@ -425,17 +432,21 @@ begin
   if weapon then
   begin
   {$I-}fsclassic := filesize(weapfile);{$I+}
-    if IOResult <> 0 then unable_to_filesize(weapofile);
+    if IOResult <> 0 then
+      unable_to_filesize(weapofile);
 
   {$I-}Close(weapfile);{$I+}
-    if IOResult <> 0 then unable_to_close(weapofile);
+    if IOResult <> 0 then
+      unable_to_close(weapofile);
   end else
   begin
   {$I-}fsclassic := filesize(armfile);{$I+}
-    if IOResult <> 0 then unable_to_filesize(armofile);
+    if IOResult <> 0 then
+      unable_to_filesize(armofile);
 
   {$I-}Close(armfile);{$I+}
-    if IOResult <> 0 then unable_to_close(armofile);
+    if IOResult <> 0 then
+      unable_to_close(armofile);
   end;
 
   {reset filemode}
@@ -477,10 +488,12 @@ begin
       until (ok) or (i > locknrs);
 
        {$I-}fs := filesize(playerfile);{$I+}
-      if IOresult <> 0 then unable_to_filesize(global_pfile + ' / ' + global_npfile);
+      if IOresult <> 0 then
+        unable_to_filesize(global_pfile + ' / ' + global_npfile);
 
        {$I-}Close(playerfile);{$I+}
-      if IOresult <> 0 then unable_to_close(global_pfile + ' / ' + global_npfile);
+      if IOresult <> 0 then
+        unable_to_close(global_pfile + ' / ' + global_npfile);
 
     end;
     FsLevel: begin {Level limits}
@@ -496,10 +509,12 @@ begin
       until (ok) or (i > locknrs);
 
        {$I-}fs := filesize(levelfile);{$I+}
-      if IOResult <> 0 then unable_to_filesize(lvlfile);
+      if IOResult <> 0 then
+        unable_to_filesize(lvlfile);
 
        {$I-}Close(levelfile);{$I+}
-      if IOResult <> 0 then unable_to_close(lvlfile);
+      if IOResult <> 0 then
+        unable_to_close(lvlfile);
 
     end;
     FsGuard: begin {DoorGuards}
@@ -515,10 +530,12 @@ begin
       until (ok) or (i > locknrs);
 
        {$I-}fs := filesize(guardfile);{$I+}
-      if IOResult <> 0 then unable_to_filesize(gufile);
+      if IOResult <> 0 then
+        unable_to_filesize(gufile);
 
        {$I-}Close(guardfile);{$I+}
-      if IOResult <> 0 then unable_to_close(gufile);
+      if IOResult <> 0 then
+        unable_to_close(gufile);
 
     end;
     FsMonster: begin {Monsters}
@@ -534,10 +551,12 @@ begin
       until (ok) or (i > locknrs);
 
        {$I-}fs := filesize(monsterfile);{$I+}
-      if IOResult <> 0 then unable_to_filesize(Monfile);
+      if IOResult <> 0 then
+        unable_to_filesize(Monfile);
 
        {$I-}Close(monsterfile);{$I+}
-      if IOResult <> 0 then unable_to_close(Monfile);
+      if IOResult <> 0 then
+        unable_to_close(Monfile);
 
     end;
     FsDrink: begin {Drinks}
@@ -555,10 +574,12 @@ begin
       until (ok) or (i > locknrs);
 
        {$I-}fs := filesize(cocktailfile);{$I+}
-      if IOResult <> 0 then unable_to_filesize(drinkfile);
+      if IOResult <> 0 then
+        unable_to_filesize(drinkfile);
 
        {$I-}Close(cocktailfile);{$I+}
-      if IOResult <> 0 then unable_to_close(drinkfile);
+      if IOResult <> 0 then
+        unable_to_close(drinkfile);
 
     end;
 
@@ -577,12 +598,14 @@ begin
       until (ok) or (i > locknrs);
 
        {$I-}fs := filesize(moatfile);{$I+}
-      if IOResult <> 0 then unable_to_filesize(motfile);
+      if IOResult <> 0 then
+        unable_to_filesize(motfile);
 
        {$I-}Close(moatfile);{$I+}
-      if IOResult <> 0 then unable_to_close(motfile);
+      if IOResult <> 0 then
+        unable_to_close(motfile);
 
-    end; {moat *end*}
+    end;         {moat *end*}
     FsGod: begin {God file}
 
       Assign(godfile, godsf);
@@ -598,12 +621,14 @@ begin
       until (ok) or (i > locknrs);
 
        {$I-}fs := filesize(godfile);{$I+}
-      if IOResult <> 0 then unable_to_filesize(godsf);
+      if IOResult <> 0 then
+        unable_to_filesize(godsf);
 
        {$I-}Close(godfile);{$I+}
-      if IOResult <> 0 then unable_to_close(godsf);
+      if IOResult <> 0 then
+        unable_to_close(godsf);
 
-    end; {god *end*}
+    end;           {god *end*}
 
     FsChild: begin {Child file}
 
@@ -620,16 +645,18 @@ begin
       until (ok) or (i > locknrs);
 
        {$I-}fs := filesize(childfile);{$I+}
-      if IOResult <> 0 then unable_to_filesize(childrenf);
+      if IOResult <> 0 then
+        unable_to_filesize(childrenf);
 
        {$I-}Close(childfile);{$I+}
-      if IOResult <> 0 then unable_to_close(childrenf);
+      if IOResult <> 0 then
+        unable_to_close(childrenf);
 
     end; {child *end*}
 
-  end; {case .end.}
+  end;   {case .end.}
 
-  {reset filemode}
+         {reset filemode}
   filemode := memmy;
 {$IFNDEF MSDOS}
   FileModeReadWrite := FileMode;
@@ -693,21 +720,25 @@ begin
   until (Ok) or (i > locknrs);
 
  {$I-}seek(ofil, filnr - 1);{$I+}
-  if IOResult <> 0 then unable_to_seek(fname, filnr - 1);
+  if IOResult <> 0 then
+    unable_to_seek(fname, filnr - 1);
 
   case action of
     Fload: begin
          {$I-}Read(ofil, objektt);{$I+}
-      if IOResult <> 0 then unable_to_read(fname);
+      if IOResult <> 0 then
+        unable_to_read(fname);
     end;
     FSave: begin
          {$I-}Write(ofil, objektt);{$I+}
-      if IOResult <> 0 then unable_to_write(fname);
+      if IOResult <> 0 then
+        unable_to_write(fname);
     end;
   end;
 
  {$I-}Close(ofil);{$I+}
-  if IOResult <> 0 then unable_to_close(fname);
+  if IOResult <> 0 then
+    unable_to_close(fname);
 
   {reset filemode}
   filemode := memmy;
@@ -756,16 +787,19 @@ begin
   until (Ok) or (i > 20);
 
  {$I-}seek(playerfile, gr - 1);{$I+}
-  if IOResult <> 0 then unable_to_seek(fname, gr - 1);
+  if IOResult <> 0 then
+    unable_to_seek(fname, gr - 1);
   case action of
     Fload: begin
          {$I-}Read(playerfile, ply);{$I+}
-      if IOResult <> 0 then unable_to_read(fname)
+      if IOResult <> 0 then
+        unable_to_read(fname)
       else ply.recnr := gr;
     end;
     Fsave: begin
          {$I-}Write(playerfile, ply);{$I+}
-      if IOResult <> 0 then unable_to_write(fname);
+      if IOResult <> 0 then
+        unable_to_write(fname);
     end;
   end;
 
@@ -817,21 +851,25 @@ begin
   until (Ok) or (i > 20);
 
  {$I-}seek(guardfile, gr - 1);{$I+}
-  if IOResult <> 0 then unable_To_seek(gufile, gr - 1);
+  if IOResult <> 0 then
+    unable_To_seek(gufile, gr - 1);
 
   case action of
     Fload: begin
          {$I-}Read(guardfile, grd);{$I+}
-      if IOResult <> 0 then unable_to_read(gufile);
+      if IOResult <> 0 then
+        unable_to_read(gufile);
     end;
     Fsave: begin
          {$I-}Write(guardfile, grd);{$I+}
-      if IOResult <> 0 then unable_to_write(gufile);
+      if IOResult <> 0 then
+        unable_to_write(gufile);
     end;
   end;
 
  {$I-}Close(guardfile);{$I+}
-  if IOResult <> 0 then unable_to_close(gufile);
+  if IOResult <> 0 then
+    unable_to_close(gufile);
 
   {reset filemode}
   filemode := memmy;
@@ -875,21 +913,25 @@ begin
   until (Ok) or (i > 20);
 
  {$I-}seek(moatfile, gr - 1);{$I+}
-  if IOResult <> 0 then unable_To_seek(motfile, gr - 1);
+  if IOResult <> 0 then
+    unable_To_seek(motfile, gr - 1);
 
   case action of
     Fload: begin
          {$I-}Read(moatfile, mot);{$I+}
-      if IOResult <> 0 then unable_to_read(motfile);
+      if IOResult <> 0 then
+        unable_to_read(motfile);
     end;
     Fsave: begin
          {$I-}Write(moatfile, mot);{$I+}
-      if IOResult <> 0 then unable_to_write(motfile);
+      if IOResult <> 0 then
+        unable_to_write(motfile);
     end;
   end;
 
  {$I-}Close(moatfile);{$I+}
-  if IOResult <> 0 then unable_to_close(motfile);
+  if IOResult <> 0 then
+    unable_to_close(motfile);
 
   {reset filemode}
   filemode := memmy;
@@ -933,21 +975,25 @@ begin
   until (Ok) or (i > 20);
 
  {$I-}seek(godfile, gr - 1);{$I+}
-  if IOResult <> 0 then unable_To_seek(godsf, gr - 1);
+  if IOResult <> 0 then
+    unable_To_seek(godsf, gr - 1);
 
   case action of
     Fload: begin
          {$I-}Read(godfile, goddy);{$I+}
-      if IOResult <> 0 then unable_to_read(godsf);
+      if IOResult <> 0 then
+        unable_to_read(godsf);
     end;
     Fsave: begin
          {$I-}Write(godfile, goddy);{$I+}
-      if IOResult <> 0 then unable_to_write(godsf);
+      if IOResult <> 0 then
+        unable_to_write(godsf);
     end;
   end;
 
  {$I-}Close(godfile);{$I+}
-  if IOResult <> 0 then unable_to_close(godsf);
+  if IOResult <> 0 then
+    unable_to_close(godsf);
 
   {reset filemode}
   filemode := memmy;
@@ -991,21 +1037,25 @@ begin
   until (Ok) or (i > 20);
 
  {$I-}seek(childfile, gr - 1);{$I+}
-  if IOResult <> 0 then unable_To_seek(childrenf, gr - 1);
+  if IOResult <> 0 then
+    unable_To_seek(childrenf, gr - 1);
 
   case action of
     Fload: begin
          {$I-}Read(childfile, childy);{$I+}
-      if IOResult <> 0 then unable_to_read(childrenf);
+      if IOResult <> 0 then
+        unable_to_read(childrenf);
     end;
     Fsave: begin
          {$I-}Write(childfile, childy);{$I+}
-      if IOResult <> 0 then unable_to_write(childrenf);
+      if IOResult <> 0 then
+        unable_to_write(childrenf);
     end;
   end;
 
  {$I-}Close(childfile);{$I+}
-  if IOResult <> 0 then unable_to_close(childrenf);
+  if IOResult <> 0 then
+    unable_to_close(childrenf);
 
   {reset filemode}
   filemode := memmy;
@@ -1123,21 +1173,25 @@ begin
   until (Ok) or (i > 20);
 
  {$I-}seek(cocktailfile, gr - 1);{$I+}
-  if IOResult <> 0 then unable_To_seek(drinkfile, gr - 1);
+  if IOResult <> 0 then
+    unable_To_seek(drinkfile, gr - 1);
 
   case action of
     Fload: begin
          {$I-}Read(cocktailfile, drnk);{$I+}
-      if IOResult <> 0 then unable_to_read(drinkfile);
+      if IOResult <> 0 then
+        unable_to_read(drinkfile);
     end;
     Fsave: begin
          {$I-}Write(cocktailfile, drnk);{$I+}
-      if IOResult <> 0 then unable_to_write(drinkfile);
+      if IOResult <> 0 then
+        unable_to_write(drinkfile);
     end;
   end;
 
  {$I-}Close(cocktailfile);{$I+}
-  if IOResult <> 0 then unable_to_close(drinkfile);
+  if IOResult <> 0 then
+    unable_to_close(drinkfile);
 
   {restore filemode}
   filemode := memmy;
@@ -1180,20 +1234,24 @@ begin
   until (Ok) or (i > 20);
 
  {$I-}seek(levelfile, gr - 1);{$I+}
-  if IOResult <> 0 then unable_to_seek(lvlfile, gr - 1);
+  if IOResult <> 0 then
+    unable_to_seek(lvlfile, gr - 1);
 
   case action of
     Fload: begin
          {$I-}Read(levelfile, lev);{$I+}
-      if IOresult <> 0 then unable_to_read(lvlfile);
+      if IOresult <> 0 then
+        unable_to_read(lvlfile);
     end;
     Fsave: begin
          {$I-}Write(levelfile, lev);{$I+}
-      if IOResult <> 0 then unable_to_write(lvlfile);
+      if IOResult <> 0 then
+        unable_to_write(lvlfile);
     end;
   end;
  {$I-}Close(levelfile);{$I+}
-  if IOResult <> 0 then unable_to_close(lvlfile);
+  if IOResult <> 0 then
+    unable_to_close(lvlfile);
   filemode := memmy;
 {$IFNDEF MSDOS}
   FileModeReadWrite := FileMode;
@@ -1235,21 +1293,25 @@ begin
   until (Ok) or (i > 20);
 
  {$I-}seek(monsterfile, gr - 1);{$I+}
-  if IOResult <> 0 then unable_to_Seek(monfile, gr - 1);
+  if IOResult <> 0 then
+    unable_to_Seek(monfile, gr - 1);
 
   case action of
     Fload: begin
         {$I-}Read(monsterfile, mony);{$I+}
-      if IOResult <> 0 then unable_to_read(monfile);
+      if IOResult <> 0 then
+        unable_to_read(monfile);
     end;
     FSave: begin
          {$I-}Write(monsterfile, mony);{$I+}
-      if IOResult <> 0 then unable_to_write(monfile);
+      if IOResult <> 0 then
+        unable_to_write(monfile);
     end;
   end;
 
  {$I-}Close(monsterfile);{$I+}
-  if IOResult <> 0 then unable_to_close(monfile);
+  if IOResult <> 0 then
+    unable_to_close(monfile);
 
   {reset filemode}
   filemode := memmy;
@@ -1288,13 +1350,16 @@ begin
   until (Ok) or (i > locknrs);
 
  {$I-}Seek(weapfile, nr - 1);{$I+}
-  if IOResult <> 0 then unable_to_seek(weapofile, nr - 1);
+  if IOResult <> 0 then
+    unable_to_seek(weapofile, nr - 1);
 
  {$I-}Read(weapfile, inweap);{$I+}
-  if IOResult <> 0 then unable_to_read(weapofile);
+  if IOResult <> 0 then
+    unable_to_read(weapofile);
 
  {$I-}Close(weapfile);{$I+}
-  if IOResult <> 0 then unable_to_close(weapofile);
+  if IOResult <> 0 then
+    unable_to_close(weapofile);
 
   {reset filemode}
   filemode := memmy;
@@ -1331,13 +1396,16 @@ begin
   until (Ok) or (i > locknrs);
 
  {$I-}Seek(armfile, nr - 1);{$I+}
-  if IOResult <> 0 then unable_to_seek(armofile, nr - 1);
+  if IOResult <> 0 then
+    unable_to_seek(armofile, nr - 1);
 
  {$I-}Read(armfile, inarm);{$I+}
-  if IOResult <> 0 then unable_to_read(armofile);
+  if IOResult <> 0 then
+    unable_to_read(armofile);
 
  {$I-}Close(armfile);{$I+}
-  if IOResult <> 0 then unable_to_close(armofile);
+  if IOResult <> 0 then
+    unable_to_close(armofile);
 
   filemode := memmy;
 {$IFNDEF MSDOS}
@@ -1352,150 +1420,180 @@ begin
   begin
     Assign(ofil, objf1);
   {$I-}rewrite(ofil);{$I+}
-    if IOResult <> 0 then unable_to_create(objf1);
+    if IOResult <> 0 then
+      unable_to_create(objf1);
 
   {$I-}Close(ofil);{$I+}
-    if IOResult <> 0 then unable_to_close(objf1);
+    if IOResult <> 0 then
+      unable_to_close(objf1);
 
   end;
   if not f_exists(objf2) or (force) then
   begin
     Assign(ofil, objf2);
   {$I-}rewrite(ofil);{$I+}
-    if IOResult <> 0 then unable_to_create(objf2);
+    if IOResult <> 0 then
+      unable_to_create(objf2);
 
   {$I-}Close(ofil);{$I+}
-    if IOResult <> 0 then unable_to_close(objf2);
+    if IOResult <> 0 then
+      unable_to_close(objf2);
 
   end;
   if not f_exists(objf3) or (force) then
   begin
     Assign(ofil, objf3);
   {$I-}rewrite(ofil);{$I+}
-    if IOResult <> 0 then unable_to_create(objf3);
+    if IOResult <> 0 then
+      unable_to_create(objf3);
 
   {$I-}Close(ofil);{$I+}
-    if IOResult <> 0 then unable_to_close(objf3);
+    if IOResult <> 0 then
+      unable_to_close(objf3);
 
   end;
   if not f_exists(objf4) or (force) then
   begin
     Assign(ofil, objf4);
   {$I-}rewrite(ofil);{$I+}
-    if IOResult <> 0 then unable_to_create(objf4);
+    if IOResult <> 0 then
+      unable_to_create(objf4);
 
   {$I-}Close(ofil);{$I+}
-    if IOResult <> 0 then unable_to_close(objf4);
+    if IOResult <> 0 then
+      unable_to_close(objf4);
 
   end;
   if not f_exists(objf5) or (force) then
   begin
     Assign(ofil, objf5);
   {$I-}rewrite(ofil);{$I+}
-    if IOResult <> 0 then unable_to_create(objf5);
+    if IOResult <> 0 then
+      unable_to_create(objf5);
 
   {$I-}Close(ofil);{$I+}
-    if IOResult <> 0 then unable_to_close(objf5);
+    if IOResult <> 0 then
+      unable_to_close(objf5);
 
   end;
   if not f_exists(objf6) or (force) then
   begin
     Assign(ofil, objf6);
   {$I-}rewrite(ofil);{$I+}
-    if IOResult <> 0 then unable_to_create(objf6);
+    if IOResult <> 0 then
+      unable_to_create(objf6);
 
   {$I-}Close(ofil);{$I+}
-    if IOResult <> 0 then unable_to_close(objf6);
+    if IOResult <> 0 then
+      unable_to_close(objf6);
 
   end;
   if not f_exists(objf7) or (force) then
   begin
     Assign(ofil, objf7);
   {$I-}rewrite(ofil);{$I+}
-    if IOResult <> 0 then unable_to_create(objf7);
+    if IOResult <> 0 then
+      unable_to_create(objf7);
 
   {$I-}Close(ofil);{$I+}
-    if IOResult <> 0 then unable_to_close(objf7);
+    if IOResult <> 0 then
+      unable_to_close(objf7);
 
   end;
   if not f_exists(objf8) or (force) then
   begin
     Assign(ofil, objf8);
   {$I-}rewrite(ofil);{$I+}
-    if IOResult <> 0 then unable_to_create(objf8);
+    if IOResult <> 0 then
+      unable_to_create(objf8);
 
   {$I-}Close(ofil);{$I+}
-    if IOResult <> 0 then unable_to_close(objf8);
+    if IOResult <> 0 then
+      unable_to_close(objf8);
 
   end;
   if not f_exists(objf9) or (force) then
   begin
     Assign(ofil, objf9);
   {$I-}rewrite(ofil);{$I+}
-    if IOResult <> 0 then unable_to_create(objf9);
+    if IOResult <> 0 then
+      unable_to_create(objf9);
 
   {$I-}Close(ofil);{$I+}
-    if IOResult <> 0 then unable_to_close(objf9);
+    if IOResult <> 0 then
+      unable_to_close(objf9);
 
   end;
   if not f_exists(objf10) or (force) then
   begin
     Assign(ofil, objf10);
   {$I-}rewrite(ofil);{$I+}
-    if IOResult <> 0 then unable_to_create(objf10);
+    if IOResult <> 0 then
+      unable_to_create(objf10);
 
   {$I-}Close(ofil);{$I+}
-    if IOResult <> 0 then unable_to_close(objf10);
+    if IOResult <> 0 then
+      unable_to_close(objf10);
 
   end;
   if not f_exists(objf11) or (force) then
   begin
     Assign(ofil, objf11);
   {$I-}rewrite(ofil);{$I+}
-    if IOResult <> 0 then unable_to_create(objf11);
+    if IOResult <> 0 then
+      unable_to_create(objf11);
 
   {$I-}Close(ofil);{$I+}
-    if IOResult <> 0 then unable_to_close(objf11);
+    if IOResult <> 0 then
+      unable_to_close(objf11);
 
   end;
   if not f_exists(objf12) or (force) then
   begin
     Assign(ofil, objf12);
   {$I-}rewrite(ofil);{$I+}
-    if IOResult <> 0 then unable_to_create(objf12);
+    if IOResult <> 0 then
+      unable_to_create(objf12);
 
   {$I-}Close(ofil);{$I+}
-    if IOResult <> 0 then unable_to_close(objf12);
+    if IOResult <> 0 then
+      unable_to_close(objf12);
 
   end;
   if not f_exists(objf13) or (force) then
   begin
     Assign(ofil, objf13);
   {$I-}rewrite(ofil);{$I+}
-    if IOResult <> 0 then unable_to_create(objf13);
+    if IOResult <> 0 then
+      unable_to_create(objf13);
 
   {$I-}Close(ofil);{$I+}
-    if IOResult <> 0 then unable_to_close(objf13);
+    if IOResult <> 0 then
+      unable_to_close(objf13);
 
   end;
   if not f_exists(objf14) or (force) then
   begin
     Assign(ofil, objf14);
   {$I-}rewrite(ofil);{$I+}
-    if IOResult <> 0 then unable_to_create(objf14);
+    if IOResult <> 0 then
+      unable_to_create(objf14);
 
   {$I-}Close(ofil);{$I+}
-    if IOResult <> 0 then unable_to_close(objf14);
+    if IOResult <> 0 then
+      unable_to_close(objf14);
 
   end;
   if not f_exists(objf15) or (force) then
   begin
     Assign(ofil, objf15);
   {$I-}rewrite(ofil);{$I+}
-    if IOResult <> 0 then unable_to_create(objf15);
+    if IOResult <> 0 then
+      unable_to_create(objf15);
 
   {$I-}Close(ofil);{$I+}
-    if IOResult <> 0 then unable_to_close(objf15);
+    if IOResult <> 0 then
+      unable_to_close(objf15);
 
   end;
 
@@ -1584,7 +1682,7 @@ begin
     end;}
       end;
       delay2(lockdelay);    (* Wait 1/10 second before retry *)
-      Inc(i);       (* Use your own delay routine here *)
+      Inc(i);               (* Use your own delay routine here *)
     end else
     begin
       i := tries;        (* Quit if not a sharing deny *)
@@ -1630,7 +1728,8 @@ begin
   TextModeReadWrite := memmy_rw;
 {$ENDIF}
 
-  if IOREs <> 0 then Open_TxtFile := False
+  if IOREs <> 0 then
+    Open_TxtFile := False
   else open_txtfile := True;
 
 end;
@@ -1640,10 +1739,12 @@ begin
 
  {$I-}Close(f);{$I+}
 {$IFDEF MSDOS}
-  if IOResult <> 0 then unable_to_close(textrec(f).Name);
+  if IOResult <> 0 then
+    unable_to_close(textrec(f).Name);
 {$ENDIF}
 {$IFNDEF MSDOS}
-  if IOResult <> 0 then unable_to_close(StrPas(textrec(f).Name));
+  if IOResult <> 0 then
+    unable_to_close(StrPas(textrec(f).Name));
 {$ENDIF}
 end;
 
@@ -1651,10 +1752,12 @@ procedure Readln_from_Text(var f: Text; var s: string);
 begin
  {$I-}readln(f, s);{$I+}
 {$IFDEF MSDOS}
-  if IOResult <> 0 then unable_to_read(textrec(f).Name);
+  if IOResult <> 0 then
+    unable_to_read(textrec(f).Name);
 {$ENDIF}
 {$IFNDEF MSDOS}
-  if IOResult <> 0 then unable_to_read(StrPas(textrec(f).Name));
+  if IOResult <> 0 then
+    unable_to_read(StrPas(textrec(f).Name));
 {$ENDIF}
 end;
 
@@ -1662,10 +1765,12 @@ procedure Write_To_Text(var f: Text; const s: string);
 begin
  {$I-}Write(f, s);{$I+}
 {$IFDEF MSDOS}
-  if IOResult <> 0 then unable_to_write(textrec(f).Name);
+  if IOResult <> 0 then
+    unable_to_write(textrec(f).Name);
 {$ENDIF}
 {$IFNDEF MSDOS}
-  if IOResult <> 0 then unable_to_write(StrPas(textrec(f).Name));
+  if IOResult <> 0 then
+    unable_to_write(StrPas(textrec(f).Name));
 {$ENDIF}
 end;
 
@@ -1673,10 +1778,12 @@ procedure Writeln_To_Text(var f: Text; const s: string);
 begin
  {$I-}writeln(f, s);{$I+}
 {$IFDEF MSDOS}
-  if IOResult <> 0 then unable_to_write(textrec(f).Name);
+  if IOResult <> 0 then
+    unable_to_write(textrec(f).Name);
 {$ENDIF}
 {$IFNDEF MSDOS}
-  if IOResult <> 0 then unable_to_write(StrPas(textrec(f).Name));
+  if IOResult <> 0 then
+    unable_to_write(StrPas(textrec(f).Name));
 {$ENDIF}
 end;
 

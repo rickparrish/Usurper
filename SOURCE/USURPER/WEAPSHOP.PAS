@@ -156,7 +156,8 @@ begin {Weapon Shop}
   exit_shop := False;
   {fetching Tullys name from .CFG}
   tully^ := cfg_string(15);
-  if tully^ = '' then tully^ := 'Tully';
+  if tully^ = '' then
+    tully^ := 'Tully';
 
   crlf;
   komihag := ' ';
@@ -181,7 +182,8 @@ begin {Weapon Shop}
 
       Bad_News('W');
 
-    end else if komihag = ' ' then
+    end else
+    if komihag = ' ' then
     begin
       display_menu(True, True);
       cho := upcase(getchar);
@@ -283,7 +285,8 @@ begin {Weapon Shop}
             normcol := 3;
             shadcol := 8;
 
-            if restrict then col := shadcol
+            if restrict then
+              col := shadcol
             else col := normcol;
 
             {#}
@@ -296,14 +299,16 @@ begin {Weapon Shop}
               s := s + '.';
             end;
             normcol := 15;
-            if restrict then col := shadcol
+            if restrict then
+              col := shadcol
             else col := normcol;
 
             sd(col, s);
 
             {price}
             normcol := 14;
-            if restrict then col := shadcol
+            if restrict then
+              col := shadcol
             else col := normcol;
 
             s := commastr(objekt^.Value);
@@ -361,7 +366,8 @@ begin {Weapon Shop}
 
     case cho of
       '?': begin
-        if player.expert = True then display_menu(True, False)
+        if player.expert = True then
+          display_menu(True, False)
         else display_menu(False, False);
       end;
       'S': begin
@@ -421,7 +427,8 @@ begin {Weapon Shop}
                   begin
                     sd(global_itemcol, objekt^.Name);
                     sd(config.textcolor, ' is worthless!, ' + tully^ + ' says.');
-                  end else if objekt^.cursed = True then
+                  end else
+                  if objekt^.cursed = True then
                   begin
                     sd(global_itemcol, objekt^.Name);
                     d(config.textcolor, ' is cursed!');
@@ -474,7 +481,8 @@ begin {Weapon Shop}
                   begin
                     sd(global_talkcol, 'That item is worthless!');
                     d(config.textcolor, ', ' + tully^ + ' says.');
-                  end else if objekt^.cursed = True then
+                  end else
+                  if objekt^.cursed = True then
                   begin
                     sd(global_talkcol, 'I don''t buy cursed items!');
                     d(config.textcolor, ', ' + tully^ + ' says.');
@@ -558,7 +566,8 @@ begin {Weapon Shop}
                 if player.gold >= wweapon.Value then
                 begin
                   x := i;
-                end else if player.gold < wweapon.Value then
+                end else
+                if player.gold < wweapon.Value then
                 begin
                   break;
                 end;
@@ -613,10 +622,12 @@ begin {Weapon Shop}
                   if (objekt^.good) and (player.chiv < 1) and (player.dark > 0) then
                   begin
                     go_ahead := False;
-                  end else if (objekt^.evil = True) and (player.chiv > 0) and (player.dark < 1) then
+                  end else
+                  if (objekt^.evil = True) and (player.chiv > 0) and (player.dark < 1) then
                   begin
                     go_ahead := False;
-                  end else if class_restricted(player.class, objekt^, 0) = True then
+                  end else
+                  if class_restricted(player.class, objekt^, 0) = True then
                   begin
                     go_ahead := False;
                   end;
@@ -842,7 +853,8 @@ begin {Weapon Shop}
                 begin
                   d(12, 'This item is charmed for good characters.');
                   d(12, 'You can buy it, but you can''t use it!');
-                end else if (objekt^.evil = True) and (player.chiv > 0) and (player.dark < 1) then
+                end else
+                if (objekt^.evil = True) and (player.chiv > 0) and (player.dark < 1) then
                 begin
                   d(12, 'This item is enchanted and can be used by evil characters only.');
                   d(12, 'You can buy it, but not use it!');
@@ -967,7 +979,7 @@ begin {Weapon Shop}
         exit_shop := True;
       end; {return .end.}
 
-    end; {case .end.}
+    end;   {case .end.}
 
   until exit_shop = True;
 

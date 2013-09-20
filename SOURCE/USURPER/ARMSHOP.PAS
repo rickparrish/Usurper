@@ -137,7 +137,8 @@ begin
   end;
 
   {return result}
-  if deal then purchase_now := True
+  if deal then
+    purchase_now := True
   else purchase_now := False;
 
 end; {purchase_now *end*}
@@ -165,10 +166,14 @@ begin
 
       ok := True;
 
-      if class_restricted(player.class, objekt^, 0) = True then ok := False;
-      if (player.dark > 0) and (objekt^.good) then ok := False;
-      if (player.chiv > 0) and (objekt^.evil) then ok := False;
-      if player.gold < objekt^.Value then ok := False;
+      if class_restricted(player.class, objekt^, 0) = True then
+        ok := False;
+      if (player.dark > 0) and (objekt^.good) then
+        ok := False;
+      if (player.chiv > 0) and (objekt^.evil) then
+        ok := False;
+      if player.gold < objekt^.Value then
+        ok := False;
 
       if ok then
       begin
@@ -259,25 +264,34 @@ begin
 
     menu2(ljust('(B)uy', justval));
     justval := 16;
-    if config.allowitem[2] then menu2(ljust('(H)ead Items', justval));
-    if config.allowitem[3] then menu3(ljust('B(o)dy Items', justval), 3);
-    if config.allowitem[4] then menu2(ljust('(A)rm Items', justval));
+    if config.allowitem[2] then
+      menu2(ljust('(H)ead Items', justval));
+    if config.allowitem[3] then
+      menu3(ljust('B(o)dy Items', justval), 3);
+    if config.allowitem[4] then
+      menu2(ljust('(A)rm Items', justval));
     crlf;
 
     justval := 12;
     menu2(ljust('(S)ell', justval));
     justval := 16;
-    if config.allowitem[1] then menu3(ljust('Ha(n)d Items', justval), 4);
-    if config.allowitem[7] then menu2(ljust('(L)eg Items', justval));
-    if config.allowitem[8] then menu2(ljust('(F)eet Items', justval));
+    if config.allowitem[1] then
+      menu3(ljust('Ha(n)d Items', justval), 4);
+    if config.allowitem[7] then
+      menu2(ljust('(L)eg Items', justval));
+    if config.allowitem[8] then
+      menu2(ljust('(F)eet Items', justval));
     crlf;
 
     justval := 12;
     menu2(ljust('(R)eturn', justval));
     justval := 16;
-    if config.allowitem[12] then menu3(ljust('Fac(e) Items', justval), 5);
-    if config.allowitem[14] then menu2(ljust('(C)loaks', justval));
-    if config.allowitem[13] then menu3(ljust('Sh(i)elds', justval), 4);
+    if config.allowitem[12] then
+      menu3(ljust('Fac(e) Items', justval), 5);
+    if config.allowitem[14] then
+      menu2(ljust('(C)loaks', justval));
+    if config.allowitem[13] then
+      menu3(ljust('Sh(i)elds', justval), 4);
     crlf;
     crlf;
     menu('(1) ask ' + uplc + reese^ + config.textcol1 + ' to help you with your equipment!');
@@ -310,15 +324,24 @@ begin
       begin
         s := 'Armors (B,S';
 
-        if config.allowitem[2] then s := s + ',H';
-        if config.allowitem[3] then s := s + ',O';
-        if config.allowitem[4] then s := s + ',A';
-        if config.allowitem[1] then s := s + ',N';
-        if config.allowitem[7] then s := s + ',L';
-        if config.allowitem[8] then s := s + ',F';
-        if config.allowitem[12] then s := s + ',E';
-        if config.allowitem[14] then s := s + ',C';
-        if config.allowitem[13] then s := s + ',I';
+        if config.allowitem[2] then
+          s := s + ',H';
+        if config.allowitem[3] then
+          s := s + ',O';
+        if config.allowitem[4] then
+          s := s + ',A';
+        if config.allowitem[1] then
+          s := s + ',N';
+        if config.allowitem[7] then
+          s := s + ',L';
+        if config.allowitem[8] then
+          s := s + ',F';
+        if config.allowitem[12] then
+          s := s + ',E';
+        if config.allowitem[14] then
+          s := s + ',C';
+        if config.allowitem[13] then
+          s := s + ',I';
 
         s := s + ',R,?) :';
 
@@ -361,21 +384,39 @@ begin
   new(inarm);
 
   {set default armor type when entering proc, NEW mode}
-  if config.allowitem[1] then soktyp := Arms
-  else if config.allowitem[2] then soktyp := Head
-  else if config.allowitem[3] then soktyp := Body
-  else if config.allowitem[4] then soktyp := Arms
-  else if config.allowitem[7] then soktyp := Legs
-  else if config.allowitem[8] then soktyp := Feet
+  if config.allowitem[1] then
+    soktyp := Arms
+  else
+  if config.allowitem[2] then
+    soktyp := Head
+  else
+  if config.allowitem[3] then
+    soktyp := Body
+  else
+  if config.allowitem[4] then
+    soktyp := Arms
+  else
+  if config.allowitem[7] then
+    soktyp := Legs
+  else
+  if config.allowitem[8] then
+    soktyp := Feet
 
-  else if config.allowitem[12] then soktyp := Face
-  else if config.allowitem[13] then soktyp := Shield
-  else if config.allowitem[14] then soktyp := Abody
+  else
+  if config.allowitem[12] then
+    soktyp := Face
+  else
+  if config.allowitem[13] then
+    soktyp := Shield
+  else
+  if config.allowitem[14] then
+    soktyp := Abody
   else soktyp := Head;
 
   {fetch Reeses name from .CFG, #16}
   reese^ := cfg_string(16);
-  if reese^ = '' then reese^ := 'Reese';
+  if reese^ = '' then
+    reese^ := 'Reese';
 
   komihag := ' ';
   leave_place := False;
@@ -402,7 +443,8 @@ begin
 
       Bad_News('A');
 
-    end else if komihag = ' ' then
+    end else
+    if komihag = ' ' then
     begin
       display_menu(True, True);
       cho := upcase(getchar);
@@ -414,19 +456,29 @@ begin
 
     if cho = '?' then
     begin
-      if player.expert = True then display_menu(True, False)
+      if player.expert = True then
+        display_menu(True, False)
       else display_menu(False, False);
     end;
 
-    if (cho = 'H') and (config.allowitem[2] = False) and (config.classic = False) then cho := ' ';
-    if (cho = 'O') and (config.allowitem[3] = False) and (config.classic = False) then cho := ' ';
-    if (cho = 'A') and (config.allowitem[4] = False) and (config.classic = False) then cho := ' ';
-    if (cho = 'N') and (config.allowitem[1] = False) and (config.classic = False) then cho := ' ';
-    if (cho = 'L') and (config.allowitem[7] = False) and (config.classic = False) then cho := ' ';
-    if (cho = 'F') and (config.allowitem[8] = False) and (config.classic = False) then cho := ' ';
-    if (cho = 'E') and (config.allowitem[12] = False) and (config.classic = False) then cho := ' ';
-    if (cho = 'C') and (config.allowitem[14] = False) and (config.classic = False) then cho := ' ';
-    if (cho = 'I') and (config.allowitem[13] = False) and (config.classic = False) then cho := ' ';
+    if (cho = 'H') and (config.allowitem[2] = False) and (config.classic = False) then
+      cho := ' ';
+    if (cho = 'O') and (config.allowitem[3] = False) and (config.classic = False) then
+      cho := ' ';
+    if (cho = 'A') and (config.allowitem[4] = False) and (config.classic = False) then
+      cho := ' ';
+    if (cho = 'N') and (config.allowitem[1] = False) and (config.classic = False) then
+      cho := ' ';
+    if (cho = 'L') and (config.allowitem[7] = False) and (config.classic = False) then
+      cho := ' ';
+    if (cho = 'F') and (config.allowitem[8] = False) and (config.classic = False) then
+      cho := ' ';
+    if (cho = 'E') and (config.allowitem[12] = False) and (config.classic = False) then
+      cho := ' ';
+    if (cho = 'C') and (config.allowitem[14] = False) and (config.classic = False) then
+      cho := ' ';
+    if (cho = 'I') and (config.allowitem[13] = False) and (config.classic = False) then
+      cho := ' ';
 
     if (cho in ['H', 'O', 'A', 'N', 'L', 'F', 'E', 'C', 'I']) and (config.classic = False) then
     begin
@@ -470,7 +522,8 @@ begin
           normcol := 3;
           shadcol := 8;
 
-          if restrict then col := shadcol
+          if restrict then
+            col := shadcol
           else col := normcol;
 
           {#}
@@ -483,13 +536,15 @@ begin
             s := s + '.';
           end;
           normcol := 15;
-          if restrict then col := shadcol
+          if restrict then
+            col := shadcol
           else col := normcol;
           sd(col, s);
 
           {price}
           normcol := 14;
-          if restrict then col := shadcol
+          if restrict then
+            col := shadcol
           else col := normcol;
           s := commastr(objekt^.Value);
           sd(col, s);
@@ -516,7 +571,8 @@ begin
               ch := upcase(getchar);
             until ch in ['C', 'A', 'B', ReturnKey];
 
-            if ch = ReturnKey then ch := 'C';
+            if ch = ReturnKey then
+              ch := 'C';
 
             case ch of
               'C': begin
@@ -574,7 +630,8 @@ begin
             sd(config.textcolor, ', ');
             sd(global_plycol, reese^);
             d(config.textcolor, ' says with a strange voice.');
-          end else if player.gold < 50 then
+          end else
+          if player.gold < 50 then
           begin
             d(config.textcolor, 'You show ' + reese^ + ' your ' + config.moneytype + ' ' + config.moneytype3 + '.');
             sd(global_talkcol, 'You won''t get anything for that!');
@@ -675,15 +732,24 @@ begin
 
               bought := 0;
               {b”rja plocka ihop grejor}
-              if abody_need then purchase_help(abody, xx);
-              if hands_need then purchase_help(hands, xx);
-              if shield_need then purchase_help(shield, xx);
-              if face_need then purchase_help(face, xx);
-              if feet_need then purchase_help(feet, xx);
-              if legs_need then purchase_help(legs, xx);
-              if arms_need then purchase_help(arms, xx);
-              if body_need then purchase_help(body, xx);
-              if head_need then purchase_help(head, xx);
+              if abody_need then
+                purchase_help(abody, xx);
+              if hands_need then
+                purchase_help(hands, xx);
+              if shield_need then
+                purchase_help(shield, xx);
+              if face_need then
+                purchase_help(face, xx);
+              if feet_need then
+                purchase_help(feet, xx);
+              if legs_need then
+                purchase_help(legs, xx);
+              if arms_need then
+                purchase_help(arms, xx);
+              if body_need then
+                purchase_help(body, xx);
+              if head_need then
+                purchase_help(head, xx);
 
               if bought > 0 then
               begin
@@ -808,7 +874,8 @@ begin
                     sd(config.textcolor, ', ');
                     sd(global_plycol, reese^);
                     sd(config.textcolor, ' says.');
-                  end else if objekt^.cursed = True then
+                  end else
+                  if objekt^.cursed = True then
                   begin
                     sd(global_itemcol, objekt^.Name);
                     d(global_talkcol, ' is cursed!');
@@ -865,7 +932,8 @@ begin
                     sd(config.textcolor, ', ');
                     sd(global_plycol, reese^);
                     d(config.textcolor, ' says.');
-                  end else if objekt^.cursed = True then
+                  end else
+                  if objekt^.cursed = True then
                   begin
                     sd(global_talkcol, 'I don''t buy cursed items!');
                     sd(config.textcolor, ', ');
@@ -1067,7 +1135,8 @@ begin
                 begin
                   d(12, 'This item is charmed for good characters.');
                   d(12, 'You can buy it, but you not use it!');
-                end else if (objekt^.evil = True) and (player.chiv > 0) and (player.dark < 1) then
+                end else
+                if (objekt^.evil = True) and (player.chiv > 0) and (player.dark < 1) then
                 begin
                   d(12, 'This item is enchanted and can be used by evil characters only.');
                   d(12, 'You can buy it, but not use it!');

@@ -202,7 +202,7 @@ begin
       case x of
         0: begin {stop believe}
 
-          {mail the god who lost a believer}
+                 {mail the god who lost a believer}
           s := 'Lost Believer';
           post(MailSend,
             pl0^.god,
@@ -243,10 +243,10 @@ begin
           pl0^.god := '';
           save_need := True;
 
-        end; {stop believe .end.}
+        end;     {stop believe .end.}
         1: begin {desecrate other gods altar}
 
-          {jakob}
+                 {jakob}
 
         end;
       end; {case .end.}
@@ -319,9 +319,9 @@ begin
   {init pointer vars}
   for i := 1 to maxnr do
   begin
-    nice[i]^ := False;    {human influenced gang?}
+    nice[i]^ := False;     {human influenced gang?}
     nice2[i]^ := emptystr; {gang-name}
-    power[i] := 0;        {power}
+    power[i] := 0;         {power}
     team2[i]^ := emptystr;
     power2[i] := 0;        {# of members}
   end; {for i:= .end.}
@@ -404,8 +404,8 @@ begin
 
   end; {for j:= .end.}
 
-  {remove small NPC gangs or...}
-  {should they recruite!? that is decided here!}
+       {remove small NPC gangs or...}
+       {should they recruite!? that is decided here!}
   for i := 1 to maxnr do
   begin
 
@@ -413,9 +413,10 @@ begin
     begin
       {cheat gang! team has more than 5 members}
       remove_gang(nice2[i]^);
-    end else if (nice2[i]^ <> '') and (nice[i]^ = False) and (power2[i] <= 3) then
+    end else
+    if (nice2[i]^ <> '') and (nice[i]^ = False) and (power2[i] <= 3) then
     begin
-      {this is a NPC only gang with *power2* members}
+            {this is a NPC only gang with *power2* members}
       if random(4) = 0 then
       begin {dissolve gang}
         remove_gang(nice2[i]^);
@@ -462,7 +463,7 @@ begin
 
               end; {for k:= .end.}
 
-              {save player}
+                   {save player}
               user_save(pl0^);
 
               {news-paper}
@@ -486,7 +487,7 @@ begin
     end;
   end; {for i:= .end.}
 
-end; {npcs_on_the_move *end*}
+end;   {npcs_on_the_move *end*}
 
 procedure Npc_Scan;
 begin
@@ -497,7 +498,7 @@ begin
     for i := 1 to maxnr do
     begin
       nice2[i]^ := emptystr; {name for wanted}
-      power[i] := 0;   {the wanteds level}
+      power[i] := 0;         {the wanteds level}
       team2[i]^ := emptystr;
     end; {for i:= .end.}
 
@@ -564,7 +565,8 @@ var
   x: longint;
   bought, save_need: boolean;
 
-  rhand_need, lhand_need, head_need, body_need, arms_need, lfinger_need, rfinger_need, legs_need, feet_need, waist_need, neck_need, neck2_need, face_need, shield_need, hands_need, abody_need: boolean;
+  rhand_need, lhand_need, head_need, body_need, arms_need, lfinger_need, rfinger_need, legs_need,
+  feet_need, waist_need, neck_need, neck2_need, face_need, shield_need, hands_need, abody_need: boolean;
 
   minattack, minarmor, maxattack, maxarmor: word;
 
@@ -1130,7 +1132,8 @@ begin
   vic := 0;
   s := cfg_string(8);
   vic := str_to_nr(s);
-  if (vic < 1) or (vic > 3) then vic := 0;
+  if (vic < 1) or (vic > 3) then
+    vic := 0;
 
  {we read interest level from .cfg (#41) and
   are NPCs allowed to create their own teams? (#42) }
@@ -1138,9 +1141,11 @@ begin
   ss := cfg_string(42);
 
   interest := str_to_nr(s);
-  if (interest < 1) or (interest > 15) then interest := 3;
+  if (interest < 1) or (interest > 15) then
+    interest := 3;
   npcallow := True;
-  if upcasestr(ss) = 'NO' then npcallow := False;
+  if upcasestr(ss) = 'NO' then
+    npcallow := False;
 
   {fetching NPC ,level raises in news, in NEWS? from .CFG (#44) }
   {fetching NPC allowance to buy new armor/weapons (#45) }
@@ -1153,14 +1158,18 @@ begin
   s := cfg_string(45);
   ss := cfg_string(46);
 
-  if upcasestr(s2) = 'NO' then npcnews := False;
-  if upcasestr(s) = 'NO' then npcbuy := False;
-  if upcasestr(ss) = 'NO' then npcpurnews := False;
+  if upcasestr(s2) = 'NO' then
+    npcnews := False;
+  if upcasestr(s) = 'NO' then
+    npcbuy := False;
+  if upcasestr(ss) = 'NO' then
+    npcpurnews := False;
 
   {read editor option #94, npc teams allowed to attack?}
   npccharge := True;
   s := cfg_string(94);
-  if upcasestr(s) = 'NO' then npccharge := False;
+  if upcasestr(s) = 'NO' then
+    npccharge := False;
 
   {read editor option #88, buying strategy}
   s := cfg_string(88);
@@ -1344,7 +1353,8 @@ begin
 
       end;
 
-    end else if pl0^.location <> offloc_dormitory then
+    end else
+    if pl0^.location <> offloc_dormitory then
     begin
       pl0^.location := offloc_dormitory;
       save_need := True;
@@ -1402,7 +1412,8 @@ begin
             '');
         end;
 
-      end else if random(7) = 0 then
+      end else
+      if random(7) = 0 then
       begin
         {npc takes his rest at the Inn}
 
@@ -1425,12 +1436,14 @@ begin
             pl0^.bguard := x;
             {have to check of you are able to hire more than 1 guard}
             load_guard(Fload, guard, x);
-            if guard.multiple then pl0^.bguardnr := random(10) + 1
+            if guard.multiple then
+              pl0^.bguardnr := random(10) + 1
             else pl0^.bguardnr := 1;
           end;
         end;
         save_need := True;
-      end else if random(8) = 0 then
+      end else
+      if random(8) = 0 then
       begin
         {npc takes his rest at the Beggars Wall}
         pl0^.location := offloc_beggarwall;
@@ -1470,7 +1483,8 @@ begin
       if (pl1^.king = False) and (pl1^.level > 4) and (bother) then
       begin
         zz := random(pl1^.level) + random(pl1^.level);
-        if zz < 2 then zz := 2;
+        if zz < 2 then
+          zz := 2;
         xx := 1000 * zz;
 
         wanted.Name := pl1^.name2;
@@ -1502,7 +1516,8 @@ begin
             '',
             umailheadc + 'You are WANTED!' + config.textcol1,
             mkstring(15, underscore),
-            uplc + pl0^.name2 + config.textcol1 + ' has set a ' + uyellow + commastr(xx) + config.textcol1 + ' ' + many_money(xx) + ' reward',
+            uplc + pl0^.name2 + config.textcol1 + ' has set a ' + uyellow + commastr(xx) +
+            config.textcol1 + ' ' + many_money(xx) + ' reward',
             'for your liquidation.',
             '',
             '',
@@ -1570,11 +1585,16 @@ begin
     pl0^.RoyQuestsToday := 0;
 
     {heal npc from diseases ... by cheating really...}
-    if pl0^.blind = True then pl0^.blind := False;
-    if pl0^.plague = True then pl0^.plague := False;
-    if pl0^.smallpox = True then pl0^.smallpox := False;
-    if pl0^.measles = True then pl0^.measles := False;
-    if pl0^.leprosy = True then pl0^.leprosy := False;
+    if pl0^.blind = True then
+      pl0^.blind := False;
+    if pl0^.plague = True then
+      pl0^.plague := False;
+    if pl0^.smallpox = True then
+      pl0^.smallpox := False;
+    if pl0^.measles = True then
+      pl0^.measles := False;
+    if pl0^.leprosy = True then
+      pl0^.leprosy := False;
 
     {become a member of the Alchemist guild}
     if (pl0^.class = Alchemist) and
@@ -1648,7 +1668,8 @@ begin
         if pl0^.weapon = 0 then
         begin
           x := pl0^.level + random(5) + 3;
-          if x > 100 then x := 90;
+          if x > 100 then
+            x := 90;
 
           load_weapon(x, wweapon);
           pl0^.weapon := x;
@@ -1659,7 +1680,8 @@ begin
         if pl0^.armor = 0 then
         begin
           x := pl0^.level + random(5) + 3;
-          if x > 100 then x := 90;
+          if x > 100 then
+            x := 90;
 
           load_armor(x, aarmor);
           pl0^.armor := x;
@@ -1688,17 +1710,28 @@ begin
     if pl0^.class in [Cleric, Magician, Sage] then
     begin
       pl0^.spell[1, 1] := True;
-      if pl0^.level >= 5 then pl0^.spell[2, 1] := True;
-      if pl0^.level >= 10 then pl0^.spell[3, 1] := True;
-      if pl0^.level >= 15 then pl0^.spell[4, 1] := True;
-      if pl0^.level >= 20 then pl0^.spell[5, 1] := True;
-      if pl0^.level >= 25 then pl0^.spell[6, 1] := True;
-      if pl0^.level >= 30 then pl0^.spell[7, 1] := True;
-      if pl0^.level >= 35 then pl0^.spell[8, 1] := True;
-      if pl0^.level >= 40 then pl0^.spell[9, 1] := True;
-      if pl0^.level >= 45 then pl0^.spell[10, 1] := True;
-      if pl0^.level >= 50 then pl0^.spell[11, 1] := True;
-      if pl0^.level >= 55 then pl0^.spell[12, 1] := True;
+      if pl0^.level >= 5 then
+        pl0^.spell[2, 1] := True;
+      if pl0^.level >= 10 then
+        pl0^.spell[3, 1] := True;
+      if pl0^.level >= 15 then
+        pl0^.spell[4, 1] := True;
+      if pl0^.level >= 20 then
+        pl0^.spell[5, 1] := True;
+      if pl0^.level >= 25 then
+        pl0^.spell[6, 1] := True;
+      if pl0^.level >= 30 then
+        pl0^.spell[7, 1] := True;
+      if pl0^.level >= 35 then
+        pl0^.spell[8, 1] := True;
+      if pl0^.level >= 40 then
+        pl0^.spell[9, 1] := True;
+      if pl0^.level >= 45 then
+        pl0^.spell[10, 1] := True;
+      if pl0^.level >= 50 then
+        pl0^.spell[11, 1] := True;
+      if pl0^.level >= 55 then
+        pl0^.spell[12, 1] := True;
       y := 1;
       if pl0^.maxmana = 0 then
       begin
@@ -1712,11 +1745,13 @@ begin
     begin
       pl0^.king := False;
       save_need := True;
-    end else if (pl0^.king = True) and (player_active(pl0^, False) = False) then
+    end else
+    if (pl0^.king = True) and (player_active(pl0^, False) = False) then
     begin
       pl0^.king := False;
       save_need := True;
-    end else if (pl0^.king) and (player_active(pl0^, False) = True) and (king_found = False) then
+    end else
+    if (pl0^.king) and (player_active(pl0^, False) = True) and (king_found = False) then
     begin
 
       {we found the king .. or queen}
@@ -1744,18 +1779,26 @@ begin
     go_ahead := True;
 
     {is the npc allowed to usurp the throne?}
-    if king_found then go_ahead := False;
-    if config.AllowNPCUsurping = False then go_ahead := False;
-    if config.minlevelking = 0 then go_ahead := False;
-    if pl0^.king = True then go_ahead := False;
-    if pl0^.level < config.minlevelking then go_ahead := False;
-    if (pl0^.dark > pl0^.chiv) and (config.SoulNeededKing = 1) then go_ahead := False;
-    if (pl0^.chiv > pl0^.dark) and (config.SoulNeededKing = 2) then go_ahead := False;
+    if king_found then
+      go_ahead := False;
+    if config.AllowNPCUsurping = False then
+      go_ahead := False;
+    if config.minlevelking = 0 then
+      go_ahead := False;
+    if pl0^.king = True then
+      go_ahead := False;
+    if pl0^.level < config.minlevelking then
+      go_ahead := False;
+    if (pl0^.dark > pl0^.chiv) and (config.SoulNeededKing = 1) then
+      go_ahead := False;
+    if (pl0^.chiv > pl0^.dark) and (config.SoulNeededKing = 2) then
+      go_ahead := False;
 
     {ok if the dice says so, we'll make a run for the Castle}
     if go_ahead then
     begin
-      if random(7) <> 0 then go_ahead := False;
+      if random(7) <> 0 then
+        go_ahead := False;
     end;
 
     if go_ahead then
@@ -1796,7 +1839,8 @@ begin
       load_king(fsave, king);
 
       {attack the castle!!}
-      if global_utest then d(15, pl0^.name2 + ' is attempting to usurp the Throne!');
+      if global_utest then
+        d(15, pl0^.name2 + ' is attempting to usurp the Throne!');
 
       {worsen kings attitude to pl0}
       Update_Relation(Relation_Worsen, 2, pl1^, pl0^, True, False);
@@ -1815,7 +1859,8 @@ begin
         newsy(True,
           'Team Deserter',
           ' ' + uplc + pl0^.name2 + config.textcol1 + ' left ' + utec + pl0^.team + config.textcol1 + '!',
-          ' ' + uplc + pl0^.name2 + config.textcol1 + ' became something better: ' + ukingc + kingstring(pl0^.sex) + config.textcol1 + '!',
+          ' ' + uplc + pl0^.name2 + config.textcol1 + ' became something better: ' + ukingc +
+          kingstring(pl0^.sex) + config.textcol1 + '!',
           '',
           '',
           '',
@@ -1824,7 +1869,7 @@ begin
           '',
           '');
 
-        {mail team-mates}
+               {mail team-mates}
         Team_Report_All(pl0^.team,  {team to send message to}
           pl0^.name2, {exclude player name}
           'Team Drop-Out!',    {letter head}
@@ -1914,9 +1959,11 @@ begin
     {social relations}
     if config.allownpcmarry then
     begin
-      if global_utest then d(15, pl0^.name2 + ' entering npc_change_relations');
+      if global_utest then
+        d(15, pl0^.name2 + ' entering npc_change_relations');
       npc_change_relations(pl0^);
-      if global_utest then d(15, pl0^.name2 + ' exiting npc_change_relations');
+      if global_utest then
+        d(15, pl0^.name2 + ' exiting npc_change_relations');
     end;
 
     save_need := True;
@@ -2162,7 +2209,7 @@ begin
       end;
     end; {for i:= .end.}
 
-    {counting all HUMAN influenced gangs (gangs with human members) }
+         {counting all HUMAN influenced gangs (gangs with human members) }
     counter := 0;
     for i := 1 to fs(FsPlayer) do
     begin
@@ -2493,7 +2540,8 @@ begin
 
                     if pl1^.ai = 'H' then
                     begin
-                      if pl0^.sex = 1 then s := 'his'
+                      if pl0^.sex = 1 then
+                        s := 'his'
                       else s := 'her';
                       post(MailSend,
                         pl1^.name2,
@@ -2517,15 +2565,18 @@ begin
                         '',
                         '');
                     end;
-                  end else if pl0^.hps < 1 then
+                  end else
+                  if pl0^.hps < 1 then
                   begin
 
                     if zz > 1 then
                     begin
-                      s := s + '. ' + ulred + pl0^.name2 + config.textcol1 + ' was defeated (' + ulgray + commastr(zz) + config.textcol1 + ' rounds)';
+                      s := s + '. ' + ulred + pl0^.name2 + config.textcol1 + ' was defeated (' +
+                        ulgray + commastr(zz) + config.textcol1 + ' rounds)';
                     end else
                     begin
-                      s := s + '. ' + ulred + pl0^.name2 + config.textcol1 + ' was killed (' + ulgray + commastr(zz) + config.textcol1 + ' round)';
+                      s := s + '. ' + ulred + pl0^.name2 + config.textcol1 + ' was killed (' +
+                        ulgray + commastr(zz) + config.textcol1 + ' round)';
                     end;
 
                     {inform opponent}
@@ -2601,7 +2652,8 @@ begin
                       end;
                     end; {case .end.}
 
-                  end else if pl1^.hps < 1 then
+                  end else
+                  if pl1^.hps < 1 then
                   begin
 
                     if zz > 1 then
@@ -2640,7 +2692,8 @@ begin
                     newsy(True,
                       config.textcol1 + 'Bounty Hunter',
                       s,
-                      ' ' + uplc + pl0^.name2 + config.textcol1 + ' collected the reward for ' + uplc + pl1^.name2 + config.textcol1 + '.',
+                      ' ' + uplc + pl0^.name2 + config.textcol1 + ' collected the reward for ' +
+                      uplc + pl1^.name2 + config.textcol1 + '.',
                       '',
                       '',
                       '',
@@ -2694,7 +2747,7 @@ begin
 
   end; {for i:= .end. BIG-LOOP}
 
-  {save the updated king record}
+       {save the updated king record}
   load_king(fsave, king);
 
   {the byebye proc will create scores if the player.name strings are set}

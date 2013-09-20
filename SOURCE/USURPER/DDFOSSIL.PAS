@@ -82,7 +82,8 @@ end;
 {$IFNDEF MSDOS}
 procedure async_send(c: char);
 begin
-  if not (DidInit) then Exit;
+  if not (DidInit) then
+    Exit;
   Com_SendChar(c);
 end;
 
@@ -94,14 +95,16 @@ var
   a: integer;
 begin
   { REETODO This could probably be optimized to send a block at a time, not a character at a time }
-  for a := 1 to length(s) do async_send(s[a]);
+  for a := 1 to length(s) do
+    async_send(s[a]);
 end;
 
 {$ENDIF}
 {$IFNDEF MSDOS}
 procedure async_send_string(s: string);
 begin
-  if not (DidInit) then Exit;
+  if not (DidInit) then
+    Exit;
   Com_SendString(s);
 end;
 
@@ -132,7 +135,8 @@ function async_receive(var ch: char): boolean;
 begin
   ch := #0;
   async_receive := False;
-  if not (DidInit) then Exit;
+  if not (DidInit) then
+    Exit;
 
   // Loop until we get a key we want
   while (Com_CharAvail) and (ch = #0) do
@@ -175,7 +179,8 @@ begin
   regs.ah := $03;
   regs.dx := port_num;
   intr($14, regs);
-  if (regs.al and $80) <> 0 then async_carrier_drop := False else async_carrier_drop := True;
+  if (regs.al and $80) <> 0 then
+    async_carrier_drop := False else async_carrier_drop := True;
 end;
 
 {$ENDIF}
@@ -183,7 +188,8 @@ end;
 function async_carrier_drop: boolean;
 begin
   async_carrier_drop := False;
-  if not (DidInit) then Exit;
+  if not (DidInit) then
+    Exit;
   async_carrier_drop := not Com_Carrier;
 end;
 
@@ -197,7 +203,8 @@ begin
   regs.ah := $03;
   regs.dx := port_num;
   intr($14, regs);
-  if (regs.al and $80) <> 0 then async_carrier_present := True else async_carrier_present := False;
+  if (regs.al and $80) <> 0 then
+    async_carrier_present := True else async_carrier_present := False;
 end;
 
 {$ENDIF}
@@ -205,7 +212,8 @@ end;
 function async_carrier_present: boolean;
 begin
   async_carrier_present := True;
-  if not (DidInit) then Exit;
+  if not (DidInit) then
+    Exit;
   async_carrier_present := Com_Carrier;
 end;
 
@@ -219,7 +227,8 @@ begin
   regs.ah := $03;
   regs.dx := port_num;
   intr($14, regs);
-  if (regs.ah and 1) = 1 then async_buffer_check := True else async_buffer_check := False;
+  if (regs.ah and 1) = 1 then
+    async_buffer_check := True else async_buffer_check := False;
 end;
 
 {$ENDIF}
@@ -227,7 +236,8 @@ end;
 function async_buffer_check: boolean;
 begin
   async_buffer_check := False;
-  if not (DidInit) then Exit;
+  if not (DidInit) then
+    Exit;
   async_buffer_check := Com_CharAvail;
 end;
 
@@ -242,14 +252,16 @@ begin
   regs.bx := $00;
   regs.dx := port_num;
   intr($14, regs);
-  if regs.ax = $1954 then async_init_fossil := True else async_init_fossil := False;
+  if regs.ax = $1954 then
+    async_init_fossil := True else async_init_fossil := False;
 end;
 
 {$ENDIF}
 {$IFNDEF MSDOS}
 function async_init_fossil: boolean;
 begin
-  if (DidInit) then Exit;
+  if (DidInit) then
+    Exit;
   DidInit := True;
   Com_StartUp(2);
   Com_SetDontClose(True);
@@ -273,7 +285,8 @@ end;
 {$IFNDEF MSDOS}
 procedure async_deinit_fossil;
 begin
-  if not (DidInit) then Exit;
+  if not (DidInit) then
+    Exit;
   Com_ShutDown;
 end;
 
@@ -285,7 +298,8 @@ var
   regs: registers;
 begin
   regs.ah := $06;
-  if state then regs.al := 1 else regs.al := 0;
+  if state then
+    regs.al := 1 else regs.al := 0;
   regs.dx := port_num;
   intr($14, regs);
 end;
@@ -294,7 +308,8 @@ end;
 {$IFNDEF MSDOS}
 procedure async_set_dtr(state: boolean);
 begin
-  if not (DidInit) then Exit;
+  if not (DidInit) then
+    Exit;
   // REENOTE Telnet can't set DTR
 end;
 
@@ -338,7 +353,8 @@ end;
 {$IFNDEF MSDOS}
 procedure async_purge_output;
 begin
-  if not (DidInit) then Exit;
+  if not (DidInit) then
+    Exit;
   Com_PurgeOutBuffer;
 end;
 
@@ -358,7 +374,8 @@ end;
 {$IFNDEF MSDOS}
 procedure async_purge_input;
 begin
-  if not (DidInit) then Exit;
+  if not (DidInit) then
+    Exit;
   Com_PurgeInBuffer;
 end;
 
@@ -379,7 +396,8 @@ end;
 {$IFNDEF MSDOS}
 procedure async_watchdog_on;
 begin
-  if not (DidInit) then Exit;
+  if not (DidInit) then
+    Exit;
   // REENOTE Nothing to do here
 end;
 
@@ -400,7 +418,8 @@ end;
 {$IFNDEF MSDOS}
 procedure async_watchdog_off;
 begin
-  if not (DidInit) then Exit;
+  if not (DidInit) then
+    Exit;
   // REENOTE Nothing to do here
 end;
 
@@ -420,7 +439,8 @@ end;
 {$IFNDEF MSDOS}
 procedure async_warm_reboot;
 begin
-  if not (DidInit) then Exit;
+  if not (DidInit) then
+    Exit;
   // REENOTE Nothing to do here
 end;
 
@@ -440,7 +460,8 @@ end;
 {$IFNDEF MSDOS}
 procedure async_cold_reboot;
 begin
-  if not (DidInit) then Exit;
+  if not (DidInit) then
+    Exit;
   // REENOTE Nothing to do here
 end;
 
@@ -457,8 +478,11 @@ begin
   regs.dx := port_num;
   w := n;
 
-  if n > 76800 then         {115200 } regs.al := regs.al or $80
-  else if n > 57600 then         { 76800 } regs.al := regs.al or $60
+  if n > 76800 then
+    {115200 } regs.al := regs.al or $80
+  else
+  if n > 57600 then
+    { 76800 } regs.al := regs.al or $60
   else
     case w of
       300: regs.al := regs.al or $40;
@@ -479,7 +503,8 @@ end;
 {$IFNDEF MSDOS}
 procedure async_set_baud(n: longint);
 begin
-  if not (DidInit) then Exit;
+  if not (DidInit) then
+    Exit;
   // REENOTE Telnet can't set baud
 end;
 
@@ -498,7 +523,8 @@ begin
 
   if n > 38400 then
   begin
-    if n > 57600 then               {115200} regs.al := regs.al or $80
+    if n > 57600 then
+      {115200} regs.al := regs.al or $80
     else
       regs.al := regs.al or $60;       { 57600 }
     regs.bx := $69DC;
@@ -522,7 +548,8 @@ end;
 {$IFNDEF MSDOS}
 procedure async_set_baudBnu(n: longint);
 begin
-  if not (DidInit) then Exit;
+  if not (DidInit) then
+    Exit;
   // REENOTE Telnet can't set baud
 end;
 
@@ -554,9 +581,12 @@ var
 begin
   regs.ah := $0F;
   regs.al := $00;
-  if softtran then regs.al := regs.al or $01;
-  if Hard then regs.al := regs.al or $02;
-  if SoftRecv then regs.al := regs.al or $08;
+  if softtran then
+    regs.al := regs.al or $01;
+  if Hard then
+    regs.al := regs.al or $02;
+  if SoftRecv then
+    regs.al := regs.al or $08;
   regs.al := regs.al or $F0;
   Intr($14, regs);
 end;
@@ -565,7 +595,8 @@ end;
 {$IFNDEF MSDOS}
 procedure async_set_flow(SoftTran, Hard, SoftRecv: boolean);
 begin
-  if not (DidInit) then Exit;
+  if not (DidInit) then
+    Exit;
   // REENOTE Telnet can't set flow
 end;
 
@@ -588,7 +619,8 @@ end;
 {$IFNDEF MSDOS}
 procedure async_get_fossil_data;
 begin
-  if not (DidInit) then Exit;
+  if not (DidInit) then
+    Exit;
   // REENOTE Telnet has no FOSSIL data to get
 end;
 
@@ -605,7 +637,8 @@ begin
   outsize := fossildata.obufr;
   outfree := fossildata.ofree;
   i := 1;
-  while (i < 62) and (fossildata.ident^[i] <> #0) do Inc(i);
+  while (i < 62) and (fossildata.ident^[i] <> #0) do
+    Inc(i);
   move(fossildata.ident^, fossilname[1], i);
   fossilname[0] := char(i);
 end;
@@ -615,7 +648,8 @@ end;
 procedure Async_Buffer_Status(var Insize, Infree, OutSize, Outfree: word; var fossilname: string);
 var FInFree, FOutFree, FInUsed, FOutUsed: longint;
 begin
-  if not (DidInit) then Exit;
+  if not (DidInit) then
+    Exit;
   Com_GetBufferStatus(FInFree, FOutFree, FInUsed, FOutUsed);
   Insize := FInFree + FInUsed;
   Infree := FInFree;

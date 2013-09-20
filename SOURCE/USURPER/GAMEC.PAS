@@ -134,7 +134,7 @@ var
   Result: word;
 begin {debug purposes only. remove when sharp version is released.}
 
-  {init}
+      {init}
   Result := global_relationNormal;
 
   menu('(1) Married');
@@ -169,7 +169,7 @@ begin {debug purposes only. remove when sharp version is released.}
     'A': Result := global_RelationHate;
   end; {case .end.}
 
-  {return result}
+       {return result}
   gimme_relation_constant := Result;
 
 end; {gimme_relation_constant *end*}
@@ -189,13 +189,13 @@ var
   s:           s100;
   s2:          string[6];
 
-  temp, temp2: userrec; {jakob, remove when sharp version is released}
-  child:       childrec; {jakob, remove when sharp version is released}
+  temp, temp2: userrec;     {jakob, remove when sharp version is released}
+  child:       childrec;    {jakob, remove when sharp version is released}
   relation:    relationrec; {jakob, remove when sharp version is released}
 
-  bardsong:    bardtype; {bardtype is defined in file_io.pas}
+  bardsong:    bardtype;    {bardtype is defined in file_io.pas}
 
-  king:        kingrec; {oh boy! the King!}
+  king:        kingrec;     {oh boy! the King!}
 
 begin
 
@@ -203,7 +203,8 @@ begin
   user_save(player);
 
   {Setup Online Record}
-  if local then onliner.node := global_onlocal
+  if local then
+    onliner.node := global_onlocal
   else onliner.node := global_cnode;
 
   onliner.Name := player.name2;
@@ -247,7 +248,8 @@ begin
   {Send a BroadCast to other nodes of player entry, THE KING has entered}
   if player.king then
   begin
-    if player.sex = 1 then online_send_to_all(broadcast_kingenter, onliner.Name, '')
+    if player.sex = 1 then
+      online_send_to_all(broadcast_kingenter, onliner.Name, '')
     else online_send_to_all(broadcast_queenenter, onliner.Name, '');
 
   end else
@@ -257,7 +259,8 @@ begin
 
   {name of town}
   town_name := cfg_string(9);
-  if town_name = '' then town_name := 'Valhalla';
+  if town_name = '' then
+    town_name := 'Valhalla';
 
   {allow multi node procs to be executed}
   global_multi := True;
@@ -280,11 +283,13 @@ begin
   {get "log player entrances in news" from .cfg}
   log_mortal_entrance := True;
   s := cfg_string(87);
-  if upcasestr(s) = 'NO' then log_mortal_entrance := False;
+  if upcasestr(s) = 'NO' then
+    log_mortal_entrance := False;
 
   if (player.king) and (log_mortal_entrance) then
   begin
-    if player.sex = 1 then s := 'King'
+    if player.sex = 1 then
+      s := 'King'
     else s := 'Queen';
 
     case random(5) of
@@ -359,14 +364,15 @@ begin
   end else
   begin {log regular player entrance}
 
-    {log player entrance}
+        {log player entrance}
     x := random(7);
 
     {prison news}
     if player.location = offloc_prison then
     begin
       x := 0;
-    end else if x = 0 then
+    end else
+    if x = 0 then
     begin
       x := 1;
     end;
@@ -412,7 +418,8 @@ begin
 
           newsy(True,
             'Entrance',
-            ' ' + uplc + player.name2 + config.textcol1 + ' the ' + s + ' ' + race_display(2, player.race, 0) + ' is back in Town.',
+            ' ' + uplc + player.name2 + config.textcol1 + ' the ' + s + ' ' + race_display(2, player.race, 0) +
+            ' is back in Town.',
             '',
             '',
             '',
@@ -575,7 +582,8 @@ begin
   crlf;
   crlf;
 
-  if global_ansi then display_file(global_truthfile1)
+  if global_ansi then
+    display_file(global_truthfile1)
   else display_file(global_truthfile2);
 
   crlf;
@@ -605,7 +613,8 @@ begin
   begin
     crlf;
 
-    if x = 1 then s2 := 'QUEST'
+    if x = 1 then
+      s2 := 'QUEST'
     else s2 := 'QUESTS';
     s := 'YOU HAVE 99 ' + commastr(x) + ' UNFINISHED ' + s2 + '!';
     d(2, cool_string(length(s), '=', '-', 15, 12));
@@ -637,7 +646,8 @@ begin
         main_menu(True, True);
         {get user-input}
         cho := upcase(getchar);
-        if cho = '-' then cho := ' ';
+        if cho = '-' then
+          cho := ' ';
       end;
       Slottet,
       Dormy: begin
@@ -673,7 +683,8 @@ begin
         send_stuff_online(True);
       end;
       '?': begin {display menu}
-        if player.expert = True then main_menu(True, False)
+        if player.expert = True then
+          main_menu(True, False)
         else main_menu(False, False);
       end;
       '2': begin {healing hut}
@@ -706,7 +717,7 @@ begin
         shady_shops;
       end;
       '-': begin {autowalk to prison}
-        {player is just passing here on his way to prison}
+                 {player is just passing here on his way to prison}
         the_prison;
       end;
       '"': begin {debug, jakob}
@@ -800,7 +811,7 @@ begin
               end;
 
               '1': begin {check_my_spouse}
-                {check i player is married and to whom}
+                         {check i player is married and to whom}
                 crlf;
                 crlf;
                 d(2, 'who do you wanna check for spouse');
@@ -861,8 +872,10 @@ begin
                       d(config.textcolor, relation_string(True, relation.name1, relation.name2, relation.relation1));
                       d(config.textcolor, relation_string(True, relation.name2, relation.name1, relation.relation2));
 
-                      menu('(1) change ' + uplc + temp.name2 + 's' + config.textcol1 + ' attitude to ' + uplc + temp2.name2 + config.textcol1);
-                      menu('(2) change ' + uplc + temp2.name2 + 's' + config.textcol1 + ' attitude to ' + uplc + temp.name2 + config.textcol1);
+                      menu('(1) change ' + uplc + temp.name2 + 's' + config.textcol1 + ' attitude to ' +
+                        uplc + temp2.name2 + config.textcol1);
+                      menu('(2) change ' + uplc + temp2.name2 + 's' + config.textcol1 + ' attitude to ' +
+                        uplc + temp.name2 + config.textcol1);
                       menu('(D)one');
                       sd(config.textcolor, ':');
 
@@ -874,11 +887,11 @@ begin
                       case ch of
                         'D': done := True;
                         '1': begin {change temps attitude to temp2}
-                          {get new relation value}
+                                   {get new relation value}
                           relation.relation1 := gimme_relation_constant;
                         end;
                         '2': begin {change temp2s attitude to temp}
-                          {get new relation value}
+                                   {get new relation value}
                           relation.relation2 := gimme_relation_constant;
                         end;
                       end; {case .end.}
@@ -948,7 +961,7 @@ begin
       end;
       'T': begin {the marketplace}
 
-        {check for registration}
+                 {check for registration}
         muffis;
 
         if global_registered = True then
@@ -984,7 +997,7 @@ begin
       end;
       'N': begin {news-paper}
 
-        {update player location & doing}
+                 {update player location & doing}
         onliner.location := onloc_readingnews;
         onliner.doing := location_desc(onliner.location);
         add_onliner(OUpdateLocation, onliner);
@@ -1048,7 +1061,8 @@ begin
         begin
           crlf;
           d(12, 'The Armor Shop is closed! (The ' + upcasestr(kingstring(king.sexy)) + 's order!)');
-        end else if player.armhag < 1 then
+        end else
+        if player.armhag < 1 then
         begin
           crlf;
           d(15, 'You have been shut out from the Armor Store!');
@@ -1068,7 +1082,8 @@ begin
         begin
           crlf;
           d(12, 'The Weapon Shop is closed! (The ' + upcasestr(kingstring(king.sexy)) + 's order!)');
-        end else if player.weaphag < 1 then
+        end else
+        if player.weaphag < 1 then
         begin
           crlf;
           d(15, 'You have been shut out from the Weapon Store!');
@@ -1140,7 +1155,8 @@ begin
             crlf;
             d(config.textcolor, 'Everything costs. A place at the Beggars Wall among');
             d(config.textcolor, 'the other poor bastards doesn''t come for free.');
-            d(config.textcolor, 'It will cost you ' + uyellow + commastr(beggar_cost) + config.textcol1 + ' ' + many_money(beggar_cost) + ' for a good seat.');
+            d(config.textcolor, 'It will cost you ' + uyellow + commastr(beggar_cost) + config.textcol1 +
+              ' ' + many_money(beggar_cost) + ' for a good seat.');
 
             if confirm('Pay', 'n') = True then
             begin
@@ -1157,7 +1173,8 @@ begin
                 crlf;
                 d(config.textcolor, 'You take your seat among the other beggars.');
                 d(config.textcolor, 'You pray that people will have mercy upon you.');
-                d(config.textcolor, '(at least so you can get those ' + uyellow + commastr(beggar_cost) + config.textcol1 + ' back)');
+                d(config.textcolor, '(at least so you can get those ' + uyellow + commastr(beggar_cost) +
+                  config.textcol1 + ' back)');
                 crlf;
                 pause;
 
@@ -1211,7 +1228,7 @@ begin
 
       end;
 
-    end; {case .end.}
+    end;       {case .end.}
 
   until never; {main game loop}
 

@@ -187,7 +187,7 @@ const
   hcResetGame = 11;
   hcResetData = 12;
 
-  hcLevelfile = 13; {don't change the order of the following range}
+  hcLevelfile = 13;     {don't change the order of the following range}
   hcDoorGuardfile = 14; {without changing RESET_DATAFILES proc}
   hcItemfile = 15;
   hcMonsterfile = 16;
@@ -290,10 +290,10 @@ const
   hcMeditGrabWeapon = 313; {ranged start}
   hcMeditGrabWeap2 = 314;
   hcMeditGrabArmor = 315;
-  hcMeditGrabArm2 = 316; {ranged end}
-  hcMeditGlobal = 317; {global monster commands}
+  hcMeditGrabArm2 = 316;   {ranged end}
+  hcMeditGlobal = 317;     {global monster commands}
   hcMeditGRmvSpells = 318; {global monster command: remove all spells}
-  hcMeditSpells1 = 350; {ranged start}
+  hcMeditSpells1 = 350;    {ranged start}
   hcMeditSpells2 = 351;
   hcMeditSpells3 = 352;
   hcMeditSpells4 = 353;
@@ -552,7 +552,7 @@ const
 
   HcNada = 5001; {empty string}
 
-{*** Help Context Constants  END ***}
+ {*** Help Context Constants  END ***}
 
 implementation
 

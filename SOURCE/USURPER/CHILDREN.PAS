@@ -56,7 +56,8 @@ function Numbers_In_Orphanage: word;
 
 procedure Better_Child_Soul(var child: childrec; change: integer);
 procedure Worsen_Child_Soul(var child: childrec; change: integer);
-function Select_A_Child(const ply: userrec; var child: childrec; typeofkids: childrentype; excludetype: childrentype2; numbers: boolean): boolean;
+function Select_A_Child(const ply: userrec; var child: childrec; typeofkids: childrentype;
+  excludetype: childrentype2; numbers: boolean): boolean;
 
 function Child_Name_Exist(const Name: s20): boolean;
 function My_Child(const ply: userrec; const child: childrec): boolean;
@@ -103,7 +104,7 @@ begin
     end;
   end; {for i:= .end.}
 
-  {return result}
+       {return result}
   numbers_in_orphanage := Result;
 
 end; {numbers_in_orphanage *end*}
@@ -113,16 +114,18 @@ function My_Child(const ply: userrec; const child: childrec): boolean;
 var Result: boolean;
 begin {is ply the father/mother to child?}
 
-  {init}
+      {init}
   Result := False;
 
   if (child.fatherid = ply.id) and
     (child.father = ply.name2) and
-    (child.deleted = False) then Result := True;
+    (child.deleted = False) then
+    Result := True;
 
   if (child.motherid = ply.id) and
     (child.mother = ply.name2) and
-    (child.deleted = False) then Result := True;
+    (child.deleted = False) then
+    Result := True;
 
   {return result}
   my_child := Result;
@@ -159,7 +162,7 @@ begin
     end;
   end; {for i:= .end.}
 
-  {return result}
+       {return result}
   child_name_exist := Result;
 
 end; {child_name_exist *end*}
@@ -171,10 +174,10 @@ var
   Result: boolean;
   child:  ^childrec;
 begin {adds ALL of pl1 and pl2 produced children online}
-  {returns false if for some reason not ALL children could be placed online}
-  {see also "remove_couples_children_online"}
+      {returns false if for some reason not ALL children could be placed online}
+      {see also "remove_couples_children_online"}
 
-  {init}
+      {init}
   Result := True;
   new(child);
 
@@ -203,7 +206,7 @@ begin {adds ALL of pl1 and pl2 produced children online}
 
   end; {for i:= .end.}
 
-  {dispose pointer vars}
+       {dispose pointer vars}
   dispose(child);
 
   {return result}
@@ -218,10 +221,10 @@ var
   child:  ^childrec;
 
 begin {removes ALL of pl1 and pl2 produced children from online list}
-  {returns false if for some reason not ALL children could be remove}
-  {see also "add_couples_children_online"}
+      {returns false if for some reason not ALL children could be remove}
+      {see also "add_couples_children_online"}
 
-  {init}
+      {init}
   Result := True;
   new(child);
 
@@ -249,7 +252,7 @@ begin {removes ALL of pl1 and pl2 produced children from online list}
 
   end; {for i:= .end.}
 
-  {dispose pointer vars}
+       {dispose pointer vars}
   dispose(child);
 
   {return result}
@@ -311,7 +314,8 @@ begin
     begin
       my_baby := True;
       father_active := True;
-    end else if (child.deleted = False) and
+    end else
+    if (child.deleted = False) and
       (child.named = False) and
       (child.mother = pl1.name2) and
       (child.motherId = pl1.Id) then
@@ -380,7 +384,8 @@ begin
                 crlf;
                 if child.bastard then
                 begin
-                  d(14, Name + config.textcol1 + ',' + ulred + ' the bastard-child' + config.textcol1 + ', has been baptized!');
+                  d(14, Name + config.textcol1 + ',' + ulred + ' the bastard-child' + config.textcol1 +
+                    ', has been baptized!');
                 end else
                 begin
                   d(14, Name + config.textcol1 + ' has been baptized!');
@@ -405,7 +410,8 @@ begin
 
         if child.royal > 0 then
         begin
-          s := ' ' + ukidc + child.Name + config.textcol1 + ' has ' + uyellow + 'Royal' + config.textcol1 + ' blood floating in ' + sex3[child.sex] + ' veins!';
+          s := ' ' + ukidc + child.Name + config.textcol1 + ' has ' + uyellow + 'Royal' + config.textcol1 +
+            ' blood floating in ' + sex3[child.sex] + ' veins!';
         end else
         begin
           s := '';
@@ -414,7 +420,8 @@ begin
         {news-paper}
         newsy(True,
           'Baby Citizen',
-          ' ' + uplc + pl1.name2 + config.textcol1 + ' named ' + sex3[pl1.sex] + ' new-born ' + sex7[child.sex] + '; ' + ukidc + Name + config.textcol1 + '!',
+          ' ' + uplc + pl1.name2 + config.textcol1 + ' named ' + sex3[pl1.sex] + ' new-born ' +
+          sex7[child.sex] + '; ' + ukidc + Name + config.textcol1 + '!',
           ' The town welcomes its new member. May ' + sex2[child.sex] + ' grow up to become',
           ' a responsible citizen.',
           '' + s,
@@ -426,8 +433,10 @@ begin
 
         s := '';
         {royal,bastard?}
-        if child.bastard then s := s + ulred + ' *Bastard*';
-        if child.royal > 0 then s := s + uyellow + ' *ROYAL*';
+        if child.bastard then
+          s := s + ulred + ' *Bastard*';
+        if child.royal > 0 then
+          s := s + uyellow + ' *ROYAL*';
 
 
         if mother_active then
@@ -436,7 +445,8 @@ begin
           {child-birth/death-log}
           Generic_News(ChildBirthNews,
             False,
-            ugreen + '[' + fix_date(todays_date) + '] ' + uplc + child.mother + ugreen + ' gave birth to; ' + ukidc + child.Name + config.textcol1 + '!' + s,
+            ugreen + '[' + fix_date(todays_date) + '] ' + uplc + child.mother + ugreen +
+            ' gave birth to; ' + ukidc + child.Name + config.textcol1 + '!' + s,
             '',
             '',
             '',
@@ -466,8 +476,10 @@ begin
         end;
 
         {inform spouse}
-        if father_active then id := child.motherId;
-        if mother_active then id := child.fatherId;
+        if father_active then
+          id := child.motherId;
+        if mother_active then
+          id := child.fatherId;
 
         {locate spouse}
         x := look_for_id(id, 'H', ReturnFileId);
@@ -488,7 +500,8 @@ begin
             '',
             ulcyan + 'Your Child' + config.textcol1,
             mkstring(10, underscore),
-            uplc + pl1.name2 + config.textcol1 + ' named your baby ' + sex6[child.sex] + ': ' + ukidc + child.Name + config.textcol1 + '!',
+            uplc + pl1.name2 + config.textcol1 + ' named your baby ' + sex6[child.sex] + ': ' +
+            ukidc + child.Name + config.textcol1 + '!',
             uplc + pl1.name2 + config.textcol1 + ' think this is a great name for your ' + sex7[child.sex] + '.',
             '',
             '',
@@ -507,7 +520,7 @@ begin
 
   end; {for i:= .end.}
 
-  {dispose pointer variables}
+       {dispose pointer variables}
   dispose(ply0);
 
 end; {name_babies *end*}
@@ -538,7 +551,8 @@ begin
           {child-birth/death-log}
           Generic_News(ChildBirthNews,
             False,
-            ugreen + '[' + fix_date(todays_date) + '] ' + ukidc + child.Name + ugreen + ' lost ' + sex3[child.sex] + ' mother, ' + uplc + child.mother + config.textcol1 + '!',
+            ugreen + '[' + fix_date(todays_date) + '] ' + ukidc + child.Name + ugreen + ' lost ' +
+            sex3[child.sex] + ' mother, ' + uplc + child.mother + config.textcol1 + '!',
             '',
             '',
             '',
@@ -554,13 +568,15 @@ begin
           child.mother := '';
           child.motherid := '';
 
-        end else if (child.father = ply.name2) and (child.fatherid = ply.id) then
+        end else
+        if (child.father = ply.name2) and (child.fatherid = ply.id) then
         begin
 
           {child-birth/death-log}
           Generic_News(ChildBirthNews,
             False,
-            ugreen + '[' + fix_date(todays_date) + '] ' + ukidc + child.Name + ugreen + ' lost ' + sex3[child.sex] + ' father, ' + uplc + child.father + config.textcol1 + '!',
+            ugreen + '[' + fix_date(todays_date) + '] ' + ukidc + child.Name + ugreen + ' lost ' +
+            sex3[child.sex] + ' father, ' + uplc + child.father + config.textcol1 + '!',
             '',
             '',
             '',
@@ -589,7 +605,8 @@ begin
             {news-paper}
             Newsy(True,
               'Child Dead!',
-              ' ' + ukidc + child.Name + config.textcol1 + ' has died from a ' + ulred + 'depression' + config.textcol1 + ', a direct result',
+              ' ' + ukidc + child.Name + config.textcol1 + ' has died from a ' + ulred + 'depression' +
+              config.textcol1 + ', a direct result',
               ' of the loss of ' + sex3[child.sex] + ' parents.',
               ' ' + ukidc + child.Name + config.textcol1 + ' died at the age of ' + commastr(child.age) + '.',
               '',
@@ -602,7 +619,8 @@ begin
             {child-birth/death-log}
             Generic_News(ChildBirthNews,
               False,
-              ugreen + '[' + fix_date(todays_date) + '] ' + ukidc + child.Name + ugreen + ' died after losing ' + sex3[child.sex] + ' parents.',
+              ugreen + '[' + fix_date(todays_date) + '] ' + ukidc + child.Name + ugreen +
+              ' died after losing ' + sex3[child.sex] + ' parents.',
               '',
               '',
               '',
@@ -631,7 +649,8 @@ begin
               uyellow + s + config.textcol1,
               mkstring(length(s), underscore),
               ukidc + child.Name + config.textcol1 + ', your ' + sex7[child.sex] + ', is now in your custody!',
-              'The tragic death of ' + ukidc + child.Name + 's' + config.textcol1 + ' father: ' + uplc + ply.name2 + config.textcol1 + ' has',
+              'The tragic death of ' + ukidc + child.Name + 's' + config.textcol1 + ' father: ' +
+              uplc + ply.name2 + config.textcol1 + ' has',
               ' made you fully responsible for ' + ukidc + child.Name + config.textcol1 + '!',
               '',
               '',
@@ -660,7 +679,8 @@ begin
               uyellow + s + config.textcol1,
               mkstring(length(s), underscore),
               ukidc + child.Name + config.textcol1 + ', your ' + sex7[child.sex] + ', is now in your custody!',
-              'The tragic death of ' + ukidc + child.Name + 's' + config.textcol1 + ' mother: ' + uplc + ply.name2 + config.textcol1 + ' has',
+              'The tragic death of ' + ukidc + child.Name + 's' + config.textcol1 + ' mother: ' +
+              uplc + ply.name2 + config.textcol1 + ' has',
               ' made you fully responsible for ' + ukidc + child.Name + config.textcol1 + '!',
               '',
               '',
@@ -683,7 +703,7 @@ begin
 
   end; {for i:= .end.}
 
-end; {remove_parent *end*}
+end;   {remove_parent *end*}
 
 
 procedure Free_Kidnapped_Children(const ply: userrec);
@@ -738,7 +758,8 @@ begin
         {news-paper}
         newsy(True,
           config.textcol1 + 'Child Released!',
-          ' ' + ukidc + child.Name + config.textcol1 + ', the ' + sex7[child.sex] + ' of ' + uplc + child.mother + config.textcol1 + ' and ' + uplc + child.father + config.textcol1 + ' was',
+          ' ' + ukidc + child.Name + config.textcol1 + ', the ' + sex7[child.sex] + ' of ' + uplc +
+          child.mother + config.textcol1 + ' and ' + uplc + child.father + config.textcol1 + ' was',
           ' released by ' + sex3[child.sex] + ' kidnappers!',
           '',
           '',
@@ -753,7 +774,7 @@ begin
 
   end;  {for i:= .end.}
 
-end; {Free_Kidnapped_Children *end*}
+end;    {Free_Kidnapped_Children *end*}
 
 
 function Child_Status(const child: childrec): s70;
@@ -784,7 +805,7 @@ begin
     else s := '';
   end; {case .end.}
 
-  {return result}
+       {return result}
   child_health := s;
 
 end; {child_health *end*}
@@ -801,13 +822,14 @@ begin
     else s := '*unknown*';
   end; {case .end.}
 
-  {return result}
+       {return result}
   child_soul := s;
 
 end; {child_soul *end*}
 
 
-function Select_A_Child(const ply: userrec; var child: childrec; typeofkids: childrentype; excludetype: childrentype2; numbers: boolean): boolean;
+function Select_A_Child(const ply: userrec; var child: childrec; typeofkids: childrentype;
+  excludetype: childrentype2; numbers: boolean): boolean;
   {returns false if no child is selected}
 var
   s: s30;
@@ -875,8 +897,10 @@ begin
 
         ok := True;
         my_kid := False;
-        if my_child(ply, child) = True then my_kid := True;
-        if (typeofkids = ownchild) and (my_kid = False) then ok := False;
+        if my_child(ply, child) = True then
+          my_kid := True;
+        if (typeofkids = ownchild) and (my_kid = False) then
+          ok := False;
 
         if typeofkids = kidnappedchild then
         begin
@@ -889,7 +913,8 @@ begin
           end;
         end;
 
-        if (excludetype = excludeown) and (my_kid = True) then ok := False;
+        if (excludetype = excludeown) and (my_kid = True) then
+          ok := False;
 
         if ok then
         begin
@@ -946,7 +971,7 @@ begin
     end;
   end; {for i:= .end.}
 
-  {return result}
+       {return result}
   select_a_child := Result;
 
 end; {select_a_child *end*}
@@ -955,13 +980,15 @@ end; {select_a_child *end*}
 procedure Worsen_Child_Soul(var child: childrec; change: integer);
 begin
   Dec(child.soul, change);
-  if child.soul < -500 then child.soul := -500;
+  if child.soul < -500 then
+    child.soul := -500;
 end; {worsen_child_soul *end*}
 
 procedure Better_Child_Soul(var child: childrec; change: integer);
 begin
   Inc(child.soul, change);
-  if child.soul > 500 then child.soul := 500;
+  if child.soul > 500 then
+    child.soul := 500;
 end; {better_child_soul *end*}
 
 
@@ -1013,8 +1040,10 @@ begin
 
         if excludename <> '' then
         begin
-          if (child.father = excludename) and (child.fatherid = excludeid) then ok := False;
-          if (child.mother = excludename) and (child.motherid = excludeid) then ok := False;
+          if (child.father = excludename) and (child.fatherid = excludeid) then
+            ok := False;
+          if (child.mother = excludename) and (child.motherid = excludeid) then
+            ok := False;
         end;
 
         if ok then
@@ -1042,11 +1071,14 @@ begin
           {name}
           sd(11, child.Name + config.textcol1 + s + config.textcol1 + ', ');
 
-          if child.father = '' then child.father := unknown;
-          if child.mother = '' then child.mother := unknown;
+          if child.father = '' then
+            child.father := unknown;
+          if child.mother = '' then
+            child.mother := unknown;
 
           {parents}
-          sd(config.textcolor, sex7[child.sex] + ' of ' + uplc + child.mother + config.textcol1 + ' and ' + uplc + child.father + config.textcol1 + '.');
+          sd(config.textcolor, sex7[child.sex] + ' of ' + uplc + child.mother + config.textcol1 +
+            ' and ' + uplc + child.father + config.textcol1 + '.');
 
           {point to own children}
           if point_to_own = True then
@@ -1150,12 +1182,15 @@ begin
         sd(global_kidcol, ljust(s, 17 + adjust));
 
         {age}
-        if child.age = 1 then s := ' year'
+        if child.age = 1 then
+          s := ' year'
         else s := ' years';
         sd(7, ' ' + rjust(commastr(child.age) + s, 8));
 
         {parents}
-        sd(config.textcolor, '  (' + uplc + child.father + config.textcol1 + ' the ' + race_display(2, child.fatherrace, 0) + ' ' + config.textcol1 + '/ ' + uplc + child.mother + config.textcol1 + ' the ' + race_display(2, child.motherrace, 0) + ')');
+        sd(config.textcolor, '  (' + uplc + child.father + config.textcol1 + ' the ' +
+          race_display(2, child.fatherrace, 0) + ' ' + config.textcol1 + '/ ' + uplc + child.mother +
+          config.textcol1 + ' the ' + race_display(2, child.motherrace, 0) + ')');
 
         {crlf}
         crlf;
@@ -1226,8 +1261,10 @@ begin
 
   {is child of royal birth?}
   child.royal := 0;
-  if mother.king then Inc(child.royal);
-  if father.king then Inc(child.royal);
+  if mother.king then
+    Inc(child.royal);
+  if father.king then
+    Inc(child.royal);
 
   {if child is a bastard then only the mother will get custody!}
   if child.bastard = True then
@@ -1286,14 +1323,14 @@ begin
   with Child do
   begin
     Name := emptystr;  {name}
-    sex := 1; {sex, 1=male, 2=female}
-    age := 1; {age}
+    sex := 1;          {sex, 1=male, 2=female}
+    age := 1;          {age}
     birth := todays_date; {date of birth}
-    recnr := 1; {record #, position in file}
-    ageplus := 0; {how many days since getting one year older}
-    bastard := False; {set to true if product of secret lay or whore intercourse}
-    named := False; {has kid been named yet? if not it is not accessible in lists etc etc}
-    deleted := False; {is this record deleted}
+    recnr := 1;        {record #, position in file}
+    ageplus := 0;      {how many days since getting one year older}
+    bastard := False;  {set to true if product of secret lay or whore intercourse}
+    named := False;    {has kid been named yet? if not it is not accessible in lists etc etc}
+    deleted := False;  {is this record deleted}
 
     mother := emptystr;  {mother to the child}
     father := emptystr;  {father to the child}
@@ -1301,8 +1338,8 @@ begin
     motherid := emptystr; {unique mother ID - to match userrec ID}
     fatherid := emptystr; {unique father ID - to match userrec ID}
 
-    motherai := 'H'; {mother ai}
-    fatherai := 'H'; {father ai}
+    motherai := 'H';   {mother ai}
+    fatherai := 'H';   {father ai}
 
     motherrace := Human; {important info so we can evaluate what the child is!}
     fatherrace := Human; {important info so we can evaluate what the child is!}
@@ -1311,7 +1348,7 @@ begin
     fatheraccess := True; {does the father have access to the kid}
 
     location := childlocation_home; {see cms.pas and childlocation_XX constants}
-    soul := 50; {soul -500=bad}
+    soul := 50;        {soul -500=bad}
     health := childhealth_normal; {see cms.pas and childhealth_XX constants}
 
     kidnapper := emptystr; {name of kidnapper}
@@ -1402,7 +1439,8 @@ begin
         sd(global_kidcol, ljust(s, 24 + adjust) + ' ');
 
         {age}
-        if child.age = 1 then s := ' year    '
+        if child.age = 1 then
+          s := ' year    '
         else s := ' years    ';
         sd(7, ljust(commastr(child.age) + s, 14));
 
@@ -1507,7 +1545,8 @@ begin
             mailrequest_nothing,
             uyellow + 'Birthday' + config.textcol1,
             mkstring(8, underscore),
-            'You celebrated your ' + sex7[child.sex] + ' ' + ukidc + child.Name + config.textcol1 + '''s ' + uwhite + commastr(child.age) + 'th' + config.textcol1 + ' birthday.',
+            'You celebrated your ' + sex7[child.sex] + ' ' + ukidc + child.Name + config.textcol1 +
+            '''s ' + uwhite + commastr(child.age) + 'th' + config.textcol1 + ' birthday.',
             '',
             '',
             '',
@@ -1534,7 +1573,8 @@ begin
               ulred + 'Child Lost' + config.textcol1,
               mkstring(10, underscore),
               'You said goodbye to your ' + sex7[child.sex] + ' ' + ukidc + child.Name + config.textcol1 + '.',
-              ukidc + child.Name + config.textcol1 + ' is a big ' + sex6[child.sex] + ' and ' + sex2[child.sex] + ' must seek ' + sex3[child.sex] + ' own luck now!',
+              ukidc + child.Name + config.textcol1 + ' is a big ' + sex6[child.sex] + ' and ' +
+              sex2[child.sex] + ' must seek ' + sex3[child.sex] + ' own luck now!',
               '',
               '',
               '',
@@ -1549,7 +1589,8 @@ begin
 
             {news-paper}
             newsy(True, 'Grownup',
-              ' ' + ukidc + child.Name + config.textcol1 + ' the child to ' + uplc + child.mother + config.textcol1 + ' and ' + uplc + child.father + config.textcol1 + ' has ',
+              ' ' + ukidc + child.Name + config.textcol1 + ' the child to ' + uplc + child.mother +
+              config.textcol1 + ' and ' + uplc + child.father + config.textcol1 + ' has ',
               ' left home to seek ' + sex3[child.sex] + ' luck in the world.',
               '',
               '',
@@ -1575,7 +1616,7 @@ begin
 
           end; {deactivate child .end.}
 
-        end; {child birthday .end.}
+        end;   {child birthday .end.}
 
         if not child.deleted then
         begin
@@ -1585,7 +1626,8 @@ begin
 
           {double the cost if only one parent is responsible for the child}
           double_cost := 0;
-          if (child.mother = '') or (child.father = '') then double_cost := cost;
+          if (child.mother = '') or (child.father = '') then
+            double_cost := cost;
           if (child.motheraccess = False) or (child.fatheraccess = False) then
           begin
             double_cost := cost;
@@ -1621,7 +1663,8 @@ begin
                     decplayermoney(ply, cost + double_cost);
                     user_save(ply);
                     able_to_pay := True;
-                  end else if ply.bankgold >= (cost + double_cost) then
+                  end else
+                  if ply.bankgold >= (cost + double_cost) then
                   begin
                     decbankmoney(ply, cost + double_cost);
                     user_save(ply);
@@ -1647,7 +1690,8 @@ begin
                     decplayermoney(ply, cost + double_cost);
                     user_save(ply);
                     able_to_pay := True;
-                  end else if ply.bankgold >= (cost + double_cost) then
+                  end else
+                  if ply.bankgold >= (cost + double_cost) then
                   begin
                     decbankmoney(ply, cost + double_cost);
                     user_save(ply);
@@ -1669,7 +1713,8 @@ begin
                 mailrequest_nothing,
                 ulred + 'Child Lost!' + config.textcol1,
                 mkstring(11, underscore),
-                'Your ' + sex7[child.sex] + ' ' + ukidc + child.Name + config.textcol1 + ' has been sent to the Royal Orphanage!',
+                'Your ' + sex7[child.sex] + ' ' + ukidc + child.Name + config.textcol1 +
+                ' has been sent to the Royal Orphanage!',
                 'You don''t have the funds to support your own children! SHAME ON YOU!',
                 'The Royal Family is responsible for the future of ' + ukidc + child.Name + config.textcol1 + '.',
                 '',
@@ -1727,7 +1772,8 @@ begin
 
             end;
 
-          end else if child.location = ChildLocation_Kidnapped then
+          end else
+          if child.location = ChildLocation_Kidnapped then
           begin
             {kidnapper must pay}
 
@@ -1756,7 +1802,8 @@ begin
                   decplayermoney(ply, cost + double_cost);
                   user_save(ply);
                   able_to_pay := True;
-                end else if ply.bankgold >= (cost + 2500) then
+                end else
+                if ply.bankgold >= (cost + 2500) then
                 begin
                   decbankmoney(ply, cost + double_cost);
                   user_save(ply);
@@ -1776,7 +1823,8 @@ begin
                     '',
                     umailheadc + 'Kidnapped Child' + config.textcol1,
                     mkstring(15, underscore),
-                    'You had to pay ' + uyellow + commastr(cost + 2500) + config.textcol1 + ' ' + many_money(cost + 2500) + ' for keeping',
+                    'You had to pay ' + uyellow + commastr(cost + 2500) + config.textcol1 + ' ' +
+                    many_money(cost + 2500) + ' for keeping',
                     ukidc + child.Name + config.textcol1 + ' alive.',
                     '',
                     '',
@@ -1806,7 +1854,8 @@ begin
                     '',
                     umailheadc + 'Kidnapped Child' + config.textcol1,
                     mkstring(15, underscore),
-                    'You were unable to pay ' + uyellow + commastr(cost + 2500) + config.textcol1 + ' ' + many_money(cost + 2500) + ' to keep',
+                    'You were unable to pay ' + uyellow + commastr(cost + 2500) + config.textcol1 +
+                    ' ' + many_money(cost + 2500) + ' to keep',
                     ukidc + child.Name + config.textcol1 + ' alive. The child has been transfered to the Royal Care House.',
                     '',
                     '',
@@ -1825,7 +1874,8 @@ begin
                     mailrequest_nothing,
                     ulred + 'Child Lost!' + config.textcol1,
                     mkstring(11, underscore),
-                    'Your ' + sex7[child.sex] + ' ' + ukidc + child.Name + config.textcol1 + ' has been sent to the Royal Orphanage!',
+                    'Your ' + sex7[child.sex] + ' ' + ukidc + child.Name + config.textcol1 +
+                    ' has been sent to the Royal Orphanage!',
                     'The kidnapper didn''t have the funds to sustain your child!',
                     'The Royal Family is responsible for the future of ' + ukidc + child.Name + config.textcol1 + '.',
                     '',
@@ -1887,7 +1937,7 @@ begin
           end else
           begin {ChildLocation_Orphanage}
 
-            {king must pay}
+                {king must pay}
             able_to_pay := False;
 
             {load king data}
@@ -1966,7 +2016,8 @@ begin
               {child-birth/death log}
               Generic_News(ChildBirthNews,
                 False,
-                ugreen + '[' + fix_date(todays_date) + '] ' + ukidc + child.Name + ulred + ' DIED' + ugreen + ' in the Royal Orphanage!',
+                ugreen + '[' + fix_date(todays_date) + '] ' + ukidc + child.Name + ulred + ' DIED' +
+                ugreen + ' in the Royal Orphanage!',
                 '',
                 '',
                 '',
@@ -2048,7 +2099,8 @@ begin
                 '',
                 '');
             end;
-          end else if child.health = childhealth_cursed then
+          end else
+          if child.health = childhealth_cursed then
           begin
             {child is cursed! parents grieving cost them experience}
             {experience cost for child being cursed}
@@ -2105,7 +2157,8 @@ begin
                 '',
                 '');
             end;
-          end else if child.health = childhealth_depressed then
+          end else
+          if child.health = childhealth_depressed then
           begin
             {child is depressed(divorce)! parents grieving cost them experience}
 
@@ -2163,7 +2216,8 @@ begin
                 '',
                 '');
             end;
-          end else if child.health = childhealth_normal then
+          end else
+          if child.health = childhealth_normal then
           begin
             {give parents xp for their efforts in raising their child}
             {experience earned for child}
@@ -2235,7 +2289,7 @@ begin
 
   end; {for i:= .end.}
 
-end; {children_maintenance *end*}
+end;   {children_maintenance *end*}
 
 procedure child_list_description;
 begin
@@ -2289,11 +2343,13 @@ begin
           {header}
           if not found then
           begin
-            if ply.id = player.id then s := '  -*-Your Children-*-'
+            if ply.id = player.id then
+              s := '  -*-Your Children-*-'
             else s := '  -*-' + ply.name2 + adds(ply.name2) + ' Children-*-';
 
             d(11, s);
-            sd(5, mkstring(5, underscore) + 'name' + mkstring(9, underscore) + 'gender' + mkstring(6, underscore) + 'age' + mkstring(4, underscore) + 'status' + mkstring(4, underscore) + 'health');
+            sd(5, mkstring(5, underscore) + 'name' + mkstring(9, underscore) + 'gender' +
+              mkstring(6, underscore) + 'age' + mkstring(4, underscore) + 'status' + mkstring(4, underscore) + 'health');
 
             if parent = True then
             begin
@@ -2334,7 +2390,8 @@ begin
           sd(7, ljust(sex7[child.sex], 9));
 
           {age}
-          if child.age = 1 then s := ' year    '
+          if child.age = 1 then
+            s := ' year    '
           else s := ' years    ';
           sd(7, ljust(commastr(child.age) + s, 10));
 
@@ -2347,7 +2404,8 @@ begin
           {father/mother}
           if parent = True then
           begin
-            if child.father = ply.name2 then s := child.mother
+            if child.father = ply.name2 then
+              s := child.mother
             else s := child.father;
             sd(global_plycol, ljust('   ' + s, 15));
           end;
@@ -2475,19 +2533,23 @@ begin
           if add_child(SAddChild, child, player.name2, 'being roughed up', 0) = False then
           begin
             d(12, child.Name + ' is busy. try again soon!');
-          end else if child.ransom_demanded > 0 then
+          end else
+          if child.ransom_demanded > 0 then
           begin
             {ransom already demanded for child}
 
             crlf;
             crlf;
-            d(config.textcolor, 'A ransom for ' + uyellow + commastr(child.ransom_demanded) + config.textcol1 + ' ' + many_money(child.ransom_demanded) + ' is already demanded for ' + ukidc + child.Name + config.textcol1 + '!');
+            d(config.textcolor, 'A ransom for ' + uyellow + commastr(child.ransom_demanded) +
+              config.textcol1 + ' ' + many_money(child.ransom_demanded) + ' is already demanded for ' + ukidc +
+              child.Name + config.textcol1 + '!');
 
             if confirm('Would you like to set a new Ransom', 'N') = True then
             begin
               {demand ransom}
               crlf;
-              d(config.textcolor, 'How much ' + config.moneytype + ' do you demand for ' + ukidc + child.Name + config.textcol1 + '?');
+              d(config.textcolor, 'How much ' + config.moneytype + ' do you demand for ' + ukidc +
+                child.Name + config.textcol1 + '?');
               sd(config.textcolor, ':');
 
               x := get_number(0, max_ransom);
@@ -2506,7 +2568,8 @@ begin
                 newsy(True,
                   umailheadc + 'Ransom removed!' + config.textcol1,
                   ' The kidnappers of ' + ukidc + child.Name + config.textcol1 + ' has removed their demand for ransom!',
-                  ' ' + ukidc + child.Name + config.textcol1 + ' parents are ' + uplc + child.mother + config.textcol1 + ' and ' + uplc + child.father + config.textcol1 + '.',
+                  ' ' + ukidc + child.Name + config.textcol1 + ' parents are ' + uplc + child.mother +
+                  config.textcol1 + ' and ' + uplc + child.father + config.textcol1 + '.',
                   '',
                   '',
                   '',
@@ -2516,14 +2579,16 @@ begin
                   '');
 
                 {inform parents online}
-                Inform_Parents_Online(child, 'The ransom has been removed for your ' + sex7[child.sex] + ukidc + ' ' + child.Name + config.textcol1 + '!');
+                Inform_Parents_Online(child, 'The ransom has been removed for your ' + sex7[child.sex] +
+                  ukidc + ' ' + child.Name + config.textcol1 + '!');
 
                 {inform parents offline}
                 inform_parents(child,
                   mailrequest_nothing,
                   umailheadc + 'Ransom removed!' + config.textcol1,
                   mkstring(15, underscore),
-                  'The kidnappers of your ' + sex7[child.sex] + ukidc + ' ' + child.Name + config.textcol1 + ' has removed their',
+                  'The kidnappers of your ' + sex7[child.sex] + ukidc + ' ' + child.Name +
+                  config.textcol1 + ' has removed their',
                   'demand for ransom in exchange for your child.',
                   'The kidnappers has not revealed their intentions to what they will do',
                   'to the young ' + ukidc + child.Name + config.textcol1 + '.',
@@ -2537,7 +2602,8 @@ begin
                   '',
                   '');
 
-              end else if x > child.ransom_demanded then
+              end else
+              if x > child.ransom_demanded then
               begin
                 {ransom raised}
                 child.ransom_demanded := x;
@@ -2549,9 +2615,11 @@ begin
                 {news-paper}
                 newsy(True,
                   umailheadc + 'Ransom raised!' + config.textcol1,
-                  ' The kidnappers of ' + ukidc + child.Name + config.textcol1 + ' demand ' + uyellow + commastr(x) + config.textcol1 + ' ' + many_money(x),
+                  ' The kidnappers of ' + ukidc + child.Name + config.textcol1 + ' demand ' +
+                  uyellow + commastr(x) + config.textcol1 + ' ' + many_money(x),
                   ' in exhange for the child.',
-                  ' ' + ukidc + child.Name + config.textcol1 + ' parents are ' + uplc + child.mother + config.textcol1 + ' and ' + uplc + child.father + config.textcol1 + '.',
+                  ' ' + ukidc + child.Name + config.textcol1 + ' parents are ' + uplc + child.mother +
+                  config.textcol1 + ' and ' + uplc + child.father + config.textcol1 + '.',
                   '',
                   '',
                   '',
@@ -2560,7 +2628,8 @@ begin
                   '');
 
                 {inform parents online}
-                Inform_Parents_Online(child, 'The ransom has been ' + ulred + 'raised' + config.textcol1 + ' for your ' + sex7[child.sex] + ukidc + ' ' + child.Name + config.textcol1 + '!');
+                Inform_Parents_Online(child, 'The ransom has been ' + ulred + 'raised' + config.textcol1 +
+                  ' for your ' + sex7[child.sex] + ukidc + ' ' + child.Name + config.textcol1 + '!');
 
                 {inform parents offline}
                 inform_parents(child,
@@ -2581,7 +2650,8 @@ begin
                   '',
                   '');
 
-              end else if x < child.ransom_demanded then
+              end else
+              if x < child.ransom_demanded then
               begin
 
                 {ransom lowered}
@@ -2594,9 +2664,11 @@ begin
                 {news-paper}
                 newsy(True,
                   umailheadc + 'Ransom lowered!' + config.textcol1,
-                  ' The kidnappers of ' + ukidc + child.Name + config.textcol1 + ' demand ' + uyellow + commastr(x) + config.textcol1 + ' ' + many_money(x),
+                  ' The kidnappers of ' + ukidc + child.Name + config.textcol1 + ' demand ' +
+                  uyellow + commastr(x) + config.textcol1 + ' ' + many_money(x),
                   ' in exhange for the child.',
-                  ' ' + ukidc + child.Name + config.textcol1 + ' parents are ' + uplc + child.mother + config.textcol1 + ' and ' + uplc + child.father + config.textcol1 + '.',
+                  ' ' + ukidc + child.Name + config.textcol1 + ' parents are ' + uplc + child.mother +
+                  config.textcol1 + ' and ' + uplc + child.father + config.textcol1 + '.',
                   '',
                   '',
                   '',
@@ -2605,7 +2677,8 @@ begin
                   '');
 
                 {inform parents online}
-                Inform_Parents_Online(child, 'The ransom has been lowered for your ' + sex7[child.sex] + ukidc + ' ' + child.Name + config.textcol1 + '!');
+                Inform_Parents_Online(child, 'The ransom has been lowered for your ' + sex7[child.sex] +
+                  ukidc + ' ' + child.Name + config.textcol1 + '!');
 
                 {inform parents offline}
                 inform_parents(child,
@@ -2626,7 +2699,8 @@ begin
                   '',
                   '');
 
-              end else if x = child.ransom_demanded then
+              end else
+              if x = child.ransom_demanded then
               begin
                 {no change!}
                 d(15, 'No change.');
@@ -2643,14 +2717,16 @@ begin
           begin
             {demand ransom}
             crlf;
-            d(config.textcolor, 'How much ' + config.moneytype + ' do you demand for ' + ukidc + child.Name + config.textcol1 + '?');
+            d(config.textcolor, 'How much ' + config.moneytype + ' do you demand for ' + ukidc +
+              child.Name + config.textcol1 + '?');
             sd(config.textcolor, ':');
 
             x := get_number(0, max_ransom);
 
             if x > 0 then
             begin
-              if confirm('Demand ' + uyellow + commastr(x) + config.textcol1 + ' ' + many_money(x) + ' for ' + ukidc + child.Name + config.textcol1, 'Y') = True then
+              if confirm('Demand ' + uyellow + commastr(x) + config.textcol1 + ' ' + many_money(x) +
+                ' for ' + ukidc + child.Name + config.textcol1, 'Y') = True then
               begin
                 {set ransom}
                 child.ransom_demanded := x;
@@ -2660,7 +2736,8 @@ begin
 
                 if child.mother <> '' then
                 begin
-                  d(config.textcolor, ' mother: ' + uplc + child.mother + config.textcol1 + ' the ' + race_display(2, child.motherrace, 1));
+                  d(config.textcolor, ' mother: ' + uplc + child.mother + config.textcol1 +
+                    ' the ' + race_display(2, child.motherrace, 1));
                 end else
                 begin
                   d(12, '*unknown mother*');
@@ -2668,7 +2745,8 @@ begin
 
                 if child.father <> '' then
                 begin
-                  d(config.textcolor, ' father: ' + uplc + child.father + config.textcol1 + ' the ' + race_display(2, child.fatherrace, 1));
+                  d(config.textcolor, ' father: ' + uplc + child.father + config.textcol1 +
+                    ' the ' + race_display(2, child.fatherrace, 1));
                 end else
                 begin
                   d(12, '*unknown father*');
@@ -2680,9 +2758,11 @@ begin
                 {news-paper}
                 newsy(True,
                   umailheadc + 'Ransom demanded' + config.textcol1,
-                  ' The kidnappers of ' + ukidc + child.Name + config.textcol1 + ' demand ' + uyellow + commastr(x) + config.textcol1 + ' ' + many_money(x),
+                  ' The kidnappers of ' + ukidc + child.Name + config.textcol1 + ' demand ' +
+                  uyellow + commastr(x) + config.textcol1 + ' ' + many_money(x),
                   ' in exhange for the child.',
-                  ' ' + ukidc + child.Name + config.textcol1 + ' parents are ' + uplc + child.mother + config.textcol1 + ' and ' + uplc + child.father + config.textcol1 + '.',
+                  ' ' + ukidc + child.Name + config.textcol1 + ' parents are ' + uplc + child.mother +
+                  config.textcol1 + ' and ' + uplc + child.father + config.textcol1 + '.',
                   '',
                   '',
                   '',
@@ -2691,7 +2771,8 @@ begin
                   '');
 
                 {inform parents online}
-                Inform_Parents_Online(child, 'A ransom has been set for your ' + sex7[child.sex] + ukidc + ' ' + child.Name + config.textcol1 + '!');
+                Inform_Parents_Online(child, 'A ransom has been set for your ' + sex7[child.sex] +
+                  ukidc + ' ' + child.Name + config.textcol1 + '!');
 
                 {inform parents offline}
                 inform_parents(child,
@@ -2752,13 +2833,16 @@ begin
             begin
               {transfer child to Royal Orphanage}
               crlf;
-              d(config.textcolor, 'Are you really sure about this!? You will not see ' + ukidc + child.Name + config.textcol1 + ' again.');
+              d(config.textcolor, 'Are you really sure about this!? You will not see ' + ukidc +
+                child.Name + config.textcol1 + ' again.');
 
-              if confirm('Transfer ' + ukidc + child.Name + config.textcol1 + ' to the ' + ulmag + 'Royal Orphanage' + config.textcol1, 'N') = True then
+              if confirm('Transfer ' + ukidc + child.Name + config.textcol1 + ' to the ' + ulmag +
+                'Royal Orphanage' + config.textcol1, 'N') = True then
               begin
                 crlf;
                 d(15, 'Done.');
-                d(2, ukidc + child.Name + config.textcol1 + ' is ready to cry when ' + sex2[child.sex] + ' is dragged out by the royal servants.');
+                d(2, ukidc + child.Name + config.textcol1 + ' is ready to cry when ' + sex2[child.sex] +
+                  ' is dragged out by the royal servants.');
                 d(2, ukidc + child.Name + config.textcol1 + ' is transported to the Royal Castle.');
                 d(config.textcolor, '(you are a bad ' + classnames[player.class] + '!)');
                 crlf;
@@ -2773,7 +2857,8 @@ begin
                 inform_king(
                   ulcyan + 'Child Arrival' + config.textcol1,
                   cool_string(13, '=', '-', 11, 5),
-                  uplc + player.name2 + config.textcol1 + ' sent the kidnapped child; ' + ukidc + child.Name + config.textcol1 + ' to the Royal Orphanage.',
+                  uplc + player.name2 + config.textcol1 + ' sent the kidnapped child; ' + ukidc +
+                  child.Name + config.textcol1 + ' to the Royal Orphanage.',
                   'Your royal highness is now responsible for this child.',
                   '',
                   '',
@@ -2793,7 +2878,8 @@ begin
                   player,
                   ulred + 'Your Children!' + config.textcol1,
                   mkstring(14, underscore),
-                  uplc + player.name2 + config.textcol1 + ' the ' + classnames[player.class] + ' sent your ' + sex7[child.sex] + ' ' + ukidc + child.Name + config.textcol1,
+                  uplc + player.name2 + config.textcol1 + ' the ' + classnames[player.class] +
+                  ' sent your ' + sex7[child.sex] + ' ' + ukidc + child.Name + config.textcol1,
                   'to the Royal Orphanage. ' + ukidc + child.Name + config.textcol1 + ' wants to come home to you!',
                   '',
                   '',
@@ -2810,9 +2896,11 @@ begin
                 {news-paper}
                 newsy(True,
                   'Child Transport',
-                  ' ' + uplc + player.name2 + config.textcol1 + ' transfered one of ' + sex3[player.sex] + ' kidnapped children',
+                  ' ' + uplc + player.name2 + config.textcol1 + ' transfered one of ' + sex3[player.sex] +
+                  ' kidnapped children',
                   ' to the Royal Orphanage.',
-                  ' ' + ukidc + child.Name + config.textcol1 + ', the ' + sex7[child.sex] + ' of ' + uplc + child.mother + config.textcol1 + ' and ' + uplc + child.father + config.textcol1 + '.',
+                  ' ' + ukidc + child.Name + config.textcol1 + ', the ' + sex7[child.sex] + ' of ' +
+                  uplc + child.mother + config.textcol1 + ' and ' + uplc + child.father + config.textcol1 + '.',
                   '',
                   '',
                   '',
@@ -2847,7 +2935,8 @@ begin
           begin
             {transfer child back to parents}
             crlf;
-            d(config.textcolor, 'Are you really sure about this!? You may never see ' + ukidc + child.Name + config.textcol1 + ' again.');
+            d(config.textcolor, 'Are you really sure about this!? You may never see ' + ukidc +
+              child.Name + config.textcol1 + ' again.');
             if confirm('Release ' + ukidc + child.Name + config.textcol1, 'N') = True then
             begin
               crlf;
@@ -2860,7 +2949,8 @@ begin
                 d(2, ukidc + child.Name + config.textcol1 + ' runs back home...');
               end;
 
-              d(2, ukidc + child.Name + config.textcol1 + ' is happy when ' + sex2[child.sex] + ' is returned to ' + sex3[child.sex] + ' parents.');
+              d(2, ukidc + child.Name + config.textcol1 + ' is happy when ' + sex2[child.sex] +
+                ' is returned to ' + sex3[child.sex] + ' parents.');
               d(config.textcolor, '(you did the right thing!)');
 
               {update child}
@@ -2871,14 +2961,16 @@ begin
               load_child(fsave, child, child.recnr);
 
               {inform parents}
-              inform_parents_online(child, ukidc + child.Name + config.textcol1 + ' has been ' + uyellow + 'RELEASED' + config.textcol1 + '!');
+              inform_parents_online(child, ukidc + child.Name + config.textcol1 + ' has been ' +
+                uyellow + 'RELEASED' + config.textcol1 + '!');
 
               {inform parents offline, via mail}
               inform_parents(child,
                 mailrequest_nothing,
                 uwhite + 'Child Released!' + config.textcol1,
                 mkstring(15, underscore),
-                'Your ' + sex7[child.sex] + ukidc + ' ' + child.Name + config.textcol1 + ' was released by ' + sex3[child.sex] + ' kidnapper!',
+                'Your ' + sex7[child.sex] + ukidc + ' ' + child.Name + config.textcol1 +
+                ' was released by ' + sex3[child.sex] + ' kidnapper!',
                 '(' + uplc + player.name2 + config.textcol1 + ' the ' + classnames[player.class] + ')',
                 '',
                 '',
@@ -2895,7 +2987,9 @@ begin
               {news-paper}
               newsy(True,
                 'Child Released!',
-                ' ' + ukidc + child.Name + config.textcol1 + ', the ' + sex7[child.sex] + ' of ' + uplc + child.mother + config.textcol1 + ' and ' + uplc + child.father + config.textcol1 + ' was released by ' + sex3[child.sex] + ' kidnapper!',
+                ' ' + ukidc + child.Name + config.textcol1 + ', the ' + sex7[child.sex] + ' of ' +
+                uplc + child.mother + config.textcol1 + ' and ' + uplc + child.father + config.textcol1 +
+                ' was released by ' + sex3[child.sex] + ' kidnapper!',
                 '',
                 '',
                 '',

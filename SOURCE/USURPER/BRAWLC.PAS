@@ -123,11 +123,13 @@ begin
     begin
       p := 2;
       s := '(e)lves';
-    end else if racenr = 4 then
+    end else
+    if racenr = 4 then
     begin
       p := 3;
       s := 'h(a)lf-elves';
-    end else if racenr = 5 then
+    end else
+    if racenr = 5 then
     begin
       p := 2;
       s := '(d)warves';
@@ -214,8 +216,10 @@ begin
 
   {*create opponents based on player level*}
   yy := player.level * 5;
-  if yy > 60 then yy := 60;
-  if player.level > 30 then yy := player.level + random(10);
+  if yy > 60 then
+    yy := 60;
+  if player.level > 30 then
+    yy := player.level + random(10);
 
   if player.class in [Barbarian, Paladin, Warrior] then
   begin
@@ -273,11 +277,12 @@ begin
     end;
   end; {case .end.}
 
-  {should Ted the Bartender get involved in the fight?}
+       {should Ted the Bartender get involved in the fight?}
   if random(2) = 0 then
   begin
     crlf;
-    d(global_plycol, config.bobsbartender + ' the Bartender' + config.textcol1 + ' immediately grabs a wooden club and jumps');
+    d(global_plycol, config.bobsbartender + ' the Bartender' + config.textcol1 +
+      ' immediately grabs a wooden club and jumps');
     d(config.textcolor, 'over the counter to if possible prevent the wrecking of the bar!');
     crlf;
     d(global_talkcol, 'Get that troublemaker!!' + config.textcol1 + ', he screams, and points at YOU!');
@@ -379,12 +384,18 @@ begin
         begin
           d(config.textcolor, 'It''s aimed for you!');
           y := 2;
-          if player.class = Jester then Inc(y);
-          if stamina < 2 then Dec(y);
-          if player.agility > 50 then Inc(y);
-          if player.agility > 200 then Inc(y);
-          if player.agility > 700 then Inc(y);
-          if player.agility > 1300 then Inc(y);
+          if player.class = Jester then
+            Inc(y);
+          if stamina < 2 then
+            Dec(y);
+          if player.agility > 50 then
+            Inc(y);
+          if player.agility > 200 then
+            Inc(y);
+          if player.agility > 700 then
+            Inc(y);
+          if player.agility > 1300 then
+            Inc(y);
 
           d(config.textcolor, 'Try to :');
           menu('(G)rab the ' + s);
@@ -469,14 +480,22 @@ begin
       sd(global_plycol, config.bobsbartender);
       d(config.textcolor, ' swings his Club! He looks angrily at you!');
       y := 0;
-      if stamina > 5 then Inc(y);
-      if player.class = Jester then Inc(y);
-      if player.agility > 50 then Inc(y);
-      if player.agility > 200 then Inc(y);
-      if player.agility > 700 then Inc(y);
-      if player.agility > 1300 then Inc(y);
-      if stunned = True then y := 1;
-      if greppad = True then y := 1;
+      if stamina > 5 then
+        Inc(y);
+      if player.class = Jester then
+        Inc(y);
+      if player.agility > 50 then
+        Inc(y);
+      if player.agility > 200 then
+        Inc(y);
+      if player.agility > 700 then
+        Inc(y);
+      if player.agility > 1300 then
+        Inc(y);
+      if stunned = True then
+        y := 1;
+      if greppad = True then
+        y := 1;
 
       if random(y) = 0 then
       begin
@@ -492,7 +511,8 @@ begin
         if stamina <= 0 then
         begin
           newsy(True,
-            ' ' + uplc + player.name2 + config.textcol1 + ' was knocked out by ' + uplc + config.bobsbartender + ' the Bartender' + config.textcol1 + '!',
+            ' ' + uplc + player.name2 + config.textcol1 + ' was knocked out by ' + uplc +
+            config.bobsbartender + ' the Bartender' + config.textcol1 + '!',
             ' (' + uplc + player.name2 + config.textcol1 + ' managed to knock out ' + commastr(knocks) + ' foes)',
             '',
             '',
@@ -617,19 +637,28 @@ begin
                 14: d(config.textcolor, 'He comes rushing at you in high speed! RAM!');
               end; {case .end.}
               y := 1;
-              if stamina > 5 then Inc(y);
-              if player.class = Jester then Inc(y);
-              if player.agility > 50 then Inc(y);
-              if player.agility > 200 then Inc(y);
-              if player.agility > 700 then Inc(y);
-              if player.agility > 1300 then Inc(y);
-              if player.level > 50 then Inc(y);
-              if player.level > 95 then Inc(y);
+              if stamina > 5 then
+                Inc(y);
+              if player.class = Jester then
+                Inc(y);
+              if player.agility > 50 then
+                Inc(y);
+              if player.agility > 200 then
+                Inc(y);
+              if player.agility > 700 then
+                Inc(y);
+              if player.agility > 1300 then
+                Inc(y);
+              if player.level > 50 then
+                Inc(y);
+              if player.level > 95 then
+                Inc(y);
 
               if random(y) = 0 then
               begin
                 d(config.textcolor, 'You didn''t manage to evade!');
-                if x = 8 then stunned := True;
+                if x = 8 then
+                  stunned := True;
                 case x of
                   1: d(12, 'The hard tackle sends you across the floor! You lose your breath!');
                   2: d(12, 'You stagger under the impact from the kick!');
@@ -706,11 +735,13 @@ begin
                 end;
               end;
 
-            end else if (stunned = True) and (random(2) = 0) then
+            end else
+            if (stunned = True) and (random(2) = 0) then
             begin
               Dec(stamina, 2);
               d(config.textcolor, 'He kicks you hard!');
-            end else if (greppad = True) and (random(2) = 0) then
+            end else
+            if (greppad = True) and (random(2) = 0) then
             begin
               Dec(stamina, 2);
               d(config.textcolor, 'He punches you hard in the stomach!');
@@ -783,11 +814,14 @@ begin
             gr2 := 0;
             crlf;
           end;
-          if (gr > 1) and (gr < 11) then sd(config.textcolor, ', ');
+          if (gr > 1) and (gr < 11) then
+            sd(config.textcolor, ', ');
           sd(config.textcolor, commastr(foes[i]^) + ' ');
 
-          if foes[i]^ = 1 then menu_foes(i, False);
-          if foes[i]^ > 1 then menu_foes(i, True);
+          if foes[i]^ = 1 then
+            menu_foes(i, False);
+          if foes[i]^ > 1 then
+            menu_foes(i, True);
         end;
       end;
 
@@ -801,7 +835,8 @@ begin
         ch := upcase(getchar);
 
         {Evaluate User-Input}
-        if (ch = '*') and (ted = 0) then ch := ' ';
+        if (ch = '*') and (ted = 0) then
+          ch := ' ';
 
         if ch in ['H', 'O', 'E', 'A', 'D', 'T', 'R', 'G', 'N', 'M', '*'] then
         begin
@@ -821,7 +856,8 @@ begin
 
           if x <> 99 then
           begin
-            if foes[x]^ > 0 then s := 'yep';
+            if foes[x]^ > 0 then
+              s := 'yep';
           end else
           begin
             s := 'yep';
@@ -844,13 +880,20 @@ begin
       xx := round(rr * 100);
 
       a := 'You are in Excellent condition';
-      if xx < 100 then a := 'You have some small wounds and bruises';
-      if xx < 80 then a := 'You have some wounds';
-      if xx < 70 then a := 'You are pretty hurt!';
-      if xx < 50 then a := 'You are in a bad shape!';
-      if xx < 30 then a := 'You have some BIG and NASTY wounds!';
-      if xx < 20 then a := 'You are in an awful condition!';
-      if xx < 5 then a := 'You are bleeding from wounds ALL over your body!';
+      if xx < 100 then
+        a := 'You have some small wounds and bruises';
+      if xx < 80 then
+        a := 'You have some wounds';
+      if xx < 70 then
+        a := 'You are pretty hurt!';
+      if xx < 50 then
+        a := 'You are in a bad shape!';
+      if xx < 30 then
+        a := 'You have some BIG and NASTY wounds!';
+      if xx < 20 then
+        a := 'You are in an awful condition!';
+      if xx < 5 then
+        a := 'You are bleeding from wounds ALL over your body!';
 
       d(config.textcolor, a);
       xx := x;
@@ -945,8 +988,10 @@ begin
           begin
             d(14, 'The ' + a + ' hits ' + s + '!');
             d(14, s + ' loses sense of all directions!');
-            if x <> 99 then Dec(foes[x]^);
-            if x = 99 then ted := 0;
+            if x <> 99 then
+              Dec(foes[x]^);
+            if x = 99 then
+              ted := 0;
             Inc(knocks);
             pause;
           end else
@@ -985,8 +1030,10 @@ begin
           begin
             d(14, 'Your tackle hits ' + s + ' VERY hard!');
             d(14, s + ' loses sense of all directions!');
-            if x <> 99 then Dec(foes[x]^);
-            if x = 99 then ted := 0;
+            if x <> 99 then
+              Dec(foes[x]^);
+            if x = 99 then
+              ted := 0;
             Inc(knocks);
             pause;
           end;
@@ -1001,8 +1048,10 @@ begin
           begin
             d(14, 'Your kick hits ' + s + ' hard!');
             d(14, 'He goes down!');
-            if x <> 99 then Dec(foes[x]^);
-            if x = 99 then ted := 0;
+            if x <> 99 then
+              Dec(foes[x]^);
+            if x = 99 then
+              ted := 0;
             Inc(knocks);
             pause;
           end;
@@ -1017,8 +1066,10 @@ begin
           begin
             d(14, 'You hit ' + s + ' right on the chin!');
             d(14, 'He goes down!');
-            if x <> 99 then Dec(foes[x]^);
-            if x = 99 then ted := 0;
+            if x <> 99 then
+              Dec(foes[x]^);
+            if x = 99 then
+              ted := 0;
             Inc(knocks);
             pause;
           end;
@@ -1032,8 +1083,10 @@ begin
           end else
           begin
             d(14, s + ' screams in horror as you bite him hard!');
-            if x <> 99 then Dec(foes[x]^);
-            if x = 99 then ted := 0;
+            if x <> 99 then
+              Dec(foes[x]^);
+            if x = 99 then
+              ted := 0;
             Inc(knocks);
             pause;
           end;
@@ -1048,8 +1101,10 @@ begin
           end else
           begin
             d(14, s + ' falls heavily to the floor as you sweep away his legs!');
-            if x <> 99 then Dec(foes[x]^);
-            if x = 99 then ted := 0;
+            if x <> 99 then
+              Dec(foes[x]^);
+            if x = 99 then
+              ted := 0;
             Inc(knocks);
             pause;
           end;
@@ -1063,8 +1118,10 @@ begin
           end else
           begin
             d(14, s + ' screams in pain as you crack a bone in his body! Hehe!');
-            if x <> 99 then Dec(foes[x]^);
-            if x = 99 then ted := 0;
+            if x <> 99 then
+              Dec(foes[x]^);
+            if x = 99 then
+              ted := 0;
             Inc(knocks);
             pause;
           end;
@@ -1079,8 +1136,10 @@ begin
           begin
             d(14, s + ' looks surprised when your punch hit him hard in the chest!');
             d(14, 'He goes down on his knees, moaning!');
-            if x <> 99 then Dec(foes[x]^);
-            if x = 99 then ted := 0;
+            if x <> 99 then
+              Dec(foes[x]^);
+            if x = 99 then
+              ted := 0;
             Inc(knocks);
             pause;
           end;
@@ -1095,8 +1154,10 @@ begin
           begin
             d(14, s + ' is stunned from your effective punch!');
             d(14, 'He goes down!');
-            if x <> 99 then Dec(foes[x]^);
-            if x = 99 then ted := 0;
+            if x <> 99 then
+              Dec(foes[x]^);
+            if x = 99 then
+              ted := 0;
             Inc(knocks);
             pause;
           end;
@@ -1110,8 +1171,10 @@ begin
           end else
           begin
             d(14, s + 's face turns red when he chokes!');
-            if x <> 99 then Dec(foes[x]^);
-            if x = 99 then ted := 0;
+            if x <> 99 then
+              Dec(foes[x]^);
+            if x = 99 then
+              ted := 0;
             Inc(knocks);
             pause;
           end;
@@ -1126,8 +1189,10 @@ begin
           begin
             d(14, 'You hit ' + s + 's head with a massive blow!');
             d(14, 'He goes down bleeding from some nasty wounds!');
-            if x <> 99 then Dec(foes[x]^);
-            if x = 99 then ted := 0;
+            if x <> 99 then
+              Dec(foes[x]^);
+            if x = 99 then
+              ted := 0;
             Inc(knocks);
             pause;
           end;
@@ -1141,8 +1206,10 @@ begin
           end else
           begin
             d(14, 'You get a firm grip of his hair! You drag him around the room!');
-            if x <> 99 then Dec(foes[x]^);
-            if x = 99 then ted := 0;
+            if x <> 99 then
+              Dec(foes[x]^);
+            if x = 99 then
+              ted := 0;
             Inc(knocks);
             pause;
           end;
@@ -1156,8 +1223,10 @@ begin
           end else
           begin
             d(14, 'He staggers under your blow!');
-            if x <> 99 then Dec(foes[x]^);
-            if x = 99 then ted := 0;
+            if x <> 99 then
+              Dec(foes[x]^);
+            if x = 99 then
+              ted := 0;
             Inc(knocks);
             pause;
           end;
@@ -1171,8 +1240,10 @@ begin
           end else
           begin
             d(14, 'You hit him right on the chin! He is dazed!');
-            if x <> 99 then Dec(foes[x]^);
-            if x = 99 then ted := 0;
+            if x <> 99 then
+              Dec(foes[x]^);
+            if x = 99 then
+              ted := 0;
             Inc(knocks);
             pause;
           end;
@@ -1186,8 +1257,10 @@ begin
           end else
           begin
             d(14, 'You hit ' + s + ' right in Solar-Plexus! You send him flying!');
-            if x <> 99 then Dec(foes[x]^);
-            if x = 99 then ted := 0;
+            if x <> 99 then
+              Dec(foes[x]^);
+            if x = 99 then
+              ted := 0;
             Inc(knocks);
             pause;
           end;
@@ -1297,7 +1370,8 @@ begin
     {make news}
     newsy(True,
       ' ' + uplc + player.name2 + config.textcol1 + ' was knocked out! (loser)',
-      ' ' + uplc + player.name2 + config.textcol1 + ' managed to knock out ' + ulgray + commastr(knocks) + config.textcol1 + ' foes.',
+      ' ' + uplc + player.name2 + config.textcol1 + ' managed to knock out ' + ulgray + commastr(knocks) +
+      config.textcol1 + ' foes.',
       '',
       '',
       '',
@@ -1328,7 +1402,8 @@ begin
     {news-paper}
     s := upcasestr(sex2[player.sex]);
     newsy(True,
-      ' ' + uplc + player.name2 + config.textcol1 + ' managed to knock out ' + ulgray + commastr(foess) + config.textcol1 + ' foes!',
+      ' ' + uplc + player.name2 + config.textcol1 + ' managed to knock out ' + ulgray + commastr(foess) +
+      config.textcol1 + ' foes!',
       ' ' + s + ' cleaned the place out!',
       '',
       '',

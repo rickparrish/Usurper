@@ -318,7 +318,8 @@ function envcount: integer;
 var
   cnt: integer;
 begin
-  if envptr = nil { If not yet changed } then envcount := dos.envcount
+  if envptr = nil { If not yet changed } then
+    envcount := dos.envcount
   else envcount := envcnt;
 end;
 
@@ -328,9 +329,14 @@ function envstr(index: integer): string;
   { Returns environment string 'index' }
 
 begin
-  if envptr = nil { If not yet changed } then envstr := dos.envstr(index)
-  else if (index <= 0) or (index >= envcnt) then envstr := ''
-  else if envptr^ [index - 1] = nil then envstr := ''
+  if envptr = nil { If not yet changed } then
+    envstr := dos.envstr(index)
+  else
+  if (index <= 0) or (index >= envcnt) then
+    envstr := ''
+  else
+  if envptr^ [index - 1] = nil then
+    envstr := ''
   else envstr := envptr^ [index - 1]^;
 end;
 
@@ -347,7 +353,8 @@ begin
   i := 1;
   eq := False;
   while (i <= length(n1)) and (i <= length(n2)) and
-    (upcase(n1[i]) = upcase(n2[i])) do i := i + 1;
+    (upcase(n1[i]) = upcase(n2[i])) do
+    i := i + 1;
   name_eq := (i > length(n1)) and (i <= length(n2)) and (n2[i] = '=');
 end;
 
@@ -366,10 +373,12 @@ begin
 
   while (idx < envcnt) and not found do
   begin
-    if envptr^ [idx] <> nil then found := name_eq(str, envptr^ [idx]^);
+    if envptr^ [idx] <> nil then
+      found := name_eq(str, envptr^ [idx]^);
     idx := idx + 1;
   end;
-  if not found then searchenv := -1
+  if not found then
+    searchenv := -1
   else searchenv := idx - 1;
 end;
 
@@ -382,11 +391,13 @@ var
   strp: stringptr;
   eq:   integer;
 begin
-  if envptr = nil { If not yet changed } then getenv := dos.getenv(envvar)
+  if envptr = nil { If not yet changed } then
+    getenv := dos.getenv(envvar)
   else
   begin
     eq := searchenv(envvar);
-    if eq < 0 then getenv := ''
+    if eq < 0 then
+      getenv := ''
     else
     begin
       strp := envptr^ [eq];
@@ -409,12 +420,14 @@ var
 begin
   envcnt := dos.envcount;
   getmem(envptr, envcnt * sizeof(stringptr));
-  if envptr = nil then exit;
+  if envptr = nil then
+    exit;
   for i := 0 to envcnt - 1 do
   begin
     str := dos.envstr(i + 1);
     getmem(envptr^ [i], length(str) + 1);
-    if envptr^ [i] <> nil then envptr^ [i]^ := str;
+    if envptr^ [i] <> nil then
+      envptr^ [i]^ := str;
   end;
 end;
 
@@ -429,12 +442,16 @@ var
   help:    stringarrptr;
   tmpvar:  string;
 begin
-  if envptr = nil then init_envptr;
-  if envptr = nil then exit;
+  if envptr = nil then
+    init_envptr;
+  if envptr = nil then
+    exit;
 
   eq := pos('=', envvar);
-  if eq = 0 then exit;
-  for idx := 1 to eq do envvar[idx] := upcase(envvar[idx]);
+  if eq = 0 then
+    exit;
+  for idx := 1 to eq do
+    envvar[idx] := upcase(envvar[idx]);
   tmpvar := copy(envvar, 1, eq - 1); { Copy the portion up to "=" }
 
   idx := searchenv(tmpvar);
@@ -442,21 +459,26 @@ begin
   begin
     freemem(envptr^ [idx], length(envptr^ [idx]^) + 1);
 
-    if eq >= length(envvar) then envptr^ [idx] := nil
+    if eq >= length(envvar) then
+      envptr^ [idx] := nil
     else
     begin
       getmem(envptr^ [idx], length(envvar) + 1);
-      if envptr^ [idx] <> nil then envptr^ [idx]^ := envvar;
+      if envptr^ [idx] <> nil then
+        envptr^ [idx]^ := envvar;
     end;
-  end else if eq < length(envvar) then
+  end else
+  if eq < length(envvar) then
   begin
     getmem(help, (envcnt + 1) * sizeof(stringptr));
-    if help = nil then exit;
+    if help = nil then
+      exit;
     move(envptr^, help^, envcnt * sizeof(stringptr));
     freemem(envptr, envcnt * sizeof(stringptr));
     envptr := help;
     getmem(envptr^ [envcnt], length(envvar) + 1);
-    if envptr^ [envcnt] <> nil then envptr^ [envcnt]^ := envvar;
+    if envptr^ [envcnt] <> nil then
+      envptr^ [envcnt]^ := envvar;
     envcnt := envcnt + 1;
   end;
 end;
@@ -487,7 +509,8 @@ begin
     nfn := fn + '.BAT';
     ok := exists(nfn);
   end;
-  if not ok then tryext := 0
+  if not ok then
+    tryext := 0
   else fn := nfn;
 end;
 
@@ -504,7 +527,8 @@ var
 begin
   if fn = '' then
   begin
-    if cmdpath = '' then findfile := ERR_COMSPEC
+    if cmdpath = '' then
+      findfile := ERR_COMSPEC
     else findfile := 3;
     exit;
   end;
@@ -524,14 +548,17 @@ begin
 
   if (check and HAS_EXT) <> 0 then
   begin
-    for i := 1 to length(ext) do ext[i] := upcase(ext[i]);
-    if ext = '.BAT' then hasext := 2
+    for i := 1 to length(ext) do
+      ext[i] := upcase(ext[i]);
+    if ext = '.BAT' then
+      hasext := 2
     else hasext := 1;
   end else hasext := 0;
 
   if hasext <> 0 then
   begin
-    if (check and FILE_EXISTS) <> 0 then found := hasext
+    if (check and FILE_EXISTS) <> 0 then
+      found := hasext
     else found := 0;
   end else found := tryext(fn);
 
@@ -565,7 +592,8 @@ begin
       check := checkpath(fn, INF_NODIR, drive, dir, Name, ext, fn);
       if hasext <> 0 then
       begin
-        if (check and FILE_EXISTS) <> 0 then found := hasext
+        if (check and FILE_EXISTS) <> 0 then
+          found := hasext
         else found := 0;
       end else found := tryext(fn);
     end;
@@ -584,7 +612,8 @@ procedure getcmdpath;
 var
   i, found: integer;
 begin
-  if length(cmdpath) > 0 then exit;
+  if length(cmdpath) > 0 then
+    exit;
   cmdpath := getenv('COMSPEC');
   cmdpars := '';
   found := 0;
@@ -592,7 +621,8 @@ begin
   if cmdpath <> '' then
   begin
     i := 1;
-    while (i <= length(cmdpath)) and (cmdpath[i] in spaces) do Inc(i);
+    while (i <= length(cmdpath)) and (cmdpath[i] in spaces) do
+      Inc(i);
     if i > 1 then
     begin
       cmdpath := copy(cmdpath, i, 255);
@@ -605,9 +635,12 @@ begin
       cmdpars := copy(cmdpath, i, 128);
       cmdpath[0] := chr(i - 1);
       i := 1;
-      while (i <= length(cmdpars)) and (cmdpars[i] in spaces) do Inc(i);
-      if i > 1 then cmdpars := copy(cmdpars, i, 128);
-      if cmdpars <> '' then cmdpars := cmdpars + ' ';
+      while (i <= length(cmdpars)) and (cmdpars[i] in spaces) do
+        Inc(i);
+      if i > 1 then
+        cmdpars := copy(cmdpars, i, 128);
+      if cmdpars <> '' then
+        cmdpars := cmdpars + ' ';
     end;
     found := findfile(cmdpath);
   end;
@@ -617,7 +650,8 @@ begin
     cmdpath := 'COMMAND.COM';
     cmdpars := '';
     found := findfile(cmdpath);
-    if found = 0 then cmdpath := '';
+    if found = 0 then
+      cmdpath := '';
   end;
 end;
 
@@ -639,7 +673,8 @@ begin
   stmp[2] := '.\';
   stmp[3] := '\';
 
-  for i := 0 to 3 do if length(stmp[i]) <> 0 then
+  for i := 0 to 3 do
+    if length(stmp[i]) <> 0 then
     begin
       outfn := stmp[i];
       res := checkpath(outfn, 0, drive, dir, Name, ext, outfn);
@@ -684,10 +719,12 @@ begin
       end;
     end;
 
-    while (i <= length(par)) and (par[i] in spaces) do Inc(i);
+    while (i <= length(par)) and (par[i] in spaces) do
+      Inc(i);
     fn := copy(par, i, 255);
     fne := pos(';,=+/"[]|<> '#9, fn);
-    if fne = 0 then fne := length(fn) + 1;
+    if fne = 0 then
+      fne := length(fn) + 1;
     i := i + fne - 1;
     fn[0] := chr(fne - 1);
     if (fne = 0) or (length(fn) = 0) then
@@ -702,7 +739,8 @@ begin
       parse_redirect := False;
       exit;
     end;
-    if app <> 0 then fnp^ := '>' + fn
+    if app <> 0 then
+      fnp^ := '>' + fn
     else fnp^ := fn;
     fnp^ [length(fnp^) + 1] := #0;
 
@@ -726,7 +764,8 @@ begin
         end else stderr := fnp;
     end;
 
-    while (i <= length(par)) and (par[i] in spaces) do Inc(i);
+    while (i <= length(par)) and (par[i] in spaces) do
+      Inc(i);
 
   until (i > length(par)) or (par[i] <> '>') and (par[i] <> '<');
 
@@ -779,7 +818,8 @@ begin
       goto exit;
     end;
 
-    if cmdbat = 2 then pars := cmdpars + '/c ' + xfn + ' ' + pars
+    if cmdbat = 2 then
+      pars := cmdpars + '/c ' + xfn + ' ' + pars
     else pars := cmdpars + pars;
     xfn := cmdpath;
   end;
@@ -787,8 +827,10 @@ begin
 {$IFDEF REDIRECT}
   idx := pos('<', pars);
   len := pos('>', pars);
-  if len > idx then idx := len;
-  if idx > 0 then if not parse_redirect(pars, idx, stdin, stdout, stderr) then
+  if len > idx then
+    idx := len;
+  if idx > 0 then
+    if not parse_redirect(pars, idx, stdin, stdout, stderr) then
     begin
       do_exec := RC_REDIRERR;
       goto exit;
@@ -800,7 +842,8 @@ begin
 
   if newenv and (envptr <> nil) then
   begin
-    for idx := 0 to envcnt - 1 do envlen := envlen + length(envptr^ [idx]^) + 1;
+    for idx := 0 to envcnt - 1 do
+      envlen := envlen + length(envptr^ [idx]^) + 1;
     if envlen > 0 then
     begin
       envlen := envlen + 1;
@@ -822,7 +865,8 @@ begin
     end;
   end;
 
-  if spawn = 0 then swapping := -1
+  if spawn = 0 then
+    swapping := -1
   else
   begin
 
@@ -837,7 +881,8 @@ begin
 
     { No swapping if available memory > needed }
 
-    if needed < avail then swapping := 0
+    if needed < avail then
+      swapping := 0
     else
     begin
 
@@ -853,15 +898,18 @@ begin
           swapping := spawn;
         end else
         begin
-          if (dosversion and $ff) >= 3 then swapping := swapping or CREAT_TEMP
+          if (dosversion and $ff) >= 3 then
+            swapping := swapping or CREAT_TEMP
           else
           begin
             swapfn := swapfn + swap_filename;
             len := length(swapfn);
             while exists(swapfn) do
             begin
-              if (swapfn[len] >= 'Z') then len := len - 1;
-              if (swapfn[len] = '.') then len := len - 1;
+              if (swapfn[len] >= 'Z') then
+                len := len - 1;
+              if (swapfn[len] = '.') then
+                len := len - 1;
               swapfn[len] := succ(swapfn[len]);
             end;
           end;
@@ -875,7 +923,8 @@ begin
 
   if swapping > 0 then
   begin
-    if envlen = 0 then swapping := swapping or DONT_SWAP_ENV;
+    if envlen = 0 then
+      swapping := swapping or DONT_SWAP_ENV;
 
     rc := prep_swap(swapping, swapfn);
     if rc < 0 then
@@ -908,18 +957,22 @@ begin
 
   { Free the environment buffer if it was allocated. }
 
-  exit: if envlen > 0 then freemem(envp, envlen);
+  exit: if envlen > 0 then
+      freemem(envp, envlen);
 {$IFDEF REDIRECT}
-  if stdin <> nil then freemem(stdin, length(stdin^) + 2);
-  if stdout <> nil then freemem(stdout, length(stdout^) + 2);
-  if stderr <> nil then freemem(stderr, length(stderr^) + 2);
+  if stdin <> nil then
+    freemem(stdin, length(stdin^) + 2);
+  if stdout <> nil then
+    freemem(stdout, length(stdout^) + 2);
+  if stderr <> nil then
+    freemem(stderr, length(stderr^) + 2);
 {$ENDIF}
 end;
 
 {$ENDIF}
 {$IFNDEF MSDOS}
-// This is only used when the sysop shells to dos while someone is playing
-// so it's not overly important to implement all the features do_exec supports
+ // This is only used when the sysop shells to dos while someone is playing
+ // so it's not overly important to implement all the features do_exec supports
 function do_exec(xfn: string; pars: string; spawn: integer; needed: word; newenv: boolean): integer;
 begin
   Dos.Exec(xfn, pars);
@@ -934,59 +987,6 @@ begin
   envcnt := 0;
   cmdpath := ''; @spawn_check := nil;
 end.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

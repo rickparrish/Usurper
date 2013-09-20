@@ -68,7 +68,8 @@ begin
     d(config.textcolor, 'are very different. Races interact differently to each other, so if you');
     d(config.textcolor, 'start as troll for example, you may get discounts in the weaponstore, which');
     d(config.textcolor, 'is run by a troll.');
-  end else if s = 'CLASSHELP' then
+  end else
+  if s = 'CLASSHELP' then
   begin
     d(5, 'Class Selection  -  HelpText');
     d(5, '=-=-=-=-=-=-=-=-=-=-=-=-=-=-');
@@ -159,7 +160,8 @@ begin
     d(config.textcolor, 'them either. Fighters receive an extra bonus in Stamina per');
     d(config.textcolor, 'experience level.');
     pause;
-  end else if s = 'LEVEL_MASTER_#1' then
+  end else
+  if s = 'LEVEL_MASTER_#1' then
   begin
     crlf;
     d(config.textcolor, 'Akrappas house resides just outside town. They call him the Wisest');
@@ -170,7 +172,8 @@ begin
     d(config.textcolor, 'meeting the old man takes your breath away. Charisma of a');
     d(config.textcolor, 'hundred Heros and still an old and gentle man, who seems to');
     d(config.textcolor, 'care mostly for his gout.');
-  end else if s = 'LEVEL_MASTER_#2' then
+  end else
+  if s = 'LEVEL_MASTER_#2' then
   begin
     crlf;
     d(config.textcolor, 'Singuman is the youngest of the known Masters. He acquired his title');
@@ -182,7 +185,8 @@ begin
     d(config.textcolor, 'Akrappa, some say Singuman lacks the important bit of caring for');
     d(config.textcolor, 'the poor. Always dressed in an Elven Chainmail and a red mantle');
     d(config.textcolor, 'Singuman is easily recognized.');
-  end else if s = 'LEVEL_MASTER_#3' then
+  end else
+  if s = 'LEVEL_MASTER_#3' then
   begin
     crlf;
     d(config.textcolor, 'Elven and human blood pours through Ishanas veins. Taught for house-');
@@ -193,7 +197,8 @@ begin
     d(config.textcolor, 'even less. Extremely skilled with a longbow and sword. Slayed');
     d(config.textcolor, 'Ogmof the Fat in the battle of Shares in 3014. While never married,');
     d(config.textcolor, 'rumours speak of her magic being connected with her virginity.');
-  end else if s = 'LEVEL_MASTER_#4' then
+  end else
+  if s = 'LEVEL_MASTER_#4' then
   begin
     crlf;
     d(config.textcolor, 'Hot-tempered to say the least, Dzarrgo is a ruler by nature. The big');
@@ -204,7 +209,8 @@ begin
     d(config.textcolor, 'plains of Okhsor. Eyes of stone and a weapon skill which outmatches');
     d(config.textcolor, 'the best warriors in the county. Dzarrgo is also expertly trained in');
     d(config.textcolor, 'Black Magic.');
-  end else if s = 'LEVEL_MASTER_#5' then
+  end else
+  if s = 'LEVEL_MASTER_#5' then
   begin
     crlf;
     d(config.textcolor, 'Agni is a Master unmarked of time. He has never been seated in the');
@@ -213,7 +219,8 @@ begin
     d(config.textcolor, 'to have won, but Gregorius refuses to accept, accusing Agni of cheating.');
     d(config.textcolor, 'Always elegant in both manners and clothing, Agni gets the rightful');
     d(config.textcolor, 'respect he deserves, whether feared or praised.');
-  end else if s = 'LEVEL_MASTER_#6' then
+  end else
+  if s = 'LEVEL_MASTER_#6' then
   begin
     crlf;
     d(config.textcolor, 'As a pupil of Sagan the Great, Apollonia makes no distinction between');
@@ -222,7 +229,8 @@ begin
     d(config.textcolor, 'approach linked back to the first Ages, when purity ruled the world.');
     d(config.textcolor, 'Dressed in a glittering Silvergown and wearing a blue mantle, Apollonia');
     d(config.textcolor, 'is the last remnant from those days.');
-  end else if s = 'LEVEL_MASTER_#7' then
+  end else
+  if s = 'LEVEL_MASTER_#7' then
   begin
     crlf;
     d(config.textcolor, 'The Witchmasters ramschackle lies in the shabby Eastern parts');
@@ -231,7 +239,8 @@ begin
     d(config.textcolor, 'the rumours of Sachmez evil doings have reached absurd proportions.');
     d(config.textcolor, 'Still, when facing the Sorceror, You can''t get rid of the nasty');
     d(config.textcolor, 'feeling of being scrutinized by a superior mind, who wishes to control You.');
-  end else if s = 'LEVEL_MASTER_#8' then
+  end else
+  if s = 'LEVEL_MASTER_#8' then
   begin
     crlf;
     d(config.textcolor, 'Umilak is always on the move and you never really can tell where');
@@ -240,7 +249,8 @@ begin
     d(config.textcolor, 'regions of the old Crypt. You find Umilak sitting behind his desk,');
     d(config.textcolor, 'solving some riddle and equations perhaps? His dark glowing eyes suddenly');
     d(config.textcolor, 'focus on You as you make yourself noticed with a discrete cough.');
-  end else if s = 'LEVEL_MASTER_#9' then
+  end else
+  if s = 'LEVEL_MASTER_#9' then
   begin
     crlf;
     d(config.textcolor, 'After an hour on a small trail leading into the forest, You');
@@ -249,7 +259,8 @@ begin
     d(config.textcolor, 'the simple appearance a mighty spiritual power dwells.');
     d(config.textcolor, 'It is hard to tell whether Asangas powers are dark or white, but');
     d(config.textcolor, 'does it matter? He is dressed in a spotted Goatskin and wields a staff.');
-  end else if s = 'LEVEL_MASTER_#10' then
+  end else
+  if s = 'LEVEL_MASTER_#10' then
   begin
     crlf;
     d(config.textcolor, 'Gregorius great mansion resides two miles outside of town');

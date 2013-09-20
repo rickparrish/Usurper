@@ -26,8 +26,9 @@ Copyright 2007 Jakob Dangarden
 
 
 unit CMS;
-{Usurper - Constants (not all of them are here!)}
-{many are located in 'init.pas'}
+
+ {Usurper - Constants (not all of them are here!)}
+ {many are located in 'init.pas'}
 interface
 
 const
@@ -62,7 +63,7 @@ const
   global_RelationTrust      = 50;
   global_RelationRespect    = 60;
 
-  global_RelationNone       = 1; {returned by social_relation}
+  global_RelationNone       = 1;  {returned by social_relation}
   global_RelationNormal     = 70; {default relation value}
 
   global_RelationSuspicious = 80;
@@ -78,7 +79,7 @@ const {mail requests constants, used to create special "request" or
   mailrequest_IWantGuard     = 2; {Player applies for guard duty to the king}
   mailrequest_DrinkOffer     = 3; {Player is offered a drink by sender}
 
-  {immortal}
+      {immortal}
   mailrequest_ImmortalOffer  = 40; {immortal wants to recruit receiver}
 
   mailrequest_RoyalAngel     = 50; {king has sent a healing angel (court mage)}
@@ -87,7 +88,7 @@ const {mail requests constants, used to create special "request" or
   mailrequest_QuestOffer     = 60; {king has offered player a Quest (quest.id)}
   mailrequest_Birthday       = 61; {player celebrates birthday}
 
-  {relation}
+      {relation}
   mailrequest_HoldHands      = 70; {sender wants to hold hands with receiver. (y/n)}
   mailrequest_Roses          = 71; {sender sends bouquet of roses to receiver. (y/n)}
   mailrequest_Poison         = 72; {sender sends poison to receiver (y/n)}
@@ -96,11 +97,11 @@ const {mail requests constants, used to create special "request" or
   mailrequest_Chocolate      = 75; {sender sends a box of chocolates to receiver, open box?}
   mailrequest_Kiss           = 76; {sender wants to kiss receiver (y/n)}
 
-  {home}
+      {home}
   mailrequest_HaveSex        = 77; {sender wants to have (in marriage) sex with receiver}
   mailrequest_HaveDiscreteSex = 78; {sender wants to have (out of marriage) sex with receiver}
 
-  {children}
+      {children}
   mailrequest_ScanForBabies  = 79; {receiver must scan for new babies to name}
   mailrequest_ChildRaisingExp = 80; {receiver gets experience points for raising his child}
   mailrequest_ChildPoisonedExp = 81; {receiver loses experience points for grieving over poisoned child}
@@ -109,13 +110,13 @@ const {mail requests constants, used to create special "request" or
   mailrequest_ChildCursedExp = 84; {receiver loses experience points for grieving over cursed child}
   mailrequest_ChildDepressedExp = 85; {receiver loses experience points for depressed child (divorce)}
 
-  {Gym}
+      {Gym}
   mailrequest_GymMembership  = 89; {receiver must say YES or NO to senders application for gym card}
 
-  {team}
+      {team}
   mailrequest_jointeam       = 90; {sender wants to join receivers gang}
 
-{*NO MAILREQUEST OVER 128* SINCE YOU ARE USING A BYTE VALUE!}
+      {*NO MAILREQUEST OVER 128* SINCE YOU ARE USING A BYTE VALUE!}
 
 const {broadcast message constants, sent to other nodes, online}
 
@@ -164,14 +165,14 @@ const {broadcast message constants, sent to other nodes, online}
   {king reinstates subject to taxes}
   broadcast_TaxReinstate  = '™q';
 
-  {team}
+      {team}
   broadcast_JoinTeam      = '™r'; {receiver allowed to join team}
 
-  {gods receive messages}
+      {gods receive messages}
   broadcast_GodDesecrated = '™™™1'; {player has desecrated gods altar}
   broadcast_GodSacrificed = '™™™2'; {player has sacrificed at gods altar}
 
-  {relations}
+      {relations}
   broadcast_HoldingHands  = '™™b'; {sender has dated (hands) receiver! cool!}
   broadcast_BouquetRoses  = '™™c'; {sender has dated receiver! cool!}
   broadcast_Poison        = '™™d'; {sender has sent poison to receiver!}
@@ -180,7 +181,7 @@ const {broadcast message constants, sent to other nodes, online}
 
   broadcast_HaveSex       = '™™g'; {sender had (in marriage) sex with receiver!}
   broadcast_HaveDiscreteSex = '™™h'; {sender had (out of marriage) sex with receiver!}
-  {children related}
+      {children related}
   broadcast_ChildPartyExp = '™™i'; {receivers child has earned XP from party going}
 
 const {player (offline) location constants}
@@ -343,4 +344,4 @@ implementation
 
 begin {put init code here}
 
-end. {Unit CMS .end.}
+end.  {Unit CMS .end.}

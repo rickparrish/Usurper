@@ -45,17 +45,17 @@ function File_Lock(var F; Action: filAction; FPos, Len: longint): word;
   assembler;
 asm
          JE      @@end
-         MOV     AL, Action  {0=Lock,1=Unlock}
-         MOV     AH, $5C     {Dos lock function}
-         LES     SI, F       {Load F}
-         MOV     BX, ES:[SI] {Get file handle}
+         MOV     AL, Action   {0=Lock,1=Unlock}
+         MOV     AH, $5C      {Dos lock function}
+         LES     SI, F        {Load F}
+         MOV     BX, ES:[SI]  {Get file handle}
          LES     DX, Fpos
-         MOV     CX, ES      {CX:DI=Begin position}
+         MOV     CX, ES       {CX:DI=Begin position}
          LES     DI, len
-         MOV     SI, ES      {SI:DI length lock area}
-         INT     21h         {MS-DOS}
+         MOV     SI, ES       {SI:DI length lock area}
+         INT     21h          {MS-DOS}
          JC      @@end        {If error, return AX}
-         XOR     AX, AX      {Else, return 0}
+         XOR     AX, AX       {Else, return 0}
          @@end:
 end; {File_Lock *end*}
 {$ENDIF}
@@ -65,11 +65,13 @@ begin
   if (Action = FLock) then
   begin
     File_Lock := RPLockFile(FileRec(F).Handle, FPos, Len);
-  end else if (Action = FUnlock) then
+  end else
+  if (Action = FUnlock) then
   begin
     File_Lock := RPUnLockFile(FileRec(F).Handle, FPos, Len);
   end;
 end;
+
 { func. LockFile }
 {$ENDIF}
 

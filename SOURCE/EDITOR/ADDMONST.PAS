@@ -30,7 +30,8 @@ interface
 uses
   Init;
 
-procedure Add_Monster(armoruser: boolean; weaponuser: boolean; weapon: longint; armor: longint; strength: integer; const Name: s70; grabweap: boolean; grabarm: boolean; const phrase: s70);
+procedure Add_Monster(armoruser: boolean; weaponuser: boolean; weapon: longint; armor: longint;
+  strength: integer; const Name: s70; grabweap: boolean; grabarm: boolean; const phrase: s70);
 
 implementation
 
@@ -53,7 +54,8 @@ begin
   monster.grabweap := grabweap; {kan man ta vapnet}
   monster.grabarm := grabarm;
   monster.phrase := phrase;     {vad s„ger odjuret?}
-  if monster.phrase = '' then monster.phrase := emptystr;
+  if monster.phrase = '' then
+    monster.phrase := emptystr;
   monster.wuser := weaponuser;
   monster.auser := armoruser;
 
@@ -61,7 +63,8 @@ begin
 
   monster.strength := strength + random(10);
 
-  if weaponuser = False then monster.strength := monster.strength + random(20);
+  if weaponuser = False then
+    monster.strength := monster.strength + random(20);
 
 
   {all of Jakob's monsters had strength*3}
@@ -84,7 +87,8 @@ begin
   begin
     monster.magiclevel := 1;
   end;
-  if monster.magiclevel > 100 then monster.magiclevel := 100;
+  if monster.magiclevel > 100 then
+    monster.magiclevel := 100;
 
   monster.mana := 0;
   monster.maxmana := 0;
@@ -92,13 +96,15 @@ begin
   {giving monsters random spell capability}
   for i := 1 to maxmspells do
   begin
-    if random(10) = 0 then monster.spell[i] := True
+    if random(10) = 0 then
+      monster.spell[i] := True
     else monster.spell[i] := False;
   end;
 
   {write to disk}
  {$I-}Write(monsterfile, monster);{$I-}
-  if IOResult <> 0 then unable_to_write(monfile);
+  if IOResult <> 0 then
+    unable_to_write(monfile);
 
   Inc(counter); {statbar must have the exact amount of posts..}
   Statbar(Counter, totobj, global_masterx, global_mastery, 1, 1);

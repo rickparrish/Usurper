@@ -119,7 +119,8 @@ begin
 
     case cho of
       '?': begin {menu}
-        if player.expert = True then display_menu(True, False)
+        if player.expert = True then
+          display_menu(True, False)
         else display_menu(False, False);
       end;
       'G': begin {give to the poor .start.}
@@ -134,11 +135,13 @@ begin
         if (xx <= player.gold) and (xx > 0) then
         begin
           crlf;
-          d(config.textcolor, 'Your contribution of ' + uyellow + commastr(xx) + config.textcol1 + ' ' + many_money(xx) + ' is appreciated.');
+          d(config.textcolor, 'Your contribution of ' + uyellow + commastr(xx) + config.textcol1 +
+            ' ' + many_money(xx) + ' is appreciated.');
           d(config.textcolor, 'You feel a bit better inside now.');
           decplayermoney(player, xx);
           xx := xx div 10;
-          if xx < 1 then xx := 1;
+          if xx < 1 then
+            xx := 1;
           Give_Chivalry(player, xx);
           Dec(player.chivnr);
 
@@ -169,18 +172,21 @@ begin
         if xx > player.gold then
         begin
           d(12, 'Scoundrel! You don''t have that much!');
-        end else if (xx <= player.gold) and (xx > 0) then
+        end else
+        if (xx <= player.gold) and (xx > 0) then
         begin
 
           crlf;
-          d(config.textcolor, 'Your contribution of ' + uyellow + commastr(xx) + config.textcol1 + ' ' + many_money(xx) + ' is appreciated.');
+          d(config.textcolor, 'Your contribution of ' + uyellow + commastr(xx) + config.textcol1 +
+            ' ' + many_money(xx) + ' is appreciated.');
           d(config.textcolor, 'Your virtue and support from the Church increase.');
           crlf;
           d(config.textcolor, 'You are blessed by Bishop ' + uplc + config.bishop + config.textcol1 + '.');
 
           decplayermoney(player, xx);
           xx := xx div 11;
-          if xx < 1 then xx := 1;
+          if xx < 1 then
+            xx := 1;
 
           Give_Chivalry(player, xx);
           Dec(player.chivnr);
@@ -200,7 +206,7 @@ begin
 
         end;
 
-      end; {church collect .end.}
+      end;       {church collect .end.}
 
       'B': begin {blessing .start.}
         if player.dark < 1 then
@@ -210,7 +216,8 @@ begin
         end else
         begin
           crlf;
-          d(config.textcolor, 'You have ' + uyellow + commastr(player.gold) + config.textcol1 + ' ' + many_money(player.gold));
+          d(config.textcolor, 'You have ' + uyellow + commastr(player.gold) + config.textcol1 +
+            ' ' + many_money(player.gold));
           d(config.textcolor, 'How much do you want to give for a blessing');
           sd(config.textcolor, ':');
           xx := get_number(0, player.gold);
@@ -218,13 +225,15 @@ begin
           if (xx <= player.gold) and (xx > 0) then
           begin
             crlf;
-            d(config.textcolor, 'Your contribution of ' + uyellow + commastr(xx) + config.textcol1 + ' ' + many_money(xx) + ' give you salvation.');
+            d(config.textcolor, 'Your contribution of ' + uyellow + commastr(xx) + config.textcol1 +
+              ' ' + many_money(xx) + ' give you salvation.');
             d(config.textcolor, 'Your dark soul lightens.');
 
             decplayermoney(player, xx);
 
             xx := xx div 15;
-            if xx < 1 then xx := 1;
+            if xx < 1 then
+              xx := 1;
 
             Give_Chivalry(player, xx);
 
@@ -245,12 +254,12 @@ begin
 
           end;
         end;
-      end; {blessing .end.}
+      end;       {blessing .end.}
       'R': begin {return}
         break;
       end;
 
-    end; {case .end.}
+    end;       {case .end.}
 
   until never; {never leave this loop}
 

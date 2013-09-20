@@ -137,7 +137,8 @@ begin
     {evaluate user-input}
     case cho of
       '?': begin {menu}
-        if player.expert = True then menu_display(True, False)
+        if player.expert = True then
+          menu_display(True, False)
         else menu_display(False, False);
       end;
       'S': begin {status}
@@ -170,7 +171,8 @@ begin
             end else
             begin
               crlf;
-              if confirm('Continue Search', 'Y') = False then break;
+              if confirm('Continue Search', 'Y') = False then
+                break;
             end;
           end;
         end; {for i:= .end.}
@@ -227,7 +229,8 @@ begin
                   begin
                     sd(global_plycol, player0^.name2);
                     d(12, ' is already in your team!');
-                  end else if is_online(player0^.name2, online_player) then
+                  end else
+                  if is_online(player0^.name2, online_player) then
                   begin
                     sd(global_plycol, player0^.name2);
                     d(12, ' is busy right now. Try again later.');
@@ -245,9 +248,11 @@ begin
                   end;
                 end;
               end;
-              if (found) or (abort) then break;
+              if (found) or (abort) then
+                break;
             end; {for j:= .end.}
-            if (found) or (abort) then break;
+            if (found) or (abort) then
+              break;
           end; {for i:= .end.}
 
           if (not abort) and (not found) then
@@ -290,9 +295,11 @@ begin
                   end;
                 end;
 
-                if not go_ahead then break;
+                if not go_ahead then
+                  break;
               end; {for j:= .end.}
-              if not go_ahead then break;
+              if not go_ahead then
+                break;
             end; {for i:= .end.}
 
             if go_ahead then
@@ -303,7 +310,8 @@ begin
               {load character}
               load_character(player0^, record_type, record_nr);
 
-              if add_shadow(SAdd, player0^, player.name2, 'negotiating with ' + uplc + player.name2 + config.textcol1, 0) = False then
+              if add_shadow(SAdd, player0^, player.name2, 'negotiating with ' + uplc + player.name2 +
+                config.textcol1, 0) = False then
               begin
                 {unable to add player0}
                 crlf;
@@ -314,14 +322,15 @@ begin
 
                 if player0^.king then
                 begin
-                  d(12, 'The ' + kingstring(player0^.sex) + ' scorns your pathetic attempt to interfere with the Royal affairs!');
+                  d(12, 'The ' + kingstring(player0^.sex) +
+                    ' scorns your pathetic attempt to interfere with the Royal affairs!');
                   d(12, 'Your relation with the Royals is not improving..');
                   {worsen pl0:s attitude to player}
                   Update_Relation(Relation_Worsen, 2, player0^, player, False, False);
 
                   pause;
-                end {npc belongs to another team!}
-                else if player0^.team <> '' then
+                end {npc belongs to another team!} else
+                if player0^.team <> '' then
                 begin
 
                   sd(global_plycol, player0^.name2);
@@ -330,7 +339,8 @@ begin
 
                   if confirm('Try to BRIBE ' + sex[player0^.sex] + ' over to your team', 'n') = True then
                   begin
-                    d(config.textcolor, 'How much do you offer (max ' + uyellow + commastr(player.gold) + config.textcol1 + ' ' + many_money(player.gold) + ')');
+                    d(config.textcolor, 'How much do you offer (max ' + uyellow + commastr(player.gold) +
+                      config.textcol1 + ' ' + many_money(player.gold) + ')');
                     sd(config.textcolor, ':');
 
                     {get bribe}
@@ -354,8 +364,10 @@ begin
                         {News Paper}
                         newsy(True,
                           'Bribe Attempt!',
-                          ' ' + uplc + player.name2 + config.textcol1 + ' tried to bribe ' + uplc + player0^.name2 + config.textcol1 + '!',
-                          ' But ' + uplc + player0^.name2 + config.textcol1 + ' refused to leave ' + sex3[player0^.sex] + ' team!',
+                          ' ' + uplc + player.name2 + config.textcol1 + ' tried to bribe ' + uplc +
+                          player0^.name2 + config.textcol1 + '!',
+                          ' But ' + uplc + player0^.name2 + config.textcol1 + ' refused to leave ' +
+                          sex3[player0^.sex] + ' team!',
                           '',
                           '',
                           '',
@@ -364,12 +376,13 @@ begin
                           '',
                           '');
 
-                        {inform team-members of bribe attempt}
+                              {inform team-members of bribe attempt}
                         Team_Report_All(player0^.team, {team to send message to}
                           '', {player name to exclude}
                           'Bribe Attempt', {news-header}
                           mailrequest_nothing, {mailrequest_constant}
-                          uplc + player.name2 + config.textcol1 + ' tried to bribe ' + uplc + player0^.name2 + config.textcol1 + '!',
+                          uplc + player.name2 + config.textcol1 + ' tried to bribe ' + uplc +
+                          player0^.name2 + config.textcol1 + '!',
                           uplc + player0^.name2 + config.textcol1 + ' rejected the bribe.',
                           '',
                           '');
@@ -401,7 +414,8 @@ begin
                           player0^.cturf := player.cturf;
                           player0^.teamrec := player.teamrec;
 
-                          if player0^.loyalty < 0 then player0^.loyalty := 0;
+                          if player0^.loyalty < 0 then
+                            player0^.loyalty := 0;
 
                           {save user}
                           user_save(player0^);
@@ -413,7 +427,8 @@ begin
                           {News Paper}
                           newsy(True,
                             'Traitor!',
-                            ' ' + uplc + player0^.name2 + config.textcol1 + ' was bribed into ' + utec + player0^.team + config.textcol1 + '.',
+                            ' ' + uplc + player0^.name2 + config.textcol1 + ' was bribed into ' +
+                            utec + player0^.team + config.textcol1 + '.',
                             '',
                             '',
                             '',
@@ -438,7 +453,8 @@ begin
                               if is_online(player1^.name2, online_player) = True then
                               begin
                                 {send online info}
-                                online_send_to_player(player1^.name2, online_player, uplc + traitor + config.textcol1 + ' has left your team!');
+                                online_send_to_player(player1^.name2, online_player, uplc +
+                                  traitor + config.textcol1 + ' has left your team!');
                               end else
                               begin
                                 {mail}
@@ -495,7 +511,8 @@ begin
                     d(config.textcolor, 'Paladins when your character is as dark as it is)');
                     crlf;
                     pause;
-                  end else if (player.dark > 500) and (player0^.class = paladin) and (player.race = troll) then
+                  end else
+                  if (player.dark > 500) and (player0^.class = paladin) and (player.race = troll) then
                   begin
                     {NPC paladins don't like Trolls!}
                     crlf;
@@ -532,7 +549,8 @@ begin
 
                       crlf;
                       sd(config.textcolor, 'You approach ' + uplc + player0^.name2);
-                      d(config.textcolor, ' and ask ' + sex[player0^.sex] + ' if ' + sex2[player0^.sex] + ' wants to join your gang.');
+                      d(config.textcolor, ' and ask ' + sex[player0^.sex] + ' if ' + sex2[player0^.sex] +
+                        ' wants to join your gang.');
                       sd(global_plycol, player0^.name2 + config.textcol1 + ' demands ');
                       sd(14, commastr(yy));
                       d(config.textcolor, ' ' + many_money(yy) + ' to join!');
@@ -567,7 +585,8 @@ begin
                               {news-paper}
                               newsy(True,
                                 'Gang Recruitment',
-                                ' ' + uplc + player.name2 + config.textcol1 + ' persuaded ' + uplc + player0^.name2 + config.textcol1 + ' to switch sides.',
+                                ' ' + uplc + player.name2 + config.textcol1 + ' persuaded ' +
+                                uplc + player0^.name2 + config.textcol1 + ' to switch sides.',
                                 ' ' + utec + player.team + config.textcol1 + ' increase their strength!',
                                 '',
                                 '',
@@ -581,7 +600,8 @@ begin
                               {news-paper}
                               newsy(True,
                                 'Gang Recruitment',
-                                ' ' + uplc + player.name2 + config.textcol1 + ' persuaded ' + uplc + player0^.name2 + config.textcol1 + ' to switch sides.',
+                                ' ' + uplc + player.name2 + config.textcol1 + ' persuaded ' +
+                                uplc + player0^.name2 + config.textcol1 + ' to switch sides.',
                                 ' ' + utec + player.team + config.textcol1 + ' is growing in strength.',
                                 '',
                                 '',
@@ -624,7 +644,7 @@ begin
       end;
       'L': begin {List of Characters}
 
-        {header}
+                 {header}
         clearscreen;
         d(5, 'Character       Hps  Race      Class         Status   Team');
 
@@ -692,9 +712,11 @@ begin
 
             end;
 
-            if abort then break;
+            if abort then
+              break;
           end; {for j:= .end.}
-          if abort then break;
+          if abort then
+            break;
         end; {for i:= .end.}
       end;
 

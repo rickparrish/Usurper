@@ -74,16 +74,17 @@ function FakePlayer_New_Message(const receiver: onlinerec): s70;
 procedure Setup_DungeonItems;
 function Dungeon_Reward(dungeon: integer): longint;
 
-{BadWords}
+ {BadWords}
 function Remove_BadWords(const s: string): string; {check string for bad words}
 
-{King}
+ {King}
 procedure New_King(var king: kingrec); {init a kingrecord}
 procedure King_Is_Gone; {when king is somehow removed/gone from office}
 function Get_King(var ply: userrec): boolean;
 function KingString(const sex: byte): s30; {returns either 1=KING or 2=QUEEN}
 
-procedure Inform_King(const line1, line2, line3, line4, line5, line6, line7, line8, line9, line10, line11, line12, line13, line14, line15: s90);
+procedure Inform_King(const line1, line2, line3, line4, line5, line6, line7, line8, line9, line10,
+  line11, line12, line13, line14, line15: s90);
 
 {Quests - most quest related procedures are located in various2.pas}
 procedure Quest_Rankings;
@@ -103,7 +104,9 @@ function Monster_Active(i: integer): boolean;
 function Target_Monster: byte;
 function Monster_Power(mnr: integer): longint;
 procedure Reset_Monsters;
-procedure Create_Monster(nr: byte; const Name: s70; hps: longint; strength: longint; defence: longint; const phrase: s70; grabweap: boolean; grabarm: boolean; const weapon: s70; const armor: s70; poisoned: boolean; disease: boolean; punch: longint; armpow: longint; weappow: longint);
+procedure Create_Monster(nr: byte; const Name: s70; hps: longint; strength: longint; defence: longint;
+  const phrase: s70; grabweap: boolean; grabarm: boolean; const weapon: s70; const armor: s70;
+  poisoned: boolean; disease: boolean; punch: longint; armpow: longint; weappow: longint);
 
 
 
@@ -203,11 +206,13 @@ begin
   if pl.dark > 0 then
   begin
     pl.dark := pl.dark - chiv;
-    if pl.dark < 0 then pl.dark := 0;
+    if pl.dark < 0 then
+      pl.dark := 0;
   end else
   begin
     pl.chiv := pl.chiv + chiv;
-    if pl.chiv > 30000 then pl.chiv := 30000;
+    if pl.chiv > 30000 then
+      pl.chiv := 30000;
   end;
 
 end;
@@ -218,11 +223,13 @@ begin
   if pl.chiv > 0 then
   begin
     pl.chiv := pl.chiv - dark;
-    if pl.chiv < 0 then pl.chiv := 0;
+    if pl.chiv < 0 then
+      pl.chiv := 0;
   end else
   begin
     pl.dark := pl.dark + dark;
-    if pl.dark > 30000 then pl.dark := 30000;
+    if pl.dark > 30000 then
+      pl.dark := 30000;
   end;
 
 end; {give_darkness *end*}
@@ -231,59 +238,74 @@ function Vicious_String(const pl: userrec): s70;
 var Result: s70;
 begin {used when examining sleeping players in the Dorm}
 
-  {returns a string with info on player pls soul}
+      {returns a string with info on player pls soul}
   if pl.dark > 0 then
   begin
     if (pl.dark >= 1) and (pl.dark <= 100) then
     begin
       Result := 'mean';
-    end else if (pl.dark >= 101) and (pl.dark <= 1000) then
+    end else
+    if (pl.dark >= 101) and (pl.dark <= 1000) then
     begin
       Result := 'vicious';
-    end else if (pl.dark >= 1001) and (pl.dark <= 5000) then
+    end else
+    if (pl.dark >= 1001) and (pl.dark <= 5000) then
     begin
       Result := 'brutal';
-    end else if (pl.dark >= 5001) and (pl.dark <= 9000) then
+    end else
+    if (pl.dark >= 5001) and (pl.dark <= 9000) then
     begin
       Result := 'sadist';
-    end else if (pl.dark >= 9001) and (pl.dark <= 15000) then
+    end else
+    if (pl.dark >= 9001) and (pl.dark <= 15000) then
     begin
       Result := 'evil';
-    end else if (pl.dark >= 15001) and (pl.dark <= 27000) then
+    end else
+    if (pl.dark >= 15001) and (pl.dark <= 27000) then
     begin
       Result := 'black soul';
-    end else if (pl.dark >= 27001) and (pl.dark <= 27001) then
+    end else
+    if (pl.dark >= 27001) and (pl.dark <= 27001) then
     begin
       Result := 'extremely evil';
-    end else if (pl.dark >= 55001) and (pl.dark <= 99999) then
+    end else
+    if (pl.dark >= 55001) and (pl.dark <= 99999) then
     begin
       Result := 'satans child';
     end else Result := 'devils right hand';
 
-  end else if pl.chiv > 0 then
+  end else
+  if pl.chiv > 0 then
   begin
     if (pl.chiv >= 1) and (pl.chiv <= 100) then
     begin
       Result := 'happy';
-    end else if (pl.chiv >= 101) and (pl.chiv <= 1000) then
+    end else
+    if (pl.chiv >= 101) and (pl.chiv <= 1000) then
     begin
       Result := 'warm-hearted';
-    end else if (pl.chiv >= 1001) and (pl.chiv <= 5000) then
+    end else
+    if (pl.chiv >= 1001) and (pl.chiv <= 5000) then
     begin
       Result := 'kind';
-    end else if (pl.chiv >= 5001) and (pl.chiv <= 9000) then
+    end else
+    if (pl.chiv >= 5001) and (pl.chiv <= 9000) then
     begin
       Result := 'good';
-    end else if (pl.chiv >= 9001) and (pl.chiv <= 15000) then
+    end else
+    if (pl.chiv >= 9001) and (pl.chiv <= 15000) then
     begin
       Result := 'good-doer';
-    end else if (pl.chiv >= 15001) and (pl.chiv <= 27000) then
+    end else
+    if (pl.chiv >= 15001) and (pl.chiv <= 27000) then
     begin
       Result := 'extremely kind';
-    end else if (pl.chiv >= 27001) and (pl.chiv <= 55000) then
+    end else
+    if (pl.chiv >= 27001) and (pl.chiv <= 55000) then
     begin
       Result := 'extremely virtous';
-    end else if (pl.chiv >= 55001) and (pl.chiv <= 99999) then
+    end else
+    if (pl.chiv >= 55001) and (pl.chiv <= 99999) then
     begin
       Result := 'angel heart';
     end else Result := 'gods device';
@@ -302,7 +324,7 @@ function BattleMaster_String(const pl: userrec): s70;
 var Result: s70;
 begin {used when examining sleeping players in the Dorm}
 
-  {returns a string with info on player experience in battle}
+      {returns a string with info on player experience in battle}
   case (pl.p_kills + pl.p_defeats) of
     0: Result := 'wimp!';
     1..7: Result := 'baby soldier';
@@ -319,7 +341,7 @@ begin {used when examining sleeping players in the Dorm}
     else Result := 'battle-god';
   end; {case .end.}
 
-  {return result}
+       {return result}
   battlemaster_string := '*' + Result + '*';
 
 end; {battlemaster_string *end*}
@@ -327,7 +349,7 @@ end; {battlemaster_string *end*}
 
 function Numeric_Help: s90;
 begin
-  {used by numeric input routines, help text}
+     {used by numeric input routines, help text}
   numeric_help := ', ' + config.textcol2 + MaxInput_Key + config.textcol1 + ' for MAX' + ')';
 end; {numeric_help *end*}
 
@@ -340,7 +362,8 @@ begin
   if open_txtfile(trewrite, txt, global_maintfile) then
   begin
     {set node}
-    if local then s := 'LOCAL'
+    if local then
+      s := 'LOCAL'
     else s := global_cnode;
     writeln_to_text(txt, 'Node ' + s);
     writeln_to_text(txt, 'This is a temporary file created when Usurper runs');
@@ -368,7 +391,7 @@ begin {pretty meaningless function. used in dungeon events}
     5: s := 'Down';
   end; {case .end.}
 
-  {return result}
+       {return result}
   random_path := s;
 
 end; {random_path *end*}
@@ -430,7 +453,8 @@ begin
   end;
 
   {return result}
-  if o.restrict[i] then class_restricted := True
+  if o.restrict[i] then
+    class_restricted := True
   else class_restricted := False;
 
 end; {class_restricted *end*}
@@ -456,7 +480,7 @@ function Monster_Power(mnr: integer): longint;
 var Result: longint;
 begin {calculates monster #mnr powers..depending on weappower & hps}
 
-  {init variables}
+      {init variables}
   Result := 0;
 
   Result := (monster[mnr]^.hps) + (monster[mnr]^.weappow);
@@ -523,7 +547,8 @@ begin
       begin
         x := str_to_nr(s);
 
-        if (x < 1) or (x > global_maxmon) then x := 0;
+        if (x < 1) or (x > global_maxmon) then
+          x := 0;
 
         if x = 0 then
         begin
@@ -619,9 +644,11 @@ begin
     monster[nr]^.spell[i] := False;
   end; {for i:= .end.}
 
-end; {reset_monster *end*}
+end;   {reset_monster *end*}
 
-procedure Create_Monster(nr: byte; const Name: s70; hps: longint; strength: longint; defence: longint; const phrase: s70; grabweap: boolean; grabarm: boolean; const weapon: s70; const armor: s70; poisoned: boolean; disease: boolean; punch: longint; armpow: longint; weappow: longint);
+procedure Create_Monster(nr: byte; const Name: s70; hps: longint; strength: longint; defence: longint;
+  const phrase: s70; grabweap: boolean; grabarm: boolean; const weapon: s70; const armor: s70;
+  poisoned: boolean; disease: boolean; punch: longint; armpow: longint; weappow: longint);
 
 begin
 
@@ -921,7 +948,7 @@ begin {fakeplayer sends nonsense first message to online human player}
     47: s := 'Hi sweetie!';
   end; {case .end.}
 
-  {return result}
+       {return result}
   fakeplayer_new_message := s;
 
 end; {fakeplayer_new_message *end*}
@@ -968,7 +995,7 @@ begin {fakeplayer response to players who send them online chatmail}
     32: s := 'tjack-pundare!';
   end; {case .end.}
 
-  {return result}
+       {return result}
   fakeplayer_reply := s;
 
 end; {fakeplayer_reply *end*}
@@ -1008,7 +1035,7 @@ begin {fakeplayers congratulate/scorn online player "ply" who just
         9: s := 'good work!';
       end; {case .end.}
 
-      {send the message to ply}
+           {send the message to ply}
       if tell_onliner_compact(faker, ply.name2, s) = True then
       begin
         {message got through!}
@@ -1018,7 +1045,7 @@ begin {fakeplayers congratulate/scorn online player "ply" who just
 
   end; {for i:= .end.}
 
-end; {fakeplayers_congratulate_levelraiser *end*}
+end;   {fakeplayers_congratulate_levelraiser *end*}
 
 procedure Get_FakePlayerData; {Gets random data name/sex from fakes.dat file}
 var
@@ -1039,7 +1066,8 @@ begin
   if f_exists(global_fakefile) = False then
   begin
     {create the fakefile}
-    if create_fakeplayerfile = False then go_ahead := False;
+    if create_fakeplayerfile = False then
+      go_ahead := False;
   end;
 
   {get a random line from file}
@@ -1060,7 +1088,8 @@ begin
     if findsub('male', Result) = True then
     begin
       fake.sex := 1;
-    end else if findsub('female', Result) = True then
+    end else
+    if findsub('female', Result) = True then
     begin
       fake.sex := 2;
     end else fake.sex := 1;
@@ -1070,31 +1099,40 @@ begin
     if findsub(racenames[Human], Result) = True then
     begin
       fake.race := Human;
-    end else if findsub(racenames[Hobbit], Result) = True then
+    end else
+    if findsub(racenames[Hobbit], Result) = True then
     begin
       fake.race := Hobbit;
-    end else if findsub(racenames[Elf], Result) = True then
+    end else
+    if findsub(racenames[Elf], Result) = True then
     begin
       fake.race := Elf;
-    end else if findsub(racenames[HalfElf], Result) = True then
+    end else
+    if findsub(racenames[HalfElf], Result) = True then
     begin
       fake.race := HalfElf;
-    end else if findsub(racenames[Dwarf], Result) = True then
+    end else
+    if findsub(racenames[Dwarf], Result) = True then
     begin
       fake.race := Dwarf;
-    end else if findsub(racenames[Troll], Result) = True then
+    end else
+    if findsub(racenames[Troll], Result) = True then
     begin
       fake.race := Troll;
-    end else if findsub(racenames[Orc], Result) = True then
+    end else
+    if findsub(racenames[Orc], Result) = True then
     begin
       fake.race := Orc;
-    end else if findsub(racenames[Gnome], Result) = True then
+    end else
+    if findsub(racenames[Gnome], Result) = True then
     begin
       fake.race := Gnome;
-    end else if findsub(racenames[Gnoll], Result) = True then
+    end else
+    if findsub(racenames[Gnoll], Result) = True then
     begin
       fake.race := Gnoll;
-    end else if findsub(racenames[Mutant], Result) = True then
+    end else
+    if findsub(racenames[Mutant], Result) = True then
     begin
       fake.race := Mutant;
     end;
@@ -1104,34 +1142,44 @@ begin
     if findsub(classnames[Alchemist], Result) = True then
     begin
       fake.class := Alchemist;
-    end else if findsub(classnames[Assassin], Result) = True then
+    end else
+    if findsub(classnames[Assassin], Result) = True then
     begin
       fake.class := Assassin;
-    end else if findsub(classnames[Barbarian], Result) = True then
+    end else
+    if findsub(classnames[Barbarian], Result) = True then
     begin
       fake.class := Barbarian;
-    end else if findsub(classnames[Bard], Result) = True then
+    end else
+    if findsub(classnames[Bard], Result) = True then
     begin
       fake.class := Bard;
-    end else if findsub(classnames[Cleric], Result) = True then
+    end else
+    if findsub(classnames[Cleric], Result) = True then
     begin
       fake.class := Cleric;
-    end else if findsub(classnames[Jester], Result) = True then
+    end else
+    if findsub(classnames[Jester], Result) = True then
     begin
       fake.class := Jester;
-    end else if findsub(classnames[Magician], Result) = True then
+    end else
+    if findsub(classnames[Magician], Result) = True then
     begin
       fake.class := Magician;
-    end else if findsub(classnames[Paladin], Result) = True then
+    end else
+    if findsub(classnames[Paladin], Result) = True then
     begin
       fake.class := Paladin;
-    end else if findsub(classnames[Ranger], Result) = True then
+    end else
+    if findsub(classnames[Ranger], Result) = True then
     begin
       fake.class := Ranger;
-    end else if findsub(classnames[Sage], Result) = True then
+    end else
+    if findsub(classnames[Sage], Result) = True then
     begin
       fake.class := Sage;
-    end else if findsub(classnames[Warrior], Result) = True then
+    end else
+    if findsub(classnames[Warrior], Result) = True then
     begin
       fake.class := Warrior;
     end;
@@ -1174,14 +1222,22 @@ begin
 
   t := 'very poor';
 
-  if def > 4 then t := 'poor';
-  if def > 10 then t := 'medium';
-  if def > 28 then t := 'average';
-  if def > 40 then t := 'above average';
-  if def > 70 then t := 'strong';
-  if def > 90 then t := 'very strong';
-  if def > 150 then t := 'EXTREME';
-  if def > 250 then t := '*IMMUNE*';
+  if def > 4 then
+    t := 'poor';
+  if def > 10 then
+    t := 'medium';
+  if def > 28 then
+    t := 'average';
+  if def > 40 then
+    t := 'above average';
+  if def > 70 then
+    t := 'strong';
+  if def > 90 then
+    t := 'very strong';
+  if def > 150 then
+    t := 'EXTREME';
+  if def > 250 then
+    t := '*IMMUNE*';
 
   immunity := t;
 
@@ -1226,14 +1282,21 @@ begin
   x := round(rr * 100);
 
   h := 'is in Excellent condition';
-  if x < 100 then h := 'has some small wounds and bruises';
-  if x < 80 then  h := 'has some wounds';
-  if x < 70 then  h := 'is pretty hurt!';
-  if x < 50 then  h := 'is in bad shape!';
-  if x < 30 then  h := 'has some BIG and NASTY wounds!';
-  if x < 20 then  h := 'is in an awful condition!';
-  if x < 5 then  h := 'is bleeding from wounds ALL over their body!';
-  {return result}
+  if x < 100 then
+    h := 'has some small wounds and bruises';
+  if x < 80 then
+    h := 'has some wounds';
+  if x < 70 then
+    h := 'is pretty hurt!';
+  if x < 50 then
+    h := 'is in bad shape!';
+  if x < 30 then
+    h := 'has some BIG and NASTY wounds!';
+  if x < 20 then
+    h := 'is in an awful condition!';
+  if x < 5 then
+    h := 'is bleeding from wounds ALL over their body!';
+     {return result}
   condition := h;
 end; {condition *end*}
 
@@ -1259,7 +1322,7 @@ begin
     else s := '*error*';
   end; {case .end.}
 
-  {return result}
+       {return result}
   bash_name := s;
 
 end; {bash_name *end*}
@@ -1288,7 +1351,7 @@ begin
     17: s := '*COMPLETE*';
     else s := '*error*';
   end;
-  {return result}
+     {return result}
   bash_rank := s;
 end; {bash_rank *end*}
 
@@ -1304,13 +1367,17 @@ begin
     x := player0.maxhps - player0.hps;
     zz := x div 5;
     z := zz * 5 + player0.hps;
-    if z < player0.maxhps then zz := zz + 1;
-    if zz = 0 then zz := 1;
-    if zz > player0.healing then zz := player0.healing;
+    if z < player0.maxhps then
+      zz := zz + 1;
+    if zz = 0 then
+      zz := 1;
+    if zz > player0.healing then
+      zz := player0.healing;
     player0.healing := player0.healing - zz;
     x := zz * 5;
     player0.hps := player0.hps + x;
-    if player0.hps > player0.maxhps then player0.hps := player0.maxhps;
+    if player0.hps > player0.maxhps then
+      player0.hps := player0.maxhps;
 
     if Show then
     begin
@@ -1453,12 +1520,14 @@ begin
 
     crlf;
 
-    if zz > 1 then s := 'potions'
+    if zz > 1 then
+      s := 'potions'
     else s := 'potion';
 
     d(config.textcolor, 'You need ' + uyellow + commastr(zz) + config.textcol1 + ' ' + s + '.');
 
-    if zz > pl.healing then zz := pl.healing;
+    if zz > pl.healing then
+      zz := pl.healing;
 
     Dec(pl.healing, zz);
     x := zz * 5;
@@ -1471,11 +1540,13 @@ begin
     end;
     if zz = 1 then
     begin
-      d(config.textcolor, 'You quaffed ' + uwhite + commastr(zz) + config.textcol1 + ' potion and regained ' + uwhite + commastr(x) + config.textcol1 + ' hitpoints.');
+      d(config.textcolor, 'You quaffed ' + uwhite + commastr(zz) + config.textcol1 + ' potion and regained ' +
+        uwhite + commastr(x) + config.textcol1 + ' hitpoints.');
       d(config.textcolor, 'You have ' + commastr(pl.healing) + ' potions left.');
     end else
     begin
-      d(config.textcolor, 'You quaffed ' + uwhite + commastr(zz) + config.textcol1 + ' potions and regained ' + uwhite + commastr(x) + config.textcol1 + ' hitpoints.');
+      d(config.textcolor, 'You quaffed ' + uwhite + commastr(zz) + config.textcol1 + ' potions and regained ' +
+        uwhite + commastr(x) + config.textcol1 + ' hitpoints.');
       d(config.textcolor, 'You have ' + uwhite + commastr(pl.healing) + config.textcol1 + ' potions left.');
     end;
 
@@ -1514,7 +1585,8 @@ var
 
 begin
 
-  if loser.exp < 2000 then exit;
+  if loser.exp < 2000 then
+    exit;
 
   new(lose);
 
@@ -1535,10 +1607,12 @@ begin
 
     end;
     2: begin {Yep, only onliner loses}
-      if loser.name2 <> player.name2 then adios := True;
+      if loser.name2 <> player.name2 then
+        adios := True;
     end;
     3: begin {Yep, only offliner loses}
-      if loser.name2 = player.name2 then adios := True;
+      if loser.name2 = player.name2 then
+        adios := True;
     end;
   end;
 
@@ -1565,7 +1639,8 @@ begin
   if loser.name2 = player.name2 then
   begin
     d(15, 'You lose ' + commastr(plose) + ' experience points.');
-  end else if (loser.ai = 'H') and (plose > 0) then
+  end else
+  if (loser.ai = 'H') and (plose > 0) then
   begin
     post(MailSend,
       loser.name2,
@@ -1652,7 +1727,8 @@ begin
         done := True;
       end;
 
-      if sum > 1000000 then done := True;
+      if sum > 1000000 then
+        done := True;
 
     until done;
 
@@ -1731,8 +1807,10 @@ begin
         x := pl.maxhps - pl.hps;
         zz := x div 5;
         z := zz * 5 + pl.hps;
-        if z < pl.maxhps then zz := zz + 1;
-        if zz = 0 then zz := 1;
+        if z < pl.maxhps then
+          zz := zz + 1;
+        if zz = 0 then
+          zz := 1;
         d(12, 'You only need ' + uwhite + commastr(zz) + ulred + ' potions.');
 
         Dec(pl.healing, zz);
@@ -1743,7 +1821,8 @@ begin
         Inc(pl.hps, x);
       end;
       d(config.textcolor, 'You quaffed ' + uwhite + commastr(zz) + config.textcol1 + ' potions');
-      d(config.textcolor, 'You regained ' + uwhite + commastr(x) + config.textcol1 + ' hitpoints  (' + commastr(pl.hps) + '/' + commastr(pl.maxhps) + ')');
+      d(config.textcolor, 'You regained ' + uwhite + commastr(x) + config.textcol1 + ' hitpoints  (' +
+        commastr(pl.hps) + '/' + commastr(pl.maxhps) + ')');
       d(config.textcolor, 'You have ' + uwhite + commastr(pl.healing) + config.textcol1 + ' potions left');
     end;
 
@@ -1820,7 +1899,7 @@ begin
 
   end; {case .end.}
 
-  {return result}
+       {return result}
   race_display := Result;
 
 end; {race_display *end*}
@@ -1884,14 +1963,16 @@ begin
           {Word1}
           repeat
             t := l[x];
-            if t <> seperator then word1 := word1 + t;
+            if t <> seperator then
+              word1 := word1 + t;
             Inc(x);
           until t = seperator;
 
           {word2}
           repeat
             t := l[x];
-            if t <> seperator then word2 := word2 + t;
+            if t <> seperator then
+              word2 := word2 + t;
             Inc(x);
           until x > length(l);
 
@@ -1911,7 +1992,7 @@ begin
 
   end; {file exists .end.}
 
-  {Return Result}
+       {Return Result}
   remove_badwords := s2;
 
 end; {remove_badwords *end*}
@@ -1950,12 +2031,14 @@ begin
 
   {Fast Play, skip first menu, #11}
   s := cfg_string(11);
-  if upcasestr(s) = 'YES' then config.fastplay := False
+  if upcasestr(s) = 'YES' then
+    config.fastplay := False
   else config.fastplay := True;
 
   {Mark Npcs or not, #123}
   s := cfg_string(123);
-  if upcasestr(s) = 'NO' then config.marknpcs := False
+  if upcasestr(s) = 'NO' then
+    config.marknpcs := False
   else config.marknpcs := True;
 
   {Anchor road name, #12}
@@ -2001,7 +2084,8 @@ begin
   {# of Bard Songs/day, #163}
   s := cfg_string(163);
   i := str_to_nr(s);
-  if (i < 0) or (i > 50) then config.bardsongs := 5
+  if (i < 0) or (i > 50) then
+    config.bardsongs := 5
   else config.bardsongs := i;
 
 
@@ -2016,34 +2100,41 @@ begin
   {minimum age to marry, #166}
   s := cfg_string(166);
   i := str_to_nr(s);
-  if (i < 0) or (i > 65000) then config.MinimumAgetoMarry := 18
+  if (i < 0) or (i > 65000) then
+    config.MinimumAgetoMarry := 18
   else config.MinimumAgetomarry := i;
 
 
   {name of bobs beer place}
   s := cfg_string(167);
   config.bobsplace := 'Bobs Beer';
-  if upcasestr(s) <> '' then config.bobsplace := s;
+  if upcasestr(s) <> '' then
+    config.bobsplace := s;
 
   s := cfg_string(168);
   config.bobsname := 'Bob';
-  if upcasestr(s) <> '' then config.bobsname := s;
+  if upcasestr(s) <> '' then
+    config.bobsname := s;
 
   s := cfg_string(169);
   config.bishop := 'Jakobinus';
-  if upcasestr(s) <> '' then config.bishop := s;
+  if upcasestr(s) <> '' then
+    config.bishop := s;
 
   s := cfg_string(170);
   config.gossip_monger := 'Lydia';
-  if upcasestr(s) <> '' then config.gossip_monger := s;
+  if upcasestr(s) <> '' then
+    config.gossip_monger := s;
 
   s := cfg_string(171);
   config.bobsbartender := 'Ted';
-  if upcasestr(s) <> '' then config.bobsbartender := s;
+  if upcasestr(s) <> '' then
+    config.bobsbartender := s;
 
   s := cfg_string(172);
   config.gymmasseur := 'Hazzan';
-  if upcasestr(s) <> '' then config.gymmasseur := s;
+  if upcasestr(s) <> '' then
+    config.gymmasseur := s;
 
   {put relation changes in the news, #173}
   s := cfg_string(173);
@@ -2056,19 +2147,22 @@ begin
   {# of Children allowed, #174}
   s := cfg_string(174);
   i := str_to_nr(s);
-  if (i < 0) or (i > 100) then config.MaxHumanChildren := 25
+  if (i < 0) or (i > 100) then
+    config.MaxHumanChildren := 25
   else config.MaxHumanChildren := i;
 
   {# of NPC Children allowed, #175}
   s := cfg_string(175);
   i := str_to_nr(s);
-  if (i < 0) or (i > 100) then config.MaxNPCChildren := 20
+  if (i < 0) or (i > 100) then
+    config.MaxNPCChildren := 20
   else config.MaxNPCChildren := i;
 
   {# of Prison Escape Attempts allowed per day and player, #176}
   s := cfg_string(176);
   i := str_to_nr(s);
-  if (i < 0) or (i > 250) then config.prison_escapes := 3
+  if (i < 0) or (i > 250) then
+    config.prison_escapes := 3
   else config.prison_escapes := i;
 
 
@@ -2084,13 +2178,15 @@ begin
   {# of minutes of inactivity before booted from the game, #178}
   s := cfg_string(178);
   i := str_to_nr(s);
-  if (i < 0) or (i > 900) then config.inactivity := 15
+  if (i < 0) or (i > 900) then
+    config.inactivity := 15
   else config.inactivity := i;
 
   {Bear Taming in the Uman Caves / attempts per day, #181}
   s := cfg_string(181);
   i := str_to_nr(s);
-  if (i < 0) or (i > 128) then config.beartametries := 5
+  if (i < 0) or (i > 128) then
+    config.beartametries := 5
   else config.beartametries := i;
 
   {Allow the NPCs to usurp the Royal Throne, #182}
@@ -2104,19 +2200,22 @@ begin
   {King allowed to feed the Wolves with X kids per day, #183}
   s := cfg_string(183);
   i := str_to_nr(s);
-  if (i < 0) or (i > 5) then config.AllowFeedingTheWolves := 5
+  if (i < 0) or (i > 5) then
+    config.AllowFeedingTheWolves := 5
   else config.AllowFeedingTheWolves := i;
 
   {Kings marry actions per day, dissolve and ban marriages, #184}
   s := cfg_string(184);
   i := str_to_nr(s);
-  if (i < 0) or (i > 15) then config.MarryActionsPerDay := 15
+  if (i < 0) or (i > 15) then
+    config.MarryActionsPerDay := 15
   else config.MarryActionsPerDay := i;
 
   {King allowed to put X kids in the Royal Orphanage per day, #185}
   s := cfg_string(185);
   i := str_to_nr(s);
-  if (i < 0) or (i > 5) then config.AllowRoyalAdoption := 5
+  if (i < 0) or (i > 5) then
+    config.AllowRoyalAdoption := 5
   else config.AllowRoyalAdoption := i;
 
   {allow NPCs to believe in GODs}
@@ -2582,7 +2681,8 @@ begin
   {get maxwanted from .CFG, #116}
   s := cfg_string(116);
   config.maxwanted := str_to_nr(s);
-  if (config.maxwanted < 2) or (config.maxwanted > 127) then config.maxwanted := 30;
+  if (config.maxwanted < 2) or (config.maxwanted > 127) then
+    config.maxwanted := 30;
 
   {GETTING NEWS & YESTERDAYS NEWSFILES....(if they are defined that is)}
   s := cfg_string(117);
@@ -2607,7 +2707,8 @@ begin
   {#121, min level for players req to usurp the throne}
   s := cfg_string(121);
   i := str_to_nr(s);
-  if (i < 0) or (i > 100) then Config.MinLevelKing := 25
+  if (i < 0) or (i > 100) then
+    Config.MinLevelKing := 25
   else Config.MinLevelKing := i;
 
   {#122, soul needed to usurp the throne (1=good,2=evil,3=any)}
@@ -2615,7 +2716,8 @@ begin
   if s = 'GOOD' then
   begin
     Config.SoulNeededKing := 1; {good}
-  end else if s = 'EVIL' then
+  end else
+  if s = 'EVIL' then
   begin
     Config.SoulNeededKing := 2; {evil}
   end else
@@ -2626,27 +2728,32 @@ begin
   {#37, get Leveldiff from .CFG}
   s := cfg_string(37);
   config.leveldiff := str_to_nr(s);
-  if (config.leveldiff < 0) or (config.leveldiff > 25) then config.leveldiff := 5;
+  if (config.leveldiff < 0) or (config.leveldiff > 25) then
+    config.leveldiff := 5;
 
   {get ArmorBase from .CFG}
   s := cfg_string(38);
   config.abase := str_to_nr(s);
-  if (config.abase < 0) or (config.abase > 60) then config.abase := 25;
+  if (config.abase < 0) or (config.abase > 60) then
+    config.abase := 25;
   config.abase := config.abase / 100;
 
   {get Max potions allowed from .CFG}
   s := cfg_string(49);
   config.maxheals := str_to_nr(s);
-  if (config.maxheals < 1) or (config.maxheals > 9999) then config.maxheals := 250;
+  if (config.maxheals < 1) or (config.maxheals > 9999) then
+    config.maxheals := 250;
 
   {get Quaffing healing potions sequence, in the dungeons from .CFG}
   s := cfg_string(22);
   config.quaffopt := str_to_nr(s);
-  if (config.quaffopt < 1) or (config.quaffopt > 3) then config.quaffopt := 1;
+  if (config.quaffopt < 1) or (config.quaffopt > 3) then
+    config.quaffopt := 1;
 
   {get Classic game mode (or not) from .CFG}
   s := cfg_string(91);
-  if upcasestr(s) = 'CLASSIC' then config.classic := True;
+  if upcasestr(s) = 'CLASSIC' then
+    config.classic := True;
 
   {get 'which items can be taken from defeated player' from .CFG}
   for i := 53 to 66 do
@@ -2669,7 +2776,7 @@ begin
       config.loothands := str_to_nr(s);
       if config.loothands in [0, 1, 2, 3, 4, 5, 6] then
       begin
-        {everything is well}
+            {everything is well}
       end else
       begin {set default value}
         config.loothands := 2;
@@ -2678,7 +2785,8 @@ begin
     end else
     begin
       {all other items are processed here}
-      if upcasestr(s) = 'YES' then config.loot[i - 52] := True
+      if upcasestr(s) = 'YES' then
+        config.loot[i - 52] := True
       else config.loot[i - 52] := False;
     end;
 
@@ -2686,14 +2794,16 @@ begin
 
   {allow team mates to help mates attacked at the Dorm?}
   s := cfg_string(96);
-  if upcasestr(s) = 'YES' then config.TeamAssist := True
+  if upcasestr(s) = 'YES' then
+    config.TeamAssist := True
   else config.TeamAssist := False;
 
   {Teamdiff, this sets how much more powerful a team can be than its opponent}
   {if the team is too powerful then the fight will not be allowed}
   s := cfg_string(95);
   config.teamdiff := str_to_nr(s);
-  if (config.teamdiff < 1) or (config.teamdiff > 5000) then config.teamdiff := 75;
+  if (config.teamdiff < 1) or (config.teamdiff > 5000) then
+    config.teamdiff := 75;
 
   {every X second should we check node interactivity, #98}
   s := cfg_string(98);
@@ -2823,13 +2933,19 @@ begin
   end;
 
   {Checking for necessary DATA files}
-  if f_exists(global_monfile) = False then fatal(global_monfile);
-  if f_exists(global_npfile) = False then fatal(global_npfile);
-  if f_exists(global_gufile) = False then fatal(global_gufile);
-  if f_exists(global_lvlfile) = False then fatal(global_lvlfile);
+  if f_exists(global_monfile) = False then
+    fatal(global_monfile);
+  if f_exists(global_npfile) = False then
+    fatal(global_npfile);
+  if f_exists(global_gufile) = False then
+    fatal(global_gufile);
+  if f_exists(global_lvlfile) = False then
+    fatal(global_lvlfile);
 
-  if (config.classic) and (f_exists(global_armofile) = False) then fatal(global_armofile);
-  if (config.classic) and (f_exists(global_weapofil) = False) then fatal(global_weapofil);
+  if (config.classic) and (f_exists(global_armofile) = False) then
+    fatal(global_armofile);
+  if (config.classic) and (f_exists(global_weapofil) = False) then
+    fatal(global_weapofil);
 
   if not f_exists(global_pfile) then
   begin
@@ -2889,7 +3005,7 @@ begin
     end;
   end; {if famefile does not exists .end.}
 
-  {Check if "Relations File" exists}
+       {Check if "Relations File" exists}
   if f_exists(global_relationf) = False then
   begin
     d(12, 'Could not find ' + ulcyan + global_relationf + ulred + ' file.');
@@ -2898,15 +3014,17 @@ begin
     Assign(relationfile, global_relationf);
   {$I-}rewrite(relationfile);{$I+}
     error := IoResult;
-    if error <> 0 then unable_to_create(global_relationf, error);
+    if error <> 0 then
+      unable_to_create(global_relationf, error);
 
   {$I-}Close(relationfile);{$I+}
     error := IoResult;
-    if error <> 0 then unable_to_close(global_relationf, error);
+    if error <> 0 then
+      unable_to_close(global_relationf, error);
 
   end; {if relation database does not exists .end.}
 
-  {Check if "Children File" exists}
+       {Check if "Children File" exists}
   if f_exists(global_childrenf) = False then
   begin
     d(12, 'Could not find ' + ulcyan + global_childrenf + ulred + ' file.');
@@ -2916,15 +3034,17 @@ begin
 
   {$I-}rewrite(childrenfile);{$I+}
     error := IoResult;
-    if error <> 0 then unable_to_create(global_childrenf, error);
+    if error <> 0 then
+      unable_to_create(global_childrenf, error);
 
   {$I-}Close(childrenfile);{$I+}
     error := IoResult;
-    if error <> 0 then unable_to_close(global_childrenf, error);
+    if error <> 0 then
+      unable_to_close(global_childrenf, error);
 
   end; {if children database does not exists .end.}
 
-  {check to see that fake.dat exists}
+       {check to see that fake.dat exists}
   if f_exists(global_fakefile) = False then
   begin
     d(12, 'Could not find ' + ulcyan + global_fakefile + ulred + ' file.');
@@ -3053,9 +3173,9 @@ begin
       63: s := s + '8';
       64: s := s + '9';
     end; {case .end.}
-  end; {for i:= .end.}
+  end;   {for i:= .end.}
 
-  {return result}
+         {return result}
   crypt := s;
 
 end; {Crypt **END**}
@@ -3070,7 +3190,7 @@ var
 
 begin {try to locate and load king from user/npc file}
 
-  {init}
+      {init}
   Result := False;
   found := False;
 
@@ -3088,7 +3208,7 @@ begin {try to locate and load king from user/npc file}
 
   end; {for i:= .end.}
 
-  {Search among the NPCs}
+       {Search among the NPCs}
   if not found then
   begin
     for i := 1 to fs(FsNpc) do
@@ -3143,19 +3263,19 @@ begin
     king.guardsex[i] := 1;     {guardsex}
   end;
 
-  king.shop_weapon := True; {shop is open}
-  king.shop_armor := True; {shop is open}
-  king.shop_magic := True; {shop is open}
-  king.shop_alabat := True; {shop is open}
-  king.shop_plmarket := True; {market is open}
-  king.shop_healing := True; {healing center}
-  king.shop_drugs := True; {drug palace is open}
-  king.shop_steroids := True; {steroid shop is open}
-  king.shop_orbs := True; {club is open}
+  king.shop_weapon := True;    {shop is open}
+  king.shop_armor := True;     {shop is open}
+  king.shop_magic := True;     {shop is open}
+  king.shop_alabat := True;    {shop is open}
+  king.shop_plmarket := True;  {market is open}
+  king.shop_healing := True;   {healing center}
+  king.shop_drugs := True;     {drug palace is open}
+  king.shop_steroids := True;  {steroid shop is open}
+  king.shop_orbs := True;      {club is open}
   king.shop_evilmagic := True; {evil mages shop is open}
-  king.shop_bobs := True; {bobs beer is open}
-  king.shop_whores := True; {whore house is open}
-  king.shop_gigolos := True; {gigolos place is open}
+  king.shop_bobs := True;      {bobs beer is open}
+  king.shop_whores := True;    {whore house is open}
+  king.shop_gigolos := True;   {gigolos place is open}
 
 end; {new_king *end*}
 
@@ -3173,7 +3293,8 @@ begin
   end;
 
   {prevent negative amount}
-  if ply.exp < 0 then ply.exp := 0;
+  if ply.exp < 0 then
+    ply.exp := 0;
 
 end;
 
@@ -3181,7 +3302,8 @@ procedure DecPlayerExp; {decrease player experience}
 begin
   Dec(ply.exp, exp);
   {prevent negative amount}
-  if ply.exp < 0 then ply.exp := 0;
+  if ply.exp < 0 then
+    ply.exp := 0;
 end;
 
 procedure IncGodExp; {increase god experience}
@@ -3202,7 +3324,8 @@ begin
 
   Dec(god0.exp, exp);
   {prevent negative amount}
-  if god0.exp < 0 then god0.exp := 0;
+  if god0.exp < 0 then
+    god0.exp := 0;
 
 end;
 
@@ -3226,7 +3349,8 @@ begin
   end;
 
   {prevent negative amount}
-  if ply.gold < 0 then ply.gold := 0;
+  if ply.gold < 0 then
+    ply.gold := 0;
 
   IncPlayerMoney := Result;
 
@@ -3238,7 +3362,8 @@ begin
   Dec(ply.gold, coins);
 
   {prevent negative amount}
-  if ply.gold < 0 then ply.gold := 0;
+  if ply.gold < 0 then
+    ply.gold := 0;
 
 end; {decplayermoney *end*}
 
@@ -3262,7 +3387,8 @@ begin
   end;
 
   {prevent negative amount}
-  if ply.bankgold < 0 then ply.bankgold := 0;
+  if ply.bankgold < 0 then
+    ply.bankgold := 0;
 
   {return result}
   IncBankMoney := Result;
@@ -3275,7 +3401,8 @@ begin
   Dec(ply.bankgold, coins);
 
   {prevent negative amount}
-  if ply.bankgold < 0 then ply.bankgold := 0;
+  if ply.bankgold < 0 then
+    ply.bankgold := 0;
 
 end; {decbankmoney *end*}
 
@@ -3299,7 +3426,8 @@ begin
   end;
 
   {prevent negative amount}
-  if ply.interest < 0 then ply.interest := 0;
+  if ply.interest < 0 then
+    ply.interest := 0;
 
   {return result}
   IncInterest := Result;
@@ -3357,7 +3485,8 @@ end; {inckingtreasury *end*}
 procedure DecKingTreasury; {decrease royal treasury}
 begin
   Dec(king.treasury, coins);
-  if king.treasury < 0 then king.treasury := 0;
+  if king.treasury < 0 then
+    king.treasury := 0;
 end; {deckingtreasury *end*}
 
 
@@ -3426,7 +3555,7 @@ begin
 
   end; {for i:= .end.}
 
-  {let's sort the array we collected}
+       {let's sort the array we collected}
   if counter > 1 then
   begin
     {Sort routine}
@@ -3498,7 +3627,8 @@ begin
         begin
           xx := offset - length(s);
           s := s + mkstring(xx, '.');
-        end else if length(s) > offset then
+        end else
+        if length(s) > offset then
         begin
           s := copy(s, 1, offset);
         end;
@@ -3523,7 +3653,7 @@ begin
 
   end; {for i:= .end.}
 
-  {dispose pointer vars}
+       {dispose pointer vars}
   dispose(ply);
 
 end; {quest_rankings *end*}
@@ -3603,26 +3733,39 @@ begin
    15: s:='Allow Secondary Weapon';
    }
 
-      if (gtyp = Head) and (config.allowitem[2]) then ok := True;
-      if (gtyp = Body) and (config.allowitem[3]) then ok := True;
-      if (gtyp = Arms) and (config.allowitem[4]) then ok := True;
-      if (gtyp = Hands) and (config.allowitem[1]) then ok := True;
+      if (gtyp = Head) and (config.allowitem[2]) then
+        ok := True;
+      if (gtyp = Body) and (config.allowitem[3]) then
+        ok := True;
+      if (gtyp = Arms) and (config.allowitem[4]) then
+        ok := True;
+      if (gtyp = Hands) and (config.allowitem[1]) then
+        ok := True;
       if gtyp = Fingers then
       begin
-        if (config.allowitem[5]) or (config.allowitem[6]) then ok := True;
+        if (config.allowitem[5]) or (config.allowitem[6]) then
+          ok := True;
       end;
-      if (gtyp = Legs) and (config.allowitem[7]) then ok := True;
-      if (gtyp = Feet) and (config.allowitem[8]) then ok := True;
-      if (gtyp = Waist) and (config.allowitem[9]) then ok := True;
+      if (gtyp = Legs) and (config.allowitem[7]) then
+        ok := True;
+      if (gtyp = Feet) and (config.allowitem[8]) then
+        ok := True;
+      if (gtyp = Waist) and (config.allowitem[9]) then
+        ok := True;
       if gtyp = Neck then
       begin
-        if (config.allowitem[10]) or (config.allowitem[11]) then ok := True;
+        if (config.allowitem[10]) or (config.allowitem[11]) then
+          ok := True;
       end;
-      if (gtyp = Face) and (config.allowitem[12]) then ok := True;
-      if (gtyp = Shield) and (config.allowitem[13]) then ok := True;
-      if (gtyp = Abody) and (config.allowitem[15]) then ok := True;
+      if (gtyp = Face) and (config.allowitem[12]) then
+        ok := True;
+      if (gtyp = Shield) and (config.allowitem[13]) then
+        ok := True;
+      if (gtyp = Abody) and (config.allowitem[15]) then
+        ok := True;
 
-      if gtyp in [Food, Drink, Weapon] then ok := True;
+      if gtyp in [Food, Drink, Weapon] then
+        ok := True;
 
       if ok then
       begin
@@ -3745,7 +3888,8 @@ begin
 
         Newsy(True,
           'Sacked',
-          ' ' + uplc + king.guard[k] + config.textcol1 + ' was SACKED from the ' + ulcyan + 'Royal Guard' + config.textcol1 + '!',
+          ' ' + uplc + king.guard[k] + config.textcol1 + ' was SACKED from the ' + ulcyan +
+          'Royal Guard' + config.textcol1 + '!',
           '',
           '',
           '',
@@ -3776,7 +3920,8 @@ begin
           '',
           umailheadc + 'Income' + config.textcol1,
           mkstring(6, underscore),
-          'You received ' + uyellow + commastr(king.guardpay[k]) + config.textcol1 + ' ' + many_money(king.guardpay[k]) + ' for your',
+          'You received ' + uyellow + commastr(king.guardpay[k]) + config.textcol1 + ' ' +
+          many_money(king.guardpay[k]) + ' for your',
           'service in the ' + ulcyan + 'Royal Guard' + config.textcol1 + '.',
           '',
           '',
@@ -3799,8 +3944,10 @@ begin
           '',
           umailheadc + 'Royal Expenses' + config.textcol1,
           mkstring(14, underscore),
-          ulgray + 'The Royal Treasury ' + config.textcol1 + 'reports that it has paid ' + uplc + king.guard[k] + config.textcol1,
-          'the tidy sum of ' + uyellow + commastr(king.guardpay[k]) + config.textcol1 + ' for ' + sex3[king.guardsex[k]] + ' service in the ' + ulcyan + 'Royal Guard' + config.textcol1 + '.',
+          ulgray + 'The Royal Treasury ' + config.textcol1 + 'reports that it has paid ' + uplc +
+          king.guard[k] + config.textcol1,
+          'the tidy sum of ' + uyellow + commastr(king.guardpay[k]) + config.textcol1 + ' for ' +
+          sex3[king.guardsex[k]] + ' service in the ' + ulcyan + 'Royal Guard' + config.textcol1 + '.',
           '',
           '',
           '',
@@ -3838,7 +3985,8 @@ begin
     begin
       if is_online(king.guard[i], online_player) then
       begin
-        online_send_to_player(king.guard[i], online_player, 'You were ' + ulred + 'SACKED' + config.textcol1 + ' from the Royal Guard!');
+        online_send_to_player(king.guard[i], online_player, 'You were ' + ulred + 'SACKED' +
+          config.textcol1 + ' from the Royal Guard!');
       end else
       begin
 
@@ -3869,9 +4017,10 @@ begin
 
   end; {for i:= .end.}
 
-end; {sack_royal_guards *end*}
+end;   {sack_royal_guards *end*}
 
-procedure Inform_King(const line1, line2, line3, line4, line5, line6, line7, line8, line9, line10, line11, line12, line13, line14, line15: s90);
+procedure Inform_King(const line1, line2, line3, line4, line5, line6, line7, line8, line9, line10,
+  line11, line12, line13, line14, line15: s90);
 
 {mail king, if he exists and is a human controlled character}
 var king: kingrec;
@@ -3956,7 +4105,7 @@ begin
           end else
           begin
             ply^.KingVotePoll := 200; {days since vote for king. this makes it happen at first logon}
-            ply^.KingLastVote := 0; {how did player vote last time}
+            ply^.KingLastVote := 0;   {how did player vote last time}
             if ply^.tax_relief = True then
             begin
               ply^.Tax_Relief := False; {kill old tax relief flag}
@@ -3996,9 +4145,9 @@ begin
 
     end; {for j:= .end.}
 
-  end; {for i:= .end.}
+  end;   {for i:= .end.}
 
-  {open all shoppes}
+         {open all shoppes}
  {hmm..this is done in file_io.pas =>
  }
 
@@ -4074,7 +4223,7 @@ begin
 
   end; {for i:= .end.}
 
-  {dispose pointer vars}
+       {dispose pointer vars}
   dispose(relation);
   dispose(ply);
 
@@ -4120,13 +4269,15 @@ begin
   kingstr := 'King';
 
   {we exit if there is no king-file}
-  if f_exists(global_kingf) = False then exit;
+  if f_exists(global_kingf) = False then
+    exit;
 
   {load king}
   load_king(fload, king);
 
   {we exit if there is no king}
-  if king.Name = '' then exit;
+  if king.Name = '' then
+    exit;
 
   case king.sexy of
     1: kingstr := 'King';
@@ -4179,11 +4330,13 @@ begin
 
   case ch of
     ReturnKey, 'T', 'N': begin {todays news}
-      if global_ansi then display_file(global_nwfileans)
+      if global_ansi then
+        display_file(global_nwfileans)
       else display_file(global_nwfileasc);
     end;
     'Y': begin {yesterdays news}
-      if global_ansi then display_file(global_ynwfileans)
+      if global_ansi then
+        display_file(global_ynwfileans)
       else display_file(global_ynwfileasc);
     end;
   end; {case .end.}
@@ -4191,16 +4344,19 @@ begin
 
 end; {read_news_paper *end*}
 
-{Alchemist}
+     {Alchemist}
 function Alchemist_Poison(const ply: Userrec): s30;
 var s: s30;
 begin
 
   {returns a string with info on how strong the current poison is}
   s := 'Light';
-  if ply.poison > 25 then s := 'Medium';
-  if ply.poison > 50 then s := 'Strong';
-  if ply.poison > 80 then s := 'Deadly';
+  if ply.poison > 25 then
+    s := 'Medium';
+  if ply.poison > 50 then
+    s := 'Strong';
+  if ply.poison > 80 then
+    s := 'Deadly';
 
   {return result}
   alchemist_poison := s;
@@ -4216,7 +4372,8 @@ begin {displays information of a character..used when dealing
        of situations. caller is the player calling this procedure.}
 
   d(global_plycol, ply.name2 + config.textcol1 + ' is ' + uwhite + commastr(ply.age) + config.textcol1 + ' years old.');
-  d(global_plycol, ply.name2 + config.textcol1 + ' is a level ' + uwhite + commastr(ply.level) + config.textcol1 + ' character.');
+  d(global_plycol, ply.name2 + config.textcol1 + ' is a level ' + uwhite + commastr(ply.level) +
+    config.textcol1 + ' character.');
 
   {soul condition (good or evil)}
   if ply.dark > ply.chiv then
@@ -4239,8 +4396,10 @@ begin {displays information of a character..used when dealing
 
   {player kills}
   crlf;
-  d(global_plycol, ply.name2 + config.textcol1 + ' has defeated ' + uwhite + commastr(ply.p_kills) + config.textcol1 + ' players in ' + sex3[ply.sex] + ' career.');
-  d(global_plycol, ply.name2 + config.textcol1 + ' has been defeated ' + uwhite + commastr(ply.p_defeats) + config.textcol1 + ' times.');
+  d(global_plycol, ply.name2 + config.textcol1 + ' has defeated ' + uwhite + commastr(ply.p_kills) +
+    config.textcol1 + ' players in ' + sex3[ply.sex] + ' career.');
+  d(global_plycol, ply.name2 + config.textcol1 + ' has been defeated ' + uwhite + commastr(ply.p_defeats) +
+    config.textcol1 + ' times.');
   {load current relation}
   social_relation(caller, ply, relation);
   {display how many times player has been attacked by applicant}
@@ -4255,7 +4414,8 @@ begin {displays information of a character..used when dealing
     s := is_player_married(ply.name2, ply.id);
     if s <> '' then
     begin
-      if s = player.name2 then s := 'You';
+      if s = player.name2 then
+        s := 'You';
       d(global_plycol, ply.name2 + config.textcol1 + ' is married to ' + uplc + s + config.textcol1 + '.');
     end;
   end else
@@ -4296,7 +4456,8 @@ begin
   a "s" if players name not already ends with a s}
 
   {return result}
-  if upcasestr(Name[length(Name)]) <> 'S' then adds := 's'
+  if upcasestr(Name[length(Name)]) <> 'S' then
+    adds := 's'
   else adds := '';
 
 end; {adds *end*}

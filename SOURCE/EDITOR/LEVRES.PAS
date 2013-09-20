@@ -41,7 +41,8 @@ begin
   level.xpneed := xp;
   {write to disk}
  {$I-}Write(levelfile, level);{$I+}
-  if IOResult <> 0 then unable_to_write(lvlfile);
+  if IOResult <> 0 then
+    unable_to_write(lvlfile);
 
   Inc(c);
   Statbar(C, 101, global_masterx, global_mastery, 1, 2);
@@ -55,7 +56,8 @@ begin
 
   Assign(levelfile, lvlfile);
  {$I-}rewrite(levelfile);{$I+}
-  if IOResult <> 0 then unable_to_create(lvlfile);
+  if IOResult <> 0 then
+    unable_to_create(lvlfile);
 
   add_level(900);
   add_level(5000);
@@ -160,7 +162,8 @@ begin
   add_level(50000000);
 
  {$I-}Close(levelfile);{$I+}
-  if IOResult <> 0 then unable_to_close(lvlfile);
+  if IOResult <> 0 then
+    unable_to_close(lvlfile);
 
 end;
 

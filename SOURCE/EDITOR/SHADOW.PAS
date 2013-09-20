@@ -63,9 +63,13 @@ begin
   DMT := ptr(DSeg, DMTofs);
   Table := ptr(Dseg, DMTofs + 8 + (DMT^.cnt * 2));
   i := 0;
-  while (Table^[i] <> AMethod) and (I < (DMT^.cnt - 1)) do Inc(i);
-  if Table^[i] = AMethod then FindDMTMethod := @Table^[i]
-  else if (DMT^.BaseDMT > 0) then FindDMTMethod := FindDMTMethod(AMethod, DMT^.BaseDMT)
+  while (Table^[i] <> AMethod) and (I < (DMT^.cnt - 1)) do
+    Inc(i);
+  if Table^[i] = AMethod then
+    FindDMTMethod := @Table^[i]
+  else
+  if (DMT^.BaseDMT > 0) then
+    FindDMTMethod := FindDMTMethod(AMethod, DMT^.BaseDMT)
   else
     FindDMTMethod := nil;
 end;
@@ -81,13 +85,17 @@ var
   Slot: word;
 begin
   { Returns a pointer to AMethod's location in the VMT Table }
-  if ValidVMT(VMT) then with VMT^ do
+  if ValidVMT(VMT) then
+    with VMT^ do
     begin
       Slot := 0;
-      while (Slot < MaxVMTPointers) and (Table[Slot] <> AMethod) do Inc(Slot);
-      if Slot < MaxVMTPointers then FindMethodSlot := @Table[Slot]
+      while (Slot < MaxVMTPointers) and (Table[Slot] <> AMethod) do
+        Inc(Slot);
+      if Slot < MaxVMTPointers then
+        FindMethodSlot := @Table[Slot]
       else {$IFDEF VER70}
-      if DMTofs > 0 then FindMethodSlot := FindDMTMethod(AMethod, DMTofs)
+      if DMTofs > 0 then
+        FindMethodSlot := FindDMTMethod(AMethod, DMTofs)
       else
          {$ENDIF}
         FindMethodSlot := nil;

@@ -136,7 +136,8 @@ begin
 
   {get shop-keepers name from .cfg #179}
   owner := cfg_string(179);
-  if owner = '' then owner := 'Rand the Human';
+  if owner = '' then
+    owner := 'Rand the Human';
 
   steroid[1]^ := 'Teddy Bears';
   steroid[2]^ := 'Ape Hormones';
@@ -195,7 +196,8 @@ begin
     {evaluate user-input}
     case cho of
       '?': begin
-        if player.expert = True then display_menu(True, False)
+        if player.expert = True then
+          display_menu(True, False)
         else display_menu(False, False);
       end;
       'R': begin
@@ -213,7 +215,8 @@ begin
         d(3, 'Enter Item # to buy');
         sd(config.textcolor, ':');
         x := get_number(0, sternr);
-        if (x < 1) or (x > sternr) then x := 0;
+        if (x < 1) or (x > sternr) then
+          x := 0;
         if x = 0 then
         begin
           d(15, 'Wrong number birdbrain!');
@@ -289,7 +292,8 @@ begin
                 {news-paper}
                 newsy(True,
                   'Bad Steroids!',
-                  ' ' + uplc + player.name2 + config.textcol1 + ' bought a package of steroids to build up ' + sex3[player.sex] + ' body.',
+                  ' ' + uplc + player.name2 + config.textcol1 + ' bought a package of steroids to build up ' +
+                  sex3[player.sex] + ' body.',
                   ' Unfortunately the stuff was bad, and ' + uplc + player.name2 + config.textcol1 + ' died.',
                   '',
                   '',
@@ -354,15 +358,18 @@ begin
                 if player.race = Gnome then
                 begin
                   x := x - 2;
-                  if x <= 0 then x := 0;
+                  if x <= 0 then
+                    x := 0;
                 end;
                 player.mental := player.mental - x;
-                if player.mental < 0 then player.mental := 0;
+                if player.mental < 0 then
+                  player.mental := 0;
 
                 case random(5) of
                   0: s := uplc + player.name2 + config.textcol1 + ' shot ' + sex4[player.sex] + ' full of steroids.';
                   1: s := uplc + player.name2 + config.textcol1 + ' bought loads of steroids.';
-                  2: s := uplc + player.name2 + config.textcol1 + ' increased ' + sex3[player.sex] + ' strength with steroids.';
+                  2: s := uplc + player.name2 + config.textcol1 + ' increased ' + sex3[player.sex] +
+                      ' strength with steroids.';
                   3: s := uplc + player.name2 + config.textcol1 + ' got bigger and meaner with some pills.';
                   4: s := uplc + player.name2 + config.textcol1 + ' gave ' + sex3[player.sex] + ' body a dose of steroids.';
                 end;

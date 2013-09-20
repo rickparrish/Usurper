@@ -25,6 +25,7 @@ Copyright 2007 Jakob Dangarden
 
 
 unit Jakob;
+
 {Usurper - Basic Door Routines Using DDPLUS door driver
              routines.
 
@@ -35,9 +36,9 @@ interface
 
 const global_place: byte = 0; {see spin_cursor}
 
-{Uses Init;}
+ {Uses Init;}
 
-{string}
+ {string}
 procedure Remove_Commas(var gulp: string);
 procedure AddBackSlash(var inpath: string);
 function LeadingZero(w: word): string;
@@ -45,7 +46,7 @@ function striplead(st: string; ch: char): string;
 function WithBackSlash(inpath: string): string;
 function padright(const st: string; ch: char; l: integer): string;
 function Str_to_Nr(const s: string): longint; {string to number}
-function Str_to_Real(const s: string): real; {string to number}
+function Str_to_Real(const s: string): real;  {string to number}
 function CommaStr(Number: longint): string;
 function Long2Str(Number: longint): string;
 function MkString(nr: integer; const s: string): string;
@@ -85,9 +86,9 @@ function Days_Between(const stream1, stream2: string): longint;
 function Give_Me_Time: string;
 function Hours_Between(const time1, time2: string): integer;
 function Minutes_Between(const time1, time2: string): longint;
-{file stamp info...see file_io.pas}
+ {file stamp info...see file_io.pas}
 
-{display}
+ {display}
 procedure Wrl(col: byte; const s: string); {replaces crt; writeln}
 procedure Wr(col: byte; const s: string);  {replaces crt; write}
 procedure D(col: byte; const Text: string); {display a string of text with crlf at the end}
@@ -110,7 +111,7 @@ function Valid_Color(const incolor: string): boolean;
 function Strip(const out: string): string; {remove all Usurper ansi}
 function Uconv(const out: string): string; {Usurper ANSI -> standard ANSI}
 
-{menu}
+ {menu}
 procedure Show_Usurper_Data(const Name: string; pausing: boolean);
 procedure Menu(const Text: string);
 procedure Menu2(const Text: string);
@@ -118,7 +119,7 @@ procedure Menu3(const Text: string; pos: integer);
 procedure Menu5(const Text: string; pos: integer);
 function Menu_Choices(const m1, m2, m3, m4, m5: string): char;
 
-{Other routines}
+ {Other routines}
 function HeapHandler(Size: word): integer; far; {handles heap errors}
 procedure My_TimeSlice; {release a time slice}
 procedure Normal_Exit; {HALT the program}
@@ -131,7 +132,7 @@ function DeathSign: char; {returns a ''}
 function Confirm(const Text: string; default: char): boolean; {Y/N confirmation}
 function Confirm2(const Text: string; default: char): char; {Y/N/= confirmation}
 
-{Misc}
+ {Misc}
 procedure Drop_Dos; {drop to dos}
 procedure Display_Bar_Status(force: boolean); {call to DDplus Display_Status (bar) proc}
 function Dos_Version: word;
@@ -172,10 +173,14 @@ begin
       exit;
     end;
     Delete(out1, 1, 2);
-    if out1[1] = '0' then Delete(out1, 1, 1);
-    while length(out1) <= 2 do insert(' ', out1, 1);
-    if out1 = '0' then out1 := '100';
-    if out1 = '' then out1 := '0';
+    if out1[1] = '0' then
+      Delete(out1, 1, 1);
+    while length(out1) <= 2 do
+      insert(' ', out1, 1);
+    if out1 = '0' then
+      out1 := '100';
+    if out1 = '' then
+      out1 := '0';
   end;
   percent_string := out1;
 
@@ -276,7 +281,7 @@ var s:          s70;
   Result:       integer;
   hour1, hour2: byte;
 begin {calculates passed hours between ??:??:?? and ??:??:??}
-  {result=time1-time2}
+      {result=time1-time2}
 
   s := time1[1] + time1[2];
   hour1 := str_to_nr(s);
@@ -296,7 +301,7 @@ var s:           s70;
   hours, Result: longint;
   minutes1, minutes2: byte;
 begin {calculates passed minutes between ??:??:?? and ??:??:??}
-  {result=time1-time2}
+      {result=time1-time2}
 
   s := time1[4] + time1[5];
   minutes1 := str_to_nr(s);
@@ -321,8 +326,8 @@ end; {minutes_between *end*}
 
 function days_between(const stream1, stream2: string): longint;
 var {from SWAG (a pascal library) => date/time routines => Michael Hoenie}
-  {stream1,stream2 can have the 'mm-dd-yy' or 'mm-dd-yyyy' format}
-  {jakob has made two changes in the code. see 'jakob' comments in source.}
+    {stream1,stream2 can have the 'mm-dd-yy' or 'mm-dd-yyyy' format}
+    {jakob has made two changes in the code. see 'jakob' comments in source.}
   internal1, internal2: longint;
   JNUM: real;
   cd, month, day, year: integer;
@@ -343,25 +348,31 @@ var {from SWAG (a pascal library) => date/time routines => Michael Hoenie}
 begin
 
   out := copy(stream1, 1, 2);
-  if copy(out, 1, 1) = '0' then Delete(out, 1, 1);
+  if copy(out, 1, 1) = '0' then
+    Delete(out, 1, 1);
   val(out, month, cd);
   out := copy(stream1, 4, 2);
-  if copy(out, 1, 1) = '0' then Delete(out, 1, 1);
+  if copy(out, 1, 1) = '0' then
+    Delete(out, 1, 1);
   val(out, day, cd);
   out := copy(stream1, 7, 4); {jakob, original code is stream1,7,2) }
-  if copy(out, 1, 1) = '0' then Delete(out, 1, 1);
+  if copy(out, 1, 1) = '0' then
+    Delete(out, 1, 1);
   val(out, year, cd);
   jnum := jul(month, day, year);
   str(jnum: 10: 0, out);
   val(out, internal1, cd);
   out := copy(stream2, 1, 2);
-  if copy(out, 1, 1) = '0' then Delete(out, 1, 1);
+  if copy(out, 1, 1) = '0' then
+    Delete(out, 1, 1);
   val(out, month, cd);
   out := copy(stream2, 4, 2);
-  if copy(out, 1, 1) = '0' then Delete(out, 1, 1);
+  if copy(out, 1, 1) = '0' then
+    Delete(out, 1, 1);
   val(out, day, cd);
   out := copy(stream2, 7, 4); {jakob, original code is stream1,7,2) }
-  if copy(out, 1, 1) = '0' then Delete(out, 1, 1);
+  if copy(out, 1, 1) = '0' then
+    Delete(out, 1, 1);
   val(out, year, cd);
   jnum := jul(month, day, year);
   str(jnum: 10: 0, out);
@@ -427,8 +438,10 @@ begin
 
   { Convert milliseconds to number of tics to delay for }
   DelayTics := milliSeconds div 55;
-  if (DelayTics <= 0) then Exit;
-  if (DelayTics > TicsPerDay) then DelayTics := TicsPerDay;
+  if (DelayTics <= 0) then
+    Exit;
+  if (DelayTics > TicsPerDay) then
+    DelayTics := TicsPerDay;
 
   ExpireTics := StartTics + DelayTics;
 
@@ -438,10 +451,12 @@ begin
     releasetimeslice;
 
     {Check normal expiration}
-    if (BiosTics^ > ExpireTics) then Break;
+    if (BiosTics^ > ExpireTics) then
+      Break;
 
     {Check wrapped expiration}
-    if (BiosTics^ < StartTics) and ((BiosTics^ + TicsPerDay) > ExpireTics) then Break;
+    if (BiosTics^ < StartTics) and ((BiosTics^ + TicsPerDay) > ExpireTics) then
+      Break;
   end;
 end;
 
@@ -522,31 +537,78 @@ begin
         {get first/next three characters from string}
         p := Text[i] + Text[i + 1] + Text[i + 2];
 
-        if p = ublack then fore_col := 0
-        else if p = ublue then fore_col := 1
-        else if p = ugreen then fore_col := 2
-        else if p = ucyan then fore_col := 3
-        else if p = ured then fore_col := 4
-        else if p = umag then fore_col := 5
-        else if p = ubrown then fore_col := 6
-        else if p = ulgray then fore_col := 7
-        else if p = udgray then fore_col := 8
-        else if p = ulblue then fore_col := 9
-        else if p = ulgreen then fore_col := 10
-        else if p = ulcyan then fore_col := 11
-        else if p = ulred then fore_col := 12
-        else if p = ulmag then fore_col := 13
-        else if p = uyellow then fore_col := 14
-        else if p = uwhite then fore_col := 15
+        if p = ublack then
+          fore_col := 0
+        else
+        if p = ublue then
+          fore_col := 1
+        else
+        if p = ugreen then
+          fore_col := 2
+        else
+        if p = ucyan then
+          fore_col := 3
+        else
+        if p = ured then
+          fore_col := 4
+        else
+        if p = umag then
+          fore_col := 5
+        else
+        if p = ubrown then
+          fore_col := 6
+        else
+        if p = ulgray then
+          fore_col := 7
+        else
+        if p = udgray then
+          fore_col := 8
+        else
+        if p = ulblue then
+          fore_col := 9
+        else
+        if p = ulgreen then
+          fore_col := 10
+        else
+        if p = ulcyan then
+          fore_col := 11
+        else
+        if p = ulred then
+          fore_col := 12
+        else
+        if p = ulmag then
+          fore_col := 13
+        else
+        if p = uyellow then
+          fore_col := 14
+        else
+        if p = uwhite then
+          fore_col := 15
 
-        else if p = backUblack then back_col := 0
-        else if p = backUblue then back_col := 1
-        else if p = BackUGreen then back_col := 2
-        else if p = BackUCyan then back_col := 3
-        else if p = BackURed then back_col := 4
-        else if p = BackUMagenta then back_col := 5
-        else if p = BackUBrown then back_col := 6
-        else if p = BackULGray then back_col := 7
+        else
+        if p = backUblack then
+          back_col := 0
+        else
+        if p = backUblue then
+          back_col := 1
+        else
+        if p = BackUGreen then
+          back_col := 2
+        else
+        if p = BackUCyan then
+          back_col := 3
+        else
+        if p = BackURed then
+          back_col := 4
+        else
+        if p = BackUMagenta then
+          back_col := 5
+        else
+        if p = BackUBrown then
+          back_col := 6
+        else
+        if p = BackULGray then
+          back_col := 7
 
 
         else
@@ -596,7 +658,7 @@ begin
   begin
     crlf;
   end;
-  {swriteln(text); {ddplus routine}
+     {swriteln(text); {ddplus routine}
 
 end; {D **END**}
 
@@ -653,8 +715,10 @@ begin
   len := Ord(Str[0]);
   repeat
     Inc(i);
-    if i > len then Break;
-    if Str[i] in ['a'..'z'] then Dec(Str[i], 32);
+    if i > len then
+      Break;
+    if Str[i] in ['a'..'z'] then
+      Dec(Str[i], 32);
   until False;
 end;
 
@@ -689,14 +753,16 @@ begin
     end;
   end; {case .end.}
 
-  {get user-input}
+       {get user-input}
   repeat
     ch := getchar;
   until ch in ['Y', 'N', ReturnKey];
 
   {evaluate user-input}
-  if (ch = ReturnKey) and (default = 'Y') then ch := 'Y';
-  if (ch = ReturnKey) and (default = 'N') then ch := 'N';
+  if (ch = ReturnKey) and (default = 'Y') then
+    ch := 'Y';
+  if (ch = ReturnKey) and (default = 'N') then
+    ch := 'N';
 
   case ch of
     'Y': begin
@@ -745,15 +811,18 @@ begin
     end;
   end; {case .end.}
 
-  {get user-input}
+       {get user-input}
   repeat
     ch := getchar;
   until ch in ['Y', 'N', '=', ReturnKey];
 
   {evaluate user-input}
-  if (ch = ReturnKey) and (default = 'Y') then ch := 'Y';
-  if (ch = ReturnKey) and (default = 'N') then ch := 'N';
-  if (ch = ReturnKey) and (default = '=') then ch := '=';
+  if (ch = ReturnKey) and (default = 'Y') then
+    ch := 'Y';
+  if (ch = ReturnKey) and (default = 'N') then
+    ch := 'N';
+  if (ch = ReturnKey) and (default = '=') then
+    ch := '=';
 
   case ch of
     'Y': begin
@@ -830,7 +899,7 @@ begin
     Dec(lngth);
   end; {while *end*}
 
-  {return result}
+       {return result}
   cool_string := s;
 
 end; {cool_string *end*}
@@ -844,7 +913,8 @@ begin
   if length(s) > max then
   begin
     temp := copy(s, 1, max);
-  end else if length(s) < max then
+  end else
+  if length(s) < max then
   begin
     diff := max - length(s);
     temp := s + mkstring(diff, ' ');
@@ -865,7 +935,8 @@ begin
   if length(s) > max then
   begin
     temp := copy(s, 1, max);
-  end else if length(s) < max then
+  end else
+  if length(s) < max then
   begin
     diff := max - length(s);
     temp := mkstring(diff, ' ') + s;
@@ -884,10 +955,12 @@ var
 
 begin
   tempstr := st;
-  if length(tempstr) > l then tempstr[0] := chr(l);
+  if length(tempstr) > l then
+    tempstr[0] := chr(l);
   if length(tempstr) < l then
   begin
-    for i := length(tempstr) + 1 to l do tempstr[i] := ch;
+    for i := length(tempstr) + 1 to l do
+      tempstr[i] := ch;
     tempstr[0] := chr(l);
   end;
 
@@ -997,7 +1070,8 @@ begin
         if (not suspect_mode) and (ch = '@') then
         begin
           suspect_mode := True;
-        end else if suspect_mode then
+        end else
+        if suspect_mode then
         begin
           if ch = '#' then
           begin
@@ -1015,7 +1089,8 @@ begin
       begin
         {find start of picture}
         s := '@#' + upcasestr(Name);
-        if global_ansi then s := s + '.ANS'
+        if global_ansi then
+          s := s + '.ANS'
         else s := s + '.ASC';
 
         matching := False;
@@ -1029,14 +1104,16 @@ begin
           begin
             Inc(c);
             matching := True;
-          end else if (matching) and (ch = s[c]) then
+          end else
+          if (matching) and (ch = s[c]) then
           begin
             Inc(c);
             if c > length(s) then
             begin
               read_data := True;
             end;
-          end else if (matching) and (ch <> s[c]) then
+          end else
+          if (matching) and (ch <> s[c]) then
           begin
             c := 1;
             matching := False;
@@ -1048,7 +1125,7 @@ begin
 
     end; {while .end.}
 
-    {close textfile}
+         {close textfile}
     Close(f);
 
   end else
@@ -1069,7 +1146,8 @@ begin
   ansion := ansisave;
 
   {should we pause?}
-  if pausing then pause;
+  if pausing then
+    pause;
 
 end; {show_usurper_data *end*}
 
@@ -1249,32 +1327,79 @@ begin
     p := copy(s, i, 3);
 
     {kolla om ansi tecken finns}
-    if p = ublack then cfor := 0
-    else if p = ublue then cfor := 1
-    else if p = ugreen then cfor := 2
-    else if p = ucyan then cfor := 3
-    else if p = ured then cfor := 4
-    else if p = umag then cfor := 5
-    else if p = ubrown then cfor := 6
-    else if p = ulgray then cfor := 7
-    else if p = udgray then cfor := 8
-    else if p = ulblue then cfor := 9
-    else if p = ulgreen then cfor := 10
-    else if p = ulcyan then cfor := 11
-    else if p = ulred then cfor := 12
-    else if p = ulmag then cfor := 13
-    else if p = uyellow then cfor := 14
-    else if p = uwhite then cfor := 15
+    if p = ublack then
+      cfor := 0
+    else
+    if p = ublue then
+      cfor := 1
+    else
+    if p = ugreen then
+      cfor := 2
+    else
+    if p = ucyan then
+      cfor := 3
+    else
+    if p = ured then
+      cfor := 4
+    else
+    if p = umag then
+      cfor := 5
+    else
+    if p = ubrown then
+      cfor := 6
+    else
+    if p = ulgray then
+      cfor := 7
+    else
+    if p = udgray then
+      cfor := 8
+    else
+    if p = ulblue then
+      cfor := 9
+    else
+    if p = ulgreen then
+      cfor := 10
+    else
+    if p = ulcyan then
+      cfor := 11
+    else
+    if p = ulred then
+      cfor := 12
+    else
+    if p = ulmag then
+      cfor := 13
+    else
+    if p = uyellow then
+      cfor := 14
+    else
+    if p = uwhite then
+      cfor := 15
 
     {background color}
-    else if p = backublack then cback := 0
-    else if p = backublue then  cback := 2
-    else if p = BackUGreen then cback := 2
-    else if p = BackUCyan then cback := 3
-    else if p = BackURed then cback := 4
-    else if p = BackUMagenta then cback := 5
-    else if p = BackUBrown then cback := 6
-    else if p = BackULGray then cback := 7
+    else
+    if p = backublack then
+      cback := 0
+    else
+    if p = backublue then
+      cback := 2
+    else
+    if p = BackUGreen then
+      cback := 2
+    else
+    if p = BackUCyan then
+      cback := 3
+    else
+    if p = BackURed then
+      cback := 4
+    else
+    if p = BackUMagenta then
+      cback := 5
+    else
+    if p = BackUBrown then
+      cback := 6
+    else
+    if p = BackULGray then
+      cback := 7
 
     else
     begin
@@ -1290,7 +1415,8 @@ begin
       Inc(i);
     end;
 
-    if i > length(out) then fin := True;
+    if i > length(out) then
+      fin := True;
 
   until fin;
 
@@ -1359,7 +1485,7 @@ begin
     end; {white *end*}
   end; {case .end.}
 
-  {return result}
+       {return result}
   backcolr := s;
 
 end; {backcolr *end*}
@@ -1384,32 +1510,79 @@ begin
     p := copy(s, i, 3);
 
     {check for (foreground) control string}
-    if p = ublack then c := AblackonBlack
-    else if p = ublue then c := ABlueonBlack
-    else if p = ugreen then c := AGreenonBlack
-    else if p = ucyan then c := ACyanonBlack
-    else if p = ured then c := ARedonBlack
-    else if p = umag then c := AMagentaonBlack
-    else if p = ubrown then c := ABrownonBlack
-    else if p = ulgray then c := ALtGrayonBlack
-    else if p = udgray then c := ADkGrayonBlack
-    else if p = ulblue then c := ALtBlueonBlack
-    else if p = ulgreen then c := ALtGreenonBlack
-    else if p = ulcyan then c := ALtCyanOnBlack
-    else if p = ulred then c := ALtRedonBlack
-    else if p = ulmag then c := ALtMagentaonBlack
-    else if p = uyellow then c := AYellowonBlack
-    else if p = uwhite then c := AWhiteonBlack
+    if p = ublack then
+      c := AblackonBlack
+    else
+    if p = ublue then
+      c := ABlueonBlack
+    else
+    if p = ugreen then
+      c := AGreenonBlack
+    else
+    if p = ucyan then
+      c := ACyanonBlack
+    else
+    if p = ured then
+      c := ARedonBlack
+    else
+    if p = umag then
+      c := AMagentaonBlack
+    else
+    if p = ubrown then
+      c := ABrownonBlack
+    else
+    if p = ulgray then
+      c := ALtGrayonBlack
+    else
+    if p = udgray then
+      c := ADkGrayonBlack
+    else
+    if p = ulblue then
+      c := ALtBlueonBlack
+    else
+    if p = ulgreen then
+      c := ALtGreenonBlack
+    else
+    if p = ulcyan then
+      c := ALtCyanOnBlack
+    else
+    if p = ulred then
+      c := ALtRedonBlack
+    else
+    if p = ulmag then
+      c := ALtMagentaonBlack
+    else
+    if p = uyellow then
+      c := AYellowonBlack
+    else
+    if p = uwhite then
+      c := AWhiteonBlack
 
     {check for (background) control string}
-    else if p = backublack then c := backcolr(0)
-    else if p = backublue then c := backcolr(1)
-    else if p = BackUGreen then c := backcolr(2)
-    else if p = BackUCyan then c := backcolr(3)
-    else if p = BackURed then c := backcolr(4)
-    else if p = BackUMagenta then c := backcolr(5)
-    else if p = BackUBrown then c := backcolr(6)
-    else if p = BackULGray then c := backcolr(7)
+    else
+    if p = backublack then
+      c := backcolr(0)
+    else
+    if p = backublue then
+      c := backcolr(1)
+    else
+    if p = BackUGreen then
+      c := backcolr(2)
+    else
+    if p = BackUCyan then
+      c := backcolr(3)
+    else
+    if p = BackURed then
+      c := backcolr(4)
+    else
+    if p = BackUMagenta then
+      c := backcolr(5)
+    else
+    if p = BackUBrown then
+      c := backcolr(6)
+    else
+    if p = BackULGray then
+      c := backcolr(7)
 
     else
     begin
@@ -1428,7 +1601,8 @@ begin
       Inc(i);
     end;
 
-    if i > length(s) then fin := True;
+    if i > length(s) then
+      fin := True;
 
   until fin;
 
@@ -1584,7 +1758,8 @@ begin
         begin
           sd(config.textcolor, '000');
           s := s + '000';
-        end else if length(s) < 10 then
+        end else
+        if length(s) < 10 then
         begin
           repeat
             sd(config.textcolor, '0');
@@ -1599,7 +1774,8 @@ begin
         begin
           sd(config.textcolor, '000000');
           s := s + '000000';
-        end else if length(s) < 10 then
+        end else
+        if length(s) < 10 then
         begin
           repeat
             sd(config.textcolor, '0');
@@ -1618,9 +1794,10 @@ begin
           door_left(1);
         end; {for i:= .end.}
 
-        {set string to max value}
+             {set string to max value}
         s := long2str(rmax);
-        if s = '' then s := '0';
+        if s = '' then
+          s := '0';
 
         sd(config.textcolor, s);
 
@@ -1633,12 +1810,14 @@ begin
         begin
           if s = '' then
           begin
-            if default > rmax then default := rmax;
+            if default > rmax then
+              default := rmax;
             s := long2str(default);
           end;
         end else
         begin
-          if s = '' then s := '0';
+          if s = '' then
+            s := '0';
         end;
 
         x := str_to_nr2(s);
@@ -1646,7 +1825,8 @@ begin
         if (x > rmax) or (x < rmin) then
         begin
           crlf;
-          d(config.textcolor, '(a number in the range ' + ulgray + commastr(rmin) + config.textcol1 + ' .. ' + ulgray + commastr(rmax) +
+          d(config.textcolor, '(a number in the range ' + ulgray + commastr(rmin) + config.textcol1 +
+            ' .. ' + ulgray + commastr(rmax) +
             config.textcol1 + ' please!)');
           sd(config.textcolor, ':');
           {reset string}
@@ -1736,7 +1916,8 @@ begin
     remove_commas(s);
 
     {if user presses return}
-    if s = '' then s := '0';
+    if s = '' then
+      s := '0';
 
     {convert the string to a numeric}
     x := str_to_nr(s);
@@ -1769,7 +1950,8 @@ var
   n: array[1..sizeof(longint)] of byte absolute num;
 begin
   s := '';
-  for c := 4 downto 1 do s := s + hexid[n[c] shr 4] + hexid[n[c] and $F];
+  for c := 4 downto 1 do
+    s := s + hexid[n[c] shr 4] + hexid[n[c] and $F];
   IntToHex := copy(s, 8 - digits + 1, digits);
 end;
 
@@ -1787,22 +1969,53 @@ begin
 
   Result := False;
 
-  if upcasestr(incolor) = 'BLACK' then Result := True
-  else if upcasestr(incolor) = 'BLUE' then Result := True
-  else if upcasestr(incolor) = 'GREEN' then Result := True
-  else if upcasestr(incolor) = 'CYAN' then Result := True
-  else if upcasestr(incolor) = 'RED' then Result := True
-  else if upcasestr(incolor) = 'MAGENTA' then Result := True
-  else if upcasestr(incolor) = 'BROWN' then Result := True
-  else if upcasestr(incolor) = 'LIGHTGRAY' then Result := True
-  else if upcasestr(incolor) = 'DARKGRAY' then Result := True
-  else if upcasestr(incolor) = 'LIGHTBLUE' then Result := True
-  else if upcasestr(incolor) = 'LIGHTGREEN' then Result := True
-  else if upcasestr(incolor) = 'LIGHTCYAN' then Result := True
-  else if upcasestr(incolor) = 'LIGHTRED' then Result := True
-  else if upcasestr(incolor) = 'LIGHTMAGENTA' then Result := True
-  else if upcasestr(incolor) = 'YELLOW' then Result := True
-  else if upcasestr(incolor) = 'WHITE' then Result := True;
+  if upcasestr(incolor) = 'BLACK' then
+    Result := True
+  else
+  if upcasestr(incolor) = 'BLUE' then
+    Result := True
+  else
+  if upcasestr(incolor) = 'GREEN' then
+    Result := True
+  else
+  if upcasestr(incolor) = 'CYAN' then
+    Result := True
+  else
+  if upcasestr(incolor) = 'RED' then
+    Result := True
+  else
+  if upcasestr(incolor) = 'MAGENTA' then
+    Result := True
+  else
+  if upcasestr(incolor) = 'BROWN' then
+    Result := True
+  else
+  if upcasestr(incolor) = 'LIGHTGRAY' then
+    Result := True
+  else
+  if upcasestr(incolor) = 'DARKGRAY' then
+    Result := True
+  else
+  if upcasestr(incolor) = 'LIGHTBLUE' then
+    Result := True
+  else
+  if upcasestr(incolor) = 'LIGHTGREEN' then
+    Result := True
+  else
+  if upcasestr(incolor) = 'LIGHTCYAN' then
+    Result := True
+  else
+  if upcasestr(incolor) = 'LIGHTRED' then
+    Result := True
+  else
+  if upcasestr(incolor) = 'LIGHTMAGENTA' then
+    Result := True
+  else
+  if upcasestr(incolor) = 'YELLOW' then
+    Result := True
+  else
+  if upcasestr(incolor) = 'WHITE' then
+    Result := True;
 
   {return result}
   valid_color := Result;
@@ -1816,22 +2029,53 @@ begin
   incolor := upcasestr(incolor);
   Result := ugreen;
 
-  if incolor = 'BLACK' then  Result := ublack
-  else if incolor = 'BLUE' then  Result := ublue
-  else if incolor = 'GREEN' then  Result := ugreen
-  else if incolor = 'CYAN' then  Result := ucyan
-  else if incolor = 'RED' then  Result := ured
-  else if incolor = 'MAGENTA' then  Result := umag
-  else if incolor = 'BROWN' then  Result := ubrown
-  else if incolor = 'LIGHTGRAY' then  Result := ulgray
-  else if incolor = 'DARKGRAY' then  Result := udgray
-  else if incolor = 'LIGHTBLUE' then  Result := ulblue
-  else if incolor = 'LIGHTGREEN' then  Result := ulgreen
-  else if incolor = 'LIGHTCYAN' then  Result := ulcyan
-  else if incolor = 'LIGHTRED' then  Result := ulred
-  else if incolor = 'LIGHTMAGENTA' then Result := ulmag
-  else if incolor = 'YELLOW' then  Result := uyellow
-  else if incolor = 'WHITE' then  Result := uwhite;
+  if incolor = 'BLACK' then
+    Result := ublack
+  else
+  if incolor = 'BLUE' then
+    Result := ublue
+  else
+  if incolor = 'GREEN' then
+    Result := ugreen
+  else
+  if incolor = 'CYAN' then
+    Result := ucyan
+  else
+  if incolor = 'RED' then
+    Result := ured
+  else
+  if incolor = 'MAGENTA' then
+    Result := umag
+  else
+  if incolor = 'BROWN' then
+    Result := ubrown
+  else
+  if incolor = 'LIGHTGRAY' then
+    Result := ulgray
+  else
+  if incolor = 'DARKGRAY' then
+    Result := udgray
+  else
+  if incolor = 'LIGHTBLUE' then
+    Result := ulblue
+  else
+  if incolor = 'LIGHTGREEN' then
+    Result := ulgreen
+  else
+  if incolor = 'LIGHTCYAN' then
+    Result := ulcyan
+  else
+  if incolor = 'LIGHTRED' then
+    Result := ulred
+  else
+  if incolor = 'LIGHTMAGENTA' then
+    Result := ulmag
+  else
+  if incolor = 'YELLOW' then
+    Result := uyellow
+  else
+  if incolor = 'WHITE' then
+    Result := uwhite;
 
   {return result}
   ConvertToUsurperAnsi := Result;
@@ -1845,22 +2089,53 @@ begin
   incolor := upcasestr(incolor);
   Result := 2;
 
-  if incolor = 'BLACK' then Result := 0
-  else if incolor = 'BLUE' then Result := 1
-  else if incolor = 'GREEN' then Result := 2
-  else if incolor = 'CYAN' then Result := 3
-  else if incolor = 'RED' then Result := 4
-  else if incolor = 'MAGENTA' then Result := 5
-  else if incolor = 'BROWN' then Result := 6
-  else if incolor = 'LIGHTGRAY' then Result := 7
-  else if incolor = 'DARKGRAY' then Result := 8
-  else if incolor = 'LIGHTBLUE' then Result := 9
-  else if incolor = 'LIGHTGREEN' then Result := 10
-  else if incolor = 'LIGHTCYAN' then Result := 11
-  else if incolor = 'LIGHTRED' then Result := 12
-  else if incolor = 'LIGHTMAGENTA' then Result := 13
-  else if incolor = 'YELLOW' then Result := 14
-  else if incolor = 'WHITE' then Result := 15;
+  if incolor = 'BLACK' then
+    Result := 0
+  else
+  if incolor = 'BLUE' then
+    Result := 1
+  else
+  if incolor = 'GREEN' then
+    Result := 2
+  else
+  if incolor = 'CYAN' then
+    Result := 3
+  else
+  if incolor = 'RED' then
+    Result := 4
+  else
+  if incolor = 'MAGENTA' then
+    Result := 5
+  else
+  if incolor = 'BROWN' then
+    Result := 6
+  else
+  if incolor = 'LIGHTGRAY' then
+    Result := 7
+  else
+  if incolor = 'DARKGRAY' then
+    Result := 8
+  else
+  if incolor = 'LIGHTBLUE' then
+    Result := 9
+  else
+  if incolor = 'LIGHTGREEN' then
+    Result := 10
+  else
+  if incolor = 'LIGHTCYAN' then
+    Result := 11
+  else
+  if incolor = 'LIGHTRED' then
+    Result := 12
+  else
+  if incolor = 'LIGHTMAGENTA' then
+    Result := 13
+  else
+  if incolor = 'YELLOW' then
+    Result := 14
+  else
+  if incolor = 'WHITE' then
+    Result := 15;
 
   {return result}
   ConvertToUsurperAnsi2 := Result;
@@ -1891,7 +2166,7 @@ begin
     else s := '';
   end; {case .end.}
 
-  {return result}
+       {return result}
   converttoUsurperAnsi3 := s;
 
 end; {converttoUsurperAnsi3 *end*}
@@ -1920,7 +2195,7 @@ begin
     else s9 := AGreenOnBlack;
   end; {case .end.}
 
-  {return result}
+       {return result}
   ConvertToAnsi := s9;
 
 end; {ConvertToAnsi *end*}
@@ -1934,7 +2209,8 @@ begin
   end else
   begin
 
-    if pos(upcasestr(s1), upcasestr(s2)) > 0 then findsub := True
+    if pos(upcasestr(s1), upcasestr(s2)) > 0 then
+      findsub := True
     else findsub := False;
   end;
 
@@ -1969,9 +2245,12 @@ begin
   m := commastr(minute);
   s := commastr(second);
 
-  if length(h) < 2 then h := '0' + h;
-  if length(m) < 2 then m := '0' + m;
-  if length(s) < 2 then s := '0' + s;
+  if length(h) < 2 then
+    h := '0' + h;
+  if length(m) < 2 then
+    m := '0' + m;
+  if length(s) < 2 then
+    s := '0' + s;
 
   {return result}
   give_me_time := h + ':' + m + ':' + s;
@@ -2019,9 +2298,11 @@ begin;  {original code taken from the "date" function in ddscott.pas}
   getdate(y, m, d, dow);
 
   s := long2str(m);
-  if length(s) = 1 then s := '0' + s;
+  if length(s) = 1 then
+    s := '0' + s;
   s2 := long2str(d);
-  if length(s2) = 1 then s2 := '0' + s2;
+  if length(s2) = 1 then
+    s2 := '0' + s2;
   s := s + s2;
   s2 := long2str(y);
   while length(s2) < 4 do
@@ -2064,11 +2345,13 @@ begin;
   end;
 
   savescreen;
-  if not local then AsyncCloseUp;
+  if not local then
+    AsyncCloseUp;
   swapvectors;
   do_exec(getenv('COMSPEC'), '', USE_ALL, $FFFF, True);
   swapvectors;
-  if not local then AsyncSelectPort(com_port);
+  if not local then
+    AsyncSelectPort(com_port);
   restorescreen;
 
   if not local then
@@ -2138,7 +2421,8 @@ end; {jake_tasker *end*}
 
 procedure Display_Bar_Status; {call to DDplus Display_Status (bar) proc}
 begin
-  if (statline) then display_status(force);
+  if (statline) then
+    display_status(force);
 end;
 
 function Param_Hunt; {checking for Command Line parameters}
@@ -2172,7 +2456,7 @@ end;
 
 procedure My_TimeSlice; {release a timeslice}
 begin
-  releasetimeslice; {ddplus routine}
+  releasetimeslice;     {ddplus routine}
 end;
 
 function HeapHandler;
@@ -2209,7 +2493,8 @@ var
   y: word;
 begin
   y := RPScreenSizeY;
-  if (y > 255) then y := 255;
+  if (y > 255) then
+    y := 255;
   ScreenRows := y;
 end;
 
@@ -2231,7 +2516,8 @@ var
   x: word;
 begin
   x := RPScreenSizeX;
-  if (x > 255) then x := 255;
+  if (x > 255) then
+    x := 255;
   ScreenCols := x;
 end;
 
@@ -2244,7 +2530,8 @@ const sc: array[0..3] of char = '-\|/';
   begin
     global_place := (global_place + 1) mod 4;
     sd(cursor_color, sc[global_place]);
-    if pause_it then delay2(250);
+    if pause_it then
+      delay2(250);
     sd(cursor_color, #8);
   end;
 
@@ -2260,9 +2547,9 @@ begin
     end;
   end; {case .end.}
 
-end; {spincursor *end*}
+end;   {spincursor *end*}
 
-{*Unit Initialization Code*}
+       {*Unit Initialization Code*}
 begin
   carriage_return := True;
 

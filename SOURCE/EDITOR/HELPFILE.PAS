@@ -1,12 +1,12 @@
 {$IFNDEF MSDOS}
 {$I DEFINES.INC}
 {$ENDIF}
-{************************************************}
+ {************************************************}
 
-{   Turbo Vision Demo                            }
-{   Copyright (c) 1992 by Borland International  }
+ {   Turbo Vision Demo                            }
+ {   Copyright (c) 1992 by Borland International  }
 
-{************************************************}
+ {************************************************}
 
 unit HelpFile;
 
@@ -195,7 +195,8 @@ constructor THelpTopic.Load(var S: TStream);
   begin
     S.Read(NumRefs, SizeOf(integer));
     GetMem(CrossRefs, SizeOf(TCrossRef) * NumRefs);
-    if CrossRefs <> nil then S.Read(CrossRefs^, SizeOf(TCrossRef) * NumRefs);
+    if CrossRefs <> nil then
+      S.Read(CrossRefs^, SizeOf(TCrossRef) * NumRefs);
   end;
 
 begin
@@ -246,7 +247,8 @@ var
   PP: ^PParagraph;
 begin
   PP := @Paragraphs;
-  while PP^ <> nil do PP := @PP^^.Next;
+  while PP^ <> nil do
+    PP := @PP^^.Next;
   PP^ := P;
   P^.Next := nil;
 end;
@@ -347,18 +349,21 @@ end;
 
 procedure THelpTopic.SetCrossRef(I: integer; var Ref: TCrossRef);
 begin
-  if I <= NumRefs then CrossRefs^[I] := Ref;
+  if I <= NumRefs then
+    CrossRefs^[I] := Ref;
 end;
 
 procedure THelpTopic.SetNumCrossRefs(I: integer);
 var
   P: PCrossRefs;
 begin
-  if NumRefs = I then Exit;
+  if NumRefs = I then
+    Exit;
   GetMem(P, I * SizeOf(TCrossRef));
   if NumRefs > 0 then
   begin
-    if I > NumRefs then Move(CrossRefs^, P^, NumRefs * SizeOf(TCrossRef))
+    if I > NumRefs then
+      Move(CrossRefs^, P^, NumRefs * SizeOf(TCrossRef))
     else Move(CrossRefs^, P^, I * SizeOf(TCrossRef));
     FreeMem(CrossRefs, NumRefs * SizeOf(TCrossRef));
   end;
@@ -401,7 +406,8 @@ procedure THelpTopic.Store(var S: TStream);
     I: integer;
   begin
     S.Write(NumRefs, SizeOf(integer));
-    if @CrossRefHandler = @NotAssigned then S.Write(CrossRefs^, SizeOf(TCrossRef) * NumRefs)
+    if @CrossRefHandler = @NotAssigned then
+      S.Write(CrossRefs^, SizeOf(TCrossRef) * NumRefs)
     else
       for I := 1 to NumRefs do
       begin
@@ -540,18 +546,23 @@ begin
   if (I >= Width) and Wrap then
   begin
     I := Offset + Width;
-    if I > Size then I := Size
+    if I > Size then
+      I := Size
     else
     begin
-      while (I > Offset) and not IsBlank(PCArray(@Text)^[I]) do Dec(I);
-      if I = Offset then I := Offset + Width
+      while (I > Offset) and not IsBlank(PCArray(@Text)^[I]) do
+        Dec(I);
+      if I = Offset then
+        I := Offset + Width
       else Inc(I);
     end;
-    if I = Offset then I := Offset + Width;
+    if I = Offset then
+      I := Offset + Width;
     Dec(I, Offset);
   end;
   TextToLine(Text, Offset, I, Line);
-  if Line[Length(Line)] = #13 then Dec(Line[0]);
+  if Line[Length(Line)] = #13 then
+    Dec(Line[0]);
   Inc(Offset, I);
   WrapText := Line;
 end;
@@ -601,11 +612,13 @@ begin
     while Lo <= Hi do
     begin
       Pos := (Lo + Hi) div 2;
-      if I > Contexts^[Pos] then Lo := Pos + 1
+      if I > Contexts^[Pos] then
+        Lo := Pos + 1
       else
       begin
         Hi := Pos - 1;
-        if I = Contexts^[Pos] then Lo := Pos;
+        if I = Contexts^[Pos] then
+          Lo := Pos;
       end;
     end;
   end;
@@ -632,10 +645,12 @@ var
     GetMem(NewP, NewSize * ElemSize);
     if NewP <> nil then
     begin
-      if P <> nil then Move(P^, NewP^, OldSize * ElemSize);
+      if P <> nil then
+        Move(P^, NewP^, OldSize * ElemSize);
       FillChar(NewP^[OldSize * ElemSize], (NewSize - Size) * ElemSize, $FF);
     end;
-    if OldSize > 0 then FreeMem(P, OldSize * ElemSize);
+    if OldSize > 0 then
+      FreeMem(P, OldSize * ElemSize);
     Grow := NewP;
   end;
 
@@ -682,7 +697,8 @@ var
 begin
   Magic := 0;
   S^.Seek(0);
-  if S^.GetSize > SizeOf(Magic) then S^.Read(Magic, SizeOf(Magic));
+  if S^.GetSize > SizeOf(Magic) then
+    S^.Read(Magic, SizeOf(Magic));
   if Magic <> MagicHeader then
   begin
     IndexPos := 12;
@@ -813,7 +829,8 @@ begin
   KeyPoint.X := 0;
   KeyPoint.Y := 0;
   Topic^.SetWidth(Size.X);
-  if Topic^.GetNumCrossRefs > 0 then repeat
+  if Topic^.GetNumCrossRefs > 0 then
+    repeat
       Inc(KeyCount);
       Topic^.GetCrossRef(KeyCount, KeyPoint, KeyLength, KeyRef);
     until (KeyCount >= Topic^.GetNumCrossRefs) or (KeyPoint.Y > Delta.Y);
@@ -830,11 +847,14 @@ begin
         Dec(L, Delta.X - KeyPoint.X);
         KeyPoint.X := Delta.X;
       end;
-      if KeyCount = Selected then C := SelKeyword
+      if KeyCount = Selected then
+        C := SelKeyword
       else C := Keyword;
-      for J := 0 to L - 1 do WordRec(B[KeyPoint.X - Delta.X + J]).Hi := C;
+      for J := 0 to L - 1 do
+        WordRec(B[KeyPoint.X - Delta.X + J]).Hi := C;
       Inc(KeyCount);
-      if KeyCount <= Topic^.GetNumCrossRefs then Topic^.GetCrossRef(KeyCount, KeyPoint, KeyLength, KeyRef)
+      if KeyCount <= Topic^.GetNumCrossRefs then
+        Topic^.GetCrossRef(KeyCount, KeyPoint, KeyLength, KeyRef)
       else KeyPoint.Y := 0;
     end;
     WriteLine(0, I - 1, Size.X, 1, B);
@@ -854,16 +874,23 @@ var
   begin
     Topic^.GetCrossRef(Selected, KeyPoint, KeyLength, KeyRef);
     D := Delta;
-    if KeyPoint.X < D.X then D.X := KeyPoint.X
-    else if KeyPoint.X + KeyLength > D.X + Size.X then D.X := KeyPoint.X + KeyLength - Size.X + 1;
-    if KeyPoint.Y <= D.Y then D.Y := KeyPoint.Y - 1;
-    if KeyPoint.Y > D.Y + Size.Y then D.Y := KeyPoint.Y - Size.Y;
-    if (D.X <> Delta.X) or (D.Y <> Delta.Y) then ScrollTo(D.X, D.Y);
+    if KeyPoint.X < D.X then
+      D.X := KeyPoint.X
+    else
+    if KeyPoint.X + KeyLength > D.X + Size.X then
+      D.X := KeyPoint.X + KeyLength - Size.X + 1;
+    if KeyPoint.Y <= D.Y then
+      D.Y := KeyPoint.Y - 1;
+    if KeyPoint.Y > D.Y + Size.Y then
+      D.Y := KeyPoint.Y - Size.Y;
+    if (D.X <> Delta.X) or (D.Y <> Delta.Y) then
+      ScrollTo(D.X, D.Y);
   end;
 
   procedure SwitchToTopic(KeyRef: integer);
   begin
-    if Topic <> nil then Dispose(Topic, Done);
+    if Topic <> nil then
+      Dispose(Topic, Done);
     Topic := HFile^.GetTopic(KeyRef);
     Topic^.SetWidth(Size.X);
     ScrollTo(0, 0);
@@ -879,19 +906,22 @@ begin
       case Event.KeyCode of
         kbUp: begin  {jakob added this Kbup event}
           Dec(Selected);
-          if Selected < 1 then Selected := Topic^.GetNumCrossRefs;
+          if Selected < 1 then
+            Selected := Topic^.GetNumCrossRefs;
           MakeSelectVisible;
         end;
         kbTab, Kbdown: if Topic^.GetNumCrossRefs > 0 then
           begin
             Inc(Selected);
-            if Selected > Topic^.GetNumCrossRefs then Selected := 1;
+            if Selected > Topic^.GetNumCrossRefs then
+              Selected := 1;
             MakeSelectVisible;
           end;
         kbShiftTab: if Topic^.GetNumCrossRefs > 0 then
           begin
             Dec(Selected);
-            if Selected = 0 then Selected := Topic^.GetNumCrossRefs;
+            if Selected = 0 then
+              Selected := Topic^.GetNumCrossRefs;
             MakeSelectVisible;
           end;
         kbEnter: if Selected <= Topic^.GetNumCrossRefs then
@@ -915,13 +945,15 @@ begin
       KeyCount := 0;
       repeat
         Inc(KeyCount);
-        if KeyCount > Topic^.GetNumCrossRefs then Exit;
+        if KeyCount > Topic^.GetNumCrossRefs then
+          Exit;
         Topic^.GetCrossRef(KeyCount, KeyPoint, KeyLength, KeyRef);
       until (KeyPoint.Y = Mouse.Y + 1) and (Mouse.X >= KeyPoint.X) and
         (Mouse.X < KeyPoint.X + KeyLength);
       Selected := KeyCount;
       DrawView;
-      if Event.double then SwitchToTopic(KeyRef);
+      if Event.double then
+        SwitchToTopic(KeyRef);
       ClearEvent(Event);
     end;
     evCommand: if (Event.Command = cmClose) and (Owner^.State and sfModal <> 0) then
@@ -954,31 +986,6 @@ begin
 end;
 
 procedure NotAssigned(var S: TStream; Value: integer);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 begin
 end;

@@ -121,7 +121,8 @@ begin
               2: size := fs(FsNpc);
             end;
 
-            if (found) or (nomore) then break;
+            if (found) or (nomore) then
+              break;
             for j := 1 to size do
             begin
 
@@ -149,7 +150,7 @@ begin
                 end;
               end;
             end; {for j:= .end.}
-          end; {for i:= .end.}
+          end;   {for i:= .end.}
 
           shadow := False;
           if (found) and (is_online(pl0.name2, online_player)) then
@@ -184,7 +185,7 @@ begin
               end;
             end; {for i:= .end.}
 
-            {poll onguy player}
+                 {poll onguy player}
             onguy.bname := onliner.Name;
             onguy.com := intercom_execute;
             onguy.comfile := onliner.comfile;
@@ -209,7 +210,8 @@ begin
               d(config.textcolor, ' is soon under control.');
             end;
 
-          end else if found then
+          end else
+          if found then
           begin
             {pl0 is not online, we put him as shadow}
             {add shadow}
@@ -225,13 +227,14 @@ begin
           if found then
           begin {execute offline prisoner}
 
-            {prisoner is brought up}
+                {prisoner is brought up}
             crlf;
             sd(global_plycol, pl0.name2);
             d(config.textcolor, ' is brought up from ' + sex3[pl0.sex] + ' cell.');
             crlf;
 
-            if player.sex = 1 then s := 'King'
+            if player.sex = 1 then
+              s := 'King'
             else s := 'Queen';
 
             {why death?}
@@ -261,7 +264,8 @@ begin
               {news}
               newsy(True,
                 config.textcol1 + 'Execution',
-                ' ' + ulred + pl0.name2 + config.textcol1 + ', the ' + race_display(2, pl0.race, 0) + ', was sentenced to death and' + ' beheaded!',
+                ' ' + ulred + pl0.name2 + config.textcol1 + ', the ' + race_display(2, pl0.race, 0) +
+                ', was sentenced to death and' + ' beheaded!',
                 ' ' + s + ukingc + ' ' + player.name2 + config.textcol1 + ' signed the order.',
                 '',
                 '',
@@ -280,7 +284,7 @@ begin
                 4: s2 := '(it is my destiny)';
               end; {case }
 
-              {mail to imprisoned subject}
+                   {mail to imprisoned subject}
               post(MailSend,
                 pl0.name2,
                 pl0.ai,
@@ -335,7 +339,7 @@ begin
 
         end;
 
-      end; {execute prisoner .end.}
+      end;       {execute prisoner .end.}
 
       'F': begin {free prisoner .start.}
 
@@ -385,9 +389,11 @@ begin
               end;
             end;
 
-            if (found) or (nomore) then break;
+            if (found) or (nomore) then
+              break;
           end; {for j:= .end.}
-          if (found) or (nomore) then break;
+          if (found) or (nomore) then
+            break;
         end; {for i:= .end.}
 
         if (found) and
@@ -456,12 +462,14 @@ begin
             sd(global_plycol, pl0.name2);
             d(config.textcolor, ' thanks you for your kindness and walks out of ' + sex3[pl0.sex] + ' cell!');
 
-            if player.sex = 1 then s := 'King'
+            if player.sex = 1 then
+              s := 'King'
             else s := 'Queen';
             {news-paper}
             newsy(True,
               config.textcol1 + 'Freedom',
-              ' ' + s + ukingc + ' ' + player.name2 + config.textcol1 + ' released ' + uplc + pl0.name2 + config.textcol1 + ' from prison!',
+              ' ' + s + ukingc + ' ' + player.name2 + config.textcol1 + ' released ' + uplc +
+              pl0.name2 + config.textcol1 + ' from prison!',
               '',
               '',
               '',
@@ -470,7 +478,8 @@ begin
               '',
               '',
               '');
-          end else if onliner.com = intercom_decline then
+          end else
+          if onliner.com = intercom_decline then
           begin
             {decline}
             sd(global_plycol, pl0.name2);
@@ -488,10 +497,11 @@ begin
             delete_file(onliner.comfile);
           end;
 
-        end else if found then
+        end else
+        if found then
         begin {prisoner is offline}
 
-          {add shadow}
+              {add shadow}
           if add_shadow(SAdd, pl0, player.name2, 'being released from prison', 0) = False then
           begin
             {unable to add pl0}
@@ -572,10 +582,11 @@ begin
 
             end; {case .end.}
 
-            {release}
+                 {release}
             pl0.location := offloc_dormitory;
 
-            if player.sex = 1 then s := 'King'
+            if player.sex = 1 then
+              s := 'King'
             else s := 'Queen';
 
             {news text}
@@ -590,7 +601,8 @@ begin
             {news}
             newsy(True,
               config.textcol1 + 'Pardon',
-              ' ' + s + ukingc + ' ' + player.name2 + config.textcol1 + ' released ' + uplc + pl0.name2 + config.textcol1 + ' from prison!',
+              ' ' + s + ukingc + ' ' + player.name2 + config.textcol1 + ' released ' + uplc +
+              pl0.name2 + config.textcol1 + ' from prison!',
               '' + s2,
               '',
               '',
@@ -645,13 +657,13 @@ begin
             add_shadow(SRemove, pl0, '', '', 0);
           end;
 
-        end; {found}
+        end;     {found}
 
-      end; {release prisoner .end.}
+      end;       {release prisoner .end.}
 
       'I': begin {imprison subject}
 
-        {load the king}
+                 {load the king}
         load_king(fload, king);
 
         if king.prisonsleft < 1 then
@@ -660,7 +672,8 @@ begin
           crlf;
           d(12, 'You have run out of prison sentences.');
           crlf;
-        end else if Config.AllowKingtoImprison = 0 then
+        end else
+        if Config.AllowKingtoImprison = 0 then
         begin
           crlf;
           crlf;
@@ -691,7 +704,8 @@ begin
               2: size := fs(FsNpc);
             end;
 
-            if (found) or (nomore) then break;
+            if (found) or (nomore) then
+              break;
             for j := 1 to size do
             begin
               load_character(pl0, i, j);
@@ -727,9 +741,9 @@ begin
                 end;
               end;
             end; {for j:= .end.}
-          end; {for i:= .end.}
+          end;   {for i:= .end.}
 
-          {imprison}
+                 {imprison}
           if (found) and (is_online(pl0.name2, online_player) = False) then
           begin
 
@@ -814,7 +828,8 @@ begin
                 begin
                   crlf;
                   crlf;
-                  if confirm('Should ' + uplc + pl0.name2 + config.textcol1 + ' stay in Prison for more than' + ' 1 day', 'N') = True then
+                  if confirm('Should ' + uplc + pl0.name2 + config.textcol1 + ' stay in Prison for more than' +
+                    ' 1 day', 'N') = True then
                   begin
 
                     crlf;
@@ -842,10 +857,12 @@ begin
                 d(config.textcolor, ' is sent down to ' + sex3[pl0.sex] + ' cell.');
                 crlf;
 
-                if player.sex = 1 then s := 'King'
+                if player.sex = 1 then
+                  s := 'King'
                 else s := 'Queen';
 
-                if days > 1 then daystr := 'days'
+                if days > 1 then
+                  daystr := 'days'
                 else daystr := 'day';
 
                 {worsen pl0:s attitude to player}
@@ -854,9 +871,11 @@ begin
                 {news}
                 newsy(True,
                   config.textcol1 + 'Prisoner',
-                  ' ' + s + ukingc + ' ' + player.name2 + config.textcol1 + ' imprisoned ' + ulred + pl0.name2 + config.textcol1 + '!',
+                  ' ' + s + ukingc + ' ' + player.name2 + config.textcol1 + ' imprisoned ' + ulred +
+                  pl0.name2 + config.textcol1 + '!',
                   ' ' + s2,
-                  ' ' + uplc + pl0.name2 + config.textcol1 + ' will stay in prison for ' + uwhite + commastr(days) + config.textcol1 + ' ' + daystr + '.',
+                  ' ' + uplc + pl0.name2 + config.textcol1 + ' will stay in prison for ' + uwhite +
+                  commastr(days) + config.textcol1 + ' ' + daystr + '.',
                   '',
                   '',
                   '',
@@ -914,7 +933,7 @@ begin
           end;
         end;
 
-      end; {imprison subject .end.}
+      end;       {imprison subject .end.}
       'P': begin {list of prisoners}
 
         crlf;
@@ -951,7 +970,8 @@ begin
               if is_online(pl0.name2, online_player) then
               begin
                 sd(14, ' (awake).');
-              end else if pl0.hps < 1 then
+              end else
+              if pl0.hps < 1 then
               begin
                 sd(config.textcolor, ' (' + ulred + 'dead' + config.textcol1 + ').');
               end else
@@ -961,8 +981,10 @@ begin
 
               {days left in prison}
               x := pl0.daysinprison;
-              if x = 0 then x := 1;
-              if x = 1 then daystr := 'day'
+              if x = 0 then
+                x := 1;
+              if x = 1 then
+                daystr := 'day'
               else daystr := 'days';
 
               d(config.textcolor, ' (' + uwhite + commastr(x) + config.textcol1 + ' ' + daystr + ' left)');
@@ -979,9 +1001,11 @@ begin
               end;
 
             end;
-            if abort then break;
+            if abort then
+              break;
           end; {for j:= .end.}
-          if abort then break;
+          if abort then
+            break;
         end; {for i:= .end.}
 
         if counter = 0 then

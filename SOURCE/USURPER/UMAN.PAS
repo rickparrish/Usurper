@@ -96,14 +96,15 @@ function Easy_Target(x: longint): s30;
 var s: s30;
 begin
 
-  case x of -32000.. -300: s := 'Impossible'; -299.. -100: s := 'Very Tough'; -99.. -50: s := 'Tough'; -49.. -20: s := 'Difficult'; -19..5: s := 'Interesting';
+  case x of -32000.. -300: s := 'Impossible'; -299.. -100: s := 'Very Tough'; -99.. -50: s := 'Tough';
+    -49.. -20: s := 'Difficult'; -19..5: s := 'Interesting';
     6..10: s := 'Pretty Easy';
     11..75: s := 'Easy';
     76..150: s := 'Very Easy';
     else s := 'You can''t lose';
   end; {case .end.}
 
-  {return result}
+       {return result}
   easy_target := s;
 
 end; {easy_target *end*}
@@ -121,7 +122,7 @@ begin
     list2[i]^ := 0;
   end; {for i:= .end.}
 
-end; {init_list *end*}
+end;   {init_list *end*}
 
 procedure Remove_List; {dispose pointer variables}
 var i: integer;
@@ -133,7 +134,7 @@ begin
     dispose(list2[i]);
   end; {for i:= .end.}
 
-end; {remove_list *end*}
+end;   {remove_list *end*}
 
 procedure Sort_List(antal: integer); {sort routine}
 var gap:      integer;
@@ -171,7 +172,7 @@ begin
     gap := gap div 2;
   end; {while .end.}
 
-end; {sort_list *end*}
+end;   {sort_list *end*}
 
 procedure Uman_Cave;
 const wwtries = 15; {wrestlings memory#}
@@ -198,7 +199,7 @@ var
   rounds:      byte;
   risk:        byte;
 
-  p1str, p2str: longint; {indian wrestling; players power}
+  p1str, p2str: longint;   {indian wrestling; players power}
   p1orig, p2orig: longint; {original strength}
 
   xpreward:    longint;
@@ -249,10 +250,11 @@ begin
       end;
     end; {case .end.}
 
-    {evaluate user-input}
+         {evaluate user-input}
     case cho of
       '?': begin {display menu}
-        if player.expert = True then display_menu(True, False)
+        if player.expert = True then
+          display_menu(True, False)
         else display_menu(False, False);
       end;
       'S': begin {status}
@@ -265,7 +267,7 @@ begin
         leave_uman := True;
       end;
       'I': begin {indian wrestling}
-        {the cia planted some grass on me!}
+                 {the cia planted some grass on me!}
         s := '';
 
         crlf;
@@ -326,9 +328,9 @@ begin
                     end;
                   end;
                 end; {for j:= .end.}
-              end; {for i:= .end.}
+              end;   {for i:= .end.}
 
-              {sort list}
+                     {sort list}
               sort_list(x);
 
               j := 0;
@@ -391,10 +393,12 @@ begin
                       begin
                         if pl0.king = True then
                         begin
-                          if pl0.sex = 1 then sl := 'KING'
+                          if pl0.sex = 1 then
+                            sl := 'KING'
                           else sl := 'QUEEN';
                           d(12, 'YOU MAY NOT CHALLENGE THE ' + sl);
-                        end else if is_online(pl0.name2, online_player) = True then
+                        end else
+                        if is_online(pl0.name2, online_player) = True then
                         begin
                           d(global_plycol, pl0.name2 + ulred + ' is busy right now!');
                         end else
@@ -430,12 +434,14 @@ begin
                   end;
                 end; {for j= .end.}
 
-                if (z = -1) or (search) then break;
+                if (z = -1) or (search) then
+                  break;
 
               end; {for i= .end.}
             end;
 
-            if z <> 0 then go := True;
+            if z <> 0 then
+              go := True;
 
           until go = True;
 
@@ -444,7 +450,8 @@ begin
             crlf;
             d(12, 'Sorry, You have used up your luck in this game!');
             pause;
-          end else if z > 0 then
+          end else
+          if z > 0 then
           begin
 
             if add_shadow(SAdd, pl0, player.name2, 'wrestling ' + uplc + player.name2 + config.textcol1, 0) = False then
@@ -488,8 +495,10 @@ begin
               end;
 
               x := player.strength - pl0.strength;
-              if x > 32000 then x := 32000;
-              if x < -32000 then x := -32000;
+              if x > 32000 then
+                x := 32000;
+              if x < -32000 then
+                x := -32000;
 
               case x of -32000.. -300: begin
                   sd(config.textcolor, 'Compared to you, ');
@@ -503,7 +512,8 @@ begin
                 end; -99..0: begin
                   sd(global_plycol, pl0.name2);
                   sd(config.textcolor, ' is a pretty strong ');
-                  if pl0.sex = 1 then d(config.textcolor, 'guy!')
+                  if pl0.sex = 1 then
+                    d(config.textcolor, 'guy!')
                   else d(config.textcolor, 'girl!');
                   d(config.textcolor, 'This will be a close fight!');
                   xpreward := player.level * 35;
@@ -532,8 +542,10 @@ begin
                 end;
               end; {case .end.}
 
-              if xpreward < 50 then xpreward := 50;
-              if xpreward > 35000 then xpreward := 35000;
+              if xpreward < 50 then
+                xpreward := 50;
+              if xpreward > 35000 then
+                xpreward := 35000;
 
               crlf;
               crlf;
@@ -544,7 +556,8 @@ begin
                   sd(global_talkcol, 'PRETTY NICE HUH?' + config.textcol1 + ', ');
                   sd(global_plycol, pl0.name2);
                   d(config.textcolor, ' boasts.');
-                  d(global_talkcol, 'YOU ARE A LOSER ' + player.name2 + ' AND ALWAYS WILL BE! HA HA!' + config.textcol1 + ',');
+                  d(global_talkcol, 'YOU ARE A LOSER ' + player.name2 + ' AND ALWAYS WILL BE! HA HA!' +
+                    config.textcol1 + ',');
                 end;
                 1: begin
                   sd(global_plycol, pl0.name2);
@@ -566,10 +579,17 @@ begin
               p1str := player.strength;
               p2str := pl0.strength;
 
-              if (p1str > 10000) and (p2str > 10000) then x := 10000
-              else if (p1str > 1000) and (p2str > 1000) then x := 1000
-              else if (p1str > 100) and (p2str > 100) then x := 100
-              else if (p1str > 10) and (p2str > 10) then x := 10
+              if (p1str > 10000) and (p2str > 10000) then
+                x := 10000
+              else
+              if (p1str > 1000) and (p2str > 1000) then
+                x := 1000
+              else
+              if (p1str > 100) and (p2str > 100) then
+                x := 100
+              else
+              if (p1str > 10) and (p2str > 10) then
+                x := 10
               else x := 0;
 
               if x > 0 then
@@ -577,8 +597,10 @@ begin
                 p1str := p1str div x;
                 p2str := p2str div x;
               end;
-              if p1str < 2 then p1str := 2;
-              if p2str < 2 then p2str := 2;
+              if p1str < 2 then
+                p1str := 2;
+              if p2str < 2 then
+                p2str := 2;
               p1orig := p1str;
               p2orig := p2str;
 
@@ -678,13 +700,17 @@ begin
                   end;
                 end; {case .end.}
 
-                {losses}
-                if lose1 then Dec(p1str, 2);
-                if lose2 then Dec(p2str, 2);
+                     {losses}
+                if lose1 then
+                  Dec(p1str, 2);
+                if lose2 then
+                  Dec(p2str, 2);
 
                 {rests}
-                if rest1 then Inc(p1str, 1);
-                if rest2 then Inc(p2str, 1);
+                if rest1 then
+                  Inc(p1str, 1);
+                if rest2 then
+                  Inc(p2str, 1);
 
               until (p1str < 1) or (p2str < 1);
 
@@ -735,7 +761,8 @@ begin
                   '',
                   '');
 
-              end else if p1str < 1 then
+              end else
+              if p1str < 1 then
               begin
                 d(config.textcolor, 'You are exhausted! No strength is left in your arm...');
                 sd(config.textcolor, 'With a grin on ' + sex3[pl0.sex] + ' face ');
@@ -786,7 +813,8 @@ begin
 
                 s := pl0.name2 + ' beat ' + player.name2;
 
-              end else if p2str < 1 then
+              end else
+              if p2str < 1 then
               begin
                 sd(global_plycol, pl0.name2);
                 d(config.textcolor, ' is exhausted! With sweat pouring down ' + sex3[pl0.sex] + ' forehead');
@@ -870,7 +898,8 @@ begin
               {remove offline opponent}
               add_shadow(SRemove, pl0, player.name2, '', 0);
               onliner.location := onloc_umanwrest;
-              if player.wrestlings = 0 then pause;
+              if player.wrestlings = 0 then
+                pause;
               if (player.wrestlings > 0) and
                 (confirm('Another Match', 'Y') = True) then
               begin
@@ -903,7 +932,8 @@ begin
 
           xpprice := player.level * 150;
 
-          if price <= insats then price := insats * 2;
+          if price <= insats then
+            price := insats * 2;
 
           crlf;
           crlf;
@@ -932,7 +962,8 @@ begin
             d(11, 'You can''t afford to participate!');
             crlf;
             pause;
-          end else if confirm('Go ahead ', 'N') = True then
+          end else
+          if confirm('Go ahead ', 'N') = True then
           begin
 
             if onliner.location <> onloc_umantame then
@@ -1043,9 +1074,11 @@ begin
                 end; {case .end.}
               end;
 
-              if bearmood > 10 then bearmood := 10;
+              if bearmood > 10 then
+                bearmood := 10;
 
-              if bearmood < 1 then d(15, 'The Bear is sitting down! YOU''VE DONE IT!');
+              if bearmood < 1 then
+                d(15, 'The Bear is sitting down! YOU''VE DONE IT!');
 
             until (player.hps < 1) or (bearmood < 1) or (rounds < 1);
 
@@ -1071,7 +1104,8 @@ begin
 
               normal_exit;
 
-            end else if (rounds >= 0) and (bearmood = 0) then
+            end else
+            if (rounds >= 0) and (bearmood = 0) then
             begin
               crlf;
               d(5, 'YOU WON!');
@@ -1110,7 +1144,7 @@ begin
 
         end;
 
-      end; {tame the bear .end.}
+      end;       {tame the bear .end.}
 
       'H': begin {high & low}
 
@@ -1150,8 +1184,10 @@ begin
 
               x := random(10) + 1;
               win := False;
-              if (ch = 'H') and (x > 5) then win := True;
-              if (ch = 'L') and (x < 6) then win := True;
+              if (ch = 'H') and (x > 5) then
+                win := True;
+              if (ch = 'L') and (x < 6) then
+                win := True;
 
               sd(config.textcolor, 'The croupier picked :');
               d(14, commastr(x));
@@ -1178,7 +1214,7 @@ begin
 
       end; {high or low .end.}
 
-    end; {case .end.}
+    end;   {case .end.}
 
   until leave_uman = True;
   crlf;

@@ -36,7 +36,8 @@ uses
 var  c: integer;
 
 
-procedure Add_Creature(const Name: s30; cost: longint; hps: longint; basearm: longint; baseatt: longint; const desc1: s70; const desc2: s70; const desc3: s70; const desc4: s70; const desc5: s70);
+procedure Add_Creature(const Name: s30; cost: longint; hps: longint; basearm: longint; baseatt: longint;
+  const desc1: s70; const desc2: s70; const desc3: s70; const desc4: s70; const desc5: s70);
 
 var moaty: MoatRec; {moat creature}
 
@@ -58,11 +59,13 @@ begin
 
   for c := 1 to 5 do
   begin
-    if moaty.descp[c] = '' then moaty.descp[c] := emptystr;
+    if moaty.descp[c] = '' then
+      moaty.descp[c] := emptystr;
   end;
 
  {$I-}Write(moatfile, moaty);{$I+}
-  if IOResult <> 0 then unable_to_write(gufile);
+  if IOResult <> 0 then
+    unable_to_write(gufile);
 
 end; {add_creature}
 
@@ -73,7 +76,8 @@ begin
 
   Assign(moatfile, motfile);
  {$I-}rewrite(moatfile);{$I+}
-  if IOResult <> 0 then unable_to_create(motfile);
+  if IOResult <> 0 then
+    unable_to_create(motfile);
 
   add_creature('Eel', 2500, 50, 15, 15,
     'the black eel. using its jagged theeth the eel can',
@@ -111,12 +115,8 @@ begin
     '');
 
  {$I-}Close(moatfile);{$I+}
-  if IOResult <> 0 then unable_to_close(motfile);
-
-
-
-
-
+  if IOResult <> 0 then
+    unable_to_close(motfile);
 
 
 

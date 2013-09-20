@@ -59,7 +59,8 @@ begin
   bye := False;
   sleep := 0;
 
-  if imp = True then i := 1
+  if imp = True then
+    i := 1
   else i := 0;
   repeat
 
@@ -108,7 +109,8 @@ procedure Put_Own(incom: char);
 var i: byte;
 begin
 
-  if imp = True then i := 0
+  if imp = True then
+    i := 0
   else i := 1;
   commy.com := incom;
   commy.nr1 := nr1;
@@ -124,7 +126,8 @@ var i:   byte;
   sleep: longint;
 begin
   sleep := 0;
-  if imp = True then i := 0
+  if imp = True then
+    i := 0
   else i := 1;
 
   repeat
@@ -239,7 +242,7 @@ begin
     end;
   end; {for i:= .end.}
 
-  {init}
+       {init}
   error := 0;
   challenger := utman;
   imp := utman;
@@ -264,19 +267,23 @@ begin
     Assign(comfile, onliner.comfile);
   {$I-}rewrite(comfile);{$I+}
     error := IoResult;
-    if error <> 0 then unable_to_create(onliner.comfile, error);
+    if error <> 0 then
+      unable_to_create(onliner.comfile, error);
 
   {$I-}Write(comfile, commy);{$I+}
     error := IoResult;
-    if error <> 0 then unable_to_write(onliner.comfile, error);
+    if error <> 0 then
+      unable_to_write(onliner.comfile, error);
 
   {$I-}Write(comfile, commy);{$I+}
     error := IoResult;
-    if error <> 0 then unable_to_write(onliner.comfile, error);
+    if error <> 0 then
+      unable_to_write(onliner.comfile, error);
 
   {$I-}Close(comfile);{$I+}
     error := IoResult;
-    if error <> 0 then unable_to_close(onliner.comfile, error);
+    if error <> 0 then
+      unable_to_close(onliner.comfile, error);
 
   end else
   begin
@@ -317,7 +324,8 @@ begin
 
       end;
 
-      if waits > global_online_maxwaits then abort := True;
+      if waits > global_online_maxwaits then
+        abort := True;
 
     until (f_exists(onliner.comfile)) or (abort);
 
@@ -448,7 +456,8 @@ begin
         save_mess := '';
 
         {this is necessary since 'J' is used in the 'I' routine below}
-        if ch = 'J' then ch := '?';
+        if ch = 'J' then
+          ch := '?';
 
         {evaluate user-input}
         case ch of
@@ -483,7 +492,8 @@ begin
               if s = '?' then
               begin
                 inventory_display(player);
-              end else if s = '' then
+              end else
+              if s = '' then
               begin
                 finito := True;
               end else
@@ -509,7 +519,8 @@ begin
                     d(config.textcolor, ' inventory is full!');
                     crlf;
                     pause;
-                  end else if objekt^.cursed = True then
+                  end else
+                  if objekt^.cursed = True then
                   begin
                     sd(12, 'Impossible! The ');
                     sd(global_itemcol, objekt^.Name + ' ' + item_power_display(objekt^));
@@ -528,18 +539,20 @@ begin
                     if confirm(' ', 'N') = True then
                     begin
 
-                      if confirm('Would you like to request an item from ' + uplc + oppo + config.textcol1 + ' at the same time', 'N') = True then
+                      if confirm('Would you like to request an item from ' + uplc + oppo +
+                        config.textcol1 + ' at the same time', 'N') = True then
                       begin
 
                         ch := '?';
                         nr1 := yy; {item offered}
-                        nr2 := 0; {item requested}
+                        nr2 := 0;  {item requested}
 
                         inventory_sort(enemy);
 
                         repeat
                           finito := False;
-                          d(config.textcolor, 'Item # to Request (' + config.textcol2 + '?' + config.textcol1 + '=list, Enter=abort)');
+                          d(config.textcolor, 'Item # to Request (' + config.textcol2 + '?' +
+                            config.textcol1 + '=list, Enter=abort)');
                           sd(config.textcolor, ':');
 
                           s := get_string(5);
@@ -548,7 +561,8 @@ begin
                           if s = '?' then
                           begin
                             inventory_display(enemy);
-                          end else if s = '' then
+                          end else
+                          if s = '' then
                           begin
                             finito := True;
                           end else
@@ -637,7 +651,8 @@ begin
               crlf;
               d(12, enemy.name2 + ' can''t carry more potions.');
               pause;
-            end else if player.healing > 0 then
+            end else
+            if player.healing > 0 then
             begin
               crlf;
               sd(config.textcolor, '  (' + oppo + ' has ');
@@ -793,7 +808,7 @@ begin
           end;
 
         end; {case .end.}
-        {1=bow 2=hug 3=kiss}
+             {1=bow 2=hug 3=kiss}
       until ch in ['G', 'M', 'H', 'I', 'J', 'D', 'E', '1', '2', '3', '4'];
 
       {load the other player}
@@ -807,7 +822,7 @@ begin
         end;
       end; {case .end.}
 
-      {save users}
+           {save users}
       user_save(enemy);
       user_save(player); {pucko 0.13}
 
@@ -848,7 +863,7 @@ begin
             3: d(config.textcolor, ' thinks you''re a moron!');
             4: d(config.textcolor, ' thinks you look like a swamp monster!');
             5: d(config.textcolor, ' thinks you should get the hell out of here!');
-          end; {case end}
+          end;     {case end}
         end;
         'I': begin {receiving item}
           load_objekt(objekt^, player.itemtype[nr1], player.item[nr1]);

@@ -71,7 +71,7 @@ begin
   ExitProc := ExitSave;
 end; { MyExitProc }
 
-{ Initialization code performed on program startup }
+     { Initialization code performed on program startup }
 begin
 {$ifdef VER60}
   Seg0040 := $40;

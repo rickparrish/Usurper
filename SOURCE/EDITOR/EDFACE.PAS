@@ -180,71 +180,71 @@ begin
     '',
     '',
     '',
-    '',        {normal beskrivning 4}
-    '',        {normal beskrivning 5}
-    '',        {detaljerad beskrivning 1}
-    '',        {detaljerad beskrivning 2}
-    '',        {detaljerad beskrivning 3}
-    '',        {detaljerad beskrivning 4}
-    '',        {detaljerad beskrivning 5}
-    0,         {”ka strength}
-    0,         {”ka defence}
-    0);        {strength demanded to use object}
+    '',         {normal beskrivning 4}
+    '',         {normal beskrivning 5}
+    '',         {detaljerad beskrivning 1}
+    '',         {detaljerad beskrivning 2}
+    '',         {detaljerad beskrivning 3}
+    '',         {detaljerad beskrivning 4}
+    '',         {detaljerad beskrivning 5}
+    0,          {”ka strength}
+    0,          {”ka defence}
+    0);         {strength demanded to use object}
 
   Add_Object('Death Mask', {name}
-    Face,      {typ}
+    Face,       {typ}
     5000,       {v„rde i gold}
-    0,         {”ka/minska hps}
-    0,         {”ka stamina}
-    0,         {”ka agility}
-    0,         {”ka charisma}
-    0,         {”ka dexterity}
-    0,         {”ka wisdom}
-    0,         {”ka mana}
-    5,         {”ka armor v„rde}
-    0,         {”ka attack v„rde}
-    '',        {„gd av?}
-    False,     {bara EN i spelet}
-    Nothing,   {kurerar}
-    True,      {finnas i shoppen}
-    False,     {kunna hittas i dungeons?}
-    False,     {cursed item?}
-    1,         {min level att hittas i dngs}
-    99,        {max level att hittas i dngs}
+    0,          {”ka/minska hps}
+    0,          {”ka stamina}
+    0,          {”ka agility}
+    0,          {”ka charisma}
+    0,          {”ka dexterity}
+    0,          {”ka wisdom}
+    0,          {”ka mana}
+    5,          {”ka armor v„rde}
+    0,          {”ka attack v„rde}
+    '',         {„gd av?}
+    False,      {bara EN i spelet}
+    Nothing,    {kurerar}
+    True,       {finnas i shoppen}
+    False,      {kunna hittas i dungeons?}
+    False,      {cursed item?}
+    1,          {min level att hittas i dngs}
+    99,         {max level att hittas i dngs}
     'It is black with yellow stripes.',
     '',
-    '',        {normal beskrivning 3}
-    '',        {normal beskrivning 4}
-    '',        {normal beskrivning 5}
-    '',        {detaljerad beskrivning 1}
-    '',        {detaljerad beskrivning 2}
-    '',        {detaljerad beskrivning 3}
-    '',        {detaljerad beskrivning 4}
-    '',        {detaljerad beskrivning 5}
-    0,         {”ka strength}
-    0,         {”ka defence}
-    0);        {strength demanded to use object}
+    '',               {normal beskrivning 3}
+    '',               {normal beskrivning 4}
+    '',               {normal beskrivning 5}
+    '',               {detaljerad beskrivning 1}
+    '',               {detaljerad beskrivning 2}
+    '',               {detaljerad beskrivning 3}
+    '',               {detaljerad beskrivning 4}
+    '',               {detaljerad beskrivning 5}
+    0,                {”ka strength}
+    0,                {”ka defence}
+    0);               {strength demanded to use object}
 
   Add_Object('Crape', {name}
-    Face,      {typ}
-    2500,      {v„rde i gold}
-    10,        {”ka/minska hps}
-    0,         {”ka stamina}
-    0,         {”ka agility}
-    0,         {”ka charisma}
-    0,         {”ka dexterity}
-    0,         {”ka wisdom}
-    0,         {”ka mana}
-    0,         {”ka armor v„rde}
-    0,         {”ka attack v„rde}
-    '',        {„gd av?}
-    False,     {bara EN i spelet}
-    Nothing,   {kurerar}
-    True,      {finnas i shoppen}
-    True,      {kunna hittas i dungeons?}
-    False,     {cursed item?}
-    25,        {min level att hittas i dngs}
-    35,        {max level att hittas i dngs}
+    Face,             {typ}
+    2500,             {v„rde i gold}
+    10,               {”ka/minska hps}
+    0,                {”ka stamina}
+    0,                {”ka agility}
+    0,                {”ka charisma}
+    0,                {”ka dexterity}
+    0,                {”ka wisdom}
+    0,                {”ka mana}
+    0,                {”ka armor v„rde}
+    0,                {”ka attack v„rde}
+    '',               {„gd av?}
+    False,            {bara EN i spelet}
+    Nothing,          {kurerar}
+    True,             {finnas i shoppen}
+    True,             {kunna hittas i dungeons?}
+    False,            {cursed item?}
+    25,               {min level att hittas i dngs}
+    35,               {max level att hittas i dngs}
     'A Funeral must.',
     '',
     '',        {normal beskrivning 3}

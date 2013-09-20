@@ -50,7 +50,7 @@ begin
     91,        {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    nothing, {kurerar}
+    nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -84,7 +84,7 @@ begin
     92,        {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    nothing, {kurerar}
+    nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -118,7 +118,7 @@ begin
     93,        {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -152,7 +152,7 @@ begin
     94,        {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -186,7 +186,7 @@ begin
     95,        {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -220,7 +220,7 @@ begin
     96,        {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -254,7 +254,7 @@ begin
     97,        {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -288,7 +288,7 @@ begin
     98,        {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -322,7 +322,7 @@ begin
     99,        {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -356,7 +356,7 @@ begin
     100,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -390,7 +390,7 @@ begin
     101,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -424,7 +424,7 @@ begin
     102,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -458,7 +458,7 @@ begin
     103,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -492,7 +492,7 @@ begin
     104,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -526,7 +526,7 @@ begin
     105,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -560,7 +560,7 @@ begin
     106,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -575,7 +575,7 @@ begin
     '',        {detaljerad beskrivning 2}
     '',        {detaljerad beskrivning 3}
     '',        {detaljerad beskrivning 4}
-    '',       {detaljerad beskrivning 5}
+    '',        {detaljerad beskrivning 5}
     0,         {”ka strength}
     0,         {”ka defence}
     0);        {strength demanded to use object}
@@ -594,7 +594,7 @@ begin
     107,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -628,7 +628,7 @@ begin
     108,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -662,7 +662,7 @@ begin
     109,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -696,7 +696,7 @@ begin
     110,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -730,7 +730,7 @@ begin
     111,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -764,7 +764,7 @@ begin
     112,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -798,7 +798,7 @@ begin
     113,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -832,7 +832,7 @@ begin
     114,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -866,7 +866,7 @@ begin
     115,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -900,7 +900,7 @@ begin
     116,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -934,7 +934,7 @@ begin
     117,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -968,7 +968,7 @@ begin
     118,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -1002,7 +1002,7 @@ begin
     119,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -1036,7 +1036,7 @@ begin
     120,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -1070,7 +1070,7 @@ begin
     121,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -1104,7 +1104,7 @@ begin
     122,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -1138,7 +1138,7 @@ begin
     123,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -1172,7 +1172,7 @@ begin
     124,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -1206,7 +1206,7 @@ begin
     125,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -1240,7 +1240,7 @@ begin
     126,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -1274,7 +1274,7 @@ begin
     127,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -1308,7 +1308,7 @@ begin
     128,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -1342,7 +1342,7 @@ begin
     129,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -1376,7 +1376,7 @@ begin
     130,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -1410,7 +1410,7 @@ begin
     131,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -1444,7 +1444,7 @@ begin
     132,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -1478,7 +1478,7 @@ begin
     133,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -1512,7 +1512,7 @@ begin
     134,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -1546,7 +1546,7 @@ begin
     135,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -1580,7 +1580,7 @@ begin
     136,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -1614,7 +1614,7 @@ begin
     137,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -1648,7 +1648,7 @@ begin
     138,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -1682,7 +1682,7 @@ begin
     139,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -1716,7 +1716,7 @@ begin
     140,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -1750,7 +1750,7 @@ begin
     141,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -1784,7 +1784,7 @@ begin
     142,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -1818,7 +1818,7 @@ begin
     143,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -1852,7 +1852,7 @@ begin
     144,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -1886,7 +1886,7 @@ begin
     145,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -1920,7 +1920,7 @@ begin
     146,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -1954,7 +1954,7 @@ begin
     147,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -1988,7 +1988,7 @@ begin
     148,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -2022,7 +2022,7 @@ begin
     149,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -2056,7 +2056,7 @@ begin
     150,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -2090,7 +2090,7 @@ begin
     151,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -2124,7 +2124,7 @@ begin
     152,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -2158,7 +2158,7 @@ begin
     153,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -2192,7 +2192,7 @@ begin
     154,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -2226,7 +2226,7 @@ begin
     155,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -2260,7 +2260,7 @@ begin
     156,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -2294,7 +2294,7 @@ begin
     157,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -2328,7 +2328,7 @@ begin
     158,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -2362,7 +2362,7 @@ begin
     159,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -2396,7 +2396,7 @@ begin
     160,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -2430,7 +2430,7 @@ begin
     161,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -2464,7 +2464,7 @@ begin
     162,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -2498,7 +2498,7 @@ begin
     163,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -2532,7 +2532,7 @@ begin
     164,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -2566,7 +2566,7 @@ begin
     165,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -2600,7 +2600,7 @@ begin
     166,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -2634,7 +2634,7 @@ begin
     167,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -2668,7 +2668,7 @@ begin
     168,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -2702,7 +2702,7 @@ begin
     169,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -2736,7 +2736,7 @@ begin
     170,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -2770,7 +2770,7 @@ begin
     171,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -2804,7 +2804,7 @@ begin
     172,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -2838,7 +2838,7 @@ begin
     173,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -2872,7 +2872,7 @@ begin
     174,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -2906,7 +2906,7 @@ begin
     175,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -2940,7 +2940,7 @@ begin
     176,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -2974,7 +2974,7 @@ begin
     177,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -3008,7 +3008,7 @@ begin
     178,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -3042,7 +3042,7 @@ begin
     179,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}

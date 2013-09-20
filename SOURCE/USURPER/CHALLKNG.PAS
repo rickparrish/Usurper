@@ -27,8 +27,9 @@ Copyright 2007 Jakob Dangarden
 unit ChallKng; {Challenge the King (or Queen)}
 
 interface
-{This routine can be called by a player or NPC}
-{see challeng.pas, npmaint.pas}
+
+ {This routine can be called by a player or NPC}
+ {see challeng.pas, npmaint.pas}
 uses
   Init;
 
@@ -144,7 +145,8 @@ var
       Generic_News(RoyalNews,
         True,
         ' ' + config.textcol1 + s + ' ' + ukingc + pl0.name2 + config.textcol1 + ' was dethroned after a bloody battle.',
-        config.textcol1 + ' The ' + race_display(2, challenger.race, 0) + ' ' + uplc + challenger.name2 + config.textcol1 + ' usurped the Throne.',
+        config.textcol1 + ' The ' + race_display(2, challenger.race, 0) + ' ' + uplc + challenger.name2 +
+        config.textcol1 + ' usurped the Throne.',
         '',
         '',
         '',
@@ -158,7 +160,8 @@ var
       Generic_News(RoyalNews,
         True,
         ' ' + config.textcol1 + s + ' ' + ukingc + pl0.name2 + config.textcol1 + ' was dethroned without bloodshed.',
-        config.textcol1 + ' The ' + race_display(2, challenger.race, 0) + ' ' + uplc + challenger.name2 + config.textcol1 + ' usurped the Throne.',
+        config.textcol1 + ' The ' + race_display(2, challenger.race, 0) + ' ' + uplc + challenger.name2 +
+        config.textcol1 + ' usurped the Throne.',
         '',
         '',
         '',
@@ -249,7 +252,7 @@ var monsters_killed: boolean;
   rounds: word;
 begin {CHALLENGE KING *START*}
 
-  {load king record}
+      {load king record}
   load_king(fload, king);
 
   {check that there are not more moat creatures than the system can handle}
@@ -290,7 +293,8 @@ begin {CHALLENGE KING *START*}
       crlf;
       pause;
     end;
-  end else if king.moatnr > 0 then
+  end else
+  if king.moatnr > 0 then
   begin
 
     if silent then
@@ -313,13 +317,15 @@ begin {CHALLENGE KING *START*}
         j := king.moatnr;
       end;
 
-    end else if not silent then
+    end else
+    if not silent then
     begin
       sd(config.textcolor, 'You encounter ');
       sd(15, commastr(king.moatnr) + ' ');
 
       sd(11, MoatGuard.Name);
-      if king.moatnr > 1 then sd(11, 's');
+      if king.moatnr > 1 then
+        sd(11, 's');
 
       sd(config.textcolor, ' in the moat!');
       d(12, '  FIGHT!');
@@ -329,21 +335,21 @@ begin {CHALLENGE KING *START*}
 
       for i := 1 to King.MoatNr do
       begin
-        create_monster(i,  {#}
-          MoatGuard.Name,    {name}
-          MoatGuard.hps,     {hps}
-          MoatGuard.battack, {strength}
+        create_monster(i,        {#}
+          MoatGuard.Name,        {name}
+          MoatGuard.hps,         {hps}
+          MoatGuard.battack,     {strength}
           {challenger.level} 0,  {defence}
-          'Grrrr..',      {phrase}
-          False,          {grabweap}
-          False,          {grabarm}
-          '',             {weapon-string}
-          '',             {armor-string}
-          False,          {poisoned-should be false}
-          False,          {disease -should be false}
-          MoatGuard.battack,  {punch}
-          0,              {armpow}
-          0);             {weappow}
+          'Grrrr..',             {phrase}
+          False,                 {grabweap}
+          False,                 {grabarm}
+          '',                    {weapon-string}
+          '',                    {armor-string}
+          False,                 {poisoned-should be false}
+          False,                 {disease -should be false}
+          MoatGuard.battack,     {punch}
+          0,                     {armpow}
+          0);                    {weappow}
       end; {for i:= .end.}
 
       {setting some variables before the fight}
@@ -372,7 +378,8 @@ begin {CHALLENGE KING *START*}
       j := 0;
       for i := 1 to global_maxmon do
       begin
-        if monster_active(i) then Inc(j);
+        if monster_active(i) then
+          Inc(j);
       end;
 
     end; {interactive moat-fight *end*}
@@ -398,7 +405,8 @@ begin {CHALLENGE KING *START*}
         umailheadc + s + config.textcol1,
         mkstring(length(s), underscore),
         uplc + challenger.name2 + config.textcol1 + ' swam across the Moat!',
-        uplc + challenger.name2 + config.textcol1 + ' was killed by your ' + ulcyan + MoatGuard.Name + 's' + config.textcol1 + '.',
+        uplc + challenger.name2 + config.textcol1 + ' was killed by your ' + ulcyan + MoatGuard.Name +
+        's' + config.textcol1 + '.',
         '',
         '',
         '',
@@ -413,10 +421,14 @@ begin {CHALLENGE KING *START*}
 
       {decide on news text}
       case random(4) of
-        0: s := ' Some ' + ulcyan + MoatGuard.Name + 's' + config.textcol1 + ' killed ' + uplc + challenger.name2 + config.textcol1 + '.';
-        1: s := ' Some ' + ulcyan + MoatGuard.Name + 's' + config.textcol1 + ' catched up with ' + uplc + challenger.name2 + config.textcol1 + ' and killed ' + sex[challenger.sex] + '.';
-        2: s := ' Some ' + ulcyan + MoatGuard.Name + 's' + config.textcol1 + ' had ' + uplc + challenger.name2 + config.textcol1 + ' for lunch.';
-        3: s := ' Some ' + ulcyan + MoatGuard.Name + 's' + config.textcol1 + ' trashed ' + uplc + challenger.name2 + config.textcol1 + '!';
+        0: s := ' Some ' + ulcyan + MoatGuard.Name + 's' + config.textcol1 + ' killed ' + uplc +
+            challenger.name2 + config.textcol1 + '.';
+        1: s := ' Some ' + ulcyan + MoatGuard.Name + 's' + config.textcol1 + ' catched up with ' +
+            uplc + challenger.name2 + config.textcol1 + ' and killed ' + sex[challenger.sex] + '.';
+        2: s := ' Some ' + ulcyan + MoatGuard.Name + 's' + config.textcol1 + ' had ' + uplc +
+            challenger.name2 + config.textcol1 + ' for lunch.';
+        3: s := ' Some ' + ulcyan + MoatGuard.Name + 's' + config.textcol1 + ' trashed ' + uplc +
+            challenger.name2 + config.textcol1 + '!';
       end;
 
       {news-paper}
@@ -476,8 +488,10 @@ begin {CHALLENGE KING *START*}
       Newsy(True,
         'Swimmer',
         ' ' + uplc + challenger.name2 + config.textcol1 + ' swam across the Moat.',
-        ' Some ' + ulcyan + MoatGuard.Name + 's' + config.textcol1 + ' attacked ' + uplc + challenger.name2 + config.textcol1 + '!',
-        ' ' + uplc + challenger.name2 + config.textcol1 + ' massacred the ' + ulcyan + MoatGuard.Name + 's' + config.textcol1 + '.',
+        ' Some ' + ulcyan + MoatGuard.Name + 's' + config.textcol1 + ' attacked ' + uplc +
+        challenger.name2 + config.textcol1 + '!',
+        ' ' + uplc + challenger.name2 + config.textcol1 + ' massacred the ' + ulcyan + MoatGuard.Name +
+        's' + config.textcol1 + '.',
         '',
         '',
         '',
@@ -541,7 +555,8 @@ begin {CHALLENGE KING *START*}
         for k := 1 to size do
         begin
 
-          if ok then break;
+          if ok then
+            break;
 
           load_character(pl[1]^, j, k);
 
@@ -555,7 +570,7 @@ begin {CHALLENGE KING *START*}
           end;
         end; {for k:= .end.}
 
-      end; {for j:= .end.}
+      end;   {for j:= .end.}
 
       if ok then
       begin
@@ -573,7 +588,8 @@ begin {CHALLENGE KING *START*}
             '',
             ulred + 'FAILED DUTY' + config.textcol1,
             mkstring(11, underscore),
-            'The royal guard ' + uplc + king.guard[i] + config.textcol1 + ' was ' + ulred + 'IN PRISON' + config.textcol1 + ' when the Castle was attacked!',
+            'The royal guard ' + uplc + king.guard[i] + config.textcol1 + ' was ' + ulred +
+            'IN PRISON' + config.textcol1 + ' when the Castle was attacked!',
             '',
             '',
             '',
@@ -611,7 +627,8 @@ begin {CHALLENGE KING *START*}
             '',
             '');
 
-        end else if pl[1]^.hps < 1 then
+        end else
+        if pl[1]^.hps < 1 then
         begin
           {guard is dead and therefore unable to defend the king}
 
@@ -624,7 +641,8 @@ begin {CHALLENGE KING *START*}
             '',
             ulred + 'FAILED DUTY' + config.textcol1,
             mkstring(11, underscore),
-            'The Royal Guard ' + uplc + king.guard[i] + config.textcol1 + ' was ' + ulred + 'DEAD' + config.textcol1 + ' and unable to defend' + ' the Castle!',
+            'The Royal Guard ' + uplc + king.guard[i] + config.textcol1 + ' was ' + ulred + 'DEAD' +
+            config.textcol1 + ' and unable to defend' + ' the Castle!',
             '',
             '',
             '',
@@ -662,7 +680,8 @@ begin {CHALLENGE KING *START*}
             '',
             '');
 
-        end else if is_online(king.guard[i], online_player) then
+        end else
+        if is_online(king.guard[i], online_player) then
         begin
           {guard is online and therefore unable to defend the king}
 
@@ -681,7 +700,8 @@ begin {CHALLENGE KING *START*}
             '',
             ulred + 'FAILED DUTY' + config.textcol1,
             mkstring(11, underscore),
-            uplc + king.guard[i] + config.textcol1 + ' wasn''t on ' + sex3[king.guardsex[i]] + ' post when the Castle was attacked!',
+            uplc + king.guard[i] + config.textcol1 + ' wasn''t on ' + sex3[king.guardsex[i]] +
+            ' post when the Castle was attacked!',
             '',
             '',
             '',
@@ -736,7 +756,8 @@ begin {CHALLENGE KING *START*}
             sd(global_plycol, pl[1]^.name2);
             d(config.textcolor, '!');
             pause;
-            for i := 1 to global_maxspells do player.spell[i, 2] := False;
+            for i := 1 to global_maxspells do
+              player.spell[i, 2] := False;
             to_death := False;
             repeat
               challenger_begged := player_computer(challenger, pl[1]^, False, 2);
@@ -778,7 +799,8 @@ begin {CHALLENGE KING *START*}
             {news-paper}
             newsy(True,
               'Castle Fight!',
-              ' ' + uplc + challenger.name2 + config.textcol1 + ' fought the Royal Guard ' + uplc + pl[1]^.name2 + config.textcol1 + '!',
+              ' ' + uplc + challenger.name2 + config.textcol1 + ' fought the Royal Guard ' + uplc +
+              pl[1]^.name2 + config.textcol1 + '!',
               ' ' + ulred + challenger.name2 + config.textcol1 + ' begged for mercy and was imprisoned.',
               '',
               '',
@@ -798,8 +820,10 @@ begin {CHALLENGE KING *START*}
               '',
               ulred + s + config.textcol1,
               mkstring(length(s), underscore),
-              uplc + challenger.name2 + config.textcol1 + ' engaged in combat with the Royal Guard ' + uplc + pl[1]^.name2 + config.textcol1 + '!',
-              uplc + challenger.name2 + config.textcol1 + ' begged for mercy! ' + uplc + challenger.name2 + 's' + config.textcol1 + ' life was spared.',
+              uplc + challenger.name2 + config.textcol1 + ' engaged in combat with the Royal Guard ' +
+              uplc + pl[1]^.name2 + config.textcol1 + '!',
+              uplc + challenger.name2 + config.textcol1 + ' begged for mercy! ' + uplc + challenger.name2 +
+              's' + config.textcol1 + ' life was spared.',
               uplc + challenger.name2 + config.textcol1 + ' was sent to prison. Sentence pending.',
               '',
               '',
@@ -855,7 +879,8 @@ begin {CHALLENGE KING *START*}
               {news-paper}
               newsy(True,
                 'Castle Infiltrated!',
-                ' ' + uplc + challenger.name2 + config.textcol1 + ' fought the royal guard ' + uplc + pl[1]^.name2 + config.textcol1 + '!',
+                ' ' + uplc + challenger.name2 + config.textcol1 + ' fought the royal guard ' +
+                uplc + pl[1]^.name2 + config.textcol1 + '!',
                 ' ' + ulred + pl[1]^.name2 + config.textcol1 + ' was killed!',
                 ' ' + ulred + challenger.name2 + config.textcol1 + ' died of ' + sex3[challenger.sex] + ' wounds.',
                 ' The intruder failed to infiltrate the Castle!',
@@ -926,7 +951,8 @@ begin {CHALLENGE KING *START*}
                 normal_exit;
               end;
 
-            end else if challenger.hps < 1 then
+            end else
+            if challenger.hps < 1 then
             begin
 
               {challenger died}
@@ -934,7 +960,8 @@ begin {CHALLENGE KING *START*}
               {news-paper}
               newsy(True,
                 'Infiltration Attempt!',
-                ' ' + uplc + challenger.name2 + config.textcol1 + ' fought the Royal Guard ' + uplc + pl[1]^.name2 + config.textcol1 + '!',
+                ' ' + uplc + challenger.name2 + config.textcol1 + ' fought the Royal Guard ' +
+                uplc + pl[1]^.name2 + config.textcol1 + '!',
                 ' ' + ulred + challenger.name2 + config.textcol1 + ' was defeated!',
                 ' The intruder failed to infiltrate the Castle!',
                 ' Long Live the ' + kingstring(pl0.sex) + '!',
@@ -1022,8 +1049,10 @@ begin {CHALLENGE KING *START*}
               {news-paper}
               newsy(True,
                 'Royal Guard Slain!',
-                ' ' + uplc + challenger.name2 + config.textcol1 + ' fought the Royal guard ' + uplc + pl[1]^.name2 + config.textcol1 + '!',
-                ' ' + ulred + pl[1]^.name2 + config.textcol1 + ' was ' + s + ' by ' + uplc + challenger.name2 + '!' + config.textcol1,
+                ' ' + uplc + challenger.name2 + config.textcol1 + ' fought the Royal guard ' +
+                uplc + pl[1]^.name2 + config.textcol1 + '!',
+                ' ' + ulred + pl[1]^.name2 + config.textcol1 + ' was ' + s + ' by ' + uplc +
+                challenger.name2 + '!' + config.textcol1,
                 '',
                 '',
                 '',
@@ -1210,7 +1239,8 @@ begin {CHALLENGE KING *START*}
     begin
 
       {fight}
-      for i := 1 to global_maxspells do player.spell[i, 2] := False;
+      for i := 1 to global_maxspells do
+        player.spell[i, 2] := False;
       to_death := False;
       repeat
         challenger_begged := player_computer(challenger, pl0, False, 2);
@@ -1241,7 +1271,8 @@ begin {CHALLENGE KING *START*}
       {news-paper}
       newsy(True,
         'Raise the Standard of Revolt!',
-        ' ' + uplc + challenger.name2 + config.textcol1 + ' fought ' + upcasestr(kingstring(king.sexy)) + ' ' + ukingc + pl0.name2 + config.textcol1 + '!',
+        ' ' + uplc + challenger.name2 + config.textcol1 + ' fought ' + upcasestr(kingstring(king.sexy)) +
+        ' ' + ukingc + pl0.name2 + config.textcol1 + '!',
         ' ' + ulred + challenger.name2 + config.textcol1 + ' lost the fight, begged for mercy and was sent to Prison.',
         '',
         '',
@@ -1362,7 +1393,8 @@ begin {CHALLENGE KING *START*}
           normal_exit;
         end;
 
-      end else if challenger.hps < 1 then
+      end else
+      if challenger.hps < 1 then
       begin
         {challenger died}
 

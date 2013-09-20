@@ -47,7 +47,8 @@ var
 function Set_Color(rank: byte): byte;
 begin
 
-  if rank > 16 then set_color := 14
+  if rank > 16 then
+    set_color := 14
   else set_color := 3;
 end; {set_color *end*}
 
@@ -243,11 +244,13 @@ begin
   {fetching option set in .CFG, is player allowed to kill teammates?}
   teamkill := False;
   s := cfg_String(35);
-  if upcasestr(s) = 'YES' then teamkill := True;
+  if upcasestr(s) = 'YES' then
+    teamkill := True;
 
   {fetching Training masters name from .CFG}
   master := cfg_string(17);
-  if master = '' then master := 'Liu Zei';
+  if master = '' then
+    master := 'Liu Zei';
 
   crlf;
   crlf;
@@ -273,7 +276,8 @@ begin
     {evaluate user-input}
     case cho of
       '?': begin {display menu}
-        if player.expert = True then display_menu(True, False)
+        if player.expert = True then
+          display_menu(True, False)
         else display_menu(False, False);
       end;
       'P': begin {Player Market, where players sell their stuff}
@@ -283,7 +287,8 @@ begin
         begin
           crlf;
           d(15, 'This place is not available in Usurper Classic mode.');
-        end else if (king.shop_plmarket = False) and (player.king = False) then
+        end else
+        if (king.shop_plmarket = False) and (player.king = False) then
         begin
           crlf;
           d(12, 'The Marketplace is closed! (The ' + upcasestr(kingstring(king.sexy)) + 's order!)');
@@ -300,7 +305,8 @@ begin
         begin
           crlf;
           d(15, 'This store is not available in Usurper Classic mode.');
-        end else if (king.shop_alabat = False) and (player.king = False) then
+        end else
+        if (king.shop_alabat = False) and (player.king = False) then
         begin
           crlf;
           d(12, food_master + 's store is closed! (The ' + upcasestr(kingstring(king.sexy)) + 's order!)');
@@ -323,7 +329,8 @@ begin
 
             case ch of
               '?': begin {display menu}
-                if player.expert = True then display_menu2(True, False)
+                if player.expert = True then
+                  display_menu2(True, False)
                 else display_menu2(False, False);
               end;
               'S': begin {sell}
@@ -356,7 +363,8 @@ begin
                           sd(config.textcolor, ', ');
                           sd(global_plycol, food_master);
                           d(config.textcolor, ' says.');
-                        end else if objekt^.cursed = True then
+                        end else
+                        if objekt^.cursed = True then
                         begin
                           sd(global_itemcol, objekt^.Name);
                           sd(global_talkcol, ' is cursed!');
@@ -414,7 +422,8 @@ begin
                           sd(config.textcolor, ', ');
                           sd(global_plycol, food_master);
                           d(config.textcolor, ' says.');
-                        end else if objekt^.cursed = True then
+                        end else
+                        if objekt^.cursed = True then
                         begin
                           sd(global_talkcol, 'I don''''t buy cursed items!');
                           sd(config.textcolor, ', ');
@@ -612,7 +621,8 @@ begin
                     begin
                       cc := 0;
                       crlf;
-                      if confirm('Continue ', 'Y') = False then break;
+                      if confirm('Continue ', 'Y') = False then
+                        break;
                       crlf;
                     end;
                   end;
@@ -853,7 +863,8 @@ begin
                   ch := upcase(getchar);
                   if ch = chr(13) then
                   begin
-                    if tr_def = ' ' then ch := ' ';
+                    if tr_def = ' ' then
+                      ch := ' ';
                   end;
                 until ch in ['T', 'D', 'U', 'B', 'L', 'J', 'K', 'N', 'C', 'H',
                     'P', 'I', 'S', 'R', 'A', chr(13)];
@@ -943,8 +954,10 @@ begin
                           end;
 
                           case random(4) of
-                            0: s := uplc + player.name2 + config.textcol1 + ' trained ' + sex3[player.sex] + ' combat skills!';
-                            1: s := uplc + player.name2 + config.textcol1 + ' increased ' + sex3[player.sex] + ' combat skills!';
+                            0: s := uplc + player.name2 + config.textcol1 + ' trained ' +
+                                sex3[player.sex] + ' combat skills!';
+                            1: s := uplc + player.name2 + config.textcol1 + ' increased ' +
+                                sex3[player.sex] + ' combat skills!';
                             2: s := uplc + player.name2 + config.textcol1 + ' trained some close-combat skills!';
                             3: s := uplc + player.name2 + config.textcol1 + ' trained ' + sex3[player.sex] + ' skills!';
                           end;
@@ -982,8 +995,10 @@ begin
                           d(config.textcolor, ' training sessions left.');
 
                           case random(4) of
-                            0: s := uplc + player.name2 + config.textcol1 + ' trained ' + sex3[player.sex] + ' combat skills!';
-                            1: s := uplc + player.name2 + config.textcol1 + ' has increased ' + sex3[player.sex] + ' combat skills!';
+                            0: s := uplc + player.name2 + config.textcol1 + ' trained ' +
+                                sex3[player.sex] + ' combat skills!';
+                            1: s := uplc + player.name2 + config.textcol1 + ' has increased ' +
+                                sex3[player.sex] + ' combat skills!';
                             2: s := uplc + player.name2 + config.textcol1 + ' has trained some close-combat skills!';
                             3: s := uplc + player.name2 + config.textcol1 + ' trained ' + sex3[player.sex] + ' skills!';
                           end;
@@ -1033,7 +1048,7 @@ begin
       end;
       'B': begin {Beggars Wall}
 
-        {update player doing}
+                 {update player doing}
         onliner.location := onloc_beggarswall;
         onliner.doing := location_desc(onliner.location);
 
@@ -1111,9 +1126,11 @@ begin
               end;
 
             end;
-            if abort then break;
+            if abort then
+              break;
           end; {for j:= .end.}
-          if abort then break;
+          if abort then
+            break;
         end; {for i:= .end.}
 
         if (xx = 0) and (abort = False) then
@@ -1138,7 +1155,8 @@ begin
             crlf;
             d(12, 'You have run out of dark deeds, my blood-thirsty friend!');
             pause;
-          end else if (cho = 'A') and (player.darknr > 0) then
+          end else
+          if (cho = 'A') and (player.darknr > 0) then
           begin
             crlf;
             d(config.textcolor, 'Who must die?');
@@ -1175,13 +1193,15 @@ begin
                       crlf;
                       d(12, 'You are not allowed to attack your own team-mates!');
                       abort := True;
-                    end else if Is_Player_Married(player.name2, player.id) = player0.name2 then
+                    end else
+                    if Is_Player_Married(player.name2, player.id) = player0.name2 then
                     begin
 
                       cannot_attack_husband(player, player0);
 
                       abort := True;
-                    end else if is_online(player0.name2, online_player) = True then
+                    end else
+                    if is_online(player0.name2, online_player) = True then
                     begin
                       crlf;
                       sd(global_plycol, player0.name2);
@@ -1192,7 +1212,8 @@ begin
                       {we found our target}
 
                       {add shadow player}
-                      if add_shadow(SAdd, player0, player.name2, 'attacked by ' + uplc + player.name2 + config.textcol1, 0) = False then
+                      if add_shadow(SAdd, player0, player.name2, 'attacked by ' + uplc + player.name2 +
+                        config.textcol1, 0) = False then
                       begin
                         {unable to add player0}
                         d(global_plycol, player0.name2 + ulred + ' has left this location!');
@@ -1214,11 +1235,13 @@ begin
                   end;
                 end;
 
-                if (abort) or (found) then break;
+                if (abort) or (found) then
+                  break;
 
               end; {for j:= .end.}
 
-              if (abort) or (found) then break;
+              if (abort) or (found) then
+                break;
 
             end; {for i:= .end.}
 
@@ -1259,7 +1282,8 @@ begin
                   d(config.textcolor, ' with a smile.');
 
                   d(config.textcolor, sex2[player0.sex] + ' looks expectantly at you. You draw your weapon');
-                  d(config.textcolor, 'and manage to surprise ' + sex[player0.sex] + ', with a quick stroke over ' + sex3[player0.sex] + ' head!');
+                  d(config.textcolor, 'and manage to surprise ' + sex[player0.sex] +
+                    ', with a quick stroke over ' + sex3[player0.sex] + ' head!');
 
                   sd(config.textcolor, 'You laugh loudly as ');
                   sd(global_plycol, player0.name2);
@@ -1277,11 +1301,13 @@ begin
                   sd(config.textcolor, 'You approach ');
                   sd(global_plycol, player0.name2);
                   d(config.textcolor, ' and pretend to give');
-                  d(config.textcolor, sex[player0.sex] + ' some ' + config.moneytype + '. But when ' + sex2[player0.sex] + ' reaches for ' +
+                  d(config.textcolor, sex[player0.sex] + ' some ' + config.moneytype + '. But when ' +
+                    sex2[player0.sex] + ' reaches for ' +
                     sex3[player0.sex] + ' begging cup');
 
                   d(config.textcolor, 'you charge and engage ' + sex[player0.sex] + ' in a wrestling match. You soon');
-                  d(config.textcolor, 'overcome ' + sex[player0.sex] + ' and place your strong hands around ' + sex3[player0.sex] + ' throat.');
+                  d(config.textcolor, 'overcome ' + sex[player0.sex] + ' and place your strong hands around ' +
+                    sex3[player0.sex] + ' throat.');
                   d(config.textcolor, 'A couple of minutes later and you realize that you are holding a stiff.');
                   d(config.textcolor, 'You feel happy to have gotten rid of this piece of garbage.');
                   sd(global_plycol, player0.name2 + 's');
@@ -1294,8 +1320,10 @@ begin
                   sd(config.textcolor, 'You approach ');
                   sd(global_plycol, player0.name2);
                   d(config.textcolor, ' and pretend to give');
-                  d(config.textcolor, sex[player0.sex] + ' some ' + config.moneytype + '. But when ' + sex2[player0.sex] + ' reach for ' + sex3[player0.sex] + ' begging cup');
-                  d(config.textcolor, 'you charge ' + sex[player0.sex] + ' and place ' + sex3[player0.sex] + ' head between' + ' your strong');
+                  d(config.textcolor, sex[player0.sex] + ' some ' + config.moneytype + '. But when ' +
+                    sex2[player0.sex] + ' reach for ' + sex3[player0.sex] + ' begging cup');
+                  d(config.textcolor, 'you charge ' + sex[player0.sex] + ' and place ' +
+                    sex3[player0.sex] + ' head between' + ' your strong');
                   sd(config.textcolor, 'hands. A quick bend and ');
                   sd(global_plycol, player0.name2 + 's');
                   d(config.textcolor, ' neck snaps!');
@@ -1334,17 +1362,22 @@ begin
               Dec(player.darknr);
 
               case cho of
-                'S': s := uplc + player.name2 + config.textcol1 + ' strangled the innocent ' + race_display(2, player0.race, 0) + ' ' + uplc + player0.name2 +
+                'S': s := uplc + player.name2 + config.textcol1 + ' strangled the innocent ' +
+                    race_display(2, player0.race, 0) + ' ' + uplc + player0.name2 +
                     config.textcol1 + '.';
-                'B': s := uplc + player.name2 + config.textcol1 + ' beat the ' + race_display(2, player0.race, 0) + ' ' + uplc + player0.name2 + config.textcol1 +
+                'B': s := uplc + player.name2 + config.textcol1 + ' beat the ' + race_display(2, player0.race, 0) +
+                    ' ' + uplc + player0.name2 + config.textcol1 +
                     ' to death with a club!';
-                'W': s := uplc + player.name2 + config.textcol1 + ' wringed the innocent ' + race_display(2, player0.race, 0) + ' ' + uplc + player0.name2 +
+                'W': s := uplc + player.name2 + config.textcol1 + ' wringed the innocent ' +
+                    race_display(2, player0.race, 0) + ' ' + uplc + player0.name2 +
                     's' + config.textcol1 + ' neck.';
-                'T': s := uplc + player.name2 + config.textcol1 + ' stabbed ' + uplc + player0.name2 + config.textcol1 + ', the ' + race_display(2, player0.race, 0) + '!';
+                'T': s := uplc + player.name2 + config.textcol1 + ' stabbed ' + uplc + player0.name2 +
+                    config.textcol1 + ', the ' + race_display(2, player0.race, 0) + '!';
                 'C': s := uplc + player.name2 + config.textcol1 + ' sliced ' + player0.name2 + 's throat!';
               end; {case .end.}
 
-              a := ' It all happened when ' + uplc + player0.name2 + config.textcol1 + ' was begging for ' + config.moneytype + '.';
+              a := ' It all happened when ' + uplc + player0.name2 + config.textcol1 + ' was begging for ' +
+                config.moneytype + '.';
 
               {news-paper}
               newsy(True,
@@ -1407,12 +1440,14 @@ begin
 
             end;
 
-          end else if (cho = 'G') and (player.chivnr < 1) then
+          end else
+          if (cho = 'G') and (player.chivnr < 1) then
           begin
             crlf;
             d(config.textcolor, 'You have run out of good deeds.');
             pause;
-          end else if (cho = 'G') and (player.chivnr > 0) then
+          end else
+          if (cho = 'G') and (player.chivnr > 0) then
           begin
 
             {give alms}
@@ -1457,7 +1492,8 @@ begin
                     begin
 
                       crlf;
-                      d(config.textcolor, 'You approach ' + uplc + player0.name2 + config.textcol1 + ' and hand ' + sex[player0.sex] + ' the money.');
+                      d(config.textcolor, 'You approach ' + uplc + player0.name2 + config.textcol1 +
+                        ' and hand ' + sex[player0.sex] + ' the money.');
                       crlf;
                       sd(global_plycol, player0.name2);
                       d(config.textcolor, ' bless you for your kindness and quickly');
@@ -1489,7 +1525,8 @@ begin
                         '',
                         umailheadc + 'Beggar Gift' + config.textcol1,
                         umailheadc + mkstring(11, underscore) + config.textcol1,
-                        uplc + player.name2 + config.textcol1 + ' gave you ' + commastr(xx) + ' ' + many_money(xx) + ' when you sat begging!',
+                        uplc + player.name2 + config.textcol1 + ' gave you ' + commastr(xx) +
+                        ' ' + many_money(xx) + ' when you sat begging!',
                         'You blessed ' + sex[player.sex] + '.',
                         '',
                         '',
@@ -1506,7 +1543,8 @@ begin
                       {news-paper}
                       newsy(True,
                         'Good Doer at Beggars Wall',
-                        ' ' + uplc + player.name2 + config.textcol1 + ' gave alms to ' + uplc + player0.name2 + config.textcol1 + '!',
+                        ' ' + uplc + player.name2 + config.textcol1 + ' gave alms to ' + uplc +
+                        player0.name2 + config.textcol1 + '!',
                         ' May the gods bless the good-hearted ' + uplc + player.name2 + config.textcol1 + '!',
                         '',
                         '',
@@ -1543,7 +1581,8 @@ begin
 
               end; {for j:= .end.}
 
-              if break_time then break;
+              if break_time then
+                break;
 
             end; {for i:= .end.}
 

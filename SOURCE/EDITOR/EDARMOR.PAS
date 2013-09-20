@@ -52,7 +52,8 @@ begin
   carmor.pow := pow;
 
  {$I-}Write(armfile, carmor);{$I+}
-  if IOResult <> 0 then unable_to_write(armofile);
+  if IOResult <> 0 then
+    unable_to_write(armofile);
 
   Inc(counter);   {statbaren m†ste ha exakt antal poster..}
   Statbar(Counter, totobj, global_masterx, global_mastery, 1, 2);
@@ -68,7 +69,8 @@ begin
   begin
     Assign(armfile, armofile);
   {$I-}rewrite(armfile);{$I+}
-    if IOResult <> 0 then unable_to_create(armofile);
+    if IOResult <> 0 then
+      unable_to_create(armofile);
   end;
 
   add('Skin', 0, 1);
@@ -294,7 +296,8 @@ begin
   if add_fake = False then
   begin
   {$I-}Close(armfile);{$I+}
-    if IOResult <> 0 then unable_to_close(armofile);
+    if IOResult <> 0 then
+      unable_to_close(armofile);
   end;
 
 end;

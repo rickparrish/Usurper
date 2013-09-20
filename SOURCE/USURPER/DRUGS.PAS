@@ -130,7 +130,8 @@ begin
 
   {get shop-keepers name from .cfg #180}
   owner := cfg_string(180);
-  if owner = '' then owner := 'Ordlof';
+  if owner = '' then
+    owner := 'Ordlof';
 
 
   {set drug names & prices}
@@ -189,7 +190,8 @@ begin
 
     case cho of
       '?': begin
-        if player.expert = True then display_menu(True, False)
+        if player.expert = True then
+          display_menu(True, False)
         else display_menu(False, False);
       end;
       'S': begin
@@ -201,7 +203,8 @@ begin
         sd(config.textcolor, ':');
         x := get_number(0, drugnr);
 
-        if (x < 1) or (x > drugnr) then x := 0;
+        if (x < 1) or (x > drugnr) then
+          x := 0;
 
         if x = 0 then
         begin
@@ -399,7 +402,8 @@ begin
 
                 {x:=x-random(player.addict);}
 
-                if x <= 0 then x := 50;
+                if x <= 0 then
+                  x := 50;
 
                 Inc(player.exp, x);
 
@@ -426,11 +430,13 @@ begin
                 if player.race = Gnome then
                 begin
                   x := x - 2;
-                  if x <= 0 then x := 0;
+                  if x <= 0 then
+                    x := 0;
                 end;
 
                 player.addict := player.addict + x;
-                if player.addict > 100 then player.addict := 100;
+                if player.addict > 100 then
+                  player.addict := 100;
 
                 pause;
                 case random(5) of
@@ -495,6 +501,6 @@ begin
     dispose(comment[i]);
   end; {for i:= .end.}
 
-end; {Drug_store *end*}
+end;   {Drug_store *end*}
 
-end. {Unit Drugs .end.}
+end.   {Unit Drugs .end.}

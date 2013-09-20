@@ -33,7 +33,7 @@ uses
 
 const global_supreme_creator = 'Manwe'; {the boss God}
 
-type {see vargods.pas => become_god}
+type   {see vargods.pas => become_god}
   GodRec = record {God record}
     realname:  s30;  {real (user/bbs) name}
     Name:      s30;      {alias}

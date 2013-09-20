@@ -153,7 +153,8 @@ begin
   WriteLn(' - Trying to determine your installed version...');
 
   Result := GetVersionDatVersion;
-  if (Result = VERSION_UNKNOWN) then Result := GuessVersionByData;
+  if (Result = VERSION_UNKNOWN) then
+    Result := GuessVersionByData;
   WriteLn;
 
   GetOldVersion := Result;
@@ -226,31 +227,40 @@ begin
     if (NpcsDatSize = 37800) then
     begin
       Result := VERSION_001_OR_001e;
-    end else if (NpcsDatSize = 49770) then
+    end else
+    if (NpcsDatSize = 49770) then
     begin
       Result := VERSION_001f;
-    end else if (NpcsDatSize = 173880) then
+    end else
+    if (NpcsDatSize = 173880) then
     begin
       Result := VERSION_002_OR_004c_OR_005b;
-    end else if (NpcsDatSize = 89320) then
+    end else
+    if (NpcsDatSize = 89320) then
     begin
       Result := VERSION_008;
-    end else if (NpcsDatSize = 90370) then
+    end else
+    if (NpcsDatSize = 90370) then
     begin
       Result := VERSION_013c;
-    end else if (NpcsDatSize = 91420) then
+    end else
+    if (NpcsDatSize = 91420) then
     begin
       Result := VERSION_014_OR_016;
-    end else if (NpcsDatSize = 91910) then
+    end else
+    if (NpcsDatSize = 91910) then
     begin
       Result := VERSION_017;
-    end else if (NpcsDatSize = 100270) then
+    end else
+    if (NpcsDatSize = 100270) then
     begin
       Result := VERSION_018_OR_019b6;
-    end else if (NpcsDatSize = 100418) then
+    end else
+    if (NpcsDatSize = 100418) then
     begin
       Result := VERSION_020d;
-    end else if (NpcsDatSize = 100566) then
+    end else
+    if (NpcsDatSize = 100566) then
     begin
       if (MonsterDatSize = 237237) then
       begin
@@ -261,11 +271,13 @@ begin
         begin
           Result := VERSION_020e_OR_022_OR_023_OR_023a_OR_023b;
         end;
-      end else if (MonsterDatSize = 239239) then
+      end else
+      if (MonsterDatSize = 239239) then
       begin
         Result := VERSION_023c_OR_023d_OR_023e_OR_023f;
       end;
-    end else if (NpcsDatSize = 113590) then
+    end else
+    if (NpcsDatSize = 113590) then
     begin
       Result := VERSION_021W32_OR_021aW32;
     end else
@@ -328,8 +340,10 @@ begin
   if (OldVersion = VERSION_020e_OR_022_OR_023_OR_023a_OR_023b) or (OldVersion = VERSION_021DOS_OR_021aDOS) then
   begin
     Result := PerformUpgradeTo023c;
-    if (Result) then Result := PerformUpgradeTo023d;
-  end else if (OldVersion = VERSION_023c_OR_023d_OR_023e_OR_023f) then
+    if (Result) then
+      Result := PerformUpgradeTo023d;
+  end else
+  if (OldVersion = VERSION_023c_OR_023d_OR_023e_OR_023f) then
   begin
     Result := PerformUpgradeTo023d;
   end else
@@ -339,7 +353,8 @@ begin
   end;
 
   { If we succeeded above, update the VERSION.DAT file }
-  if (Result) then Result := UpdateVersionDat;
+  if (Result) then
+    Result := UpdateVersionDat;
 
   PerformUpgrade := Result;
 end;
@@ -491,7 +506,8 @@ begin
   if (OldVersion = VERSION_ERROR) then
   begin
     { Ignore, error message would have been presented to user earlier }
-  end else if (OldVersion = VERSION_UNKNOWN) then
+  end else
+  if (OldVersion = VERSION_UNKNOWN) then
   begin
     WriteLn('Unable to determine which version of Usurper you have installed!');
     WriteLn(' - If you will be resetting the game, then you can safely ignore this message');
@@ -499,7 +515,8 @@ begin
     WriteLn;
     WriteLn('Hit any key to continue');
     ReadKey;
-  end else if (NewVersion <> OldVersion) then
+  end else
+  if (NewVersion <> OldVersion) then
   begin
     WriteLn('It looks like your copy of Usurper needs to be upgraded!');
     WriteLn;
@@ -544,7 +561,8 @@ begin
         WriteLn('Hit any key to continue');
         ReadKey;
       end;
-    end else if (Ch = 'N') then
+    end else
+    if (Ch = 'N') then
     begin
       WriteLn('OK, I won''t upgrade your game now.  Please either reset the game, or be');
       WriteLn('careful with this program as some of the editors may expect data files with');
@@ -554,23 +572,8 @@ begin
       WriteLn;
       WriteLn('Hit any key to continue');
       ReadKey;
-    end else if (Ch = 'A') then
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    end else
+    if (Ch = 'A') then
     begin
       Halt;
     end;

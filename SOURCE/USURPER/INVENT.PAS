@@ -25,6 +25,7 @@ Copyright 2007 Jakob Dangarden
 
 
 unit Invent;
+
 {Usurper - Player Inventory Routines}
              {also see npc_chec.pas, comp_use.pas and swapeq.pas for NPC
               inventory routines}
@@ -116,7 +117,7 @@ begin {returns true if player0's inventory is empty}
     end;
   end; {for i:= .end.}
 
-  {return result}
+       {return result}
   Is_Inventory_Empty := Result;
 
 end; {Is_Inventory_Empty .end.}
@@ -140,7 +141,7 @@ begin
     end;
   end; {for i:= .end.}
 
-  {return result}
+       {return result}
   inventory_empty := Result;
 
 end; {inventory_empty *end*}
@@ -266,12 +267,14 @@ begin
     if s = '?' then
     begin
       inventory_display(player0);
-    end else if s <> '' then
+    end else
+    if s <> '' then
     begin
 
       i := str_to_nr(s);
 
-      if (i < 1) or (i > global_maxitem) then i := 0;
+      if (i < 1) or (i > global_maxitem) then
+        i := 0;
 
       if (i > 0) and (player0.item[i] > 0) then
       begin
@@ -302,7 +305,7 @@ begin
     end;
   end; {for i:= .end.}
 
-  {return result}
+       {return result}
   item_search := Result;
 
 end; {item_search *end*}
@@ -546,19 +549,22 @@ begin
 
       if player.head > 0 then
       begin
-        if yy = i then load_objekt(objekt^, head, player.head);
+        if yy = i then
+          load_objekt(objekt^, head, player.head);
         Inc(yy);
       end;
 
       if player.face > 0 then
       begin
-        if yy = i then load_objekt(objekt^, face, player.face);
+        if yy = i then
+          load_objekt(objekt^, face, player.face);
         Inc(yy);
       end;
       neck1 := True;
       if player.neck > 0 then
       begin
-        if yy = i then load_objekt(objekt^, neck, player.neck);
+        if yy = i then
+          load_objekt(objekt^, neck, player.neck);
         Inc(yy);
       end;
 
@@ -574,20 +580,23 @@ begin
 
       if player.body > 0 then
       begin
-        if yy = i then load_objekt(objekt^, body, player.body);
+        if yy = i then
+          load_objekt(objekt^, body, player.body);
         Inc(yy);
       end;
 
       if player.arms > 0 then
       begin
-        if yy = i then load_objekt(objekt^, arms, player.arms);
+        if yy = i then
+          load_objekt(objekt^, arms, player.arms);
         Inc(yy);
       end;
 
       rightfinger := True;
       if player.rfinger > 0 then
       begin
-        if yy = i then load_objekt(objekt^, fingers, player.rfinger);
+        if yy = i then
+          load_objekt(objekt^, fingers, player.rfinger);
         Inc(yy);
       end;
 
@@ -603,37 +612,43 @@ begin
 
       if player.waist > 0 then
       begin
-        if yy = i then load_objekt(objekt^, waist, player.waist);
+        if yy = i then
+          load_objekt(objekt^, waist, player.waist);
         Inc(yy);
       end;
 
       if player.legs > 0 then
       begin
-        if yy = i then load_objekt(objekt^, legs, player.legs);
+        if yy = i then
+          load_objekt(objekt^, legs, player.legs);
         Inc(yy);
       end;
 
       if player.feet > 0 then
       begin
-        if yy = i then load_objekt(objekt^, feet, player.feet);
+        if yy = i then
+          load_objekt(objekt^, feet, player.feet);
         Inc(yy);
       end;
 
       if player.abody > 0 then
       begin
-        if yy = i then load_objekt(objekt^, abody, player.abody);
+        if yy = i then
+          load_objekt(objekt^, abody, player.abody);
         Inc(yy);
       end;
 
       if player.shield > 0 then
       begin
-        if yy = i then load_objekt(objekt^, shield, player.shield);
+        if yy = i then
+          load_objekt(objekt^, shield, player.shield);
         Inc(yy);
       end;
 
       if player.hands > 0 then
       begin
-        if yy = i then load_objekt(objekt^, hands, player.hands);
+        if yy = i then
+          load_objekt(objekt^, hands, player.hands);
         Inc(yy);
       end;
 
@@ -932,17 +947,20 @@ begin
       begin
         d(12, 'Impossible! This item is class restricted!');
         pause;
-      end else if objekt^.str_need > player.strength then
+      end else
+      if objekt^.str_need > player.strength then
       begin
         d(12, 'Impossible! It''s too heavy!');
         pause;
-      end else if (objekt^.good = True) and (player.chiv < 1) and (player.dark > 0) then
+      end else
+      if (objekt^.good = True) and (player.chiv < 1) and (player.dark > 0) then
       begin
         d(12, 'You are zapped by the ' + uitemc + objekt^.Name + ulred + '!');
         d(12, 'You can''t use this item!');
         d(config.textcolor, 'It can only be used by Good characters.');
         pause;
-      end else if (objekt^.evil = True) and (player.chiv > 0) and (player.dark < 1) then
+      end else
+      if (objekt^.evil = True) and (player.chiv > 0) and (player.dark < 1) then
       begin
         d(12, 'You are zapped by the ' + uitemc + objekt^.Name + ulred + '!');
         d(12, 'You can''t use this item!');
@@ -1018,7 +1036,8 @@ begin
               begin
                 menu2('[R]ight or');
                 menu2(' [L]eft hand ? :');
-              end else if player.rhand = 0 then
+              end else
+              if player.rhand = 0 then
               begin
                 menu2('[R]ight or');
                 menu2(' Left hand ? :');
@@ -1055,11 +1074,12 @@ begin
               player.rhand := player.item[i];
               player.item[i] := 0;
               objekt_affect(1, player.rhand, weapon, player, True);
-            end else if (ch = 'R') and (player.rhand > 0) then
+            end else
+            if (ch = 'R') and (player.rhand > 0) then
             begin
               d(config.textcolor, 'Your right hand is occupied!');
-            end
-            else if (ch = 'L') and (player.lhand = 0) then
+            end else
+            if (ch = 'L') and (player.lhand = 0) then
             begin
               sd(config.textcolor, 'You grab the ');
               sd(global_itemcol, objekt^.Name);
@@ -1067,7 +1087,8 @@ begin
               player.lhand := player.item[i];
               player.item[i] := 0;
               objekt_affect(1, player.lhand, weapon, player, True);
-            end else if (ch = 'L') and (player.lhand > 0) then
+            end else
+            if (ch = 'L') and (player.lhand > 0) then
             begin
               d(config.textcolor, 'Your left hand is occupied!');
             end;
@@ -1240,7 +1261,8 @@ begin
                 menu2('[R]ight or');
                 menu2(' [L]eft finger ? :');
               end;
-            end else if config.allowitem[5] = True then
+            end else
+            if config.allowitem[5] = True then
             begin
               if (config.allowitem[6] = False) or ((player.rfinger <> 0) and (player.lfinger = 0)) then
               begin
@@ -1259,15 +1281,18 @@ begin
             if force_right then
             begin
               ch := 'R';
-            end else if force_left then
+            end else
+            if force_left then
             begin
               ch := 'L';
             end else
             begin
               repeat
                 ch := upcase(getchar);
-                if (ch = 'R') and (config.allowitem[6] = False) then ch := ' ';
-                if (ch = 'L') and (config.allowitem[5] = False) then ch := ' ';
+                if (ch = 'R') and (config.allowitem[6] = False) then
+                  ch := ' ';
+                if (ch = 'L') and (config.allowitem[5] = False) then
+                  ch := ' ';
               until ch in ['R', 'L', ReturnKey];
             end;
 
@@ -1302,7 +1327,8 @@ begin
                 player.rfinger := y;
                 objekt_affect(1, player.rfinger, fingers, player, True);
               end;
-            end else if (ch = 'L') and (player.lfinger > 0) then
+            end else
+            if (ch = 'L') and (player.lfinger > 0) then
             begin
               load_objekt(objekt2^, fingers, player.lfinger);
 
@@ -1323,7 +1349,8 @@ begin
                 player.lfinger := y;
                 objekt_affect(1, player.lfinger, fingers, player, True);
               end;
-            end else if (ch = 'R') and (player.rfinger = 0) then
+            end else
+            if (ch = 'R') and (player.rfinger = 0) then
             begin
               sd(config.textcolor, 'You put the ');
               sd(global_itemcol, objekt^.Name);
@@ -1331,7 +1358,8 @@ begin
               player.rfinger := player.item[i];
               player.item[i] := 0;
               objekt_affect(1, player.rfinger, fingers, player, True);
-            end else if (ch = 'L') and (player.lfinger = 0) then
+            end else
+            if (ch = 'L') and (player.lfinger = 0) then
             begin
               sd(config.textcolor, 'You put the ');
               sd(global_itemcol, objekt^.Name);
@@ -1473,7 +1501,8 @@ begin
                 player.neck := player.item[i];
                 player.item[i] := 0;
                 objekt_affect(1, player.neck, neck, player, True);
-              end else if (player.neck2 = 0) and (config.allowitem[11] = True) then
+              end else
+              if (player.neck2 = 0) and (config.allowitem[11] = True) then
               begin
                 sd(config.textcolor, 'You start to wear ');
                 sd(global_itemcol, objekt^.Name);
@@ -1481,7 +1510,8 @@ begin
                 player.neck2 := player.item[i];
                 player.item[i] := 0;
                 objekt_affect(1, player.neck2, neck, player, True);
-              end else if (player.neck > 0) and (config.allowitem[10] = True) then
+              end else
+              if (player.neck > 0) and (config.allowitem[10] = True) then
               begin
                 load_objekt(objekt2^, neck, player.neck);
 
@@ -1503,7 +1533,8 @@ begin
                   objekt_affect(1, player.neck, neck, player, True);
                 end;
 
-              end else if (player.neck2 > 0) and (config.allowitem[11] = True) then
+              end else
+              if (player.neck2 > 0) and (config.allowitem[11] = True) then
               begin
                 load_objekt(objekt2^, neck, player.neck2);
 
@@ -1642,7 +1673,7 @@ begin
 end; {Use_Item *end*}
 
 procedure Objekt_Affect;
-const txtcol = 13;   {these two must refer to the same color}
+const txtcol = 13;    {these two must refer to the same color}
   txtcol2    = ulmag; {see above}
 var
   obj: orec;
@@ -1690,8 +1721,10 @@ var
 
       if Value < 0 then
       begin
-        d(txtcol, who + ' ' + txtval + ' ' + uyellow + 'increase' + txtcol2 + ' by ' + uwhite + '+' + commastr(abs(Value)) + txtcol2 + '!');
-      end else if Value > 0 then
+        d(txtcol, who + ' ' + txtval + ' ' + uyellow + 'increase' + txtcol2 + ' by ' + uwhite +
+          '+' + commastr(abs(Value)) + txtcol2 + '!');
+      end else
+      if Value > 0 then
       begin
         d(txtcol, who + ' ' + txtval + ' ' + ulred + 'decrease' + txtcol2 + ' by ' + ulred + commastr(Value) + txtcol2 + '!');
       end;
@@ -1717,22 +1750,25 @@ var
 
       if Value > 0 then
       begin
-        d(txtcol, who + ' ' + txtval + ' ' + uyellow + 'increase' + txtcol2 + ' by ' + uwhite + '+' + commastr(Value) + txtcol2 + '!');
-      end else if Value < 0 then
+        d(txtcol, who + ' ' + txtval + ' ' + uyellow + 'increase' + txtcol2 + ' by ' + uwhite +
+          '+' + commastr(Value) + txtcol2 + '!');
+      end else
+      if Value < 0 then
       begin
-        d(txtcol, who + ' ' + txtval + ' ' + ulred + 'decrease' + txtcol2 + ' by ' + ulred + commastr(abs(Value)) + txtcol2 + '!');
+        d(txtcol, who + ' ' + txtval + ' ' + ulred + 'decrease' + txtcol2 + ' by ' + ulred +
+          commastr(abs(Value)) + txtcol2 + '!');
       end;
 
     end;
 
   end; {report_changes *end*}
 
-begin {objekt_affect, start}
+begin  {objekt_affect, start}
 
-  { => ** Don't forget to change corresponding OBJ AFFECT now! ** <= }
-  {in the editor routines...}
+       { => ** Don't forget to change corresponding OBJ AFFECT now! ** <= }
+       {in the editor routines...}
 
-  {load object in question}
+       {load object in question}
   load_objekt(obj, otyp, nr);
 
   case use of
@@ -1795,39 +1831,49 @@ begin {objekt_affect, start}
 
       case obj.cure of
         All: begin
-          if player0.blind = True then cured(blindness);
+          if player0.blind = True then
+            cured(blindness);
           player0.blind := False;
 
-          if player0.plague = True then cured(plague);
+          if player0.plague = True then
+            cured(plague);
           player0.plague := False;
 
-          if player0.smallpox = True then cured(smallpox);
+          if player0.smallpox = True then
+            cured(smallpox);
           player0.smallpox := False;
 
-          if player0.measles = True then cured(measles);
+          if player0.measles = True then
+            cured(measles);
           player0.measles := False;
 
-          if player0.leprosy = True then cured(leprosy);
+          if player0.leprosy = True then
+            cured(leprosy);
           player0.leprosy := False;
         end;
         Blindness: begin
-          if player0.blind = True then cured(blindness);
+          if player0.blind = True then
+            cured(blindness);
           player0.blind := False;
         end;
         Plague: begin
-          if player0.plague = True then cured(plague);
+          if player0.plague = True then
+            cured(plague);
           player0.plague := False;
         end;
         Smallpox: begin
-          if player0.smallpox = True then cured(smallpox);
+          if player0.smallpox = True then
+            cured(smallpox);
           player0.smallpox := False;
         end;
         Measles: begin
-          if player0.measles = True then cured(measles);
+          if player0.measles = True then
+            cured(measles);
           player0.measles := False;
         end;
         Leprosy: begin
-          if player0.leprosy = True then cured(leprosy);
+          if player0.leprosy = True then
+            cured(leprosy);
           player0.leprosy := False;
         end;
 
@@ -1836,7 +1882,7 @@ begin {objekt_affect, start}
     end;
     2: begin { Item has STOPPED being used by player0 }
 
-      {Hitpoints}
+             {Hitpoints}
       stopped_using('maximum hitpoints', obj.hps);
       player0.maxhps := player0.maxhps - obj.hps;
 
@@ -1889,7 +1935,7 @@ begin {objekt_affect, start}
 
   end; {case .end.}
 
-end; {objekt_affekt *end*}
+end;   {objekt_affekt *end*}
 
 procedure Check_Valid_Equipment;
 var
@@ -2036,21 +2082,33 @@ begin
   a := True;
 
   case typ of
-    Hands: if config.allowitem[1] = False then a := False;
-    Head: if config.allowitem[2] = False then a := False;
-    Body: if config.allowitem[3] = False then a := False;
-    Arms: if config.allowitem[4] = False then a := False;
-    Fingers: if (config.allowitem[5] = False) and (config.allowitem[6] = False) then a := False;
-    Legs: if config.allowitem[7] = False then a := False;
-    Feet: if config.allowitem[8] = False then a := False;
-    Waist: if config.allowitem[9] = False then a := False;
-    Neck: if (config.allowitem[10] = False) and (config.allowitem[11] = False) then a := False;
-    Face: if config.allowitem[12] = False then a := False;
-    Shield: if config.allowitem[13] = False then a := False;
-    Abody: if config.allowitem[14] = False then a := False;
+    Hands: if config.allowitem[1] = False then
+        a := False;
+    Head: if config.allowitem[2] = False then
+        a := False;
+    Body: if config.allowitem[3] = False then
+        a := False;
+    Arms: if config.allowitem[4] = False then
+        a := False;
+    Fingers: if (config.allowitem[5] = False) and (config.allowitem[6] = False) then
+        a := False;
+    Legs: if config.allowitem[7] = False then
+        a := False;
+    Feet: if config.allowitem[8] = False then
+        a := False;
+    Waist: if config.allowitem[9] = False then
+        a := False;
+    Neck: if (config.allowitem[10] = False) and (config.allowitem[11] = False) then
+        a := False;
+    Face: if config.allowitem[12] = False then
+        a := False;
+    Shield: if config.allowitem[13] = False then
+        a := False;
+    Abody: if config.allowitem[14] = False then
+        a := False;
   end; {case .end.}
 
-  {return result}
+       {return result}
   allowed_to_use := a;
 
 end; {Allowed_To_Use *end*}
@@ -2078,18 +2136,20 @@ begin
     Face,
     Shield,
     Abody: begin
-      if item.armor > 0 then sign := '+'
+      if item.armor > 0 then
+        sign := '+'
       else sign := '';
       Result := config.textcol1 + '(' + uwhite + sign + commastr(item.armor) + config.textcol1 + ')';
     end;
     Weapon: begin
-      if item.attack > 0 then sign := '+'
+      if item.attack > 0 then
+        sign := '+'
       else sign := '';
       Result := config.textcol1 + '(' + uwhite + sign + commastr(item.attack) + config.textcol1 + ')';
     end;
   end; {case .end.}
 
-  {return result}
+       {return result}
   item_power_display := Result;
 
 end; {item_power_display *end*}
@@ -2144,7 +2204,7 @@ var
 
 begin {called from Home.pas}
 
-  {init pointer variables}
+      {init pointer variables}
   new(objekt);
 
   clearscreen;
@@ -2164,7 +2224,8 @@ begin {called from Home.pas}
     begin
       crlf;
       settings_header('Chest Room');
-      d(config.textcolor, 'You examine the oak ' + ulcyan + 'Chest' + config.textcol1 + ' which holds your precious belongings.');
+      d(config.textcolor, 'You examine the oak ' + ulcyan + 'Chest' + config.textcol1 +
+        ' which holds your precious belongings.');
       d(config.textcolor, 'Now, what to do?');
       crlf;
       menu('(L)ist content');
@@ -2247,7 +2308,8 @@ begin {called from Home.pas}
                 if confirm('Get the ' + uitemc + objekt^.Name + config.textcol1, 'N') = True then
                 begin
                   d(15, 'Ok.');
-                  d(config.textcolor, 'You take the ' + uitemc + objekt^.Name + config.textcol1 + ' and put it in Your inventory.');
+                  d(config.textcolor, 'You take the ' + uitemc + objekt^.Name + config.textcol1 +
+                    ' and put it in Your inventory.');
 
                   {add item to inventory}
                   player.item[check] := ChestItem.pekare;
@@ -2264,7 +2326,9 @@ begin {called from Home.pas}
                   {news-paper}
                   newsy(True,
                     'Home Storage',
-                    ' ' + uplc + player.name2 + config.textcol1 + ' removed a ' + uitemc + objekt^.Name + config.textcol1 + ' from ' + sex3[player.sex] + ' impressive oak ' + ulcyan + 'Chest' + config.textcol1 + '.',
+                    ' ' + uplc + player.name2 + config.textcol1 + ' removed a ' + uitemc +
+                      objekt^.Name + config.textcol1 + ' from ' + sex3[player.sex] +
+                      ' impressive oak ' + ulcyan + 'Chest' + config.textcol1 + '.',
                     '',
                     '',
                     '',
@@ -2282,7 +2346,7 @@ begin {called from Home.pas}
 
         end;
 
-      end; {get item .end.}
+      end;       {get item .end.}
 
       'A': begin {add item}
 
@@ -2396,7 +2460,9 @@ begin {called from Home.pas}
                       {news-paper}
                       newsy(True,
                         'Home Storage',
-                        ' ' + uplc + player.name2 + config.textcol1 + ' put a ' + uitemc + objekt^.Name + config.textcol1 + ' into ' + sex3[player.sex] + ' massive oak ' + ulcyan + 'Chest' + config.textcol1 + '.',
+                        ' ' + uplc + player.name2 + config.textcol1 + ' put a ' + uitemc +
+                          objekt^.Name + config.textcol1 + ' into ' + sex3[player.sex] + ' massive oak ' + ulcyan +
+                          'Chest' + config.textcol1 + '.',
                         '',
                         '',
                         '',
@@ -2475,7 +2541,7 @@ begin {called from Home.pas}
 
         end; {for i .end.}
 
-        {did we found any items}
+             {did we found any items}
         if counter = 0 then
         begin
           d(12, 'Bah! its empty.');

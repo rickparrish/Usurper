@@ -56,7 +56,8 @@ begin;
     dx := dport_num;
   end;
   intr($14, regs);
-  if regs.ah = $FF then digi_init_driver := False
+  if regs.ah = $FF then
+    digi_init_driver := False
   else
     digi_init_driver := True;
   { Checks for extended Bios }
@@ -66,7 +67,8 @@ begin;
            MOV     DX,dport_num
            INT     $14
   end;
-  if regs.ax = $000 then EbiosOk := True
+  if regs.ax = $000 then
+    EbiosOk := True
   else
     EbiosOk := False;
 
@@ -77,10 +79,12 @@ begin;
     dx := dport_num;
   end;
   intr($14, regs);
-  if (regs.bl and DTRmask) <> $00 then DTRok := True
+  if (regs.bl and DTRmask) <> $00 then
+    DTRok := True
   else
     DTRok := False;
-  if (regs.bl and RTSmask) <> $00 then RTSok := True
+  if (regs.bl and RTSmask) <> $00 then
+    RTSok := True
   else
     RTSok := False;
 
@@ -112,7 +116,8 @@ begin;
     dx := dport_num;
   end;
   intr($14, regs);
-  if (regs.ah and $01) <> $00 then   { data ready bit               } digi_buffer_check := True        { checks if byte ready to send }
+  if (regs.ah and $01) <> $00 then
+    { data ready bit               } digi_buffer_check := True        { checks if byte ready to send }
   else
     digi_buffer_check := False;
 end;
@@ -139,7 +144,8 @@ begin;
   end;
   intr($14, regs);
   { bit 5 set on = buffer space avail }
-  if (regs.ah and $20) <> $00 then OutReady := True
+  if (regs.ah and $20) <> $00 then
+    OutReady := True
   else
     OutReady := False;
 end;
@@ -196,10 +202,12 @@ begin;
     dx := dport_num;
   end;
   intr($14, regs);
-  if (regs.al and $80) <> $00 then      { carrier present bit } digi_carrier_present := True
+  if (regs.al and $80) <> $00 then
+    { carrier present bit } digi_carrier_present := True
   else
     digi_carrier_present := False;
-  if (regs.ah and $20) <> $00 then      { bit 5 set on = buffer space avail } OutReady := True                    { thus can check if out buffer ready}
+  if (regs.ah and $20) <> $00 then
+    { bit 5 set on = buffer space avail } OutReady := True                    { thus can check if out buffer ready}
   else
     OutReady := False;
 end;
@@ -221,8 +229,11 @@ begin
   b := $00;
   w := n;
 
-  if n > 76800 then   { 115200 } b := $0C
-  else if n > 57600 then   {  76800 } b := $0B
+  if n > 76800 then
+    { 115200 } b := $0C
+  else
+  if n > 57600 then
+    {  76800 } b := $0B
   else
     case w of
       300: b := $02;
@@ -249,8 +260,10 @@ begin
     dx := dport_num;
     ah := $05;
     al := $01;
-    if dtrok then bl := bl or dtrmask;
-    if rtsok then bl := bl or rtsmask;
+    if dtrok then
+      bl := bl or dtrmask;
+    if rtsok then
+      bl := bl or rtsmask;
   end;
   intr($14, regs);
 end;
@@ -264,9 +277,9 @@ end;
 
 {$ENDIF}
 
-{ This is included for completeness only }
-{ Most sysops don't want a door to reinitiallize their board }
-{ so this is by passed.                                      }
+ { This is included for completeness only }
+ { Most sysops don't want a door to reinitiallize their board }
+ { so this is by passed.                                      }
 {$IFDEF MSDOS}
 function digi_set_baud;      { new form digiboard init }
 var
@@ -296,7 +309,8 @@ begin;
     cl := ExtBaud(n);      { set baud rate }
   end;
   intr($14, regs);
-  if regs.ah = $FF then digi_set_baud := False
+  if regs.ah = $FF then
+    digi_set_baud := False
   else
   begin
     digi_set_baud := True;
@@ -392,7 +406,8 @@ begin;
   intr($14, regs);
   nameptr := ptr(regs.es, regs.bx);
   i := 1;
-  while (i < 8) and (nameptr^[i] <> #0) do Inc(i);
+  while (i < 8) and (nameptr^[i] <> #0) do
+    Inc(i);
   move(nameptr^, d[1], i);
   d[0] := char(i);
 
@@ -422,7 +437,9 @@ begin;
     dx := dport_num;
   end;
   intr($14, regs);
-  if regs.ah <> $ff then if regs.al in [$01..$05] then s := dname[regs.al]
+  if regs.ah <> $ff then
+    if regs.al in [$01..$05] then
+      s := dname[regs.al]
     else str(regs.al, s);
   drivername := d + s + o;
 

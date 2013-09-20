@@ -30,25 +30,25 @@ uses
   Init;
 
 procedure Add_Object(const Name: s70;    {objektets namn}
-  ttype: objtype;   {typ av objekt}
-  Value: longint;  {v„rdet p† objektet}
-  hps: integer;   {ska objekt ”ka/minska hps}
-  stamina: integer; {ska objekt ”ka stamina}
-  agility: integer; {ska objekt ”ka agility}
-  charisma: integer; {ska objekt ”ka charisma}
-  dexterity: integer;{ska objekt ”ka dexterity}
-  wisdom: integer;   {ska objekt ”ka wisdom}
-  mana: integer;   {ska objektet ”ka manan}
-  armor: integer;  {ska objekt ”ka armor v„rdet}
-  attack: integer; {ska objekt ”ka attack v„rdet}
-  const owned: s70;  {„gd av}
-  onlyone: boolean; {bara ett s†dant objekt i hela spelet}
-  cure: cures;   {kurerar den n†got}
-  shop: boolean; {finnas i shoppen}
-  dng: boolean; {kunna hittas i dungeons?}
-  cursed: boolean; {cursed?}
-  minlev: integer; {min level att hittas i dngs}
-  maxlev: integer; {max level att hittas i dngs}
+  ttype: objtype;     {typ av objekt}
+  Value: longint;     {v„rdet p† objektet}
+  hps: integer;       {ska objekt ”ka/minska hps}
+  stamina: integer;   {ska objekt ”ka stamina}
+  agility: integer;   {ska objekt ”ka agility}
+  charisma: integer;  {ska objekt ”ka charisma}
+  dexterity: integer; {ska objekt ”ka dexterity}
+  wisdom: integer;    {ska objekt ”ka wisdom}
+  mana: integer;      {ska objektet ”ka manan}
+  armor: integer;     {ska objekt ”ka armor v„rdet}
+  attack: integer;    {ska objekt ”ka attack v„rdet}
+  const owned: s70;   {„gd av}
+  onlyone: boolean;   {bara ett s†dant objekt i hela spelet}
+  cure: cures;        {kurerar den n†got}
+  shop: boolean;      {finnas i shoppen}
+  dng: boolean;       {kunna hittas i dungeons?}
+  cursed: boolean;    {cursed?}
+  minlev: integer;    {min level att hittas i dngs}
+  maxlev: integer;    {max level att hittas i dngs}
   const desc1: s70;   {normal beskrivning}
   const desc2: s70;   {normal beskrivning}
   const desc3: s70;   {normal beskrivning}
@@ -59,8 +59,8 @@ procedure Add_Object(const Name: s70;    {objektets namn}
   const desc8: s70;   {detaljerad beskrivning}
   const desc9: s70;   {detaljerad beskrivning}
   const desc10: s70;  {detaljerad beskrivning}
-  strength: integer; {strength ”kning}
-  defence: integer; {defence ”kning}
+  strength: integer;  {strength ”kning}
+  defence: integer;   {defence ”kning}
   strength_need: integer); {hur mycket strength beh”vs f”r att anv„nda objektet}
 
 implementation
@@ -135,11 +135,14 @@ begin
   objekt.desc2[4] := desc9;
   objekt.desc2[5] := desc10;
 
-  if objekt.owned = '' then objekt.owned := emptystr;
+  if objekt.owned = '' then
+    objekt.owned := emptystr;
   for i := 1 to 5 do
   begin
-    if objekt.desc1[i] = '' then objekt.desc1[i] := emptystr;
-    if objekt.desc2[i] = '' then objekt.desc2[i] := emptystr;
+    if objekt.desc1[i] = '' then
+      objekt.desc1[i] := emptystr;
+    if objekt.desc2[i] = '' then
+      objekt.desc2[i] := emptystr;
   end;
 
   objekt.strength := strength;
@@ -164,16 +167,20 @@ begin
   end;
 
  {$I-}reset(ofil);{$I+}
-  if IOResult <> 0 then unable_to_access(fname);
+  if IOResult <> 0 then
+    unable_to_access(fname);
 
  {$I-}seek(ofil, filesize(ofil));{$I+}
-  if IOResult <> 0 then unable_to_seek(fname, 0);
+  if IOResult <> 0 then
+    unable_to_seek(fname, 0);
 
  {$I-}Write(ofil, objekt);{$I+}
-  if IOResult <> 0 then unable_to_write(fname);
+  if IOResult <> 0 then
+    unable_to_write(fname);
 
  {$I-}Close(ofil);{$I+}
-  if IOResult <> 0 then unable_to_close(fname);
+  if IOResult <> 0 then
+    unable_to_close(fname);
 
   Inc(counter);   {statbaren m†ste ha exakt antal poster..}
   Statbar(counter, totobj, global_masterx, global_mastery, 1, 1);

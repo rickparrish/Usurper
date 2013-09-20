@@ -50,7 +50,7 @@ begin
     180,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -221,7 +221,7 @@ begin
     181,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -255,7 +255,7 @@ begin
     182,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -290,7 +290,7 @@ begin
     183,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -324,7 +324,7 @@ begin
     184,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -358,7 +358,7 @@ begin
     185,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -380,93 +380,93 @@ begin
 
 
   Add_Object('Hammer of Satan',   {name}
-    Weapon,    {typ}
-    200000000, {v„rde i gold}
-    0,         {”ka/minska hps}
-    0,         {”ka stamina}
-    0,         {”ka agility}
-    0,         {”ka charisma}
-    0,         {”ka dexterity}
-    0,         {”ka wisdom}
-    0,         {”ka mana}
-    0,         {”ka armor v„rde}
-    186,       {”ka attack v„rde}
-    '',        {„gd av?}
-    False,     {bara EN i spelet}
-    Nothing,   {kurerar}
-    True,      {finnas i shoppen}
-    False,     {kunna hittas i dungeons?}
-    False,     {cursed item?}
-    1,         {min level att hittas i dngs}
-    99,        {max level att hittas i dngs}
+    Weapon,            {typ}
+    200000000,         {v„rde i gold}
+    0,                 {”ka/minska hps}
+    0,                 {”ka stamina}
+    0,                 {”ka agility}
+    0,                 {”ka charisma}
+    0,                 {”ka dexterity}
+    0,                 {”ka wisdom}
+    0,                 {”ka mana}
+    0,                 {”ka armor v„rde}
+    186,               {”ka attack v„rde}
+    '',                {„gd av?}
+    False,             {bara EN i spelet}
+    Nothing,           {kurerar}
+    True,              {finnas i shoppen}
+    False,             {kunna hittas i dungeons?}
+    False,             {cursed item?}
+    1,                 {min level att hittas i dngs}
+    99,                {max level att hittas i dngs}
     'You see nothing special.',
-    '',        {normal beskrivning 2}
-    '',        {normal beskrivning 3}
-    '',        {normal beskrivning 4}
-    '',        {normal beskrivning 5}
-    '',        {detaljerad beskrivning 1}
-    '',        {detaljerad beskrivning 2}
-    '',        {detaljerad beskrivning 3}
-    '',        {detaljerad beskrivning 4}
-    '',        {detaljerad beskrivning 5}
-    0,         {”ka strength}
-    0,         {”ka defence}
-    0);       {strength demanded to use object}
+    '',                {normal beskrivning 2}
+    '',                {normal beskrivning 3}
+    '',                {normal beskrivning 4}
+    '',                {normal beskrivning 5}
+    '',                {detaljerad beskrivning 1}
+    '',                {detaljerad beskrivning 2}
+    '',                {detaljerad beskrivning 3}
+    '',                {detaljerad beskrivning 4}
+    '',                {detaljerad beskrivning 5}
+    0,                 {”ka strength}
+    0,                 {”ka defence}
+    0);                {strength demanded to use object}
 
   Add_Object('Scalpel',   {name}
-    Weapon,    {typ}
-    2000,       {v„rde i gold}
-    0,         {”ka/minska hps}
-    0,         {”ka stamina}
-    0,         {”ka agility}
-    0,         {”ka charisma}
-    0,         {”ka dexterity}
-    0,         {”ka wisdom}
-    0,         {”ka mana}
-    0,         {”ka armor v„rde}
-    4,         {”ka attack v„rde}
-    '',        {„gd av?}
-    False,     {bara EN i spelet}
-    blindness, {kurerar}
-    True,      {finnas i shoppen}
-    False,     {kunna hittas i dungeons?}
-    False,     {cursed item?}
-    1,         {min level att hittas i dngs}
-    99,        {max level att hittas i dngs}
+    Weapon,            {typ}
+    2000,              {v„rde i gold}
+    0,                 {”ka/minska hps}
+    0,                 {”ka stamina}
+    0,                 {”ka agility}
+    0,                 {”ka charisma}
+    0,                 {”ka dexterity}
+    0,                 {”ka wisdom}
+    0,                 {”ka mana}
+    0,                 {”ka armor v„rde}
+    4,                 {”ka attack v„rde}
+    '',                {„gd av?}
+    False,             {bara EN i spelet}
+    blindness,         {kurerar}
+    True,              {finnas i shoppen}
+    False,             {kunna hittas i dungeons?}
+    False,             {cursed item?}
+    1,                 {min level att hittas i dngs}
+    99,                {max level att hittas i dngs}
     'The standard surgeon tool. Looks very sharp indeed ...',
-    '',        {normal beskrivning 2}
-    '',        {normal beskrivning 3}
-    '',        {normal beskrivning 4}
-    '',        {normal beskrivning 5}
-    '',        {detaljerad beskrivning 1}
-    '',        {detaljerad beskrivning 2}
-    '',        {detaljerad beskrivning 3}
-    '',        {detaljerad beskrivning 4}
-    '',        {detaljerad beskrivning 5}
-    0,         {”ka strength}
-    0,         {”ka defence}
-    0);        {strength demanded to use object}
+    '',                {normal beskrivning 2}
+    '',                {normal beskrivning 3}
+    '',                {normal beskrivning 4}
+    '',                {normal beskrivning 5}
+    '',                {detaljerad beskrivning 1}
+    '',                {detaljerad beskrivning 2}
+    '',                {detaljerad beskrivning 3}
+    '',                {detaljerad beskrivning 4}
+    '',                {detaljerad beskrivning 5}
+    0,                 {”ka strength}
+    0,                 {”ka defence}
+    0);                {strength demanded to use object}
 
   Add_Object('Whip',   {name}
-    Weapon,    {typ}
-    4000,       {v„rde i gold}
-    0,         {”ka/minska hps}
-    0,         {”ka stamina}
-    0,         {”ka agility}
-    0,         {”ka charisma}
-    0,         {”ka dexterity}
-    0,         {”ka wisdom}
-    0,         {”ka mana}
-    0,         {”ka armor v„rde}
-    5,         {”ka attack v„rde}
-    '',        {„gd av?}
-    False,     {bara EN i spelet}
-    Nothing,   {kurerar}
-    True,      {finnas i shoppen}
-    False,     {kunna hittas i dungeons?}
-    False,     {cursed item?}
-    1,         {min level att hittas i dngs}
-    99,        {max level att hittas i dngs}
+    Weapon,            {typ}
+    4000,              {v„rde i gold}
+    0,                 {”ka/minska hps}
+    0,                 {”ka stamina}
+    0,                 {”ka agility}
+    0,                 {”ka charisma}
+    0,                 {”ka dexterity}
+    0,                 {”ka wisdom}
+    0,                 {”ka mana}
+    0,                 {”ka armor v„rde}
+    5,                 {”ka attack v„rde}
+    '',                {„gd av?}
+    False,             {bara EN i spelet}
+    Nothing,           {kurerar}
+    True,              {finnas i shoppen}
+    False,             {kunna hittas i dungeons?}
+    False,             {cursed item?}
+    1,                 {min level att hittas i dngs}
+    99,                {max level att hittas i dngs}
     'The whip is long and black. It looks as if it could',
     'do some interesting damage...',
     '',        {normal beskrivning 3}
@@ -495,7 +495,7 @@ begin
     187,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -529,7 +529,7 @@ begin
     188,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -563,7 +563,7 @@ begin
     189,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -597,7 +597,7 @@ begin
     190,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -631,7 +631,7 @@ begin
     191,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -665,7 +665,7 @@ begin
     192,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -699,7 +699,7 @@ begin
     193,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -733,7 +733,7 @@ begin
     194,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -767,7 +767,7 @@ begin
     195,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -801,7 +801,7 @@ begin
     230,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -835,7 +835,7 @@ begin
     270,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -869,7 +869,7 @@ begin
     300,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -903,7 +903,7 @@ begin
     325,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -937,7 +937,7 @@ begin
     350,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -971,7 +971,7 @@ begin
     375,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -1005,7 +1005,7 @@ begin
     400,       {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
-    Nothing, {kurerar}
+    Nothing,   {kurerar}
     True,      {finnas i shoppen}
     False,     {kunna hittas i dungeons?}
     False,     {cursed item?}
@@ -1020,7 +1020,7 @@ begin
     '',        {detaljerad beskrivning 2}
     '',        {detaljerad beskrivning 3}
     '',        {detaljerad beskrivning 4}
-    '',       {detaljerad beskrivning 5}
+    '',        {detaljerad beskrivning 5}
     0,         {”ka strength}
     0,         {”ka defence}
     0);        {strength demanded to use object}

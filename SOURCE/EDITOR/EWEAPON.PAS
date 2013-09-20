@@ -51,7 +51,8 @@ begin
   cweapon.Value := Value;
   cweapon.pow := pow;
  {$I-}Write(weapfile, cweapon);{$I+}
-  if IOResult <> 0 then unable_to_write(weapofile);
+  if IOResult <> 0 then
+    unable_to_write(weapofile);
 
   Inc(counter);   {statbaren m†ste ha exakt antal poster..}
   Statbar(Counter, totobj, global_masterx, global_mastery, 1, 2);
@@ -67,7 +68,8 @@ begin
   begin
     Assign(weapfile, weapofile);
   {$I-}rewrite(weapfile);{$I+}
-    if IOresult <> 0 then unable_to_create(weapofile);
+    if IOresult <> 0 then
+      unable_to_create(weapofile);
   end;
 
   add('Bare Hands', 0, 1);
@@ -277,7 +279,8 @@ begin
   if add_fake = False then
   begin
   {$I-}Close(weapfile);{$I+}
-    if IOREsult <> 0 then unable_to_close(weapofile);
+    if IOREsult <> 0 then
+      unable_to_close(weapofile);
   end;
 
 end;

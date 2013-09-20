@@ -42,7 +42,7 @@ var
   counter, gap, j, k: integer;
 
   exp_array:   array [1..global_maxplayers] of ^longint; {experience}
-  pos_array:   array [1..global_maxplayers] of longint; {file position}
+  pos_array:   array [1..global_maxplayers] of longint;  {file position}
 
   i, x, y, xx, yy: longint;
 
@@ -108,7 +108,8 @@ begin
             if cust0.king then
             begin
               write_to_text(ansifile, ALtCyanOnBlack + s^ + ' ' + ALtCyanOnBlack);
-            end else if cust0.hps < 1 then
+            end else
+            if cust0.hps < 1 then
             begin
               write_to_text(ansifile, ALtCyanOnBlack + s^ + ' ' + ALtRedOnBlack);
             end else
@@ -118,7 +119,8 @@ begin
 
             {name}
             x := length(cust0.name2);
-            if x > 20 then x := 20;
+            if x > 20 then
+              x := 20;
 
             cust0.name1 := cust0.name2;
             cust0.name2 := cust0.name2 + mkstring(25, '.');
@@ -142,7 +144,8 @@ begin
             str(cust0.level: 7, s^);
             for j := 1 to length(s^) do
             begin
-              if s^[j] = ' ' then s^[j] := '.';
+              if s^[j] = ' ' then
+                s^[j] := '.';
             end;
             write_to_text(ansifile, s^);
 
@@ -168,13 +171,16 @@ begin
             if cust0.location = offloc_prison then
             begin
               write_to_text(ansifile, AltGrayonBlack + '  Prison' + ConvertToAnsi(Config.TextColor));
-            end else if cust0.location = offloc_castle then
+            end else
+            if cust0.location = offloc_castle then
             begin
               write_to_text(ansifile, AYellowonBlack + '  Castle' + ConvertToAnsi(Config.TextColor));
-            end else if cust0.hps > 0 then
+            end else
+            if cust0.hps > 0 then
             begin
               write_to_text(ansifile, '  Alive');
-            end else if cust0.hps <= 0 then
+            end else
+            if cust0.hps <= 0 then
             begin
               write_to_text(ansifile, ALtRedonBlack + '  Dead' + ConvertToAnsi(Config.TextColor));
             end;
@@ -195,7 +201,8 @@ begin
             if cust0.king = True then
             begin
               write_to_text(ansifile, ALtGrayOnBlack);
-              if cust0.sex = 1 then write_to_text(ansifile, '<K>')
+              if cust0.sex = 1 then
+                write_to_text(ansifile, '<K>')
               else write_to_text(ansifile, '<Q>');
               write_to_text(ansifile, ConvertToAnsi(Config.TextColor));
             end;
@@ -230,7 +237,8 @@ var dummy:     word;
 begin
 
   worknumbers := fs(FsPlayer);
-  if worknumbers > global_maxplayers then worknumbers := global_maxplayers;
+  if worknumbers > global_maxplayers then
+    worknumbers := global_maxplayers;
 
   {init pointer vars}
   for i := 1 to worknumbers do
@@ -265,7 +273,7 @@ begin
       if player_active(cust0, False) = True then
       begin
 
-        exp_array[i]^ := cust0.exp; {experience}
+        exp_array[i]^ := cust0.exp;  {experience}
         pos_array[i] := cust0.recnr; {file position/ record #}
 
       end;
@@ -274,7 +282,8 @@ begin
   end; {for i:= .end.}
 
   gap := 1;
-  while gap < worknumbers do gap := gap * 3 + 1;
+  while gap < worknumbers do
+    gap := gap * 3 + 1;
 
   while gap > 0 do
   begin
@@ -329,7 +338,8 @@ begin
           begin
 
             {counters}
-            if pause_check = True then Inc(counter);
+            if pause_check = True then
+              Inc(counter);
             Inc(bigcounter);
 
             {#}
@@ -342,7 +352,8 @@ begin
 
             {name}
             x := length(cust0.name2);
-            if x > 20 then x := 20;
+            if x > 20 then
+              x := 20;
 
             cust0.name1 := cust0.name2; {since we screw up cust0.name2 and we need
                                  to remember cust0.name2 we put it in .name1
@@ -357,7 +368,8 @@ begin
                 if cust0.king then
                 begin
                   col := global_kingcol;
-                end else if cust0.hps < 1 then
+                end else
+                if cust0.hps < 1 then
                 begin
                   col := 12;
                 end else
@@ -372,11 +384,12 @@ begin
               sd(col, cust0.name2[j]);
             end; {for j:= .end.}
 
-            {level}
+                 {level}
             str(cust0.level: 7, s^);
             for j := 1 to length(s^) do
             begin
-              if s^[j] = ' ' then s^[j] := '.';
+              if s^[j] = ' ' then
+                s^[j] := '.';
             end;
             sd(config.textcolor, s^);
 
@@ -403,16 +416,20 @@ begin
             if is_online(cust0.name1, online_player) = True then
             begin
               sd(14, '  Online');
-            end else if cust0.location = offloc_prison then
+            end else
+            if cust0.location = offloc_prison then
             begin
               sd(11, '  Prison');
-            end else if cust0.location = offloc_castle then
+            end else
+            if cust0.location = offloc_castle then
             begin
               sd(14, '  Castle');
-            end else if (cust0.hps = -9000) or (cust0.hps = -8000) then
+            end else
+            if (cust0.hps = -9000) or (cust0.hps = -8000) then
             begin
               sd(12, '  Drugged');
-            end else if cust0.hps > 0 then
+            end else
+            if cust0.hps > 0 then
             begin
               sd(config.textcolor, '  Alive');
             end else
@@ -436,7 +453,8 @@ begin
             {king}
             if cust0.king = True then
             begin
-              if cust0.sex = 1 then sd(7, '<K>')
+              if cust0.sex = 1 then
+                sd(7, '<K>')
               else sd(7, '<Q>');
             end;
             crlf;
@@ -451,7 +469,8 @@ begin
             begin
               y := 1;
               break;
-            end else if ch = '=' then
+            end else
+            if ch = '=' then
             begin
               pause_check := False;
             end;
@@ -484,8 +503,10 @@ begin
     ansiname := cfg_string(70);
     asciname := cfg_string(71);
 
-    if ansiname <> '' then ansiscore := True;
-    if asciname <> '' then asciscore := True;
+    if ansiname <> '' then
+      ansiscore := True;
+    if asciname <> '' then
+      asciscore := True;
 
     {writes player score file (ascii) }
     if asciscore = True then
@@ -536,7 +557,8 @@ begin
                 str(cust0.level: 7, s^);
                 for j := 1 to length(s^) do
                 begin
-                  if s^[j] = ' ' then s^[j] := '.';
+                  if s^[j] = ' ' then
+                    s^[j] := '.';
                 end;
                 write_to_text(ascifile, s^);
 
@@ -562,13 +584,16 @@ begin
                 if cust0.location = offloc_castle then
                 begin
                   write_to_text(ascifile, '  Castle');
-                end else if cust0.location = offloc_prison then
+                end else
+                if cust0.location = offloc_prison then
                 begin
                   write_to_text(ascifile, '  Prison');
-                end else if cust0.hps > 0 then
+                end else
+                if cust0.hps > 0 then
                 begin
                   write_to_text(ascifile, '  Alive');
-                end else if cust0.hps <= 0 then
+                end else
+                if cust0.hps <= 0 then
                 begin
                   write_to_text(ascifile, '  Dead');
                 end;
@@ -587,7 +612,8 @@ begin
                 {king/queen}
                 if cust0.king = True then
                 begin
-                  if cust0.sex = 1 then write_to_text(ascifile, '<K>')
+                  if cust0.sex = 1 then
+                    write_to_text(ascifile, '<K>')
                   else write_to_text(ascifile, '<Q>');
                 end;
 

@@ -78,11 +78,12 @@ begin
         if my_child(player, child) then
         begin
           d(12, 'You can''t kidnap your own children! (you twisted creature!)');
-        end {alredy poisoned?}
-        else if child.health = childhealth_poisoned then
+        end {alredy poisoned?} else
+        if child.health = childhealth_poisoned then
         begin
           d(12, child.Name + ' is suffering from poison! It''s impossible to get through.');
-        end else if child.location <> childlocation_home then
+        end else
+        if child.location <> childlocation_home then
         begin
           d(12, child.Name + ' is not home!');
         end else
@@ -128,13 +129,16 @@ begin
             incplayerexp(player, x);
 
             {inform parents}
-            inform_parents_online(child, ukidc + child.Name + config.textcol1 + ' has been ' + ulred + 'kidnapped' + config.textcol1 + '!');
+            inform_parents_online(child, ukidc + child.Name + config.textcol1 + ' has been ' +
+              ulred + 'kidnapped' + config.textcol1 + '!');
 
             inform_parents(child,
               mailrequest_nothing,
               ulred + 'Child harmed!' + config.textcol1,
               mkstring(13, underscore),
-              'Your ' + sex7[child.sex] + ukidc + ' ' + child.Name + config.textcol1 + ' has been kidnapped by ' + uplc + player.name2 + config.textcol1 + ' the ' + race_display(2, player.race, 0) + '!',
+              'Your ' + sex7[child.sex] + ukidc + ' ' + child.Name + config.textcol1 +
+                ' has been kidnapped by ' + uplc + player.name2 + config.textcol1 + ' the ' +
+                race_display(2, player.race, 0) + '!',
               '',
               '',
               '',
@@ -151,7 +155,8 @@ begin
             {news-paper}
             newsy(True,
               'Child Kidnapped!',
-              ' ' + ukidc + child.Name + config.textcol1 + ', the ' + sex7[child.sex] + ' of ' + uplc + child.mother + config.textcol1 + ' and ' + uplc + child.father + config.textcol1 + ' was',
+              ' ' + ukidc + child.Name + config.textcol1 + ', the ' + sex7[child.sex] + ' of ' +
+                uplc + child.mother + config.textcol1 + ' and ' + uplc + child.father + config.textcol1 + ' was',
               ' ' + ulred + 'kidnapped' + config.textcol1 + ' by a evil ' + race_display(2, player.race, 0) + '!',
               '',
               '',
@@ -204,8 +209,10 @@ begin
               {news-paper}
               newsy(True,
                 'Kidnapper caught!',
-                ' ' + the_bad + lowercase(classnames[player.class]) + ' ' + uplc + player.name2 + config.textcol1 + ' was caught attempting',
-                ' to run off with ' + ukidc + child.Name + config.textcol1 + ', the ' + sex7[child.sex] + ' of ' + uplc + child.mother + config.textcol1 + ' and ' + uplc + child.father + config.textcol1 + '.',
+                ' ' + the_bad + lowercase(classnames[player.class]) + ' ' + uplc + player.name2 +
+                config.textcol1 + ' was caught attempting',
+                ' to run off with ' + ukidc + child.Name + config.textcol1 + ', the ' + sex7[child.sex] +
+                ' of ' + uplc + child.mother + config.textcol1 + ' and ' + uplc + child.father + config.textcol1 + '.',
                 '',
                 '',
                 '',
@@ -215,13 +222,15 @@ begin
                 '');
 
               {inform parents}
-              inform_parents_online(child, ukidc + child.Name + config.textcol1 + ' was almost kidnapped' + config.textcol1 + '!');
+              inform_parents_online(child, ukidc + child.Name + config.textcol1 + ' was almost kidnapped' +
+                config.textcol1 + '!');
 
               inform_parents(child,
                 mailrequest_nothing,
                 umailheadc + 'Child in danger!' + config.textcol1,
                 mkstring(16, underscore),
-                uplc + player.name2 + config.textcol1 + ' the ' + classnames[player.class] + ' made an attempt to kidnap your ' + sex7[child.sex] + ukidc + ' ' + child.Name + config.textcol1 + '!',
+                uplc + player.name2 + config.textcol1 + ' the ' + classnames[player.class] +
+                ' made an attempt to kidnap your ' + sex7[child.sex] + ukidc + ' ' + child.Name + config.textcol1 + '!',
                 'Fortunately the attempt failed and ' + uplc + player.name2 + config.textcol1 + ' was jailed!',
                 '',
                 '',
@@ -239,7 +248,8 @@ begin
               inform_king(
                 umailheadc + 'Kidnapper Jailed!' + config.textcol1,
                 mkstring(17, underscore),
-                uplc + player.name2 + config.textcol1 + ' made an attempt to kidnap ' + ukidc + child.Name + config.textcol1 + '!',
+                uplc + player.name2 + config.textcol1 + ' made an attempt to kidnap ' + ukidc +
+                child.Name + config.textcol1 + '!',
                 'Fortunately the attempt failed and ' + uplc + player.name2 + config.textcol1 + ' was jailed!',
                 'It''s up to your royal highness to deal with this bandit.',
                 '',
@@ -266,7 +276,8 @@ begin
               {news-paper}
               newsy(True,
                 umailheadc + 'Kidnap attempt' + config.textcol1,
-                ' An attempt to kidnap ' + ukidc + child.Name + config.textcol1 + ', ' + sex7[child.sex] + ' of ' + uplc + child.mother + config.textcol1 + ' and ' + uplc + child.father + config.textcol1 + ', failed!',
+                ' An attempt to kidnap ' + ukidc + child.Name + config.textcol1 + ', ' + sex7[child.sex] +
+                ' of ' + uplc + child.mother + config.textcol1 + ' and ' + uplc + child.father + config.textcol1 + ', failed!',
                 '',
                 '',
                 '',
@@ -280,7 +291,8 @@ begin
               Dec(player.darknr);
 
               {inform parents}
-              inform_parents_online(child, ukidc + child.Name + config.textcol1 + ' was almost kidnapped' + config.textcol1 + '!');
+              inform_parents_online(child, ukidc + child.Name + config.textcol1 + ' was almost kidnapped' +
+                config.textcol1 + '!');
 
               inform_parents(child,
                 mailrequest_nothing,
@@ -350,8 +362,8 @@ begin
         if my_child(player, child) then
         begin
           d(12, 'You can''t poison your own children! (you cruel bastard!)');
-        end {alredy poisoned?}
-        else if child.health = childhealth_poisoned then
+        end {alredy poisoned?} else
+        if child.health = childhealth_poisoned then
         begin
           d(12, child.Name + ' is already laying in bed, suffering!');
         end else
@@ -387,13 +399,15 @@ begin
             incplayerexp(player, x);
 
             {inform parents}
-            inform_parents_online(child, ukidc + child.Name + config.textcol1 + ' has been ' + ulred + 'poisoned' + config.textcol1 + '!');
+            inform_parents_online(child, ukidc + child.Name + config.textcol1 + ' has been ' +
+              ulred + 'poisoned' + config.textcol1 + '!');
 
             inform_parents(child,
               mailrequest_nothing,
               ulred + 'Child harmed!' + config.textcol1,
               mkstring(13, underscore),
-              'Your ' + sex7[child.sex] + ukidc + ' ' + child.Name + config.textcol1 + ' ate a poisoned cookie sent by ' + uplc + player.name2 + config.textcol1 + '!',
+              'Your ' + sex7[child.sex] + ukidc + ' ' + child.Name + config.textcol1 +
+              ' ate a poisoned cookie sent by ' + uplc + player.name2 + config.textcol1 + '!',
               '',
               '',
               '',
@@ -410,7 +424,8 @@ begin
             {news-paper}
             newsy(True,
               'Child Poisoned!',
-              ' ' + ukidc + child.Name + config.textcol1 + ', the ' + sex7[child.sex] + ' of ' + uplc + child.mother + config.textcol1 + ' and ' + uplc + child.father + config.textcol1 + ' was',
+              ' ' + ukidc + child.Name + config.textcol1 + ', the ' + sex7[child.sex] + ' of ' +
+              uplc + child.mother + config.textcol1 + ' and ' + uplc + child.father + config.textcol1 + ' was',
               ' ' + ulred + 'poisoned' + config.textcol1 + ' by a wicked ' + race_display(2, player.race, 0) + '!',
               '',
               '',
@@ -431,7 +446,9 @@ begin
             {news-paper}
             newsy(True,
               umailheadc + 'Poisoning attempt' + config.textcol1,
-              ' An attempt to poison ' + ukidc + child.Name + config.textcol1 + ', the ' + sex7[child.sex] + ' of ' + uplc + child.mother + config.textcol1 + ' and ' + uplc + child.father + config.textcol1 + ' failed!',
+              ' An attempt to poison ' + ukidc + child.Name + config.textcol1 + ', the ' +
+              sex7[child.sex] + ' of ' + uplc + child.mother + config.textcol1 + ' and ' + uplc + child.father +
+              config.textcol1 + ' failed!',
               '',
               '',
               '',
@@ -445,13 +462,15 @@ begin
             Dec(player.darknr);
 
             {inform parents}
-            inform_parents_online(child, ukidc + child.Name + config.textcol1 + ' was almost poisoned' + config.textcol1 + '!');
+            inform_parents_online(child, ukidc + child.Name + config.textcol1 + ' was almost poisoned' +
+              config.textcol1 + '!');
 
             inform_parents(child,
               mailrequest_nothing,
               umailheadc + 'Evil lurking!' + config.textcol1,
               mkstring(13, underscore),
-              'Somebody tried to trick your ' + sex7[child.sex] + ukidc + ' ' + child.Name + config.textcol1 + ' to eat a poisoned cookie!',
+              'Somebody tried to trick your ' + sex7[child.sex] + ukidc + ' ' + child.Name +
+              config.textcol1 + ' to eat a poisoned cookie!',
               '',
               '',
               '',
@@ -585,7 +604,8 @@ begin
       d(12, 'The Whore House is closed in this game.');
       pause;
       cho := ' ';
-    end else if (config.allow_murder = False) and (cho = 'M') then
+    end else
+    if (config.allow_murder = False) and (cho = 'M') then
     begin
       crlf;
       d(12, 'Murdering innocent people is forbidden in this game.');
@@ -596,7 +616,8 @@ begin
     {evaluate user-input}
     case cho of
       '?': begin {display menu}
-        if player.expert = True then display_menu(True, False)
+        if player.expert = True then
+          display_menu(True, False)
         else display_menu(False, False);
       end;
       'S': begin {status}
@@ -640,7 +661,7 @@ begin
           chest_looting;
           crlf;
         end;
-      end; {steal from Chests, at peoples homes *end*}
+      end;       {steal from Chests, at peoples homes *end*}
       'M': begin {murder innocent people}
         if player.darknr <= 0 then
         begin

@@ -166,7 +166,8 @@ begin
     if mazedata.monster_hps < 1 then
     begin
       d(12, 'The ' + mazedata.monster_name + ' is laying in a pool of blood!');
-    end else if mazedata.monster_hps < mazedata.monster_maxhps then
+    end else
+    if mazedata.monster_hps < mazedata.monster_maxhps then
     begin
       d(15, 'The ' + umonc + mazedata.monster_name + uwhite + ' is bleeding! Kill it!');
     end else
@@ -193,7 +194,8 @@ begin
     {evaluate user-input}
     case cho of
       '?': begin {menu}
-        if player.expert = True then display_menu(True, False)
+        if player.expert = True then
+          display_menu(True, False)
         else display_menu(False, False);
       end;
       'S': begin {status}
@@ -220,12 +222,14 @@ begin
           begin
             d(15, 'HIT!');
             {inform other nodes}
-            send_to_location(uplc + player.name2 + config.textcol1 + ' hit the ' + umonc + mazedata.monster_name + config.textcol1 + '!', player.name2);
+            send_to_location(uplc + player.name2 + config.textcol1 + ' hit the ' + umonc +
+              mazedata.monster_name + config.textcol1 + '!', player.name2);
           end else
           begin
             d(12, 'MISS!');
             {inform other nodes}
-            send_to_location(uplc + player.name2 + config.textcol1 + ' missed the ' + umonc + mazedata.monster_name + config.textcol1 + '!', player.name2);
+            send_to_location(uplc + player.name2 + config.textcol1 + ' missed the ' + umonc +
+              mazedata.monster_name + config.textcol1 + '!', player.name2);
           end;
 
           Dec(mazedata.monster_hps, 13);
@@ -235,7 +239,8 @@ begin
           if mazedata.monster_hps < 1 then
           begin
             d(14, 'You killed the ' + umonc + mazedata.monster_name + uyellow + '!');
-            send_to_location(uplc + player.name2 + config.textcol1 + ' killed the ' + umonc + mazedata.monster_name + config.textcol1 + '!', player.name2);
+            send_to_location(uplc + player.name2 + config.textcol1 + ' killed the ' + umonc +
+              mazedata.monster_name + config.textcol1 + '!', player.name2);
           end;
 
         end;

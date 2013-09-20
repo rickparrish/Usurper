@@ -24,8 +24,9 @@ Copyright 2007 Jakob Dangarden
 
 
 unit SwapEq;
-{Usurper - Swap equipment}
-{winner scans/takes defeated players equipment}
+
+ {Usurper - Swap equipment}
+ {winner scans/takes defeated players equipment}
 interface
 
 uses
@@ -148,9 +149,9 @@ var looting_hands: looting_handtypes;
       else looting_hands := NoHands;
     end; {case .end.}
 
-  end; {set_loothands *end*}
+  end;   {set_loothands *end*}
 
-  {Swap_Objects *start*}
+         {Swap_Objects *start*}
 const
 
   stolar     = global_maxitem + 16;
@@ -219,7 +220,8 @@ begin
 
         inweap^.Name := '';
         inweap^.pow := 0;
-        if victor.weapon <> 0 then load_weapon(victor.weapon, inweap^);
+        if victor.weapon <> 0 then
+          load_weapon(victor.weapon, inweap^);
 
         sd(config.textcolor, 'Your weapon    : ');
         sd(global_itemcol, inweap^.Name);
@@ -269,7 +271,8 @@ begin
 
         inarm^.Name := '';
         inarm^.pow := 0;
-        if victor.armor <> 0 then load_armor(victor.armor, inarm^);
+        if victor.armor <> 0 then
+          load_armor(victor.armor, inarm^);
 
         sd(config.textcolor, 'Your armor     : ');
         sd(global_itemcol, inarm^.Name);
@@ -390,9 +393,9 @@ begin
     exit;
   end; {Classic *END*}
 
-  {NEW GAME MODE}
+       {NEW GAME MODE}
 
-  {set looting hand items variable}
+       {set looting hand items variable}
   set_loothands;
 
   case looting_hands of
@@ -419,7 +422,7 @@ begin
         3: looting_hands := NoHands;
       end; {case .end.}
     end;
-  end; {case .end.}
+  end;     {case .end.}
 
   {
     NoHands;
@@ -924,7 +927,8 @@ begin
 
     {* VICTOR is computer controlled *}
 
-    if loser.name2 = player.name2 then des := 'your '
+    if loser.name2 = player.name2 then
+      des := 'your '
     else des := loser.name2 + 's ';
 
     {* Right Hand Swap *}

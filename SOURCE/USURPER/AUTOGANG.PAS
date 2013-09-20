@@ -51,7 +51,7 @@ begin
     5: Result := 'Rival Gangs Clash!';
   end; {case .end.}
 
-  {return result}
+       {return result}
   gang_war_header := Result;
 
 end; {gang_war_header .end.}
@@ -248,10 +248,12 @@ begin
 
             if (pl[i]^.hps < 1) and (pl[j]^.hps < 1) then
             begin
-              s^ := s^ + ' : ' + ulred + 'both dead!' + config.textcol1 + ' (in round ' + ulgray + commastr(rounds) + config.textcol1 + ')';
+              s^ := s^ + ' : ' + ulred + 'both dead!' + config.textcol1 + ' (in round ' + ulgray +
+                commastr(rounds) + config.textcol1 + ')';
               if pl[j]^.ai = 'H' then
               begin
-                if pl[i]^.sex = 1 then s^ := 'his'
+                if pl[i]^.sex = 1 then
+                  s^ := 'his'
                 else s^ := 'her';
 
                 {mail offline player}
@@ -278,14 +280,17 @@ begin
                   '');
 
               end;
-            end else if pl[i]^.hps < 1 then
+            end else
+            if pl[i]^.hps < 1 then
             begin
               if rounds > 1 then
               begin
-                s^ := s^ + ' : ' + ulred + pl[i]^.name2 + config.textcol1 + ' dead (' + ulgray + commastr(rounds) + config.textcol1 + ' rounds)';
+                s^ := s^ + ' : ' + ulred + pl[i]^.name2 + config.textcol1 + ' dead (' + ulgray +
+                  commastr(rounds) + config.textcol1 + ' rounds)';
               end else
               begin
-                s^ := s^ + ' : ' + ulred + pl[i]^.name2 + config.textcol1 + ' dead (' + ulgray + commastr(rounds) + config.textcol1 + ' round)';
+                s^ := s^ + ' : ' + ulred + pl[i]^.name2 + config.textcol1 + ' dead (' + ulgray +
+                  commastr(rounds) + config.textcol1 + ' round)';
               end;
 
               case random(3) of
@@ -360,14 +365,17 @@ begin
 
                 end;
               end; {case .end.}
-            end else if pl[j]^.hps < 1 then
+            end else
+            if pl[j]^.hps < 1 then
             begin
               if rounds > 1 then
               begin
-                s^ := s^ + ' : ' + ulred + pl[j]^.name2 + config.textcol1 + ' dead (' + ulgray + commastr(rounds) + config.textcol1 + ' rounds)';
+                s^ := s^ + ' : ' + ulred + pl[j]^.name2 + config.textcol1 + ' dead (' + ulgray +
+                  commastr(rounds) + config.textcol1 + ' rounds)';
               end else
               begin
-                s^ := s^ + ' : ' + ulred + pl[j]^.name2 + config.textcol1 + ' dead (' + ulgray + commastr(rounds) + config.textcol1 + ' round)';
+                s^ := s^ + ' : ' + ulred + pl[j]^.name2 + config.textcol1 + ' dead (' + ulgray +
+                  commastr(rounds) + config.textcol1 + ' round)';
               end;
 
               post(MailSend,
@@ -413,7 +421,7 @@ begin
         end;
       end; {for i:= .end.}
 
-      {game_over ??}
+           {game_over ??}
 
       if (pl[1]^.hps + pl[2]^.hps + pl[3]^.hps + pl[4]^.hps + pl[5]^.hps +
         pl[6]^.hps + pl[7]^.hps + pl[8]^.hps + pl[9]^.hps + pl[10]^.hps) < 1 then
@@ -571,7 +579,8 @@ begin
         begin
           pl[0]^.cturf := True;
           user_save(pl[0]^);
-        end else if pl[0]^.team = gang2 then
+        end else
+        if pl[0]^.team = gang2 then
         begin
 
           pl[0]^.cturf := False;
@@ -592,7 +601,8 @@ begin
         begin
           pl[0]^.cturf := True;
           user_save(pl[0]^);
-        end else if pl[0]^.team = gang2 then
+        end else
+        if pl[0]^.team = gang2 then
         begin
           pl[0]^.cturf := False;
           user_save(pl[0]^);
@@ -601,9 +611,9 @@ begin
 
     end; {for i:= .end.}
 
-  end; {turf .end.}
+  end;   {turf .end.}
 
-  {dispose of the remaining pointer variables}
+         {dispose of the remaining pointer variables}
   dispose(s);
   dispose(s2);
 

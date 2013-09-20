@@ -36,13 +36,14 @@ program Usurper; {Door-Game by Jakob Dangarden
 
 
 uses
- {$IFDEF MSDOS}Overlay, {$ENDIF} Dos, {$IFDEF MSDOS}InitOver, {$ENDIF}
-  DDplus, Init, Jakob, Maint, Cms, SortPl, VarGods, GodWorld, UserHunc, Gamec, Byebyec, Mail, Various, Various2, Rating, Relation, Relatio2, Post_To, Online, File_Io, {$IFDEF MSDOS}OverXms, {$ENDIF}
+  {$IFDEF MSDOS}Overlay, {$ENDIF} Dos, {$IFDEF MSDOS}InitOver, {$ENDIF}
+  DDplus, Init, Jakob, Maint, Cms, SortPl, VarGods, GodWorld, UserHunc, Gamec, Byebyec, Mail,
+  Various, Various2, Rating, Relation, Relatio2, Post_To, Online, File_Io, {$IFDEF MSDOS}OverXms, {$ENDIF}
   Various3, News, Children, InitGods;
 
-{bard : singing...love & battle hymns}
-{half-elves : hypnotize}
-{mutants : can't be affected by (bad) divine intervention}
+ {bard : singing...love & battle hymns}
+ {half-elves : hypnotize}
+ {mutants : can't be affected by (bad) divine intervention}
 
      {record locking has so far been implemented in
       online file functions, player save, mail
@@ -52,123 +53,123 @@ uses
 
 
 
-{suggestion: BE ABLE TO TEAM UP WITH A MONSTER!}
-{or even better : strangers offer their assistance}
+ {suggestion: BE ABLE TO TEAM UP WITH A MONSTER!}
+ {or even better : strangers offer their assistance}
 
-{Let the NPC girls court the players...send flowers etc}
+ {Let the NPC girls court the players...send flowers etc}
 
       {NPC king should sack guards when new cheap guards are offering
       their service}
 
-{ DDPlus new versions, remember this : }
-{  pause funktion at display of .asc+ .ans files}
+ { DDPlus new versions, remember this : }
+ {  pause funktion at display of .asc+ .ans files}
 
-{monster b”r kunna togglas som SINGLAR. De dyker bara upp en † en}
-{ l„gg in sl†ss tesammans i dngs funktion! kul! eller team fghts}
+ {monster b”r kunna togglas som SINGLAR. De dyker bara upp en † en}
+ { l„gg in sl†ss tesammans i dngs funktion! kul! eller team fghts}
 
-{SKANDAL om det „r kungen som †ker dit f”r att m”rda eller ta droger!}
+ {SKANDAL om det „r kungen som †ker dit f”r att m”rda eller ta droger!}
 
-{LOVE PARTY:}
-{beauty shop to enhance your looks}
-{snuck a love potion in Mirandellas drink}
+ {LOVE PARTY:}
+ {beauty shop to enhance your looks}
+ {snuck a love potion in Mirandellas drink}
 
-{turns to you with his hand extended}
-{Demonstration, (gatu)}
-{Dance on Your grave one day}
+ {turns to you with his hand extended}
+ {Demonstration, (gatu)}
+ {Dance on Your grave one day}
 
-{Spell competition}
-{DEMI-GOD}
+ {Spell competition}
+ {DEMI-GOD}
 
-{f† brev fr†n sin morsa!! haha!}
-{toothless old fool}
-{top-boot : kragst”vel}
-{topknot : h†rknut p† hj„ssan  *mest kvinnor som anv„nder*}
-{a torrent of abuse = ett regn av okv„dinsord}
-{tormentors = pl†goandar}
-{torchlight procession = fackelt†g}
-{hey Jack!}
-{mannerly = v„luppfostrad}
-{lame-brain}
-{milksop = ynkrygg}
-{evil-doer = missd†dare}
-{blunderer = klantarsle}
-{displease = misshaga}
-{her eyes were full of mischief = hennes ”gon var fulla av rackartyg}
-{madcap = yrh„tta}
-{leprechaun = tomte, pyssling}
-{I wanna fuck you like an animal (indeed!)}
-{square-shouldered = bredaxlad}
-{sputter = spotta n„r man talar, fr„sande}
-{blood sucking society}
-{grubby little parasite = snuskig liten parasit}
-{hazardous to your health}
-{who are you trying to kid punk! haha!}
-{everybody is screwing everybody, indiscriminately!}
-{occupational hazard = yrkesrisk}
-{dont stop admiring your handywork = vila inte p† dina lagrar}
-{he's on a power trip = han ska ta h„mnd whatever}
-{for Paco its nothing left, nothing but the death collector!}
-{cartographer, draws maps....sell maps in the dungeons?!}
-{hobo,vagrant,tramp = luffare}
-{smoke him! = d”da honom...}
-{catapulte somebody in office}
-{shakedown = act of getting money by violence or threat}
-{shake like a leaf}
-{shaking his fist at you! = hytter med n„ven}
-{there is more to you than meets the eye}
-{the robbers all wore hoods to hide their faces}
-{hodded monks}
-{tradesman}
-{shopkeeper = aff„rsinnehavare}
-{the tides of war}
-{I don't speak your tongue}
-{sharp-tongued}
-{are you tongue-tied boy!}
-{Toghroul}
-{thick with dust}
-{through-paced = inpiskad}
-{she had her throat slashed}
-{stab wounds}
-{intragang warfare}
-{gypsy camp, slaughter them all, kids to!}
-{he tried to kiss her, but she fended him off}
-{what's your angel? (inte „ngel) }
-{domedags profet}
-{the old woman gave a loud cackle}
-{that old geezer over there}
-{poor old devil}
-{gr†tf„rdig = be ready to cry}
-{shut her up for good}
-{klumpfot = clump foot}
-{attack of cramp}
-{they pose a threat to me}
-{she has been cheating on you Jakob!}
-{Am I special to you Slash? (girl)}
-{patrified}
-{demi god}
-{take the ferry over to}
-{raghead}
-{aloud}
-{rebuke}
-{walk in the park}
-{hear him out}
-{Go and stay gone!}
-{rock-heart}
-{terror-gang}
-{this flagrant disregard for my orders}
-{five assorted trash = fem slyngh”gar}
-{fitting demise to this scoundrel}
-{enter the Morgue, where the bodies are laying in chalk}
-{"Take your medicine Boy!"}
-{who are you? His buttboy?}
+ {f† brev fr†n sin morsa!! haha!}
+ {toothless old fool}
+ {top-boot : kragst”vel}
+ {topknot : h†rknut p† hj„ssan  *mest kvinnor som anv„nder*}
+ {a torrent of abuse = ett regn av okv„dinsord}
+ {tormentors = pl†goandar}
+ {torchlight procession = fackelt†g}
+ {hey Jack!}
+ {mannerly = v„luppfostrad}
+ {lame-brain}
+ {milksop = ynkrygg}
+ {evil-doer = missd†dare}
+ {blunderer = klantarsle}
+ {displease = misshaga}
+ {her eyes were full of mischief = hennes ”gon var fulla av rackartyg}
+ {madcap = yrh„tta}
+ {leprechaun = tomte, pyssling}
+ {I wanna fuck you like an animal (indeed!)}
+ {square-shouldered = bredaxlad}
+ {sputter = spotta n„r man talar, fr„sande}
+ {blood sucking society}
+ {grubby little parasite = snuskig liten parasit}
+ {hazardous to your health}
+ {who are you trying to kid punk! haha!}
+ {everybody is screwing everybody, indiscriminately!}
+ {occupational hazard = yrkesrisk}
+ {dont stop admiring your handywork = vila inte p† dina lagrar}
+ {he's on a power trip = han ska ta h„mnd whatever}
+ {for Paco its nothing left, nothing but the death collector!}
+ {cartographer, draws maps....sell maps in the dungeons?!}
+ {hobo,vagrant,tramp = luffare}
+ {smoke him! = d”da honom...}
+ {catapulte somebody in office}
+ {shakedown = act of getting money by violence or threat}
+ {shake like a leaf}
+ {shaking his fist at you! = hytter med n„ven}
+ {there is more to you than meets the eye}
+ {the robbers all wore hoods to hide their faces}
+ {hodded monks}
+ {tradesman}
+ {shopkeeper = aff„rsinnehavare}
+ {the tides of war}
+ {I don't speak your tongue}
+ {sharp-tongued}
+ {are you tongue-tied boy!}
+ {Toghroul}
+ {thick with dust}
+ {through-paced = inpiskad}
+ {she had her throat slashed}
+ {stab wounds}
+ {intragang warfare}
+ {gypsy camp, slaughter them all, kids to!}
+ {he tried to kiss her, but she fended him off}
+ {what's your angel? (inte „ngel) }
+ {domedags profet}
+ {the old woman gave a loud cackle}
+ {that old geezer over there}
+ {poor old devil}
+ {gr†tf„rdig = be ready to cry}
+ {shut her up for good}
+ {klumpfot = clump foot}
+ {attack of cramp}
+ {they pose a threat to me}
+ {she has been cheating on you Jakob!}
+ {Am I special to you Slash? (girl)}
+ {patrified}
+ {demi god}
+ {take the ferry over to}
+ {raghead}
+ {aloud}
+ {rebuke}
+ {walk in the park}
+ {hear him out}
+ {Go and stay gone!}
+ {rock-heart}
+ {terror-gang}
+ {this flagrant disregard for my orders}
+ {five assorted trash = fem slyngh”gar}
+ {fitting demise to this scoundrel}
+ {enter the Morgue, where the bodies are laying in chalk}
+ {"Take your medicine Boy!"}
+ {who are you? His buttboy?}
 
 
       {"For we were young, and we knew that we could never die."
        Thomas Wolfe}
 
-{Damayanti = indisk prinsessa}
+ {Damayanti = indisk prinsessa}
 
-{the gods can enter earth in a mortal disguise}
+ {the gods can enter earth in a mortal disguise}
 
 
 {$O ddovr}
@@ -342,7 +343,7 @@ var
 
 begin {* Main Program *}
 
-  { Check that DATA\VERSION.DAT exists, and contains the same version number as this EXE }
+      { Check that DATA\VERSION.DAT exists, and contains the same version number as this EXE }
   S := '';
   Write('   - Looking for ' + Global_VersionF + '...');
   if (F_Exists(Global_VersionF)) then
@@ -543,7 +544,8 @@ begin {* Main Program *}
         if i > 0 then
         begin
           d(15, commastr(i) + ' minutes have passed.');
-          if i > 45 then kill_file := True;
+          if i > 45 then
+            kill_file := True;
         end;
       end;
     end;
@@ -592,7 +594,8 @@ begin {* Main Program *}
   notime := '*** TIME HAS EXPIRED ***';
 
   {Determine Graphics}
-  if (Graphics = 1) or (Graphics = 2) then global_ansi := False
+  if (Graphics = 1) or (Graphics = 2) then
+    global_ansi := False
   else global_ansi := True;
 
   {Set color}
@@ -711,7 +714,8 @@ begin {* Main Program *}
     begin
       wrl(12, 'Maintenance not able to run! Players are reported ONLINE.');
       wrl(12, '');
-    end else if f_exists(global_maintfile) then
+    end else
+    if f_exists(global_maintfile) then
     begin
       wrl(12, 'Maintenance in progress (' + global_maintfile + ' exists).');
     end else
@@ -748,7 +752,8 @@ begin {* Main Program *}
 
     if f_exists(s) then
     begin
-      if f_exists(global_docsdir + s) then delete_file(global_docsdir + s);
+      if f_exists(global_docsdir + s) then
+        delete_file(global_docsdir + s);
       if First = True then
       begin
         First := False;
@@ -763,7 +768,8 @@ begin {* Main Program *}
   s := global_textdataf;
   if f_exists(s) then
   begin
-    if f_exists(global_datadir + s) then delete_file(global_datadir + s);
+    if f_exists(global_datadir + s) then
+      delete_file(global_datadir + s);
     d(config.textcolor, 'Updating Usurper files... please wait!');
     move_file(s, global_datadir);
   end;
@@ -939,7 +945,8 @@ begin {* Main Program *}
       '1': begin {List of Monarchs, log of comings and goings}
         d(11, 'List of Monarchs');
         crlf;
-        if global_ansi then display_file(global_MonarchsANSI)
+        if global_ansi then
+          display_file(global_MonarchsANSI)
         else display_file(global_MonarchsASCI);
         crlf;
         pause;
@@ -947,7 +954,8 @@ begin {* Main Program *}
       '2': begin {List of Gods, log of comings and goings}
         d(11, 'Immortal News');
         crlf;
-        if global_ansi then display_file(global_GodsANSI)
+        if global_ansi then
+          display_file(global_GodsANSI)
         else display_file(global_GodsASCI);
         crlf;
         pause;
@@ -1093,7 +1101,8 @@ begin {* Main Program *}
 
         d(11, 'News');
         crlf;
-        if global_ansi then display_file(global_nwfileans)
+        if global_ansi then
+          display_file(global_nwfileans)
         else display_file(global_nwfileasc);
         crlf;
         pause;
@@ -1103,7 +1112,8 @@ begin {* Main Program *}
 
         d(11, 'Yesterdays News');
         crlf;
-        if global_ansi then display_file(global_ynwfileans)
+        if global_ansi then
+          display_file(global_ynwfileans)
         else display_file(global_ynwfileasc);
         crlf;
         pause;
@@ -1121,7 +1131,8 @@ begin {* Main Program *}
       'T': begin {List of Teams}
 
         crlf;
-        if global_ansi then s := cfg_string(72)
+        if global_ansi then
+          s := cfg_string(72)
         else s := cfg_string(73);
         display_file(s);
         crlf;
@@ -1219,7 +1230,7 @@ begin {* Main Program *}
           {checking if maintenance is running on another node}
           if f_exists(global_maintfile) then
           begin
-            {read maint.flg data}
+                     {read maint.flg data}
             s := ''; {node}
             if open_txtfile(treset, txt, global_maintfile) then
             begin
@@ -1324,7 +1335,7 @@ begin {* Main Program *}
         end;
       end;
 
-    end; {case .end.}
+    end;       {case .end.}
 
   until never; {Main loop *END*}
 

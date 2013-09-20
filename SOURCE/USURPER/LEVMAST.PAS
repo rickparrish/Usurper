@@ -201,7 +201,8 @@ begin
     player.master := '1';
   end;
 
-  if ch = ReturnKey then ch := player.master;
+  if ch = ReturnKey then
+    ch := player.master;
 
   case ch of
     'A': begin
@@ -307,7 +308,8 @@ begin
 
     case ch of
       '?': begin {display menu}
-        if player.expert = True then display_menu(True, False)
+        if player.expert = True then
+          display_menu(True, False)
         else display_menu(False, False);
       end;
       'R': begin {leave level masters *start*}
@@ -315,7 +317,7 @@ begin
         crlf;
         d(config.textcolor, 'You leave your masters hut.');
         leave_level_masters := True;
-      end;  {leave level masters *end*}
+      end;       {leave level masters *end*}
       'S': begin {player status}
         status(player);
       end;
@@ -389,14 +391,16 @@ begin
                         sd(global_plycol, player0.name2);
                         d(global_talkcol, ' is wandering the streets and can''t be summoned!');
                         pause;
-                      end else if player0.hps < 1 then
+                      end else
+                      if player0.hps < 1 then
                       begin
                         crlf;
                         sd(global_talkcol, 'Sorry! ');
                         sd(global_plycol, player0.name2);
                         d(global_talkcol, ' is dead and can''t be summoned!');
                         pause;
-                      end else if x <> 0 then
+                      end else
+                      if x <> 0 then
                       begin
                         crlf;
                         sd(global_plycol, player0.name2);
@@ -404,7 +408,8 @@ begin
                         sd(15, commastr(x));
                         d(global_talkcol, ' experience points before ' + sex2[player0.sex] + ' can make a level!');
                         pause;
-                      end else if player0.location = offloc_prison then
+                      end else
+                      if player0.location = offloc_prison then
                       begin
                         crlf;
                         sd(global_talkcol, 'Impossible! ');
@@ -486,7 +491,8 @@ begin
 
                   crlf;
 
-                  if player0.ai = 'H' then found := True
+                  if player0.ai = 'H' then
+                    found := True
                   else found := False;
 
                   raise_player(player0, True, found, False, True, player.name2);
@@ -503,7 +509,8 @@ begin
               begin
                 sd(global_plycol, player0.name2);
                 d(config.textcolor, ' bows deeply before ' + sex3[player0.sex] + ' teacher.');
-                d(config.textcolor, uplc + sagee + config.textcol1 + ' and ' + uplc + player0.name2 + config.textcol1 + ' then walk upstairs.');
+                d(config.textcolor, uplc + sagee + config.textcol1 + ' and ' + uplc + player0.name2 +
+                  config.textcol1 + ' then walk upstairs.');
 
                 crlf;
                 sd(config.textcolor, 'You wait ..');
@@ -511,19 +518,22 @@ begin
 
                 crlf;
 
-                if player0.ai = 'H' then found := True
+                if player0.ai = 'H' then
+                  found := True
                 else found := False;
 
                 raise_player(player0, True, found, False, True, player.name2);
 
                 sd(global_plycol, player0.name2);
                 d(config.textcolor, ' has returned!');
-                d(config.textcolor, uplc + player0.name2 + config.textcol1 + ' hugs you, waves farewell and disappears out through' + ' the door.');
+                d(config.textcolor, uplc + player0.name2 + config.textcol1 +
+                  ' hugs you, waves farewell and disappears out through' + ' the door.');
               end;
 
               add_shadow(SRemoveShadows, player, '', 'going to sleep...', 0);
             end;
-          end else if (z = 0) and (no_more = False) then
+          end else
+          if (z = 0) and (no_more = False) then
           begin
             d(15, 'Sorry, couldn''t find that character.');
             crlf;
@@ -569,7 +579,8 @@ begin
                   z := i;
                   if player0.king = True then
                   begin
-                    d(global_talkcol, 'You will get no information of the King! ' + uplc + sagee + config.textcol1 + ' declares.');
+                    d(global_talkcol, 'You will get no information of the King! ' + uplc + sagee +
+                      config.textcol1 + ' declares.');
                     d(global_talkcol, 'Such information must not fall into enemy hands!');
                     crlf;
                     {a:='Empty';}
@@ -595,7 +606,8 @@ begin
 
                         s := player0.name2;
                         zz := 1;
-                        d(config.textcolor, uplc + sagee + config.textcol1 + ' mumbles a couple of spells and then gives you ' + uplc + s + config.textcol1 + '!');
+                        d(config.textcolor, uplc + sagee + config.textcol1 +
+                          ' mumbles a couple of spells and then gives you ' + uplc + s + config.textcol1 + '!');
                         status(player0);
                         break;
 
@@ -617,7 +629,8 @@ begin
             end;
           end; {for j:= .end.}
 
-          if no_more then break;
+          if no_more then
+            break;
 
         end; {for i:= .end.}
 
@@ -635,7 +648,8 @@ begin
         if player.level > 99 then
         begin
           crlf;
-          d(config.textcolor, uplc + sagee + config.textcol1 + ' clears his throat and speaks : ' + utalkc + 'You cannot receive further');
+          d(config.textcolor, uplc + sagee + config.textcol1 + ' clears his throat and speaks : ' +
+            utalkc + 'You cannot receive further');
           d(global_talkcol, 'levels from me. You must seek help elsewhere from now on.');
           d(global_talkcol, 'But I think you can go far if you follow your instincts.');
           d(global_talkcol, 'But now you must leave me, I am old and tired.');
@@ -653,7 +667,8 @@ begin
 
           if x <> 0 then
           begin
-            d(global_talkcol, 'but you are not yet fully qualified to receive a raise to level ' + commastr(player.level + 1) + '.');
+            d(global_talkcol, 'but you are not yet fully qualified to receive a raise to level ' +
+              commastr(player.level + 1) + '.');
             d(global_talkcol, 'You need ' + uwhite + commastr(x) + utalkc + ' experience points!');
             crlf;
             pause;
@@ -668,7 +683,7 @@ begin
         end;
       end; {level raise *end*}
 
-    end; {case .end.}
+    end;   {case .end.}
 
   until leave_level_masters = True;
 

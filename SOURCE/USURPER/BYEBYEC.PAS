@@ -108,7 +108,8 @@ begin
     {player.allowed:=false;}
     Reduce_Player_Resurrections(player, True);
 
-  end else if (global_PlayerInFight) and (config.PunishCarrierDroppers > 0) then
+  end else
+  if (global_PlayerInFight) and (config.PunishCarrierDroppers > 0) then
   begin
 
     {message}

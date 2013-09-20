@@ -191,7 +191,8 @@ begin
 
   {h„mtar Groggoss namn fr†n .CFG}
   owner := cfg_string(21);
-  if owner = '' then owner := 'Groggo';
+  if owner = '' then
+    owner := 'Groggo';
 
   repeat
 
@@ -209,7 +210,8 @@ begin
 
     case ch of
       '?': begin
-        if player.expert = True then display_menu(True, False)
+        if player.expert = True then
+          display_menu(True, False)
         else display_menu(False, False);
       end;
       'S': begin
@@ -365,7 +367,8 @@ begin
                       break;
                     end else
                     begin
-                      if confirm('Continue Search', 'N') = False then break;
+                      if confirm('Continue Search', 'N') = False then
+                        break;
                     end;
                   end;
                 end;
@@ -450,12 +453,18 @@ begin
                     Warrior: x := 2;
                   end;
 
-                  if pl0^.disres > 10 then Inc(x);
-                  if pl0^.disres > 30 then Inc(x);
-                  if pl0^.disres > 60 then Inc(x);
-                  if pl0^.disres > 100 then Inc(x);
-                  if pl0^.disres > 150 then Inc(x);
-                  if pl0^.disres > 240 then Inc(x);
+                  if pl0^.disres > 10 then
+                    Inc(x);
+                  if pl0^.disres > 30 then
+                    Inc(x);
+                  if pl0^.disres > 60 then
+                    Inc(x);
+                  if pl0^.disres > 100 then
+                    Inc(x);
+                  if pl0^.disres > 150 then
+                    Inc(x);
+                  if pl0^.disres > 240 then
+                    Inc(x);
 
                   if random(x) < 3 then
                   begin
@@ -545,7 +554,8 @@ begin
                     {news-paper}
                     newsy(True,
                       'Dirty Attempt!',
-                      ' ' + uplc + player.name2 + config.textcol1 + ' tried to cast a Disease spell on ' + uplc + pl0^.name2 + config.textcol1 + '!',
+                      ' ' + uplc + player.name2 + config.textcol1 + ' tried to cast a Disease spell on ' +
+                      uplc + pl0^.name2 + config.textcol1 + '!',
                       '',
                       '',
                       '',
@@ -606,9 +616,11 @@ begin
 
                     crlf;
                     yy := pl0^.level * 50000;
-                    if yy < 0 then yy := 9000;
+                    if yy < 0 then
+                      yy := 9000;
 
-                    d(config.textcolor, 'This will cost ' + uyellow + commastr(yy) + config.textcol1 + ' ' + many_money(yy) + '!');
+                    d(config.textcolor, 'This will cost ' + uyellow + commastr(yy) + config.textcol1 +
+                      ' ' + many_money(yy) + '!');
                     if confirm('Go ahead and pay', 'n') = True then
                     begin
                       if player.gold < yy then
@@ -683,7 +695,8 @@ begin
                       {news-paper}
                       newsy(True,
                         'Nasty Attempt!',
-                        ' ' + uplc + player.name2 + config.textcol1 + ' tried to summon a Demon against ' + uplc + pl0^.name2 + config.textcol1 + '!',
+                        ' ' + uplc + player.name2 + config.textcol1 + ' tried to summon a Demon against ' +
+                        uplc + pl0^.name2 + config.textcol1 + '!',
                         '',
                         '',
                         '',
@@ -750,7 +763,8 @@ begin
                     end;
                   end else
                   begin
-                    if confirm('Continue search', 'Y') = False then break;
+                    if confirm('Continue search', 'Y') = False then
+                      break;
                   end;
                 end;
               end;

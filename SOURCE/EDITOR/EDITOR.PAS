@@ -23,8 +23,9 @@ Copyright 2007 Jakob Dangarden
 }
 
 program Editor;
-{Usurper - DoorGame Editor}
-{Tools:Borland Pascal 7.0 and TurboVision 2.0}
+
+ {Usurper - DoorGame Editor}
+ {Tools:Borland Pascal 7.0 and TurboVision 2.0}
 
                 {to change version and year: look for uver in init.pas
                  and extra.pas}
@@ -38,9 +39,9 @@ program Editor;
 uses
  {$IFDEF MSDOS}Overlay, {$ENDIF} Init, CfgVal, JakobE, muffi2, extra, file_io, Upgrade;
 
-{---$O Addit}
-{---$O CfgHelp}
-{---$O helpfile}
+ {---$O Addit}
+ {---$O CfgHelp}
+ {---$O helpfile}
 {$O CfgVal}
 {$O CfgDef}
 {$O Extra}
@@ -53,7 +54,7 @@ uses
 {$O eddrink}         {*grave.diggers* *vultures* *slaves* *black hawks*
 {$O edrings}         {undertaker,
 {$O edshield}        {zonk,septic,death,buzzard,69,ferret,stinky,
-{$O edbody}{bad max,scrag,hooks,toad,pinball,stone,midnight,}
+{$O edbody} {bad max,scrag,hooks,toad,pinball,stone,midnight,}
 {$O edhead}{vanessa,stinkfinger,ferret}
 {$O edneck}
 {$O edarms}
@@ -192,7 +193,8 @@ begin
     unable_To_access(ucfg);
   end;
 
-  if upcasestr(s) = 'CLASSIC' then classic := True
+  if upcasestr(s) = 'CLASSIC' then
+    classic := True
   else classic := False;
 
   {the standard pascal randomize routine}

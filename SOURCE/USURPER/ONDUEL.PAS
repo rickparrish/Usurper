@@ -73,7 +73,7 @@ begin
     5: s := 'I''ll get you next time ' + winner + '!, ' + loser + ' says.';
   end; {case .end.}
 
-  {Convert string to Standard ANSI}
+       {Convert string to Standard ANSI}
   after_battle := uconv(s);
 
 end; {after_battle *end*}
@@ -88,7 +88,8 @@ begin
   bye := False;
   sleep := 0;
 
-  if imp = True then i := 1
+  if imp = True then
+    i := 1
   else i := 0;
   repeat
 
@@ -140,7 +141,8 @@ procedure Put_Own(incom: char);
 var i: byte;
 begin
 
-  if imp = True then i := 0
+  if imp = True then
+    i := 0
   else i := 1;
   commy.com := incom;
   commy.nr1 := nr1;
@@ -155,7 +157,8 @@ var i:   byte;
   sleep: longint;
 begin
   sleep := 0;
-  if imp = True then i := 0
+  if imp = True then
+    i := 0
   else i := 1;
 
   {init incoming orders}
@@ -326,19 +329,23 @@ begin
     Assign(comfile, onliner.comfile);
   {$I-}rewrite(comfile);{$I+}
     error := IoResult;
-    if error <> 0 then unable_to_create(onliner.comfile, error);
+    if error <> 0 then
+      unable_to_create(onliner.comfile, error);
 
   {$I-}Write(comfile, commy);{$I+}
     error := IoResult;
-    if error <> 0 then unable_to_write(onliner.comfile, error);
+    if error <> 0 then
+      unable_to_write(onliner.comfile, error);
 
   {$I-}Write(comfile, commy);{$I+}
     error := IoResult;
-    if error <> 0 then unable_to_write(onliner.comfile, error);
+    if error <> 0 then
+      unable_to_write(onliner.comfile, error);
 
   {$I-}Close(comfile);{$I+}
     error := IoResult;
-    if error <> 0 then unable_to_close(onliner.comfile, error);
+    if error <> 0 then
+      unable_to_close(onliner.comfile, error);
 
   end else
   begin
@@ -380,7 +387,8 @@ begin
 
       end;
 
-      if waits > global_online_maxwaits then abort := True;
+      if waits > global_online_maxwaits then
+        abort := True;
 
     until (f_exists(onliner.comfile)) or (abort);
 
@@ -419,7 +427,7 @@ begin
     end else
     begin { if challenger = false }
 
-      {load opponent}
+          {load opponent}
       load_character(enemy, 1, fs2);
       ch := '?';
 
@@ -445,8 +453,10 @@ begin
             menu2('(C)ast Spell  ');
           end;
 
-          if player.class = Paladin then menu2('(1) Soul Strike  ');
-          if player.class = Assassin then menu2('(1) Backstab  ');
+          if player.class = Paladin then
+            menu2('(1) Soul Strike  ');
+          if player.class = Assassin then
+            menu2('(1) Backstab  ');
           crlf;
           sd(config.textcolor, ':');
         end;
@@ -581,7 +591,8 @@ begin
               begin
                 ch := '1';
               end;
-            end else if player.class = Assassin then
+            end else
+            if player.class = Assassin then
             begin
               if config.classic then
               begin
@@ -640,7 +651,8 @@ begin
                 d(config.textcolor, 'But you miss!');
                 d(config.textcolor, enemy.name2 + ' laughs at your pathetic attempt.');
               end;
-              if nr1 < 1 then nr1 := 0;
+              if nr1 < 1 then
+                nr1 := 0;
               Dec(enemy.hps, nr1);
             end;
             Paladin: begin
@@ -675,7 +687,8 @@ begin
           normal_defence(enemy);
 
           nr1 := player.punch - enemy.absorb;
-          if nr1 < 1 then nr1 := 0;
+          if nr1 < 1 then
+            nr1 := 0;
           Dec(enemy.hps, nr1);
 
           if nr1 < 1 then
@@ -878,7 +891,8 @@ begin
       d(15, ' are DEAD!');
       crlf;
       adios := True;
-    end else if enemy.hps < 1 then
+    end else
+    if enemy.hps < 1 then
     begin
    {add enemy as shadow player, so he can''t return before he has been
     frisked and removed of his earthly belongings.}
@@ -902,7 +916,8 @@ begin
       {take opponents money}
       nr1 := enemy.gold;
       enemy.gold := 0;
-      if nr1 < 1 then nr1 := 0;
+      if nr1 < 1 then
+        nr1 := 0;
       sd(config.textcolor, 'You take ');
       sd(14, commastr(nr1));
       sd(config.textcolor, ' ' + many_money(nr1) + ' from ');
@@ -936,7 +951,8 @@ begin
       {remove shadow}
       add_shadow(SRemove, enemy, '', '', 0);
 
-    end else if player.hps < 1 then
+    end else
+    if player.hps < 1 then
     begin
       d(12, 'You are DEAD!');
       crlf;
@@ -985,8 +1001,9 @@ begin
     end;
   end; {if online.comfile exists}
 
-  {enemy has fallen asleep at his terminal...}
-  if round = 1 then s := ''
+       {enemy has fallen asleep at his terminal...}
+  if round = 1 then
+    s := ''
   else s := 's';
 
   if hesleepy = True then
@@ -1003,8 +1020,8 @@ begin
       '',
       '',
       '');
-  end {player has fallen a sleep at his terminal...}
-  else if mesleepy = True then
+  end {player has fallen a sleep at his terminal...} else
+  if mesleepy = True then
   begin
     {news-paper}
     newsy(True,
@@ -1018,8 +1035,8 @@ begin
       '',
       '',
       '');
-  end {did someone beg for mercy?}
-  else if beggar <> '' then
+  end {did someone beg for mercy?} else
+  if beggar <> '' then
   begin
     if the_challenger = True then
     begin
@@ -1036,8 +1053,8 @@ begin
         '',
         '');
     end;
-  end {are both players dead?}
-  else if (enemy.hps < 1) and (player.hps < 1) then
+  end {are both players dead?} else
+  if (enemy.hps < 1) and (player.hps < 1) then
   begin
     if the_challenger = True then
     begin
@@ -1056,8 +1073,8 @@ begin
     end;
 
     normal_exit;
-  end {is enemy dead?}
-  else if enemy.hps < 1 then
+  end {is enemy dead?} else
+  if enemy.hps < 1 then
   begin
     if the_challenger = True then
     begin
@@ -1074,8 +1091,8 @@ begin
         '',
         '');
     end;
-  end {is player dead?}
-  else if player.hps < 1 then
+  end {is player dead?} else
+  if player.hps < 1 then
   begin
     {news-paper}
     newsy(True,

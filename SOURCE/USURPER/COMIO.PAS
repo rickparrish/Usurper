@@ -78,11 +78,15 @@ begin;
     Fossil: async_send(ch);
 {$IFDEF MSDOS}
     Internal: begin
-      while CTSStat(comport) or RTSstat(comport) do if not AsyncCarrierPresent then exit;
+      while CTSStat(comport) or RTSstat(comport) do
+        if not AsyncCarrierPresent then
+          exit;
       ComWriteChw(comport, ch);
     end;
     Digi: begin
-      while (not OutReady) do if not AsyncCarrierPresent then exit;
+      while (not OutReady) do
+        if not AsyncCarrierPresent then
+          exit;
       Digi_send(ch);
     end;
 {$ENDIF}
@@ -133,9 +137,11 @@ begin;
   AsyncIoType := Fossil;
   AsyncBufferStatus(Insize, infree, outsize, outfree, fossilname);
   s := '';
-  for p := 1 to length(fossilname) do s := s + Upcase(fossilname[p]);
+  for p := 1 to length(fossilname) do
+    s := s + Upcase(fossilname[p]);
   p := Pos('BNU', s);
-  if p > 0 then fosbnu := True;
+  if p > 0 then
+    fosbnu := True;
 end;
 
 procedure AsyncSelectDigiBoard;
@@ -178,7 +184,9 @@ var
   i: byte;
 begin;
   case asynciotype of
-    Fossil: if not NoFossInit then if fosbnu then async_set_baudbnu(n)
+    Fossil: if not NoFossInit then
+        if fosbnu then
+          async_set_baudbnu(n)
         else
           async_set_baud(n);
 {$IFDEF MSDOS}

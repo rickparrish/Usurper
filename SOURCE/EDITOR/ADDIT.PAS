@@ -82,12 +82,12 @@ function Look_For_Item(templist: pstringcollection): longint;
 
 procedure Player_Editor;
 procedure Player_Page2; {Player/Npc Editor page 2}
-procedure Phrase_Page; {Player/Npc Editor, phrases dialog box}
+procedure Phrase_Page;  {Player/Npc Editor, phrases dialog box}
 
 procedure DoorGuard_Editor;
 procedure Drink_Editor; {user created drinks, at Orbs}
 procedure Drink_Ingredients_Editor(var a_drink: drinkrec); {called from drink_editor}
-procedure Moat_Editor; {moat creatures}
+procedure Moat_Editor;  {moat creatures}
 
 procedure Item_Editor;
 procedure Monster_Editor;
@@ -139,7 +139,8 @@ begin
     Warrior: i := 11;
   end;
 
-  if o.restrict[i] then class_restricted := True
+  if o.restrict[i] then
+    class_restricted := True
   else class_restricted := False;
 
 end;
@@ -249,7 +250,8 @@ begin
     vakt.Name := gue.Name;
     vakt.cost := gue.cost;
     vakt.hps := gue.hps;
-    if gue.multi = 0 then vakt.multiple := True
+    if gue.multi = 0 then
+      vakt.multiple := True
     else vakt.multiple := False;
 
     vakt.barmor := gue.barmor;
@@ -265,7 +267,8 @@ begin
     gue.Name := vakt.Name;
     gue.cost := vakt.cost;
     gue.hps := vakt.hps;
-    if vakt.multiple then gue.multi := 0
+    if vakt.multiple then
+      gue.multi := 0
     else gue.multi := 1;
     gue.barmor := vakt.barmor;
     gue.battack := vakt.battack;
@@ -288,7 +291,8 @@ begin
     moaty.Name := mue.Name;
     moaty.cost := mue.cost;
     moaty.hps := mue.hps;
-    if mue.multi = 0 then moaty.deleted := True
+    if mue.multi = 0 then
+      moaty.deleted := True
     else moaty.deleted := False;
 
     moaty.barmor := mue.barmor;
@@ -304,7 +308,8 @@ begin
     mue.Name := moaty.Name;
     mue.cost := moaty.cost;
     mue.hps := moaty.hps;
-    if moaty.deleted then mue.multi := 0
+    if moaty.deleted then
+      mue.multi := 0
     else mue.multi := 1;
     mue.barmor := moaty.barmor;
     mue.battack := moaty.battack;
@@ -354,10 +359,12 @@ begin
     drinky.ordered := due.ordered;
     drinky.lasthad := due.lasthad;
 
-    if due.secret = 0 then drinky.secret := True
+    if due.secret = 0 then
+      drinky.secret := True
     else drinky.secret := False;
 
-    if due.deleted = 0 then drinky.deleted := True
+    if due.deleted = 0 then
+      drinky.deleted := True
     else drinky.deleted := False;
 
   end else
@@ -372,10 +379,12 @@ begin
     due.lasthad := drinky.lasthad;
     due.lastdat := datefix(drinky.lastdat);
 
-    if drinky.secret then due.secret := 0
+    if drinky.secret then
+      due.secret := 0
     else due.secret := 1;
 
-    if drinky.deleted then due.deleted := 0
+    if drinky.deleted then
+      due.deleted := 0
     else due.deleted := 1;
 
   end;
@@ -392,7 +401,8 @@ begin
     goddy.Name := gue.Name;
     goddy.realname := gue.realname;
 
-    if gue.deleted = 0 then goddy.deleted := True
+    if gue.deleted = 0 then
+      goddy.deleted := True
     else goddy.deleted := False;
 
   end else
@@ -401,7 +411,8 @@ begin
     gue.Name := goddy.Name;
     gue.realname := goddy.realname;
 
-    if goddy.deleted then gue.deleted := 0
+    if goddy.deleted then
+      gue.deleted := 0
     else gue.deleted := 1;
 
   end;
@@ -419,7 +430,8 @@ begin
     childy.mother := cue.mother;
     childy.father := cue.father;
 
-    if cue.deleted = 0 then childy.deleted := True
+    if cue.deleted = 0 then
+      childy.deleted := True
     else childy.deleted := False;
 
   end else
@@ -429,7 +441,8 @@ begin
     cue.mother := childy.mother;
     cue.father := childy.father;
 
-    if childy.deleted then cue.deleted := 0
+    if childy.deleted then
+      cue.deleted := 0
     else cue.deleted := 1;
 
   end;
@@ -445,14 +458,17 @@ begin
 
     for i := 1 to maxmspells do
     begin
-      if mony.spell[i] = 1 then gulp.spell[i] := True
+      if mony.spell[i] = 1 then
+        gulp.spell[i] := True
       else gulp.spell[i] := False;
     end;
 
     gulp.Name := mony.Name;
-    if mony.grabweap = 0 then gulp.grabweap := True
+    if mony.grabweap = 0 then
+      gulp.grabweap := True
     else gulp.grabweap := False;
-    if mony.grabarm = 0 then gulp.grabarm := True
+    if mony.grabarm = 0 then
+      gulp.grabarm := True
     else gulp.grabarm := False;
 
     gulp.phrase := mony.phrase;
@@ -469,14 +485,17 @@ begin
     {MONSTER -> DIALOG}
     for i := 1 to maxmspells do
     begin
-      if gulp.spell[i] then mony.spell[i] := 1
+      if gulp.spell[i] then
+        mony.spell[i] := 1
       else mony.spell[i] := 0;
     end;
 
     mony.Name := gulp.Name;
-    if gulp.grabweap then mony.grabweap := 0
+    if gulp.grabweap then
+      mony.grabweap := 0
     else mony.grabweap := 1;
-    if gulp.grabarm then mony.grabarm := 0
+    if gulp.grabarm then
+      mony.grabarm := 0
     else mony.grabarm := 1;
 
     mony.phrase := gulp.phrase;
@@ -535,19 +554,24 @@ begin
       6: obj.cure := Leprosy;
     end;
 
-    if dia.shop = 0 then obj.shop := True
+    if dia.shop = 0 then
+      obj.shop := True
     else obj.shop := False;
 
-    if dia.dng = 0 then obj.dng := True
+    if dia.dng = 0 then
+      obj.dng := True
     else obj.dng := False;
 
-    if dia.cursed = 0 then obj.cursed := True
+    if dia.cursed = 0 then
+      obj.cursed := True
     else obj.cursed := False;
 
-    if dia.good = 0 then obj.good := True
+    if dia.good = 0 then
+      obj.good := True
     else obj.good := False;
 
-    if dia.evil = 0 then obj.evil := True
+    if dia.evil = 0 then
+      obj.evil := True
     else obj.evil := False;
 
   end else
@@ -591,19 +615,24 @@ begin
       Leprosy: dia.cure := 6;
     end;
 
-    if obj.shop then dia.shop := 0
+    if obj.shop then
+      dia.shop := 0
     else dia.shop := 1;
 
-    if obj.dng then dia.dng := 0
+    if obj.dng then
+      dia.dng := 0
     else dia.dng := 1;
 
-    if obj.cursed then dia.cursed := 0
+    if obj.cursed then
+      dia.cursed := 0
     else dia.cursed := 1;
 
-    if obj.good then dia.good := 0
+    if obj.good then
+      dia.good := 0
     else dia.good := 1;
 
-    if obj.evil then dia.evil := 0
+    if obj.evil then
+      dia.evil := 0
     else dia.evil := 1;
 
   end;
@@ -619,15 +648,19 @@ begin
 
     ply.name1 := man.Name;
     ply.name2 := man.alias;
-    if man.human = 0 then ply.ai := 'H'
+    if man.human = 0 then
+      ply.ai := 'H'
     else ply.ai := 'C';
-    if man.king = 0 then ply.king := True
+    if man.king = 0 then
+      ply.king := True
     else ply.king := False;
 
-    if man.allowed = 0 then ply.allowed := True
+    if man.allowed = 0 then
+      ply.allowed := True
     else ply.allowed := False;
 
-    if man.sex = 0 then ply.sex := 2
+    if man.sex = 0 then
+      ply.sex := 2
     else ply.sex := 1;
 
     case man.race of
@@ -751,8 +784,7 @@ begin
     {battlecry}
     {ply.battlecry:=man.battlecry; moved this entry to 'phrases' dialog box}
 
-  end
-  else
+  end else
   begin {PLAYER -> EDITREC}
 
     if ply.deleted then
@@ -765,17 +797,21 @@ begin
       man.alias := ply.name2;
     end;
 
-    if ply.ai = 'H' then man.human := 0
+    if ply.ai = 'H' then
+      man.human := 0
     else man.human := 1;
 
-    if ply.king then man.king := 0
+    if ply.king then
+      man.king := 0
     else man.king := 1;
 
-    if ply.allowed then man.allowed := 0
+    if ply.allowed then
+      man.allowed := 0
     else man.allowed := 1;
 
 
-    if ply.sex = 1 then man.sex := 1
+    if ply.sex = 1 then
+      man.sex := 1
     else man.sex := 0;
     {man.sex:=ply.sex;}
 
@@ -916,7 +952,8 @@ begin
 
     for i := 1 to maxspells do
     begin
-      if man.spell[i] = 1 then ply.spell[i, 1] := True
+      if man.spell[i] = 1 then
+        ply.spell[i, 1] := True
       else ply.spell[i, 1] := False;
     end;
 
@@ -929,18 +966,24 @@ begin
  { if man.immortal then ply.immortal:=false
                   else ply.immortal:=true;
  }
-    if man.immortal = 1 then ply.immortal := True
+    if man.immortal = 1 then
+      ply.immortal := True
     else ply.immortal := False;
 
-    if man.blind = 1 then ply.blind := True
+    if man.blind = 1 then
+      ply.blind := True
     else ply.blind := False;
-    if man.plague = 1 then ply.plague := True
+    if man.plague = 1 then
+      ply.plague := True
     else ply.plague := False;
-    if man.smallpox = 1 then ply.smallpox := True
+    if man.smallpox = 1 then
+      ply.smallpox := True
     else ply.smallpox := False;
-    if man.measles = 1 then ply.measles := True
+    if man.measles = 1 then
+      ply.measles := True
     else ply.measles := False;
-    if man.leprosy = 1 then ply.leprosy := True
+    if man.leprosy = 1 then
+      ply.leprosy := True
     else ply.leprosy := False;
 
     {maxtime}
@@ -972,7 +1015,8 @@ begin
 
     for i := 1 to maxspells do
     begin
-      if ply.spell[i, 1] then man.spell[i] := 1
+      if ply.spell[i, 1] then
+        man.spell[i] := 1
       else man.spell[i] := 0;
     end;
 
@@ -983,20 +1027,26 @@ begin
 {  if ply.immortal then man.immortal:=false
                   else man.immortal:=true;
 }
-    if ply.immortal then man.immortal := 1
+    if ply.immortal then
+      man.immortal := 1
     else man.immortal := 0;
 
 
 
-    if ply.blind then man.blind := 1
+    if ply.blind then
+      man.blind := 1
     else man.blind := 0;
-    if ply.plague then man.plague := 1
+    if ply.plague then
+      man.plague := 1
     else man.plague := 0;
-    if ply.smallpox then man.smallpox := 1
+    if ply.smallpox then
+      man.smallpox := 1
     else man.smallpox := 0;
-    if ply.measles then man.measles := 1
+    if ply.measles then
+      man.measles := 1
     else man.measles := 0;
-    if ply.leprosy then man.leprosy := 1
+    if ply.leprosy then
+      man.leprosy := 1
     else man.leprosy := 0;
 
     {maxtime}
@@ -1479,32 +1529,48 @@ var go: boolean;
 begin
 
   go := True;
-  if obj.cursed = True then go := False;
-  if obj.owned <> '' then go := False;
-  if (obj.good) and (ply.dark > 0) then go := False;
-  if (obj.evil) and (ply.chiv > 0) then go := False;
-  if obj.str_need > ply.strength then go := False;
+  if obj.cursed = True then
+    go := False;
+  if obj.owned <> '' then
+    go := False;
+  if (obj.good) and (ply.dark > 0) then
+    go := False;
+  if (obj.evil) and (ply.chiv > 0) then
+    go := False;
+  if obj.str_need > ply.strength then
+    go := False;
 
   if obj.ttype = Weapon then
   begin
-    if obj.attack < 1 then go := False; {attack v„rde}
-    if obj.attack < (ply.level) then go := False;
+    if obj.attack < 1 then
+      go := False; {attack v„rde}
+    if obj.attack < (ply.level) then
+      go := False;
   end;
 
   if obj.ttype <> Weapon then
   begin
-    if obj.armor < 0 then go := False;  {armor v„rde}
+    if obj.armor < 0 then
+      go := False;  {armor v„rde}
   end;
 
 
-  if (ply.class in [Magician, Cleric, Sage]) and (obj.mana < 0) then go := False;
-  if obj.strength < -10 then go := False;
-  if obj.strength < -10 then go := False;
-  if obj.hps < -5 then go := False;
-  if obj.stamina < -20 then go := False;
-  if obj.charisma < -25 then go := False;
-  if obj.dex < -25 then go := False;
-  if obj.agility < -25 then go := False;
+  if (ply.class in [Magician, Cleric, Sage]) and (obj.mana < 0) then
+    go := False;
+  if obj.strength < -10 then
+    go := False;
+  if obj.strength < -10 then
+    go := False;
+  if obj.hps < -5 then
+    go := False;
+  if obj.stamina < -20 then
+    go := False;
+  if obj.charisma < -25 then
+    go := False;
+  if obj.dex < -25 then
+    go := False;
+  if obj.agility < -25 then
+    go := False;
 
   value_objekt := go;
 
@@ -1521,7 +1587,7 @@ begin
   end else
   begin {NEW game mode}
 
-    {left hand weapon}
+        {left hand weapon}
     if (ply.lhand = 0) and (allowitem[15] = True) then
     begin
 
@@ -2062,40 +2128,65 @@ begin
   save := False;
   dep := False;
 
-  if pryl.Name <> memobj.Name then save := True;
-  if pryl.Value <> memobj.Value then save := True;
-  if pryl.cure <> memobj.cure then save := True;
-  if pryl.shop <> memobj.shop then save := True;
-  if pryl.dng <> memobj.dng then save := True;
-  if pryl.cursed <> memobj.cursed then save := True;
-  if pryl.minlev <> memobj.minlev then save := True;
-  if pryl.maxlev <> memobj.maxlev then save := True;
-  if pryl.good <> memobj.good then save := True;
-  if pryl.evil <> memobj.evil then save := True;
-  if pryl.str_need <> memobj.str_need then save := True;
+  if pryl.Name <> memobj.Name then
+    save := True;
+  if pryl.Value <> memobj.Value then
+    save := True;
+  if pryl.cure <> memobj.cure then
+    save := True;
+  if pryl.shop <> memobj.shop then
+    save := True;
+  if pryl.dng <> memobj.dng then
+    save := True;
+  if pryl.cursed <> memobj.cursed then
+    save := True;
+  if pryl.minlev <> memobj.minlev then
+    save := True;
+  if pryl.maxlev <> memobj.maxlev then
+    save := True;
+  if pryl.good <> memobj.good then
+    save := True;
+  if pryl.evil <> memobj.evil then
+    save := True;
+  if pryl.str_need <> memobj.str_need then
+    save := True;
 
   for i := 1 to 5 do
   begin
-    if pryl.desc1[i] <> memobj.desc1[i] then save := True;
-    if pryl.desc2[i] <> memobj.desc2[i] then save := True;
+    if pryl.desc1[i] <> memobj.desc1[i] then
+      save := True;
+    if pryl.desc2[i] <> memobj.desc2[i] then
+      save := True;
   end;
 
   for i := 1 to maxclasses do
   begin
-    if pryl.restrict[i] <> memobj.restrict[i] then save := True;
+    if pryl.restrict[i] <> memobj.restrict[i] then
+      save := True;
   end;
 
-  if pryl.hps <> memobj.hps then dep := True;
-  if pryl.stamina <> memobj.stamina then dep := True;
-  if pryl.agility <> memobj.agility then dep := True;
-  if pryl.charisma <> memobj.charisma then dep := True;
-  if pryl.dex <> memobj.dex then dep := True;
-  if pryl.wisdom <> memobj.wisdom then dep := True;
-  if pryl.mana <> memobj.mana then dep := True;
-  if pryl.armor <> memobj.armor then dep := True;
-  if pryl.attack <> memobj.attack then dep := True;
-  if pryl.strength <> memobj.strength then dep := True;
-  if pryl.defence <> memobj.defence then dep := True;
+  if pryl.hps <> memobj.hps then
+    dep := True;
+  if pryl.stamina <> memobj.stamina then
+    dep := True;
+  if pryl.agility <> memobj.agility then
+    dep := True;
+  if pryl.charisma <> memobj.charisma then
+    dep := True;
+  if pryl.dex <> memobj.dex then
+    dep := True;
+  if pryl.wisdom <> memobj.wisdom then
+    dep := True;
+  if pryl.mana <> memobj.mana then
+    dep := True;
+  if pryl.armor <> memobj.armor then
+    dep := True;
+  if pryl.attack <> memobj.attack then
+    dep := True;
+  if pryl.strength <> memobj.strength then
+    dep := True;
+  if pryl.defence <> memobj.defence then
+    dep := True;
 
 
   if dep then
@@ -2112,7 +2203,8 @@ begin
 
     DeskTop^.ExecView(dia);
     Dispose(dia, Done);
-  end else if save then
+  end else
+  if save then
   begin
     Load_Objekt(FSave, pryl, pryl.ttype, rand);
   end;
@@ -2187,7 +2279,8 @@ begin
 
   for w := 1 to maxclasses do
   begin
-    if item.restrict[w] = False then items^.press(w - 1);
+    if item.restrict[w] = False then
+      items^.press(w - 1);
   end;
   Dia^.Insert(items);
 
@@ -2202,7 +2295,8 @@ begin
     {change user settings}
     for w := 1 to maxclasses do
     begin
-      if not items^.Mark(w - 1) then item.restrict[w] := True
+      if not items^.Mark(w - 1) then
+        item.restrict[w] := True
       else item.restrict[w] := False;
     end;
   end;
@@ -2225,13 +2319,16 @@ begin
   Assign(tempfile, s);
 
  {$I-}reset(tempfile);{$I+}
-  if IOResult <> 0 then unable_to_access(s);
+  if IOResult <> 0 then
+    unable_to_access(s);
 
  {$I-}x := filesize(tempfile);{$I+}
-  if IOResult <> 0 then unable_to_filesize(s);
+  if IOResult <> 0 then
+    unable_to_filesize(s);
 
  {$I-}Read(tempfile, tmpobjekt);{$I+}
-  if IOResult <> 0 then unable_to_read(s);
+  if IOResult <> 0 then
+    unable_to_read(s);
 
 
   if IOResult = 0 then
@@ -2266,29 +2363,36 @@ begin
       Assign(ofil, fname);
 
    {$I-}reset(ofil);{$I+}
-      if IOResult <> 0 then unable_to_access(fname);
+      if IOResult <> 0 then
+        unable_to_access(fname);
 
    {$I-}seek(ofil, filesize(ofil));{$I+}
-      if IOResult <> 0 then unable_to_seek(fname, 0);
+      if IOResult <> 0 then
+        unable_to_seek(fname, 0);
 
    {$I-}reset(tempfile);{$I+}
-      if IOResult <> 0 then unable_to_access(s);
+      if IOResult <> 0 then
+        unable_to_access(s);
 
       for i := 1 to x do
       begin
     {$I-}Read(tempfile, tmpobjekt);{$I+}
-        if Ioresult <> 0 then unable_to_read(s);
+        if Ioresult <> 0 then
+          unable_to_read(s);
 
     {$I-}Write(ofil, tmpobjekt);{$I+}
-        if Ioresult <> 0 then unable_to_write(fname);
+        if Ioresult <> 0 then
+          unable_to_write(fname);
 
       end;
 
    {$I-}Close(tempfile);{$I+}
-      if IOresult <> 0 then unable_to_close(s);
+      if IOresult <> 0 then
+        unable_to_close(s);
 
    {$I-}Close(ofil);{$I+}
-      if IOresult <> 0 then unable_to_close(fname);
+      if IOresult <> 0 then
+        unable_to_close(fname);
 
       messagebox(#3 + commastr(x) + ' ITEMS IMPORTED', nil, mfOkbutton + mfInformation);
     end;
@@ -2309,7 +2413,8 @@ begin
 
   Assign(tempfile, s);
  {$I-}rewrite(tempfile);{$I+}
-  if IOresult <> 0 then unable_to_create(s);
+  if IOresult <> 0 then
+    unable_to_create(s);
 
   for i := n1 to n2 do
   begin
@@ -2317,11 +2422,13 @@ begin
     load_objekt(Fload, tmpobjekt, typ, i);
 
   {$I-}Write(tempfile, tmpobjekt);{$I+}
-    if IOResult <> 0 then unable_to_write(s);
+    if IOResult <> 0 then
+      unable_to_write(s);
   end;
 
  {$I-}Close(tempfile);{$I+}
-  if IOresult <> 0 then unable_to_close(s);
+  if IOresult <> 0 then
+    unable_to_close(s);
 
   messagebox(#3 + commastr(n2 - n1) + ' ITEMS EXPORTED', nil, mfOkbutton + mfInformation);
 
@@ -2405,7 +2512,8 @@ begin
       for i := 1 to fs(FsPlayer) do
       begin
         load_player(Fload, player0, i);
-        if nam then ss := player0.name1
+        if nam then
+          ss := player0.name1
         else ss := player0.name2;
 
         if (findsub(s, ss)) and (player0.name2 <> user.name2) then
@@ -2445,7 +2553,8 @@ begin
             res := i;
             found := True;
             break;
-          end else if go = CmCancel then
+          end else
+          if go = CmCancel then
           begin
             res := -1;
             found := True;
@@ -2587,7 +2696,8 @@ begin
             res := i;
             found := True;
             break;
-          end else if go = CmCancel then
+          end else
+          if go = CmCancel then
           begin
             res := -1;
             found := True;
@@ -2730,7 +2840,8 @@ begin
             res := i;
             found := True;
             break;
-          end else if go = CmCancel then
+          end else
+          if go = CmCancel then
           begin
             res := -1;
             found := True;
@@ -2873,7 +2984,8 @@ begin
             res := i;
             found := True;
             break;
-          end else if go = CmCancel then
+          end else
+          if go = CmCancel then
           begin
             res := -1;
             found := True;
@@ -3016,7 +3128,8 @@ begin
             res := i;
             found := True;
             break;
-          end else if go = CmCancel then
+          end else
+          if go = CmCancel then
           begin
             res := -1;
             found := True;
@@ -3145,7 +3258,8 @@ begin
             res := i;
             found := True;
             break;
-          end else if go = CmCancel then
+          end else
+          if go = CmCancel then
           begin
             res := -1;
             found := True;
@@ -3253,7 +3367,8 @@ begin
             res := i;
             found := True;
             break;
-          end else if go = CmCancel then
+          end else
+          if go = CmCancel then
           begin
             res := -1;
             found := True;
@@ -3395,7 +3510,8 @@ begin
             res := i;
             found := True;
             break;
-          end else if go = CmCancel then
+          end else
+          if go = CmCancel then
           begin
             res := -1;
             found := True;
@@ -3545,7 +3661,8 @@ begin
           res := i;
           found := True;
           break;
-        end else if go = CmCancel then
+        end else
+        if go = CmCancel then
         begin
           res := -1;
           found := True;
@@ -4871,7 +4988,8 @@ begin
   w := 17;
 
   {we shadow the spell boxes if player is not a magic user}
-  if player.class in [Sage, Cleric, Magician] then shadow := False
+  if player.class in [Sage, Cleric, Magician] then
+    shadow := False
   else shadow := True;
 
   {setup checkboxes for the spells}
@@ -4910,7 +5028,7 @@ begin
   items := NewsItem('Never Delete Character', nil);
   dia^.CheckBoxes('', 28, 2, 25, 1, items, False, hcPeditNeverDel);
 
-  {Diseases}
+           {Diseases}
   t := 4;  {y start-coord}
   x1 := 28;{x start-coord}
   dia^.static(x1 + 1, t, 'Diseases');
@@ -4936,7 +5054,8 @@ begin
     begin
       diff := length(s) - 6;
       Dec(x1, diff);
-    end else if length(s) < 6 then
+    end else
+    if length(s) < 6 then
     begin
       diff := 6 - length(s);
       Inc(x1, diff);
@@ -4945,7 +5064,7 @@ begin
     Inc(y2);
   end; {for i:= .end.}
 
-  {insert player stats}
+       {insert player stats}
   Inc(y2, 2);
   dia^.ValEntry(54, y2, '  Monster Kills', 7, 0, 2000000000, hcPeditMkills);
   dia^.ValEntry(54, y2 + 1, 'Monster Defeats', 7, 0, 2000000000, hcPeditMDefeats);

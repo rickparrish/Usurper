@@ -24,6 +24,7 @@ Copyright 2007 Jakob Dangarden
 
 
 unit CfgHelp;
+
 {Usurper Editor - Configuration Options Help text}
               {see cfgdef.pas for help regarding adding/editing/removing
                config options}
@@ -1374,7 +1375,7 @@ begin
 
   end; {case .end.}
 
-  {return result}
+       {return result}
   configuration_help := s;
 
 end; {configuration_help *end*}

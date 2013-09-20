@@ -37,7 +37,8 @@ type
 
 function TMenuBoxShadow.GetPalette: PPalette;
 begin
-  if ParentMenu = nil then GetPalette := TMenuView.GetPalette
+  if ParentMenu = nil then
+    GetPalette := TMenuView.GetPalette
   else
     GetPalette := ParentMenu^.GetPalette;
 end;

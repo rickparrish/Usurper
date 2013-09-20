@@ -69,7 +69,8 @@ type DrinkTypes = (OwnDrink, FileDrink, MailDrink, NpcDrink);
                    MailDrink = player enjoys a free drink sent from another player
                    NpcDrink = player buys NPC player a drink}
 
-procedure Drink_a_drink(var Drinker: UserRec; KindofDrink: DrinkTypes; const cocktail: drinkrec; var InAmount: amountRec; RecNr: word);
+procedure Drink_a_drink(var Drinker: UserRec; KindofDrink: DrinkTypes; const cocktail: drinkrec;
+  var InAmount: amountRec; RecNr: word);
 {drinks}
 function Old_Drink(const adrink: drinkrec): boolean; {is drink record old}
 
@@ -84,7 +85,7 @@ uses
   News, Online;
 
 const
-  drink_col      = 9; {color used when displaying drink names}
+  drink_col      = 9;     {color used when displaying drink names}
   bartender: s40 = 'Sly'; {the bartender}
 
 
@@ -227,7 +228,7 @@ begin
 
   end; {for q:= .end.}
 
-  {no empty drink-slot found, we place the drink at the end of file}
+       {no empty drink-slot found, we place the drink at the end of file}
   if not found then
   begin
   {have to check if file has more than the allowed # of drinks specified
@@ -446,7 +447,7 @@ var
             j := j - gap;
           end;
         end; {while .end.}
-      end; {for i:= .end.}
+      end;   {for i:= .end.}
       gap := gap div 2;
     end; {while .end.}
 
@@ -544,7 +545,8 @@ begin
 
 end; {drink_top_list *end*}
 
-procedure Drink_a_drink(var Drinker: UserRec; KindofDrink: DrinkTypes; const cocktail: drinkrec; var InAmount: amountRec; RecNr: word);
+procedure Drink_a_drink(var Drinker: UserRec; KindofDrink: DrinkTypes; const cocktail: drinkrec;
+  var InAmount: amountRec; RecNr: word);
 {Custom-Made Drink, either from File or own mix}
 var
   i:         word;
@@ -611,7 +613,7 @@ begin
           91..100: d(global_talkcol, 'Holy Smokes!!! Thats alot of ' + ing[i] + '!');
         end; {case .end.}
       end;
-    end; {for i:= .end.}
+    end;     {for i:= .end.}
   end;
 
   if KindOfDrink in [OwnDrink, FileDrink] then
@@ -626,7 +628,8 @@ begin
     sd(global_plycol, bartender);
     d(config.textcolor, ' looks at you...');
     delay2(1000);
-  end else if KindOfDrink = NpcDrink then
+  end else
+  if KindOfDrink = NpcDrink then
   begin
     crlf;
     d(global_plycol, drinker.name2 + config.textcol1 + ' puts the empty cup on the bardisk...');
@@ -642,7 +645,8 @@ begin
     sd(global_plycol, bartender);
     d(config.textcolor, ' and You look at ' + uplc + drinker.name2 + config.textcol1 + '...');
     delay2(1000);
-  end else if KindOfDrink = MailDrink then
+  end else
+  if KindOfDrink = MailDrink then
   begin
     {MailDrink}
     crlf;
@@ -679,22 +683,30 @@ begin
  }
   killed := False;
 
-  if (InAmount.amount[10] > 0) and (drinker.class = Assassin) then killed := True;
+  if (InAmount.amount[10] > 0) and (drinker.class = Assassin) then
+    killed := True;
 
   {Elf Water}
   if InAmount.amount[11] > 0 then
   begin
     if (drinker.class = Cleric) or
       (drinker.class = Jester) or
-      (drinker.race = Troll) then killed := True;
+      (drinker.race = Troll) then
+      killed := True;
   end;
 
-  if InAmount.amount[4] >= 80 then killed := True;
-  if InAmount.amount[17] >= 80 then killed := True;
-  if InAmount.amount[1] >= 70 then killed := True;
-  if InAmount.amount[8] >= 90 then killed := True;
-  if InAmount.amount[9] >= 90 then killed := True;
-  if InAmount.amount[15] >= 80 then killed := True;
+  if InAmount.amount[4] >= 80 then
+    killed := True;
+  if InAmount.amount[17] >= 80 then
+    killed := True;
+  if InAmount.amount[1] >= 70 then
+    killed := True;
+  if InAmount.amount[8] >= 90 then
+    killed := True;
+  if InAmount.amount[9] >= 90 then
+    killed := True;
+  if InAmount.amount[15] >= 80 then
+    killed := True;
 
   for i := 1 to maxingredients do
   begin
@@ -739,7 +751,7 @@ begin
 
       end; {case .end.}
     end;
-  end; {for i:= .end.}
+  end;     {for i:= .end.}
 
 
   if (KindOfDrink <> OwnDrink) and (recnr > 0) then
@@ -799,7 +811,8 @@ begin
         {news-paper}
         newsy(True,
           'Drinking Death',
-          ' ' + uplc + drinker.name2 + config.textcol1 + ' died after having the special Cocktail; ' + udrinkc + cocktail.Name + config.textcol1 + '.',
+          ' ' + uplc + drinker.name2 + config.textcol1 + ' died after having the special Cocktail; ' +
+          udrinkc + cocktail.Name + config.textcol1 + '.',
           '',
           '',
           '',
@@ -813,7 +826,8 @@ begin
         {news-paper}
         newsy(True,
           'Free Drink proves Fatal',
-          ' ' + uplc + drinker.name2 + config.textcol1 + ' died after having the special Cocktail; ' + udrinkc + cocktail.Name + config.textcol1 + '.',
+          ' ' + uplc + drinker.name2 + config.textcol1 + ' died after having the special Cocktail; ' +
+          udrinkc + cocktail.Name + config.textcol1 + '.',
           '',
           '',
           '',
@@ -827,7 +841,8 @@ begin
         {news-paper}
         newsy(True,
           'Free Drink proves Fatal',
-          ' ' + uplc + drinker.name2 + config.textcol1 + ' died after having the special Cocktail; ' + udrinkc + cocktail.Name + config.textcol1 + '.',
+          ' ' + uplc + drinker.name2 + config.textcol1 + ' died after having the special Cocktail; ' +
+          udrinkc + cocktail.Name + config.textcol1 + '.',
           ' The deathbringer who served the drink was ' + uplc + player.name2 + config.textcol1 + '.',
           '',
           '',
@@ -845,10 +860,12 @@ begin
     if KindOfDrink in [OwnDrink, FileDrink] then
     begin
       d(config.textcolor, 'You slide down from the BarStool...');
-    end else if KindofDrink = MailDrink then
+    end else
+    if KindofDrink = MailDrink then
     begin
       d(config.textcolor, 'You feel extremely intoxicated...');
-    end else if KindOfDrink = NpcDrink then
+    end else
+    if KindOfDrink = NpcDrink then
     begin
       d(global_plycol, drinker.name2 + config.textcol1 + ' slides down from the BarStool...');
     end;
@@ -966,7 +983,7 @@ begin
       4: s := 'I''ve had enough.';
     end; {case .end.}
 
-    {Good Drink Experience}
+         {Good Drink Experience}
     case KindofDrink of
       OwnDrink: begin
         {news-paper}
@@ -986,7 +1003,8 @@ begin
         {news-paper}
         newsy(True,
           'Special Cocktail',
-          ' ' + uplc + drinker.name2 + config.textcol1 + ' enjoyed a special Cocktail; ' + udrinkc + cocktail.Name + config.textcol1 + '.',
+          ' ' + uplc + drinker.name2 + config.textcol1 + ' enjoyed a special Cocktail; ' + udrinkc +
+          cocktail.Name + config.textcol1 + '.',
           '',
           '',
           '',
@@ -1000,7 +1018,8 @@ begin
         {news-paper}
         newsy(True,
           'Free Drink',
-          ' ' + uplc + drinker.name2 + config.textcol1 + ' enjoyed a free drink; ' + udrinkc + cocktail.Name + config.textcol1 + '.',
+          ' ' + uplc + drinker.name2 + config.textcol1 + ' enjoyed a free drink; ' + udrinkc +
+          cocktail.Name + config.textcol1 + '.',
           '',
           '',
           '',
@@ -1014,8 +1033,10 @@ begin
         {news-paper}
         newsy(True,
           'Drink Buddies',
-          ' ' + uplc + drinker.name2 + config.textcol1 + ' enjoyed a free drink; ' + udrinkc + cocktail.Name + config.textcol1 + ' at Orbs.',
-          ' The generous ' + race_display(2, player.race, 0) + ' ' + uplc + player.name2 + config.textcol1 + ' paid the bill.',
+          ' ' + uplc + drinker.name2 + config.textcol1 + ' enjoyed a free drink; ' + udrinkc +
+          cocktail.Name + config.textcol1 + ' at Orbs.',
+          ' The generous ' + race_display(2, player.race, 0) + ' ' + uplc + player.name2 +
+          config.textcol1 + ' paid the bill.',
           '',
           '',
           '',
@@ -1108,10 +1129,12 @@ var
 
       case ch2 of
         'O': begin
-          if event = 2 then ch2 := ' ';
+          if event = 2 then
+            ch2 := ' ';
         end;
         'S': begin
-          if event = 1 then ch2 := ' ';
+          if event = 1 then
+            ch2 := ' ';
         end;
         'L': begin {look for drink}
           crlf;
@@ -1255,7 +1278,8 @@ var
           if (view = True) and (ch2 = 'S') then
           begin
             Result := realcounter;
-          end else if (view) and (ch2 = 'O') then
+          end else
+          if (view) and (ch2 = 'O') then
           begin
 
             {bartender mixes the drink}
@@ -1277,8 +1301,11 @@ var
               (is_online(tempdrink.creator, online_player)) then
             begin
 
-              online_send_to_player(tempdrink.creator, online_player, uplc + player.name2 + config.textcol1 + ' just ordered one of your' + ' drinks; ' + udrinkc + tempdrink.Name + config.textcol1 + '.');
-            end else if tempdrink.creator <> player.name2 then
+              online_send_to_player(tempdrink.creator, online_player, uplc + player.name2 +
+                config.textcol1 + ' just ordered one of your' + ' drinks; ' + udrinkc + tempdrink.Name +
+                config.textcol1 + '.');
+            end else
+            if tempdrink.creator <> player.name2 then
             begin
 
               {creator of drink is offline, lets send him a message}
@@ -1290,7 +1317,8 @@ var
                 '',
                 udrinkc + 'Drinker' + config.textcol1,
                 mkstring(7, underscore),
-                uplc + player.name2 + config.textcol1 + ' enjoyed your drink; ' + udrinkc + tempdrink.Name + config.textcol1 + '.',
+                uplc + player.name2 + config.textcol1 + ' enjoyed your drink; ' + udrinkc +
+                tempdrink.Name + config.textcol1 + '.',
                 '',
                 '',
                 '',
@@ -1310,7 +1338,7 @@ var
 
         end;
 
-      end; {Order or Select a drink .end.}
+      end;       {Order or Select a drink .end.}
 
       'V': begin {view ingredients}
         view := False;
@@ -1397,9 +1425,9 @@ var
         pause;
 
       end; {view ingredients .end.}
-    end; {case ch2 .end.}
+    end;   {case ch2 .end.}
 
-    {return result}
+           {return result}
     mini_menu := Result;
 
   end; {mini_menu}
@@ -1478,7 +1506,8 @@ var
         begin
           sd(config.textcolor, ' (last had by ');
           sd(global_plycol, adrink^.lasthad);
-          d(config.textcolor, ', the ' + race_display(2, adrink^.lastrac, 0) + ', ' + ulmag + fix_date(adrink^.lastdat) + config.textcol1 + ')');
+          d(config.textcolor, ', the ' + race_display(2, adrink^.lastrac, 0) + ', ' + ulmag +
+            fix_date(adrink^.lastdat) + config.textcol1 + ')');
         end else
         begin
           crlf;
@@ -1501,7 +1530,7 @@ var
 
       end; {mini menu/pause .end.}
 
-    end; {for i:= .end.}
+    end;   {for i:= .end.}
 
     if (menu_result = 0) and (lasttimewasthemenu = False) then
     begin
@@ -1530,13 +1559,14 @@ var
 
 begin {*MAIN PROCEDURE*}
 
-  {Init Pointer Var}
+      {Init Pointer Var}
   new(pl0);
   new(adrink);
 
   {fetch Bartenders name from .CFG, #165}
   bartender := cfg_string(165);
-  if bartender = '' then bartender := 'Sly';
+  if bartender = '' then
+    bartender := 'Sly';
 
   {Name of Regular Drinks}
   drink[1] := 'Orb Soda';
@@ -1588,7 +1618,8 @@ begin {*MAIN PROCEDURE*}
     {evalauate user input}
     case ch of
       '?': begin {display menu}
-        if player.expert = True then display_menu(True, False)
+        if player.expert = True then
+          display_menu(True, False)
         else display_menu(False, False);
       end;
       'S': begin {status}
@@ -1627,12 +1658,14 @@ begin {*MAIN PROCEDURE*}
               2: size := fs(FsNpc);
             end;
 
-            if found then break;
+            if found then
+              break;
 
             for j := 1 to size do
             begin
 
-              if finito then break;
+              if finito then
+                break;
 
               {load character}
               load_character(pl0^, i, j);
@@ -1660,12 +1693,13 @@ begin {*MAIN PROCEDURE*}
 
               end;
             end; {for j:= .end.}
-          end; {for i:= .end.}
+          end;   {for i:= .end.}
 
           if not found and not finito then
           begin
             could_not_locate_character;
-          end else if found then
+          end else
+          if found then
           begin
 
             {we have a target!}
@@ -1689,7 +1723,8 @@ begin {*MAIN PROCEDURE*}
                 s := 'Send ' + udrinkc + adrink^.Name + config.textcol1 + ' to ' + uplc + pl0^.name2 + config.textcol1;
               end else
               begin
-                s := 'Invite ' + uplc + pl0^.name2 + config.textcol1 + ' to drink ' + udrinkc + adrink^.Name + config.textcol1 + '.';
+                s := 'Invite ' + uplc + pl0^.name2 + config.textcol1 + ' to drink ' + udrinkc +
+                  adrink^.Name + config.textcol1 + '.';
               end;
 
               if confirm(s, 'Y') = True then
@@ -1729,7 +1764,8 @@ begin {*MAIN PROCEDURE*}
                         if random(1) = 0 then
                         begin
                           crlf;
-                          d(global_plycol, pl0^.name2 + config.textcol1 + ' has arrived, with a dry throat longing for a drink!');
+                          d(global_plycol, pl0^.name2 + config.textcol1 +
+                            ' has arrived, with a dry throat longing for a drink!');
 
                           {npc enjoys the free drink!}
                           Drink_a_drink(pl0^, NpcDrink, ADrink^, TheAmount, x);
@@ -1766,7 +1802,8 @@ begin {*MAIN PROCEDURE*}
 
                   {send drink to human player}
                   {anonymous}
-                  if confirm('Be Anonymous', 'N') = True then s := 'Y'
+                  if confirm('Be Anonymous', 'N') = True then
+                    s := 'Y'
                   else s := 'N';
 
                   d(14, 'Done!');
@@ -1780,10 +1817,10 @@ begin {*MAIN PROCEDURE*}
                     False,
                     mailrequest_DrinkOffer,
                     player.name2,
-                    commastr(x), {drink #, so receiver can load the right drink}
+                    commastr(x),  {drink #, so receiver can load the right drink}
                     adrink^.Name, {drink name, compared at load time}
                     adrink^.date, {drink date, compared at load time}
-                    s,           {is sender anonymous? (Y/N)}
+                    s,            {is sender anonymous? (Y/N)}
                     '',
                     '',
                     '',
@@ -1796,12 +1833,14 @@ begin {*MAIN PROCEDURE*}
                     '',
                     '');
 
-                  if s = 'Y' then s := '*Unknown*'
+                  if s = 'Y' then
+                    s := '*Unknown*'
                   else s := player.name2;
 
                   if is_online(pl0^.name2, online_player) then
                   begin
-                    online_send_to_player(pl0^.name2, online_player, uplc + S + config.textcol1 + ' has sent you a free drink!');
+                    online_send_to_player(pl0^.name2, online_player, uplc + S + config.textcol1 +
+                      ' has sent you a free drink!');
                   end;
 
                 end;
@@ -1914,7 +1953,8 @@ begin {*MAIN PROCEDURE*}
 
             sdrink := 0; {n„r denna n†r 100 „r den full och kan drickas}
 
-            for i := 1 to maxingredients do TheAmount.amount[i] := 0;
+            for i := 1 to maxingredients do
+              TheAmount.amount[i] := 0;
 
             repeat
 
@@ -1955,7 +1995,8 @@ begin {*MAIN PROCEDURE*}
                   for i := 1 to 9 do
                   begin
                     menu2('(' + commastr(i) + ') ' + ljust(ing[i] + ' - ' + commastr(TheAmount.amount[i]), 24));
-                    if i < 9 then menu('(' + chr(i + 64) + ') ' + ing[9 + i] + ' - ' + commastr(TheAmount.amount[9 + i]));
+                    if i < 9 then
+                      menu('(' + chr(i + 64) + ') ' + ing[9 + i] + ' - ' + commastr(TheAmount.amount[9 + i]));
                   end;
 
                   crlf;
@@ -2021,15 +2062,24 @@ begin {*MAIN PROCEDURE*}
               crlf; crlf;
               d(5, 'Standard Orb Drinks :');
               crlf;
-              menu('(1) Orb Soda   - Known to be a stamina-raiser for some [' + commastr(cost[1]) + ' ' + config.moneytype + ']');
-              menu('(2) Troll Cola - Famous outdoor drink, troll favourite [' + commastr(cost[2]) + ' ' + config.moneytype + ']');
-              menu('(3) Gildarion  - Holy elf water (be a good boy)        [' + commastr(cost[3]) + ' ' + config.moneytype + ']');
-              menu('(4) Harlindar  - Character builder                     [' + commastr(cost[4]) + ' ' + config.moneytype + ']');
-              menu('(5) Reliever   - Hardworking dwarves love this one     [' + commastr(cost[5]) + ' ' + config.moneytype + ']');
-              menu('(6) Grindstone - Buy it, drink it, think about it      [' + commastr(cost[6]) + ' ' + config.moneytype + ']');
-              menu('(7) ByeBye Sue - Also called "THE KISS" by the fans    [' + commastr(cost[7]) + ' ' + config.moneytype + ']');
-              menu('(8) Suranie    - Only recommended to strong males      [' + commastr(cost[8]) + ' ' + config.moneytype + ']');
-              menu('(9) Dark Lord  - Interesting...                        [' + commastr(cost[9]) + ' ' + config.moneytype + ']');
+              menu('(1) Orb Soda   - Known to be a stamina-raiser for some [' + commastr(cost[1]) +
+                ' ' + config.moneytype + ']');
+              menu('(2) Troll Cola - Famous outdoor drink, troll favourite [' + commastr(cost[2]) +
+                ' ' + config.moneytype + ']');
+              menu('(3) Gildarion  - Holy elf water (be a good boy)        [' + commastr(cost[3]) +
+                ' ' + config.moneytype + ']');
+              menu('(4) Harlindar  - Character builder                     [' + commastr(cost[4]) +
+                ' ' + config.moneytype + ']');
+              menu('(5) Reliever   - Hardworking dwarves love this one     [' + commastr(cost[5]) +
+                ' ' + config.moneytype + ']');
+              menu('(6) Grindstone - Buy it, drink it, think about it      [' + commastr(cost[6]) +
+                ' ' + config.moneytype + ']');
+              menu('(7) ByeBye Sue - Also called "THE KISS" by the fans    [' + commastr(cost[7]) +
+                ' ' + config.moneytype + ']');
+              menu('(8) Suranie    - Only recommended to strong males      [' + commastr(cost[8]) +
+                ' ' + config.moneytype + ']');
+              menu('(9) Dark Lord  - Interesting...                        [' + commastr(cost[9]) +
+                ' ' + config.moneytype + ']');
               menu('(0) Abort');
               sd(config.textcolor, ':');
               repeat
@@ -2088,7 +2138,8 @@ begin {*MAIN PROCEDURE*}
                   d(config.textcolor, 'Holy smokes! That was good!');
                   xx := player.level * 50;
                   player.exp := player.exp + xx;
-                  if xx > 0 then d(config.textcolor, 'Your experience raised!');
+                  if xx > 0 then
+                    d(config.textcolor, 'Your experience raised!');
                   if random(2) = 0 then
                   begin
                     if random(2) = 0 then
@@ -2107,11 +2158,13 @@ begin {*MAIN PROCEDURE*}
                 '2': begin
                   crlf;
                   d(config.textcolor, 'Brrrrrr....! That was awesome!');
-                  if player.race = Elf then d(config.textcolor, 'But you don' + chr(39) + 't feel very well...');
+                  if player.race = Elf then
+                    d(config.textcolor, 'But you don' + chr(39) + 't feel very well...');
                   if player.race = Troll then
                   begin
                     xx := player.level * 200;
-                  end else if player.race = Elf then
+                  end else
+                  if player.race = Elf then
                   begin
                     xx := 0;
                   end else
@@ -2130,7 +2183,8 @@ begin {*MAIN PROCEDURE*}
                     end;
                   end;
                   player.exp := player.exp + xx;
-                  if xx > 0 then d(config.textcolor, 'Your experience raised!');
+                  if xx > 0 then
+                    d(config.textcolor, 'Your experience raised!');
                   pause;
                   ch := '0';
                 end;
@@ -2144,8 +2198,10 @@ begin {*MAIN PROCEDURE*}
                     d(config.textcolor, 'Never drink that again!');
                     player.stamina := player.stamina - 1;
                     player.strength := player.strength - 1;
-                    if player.stamina < 1 then player.stamina := 1;
-                    if player.strength < 1 then player.strength := 1;
+                    if player.stamina < 1 then
+                      player.stamina := 1;
+                    if player.strength < 1 then
+                      player.strength := 1;
                     xx := 0;
                   end else
                   begin
@@ -2156,7 +2212,8 @@ begin {*MAIN PROCEDURE*}
                       xx := 100;
                     end else
                     begin
-                      if player.race = Elf then d(config.textcolor, 'This is THE drink for you!');
+                      if player.race = Elf then
+                        d(config.textcolor, 'This is THE drink for you!');
                       if random(2) = 0 then
                       begin
                         d(config.textcolor, 'Your powers are increasing!');
@@ -2172,7 +2229,8 @@ begin {*MAIN PROCEDURE*}
                   end;
 
                   Inc(player.exp, xx);
-                  if xx > 0 then d(config.textcolor, 'Your experience raised!');
+                  if xx > 0 then
+                    d(config.textcolor, 'Your experience raised!');
                   pause;
                   ch := '0';
                 end;
@@ -2198,7 +2256,8 @@ begin {*MAIN PROCEDURE*}
                       '',
                       '');
 
-                    if player.stamina > 1 then player.stamina := player.stamina - 1;
+                    if player.stamina > 1 then
+                      player.stamina := player.stamina - 1;
                   end else
                   begin
                     if random(2) = 0 then
@@ -2216,7 +2275,8 @@ begin {*MAIN PROCEDURE*}
                     end;
                     xx := player.level * 200;
                     player.exp := player.exp + xx;
-                    if xx > 0 then d(config.textcolor, 'Your experience raised!');
+                    if xx > 0 then
+                      d(config.textcolor, 'Your experience raised!');
                   end;
                   pause;
                   ch := '0';
@@ -2238,7 +2298,8 @@ begin {*MAIN PROCEDURE*}
                       d(config.textcolor, 'Ahhhh...! You feel the fluid empower you with the');
                       d(config.textcolor, 'strength you need so badly.');
                       pause;
-                      if random(2) = 0 then player.stamina := player.stamina + 2;
+                      if random(2) = 0 then
+                        player.stamina := player.stamina + 2;
                       xx := xx + random(1000);
                     end;
                   end else
@@ -2254,7 +2315,8 @@ begin {*MAIN PROCEDURE*}
                     delay2(1000);
                   end;
                   player.exp := player.exp + xx;
-                  if xx > 0 then d(config.textcolor, 'Your experience raised!');
+                  if xx > 0 then
+                    d(config.textcolor, 'Your experience raised!');
                   pause;
                   ch := '0';
                 end;
@@ -2285,12 +2347,14 @@ begin {*MAIN PROCEDURE*}
 
                         if random(2) = 0 then
                         begin
-                          if player.drinksleft > 0 then Dec(player.drinksleft);
+                          if player.drinksleft > 0 then
+                            Dec(player.drinksleft);
                         end;
 
                         newsy(True,
                           'Boozer at Orbs!',
-                          ' ' + uplc + player.name2 + 's' + config.textcol1 + ' didn''t manage to control ' + sex3[player.sex],
+                          ' ' + uplc + player.name2 + 's' + config.textcol1 + ' didn''t manage to control ' +
+                          sex3[player.sex],
                           ' drinking! Had to be carried out from the bar...',
                           '',
                           '',
@@ -2345,7 +2409,8 @@ begin {*MAIN PROCEDURE*}
 
                   xx := player.level * 300;
                   player.exp := player.exp + xx;
-                  if xx > 0 then d(config.textcolor, 'Your experience raised!');
+                  if xx > 0 then
+                    d(config.textcolor, 'Your experience raised!');
                   pause;
                   ch := '0';
                 end;
@@ -2376,7 +2441,8 @@ begin {*MAIN PROCEDURE*}
                   end;
                   xx := player.level * 350;
                   player.exp := player.exp + xx;
-                  if xx > 0 then d(config.textcolor, 'Your experience raised!');
+                  if xx > 0 then
+                    d(config.textcolor, 'Your experience raised!');
                   pause;
                   ch := '0';
                 end;
@@ -2397,7 +2463,8 @@ begin {*MAIN PROCEDURE*}
 
                     if random(2) = 0 then
                     begin
-                      if player.drinksleft > 0 then Dec(player.drinksleft);
+                      if player.drinksleft > 0 then
+                        Dec(player.drinksleft);
                     end;
                     crlf;
                     pause;
@@ -2413,7 +2480,8 @@ begin {*MAIN PROCEDURE*}
                   end;
 
                   player.exp := player.exp + xx;
-                  if xx > 0 then d(config.textcolor, 'Your experience raised!');
+                  if xx > 0 then
+                    d(config.textcolor, 'Your experience raised!');
                   pause;
                   ch := '0';
                 end;
@@ -2429,7 +2497,8 @@ begin {*MAIN PROCEDURE*}
                   d(config.textcolor, 'You must say something to the crowd before this one goes down!');
                   sd(config.textcolor, ':');
                   s := get_string(70);
-                  if s = '' then s := 'Hello there Mama!';
+                  if s = '' then
+                    s := 'Hello there Mama!';
                   s := ' ' + s;
 
                   newsy(False,
@@ -2461,11 +2530,13 @@ begin {*MAIN PROCEDURE*}
                     d(config.textcolor, 'You take the hideous skull, and drink the whole brew in one go...');
                     delay2(1200);
                     d(config.textcolor, 'Your head is exloding! You fade away into the great unknown..');
-                    if player.exp > 500 then player.exp := player.exp - 500;
+                    if player.exp > 500 then
+                      player.exp := player.exp - 500;
 
                     if random(3) = 0 then
                     begin
-                      if player.drinksleft > 0 then Dec(player.drinksleft);
+                      if player.drinksleft > 0 then
+                        Dec(player.drinksleft);
                     end;
 
                     crlf;

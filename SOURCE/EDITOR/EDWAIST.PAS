@@ -222,7 +222,9 @@ begin
 
   Add_Object('Yellow Belt',   {name}
     Waist,     {typ}
-    25,         {v„rde i gold} -2,        {”ka/minska hps} -2,        {”ka stamina} -2,        {”ka agility} -2,        {”ka charisma} -2,        {”ka dexterity} -2,        {”ka wisdom} -2,        {”ka mana} -2,        {”ka armor v„rde} -2,        {”ka attack v„rde}
+    25,         {v„rde i gold} -2,        {”ka/minska hps} -2,        {”ka stamina} -2,
+    {”ka agility} -2,        {”ka charisma} -2,        {”ka dexterity} -2,        {”ka wisdom} -2,
+    {”ka mana} -2,        {”ka armor v„rde} -2,        {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
     Nothing,   {kurerar}
@@ -382,15 +384,5 @@ begin
     0);        {strength demanded to use object}
 
 end;
-
-
-
-
-
-
-
-
-
-
 
 end.

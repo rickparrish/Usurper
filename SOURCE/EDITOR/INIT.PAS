@@ -57,9 +57,9 @@ const
 {$IFDEF LINUX}
   DIRECTORY_SEPARATOR = '/';
 {$ENDIF}
-  global_datadir = 'DATA' + DIRECTORY_SEPARATOR;   {Path to DATA directory}
-  global_docsdir = 'DOCS' + DIRECTORY_SEPARATOR;   {Path to DOCS directory}
-  global_nodedir = 'NODE' + DIRECTORY_SEPARATOR;   {Path to NODE files}
+  global_datadir = 'DATA' + DIRECTORY_SEPARATOR;    {Path to DATA directory}
+  global_docsdir = 'DOCS' + DIRECTORY_SEPARATOR;    {Path to DOCS directory}
+  global_nodedir = 'NODE' + DIRECTORY_SEPARATOR;    {Path to NODE files}
   global_scoredir = 'SCORES' + DIRECTORY_SEPARATOR; {Path to SCORE and NEWS files}
 
  {file with all online help-texts. raw-file : edhelp.txt.
@@ -87,7 +87,7 @@ const
   innfile2       = global_datadir + 'COMMENTS.ASC';
   datefile       = global_datadir + 'DATE.DAT';
   monfile        = global_datadir + 'MONSTER.DAT';
-  gufile         = global_datadir + 'GUARDS.DAT'; {door-guards}
+  gufile         = global_datadir + 'GUARDS.DAT';  {door-guards}
   motfile        = global_datadir + 'MOATMON.DAT'; {moat creatures, protects the Castle}
   lvlfile        = global_datadir + 'LEVELS.DAT';
   mafile         = global_datadir + 'MAIL.DAT';
@@ -166,7 +166,7 @@ const
   delname2       = 'EMPTY';
 
   Global_Max_Drink_Ingredients = 17; {max ingredients in a drink (ORBS)}
-  maxmspells     = 6; {max # of monster spells}
+  maxmspells     = 6;  {max # of monster spells}
   maxitem        = 15; {how many items in inventory}
   maxspells      = 12; {number of spells for spellcasters}
   maxclasses = 11; {number of player classes}
@@ -184,7 +184,7 @@ type
 
 type ItemHandler = (Item_Add, Item_Remove); {useb by itemhandler in ADDIT.pas}
 
-{Date Type, used by ALL record type DATE definitions in the game (usually defined in record structures)}
+ {Date Type, used by ALL record type DATE definitions in the game (usually defined in record structures)}
 type UDate = string[8];
 
 type {Character Classes}
@@ -300,7 +300,7 @@ type {item record}
     restrict: array[1..maxclasses] of boolean;
   end;
 
-type {god}
+type   {god}
   GodRec = record {God record}
     realname:  s30;  {real (user/bbs) name}
     Name:      s30;      {alias}
@@ -372,7 +372,7 @@ type {god}
   end;
 
 
-{You must change NPC.pas when something changes in UserRec}
+     {You must change NPC.pas when something changes in UserRec}
 type {Player & Npc structures}
   UserRec = record
     Name1:       string[30];
@@ -422,13 +422,13 @@ type {Player & Npc structures}
     charisma:    longint;
     dex:         longint;
     wisdom:      longint;
-    weap:        longint;  {weaponpower va hmm, vad?}
+    weap:        longint;   {weaponpower va hmm, vad?}
     arm:         longint;   {hmm, vad?}
-    blind:       boolean; {blindhet}
-    plague:      boolean; {pesten}
-    smallpox:    boolean; {smittkoppor}
-    measles:     boolean; {m„ssling}
-    leprosy:     boolean; {spet„lska}
+    blind:       boolean;   {blindhet}
+    plague:      boolean;   {pesten}
+    smallpox:    boolean;   {smittkoppor}
+    measles:     boolean;   {m„ssling}
+    leprosy:     boolean;   {spet„lska}
     mercy:       smallint;
     item:        array[1..maxitem] of smallint;
     itemtype:    array[1..maxitem] of objtype;
@@ -469,10 +469,10 @@ type {Player & Npc structures}
     shield:      SmallWord;
     hands:       SmallWord;
     abody:       SmallWord;
-    immortal:    boolean; {dialog?}
+    immortal:    boolean;  {dialog?}
     battlecry:   string[70];
     bguardnr:    smallint; {antal doorguards, typ specificeras i bguard}
-    casted:      boolean; {anv„nds som flagga under battles}
+    casted:      boolean;  {anv„nds som flagga under battles}
     punch:       longint;
     absorb:      longint;
     used_item:   boolean;
@@ -554,8 +554,8 @@ type {Monster structure}
     Name:       string[30];
     weapnr:     longint;
     armnr:      longint;
-    grabweap:   boolean;  {kan vapnet er”vras?}
-    grabarm:    boolean;  {kan armor er”vras?}
+    grabweap:   boolean;    {kan vapnet er”vras?}
+    grabarm:    boolean;    {kan armor er”vras?}
     phrase:     string[70]; {intro fras fr†n monstret}
     magicres:   smallint;
     strength:   longint;
@@ -650,15 +650,15 @@ var
   Level:        LevelRec;
   Global_Drink: DrinkRec;
 
-  Playerfile:   file of UserRec;    {** User file **}
-  Monsterfile:  file of MonsterRec; {** Monster file **}
+  Playerfile:   file of UserRec;         {** User file **}
+  Monsterfile:  file of MonsterRec;      {** Monster file **}
   Guardfile, dummyg: file of GuardRec;   {** DoorGuard file **}
-  MoatFile:     file of MoatRec;    {** Moat Creatures **}
-  GodFile:      file of GodRec;     {** Gods **}
-  ChildFile:    file of ChildRec;   {** Children **}
-  Levelfile:    file of LevelRec;   {** Level Limits file **}
-  Cocktailfile: file of DrinkRec;   {** User Drink file}
-  Objektfil:    file of ObjektRec;  {** Object file **}
+  MoatFile:     file of MoatRec;         {** Moat Creatures **}
+  GodFile:      file of GodRec;          {** Gods **}
+  ChildFile:    file of ChildRec;        {** Children **}
+  Levelfile:    file of LevelRec;        {** Level Limits file **}
+  Cocktailfile: file of DrinkRec;        {** User Drink file}
+  Objektfil:    file of ObjektRec;       {** Object file **}
 
 var
   cfgvalue: array[1..global_maxcdef] of string[70];
@@ -668,7 +668,7 @@ var
   ofil:     file of objektrec;
   cfgchang: boolean; {global setting that keeps track if .cfg has changed}
 
-{Transfer Types, used when editor dialogs are converted to RECORD types}
+ {Transfer Types, used when editor dialogs are converted to RECORD types}
 {REENOTE These should not use SmallWord or SmallInt, or VP's TV clone will break
          They're only used in memory, so no binary compatibility problems}
 type
@@ -676,12 +676,12 @@ type
     {communicating with PLAYER REC, dialog page2}
     spell:    array [1..maxspells] of word;
     desc:     array[1..4] of s70;
-    immortal: word; {never delete character}
-    blind:    word; {blindhet}
-    plague:   word; {plague}
-    smallpox: word; {smittkoppor}
-    measles:  word; {measles}
-    leprosy:  word; {leprosy}
+    immortal: word;   {never delete character}
+    blind:    word;   {blindhet}
+    plague:   word;   {plague}
+    smallpox: word;   {smittkoppor}
+    measles:  word;   {measles}
+    leprosy:  word;   {leprosy}
 
     maxtime: longint; {time left today (in minutes) }
 
@@ -695,7 +695,7 @@ type
   end;
 
 type
-  EditRec = record     {RECORD being used in PLAYER/NPC DIALOGUE}
+  EditRec = record        {RECORD being used in PLAYER/NPC DIALOGUE}
     Name:     string[30]; {communicating with PLAYER REC}
     alias:    string[30];
     gold:     longint;
@@ -1202,7 +1202,7 @@ type
     function Valid(Command: word): boolean; virtual;
   end;
   ItemEditDialogP = ^ItemEditDialog;
-{--end-----------------------}
+    {--end-----------------------}
 
 var {a bunch of Lists}
   NameList: PstringCollection;
@@ -1782,8 +1782,7 @@ const
 begin
   inherited GetEvent(Event);
   case Event.What of
-    evCommand:
-      if (Event.Command = cmHelp) and not HelpInUse then
+    evCommand: if (Event.Command = cmHelp) and not HelpInUse then
       begin
         HelpInUse := True;
         HelpStrm := New(PDosStream, Init(CalcHelpName(global_EDHELP), stOpenRead));
@@ -1804,7 +1803,8 @@ begin
         end;
         HelpInUse := False;
       end;
-    evMouseDown: if Event.Buttons <> 1 then Event.What := evNothing;
+    evMouseDown: if Event.Buttons <> 1 then
+        Event.What := evNothing;
   end;
 end;
 
@@ -1833,7 +1833,8 @@ var
 begin
 
   NewMode := ScreenMode xor smFont8x8;
-  if NewMode and smFont8x8 <> 0 then ShadowSize.X := 1
+  if NewMode and smFont8x8 <> 0 then
+    ShadowSize.X := 1
   else ShadowSize.X := 2;
   SetScreenMode(NewMode);
 
@@ -1848,9 +1849,9 @@ begin
     nil, mfError + mfOKButton);
 end;
 
-{*** TMyApplication *** END ***}
+ {*** TMyApplication *** END ***}
 
-{-------CLASSIC ITEMPICK DIALOG START--------}
+ {-------CLASSIC ITEMPICK DIALOG START--------}
 constructor ClassicPickDialog.Init(var Bounds: TRect; MyTitle: TTitleStr; vapen: boolean);
 begin
   TDialog.Init(Bounds, MyTitle);
@@ -1947,9 +1948,9 @@ begin
 
 end;
 
-{-------CLASSIC ITEMPICK DIALOG END--------}
+ {-------CLASSIC ITEMPICK DIALOG END--------}
 
-{----RES DIALOG START-----}
+ {----RES DIALOG START-----}
 constructor ResDialog.Init(var Bounds: TRect; MyTitle: TTitleStr; gmode: boolean);
 begin
   TDialog.Init(Bounds, MyTitle);
@@ -1967,46 +1968,77 @@ begin
     doneit := True;
     if game then
     begin
-      if f_exists(innfile1) then delete_file(innfile1);
-      if f_exists(innfile2) then delete_file(innfile2);
-      if f_exists(nwfileans) then delete_file(nwfileans);
-      if f_exists(nwfileasc) then delete_file(nwfileasc);
-      if f_exists(ynwfileasc) then delete_file(ynwfileasc);
-      if f_exists(ynwfileasc) then delete_file(ynwfileasc);
-      if f_exists(datefile) then delete_file(datefile);
-      if f_exists(mafile) then delete_file(mafile);
-      if f_exists(marketfile) then delete_file(marketfile);
-      if f_exists(chestfile) then delete_file(chestfile);
-      if f_exists(armofile) then delete_file(armofile);
-      if f_exists(weapofile) then delete_file(weapofile);
-      if f_exists(wwfile) then delete_file(wwfile);
-      if f_exists(truthfile1) then delete_file(truthfile1);
-      if f_exists(truthfile2) then delete_file(truthfile2);
-      if f_exists(teamrecordf) then delete_file(teamrecordf);
-      if f_exists(teamrecfile) then delete_file(teamrecfile);
-      if f_exists(indianfile) then delete_file(indianfile);
-      if f_exists(kingfile) then delete_file(kingfile);
-      if f_exists(rquestf) then delete_file(rquestf);
-      if f_exists(relationf) then delete_file(relationf);
-      if f_exists(childrenf) then delete_file(childrenf);
-      if f_exists(barrelf) then delete_file(barrelf);
+      if f_exists(innfile1) then
+        delete_file(innfile1);
+      if f_exists(innfile2) then
+        delete_file(innfile2);
+      if f_exists(nwfileans) then
+        delete_file(nwfileans);
+      if f_exists(nwfileasc) then
+        delete_file(nwfileasc);
+      if f_exists(ynwfileasc) then
+        delete_file(ynwfileasc);
+      if f_exists(ynwfileasc) then
+        delete_file(ynwfileasc);
+      if f_exists(datefile) then
+        delete_file(datefile);
+      if f_exists(mafile) then
+        delete_file(mafile);
+      if f_exists(marketfile) then
+        delete_file(marketfile);
+      if f_exists(chestfile) then
+        delete_file(chestfile);
+      if f_exists(armofile) then
+        delete_file(armofile);
+      if f_exists(weapofile) then
+        delete_file(weapofile);
+      if f_exists(wwfile) then
+        delete_file(wwfile);
+      if f_exists(truthfile1) then
+        delete_file(truthfile1);
+      if f_exists(truthfile2) then
+        delete_file(truthfile2);
+      if f_exists(teamrecordf) then
+        delete_file(teamrecordf);
+      if f_exists(teamrecfile) then
+        delete_file(teamrecfile);
+      if f_exists(indianfile) then
+        delete_file(indianfile);
+      if f_exists(kingfile) then
+        delete_file(kingfile);
+      if f_exists(rquestf) then
+        delete_file(rquestf);
+      if f_exists(relationf) then
+        delete_file(relationf);
+      if f_exists(childrenf) then
+        delete_file(childrenf);
+      if f_exists(barrelf) then
+        delete_file(barrelf);
 
-      if f_exists(drinkfile) then delete_file(drinkfile);
+      if f_exists(drinkfile) then
+        delete_file(drinkfile);
 
       {log the royals comings and goings}
-      if f_exists(MonarchsANSI) then delete_file(MonarchsANSI);
-      if f_exists(MonarchsASCI) then delete_file(MonarchsASCI);
+      if f_exists(MonarchsANSI) then
+        delete_file(MonarchsANSI);
+      if f_exists(MonarchsASCI) then
+        delete_file(MonarchsASCI);
 
       {Marriage & Divorce History}
-      if f_exists(MarrHistANSI) then delete_file(MarrHistANSI);
-      if f_exists(MarrHistASCI) then delete_file(MarrHistASCI);
+      if f_exists(MarrHistANSI) then
+        delete_file(MarrHistANSI);
+      if f_exists(MarrHistASCI) then
+        delete_file(MarrHistASCI);
 
       {Child-Birth History}
-      if f_exists(ChildBirthHistANSI) then delete_file(ChildBirthHistANSI);
-      if f_exists(ChildBirthHistASCI) then delete_file(ChildBirthHistASCI);
+      if f_exists(ChildBirthHistANSI) then
+        delete_file(ChildBirthHistANSI);
+      if f_exists(ChildBirthHistASCI) then
+        delete_file(ChildBirthHistASCI);
 
       { Data file version }
-      if (F_Exists(VersionF)) then Delete_File(VersionF);
+      if (F_Exists(VersionF)) then
+        Delete_File(VersionF);
     end;
     sx := 3;
     sy := 0;
@@ -2122,8 +2154,10 @@ begin
 
     if game then
     begin
-      if f_exists(global_pfile) then delete_file(global_pfile);
-      if f_exists(childrenf) then delete_file(childrenf);
+      if f_exists(global_pfile) then
+        delete_file(global_pfile);
+      if f_exists(childrenf) then
+        delete_file(childrenf);
 
       { Data file version }
       if (Open_TxtFile(TReWrite, Txt, VersionF)) then
@@ -2158,9 +2192,9 @@ begin
 
 end;
 
-{-------RES DIALOG END--------}
+ {-------RES DIALOG END--------}
 
-{-------CONFIG OBJECT--------}
+ {-------CONFIG OBJECT--------}
 destructor ConfigDialog.Done;
 begin
   Dispose(NameList, Done);
@@ -2349,9 +2383,9 @@ begin
 
 end;
 
-{-------Item File Operations Dialog END--------}
+ {-------Item File Operations Dialog END--------}
 
-{-------Item Class Restrictions Dialog START--------}
+ {-------Item Class Restrictions Dialog START--------}
 constructor IREDialog.Init(var Bounds: TRect; MyTitle: TTitleStr);
 begin
   TDialog.Init(Bounds, MyTitle);
@@ -2386,9 +2420,9 @@ begin
 
 end;
 
-{-------Item Class Restrictions Dialog END--------}
+ {-------Item Class Restrictions Dialog END--------}
 
-{-------Gimme Value (longint) Dialog START--------}
+ {-------Gimme Value (longint) Dialog START--------}
 function GimmeValDialog.Valid(Command: word): boolean;
 begin
   Valid := True;
@@ -2497,9 +2531,9 @@ begin
 
 end;
 
-{-------ITEMPICK DIALOG2 END--------}
+ {-------ITEMPICK DIALOG2 END--------}
 
-{-------ITEMTYPE SELECTOR START---------}
+ {-------ITEMTYPE SELECTOR START---------}
 procedure TypSelDialog.HandleEvent(var Event: TEvent);
 var c: objtype;
   bye: boolean;
@@ -2725,7 +2759,8 @@ begin
         m := (EqList^.Focused) + 1;
         if m <> mem then
         begin
-          if player.item[kick] = 0 then obj.Name := '-'
+          if player.item[kick] = 0 then
+            obj.Name := '-'
           else load_objekt(Fload, obj, nytyp, m);
 
           Update_Item(kick, obj.Name);
@@ -2740,9 +2775,9 @@ begin
 
 end;
 
-{-------ITEMPICK DIALOG END--------}
+ {-------ITEMPICK DIALOG END--------}
 
-{-------MONSTER ITEMPICK DIALOG START--------}
+ {-------MONSTER ITEMPICK DIALOG START--------}
 destructor ItemPickMDialog.Done;
 begin
   Dispose(NameList, Done);
@@ -2773,7 +2808,8 @@ begin
           if sniper = Weapon then
           begin
             monster.weapnr := index;
-          end else if sniper = Abody then
+          end else
+          if sniper = Abody then
           begin
             monster.armnr := index;
           end;
@@ -2802,7 +2838,8 @@ begin
           if sniper = Weapon then
           begin
             monster.weapnr := 0;
-          end else if sniper = Abody then
+          end else
+          if sniper = Abody then
           begin
             monster.armnr := 0;
           end;
@@ -2815,7 +2852,8 @@ begin
           if sniper = Weapon then
           begin
             monster.weapnr := index;
-          end else if sniper = Abody then
+          end else
+          if sniper = Abody then
           begin
             monster.armnr := index;
           end;
@@ -2888,7 +2926,8 @@ begin
 
           if player.lhand <> mem[1] then
           begin
-            if player.lhand = 0 then obbe.Name := '-'
+            if player.lhand = 0 then
+              obbe.Name := '-'
             else load_objekt(Fload, obbe, weapon, player.lhand);
 
             Update_Item(1, obbe.Name);
@@ -2896,105 +2935,120 @@ begin
 
           if player.rhand <> mem[2] then
           begin
-            if player.rhand = 0 then obbe.Name := '-'
+            if player.rhand = 0 then
+              obbe.Name := '-'
             else load_objekt(Fload, obbe, weapon, player.rhand);
             Update_Item(2, obbe.Name);
           end;
 
           if player.head <> mem[3] then
           begin
-            if player.head = 0 then obbe.Name := '-'
+            if player.head = 0 then
+              obbe.Name := '-'
             else load_objekt(Fload, obbe, head, player.head);
             Update_Item(3, obbe.Name);
           end;
 
           if player.body <> mem[4] then
           begin
-            if player.body = 0 then obbe.Name := '-'
+            if player.body = 0 then
+              obbe.Name := '-'
             else load_objekt(Fload, obbe, body, player.body);
             Update_Item(4, obbe.Name);
           end;
 
           if player.arms <> mem[5] then
           begin
-            if player.arms = 0 then obbe.Name := '-'
+            if player.arms = 0 then
+              obbe.Name := '-'
             else load_objekt(Fload, obbe, arms, player.arms);
             Update_Item(5, obbe.Name);
           end;
 
           if player.lfinger <> mem[6] then
           begin
-            if player.lfinger = 0 then obbe.Name := '-'
+            if player.lfinger = 0 then
+              obbe.Name := '-'
             else load_objekt(Fload, obbe, fingers, player.lfinger);
             Update_Item(6, obbe.Name);
           end;
 
           if player.rfinger <> mem[7] then
           begin
-            if player.rfinger = 0 then obbe.Name := '-'
+            if player.rfinger = 0 then
+              obbe.Name := '-'
             else load_objekt(Fload, obbe, fingers, player.rfinger);
             Update_Item(7, obbe.Name);
           end;
 
           if player.legs <> mem[8] then
           begin
-            if player.legs = 0 then obbe.Name := '-'
+            if player.legs = 0 then
+              obbe.Name := '-'
             else load_objekt(Fload, obbe, legs, player.legs);
             Update_Item(8, obbe.Name);
           end;
 
           if player.feet <> mem[9] then
           begin
-            if player.feet = 0 then obbe.Name := '-'
+            if player.feet = 0 then
+              obbe.Name := '-'
             else load_objekt(Fload, obbe, feet, player.feet);
             Update_Item(9, obbe.Name);
           end;
 
           if player.waist <> mem[10] then
           begin
-            if player.waist = 0 then obbe.Name := '-'
+            if player.waist = 0 then
+              obbe.Name := '-'
             else load_objekt(Fload, obbe, waist, player.waist);
             Update_Item(10, obbe.Name);
           end;
 
           if player.neck <> mem[11] then
           begin
-            if player.neck = 0 then obbe.Name := '-'
+            if player.neck = 0 then
+              obbe.Name := '-'
             else load_objekt(Fload, obbe, neck, player.neck);
             Update_Item(11, obbe.Name);
           end;
 
           if player.neck2 <> mem[12] then
           begin
-            if player.neck2 = 0 then obbe.Name := '-'
+            if player.neck2 = 0 then
+              obbe.Name := '-'
             else load_objekt(Fload, obbe, neck, player.neck2);
             Update_Item(12, obbe.Name);
           end;
 
           if player.face <> mem[13] then
           begin
-            if player.face = 0 then obbe.Name := '-'
+            if player.face = 0 then
+              obbe.Name := '-'
             else load_objekt(Fload, obbe, face, player.face);
             Update_Item(13, obbe.Name);
           end;
 
           if player.shield <> mem[14] then
           begin
-            if player.shield = 0 then obbe.Name := '-'
+            if player.shield = 0 then
+              obbe.Name := '-'
             else load_objekt(Fload, obbe, shield, player.shield);
             Update_Item(14, obbe.Name);
           end;
 
           if player.hands <> mem[15] then
           begin
-            if player.hands = 0 then obbe.Name := '-'
+            if player.hands = 0 then
+              obbe.Name := '-'
             else load_objekt(Fload, obbe, hands, player.hands);
             Update_Item(15, obbe.Name);
           end;
 
           if player.abody <> mem[16] then
           begin
-            if player.abody = 0 then obbe.Name := '-'
+            if player.abody = 0 then
+              obbe.Name := '-'
             else load_objekt(Fload, obbe, abody, player.abody);
             Update_Item(16, obbe.Name);
           end;
@@ -3031,7 +3085,8 @@ begin
           pick_item(weapon, True);
           if player.lhand <> m then
           begin
-            if player.lhand = 0 then obbe.Name := '-'
+            if player.lhand = 0 then
+              obbe.Name := '-'
             else load_objekt(Fload, obbe, weapon, player.lhand);
 
             Update_Item(1, obbe.Name);
@@ -3042,7 +3097,8 @@ begin
           pick_item(weapon, False);
           if player.rhand <> m then
           begin
-            if player.rhand = 0 then obbe.Name := '-'
+            if player.rhand = 0 then
+              obbe.Name := '-'
             else load_objekt(Fload, obbe, weapon, player.rhand);
             Update_Item(2, obbe.Name);
           end;
@@ -3052,7 +3108,8 @@ begin
           pick_item(head, False);
           if player.head <> m then
           begin
-            if player.head = 0 then obbe.Name := '-'
+            if player.head = 0 then
+              obbe.Name := '-'
             else load_objekt(Fload, obbe, head, player.head);
             Update_Item(3, obbe.Name);
           end;
@@ -3062,7 +3119,8 @@ begin
           pick_item(body, False);
           if player.body <> m then
           begin
-            if player.body = 0 then obbe.Name := '-'
+            if player.body = 0 then
+              obbe.Name := '-'
             else load_objekt(Fload, obbe, body, player.body);
             Update_Item(4, obbe.Name);
           end;
@@ -3072,7 +3130,8 @@ begin
           pick_item(arms, False);
           if player.arms <> m then
           begin
-            if player.arms = 0 then obbe.Name := '-'
+            if player.arms = 0 then
+              obbe.Name := '-'
             else load_objekt(Fload, obbe, arms, player.arms);
             Update_Item(5, obbe.Name);
           end;
@@ -3082,7 +3141,8 @@ begin
           pick_item(fingers, True);
           if player.lfinger <> m then
           begin
-            if player.lfinger = 0 then obbe.Name := '-'
+            if player.lfinger = 0 then
+              obbe.Name := '-'
             else load_objekt(Fload, obbe, fingers, player.lfinger);
             Update_Item(6, obbe.Name);
           end;
@@ -3092,7 +3152,8 @@ begin
           pick_item(fingers, False);
           if player.rfinger <> m then
           begin
-            if player.rfinger = 0 then obbe.Name := '-'
+            if player.rfinger = 0 then
+              obbe.Name := '-'
             else load_objekt(Fload, obbe, fingers, player.rfinger);
             Update_Item(7, obbe.Name);
           end;
@@ -3102,7 +3163,8 @@ begin
           pick_item(legs, False);
           if player.legs <> m then
           begin
-            if player.legs = 0 then obbe.Name := '-'
+            if player.legs = 0 then
+              obbe.Name := '-'
             else load_objekt(Fload, obbe, legs, player.legs);
             Update_Item(8, obbe.Name);
           end;
@@ -3112,7 +3174,8 @@ begin
           pick_item(feet, False);
           if player.feet <> m then
           begin
-            if player.feet = 0 then obbe.Name := '-'
+            if player.feet = 0 then
+              obbe.Name := '-'
             else load_objekt(Fload, obbe, feet, player.feet);
             Update_Item(9, obbe.Name);
           end;
@@ -3122,7 +3185,8 @@ begin
           pick_item(waist, False);
           if player.waist <> m then
           begin
-            if player.waist = 0 then obbe.Name := '-'
+            if player.waist = 0 then
+              obbe.Name := '-'
             else load_objekt(Fload, obbe, waist, player.waist);
             Update_Item(10, obbe.Name);
           end;
@@ -3132,7 +3196,8 @@ begin
           pick_item(neck, True);
           if player.neck <> m then
           begin
-            if player.neck = 0 then obbe.Name := '-'
+            if player.neck = 0 then
+              obbe.Name := '-'
             else load_objekt(Fload, obbe, neck, player.neck);
             Update_Item(11, obbe.Name);
           end;
@@ -3142,7 +3207,8 @@ begin
           pick_item(neck, False);
           if player.neck2 <> m then
           begin
-            if player.neck2 = 0 then obbe.Name := '-'
+            if player.neck2 = 0 then
+              obbe.Name := '-'
             else load_objekt(Fload, obbe, neck, player.neck2);
             Update_Item(12, obbe.Name);
           end;
@@ -3152,7 +3218,8 @@ begin
           pick_item(face, False);
           if player.face <> m then
           begin
-            if player.face = 0 then obbe.Name := '-'
+            if player.face = 0 then
+              obbe.Name := '-'
             else load_objekt(Fload, obbe, face, player.face);
             Update_Item(13, obbe.Name);
           end;
@@ -3162,7 +3229,8 @@ begin
           pick_item(shield, False);
           if player.shield <> m then
           begin
-            if player.shield = 0 then obbe.Name := '-'
+            if player.shield = 0 then
+              obbe.Name := '-'
             else load_objekt(Fload, obbe, shield, player.shield);
             Update_Item(14, obbe.Name);
           end;
@@ -3172,7 +3240,8 @@ begin
           pick_item(hands, False);
           if player.hands <> m then
           begin
-            if player.hands = 0 then obbe.Name := '-'
+            if player.hands = 0 then
+              obbe.Name := '-'
             else load_objekt(Fload, obbe, hands, player.hands);
             Update_Item(15, obbe.Name);
           end;
@@ -3182,7 +3251,8 @@ begin
           pick_item(abody, False);
           if player.abody <> m then
           begin
-            if player.abody = 0 then obbe.Name := '-'
+            if player.abody = 0 then
+              obbe.Name := '-'
             else load_objekt(Fload, obbe, abody, player.abody);
             Update_Item(16, obbe.Name);
           end;
@@ -3261,9 +3331,9 @@ begin
 
 end;
 
-{----------EQUIPMENT DIALOG END---------------}
+ {----------EQUIPMENT DIALOG END---------------}
 
-{-----CLASSIC EQUIPMENT DIALOG START----------}
+ {-----CLASSIC EQUIPMENT DIALOG START----------}
 constructor EqClDialog.Init(var Bounds: TRect; MyTitle: TTitleStr);
 var r:   trect;
   i, sx: byte;
@@ -3329,7 +3399,8 @@ begin
           set_classic_weapon(True);
           if m <> player.weapon then
           begin
-            if player.weapon = 0 then cweapon.Name := '*none*'
+            if player.weapon = 0 then
+              cweapon.Name := '*none*'
             else load_weapon(player.weapon, cweapon);
 
             Update_Item(1, cweapon.Name);
@@ -3340,7 +3411,8 @@ begin
           set_classic_weapon(False);
           if m <> player.armor then
           begin
-            if player.armor = 0 then carmor.Name := '*none*'
+            if player.armor = 0 then
+              carmor.Name := '*none*'
             else load_armor(player.armor, carmor);
 
             Update_Item(2, carmor.Name);
@@ -3354,9 +3426,9 @@ begin
 
 end;
 
-{----------CLASSIC EQUIPMENT DIALOG END---------------}
+ {----------CLASSIC EQUIPMENT DIALOG END---------------}
 
-{----------INVENTORY DIALOG START----------}
+ {----------INVENTORY DIALOG START----------}
 constructor InvDialog.Init(var Bounds: TRect; MyTitle: TTitleStr);
 var r:   trect;
   i, sx: byte;
@@ -3427,8 +3499,9 @@ begin
     end;
   end;
 end;
-{ Page2Dialog.Valid }
-{----PAGE2 DIALOG END------}
+
+ { Page2Dialog.Valid }
+ {----PAGE2 DIALOG END------}
 
 
 {-------PLAYER/NPC EDITOR START--------}
@@ -3501,7 +3574,8 @@ var i: longint;
     begin
       hampus := 1;
       need := True;
-    end else if (not player.deleted) and (hampus = 1) then
+    end else
+    if (not player.deleted) and (hampus = 1) then
     begin
       hampus := 2;
       need := True;
@@ -3602,21 +3676,21 @@ begin
 
             player.name1 := 'New Player Name';
             player.name2 := 'New Player Alias';
-            player.id := crypt(15); {unique ID tag}
+            player.id := crypt(15);     {unique ID tag}
             player.KingVotePoll := 200; {how many days since voted for king popularity}
             player.married := False;
-            player.Kids := 0; {how many kids this playeer is father/mother to}
-            player.IntimacyActs := 5; {how many acts of intimacy has player left today?}
-            player.Pregnancy := 0; {is player pregnant? 0=no, 1...X = days pregnant}
+            player.Kids := 0;           {how many kids this playeer is father/mother to}
+            player.IntimacyActs := 5;   {how many acts of intimacy has player left today?}
+            player.Pregnancy := 0;      {is player pregnant? 0=no, 1...X = days pregnant}
             player.team := '';
             player.teampw := '';
-            player.cturf := False; {town rulers}
-            player.gym_owner := 0; {gym owner}
-            player.gym_card := 0; {gym card}
-            player.Tax_Relief := False; {free from tax?}
-            player.MarriedTimes := 0; {counter for marriages}
+            player.cturf := False;       {town rulers}
+            player.gym_owner := 0;       {gym owner}
+            player.gym_card := 0;        {gym card}
+            player.Tax_Relief := False;  {free from tax?}
+            player.MarriedTimes := 0;    {counter for marriages}
             player.Bard_Songs_Left := 0; {ehhh..quite self-explanatory huh?}
-            player.prison_escapes := 2; {allowed prison escape attempts}
+            player.prison_escapes := 2;  {allowed prison escape attempts}
 
 
             currp := fs(Fsplayer) + 1;
@@ -3664,7 +3738,8 @@ begin
           Load_Player(Fsave, player, currp);
 
           {loading next character}
-          if currp < fs(FsPlayer) then Inc(currp)
+          if currp < fs(FsPlayer) then
+            Inc(currp)
           else currp := 1;
 
           load_player(Fload, player, currp);
@@ -3685,7 +3760,8 @@ begin
           Load_Player(Fsave, player, currp);
 
           {load previous character}
-          if currp > 1 then Dec(currp)
+          if currp > 1 then
+            Dec(currp)
           else currp := fs(fsplayer);
 
           load_player(Fload, player, currp);
@@ -3804,7 +3880,8 @@ begin
           Load_Guard(Fsave, guard, currg);
 
           {loading next guard}
-          if currg < fs(fsguard) then Inc(currg)
+          if currg < fs(fsguard) then
+            Inc(currg)
           else currg := 1;
 
           load_guard(Fload, guard, currg);
@@ -3822,7 +3899,8 @@ begin
           Load_Guard(Fsave, guard, currg);
 
           {loading previous guard}
-          if currg > 1 then Dec(currg)
+          if currg > 1 then
+            Dec(currg)
           else currg := fs(fsguard);
 
           load_guard(Fload, guard, currg);
@@ -3839,9 +3917,9 @@ begin
 
 end;
 
-{-------DOORGUARD DIALOG END--------}
+ {-------DOORGUARD DIALOG END--------}
 
-{-------MOAT DIALOG START--------}
+ {-------MOAT DIALOG START--------}
 constructor MoatDialog.Init(var Bounds: TRect; MyTitle: TTitleStr);
 var r: trect;
 begin
@@ -3940,7 +4018,8 @@ begin
           Load_Moat(Fsave, moat, currmoat);
 
           {loading next moat creature}
-          if currmoat < fs(fsMoat) then Inc(currmoat)
+          if currmoat < fs(fsMoat) then
+            Inc(currmoat)
           else currmoat := 1;
 
           load_moat(Fload, moat, currmoat);
@@ -3958,7 +4037,8 @@ begin
           Load_Moat(Fsave, moat, currmoat);
 
           {loading previous moat creature}
-          if currmoat > 1 then Dec(currmoat)
+          if currmoat > 1 then
+            Dec(currmoat)
           else currmoat := fs(fsMoat);
 
           load_moat(Fload, moat, currmoat);
@@ -3975,9 +4055,9 @@ begin
 
 end;
 
-{-------MOAT DIALOG END--------}
+ {-------MOAT DIALOG END--------}
 
-{-------GOD DIALOG START--------}
+ {-------GOD DIALOG START--------}
 constructor GodDialog.Init(var Bounds: TRect; MyTitle: TTitleStr);
 var r: trect;
 begin
@@ -4076,7 +4156,8 @@ begin
           Load_God(Fsave, god, currgod);
 
           {loading next god creature}
-          if currgod < fs(fsgod) then Inc(currgod)
+          if currgod < fs(fsgod) then
+            Inc(currgod)
           else currgod := 1;
 
           load_god(Fload, god, currgod);
@@ -4094,7 +4175,8 @@ begin
           Load_God(Fsave, god, currgod);
 
           {loading previous god creature}
-          if currgod > 1 then Dec(currgod)
+          if currgod > 1 then
+            Dec(currgod)
           else currgod := fs(fsGod);
 
           load_god(Fload, god, currgod);
@@ -4213,7 +4295,8 @@ begin
           Load_Child(Fsave, child, currchild);
 
           {loading next child}
-          if currchild < fs(fschild) then Inc(currchild)
+          if currchild < fs(fschild) then
+            Inc(currchild)
           else currchild := 1;
 
           load_child(Fload, child, currchild);
@@ -4231,7 +4314,8 @@ begin
           Load_Child(Fsave, child, currchild);
 
           {loading previous god creature}
-          if currchild > 1 then Dec(currchild)
+          if currchild > 1 then
+            Dec(currchild)
           else currchild := fs(fsChild);
 
           load_child(Fload, child, currchild);
@@ -4324,7 +4408,8 @@ begin
           Load_Drink(Fsave, global_drink, currd);
 
           {loading next drink}
-          if currd < fs(fsdrink) then Inc(currd)
+          if currd < fs(fsdrink) then
+            Inc(currd)
           else currd := 1;
 
           load_drink(Fload, global_drink, currd);
@@ -4341,7 +4426,8 @@ begin
           Load_Drink(Fsave, global_drink, currd);
 
           {loading previous drink}
-          if currd > 1 then Dec(currd)
+          if currd > 1 then
+            Dec(currd)
           else currd := fs(fsdrink);
 
           load_drink(Fload, global_drink, currd);
@@ -4359,9 +4445,9 @@ begin
 
 end;
 
-{-------DRINK DIALOG END--------}
+ {-------DRINK DIALOG END--------}
 
-{-------PHRASE DIALOG START--------}
+ {-------PHRASE DIALOG START--------}
 constructor PhraseDialog.Init(var Bounds: TRect; MyTitle: TTitleStr);
 var r: trect;
 begin
@@ -4401,9 +4487,9 @@ begin
 
 end;
 
-{-------PHRASE DIALOG END--------}
+ {-------PHRASE DIALOG END--------}
 
-{-------MONSTER EDITOR DIALOG START--------}
+ {-------MONSTER EDITOR DIALOG START--------}
 function A_Deal: s70;
 var s, s2: s70;
 begin
@@ -4631,7 +4717,8 @@ begin
           Load_Monster(Fsave, monster, currm);
 
           {loading next monster}
-          if currm < fs(fsmonster) then Inc(currm)
+          if currm < fs(fsmonster) then
+            Inc(currm)
           else currm := 1;
 
           load_monster(Fload, monster, currm);
@@ -4649,7 +4736,8 @@ begin
           Load_Monster(Fsave, monster, currm);
 
           {loading previous monster}
-          if currm > 1 then Dec(currm)
+          if currm > 1 then
+            Dec(currm)
           else currm := fs(fsmonster);
 
           load_monster(Fload, monster, currm);
@@ -4957,9 +5045,9 @@ begin
 
 end;
 
-{-------CHECKING DEPENDENCIES, DIALOG END--------}
+ {-------CHECKING DEPENDENCIES, DIALOG END--------}
 
-{-------ITEM EDITOR, DIALOG START--------}
+ {-------ITEM EDITOR, DIALOG START--------}
 constructor ItemEditDialog.Init(var Bounds: TRect; MyTitle: TTitleStr);
 var r: trect;
 begin
@@ -5093,7 +5181,8 @@ begin
           check_item(item, curri);
 
           {laddar n„sta item}
-          if curri < fso(item.ttype) then Inc(curri)
+          if curri < fso(item.ttype) then
+            Inc(curri)
           else curri := 1;
 
           load_objekt(Fload, item, item.ttype, curri);
@@ -5112,7 +5201,8 @@ begin
           check_item(item, curri);
 
           {laddar f”reg†ende item}
-          if curri > 1 then Dec(curri)
+          if curri > 1 then
+            Dec(curri)
           else curri := fso(item.ttype);
 
           load_objekt(Fload, item, item.ttype, curri);
@@ -5159,12 +5249,14 @@ begin
     Message(Owner, EvBroadCast, CatchNum, list^.at(focused));
     Draw;
     ClearEvent(Event);
-  end else if (Event.What = EvKeyDown) and (Event.KeyCode = KbEnter) then
+  end else
+  if (Event.What = EvKeyDown) and (Event.KeyCode = KbEnter) then
   begin
     Message(Owner, evBroadCast, CatchNum, list^.at(focused));
     Draw;
     ClearEvent(event);
-  end else if (Event.What = Evkeydown) and (Event.CharCode = ' ') then
+  end else
+  if (Event.What = Evkeydown) and (Event.CharCode = ' ') then
   begin
     Message(Owner, evBroadCast, CatchNum, list^.at(focused));
     Draw;
@@ -5173,9 +5265,9 @@ begin
 
 end;
 
-{-------LISTBOX OBJECT END--------}
+ {-------LISTBOX OBJECT END--------}
 
-{-------LISTBOX (EQUIPMENT ) OBJECT--------}
+ {-------LISTBOX (EQUIPMENT ) OBJECT--------}
 procedure Elistbox.Process;
 const xl = 30;
 var i:       integer;
@@ -5203,7 +5295,8 @@ begin
     begin
       diff := length(s) - xl;
       Delete(s, xl + 1, 99);
-    end else if length(s) < xl then
+    end else
+    if length(s) < xl then
     begin
       diff := xl - length(s);
       s := s + mkstring(diff, ' ');
@@ -5228,12 +5321,14 @@ begin
     Message(Owner, evBroadCast, cmEqCatchMe, list^.at(focused));
     draw;
     clearevent(event);
-  end else if (event.what = evkeydown) and (event.KeyCode = KbEnter) then
+  end else
+  if (event.what = evkeydown) and (event.KeyCode = KbEnter) then
   begin
     Message(Owner, evBroadCast, cmEqCatchMe, list^.at(focused));
     draw;
     clearevent(event);
-  end else if (event.what = evkeydown) and (event.CharCode = ' ') then
+  end else
+  if (event.what = evkeydown) and (event.CharCode = ' ') then
   begin
     Message(Owner, evBroadCast, cmEqCatchMe, list^.at(focused));
     draw;
@@ -5242,9 +5337,9 @@ begin
 
 end;
 
-{-------LISTBOX (EQUIPMENT) OBJECT END--------}
+ {-------LISTBOX (EQUIPMENT) OBJECT END--------}
 
-{-------CLASSIC LISTBOX (WEAPON/ARMOR) START--------}
+ {-------CLASSIC LISTBOX (WEAPON/ARMOR) START--------}
 procedure Clistbox.Process;
 const xl = 30;
 var i:       integer;
@@ -5262,7 +5357,8 @@ begin
 
   for i := 1 to max do
   begin
-    if vapen then load_weapon(i, cweapon)
+    if vapen then
+      load_weapon(i, cweapon)
     else load_armor(i, carmor);
 
     case i of                {„ndrar du dessa mellanrum s† m†ste „ven S™K RUTINERNA „ndras lite}
@@ -5272,21 +5368,24 @@ begin
       else s2 := commastr(i);
     end;
 
-    if vapen then s := s2 + ' ' + cweapon.Name
+    if vapen then
+      s := s2 + ' ' + cweapon.Name
     else s := s2 + ' ' + carmor.Name;
 
     if length(s) > xl then
     begin
       diff := length(s) - xl;
       Delete(s, xl + 1, 99);
-    end else if length(s) < xl then
+    end else
+    if length(s) < xl then
     begin
       diff := xl - length(s);
       s := s + mkstring(diff, ' ');
     end;
 
     {armor & attack info}
-    if vapen then s := s + ' (attack ' + commastr(cweapon.pow * 11) + ')'
+    if vapen then
+      s := s + ' (attack ' + commastr(cweapon.pow * 11) + ')'
     else s := s + ' (armor ' + commastr(carmor.pow * 11) + ')';
 
     NameList^.ATInsert(i - 1, Newstr(s));
@@ -5301,12 +5400,14 @@ begin
     Message(Owner, evBroadCast, cmEqCatchMe, list^.at(focused));
     draw;
     clearevent(event);
-  end else if (event.what = evkeydown) and (event.KeyCode = KbEnter) then
+  end else
+  if (event.what = evkeydown) and (event.KeyCode = KbEnter) then
   begin
     Message(Owner, evBroadCast, cmEqCatchMe, list^.at(focused));
     draw;
     clearevent(event);
-  end else if (event.what = evkeydown) and (event.CharCode = ' ') then
+  end else
+  if (event.what = evkeydown) and (event.CharCode = ' ') then
   begin
     Message(Owner, evBroadCast, cmEqCatchMe, list^.at(focused));
     draw;
@@ -5352,12 +5453,14 @@ begin
     Message(Owner, evBroadCast, CatchNum, list^.at(focused));
     draw;
     clearevent(event);
-  end else if (event.what = evkeydown) and (event.KeyCode = KbEnter) then
+  end else
+  if (event.what = evkeydown) and (event.KeyCode = KbEnter) then
   begin
     Message(Owner, evBroadCast, CatchNum, list^.at(focused));
     draw;
     clearevent(event);
-  end else if (event.what = evkeydown) and (event.CharCode = ' ') then
+  end else
+  if (event.what = evkeydown) and (event.CharCode = ' ') then
   begin
     Message(Owner, evBroadCast, CatchNum, list^.at(focused));
     draw;
@@ -5559,9 +5662,9 @@ begin
 end;
 
 
-{-------MAIN MENU OBJECT END--------}
+ {-------MAIN MENU OBJECT END--------}
 
-{View ViewText Dialog ***START***}
+ {View ViewText Dialog ***START***}
 procedure ViewTextDialog.HandleEvent(var Event: TEvent);
   procedure Show_Me(s: string);
   begin
@@ -5595,7 +5698,7 @@ begin
 
 end; {View ViewText Dialog ***END***}
 
-{Options Dialog ***START***}
+     {Options Dialog ***START***}
 procedure OptionsDialog.HandleEvent(var Event: TEvent);
 var r: trect;
 begin
@@ -5614,7 +5717,7 @@ begin
 
 end; {Options Dialog ***END***}
 
-{More_Editors Dialog ***START***}
+     {More_Editors Dialog ***START***}
 procedure MoreEditorsDialog.HandleEvent(var Event: TEvent);
 var r: trect;
 begin
@@ -5707,7 +5810,7 @@ begin
 
 end; {More_Editors Dialog ***END***}
 
-{Global Monster Dialog ***START***}
+     {Global Monster Dialog ***START***}
 procedure GlobalMonsterDialog.HandleEvent(var Event: TEvent);
 var r:         trect;
   i, j:        word;
@@ -5755,7 +5858,7 @@ begin
 
           end; {for i:= .end.}
 
-          {Remove Wait Dialog}
+               {Remove Wait Dialog}
           MyApp.Delete(Dia);
           Dia^.Done;
           Dispose(Dia);
@@ -5774,6 +5877,6 @@ end; {GlobalMonster Dialog ***END***}
 
 begin
 
-  {no init code here, yet}
+     {no init code here, yet}
 
 end. {Unit Init .end.}

@@ -53,7 +53,7 @@ begin
                               14. vapen }
 
   Add_Object('Grass Boots',   {name}
-    Feet,     {typ}
+    Feet,      {typ}
     250,       {v„rde i gold}
     0,         {”ka/minska hps}
     0,         {”ka stamina}
@@ -87,7 +87,7 @@ begin
     0);        {strength demanded to use object}
 
   Add_Object('Wool Boots',   {name}
-    Feet,     {typ}
+    Feet,      {typ}
     500,       {v„rde i gold}
     0,         {”ka/minska hps}
     0,         {”ka stamina}
@@ -121,7 +121,7 @@ begin
     0);        {strength demanded to use object}
 
   Add_Object('Rubber Boots',   {name}
-    Feet,     {typ}
+    Feet,      {typ}
     4500,      {v„rde i gold}
     15,        {”ka/minska hps}
     0,         {”ka stamina}
@@ -155,7 +155,7 @@ begin
     5);        {strength demanded to use object}
 
   Add_Object('Slippers',   {name}
-    Feet,     {typ}
+    Feet,      {typ}
     800,       {v„rde i gold}
     0,         {”ka/minska hps}
     0,         {”ka stamina}
@@ -189,8 +189,9 @@ begin
     0);        {strength demanded to use object}
 
   Add_Object('Ball and Chain',   {name}
-    Feet,     {typ}
-    5,         {v„rde i gold} -10,       {”ka/minska hps} -10,       {”ka stamina} -10,       {”ka agility} -10,       {”ka charisma} -10,       {”ka dexterity} -10,       {”ka wisdom}
+    Feet,      {typ}
+    5,         {v„rde i gold} -10,       {”ka/minska hps} -10,       {”ka stamina} -10,
+    {”ka agility} -10,       {”ka charisma} -10,       {”ka dexterity} -10,       {”ka wisdom}
     0,         {”ka mana} -5,        {”ka armor v„rde} -5,        {”ka attack v„rde}
     '',        {„gd av?}
     False,     {bara EN i spelet}
@@ -213,7 +214,7 @@ begin
     15);       {strength demanded to use object}
 
   Add_Object('Leather Boots',   {name}
-    Feet,     {typ}
+    Feet,      {typ}
     1000,      {v„rde i gold}
     0,         {”ka/minska hps}
     0,         {”ka stamina}
@@ -247,7 +248,7 @@ begin
     0);        {strength demanded to use object}
 
   Add_Object('Reinforced Leather Boots',   {name}
-    Feet,     {typ}
+    Feet,      {typ}
     2000,      {v„rde i gold}
     0,         {”ka/minska hps}
     0,         {”ka stamina}
@@ -281,7 +282,7 @@ begin
     0);        {strength demanded to use object}
 
   Add_Object('Iron Boots',   {name}
-    Feet,     {typ}
+    Feet,      {typ}
     4500,      {v„rde i gold} -5,        {”ka/minska hps} -2,        {”ka stamina}
     0,         {”ka agility}
     0,         {”ka charisma}
@@ -313,7 +314,7 @@ begin
     0);        {strength demanded to use object}
 
   Add_Object('Roller-Skates',   {name}
-    Feet,     {typ}
+    Feet,      {typ}
     11000,     {v„rde i gold}
     0,         {”ka/minska hps}
     0,         {”ka stamina}
@@ -347,7 +348,7 @@ begin
     4);        {strength demanded to use object}
 
   Add_Object('Riding-Boots',   {name}
-    Feet,     {typ}
+    Feet,      {typ}
     15000,     {v„rde i gold}
     5,         {”ka/minska hps}
     0,         {”ka stamina}
@@ -367,120 +368,119 @@ begin
     50,        {max level att hittas i dngs}
     'You see nothing special.',
     '',
-    '',        {normal beskrivning 3}
-    '',        {normal beskrivning 4}
-    '',        {normal beskrivning 5}
-    '',        {detaljerad beskrivning 1}
-    '',        {detaljerad beskrivning 2}
-    '',        {detaljerad beskrivning 3}
-    '',        {detaljerad beskrivning 4}
-    '',        {detaljerad beskrivning 5}
-    0,         {”ka strength}
-    10,        {”ka defence}
+    '',         {normal beskrivning 3}
+    '',         {normal beskrivning 4}
+    '',         {normal beskrivning 5}
+    '',         {detaljerad beskrivning 1}
+    '',         {detaljerad beskrivning 2}
+    '',         {detaljerad beskrivning 3}
+    '',         {detaljerad beskrivning 4}
+    '',         {detaljerad beskrivning 5}
+    0,          {”ka strength}
+    10,         {”ka defence}
     10);        {strength demanded to use object}
 
   Add_Object('Ivory Sandals',   {name}
-    Feet,     {typ}
-    15000,     {v„rde i gold}
-    15,        {”ka/minska hps}
-    0,         {”ka stamina}
+    Feet,       {typ}
+    15000,      {v„rde i gold}
+    15,         {”ka/minska hps}
+    0,          {”ka stamina}
     0,         {”ka agility} -9,        {”ka charisma} -5,        {”ka dexterity}
-    0,         {”ka wisdom}
-    10,        {”ka mana}
-    2,         {”ka armor v„rde}
-    0,         {”ka attack v„rde}
-    '',        {„gd av?}
-    False,     {bara EN i spelet}
-    Plague,    {kurerar}
-    False,     {finnas i shoppen}
-    True,      {kunna hittas i dungeons?}
-    False,     {cursed item?}
-    15,        {min level att hittas i dngs}
-    70,        {max level att hittas i dngs}
+    0,          {”ka wisdom}
+    10,         {”ka mana}
+    2,          {”ka armor v„rde}
+    0,          {”ka attack v„rde}
+    '',         {„gd av?}
+    False,      {bara EN i spelet}
+    Plague,     {kurerar}
+    False,      {finnas i shoppen}
+    True,       {kunna hittas i dungeons?}
+    False,      {cursed item?}
+    15,         {min level att hittas i dngs}
+    70,         {max level att hittas i dngs}
     'Look very comfortable.',
-    '',        {normal beskrivning 2}
-    '',        {normal beskrivning 3}
-    '',        {normal beskrivning 4}
-    '',        {normal beskrivning 5}
-    '',        {detaljerad beskrivning 1}
-    '',        {detaljerad beskrivning 2}
-    '',        {detaljerad beskrivning 3}
-    '',        {detaljerad beskrivning 4}
-    '',        {detaljerad beskrivning 5}
-    0,         {”ka strength}
-    0,         {”ka defence}
-    0);        {strength demanded to use object}
+    '',         {normal beskrivning 2}
+    '',         {normal beskrivning 3}
+    '',         {normal beskrivning 4}
+    '',         {normal beskrivning 5}
+    '',         {detaljerad beskrivning 1}
+    '',         {detaljerad beskrivning 2}
+    '',         {detaljerad beskrivning 3}
+    '',         {detaljerad beskrivning 4}
+    '',         {detaljerad beskrivning 5}
+    0,          {”ka strength}
+    0,          {”ka defence}
+    0);         {strength demanded to use object}
 
   Add_Object('Black Skulls',   {name}
-    Feet,     {typ}
-    7000,      {v„rde i gold}
-    0,         {”ka/minska hps}
-    0,         {”ka stamina}
-    0,         {”ka agility}
-    15,        {”ka charisma}
-    0,         {”ka dexterity}
-    0,         {”ka wisdom}
-    0,         {”ka mana}
-    1,         {”ka armor v„rde}
-    0,         {”ka attack v„rde}
-    '',        {„gd av?}
-    False,     {bara EN i spelet}
-    Nothing,   {kurerar}
-    True,      {finnas i shoppen}
-    False,     {kunna hittas i dungeons?}
-    False,     {cursed item?}
-    1,         {min level att hittas i dngs}
-    99,        {max level att hittas i dngs}
+    Feet,       {typ}
+    7000,       {v„rde i gold}
+    0,          {”ka/minska hps}
+    0,          {”ka stamina}
+    0,          {”ka agility}
+    15,         {”ka charisma}
+    0,          {”ka dexterity}
+    0,          {”ka wisdom}
+    0,          {”ka mana}
+    1,          {”ka armor v„rde}
+    0,          {”ka attack v„rde}
+    '',         {„gd av?}
+    False,      {bara EN i spelet}
+    Nothing,    {kurerar}
+    True,       {finnas i shoppen}
+    False,      {kunna hittas i dungeons?}
+    False,      {cursed item?}
+    1,          {min level att hittas i dngs}
+    99,         {max level att hittas i dngs}
     'A pair of orc skulls.',
-    '',        {normal beskrivning 2}
-    '',        {normal beskrivning 3}
-    '',        {normal beskrivning 4}
-    '',        {normal beskrivning 5}
-    '',        {detaljerad beskrivning 1}
-    '',        {detaljerad beskrivning 2}
-    '',        {detaljerad beskrivning 3}
-    '',        {detaljerad beskrivning 4}
-    '',        {detaljerad beskrivning 5}
-    0,         {”ka strength}
-    0,         {”ka defence}
-    0);        {strength demanded to use object}
+    '',         {normal beskrivning 2}
+    '',         {normal beskrivning 3}
+    '',         {normal beskrivning 4}
+    '',         {normal beskrivning 5}
+    '',         {detaljerad beskrivning 1}
+    '',         {detaljerad beskrivning 2}
+    '',         {detaljerad beskrivning 3}
+    '',         {detaljerad beskrivning 4}
+    '',         {detaljerad beskrivning 5}
+    0,          {”ka strength}
+    0,          {”ka defence}
+    0);         {strength demanded to use object}
 
   Add_Object('Elven Hunting Boots',   {name}
-    Feet,     {typ}
-    27000,     {v„rde i gold}
-    20,        {”ka/minska hps}
-    10,        {”ka stamina}
-    0,         {”ka agility}
-    0,         {”ka charisma}
-    0,         {”ka dexterity}
-    0,         {”ka wisdom}
-    30,        {”ka mana}
-    7,         {”ka armor v„rde}
-    0,         {”ka attack v„rde}
-    '',        {„gd av?}
-    False,     {bara EN i spelet}
-    Blindness, {kurerar}
-    True,      {finnas i shoppen}
-    True,      {kunna hittas i dungeons?}
-    False,     {cursed item?}
-    30,        {min level att hittas i dngs}
-    40,        {max level att hittas i dngs}
+    Feet,       {typ}
+    27000,      {v„rde i gold}
+    20,         {”ka/minska hps}
+    10,         {”ka stamina}
+    0,          {”ka agility}
+    0,          {”ka charisma}
+    0,          {”ka dexterity}
+    0,          {”ka wisdom}
+    30,         {”ka mana}
+    7,          {”ka armor v„rde}
+    0,          {”ka attack v„rde}
+    '',         {„gd av?}
+    False,      {bara EN i spelet}
+    Blindness,  {kurerar}
+    True,       {finnas i shoppen}
+    True,       {kunna hittas i dungeons?}
+    False,      {cursed item?}
+    30,         {min level att hittas i dngs}
+    40,         {max level att hittas i dngs}
     'The boots are shimmering with a strange light.',
-    '',        {normal beskrivning 2}
-    '',        {normal beskrivning 3}
-    '',        {normal beskrivning 4}
-    '',        {normal beskrivning 5}
-    '',        {detaljerad beskrivning 1}
-    '',        {detaljerad beskrivning 2}
-    '',        {detaljerad beskrivning 3}
-    '',        {detaljerad beskrivning 4}
-    '',        {detaljerad beskrivning 5}
-    0,         {”ka strength}
-    0,         {”ka defence}
-    0);        {strength demanded to use object}
+    '',         {normal beskrivning 2}
+    '',         {normal beskrivning 3}
+    '',         {normal beskrivning 4}
+    '',         {normal beskrivning 5}
+    '',         {detaljerad beskrivning 1}
+    '',         {detaljerad beskrivning 2}
+    '',         {detaljerad beskrivning 3}
+    '',         {detaljerad beskrivning 4}
+    '',         {detaljerad beskrivning 5}
+    0,          {”ka strength}
+    0,          {”ka defence}
+    0);         {strength demanded to use object}
 
 end;
-
 
 
 

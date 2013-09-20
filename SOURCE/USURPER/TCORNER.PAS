@@ -25,7 +25,7 @@ Copyright 2007 Jakob Dangarden
 
 unit TCorner; {Usurper - Team Corner}
 
-interface  {This is the place where the teams make their decisions}
+interface     {This is the place where the teams make their decisions}
 
 procedure Team_Corner;
 
@@ -54,7 +54,7 @@ begin
     nice2[justval]^ := emptystr;
   end; {for i:= .end.}
 
-end; {get_mem *end*}
+end;   {get_mem *end*}
 
 procedure Disposal; {dispose temporary pointer vars}
 begin
@@ -64,7 +64,7 @@ begin
     dispose(nice2[justval]);
   end; {for i:= .end.}
 
-end; {disposal *end*}
+end;   {disposal *end*}
 
 procedure Meny; {Team Corners Main Menu}
 const offset = 24;
@@ -186,7 +186,7 @@ begin
     nice2[i]^ := '';
   end; {for i= .end.}
 
-  {get user-input}
+       {get user-input}
   s := get_string(20);
 
   abort := False;
@@ -253,11 +253,13 @@ begin
         end;
       end;
 
-      if (found) or (abort) then break;
+      if (found) or (abort) then
+        break;
 
     end; {for j:= .end.}
 
-    if (found) or (abort) then break;
+    if (found) or (abort) then
+      break;
 
   end; {for i:= .end.}
 
@@ -266,7 +268,8 @@ begin
   dispose(pl0);
 
   {return result}
-  if not found then s := '';
+  if not found then
+    s := '';
   give_me_a_team := s;
 
 end; {Give_Me_A_Team *end*}
@@ -300,7 +303,8 @@ begin
   {fetching "Resurrect teammates?" option from .CFG}
   resurr := False;
   s := cfg_string(36);
-  if upcasestr(s) = 'YES' then resurr := True;
+  if upcasestr(s) = 'YES' then
+    resurr := True;
 
   {Main Loop *START*}
   repeat
@@ -323,7 +327,8 @@ begin
     {evaluate user-input}
     case cho of
       '?': begin {display menu}
-        if player.expert = True then display_menu(True, False)
+        if player.expert = True then
+          display_menu(True, False)
         else display_menu(False, False);
       end;
       'R': begin {return to the Inn}
@@ -389,7 +394,8 @@ begin
           repeat
             found := False;
             crlf;
-            d(config.textcolor, 'Who would you like to examine ? (enter ' + config.textcol2 + '?' + config.textcol1 + ' to see your team)');
+            d(config.textcolor, 'Who would you like to examine ? (enter ' + config.textcol2 +
+              '?' + config.textcol1 + ' to see your team)');
             sd(config.textcolor, ':');
 
             s := get_string(20);
@@ -433,11 +439,13 @@ begin
 
                   end;
 
-                  if found then break;
+                  if found then
+                    break;
 
                 end; {for j=.end.}
 
-                if found then break;
+                if found then
+                  break;
 
               end; {for i= .end.}
             end;
@@ -476,7 +484,8 @@ begin
           repeat
             crlf;
             crlf;
-            d(config.textcolor, 'Who must be SACKED? (enter ' + config.textcol2 + '?' + config.textcol1 + ' to see your team)');
+            d(config.textcolor, 'Who must be SACKED? (enter ' + config.textcol2 + '?' + config.textcol1 +
+              ' to see your team)');
             sd(config.textcolor, ':');
             s := get_string(20);
 
@@ -535,7 +544,8 @@ begin
                         sd(global_plycol, pl0.name2);
                         d(config.textcolor, ' is dead. It''s only');
                         d(config.textcolor, 'a formal matter of clearing ' + sex3[pl0.sex] + ' name from the papers.');
-                        d(global_talkcol, ' Hell, ' + sex2[pl0.sex] + ' was no good anyway ' + config.textcol1 + ', you think for yourself.');
+                        d(global_talkcol, ' Hell, ' + sex2[pl0.sex] + ' was no good anyway ' +
+                          config.textcol1 + ', you think for yourself.');
                         crlf;
                         pause;
                       end;
@@ -552,7 +562,8 @@ begin
                         '',
                         umailheadc + 'Team' + config.textcol1,
                         mkstring(4, underscore),
-                        'You were ' + ulred + 'sacked' + config.textcol1 + ' from the team by ' + uplc + player.name2 + config.textcol1 + '!',
+                        'You were ' + ulred + 'sacked' + config.textcol1 + ' from the team by ' +
+                        uplc + player.name2 + config.textcol1 + '!',
                         '',
                         '',
                         '',
@@ -583,7 +594,8 @@ begin
 
                       {news paper}
                       newsy(True, 'Internal Gang Turbulence!',
-                        ' ' + uplc + player.name2 + config.textcol1 + ' sacked ' + uplc + pl0.name2 + config.textcol1 + ' from ' + utec + player.team + config.textcol1 + '!',
+                        ' ' + uplc + player.name2 + config.textcol1 + ' sacked ' + uplc + pl0.name2 +
+                        config.textcol1 + ' from ' + utec + player.team + config.textcol1 + '!',
                         '',
                         '',
                         '',
@@ -603,7 +615,8 @@ begin
                   end;
                 end;
 
-                if break_out then break;
+                if break_out then
+                  break;
 
               end; {for i:= .end.}
 
@@ -642,7 +655,8 @@ begin
                           sd(config.textcolor, 'You call ');
                           sd(global_plycol, pl0.name2);
                           d(config.textcolor, ' to the team HQ.');
-                          d(config.textcolor, 'When you try to explain ' + sex3[pl0.sex] + ' dismissal ' + sex2[pl0.sex] + ' only');
+                          d(config.textcolor, 'When you try to explain ' + sex3[pl0.sex] +
+                            ' dismissal ' + sex2[pl0.sex] + ' only');
                           d(config.textcolor, 'gets angry and demands to get some compensation');
                           d(config.textcolor, 'for your brute decision!');
 
@@ -683,7 +697,8 @@ begin
                             sd(global_talkcol, 'Greedy Hog! ');
                             sd(global_plycol, pl0.name2);
                             d(config.textcolor, ' screams before');
-                            d(config.textcolor, sex2[pl0.sex] + ' rushes out, slamming the door shut behind ' + sex[pl0.sex] + '.');
+                            d(config.textcolor, sex2[pl0.sex] + ' rushes out, slamming the door shut behind ' +
+                              sex[pl0.sex] + '.');
                             d(config.textcolor, 'You somehow feel that this joker may stir some trouble');
                             d(config.textcolor, 'in the future.');
                             crlf;
@@ -697,7 +712,8 @@ begin
                           sd(global_plycol, pl0.name2);
                           d(config.textcolor, ' is dead as a stone, you');
                           d(config.textcolor, 'quickly remove ' + sex3[pl0.sex] + ' name from the team records.');
-                          d(config.textcolor, sex2[pl0.sex] + ' can''t complain from ' + sex3[pl0.sex] + ' current position.');
+                          d(config.textcolor, sex2[pl0.sex] + ' can''t complain from ' + sex3[pl0.sex] +
+                            ' current position.');
                           crlf;
                           pause;
                         end;
@@ -722,7 +738,8 @@ begin
 
                         {news-paper}
                         newsy(True, 'Internal Gang Turbulence!',
-                          ' ' + uplc + player.name2 + config.textcol1 + ' sacked ' + uplc + pl0.name2 + config.textcol1 + ' from ' + utec + player.team + config.textcol1 + '!',
+                          ' ' + uplc + player.name2 + config.textcol1 + ' sacked ' + uplc +
+                          pl0.name2 + config.textcol1 + ' from ' + utec + player.team + config.textcol1 + '!',
                           '',
                           '',
                           '',
@@ -742,7 +759,8 @@ begin
                     end;
                   end;
 
-                  if break_out then break;
+                  if break_out then
+                    break;
 
                 end; {for i:= .end.}
 
@@ -777,7 +795,8 @@ begin
                     if is_online(pl0.name2, online_player) = True then
                     begin
                       {send online mess}
-                      online_send_to_player(pl0.name2, online_player, uplc + player.name2 + ulred + ' sacked ' + uplc + poor_guy + config.textcol1 + ' from the Team!');
+                      online_send_to_player(pl0.name2, online_player, uplc + player.name2 + ulred +
+                        ' sacked ' + uplc + poor_guy + config.textcol1 + ' from the Team!');
                     end else
                     begin
 
@@ -807,9 +826,9 @@ begin
                   end;
 
                 end; {for j:= .end.}
-              end; {for i:= .end.}
+              end;   {for i:= .end.}
 
-              {reset mem var}
+                     {reset mem var}
               poor_guy := '';
             end;
 
@@ -857,7 +876,8 @@ begin
             if pl0.team = s then
             begin
               display_member(pl0, motivation);
-              if motivation = True then motivation := False;
+              if motivation = True then
+                motivation := False;
             end;
           end; {for i= .end.}
 
@@ -867,7 +887,8 @@ begin
             if pl0.team = s then
             begin
               display_member(pl0, motivation);
-              if motivation = True then motivation := False;
+              if motivation = True then
+                motivation := False;
             end;
           end; {for i= .end.}
           crlf;
@@ -983,7 +1004,7 @@ begin
                   end;
                 end; {for i:= .end.}
 
-                {changing npc members password to}
+                     {changing npc members password to}
                 for i := 1 to fs(FsNPC) do
                 begin
                   load_character(pl0, 2, i);
@@ -1032,7 +1053,8 @@ begin
 
             {news paper}
             Newsy(True, 'Gang Deserter!',
-              ' ' + uplc + player.name2 + config.textcol1 + ' the ' + classnames[player.class] + ' left ' + utec + player.team + config.textcol1 + '.',
+              ' ' + uplc + player.name2 + config.textcol1 + ' the ' + classnames[player.class] +
+              ' left ' + utec + player.team + config.textcol1 + '.',
               '',
               '',
               '',
@@ -1066,7 +1088,7 @@ begin
 
             end; {for i= .end.}
 
-            {removing NPC teammembers}
+                 {removing NPC teammembers}
             if x = 0 then
             begin
 
@@ -1148,7 +1170,8 @@ begin
                   (pl0.name2 <> player.name2) and
                   (pl0.team = s) then
                 begin
-                  online_send_to_player(pl0.name2, online_player, uplc + player.name2 + config.textcol1 + ' has left the team!');
+                  online_send_to_player(pl0.name2, online_player, uplc + player.name2 + config.textcol1 +
+                    ' has left the team!');
                 end;
 
                 if (pl0.team = s) and (pl0.name2 <> player.name2) then
@@ -1322,17 +1345,19 @@ begin
       end;
       'J': begin {join a team}
 
-        {the king/queen may not join a team}
+                 {the king/queen may not join a team}
         if player.king = True then
         begin
           crlf;
-          if player.sex = 1 then s := 'KING'
+          if player.sex = 1 then
+            s := 'KING'
           else s := 'QUEEN';
 
           d(12, 'The ' + s + ' may not join any team!');
           crlf;
           pause;
-        end else if player.team <> '' then
+        end else
+        if player.team <> '' then
         begin
           crlf;
           crlf;
@@ -1365,7 +1390,8 @@ begin
               d(12, 'Sorry, this team is full!');
 
               {inform online team members of failed attempt}
-              Team_Online_Report_All(pl0.team, '', uplc + player.name2 + ' ' + ulred + 'failed' + config.textcol1 + ' to join your team!');
+              Team_Online_Report_All(pl0.team, '', uplc + player.name2 + ' ' + ulred + 'failed' +
+                config.textcol1 + ' to join your team!');
 
               {inform offline team members of failed attempt}
               Team_Report_All(pl0.team, '', 'Turned down',
@@ -1424,7 +1450,8 @@ begin
 
                     if is_online(pl0.name2, online_player) = True then
                     begin
-                      online_send_to_player(pl0.name2, online_player, uplc + player.name2 + config.textcol1 + ' joined your team!');
+                      online_send_to_player(pl0.name2, online_player, uplc + player.name2 +
+                        config.textcol1 + ' joined your team!');
                     end else
                     begin
                       {mail}
@@ -1460,7 +1487,8 @@ begin
                 d(12, 'Wrong password!');
 
                 {inform online team members of failed attempt}
-                Team_Online_Report_All(pl0.team, '', uplc + player.name2 + ' ' + ulred + 'failed' + config.textcol1 + ' to join your team!');
+                Team_Online_Report_All(pl0.team, '', uplc + player.name2 + ' ' + ulred + 'failed' +
+                  config.textcol1 + ' to join your team!');
 
                 {inform offline team members of failed attempt}
                 Team_Report_All(pl0.team, '', 'Intruder',
@@ -1482,20 +1510,23 @@ begin
         if player.king = True then
         begin
           crlf;
-          if player.sex = 1 then s := 'KING'
+          if player.sex = 1 then
+            s := 'KING'
           else s := 'QUEEN';
 
           d(15, 'The ' + s + ' may not create a team!');
           crlf;
           pause;
-        end else if player.team <> '' then
+        end else
+        if player.team <> '' then
         begin
           crlf;
           sd(12, 'You are already a member of ');
           sd(global_teamcol, player.team);
           d(12, '!');
           crlf;
-        end else if confirm('Create a New Team', 'n') = True then
+        end else
+        if confirm('Create a New Team', 'n') = True then
         begin
           crlf;
           crlf;
@@ -1590,7 +1621,8 @@ begin
             d(config.textcolor, ' has been created by you!');
 
             d(config.textcolor, 'Hopefully your new team will be victorious in many battles to come.');
-            d(config.textcolor, '(Remember that a team can have a maximum of ' + commastr(global_maxteammembers) + ' members)');
+            d(config.textcolor, '(Remember that a team can have a maximum of ' + commastr(global_maxteammembers) +
+              ' members)');
             crlf;
 
             player.team := s;

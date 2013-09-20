@@ -61,7 +61,7 @@ var
   nice3: array [1..maxsorts] of boolean;
 
 procedure King_VoteResults; {displays the players votes}
-const voptions = 4; {vote options}
+const voptions = 4;         {vote options}
 var
 
   gap:     integer;
@@ -76,7 +76,7 @@ var
   s:       s40;
 
   pl0:     ^UserRec; {temporary user record}
-  king:    KingRec; {the king}
+  king:    KingRec;  {the king}
 
 begin
 
@@ -139,9 +139,9 @@ begin
       end;
 
     end; {for j:= .end.}
-  end; {for i:= .end.}
+  end;   {for i:= .end.}
 
-  {sorting}
+         {sorting}
   gap := voptions;
   while gap > 0 do
   begin
@@ -165,7 +165,7 @@ begin
           j := j - gap;
         end;
       end; {while .end.}
-    end; {for i:= .end.}
+    end;   {for i:= .end.}
     gap := gap div 2;
   end; {while .end.}
 
@@ -192,15 +192,16 @@ begin
       4: sd(config.textcolor, 'vote for REVOLUTION NOW!');
     end; {case .end.}
 
-    {nr of votes}
-    if results[i] = 1 then s := ' vote'
+         {nr of votes}
+    if results[i] = 1 then
+      s := ' vote'
     else s := ' votes';
 
     d(14, ' ... ' + uwhite + '(' + commastr(results[i]) + s + ')');
 
   end; {for i:= .end.}
 
-  {dispose temporary variables}
+       {dispose temporary variables}
   dispose(pl0);
 
 end; {king_voteresults *end*}
@@ -226,7 +227,8 @@ begin
 
   if config.marknpcs then
   begin
-    if confirm('Include NPCs in list', 'Y') then npc := True
+    if confirm('Include NPCs in list', 'Y') then
+      npc := True
     else npc := False;
   end else
   begin
@@ -326,7 +328,7 @@ begin
       end;
     end; {for i:= .end.}
     gap := gap div 2;
-  end; {while .end.}
+  end;   {while .end.}
 
   if filescore = False then
   begin
@@ -397,7 +399,7 @@ var
   targetid1, targetid2: s15;
 
   hatecounter: array [1..maxsortsF] of word; {used by sorting routine}
-  idtag:       array [1..maxsortsF] of s15; {used by sorting routine}
+  idtag:       array [1..maxsortsF] of s15;  {used by sorting routine}
   filex:       array [1..maxsortsF] of word; {used by sorting routine}
 
   zz:          s15;
@@ -433,8 +435,10 @@ begin
         found1 := False;
         found2 := False;
 
-        if relation.relation1 = feeling then targetid1 := relation.idtag2;
-        if relation.relation2 = feeling then targetid2 := relation.idtag1;
+        if relation.relation1 = feeling then
+          targetid1 := relation.idtag2;
+        if relation.relation2 = feeling then
+          targetid2 := relation.idtag1;
 
         {increase already existing}
         if counter > 1 then
@@ -454,7 +458,8 @@ begin
               found2 := True;
             end;
 
-            if (found1) and (found2) then break;
+            if (found1) and (found2) then
+              break;
 
           end; {for j:= .end.}
         end;
@@ -478,11 +483,12 @@ begin
       end;
     end;
 
-    if counter >= maxsortsF then break;
+    if counter >= maxsortsF then
+      break;
 
   end; {for i:= .end.}
 
-  {sort the array we collected}
+       {sort the array we collected}
   if counter > 1 then
   begin
     {Sort routine}
@@ -555,7 +561,8 @@ begin
       if idtag[i] = relation.idtag1 then
       begin
         s := s + uplc + relation.name1 + config.textcol1;
-      end else if idtag[i] = relation.idtag2 then
+      end else
+      if idtag[i] = relation.idtag2 then
       begin
         s := s + uplc + relation.name2 + config.textcol1;
       end;
@@ -566,7 +573,8 @@ begin
       sd(config.textcolor, s);
 
       {feelings total}
-      if (hatecounter[i] > 1) or (hatecounter[i] = 0) then s := ' players'
+      if (hatecounter[i] > 1) or (hatecounter[i] = 0) then
+        s := ' players'
       else s := ' player';
 
       d(15, ' ' + commastr(hatecounter[i]) + config.textcol1 + s);
@@ -585,7 +593,7 @@ begin
 
   end; {for i:= .end.}
 
-end; {feeling_list *end*}
+end;   {feeling_list *end*}
 
 procedure Child_Producers; {rankings of top child producers}
 var
@@ -596,7 +604,7 @@ var
 
   npc:      boolean;
 
-  plyfile:  array[1..maxsorts] of byte; {used by sorting routine}
+  plyfile:  array[1..maxsorts] of byte;  {used by sorting routine}
   filex:    array [1..maxsorts] of word; {used by sorting routine}
   children: array [1..maxsorts] of word; {used by sorting routine}
 
@@ -623,7 +631,8 @@ begin
 
   if config.marknpcs = True then
   begin
-    if confirm('Include NPCs in list', 'Y') then npc := True
+    if confirm('Include NPCs in list', 'Y') then
+      npc := True
     else npc := False;
   end else
   begin
@@ -668,7 +677,7 @@ begin
 
   end; {for i:= .end.}
 
-  {should we load the npcs as well?}
+       {should we load the npcs as well?}
   if npc = True then
   begin
     for i := 1 to fs(FsNpc) do
@@ -770,7 +779,8 @@ begin
         s := s + config.textcol1 + classnames[ply^.class] + config.textcol1;
 
         {display produced string}
-        if ply^.sex = 1 then s := s + ' is father to '
+        if ply^.sex = 1 then
+          s := s + ' is father to '
         else s := s + ' is mother to ';
 
         offset := 80;
@@ -778,7 +788,8 @@ begin
         begin
           xx := offset - length(s);
           s := s + mkstring(xx, '.');
-        end else if length(s) > offset then
+        end else
+        if length(s) > offset then
         begin
           s := copy(s, 1, offset);
         end;
@@ -803,7 +814,7 @@ begin
 
   end; {for i:= .end.}
 
-  {dispose pointer vars}
+       {dispose pointer vars}
   dispose(ply);
 
 end; {child_producers *end*}
@@ -826,7 +837,8 @@ begin
 
   if config.marknpcs then
   begin
-    if confirm('Include NPCs in list', 'Y') then npc := True
+    if confirm('Include NPCs in list', 'Y') then
+      npc := True
     else npc := False;
   end else
   begin
@@ -1001,12 +1013,14 @@ begin
 
   for i := 1 to fs(FsPlayer) do
   begin
-    if o >= maxsorts then break;
+    if o >= maxsorts then
+      break;
     if load_character(ply0^, 1, i) = True then
     begin
       Inc(o);
       nice[o] := ply0^.armpow + ply0^.weappow;
-      if nice[o] < 0 then nice[o] := 0;
+      if nice[o] < 0 then
+        nice[o] := 0;
       nice2[o] := i;
       nice3[o] := True;
     end;
@@ -1016,12 +1030,14 @@ begin
   begin
     for i := 1 to fs(FsNPC) do
     begin
-      if o >= maxsorts then break;
+      if o >= maxsorts then
+        break;
       if load_character(ply0^, 2, i) = True then
       begin
         Inc(o);
         nice[o] := ply0^.armpow + ply0^.weappow;
-        if nice[o] < 0 then nice[o] := 0;
+        if nice[o] < 0 then
+          nice[o] := 0;
         nice2[o] := i;
         nice3[o] := False;
       end;
@@ -1071,17 +1087,20 @@ begin
       writeln_to_text(ansifile, '*** Equipment Masters Top 400 ***');
       writeln_to_text(ansifile, ' *******************************');
       writeln_to_text(ansifile, ' ');
-      writeln_to_text(ansifile, aYellowOnBlack + 'Rank  Name              Equipment Rating   Level' + ConvertToAnsi(config.textcolor));
+      writeln_to_text(ansifile, aYellowOnBlack + 'Rank  Name              Equipment Rating   Level' +
+        ConvertToAnsi(config.textcolor));
       for i := 1 to o do
       begin
 
         loading_ok := False;
         if nice3[i] then
         begin
-          if load_character(ply0^, 1, nice2[i]) = True then loading_ok := True;
+          if load_character(ply0^, 1, nice2[i]) = True then
+            loading_ok := True;
         end else
         begin
-          if load_character(ply0^, 2, nice2[i]) = True then loading_ok := True;
+          if load_character(ply0^, 2, nice2[i]) = True then
+            loading_ok := True;
         end;
 
         temp2^ := ply0^.name2;
@@ -1146,10 +1165,12 @@ begin
         loading_ok := False;
         if nice3[i] then
         begin
-          if load_character(ply0^, 1, nice2[i]) = True then loading_ok := True;
+          if load_character(ply0^, 1, nice2[i]) = True then
+            loading_ok := True;
         end else
         begin
-          if load_character(ply0^, 2, nice2[i]) = True then loading_ok := True;
+          if load_character(ply0^, 2, nice2[i]) = True then
+            loading_ok := True;
         end;
 
         temp2^ := ply0^.name2;
@@ -1209,10 +1230,12 @@ begin
       loading_ok := False;
       if nice3[i] then
       begin
-        if load_character(ply0^, 1, nice2[i]) = True then loading_ok := True;
+        if load_character(ply0^, 1, nice2[i]) = True then
+          loading_ok := True;
       end else
       begin
-        if load_character(ply0^, 2, nice2[i]) = True then loading_ok := True;
+        if load_character(ply0^, 2, nice2[i]) = True then
+          loading_ok := True;
       end;
 
       temp2^ := ply0^.name2;
@@ -1250,7 +1273,8 @@ begin
         if Count > global_screenlines - 2 then
         begin
           Count := 0;
-          if confirm('More', 'y') = False then break;
+          if confirm('More', 'y') = False then
+            break;
         end;
       end;
     end;
@@ -1311,7 +1335,8 @@ begin
 
   for i := 1 to fs(FsPlayer) do
   begin
-    if o >= maxsorts then break;
+    if o >= maxsorts then
+      break;
 
     if load_character(ply0^, 1, i) = True then
     begin
@@ -1323,7 +1348,8 @@ begin
       begin
         nice[o] := ply0^.armpow;
       end;
-      if nice[o] < 0 then nice[o] := 0;
+      if nice[o] < 0 then
+        nice[o] := 0;
       nice2[o] := i;
       nice3[o] := True;
     end;
@@ -1333,7 +1359,8 @@ begin
   begin
     for i := 1 to fs(FsNPC) do
     begin
-      if o >= maxsorts then break;
+      if o >= maxsorts then
+        break;
       if load_character(ply0^, 2, i) = True then
       begin
         Inc(o);
@@ -1344,7 +1371,8 @@ begin
         begin
           nice[o] := ply0^.armpow;
         end;
-        if nice[o] < 0 then nice[o] := 0;
+        if nice[o] < 0 then
+          nice[o] := 0;
         nice2[o] := i;
         nice3[o] := False;
       end;
@@ -1402,10 +1430,12 @@ begin
         loading_ok := False;
         if nice3[i] then
         begin
-          if load_character(ply0^, 1, nice2[i]) = True then loading_ok := True;
+          if load_character(ply0^, 1, nice2[i]) = True then
+            loading_ok := True;
         end else
         begin
-          if load_character(ply0^, 2, nice2[i]) = True then loading_ok := True;
+          if load_character(ply0^, 2, nice2[i]) = True then
+            loading_ok := True;
         end;
 
         temp2^ := ply0^.name2;
@@ -1478,10 +1508,12 @@ begin
         loading_ok := False;
         if nice3[i] then
         begin
-          if load_character(ply0^, 1, nice2[i]) = True then loading_ok := True;
+          if load_character(ply0^, 1, nice2[i]) = True then
+            loading_ok := True;
         end else
         begin
-          if load_character(ply0^, 2, nice2[i]) = True then loading_ok := True;
+          if load_character(ply0^, 2, nice2[i]) = True then
+            loading_ok := True;
         end;
 
         if (loading_ok = True) and
@@ -1548,10 +1580,12 @@ begin
       loading_ok := False;
       if nice3[i] then
       begin
-        if load_character(ply0^, 1, nice2[i]) = True then loading_ok := True;
+        if load_character(ply0^, 1, nice2[i]) = True then
+          loading_ok := True;
       end else
       begin
-        if load_character(ply0^, 2, nice2[i]) = True then loading_ok := True;
+        if load_character(ply0^, 2, nice2[i]) = True then
+          loading_ok := True;
       end;
 
       if (loading_ok = True) and
@@ -1570,7 +1604,8 @@ begin
         if length(s^) > offset then
         begin
           sd(global_plycol, copy(s^, 1, offset));
-        end else if length(s^) < offset then
+        end else
+        if length(s^) < offset then
         begin
           x := offset - length(s^);
           sd(global_plycol, ply0^.name2);
@@ -1612,7 +1647,8 @@ begin
       if Count > global_screenlines - 2 then
       begin
         Count := 0;
-        if confirm('More', 'y') = False then break;
+        if confirm('More', 'y') = False then
+          break;
       end;
     end;
     crlf;
@@ -1675,7 +1711,8 @@ begin
 
   for i := 1 to fs(FsPlayer) do
   begin
-    if o >= maxsorts then break;
+    if o >= maxsorts then
+      break;
     if load_character(ply0^, 1, i) = True then
     begin
       Inc(o);
@@ -1687,7 +1724,8 @@ begin
         nice[o] := ply0^.weappow;
       end;
 
-      if nice[o] < 0 then nice[o] := 0;
+      if nice[o] < 0 then
+        nice[o] := 0;
       nice2[o] := i;
       nice3[o] := True;
     end;
@@ -1697,7 +1735,8 @@ begin
   begin
     for i := 1 to fs(FsNPC) do
     begin
-      if o >= maxsorts then break;
+      if o >= maxsorts then
+        break;
       if load_character(ply0^, 2, i) = True then
       begin
         Inc(o);
@@ -1708,7 +1747,8 @@ begin
         begin
           nice[o] := ply0^.weappow;
         end;
-        if nice[o] < 0 then nice[o] := 0;
+        if nice[o] < 0 then
+          nice[o] := 0;
         nice2[o] := i;
         nice3[o] := False;
       end;
@@ -1764,10 +1804,12 @@ begin
         loading_ok := False;
         if nice3[i] then
         begin
-          if load_character(ply0^, 1, nice2[i]) = True then loading_ok := True;
+          if load_character(ply0^, 1, nice2[i]) = True then
+            loading_ok := True;
         end else
         begin
-          if load_character(ply0^, 2, nice2[i]) = True then loading_ok := True;
+          if load_character(ply0^, 2, nice2[i]) = True then
+            loading_ok := True;
         end;
 
         if (loading_ok = True) and
@@ -1838,10 +1880,12 @@ begin
         loading_ok := False;
         if nice3[i] then
         begin
-          if load_character(ply0^, 1, nice2[i]) = True then loading_ok := True;
+          if load_character(ply0^, 1, nice2[i]) = True then
+            loading_ok := True;
         end else
         begin
-          if load_character(ply0^, 2, nice2[i]) = True then loading_ok := True;
+          if load_character(ply0^, 2, nice2[i]) = True then
+            loading_ok := True;
         end;
 
         if (loading_ok = True) and
@@ -1907,10 +1951,12 @@ begin
       loading_ok := False;
       if nice3[i] then
       begin
-        if load_character(ply0^, 1, nice2[i]) = True then loading_ok := True;
+        if load_character(ply0^, 1, nice2[i]) = True then
+          loading_ok := True;
       end else
       begin
-        if load_character(ply0^, 2, nice2[i]) = True then loading_ok := True;
+        if load_character(ply0^, 2, nice2[i]) = True then
+          loading_ok := True;
       end;
 
       if (loading_ok = True) and
@@ -1929,7 +1975,8 @@ begin
         if length(s^) > offset then
         begin
           sd(global_plycol, copy(s^, 1, offset));
-        end else if length(s^) < offset then
+        end else
+        if length(s^) < offset then
         begin
           x := offset - length(s^);
           sd(global_plycol, ply0^.name2);
@@ -1971,7 +2018,8 @@ begin
       if Count > global_screenlines - 2 then
       begin
         Count := 0;
-        if confirm('More', 'y') = False then break;
+        if confirm('More', 'y') = False then
+          break;
       end;
     end;
     crlf;
@@ -2038,7 +2086,8 @@ begin
   {Sorting}
   for i := 1 to fs(FsPlayer) do
   begin
-    if o >= maxsorts then break;
+    if o >= maxsorts then
+      break;
     if load_character(ply0^, 1, i) = True then
     begin
       Inc(o);
@@ -2053,7 +2102,8 @@ begin
   begin
     for i := 1 to fs(FsNPC) do
     begin
-      if o >= maxsorts then break;
+      if o >= maxsorts then
+        break;
 
 
       if load_character(ply0^, 2, i) = True then
@@ -2125,10 +2175,12 @@ begin
         loading_ok := False;
         if nice3[i] then
         begin
-          if load_character(ply0^, 1, nice2[i]) = True then loading_ok := True;
+          if load_character(ply0^, 1, nice2[i]) = True then
+            loading_ok := True;
         end else
         begin
-          if load_character(ply0^, 2, nice2[i]) = True then loading_ok := True;
+          if load_character(ply0^, 2, nice2[i]) = True then
+            loading_ok := True;
         end;
 
         if (loading_ok = True) and
@@ -2220,10 +2272,12 @@ begin
         loading_ok := False;
         if nice3[i] then
         begin
-          if load_character(ply0^, 1, nice2[i]) = True then loading_ok := True;
+          if load_character(ply0^, 1, nice2[i]) = True then
+            loading_ok := True;
         end else
         begin
-          if load_character(ply0^, 2, nice2[i]) = True then loading_ok := True;
+          if load_character(ply0^, 2, nice2[i]) = True then
+            loading_ok := True;
         end;
 
         if (loading_ok = True) and
@@ -2308,10 +2362,12 @@ begin
       loading_ok := False;
       if nice3[i] then
       begin
-        if load_character(ply0^, 1, nice2[i]) = True then loading_ok := True;
+        if load_character(ply0^, 1, nice2[i]) = True then
+          loading_ok := True;
       end else
       begin
-        if load_character(ply0^, 2, nice2[i]) = True then loading_ok := True;
+        if load_character(ply0^, 2, nice2[i]) = True then
+          loading_ok := True;
       end;
 
       if (loading_ok = True) and
@@ -2330,7 +2386,8 @@ begin
         if length(s^) > offset then
         begin
           sd(global_plycol, copy(s^, 1, offset));
-        end else if length(s^) < offset then
+        end else
+        if length(s^) < offset then
         begin
           x := offset - length(s^);
           sd(global_plycol, ply0^.name2);
@@ -2390,7 +2447,8 @@ begin
       if Count > global_screenlines - 2 then
       begin
         Count := 0;
-        if confirm('More', 'y') = False then break;
+        if confirm('More', 'y') = False then
+          break;
       end;
     end;
     crlf;
@@ -2456,12 +2514,14 @@ begin
 
   for i := 1 to fs(FsPlayer) do
   begin
-    if o >= maxsorts then break;
+    if o >= maxsorts then
+      break;
     if load_character(ply0^, 1, i) = True then
     begin
       Inc(o);
       nice[o] := ply0^.p_kills - ply0^.p_defeats;
-      if nice[o] < 0 then nice[o] := 0;
+      if nice[o] < 0 then
+        nice[o] := 0;
       nice2[o] := i;
       nice3[o] := True;
     end;
@@ -2471,12 +2531,14 @@ begin
   begin
     for i := 1 to fs(FsNPC) do
     begin
-      if o >= maxsorts then break;
+      if o >= maxsorts then
+        break;
       if load_character(ply0^, 2, i) = True then
       begin
         Inc(o);
         nice[o] := ply0^.p_kills - ply0^.p_defeats;
-        if nice[o] < 0 then nice[o] := 0;
+        if nice[o] < 0 then
+          nice[o] := 0;
         nice2[o] := i;
         nice3[o] := False;
       end;
@@ -2535,10 +2597,12 @@ begin
         loading_ok := False;
         if nice3[i] then
         begin
-          if load_character(ply0^, 1, nice2[i]) = True then loading_ok := True;
+          if load_character(ply0^, 1, nice2[i]) = True then
+            loading_ok := True;
         end else
         begin
-          if load_character(ply0^, 2, nice2[i]) = True then loading_ok := True;
+          if load_character(ply0^, 2, nice2[i]) = True then
+            loading_ok := True;
         end;
 
         if (loading_ok = True) and
@@ -2622,10 +2686,12 @@ begin
         loading_ok := False;
         if nice3[i] then
         begin
-          if load_character(ply0^, 1, nice2[i]) = True then loading_ok := True;
+          if load_character(ply0^, 1, nice2[i]) = True then
+            loading_ok := True;
         end else
         begin
-          if load_character(ply0^, 2, nice2[i]) = True then loading_ok := True;
+          if load_character(ply0^, 2, nice2[i]) = True then
+            loading_ok := True;
         end;
 
         if (loading_ok = True) and
@@ -2708,10 +2774,12 @@ begin
       loading_ok := False;
       if nice3[i] then
       begin
-        if load_character(ply0^, 1, nice2[i]) = True then loading_ok := True;
+        if load_character(ply0^, 1, nice2[i]) = True then
+          loading_ok := True;
       end else
       begin
-        if load_character(ply0^, 2, nice2[i]) = True then loading_ok := True;
+        if load_character(ply0^, 2, nice2[i]) = True then
+          loading_ok := True;
       end;
 
       if (loading_ok = True) and
@@ -2730,7 +2798,8 @@ begin
         if length(s^) > offset then
         begin
           sd(global_plycol, copy(s^, 1, offset));
-        end else if length(s^) < offset then
+        end else
+        if length(s^) < offset then
         begin
           x := offset - length(s^);
           sd(global_plycol, ply0^.name2);
@@ -2790,7 +2859,8 @@ begin
       if Count > global_screenlines - 2 then
       begin
         Count := 0;
-        if confirm('More', 'y') = False then break;
+        if confirm('More', 'y') = False then
+          break;
       end;
     end;
     crlf;
@@ -2970,7 +3040,8 @@ begin
     {evaluate user-input}
     case ch of
       '?': begin {Menu}
-        if player.expert = True then display_menu(True, False)
+        if player.expert = True then
+          display_menu(True, False)
         else display_menu(False, False);
       end;
       'H': begin {Help Text}
@@ -3026,7 +3097,8 @@ begin
         crlf;
         if config.marknpcs then
         begin
-          if confirm('Include NPCs in list', 'Y') then npcinc := True
+          if confirm('Include NPCs in list', 'Y') then
+            npcinc := True
           else npcinc := False;
         end else
         begin
@@ -3039,7 +3111,8 @@ begin
         crlf;
         if config.marknpcs then
         begin
-          if confirm('Include NPCs in list', 'Y') then npcinc := True
+          if confirm('Include NPCs in list', 'Y') then
+            npcinc := True
           else npcinc := False;
         end else
         begin
@@ -3057,7 +3130,8 @@ begin
         crlf;
         if config.marknpcs then
         begin
-          if confirm('Include NPCs in list', 'Y') then npcinc := True
+          if confirm('Include NPCs in list', 'Y') then
+            npcinc := True
           else npcinc := False;
         end else
         begin
@@ -3070,7 +3144,8 @@ begin
         crlf;
         if config.marknpcs then
         begin
-          if confirm('Include NPCs in list', 'Y') then npcinc := True
+          if confirm('Include NPCs in list', 'Y') then
+            npcinc := True
           else npcinc := False;
         end else
         begin
@@ -3085,7 +3160,8 @@ begin
           crlf;
           if config.marknpcs then
           begin
-            if confirm('Include NPCs in list', 'Y') then npcinc := True
+            if confirm('Include NPCs in list', 'Y') then
+              npcinc := True
             else npcinc := False;
           end else
           begin

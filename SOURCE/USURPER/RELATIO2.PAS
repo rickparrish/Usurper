@@ -93,7 +93,7 @@ begin
     251..500: Result := 'angel-heart';
   end; {case .end.}
 
-  {return result}
+       {return result}
   child_soul_string := Result;
 
 end; {child_soul_string .end.}
@@ -130,7 +130,7 @@ begin
   Result := '';
 
   case child.health of
-    ChildHealth_Normal: Result := 'normal'; {normal health, default}
+    ChildHealth_Normal: Result := 'normal';          {normal health, default}
     ChildHealth_Poisoned: Result := ulred + 'poisoned!'; {poisoned}
     ChildHealth_Cursed: Result := ulred + 'cursed!'; {cursed, curses can only be ordained by Gods}
     ChildHealth_Depressed: Result := +ulred + '*depressed*'; {depressed after a divorce}
@@ -168,7 +168,8 @@ begin {used in relation.pas <examine child>, also good for debugging}
   {age}
   sd(c1, 'Age: ');
   sd(c2, commastr(child.age));
-  if child.age > 1 then d(c1, ' years')
+  if child.age > 1 then
+    d(c1, ' years')
   else d(c1, ' year');
 
   {sex}
@@ -206,12 +207,14 @@ begin {used in relation.pas <examine child>, also good for debugging}
   crlf;
   {current mother}
   sd(c1, 'Mother: ');
-  if child.mother = '' then d(12, unknown)
+  if child.mother = '' then
+    d(12, unknown)
   else d(global_plycol, child.mother);
 
   {current father}
   sd(c1, 'Father: ');
-  if child.father = '' then d(12, unknown)
+  if child.father = '' then
+    d(12, unknown)
   else d(global_plycol, child.father);
 
   crlf;
@@ -220,7 +223,8 @@ begin {used in relation.pas <examine child>, also good for debugging}
   begin
     {original mother}
     sd(c1, 'Biological Mother: ');
-    if child.orgmother = '' then d(12, unknown)
+    if child.orgmother = '' then
+      d(12, unknown)
     else d(global_plycol, child.orgmother);
   end;
 
@@ -228,7 +232,8 @@ begin {used in relation.pas <examine child>, also good for debugging}
   begin
     {original father}
     sd(c1, 'Biological Father: ');
-    if child.orgfather = '' then d(12, unknown)
+    if child.orgfather = '' then
+      d(12, unknown)
     else d(global_plycol, child.orgfather);
   end;
 
@@ -270,7 +275,8 @@ begin {used in relation.pas <examine child>, also good for debugging}
     d(12, 'Ransom demanded: ' + commastr(child.ransom_demanded));
   end;
 
-  if child.royal = 0 then d(c1, 'child is not of royal blood')
+  if child.royal = 0 then
+    d(c1, 'child is not of royal blood')
   else d(c1, 'CHILD IS ROYAL');
 
 end; {child_view .end.}
@@ -284,10 +290,12 @@ const
   kidnapped_sign = '<k>'; {the mark of a child being kidnapped}
 
 var Result: s70;
+
   {returns bastard,orphanage,adopted,}
   procedure add_red;
   begin
-    if Result = '' then Result := ulred;
+    if Result = '' then
+      Result := ulred;
   end; {add_red .end.}
 
 begin
@@ -345,7 +353,7 @@ begin
     global_RelationTrust: Result := 'trusted by';
     global_RelationRespect: Result := 'respected by';
 
-    global_RelationNone: Result := '*none*'; {returned by social_relation}
+    global_RelationNone: Result := '*none*';   {returned by social_relation}
     global_RelationNormal: Result := 'normal'; {default relation value}
 
     global_RelationSuspicious: Result := 'suspected by';
@@ -355,7 +363,7 @@ begin
 
   end; {case .end.}
 
-  {return result}
+       {return result}
   RelationConstant_to_TopList2 := Result;
 
 end; {RelationConstant_to_TopList2 .end.}
@@ -373,7 +381,7 @@ begin
     global_RelationTrust: Result := ', most trusted players            trusted by';
     global_RelationRespect: Result := ', most respected players          respected by';
 
-    global_RelationNone: Result := '*none*'; {returned by social_relation}
+    global_RelationNone: Result := '*none*';   {returned by social_relation}
     global_RelationNormal: Result := 'normal'; {default relation value}
 
     global_RelationSuspicious: Result := ', most suspicious';
@@ -383,7 +391,7 @@ begin
 
   end; {case .end.}
 
-  {return result}
+       {return result}
   RelationConstant_to_TopList := Result;
 
 end; {RelationConstant_to_TopList .end.}
@@ -401,7 +409,7 @@ begin
     global_RelationTrust: Result := 'trust';
     global_RelationRespect: Result := 'respect';
 
-    global_RelationNone: Result := '*none*'; {returned by social_relation}
+    global_RelationNone: Result := '*none*';   {returned by social_relation}
     global_RelationNormal: Result := 'normal'; {default relation value}
 
     global_RelationSuspicious: Result := 'suspicious';
@@ -411,7 +419,7 @@ begin
 
   end; {case .end.}
 
-  {return result}
+       {return result}
   relationConstant_to_String := Result;
 
 end; {relationConstant_to_String .end.}
@@ -428,10 +436,10 @@ var
 
 begin {called from name_babies. fetches a childname based on childs gender}
 
-  { childmalef  = datadir+'CHILDMAL.DAT'; children, male names *used by npcs*}
-  { childfemalef= datadir+'CHILDFEM.DAT';children, female names *used by npcs*}
+      { childmalef  = datadir+'CHILDMAL.DAT'; children, male names *used by npcs*}
+      { childfemalef= datadir+'CHILDFEM.DAT';children, female names *used by npcs*}
 
-  {init}
+      {init}
   s := '';
   cnr := 1;
   go_ahead := True;
@@ -447,10 +455,11 @@ begin {called from name_babies. fetches a childname based on childs gender}
     end;
   end; {case .end.}
 
-  {if the childname datafiles does not exist, then we create them}
+       {if the childname datafiles does not exist, then we create them}
   if f_exists(tempfilename) = False then
   begin
-    if create_childrenfile(cnr) = False then go_ahead := False;
+    if create_childrenfile(cnr) = False then
+      go_ahead := False;
   end;
 
   if go_ahead = True then
@@ -646,7 +655,7 @@ begin {persons recnr in RELATION to #record nr in userfile
 
   end; {for i:= .end.}
 
-  {delete record?}
+       {delete record?}
   if (result_person1 = False) or (result_person2 = False) then
   begin
     if global_utest then
@@ -683,13 +692,15 @@ begin {called by relation.pas => Relation_Maintenance
 
     if (step_through) and (override) then
     begin
-      if confirm('Continue', 'Y') = False then break;
-      if confirm('Skip continue question', 'N') = True then override := False;
+      if confirm('Continue', 'Y') = False then
+        break;
+      if confirm('Skip continue question', 'N') = True then
+        override := False;
     end;
 
   end; {for i:= .end.}
 
-end; {validate_all_relations *end*}
+end;   {validate_all_relations *end*}
 
 
 
@@ -788,7 +799,7 @@ begin
 
           {edit gawain to love mia, and then let mia marry gawain
            }
-          end; {edit relations .end.}
+          end;       {edit relations .end.}
 
           'V': begin {view relations}
             crlf;
@@ -848,7 +859,8 @@ begin
 
             if x > 0 then
             begin
-              if confirm('Only create new relations with opposite sex', 'N') = True then dimmy := True
+              if confirm('Only create new relations with opposite sex', 'N') = True then
+                dimmy := True
               else dimmy := False;
               crlf;
               sd(15, 'Hang on..');
@@ -864,7 +876,8 @@ begin
 
     end else
     begin
-      if confirm('Exit Relations Editor', 'N') = True then really_done := True;
+      if confirm('Exit Relations Editor', 'N') = True then
+        really_done := True;
     end;
 
   until really_done;
@@ -876,7 +889,8 @@ var header: s30;
 begin
 
   {exit if configuration has been set to NOT DISPLAY RELATION CHANGES}
-  if (config.RelationChangesNews = 0) or (global_maintrunning = True) then exit;
+  if (config.RelationChangesNews = 0) or (global_maintrunning = True) then
+    exit;
 
   case random(3) of
     0: header := 'Relations';
@@ -910,22 +924,28 @@ var
   relation: relationrec;
 
 begin {called from npcmaint.pas. player marries the first girl/boy he can find}
-  {scan relations for a LOVE-LOVE relation}
+      {scan relations for a LOVE-LOVE relation}
   for i := 1 to fs(FsRelation) do
   begin
-    if i mod 100 = 0 then sd(12, '.');
+    if i mod 100 = 0 then
+      sd(12, '.');
     load_relation(fload, relation, i);
-    if relation.deleted = True then continue;
+    if relation.deleted = True then
+      continue;
     if ((relation.relation1 = global_RelationLove) and
       (relation.relation2 = global_RelationLove)) and
       (relation.BannedMarry = False) and
       (relation.ai1 = 'C') and (relation.ai2 = 'C') then
     begin
-      if is_player_married(relation.name1, relation.idtag1) <> '' then continue;
-      if is_player_married(relation.name2, relation.idtag2) <> '' then continue;
+      if is_player_married(relation.name1, relation.idtag1) <> '' then
+        continue;
+      if is_player_married(relation.name2, relation.idtag2) <> '' then
+        continue;
 
-      if load_character(marry, relation.filetype2, relation.recnr1) = False then continue;
-      if load_character(spouse, relation.filetype2, relation.recnr2) = False then continue;
+      if load_character(marry, relation.filetype2, relation.recnr1) = False then
+        continue;
+      if load_character(spouse, relation.filetype2, relation.recnr2) = False then
+        continue;
       if (marry.age >= config.minimumagetomarry) and (spouse.age >= config.minimumagetomarry) then
       begin
 
@@ -943,10 +963,11 @@ begin {called from npcmaint.pas. player marries the first girl/boy he can find}
           2: s := ' The mayor held a party for the newly wed!';
         end; {case .end.}
 
-        {news-paper}
+             {news-paper}
         newsy(True,
           'Wedding!',
-          ' ' + uplc + marry.name2 + config.textcol1 + ', the ' + race_display(2, marry.race, 0) + ', and ' + uplc + spouse.name2 + config.textcol1 + ', the ' + race_display(2, spouse.race, 0) + ', were married!',
+          ' ' + uplc + marry.name2 + config.textcol1 + ', the ' + race_display(2, marry.race, 0) +
+          ', and ' + uplc + spouse.name2 + config.textcol1 + ', the ' + race_display(2, spouse.race, 0) + ', were married!',
           s,
           '',
           '',
@@ -959,7 +980,8 @@ begin {called from npcmaint.pas. player marries the first girl/boy he can find}
         {marriage-log, see duplicate code in lovers.pas}
         Generic_News(MarriageDivorceNews,
           False,
-          ugreen + '[' + fix_date(todays_date) + '] ' + uplc + marry.name2 + ugreen + ' and ' + uplc + spouse.name2 + ugreen + ' were ' + uyellow + 'Married' + ugreen + '.',
+          ugreen + '[' + fix_date(todays_date) + '] ' + uplc + marry.name2 + ugreen + ' and ' +
+          uplc + spouse.name2 + ugreen + ' were ' + uyellow + 'Married' + ugreen + '.',
           '',
           '',
           '',
@@ -1070,7 +1092,7 @@ begin {called from npcmaint.pas. player marries the first girl/boy he can find}
 
         end; {for ii:= .end.}
 
-        {save updated player flags}
+             {save updated player flags}
         user_save(spouse);
         user_save(marry);
 
@@ -1085,6 +1107,6 @@ begin {called from npcmaint.pas. player marries the first girl/boy he can find}
 
   end; {for i:= .end.}
 
-end; {npc_set_out_to_marry *end*}
+end;   {npc_set_out_to_marry *end*}
 
 end.

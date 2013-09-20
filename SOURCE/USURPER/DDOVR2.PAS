@@ -10,8 +10,16 @@ interface
 uses
   dos, jakob, crt;
 
-procedure Loadconfig(fn: string; var bbs_software: byte; var user_first_name, user_last_name: string; var user_access_level: word; var bbs_time_left: integer; var com_port: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}integer{$ENDIF}; var baud_rate: longint; var node_num: integer; {jakob; originally BYTE in DDplus version}
-  var local: boolean; var Graphics: byte; var color1: boolean; var color_chg: boolean; var NoFossInit: boolean; var board_name: string; var pause_code: string; var sysop_first_name: string; var sysop_last_name: string; var maxtime: word; var localcol: boolean; var statfore: byte; var statback: byte; var statline: boolean; var EMSOk, NetOk, NoLocal: boolean; var fossilio, digiio: boolean; var dropfilepath: string; var GoRip: byte; var lockbaud: longint; var nodirect: boolean; var port1, port2, port3, port4: word; var irq1, irq2, irq3, irq4: byte);
+procedure Loadconfig(fn: string; var bbs_software: byte; var user_first_name, user_last_name: string;
+  var user_access_level: word; var bbs_time_left: integer;
+  var com_port: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}integer{$ENDIF}; var baud_rate: longint;
+  var node_num: integer; {jakob; originally BYTE in DDplus version}
+  var local: boolean; var Graphics: byte; var color1: boolean; var color_chg: boolean;
+  var NoFossInit: boolean; var board_name: string; var pause_code: string; var sysop_first_name: string;
+  var sysop_last_name: string; var maxtime: word; var localcol: boolean; var statfore: byte;
+  var statback: byte; var statline: boolean; var EMSOk, NetOk, NoLocal: boolean; var fossilio, digiio: boolean;
+  var dropfilepath: string; var GoRip: byte; var lockbaud: longint; var nodirect: boolean;
+  var port1, port2, port3, port4: word; var irq1, irq2, irq3, irq4: byte);
 
 var
   ddcfgp1, ddcfgp2, ddcfgps: string[80];
@@ -45,9 +53,17 @@ end;
 
 {$ENDIF}
 
-procedure Loadconfig(fn: string; var bbs_software: byte; var user_first_name, user_last_name: string; var user_access_level: word; var bbs_time_left: integer; var com_port: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}integer{$ENDIF}; var baud_rate: longint; var node_num: integer; var local: boolean; var Graphics: byte; var color1: boolean; var color_chg: boolean; var noFossInit: boolean; var board_name: string; var pause_code: string; var sysop_first_name: string; var sysop_last_name: string; var maxtime: word;
+procedure Loadconfig(fn: string; var bbs_software: byte; var user_first_name, user_last_name: string;
+  var user_access_level: word; var bbs_time_left: integer;
+  var com_port: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}integer{$ENDIF}; var baud_rate: longint;
+  var node_num: integer; var local: boolean; var Graphics: byte; var color1: boolean; var color_chg: boolean;
+  var noFossInit: boolean; var board_name: string; var pause_code: string; var sysop_first_name: string;
+  var sysop_last_name: string; var maxtime: word;
   { var quiet: boolean; }
-  var localcol: boolean; var statfore: byte; var statback: byte; var statline: boolean; var EMSOk, NetOK, NoLocal: boolean; var fossilio, digiio: boolean; var dropfilepath: string; var GoRip: byte; var lockbaud: longint; var nodirect: boolean; var port1, port2, port3, port4: word; var irq1, irq2, irq3, irq4: byte);
+  var localcol: boolean; var statfore: byte; var statback: byte; var statline: boolean;
+  var EMSOk, NetOK, NoLocal: boolean; var fossilio, digiio: boolean; var dropfilepath: string;
+  var GoRip: byte; var lockbaud: longint; var nodirect: boolean; var port1, port2, port3, port4: word;
+  var irq1, irq2, irq3, irq4: byte);
 
   function getparam(s: string; n: integer): string;
   var
@@ -55,16 +71,21 @@ procedure Loadconfig(fn: string; var bbs_software: byte; var user_first_name, us
     s2: string;
   begin;
 
-    while (length(s) > 0) and (s[1] = ' ') do Delete(s, 1, 1);
+    while (length(s) > 0) and (s[1] = ' ') do
+      Delete(s, 1, 1);
     if n <> 1 then
     begin;
-      while (length(s) > 0) and (s[1] <> ' ') do Delete(s, 1, 1);
-      while (length(s) > 0) and (s[1] = ' ') do Delete(s, 1, 1);
+      while (length(s) > 0) and (s[1] <> ' ') do
+        Delete(s, 1, 1);
+      while (length(s) > 0) and (s[1] = ' ') do
+        Delete(s, 1, 1);
     end;
     if n = 3 then
     begin;
-      while (length(s) > 0) and (s[1] <> ' ') do Delete(s, 1, 1);
-      while (length(s) > 0) and (s[1] = ' ') do Delete(s, 1, 1);
+      while (length(s) > 0) and (s[1] <> ' ') do
+        Delete(s, 1, 1);
+      while (length(s) > 0) and (s[1] = ' ') do
+        Delete(s, 1, 1);
     end;
     while (pos(' ', s) <> 0) do
     begin;
@@ -77,8 +98,10 @@ procedure Loadconfig(fn: string; var bbs_software: byte; var user_first_name, us
       end;
       s := s2;
     end;
-    while (length(s) > 0) and (s[length(s)] = ' ') do Delete(s, length(s), 1);
-    for a := 1 to length(s) do s[a] := upcase(s[a]);
+    while (length(s) > 0) and (s[length(s)] = ' ') do
+      Delete(s, length(s), 1);
+    for a := 1 to length(s) do
+      s[a] := upcase(s[a]);
     getparam := s;
   end;
 
@@ -87,10 +110,14 @@ procedure Loadconfig(fn: string; var bbs_software: byte; var user_first_name, us
     a:  integer;
     s2: string;
   begin;
-    while (length(s) > 0) and (s[1] = ' ') do Delete(s, 1, 1);
-    while (length(s) > 0) and (s[1] <> ' ') do Delete(s, 1, 1);
-    while (length(s) > 0) and (s[1] = ' ') do Delete(s, 1, 1);
-    while (length(s) > 0) and (s[length(s)] = ' ') do Delete(s, length(s), 1);
+    while (length(s) > 0) and (s[1] = ' ') do
+      Delete(s, 1, 1);
+    while (length(s) > 0) and (s[1] <> ' ') do
+      Delete(s, 1, 1);
+    while (length(s) > 0) and (s[1] = ' ') do
+      Delete(s, 1, 1);
+    while (length(s) > 0) and (s[length(s)] = ' ') do
+      Delete(s, length(s), 1);
     getsecond := s;
   end;
 
@@ -100,12 +127,18 @@ procedure Loadconfig(fn: string; var bbs_software: byte; var user_first_name, us
   begin;
     i := 0;
     numparams := 0;
-    if length(s) = 0 then exit;
-    if s[1] = ';' then exit;
-    if s[2] = ';' then exit;
-    if getparam(s, 1) <> '' then Inc(i);
-    if getparam(s, 2) <> '' then Inc(i);
-    if getparam(s, 3) <> '' then Inc(i);
+    if length(s) = 0 then
+      exit;
+    if s[1] = ';' then
+      exit;
+    if s[2] = ';' then
+      exit;
+    if getparam(s, 1) <> '' then
+      Inc(i);
+    if getparam(s, 2) <> '' then
+      Inc(i);
+    if getparam(s, 3) <> '' then
+      Inc(i);
     numparams := i;
   end;
 
@@ -143,7 +176,8 @@ procedure Loadconfig(fn: string; var bbs_software: byte; var user_first_name, us
     begin;
       s := ParamStr(a);
 {$IFNDEF LINUX}
-      for b := 1 to length(s) do s[b] := upcase(s[b]);
+      for b := 1 to length(s) do
+        s[b] := upcase(s[b]);
 {$ENDIF}
       if (s[1] = '/') and (length(s) > 1) then
       begin;
@@ -160,7 +194,8 @@ procedure Loadconfig(fn: string; var bbs_software: byte; var user_first_name, us
           'N': val(s2, node_num, b);
           'M': ctlnm := s2;
           'P': begin;
-            if s2[length(s2)] <> DIRECTORY_SEPARATOR then s2 := s2 + DIRECTORY_SEPARATOR;
+            if s2[length(s2)] <> DIRECTORY_SEPARATOR then
+              s2 := s2 + DIRECTORY_SEPARATOR;
             dropfilepath := s2;
           end;
           'R': GoRip := 4;
@@ -241,26 +276,94 @@ begin;
       p3 := getparam(s, 3);
       ps := getsecond(s);
 
-      if p1 = 'SYSOPFIRST' then sysop_first_name := ps else if p1 = 'SYSOPLAST' then sysop_last_name := ps else if p1 = 'BBSNAME' then board_name := ps else if p1 = 'BBSTYPE' then
+      if p1 = 'SYSOPFIRST' then
+        sysop_first_name := ps else
+      if p1 = 'SYSOPLAST' then
+        sysop_last_name := ps else
+      if p1 = 'BBSNAME' then
+        board_name := ps else
+      if p1 = 'BBSTYPE' then
       begin;
-        if p2 = 'LOCAL' then bbs_software := 1;
-        if p2 = 'QUICK' then bbs_software := 3 else if p2 = 'PCB12' then bbs_software := 4 else if p2 = 'WWIV' then bbs_software := 5 else if p2 = 'PCB15' then bbs_software := 6 else if p2 = 'RBBS' then bbs_software := 7 else if p2 = 'PHOENIX' then bbs_software := 8 else if p2 = 'DORINFO1' then bbs_software := 9 else if p2 = 'PCB14' then bbs_software := 10 else if p2 = 'DOORSYS' then bbs_software := 11 else if p2 = 'SPITFIRE' then bbs_software := 12 else if p2 = '2AM' then bbs_software := 13 else if p2 = 'TRIBBS' then bbs_software := 14 else if p2 = 'DOOR32' then bbs_software := 15 else
+        if p2 = 'LOCAL' then
+          bbs_software := 1;
+        if p2 = 'QUICK' then
+          bbs_software := 3 else
+        if p2 = 'PCB12' then
+          bbs_software := 4 else
+        if p2 = 'WWIV' then
+          bbs_software := 5 else
+        if p2 = 'PCB15' then
+          bbs_software := 6 else
+        if p2 = 'RBBS' then
+          bbs_software := 7 else
+        if p2 = 'PHOENIX' then
+          bbs_software := 8 else
+        if p2 = 'DORINFO1' then
+          bbs_software := 9 else
+        if p2 = 'PCB14' then
+          bbs_software := 10 else
+        if p2 = 'DOORSYS' then
+          bbs_software := 11 else
+        if p2 = 'SPITFIRE' then
+          bbs_software := 12 else
+        if p2 = '2AM' then
+          bbs_software := 13 else
+        if p2 = 'TRIBBS' then
+          bbs_software := 14 else
+        if p2 = 'DOOR32' then
+          bbs_software := 15 else
           badparam(s);
-      end else if p1 = 'STATUS' then
+      end else
+      if p1 = 'STATUS' then
       begin;
-        if p2 = 'OFF' then statline := False else if p2 = 'ON' then statline := True else
+        if p2 = 'OFF' then
+          statline := False else
+        if p2 = 'ON' then
+          statline := True else
           badparam(s);
-      end else if p1 = 'DIGI' then digiio := True  else if p1 = 'FOSSIL' then fossilio := True else if p1 = 'XFOSSIL' then
+      end else
+      if p1 = 'DIGI' then
+        digiio := True  else
+      if p1 = 'FOSSIL' then
+        fossilio := True else
+      if p1 = 'XFOSSIL' then
       begin
         fossilio := True;
         noFossInit := True;
-      end else if p1 = 'LOCKBAUD' then val(p2, lockbaud, a) else if p1 = 'PORT1' then port_rtn(p2, p3, port1, irq1) else if p1 = 'PORT2' then port_rtn(p2, p3, port2, irq2) else if p1 = 'PORT3' then port_rtn(p2, p3, port3, irq3) else if p1 = 'PORT4' then port_rtn(p2, p3, port4, irq4) else if p1 = 'STATFORE' then val(p2, statfore, a) else if p1 = 'STATBACK' then val(p2, statback, a) else if p1 = 'MAXTIME' then val(p2, maxtime, a) else if p1 = 'COLOR' then localcol := True else if p1 = 'MONO' then localcol := False else if p1 = 'COLOR1' then color1 := True else if p1 = 'COMPORT' then val(p2, com_port, a) else if p1 = 'PAUSECODE' then pause_code := ps else
+      end else
+      if p1 = 'LOCKBAUD' then
+        val(p2, lockbaud, a) else
+      if p1 = 'PORT1' then
+        port_rtn(p2, p3, port1, irq1) else
+      if p1 = 'PORT2' then
+        port_rtn(p2, p3, port2, irq2) else
+      if p1 = 'PORT3' then
+        port_rtn(p2, p3, port3, irq3) else
+      if p1 = 'PORT4' then
+        port_rtn(p2, p3, port4, irq4) else
+      if p1 = 'STATFORE' then
+        val(p2, statfore, a) else
+      if p1 = 'STATBACK' then
+        val(p2, statback, a) else
+      if p1 = 'MAXTIME' then
+        val(p2, maxtime, a) else
+      if p1 = 'COLOR' then
+        localcol := True else
+      if p1 = 'MONO' then
+        localcol := False else
+      if p1 = 'COLOR1' then
+        color1 := True else
+      if p1 = 'COMPORT' then
+        val(p2, com_port, a) else
+      if p1 = 'PAUSECODE' then
+        pause_code := ps else
 
       begin;
         ddcfgp1 := p1;
         ddcfgp2 := p2;
         ddcfgps := ps;
-        if dduserconfigptr <> nil then callproc;
+        if dduserconfigptr <> nil then
+          callproc;
       end;
 
     end;
@@ -286,7 +389,6 @@ begin;
 end;
 
 end.
-
 {
  /E - Use EMS for extra memory for overlays
  /Bxxx - Specify locked baud rate (i.e. /B38400)

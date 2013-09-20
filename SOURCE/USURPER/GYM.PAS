@@ -31,27 +31,27 @@ interface
 uses
   Init;
 
-type BarrelRec = record {Barrel Lifter top list, record structure}
-    Name:      s30; {player name}
-    id:        s15; {player id}
-    level:     longint; {player level}
-    race:      races;  {player race}
+type BarrelRec = record     {Barrel Lifter top list, record structure}
+    Name:      s30;         {player name}
+    id:        s15;         {player id}
+    level:     longint;     {player level}
+    race:      races;       {player race}
     class: classes; {player class}
-    deleted:   boolean; {has record been deleted}
-    datee:     udate; {date when record was set}
-    barrels:   SmallWord; {how many barrels did player lift}
+    deleted:   boolean;     {has record been deleted}
+    datee:     udate;       {date when record was set}
+    barrels:   SmallWord;   {how many barrels did player lift}
   end;
 
 const gymcol = ulcyan; {color to use when displaying "The Gym"}
 
-{-visiting the gym-}
+ {-visiting the gym-}
 procedure The_Gym;
 
-{-taking over the gym-}
+ {-taking over the gym-}
 procedure Take_Over_The_Gym(const gym_owners: s30);
 function Gym_Owning_Team: s40; {team controlling the Gym}
 
-{-barrel masters-}
+ {-barrel masters-}
 procedure Init_Barrel_Master(var barrel_guy: barrelRec);
 
 implementation
@@ -82,13 +82,14 @@ begin {change in file_io.pas if you decide to change struct here}
     race := human;
     class := Warrior;
     deleted := True;        {has record been deleted?}
-    datee := todays_date; {date}
+    datee := todays_date;   {date}
     barrels := 0;           {how many barrels did player lift}
   end; {with .end.}
 
 end; {init_barrel_master *end*}
 
-function Barrel_Fame_Rating(Name, id: s30; level: longint; ply_race: races; ply_class: classes; lifted: word): integer;
+function Barrel_Fame_Rating(Name, id: s30; level: longint; ply_race: races; ply_class: classes;
+  lifted: word): integer;
 var
   i, Result:   word;
 
@@ -125,7 +126,7 @@ var
         end;
       end; {for i:= .end.}
       gap := gap div 2;
-    end; {while .end.}
+    end;   {while .end.}
 
   end; {sort_barrel_masters *end*}
 
@@ -143,11 +144,12 @@ begin
 
   for i := 1 to fs(fsbarrel) do
   begin
-    if i > global_maxbarrelmasters then break;
+    if i > global_maxbarrelmasters then
+      break;
     load_barrel(fload, barrel_star[i], i);
   end; {for i:= .end.}
 
-  {check if player already exists on the fame list}
+       {check if player already exists on the fame list}
   go_on := True;
   replace_old_score := False;
   for i := 1 to global_maxbarrelmasters do
@@ -166,7 +168,8 @@ begin
         barrel_star[i].datee := todays_date;
       end;
     end;
-    if (go_on = False) or (replace_old_score = True) then break;
+    if (go_on = False) or (replace_old_score = True) then
+      break;
   end; {for i:= .end.}
 
   if (go_on = True) and (replace_old_score = False) then
@@ -177,9 +180,9 @@ begin
     barrel_star[i].level := level;
     barrel_star[i].race := ply_race;
     barrel_star[i].class := ply_class;
-    barrel_star[i].deleted := False; {has record been deleted}
+    barrel_star[i].deleted := False;     {has record been deleted}
     barrel_star[i].datee := todays_date; {date}
-    barrel_star[i].barrels := lifted; {how many barrels}
+    barrel_star[i].barrels := lifted;    {how many barrels}
   end;
 
   if go_on = True then
@@ -197,7 +200,7 @@ begin
       end;
     end; {for i:= .end.}
 
-    {write array to disk?}
+         {write array to disk?}
     if Result > 0 then
     begin
       counter := 0;
@@ -222,14 +225,14 @@ end; {barrel_fame_rating *end*}
 
 
 procedure Tug_of_War; {two teams pulling each end of a rope}
-{ we use the constant global_maxteammembers to set maximum crew }
+ { we use the constant global_maxteammembers to set maximum crew }
 type TugofWarRec = record {Tug-of-War participant}
     Name:     s30; {name}
-    ai:       char; {ai}
-    filtyp:   byte; {filtyp (1,2)}
+    ai:       char;      {ai}
+    filtyp:   byte;      {filtyp (1,2)}
     recnr:    SmallWord; {record #}
-    id:       s15; {id}
-    team:     s30; {teamname}
+    id:       s15;       {id}
+    team:     s30;       {teamname}
     strength: SmallWord; {strength}
       {when you change this structure..don't forget initialize functions
        and swap routine!}
@@ -330,9 +333,9 @@ var
         end;
       end; {case .end.}
 
-    end; {for k:= .end. }
+    end;   {for k:= .end. }
 
-    {return result}
+           {return result}
     Add_Tug_Participant := Result;
 
   end; {Add_Tug_Participant .end.}
@@ -438,7 +441,8 @@ var
     Result := False;
 
     crlf;
-    if hometeam then d(15, 'Searching for your crew...')
+    if hometeam then
+      d(15, 'Searching for your crew...')
     else d(15, 'Searching for other team...');
 
     done := False;
@@ -476,7 +480,7 @@ var
               end else
               begin {away team}
                 d(global_plycol, ply.name2 + config.textcol1 + ' arrived for other team!');
-                {find empty spot to put ply in team array}
+                    {find empty spot to put ply in team array}
                 add_tug_participant(2, ply);
               end;
 
@@ -513,16 +517,19 @@ var
           end;
         end;
 
-        if done then break;
+        if done then
+          break;
 
       end; {for j:= .end.}
 
-      if done then break;
+      if done then
+        break;
 
     end; {for i:= .end.}
 
-    {did we get a full team?}
-    if done then Result := True
+         {did we get a full team?}
+    if done then
+      Result := True
     else Result := False;
 
     {return result}
@@ -546,7 +553,7 @@ var
       end;
     end; {for i:= .end.}
 
-    {return result}
+         {return result}
     teams_ready := Result;
 
   end; {teams_ready *end*}
@@ -608,7 +615,7 @@ var
           end else
           begin {away team}
             d(global_plycol, ply.name2 + config.textcol1 + ' arrived for other team!');
-            {find empty spot to put ply in team array}
+                {find empty spot to put ply in team array}
             for i := 1 to global_maxteammembers do
             begin
               if away_team[i].Name = '' then
@@ -648,7 +655,8 @@ var
     until (done) or (tries > global_maxteammembers * 3);
 
     {did we get a full team?}
-    if done then Result := True
+    if done then
+      Result := True
     else Result := False;
 
     {return result}
@@ -666,11 +674,11 @@ var team1_power, team2_power: longint;
     goal_char     = '|';
   begin {displays pulled rope}
 
-    {***                          |                                  ****}
-    {you<<<<<<<<<<<<<<<<<<<<<<<<<<->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>them}
-    {                             |                                      }
+        {***                          |                                  ****}
+        {you<<<<<<<<<<<<<<<<<<<<<<<<<<->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>them}
+        {                             |                                      }
 
-    {calculate length of rope depending on power}
+        {calculate length of rope depending on power}
     d(11, mkstring(31, ' ') + goal_char);
     sd(rope_col, mkstring(max_team_power - team1_power, ' '));
     sd(14, mkstring(global_maxteammembers, team_char));
@@ -698,11 +706,15 @@ var team1_power, team2_power: longint;
       end;
     end; {case .end.}
 
-    if team1_power > max_team_power then team1_power := max_team_power;
-    if team1_power < 0 then team1_power := 0;
+    if team1_power > max_team_power then
+      team1_power := max_team_power;
+    if team1_power < 0 then
+      team1_power := 0;
 
-    if team2_power > max_team_power then team2_power := max_team_power;
-    if team2_power < 0 then team2_power := 0;
+    if team2_power > max_team_power then
+      team2_power := max_team_power;
+    if team2_power < 0 then
+      team2_power := 0;
 
   end; {update_power *end*}
 
@@ -762,7 +774,7 @@ var team1_power, team2_power: longint;
       end;
     end; {for i:= .end.}
 
-    {return result}
+         {return result}
     tug_team_active := Result;
 
   end; {tug_team_active *end*}
@@ -784,7 +796,7 @@ var team1_power, team2_power: longint;
       end;
     end; {case .end.}
 
-  end; {pull_rope_once *end*}
+  end;   {pull_rope_once *end*}
 
   procedure view_tug_teams;
   var
@@ -796,12 +808,12 @@ var team1_power, team2_power: longint;
 
     go_ahead, ready: boolean;
 
-    tempName:   s30; {name}
-    tempAI:     char; {ai}
-    tempFILTYP: byte; {filnr}
-    tempRECNR:  word; {recnr}
-    tempId:     s15; {id}
-    tempTeam:   s30; {teamname}
+    tempName:   s30;    {name}
+    tempAI:     char;   {ai}
+    tempFILTYP: byte;   {filnr}
+    tempRECNR:  word;   {recnr}
+    tempId:     s15;    {id}
+    tempTeam:   s30;    {teamname}
     tempStrength: word; {strength}
 
     relation:   relationRec;
@@ -817,7 +829,8 @@ var team1_power, team2_power: longint;
       begin
         if home_team[i].Name <> '' then
         begin
-          if i = 1 then d(11, commastr(i) + '. ' + uplc + 'You')
+          if i = 1 then
+            d(11, commastr(i) + '. ' + uplc + 'You')
           else d(11, commastr(i) + '. ' + uplc + home_team[i].Name);
         end else
         begin
@@ -825,7 +838,7 @@ var team1_power, team2_power: longint;
         end;
       end; {for i:= .end.}
 
-      {away team}
+           {away team}
       crlf;
       d(14, 'Other Team');
       for i := 1 to global_maxteammembers do
@@ -908,7 +921,8 @@ var team1_power, team2_power: longint;
             {ready to swap?}
             if (x > 0) and (x2 > 0) then
             begin
-              if confirm('Swap ' + uplc + home_team[x].Name + config.textcol1 + ' and ' + uplc + away_team[x2].Name + config.textcol1, 'Y') = True then
+              if confirm('Swap ' + uplc + home_team[x].Name + config.textcol1 + ' and ' + uplc +
+                away_team[x2].Name + config.textcol1, 'Y') = True then
               begin
 
                 {set temp values}
@@ -944,10 +958,10 @@ var team1_power, team2_power: longint;
 
           end;
 
-        end; {swap .end.}
+        end;       {swap .end.}
 
         'A': begin {add player}
-          {are both teams full?`}
+                   {are both teams full?`}
           if teams_ready then
           begin
             d(12, 'Both teams are full!');
@@ -1021,7 +1035,8 @@ var team1_power, team2_power: longint;
                         begin
 
                           {find empty spot to put ply in team array}
-                          if ch = 'Y' then i := 1
+                          if ch = 'Y' then
+                            i := 1
                           else i := 2;
 
                           if add_tug_participant(i, temp) = True then
@@ -1054,11 +1069,11 @@ var team1_power, team2_power: longint;
             end;
 
           end;
-        end; {add player .end.}
+        end;       {add player .end.}
 
         'D': begin {drop player}
 
-          {are there any players to drop?}
+                   {are there any players to drop?}
           ready := False;
 
           for i := 1 to global_maxteammembers do
@@ -1160,7 +1175,7 @@ var team1_power, team2_power: longint;
           end;
 
         end; {drop player .end.}
-      end; {case .end.}
+      end;   {case .end.}
 
     until ch = 'R';
 
@@ -1186,7 +1201,7 @@ var
 
 begin {*Tug_Of_War*}
 
-  {init values}
+      {init values}
   ch := '?';
 
   {init teams, and put player at first record in the "home team"}
@@ -1255,7 +1270,7 @@ begin {*Tug_Of_War*}
           end;
         end;
 
-      end; {invite other team *end*}
+      end;       {invite other team *end*}
       'B': begin {bring in own team}
 
         if player.team = '' then
@@ -1275,7 +1290,7 @@ begin {*Tug_Of_War*}
           bring_in_team(True, player.team);
 
         end;
-      end; {bring in own team *end*}
+      end;       {bring in own team *end*}
 
       'G': begin {get randomly selected team(s) }
 
@@ -1582,7 +1597,7 @@ begin {*Tug_Of_War*}
 
       end; {for i:= .end.}
 
-      {news-paper}
+           {news-paper}
       newsy(False,
         'Tug-of-War',
         ' ' + uplc + player.name2 + config.textcol1 + ' arranged a TUG-Of-War Competition.',
@@ -1609,7 +1624,8 @@ begin {*Tug_Of_War*}
         '',
         '', '', '', '', '');
 
-    end {DRAW .END.} else if team2_power < 1 then
+    end {DRAW .END.} else
+    if team2_power < 1 then
     begin
 
       {team 1 won!}
@@ -1738,7 +1754,7 @@ begin {*Tug_Of_War*}
     end {WON .END.} else
     begin {LOSE .START.}
 
-      {team 2 won!}
+          {team 2 won!}
       d(12, 'You lost!!');
       d(config.textcolor, 'You can hear the Crowd booing your lousy performance!');
       sd(15, 'Hang on while the stats are being updated...');
@@ -1843,7 +1859,7 @@ begin {*Tug_Of_War*}
 
       end; {for i:= .end.}
 
-      {news-paper}
+           {news-paper}
       newsy(False,
         'Tug-of-War',
         ' ' + uplc + player.name2 + config.textcol1 + ' arranged a TUG-Of-War Competition.',
@@ -1909,7 +1925,8 @@ begin
     newsy(True,
       config.textcol1 + 'Barrel Champion!',
       ' ' + uplc + player.name2 + config.textcol1 + ' lifted ' + uwhite + commastr(brls) + config.textcol1 + ' beer barrels!',
-      ' ' + uplc + player.name2 + config.textcol1 + ' entered position ' + uwhite + commastr(x) + config.textcol1 + ' in the ' + ulcyan + 'Barrel Hall of Fame' + config.textcol1 + '!',
+      ' ' + uplc + player.name2 + config.textcol1 + ' entered position ' + uwhite + commastr(x) +
+      config.textcol1 + ' in the ' + ulcyan + 'Barrel Hall of Fame' + config.textcol1 + '!',
       '',
       '',
       '',
@@ -1977,7 +1994,7 @@ begin
     5: s := 'humiliated';
     6: s := 'defeated';
   end; {case .end.}
-  {return result}
+       {return result}
   crushed_verb := s;
 
 end; {crushed_verb *end*}
@@ -1995,7 +2012,7 @@ begin
     6: s := 'floored';
   end; {case .end.}
 
-  {return result}
+       {return result}
   maim_verb := s;
 
 end; {maim_verb *end*}
@@ -2045,11 +2062,12 @@ begin
       end;
     end; {for j:= .end.}
 
-    if found then break;
+    if found then
+      break;
 
   end; {for i:= .end.}
 
-  {return result}
+       {return result}
   gym_owning_team := s;
 
 end; {gym_owning_team *end*}
@@ -2071,8 +2089,11 @@ begin
   d(config.textcolor, 'in this town, some day.');
   d(global_plycol, config.gymMasseur + config.textcol1 + ', the masseur, is watching you.');
   s := gym_owning_team;
-  if s = '' then d(14, 'No team owns the gym!')
-  else if (s = player.team) then d(14, 'The Gym is owned by your gang!')
+  if s = '' then
+    d(14, 'No team owns the gym!')
+  else
+  if (s = player.team) then
+    d(14, 'The Gym is owned by your gang!')
   else
     d(config.textcolor, 'The Gym is in the hands of ' + utec + s + config.textcol1 + '.');
 
@@ -2086,7 +2107,8 @@ begin
   end else crlf;
 
   menu2(ljust('(B)arrel Masters', offset));
-  if player.sex = 1 then x := 2
+  if player.sex = 1 then
+    x := 2
   else x := 1;
   menu2(ljust('(T)ug-of-war competition', offset2));
   if player.gym_owner > 0 then
@@ -2181,7 +2203,8 @@ begin
       {barrels}
       sd(15, rjust(commastr(barrel_master.barrels), 9));
 
-      if barrel_master.barrels = 1 then s := 'barrel '
+      if barrel_master.barrels = 1 then
+        s := 'barrel '
       else s := 'barrels';
       sd(7, ' ' + s);
 
@@ -2230,7 +2253,7 @@ var finished: boolean;
 
 begin {Main proc START}
 
-  {init pointer vars}
+      {init pointer vars}
   new(pl0);
 
   crlf;
@@ -2267,7 +2290,8 @@ begin {Main proc START}
     {evaluate user-input}
     case ch of
       '?': begin {display menu}
-        if player.expert = True then display_menu(True, False)
+        if player.expert = True then
+          display_menu(True, False)
         else display_menu(False, False);
       end;
       'S': begin {status}
@@ -2300,7 +2324,8 @@ begin {Main proc START}
             {news-paper}
             newsy(True,
               'Troublemaker leaves!',
-              ' ' + uplc + player.name2 + config.textcol1 + ' was not satisfied with the ' + gymcol + 'Gym' + config.textcol1 + ' facilities.',
+              ' ' + uplc + player.name2 + config.textcol1 + ' was not satisfied with the ' +
+              gymcol + 'Gym' + config.textcol1 + ' facilities.',
               ' ' + the_bad + race_display(2, player.race, 0) + ' burned ' + sex3[player.sex] + ' membership card!',
               '',
               '',
@@ -2335,7 +2360,8 @@ begin {Main proc START}
                     '');
 
                   {online mail to all members in pl0^.team}
-                  Team_Online_Report_All(pl0^.team, '', uplc + player.name2 + config.textcol1 + ' quit being a member at the ' + gymcol + 'Gym' + config.textcol1 + '!');
+                  Team_Online_Report_All(pl0^.team, '', uplc + player.name2 + config.textcol1 +
+                    ' quit being a member at the ' + gymcol + 'Gym' + config.textcol1 + '!');
 
                   {let's break out of here. we are done}
                   break;
@@ -2367,7 +2393,7 @@ begin {Main proc START}
           tug_of_war;
         end;
 
-      end; {tug-of-ware *end*}
+      end;       {tug-of-ware *end*}
       'W': begin {work out}
         crlf;
         if player.gym_sessions < 1 then
@@ -2440,7 +2466,7 @@ begin {Main proc START}
 
         end;
 
-      end; {work out .end.}
+      end;       {work out .end.}
 
       'A': begin {abandon gym control}
         crlf;
@@ -2499,7 +2525,8 @@ begin {Main proc START}
                       '',
                       ulred + 'Gym Rule Ended!' + config.textcol1,
                       mkstring(15, underscore),
-                      uplc + player.name2 + config.textcol1 + ' resigned your team from ' + gymcol + 'Gym' + config.textcol1 + ' control!',
+                      uplc + player.name2 + config.textcol1 + ' resigned your team from ' + gymcol +
+                      'Gym' + config.textcol1 + ' control!',
                       '',
                       '',
                       '',
@@ -2516,15 +2543,16 @@ begin {Main proc START}
                   end;
                 end;
               end; {for j:= .end.}
-            end; {for i:= .end.}
+            end;   {for i:= .end.}
 
-            {update player stats}
+                   {update player stats}
             player.gym_owner := 0;
             player.gym_card := 1;
             user_save(player);
 
             {inform all nodes}
-            online_send_to_all('Team ' + utec + player.team + config.textcol1 + ' resigned as ' + gymcol + 'GYM' + config.textcol1 + ' owners!', player.name2, player.name2);
+            online_send_to_all('Team ' + utec + player.team + config.textcol1 + ' resigned as ' +
+              gymcol + 'GYM' + config.textcol1 + ' owners!', player.name2, player.name2);
 
             {news-paper}
             newsy(True,
@@ -2545,7 +2573,7 @@ begin {Main proc START}
       end;
       'M': begin {massage}
         crlf;
-        {cost}
+                 {cost}
         cost := player.level * 450;
         ok := False;
 
@@ -2553,7 +2581,8 @@ begin {Main proc START}
         if player.massage >= Config.MassageVisits then
         begin
           d(12, 'You have already had your daily dose of massage!');
-        end else if player.gym_owner = 0 then
+        end else
+        if player.gym_owner = 0 then
         begin
           crlf;
           if confirm('Pay ' + uyellow + commastr(cost) + config.textcol1 + ' for a Massage', 'N') = True then
@@ -2622,7 +2651,8 @@ begin {Main proc START}
             crlf;
 
             {#1 - session}
-            sd(global_plycol, config.gymmasseur + config.textcol1 + ' starts off by smearing your body with ' + oilcol + my_oil + config.textcol1 + '.');
+            sd(global_plycol, config.gymmasseur + config.textcol1 + ' starts off by smearing your body with ' +
+              oilcol + my_oil + config.textcol1 + '.');
             make_delay_dots(config.textcolor, 5, 500);
             crlf;
             {hitpoints max out}
@@ -2640,7 +2670,8 @@ begin {Main proc START}
 
             {#2 - session}
             crlf;
-            sd(config.textcolor, 'With his gentle hands, ' + uplc + config.gymmasseur + config.textcol1 + ' relieves your body of its stiffness' + '...');
+            sd(config.textcolor, 'With his gentle hands, ' + uplc + config.gymmasseur + config.textcol1 +
+              ' relieves your body of its stiffness' + '...');
             make_delay_dots(config.textcolor, 5, 500);
             crlf;
 
@@ -2696,7 +2727,8 @@ begin {Main proc START}
                   begin
                     crlf;
                     d(config.textcolor, 'A name suddenly pops into your head; ' + uplc + pl0^.name2 + config.textcol1 + '!');
-                    d(config.textcolor, 'Your mind is filled ' + uyellow + 'nice' + config.textcol1 + ' pictures of you and ' + uplc + pl0^.name2 + config.textcol1 + ' having a good time.');
+                    d(config.textcolor, 'Your mind is filled ' + uyellow + 'nice' + config.textcol1 +
+                      ' pictures of you and ' + uplc + pl0^.name2 + config.textcol1 + ' having a good time.');
                     d(15, 'Your relation with ' + uplc + pl0^.name2 + uwhite + ' improved!');
 
                     {improve pl0:s attitude to player}
@@ -2709,7 +2741,7 @@ begin {Main proc START}
 
                 end;
 
-              end; {white water *end*}
+              end;       {white water *end*}
               'T': begin {tox uthat}
                 sd(14, 'Ahhh..great feeling...');
                 d(15, 'Your body is hardened by the oil!');
@@ -2755,7 +2787,8 @@ begin {Main proc START}
                   begin
                     crlf;
                     d(config.textcolor, 'A name suddenly pops into your head; ' + uplc + pl0^.name2 + config.textcol1 + '!');
-                    d(config.textcolor, 'Your mind is filled ' + ulgray + 'dark' + config.textcol1 + ' thoughts of you inflicting' + ' pain on ' + uplc + pl0^.name2 + config.textcol1 + '!');
+                    d(config.textcolor, 'Your mind is filled ' + ulgray + 'dark' + config.textcol1 +
+                      ' thoughts of you inflicting' + ' pain on ' + uplc + pl0^.name2 + config.textcol1 + '!');
                     d(global_plycol, pl0^.name2 + config.textcol1 + ' is scum and must die!');
 
                     d(15, 'Your relation with ' + uplc + pl0^.name2 + uwhite + ' is sinking into a bottomless pit!');
@@ -2770,11 +2803,13 @@ begin {Main proc START}
               end;
             end; {case .end.}
 
-            {news-paper}
+                 {news-paper}
             Newsy(True,
               'Massage',
-              ' ' + uplc + player.name2 + config.textcol1 + ' the ' + race_display(2, player.race, 0) + ' enjoyed a massage at the ' + gymcol + 'Gym' + config.textcol1 + '.',
-              ' ' + uplc + player.name2 + config.textcol1 + ' used ' + oilcol + my_oil + config.textcol1 + ' oil to relax ' + sex3[player.sex] + ' body.',
+              ' ' + uplc + player.name2 + config.textcol1 + ' the ' + race_display(2, player.race, 0) +
+              ' enjoyed a massage at the ' + gymcol + 'Gym' + config.textcol1 + '.',
+              ' ' + uplc + player.name2 + config.textcol1 + ' used ' + oilcol + my_oil + config.textcol1 +
+              ' oil to relax ' + sex3[player.sex] + ' body.',
               '',
               '',
               '',
@@ -2835,8 +2870,8 @@ begin {Main proc START}
                     begin
                       crlf;
                       d(12, 'Fool! ' + uplc + pl0^.name2 + ulred + ' is one of the owners!');
-                    end {is the other player a MEMBER?}
-                    else if pl0^.gym_card > 0 then
+                    end {is the other player a MEMBER?} else
+                    if pl0^.gym_card > 0 then
                     begin
                       crlf;
                       d(global_plycol, pl0^.name2 + ulred + ' is a already a member!');
@@ -2855,14 +2890,16 @@ begin {Main proc START}
                     end;
                   end;
                 end;
-                if (found) or (abort) then break;
+                if (found) or (abort) then
+                  break;
               end;
 
             end; {for j:= .end.}
-            if (found) or (abort) then break;
+            if (found) or (abort) then
+              break;
           end; {for i:= .end.}
 
-          {target found - let us hand out a membership card}
+               {target found - let us hand out a membership card}
           if found then
           begin
             crlf;
@@ -2875,7 +2912,8 @@ begin {Main proc START}
             if is_online(pl0^.name2, online_player) = True then
             begin
               online_send_to_player(pl0^.name2, online_player, BroadCast_NewGymCard);
-              online_send_to_player(pl0^.name2, online_player, uplc + player.name2 + config.textcol1 + ' gave you access to the ' + gymcol + 'Gym' + config.textcol1 + '!');
+              online_send_to_player(pl0^.name2, online_player, uplc + player.name2 + config.textcol1 +
+                ' gave you access to the ' + gymcol + 'Gym' + config.textcol1 + '!');
             end;
 
             {inform owners teammates}
@@ -2883,7 +2921,8 @@ begin {Main proc START}
               player.name2, {player name to exclude}
               'The Gym',    {news-header}
               mailrequest_nothing, {mailrequest_constant}
-              uplc + player.name2 + config.textcol1 + ' gave ' + uplc + pl0^.name2 + config.textcol1 + ' access to the ' + gymcol + 'Gym' + config.textcol1 + '.',
+              uplc + player.name2 + config.textcol1 + ' gave ' + uplc + pl0^.name2 + config.textcol1 +
+              ' access to the ' + gymcol + 'Gym' + config.textcol1 + '.',
               '',
               '',
               '');
@@ -2914,7 +2953,8 @@ begin {Main proc START}
             {news-paper}
             Newsy(True,
               'The Gym',
-              ' ' + uplc + pl0^.name2 + config.textcol1 + ' was given access to the ' + gymcol + 'Gym' + config.textcol1 + ' by ' + uplc + player.name2 + config.textcol1 + '.',
+              ' ' + uplc + pl0^.name2 + config.textcol1 + ' was given access to the ' + gymcol +
+              'Gym' + config.textcol1 + ' by ' + uplc + player.name2 + config.textcol1 + '.',
               '',
               '',
               '',
@@ -2948,7 +2988,7 @@ begin {Main proc START}
           end;
         end;
 
-      end; {barrel_masters *end*}
+      end;       {barrel_masters *end*}
       'E': begin {exclude member}
 
         if player.gym_owner = 0 then
@@ -3014,17 +3054,20 @@ begin {Main proc START}
                     end;
                   end;
                 end;
-                if (found) or (abort) then break;
+                if (found) or (abort) then
+                  break;
               end;
             end; {for j:= .end.}
-            if (found) or (abort) then break;
+            if (found) or (abort) then
+              break;
           end; {for i:= .end.}
 
-          {target found}
+               {target found}
           if found then
           begin
             crlf;
-            d(global_plycol, pl0^.name2 + config.textcol1 + ' has been kicked out from the ' + gymcol + 'Gym' + config.textcol1 + '!');
+            d(global_plycol, pl0^.name2 + config.textcol1 + ' has been kicked out from the ' +
+              gymcol + 'Gym' + config.textcol1 + '!');
 
             {update other player}
             pl0^.gym_card := 0;
@@ -3033,7 +3076,8 @@ begin {Main proc START}
             if is_online(pl0^.name2, online_player) = True then
             begin
               online_send_to_player(pl0^.name2, online_player, BroadCast_RemoveGymCard);
-              online_send_to_player(pl0^.name2, online_player, uplc + player.name2 + config.textcol1 + ' kicked you out from the ' + gymcol + 'Gym' + config.textcol1 + '!');
+              online_send_to_player(pl0^.name2, online_player, uplc + player.name2 + config.textcol1 +
+                ' kicked you out from the ' + gymcol + 'Gym' + config.textcol1 + '!');
             end;
 
             {inform owners teammates}
@@ -3041,7 +3085,8 @@ begin {Main proc START}
               player.name2, {player name to exclude}
               'The Gym',    {news-header}
               mailrequest_nothing, {mailrequest_constant}
-              uplc + player.name2 + config.textcol1 + ' kicked ' + uplc + pl0^.name2 + 's' + config.textcol1 + ' sorry butt out of the ' + gymcol + 'Gym' + config.textcol1 + '!',
+              uplc + player.name2 + config.textcol1 + ' kicked ' + uplc + pl0^.name2 + 's' +
+              config.textcol1 + ' sorry butt out of the ' + gymcol + 'Gym' + config.textcol1 + '!',
               uplc + pl0^.name2 + config.textcol1 + ' has no place to work out anymore.',
               '',
               '');
@@ -3072,7 +3117,8 @@ begin {Main proc START}
             {news-paper}
             Newsy(True,
               'Brutal Methods at the Gym',
-              ' ' + uplc + pl0^.name2 + config.textcol1 + ' was kicked out from the ' + gymcol + 'Gym' + config.textcol1 + ' by ' + uplc + player.name2 + config.textcol1 + '.',
+              ' ' + uplc + pl0^.name2 + config.textcol1 + ' was kicked out from the ' + gymcol +
+              'Gym' + config.textcol1 + ' by ' + uplc + player.name2 + config.textcol1 + '.',
               '',
               '',
               '',
@@ -3134,7 +3180,8 @@ begin {Main proc START}
                   if pl0^.gym_owner > 0 then
                   begin
                     sd(14, '   *OWNER*');
-                  end else if pl0^.gym_card > 0 then
+                  end else
+                  if pl0^.gym_card > 0 then
                   begin
                     sd(6, '   member');
                   end;
@@ -3158,10 +3205,11 @@ begin {Main proc START}
             end;
 
           end; {for j:= .end.}
-          if abort then break;
+          if abort then
+            break;
         end; {for i:= .end.}
 
-      end; {list members *end*}
+      end;   {list members *end*}
 
     end; {case .end.}
 
@@ -3227,14 +3275,15 @@ var
 
   procedure disposal2;
   begin
-    {dispose of pointer variables}
+       {dispose of pointer variables}
   end; {disposal2 *end*}
 
   procedure boost_team_power(var power: longint; const fighter: fistfighterrec);
   var k: byte;
   begin
 
-    if fighter.Name = '' then exit;
+    if fighter.Name = '' then
+      exit;
 
     {close combat skills}
     for k := 1 to global_maxcombat do
@@ -3271,7 +3320,7 @@ var
       end;
     end; {with .end.}
 
-  end; {init_fighter .end.}
+  end;   {init_fighter .end.}
 
   procedure swap_fist_fighter(var f1, f2: fistfighterrec);
   var temp: fistfighterrec;
@@ -3291,7 +3340,8 @@ var
       Name := ply.name2;
       id := ply.id;
       sex := ply.sex;
-      if (ply.name2 = player.name2) and (ply.id = player.id) then human := True
+      if (ply.name2 = player.name2) and (ply.id = player.id) then
+        human := True
       else human := False;
       filnr := filenr;
       recnr := ply.recnr; {position in userfile}
@@ -3301,8 +3351,8 @@ var
       stamina := ply.stamina; {stamina}
       strength := ply.strength; {strength}
       punch_effect := 0; {punch effect}
-      my_exp := 0; {experience earned during fight}
-      my_fate := ''; {knocked out by whom? empty string means that he survived}
+      my_exp := 0;    {experience earned during fight}
+      my_fate := '';  {knocked out by whom? empty string means that he survived}
       my_kills := ''; {names of the people the fighter managed to knock cold}
       me_nailed := 0; {i was nailed in this round}
       move := 0;
@@ -3316,7 +3366,8 @@ var
 
   {player tries to take over the Gym from team OWNERS}
 var
-  save_need, swap_needed, attackers_killed, defenders_killed, kamikaze_raid, {set to true if player attempts to take on the owning team on his own!}
+  save_need, swap_needed, attackers_killed, defenders_killed, kamikaze_raid,
+  {set to true if player attempts to take on the owning team on his own!}
   player_knocked: boolean;
 
   player_nemesis, target_name, target_name2: s30;
@@ -3336,11 +3387,11 @@ var
 
 begin {take_over_the_gym}
 
-  {owners might be dead or in prison}
-  {there will be a fight if at least 1 person from OWNERS can show}
+      {owners might be dead or in prison}
+      {there will be a fight if at least 1 person from OWNERS can show}
 
-  {player doing}
-  {update online location}
+      {player doing}
+      {update online location}
   onliner.location := onloc_gymfists;
   onliner.doing := location_desc(onliner.location);
   add_onliner(OUpdateLocation, onliner);
@@ -3392,9 +3443,11 @@ begin {take_over_the_gym}
         end;
       end;
 
-      if found then break;
+      if found then
+        break;
     end; {for j:= .end.}
-    if found then break;
+    if found then
+      break;
   end; {for i:= .end.}
 
   if found then
@@ -3448,7 +3501,8 @@ begin {take_over_the_gym}
                 Inc(enemy_counter);
                 setup_fighter(pl0, defender[enemy_counter], i, False);
               end;
-            end else if pl0.team = player.team then
+            end else
+            if pl0.team = player.team then
             begin
               if add_shadow(SAdd, pl0, player.name2, 'FISTFIGHT IN THE GYM', 0) = True then
               begin
@@ -3467,13 +3521,15 @@ begin {take_over_the_gym}
         end;
       end;
 
-      if done then break;
+      if done then
+        break;
 
     end; {for j:= .end.}
-    if done then break;
+    if done then
+      break;
   end; {for i:= .end.}
 
-  {Walk-Over}
+       {Walk-Over}
   if enemy_counter = 0 then
   begin
     {swap leader ship}
@@ -3488,7 +3544,8 @@ begin {take_over_the_gym}
     user_save(player);
 
     {inform all nodes}
-    online_send_to_all('The ' + utec + player.team + config.textcol1 + ' crew took over the ' + gymcol + 'Gym' + config.textcol1 + '!', player.name2, player.name2);
+    online_send_to_all('The ' + utec + player.team + config.textcol1 + ' crew took over the ' +
+      gymcol + 'Gym' + config.textcol1 + '!', player.name2, player.name2);
 
     {inform former gang}
     {inform new gang}
@@ -3525,7 +3582,8 @@ begin {take_over_the_gym}
                 if is_online(pl0.name2, online_player) = True then
                 begin
                   online_send_to_player(pl0.name2, online_player, BroadCast_AddGym);
-                  online_send_to_player(pl0.name2, online_player, uplc + player.name2 + config.textcol1 + ' took over the ' + gymcol + 'Gym' + config.textcol1 + '!');
+                  online_send_to_player(pl0.name2, online_player, uplc + player.name2 + config.textcol1 +
+                    ' took over the ' + gymcol + 'Gym' + config.textcol1 + '!');
 
                 end;
 
@@ -3539,7 +3597,8 @@ begin {take_over_the_gym}
                   gymcol + 'GYM CONTROL!' + config.textcol1,
                   mkstring(12, underscore),
                   uplc + player.name2 + config.textcol1 + ' led the team to an amazing take-over!',
-                  'Without bloodshed you were able to grab the ' + gymcol + 'GYM' + config.textcol1 + ' from the ' + utec + gym_owners + config.textcol1 + ' crew.',
+                  'Without bloodshed you were able to grab the ' + gymcol + 'GYM' + config.textcol1 +
+                  ' from the ' + utec + gym_owners + config.textcol1 + ' crew.',
                   '',
                   '',
                   '',
@@ -3552,7 +3611,8 @@ begin {take_over_the_gym}
                   '',
                   '');
 
-              end else if pl0.team = gym_owners then
+              end else
+              if pl0.team = gym_owners then
               begin
                 {losing team}
 
@@ -3564,7 +3624,8 @@ begin {take_over_the_gym}
                 if is_online(pl0.name2, online_player) = True then
                 begin
                   online_send_to_player(pl0.name2, online_player, BroadCast_RemoveGym);
-                  online_send_to_player(pl0.name2, online_player, uplc + player.name2 + config.textcol1 + ' took over the ' + gymcol + 'Gym' + config.textcol1 + '!');
+                  online_send_to_player(pl0.name2, online_player, uplc + player.name2 + config.textcol1 +
+                    ' took over the ' + gymcol + 'Gym' + config.textcol1 + '!');
 
                 end;
 
@@ -3578,7 +3639,8 @@ begin {take_over_the_gym}
                   ulred + 'LOST GYM CONTROL!' + config.textcol1,
                   mkstring(17, underscore),
                   uplc + player.name2 + config.textcol1 + ' led ' + sex3[player.sex] + ' team to an amazing victory!',
-                  'They were able to take-over the ' + gymcol + 'GYM' + config.textcol1 + ' without resistance from your gang!',
+                  'They were able to take-over the ' + gymcol + 'GYM' + config.textcol1 +
+                  ' without resistance from your gang!',
                   '',
                   '',
                   '',
@@ -3597,7 +3659,7 @@ begin {take_over_the_gym}
         end;
 
       end; {for j:= .end.}
-    end; {for i:= .end.}
+    end;   {for i:= .end.}
 
     case random(5) of
       0: s := 'idiots';
@@ -3607,9 +3669,10 @@ begin {take_over_the_gym}
       4: s := 'half-wits';
     end; {case .end.}
 
-    {news-paper}
+         {news-paper}
     Newsy(True, 'New Gym owners!',
-      ' ' + uplc + player.name2 + config.textcol1 + ' and ' + sex3[player.sex] + ' crew took over the ' + gymcol + 'Gym' + config.textcol1 + ' without bloodshed!',
+      ' ' + uplc + player.name2 + config.textcol1 + ' and ' + sex3[player.sex] + ' crew took over the ' +
+      gymcol + 'Gym' + config.textcol1 + ' without bloodshed!',
       ' The ' + s + ' in the ' + utec + gym_owners + config.textcol1 + ' gang were unable to defend their turf!',
       '',
       '',
@@ -3654,7 +3717,8 @@ begin {take_over_the_gym}
   if attack_power > defend_power then
   begin
     d(11, 'You are strong enough to whip their butt!');
-  end else if defend_power > attack_power then
+  end else
+  if defend_power > attack_power then
   begin
     d(11, 'They are going to whip your butt!');
   end else
@@ -3739,7 +3803,8 @@ begin {take_over_the_gym}
                 end;
               end; {for j:= .end.}
 
-              if found then done := True;
+              if found then
+                done := True;
             until done;
           end;
 
@@ -3802,7 +3867,8 @@ begin {take_over_the_gym}
                   kick_missed_string := 'NO EFFECT';
                 end;
                 9: begin {choke-hold}
-                  sd(config.textcolor, 'You sneak up behind ' + target_name + config.textcol1 + ' for a devestating choke-hold!');
+                  sd(config.textcolor, 'You sneak up behind ' + target_name + config.textcol1 +
+                    ' for a devestating choke-hold!');
                   kick_hit_string := 'CHOKE!';
                   kick_missed_string := 'FAILED';
                 end;
@@ -3863,71 +3929,86 @@ begin {take_over_the_gym}
                   kick_missed_string := 'MISS';
                 end;
                 2: begin {drop-kick}
-                  sd(global_plycol, attacker[i].Name + config.textcol1 + ' sends off a drop-kick against ' + target_name + config.textcol1 + '!');
+                  sd(global_plycol, attacker[i].Name + config.textcol1 + ' sends off a drop-kick against ' +
+                    target_name + config.textcol1 + '!');
                   kick_hit_string := 'HIT!';
                   kick_missed_string := 'MISS';
                 end;
                 3: begin {uppercut}
-                  sd(global_plycol, attacker[i].Name + config.textcol1 + ' attempts an upper-cut against ' + target_name + config.textcol1 + '!');
+                  sd(global_plycol, attacker[i].Name + config.textcol1 + ' attempts an upper-cut against ' +
+                    target_name + config.textcol1 + '!');
                   kick_hit_string := 'HIT!';
                   kick_missed_string := 'MISS';
                 end;
                 4: begin {bite}
-                  sd(global_plycol, attacker[i].Name + config.textcol1 + ' makes a desperate attempt to bite poor ' + target_name + config.textcol1 + '!');
+                  sd(global_plycol, attacker[i].Name + config.textcol1 + ' makes a desperate attempt to bite poor ' +
+                    target_name + config.textcol1 + '!');
                   kick_hit_string := 'PAIN!';
                   kick_missed_string := 'NO EFFECT';
                 end;
                 5: begin {leg-sweep}
-                  sd(global_plycol, attacker[i].Name + config.textcol1 + ' delivers a vicious leg-sweep aimed at ' + target_name + config.textcol1 + '!');
+                  sd(global_plycol, attacker[i].Name + config.textcol1 + ' delivers a vicious leg-sweep aimed at ' +
+                    target_name + config.textcol1 + '!');
                   kick_hit_string := 'IT WORKED!';
                   kick_missed_string := 'MISS';
                 end;
                 6: begin {joint-break}
-                  sd(global_plycol, attacker[i].Name + config.textcol1 + ' makes a bold attempt to break a bone in ' + target_name2 + config.textcol1 + ' body!');
+                  sd(global_plycol, attacker[i].Name + config.textcol1 + ' makes a bold attempt to break a bone in ' +
+                    target_name2 + config.textcol1 + ' body!');
                   kick_hit_string := 'CRACK!';
                   kick_missed_string := 'MISS';
                 end;
                 7: begin {knife-hand}
-                  sd(global_plycol, attacker[i].Name + config.textcol1 + ' directs a nasty knife-hand towards ' + target_name + config.textcol1 + '!');
+                  sd(global_plycol, attacker[i].Name + config.textcol1 + ' directs a nasty knife-hand towards ' +
+                    target_name + config.textcol1 + '!');
                   kick_hit_string := 'HIT!';
                   kick_missed_string := 'MISS';
                 end;
                 8: begin {nerve punch}
-                  sd(global_plycol, attacker[i].Name + config.textcol1 + ' sends off a nerve punch against ' + target_name + config.textcol1 + '!');
+                  sd(global_plycol, attacker[i].Name + config.textcol1 + ' sends off a nerve punch against ' +
+                    target_name + config.textcol1 + '!');
                   kick_hit_string := 'STUNNED!';
                   kick_missed_string := 'NO EFFECT';
                 end;
                 9: begin {choke-hold}
-                  sd(global_plycol, attacker[i].Name + config.textcol1 + ' sneaks up behind ' + target_name + config.textcol1 + ' for a devestating choke-hold!');
+                  sd(global_plycol, attacker[i].Name + config.textcol1 + ' sneaks up behind ' +
+                    target_name + config.textcol1 + ' for a devestating choke-hold!');
                   kick_hit_string := 'CHOKE!';
                   kick_missed_string := 'FAILED';
                 end;
                 10: begin {head-bash}
-                  sd(global_plycol, attacker[i].Name + config.textcol1 + ' tries to head-bash ' + target_name + config.textcol1 + '!');
+                  sd(global_plycol, attacker[i].Name + config.textcol1 + ' tries to head-bash ' +
+                    target_name + config.textcol1 + '!');
                   kick_hit_string := 'HIT!';
                   kick_missed_string := 'MISS';
                 end;
                 11: begin {pull-hair}
-                  sd(global_plycol, attacker[i].Name + config.textcol1 + ' grab hold of ' + target_name2 + config.textcol1 + ' hair!');
+                  sd(global_plycol, attacker[i].Name + config.textcol1 + ' grab hold of ' +
+                    target_name2 + config.textcol1 + ' hair!');
                   kick_hit_string := 'PAIN!';
                   kick_missed_string := 'NO EFFECT';
                 end;
                 12: begin {kick}
                   case random(3) of
-                    0: sd(global_plycol, attacker[i].Name + config.textcol1 + ' tries to kick ' + target_name + config.textcol1 + ' in the head!');
-                    1: sd(global_plycol, attacker[i].Name + config.textcol1 + ' tries to kick ' + target_name + config.textcol1 + ' in the groin!');
-                    2: sd(global_plycol, attacker[i].Name + config.textcol1 + ' tries to kick ' + target_name + config.textcol1 + ' in the back!');
+                    0: sd(global_plycol, attacker[i].Name + config.textcol1 + ' tries to kick ' +
+                        target_name + config.textcol1 + ' in the head!');
+                    1: sd(global_plycol, attacker[i].Name + config.textcol1 + ' tries to kick ' +
+                        target_name + config.textcol1 + ' in the groin!');
+                    2: sd(global_plycol, attacker[i].Name + config.textcol1 + ' tries to kick ' +
+                        target_name + config.textcol1 + ' in the back!');
                   end; {case .end.}
                   kick_hit_string := 'HIT!';
                   kick_missed_string := 'MISS';
                 end;
                 13: begin {straight-punch}
-                  sd(global_plycol, attacker[i].Name + config.textcol1 + ' sends off a straight-punch at ' + target_name + config.textcol1 + '!');
+                  sd(global_plycol, attacker[i].Name + config.textcol1 + ' sends off a straight-punch at ' +
+                    target_name + config.textcol1 + '!');
                   kick_hit_string := 'SMACK!';
                   kick_missed_string := 'MISS';
                 end;
                 14: begin {ram}
-                  sd(global_plycol, attacker[i].Name + config.textcol1 + ' attempts to ram ' + target_name + config.textcol1 + '!');
+                  sd(global_plycol, attacker[i].Name + config.textcol1 + ' attempts to ram ' +
+                    target_name + config.textcol1 + '!');
                   kick_hit_string := 'HIT!';
                   kick_missed_string := 'MISS';
                 end;
@@ -4003,13 +4084,13 @@ begin {take_over_the_gym}
         end;
       end; {for i:= .end.}
 
-      {swap teams}
+           {swap teams}
       for i := 1 to global_maxteammembers do
       begin
         swap_fist_fighter(attacker[i], defender[i]);
       end; {for i:= .end.}
 
-      {is fight over?}
+           {is fight over?}
       attackers_killed := True;
       defenders_killed := True;
       for i := 1 to global_maxteammembers do
@@ -4036,7 +4117,8 @@ begin {take_over_the_gym}
     if (attackers_killed = False) and (player_knocked = True) then
     begin
       swap_needed := True;
-    end else if (attackers_killed = True) and (player_knocked = False) then
+    end else
+    if (attackers_killed = True) and (player_knocked = False) then
     begin
       swap_needed := True;
     end;
@@ -4068,7 +4150,8 @@ begin {take_over_the_gym}
       {attacker lost}
       {creating crew_news[x] strings}
       counter := 0;
-      for i := 1 to global_maxteammembers do crew_news[i] := '';
+      for i := 1 to global_maxteammembers do
+        crew_news[i] := '';
       for i := 1 to global_maxteammembers do
       begin
         if (attacker[i].Name <> '') and (attacker[i].stamina < 1) then
@@ -4076,7 +4159,8 @@ begin {take_over_the_gym}
           Inc(counter);
 
 
-          crew_news[counter] := ulred + '  -' + uplc + attacker[i].Name + config.textcol1 + ' was ' + maim_verb + ' by ' + uplc + attacker[i].my_slayer + config.textcol1 + '!';
+          crew_news[counter] := ulred + '  -' + uplc + attacker[i].Name + config.textcol1 +
+            ' was ' + maim_verb + ' by ' + uplc + attacker[i].my_slayer + config.textcol1 + '!';
         end;
       end; {for i:= .end.}
 
@@ -4085,13 +4169,15 @@ begin {take_over_the_gym}
         s := ' ' + uplc + player.name2 + config.textcol1 + ' tried to grab control of the Gym.';
       end else
       begin
-        s := ' ' + uplc + player.name2 + config.textcol1 + ' and ' + sex3[player.sex] + ' team attempted to grab control of the Gym.';
+        s := ' ' + uplc + player.name2 + config.textcol1 + ' and ' + sex3[player.sex] +
+          ' team attempted to grab control of the Gym.';
       end;
 
       newsy(True,
         'Fist-Fight at the Gym!',
         s,
-        ' ' + utec + gym_owners + config.textcol1 + ' engaged ' + uplc + player.name2 + 's' + config.textcol1 + ' crew in a wild brawl!',
+        ' ' + utec + gym_owners + config.textcol1 + ' engaged ' + uplc + player.name2 + 's' +
+        config.textcol1 + ' crew in a wild brawl!',
         ' ' + ulred + player.name2 + 's pitiful attempt for power failed miserably!' + config.textcol1,
         ' ' + ulred + player.name2 + 's crew was ' + crushed_verb + ':' + config.textcol1,
         crew_news[1],
@@ -4106,13 +4192,15 @@ begin {take_over_the_gym}
       {attacker lost}
       {creating crew_news[x] strings}
       counter := 0;
-      for i := 1 to global_maxteammembers do crew_news[i] := '';
+      for i := 1 to global_maxteammembers do
+        crew_news[i] := '';
       for i := 1 to global_maxteammembers do
       begin
         if (defender[i].Name <> '') and (defender[i].stamina < 1) then
         begin
           Inc(counter);
-          crew_news[counter] := ulred + '  -' + uplc + defender[i].Name + config.textcol1 + ' was ' + maim_verb + ' by ' + uplc + defender[i].my_slayer + config.textcol1 + '!';
+          crew_news[counter] := ulred + '  -' + uplc + defender[i].Name + config.textcol1 +
+            ' was ' + maim_verb + ' by ' + uplc + defender[i].my_slayer + config.textcol1 + '!';
         end;
       end; {for i:= .end.}
 
@@ -4121,13 +4209,15 @@ begin {take_over_the_gym}
         s := ' ' + uplc + player.name2 + config.textcol1 + ' tried to grab control of the Gym.';
       end else
       begin
-        s := ' ' + uplc + player.name2 + config.textcol1 + ' and ' + sex3[player.sex] + ' team attempted to grab control of the Gym.';
+        s := ' ' + uplc + player.name2 + config.textcol1 + ' and ' + sex3[player.sex] +
+          ' team attempted to grab control of the Gym.';
       end;
 
       newsy(True,
         'New Gym Owners!',
         s,
-        ' ' + utec + gym_owners + config.textcol1 + ' engaged ' + uplc + player.name2 + 's' + config.textcol1 + ' crew in a wild brawl!',
+        ' ' + utec + gym_owners + config.textcol1 + ' engaged ' + uplc + player.name2 + 's' +
+        config.textcol1 + ' crew in a wild brawl!',
         ' ' + uplc + player.name2 + 's' + config.textcol1 + ' attempt for power was a success!',
         ' The ' + utec + gym_owners + config.textcol1 + ' crew was ' + crushed_verb + ':',
         crew_news[1],
@@ -4174,7 +4264,8 @@ begin {take_over_the_gym}
         {set gained experience string}
         if defender[i].my_exp > 0 then
         begin
-          my_experience := 'You earned ' + uwhite + commastr(defender[i].my_exp) + config.textcol1 + ' experience points from this fight!';
+          my_experience := 'You earned ' + uwhite + commastr(defender[i].my_exp) + config.textcol1 +
+            ' experience points from this fight!';
         end else
         begin
           my_experience := '';
@@ -4189,7 +4280,7 @@ begin {take_over_the_gym}
           4: evil_name := 'dirty';
         end; {case .end.}
 
-        {name calling, attacking team}
+             {name calling, attacking team}
         case random(4) of
           0: evil_team := 'band of misfits';
           1: evil_team := 'band of cutthroats';
@@ -4205,7 +4296,8 @@ begin {take_over_the_gym}
           '',
           ulcyan + 'Fist-Fight!' + config.textcol1,
           cool_string(11, '=', '-', 10, 5),
-          'The ' + evil_name + ' ' + race_display(2, player.race, 0) + ' ' + uplc + player.name2 + config.textcol1 + ' gathered ' + sex3[player.sex] + ' ' + evil_team + ' to erase',
+          'The ' + evil_name + ' ' + race_display(2, player.race, 0) + ' ' + uplc + player.name2 +
+          config.textcol1 + ' gathered ' + sex3[player.sex] + ' ' + evil_team + ' to erase',
           'your crew from the Gym! You were engaged in a fist-fight!',
           defender[i].my_fate,
           defender[i].my_kills,
@@ -4253,7 +4345,8 @@ begin {take_over_the_gym}
         {set gained experience string}
         if attacker[i].my_exp > 0 then
         begin
-          my_experience := 'You earned ' + uwhite + commastr(attacker[i].my_exp) + config.textcol1 + ' experience points from this fight!';
+          my_experience := 'You earned ' + uwhite + commastr(attacker[i].my_exp) + config.textcol1 +
+            ' experience points from this fight!';
         end else
         begin
           my_experience := '';
@@ -4418,7 +4511,8 @@ begin {take_over_the_gym}
           pl0.gym_owner := 0;
           pl0.gym_card := 0;
           user_save(pl0);
-        end else if pl0.team = player.team then
+        end else
+        if pl0.team = player.team then
         begin
           pl0.gym_owner := 1;
           pl0.gym_card := 0;

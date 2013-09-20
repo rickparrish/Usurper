@@ -36,7 +36,8 @@ uses
 var  c: integer;
 
 
-procedure Add_Guard(const Name: s70; cost: longint; hps: longint; multi: boolean; basearm: longint; baseatt: longint; const lin1: s70; const lin2: s70; const lin3: s70; const lin4: s70; const lin5: s70);
+procedure Add_Guard(const Name: s70; cost: longint; hps: longint; multi: boolean; basearm: longint;
+  baseatt: longint; const lin1: s70; const lin2: s70; const lin3: s70; const lin4: s70; const lin5: s70);
 var
   i: integer;
 begin
@@ -56,11 +57,13 @@ begin
 
   for i := 1 to 5 do
   begin
-    if guard.descp[i] = '' then guard.descp[i] := emptystr;
+    if guard.descp[i] = '' then
+      guard.descp[i] := emptystr;
   end;
 
  {$I-}Write(guardfile, guard);{$I+}
-  if IOResult <> 0 then unable_to_write(gufile);
+  if IOResult <> 0 then
+    unable_to_write(gufile);
 
   {gl”m inte att „ndra 7:an om antalet guards „ndras}
   Inc(c);
@@ -75,7 +78,8 @@ begin
 
   Assign(guardfile, gufile);
  {$I-}rewrite(guardfile);{$I+}
-  if IOResult <> 0 then unable_to_create(gufile);
+  if IOResult <> 0 then
+    unable_to_create(gufile);
 
   add_guard('Cat', 1000, 50, True, 25, 25,
     'The Innkeeper is the breeder of this animal.',
@@ -127,16 +131,9 @@ begin
     '');
 
  {$I-}Close(guardfile);{$I+}
-  if IOResult <> 0 then unable_to_close(gufile);
+  if IOResult <> 0 then
+    unable_to_close(gufile);
 
 end;
-
-
-
-
-
-
-
-
 
 end.

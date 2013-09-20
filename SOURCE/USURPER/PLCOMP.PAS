@@ -79,8 +79,10 @@ begin
       menu2('(C)ast Spell  ');
     end;
 
-    if player1.class = Paladin then menu2('(1) Soul Strike  ');
-    if player1.class = Assassin then menu2('(1) Backstab  ');
+    if player1.class = Paladin then
+      menu2('(1) Soul Strike  ');
+    if player1.class = Assassin then
+      menu2('(1) Backstab  ');
     crlf;
     sd(config.textcolor, ':');
   end else
@@ -257,7 +259,8 @@ begin
       cho := '?';
     end;
 
-    if cho = 'H' then healing(player);
+    if cho = 'H' then
+      healing(player);
 
     if cho = 'S' then
     begin
@@ -404,8 +407,10 @@ begin
     crlf;
 
     {restoring overmaxed hps}
-    if player2.hps > player2.maxhps then player2.hps := player2.maxhps;
-    if player1.hps > player1.maxhps then player1.hps := player1.maxhps;
+    if player2.hps > player2.maxhps then
+      player2.hps := player2.maxhps;
+    if player1.hps > player1.maxhps then
+      player1.hps := player1.maxhps;
 
     {*should opponent quaff healing potions?*}
     computer_healing(True, player2);
@@ -453,7 +458,8 @@ begin
     if player2.gnollp > 0 then
     begin
       player1.punch := random(player1.level) + 1;
-      d(global_plycol, player2.name2 + config.textcol1 + ' suffers ' + uwhite + commastr(player1.punch) + config.textcol1 + ' points from poison!');
+      d(global_plycol, player2.name2 + config.textcol1 + ' suffers ' + uwhite + commastr(player1.punch) +
+        config.textcol1 + ' points from poison!');
       Dec(player2.hps, player1.punch);
     end;
 
@@ -482,7 +488,8 @@ begin
       zz := soulstrike;
       player1.punch := soul_effect(player1, zz);
       soulstrike := 0;
-      d(config.textcolor, 'Soulstrike hits ' + uplc + player2.name2 + config.textcol1 + ' for ' + uwhite + commastr(player1.punch) + config.textcol1 + ' points!');
+      d(config.textcolor, 'Soulstrike hits ' + uplc + player2.name2 + config.textcol1 + ' for ' +
+        uwhite + commastr(player1.punch) + config.textcol1 + ' points!');
     end;
     {*should computer controlled player ues Backstab?*}
     if config.classic then
@@ -538,7 +545,8 @@ begin
       Dec(player2.hps, zz);
       player2.punch := soul_effect(player2, zz);
       soulstrike := 0;
-      d(config.textcolor, 'Soulstrike from ' + uplc + player2.name2 + config.textcol1 + ' hits you for ' + uwhite + commastr(player2.punch) + config.textcol1 + ' points!');
+      d(config.textcolor, 'Soulstrike from ' + uplc + player2.name2 + config.textcol1 + ' hits you for ' +
+        uwhite + commastr(player2.punch) + config.textcol1 + ' points!');
     end;
 
     {* random messages *}
@@ -547,11 +555,13 @@ begin
       battle_comment(1, player2.name2);
     end;
 
-    if (player1.punch + player1.poison = 0) and (player1.used_item = False) and (player1.casted = False) and (stab1 <> -1) then
+    if (player1.punch + player1.poison = 0) and (player1.used_item = False) and (player1.casted = False) and
+      (stab1 <> -1) then
     begin
       d(config.textcolor, 'You miss your blow against ' + player2.name2 + '!');
     end;
-    if (player1.punch + player1.poison > 0) and (player1.used_item = False) and (player1.casted = False) and (stab1 <> -1) then
+    if (player1.punch + player1.poison > 0) and (player1.used_item = False) and (player1.casted = False) and
+      (stab1 <> -1) then
     begin
       sd(config.textcolor, 'You hit ');
       sd(global_plycol, player2.name2);
@@ -566,7 +576,8 @@ begin
 
       normal_defence(player2);
 
-      if player2.absorb > player1.punch then player2.absorb := player1.punch;
+      if player2.absorb > player1.punch then
+        player2.absorb := player1.punch;
       if player2.absorb > 0 then
       begin
         sd(global_plycol, player2.name2 + 's');
@@ -574,16 +585,19 @@ begin
         sd(15, commastr(player2.absorb));
         d(config.textcolor, ' points!');
         player1.punch := player1.punch - player2.absorb;
-        if player1.punch < 0 then player1.punch := 0;
+        if player1.punch < 0 then
+          player1.punch := 0;
       end;
     end;
 
-    if (player2.punch + player2.poison = 0) and (player2.used_item = False) and (player2.casted = False) and (stab2 <> -1) then
+    if (player2.punch + player2.poison = 0) and (player2.used_item = False) and (player2.casted = False) and
+      (stab2 <> -1) then
     begin
       d(config.textcolor, player2.name2 + ' missed you completely!');
     end;
 
-    if (player2.punch + player2.poison > 0) and (player2.used_item = False) and (player2.casted = False) and (stab2 <> -1) then
+    if (player2.punch + player2.poison > 0) and (player2.used_item = False) and (player2.casted = False) and
+      (stab2 <> -1) then
     begin
       sd(global_plycol, player2.name2);
       sd(config.textcolor, ' hits you for ');
@@ -596,12 +610,14 @@ begin
       end;
 
       normal_defence(player1);
-      if player1.absorb > player2.punch then player1.absorb := player2.punch;
+      if player1.absorb > player2.punch then
+        player1.absorb := player2.punch;
       if player1.absorb > 0 then
       begin
         d(config.textcolor, 'Your armor absorbed ' + commastr(player1.absorb) + ' points!');
         player2.punch := player2.punch - player1.absorb;
-        if player2.punch < 0 then player2.punch := 0;
+        if player2.punch < 0 then
+          player2.punch := 0;
       end;
     end;
 
@@ -610,8 +626,10 @@ begin
     infections2(fastgame, player2);
 
     {backstab effect}
-    if stab1 > 0 then player1.punch := player1.punch + stab1;
-    if stab2 > 0 then player2.punch := player2.punch + stab2;
+    if stab1 > 0 then
+      player1.punch := player1.punch + stab1;
+    if stab2 > 0 then
+      player2.punch := player2.punch + stab2;
 
     if stab1 = -1 then
     begin
@@ -626,11 +644,15 @@ begin
     end;
 
     {poison effect}
-    if player1.poison > 0 then player1.punch := player1.punch + player1.poison;
-    if player2.poison > 0 then player2.punch := player2.punch + player2.poison;
+    if player1.poison > 0 then
+      player1.punch := player1.punch + player1.poison;
+    if player2.poison > 0 then
+      player2.punch := player2.punch + player2.poison;
 
-    if player1.punch < 0 then player1.punch := 0;
-    if player2.punch < 0 then player2.punch := 0;
+    if player1.punch < 0 then
+      player1.punch := 0;
+    if player2.punch < 0 then
+      player2.punch := 0;
 
     {eternal battle?}
     if (player1.punch < 2) and (player2.punch < 2) then
@@ -644,8 +666,10 @@ begin
     Dec(player1.hps, player2.punch);
     Dec(player2.hps, player1.punch);
 
-    if player1.hps < 0 then player1.hps := 0;
-    if player2.hps < 0 then player2.hps := 0;
+    if player1.hps < 0 then
+      player1.hps := 0;
+    if player2.hps < 0 then
+      player2.hps := 0;
 
     if player1.hps < 1 then
     begin

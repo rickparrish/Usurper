@@ -67,7 +67,8 @@ begin
   repeat
     crlf;
     crlf;
-    d(config.textcolor, 'Who do you wanna send stuff to? (enter ' + config.textcol2 + '?' + config.textcol1 + ' to see your team)');
+    d(config.textcolor, 'Who do you wanna send stuff to? (enter ' + config.textcol2 + '?' +
+      config.textcol1 + ' to see your team)');
     sd(config.textcolor, ':');
 
     {get user input}
@@ -129,11 +130,13 @@ begin
 
           end;
 
-          if break_out = True then break;
+          if break_out = True then
+            break;
 
         end; {for j:= .end.}
 
-        if break_out = True then break;
+        if break_out = True then
+          break;
 
       end; {for i:= .end.}
 
@@ -208,7 +211,8 @@ begin
               end else
               begin
                 yy := str_to_nr(s);
-                if (yy < 1) or (yy > global_maxitem) then yy := 0;
+                if (yy < 1) or (yy > global_maxitem) then
+                  yy := 0;
               end;
 
               if yy > 0 then
@@ -240,7 +244,8 @@ begin
                       sd(config.textcolor, 'returns the ');
                       sd(global_itemcol, objekt^.Name);
                       d(config.textcolor, '.');
-                    end else if objekt^.cursed then
+                    end else
+                    if objekt^.cursed then
                     begin
                       sd(global_talkcol, 'I wont take any CURSED items!');
                       sd(config.textcolor, ', ');
@@ -249,7 +254,8 @@ begin
                       sd(config.textcolor, 'returns the ');
                       sd(global_itemcol, objekt^.Name);
                       d(config.textcolor, '.');
-                    end else if pmode = 1 then
+                    end else
+                    if pmode = 1 then
                     begin
                       inventory_empty(pl0^);
 
@@ -266,7 +272,8 @@ begin
                         '',
                         umailheadc + 'Items received' + config.textcol1,
                         mkstring(14, underscore),
-                        uplc + player.name2 + config.textcol1 + ' sent you ' + uitemc + objekt^.Name + ' ' + item_power_display(objekt^) + config.textcol1 + '.',
+                        uplc + player.name2 + config.textcol1 + ' sent you ' + uitemc + objekt^.Name +
+                        ' ' + item_power_display(objekt^) + config.textcol1 + '.',
                         '',
                         '',
                         '',
@@ -295,7 +302,8 @@ begin
           end;
           'M': begin {send money}
             crlf;
-            d(config.textcolor, 'How much ? (you have ' + uyellow + commastr(player.gold) + config.textcol1 + ' in ' + config.moneytype + ')');
+            d(config.textcolor, 'How much ? (you have ' + uyellow + commastr(player.gold) +
+              config.textcol1 + ' in ' + config.moneytype + ')');
             sd(config.textcolor, ':');
 
             xx := get_number(0, player.gold);
@@ -304,7 +312,8 @@ begin
             begin
               d(config.textcolor, 'You don''t have that kind of ' + config.moneytype + '!');
               xx := 0;
-            end else if (xx <= player.gold) and (xx > 0) then
+            end else
+            if (xx <= player.gold) and (xx > 0) then
             begin
               yy := xx;
 
@@ -332,22 +341,28 @@ begin
                   if (yy > 0) and (yy < 10001) then
                   begin
                     xx := 10;
-                  end else if (yy >= 10001) and (yy < 50001) then
+                  end else
+                  if (yy >= 10001) and (yy < 50001) then
                   begin
                     xx := 15;
-                  end else if (yy >= 50001) and (yy < 250001) then
+                  end else
+                  if (yy >= 50001) and (yy < 250001) then
                   begin
                     xx := 20;
-                  end else if (yy >= 250001) and (yy < 1500001) then
+                  end else
+                  if (yy >= 250001) and (yy < 1500001) then
                   begin
                     xx := 25;
-                  end else if (yy >= 1500001) and (yy < 15000001) then
+                  end else
+                  if (yy >= 1500001) and (yy < 15000001) then
                   begin
                     xx := 30;
-                  end else if (yy >= 15000001) and (yy < 150000001) then
+                  end else
+                  if (yy >= 15000001) and (yy < 150000001) then
                   begin
                     xx := 35;
-                  end else if (yy >= 150000001) and (yy < 2000000001) then
+                  end else
+                  if (yy >= 150000001) and (yy < 2000000001) then
                   begin
 
                     if random(2) = 0 then
@@ -371,7 +386,8 @@ begin
                     pl0^.loyalty := 100;
                   end;
 
-                end else if pmode = 1 then
+                end else
+                if pmode = 1 then
                 begin
 
                   {mail a letter to receiver of money}
@@ -383,7 +399,8 @@ begin
                     '',
                     umailheadc + 'Team' + config.textcol1,
                     mkstring(4, underscore) + config.textcol1,
-                    uplc + player.name2 + config.textcol1 + ' sent you ' + uyellow + commastr(yy) + config.textcol1 + ' ' + many_money(yy) + '!',
+                    uplc + player.name2 + config.textcol1 + ' sent you ' + uyellow + commastr(yy) +
+                    config.textcol1 + ' ' + many_money(yy) + '!',
                     '',
                     '',
                     '',
@@ -418,11 +435,13 @@ begin
             begin
               d(config.textcolor, 'You don''t have that many!');
               yy := 0;
-            end else if pl0^.healing + yy > config.maxheals then
+            end else
+            if pl0^.healing + yy > config.maxheals then
             begin
               d(config.textcolor, 'You can send max ' + commastr(config.maxheals - pl0^.healing) + ' potions!');
               yy := 0;
-            end else if (player.healing >= yy) and (yy > 0) then
+            end else
+            if (player.healing >= yy) and (yy > 0) then
             begin
               if confirm('Send ' + commastr(yy) + ' potions to ' + pl0^.name2, 'n') = True then
               begin
@@ -445,7 +464,8 @@ begin
                     '',
                     umailheadc + 'Team' + config.textcol1,
                     mkstring(4, underscore) + config.textcol1,
-                    uplc + player.name2 + config.textcol1 + ' has sent you ' + uwhite + commastr(yy) + config.textcol1 + ' healing potions!',
+                    uplc + player.name2 + config.textcol1 + ' has sent you ' + uwhite + commastr(yy) +
+                    config.textcol1 + ' healing potions!',
                     '',
                     '',
                     '',

@@ -29,7 +29,7 @@ interface
 uses
   Init, Xboxes, Objects;
 
-procedure FirstMenu; {MAIN MENU}
+procedure FirstMenu;     {MAIN MENU}
 procedure Config_Editor; {Usurper Configuration Dialog}
 
 procedure Load_Config;
@@ -44,14 +44,14 @@ procedure Manage_Inventory(var gubbe: userrec);
 procedure Equipment_Dialog(var gubbe: userrec);
 procedure Equipment_Dialog_Classic(var gubbe: userrec);
 
-procedure View_As_Text(const FileName: string); {snatched from TVFDEMO}
+procedure View_As_Text(const FileName: string);    {snatched from TVFDEMO}
 
-procedure Reset_Game(game, killgods: boolean); {game=true reset game}
+procedure Reset_Game(game, killgods: boolean);     {game=true reset game}
 procedure Reset_DataFiles;
-procedure Set_Classic_Weapon(vapen: boolean); {choose Classic Weapon for PLAYER}
-procedure Pick_Monster_Item(typ: objtype); {pick equipment for Monster}
+procedure Set_Classic_Weapon(vapen: boolean);      {choose Classic Weapon for PLAYER}
+procedure Pick_Monster_Item(typ: objtype);         {pick equipment for Monster}
 procedure Pick_Item(typ: objtype; which: boolean); {pick equipment for PLAYER}
-procedure Gimme_Item(typ: objtype; invnr: byte); {general ITEM selector}
+procedure Gimme_Item(typ: objtype; invnr: byte);   {general ITEM selector}
 procedure ViewTextsMenu;
 procedure Options_Menu;
 procedure More_Editors_Menu;
@@ -84,7 +84,7 @@ procedure Config_Editor; {Usurper Configuration Dialog}
 const
   dialogtitle = 'Usurper Configuration'; {dialog title}
 
-  x1: byte    = 2; {x/y coords}
+  x1: byte    = 2;       {x/y coords}
   y1: byte    = 1;
   x2: byte    = 73;
   y2: byte    = 20;
@@ -182,7 +182,8 @@ var
   Width: integer;
   XPos:  integer;
 begin
-  if Length(Msg) > 40 then Width := Length(Msg) + 4
+  if Length(Msg) > 40 then
+    Width := Length(Msg) + 4
   else Width := 40;
   XPos := (Width div 2) - (Length(Msg) div 2) - 1;
 
@@ -460,7 +461,7 @@ begin
       end;
     end; {for c:= .end.}
 
-    {Assign Dialog}
+         {Assign Dialog}
     R.Assign(7, 4, minl + 2, rad + 12);
 
     {Setup Dialog}
@@ -550,8 +551,11 @@ begin
 
         case c of
           CmCToggle: begin
-            if cfgvalue[nr] = 'YES' then s^ := 'NO'
-            else if cfgvalue[nr] = 'NO' then s^ := 'YES';
+            if cfgvalue[nr] = 'YES' then
+              s^ := 'NO'
+            else
+            if cfgvalue[nr] = 'NO' then
+              s^ := 'YES';
 
             cfgvalue[nr] := s^;
 
@@ -561,7 +565,7 @@ begin
 
           end;
         end; {case .end.}
-      end; {if yesno_option .end.}
+      end;   {if yesno_option .end.}
 
       if not display_again then
       begin
@@ -570,7 +574,8 @@ begin
         begin
           CfgChang := True;
 
-          if s^ = ' ' then s^ := '';
+          if s^ = ' ' then
+            s^ := '';
 
           CfgValue[nr] := s^;
 
@@ -581,7 +586,7 @@ begin
 
     end; {if c<>cmcancel .end.}
 
-    {Dispose Temporary Pointers}
+         {Dispose Temporary Pointers}
     Dispose(S);
 
   until not display_again;
@@ -1010,13 +1015,15 @@ begin
     Measles: sinfo[i] := 'Cures Measles';
     Leprosy: sinfo[i] := 'Cures Leprosy';
   end;
-  if item.cure <> Nothing then Inc(i);
+  if item.cure <> Nothing then
+    Inc(i);
 
   if item.evil then
   begin
     sinfo[i] := 'Can only be used by EVIL characters';
     Inc(i);
-  end else if item.good then
+  end else
+  if item.good then
   begin
     sinfo[i] := 'Can only be used by GOOD characters';
     Inc(i);
@@ -1054,7 +1061,8 @@ begin
 
   for i := 1 to maxinfo do
   begin
-    if sinfo[i] <> '' then sinfo[i] := ' ' + sinfo[i];
+    if sinfo[i] <> '' then
+      sinfo[i] := ' ' + sinfo[i];
   end;
 
   R.Assign(0, 0, 53, needy);
@@ -1668,7 +1676,7 @@ begin
           end;
         end; {for c:= .end.}
 
-        {Setup FOUND MATCH Dialog}
+             {Setup FOUND MATCH Dialog}
         R.Assign(0, 0, minlength, rows + 6);
         Dia := New(XDialogP, Init(R, 'Found match in Option #' + commastr(i)));
         with Dia^ do
@@ -1699,7 +1707,8 @@ begin
           res := i;
           found := True;
           break;
-        end else if go = CmCancel then
+        end else
+        if go = CmCancel then
         begin
           res := -1;
           found := True;
@@ -1813,11 +1822,14 @@ begin
   {kill the gods}
   if killgods then
   begin
-    if f_exists(godsf) then delete_file(godsf);
+    if f_exists(godsf) then
+      delete_file(godsf);
 
     {logs of comings and goings of the gods}
-    if f_exists(GodsANSI) then delete_file(GodsANSI);
-    if f_exists(GodsASCI) then delete_file(GodsASCI);
+    if f_exists(GodsANSI) then
+      delete_file(GodsANSI);
+    if f_exists(GodsASCI) then
+      delete_file(GodsASCI);
 
   end;
 
@@ -1825,26 +1837,37 @@ begin
   if not game then
   begin
     {beh”ver inte s† stor box n„r bara n†gra datafiler ska resettas}
-    if not resf1 then Dec(y2, 2);
-    if not resf2 then Dec(y2, 2);
-    if not resf3 then Dec(y2, 2);
-    if not resf4 then Dec(y2, 2);
-    if not resf5 then Dec(y2, 2);
-    if not resf6 then Dec(y2, 2);
-    if not resf7 then Dec(y2, 2);
-    if not resf8 then Dec(y2, 2);
-    if not resf9 then Dec(y2, 2);
+    if not resf1 then
+      Dec(y2, 2);
+    if not resf2 then
+      Dec(y2, 2);
+    if not resf3 then
+      Dec(y2, 2);
+    if not resf4 then
+      Dec(y2, 2);
+    if not resf5 then
+      Dec(y2, 2);
+    if not resf6 then
+      Dec(y2, 2);
+    if not resf7 then
+      Dec(y2, 2);
+    if not resf8 then
+      Dec(y2, 2);
+    if not resf9 then
+      Dec(y2, 2);
   end;
 
   if (resf4 = True) and (game = False) then
   begin
     Inc(y2, 4); {monster file needs extended space}
-  end else if (game = False) then
+  end else
+  if (game = False) then
   begin
     Inc(y2, 2);
   end;
 
-  if game then s := 'Resetting Usurper'
+  if game then
+    s := 'Resetting Usurper'
   else s := 'Resetting Usurper Data files';
 
   R.Assign(x1, y1, x2, y2); {x/y start for config box}
@@ -1862,30 +1885,40 @@ begin
     {moving the usintro files (included to fix older Usurper versions)}
     {legacy stuff}
     s := 'USINTRO1.ANS';
-    if (f_exists(s)) and (f_exists(global_datadir + s) = False) then move_file(s, global_datadir);
+    if (f_exists(s)) and (f_exists(global_datadir + s) = False) then
+      move_file(s, global_datadir);
 
     s := 'USINTRO1.ASC';
-    if (f_exists(s)) and (f_exists(global_datadir + s) = False) then move_file(s, global_datadir);
+    if (f_exists(s)) and (f_exists(global_datadir + s) = False) then
+      move_file(s, global_datadir);
 
     s := 'USINTRO2.ANS';
-    if (f_exists(s)) and (f_exists(global_datadir + s) = False) then move_file(s, global_datadir);
+    if (f_exists(s)) and (f_exists(global_datadir + s) = False) then
+      move_file(s, global_datadir);
     s := 'USINTRO2.ASC';
-    if (f_exists(s)) and (f_exists(global_datadir + s) = False) then move_file(s, global_datadir);
+    if (f_exists(s)) and (f_exists(global_datadir + s) = False) then
+      move_file(s, global_datadir);
 
     s := 'USINTRO3.ANS';
-    if (f_exists(s)) and (f_exists(global_datadir + s) = False) then move_file(s, global_datadir);
+    if (f_exists(s)) and (f_exists(global_datadir + s) = False) then
+      move_file(s, global_datadir);
     s := 'USINTRO3.ASC';
-    if (f_exists(s)) and (f_exists(global_datadir + s) = False) then move_file(s, global_datadir);
+    if (f_exists(s)) and (f_exists(global_datadir + s) = False) then
+      move_file(s, global_datadir);
 
     s := 'USINTRO4.ANS';
-    if (f_exists(s)) and (f_exists(global_datadir + s) = False) then move_file(s, global_datadir);
+    if (f_exists(s)) and (f_exists(global_datadir + s) = False) then
+      move_file(s, global_datadir);
     s := 'USINTRO4.ASC';
-    if (f_exists(s)) and (f_exists(global_datadir + s) = False) then move_file(s, global_datadir);
+    if (f_exists(s)) and (f_exists(global_datadir + s) = False) then
+      move_file(s, global_datadir);
 
     s := 'USINTRO5.ANS';
-    if (f_exists(s)) and (f_exists(global_datadir + s) = False) then move_file(s, global_datadir);
+    if (f_exists(s)) and (f_exists(global_datadir + s) = False) then
+      move_file(s, global_datadir);
     s := 'USINTRO5.ASC';
-    if (f_exists(s)) and (f_exists(global_datadir + s) = False) then move_file(s, global_datadir);
+    if (f_exists(s)) and (f_exists(global_datadir + s) = False) then
+      move_file(s, global_datadir);
 
     {messagebox(#3'Usurper has been RESET!', nil,mfinformation or mfokbutton);}
 
@@ -1931,15 +1964,24 @@ begin
     NewsItem('TeamName File',
     NewsItem('Moat Creatures', nil)))))))))));
 
-  if resf1 then boxes^.press(0);
-  if resf2 then boxes^.press(1);
-  if resf3 then boxes^.press(2);
-  if resf4 then boxes^.press(3);
-  if resf5 then boxes^.press(4);
-  if resf6 then boxes^.press(5);
-  if resf7 then boxes^.press(6);
-  if resf8 then boxes^.press(7);
-  if resf9 then boxes^.press(8);
+  if resf1 then
+    boxes^.press(0);
+  if resf2 then
+    boxes^.press(1);
+  if resf3 then
+    boxes^.press(2);
+  if resf4 then
+    boxes^.press(3);
+  if resf5 then
+    boxes^.press(4);
+  if resf6 then
+    boxes^.press(5);
+  if resf7 then
+    boxes^.press(6);
+  if resf8 then
+    boxes^.press(7);
+  if resf9 then
+    boxes^.press(8);
 
   boxes^.helpctx := hcLevelfile; {help text from HcLevelfile ... HcTEam.}
 
@@ -2005,10 +2047,11 @@ begin
   x2 := 60;
   y2 := 20;
 
-  if vapen then s := 'Classic Weapons'
+  if vapen then
+    s := 'Classic Weapons'
   else s := 'Classic Armors';
 
-  CLlist^.Process(vapen); {process data list}
+  CLlist^.Process(vapen);   {process data list}
   R.Assign(x1, y1, x2, y2); {x/y start for config box}
   Dia := New(ClassicPickDialogP, Init(R, s, vapen));
   Dia^.Options := Dia^.Options or ofCentered;
@@ -2028,10 +2071,12 @@ begin
 
   if vapen then
   begin
-    if player.weapon > 0 then CLlist^.FocusItem(player.weapon - 1);
+    if player.weapon > 0 then
+      CLlist^.FocusItem(player.weapon - 1);
   end else
   begin
-    if player.armor > 0 then cLlist^.focusitem(player.armor - 1);
+    if player.armor > 0 then
+      cLlist^.focusitem(player.armor - 1);
   end;
 
   Dia^.Insert(PBor);
@@ -2203,7 +2248,7 @@ begin
 
   end; {with Dia do .end.}
 
-  {Execute Dialog}
+       {Execute Dialog}
   MyApp.ExecuteDialog(Dia, nil);
 
 end;
@@ -2281,7 +2326,8 @@ begin
 
   Result := MyApp.ExecuteDialog(D, nil);
 
-  if Result = CmYes then yesnobox := True
+  if Result = CmYes then
+    yesnobox := True
   else yesnobox := False;
 
 end; {YesNoBox *end*}
@@ -2307,7 +2353,7 @@ begin
     14: bash_name := 'Ram';
   end; {case .end.}
 
-end; {bash_name *end*}
+end;   {bash_name *end*}
 
 function Bash_Rank;
 begin
@@ -2333,7 +2379,7 @@ begin
     17: bash_rank := '*COMPLETE*';
   end; {case .end.}
 
-end; {bash_rank *end*}
+end;   {bash_rank *end*}
 
 function Race_Display;
 begin
@@ -2351,6 +2397,6 @@ begin
     Mutant: race_display := 'Mutant';
   end; {case .end.}
 
-end; {race_display *end*}
+end;   {race_display *end*}
 
-end. {UNIT *END*}
+end.   {UNIT *END*}

@@ -165,7 +165,8 @@ begin
     {evaluate user input}
     case ch of
       '?': begin {display menu}
-        if player.expert = True then display_menu(True, False)
+        if player.expert = True then
+          display_menu(True, False)
         else display_menu(False, False);
       end;
       'S': begin {player status}
@@ -309,11 +310,16 @@ begin
             {get user-input}
             ch := upcase(getchar);
 
-            if (ch = 'B') and (player.blind = False) then ch := ' ';
-            if (ch = 'P') and (player.plague = False) then ch := ' ';
-            if (ch = 'S') and (player.smallpox = False) then ch := ' ';
-            if (ch = 'M') and (player.measles = False) then ch := ' ';
-            if (ch = 'L') and (player.leprosy = False) then ch := ' ';
+            if (ch = 'B') and (player.blind = False) then
+              ch := ' ';
+            if (ch = 'P') and (player.plague = False) then
+              ch := ' ';
+            if (ch = 'S') and (player.smallpox = False) then
+              ch := ' ';
+            if (ch = 'M') and (player.measles = False) then
+              ch := ' ';
+            if (ch = 'L') and (player.leprosy = False) then
+              ch := ' ';
 
           until ch in ['C', 'B', 'P', 'S', 'M', 'L'];
 
@@ -444,11 +450,16 @@ begin
               end;
             end;
             'C': begin {cure all}
-              if player.blind = True then Inc(total, cost[1]^);
-              if player.plague = True then Inc(total, cost[2]^);
-              if player.smallpox = True then Inc(total, cost[3]^);
-              if player.measles = True then Inc(total, cost[4]^);
-              if player.leprosy = True then Inc(total, cost[5]^);
+              if player.blind = True then
+                Inc(total, cost[1]^);
+              if player.plague = True then
+                Inc(total, cost[2]^);
+              if player.smallpox = True then
+                Inc(total, cost[3]^);
+              if player.measles = True then
+                Inc(total, cost[4]^);
+              if player.leprosy = True then
+                Inc(total, cost[5]^);
 
               sd(config.textcolor, 'A ' + disease_col + 'complete healing' + config.textcol1 + ' process will cost you ');
               sd(14, commastr(total));
@@ -506,7 +517,8 @@ begin
             {news-paper}
             newsy(True,
               'Healer',
-              ' ' + uplc + player.name2 + config.textcol1 + ' spent some time with ' + ulmag + manager + config.textcol1 + ', the healer.',
+              ' ' + uplc + player.name2 + config.textcol1 + ' spent some time with ' + ulmag +
+              manager + config.textcol1 + ', the healer.',
               ' ' + uplc + player.name2 + config.textcol1 + ' paid to get rid of some annoying diseases...',
               '',
               '',

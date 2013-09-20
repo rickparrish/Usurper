@@ -144,7 +144,8 @@ begin
 
     case cho of
       '?': begin {menu}
-        if player.expert = True then display_menu(True, False)
+        if player.expert = True then
+          display_menu(True, False)
         else display_menu(False, False);
       end;
       'S': begin {status}
@@ -152,8 +153,8 @@ begin
       end;
       'F': begin {free a prisoner}
 
-        {only one player at a time may attempt to break into jail}
-        {we must check if any other node is doing this}
+                 {only one player at a time may attempt to break into jail}
+                 {we must check if any other node is doing this}
         if anybody_on_location(onloc_prisonbreak, player.name2) then
         begin
           crlf;
@@ -221,15 +222,17 @@ begin
                 end;
               end;
 
-              if (finito) or (found) then break;
+              if (finito) or (found) then
+                break;
 
             end; {for j:= .end.}
 
-            if (finito) or (found) then break;
+            if (finito) or (found) then
+              break;
 
           end; {for i:= .end.}
 
-          {the King and Royal Guards may not attempt this!}
+               {the King and Royal Guards may not attempt this!}
           if found then
           begin
             if player.king then
@@ -325,7 +328,8 @@ begin
                         begin
                           {damn! guard does not exist in the player/npc files}
                           y := 0;
-                        end else if (is_online(king.guard[i], online_player) = False) and
+                        end else
+                        if (is_online(king.guard[i], online_player) = False) and
                           (guard.location <> offloc_prison) and
                           (guard.deleted = False) and
                           (guard.name2 <> player.name2) and
@@ -367,7 +371,8 @@ begin
             {guard found}
             d(config.textcolor, 'You sneak up behind ' + uplc + s + config.textcol1 + ' the Royal guard.');
             d(config.textcolor, uplc + s + config.textcol1 + ' is sleeping on ' + sex3[guard.sex] + ' post.');
-            sd(config.textcolor, 'You cautiously loosen the bunch of keys tied to ' + uplc + s + 's' + config.textcol1 + ' belt...');
+            sd(config.textcolor, 'You cautiously loosen the bunch of keys tied to ' + uplc + s +
+              's' + config.textcol1 + ' belt...');
             make_delay_dots(2, 5, 600);
             crlf;
 
@@ -387,7 +392,7 @@ begin
               end;
             end; {case .end.}
 
-            {fight guard}
+                 {fight guard}
             if done = False then
             begin
 
@@ -433,20 +438,20 @@ begin
             }
 
                   create_monster(i,              {#}
-                    s,              {name}
-                    hps,            {hps}
+                    s,                     {name}
+                    hps,                   {hps}
                     player.strength * 2,   {strength}
-                    player.defence * 2,  {defence}
+                    player.defence * 2,    {defence}
                     'seize the intruder!', {phrase}
-                    False,          {gragweap}
-                    False,          {grabarm}
-                    weapon,         {weapon-string}
-                    armor,          {armor-string}
-                    False,          {poisoned-should be false}
-                    False,          {disease -should be false}
-                    player.level, {punch}
-                    player.level + 1,  {armpow}
-                    player.level + 1); {weappow}
+                    False,                 {gragweap}
+                    False,                 {grabarm}
+                    weapon,                {weapon-string}
+                    armor,                 {armor-string}
+                    False,                 {poisoned-should be false}
+                    False,                 {disease -should be false}
+                    player.level,          {punch}
+                    player.level + 1,      {armpow}
+                    player.level + 1);     {weappow}
 
                 end; {for i:= .end.}
 
@@ -490,7 +495,8 @@ begin
                   {news-paper}
                   Newsy(True,
                     'Prison',
-                    ' ' + uplc + player.name2 + config.textcol1 + ' was seized after an attempt to free ' + uplc + prisoner.name2 + config.textcol1 + ' from prison.',
+                    ' ' + uplc + player.name2 + config.textcol1 + ' was seized after an attempt to free ' +
+                    uplc + prisoner.name2 + config.textcol1 + ' from prison.',
                     ' ' + ulred + player.name2 + config.textcol1 + ' surrendered to the Guards and was jailed.',
                     ' The Royal Justice will deal with this outlaw.',
                     '',
@@ -540,7 +546,8 @@ begin
                       '',
                       ulred + 'Infiltration' + config.textcol1,
                       mkstring(12, underscore),
-                      uplc + player.name2 + config.textcol1 + ' was seized after an attempt to free ' + uplc + prisoner.name2 + config.textcol1 + ' from prison.',
+                      uplc + player.name2 + config.textcol1 + ' was seized after an attempt to free ' +
+                      uplc + prisoner.name2 + config.textcol1 + ' from prison.',
                       ulred + player.name2 + config.textcol1 + ' surrendered to the Guards and was put in chains.',
                       '',
                       '',
@@ -558,8 +565,8 @@ begin
 
                   pause;
                   halt;
-                end
-                else if global_killed then
+                end else
+                if global_killed then
                 begin
                   {player was killed by prison-guards}
                   d(12, 'YOU FAILED!');
@@ -569,7 +576,8 @@ begin
                   {news-paper}
                   Newsy(True,
                     'Prison',
-                    ' ' + uplc + player.name2 + config.textcol1 + ' was killed in an attempt to free ' + uplc + prisoner.name2 + config.textcol1 + ' from prison.',
+                    ' ' + uplc + player.name2 + config.textcol1 + ' was killed in an attempt to free ' +
+                    uplc + prisoner.name2 + config.textcol1 + ' from prison.',
                     '',
                     '',
                     '',
@@ -617,7 +625,8 @@ begin
                       '',
                       ulred + 'Infiltration' + config.textcol1,
                       mkstring(12, underscore),
-                      uplc + player.name2 + config.textcol1 + ' was killed in an attempt to free ' + uplc + prisoner.name2 + config.textcol1 + ' from prison.',
+                      uplc + player.name2 + config.textcol1 + ' was killed in an attempt to free ' +
+                      uplc + prisoner.name2 + config.textcol1 + ' from prison.',
                       'The prison guards took care of the intruder!',
                       '',
                       '',
@@ -672,8 +681,10 @@ begin
                   {news-paper}
                   Newsy(True,
                     'New Prisoner',
-                    ' ' + uplc + player.name2 + config.textcol1 + ' was seized after an attempt to free ' + uplc + prisoner.name2 + config.textcol1 + ' from prison.',
-                    ' ' + ulred + player.name2 + config.textcol1 + ' surrendered to the royal guard ' + uplc + guard.name2 + config.textcol1 + '!',
+                    ' ' + uplc + player.name2 + config.textcol1 + ' was seized after an attempt to free ' +
+                    uplc + prisoner.name2 + config.textcol1 + ' from prison.',
+                    ' ' + ulred + player.name2 + config.textcol1 + ' surrendered to the royal guard ' +
+                    uplc + guard.name2 + config.textcol1 + '!',
                     ' The Royal Justice will deal with this outlaw.',
                     '',
                     '',
@@ -723,7 +734,8 @@ begin
                       ulred + 'Helping Hand' + config.textcol1,
                       mkstring(12, underscore),
                       uplc + player.name2 + config.textcol1 + ' was seized after an attempt to get you out of prison.',
-                      ulred + player.name2 + config.textcol1 + ' surrendered to the royal guard ' + uplc + guard.name2 + config.textcol1 + ' and was put in chains.',
+                      ulred + player.name2 + config.textcol1 + ' surrendered to the royal guard ' +
+                      uplc + guard.name2 + config.textcol1 + ' and was put in chains.',
                       '',
                       '',
                       '',
@@ -749,8 +761,10 @@ begin
                       '',
                       ulred + 'Infiltration' + config.textcol1,
                       mkstring(12, underscore),
-                      uplc + player.name2 + config.textcol1 + ' was seized after an attempt to free ' + uplc + prisoner.name2 + config.textcol1 + ' from prison.',
-                      ulred + player.name2 + config.textcol1 + ' surrendered to the royal guard ' + uplc + guard.name2 + config.textcol1 + '.',
+                      uplc + player.name2 + config.textcol1 + ' was seized after an attempt to free ' +
+                      uplc + prisoner.name2 + config.textcol1 + ' from prison.',
+                      ulred + player.name2 + config.textcol1 + ' surrendered to the royal guard ' +
+                      uplc + guard.name2 + config.textcol1 + '.',
                       ulred + player.name2 + config.textcol1 + ' was put in chains.',
                       '',
                       '',
@@ -767,7 +781,8 @@ begin
 
                   pause;
                   halt;
-                end else if (player.hps < 1) and (guard.hps < 1) then
+                end else
+                if (player.hps < 1) and (guard.hps < 1) then
                 begin
 
                   {both guard and player were killed}
@@ -778,8 +793,10 @@ begin
                   {news-paper}
                   Newsy(True,
                     'Prison Trouble',
-                    ' ' + uplc + player.name2 + config.textcol1 + ' was killed in an attempt to free ' + uplc + prisoner.name2 + config.textcol1 + ' from prison.',
-                    ' ' + ulred + player.name2 + config.textcol1 + ' was eliminated by the royal guard ' + uplc + guard.name2 + config.textcol1 + '!',
+                    ' ' + uplc + player.name2 + config.textcol1 + ' was killed in an attempt to free ' +
+                    uplc + prisoner.name2 + config.textcol1 + ' from prison.',
+                    ' ' + ulred + player.name2 + config.textcol1 + ' was eliminated by the royal guard ' +
+                    uplc + guard.name2 + config.textcol1 + '!',
                     ' ' + ulred + guard.name2 + config.textcol1 + ' was badly wounded and died soon after the fight.',
                     '',
                     '',
@@ -826,7 +843,8 @@ begin
                       ulred + 'Helping Hand' + config.textcol1,
                       mkstring(12, underscore),
                       ulred + player.name2 + config.textcol1 + ' was killed in an attempt to get you out of prison!',
-                      ulred + player.name2 + config.textcol1 + ' was killed by the royal guard ' + uplc + guard.name2 + config.textcol1 + '!',
+                      ulred + player.name2 + config.textcol1 + ' was killed by the royal guard ' +
+                      uplc + guard.name2 + config.textcol1 + '!',
                       ulred + guard.name2 + config.textcol1 + ' died on ' + sex3[guard.sex] + ' way to hospital.',
                       '',
                       '',
@@ -852,8 +870,10 @@ begin
                       '',
                       ulred + 'Infiltration' + config.textcol1,
                       mkstring(12, underscore),
-                      ulred + player.name2 + config.textcol1 + ' was killed in an attempt to free ' + uplc + prisoner.name2 + config.textcol1 + ' from prison.',
-                      ulred + player.name2 + config.textcol1 + ' was killed by the royal guard ' + uplc + guard.name2 + config.textcol1 + '.',
+                      ulred + player.name2 + config.textcol1 + ' was killed in an attempt to free ' +
+                      uplc + prisoner.name2 + config.textcol1 + ' from prison.',
+                      ulred + player.name2 + config.textcol1 + ' was killed by the royal guard ' +
+                      uplc + guard.name2 + config.textcol1 + '.',
                       ulred + guard.name2 + config.textcol1 + ' died on ' + sex3[guard.sex] + ' way to hospital.',
                       '',
                       '',
@@ -881,7 +901,8 @@ begin
                   pause;
                   halt;
 
-                end else if guard.hps < 1 then
+                end else
+                if guard.hps < 1 then
                 begin
                   {guard was killed}
                   d(15, 'You take the Keys to the Prison Cells!');
@@ -889,7 +910,8 @@ begin
                   {news-paper}
                   Newsy(True,
                     'Prison',
-                    ' ' + ulred + guard.name2 + config.textcol1 + ', the royal guard, was killed by ' + uplc + player.name2 + config.textcol1 + '!',
+                    ' ' + ulred + guard.name2 + config.textcol1 + ', the royal guard, was killed by ' +
+                    uplc + player.name2 + config.textcol1 + '!',
                     ' ' + uplc + player.name2 + config.textcol1 + ' stole the keys to the Prison cells!',
                     '',
                     '',
@@ -937,7 +959,8 @@ begin
                       '',
                       ulred + 'Prison Infiltrated!' + config.textcol1,
                       mkstring(19, underscore),
-                      uplc + player.name2 + config.textcol1 + ' killed the royal guard ' + ulred + guard.name2 + config.textcol1 + '!',
+                      uplc + player.name2 + config.textcol1 + ' killed the royal guard ' + ulred +
+                      guard.name2 + config.textcol1 + '!',
                       uplc + player.name2 + config.textcol1 + ' stole the keys to the Prison cells!',
                       '',
                       '',
@@ -956,7 +979,8 @@ begin
                   {save guard}
                   user_save(guard);
 
-                end else if player.hps < 1 then
+                end else
+                if player.hps < 1 then
                 begin
                   {player was killed}
 
@@ -967,8 +991,10 @@ begin
                   {news-paper}
                   Newsy(True,
                     'Prison',
-                    ' ' + uplc + player.name2 + config.textcol1 + ' was killed in an attempt to free ' + uplc + prisoner.name2 + config.textcol1 + ' from prison.',
-                    ' ' + ulred + player.name2 + config.textcol1 + ' was killed by the royal guard ' + uplc + guard.name2 + config.textcol1 + '!',
+                    ' ' + uplc + player.name2 + config.textcol1 + ' was killed in an attempt to free ' +
+                    uplc + prisoner.name2 + config.textcol1 + ' from prison.',
+                    ' ' + ulred + player.name2 + config.textcol1 + ' was killed by the royal guard ' +
+                    uplc + guard.name2 + config.textcol1 + '!',
                     '',
                     '',
                     '',
@@ -1015,7 +1041,8 @@ begin
                       ulred + 'Helping Hand' + config.textcol1,
                       mkstring(12, underscore),
                       ulred + player.name2 + config.textcol1 + ' was killed in an attempt to get you out of prison!',
-                      ulred + player.name2 + config.textcol1 + ' was killed by the royal guard ' + uplc + guard.name2 + config.textcol1 + '!',
+                      ulred + player.name2 + config.textcol1 + ' was killed by the royal guard ' +
+                      uplc + guard.name2 + config.textcol1 + '!',
                       '',
                       '',
                       '',
@@ -1041,8 +1068,10 @@ begin
                       '',
                       ulred + 'Infiltration' + config.textcol1,
                       mkstring(12, underscore),
-                      ulred + player.name2 + config.textcol1 + ' was killed in an attempt to free ' + uplc + prisoner.name2 + config.textcol1 + ' from prison.',
-                      ulred + player.name2 + config.textcol1 + ' was killed by the royal guard ' + uplc + guard.name2 + config.textcol1 + '.',
+                      ulred + player.name2 + config.textcol1 + ' was killed in an attempt to free ' +
+                      uplc + prisoner.name2 + config.textcol1 + ' from prison.',
+                      ulred + player.name2 + config.textcol1 + ' was killed by the royal guard ' +
+                      uplc + guard.name2 + config.textcol1 + '.',
                       '',
                       '',
                       '',
@@ -1082,7 +1111,8 @@ begin
             {player managed to get pass the guard! now lets set prisoner free}
 
             {send a little message to all nodes}
-            online_send_to_all(uplc + player.name2 + config.textcol1 + ' stole the KEYS to the Prison Dungeons!', player.name2, '');
+            online_send_to_all(uplc + player.name2 + config.textcol1 + ' stole the KEYS to the Prison Dungeons!',
+              player.name2, '');
 
             {intro text!}
             d(15, 'You did it! You passed the guards.');
@@ -1112,7 +1142,8 @@ begin
               crlf;
               d(config.textcolor, 'You open the door to ' + uplc + prisoner.name2 + 's' + config.textcol1 + ' cell.');
               d(config.textcolor, uplc + prisoner.name2 + config.textcol1 + ' sits in a corner wearing rags.');
-              d(config.textcolor, 'You take ' + sex3[prisoner.sex] + ' hand and lead ' + sex[prisoner.sex] + ' out to freedom!');
+              d(config.textcolor, 'You take ' + sex3[prisoner.sex] + ' hand and lead ' +
+                sex[prisoner.sex] + ' out to freedom!');
               crlf;
 
               {add offline player}

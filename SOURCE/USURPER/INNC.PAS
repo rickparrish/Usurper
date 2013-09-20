@@ -57,7 +57,8 @@ begin
     load_guard(fload, guard, player.bguard);
     if player.bguardnr > 1 then
     begin
-      s := uplc + player.name2 + config.textcol1 + ' hired some ' + uguardc + guard.Name + 's' + config.textcol1 + ' for protection.';
+      s := uplc + player.name2 + config.textcol1 + ' hired some ' + uguardc + guard.Name + 's' +
+        config.textcol1 + ' for protection.';
     end else
     begin
       s := uplc + player.name2 + config.textcol1 + ' hired a ' + uguardc + guard.Name + config.textcol1 + ' for protection.';
@@ -180,7 +181,7 @@ var
   Pl0:         ^UserRec;
   Pl:          array [1..4] of ^Userrec;
 
-const len = 70;   {max length of text lines}
+const len = 70;            {max length of text lines}
 
   procedure Attack_Player; {attack a character}
   var i, j, k, x: longint;
@@ -240,7 +241,8 @@ const len = 70;   {max length of text lines}
                 if Is_Player_Married(player.name2, player.id) = pl0^.name2 then
                 begin
                   cannot_attack_husband(player, pl0^);
-                end else if (x > config.leveldiff) and (config.leveldiff <> 0) then
+                end else
+                if (x > config.leveldiff) and (config.leveldiff <> 0) then
                 begin
                   crlf;
                   d(12, 'That would be too easy!');
@@ -258,10 +260,12 @@ const len = 70;   {max length of text lines}
               end;
             end;
 
-            if (search) or (finito) then break;
+            if (search) or (finito) then
+              break;
           end;
         end; {for j:= .end.}
-        if (search) or (finito) then break;
+        if (search) or (finito) then
+          break;
       end; {for i:= .end.}
 
       if (search = False) and (finito = False) then
@@ -349,20 +353,20 @@ const len = 70;   {max length of text lines}
                   for i := 1 to pl0^.bguardnr do
                   begin
                     create_monster(i,              {#}
-                      guard^.Name,    {name}
-                      guard^.hps,     {hps}
-                      guard^.battack, {strength}
+                      guard^.Name,        {name}
+                      guard^.hps,         {hps}
+                      guard^.battack,     {strength}
                       {player.level} 0,   {defence}
-                      'Grrrr..',      {phrase}
-                      False,          {grabweap}
-                      False,          {grabarm}
-                      '',             {weapon-string}
-                      '',             {armor-string}
-                      False,          {poisoned-should be false}
-                      False,          {disease -should be false}
-                      guard^.battack, {punch}
-                      0,              {armpow}
-                      0);             {weappow}
+                      'Grrrr..',          {phrase}
+                      False,              {grabweap}
+                      False,              {grabarm}
+                      '',                 {weapon-string}
+                      '',                 {armor-string}
+                      False,              {poisoned-should be false}
+                      False,              {disease -should be false}
+                      guard^.battack,     {punch}
+                      0,                  {armpow}
+                      0);                 {weappow}
                   end; {for i:= .end.}
 
                   {setting some variables before the fight}
@@ -381,13 +385,16 @@ const len = 70;   {max length of text lines}
                   if not global_killed then
                   begin
 
-                    if pl0^.bguardnr > 1 then s := 's'
+                    if pl0^.bguardnr > 1 then
+                      s := 's'
                     else s := '';
 
                     {put the event in the news}
                     Newsy(True, 'Intruder at the Inn',
-                      ' ' + uplc + player.name2 + config.textcol1 + ' massacred ' + uwhite + commastr(pl0^.bguardnr) + config.textcol1 + ' ' + uguardc + guard^.Name + s + config.textcol1 + '.',
-                      ' ' + uplc + player.name2 + config.textcol1 + ' then walked into ' + uplc + pl0^.name2 + 's' + config.textcol1 + ' room...',
+                      ' ' + uplc + player.name2 + config.textcol1 + ' massacred ' + uwhite +
+                      commastr(pl0^.bguardnr) + config.textcol1 + ' ' + uguardc + guard^.Name + s + config.textcol1 + '.',
+                      ' ' + uplc + player.name2 + config.textcol1 + ' then walked into ' + uplc +
+                      pl0^.name2 + 's' + config.textcol1 + ' room...',
                       '',
                       '',
                       '',
@@ -413,9 +420,9 @@ const len = 70;   {max length of text lines}
                   end else
                   begin {died against doorguards}
 
-                    {set player flags}
+                        {set player flags}
                     player.hps := 0;
-                    {player.allowed:=false;}
+                        {player.allowed:=false;}
                     Reduce_Player_Resurrections(player, True);
 
                     crlf;
@@ -423,17 +430,20 @@ const len = 70;   {max length of text lines}
 
                     if pl0^.bguardnr > 1 then
                     begin
-                      s := ' ' + uplc + player.name2 + config.textcol1 + ' fought ' + uwhite + commastr(pl0^.bguardnr) + ' ' + uguardc + guard^.Name + 's' + config.textcol1 + ' at the Inn!';
+                      s := ' ' + uplc + player.name2 + config.textcol1 + ' fought ' + uwhite +
+                        commastr(pl0^.bguardnr) + ' ' + uguardc + guard^.Name + 's' + config.textcol1 + ' at the Inn!';
                     end else
                     begin
-                      s := ' ' + uplc + player.name2 + config.textcol1 + ' fought ' + uwhite + commastr(pl0^.bguardnr) + ' ' + uguardc + guard^.Name + config.textcol1 + ' at the Inn!';
+                      s := ' ' + uplc + player.name2 + config.textcol1 + ' fought ' + uwhite +
+                        commastr(pl0^.bguardnr) + ' ' + uguardc + guard^.Name + config.textcol1 + ' at the Inn!';
                     end;
 
                     {News-Paper}
                     Newsy(True,
                       player.name2 + ' fights DoorGuards!',
                       s,
-                      ' ' + uplc + player.name2 + config.textcol1 + ' wasn''t up to it! Death collected ' + uplc + player.name2 + config.textcol1 + '.',
+                      ' ' + uplc + player.name2 + config.textcol1 + ' wasn''t up to it! Death collected ' +
+                      uplc + player.name2 + config.textcol1 + '.',
                       '',
                       '',
                       '',
@@ -448,7 +458,8 @@ const len = 70;   {max length of text lines}
                     begin
                       for x := 1 to global_maxmon do
                       begin
-                        if monster_active(x) then Inc(c);
+                        if monster_active(x) then
+                          Inc(c);
                       end;
 
                       if c < pl0^.bguardnr then
@@ -467,7 +478,8 @@ const len = 70;   {max length of text lines}
                     s := uplc + player.name2 + config.textcol1 + ' attacked your Doorguards!';
                     if c > 0 then
                     begin
-                      s := uplc + player.name2 + config.textcol1 + ' managed to kill ' + ulcyan + commastr(c) + config.textcol1 + ' of your guards!';
+                      s := uplc + player.name2 + config.textcol1 + ' managed to kill ' + ulcyan +
+                        commastr(c) + config.textcol1 + ' of your guards!';
                     end;
 
                     {mail player}
@@ -560,7 +572,7 @@ const len = 70;   {max length of text lines}
 var pause_check: boolean;
 begin {MAIN-PROCEDURE}
 
-  {cost to hire rooms}
+      {cost to hire rooms}
   roomcost[1] := 200;
   roomcost[2] := 900;
   roomcost[3] := 3200;
@@ -577,8 +589,10 @@ begin {MAIN-PROCEDURE}
   {fetching "kill teammates?" option from .CFG}
   teamkill := False;
   s := cfg_string(35);
-  if s = '' then teamkill := False;
-  if upcasestr(s) = 'YES' then teamkill := True;
+  if s = '' then
+    teamkill := False;
+  if upcasestr(s) = 'YES' then
+    teamkill := True;
 
   {display_menu(false,false);}
 
@@ -613,7 +627,8 @@ begin {MAIN-PROCEDURE}
 
     case cho of
       '?': begin
-        if player.expert = True then display_menu(True, False)
+        if player.expert = True then
+          display_menu(True, False)
         else display_menu(False, False);
       end;
       'S': begin {status}
@@ -646,7 +661,8 @@ begin {MAIN-PROCEDURE}
 
         s := 'When ' + config.innkeeper + ' is not around, you quickly examine the Inn ledger';
 
-        d(config.textcolor, 'When ' + uplc + config.innkeeper + config.textcol1 + ' is not around, you quickly examine the Inn ledger');
+        d(config.textcolor, 'When ' + uplc + config.innkeeper + config.textcol1 +
+          ' is not around, you quickly examine the Inn ledger');
         d(3, mkstring(length(s), underscore));
 
         k := 2;
@@ -663,7 +679,8 @@ begin {MAIN-PROCEDURE}
           for j := 1 to Size do
           begin
 
-            if finito then break;
+            if finito then
+              break;
 
             {load character}
             if load_character(pl0^, i, j) = True then
@@ -677,7 +694,8 @@ begin {MAIN-PROCEDURE}
               begin
 
                 sd(global_plycol, pl0^.name2);
-                sd(config.textcolor, ', the level ' + commastr(pl0^.level) + ' ' + race_display(2, pl0^.race, 0) + ', is staying');
+                sd(config.textcolor, ', the level ' + commastr(pl0^.level) + ' ' + race_display(2, pl0^.race, 0) +
+                  ', is staying');
 
                 case pl0^.location of
                   offloc_innroom1: d(config.textcolor, ' at a room downstairs.');
@@ -747,7 +765,7 @@ begin {MAIN-PROCEDURE}
               end;
             end;
           end; {for j:= .end.}
-        end; {for i:= .end.}
+        end;   {for i:= .end.}
 
         crlf;
         pause;
@@ -755,7 +773,8 @@ begin {MAIN-PROCEDURE}
       end;
       'G': begin {Get a room for the night.}
         crlf;
-        d(config.textcolor, 'You approach ' + uplc + config.innkeeper + config.textcol1 + ' and ask him if there are any available rooms.');
+        d(config.textcolor, 'You approach ' + uplc + config.innkeeper + config.textcol1 +
+          ' and ask him if there are any available rooms.');
         d(config.textcolor, '"Well, of course you can have a room if you can pay.');
         d(config.textcolor, 'What floor do you wanna stay on? Downstairs is cheaper, but');
         d(config.textcolor, 'more risky. Besides, the doors are more robust upstairs."');
@@ -848,7 +867,8 @@ begin {MAIN-PROCEDURE}
 
                   x := get_number(0, dgsize);
 
-                  if (x < 1) or (x > dgsize) then x := 0;
+                  if (x < 1) or (x > dgsize) then
+                    x := 0;
 
                   if x <> 0 then
                   begin
@@ -910,7 +930,8 @@ begin {MAIN-PROCEDURE}
                                   sd(config.textcolor, 'A moment later ');
                                   sd(global_plycol, config.innkeeper);
                                   d(config.textcolor, ' appears with your requested guards.');
-                                  d(config.textcolor, 'This might be just what you need... You receive the room key and lock');
+                                  d(config.textcolor,
+                                    'This might be just what you need... You receive the room key and lock');
                                   d(config.textcolor, 'the door behind you. You fall asleep listening to strange sounds');
                                   d(config.textcolor, 'outside...');
                                   crlf;
@@ -926,7 +947,7 @@ begin {MAIN-PROCEDURE}
                                     4: player.location := offloc_innroom4;
                                   end; {case xx of}
 
-                                  {set player guard flags}
+                                       {set player guard flags}
                                   player.bguard := sicken;
                                   player.bguardnr := x;
 
@@ -1053,7 +1074,7 @@ begin {MAIN-PROCEDURE}
       end;
       'C': begin {Multinode Chat}
 
-        {Writing an IPC file}
+                 {Writing an IPC file}
         Init_Ipc(player);
 
         {Chat Menu}
@@ -1063,7 +1084,8 @@ begin {MAIN-PROCEDURE}
       'V': begin {View/add to Chatfile}
 
         crlf;
-        if global_ansi then display_file(global_innfile1)
+        if global_ansi then
+          display_file(global_innfile1)
         else display_file(global_innfile2);
 
         crlf;
@@ -1175,7 +1197,8 @@ begin {MAIN-PROCEDURE}
                 s := player.name2;
                 if player.king then
                 begin
-                  if player.sex = 1 then e := ' (the King)'
+                  if player.sex = 1 then
+                    e := ' (the King)'
                   else e := ' (the Queen)';
                   s := s + e;
                 end;

@@ -1,11 +1,11 @@
 {$IFNDEF MSDOS}
 {$I DEFINES.INC}
 {$ENDIF}
-(********************************)
-(*   Programming:  Bob Dalton   *)
-(*   ERROR LOG UNIT - Vers 1.00 *)
-(*   Utility Module             *)
-(********************************)
+ (********************************)
+ (*   Programming:  Bob Dalton   *)
+ (*   ERROR LOG UNIT - Vers 1.00 *)
+ (*   Utility Module             *)
+ (********************************)
 
 unit Elog;
 
@@ -149,7 +149,8 @@ begin
 
     {SaveGame(Player,PlayerFile,TempP,Country,CountryFile,Map1,MapFile);}
 
-    if ShareInst = False then FileMode := 64;
+    if ShareInst = False then
+      FileMode := 64;
 {$IFNDEF MSDOS}
     FileModeReadWrite := FileMode;
 {$ENDIF}
@@ -196,7 +197,8 @@ begin
     WRITELN_to_text(ErrFile, 'Program Termination');
     WRITELN_to_text(ErrFile, Exit_Message(Exitcode));
     Close_text(ErrFile); {jakob}
-    if ShareInst = False then FileMode := 66;
+    if ShareInst = False then
+      FileMode := 66;
 {$IFNDEF MSDOS}
     FileModeReadWrite := FileMode;
 {$ENDIF}
@@ -264,7 +266,8 @@ begin
     WRITELN(ErrFile, '  Offset:  ', ItoH(ofs(erroraddr^)));
     WRITELN_to_text(ErrFile, '------------------------------------------------');
     Close_text(ErrFile);
-    if ShareInst = False then FileMode := 66;
+    if ShareInst = False then
+      FileMode := 66;
 {$IFNDEF MSDOS}
     FileModeReadWrite := FileMode;
 {$ENDIF}

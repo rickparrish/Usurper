@@ -25,8 +25,9 @@ Copyright 2007 Jakob Dangarden
 
 
 unit CompWar;
-{Usurper - Computer player versus Computer player}
-{can be offline human players as well}
+
+ {Usurper - Computer player versus Computer player}
+ {can be offline human players as well}
 
 interface
 
@@ -90,14 +91,18 @@ begin
   end;
 
   {restoring overmaxed hps}
-  if player1.hps > player1.maxhps then player1.hps := player1.maxhps;
-  if player2.hps > player2.maxhps then player2.hps := player2.maxhps;
+  if player1.hps > player1.maxhps then
+    player1.hps := player1.maxhps;
+  if player2.hps > player2.maxhps then
+    player2.hps := player2.maxhps;
 
   {should somebody use healing potions?}
-  if skrik then computer_healing(True, player1)
+  if skrik then
+    computer_healing(True, player1)
   else computer_healing(False, player1);
 
-  if skrik then computer_healing(True, player2)
+  if skrik then
+    computer_healing(True, player2)
   else computer_healing(False, player2);
 
   player1.used_item := False;
@@ -137,7 +142,8 @@ begin
     player2.punch := random(player2.level) + 1;
     if skrik then
     begin
-      d(global_plycol, player1.name2 + config.textcol1 + ' suffered ' + uwhite + commastr(player2.punch) + config.textcol1 + ' points from poison!');
+      d(global_plycol, player1.name2 + config.textcol1 + ' suffered ' + uwhite + commastr(player2.punch) +
+        config.textcol1 + ' points from poison!');
     end;
     player1.hps := player1.hps - player2.punch;
   end;
@@ -146,7 +152,8 @@ begin
     player1.punch := random(player1.level) + 1;
     if skrik then
     begin
-      d(global_plycol, player2.name2 + config.textcol1 + ' suffered ' + uwhite + commastr(player1.punch) + config.textcol1 + ' points from poison!');
+      d(global_plycol, player2.name2 + config.textcol1 + ' suffered ' + uwhite + commastr(player1.punch) +
+        config.textcol1 + ' points from poison!');
     end;
     Dec(player2.hps, player1.punch);
   end;
@@ -181,13 +188,15 @@ begin
     begin
       if skrik then
       begin
-        d(global_plycol, player1.name2 + config.textcol1 + ' tries to backstab ' + uplc + player2.name2 + config.textcol1 + '!');
+        d(global_plycol, player1.name2 + config.textcol1 + ' tries to backstab ' + uplc + player2.name2 +
+          config.textcol1 + '!');
       end;
       if random(3) = 0 then
       begin
         if skrik then
         begin
-          d(global_plycol, player2.name2 + config.textcol1 + ' screams in pain as ' + uplc + player1.name2 + config.textcol1 + ' cuts ' + sex[player2.sex] + '!');
+          d(global_plycol, player2.name2 + config.textcol1 + ' screams in pain as ' + uplc +
+            player1.name2 + config.textcol1 + ' cuts ' + sex[player2.sex] + '!');
         end;
         stab1 := player1.maxhps div 3;
       end else
@@ -208,13 +217,15 @@ begin
 
       if skrik then
       begin
-        d(global_plycol, player1.name2 + config.textcol1 + ' tries to backstab ' + uplc + player2.name2 + config.textcol1 + '!');
+        d(global_plycol, player1.name2 + config.textcol1 + ' tries to backstab ' + uplc + player2.name2 +
+          config.textcol1 + '!');
       end;
       if random(3) = 0 then
       begin
         if skrik then
         begin
-          d(global_plycol, player2.name2 + config.textcol1 + ' screams in pain as ' + uplc + player1.name2 + config.textcol1 + ' cuts ' + sex[player2.sex] + '!');
+          d(global_plycol, player2.name2 + config.textcol1 + ' screams in pain as ' + uplc +
+            player1.name2 + config.textcol1 + ' cuts ' + sex[player2.sex] + '!');
         end;
         stab1 := player1.maxhps div 3;
       end else
@@ -229,7 +240,8 @@ begin
   end;
 
   {*should player1 use soul strike? *}
-  if (player1.class = Paladin) and (player1.hps > 100) and (random(3) = 0) and (player1.used_item = False) and (player1.casted = False) then
+  if (player1.class = Paladin) and (player1.hps > 100) and (random(3) = 0) and (player1.used_item = False) and
+    (player1.casted = False) then
   begin
     zz := player1.hps div 3;
     soulstrike := zz;
@@ -238,7 +250,8 @@ begin
 
     if skrik then
     begin
-      d(config.textcolor, 'Soulstrike from ' + uplc + player1.name2 + config.textcol1 + ' hits ' + uplc + player2.name2 + config.textcol1 + ' for ' + uwhite + commastr(player1.punch) + config.textcol1 + ' points!');
+      d(config.textcolor, 'Soulstrike from ' + uplc + player1.name2 + config.textcol1 + ' hits ' +
+        uplc + player2.name2 + config.textcol1 + ' for ' + uwhite + commastr(player1.punch) + config.textcol1 + ' points!');
     end;
   end else
   begin
@@ -251,7 +264,8 @@ begin
       begin
         if skrik then
         begin
-          d(global_plycol, player1.name2 + config.textcol1 + ' missed ' + uplc + player2.name2 + config.textcol1 + ' completely!');
+          d(global_plycol, player1.name2 + config.textcol1 + ' missed ' + uplc + player2.name2 +
+            config.textcol1 + ' completely!');
         end;
       end else
       begin
@@ -259,7 +273,8 @@ begin
         begin
           if skrik then
           begin
-            d(global_plycol, player1.name2 + config.textcol1 + ' hits ' + uplc + player2.name2 + config.textcol1 + ' for ' + uwhite + commastr(player1.punch + player1.poison) + config.textcol1 + ' points!');
+            d(global_plycol, player1.name2 + config.textcol1 + ' hits ' + uplc + player2.name2 +
+              config.textcol1 + ' for ' + uwhite + commastr(player1.punch + player1.poison) + config.textcol1 + ' points!');
           end;
         end;
       end;
@@ -269,15 +284,18 @@ begin
   player2.absorb := 0;
   {absorbed points are displayed}
   normal_defence(player2);
-  if player2.absorb > player1.punch then player2.absorb := player1.punch;
+  if player2.absorb > player1.punch then
+    player2.absorb := player1.punch;
   if player2.absorb > 0 then
   begin
     if fastgame = False then
     begin
-      d(global_plycol, player2.name2 + 's' + config.textcol1 + ' armor absorbed ' + uwhite + commastr(player2.absorb) + config.textcol1 + ' points!');
+      d(global_plycol, player2.name2 + 's' + config.textcol1 + ' armor absorbed ' + uwhite +
+        commastr(player2.absorb) + config.textcol1 + ' points!');
     end;
     player1.punch := player1.punch - player2.absorb;
-    if player1.punch < 0 then player1.punch := 0;
+    if player1.punch < 0 then
+      player1.punch := 0;
   end;
 
   {*Should player2 use Backstab?*}
@@ -289,13 +307,15 @@ begin
     begin
       if skrik then
       begin
-        d(global_plycol, player2.name2 + config.textcol1 + ' tries to backstab ' + uplc + player1.name2 + config.textcol1 + '!');
+        d(global_plycol, player2.name2 + config.textcol1 + ' tries to backstab ' + uplc + player1.name2 +
+          config.textcol1 + '!');
       end;
       if random(3) = 0 then
       begin
         if skrik then
         begin
-          d(global_plycol, player1.name2 + config.textcol1 + ' screams in pain as ' + uplc + player2.name2 + config.textcol1 + ' cuts ' + sex[player1.sex] + '!');
+          d(global_plycol, player1.name2 + config.textcol1 + ' screams in pain as ' + uplc +
+            player2.name2 + config.textcol1 + ' cuts ' + sex[player1.sex] + '!');
         end;
         stab2 := player2.maxhps div 3;
       end else
@@ -316,13 +336,15 @@ begin
 
       if skrik then
       begin
-        d(global_plycol, player2.name2 + config.textcol1 + ' tries to backstab ' + uplc + player1.name2 + config.textcol1 + '!');
+        d(global_plycol, player2.name2 + config.textcol1 + ' tries to backstab ' + uplc + player1.name2 +
+          config.textcol1 + '!');
       end;
       if random(3) = 0 then
       begin
         if skrik then
         begin
-          d(global_plycol, player1.name2 + config.textcol1 + ' screams in pain as ' + uplc + player2.name2 + config.textcol1 + ' cuts ' + sex[player1.sex] + '!');
+          d(global_plycol, player1.name2 + config.textcol1 + ' screams in pain as ' + uplc +
+            player2.name2 + config.textcol1 + ' cuts ' + sex[player1.sex] + '!');
         end;
         stab2 := player2.maxhps div 3;
       end else
@@ -348,7 +370,8 @@ begin
 
     if skrik then
     begin
-      d(config.textcolor, 'Soulstrike from ' + uplc + player2.name2 + config.textcol1 + ' hits ' + uplc + player1.name2 + config.textcol1 + ' for ' + uwhite + commastr(player2.punch) + config.textcol1 + ' points!');
+      d(config.textcolor, 'Soulstrike from ' + uplc + player2.name2 + config.textcol1 + ' hits ' +
+        uplc + player1.name2 + config.textcol1 + ' for ' + uwhite + commastr(player2.punch) + config.textcol1 + ' points!');
     end;
   end else
   begin
@@ -361,7 +384,8 @@ begin
       begin
         if skrik then
         begin
-          d(global_plycol, player2.name2 + config.textcol1 + ' missed ' + sex3[player2.sex] + ' blow against ' + uplc + player1.name2 + config.textcol1 + '!');
+          d(global_plycol, player2.name2 + config.textcol1 + ' missed ' + sex3[player2.sex] +
+            ' blow against ' + uplc + player1.name2 + config.textcol1 + '!');
         end;
       end else
       begin
@@ -369,7 +393,8 @@ begin
         begin
           if skrik then
           begin
-            d(global_plycol, player2.name2 + config.textcol1 + ' hits ' + uplc + player1.name2 + config.textcol1 + ' for ' + uwhite + commastr(player2.punch + player2.poison) + config.textcol1 + ' points!');
+            d(global_plycol, player2.name2 + config.textcol1 + ' hits ' + uplc + player1.name2 +
+              config.textcol1 + ' for ' + uwhite + commastr(player2.punch + player2.poison) + config.textcol1 + ' points!');
           end;
         end;
       end;
@@ -383,16 +408,19 @@ begin
 
   player1.absorb := 0;
   normal_defence(player1);
-  if player1.absorb > player2.punch then player1.absorb := player2.punch;
+  if player1.absorb > player2.punch then
+    player1.absorb := player2.punch;
   if player1.absorb > 0 then
   begin
 
     if fastgame = False then
     begin
-      d(global_plycol, player1.name2 + 's' + config.textcol1 + ' armor absorbed ' + uwhite + commastr(player1.absorb) + config.textcol1 + ' points!');
+      d(global_plycol, player1.name2 + 's' + config.textcol1 + ' armor absorbed ' + uwhite +
+        commastr(player1.absorb) + config.textcol1 + ' points!');
     end;
     player2.punch := player2.punch - player1.absorb;
-    if player2.punch < 0 then player2.punch := 0;
+    if player2.punch < 0 then
+      player2.punch := 0;
 
   end;
 
@@ -403,8 +431,10 @@ begin
   {at last the actual punches can take effect!}
 
   {backstab effect}
-  if stab1 > 0 then player1.punch := player1.punch + stab1;
-  if stab2 > 0 then player2.punch := player2.punch + stab2;
+  if stab1 > 0 then
+    player1.punch := player1.punch + stab1;
+  if stab2 > 0 then
+    player2.punch := player2.punch + stab2;
 
   if stab1 = -1 then
   begin
@@ -419,11 +449,15 @@ begin
   end;
 
   {poison effekt}
-  if player1.poison > 0 then player1.punch := player1.punch + player1.poison;
-  if player2.poison > 0 then player2.punch := player2.punch + player2.poison;
+  if player1.poison > 0 then
+    player1.punch := player1.punch + player1.poison;
+  if player2.poison > 0 then
+    player2.punch := player2.punch + player2.poison;
 
-  if player1.punch < 0 then player1.punch := 0;
-  if player2.punch < 0 then player2.punch := 0;
+  if player1.punch < 0 then
+    player1.punch := 0;
+  if player2.punch < 0 then
+    player2.punch := 0;
 
   {eternal battle?}
   if (player1.punch < 2) and (player2.punch < 2) then
@@ -435,8 +469,10 @@ begin
   Dec(player1.hps, player2.punch);
   Dec(player2.hps, player1.punch);
 
-  if player1.hps < 0 then player1.hps := 0;
-  if player2.hps < 0 then player2.hps := 0;
+  if player1.hps < 0 then
+    player1.hps := 0;
+  if player2.hps < 0 then
+    player2.hps := 0;
 
   reward := True;
   if (player1.hps < 1) and (player2.hps < 1) then

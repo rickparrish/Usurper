@@ -42,13 +42,15 @@ function Old_Mail(const mail: mailrec): boolean; {is mail record old}
 procedure Read_My_Mail(var ply: userrec); {read user mail}
 
 procedure Post(action: MailAction;  {MailRead or MailSend}
-  const receiver: s30; {recipent of message}
-  plai: char;        {receivers AI, "C"omputer or "H"uman}
+  const receiver: s30;  {recipent of message}
+  plai: char;           {receivers AI, "C"omputer or "H"uman}
   destgod: boolean;     {is receiver a god?}
   special: byte;        {see mailrequest_XX constants}
-  const Sender: s100;  {senders name}
-  const line1: s100;  {message text follows...}
-  const line2: s100; const line3: s100; const line4: s100; const line5: s100; const line6: s100; const line7: s100; const line8: s100; const line9: s100; const line10: s100; const line11: s100; const line12: s100; const line13: s100; const line14: s100; const line15: s100);
+  const Sender: s100;   {senders name}
+  const line1: s100;    {message text follows...}
+  const line2: s100; const line3: s100; const line4: s100; const line5: s100; const line6: s100;
+  const line7: s100; const line8: s100; const line9: s100; const line10: s100; const line11: s100;
+  const line12: s100; const line13: s100; const line14: s100; const line15: s100);
 
 implementation
 
@@ -173,10 +175,10 @@ end; {Save_mail *end*}
 procedure Post;
 var
 
-  King:    ^KingRec; {used when processing requests from the King}
-  Quest:   ^QuestRec; {used when processing quests proposals}
-  Amount:  ^AmountRec; {used when processing drink requests}
-  Ply0:    ^UserRec; {used when processing Relation requests}
+  King:    ^KingRec;        {used when processing requests from the King}
+  Quest:   ^QuestRec;       {used when processing quests proposals}
+  Amount:  ^AmountRec;      {used when processing drink requests}
+  Ply0:    ^UserRec;        {used when processing Relation requests}
 
   Letter, A_Mail: ^mailrec; {used when replying to letters etc etc}
 
@@ -273,7 +275,8 @@ var
     s := 'Team Membership Application';
     d(7, s);
     d(5, mkstring(length(s), underscore));
-    d(global_plycol, ply0^.name2 + config.textcol1 + ', the ' + race_display(2, ply0^.race, 0) + ', would like become a member of ' + 'your gang.');
+    d(global_plycol, ply0^.name2 + config.textcol1 + ', the ' + race_display(2, ply0^.race, 0) +
+      ', would like become a member of ' + 'your gang.');
 
     {display player profile}
     player_profile(player, ply0^);
@@ -288,7 +291,8 @@ var
       {is the team full?}
       i := team_members(player.team);
 
-      if i >= global_maxteammembers then team_full := True
+      if i >= global_maxteammembers then
+        team_full := True
       else team_full := False;
 
       if team_full then
@@ -298,7 +302,8 @@ var
         d(global_plycol, ply0^.name2 + config.textcol1 + ' is not accepted as a member.');
         if is_online(ply0^.name2, online_player) = True then
         begin
-          online_send_to_player(ply0^.name2, online_player, uplc + player.name2 + config.textcol1 + ' declined your application for team' + ' membership!');
+          online_send_to_player(ply0^.name2, online_player, uplc + player.name2 + config.textcol1 +
+            ' declined your application for team' + ' membership!');
         end;
 
         {mail ply0}
@@ -331,7 +336,8 @@ var
         if is_online(ply0^.name2, online_player) = True then
         begin
           online_send_to_player(ply0^.name2, online_player, BroadCast_JoinTeam + player.team);
-          online_send_to_player(ply0^.name2, online_player, uplc + player.name2 + config.textcol1 + ' accepted your application for ' + 'membership in the ' + utec + player.team + config.textcol1 + ' crew!');
+          online_send_to_player(ply0^.name2, online_player, uplc + player.name2 + config.textcol1 +
+            ' accepted your application for ' + 'membership in the ' + utec + player.team + config.textcol1 + ' crew!');
         end;
 
         {inform owners teammates}
@@ -339,7 +345,8 @@ var
           player.name2, {player name to exclude}
           'Team Membership', {news-header}
           mailrequest_nothing, {mailrequest_constant}
-          uplc + player.name2 + config.textcol1 + ' accepted ' + uplc + ply0^.name2 + config.textcol1 + ' as a new member in your crew.',
+          uplc + player.name2 + config.textcol1 + ' accepted ' + uplc + ply0^.name2 + config.textcol1 +
+          ' as a new member in your crew.',
           '',
           '',
           '');
@@ -376,7 +383,8 @@ var
         {news-paper}
         newsy(True,
           'New Gang Member!',
-          ' ' + uplc + ply0^.name2 + config.textcol1 + ' was accepted member in the ' + utec + player.team + config.textcol1 + ' crew.',
+          ' ' + uplc + ply0^.name2 + config.textcol1 + ' was accepted member in the ' + utec +
+          player.team + config.textcol1 + ' crew.',
           '',
           '',
           '',
@@ -395,7 +403,8 @@ var
 
       if is_online(ply0^.name2, online_player) = True then
       begin
-        online_send_to_player(ply0^.name2, online_player, uplc + player.name2 + config.textcol1 + ' declined your application for team' + ' membership!');
+        online_send_to_player(ply0^.name2, online_player, uplc + player.name2 + config.textcol1 +
+          ' declined your application for team' + ' membership!');
       end;
 
       {inform owners teammates}
@@ -434,7 +443,8 @@ var
       {news-paper}
       newsy(True,
         'Membership Denied',
-        ' ' + uplc + ply0^.name2 + config.textcol1 + ' was ' + ulred + 'denied' + config.textcol1 + ' membership to the ' + utec + player.team + config.textcol1 + ' crew.',
+        ' ' + uplc + ply0^.name2 + config.textcol1 + ' was ' + ulred + 'denied' + config.textcol1 +
+        ' membership to the ' + utec + player.team + config.textcol1 + ' crew.',
         '',
         '',
         '',
@@ -492,7 +502,8 @@ var
     s := 'Gym membership Application';
     d(7, s);
     d(5, mkstring(length(s), underscore));
-    d(global_plycol, ply0^.name2 + config.textcol1 + ', the ' + race_display(2, ply0^.race, 0) + ', would love to get access to ' + gymcol + 'The Gym' + config.textcol1 + '.');
+    d(global_plycol, ply0^.name2 + config.textcol1 + ', the ' + race_display(2, ply0^.race, 0) +
+      ', would love to get access to ' + gymcol + 'The Gym' + config.textcol1 + '.');
 
 
     {display player profile}
@@ -511,7 +522,8 @@ var
 
       if is_online(ply0^.name2, online_player) = True then
       begin
-        online_send_to_player(ply0^.name2, online_player, uplc + player.name2 + config.textcol1 + ' accepted your application for ' + gymcol + 'Gym' + config.textcol1 + ' membership!');
+        online_send_to_player(ply0^.name2, online_player, uplc + player.name2 + config.textcol1 +
+          ' accepted your application for ' + gymcol + 'Gym' + config.textcol1 + ' membership!');
       end;
 
       {inform owners teammates}
@@ -519,7 +531,8 @@ var
         player.name2, {player name to exclude}
         'The Gym',    {news-header}
         mailrequest_nothing, {mailrequest_constant}
-        uplc + player.name2 + config.textcol1 + ' gave ' + uplc + ply0^.name2 + config.textcol1 + ' access to ' + gymcol + 'The Gym' + config.textcol1 + '.',
+        uplc + player.name2 + config.textcol1 + ' gave ' + uplc + ply0^.name2 + config.textcol1 +
+        ' access to ' + gymcol + 'The Gym' + config.textcol1 + '.',
         '',
         '',
         '');
@@ -533,7 +546,8 @@ var
         '',
         uyellow + 'Gym Membership' + config.textcol1,
         mkstring(14, underscore),
-        uplc + player.name2 + config.textcol1 + ' accepted your application for membership in ' + gymcol + 'The Gym' + config.textcol1 + '!',
+        uplc + player.name2 + config.textcol1 + ' accepted your application for membership in ' +
+        gymcol + 'The Gym' + config.textcol1 + '!',
         '',
         '',
         '',
@@ -550,8 +564,10 @@ var
       {news-paper}
       newsy(True,
         'New Gym member',
-        ' ' + uplc + ply0^.name2 + config.textcol1 + ' was accepted membership to ' + gymcol + 'The Gym' + config.textcol1 + '!',
-        ' ' + uplc + player.name2 + config.textcol1 + ' in the ' + utec + player.team + config.textcol1 + ' crew accepted ' + uplc + ply0^.name2 + config.textcol1 + '.',
+        ' ' + uplc + ply0^.name2 + config.textcol1 + ' was accepted membership to ' + gymcol +
+        'The Gym' + config.textcol1 + '!',
+        ' ' + uplc + player.name2 + config.textcol1 + ' in the ' + utec + player.team + config.textcol1 +
+        ' crew accepted ' + uplc + ply0^.name2 + config.textcol1 + '.',
         '',
         '',
         '',
@@ -567,7 +583,8 @@ var
 
       if is_online(ply0^.name2, online_player) = True then
       begin
-        online_send_to_player(ply0^.name2, online_player, uplc + player.name2 + config.textcol1 + ' declined your application for ' + gymcol + 'Gym' + config.textcol1 + ' membership!');
+        online_send_to_player(ply0^.name2, online_player, uplc + player.name2 + config.textcol1 +
+          ' declined your application for ' + gymcol + 'Gym' + config.textcol1 + ' membership!');
       end;
 
       {inform owners teammates}
@@ -575,7 +592,8 @@ var
         player.name2, {player name to exclude}
         'The Gym',    {news-header}
         mailrequest_nothing, {mailrequest_constant}
-        uplc + player.name2 + config.textcol1 + ' denied ' + uplc + ply0^.name2 + config.textcol1 + ' access to ' + gymcol + 'The Gym' + config.textcol1 + '.',
+        uplc + player.name2 + config.textcol1 + ' denied ' + uplc + ply0^.name2 + config.textcol1 +
+        ' access to ' + gymcol + 'The Gym' + config.textcol1 + '.',
         '',
         '',
         '');
@@ -589,7 +607,8 @@ var
         '',
         ulred + 'Membership Denied' + config.textcol1,
         mkstring(17, underscore),
-        uplc + player.name2 + config.textcol1 + ' doesn''t think you qualify for the ' + gymcol + 'The Gym' + config.textcol1 + '!',
+        uplc + player.name2 + config.textcol1 + ' doesn''t think you qualify for the ' + gymcol +
+        'The Gym' + config.textcol1 + '!',
         'The malevolent ' + uplc + player.name2 + config.textcol1 + ' tore your application to pieces.',
         '',
         '',
@@ -642,7 +661,8 @@ var
     d(5, s);
     d(10, cool_string(length(s), '=', '-', 10, 10));
     d(config.textcolor, 'You receive ' + uwhite + commastr(xp) + config.textcol1 + ' experience points for the victory');
-    d(config.textcolor, 'of your ' + sex7[childsex] + ukidc + ' ' + childname + config.textcol1 + ' over ' + ukidc + otherchildname + config.textcol1 + '.');
+    d(config.textcolor, 'of your ' + sex7[childsex] + ukidc + ' ' + childname + config.textcol1 +
+      ' over ' + ukidc + otherchildname + config.textcol1 + '.');
 
     {give player experience}
     incplayerexp(player, xp);
@@ -667,9 +687,9 @@ var
       end;
     end; {for i:= .end.}
 
-    {DEBUG LINE s:='Silent Experience Reward!';}
+         {DEBUG LINE s:='Silent Experience Reward!';}
 
-    {give player experience}
+         {give player experience}
     incplayerexp(player, xp);
 
   end; {silent_experience *end*}
@@ -690,9 +710,12 @@ var
     {init}
     go_ahead := True;
     request := 'N';
-    if letter^.mess[1] = '*threat*' then request := 'T';
-    if letter^.mess[1] = '*normal*' then request := 'N';
-    if letter^.mess[1] = '*gift*' then request := 'G';
+    if letter^.mess[1] = '*threat*' then
+      request := 'T';
+    if letter^.mess[1] = '*normal*' then
+      request := 'N';
+    if letter^.mess[1] = '*gift*' then
+      request := 'G';
 
     {let us first check if the Immortal still is active}
     if load_god_by_name(letter^.Sender, god0) = False then
@@ -715,7 +738,8 @@ var
       {present the offer}
       d(5, 'Worship Request');
       d(5, mkstring(15, underscore));
-      d(config.textcolor, 'The immortal ' + ugodc + god0.Name + config.textcol1 + ' wants You to join ' + sex3[god0.sex] + ' ranks!');
+      d(config.textcolor, 'The immortal ' + ugodc + god0.Name + config.textcol1 + ' wants You to join ' +
+        sex3[god0.sex] + ' ranks!');
 
       if request = 'T' then
       begin
@@ -804,9 +828,12 @@ var
 
             s := 'Traitor!';
             case request of
-              'T': ss1 := uplc + ply.name2 + config.textcol1 + ' was forced / intimidated by ' + ugodc + god0.Name + config.textcol1 + ' to switch loyalties!';
-              'N': ss1 := uplc + ply.name2 + config.textcol1 + ' has left your flock for mighty immortal ' + ugodc + god0.Name + config.textcol1 + '!';
-              'G': ss1 := uplc + ply.name2 + config.textcol1 + ' received several gifts from the immortal ' + ugodc + god0.Name + config.textcol1 + ' to make ' + sex[ply.sex] + ' switch sides!';
+              'T': ss1 := uplc + ply.name2 + config.textcol1 + ' was forced / intimidated by ' +
+                  ugodc + god0.Name + config.textcol1 + ' to switch loyalties!';
+              'N': ss1 := uplc + ply.name2 + config.textcol1 + ' has left your flock for mighty immortal ' +
+                  ugodc + god0.Name + config.textcol1 + '!';
+              'G': ss1 := uplc + ply.name2 + config.textcol1 + ' received several gifts from the immortal ' +
+                  ugodc + god0.Name + config.textcol1 + ' to make ' + sex[ply.sex] + ' switch sides!';
             end; {case .end.}
 
             post(MailSend,
@@ -836,9 +863,12 @@ var
         {news-paper}
         s := '';
         case request of
-          'T': s := ' ' + uplc + ply.name2 + config.textcol1 + ' was threatened to join the following of ' + ugodc + god0.Name + config.textcol1 + '!';
-          'N': s := ' ' + uplc + ply.name2 + config.textcol1 + ' accepted an invitation from the god ' + ugodc + god0.Name + config.textcol1 + '!';
-          'G': s := ' ' + uplc + ply.name2 + config.textcol1 + ' took several gifts (bribes) and joined ' + ugodc + god0.Name + config.textcol1 + '!';
+          'T': s := ' ' + uplc + ply.name2 + config.textcol1 + ' was threatened to join the following of ' +
+              ugodc + god0.Name + config.textcol1 + '!';
+          'N': s := ' ' + uplc + ply.name2 + config.textcol1 + ' accepted an invitation from the god ' +
+              ugodc + god0.Name + config.textcol1 + '!';
+          'G': s := ' ' + uplc + ply.name2 + config.textcol1 + ' took several gifts (bribes) and joined ' +
+              ugodc + god0.Name + config.textcol1 + '!';
         end; {case .end.}
 
         if ply.god <> '' then
@@ -883,7 +913,8 @@ var
         begin
           if load_god_by_name(ply.god, god1) = True then
           begin
-            if god1.believers > 0 then Dec(god1.believers);
+            if god1.believers > 0 then
+              Dec(god1.believers);
             load_god(fsave, god1, god1.recnr);
           end;
         end;
@@ -911,9 +942,9 @@ var
           end;
         end; {case .end.}
 
-        {ply TURNED DOWN offer to become a believer in immortal (god0) }
+             {ply TURNED DOWN offer to become a believer in immortal (god0) }
 
-        {inform god, of bad news}
+             {inform god, of bad news}
         s := 'Ungrateful Mortal';
         post(MailSend,
           god0.Name,
@@ -947,19 +978,23 @@ var
             case request of
               'T': begin
                 s := 'Loyalty!';
-                ss1 := uplc + player.name2 + config.textcol1 + ' was threatened by the immortal ' + ugodc + god0.Name + config.textcol1 + '!';
+                ss1 := uplc + player.name2 + config.textcol1 + ' was threatened by the immortal ' +
+                  ugodc + god0.Name + config.textcol1 + '!';
                 ss2 := uplc + player.name2 + config.textcol1 + ' stayed loyal to you despite the threats!';
                 ss3 := uplc + player.name2 + config.textcol1 + ' has faith in you!';
               end;
               'G': begin
                 s := 'Loyalty!';
-                ss1 := uplc + player.name2 + config.textcol1 + ' was tempted by the mighty immortal ' + ugodc + god0.Name + config.textcol1 + '!';
-                ss2 := uplc + player.name2 + config.textcol1 + ' received several gifts from ' + ugodc + god0.Name + config.textcol1 + ' to switch sides!';
+                ss1 := uplc + player.name2 + config.textcol1 + ' was tempted by the mighty immortal ' +
+                  ugodc + god0.Name + config.textcol1 + '!';
+                ss2 := uplc + player.name2 + config.textcol1 + ' received several gifts from ' +
+                  ugodc + god0.Name + config.textcol1 + ' to switch sides!';
                 ss3 := uplc + player.name2 + config.textcol1 + ' continues to have faith in you!';
               end;
               'N': begin
                 s := 'Loyalty!';
-                ss1 := 'An attempt was made to shift ' + uplc + player.name2 + 's' + config.textcol1 + ' loyalties to the immortal ' + ugodc + god0.Name + config.textcol1 + '!';
+                ss1 := 'An attempt was made to shift ' + uplc + player.name2 + 's' + config.textcol1 +
+                  ' loyalties to the immortal ' + ugodc + god0.Name + config.textcol1 + '!';
                 ss2 := uplc + player.name2 + config.textcol1 + ' stayed loyal to you!';
                 ss3 := '';
               end;
@@ -995,7 +1030,8 @@ var
         {news-paper}
         s := '';
         case request of
-          'T': s := ' ' + uplc + player.name2 + config.textcol1 + ' stood up against the immortal ' + ugodc + god0.Name + 's' + config.textcol1 + ' untolarable threat!';
+          'T': s := ' ' + uplc + player.name2 + config.textcol1 + ' stood up against the immortal ' +
+              ugodc + god0.Name + 's' + config.textcol1 + ' untolarable threat!';
           'N': s := ' ' + uplc + player.name2 + config.textcol1 + ' resisted an attempt to accept a new God.';
           'G': s := ' ' + uplc + player.name2 + config.textcol1 + ' rejected several bribes (gifts) offered.';
         end; {case .end.}
@@ -1003,12 +1039,14 @@ var
         ss1 := '';
         if player.god <> '' then
         begin
-          ss1 := ' ' + uplc + player.name2 + config.textcol1 + ' stayed loyal to ' + ugodc + player.god + config.textcol1 + '!';
+          ss1 := ' ' + uplc + player.name2 + config.textcol1 + ' stayed loyal to ' + ugodc +
+            player.god + config.textcol1 + '!';
         end;
 
         Newsy(True,
           'Heaven is denied',
-          ' ' + uplc + player.name2 + config.textcol1 + ' rejected the immortal ' + ugodc + god0.Name + 's' + config.textcol1 + ' offer!',
+          ' ' + uplc + player.name2 + config.textcol1 + ' rejected the immortal ' + ugodc +
+          god0.Name + 's' + config.textcol1 + ' offer!',
           s,
           ss1,
           '',
@@ -1048,9 +1086,12 @@ var
       load_drink(fload, adrink^, x);
 
       {lets compare drink data with the ones sent along in the message}
-      if adrink^.Name <> letter^.mess[2] then found := False;
-      if adrink^.date <> letter^.mess[3] then found := False;
-      if letter^.mess[4] = 'Y' then s := '*Unknown*'
+      if adrink^.Name <> letter^.mess[2] then
+        found := False;
+      if adrink^.date <> letter^.mess[3] then
+        found := False;
+      if letter^.mess[4] = 'Y' then
+        s := '*Unknown*'
       else s := letter^.Sender;
 
     end;
@@ -1089,7 +1130,8 @@ var
           {send reply to sender}
           if is_online(letter^.Sender, online_player) then
           begin
-            online_send_to_player(letter^.Sender, online_player, uplc + player.name2 + config.textcol1 + ' accepted your drink!');
+            online_send_to_player(letter^.Sender, online_player, uplc + player.name2 + config.textcol1 +
+              ' accepted your drink!');
           end else
           begin
             {regular mail}
@@ -1130,7 +1172,8 @@ var
         {send reply to sender}
         if is_online(letter^.Sender, online_player) then
         begin
-          online_send_to_player(letter^.Sender, online_player, uplc + player.name2 + config.textcol1 + ' didn''t accept your drink!');
+          online_send_to_player(letter^.Sender, online_player, uplc + player.name2 + config.textcol1 +
+            ' didn''t accept your drink!');
         end else
         begin
           {regular mail}
@@ -1195,29 +1238,34 @@ var
       d(config.textcolor, 'raising your ' + sex7[childsex] + '; ' + ukidc + childname + config.textcol1 + '.');
 
       incplayerexp(player, xp);
-    end else if mailconstant = mailrequest_childCursedExp then
+    end else
+    if mailconstant = mailrequest_childCursedExp then
     begin
       d(12, 'Grieving your Children');
       d(14, '-=-=-=-=-=-=-=-=-=-=-=');
       d(config.textcolor, 'You lose ' + uwhite + commastr(xp) + config.textcol1 + ' experience points for going through the');
-      d(config.textcolor, 'hardship of seeing your ' + sex7[childsex] + '; ' + ukidc + childname + config.textcol1 + ' being cursed.');
+      d(config.textcolor, 'hardship of seeing your ' + sex7[childsex] + '; ' + ukidc + childname +
+        config.textcol1 + ' being cursed.');
 
       decplayerexp(player, xp);
-    end else if mailconstant = mailrequest_childDepressedExp then
+    end else
+    if mailconstant = mailrequest_childDepressedExp then
     begin
       d(12, 'Grieving your Children');
       d(14, '-=-=-=-=-=-=-=-=-=-=-=');
       d(config.textcolor, 'You lose ' + uwhite + commastr(xp) + config.textcol1 + ' experience points for going through the');
-      d(config.textcolor, 'hardship of seeing your ' + sex7[childsex] + '; ' + ukidc + childname + config.textcol1 + ' being depressed.');
+      d(config.textcolor, 'hardship of seeing your ' + sex7[childsex] + '; ' + ukidc + childname +
+        config.textcol1 + ' being depressed.');
 
       decplayerexp(player, xp);
-    end
-    else if mailconstant = mailrequest_childpoisonedExp then
+    end else
+    if mailconstant = mailrequest_childpoisonedExp then
     begin
       d(12, 'Grieving over your Children');
       d(14, '-=-=-=-=-=-=-=-=-=-=-=-=-=-');
       d(config.textcolor, 'You lose ' + uwhite + commastr(xp) + config.textcol1 + ' experience points for going through the');
-      d(config.textcolor, 'hardship of seeing your ' + sex7[childsex] + '; ' + ukidc + childname + config.textcol1 + ' being ill.');
+      d(config.textcolor, 'hardship of seeing your ' + sex7[childsex] + '; ' + ukidc + childname +
+        config.textcol1 + ' being ill.');
 
       decplayerexp(player, xp);
     end;
@@ -1421,7 +1469,7 @@ var
         'C': load_character(ply0^, 2, x);
       end; {case .end.}
 
-      {Relation Header}
+           {Relation Header}
       crlf;
       love_header(' Gift ');
 
@@ -1438,7 +1486,7 @@ var
         end;
       end; {case .end.}
 
-      {display current relation}
+           {display current relation}
       view_one_relation(player.name2, letter^.Sender, True);
 
       crlf;
@@ -1452,7 +1500,8 @@ var
             y := ply0^.level * 95;
             x := x + y;
             x := x div 2;
-            if x < 100 then x := 100;
+            if x < 100 then
+              x := 100;
           end;
           mailrequest_scorpions: begin
             {earn experience}
@@ -1460,7 +1509,8 @@ var
             y := ply0^.level * 185;
             x := x + y;
             x := x div 2;
-            if x < 100 then x := 100;
+            if x < 100 then
+              x := 100;
           end;
         end; {case .end.}
 
@@ -1489,8 +1539,10 @@ var
             {news-paper}
             newsy(True,
               'Deadly Gift',
-              ' ' + uplc + player.name2 + config.textcol1 + ' put ' + sex3[player.sex] + ' hand in a box with ' + umonc + 'Scorpions' + config.textcol1 + '!',
-              ' ' + uplc + player.name2 + config.textcol1 + ' was badly bitten...it proved ' + ulred + 'fatal' + config.textcol1 + '.',
+              ' ' + uplc + player.name2 + config.textcol1 + ' put ' + sex3[player.sex] +
+              ' hand in a box with ' + umonc + 'Scorpions' + config.textcol1 + '!',
+              ' ' + uplc + player.name2 + config.textcol1 + ' was badly bitten...it proved ' +
+              ulred + 'fatal' + config.textcol1 + '.',
               '',
               '',
               '',
@@ -1500,7 +1552,8 @@ var
               '');
 
             {send to all nodes}
-            online_send_to_all(uplc + player.name2 + config.textcol1 + ' has been bitten by ' + umonc + 'scorpions' + config.textcol1 + '!', player.name2, '');
+            online_send_to_all(uplc + player.name2 + config.textcol1 + ' has been bitten by ' +
+              umonc + 'scorpions' + config.textcol1 + '!', player.name2, '');
 
             {mail sender}
             post(MailSend,
@@ -1511,8 +1564,10 @@ var
               '',
               ulcyan + 'Scorpions at Work' + config.textcol1,
               mkstring(17, underscore),
-              uplc + player.name2 + config.textcol1 + ' put ' + sex3[player.sex] + ' hand in the box filled with ' + umonc + 'scorpions' + config.textcol1 + '!',
-              uplc + player.name2 + config.textcol1 + ' ' + ulred + 'died' + config.textcol1 + ' immediately from the poison.',
+              uplc + player.name2 + config.textcol1 + ' put ' + sex3[player.sex] +
+              ' hand in the box filled with ' + umonc + 'scorpions' + config.textcol1 + '!',
+              uplc + player.name2 + config.textcol1 + ' ' + ulred + 'died' + config.textcol1 +
+              ' immediately from the poison.',
               'Your gift was a success!',
               '',
               '',
@@ -1586,7 +1641,8 @@ var
           {news-paper}
           newsy(True,
             'Sweet Gift',
-            ' ' + uplc + ply0^.name2 + config.textcol1 + ' gobbled a ' + uwhite + 'Box of Chocolates' + config.textcol1 + ' coming',
+            ' ' + uplc + ply0^.name2 + config.textcol1 + ' gobbled a ' + uwhite + 'Box of Chocolates' +
+            config.textcol1 + ' coming',
             ' from ' + uplc + ply0^.name2 + config.textcol1 + '.',
             '',
             '',
@@ -1598,7 +1654,8 @@ var
 
           if is_online(letter^.Sender, online_player) = True then
           begin
-            online_send_to_player(letter^.Sender, online_player, uplc + player.name2 + config.textcol1 + ' accepted the ' + uwhite + 'Chocolate' + config.textcol1 + '!');
+            online_send_to_player(letter^.Sender, online_player, uplc + player.name2 + config.textcol1 +
+              ' accepted the ' + uwhite + 'Chocolate' + config.textcol1 + '!');
           end else
           begin
 
@@ -1611,7 +1668,8 @@ var
               '',
               uwhite + 'Gift Accepted' + config.textcol1,
               mkstring(13, underscore),
-              uplc + player.name2 + config.textcol1 + ' accepted your ' + uwhite + 'Box of Chocolates' + config.textcol1 + '!',
+              uplc + player.name2 + config.textcol1 + ' accepted your ' + uwhite + 'Box of Chocolates' +
+              config.textcol1 + '!',
               uplc + player.name2 + config.textcol1 + ' gobbled the whole box.',
               '',
               '',
@@ -1636,7 +1694,8 @@ var
         {mail sender}
         if is_online(letter^.Sender, online_player) = True then
         begin
-          online_send_to_player(letter^.Sender, online_player, uplc + player.name2 + config.textcol1 + ' refused to open your gift!');
+          online_send_to_player(letter^.Sender, online_player, uplc + player.name2 + config.textcol1 +
+            ' refused to open your gift!');
         end else
         begin
           post(MailSend,
@@ -1647,7 +1706,8 @@ var
             '',
             ulred + 'Gift returned' + config.textcol1,
             mkstring(13, underscore),
-            uplc + player.name2 + config.textcol1 + ' never opened the ' + uwhite + 'Box of Chocolates' + config.textcol1 + ' you sent ' + sex[ply0^.sex] + '.',
+            uplc + player.name2 + config.textcol1 + ' never opened the ' + uwhite + 'Box of Chocolates' +
+            config.textcol1 + ' you sent ' + sex[ply0^.sex] + '.',
             '',
             '',
             '',
@@ -1684,22 +1744,24 @@ var
         'C': load_character(ply0^, 2, x);
       end; {case .end.}
 
-      {Relation Header}
+           {Relation Header}
       crlf;
       love_header(' Invitation ');
 
       case letter^.special of
         MailRequest_HaveSex: begin
           {have sex with me please!}
-          d(global_plycol, letter^.Sender + config.textcol1 + ' would like to ' + uyellow + 'Sleep' + config.textcol1 + ' with you.');
+          d(global_plycol, letter^.Sender + config.textcol1 + ' would like to ' + uyellow +
+            'Sleep' + config.textcol1 + ' with you.');
         end;
         MailRequest_HaveDiscreteSex: begin
           {have sex with me please!}
-          d(global_plycol, letter^.Sender + config.textcol1 + ' would like to ' + uyellow + 'Sleep' + config.textcol1 + ' with you.');
+          d(global_plycol, letter^.Sender + config.textcol1 + ' would like to ' + uyellow +
+            'Sleep' + config.textcol1 + ' with you.');
         end;
       end; {case .end.}
 
-      {display current relation}
+           {display current relation}
       view_one_relation(player.name2, letter^.Sender, True);
 
       crlf;
@@ -1723,7 +1785,8 @@ var
             {news-paper}
             newsy(True,
               'In Bed',
-              ' ' + uplc + player.name2 + config.textcol1 + ' and ' + uplc + ply0^.name2 + config.textcol1 + ' spent the night together.',
+              ' ' + uplc + player.name2 + config.textcol1 + ' and ' + uplc + ply0^.name2 +
+              config.textcol1 + ' spent the night together.',
               '',
               '',
               '',
@@ -1737,7 +1800,8 @@ var
             {news-paper}
             newsy(True,
               'In Bed (secret)',
-              ' ' + uplc + player.name2 + config.textcol1 + ' and ' + uplc + ply0^.name2 + config.textcol1 + ' spent the night together.',
+              ' ' + uplc + player.name2 + config.textcol1 + ' and ' + uplc + ply0^.name2 +
+              config.textcol1 + ' spent the night together.',
               '',
               '',
               '',
@@ -1852,7 +1916,7 @@ var
 
           end; {case .end.}
 
-          {update ply0}
+               {update ply0}
           User_Save(ply0^);
 
         end;
@@ -1862,7 +1926,8 @@ var
         {mail poor letter^.sender}
         if is_online(letter^.Sender, online_player) = True then
         begin
-          online_send_to_player(letter^.Sender, online_player, uplc + player.name2 + config.textcol1 + ' refuses to sleep with you!');
+          online_send_to_player(letter^.Sender, online_player, uplc + player.name2 + config.textcol1 +
+            ' refuses to sleep with you!');
         end else
         begin
           post(MailSend,
@@ -1911,7 +1976,7 @@ var
         'C': load_character(ply0^, 2, x);
       end; {case .end.}
 
-      {Relation Header}
+           {Relation Header}
       crlf;
       love_header(' Invitation ');
 
@@ -1934,7 +1999,7 @@ var
 
       end; {case .end.}
 
-      {display current relation}
+           {display current relation}
       view_one_relation(player.name2, letter^.Sender, True);
 
       crlf;
@@ -1948,7 +2013,8 @@ var
             y := ply0^.level * 95;
             x := x + y;
             x := x div 2;
-            if x < 100 then x := 100;
+            if x < 100 then
+              x := 100;
           end;
           mailrequest_dinner: begin
             {earn experience}
@@ -1956,7 +2022,8 @@ var
             y := ply0^.level * 185;
             x := x + y;
             x := x div 2;
-            if x < 100 then x := 100;
+            if x < 100 then
+              x := 100;
           end;
           mailrequest_kiss: begin
             {earn experience}
@@ -1964,7 +2031,8 @@ var
             y := ply0^.level * 138;
             x := x + y;
             x := x div 2;
-            if x < 100 then x := 100;
+            if x < 100 then
+              x := 100;
           end;
         end; {case .end.}
 
@@ -1988,7 +2056,7 @@ var
 
         end; {case .end.}
 
-        {improve relation with sender?}
+             {improve relation with sender?}
         crlf;
         if confirm('Do you like ' + uplc + letter^.Sender + config.textcol1 + ' better now', 'Y') = True then
         begin
@@ -2012,7 +2080,8 @@ var
             {news-paper}
             newsy(True,
               'Dating',
-              ' ' + uplc + player.name2 + config.textcol1 + ' and ' + uplc + ply0^.name2 + config.textcol1 + ' were seen together today.',
+              ' ' + uplc + player.name2 + config.textcol1 + ' and ' + uplc + ply0^.name2 +
+              config.textcol1 + ' were seen together today.',
               ' They two of them were necking on a park bench.',
               '',
               '',
@@ -2141,7 +2210,7 @@ var
 
           end; {case .end.}
 
-          {update ply0}
+               {update ply0}
           User_Save(ply0^);
 
         end;
@@ -2153,13 +2222,16 @@ var
         begin
           case letter^.special of
             mailrequest_holdhands: begin
-              online_send_to_player(letter^.Sender, online_player, uplc + player.name2 + config.textcol1 + ' refused to go out with you!');
+              online_send_to_player(letter^.Sender, online_player, uplc + player.name2 + config.textcol1 +
+                ' refused to go out with you!');
             end;
             mailrequest_dinner: begin
-              online_send_to_player(letter^.Sender, online_player, uplc + player.name2 + config.textcol1 + ' refused to have dinner with you!');
+              online_send_to_player(letter^.Sender, online_player, uplc + player.name2 + config.textcol1 +
+                ' refused to have dinner with you!');
             end;
             mailrequest_kiss: begin
-              online_send_to_player(letter^.Sender, online_player, uplc + player.name2 + config.textcol1 + ' refused to be kissed by you!');
+              online_send_to_player(letter^.Sender, online_player, uplc + player.name2 + config.textcol1 +
+                ' refused to be kissed by you!');
             end;
           end; {case .end.}
 
@@ -2247,7 +2319,7 @@ var
 var sender_type: OnlineTypes; {see init.pas, determines type of online player}
   dummy:         byte; {counter for spinning cursor routine}
 
-begin {MAIN PROC (POST) **START**}
+begin  {MAIN PROC (POST) **START**}
 
   killed := False;
   {init pointer vars}
@@ -2289,7 +2361,8 @@ begin {MAIN PROC (POST) **START**}
 
   for i := 1 to global_maxmaillines do
   begin
-    if worm[i]^ = '' then worm[i]^ := emptystr;
+    if worm[i]^ = '' then
+      worm[i]^ := emptystr;
   end; {for i:= .end.}
 
   Count := 0;
@@ -2306,16 +2379,18 @@ begin {MAIN PROC (POST) **START**}
         letter^.Sender := Sender;
         letter^.special := special;
         letter^.recgod := destgod;
-        if global_godactive then letter^.sendgod := True
+        if global_godactive then
+          letter^.sendgod := True
         else letter^.sendgod := False;
 
         for j := 1 to global_maxmaillines do
         begin
           letter^.mess[j] := worm[j]^;
-          if letter^.mess[j] = '' then letter^.mess[j] := emptystr;
+          if letter^.mess[j] = '' then
+            letter^.mess[j] := emptystr;
         end; {for j:= .end.}
 
-        {save mail}
+             {save mail}
         Save_Mail(letter^);
 
       end;
@@ -2323,8 +2398,9 @@ begin {MAIN PROC (POST) **START**}
 
     MailRead: begin {READ News to player .start.}
 
-      {is reader a mortal or a god}
-      if global_godactive then ReaderIsGod := True
+         {is reader a mortal or a god}
+      if global_godactive then
+        ReaderIsGod := True
       else ReaderIsGod := False;
 
       {we scan the whole mail database, tedious!}
@@ -2361,7 +2437,8 @@ begin {MAIN PROC (POST) **START**}
             begin
               if letter^.mess[j] <> '' then
               begin
-                if j = 1 then s := ' [' + udgray + fix_date(letter^.date) + config.textcol1 + ']'
+                if j = 1 then
+                  s := ' [' + udgray + fix_date(letter^.date) + config.textcol1 + ']'
                 else s := '';
 
                 if (letter^.mess[j][1] = '-') and (letter^.mess[j][2] = '>') then
@@ -2389,7 +2466,7 @@ begin {MAIN PROC (POST) **START**}
               end;
             end; {for j:= .end.}
 
-            {letter menu}
+                 {letter menu}
             crlf;
             menu2('(R)eply  ');
             menu2('(D)elete  ');
@@ -2399,7 +2476,8 @@ begin {MAIN PROC (POST) **START**}
 
             repeat
               cho := upcase(getchar);
-              if cho = ReturnKey then cho := 'I';
+              if cho = ReturnKey then
+                cho := 'I';
             until cho in ['R', 'D', 'I'];
 
             {evaluate user-input}
@@ -2465,18 +2543,21 @@ begin {MAIN PROC (POST) **START**}
                   a_mail^.special := mailrequest_nothing;
 
                   a_mail^.recgod := letter^.sendgod;
-                  if global_godactive then a_mail^.sendgod := True
+                  if global_godactive then
+                    a_mail^.sendgod := True
                   else a_mail^.sendgod := False;
 
                   Save_Mail(a_mail^);
 
                   {online mess to reciever, only if he is online (of course)}
-                  if letter^.sendgod then sender_type := online_god
+                  if letter^.sendgod then
+                    sender_type := online_god
                   else sender_type := online_player;
 
                   if is_online(letter^.Sender, sender_type) then
                   begin
-                    online_send_to_player(letter^.Sender, sender_type, uplc + receiver + config.textcol1 + ' posted a letter to you.');
+                    online_send_to_player(letter^.Sender, sender_type, uplc + receiver + config.textcol1 +
+                      ' posted a letter to you.');
                     break;
                   end;
 
@@ -2518,11 +2599,11 @@ begin {MAIN PROC (POST) **START**}
                   end;
                 end;
               end; {read .end.}
-            end; {case .end.}
+            end;   {case .end.}
 
-          end {NORMAL LETTER FROM SOMEBODY **END**}
-          {special LETTERS, mail/requests}
-          else if (letter^.special = MailRequest_IWantGuard) and
+          end {NORMAL LETTER FROM SOMEBODY **END**} {special LETTERS, mail/requests}
+          else
+          if (letter^.special = MailRequest_IWantGuard) and
             (player.king = True) then
           begin
             {PLAYER OFFERS KING TO BE HIS/HER PERSONAL GUARD}
@@ -2615,7 +2696,8 @@ begin {MAIN PROC (POST) **START**}
                 load_king(fsave, king^);
 
                 {post the employee}
-                if player.sex = 1 then s := 'KING'
+                if player.sex = 1 then
+                  s := 'KING'
                 else s := 'QUEEN';
                 post(MailSend,
                   letter^.Sender,
@@ -2648,13 +2730,15 @@ begin {MAIN PROC (POST) **START**}
                 end;
 
                 {send to all nodes}
-                online_send_to_all(uplc + letter^.Sender + config.textcol1 + ' became a Royal Guard!', player.name2, letter^.Sender);
+                online_send_to_all(uplc + letter^.Sender + config.textcol1 + ' became a Royal Guard!',
+                  player.name2, letter^.Sender);
 
                 case random(2) of
                   0: begin
                     Newsy(True,
                       'Royal Employment',
-                      ' ' + uplc + letter^.Sender + config.textcol1 + ' became a member of the ' + ulcyan + 'Royal Guard' + config.textcol1 + '!',
+                      ' ' + uplc + letter^.Sender + config.textcol1 + ' became a member of the ' +
+                      ulcyan + 'Royal Guard' + config.textcol1 + '!',
                       '',
                       '',
                       '',
@@ -2667,7 +2751,8 @@ begin {MAIN PROC (POST) **START**}
                   1: begin
                     Newsy(True,
                       'Royal Employment',
-                      ' ' + uplc + letter^.Sender + config.textcol1 + ' joined the ' + ulcyan + 'Royal Guard' + config.textcol1 + '!',
+                      ' ' + uplc + letter^.Sender + config.textcol1 + ' joined the ' + ulcyan +
+                      'Royal Guard' + config.textcol1 + '!',
                       '',
                       '',
                       '',
@@ -2685,7 +2770,8 @@ begin {MAIN PROC (POST) **START**}
             begin
               {the king wont have this new guard}
 
-              if player.sex = 1 then s := 'KING'
+              if player.sex = 1 then
+                s := 'KING'
               else s := 'QUEEN';
 
               {post a letter to the player}
@@ -2713,8 +2799,8 @@ begin {MAIN PROC (POST) **START**}
 
             end;
 
-          end
-          else if (letter^.special = MailRequest_RoyalAngel) then
+          end else
+          if (letter^.special = MailRequest_RoyalAngel) then
           begin
             {KING HAS SENT A ANGEL TO HEAL PLAYER}
 
@@ -2729,7 +2815,8 @@ begin {MAIN PROC (POST) **START**}
               healing_royal_angel; {this proc is also called from online.pas}
 
               {tell all nodes of this remarkable event}
-              online_send_to_all(uwhite + 'an ' + uwhite + 'Angel' + config.textcol1 + ' visited ' + uplc + player.name2 + config.textcol1 + '!', player.name2, '');
+              online_send_to_all(uwhite + 'an ' + uwhite + 'Angel' + config.textcol1 + ' visited ' +
+                uplc + player.name2 + config.textcol1 + '!', player.name2, '');
 
               {we must send a reciept to the sender (the king or queen)}
               if is_online(letter^.Sender, online_player) then
@@ -2748,7 +2835,8 @@ begin {MAIN PROC (POST) **START**}
                   '',
                   uwhite + s + config.textcol1,
                   mkstring(length(s), underscore),
-                  uplc + player.name2 + config.textcol1 + ' was healed by the ' + uwhite + 'Angel' + config.textcol1 + ' sent out by you!',
+                  uplc + player.name2 + config.textcol1 + ' was healed by the ' + uwhite + 'Angel' +
+                  config.textcol1 + ' sent out by you!',
                   '',
                   '',
                   '',
@@ -2767,7 +2855,8 @@ begin {MAIN PROC (POST) **START**}
               pause;
             end;
 
-          end {royal angel *end*} else if (letter^.special = MailRequest_RoyalAvenger) then
+          end {royal angel *end*} else
+          if (letter^.special = MailRequest_RoyalAvenger) then
           begin
             {KING HAS SENT A DARK AVENGER TO HURT PLAYER}
 
@@ -2784,7 +2873,8 @@ begin {MAIN PROC (POST) **START**}
               hurting_royal_avenger;
 
               {tell all nodes of this remarkable event}
-              online_send_to_all(uwhite + 'a ' + ulred + 'Dark Avenger' + config.textcol1 + ' hurt ' + uplc + player.name2 + config.textcol1 + '!', player.name2, '');
+              online_send_to_all(uwhite + 'a ' + ulred + 'Dark Avenger' + config.textcol1 +
+                ' hurt ' + uplc + player.name2 + config.textcol1 + '!', player.name2, '');
 
               {we must send a reciept to the sender (the king or queen)}
               if is_online(letter^.Sender, online_player) then
@@ -2803,7 +2893,8 @@ begin {MAIN PROC (POST) **START**}
                   '',
                   uwhite + s + config.textcol1,
                   mkstring(length(s), underscore),
-                  uplc + player.name2 + config.textcol1 + ' was hurt by the ' + ulred + 'Dark Avenger' + config.textcol1 + ' sent out by you!',
+                  uplc + player.name2 + config.textcol1 + ' was hurt by the ' + ulred + 'Dark Avenger' +
+                  config.textcol1 + ' sent out by you!',
                   '',
                   '',
                   '',
@@ -2822,7 +2913,8 @@ begin {MAIN PROC (POST) **START**}
               pause;
             end;
 
-          end {royal Dark Avenger *end*} else if (letter^.special = MailRequest_QuestOffer) then
+          end {royal Dark Avenger *end*} else
+          if (letter^.special = MailRequest_QuestOffer) then
           begin
             {KING HAS OFFERED A QUEST TO PLAYER}
 
@@ -2845,7 +2937,8 @@ begin {MAIN PROC (POST) **START**}
                   (quest^.deleted = False) then
                 begin
 
-                  if quest^.forced then forced_quest := True
+                  if quest^.forced then
+                    forced_quest := True
                   else forced_quest := False;
                   x := k;
                   break;
@@ -2853,7 +2946,7 @@ begin {MAIN PROC (POST) **START**}
 
               end; {for k:= .end.}
 
-              {valid quest}
+                   {valid quest}
               if x > 0 then
               begin
 
@@ -2866,11 +2959,13 @@ begin {MAIN PROC (POST) **START**}
                 accept_quest := True;
                 if forced_quest then
                 begin
-                  d(config.textcolor, ' has forced you to accept a Quest to be completed in ' + uwhite + commastr(quest^.daystocomple) + config.textcol1 + ' days!');
+                  d(config.textcolor, ' has forced you to accept a Quest to be completed in ' +
+                    uwhite + commastr(quest^.daystocomple) + config.textcol1 + ' days!');
                   pause;
                 end else
                 begin
-                  d(config.textcolor, ' offers YOU a Quest to be completed in ' + uwhite + commastr(quest^.daystocomple) + config.textcol1 + ' days.');
+                  d(config.textcolor, ' offers YOU a Quest to be completed in ' + uwhite +
+                    commastr(quest^.daystocomple) + config.textcol1 + ' days.');
                   if confirm('Accept Quest', 'Y') = False then
                   begin
                     accept_quest := False;
@@ -2884,7 +2979,8 @@ begin {MAIN PROC (POST) **START**}
                   if claimed_quests(player.name2) >= Config.MaxClaimedQuests then
                   begin
                     crlf;
-                    d(12, 'Sorry, You may only be active on ' + uwhite + commastr(Config.MaxClaimedQuests) + ulred + ' Quests at the same time.');
+                    d(12, 'Sorry, You may only be active on ' + uwhite + commastr(Config.MaxClaimedQuests) +
+                      ulred + ' Quests at the same time.');
 
                     {player was unable to accept the quest}
                     quest^.offerto := emptystr;
@@ -2896,7 +2992,8 @@ begin {MAIN PROC (POST) **START**}
                     begin
                       if is_online(king^.Name, online_player) then
                       begin
-                        online_send_to_player(king^.Name, online_player, uplc + player.name2 + config.textcol1 + ' was unable to accept a ' + uquestc + 'Quest' + config.textcol1 + '!');
+                        online_send_to_player(king^.Name, online_player, uplc + player.name2 +
+                          config.textcol1 + ' was unable to accept a ' + uquestc + 'Quest' + config.textcol1 + '!');
                       end else
                       begin
 
@@ -2911,7 +3008,8 @@ begin {MAIN PROC (POST) **START**}
                           '',
                           uquestc + 'QUEST' + umailheadc + ' offer ' + ulred + 'Declined' + config.textcol1,
                           mkstring(length(s), underscore),
-                          uplc + player.name2 + config.textcol1 + ' was unable to accept your offer to complete a ' + uquestc + 'QUEST' + config.textcol1 + '!',
+                          uplc + player.name2 + config.textcol1 + ' was unable to accept your offer to complete a ' +
+                          uquestc + 'QUEST' + config.textcol1 + '!',
                           uplc + player.name2 + config.textcol1 + ' is involved in too many missions right now.',
                           '',
                           '',
@@ -2939,7 +3037,8 @@ begin {MAIN PROC (POST) **START**}
                         {news-paper}
                         Newsy(True,
                           'Force Quest',
-                          ' ' + uplc + player.name2 + config.textcol1 + ' was forced to accept a ' + uquestc + 'Quest' + config.textcol1 + '!',
+                          ' ' + uplc + player.name2 + config.textcol1 + ' was forced to accept a ' +
+                          uquestc + 'Quest' + config.textcol1 + '!',
                           '',
                           '',
                           '',
@@ -2953,7 +3052,8 @@ begin {MAIN PROC (POST) **START**}
                         {news-paper}
                         Newsy(True,
                           'Quest Proposal',
-                          ' ' + uplc + player.name2 + config.textcol1 + ' accepted a ' + uquestc + 'Quest' + config.textcol1 + '.',
+                          ' ' + uplc + player.name2 + config.textcol1 + ' accepted a ' + uquestc +
+                          'Quest' + config.textcol1 + '.',
                           '',
                           '',
                           '',
@@ -2965,7 +3065,8 @@ begin {MAIN PROC (POST) **START**}
                       end;
 
                       {tell other nodes}
-                      online_send_to_all(uplc + player.name2 + config.textcol1 + ' accepted a ' + uquestc + 'Quest' + config.textcol1 + '!', player.name2, '');
+                      online_send_to_all(uplc + player.name2 + config.textcol1 + ' accepted a ' +
+                        uquestc + 'Quest' + config.textcol1 + '!', player.name2, '');
 
                       load_king(fload, king^);
 
@@ -2985,7 +3086,8 @@ begin {MAIN PROC (POST) **START**}
                             '',
                             uquestc + 'QUEST' + umailheadc + ' Accepted' + config.textcol1,
                             mkstring(length(s), underscore),
-                            uplc + player.name2 + config.textcol1 + ' accepted a ' + uquestc + 'QUEST' + config.textcol1 + ' proposed by You!',
+                            uplc + player.name2 + config.textcol1 + ' accepted a ' + uquestc +
+                            'QUEST' + config.textcol1 + ' proposed by You!',
                             '',
                             '',
                             '',
@@ -3021,7 +3123,8 @@ begin {MAIN PROC (POST) **START**}
                   {news-paper}
                   Newsy(True,
                     'Cowardice',
-                    ' ' + uplc + player.name2 + config.textcol1 + ' declined an invitation to join a ' + uquestc + 'QUEST' + config.textcol1 + '!',
+                    ' ' + uplc + player.name2 + config.textcol1 + ' declined an invitation to join a ' +
+                    uquestc + 'QUEST' + config.textcol1 + '!',
                     '',
                     '',
                     '',
@@ -3032,7 +3135,8 @@ begin {MAIN PROC (POST) **START**}
                     '');
 
                   {tell other nodes}
-                  online_send_to_all(uplc + player.name2 + config.textcol1 + ' declined an ' + uquestc + 'QUEST' + config.textcol1 + ' offer!', player.name2, '');
+                  online_send_to_all(uplc + player.name2 + config.textcol1 + ' declined an ' +
+                    uquestc + 'QUEST' + config.textcol1 + ' offer!', player.name2, '');
 
                   load_king(fload, king^);
 
@@ -3052,7 +3156,8 @@ begin {MAIN PROC (POST) **START**}
                         '',
                         uquestc + 'QUEST' + umailheadc + ' offer ' + ulred + 'Declined' + config.textcol1,
                         mkstring(length(s), underscore),
-                        uplc + player.name2 + config.textcol1 + ' declined your offer to complete a ' + uquestc + 'QUEST' + config.textcol1 + '!',
+                        uplc + player.name2 + config.textcol1 + ' declined your offer to complete a ' +
+                        uquestc + 'QUEST' + config.textcol1 + '!',
                         '',
                         '',
                         '',
@@ -3075,7 +3180,8 @@ begin {MAIN PROC (POST) **START**}
 
             end;
 
-          end {quest offer *end*} else if (letter^.special = MailRequest_Poison) then
+          end {quest offer *end*} else
+          if (letter^.special = MailRequest_Poison) then
           begin
             {SENDER has sent "poison" to PLAYER *relation event*}
 
@@ -3144,7 +3250,8 @@ begin {MAIN PROC (POST) **START**}
 
                   if is_online(letter^.Sender, online_player) = True then
                   begin
-                    online_send_to_player(letter^.Sender, online_player, 'Your attempt to poison ' + uplc + player.name2 + config.textcol1 + ' failed!');
+                    online_send_to_player(letter^.Sender, online_player, 'Your attempt to poison ' +
+                      uplc + player.name2 + config.textcol1 + ' failed!');
                   end else
                   begin
 
@@ -3156,7 +3263,8 @@ begin {MAIN PROC (POST) **START**}
                       '',
                       ulred + 'Poison failure' + config.textcol1,
                       mkstring(14, underscore),
-                      uplc + player.name2 + config.textcol1 + ' detected the poison the Drink you sent ' + sex[player.sex] + '!',
+                      uplc + player.name2 + config.textcol1 + ' detected the poison the Drink you sent ' +
+                      sex[player.sex] + '!',
                       ulred + 'FAILURE!' + config.textcol1,
                       '',
                       '',
@@ -3262,7 +3370,8 @@ begin {MAIN PROC (POST) **START**}
                 {mail poor letter^.sender}
                 if is_online(letter^.Sender, online_player) = True then
                 begin
-                  online_send_to_player(letter^.Sender, online_player, uplc + player.name2 + config.textcol1 + ' rejected drink!');
+                  online_send_to_player(letter^.Sender, online_player, uplc + player.name2 +
+                    config.textcol1 + ' rejected drink!');
                 end else
                 begin
                   post(MailSend,
@@ -3291,8 +3400,8 @@ begin {MAIN PROC (POST) **START**}
 
             end;
 
-          end
-          else if (letter^.special = MailRequest_Roses) then
+          end else
+          if (letter^.special = MailRequest_Roses) then
           begin
             {SENDER has sent "bouquet of roses" to PLAYER *relation event*}
 
@@ -3309,7 +3418,7 @@ begin {MAIN PROC (POST) **START**}
                 'C': load_character(ply0^, 2, x);
               end; {case .end.}
 
-              {Red hearts}
+                   {Red hearts}
               crlf;
               show_usurper_data(picture_SMALL_HEART, False);
               d(15, '-*-LOVE EVENT*-');
@@ -3346,7 +3455,8 @@ begin {MAIN PROC (POST) **START**}
                 y := ply0^.level * 85;
                 x := x + y;
                 x := x div 2;
-                if x < 100 then x := 100;
+                if x < 100 then
+                  x := 100;
 
                 {smell roses}
                 d(config.textcolor, 'You accept the flowers from ' + uplc + letter^.Sender + config.textcol1 + '!');
@@ -3408,7 +3518,8 @@ begin {MAIN PROC (POST) **START**}
                 {mail poor letter^.sender}
                 if is_online(letter^.Sender, online_player) = True then
                 begin
-                  online_send_to_player(letter^.Sender, online_player, uplc + player.name2 + config.textcol1 + ' trashed the flowers!');
+                  online_send_to_player(letter^.Sender, online_player, uplc + player.name2 +
+                    config.textcol1 + ' trashed the flowers!');
                 end else
                 begin
                   post(MailSend,
@@ -3436,7 +3547,8 @@ begin {MAIN PROC (POST) **START**}
                 {news-paper}
                 newsy(True,
                   'Flowers',
-                  ' ' + uplc + player.name2 + config.textcol1 + ulred + ' rejected' + config.textcol1 + ' flowers from a secret admirer.',
+                  ' ' + uplc + player.name2 + config.textcol1 + ulred + ' rejected' + config.textcol1 +
+                  ' flowers from a secret admirer.',
                   '',
                   '',
                   '',
@@ -3449,57 +3561,67 @@ begin {MAIN PROC (POST) **START**}
 
             end;
 
-          end
-          else if (letter^.special in [MailRequest_ChildRaisingExp,
+          end else
+          if (letter^.special in [MailRequest_ChildRaisingExp,
             MailRequest_ChildPoisonedExp,
             MailRequest_ChildCursedExp,
             MailRequest_ChildDepressedExp]) then
           begin
             raising_children(letter^.special);
-          end else if (letter^.special = MailRequest_ChildFightExp) then
+          end else
+          if (letter^.special = MailRequest_ChildFightExp) then
           begin
             fighting_children;
-          end else if (letter^.special = MailRequest_SilentExp) then
+          end else
+          if (letter^.special = MailRequest_SilentExp) then
           begin
             silent_experience;
-          end else if (letter^.special = MailRequest_ScanForBabies) then
+          end else
+          if (letter^.special = MailRequest_ScanForBabies) then
           begin
             name_babies(player, False);
-          end else if (letter^.special = MailRequest_JoinTeam) then
+          end else
+          if (letter^.special = MailRequest_JoinTeam) then
           begin
             Join_Team;
-          end else if (letter^.special = MailRequest_GymMembership) then
+          end else
+          if (letter^.special = MailRequest_GymMembership) then
           begin
             Gym_Membership;
-          end else if (letter^.special = MailRequest_Birthday) then
+          end else
+          if (letter^.special = MailRequest_Birthday) then
           begin
             birthday;
-          end else if (letter^.special in [MailRequest_HoldHands,
+          end else
+          if (letter^.special in [MailRequest_HoldHands,
             MailRequest_Dinner,
             MailRequest_Kiss]) then
           begin
             dating;
-          end else if (letter^.special in [MailRequest_Scorpions,
+          end else
+          if (letter^.special in [MailRequest_Scorpions,
             MailRequest_Chocolate]) then
           begin
             surprise_box;
-          end else if (letter^.special in [MailRequest_HaveSex,
+          end else
+          if (letter^.special in [MailRequest_HaveSex,
             MailRequest_HaveDiscreteSex]) then
           begin
             Have_Sex;
-          end else if (letter^.special = MailRequest_DrinkOffer) then
+          end else
+          if (letter^.special = MailRequest_DrinkOffer) then
           begin
 
             drink_offer;
 
-          end {drink offer *end*}
-          else if (letter^.special = mailrequest_ImmortalOffer) then
+          end {drink offer *end*} else
+          if (letter^.special = mailrequest_ImmortalOffer) then
           begin
 
             immortal_offer(player);
 
-          end {drink offer *end*}
-          else if (letter^.special = MailRequest_BeMyGuard) then
+          end {drink offer *end*} else
+          if (letter^.special = MailRequest_BeMyGuard) then
           begin
             {KING OFFERS PLAYER TO BE HIS/HER PERSONAL GUARD}
 
@@ -3584,7 +3706,8 @@ begin {MAIN PROC (POST) **START**}
                       umailheadc + 'Failed Job Application' + config.textcol1,
                       mkstring(22, underscore),
                       uplc + player.name2 + config.textcol1 + ' accepted your offer to become Guard.',
-                      'Unfortunately there was no room for ' + uplc + player.name2 + config.textcol1 + ' in your guard force.',
+                      'Unfortunately there was no room for ' + uplc + player.name2 + config.textcol1 +
+                      ' in your guard force.',
                       '',
                       '',
                       '',
@@ -3630,8 +3753,10 @@ begin {MAIN PROC (POST) **START**}
                       '',
                       umailheadc + 'Accepted Offer' + config.textcol1,
                       mkstring(14, underscore),
-                      uplc + player.name2 + config.textcol1 + ' accepted your offer to become a ' + ulcyan + 'Royal Guard' + config.textcol1 + '.',
-                      uplc + player.name2 + '' + config.textcol1 + ' has a salary of ' + uyellow + commastr(x) + config.textcol1 + ' ' + many_money(x) + ' / day.',
+                      uplc + player.name2 + config.textcol1 + ' accepted your offer to become a ' +
+                      ulcyan + 'Royal Guard' + config.textcol1 + '.',
+                      uplc + player.name2 + '' + config.textcol1 + ' has a salary of ' + uyellow +
+                      commastr(x) + config.textcol1 + ' ' + many_money(x) + ' / day.',
                       '',
                       '',
                       '',
@@ -3663,7 +3788,9 @@ begin {MAIN PROC (POST) **START**}
                       0: begin
                         Newsy(True,
                           'Royal Employment',
-                          ' The ' + s + ' ' + urac + race_display(2, player.race, 0) + ' ' + uplc + player.name2 + config.textcol1 + ' became a member of the ' + ulcyan + 'Royal Guard' + config.textcol1 + '!',
+                          ' The ' + s + ' ' + urac + race_display(2, player.race, 0) + ' ' + uplc +
+                            player.name2 + config.textcol1 + ' became a member of the ' + ulcyan + 'Royal Guard' +
+                            config.textcol1 + '!',
                           '',
                           '',
                           '',
@@ -3676,7 +3803,8 @@ begin {MAIN PROC (POST) **START**}
                       1: begin
                         Newsy(True,
                           'Royal Employment',
-                          ' The ' + s + ' ' + urac + race_display(2, player.race, 0) + ' ' + uplc + player.name2 + config.textcol1 + ' joined the ' + ulcyan + 'Royal Guard' + config.textcol1 + '!',
+                          ' The ' + s + ' ' + urac + race_display(2, player.race, 0) + ' ' + uplc +
+                          player.name2 + config.textcol1 + ' joined the ' + ulcyan + 'Royal Guard' + config.textcol1 + '!',
                           '',
                           '',
                           '',
@@ -3688,7 +3816,7 @@ begin {MAIN PROC (POST) **START**}
                       end;
                     end; {case .end.}
 
-                  end; {if l<>0 .end.}
+                  end;   {if l<>0 .end.}
 
                 end else
                 begin
@@ -3701,7 +3829,8 @@ begin {MAIN PROC (POST) **START**}
                     '',
                     umailheadc + 'Insubordination' + config.textcol1,
                     mkstring(14, underscore),
-                    uplc + player.name2 + config.textcol1 + ' declined your offer to become a ' + ulcyan + 'Royal Guard' + config.textcol1 + '.',
+                    uplc + player.name2 + config.textcol1 + ' declined your offer to become a ' +
+                    ulcyan + 'Royal Guard' + config.textcol1 + '.',
                     '',
                     '',
                     '',
@@ -3725,8 +3854,7 @@ begin {MAIN PROC (POST) **START**}
 
             end; {the kings offer}
 
-          end {be My Guard .end.}
-          else
+          end {be My Guard .end.} else
           begin
 
             {** Regular News about Events etc .. **}
@@ -3734,7 +3862,8 @@ begin {MAIN PROC (POST) **START**}
             begin
               if letter^.mess[j] <> '' then
               begin
-                if j = 1 then s := ' [' + udgray + fix_date(letter^.date) + config.textcol1 + ']'
+                if j = 1 then
+                  s := ' [' + udgray + fix_date(letter^.date) + config.textcol1 + ']'
                 else s := '';
                 d(config.textcolor, letter^.mess[j] + s);
 
@@ -3766,9 +3895,9 @@ begin {MAIN PROC (POST) **START**}
       end;
 
     end; {READ News to player .end.}
-  end; {case action of .end.}
+  end;   {case action of .end.}
 
-  {dispose pointer vars}
+         {dispose pointer vars}
   disposal;
 
   {turn on multinode checking}

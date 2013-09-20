@@ -1,12 +1,12 @@
 {$IFNDEF MSDOS}
 {$I DEFINES.INC}
 {$ENDIF}
-{************************************************}
+ {************************************************}
 
-{   Turbo Vision File Manager Demo               }
-{   Copyright (c) 1992 by Borland International  }
+ {   Turbo Vision File Manager Demo               }
+ {   Copyright (c) 1992 by Borland International  }
 
-{************************************************}
+ {************************************************}
 
  {slightly modified by Jakob, search for 'Jakob' to see where he has
   added / changed stuff}
@@ -124,7 +124,8 @@ begin
     if Delta.Y + I < FileLines^.Count then
     begin
       P := FileLines^.At(Delta.Y + I);
-      if P <> nil then S := Copy(P^, Delta.X + 1, Size.X)
+      if P <> nil then
+        S := Copy(P^, Delta.X + 1, Size.X)
       else S := '';
       MoveStr(B, S, C);
     end;
@@ -140,7 +141,8 @@ var
   E:          TEvent;
 begin
   IsValid := True;
-  if FileName <> nil then DisposeStr(FileName);
+  if FileName <> nil then
+    DisposeStr(FileName);
   FileName := NewStr(FName);
   FileLines := New(PLineCollection, Init(5, 5));
   {$I-}
@@ -156,7 +158,8 @@ begin
     while not EOF(FileToView) and not LowMemory do
     begin
       Readln(FileToView, Line);
-      if Length(Line) > MaxWidth then MaxWidth := Length(Line);
+      if Length(Line) > MaxWidth then
+        MaxWidth := Length(Line);
       FileLines^.Insert(NewStr(Line));
     end;
     Close(FileToView);
@@ -169,7 +172,8 @@ end;
 procedure TFileViewer.SetState(AState: word; Enable: boolean);
 begin
   TScroller.SetState(AState, Enable);
-  if Enable and (AState and sfExposed <> 0) then SetLimit(Limit.X, Limit.Y);
+  if Enable and (AState and sfExposed <> 0) then
+    SetLimit(Limit.X, Limit.Y);
 end;
 
 procedure TFileViewer.Store(var S: TStream);

@@ -43,7 +43,7 @@ var
   pl:       array [1..4] of ^Userrec; {team-mates are stored here}
   custtemp: ^Userrec; {temporary user record}
 
-procedure Disposal; {remove pointer variables}
+procedure Disposal;   {remove pointer variables}
 var i: byte;
 begin
 
@@ -272,31 +272,35 @@ begin
           1: begin
             menu2('(1) ');
             sd(global_plycol, pl[1]^.name2);
-            if coming[1] = True then d(3, gtext1)
+            if coming[1] = True then
+              d(3, gtext1)
             else d(12, gtext2);
           end;
           2: begin
             menu2('(2) ');
             sd(global_plycol, pl[2]^.name2);
-            if coming[2] = True then d(3, gtext1)
+            if coming[2] = True then
+              d(3, gtext1)
             else d(12, gtext2);
           end;
           3: begin
             menu2('(3) ');
             sd(global_plycol, pl[3]^.name2);
-            if coming[3] = True then d(3, gtext1)
+            if coming[3] = True then
+              d(3, gtext1)
             else d(12, gtext2);
           end;
           4: begin
             menu2('(4) ');
             sd(global_plycol, pl[4]^.name2);
-            if coming[4] = True then d(3, gtext1)
+            if coming[4] = True then
+              d(3, gtext1)
             else d(12, gtext2);
           end;
 
         end; {case .end.}
 
-      end; {for i:= .end.}
+      end;   {for i:= .end.}
 
       crlf;
       sd(config.textcolor, '[');
@@ -315,7 +319,8 @@ begin
       '1': begin
         if y > 0 then
         begin
-          if coming[1] = True then coming[1] := False
+          if coming[1] = True then
+            coming[1] := False
           else coming[1] := True;
           redisp := True;
         end;
@@ -323,7 +328,8 @@ begin
       '2': begin
         if y > 1 then
         begin
-          if coming[2] = True then coming[2] := False
+          if coming[2] = True then
+            coming[2] := False
           else coming[2] := True;
           redisp := True;
         end;
@@ -331,7 +337,8 @@ begin
       '3': begin
         if y > 2 then
         begin
-          if coming[3] = True then coming[3] := False
+          if coming[3] = True then
+            coming[3] := False
           else coming[3] := True;
           redisp := True;
         end;
@@ -339,7 +346,8 @@ begin
       '4': begin
         if y > 3 then
         begin
-          if coming[4] = True then coming[4] := False
+          if coming[4] = True then
+            coming[4] := False
           else coming[4] := True;
           redisp := True;
         end;
@@ -485,7 +493,7 @@ begin
 
       end; {case .end.}
     end;
-  end; {for i:= .end.}
+  end;     {for i:= .end.}
   crlf;
   pause;
   crlf;
@@ -494,10 +502,14 @@ begin
 
   nice2[1] := uplc + player.name2 + config.textcol1 + ' took you to the Dungeons.';
 
-  if (pl[1]^.name2 <> '') and (pl[1]^.ai = 'H') then team_report(pl[1]^.name2, 1, nice2[1], nice2[2], nice2[3], nice2[4]);
-  if (pl[2]^.name2 <> '') and (pl[2]^.ai = 'H') then team_report(pl[2]^.name2, 1, nice2[1], nice2[2], nice2[3], nice2[4]);
-  if (pl[3]^.name2 <> '') and (pl[3]^.ai = 'H') then team_report(pl[3]^.name2, 1, nice2[1], nice2[2], nice2[3], nice2[4]);
-  if (pl[4]^.name2 <> '') and (pl[4]^.ai = 'H') then team_report(pl[4]^.name2, 1, nice2[1], nice2[2], nice2[3], nice2[4]);
+  if (pl[1]^.name2 <> '') and (pl[1]^.ai = 'H') then
+    team_report(pl[1]^.name2, 1, nice2[1], nice2[2], nice2[3], nice2[4]);
+  if (pl[2]^.name2 <> '') and (pl[2]^.ai = 'H') then
+    team_report(pl[2]^.name2, 1, nice2[1], nice2[2], nice2[3], nice2[4]);
+  if (pl[3]^.name2 <> '') and (pl[3]^.ai = 'H') then
+    team_report(pl[3]^.name2, 1, nice2[1], nice2[2], nice2[3], nice2[4]);
+  if (pl[4]^.name2 <> '') and (pl[4]^.ai = 'H') then
+    team_report(pl[4]^.name2, 1, nice2[1], nice2[2], nice2[3], nice2[4]);
 
   for i := 1 to 4 do
   begin
@@ -615,7 +627,8 @@ begin
 
   crlf;
   d(5, 'The Dungeons of ' + dungeon_name);
-  d(config.textcolor, 'As you descend to Dungeon Level ' + uwhite + commastr(player.level) + config.textcol1 + ' you tighten your grip to your weapon.');
+  d(config.textcolor, 'As you descend to Dungeon Level ' + uwhite + commastr(player.level) +
+    config.textcol1 + ' you tighten your grip to your weapon.');
   d(config.textcolor, 'You feel that evil lurk nearby... You wonder whether you ever shall');
   d(config.textcolor, 'see the sun shine again...');
 
@@ -680,7 +693,7 @@ begin
       end;
     end; {case .end.}
 
-    {evaluate user-input}
+         {evaluate user-input}
     case ch of
 
       ReturnKey: crlf;
@@ -784,7 +797,7 @@ begin
 
         end;}
 
-      end; {*ICE-CAVES END*}
+      end;       {*ICE-CAVES END*}
 
       'C': begin {change dungeon level}
         i := global_dungeonlevel;
@@ -804,7 +817,8 @@ begin
 
           global_dungeonlevel := zz;
 
-          if global_dungeonlevel > 101 then global_dungeonlevel := 101;
+          if global_dungeonlevel > 101 then
+            global_dungeonlevel := 101;
 
           if (global_dungeonlevel > 90) and (global_registered = False) then
           begin
@@ -821,7 +835,8 @@ begin
               crlf;
               sd(3, 'You remain on level ');
               d(5, commastr(global_dungeonlevel));
-            end else if global_dungeonlevel > i then
+            end else
+            if global_dungeonlevel > i then
             begin
               crlf;
               sd(3, 'You descend to level ');
@@ -892,10 +907,14 @@ begin
 
             {evaluate user-input}
             case cho of
-              '1': if player_active(pl[1]^, True) then team_member_instruct(pl[1]^);
-              '2': if player_active(pl[2]^, True) then team_member_instruct(pl[2]^);
-              '3': if player_active(pl[3]^, True) then team_member_instruct(pl[3]^);
-              '4': if player_active(pl[4]^, True) then team_member_instruct(pl[4]^);
+              '1': if player_active(pl[1]^, True) then
+                  team_member_instruct(pl[1]^);
+              '2': if player_active(pl[2]^, True) then
+                  team_member_instruct(pl[2]^);
+              '3': if player_active(pl[3]^, True) then
+                  team_member_instruct(pl[3]^);
+              '4': if player_active(pl[4]^, True) then
+                  team_member_instruct(pl[4]^);
               'R': done := True;
             end; {case .end.}
 
@@ -996,7 +1015,7 @@ begin
               end;
             end; {for i:= .end.}
 
-            {decrease dungeon fights}
+                 {decrease dungeon fights}
             Dec(player.fights);
 
             xx := (global_dungeonlevel - 1) * 10;
@@ -1004,7 +1023,8 @@ begin
 
             load_monster(y, 1);
 
-            if player.level > 99 then global_dungeonlevel := 101;
+            if player.level > 99 then
+              global_dungeonlevel := 101;
 
             if (global_dungeonlevel = 101) and (global_registered = True) then
             begin
@@ -1081,7 +1101,7 @@ begin
                 s,                 {name}
                 global_dungeonlevel * 5 * y,   {hps}
                 90,                {strength}
-                0,                {defence}
+                0,                 {defence}
                 s2,                {phrase}
                 False,             {grabweap}
                 False,             {grabarm}
@@ -1111,19 +1131,26 @@ begin
             a lot of monster!! :) }
 
               yy := random(dungeon_difficulty) + 1;
-              if dungeon_difficulty = 1 then yy := 1;
+              if dungeon_difficulty = 1 then
+                yy := 1;
 
-              if (pl[1]^.name2 <> '') and (pl[1]^.hps > 0) then yy := yy * 2;
-              if (pl[2]^.name2 <> '') and (pl[2]^.hps > 0) then yy := yy * 2;
-              if (pl[3]^.name2 <> '') and (pl[3]^.hps > 0) then yy := yy * 2;
-              if (pl[4]^.name2 <> '') and (pl[4]^.hps > 0) then yy := yy * 2;
+              if (pl[1]^.name2 <> '') and (pl[1]^.hps > 0) then
+                yy := yy * 2;
+              if (pl[2]^.name2 <> '') and (pl[2]^.hps > 0) then
+                yy := yy * 2;
+              if (pl[3]^.name2 <> '') and (pl[3]^.hps > 0) then
+                yy := yy * 2;
+              if (pl[4]^.name2 <> '') and (pl[4]^.hps > 0) then
+                yy := yy * 2;
 
-              if yy > global_maxmon then yy := global_maxmon;
+              if yy > global_maxmon then
+                yy := global_maxmon;
 
               for i := 2 to yy do
               begin
                 xx := (global_dungeonlevel - 4) * 10;
-                if xx < 1 then xx := 1;
+                if xx < 1 then
+                  xx := 1;
                 x := global_dungeonlevel * 10;
                 y := xx + random(x - xx);
 
@@ -1197,7 +1224,7 @@ begin
               end;
             end; {for i:= .end.}
 
-            {does player need to buy healing potions?}
+                 {does player need to buy healing potions?}
             need := 0;
 
             {if player is dead then there will be no purchase...}
@@ -1241,7 +1268,8 @@ begin
                   xx := config.maxheals - player.healing;
                 end;
 
-                if xx < 0 then xx := 0;
+                if xx < 0 then
+                  xx := 0;
 
                 sd(config.textcolor, 'You can buy a maximum of ');
                 sd(5, commastr(xx));
@@ -1362,7 +1390,7 @@ begin
                   9: s2 := ' was mutilated and tortured!';
                 end; {case .end.}
 
-                {news-paper}
+                     {news-paper}
                 newsy(True,
                   'Chicken in the Dungeons!',
                   s,
@@ -1434,7 +1462,8 @@ begin
                     end else
                     begin
                       newsy(False,
-                        ' ' + uplc + custtemp^.name2 + config.textcol1 + ' died along with ' + sex3[custtemp^.sex] + ' leader!',
+                        ' ' + uplc + custtemp^.name2 + config.textcol1 + ' died along with ' +
+                        sex3[custtemp^.sex] + ' leader!',
                         '',
                         '',
                         '',
@@ -1458,7 +1487,7 @@ begin
                   end;
                 end; {for i:= .end.}
 
-                {news-paper}
+                     {news-paper}
                 newsy(True,
                   '',
                   '',
@@ -1531,7 +1560,8 @@ begin
         begin
           {news-paper}
           newsy(False,
-            ' ' + uplc + custtemp^.name2 + config.textcol1 + ' the ' + classnames[custtemp^.class] + ' made it out alive from the Dungeons.',
+            ' ' + uplc + custtemp^.name2 + config.textcol1 + ' the ' + classnames[custtemp^.class] +
+            ' made it out alive from the Dungeons.',
             '',
             '',
             '',
@@ -1546,15 +1576,21 @@ begin
 
           {create random "news of death"}
           case random(6) of
-            0: s := ' ' + uplc + custtemp^.name2 + config.textcol1 + ' the ' + classnames[custtemp^.class] + ' was massacred by a ' + umonc + killed_by[i] + config.textcol1 + '!';
-            1: s := ' ' + uplc + custtemp^.name2 + config.textcol1 + ' the ' + classnames[custtemp^.class] + ' encountered a ' + umonc + killed_by[i] + config.textcol1 + ' and was killed.';
-            2: s := ' ' + uplc + custtemp^.name2 + config.textcol1 + ' the ' + classnames[custtemp^.class] + 's mutilated corpse was left behind.' + config.textcol1;
-            3: s := ' ' + uplc + custtemp^.name2 + config.textcol1 + ' the ' + classnames[custtemp^.class] + ' was killed by a ' + umonc + killed_by[i] + config.textcol1 + '.';
-            4: s := ' ' + uplc + custtemp^.name2 + config.textcol1 + ' the ' + classnames[custtemp^.class] + 's life was taken by a ' + umonc + killed_by[i] + config.textcol1 + '.';
-            5: s := ' ' + uplc + custtemp^.name2 + config.textcol1 + ' the ' + classnames[custtemp^.class] + ' was mauled by a ' + umonc + killed_by[i] + config.textcol1 + '.';
+            0: s := ' ' + uplc + custtemp^.name2 + config.textcol1 + ' the ' + classnames[custtemp^.class] +
+                ' was massacred by a ' + umonc + killed_by[i] + config.textcol1 + '!';
+            1: s := ' ' + uplc + custtemp^.name2 + config.textcol1 + ' the ' + classnames[custtemp^.class] +
+                ' encountered a ' + umonc + killed_by[i] + config.textcol1 + ' and was killed.';
+            2: s := ' ' + uplc + custtemp^.name2 + config.textcol1 + ' the ' + classnames[custtemp^.class] +
+                's mutilated corpse was left behind.' + config.textcol1;
+            3: s := ' ' + uplc + custtemp^.name2 + config.textcol1 + ' the ' + classnames[custtemp^.class] +
+                ' was killed by a ' + umonc + killed_by[i] + config.textcol1 + '.';
+            4: s := ' ' + uplc + custtemp^.name2 + config.textcol1 + ' the ' + classnames[custtemp^.class] +
+                's life was taken by a ' + umonc + killed_by[i] + config.textcol1 + '.';
+            5: s := ' ' + uplc + custtemp^.name2 + config.textcol1 + ' the ' + classnames[custtemp^.class] +
+                ' was mauled by a ' + umonc + killed_by[i] + config.textcol1 + '.';
           end; {case .end.}
 
-          {News-paper}
+               {News-paper}
           newsy(False,
             s,
             '',
@@ -1586,7 +1622,7 @@ begin
 
     end; {for i:= .end.}
 
-    {news-paper: send a ending crlf to the news file}
+         {news-paper: send a ending crlf to the news file}
     newsy(True,
       '',
       '',

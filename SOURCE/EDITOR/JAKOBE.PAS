@@ -33,7 +33,7 @@ procedure Remove_Commas(var gulp: string);
 function Commastr(number: longint): string;
 function CommastrP(nr: longint): string; {som ovan fast med + eller -}
 
-{String}
+ {String}
 procedure CleanString(var s: string);
 procedure Wrl(const s: string);
 procedure ClearScreen;
@@ -62,9 +62,11 @@ var
 begin;  {original code taken from the "date" function in ddscott.pas}
   getdate(y, m, d, dow);
   s := long2str(m);
-  if length(s) = 1 then s := '0' + s;
+  if length(s) = 1 then
+    s := '0' + s;
   s2 := long2str(d);
-  if length(s2) = 1 then s2 := '0' + s2;
+  if length(s2) = 1 then
+    s2 := '0' + s2;
   s := s + s2;
   s2 := long2str(y);
   while length(s2) < 4 do
@@ -73,7 +75,7 @@ begin;  {original code taken from the "date" function in ddscott.pas}
   end;
   s := s + s2;
 
-  {return result}
+     {return result}
   Todays_Date := s;
 end; {todays_date}
 
@@ -113,7 +115,8 @@ end;
 function UpCaseStr;
 var i: integer;
 begin
-  for i := 1 to length(s3) do s3[i] := upcase(s3[i]);
+  for i := 1 to length(s3) do
+    s3[i] := upcase(s3[i]);
   UpcaseStr := s3;
 end;
 
@@ -277,7 +280,8 @@ end;
 
 function FindSub;
 begin
-  if pos(upcasestr(s1), upcasestr(s2)) > 0 then findsub := True
+  if pos(upcasestr(s1), upcasestr(s2)) > 0 then
+    findsub := True
   else findsub := False;
 end;
 

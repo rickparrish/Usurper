@@ -2599,7 +2599,8 @@ begin
 
   {rewrite}
  {$I-}rewrite(monsterfile);{$I+}
-  if IOResult <> 0 then unable_to_create(Monfile);
+  if IOResult <> 0 then
+    unable_to_create(Monfile);
 
   {**Level 1 monsters **}
 
@@ -5043,7 +5044,8 @@ begin
 
   {close}
  {$I-}Close(monsterfile);{$I+}
-  if IOResult <> 0 then unable_to_close(Monfile);
+  if IOResult <> 0 then
+    unable_to_close(Monfile);
 
 end;
 

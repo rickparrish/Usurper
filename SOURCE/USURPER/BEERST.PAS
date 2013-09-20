@@ -135,20 +135,33 @@ begin
 
   n := 1;
 
-  if styrka > 5 then Inc(n);
-  if styrka > 10 then Inc(n);
-  if styrka > 15 then Inc(n);
+  if styrka > 5 then
+    Inc(n);
+  if styrka > 10 then
+    Inc(n);
+  if styrka > 15 then
+    Inc(n);
 
-  if styrka > 75 then Inc(n);
-  if styrka > 150 then Inc(n);
-  if styrka > 250 then Inc(n);
-  if styrka > 350 then Inc(n);
-  if styrka > 450 then Inc(n);
-  if styrka > 550 then Inc(n);
-  if styrka > 650 then Inc(n);
-  if styrka > 750 then Inc(n);
-  if styrka > 850 then Inc(n);
-  if styrka > 950 then Inc(n);
+  if styrka > 75 then
+    Inc(n);
+  if styrka > 150 then
+    Inc(n);
+  if styrka > 250 then
+    Inc(n);
+  if styrka > 350 then
+    Inc(n);
+  if styrka > 450 then
+    Inc(n);
+  if styrka > 550 then
+    Inc(n);
+  if styrka > 650 then
+    Inc(n);
+  if styrka > 750 then
+    Inc(n);
+  if styrka > 850 then
+    Inc(n);
+  if styrka > 950 then
+    Inc(n);
 
   orkar := n;
 
@@ -248,7 +261,8 @@ procedure Beer_Stealing;
     s := '';
     if poor > 0 then
     begin
-      d(config.textcolor, 'But in the distance you can hear ' + uplc + polare + 's' + config.textcol1 + ' terrifying screams!');
+      d(config.textcolor, 'But in the distance you can hear ' + uplc + polare + 's' + config.textcol1 +
+        ' terrifying screams!');
       d(config.textcolor, 'The dogs probably got hold of something...');
       s := ' Poor ' + uplc + polare + config.textcol1 + ' was left behind, chased by another bunch of dogs!';
     end;
@@ -273,13 +287,20 @@ procedure Beer_Stealing;
   begin
     pstam := player.stamina;
     risk := 2;
-    if (player.class = Assassin) or (player.class = Jester) then risk := risk + 2;
-    if player.agility > 10 then Inc(risk);
-    if player.agility > 20 then Inc(risk);
-    if player.agility > 30 then Inc(risk);
-    if player.agility > 50 then Inc(risk);
-    if player.agility > 70 then Inc(risk);
-    if player.agility > 90 then Inc(risk);
+    if (player.class = Assassin) or (player.class = Jester) then
+      risk := risk + 2;
+    if player.agility > 10 then
+      Inc(risk);
+    if player.agility > 20 then
+      Inc(risk);
+    if player.agility > 30 then
+      Inc(risk);
+    if player.agility > 50 then
+      Inc(risk);
+    if player.agility > 70 then
+      Inc(risk);
+    if player.agility > 90 then
+      Inc(risk);
 
     repeat
       pause;
@@ -334,7 +355,8 @@ begin
 
     case ch of
       '?': begin {menu}
-        if player.expert = True then display_menu(True, False)
+        if player.expert = True then
+          display_menu(True, False)
         else display_menu(False, False);
       end;
       'S': begin {status}
@@ -342,7 +364,7 @@ begin
       end;
       'G': begin {steal barrels}
 
-        {update online location}
+                 {update online location}
         onliner.location := onloc_onaraid;
         onliner.doing := location_desc(onliner.location);
         add_onliner(OUpdateLocation, Onliner);
@@ -357,15 +379,23 @@ begin
         end else
         begin
           dogs := random(2) + 5;
-          if player.level > 10 then dogs := dogs + random(5) + 2;
-          if player.level > 20 then dogs := dogs + random(5) + 2;
-          if player.level > 30 then dogs := dogs + random(5) + 2;
-          if player.level > 40 then dogs := dogs + random(5) + 2;
-          if player.level > 50 then dogs := dogs + random(5) + 2;
-          if player.level > 60 then dogs := dogs + random(5) + 2;
-          if player.level > 70 then dogs := dogs + random(5) + 2;
+          if player.level > 10 then
+            dogs := dogs + random(5) + 2;
+          if player.level > 20 then
+            dogs := dogs + random(5) + 2;
+          if player.level > 30 then
+            dogs := dogs + random(5) + 2;
+          if player.level > 40 then
+            dogs := dogs + random(5) + 2;
+          if player.level > 50 then
+            dogs := dogs + random(5) + 2;
+          if player.level > 60 then
+            dogs := dogs + random(5) + 2;
+          if player.level > 70 then
+            dogs := dogs + random(5) + 2;
 
-          if dogs > 40 then dogs := 40;
+          if dogs > 40 then
+            dogs := 40;
 
           Dec(player.darknr);
 
@@ -557,7 +587,8 @@ begin
 
               if polare <> '' then
               begin
-                if pl0^.sex = 1 then male := True
+                if pl0^.sex = 1 then
+                  male := True
                 else male := False;
                 cstam := pl0^.stamina;
 
@@ -605,12 +636,14 @@ begin
                 delay2(500);
                 if random(3) = 0 then
                 begin
-                  if male = True then sd(4, ' but ignores him!')
+                  if male = True then
+                    sd(4, ' but ignores him!')
                   else sd(4, ' but ignores her!');
 
                 end else
                 begin
-                  if male = True then sd(14, ' and runs after him!')
+                  if male = True then
+                    sd(14, ' and runs after him!')
                   else sd(14, ' and runs after her!');
                   Inc(poor);
                   Dec(dogs);
@@ -623,7 +656,8 @@ begin
 
               if dogs > 0 then
               begin
-                if dogs > 1 then d(config.textcolor, 'You are still facing ' + uwhite + commastr(dogs) + config.textcol1 + ' angry dogs!')
+                if dogs > 1 then
+                  d(config.textcolor, 'You are still facing ' + uwhite + commastr(dogs) + config.textcol1 + ' angry dogs!')
                 else d(config.textcolor, 'You are still facing ' + uwhite + commastr(dogs) + config.textcol1 + ' angry dog!');
                 crlf;
                 menu('(R)un for your life!');
@@ -649,12 +683,14 @@ begin
                       d(4, 'You fade away into the darkness...listening to');
                       d(4, 'the dogs barking...');
 
-                      if turbo = False then solo_dogs_news
+                      if turbo = False then
+                        solo_dogs_news
                       else
                       begin
                         newsy(True,
                           'Burglary Attempt!',
-                          ' ' + uplc + player.name2 + config.textcol1 + ' and ' + uplc + polare + config.textcol1 + ' tried to steal Beer from the Inn!',
+                          ' ' + uplc + player.name2 + config.textcol1 + ' and ' + uplc + polare +
+                          config.textcol1 + ' tried to steal Beer from the Inn!',
                           ' Fortunately, a bunch of watchdogs took care of ' + uplc + player.name2 + config.textcol1 + '.',
                           ' ' + uplc + polare + config.textcol1 + ' fled, and got away.',
                           '',
@@ -726,7 +762,8 @@ begin
               pause;
               if dogs > 0 then
               begin
-                if dogs > 1 then d(config.textcolor, 'You are still facing ' + commastr(dogs) + ' angry dogs!')
+                if dogs > 1 then
+                  d(config.textcolor, 'You are still facing ' + commastr(dogs) + ' angry dogs!')
                 else d(config.textcolor, 'You are still facing ' + commastr(dogs) + ' angry dog!');
                 crlf;
                 menu('(R)un for your life!');
@@ -829,9 +866,11 @@ begin
           {the saga continues}
           crlf;
           barrels := (player.level * 5) + (random(10));
-          if polare <> '' then barrels := barrels + random(20);
+          if polare <> '' then
+            barrels := barrels + random(20);
 
-          d(config.textcolor, 'You sneak in to the Storage Room. There are ' + uwhite + commastr(barrels) + config.textcol1 + ' barrels in here!');
+          d(config.textcolor, 'You sneak in to the Storage Room. There are ' + uwhite + commastr(barrels) +
+            config.textcol1 + ' barrels in here!');
 
           xx := 0;
           newdogs := 0;
@@ -866,7 +905,8 @@ begin
               Dec(cstam, 3);
               crlf;
               pause;
-              if cstam < 1 then turbo := False;
+              if cstam < 1 then
+                turbo := False;
             end;
             crlf;
             sd(5, 'You have stolen ');
@@ -876,7 +916,8 @@ begin
             sd(5, ' barrels left)');
             crlf;
 
-            if pstam < 10 then d(4, 'You should flee!')
+            if pstam < 10 then
+              d(4, 'You should flee!')
             else d(4, 'You are in good health.');
 
             if arrived = True then
@@ -884,7 +925,8 @@ begin
               if (cstam < 10) and (cstam > 0) then
               begin
                 d(global_plycol, polare + ured + ' is in BAD SHAPE!');
-              end else if cstam >= 10 then
+              end else
+              if cstam >= 10 then
               begin
                 d(global_plycol, polare + ured + ' is in good health.');
               end else
@@ -941,7 +983,8 @@ begin
 
                 if capable > 1 then
                 begin
-                  d(global_plycol, polare + config.textcol1 + ' grabs ' + uwhite + commastr(capable) + config.textcol1 + ' barrels and places them in the cart.');
+                  d(global_plycol, polare + config.textcol1 + ' grabs ' + uwhite + commastr(capable) +
+                    config.textcol1 + ' barrels and places them in the cart.');
                 end else
                 begin
                   d(global_plycol, polare + config.textcol1 + ' grabs a barrel and places it in the cart.');
@@ -1060,7 +1103,8 @@ begin
                       begin
                         d(12, polare + ' was bitten!');
                         Dec(cstam, 2);
-                        if cstam < 1 then d(12, polare + ' IS LAYING STUNNED ON THE GROUND!');
+                        if cstam < 1 then
+                          d(12, polare + ' IS LAYING STUNNED ON THE GROUND!');
                       end else
                       begin
                         d(14, polare + ' managed to avoid the attack!');
@@ -1225,7 +1269,8 @@ begin
                 {news-paper}
                 newsy(True,
                   'Successful Burglary!',
-                  ' ' + uplc + player.name2 + config.textcol1 + ' and ' + uplc + polare + config.textcol1 + ' stole barrels from the Inn!',
+                  ' ' + uplc + player.name2 + config.textcol1 + ' and ' + uplc + polare + config.textcol1 +
+                  ' stole barrels from the Inn!',
                   ' ' + uplc + polare + config.textcol1 + ' got away with the loot!',
                   ' ' + uplc + player.name2 + config.textcol1 + ' wasn''t so lucky!',
                   '',
@@ -1244,12 +1289,14 @@ begin
             begin
               if (turbo = True) and (cstam < 1) then
               begin
-                if random(3) = 0 then s := ' (Nice Dogs!)'
+                if random(3) = 0 then
+                  s := ' (Nice Dogs!)'
                 else s := '';
 
                 newsy(True,
                   'Pathetic Thieves!',
-                  ' ' + uplc + player.name2 + config.textcol1 + ' and ' + uplc + polare + config.textcol1 + ' tried to steal Beer barrels' + ' from the Inn.',
+                  ' ' + uplc + player.name2 + config.textcol1 + ' and ' + uplc + polare + config.textcol1 +
+                  ' tried to steal Beer barrels' + ' from the Inn.',
                   ' They were both finished off by the watchdogs!',
                   s,
                   '',
@@ -1328,12 +1375,14 @@ begin
             begin
               if (xx > 0) and (cstam > 0) then
               begin
-                if male = True then d(config.textcolor, 'Of course you must give ' + uplc + polare + config.textcol1 + ' his share!')
+                if male = True then
+                  d(config.textcolor, 'Of course you must give ' + uplc + polare + config.textcol1 + ' his share!')
                 else d(config.textcolor, 'Of course you must give ' + uplc + polare + config.textcol1 + ' her share!');
                 xx := xx div 2;
 
               end;
-              if (cstam > 0) and (yy > 0) then yy := yy div 2;
+              if (cstam > 0) and (yy > 0) then
+                yy := yy div 2;
               if npc = False then
               begin
 
@@ -1377,7 +1426,8 @@ begin
                     mkstring(9, underscore),
                     'You joined ' + uplc + player.name2 + config.textcol1 + ' on a burglary tour!',
                     'The watchdogs got you! You earned nothing!',
-                    uplc + player.name2 + config.textcol1 + ' got all the loot! (' + uyellow + commastr(xx * 2) + config.textcol1 + ')',
+                    uplc + player.name2 + config.textcol1 + ' got all the loot! (' + uyellow +
+                    commastr(xx * 2) + config.textcol1 + ')',
                     '',
                     '',
                     '',
@@ -1403,11 +1453,13 @@ begin
               end else
               begin
                 s := ' They got away with ' + uwhite + commastr(stolen) + config.textcol1 + ' barrels!';
-                if stolen < 1 then s2 := ' (they proved to be lousy thieves)';
+                if stolen < 1 then
+                  s2 := ' (they proved to be lousy thieves)';
               end;
               newsy(True,
                 'Successful Burglary!',
-                ' ' + uplc + player.name2 + config.textcol1 + ' and ' + uplc + polare + config.textcol1 + ' stole Beer barrels from the Inn!',
+                ' ' + uplc + player.name2 + config.textcol1 + ' and ' + uplc + polare + config.textcol1 +
+                ' stole Beer barrels from the Inn!',
                 s,
                 s2,
                 '',

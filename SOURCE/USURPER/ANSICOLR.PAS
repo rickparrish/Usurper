@@ -1,48 +1,48 @@
 {$IFNDEF MSDOS}
 {$I DEFINES.INC}
 {$ENDIF}
-{*********************************************************}
-{*                   ANSICOLR.PAS 1.0                    *}
-{*            Copyright (c) Ì ·ETATech Ì 1991.           *}
-{*                 All rights reserved.                  *}
-{*********************************************************}
-{ Wed  12-18-1991 v1.0                                    }
-{ This unit is patterned after the TurboPower OPCOLOR     }
-{ unit.  OPCOLOR allows the programmer to specify screen  }
-{ colors with easily rememberable names like "RedOnBlue". }
-{ I wanted a way to specify the same type of color        }
-{ definitions, but have the ANSI escape sequence for that }
-{ combination to be the output.  Hopfully this unit will  }
-{ accomplish this task making ANSI colors easier for the  }
-{ programmer.                                             }
+ {*********************************************************}
+ {*                   ANSICOLR.PAS 1.0                    *}
+ {*            Copyright (c) Ì ·ETATech Ì 1991.           *}
+ {*                 All rights reserved.                  *}
+ {*********************************************************}
+ { Wed  12-18-1991 v1.0                                    }
+ { This unit is patterned after the TurboPower OPCOLOR     }
+ { unit.  OPCOLOR allows the programmer to specify screen  }
+ { colors with easily rememberable names like "RedOnBlue". }
+ { I wanted a way to specify the same type of color        }
+ { definitions, but have the ANSI escape sequence for that }
+ { combination to be the output.  Hopfully this unit will  }
+ { accomplish this task making ANSI colors easier for the  }
+ { programmer.                                             }
 
-{ The naming conventions of ANSICOLR are similar to that  }
-{ of OPCOLOR except that all names begin with a lower     }
-{ case "a" (ie. aRedOnBlack).  This will return the ANSI  }
-{ escape code that will enable this color combination.    }
-{ All low intensity forground combinations start by       }
-{ setting the previous colors off, then define the new    }
-{ color set.  To get a color set with the foreground set  }
-{ to blink, just preface the color combination with "ab"  }
-{ (ie. abRedOnBlue).  Each low intensity color combination}
-{ is 10 char., each high intensity color set is 12 char.  }
-{ and each blinking color set is 14 char. long.           }
+ { The naming conventions of ANSICOLR are similar to that  }
+ { of OPCOLOR except that all names begin with a lower     }
+ { case "a" (ie. aRedOnBlack).  This will return the ANSI  }
+ { escape code that will enable this color combination.    }
+ { All low intensity forground combinations start by       }
+ { setting the previous colors off, then define the new    }
+ { color set.  To get a color set with the foreground set  }
+ { to blink, just preface the color combination with "ab"  }
+ { (ie. abRedOnBlue).  Each low intensity color combination}
+ { is 10 char., each high intensity color set is 12 char.  }
+ { and each blinking color set is 14 char. long.           }
 
-{ I retain the copyright for this unit, but release it for}
-{ public use with no royalties required.  You may use it  }
-{ in any program that it would be of assistance to you.   }
-{ In the same regard, I offer NO WARANTEE what so ever    }
-{ either express or implied.                              }
+ { I retain the copyright for this unit, but release it for}
+ { public use with no royalties required.  You may use it  }
+ { in any program that it would be of assistance to you.   }
+ { In the same regard, I offer NO WARANTEE what so ever    }
+ { either express or implied.                              }
 
-{ If you come up with enhancements or changes to this unit}
-{ I would appreciate knowing about them as I would like to}
-{ keep the unit up to date.  I can be reached at the      }
-{ places listed below:                                    }
+ { If you come up with enhancements or changes to this unit}
+ { I would appreciate knowing about them as I would like to}
+ { keep the unit up to date.  I can be reached at the      }
+ { places listed below:                                    }
 
-{ ·ETATech Computer Consulting           The Paradigm BBS }
-{ P. O. Box 566742                           404/671-1581 }
-{ Atlanta, GA  30356-6013                  1200-19200 HST }
-{*********************************************************}
+ { ·ETATech Computer Consulting           The Paradigm BBS }
+ { P. O. Box 566742                           404/671-1581 }
+ { Atlanta, GA  30356-6013                  1200-19200 HST }
+ {*********************************************************}
 
 unit AnsiColr; {Usurper - this ansi unit was taken from the SWAG archive}
 
