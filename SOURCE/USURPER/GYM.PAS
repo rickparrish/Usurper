@@ -29,7 +29,7 @@ unit Gym; {Usurper - the Gym}
 interface
 
 uses
-  Init;
+  Init {$IFDEF FPC}, RPPort{$ENDIF};
 
 type BarrelRec = record     {Barrel Lifter top list, record structure}
     Name:      s30;         {player name}
@@ -1449,7 +1449,7 @@ begin {*Tug_Of_War*}
           mkstring(22, underscore),
           uplc + player.name2 + config.textcol1 + ' invited you to a Tug-of-War Competition!',
           'You were selected to fight against ' + uplc + player.name2 + config.textcol1 + ' Team.',
-          'Your Team : ' + uplc + +away_team[1].Name,
+          'Your Team : ' + uplc + away_team[1].Name,
           '            ' + away_team[2].Name,
           '            ' + away_team[3].Name,
           '            ' + away_team[4].Name,

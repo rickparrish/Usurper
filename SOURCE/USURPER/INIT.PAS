@@ -29,6 +29,11 @@ unit Init; {Usurper Init & Structure code}
 interface  {see CMS.pas for more constants.
             see InitGods.pas for God related stuff}
 
+{$IFDEF FPC}
+  uses
+    RPPort;
+{$ENDIF}
+
 {$IFDEF MSDOS}
 type
   smallint  = System.integer;

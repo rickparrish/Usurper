@@ -29,6 +29,10 @@ unit TELNET;
  INTERFACE
 (*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-*)
 
+{$IFDEF FPC}
+ {$mode delphi}
+{$ENDIF}
+
 uses SockFunc, SockDef, Combase, BufUnit, Threads
 
      {$IFDEF WIN32}

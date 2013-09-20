@@ -29,7 +29,7 @@ unit Various; {Usurper - Various Routines I}
 interface
 
 uses
-  Init, InitGods;
+  Init, InitGods {$IFDEF FPC}, RPPort{$ENDIF};
 
 {Miscellaneous}
 procedure Zero_Player(var target: UserRec);

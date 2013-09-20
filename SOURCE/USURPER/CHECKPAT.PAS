@@ -66,8 +66,19 @@ implementation
 {$IFDEF MSDOS}
 {$L checkpap}
 {$ENDIF}
-function checkpath(var Name; inflags: integer; var drive; var dir; var fname; var ext; var fullpath): integer; external;
-function exists(var fname): boolean; external;
+function checkpath(var Name; inflags: integer; var drive; var dir; var fname; var ext; var fullpath): integer; {$IFDEF MSDOS}external;{$ENDIF}
+{$IFNDEF MSDOS}
+begin
+  WriteLn('REEPORT CHECKPAT checkpath'); Halt;
+end;
+{$ENDIF}
+
+function exists(var fname): boolean; {$IFDEF MSDOS}external;{$ENDIF}
+{$IFNDEF MSDOS}
+begin
+  WriteLn('REEPORT CHECKPAT exists'); Halt;
+end;
+{$ENDIF}
 
 
 end.

@@ -372,7 +372,7 @@ begin
           {news-paper}
           newsy(True,
             'Murderer killed by City Guards!',
-            ' ' + uplc + player.name2 + +config.textcol1 + ' was cut down after a ',
+            ' ' + uplc + player.name2 + config.textcol1 + ' was cut down after a ',
             ' fierce fight with the city police.',
             '',
             '',

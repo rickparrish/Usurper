@@ -39,7 +39,7 @@ uses
   {$IFDEF MSDOS}Overlay, {$ENDIF} Dos, {$IFDEF MSDOS}InitOver, {$ENDIF}
   DDplus, Init, Jakob, Maint, Cms, SortPl, VarGods, GodWorld, UserHunc, Gamec, Byebyec, Mail,
   Various, Various2, Rating, Relation, Relatio2, Post_To, Online, File_Io, {$IFDEF MSDOS}OverXms, {$ENDIF}
-  Various3, News, Children, InitGods;
+  Various3, News, Children, InitGods {$IFDEF FPC}, RPPort{$ENDIF};
 
  {bard : singing...love & battle hymns}
  {half-elves : hypnotize}
@@ -572,8 +572,10 @@ begin {* Main Program *}
   ExitSave := Exitproc;
   Exitproc := @ByeBye;
 
-  {Setup New HeapHandler}
-  HeapError := @HeapHandler;
+  {$IFNDEF FPC}
+    {Setup New HeapHandler}
+    HeapError := @HeapHandler;
+  {$ENDIF}
 
   {Setup Beta version indicators}
   global_ubeta := False;  {jakob beta version}
@@ -1339,4 +1341,4 @@ begin {* Main Program *}
 
   until never; {Main loop *END*}
 
-end.ÿ{* Main Program END *}
+end.{* Main Program END *}

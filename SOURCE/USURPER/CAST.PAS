@@ -1557,7 +1557,7 @@ begin    {Cast_Spell *begin*}
     begin
       if fastgame = False then
       begin
-        d(global_moncol, 'The Demon' + config.textcol1 + +' claws ' + uplc + foe + config.textcol1 + ' extremely Hard!');
+        d(global_moncol, 'The Demon' + config.textcol1 + ' claws ' + uplc + foe + config.textcol1 + ' extremely Hard!');
       end;
       Dec(temp2.hps, (200 + random(101)));
     end else

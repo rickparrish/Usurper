@@ -37,7 +37,7 @@ uses
   Plvsplc, Statusc, Mail,
   News, Npc_Chec, Plcomp,
   Various, Various2, Various3,
-  Online, File_Io;
+  Online, File_Io {$IFDEF FPC}, RPPort{$ENDIF};
 
 const maxboys = 5; {max people that can be in a fist-fight}
 

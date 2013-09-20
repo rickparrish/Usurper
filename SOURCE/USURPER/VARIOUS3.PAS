@@ -3376,7 +3376,7 @@ begin
     sd(config.textcolor, 'NPCs are allowed to have faith. They will interact with the Gods.');
   end else
   begin
-    sd(config.textcolor, 'NPCs are ' + ulred + 'NOT' + +config.textcol1 + +' allowed to interact with the Gods.');
+    sd(config.textcolor, 'NPCs are ' + ulred + 'NOT' + config.textcol1 + ' allowed to interact with the Gods.');
   end;
   d(1, config_nr(153));
 
@@ -3454,8 +3454,10 @@ begin
     d(setcol2, 'XMS' + config.textcol1 + ' memory utilized for speed.');
 {$ENDIF}
 
-  {memory availible}
+{$IFNDEF FPC}
+{memory availible}
   d(config.textcolor, 'Free Memory Available in the Heap: ' + setcol + commastr(memavail));
+{$ENDIF}
   crlf;
 end; {system_tech .end.}
 

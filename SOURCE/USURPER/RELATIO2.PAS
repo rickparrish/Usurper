@@ -133,7 +133,7 @@ begin
     ChildHealth_Normal: Result := 'normal';          {normal health, default}
     ChildHealth_Poisoned: Result := ulred + 'poisoned!'; {poisoned}
     ChildHealth_Cursed: Result := ulred + 'cursed!'; {cursed, curses can only be ordained by Gods}
-    ChildHealth_Depressed: Result := +ulred + '*depressed*'; {depressed after a divorce}
+    ChildHealth_Depressed: Result := ulred + '*depressed*'; {depressed after a divorce}
   end; {case .end.}
 
   {return result}
@@ -1071,7 +1071,7 @@ begin {called from npcmaint.pas. player marries the first girl/boy he can find}
                 spouse.ai,
                 False,
                 mailrequest_nothing,
-                '', +uyellow + 'Happy Child!' + config.textcol1,
+                '', uyellow + 'Happy Child!' + config.textcol1,
                 'You receive ' + uwhite + commastr(x) + config.textcol1 + ' experience points for making your',
                 sex7[child.sex] + ' ' + ukidc + child.Name + config.textcol1 + ' extremely happy by marrying',
                 uplc + marry.name2 + config.textcol1 + ' the ' + classnames[marry.class] + '.',

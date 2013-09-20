@@ -29,7 +29,7 @@ unit InitGods; {Usurper - God init/structure code}
 interface
 
 uses
-  Init;
+  Init {$IFDEF FPC}, RPPort{$ENDIF};
 
 const global_supreme_creator = 'Manwe'; {the boss God}
 

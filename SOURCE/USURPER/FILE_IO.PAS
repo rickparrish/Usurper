@@ -29,7 +29,7 @@ unit File_IO; {Usurper - File I/O routines
 interface
 
 uses
-  Init, InitGods, Gym;
+  Init, InitGods, Gym {$IFDEF FPC}, RPPort{$ENDIF};
 
 var  {Global_Textbuffer:
       4095 should it read if you are looking for speed. I got low on

@@ -60,7 +60,7 @@ uses
   EleNorm, RPPort;
 
 var LastChar: char;
-  DidInit:    boolean = False;
+  DidInit:    boolean;
 
 {$ENDIF}
 
@@ -263,7 +263,12 @@ begin
   if (DidInit) then
     Exit;
   DidInit := True;
-  Com_StartUp(2);
+  {$IFDEF GO32V2}
+    Com_StartUp(1);
+  {$ENDIF}
+  {$IFNDEF GO32V2}
+    Com_StartUp(2);
+  {$ENDIF}
   Com_SetDontClose(True);
   Com_OpenQuick(port_num);
   async_init_fossil := True;
@@ -659,4 +664,6 @@ end;
 
 {$ENDIF}
 
+begin
+  DidInit := false;
 end.

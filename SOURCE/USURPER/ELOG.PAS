@@ -23,7 +23,7 @@ implementation   (********************************)
 
 uses
   Crt, Dos, DDPlus,
-  Netfilep, Jakob, File_Io; {jakob}
+  Netfilep, Jakob, File_Io {$IFDEF FPC}, RPPort{$ENDIF}; {jakob}
 
 {$IFDEF MSDOS}
 procedure GetDate1(var Month: word; var day: word; var year: word);

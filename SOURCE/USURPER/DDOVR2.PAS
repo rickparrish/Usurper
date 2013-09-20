@@ -28,6 +28,11 @@ const
 
 implementation
 
+{$IFDEF FPC}
+  uses
+    RPPort;
+{$ENDIF}
+
 const
 {$IFNDEF LINUX}
   DIRECTORY_SEPARATOR = '\';

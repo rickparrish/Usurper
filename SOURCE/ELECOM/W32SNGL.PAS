@@ -30,6 +30,10 @@ unit W32SNGL;
  INTERFACE
 (*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-*)
 
+{$IFDEF FPC}
+  {$mode delphi}
+{$ENDIF}
+
 uses Windows, Combase, BufUnit, Threads
      {$IFDEF VirtualPascal}
        ,Use32

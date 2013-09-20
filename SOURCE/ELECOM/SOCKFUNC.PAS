@@ -28,6 +28,10 @@ s**
 **      @(#)socket.h    7.2 (Berkeley) 12/30/87
 -+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-*)
 
+{$IFDEF FPC}
+  {$mode delphi}
+{$ENDIF}
+
 uses
 {$IFDEF OS2}
   OS2Def,
@@ -353,7 +357,12 @@ end; { func. SockShutDown }
 (*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-*)
 
 function SockGetSockAddr(_SockDesc: tSockDesc; var _SockAddr: tSockAddr): Longint;
+{$IFDEF FPC}
+var sLength: SmallInt;
+{$ENDIF}
+{$IFNDEF FPC}
 var sLength: Integer;
+{$ENDIF}
 begin
   FillChar(_SockAddr, SizeOf(_SockAddr), #00);
   sLength := SizeOf(_SockAddr);
@@ -423,9 +432,11 @@ end; { func. SockIoCtlSocket }
 
 function SockGetSockOpt(_SockDesc: tSockDesc; _Level, _OptName: Integer;
                         _OptVal: PChar; var _OptLen: Integer): Longint;
+var Len: SmallInt;
 begin
   {$IFDEF WIN32}
-    Result := GetSockOpt(_SockDesc, _Level, _OptName, _OptVal, _OptLen);
+    Result := GetSockOpt(_SockDesc, _Level, _OptName, _OptVal, Len);
+    _OptLen := Len;
   {$ENDIF}
 
   {$IFDEF OS2}
@@ -467,7 +478,8 @@ begin
      Result := (SockSelect(_SockDesc) > 00);
    {$ELSE}
      fd_Zero(ReadFDS);
-     fd_Set(_SockDesc, ReadFDS);
+     fd_Set(_SockDesc, ReadFDS);
+
 
      Temp := Select(_SockDesc + 01, @ReadFDS, nil, nil, 0);
      if (Temp > 0) then

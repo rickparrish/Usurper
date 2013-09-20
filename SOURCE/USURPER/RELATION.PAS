@@ -30,7 +30,7 @@ unit Relation; {Usurper - relation routines 1/2
 interface
 
 uses
-  Init;
+  Init {$IFDEF FPC}, RPPort{$ENDIF};
 
 
 
@@ -2435,7 +2435,7 @@ begin
 
       {news-paper}
       newsy(True, 'Childbirth!',
-        ' ' + uplc + pl1.name2 + config.textcol1 + ' the ' + +race_display(2, pl1.race, 0) +
+        ' ' + uplc + pl1.name2 + config.textcol1 + ' the ' + race_display(2, pl1.race, 0) +
         ', delivered a baby ' + sex6[child.sex] + '!',
         ' ' + s2,
         '' + sr3,
