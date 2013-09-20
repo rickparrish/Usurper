@@ -50,7 +50,7 @@
     <Version Value="11"/>
     <PathDelim Value="\"/>
     <Target>
-      <Filename Value="..\..\bin\$(TargetCPU)-$(TargetOS)\EDITOR32.EXE"/>
+      <Filename Value="..\..\bin\$(TargetCPU)-$(TargetOS)\EDITORWF"/>
     </Target>
     <SearchPaths>
       <IncludeFiles Value="..\common;..\elecom;$(ProjOutDir)"/>

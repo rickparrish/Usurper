@@ -37,7 +37,8 @@ program Editor;
 
 
 uses
- {$IFDEF MSDOS}Overlay, {$ENDIF} Init, CfgVal, JakobE, muffi2, extra, file_io, Upgrade;
+ {$IFDEF MSDOS}Overlay, {$ENDIF} Init, CfgVal, JakobE, muffi2, extra, file_io,
+ Upgrade {$IFDEF FPC}, RPPort{$ENDIF};
 
  {---$O Addit}
  {---$O CfgHelp}
@@ -204,15 +205,19 @@ begin
   vision_is_running := True;
 
   {Run the Editor Application}
+  {$IFNDEF FPC}
   i := memavail;
   if i <> memavail then
   begin
     wrl('Out of Heap space! (give me some memory!)');
   end else
   begin
+  {$ENDIF}
     MyApp.init;
     MyApp.run;
     MyApp.done;
+  {$IFNDEF FPC}
   end;
+  {$ENDIF}
 
 end. {End Of Program}

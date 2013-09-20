@@ -31,7 +31,7 @@ procedure UpgradeIfNecessary;
 implementation
 
 uses
-  Crt, File_IO, Init;
+  Crt, File_IO, Init {$IFDEF FPC}, RPPort{$ENDIF};
 
 const
   { Constants to use in version detection }

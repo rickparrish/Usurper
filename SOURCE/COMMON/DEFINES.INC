@@ -10,4 +10,5 @@
   {$mode tp}
   {$H-}
   {$V-}
+  {$DEFINE USE32} // HELPFILE.PAS needs this to use the right ASM block
 {$ENDIF}

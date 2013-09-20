@@ -6,19 +6,28 @@ unit RPPort;
 interface
 
 {$IFDEF WIN32}
-uses
-  Windows;
-
+  uses
+    Windows;
 {$ENDIF}
 
 type
-{$IFNDEF WIN32}
-  TCharInfo = packed record
-    Ch:   char;
-    Attr: byte;
-  end;
-{$ENDIF}
+  {$IFDEF FPC}
+    SmallWord = System.Word;
+  {$ENDIF}
+  {$IFNDEF WIN32}
+    TCharInfo = packed record
+      Ch:   char;
+      Attr: byte;
+    end;
+  {$ENDIF}
   TScreenBuf = array[1..25, 1..80] of TCharInfo; // REETODO Don't hardcode to 80x25
+
+{$IFDEF FPC}
+  var
+    FileModeReadWrite: Integer;
+    TextModeRead: Integer;
+    TextModeReadWrite: Integer;
+{$ENDIF}
 
 procedure RPGotoXY(xy: SmallWord);
 procedure RPHideCursor;
@@ -35,19 +44,30 @@ function RPWhereXY: SmallWord;
 
 implementation
 
-uses
-  {$IFDEF OS2}OS2Base,{$ENDIF} VPUtils, VpSysLow, VpUsrLow;
+{$IFDEF FPC}
+  uses
+    Crt;
+{$ENDIF}
+{$IFDEF VPASCAL}
+  uses
+    {$IFDEF OS2}OS2Base,{$ENDIF} VPUtils, VpSysLow, VpUsrLow;
+{$ENDIF}
 
 {$IFDEF WIN32}
-var
-  StdOut: THandle;
-
+  var
+    StdOut: THandle;
 {$ENDIF}
 
 // REENOTE Can't to platform specific since cursor position is stored internally in VP units
 procedure RPGotoXY(xy: SmallWord);
 begin
-  SysTVSetCurPos(xy and $00FF, xy and $FF00 shr 8);
+  {$IFDEF VPASCAL}
+    SysTVSetCurPos(xy and $00FF, xy and $FF00 shr 8);
+  {$ENDIF}
+  {$IFNDEF VPASCAL}
+    // REETODO This doesn't work right if in a window()
+    GotoXY(xy and $00FF, xy and $FF00 shr 8);
+  {$ENDIF}
 end;
 
 {$IFDEF WIN32}
@@ -59,7 +79,6 @@ begin
   CCI.bVisible := False;
   SetConsoleCursorInfo(StdOut, CCI);
 end;
-
 {$ENDIF}
 {$IFNDEF WIN32}
 procedure RPHideCursor;
@@ -71,7 +90,12 @@ end;
 
 function RPLockFile(handle, start, length: longint): longint;
 begin
-  RPLockFile := SysLockFile(handle, start, length);
+  {$IFDEF VPASCAL}
+    RPLockFile := SysLockFile(handle, start, length);
+  {$ENDIF}
+  {$IFNDEF VPASCAL}
+    WriteLn('RPPORT RPPORT RPLockFile'); Halt;
+  {$ENDIF}
 end;
 
 { REETODO Should detect screen size }
@@ -93,7 +117,6 @@ begin
   DestRect.Bottom := 24;
   WriteConsoleOutput(GetStdHandle(STD_OUTPUT_HANDLE), @screenBuf[1][1], BufSize, WritePos, DestRect);
 end;
-
 {$ENDIF}
 {$IFDEF OS2}
 procedure RPRestoreScreen(var screenBuf: TScreenBuf);
@@ -103,7 +126,6 @@ begin
   Size := SizeOf(TScreenBuf);
   VioWrtCellStr(@screenBuf, Size, 0, 0, 0);
 end;
-
 {$ENDIF}
 {$IFDEF LINUX}
 procedure RPRestoreScreen(var screenBuf: TScreenBuf);
@@ -119,7 +141,6 @@ begin
     end;
   end;
 end;
-
 {$ENDIF}
 
 { REETODO Should detect screen size }
@@ -141,7 +162,6 @@ begin
   SourceRect.Bottom := 24;
   ReadConsoleOutput(GetStdHandle(STD_OUTPUT_HANDLE), @screenBuf[1][1], BufSize, ReadPos, SourceRect);
 end;
-
 {$ENDIF}
 {$IFDEF OS2}
 procedure RPSaveScreen(var screenBuf: TScreenBuf);
@@ -151,14 +171,12 @@ begin
   Size := SizeOf(TScreenBuf);
   VioReadCellStr(screenBuf, Size, 0, 0, 0);
 end;
-
 {$ENDIF}
 {$IFDEF LINUX}
 procedure RPSaveScreen(var screenBuf: TScreenBuf);
 begin
   Move(SysTVGetSrcBuf^, screenBuf, SizeOf(TScreenBuf));
 end;
-
 {$ENDIF}
 
 {$IFDEF WIN32}
@@ -169,7 +187,6 @@ begin
   GetConsoleScreenBufferInfo(StdOut, CSBI);
   RPScreenSizeX := CSBI.srWindow.Right - CSBI.srWindow.Left + 1;
 end;
-
 {$ENDIF}
 {$IFNDEF WIN32}
 function RPScreenSizeX: word;
@@ -179,9 +196,7 @@ begin
   SysTVGetScrMode(@Size, False);
   RPScreenSizeX := Size.X;
 end;
-
 {$ENDIF}
-
 {$IFDEF WIN32}
 function RPScreenSizeY: word;
 var
@@ -190,7 +205,6 @@ begin
   GetConsoleScreenBufferInfo(StdOut, CSBI);
   RPScreenSizeY := CSBI.srWindow.Bottom - CSBI.srWindow.Top + 1;
 end;
-
 {$ENDIF}
 {$IFNDEF WIN32}
 function RPScreenSizeY: word;
@@ -200,7 +214,6 @@ begin
   SysTVGetScrMode(@Size, False);
   RPScreenSizeY := Size.Y;
 end;
-
 {$ENDIF}
 
 {$IFDEF WIN32}
@@ -213,7 +226,6 @@ begin
   WriteCoord.Y := y;
   WriteConsoleOutputAttribute(StdOut, @attr, 1, WriteCoord, NumWritten);
 end;
-
 {$ENDIF}
 {$IFNDEF WIN32}
 procedure RPSetAttrAt(x, y: SmallWord; attr: byte);
@@ -223,7 +235,6 @@ begin
   Ch := SysReadCharAt(x, y);
   SysWrtCharStrAtt(@Ch, 1, x, y, attr);
 end;
-
 {$ENDIF}
 
 {$IFDEF WIN32}
@@ -235,24 +246,32 @@ begin
   CCI.bVisible := True;
   SetConsoleCursorInfo(StdOut, CCI);
 end;
-
 {$ENDIF}
 {$IFNDEF WIN32}
 procedure RPShowCursor;
 begin
   ShowCursor;
 end;
-
 {$ENDIF}
 
 procedure RPSleep(ms: word);
 begin
-  SysCtrlSleep(ms);
+  {$IFDEF VPASCAL}
+    SysCtrlSleep(ms);
+  {$ENDIF}
+  {$IFNDEF VPASCAL}
+    Sleep(ms);
+  {$ENDIF}
 end;
 
 function RPUnLockFile(handle, start, length: longint): longint;
 begin
-  RPUnLockFile := SysUnLockFile(handle, start, length);
+  {$IFDEF VPASCAL}
+    RPUnLockFile := SysUnLockFile(handle, start, length);
+  {$ENDIF}
+  {$IFNDEF VPASCAL}
+    WriteLn('RPPORT RPPORT RPUnLockFIle'); Halt;
+  {$ENDIF}
 end;
 
 // REENOTE Can't to platform specific since cursor position is stored internally in VP units
@@ -260,7 +279,14 @@ function RPWhereXY: SmallWord;
 var
   X, Y: SmallWord;
 begin
-  SysGetCurPos(X, Y);
+  {$IFDEF VPASCAL}
+    SysGetCurPos(X, Y);
+  {$ENDIF}
+  {$IFNDEF VPASCAL}
+    // REETODO This doesn't work right if in a window()
+    X := WhereX;
+    Y := WhereY;
+  {$ENDIF}
   RPWhereXY := X + (Y shl 8);
 end;
 

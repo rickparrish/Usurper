@@ -30,7 +30,7 @@ interface
 uses
   App, Restore, ShadMenu,
   Objects, Drivers, Views,
-  Dialogs, Menus, Xboxes;
+  Dialogs, Menus, Xboxes {$IFDEF FPC}, RPPort{$ENDIF};
 
 const
 
@@ -1638,10 +1638,20 @@ var
   r:     trect;
   MyBackGround: pbackground;
   Event: Tevent;
+  {$IFDEF FPC}
+  VM:    TVideoMode;
+  {$ENDIF}
 begin
 
   {Tapplication.Init;}
   inherited Init;
+
+  {$IFDEF FPC}
+    VM.Col := 80;
+    VM.Row := 25;
+    VM.Color := True;
+    SetScreenVideoMode(VM);
+  {$ENDIF}
 
  {fixes so that streams work with the below stated,
   or else helpfile won't work}
@@ -1831,12 +1841,13 @@ var
   NewMode: word;
   R:       TRect;
 begin
-
-  NewMode := ScreenMode xor smFont8x8;
-  if NewMode and smFont8x8 <> 0 then
-    ShadowSize.X := 1
-  else ShadowSize.X := 2;
-  SetScreenMode(NewMode);
+  {$IFNDEF FPC}
+    NewMode := ScreenMode xor smFont8x8;
+    if NewMode and smFont8x8 <> 0 then
+      ShadowSize.X := 1
+    else ShadowSize.X := 2;
+    SetScreenMode(NewMode);
+  {$ENDIF}
 
   {Desktop^.GetExtent(R);}
   {TrashCan^.Reposition(R);

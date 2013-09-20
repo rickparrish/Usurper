@@ -52,7 +52,12 @@ type
     procedure HandleEvent(var Event: tevent); virtual;
     procedure GetData(var r); virtual;
     procedure SetData(var r); virtual;
-    function DataSize: word; virtual;
+    {$IFDEF FPC}
+      function DataSize: sw_word; virtual;
+    {$ENDIF}
+    {$IFNDEF FPC}
+      function DataSize: word; virtual;
+    {$ENDIF}
   end;
 
 type MyInputLineP = ^TMyInputLine;
@@ -228,7 +233,12 @@ begin
   draw;
 end;
 
+{$IFDEF FPC}
+function TValInputLine.DataSize: sw_word;
+{$ENDIF}
+{$IFNDEF FPC}
 function TValInputLine.DataSize: word;
+{$ENDIF}
 begin
   datasize := sizeof(longint);
 end;

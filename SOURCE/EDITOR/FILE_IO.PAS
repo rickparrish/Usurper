@@ -100,7 +100,8 @@ function CalcHelpName(const wanted: string): string;
 implementation
 
 uses
-  Dos, MsgBox, {$IFDEF MSDOS}TxtShare,{$ENDIF} Jakobe {$IFNDEF MSDOS}, Strings{$ENDIF};
+  Dos, MsgBox, {$IFDEF MSDOS}TxtShare,{$ENDIF} Jakobe
+  {$IFNDEF MSDOS}, Strings{$ENDIF} {$IFDEF FPC}, RPPort{$ENDIF};
 
 const
   locknrs   = 100; {how many attempts to access a file?}

@@ -2226,7 +2226,7 @@ begin
  if registered=1 then s:=' (Registered)'+s;
  }
 
-  R.Assign(0, 0, 35, 17);
+  R.Assign(0, 0, 40, 19);
   Dia := New(XDialogP, Init(R, 'About'));
   with Dia^ do
   begin
@@ -2237,14 +2237,15 @@ begin
 
     {Text}
     Insert(New(PStaticText, Init(R,
-      #13 + ^C'Usurper Editor' + s + #13 +
-      #13 + ^C + 'Version ' + uver + #13 +
-      #13 + ^C'GPL License 2007' + #13 + ^C'original game by ' + #13 + ^C'Jakob Dangarden' + #13 +
-      #13 + ^C + 'Ported to Win32 by' + #13 + ^C'Rick Parrish')));
+      #13 + ^C'Usurper Editor' + s + #13 + ' ' +
+      #13 + ^C + 'Version ' + uver + #13 + ' ' +
+      #13 + ^C'GPL License 2007' + #13 + ^C'original game by ' + #13 + ^C'Jakob Dangarden' + #13 + ' ' +
+      #13 + ^C + 'Ported by' + #13 + ^C'Rick Parrish (http://randm.ca)' + #13 + ' ' +
+      #13 + ^C + 'Bugfixes by' + #13 + ^C'Dan')));
     {1993,98}
 
     {Button}
-    Okbutton(12, 14);
+    Okbutton(15, 16);
 
   end; {with Dia do .end.}
 
