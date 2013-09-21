@@ -8,6 +8,9 @@
   {$IFDEF LINUX}
     {$DEFINE UNIX}
   {$ENDIF}
+  {$IFDEF WIN32}
+    {$DEFINE WINDOWS}
+  {$ENDIF}
 {$ENDIF}
 
 {$IFDEF FPC}

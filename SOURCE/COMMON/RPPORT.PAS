@@ -29,6 +29,9 @@ type
     TextModeReadWrite: Integer;
 {$ENDIF}
 
+procedure RPFastWrite(ALine: String; AX, AY, AAttr: Byte);
+function RPGetAttrAt(AX, AY: Byte): Byte;
+function RPGetCharAt(AX, AY: Byte): Char;
 procedure RPGotoXY(xy: SmallWord);
 procedure RPHideCursor;
 function RPLockFile(handle, start, length: longint): longint;
@@ -36,7 +39,8 @@ procedure RPRestoreScreen(var screenBuf: TScreenBuf);
 procedure RPSaveScreen(var screenBuf: TScreenBuf);
 function RPScreenSizeX: word;
 function RPScreenSizeY: word;
-procedure RPSetAttrAt(x, y: SmallWord; attr: byte);
+procedure RPSetAttrAt(AAttr, AX, AY: Byte);
+procedure RPSetCharAt(ACh: Char; AX, AY: Byte);
 procedure RPSleep(ms: word);
 procedure RPShowCursor;
 function RPUnLockFile(handle, start, length: longint): longint;
@@ -53,9 +57,251 @@ implementation
     {$IFDEF OS2}OS2Base,{$ENDIF} VPUtils, VpSysLow, VpUsrLow;
 {$ENDIF}
 
+{$IFDEF GO32V2}
+  var
+    Screen: TScreenBuf absolute $B800:0000;
+{$ENDIF}
 {$IFDEF WIN32}
   var
     StdOut: THandle;
+{$ENDIF}
+
+
+{$IFDEF GO32V2}
+procedure RPFastWrite(ALine: String; AX, AY, AAttr: Byte);
+var
+  I: Integer;
+begin
+  { Validate parameters }
+  if ((AX < 1) OR (AX > 80) OR (AY < 1) OR (AY > 25)) then Exit;
+
+  { Trim to fit within 80 columns }
+  if (Length(ALine) > (80 - AX + 1)) then ALine := Copy(ALine, 1, 80 - AX + 1);
+
+  for I := 1 to Length(ALine) do
+  begin
+    Screen[AY, AX + (I - 1)].Ch := ALine[I];
+    Screen[AY, AX + (I - 1)].Attr := AAttr;
+  end;
+end;
+{$ENDIF}
+{$IFDEF OS2}
+procedure RPFastWrite(ALine: String; AX, AY, AAttr: Byte);
+begin
+  SysWrtCharStrAtt(@ALine[1], Length(ALine), AX - 1, AY - 1, AAttr);
+end;
+{$ENDIF}
+{$IFDEF UNIX}
+  {$IFDEF FPC}
+  procedure RPFastWrite(ALine: String; AX, AY, AAttr: Byte);
+  var
+    NeedWindow: Boolean;
+    SavedAttr: Integer;
+    SavedWindMinX: Integer;
+    SavedWindMinY: Integer;
+    SavedWindMaxX: Integer;
+    SavedWindMaxY: Integer;
+    SavedXY: Integer;
+  begin
+    { Validate parameters }
+    if ((AX < 1) OR (AX > 80) OR (AY < 1) OR (AY > 25)) then Exit;
+
+    { Trim to fit within 80 columns }
+    if (Length(ALine) > (80 - AX + 1)) then ALine := Copy(ALine, 1, 80 - AX + 1);
+
+    // Save
+    NeedWindow := ((WindMinX > 1) OR (WindMinY > 1) OR (WindMaxX < 80) OR (WindmaxY < 25));
+    SavedAttr := TextAttr;
+    SavedWindMinX := WindMinX;
+    SavedWindMinY := WindMinY;
+    SavedWindMaxX := WindMaxX;
+    SavedWindMaxY := WindMaxY;
+    SavedXY := WhereX + (WhereY SHL 8);
+
+    // Update
+    if (NeedWindow) then Window(1, 1, 80, 25);
+    GotoXY(AX, AY);
+    TextAttr := AAttr;
+
+    // Trim to fit within 79 columns if on line 25
+    if ((AY = 25) AND (Length(ALine) > (79 - AX + 1))) then ALine := Copy(ALine, 1, 79 - AX + 1);
+
+    // Output
+    Write(ALine);
+
+    // Restore
+    TextAttr := SavedAttr;
+    if (NeedWindow) then Window(SavedWindMinX, SavedWindMinY, SavedWindMaxX, SavedWindMaxY);
+    GotoXY(SavedXY AND $00FF, (SavedXY AND $FF00) SHR 8);
+  end;
+  {$ENDIF}
+  {$IFDEF VPASCAL}
+  procedure RPFastWrite(ALine: String; AX, AY, AAttr: Byte);
+  begin
+    SysWrtCharStrAtt(@ALine[1], Length(ALine), AX - 1, AY - 1, AAttr);
+  end;
+  {$ENDIF}
+{$ENDIF}
+{$IFDEF WINDOWS}
+procedure RPFastWrite(ALine: String; AX, AY, AAttr: Byte);
+var
+  Buffer: Array[0..255] of TCharInfo;
+  BufferCoord: TCoord;
+  BufferSize: TCoord;
+  I: Integer;
+  WriteRegion: TSmallRect;
+begin
+  { Validate parameters }
+  if ((AX < 1) OR (AX > 80) OR (AY < 1) OR (AY > 25)) then Exit;
+
+  { Trim to fit within 80 columns }
+  if (Length(ALine) > (80 - AX + 1)) then ALine := Copy(ALine, 1, 80 - AX + 1);
+
+  for I := 0 to Length(ALine) - 1 do
+  begin
+    Buffer[I].Attributes := AAttr;
+    Buffer[I].AsciiChar := ALine[I + 1];
+  end;
+  BufferSize.X := Length(ALine);
+  BufferSize.Y := 1;
+  BufferCoord.X := 0;
+  BufferCoord.Y := 0;
+  WriteRegion.Left := AX - 1;
+  WriteRegion.Top := AY - 1;
+  WriteRegion.Right := AX + Length(ALine) - 2;
+  WriteRegion.Bottom := AY - 1;
+  WriteConsoleOutput(StdOut, @Buffer, BufferSize, BufferCoord, WriteRegion);
+end;
+{$ENDIF}
+
+{$IFDEF GO32V2}
+function RPGetAttrAt(AX, AY: Byte): Byte;
+begin
+  { Validate parameters }
+  if ((AX < 1) OR (AX > 80) OR (AY < 1) OR (AY > 25)) then
+  begin
+    RPGetAttrAt := 7;
+    Exit;
+  end;
+
+  RPGetAttrAt := Screen[AY, AX].Attr;
+end;
+{$ENDIF}
+{$IFDEF OS2}
+function RPGetAttrAt(AX, AY: Byte): Byte;
+begin
+  RPGetAttrAt := SysReadAttributesAt(AX - 1, AY - 1);
+end;
+{$ENDIF}
+{$IFDEF UNIX}
+  {$IFDEF FPC}
+  function RPGetAttrAt(AX, AY: Byte): Byte;
+  begin
+    { Validate parameters }
+    if ((AX < 1) OR (AX > 80) OR (AY < 1) OR (AY > 25)) then
+    begin
+      RPGetAttrAt := 7;
+      Exit;
+    end;
+
+    RPGetAttrAt := ConsoleBuf^[((AY - 1) * ScreenWidth) + (AX - 1)].attr;
+  end;
+  {$ENDIF}
+  {$IFDEF VPASCAL}
+  function RPGetAttrAt(AX, AY: Byte): Byte;
+  begin
+    RPGetAttrAt := SysReadAttributesAt(AX - 1, AY - 1);
+  end;
+  {$ENDIF}
+{$ENDIF}
+{$IFDEF WINDOWS}
+function RPGetAttrAt(AX, AY: Byte): Byte;
+var
+  Attr: Word;
+  Coord: TCoord;
+  {$IFDEF FPC}NumRead: Cardinal;{$ENDIF}
+  {$IFDEF VPASCAL}NumRead: Integer;{$ENDIF}
+begin
+  { Validate parameters }
+  if ((AX < 1) OR (AX > 80) OR (AY < 1) OR (AY > 25)) then
+  begin
+    RPGetAttrAt := 7;
+    Exit;
+  end;
+
+  Coord.X := AX - 1;
+  Coord.Y := AY - 1;
+  ReadConsoleOutputAttribute(StdOut, @Attr, 1, Coord, NumRead);
+  RPGetAttrAt := Attr;
+end;
+{$ENDIF}
+
+{$IFDEF GO32V2}
+function RPGetCharAt(AX, AY: Byte): Char;
+begin
+  { Validate parameters }
+  if ((AX < 1) OR (AX > 80) OR (AY < 1) OR (AY > 25)) then
+  begin
+    RPGetCharAt := ' ';
+    Exit;
+  end;
+
+  RPGetCharAt := Screen[AY, AX].Ch;
+end;
+{$ENDIF}
+{$IFDEF OS2}
+function RPGetCharAt(AX, AY: Byte): Char;
+begin
+  RPGetCharAt := SysReadCharAt(AX - 1, AY - 1);
+end;
+{$ENDIF}
+{$IFDEF UNIX}
+  {$IFDEF FPC}
+  function RPGetCharAt(AX, AY: Byte): Char;
+  begin
+    { Validate parameters }
+    if ((AX < 1) OR (AX > 80) OR (AY < 1) OR (AY > 25)) then
+    begin
+      RPGetCharAt := ' ';
+      Exit;
+    end;
+
+    RPGetCharAt := ConsoleBuf^[((AY - 1) * ScreenWidth) + (AX - 1)].ch;
+  end;
+  {$ENDIF}
+  {$IFDEF VPASCAL}
+  function RPGetCharAt(AX, AY: Byte): Char;
+  begin
+    RPGetCharAt := SysReadCharAt(AX - 1, AY - 1);
+  end;
+  {$ENDIF}
+{$ENDIF}
+{$IFDEF WINDOWS}
+function RPGetCharAt(AX, AY: Byte): Char;
+var
+  Ch: Char;
+  Coord: TCoord;
+  {$IFDEF FPC}NumRead: Cardinal;{$ENDIF}
+  {$IFDEF VPASCAL}NumRead: Integer;{$ENDIF}
+begin
+  { Validate parameters }
+  if ((AX < 1) OR (AX > 80) OR (AY < 1) OR (AY > 25)) then
+  begin
+    RPGetCharAt := ' ';
+    Exit;
+  end;
+
+  Coord.X := AX - 1;
+  Coord.Y := AY - 1;
+  ReadConsoleOutputCharacter(StdOut, @Ch, 1, Coord, NumRead);
+  if (NumRead = 0) then
+  begin
+    RPGetCharAt := #32
+  end else
+  begin
+    RPGetCharAt := Ch;
+  end;
+end;
 {$ENDIF}
 
 // REENOTE Can't to platform specific since cursor position is stored internally in VP units
@@ -144,20 +390,24 @@ begin
   begin
     for X := 1 to 80 do
     begin
-      {$IFDEF VPASCAL}
-        SysWrtCharStrAtt(@screenBuf[Y][X].Ch, 1, X - 1, Y - 1, screenBuf[Y][X].Attr);
-      {$ENDIF}
-      {$IFNDEF VPASCAL}
-        // REETODO WriteLn('RPPORT RPPORT RPRestoreScreen'); Halt;
-      {$ENDIF}
+      RPFastWrite(screenBuf[Y][X].Ch, X, Y, screenBuf[Y][X].Attr);
     end;
   end;
 end;
 {$ENDIF}
 {$IFDEF GO32V2}
 procedure RPRestoreScreen(var screenBuf: TScreenBuf);
+var
+  X, Y: integer;
 begin
-  // REETODO WriteLn('RPPORT RPPORT RPRestoreScreen'); Halt;
+  // REETODO Don't hardcode to 80x25
+  for Y := 1 to 25 do
+  begin
+    for X := 1 to 80 do
+    begin
+      RPFastWrite(screenBuf[Y][X].Ch, X, Y, screenBuf[Y][X].Attr);
+    end;
+  end;
 end;
 {$ENDIF}
 
@@ -192,19 +442,37 @@ end;
 {$ENDIF}
 {$IFDEF UNIX}
 procedure RPSaveScreen(var screenBuf: TScreenBuf);
+var
+  X, Y: integer;
 begin
   {$IFDEF VPASCAL}
     Move(SysTVGetSrcBuf^, screenBuf, SizeOf(TScreenBuf));
   {$ENDIF}
   {$IFNDEF VPASCAL}
-    // REETODO WriteLn('RPPORT RPPORT RPSaveScreen'); Halt;
+    for Y := 1 to 25 do
+    begin
+      for X := 1 to 80 do
+      begin
+        screenBuf[Y][X].Ch := RPGetCharAt(X, Y);
+        screenBuf[Y][X].Attr := RPGetAttrAt(X, Y);
+      end;
+    end;
   {$ENDIF}
 end;
 {$ENDIF}
 {$IFDEF GO32V2}
 procedure RPSaveScreen(var screenBuf: TScreenBuf);
+var
+  X, Y: integer;
 begin
-  // REETODO WriteLn('RPPORT RPPORT RPSaveScreen'); Halt;
+  for Y := 1 to 25 do
+  begin
+    for X := 1 to 80 do
+    begin
+      screenBuf[Y][X].Ch := RPGetCharAt(X, Y);
+      screenBuf[Y][X].Attr := RPGetAttrAt(X, Y);
+    end;
+  end;
 end;
 {$ENDIF}
 
@@ -262,33 +530,164 @@ end;
   {$ENDIF}
 {$ENDIF}
 
+{$IFDEF GO32V2}
+procedure RPSetAttrAt(AAttr, AX, AY: Byte);
+begin
+  { Validate parameters }
+  if ((AX < 1) OR (AX > 80) OR (AY < 1) OR (AY > 25)) then Exit;
+
+  Screen[AY, AX].Attr := AAttr;
+end;
+{$ENDIF}
 {$IFDEF WIN32}
-procedure RPSetAttrAt(x, y: SmallWord; attr: byte);
+procedure RPSetAttrAt(AAttr, AX, AY: Byte);
 var
   NumWritten: longint;
   WriteCoord: TCoord;
 begin
-  WriteCoord.X := x;
-  WriteCoord.Y := y;
-  WriteConsoleOutputAttribute(StdOut, @attr, 1, WriteCoord, NumWritten);
+  WriteCoord.X := AX - 1;
+  WriteCoord.Y := AY - 1;
+  WriteConsoleOutputAttribute(StdOut, @AAttr, 1, WriteCoord, NumWritten);
 end;
 {$ENDIF}
-{$IFNDEF WIN32}
+{$IFDEF OS2}
+procedure RPSetAttrAt(AAttr, AX, AY: Byte);
+var
+  Ch: char;
+begin
+  Ch := SysReadCharAt(AX - 1, AY - 1);
+  SysWrtCharStrAtt(@Ch, 1, AX - 1, AY - 1, AAttr);
+end;
+{$ENDIF}
+{$IFDEF UNIX}
   {$IFDEF FPC}
-  procedure RPSetAttrAt(x, y: SmallWord; attr: byte);
+  procedure RPSetAttrAt(AAttr, AX, AY: Byte);
+  var
+    NeedWindow: Boolean;
+    SavedAttr: Integer;
+    SavedWindMinX: Integer;
+    SavedWindMinY: Integer;
+    SavedWindMaxX: Integer;
+    SavedWindMaxY: Integer;
+    SavedXY: Integer;
   begin
-    WriteLn('RPPORT RPPORT RPSetAttrAt'); Halt;
+    { Validate parameters }
+    if ((AX < 1) OR (AX > 80) OR (AY < 1) OR (AY > 25)) then Exit;
+
+    // Save
+    NeedWindow := ((WindMinX > 1) OR (WindMinY > 1) OR (WindMaxX < 80) OR (WindmaxY < 25));
+    SavedAttr := TextAttr;
+    SavedWindMinX := WindMinX;
+    SavedWindMinY := WindMinY;
+    SavedWindMaxX := WindMaxX;
+    SavedWindMaxY := WindMaxY;
+    SavedXY := WhereX + (WhereY SHL 8);
+
+    // Update
+    if (NeedWindow) then Window(1, 1, 80, 25);
+    GotoXY(AX, AY);
+    TextAttr := AAttr;
+
+    // Output
+    Write(RPGetCharAt(AX, AY));
+
+    // Restore
+    TextAttr := SavedAttr;
+    if (NeedWindow) then Window(SavedWindMinX, SavedWindMinY, SavedWindMaxX, SavedWindMaxY);
+    GotoXY(SavedXY AND $00FF, (SavedXY AND $FF00) SHR 8);
   end;
   {$ENDIF}
   {$IFDEF VPASCAL}
-  procedure RPSetAttrAt(x, y: SmallWord; attr: byte);
+  procedure RPSetAttrAt(AAttr, AX, AY: Byte);
   var
     Ch: char;
   begin
-    Ch := SysReadCharAt(x, y);
-    SysWrtCharStrAtt(@Ch, 1, x, y, attr);
+    Ch := SysReadCharAt(AX - 1, AY - 1);
+    SysWrtCharStrAtt(@Ch, 1, AX - 1, AY - 1, AAttr);
   end;
   {$ENDIF}
+{$ENDIF}
+
+{$IFDEF GO32V2}
+procedure RPSetCharAt(ACh: Char; AX, AY: Byte);
+begin
+  { Validate parameters }
+  if ((AX < 1) OR (AX > 80) OR (AY < 1) OR (AY > 25)) then Exit;
+
+  Screen[AY, AX].Ch := ACh;
+end;
+{$ENDIF}
+{$IFDEF OS2}
+procedure RPSetCharAt(ACh: Char; AX, AY: Byte);
+var
+  Attr: byte;
+begin
+  Attr := SysReadAttributesAt(AX - 1, AY - 1);
+  SysWrtCharStrAtt(@ACh, 1, AX - 1, AY - 1, Attr);
+end;
+{$ENDIF}
+{$IFDEF UNIX}
+  {$IFDEF FPC}
+  procedure RPSetCharAt(ACh: Char; AX, AY: Byte);
+  var
+    NeedWindow: Boolean;
+    SavedAttr: Integer;
+    SavedWindMinX: Integer;
+    SavedWindMinY: Integer;
+    SavedWindMaxX: Integer;
+    SavedWindMaxY: Integer;
+    SavedXY: Integer;
+  begin
+    { Validate parameters }
+    if ((AX < 1) OR (AX > 80) OR (AY < 1) OR (AY > 25)) then Exit;
+
+    // Save
+    NeedWindow := ((WindMinX > 1) OR (WindMinY > 1) OR (WindMaxX < 80) OR (WindmaxY < 25));
+    SavedAttr := TextAttr;
+    SavedWindMinX := WindMinX;
+    SavedWindMinY := WindMinY;
+    SavedWindMaxX := WindMaxX;
+    SavedWindMaxY := WindMaxY;
+    SavedXY := WhereX + (WhereY SHL 8);
+
+    // Update
+    if (NeedWindow) then Window(1, 1, 80, 25);
+    GotoXY(AX, AY);
+    TextAttr := RPGetAttrAt(AX, AY);
+
+    // Output
+    Write(ACh);
+
+    // Restore
+    TextAttr := SavedAttr;
+    if (NeedWindow) then Window(SavedWindMinX, SavedWindMinY, SavedWindMaxX, SavedWindMaxY);
+    GotoXY(SavedXY AND $00FF, (SavedXY AND $FF00) SHR 8);
+  end;
+  {$ENDIF}
+  {$IFDEF VPASCAL}
+  procedure RPSetCharAt(ACh: Char; AX, AY: Byte);
+  var
+    Attr: byte;
+  begin
+    Attr := SysReadAttributesAt(AX - 1, AY - 1);
+    SysWrtCharStrAtt(@ACh, 1, AX - 1, AY - 1, Attr);
+  end;
+  {$ENDIF}
+{$ENDIF}
+{$IFDEF WINDOWS}
+procedure RPSetCharAt(ACh: Char; AX, AY: Byte);
+var
+  WriteCoord: TCoord;
+  {$IFDEF FPC}NumWritten: Cardinal;{$ENDIF}
+  {$IFDEF VPASCAL}NumWritten: Integer;{$ENDIF}
+begin
+  { Validate parameters }
+  if ((AX < 1) OR (AX > 80) OR (AY < 1) OR (AY > 25)) then Exit;
+
+  WriteCoord.X := AX - 1;
+  WriteCoord.Y := AY - 1;
+  WriteConsoleOutputCharacter(StdOut, @ACh, 1, WriteCoord, NumWritten);
+end;
 {$ENDIF}
 
 {$IFDEF WIN32}

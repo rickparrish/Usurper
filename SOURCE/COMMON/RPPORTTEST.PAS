@@ -56,13 +56,7 @@ begin
     begin
       XY := (X - 1) + ((Y - 1) * 80);
       Ch := Chr(65 + (XY mod 26));
-      {$IFDEF VPASCAL}
-        SysWrtCharStrAtt(@Ch, 1, X - 1, Y - 1, Attr);
-      {$ENDIF}
-      {$IFNDEF VPASCAL}
-        if (X < 80) or (Y < 25) then GotoXY(X, Y);
-        Write(Ch);
-      {$ENDIF}
+      RPFastWrite(Ch, X, Y, Attr);
     end;
   end;
   RPSaveScreen(SavedScreen);
@@ -74,13 +68,7 @@ begin
     for X := 1 to 80 do
     begin
       Ch := Chr(65 + Random(26));
-      {$IFDEF VPASCAL}
-        SysWrtCharStrAtt(@Ch, 1, X - 1, Y - 1, Attr);
-      {$ENDIF}
-      {$IFNDEF VPASCAL}
-        if (X < 80) or (Y < 25) then GotoXY(X, Y);
-        Write(Ch);
-      {$ENDIF}
+      RPFastWrite(Ch, X, Y, Attr);
     end;
   end;
   ReadKey;
@@ -98,16 +86,32 @@ begin
   WriteLn('Test #5: RPSetAttrAt and RPSleep');
   WriteLn('  The "X Size" text above should slowly become white on blue');
   RPSleep(500);
-  RPSetAttrAt(2, 1, 31);
+  RPSetAttrAt(31, 3, 2);
   RPSleep(500);
-  RPSetAttrAt(3, 1, 31);
+  RPSetAttrAt(31, 4, 2);
   RPSleep(500);
-  RPSetAttrAt(4, 1, 31);
+  RPSetAttrAt(31, 5, 2);
   RPSleep(500);
-  RPSetAttrAt(5, 1, 31);
+  RPSetAttrAt(31, 6, 2);
   RPSleep(500);
-  RPSetAttrAt(6, 1, 31);
+  RPSetAttrAt(31, 7, 2);
   RPSleep(500);
-  RPSetAttrAt(7, 1, 31);
+  RPSetAttrAt(31, 8, 2);
   PauseOrQuit;
+  
+  WriteLn;
+  WriteLn('Test #6: RPSetCharAt and RPSleep');
+  WriteLn('  The "X Size" text above should slowly become abcdef');
+  RPSleep(500);
+  RPSetCharAt('a', 3, 2);
+  RPSleep(500);
+  RPSetCharAt('b', 4, 2);
+  RPSleep(500);
+  RPSetCharAt('c', 5, 2);
+  RPSleep(500);
+  RPSetCharAt('d', 6, 2);
+  RPSleep(500);
+  RPSetCharAt('e', 7, 2);
+  RPSleep(500);
+  RPSetCharAt('f', 8, 2);
 end.
