@@ -68,18 +68,25 @@ begin
 end;
 
 constructor TLinuxObj.Init;
+{$IFDEF VPASCAL}
 var
   Act, Old: TSigAction;
+{$ENDIF}
 begin
   inherited Init;
 
   FCarrier := True;
 
+{$IFDEF VPASCAL}
   FillChar(Act, SizeOf(Act), 0);
   Act.sa_Handler := @SignalHandler;
   Act.sa_Flags := SA_NODEFER;
   LnxSigAction(SIGHUP, Act, Old);
-  LnxSigAction(SIGTERM, Act, Old); 
+  LnxSigAction(SIGTERM, Act, Old);
+{$ENDIF}
+{$IFNDEF VPASCAL}
+  WriteLn('REEPORT LINUXCOM Init'); Halt;
+{$ENDIF}
 end; { constructor Init }
 
 (*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-*)

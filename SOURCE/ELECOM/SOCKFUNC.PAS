@@ -432,7 +432,12 @@ end; { func. SockIoCtlSocket }
 
 function SockGetSockOpt(_SockDesc: tSockDesc; _Level, _OptName: Integer;
                         _OptVal: PChar; var _OptLen: Integer): Longint;
+{$IFDEF FPC}
 var Len: SmallInt;
+{$ENDIF}
+{$IFNDEF FPC}
+var Len: Integer;
+{$ENDIF}
 begin
   {$IFDEF WIN32}
     Result := GetSockOpt(_SockDesc, _Level, _OptName, _OptVal, Len);

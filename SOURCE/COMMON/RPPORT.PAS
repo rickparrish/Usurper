@@ -46,7 +46,7 @@ implementation
 
 {$IFDEF FPC}
   uses
-    Crt {$IFDEF GO32V2}, SysUtils{$ENDIF};
+    Crt, SysUtils;
 {$ENDIF}
 {$IFDEF VPASCAL}
   uses
@@ -134,7 +134,7 @@ begin
   VioWrtCellStr(@screenBuf, Size, 0, 0, 0);
 end;
 {$ENDIF}
-{$IFDEF LINUX}
+{$IFDEF UNIX}
 procedure RPRestoreScreen(var screenBuf: TScreenBuf);
 var
   X, Y: integer;
@@ -144,7 +144,12 @@ begin
   begin
     for X := 1 to 80 do
     begin
-      SysWrtCharStrAtt(@screenBuf[Y][X].Ch, 1, X - 1, Y - 1, screenBuf[Y][X].Attr);
+      {$IFDEF VPASCAL}
+        SysWrtCharStrAtt(@screenBuf[Y][X].Ch, 1, X - 1, Y - 1, screenBuf[Y][X].Attr);
+      {$ENDIF}
+      {$IFNDEF VPASCAL}
+        // REETODO WriteLn('RPPORT RPPORT RPRestoreScreen'); Halt;
+      {$ENDIF}
     end;
   end;
 end;
@@ -185,10 +190,15 @@ begin
   VioReadCellStr(screenBuf, Size, 0, 0, 0);
 end;
 {$ENDIF}
-{$IFDEF LINUX}
+{$IFDEF UNIX}
 procedure RPSaveScreen(var screenBuf: TScreenBuf);
 begin
-  Move(SysTVGetSrcBuf^, screenBuf, SizeOf(TScreenBuf));
+  {$IFDEF VPASCAL}
+    Move(SysTVGetSrcBuf^, screenBuf, SizeOf(TScreenBuf));
+  {$ENDIF}
+  {$IFNDEF VPASCAL}
+    // REETODO WriteLn('RPPORT RPPORT RPSaveScreen'); Halt;
+  {$ENDIF}
 end;
 {$ENDIF}
 {$IFDEF GO32V2}
@@ -346,7 +356,9 @@ begin
 {$IFDEF WIN32}
   StdOut := GetStdHandle(STD_OUTPUT_HANDLE);
 {$ENDIF}
-{$IFDEF LINUX}
-  SysTVSetScrMode($FB); { $FB = COL2 = Color, graphics chars }
+{$IFDEF UNIX}
+  {$IFDEF VPASCAL}
+    SysTVSetScrMode($FB); { $FB = COL2 = Color, graphics chars }
+  {$ENDIF}
 {$ENDIF}
 end.

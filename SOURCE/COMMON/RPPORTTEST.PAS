@@ -1,7 +1,7 @@
 program RPPortTest;
 
 uses
-  Crt, RPPort, VpSysLow;
+  Crt, RPPort {$IFDEF VPASCAL}, VpSysLow{$ENDIF};
 
   procedure PauseOrQuit;
   var
@@ -56,7 +56,13 @@ begin
     begin
       XY := (X - 1) + ((Y - 1) * 80);
       Ch := Chr(65 + (XY mod 26));
-      SysWrtCharStrAtt(@Ch, 1, X - 1, Y - 1, Attr);
+      {$IFDEF VPASCAL}
+        SysWrtCharStrAtt(@Ch, 1, X - 1, Y - 1, Attr);
+      {$ENDIF}
+      {$IFNDEF VPASCAL}
+        if (X < 80) or (Y < 25) then GotoXY(X, Y);
+        Write(Ch);
+      {$ENDIF}
     end;
   end;
   RPSaveScreen(SavedScreen);
@@ -68,7 +74,13 @@ begin
     for X := 1 to 80 do
     begin
       Ch := Chr(65 + Random(26));
-      SysWrtCharStrAtt(@Ch, 1, X - 1, Y - 1, Attr);
+      {$IFDEF VPASCAL}
+        SysWrtCharStrAtt(@Ch, 1, X - 1, Y - 1, Attr);
+      {$ENDIF}
+      {$IFNDEF VPASCAL}
+        if (X < 80) or (Y < 25) then GotoXY(X, Y);
+        Write(Ch);
+      {$ENDIF}
     end;
   end;
   ReadKey;
