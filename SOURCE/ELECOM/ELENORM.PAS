@@ -44,7 +44,7 @@ uses ComBase
          , Fos_com
        {$ENDIF}
 
-       {$IFDEF LINUX}
+       {$IFDEF UNIX}
          , LinuxCom
        {$ENDIF}
        ;
@@ -152,7 +152,7 @@ begin
       01 : ComObj := New(pFossilObj, Init);
     {$ENDIF}
 
-    {$IFDEF LINUX}
+    {$IFDEF UNIX}
       01 : ComObj := New(pLinuxObj, Init);
       02 : ComObj := New(pLinuxObj, Init);
     {$ENDIF}

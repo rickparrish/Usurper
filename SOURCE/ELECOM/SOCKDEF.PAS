@@ -24,7 +24,7 @@ uses
 {$IFDEF OS2}
   Os2def;
 {$ENDIF}
-{$IFDEF LINUX}
+{$IFDEF UNIX}
   Linux;
 {$ENDIF}
 {$IFDEF WIN32}
@@ -39,7 +39,7 @@ type pInteger = ^Integer;
      SmallInt = System.Integer;
 {$ENDIF}
 
-{$IFDEF LINUX}
+{$IFDEF UNIX}
 type ULONG    = longint;
 {$ENDIF}
 
@@ -58,7 +58,7 @@ const
 (*
 ** Option flags per-socket.
 *)
-{$IFNDEF LINUX}
+{$IFNDEF UNIX}
 (*
 ** Level number for (get/set)sockopt() to apply to socket itself.
 *)
@@ -191,7 +191,7 @@ const
 
 { Windows Sockets definitions of regular Berkeley error constants }
 
-{$IFNDEF LINUX}
+{$IFNDEF UNIX}
   WSAEWOULDBLOCK          = (WSABASEERR+35);
   WSAEINPROGRESS          = (WSABASEERR+36);
   WSAEALREADY             = (WSABASEERR+37);
@@ -233,7 +233,7 @@ const
   WSAEDISCON              = (WSABASEERR+101);
 {$ENDIF}
 
-{$IFDEF LINUX}
+{$IFDEF UNIX}
   WSAEWOULDBLOCK          = 11;
   WSAEINPROGRESS          = 115;
   WSAEALREADY             = 114;
@@ -381,7 +381,7 @@ const
   IOC_IN       = $80000000;
   IOC_INOUT    = (IOC_IN or IOC_OUT);
 
-{$IFNDEF LINUX}
+{$IFNDEF UNIX}
   FIONREAD     = IOC_OUT or { get # bytes to read }
     ((Longint(SizeOf(Longint)) and IOCPARM_MASK) shl 16) or
     (Longint(Byte('f')) shl 8) or 127;

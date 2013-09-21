@@ -521,9 +521,9 @@ begin;
   d := 60 - el_sc;
   if d <> save_sc then
   begin
-    gotoxy(74, numlines);
+    gotoxy(73, numlines);
     clreol;
-    gotoxy(74, numlines);
+    gotoxy(73, numlines);
     Write(c, ':');
     if d < 10 then
       Write('0');

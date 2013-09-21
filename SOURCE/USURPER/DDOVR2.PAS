@@ -34,11 +34,11 @@ implementation
 {$ENDIF}
 
 const
-{$IFNDEF LINUX}
-  DIRECTORY_SEPARATOR = '\';
-{$ENDIF}
-{$IFDEF LINUX}
+{$IFDEF UNIX}
   DIRECTORY_SEPARATOR = '/';
+{$ENDIF}
+{$IFNDEF UNIX}
+  DIRECTORY_SEPARATOR = '\';
 {$ENDIF}
 
 type
@@ -180,7 +180,7 @@ procedure Loadconfig(fn: string; var bbs_software: byte; var user_first_name, us
     for a := 1 to paramcount do
     begin;
       s := ParamStr(a);
-{$IFNDEF LINUX}
+{$IFNDEF UNIX}
       for b := 1 to length(s) do
         s[b] := upcase(s[b]);
 {$ENDIF}
@@ -268,122 +268,136 @@ begin;
 
   if ioresult <> 0 then
   begin
-    dderror('Configuration file, ' + fn + ', is missing!');
-  end;
-
-  while not EOF(f) do
-  begin;
-    readln(f, s);
-    if numparams(s) > 0 then
+    dderror('Configuration file, ' + fn + ', is missing! Using defaults');
+    sysop_first_name := 'System';
+    sysop_last_name := 'Operator';
+    board_name := 'Unknown BBS';
+    bbs_software := 11; { DOORSYS }
+    statline := True;
+    fossilio := True;
+    noFossInit := True;
+    statfore := 7;
+    statback := 1;
+    localcol := True;
+    pause_code := '@PAUSE';
+  end else
+  begin
+    while not EOF(f) do
     begin;
-      p1 := getparam(s, 1);
-      p2 := getparam(s, 2);
-      p3 := getparam(s, 3);
-      ps := getsecond(s);
+      readln(f, s);
+      if numparams(s) > 0 then
+      begin;
+        p1 := getparam(s, 1);
+        p2 := getparam(s, 2);
+        p3 := getparam(s, 3);
+        ps := getsecond(s);
 
-      if p1 = 'SYSOPFIRST' then
-        sysop_first_name := ps else
-      if p1 = 'SYSOPLAST' then
-        sysop_last_name := ps else
-      if p1 = 'BBSNAME' then
-        board_name := ps else
-      if p1 = 'BBSTYPE' then
-      begin;
-        if p2 = 'LOCAL' then
-          bbs_software := 1;
-        if p2 = 'QUICK' then
-          bbs_software := 3 else
-        if p2 = 'PCB12' then
-          bbs_software := 4 else
-        if p2 = 'WWIV' then
-          bbs_software := 5 else
-        if p2 = 'PCB15' then
-          bbs_software := 6 else
-        if p2 = 'RBBS' then
-          bbs_software := 7 else
-        if p2 = 'PHOENIX' then
-          bbs_software := 8 else
-        if p2 = 'DORINFO1' then
-          bbs_software := 9 else
-        if p2 = 'PCB14' then
-          bbs_software := 10 else
-        if p2 = 'DOORSYS' then
-          bbs_software := 11 else
-        if p2 = 'SPITFIRE' then
-          bbs_software := 12 else
-        if p2 = '2AM' then
-          bbs_software := 13 else
-        if p2 = 'TRIBBS' then
-          bbs_software := 14 else
-        if p2 = 'DOOR32' then
-          bbs_software := 15 else
-          badparam(s);
-      end else
-      if p1 = 'STATUS' then
-      begin;
-        if p2 = 'OFF' then
-          statline := False else
-        if p2 = 'ON' then
-          statline := True else
-          badparam(s);
-      end else
-      if p1 = 'DIGI' then
-        digiio := True  else
-      if p1 = 'FOSSIL' then
-        fossilio := True else
-      if p1 = 'XFOSSIL' then
-      begin
-        fossilio := True;
-        noFossInit := True;
-      end else
-      if p1 = 'LOCKBAUD' then
-        val(p2, lockbaud, a) else
-      if p1 = 'PORT1' then
-        port_rtn(p2, p3, port1, irq1) else
-      if p1 = 'PORT2' then
-        port_rtn(p2, p3, port2, irq2) else
-      if p1 = 'PORT3' then
-        port_rtn(p2, p3, port3, irq3) else
-      if p1 = 'PORT4' then
-        port_rtn(p2, p3, port4, irq4) else
-      if p1 = 'STATFORE' then
-        val(p2, statfore, a) else
-      if p1 = 'STATBACK' then
-        val(p2, statback, a) else
-      if p1 = 'MAXTIME' then
-        val(p2, maxtime, a) else
-      if p1 = 'COLOR' then
-        localcol := True else
-      if p1 = 'MONO' then
-        localcol := False else
-      if p1 = 'COLOR1' then
-        color1 := True else
-      if p1 = 'COMPORT' then
-        val(p2, com_port, a) else
-      if p1 = 'PAUSECODE' then
-        pause_code := ps else
+        if p1 = 'SYSOPFIRST' then
+          sysop_first_name := ps else
+        if p1 = 'SYSOPLAST' then
+          sysop_last_name := ps else
+        if p1 = 'BBSNAME' then
+          board_name := ps else
+        if p1 = 'BBSTYPE' then
+        begin;
+          if p2 = 'LOCAL' then
+            bbs_software := 1;
+          if p2 = 'QUICK' then
+            bbs_software := 3 else
+          if p2 = 'PCB12' then
+            bbs_software := 4 else
+          if p2 = 'WWIV' then
+            bbs_software := 5 else
+          if p2 = 'PCB15' then
+            bbs_software := 6 else
+          if p2 = 'RBBS' then
+            bbs_software := 7 else
+          if p2 = 'PHOENIX' then
+            bbs_software := 8 else
+          if p2 = 'DORINFO1' then
+            bbs_software := 9 else
+          if p2 = 'PCB14' then
+            bbs_software := 10 else
+          if p2 = 'DOORSYS' then
+            bbs_software := 11 else
+          if p2 = 'SPITFIRE' then
+            bbs_software := 12 else
+          if p2 = '2AM' then
+            bbs_software := 13 else
+          if p2 = 'TRIBBS' then
+            bbs_software := 14 else
+          if p2 = 'DOOR32' then
+            bbs_software := 15 else
+            badparam(s);
+        end else
+        if p1 = 'STATUS' then
+        begin;
+          if p2 = 'OFF' then
+            statline := False else
+          if p2 = 'ON' then
+            statline := True else
+            badparam(s);
+        end else
+        if p1 = 'DIGI' then
+          digiio := True  else
+        if p1 = 'FOSSIL' then
+          fossilio := True else
+        if p1 = 'XFOSSIL' then
+        begin
+          fossilio := True;
+          noFossInit := True;
+        end else
+        if p1 = 'LOCKBAUD' then
+          val(p2, lockbaud, a) else
+        if p1 = 'PORT1' then
+          port_rtn(p2, p3, port1, irq1) else
+        if p1 = 'PORT2' then
+          port_rtn(p2, p3, port2, irq2) else
+        if p1 = 'PORT3' then
+          port_rtn(p2, p3, port3, irq3) else
+        if p1 = 'PORT4' then
+          port_rtn(p2, p3, port4, irq4) else
+        if p1 = 'STATFORE' then
+          val(p2, statfore, a) else
+        if p1 = 'STATBACK' then
+          val(p2, statback, a) else
+        if p1 = 'MAXTIME' then
+          val(p2, maxtime, a) else
+        if p1 = 'COLOR' then
+          localcol := True else
+        if p1 = 'MONO' then
+          localcol := False else
+        if p1 = 'COLOR1' then
+          color1 := True else
+        if p1 = 'COMPORT' then
+          val(p2, com_port, a) else
+        if p1 = 'PAUSECODE' then
+          pause_code := ps else
 
-      begin;
-        ddcfgp1 := p1;
-        ddcfgp2 := p2;
-        ddcfgps := ps;
-        if dduserconfigptr <> nil then
-          callproc;
+        begin;
+          ddcfgp1 := p1;
+          ddcfgp2 := p2;
+          ddcfgps := ps;
+          if dduserconfigptr <> nil then
+            callproc;
+        end;
+
       end;
-
     end;
+    Close(f);
   end;
-  Close(f);
   filemode := ofm;
 {$IFNDEF MSDOS}
   FileModeReadWrite := FileMode;
 {$ENDIF}
 
 {$IFNDEF MSDOS}
-  { ensure win32 doors run with fossil io (where we put the socket code) }
-  bbs_software := 15;
-  fossilio := True;
-  noFossInit := False;
+  {$IFNDEF GO32V2}
+    { ensure non-dos doors run with fossil io (where we put the socket code) }
+    bbs_software := 15;
+    fossilio := True;
+    noFossInit := False;
+  {$ENDIF}
 {$ENDIF}
 
   case iomode of

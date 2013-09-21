@@ -871,7 +871,7 @@ begin
     unable_to_find(global_ucfg);
   end;
 
-{$IFDEF LINUX}
+{$IFDEF UNIX}
   // translate \ to / for path related entries
   // 70..83 = score files
   // 99 = semaphore path

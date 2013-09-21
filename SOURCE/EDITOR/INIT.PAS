@@ -51,11 +51,11 @@ const
   onlyin         = 'Only Available In Registered Version!';
 
   {Directories}
-{$IFNDEF LINUX}
-  DIRECTORY_SEPARATOR = '\';
-{$ENDIF}
-{$IFDEF LINUX}
+{$IFDEF UNIX}
   DIRECTORY_SEPARATOR = '/';
+{$ENDIF}
+{$IFNDEF UNIX}
+  DIRECTORY_SEPARATOR = '\';
 {$ENDIF}
   global_datadir = 'DATA' + DIRECTORY_SEPARATOR;    {Path to DATA directory}
   global_docsdir = 'DOCS' + DIRECTORY_SEPARATOR;    {Path to DOCS directory}

@@ -355,7 +355,7 @@ begin
      if ReturnCode <> 0 then ThreadHandle := -1;
   {$ENDIF}
 
-  {$IFDEF LINUX}
+  {$IFDEF UNIX}
 
   {$ENDIF}
 

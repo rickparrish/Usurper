@@ -44,7 +44,7 @@ uses
   W32Sock,
 {$ENDIF}
 
-{$IFDEF LINUX}
+{$IFDEF UNIX}
   linux,
   Linsock,
 {$ENDIF}
@@ -100,7 +100,7 @@ function  SockDataAvail(_SockDesc: tSockDesc): Boolean;
 function  SockSelect(_SockDesc: tSockDesc): Longint;
 function  SockInetAddr(_s: ShortString):tIn_Addr;
 
-{$IFNDEF LINUX}
+{$IFNDEF UNIX}
  {$IFNDEF FPC}
   {$IFDEF OS2}
    {$R SOCKFUNC.OS2}
@@ -135,7 +135,7 @@ begin
    Result := WsaGetLastError;
  {$ENDIF}
 
- {$IFDEF LINUX}
+ {$IFDEF UNIX}
    Result := SocketError;
  {$ENDIF}
 end; { func. SockErrorNo }
@@ -178,7 +178,7 @@ begin
     Result := ibm_getservbyname(@_Name[01], @_Proto[01]);
   {$ENDIF}
 
-  {$IFDEF LINUX}
+  {$IFDEF UNIX}
     Result := getservbyname(@_Name[1], @_Proto[01]);
   {$ENDIF}
 end; { func. SockGetServByName }
@@ -234,7 +234,7 @@ end; { func. SockhToNl }
 
 function SockNtohl( _Input: longint): longint;
 begin
-  {$IFNDEF LINUX}
+  {$IFNDEF UNIX}
      Result:=ntohl(_Input);
   {$ELSE}
      {!!!!!!!!!!!!!!!!!!!!!!!}
@@ -255,7 +255,7 @@ begin
     Result := Lo(_Input) * 256 + Hi(_Input);
   {$ENDIF}
 
-  {$IFDEF LINUX}
+  {$IFDEF UNIX}
     Result := ntohs(_input);
   {$ENDIF}
 end; { func. SockNToHs }
@@ -274,7 +274,7 @@ begin
     Result := IBM_Accept(_SockDesc, _SockAddr, @_SockAddrLen);
   {$ENDIF}
 
-  {$IFDEF LINUX}
+  {$IFDEF UNIX}
     Result := Accept(_SockDesc, _SockAddr^, _SockAddrLen);
   {$ENDIF}
 end; { func. SockAccept }
@@ -292,7 +292,7 @@ begin
     SockBind := IBM_Bind(_SockDesc, @_SockAddr, SockAddr_Len);
   {$ENDIF}
 
-  {$IFDEF LINUX}
+  {$IFDEF UNIX}
     SockBind := Longint(Bind(_SockDesc, _SockAddr, SockAddr_Len));
   {$ENDIF}
 end; { func. SockBind }
@@ -310,7 +310,7 @@ begin
     SockConnect := ibm_connect(_SockDesc, @_SockAddr, SockAddr_Len);
   {$ENDIF}
 
-  {$IFDEF LINUX}
+  {$IFDEF UNIX}
     SockConnect := connect(_SockDesc, _SockAddr, sockAddr_Len);
   {$ENDIF}
 end; { func. SockConnect }
@@ -327,7 +327,7 @@ begin
     Result := IBM_So_Cancel(_SockDesc);
   {$ENDIF}
 
-  {$IFDEF LINUX}
+  {$IFDEF UNIX}
     Result := longint(true);
     if _SockDesc=0 then ;
 
@@ -349,7 +349,7 @@ begin
     SockShutDown := IBM_ShutDown(_SockDesc, _How);
   {$ENDIF}
 
-  {$IFDEF LINUX}
+  {$IFDEF UNIX}
     SockShutDown := ShutDown(_SockDesc, _How);
   {$ENDIF}
 end; { func. SockShutDown }
@@ -375,7 +375,7 @@ begin
     Result := IBM_GetSockName(_SockDesc, @_SockAddr, @sLength);
   {$ENDIF}
 
-  {$IFDEF LINUX}
+  {$IFDEF UNIX}
     Result := GetSocketName(_SockDesc, _SockAddr, sLength);
   {$ENDIF}
 end; { func. sockGetSockAddr }
@@ -400,7 +400,7 @@ begin
     Result := IOCtlSocket(_SockDesc, FIONBIO, Arg);
   {$ENDIF}
 
-  {$IFDEF LINUX}
+  {$IFDEF UNIX}
     if _BlockingIO then Arg := 00
       else Arg := 01;
 
@@ -423,7 +423,7 @@ begin
     Result := IOCtlSocket(_SockDesc, FUNC, Arg);
   {$ENDIF}
 
-  {$IFDEF LINUX}
+  {$IFDEF UNIX}
     Result := Longint(IoCtl(_SockDesc, Func, @Arg));
   {$ENDIF}
 end; { func. SockIoCtlSocket }
@@ -448,7 +448,7 @@ begin
     Result := IBM_GetSockOpt(_SockDesc, _Level, _OptName, _OptVal, _OptLen);
   {$ENDIF}
 
-  {$IFDEF LINUX}
+  {$IFDEF UNIX}
     Result := SetSocketOptions(_SockDesc, _Level, _OptName, _OptVal, _OptLen);
   {$ENDIF}
 end; { func. SockGetSockOpt }
@@ -466,7 +466,7 @@ begin
     Result := IBM_SetSockOpt(_SockDesc, _Level, _OptName, _OptVal, _OptLen);
   {$ENDIF}
 
-  {$IFDEF LINUX}
+  {$IFDEF UNIX}
     Result := SetSocketOptions(_SockDesc, _Level, _OptName, _OptVal, _OptLen);
   {$ENDIF}
 end; { func. SockSetSockOpt }
@@ -474,12 +474,12 @@ end; { func. SockSetSockOpt }
 (*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-*)
 
 function SockDataAvail(_SockDesc: tSockDesc): Boolean;
-{$IFDEF LINUX}
+{$IFDEF UNIX}
   var ReadFDS  : FDSet;
       Temp     : Longint;
 {$ENDIF}
 begin
-   {$IFNDEF LINUX}
+   {$IFNDEF UNIX}
      Result := (SockSelect(_SockDesc) > 00);
    {$ELSE}
      fd_Zero(ReadFDS);
@@ -523,7 +523,7 @@ begin
     SockListen := ibm_listen(_SockDesc, _SockQueue);
   {$ENDIF}
 
-  {$IFDEF LINUX}
+  {$IFDEF UNIX}
     SockListen := Longint(Listen(_SockDesc, _SockQueue));
   {$ENDIF}
 end; { func. SockListen }
@@ -540,7 +540,7 @@ var SockArr : TFDSet;
     Timeout : TTimeVal;
 {$ENDIF}
 
-{$IFDEF LINUX}
+{$IFDEF UNIX}
 var ReadFDS  : FDSet;
 {$ENDIF}
 begin
@@ -558,7 +558,7 @@ begin
     Result := Select(00, @SockArr, NIL, NIL, @Timeout);
   {$ENDIF}
 
-  {$IFDEF LINUX}
+  {$IFDEF UNIX}
     fd_Zero(ReadFDS);
     fd_Set(_SockDesc, ReadFDS);
 
@@ -588,7 +588,7 @@ begin
                          _SockFlags);
   {$ENDIF}
 
-  {$IFDEF LINUX}
+  {$IFDEF UNIX}
     SockRecv := Recv(_SockDesc,
                      _SockBuffer^,
                      _SockBufLen,
@@ -617,7 +617,7 @@ begin
                          _SockFlags);
   {$ENDIF}
 
-  {$IFDEF LINUX}
+  {$IFDEF UNIX}
     SockSend := Send(_SockDesc,
                      _SockBuffer^,
                      _SockBufLen,
@@ -639,7 +639,7 @@ begin
     SockSocket := ibm_Socket(_SockFamily, _SockType, _SockProtocol);
   {$ENDIF}
 
-  {$IFDEF LINUX}
+  {$IFDEF UNIX}
     SockSocket :=  Socket(_SockFamily, _SockType, _SockProtocol);
   {$ENDIF}
 end; { func. SockSocket }
@@ -656,7 +656,7 @@ begin
     Result := Closesocket(_SockDesc);
  {$ENDIF}
 
- {$IFDEF LINUX}
+ {$IFDEF UNIX}
    Result := Longint(fdClose(_SockDesc));
  {$ENDIF}
 end; { func. SockClose }
@@ -679,7 +679,7 @@ begin
     SockInit := WsaStartup($0101, Data);
   {$ENDIF}
 
-  {$IFDEF LINUX}
+  {$IFDEF UNIX}
     SockInit :=  0;
   {$ENDIF}
 end; { func. SockInit }
@@ -697,7 +697,7 @@ begin
     Result := IBM_GetHostByName(@HostName[01]);
   {$ENDIF}
 
-  {$IFDEF LINUX}
+  {$IFDEF UNIX}
     Result := GetHostByName(@HostName[1]);
   {$ENDIF}
 end; { func. SockGetHostByName }
@@ -735,7 +735,7 @@ begin
                                            HostAddrType);
   {$ENDIF}
 
-  {$IFDEF LINUX}
+  {$IFDEF UNIX}
     Result := GetHostByAddr(HostAddr, HostAddrLen, HostAddrtype);
   {$ENDIF}
 end; { func. SockGetHostbyAddr }
@@ -785,7 +785,7 @@ begin
     sResult := IBM_GetHostName(@HostName[01], SizeOf(HostName));
   {$ENDIF}
 
-  {$IFDEF LINUX}
+  {$IFDEF UNIX}
     {!!!!!!!!!!!!!!!!!!!}
     InAddr.ClassA := 127;
     InAddr.ClassB := 0;
@@ -813,7 +813,7 @@ function SockInetAddr(_s: ShortString): tIn_Addr;
 begin
   _s := _s + #00;
 
-  {$IFNDEF LINUX}
+  {$IFNDEF UNIX}
     Result.IpAddr := INet_Addr(@_S[01]);
   {$ELSE}
     {$WARNING SockInetAddr function not implemented! }
