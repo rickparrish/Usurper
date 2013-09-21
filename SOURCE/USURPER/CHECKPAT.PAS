@@ -66,7 +66,8 @@ implementation
 {$IFDEF MSDOS}
 {$L checkpap}
 {$ENDIF}
-function checkpath(var Name; inflags: integer; var drive; var dir; var fname; var ext; var fullpath): integer; {$IFDEF MSDOS}external;{$ENDIF}
+function checkpath(var Name; inflags: integer; var drive; var dir; var fname;
+  var ext; var fullpath): integer; {$IFDEF MSDOS}external;{$ENDIF}
 {$IFNDEF MSDOS}
 begin
   WriteLn('REEPORT CHECKPAT checkpath'); Halt;

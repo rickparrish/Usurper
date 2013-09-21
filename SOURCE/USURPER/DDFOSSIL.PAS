@@ -665,5 +665,7 @@ end;
 {$ENDIF}
 
 begin
+{$IFNDEF MSDOS}
   DidInit := false;
+{$ENDIF}
 end.
