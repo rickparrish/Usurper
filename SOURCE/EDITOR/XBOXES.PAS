@@ -151,7 +151,7 @@ function TValInputLine.Valid(Command: word): boolean;
 var  l: longint;
   s:    string;
 begin
-
+  { REETODO l not initialized -- should it be using Command parameter? }
   str(l, Data^);
   Valid := True;
   if (l < small) or (l > big) then

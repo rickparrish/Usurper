@@ -107,6 +107,7 @@ end;
 function EmptyStr: string;
 var s: string;
 begin
+  { REETODO s not initialized -- this function seems stupid, can't it just do emptystr := ''? }
   cleanstring(s);
   emptystr := s;
 end;

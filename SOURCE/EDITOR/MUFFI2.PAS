@@ -45,7 +45,7 @@ label
 
 var
   i, j:     integer;
-  yy, x, y: longint;
+  yy, x: longint;
   regnr:    longint;
 
 begin
@@ -82,7 +82,6 @@ begin
     j := length(a);
     yy := 0;
     x := 0;
-    y := 0;
     for i := 1 to length(a) do
     begin
       x := x + (Ord(a[i]) * i);

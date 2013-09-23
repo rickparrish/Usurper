@@ -320,7 +320,6 @@ end; { DirExist END, from SWAG }
 
 function FsO;
 var
-  dum:      byte;
   memmy, i: integer;
   ok:       boolean;
   ofil:     file of objektrec;
@@ -351,7 +350,6 @@ begin
   {assign file}
   Assign(ofil, fname);
 
-  dum := 0;
   fso := 0;
   i := 0;
 
@@ -389,7 +387,6 @@ end;
 
 function FsClassic(weapon: boolean): word;
 var
-  dum:      byte;
   memmy, i: integer;
   ok:       boolean;
 
@@ -403,7 +400,6 @@ begin
     Assign(weapfile, weapofile)
   else Assign(armfile, armofile);
 
-  dum := 0;
   fsclassic := 0;
   i := 0;
 
@@ -459,13 +455,11 @@ end;
 
 function Fs(filtyp: filsize): word;
 var
-  dum:      byte;
   memmy, i: integer;
   ok:       boolean;
 
 begin
 
-  dum := 0;
   fs := 0;
   i := 0;
 
