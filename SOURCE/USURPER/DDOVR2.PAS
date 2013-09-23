@@ -78,22 +78,14 @@ procedure Loadconfig(fn: string; var bbs_software: byte; var user_first_name, us
 
     while (length(s) > 0) and (s[1] = ' ') do
       Delete(s, 1, 1);
-    if n <> 1 then
+    while n > 1 do
     begin;
       while (length(s) > 0) and (s[1] <> ' ') do
         Delete(s, 1, 1);
       while (length(s) > 0) and (s[1] = ' ') do
         Delete(s, 1, 1);
+      n := n - 1;
     end;
-    if n = 3 then
-    begin;
-      while (length(s) > 0) and (s[1] <> ' ') do
-        Delete(s, 1, 1);
-      while (length(s) > 0) and (s[1] = ' ') do
-        Delete(s, 1, 1);
-    end;
-    while (pos(' ', s) <> 0) do
-    begin;
       a := 1;
       s2 := '';
       while s[a] <> ' ' do
@@ -102,7 +94,6 @@ procedure Loadconfig(fn: string; var bbs_software: byte; var user_first_name, us
         a := a + 1;
       end;
       s := s2;
-    end;
     while (length(s) > 0) and (s[length(s)] = ' ') do
       Delete(s, length(s), 1);
     for a := 1 to length(s) do
@@ -237,16 +228,20 @@ begin;
   sysop_last_name := 'LORENZ';
   board_name := 'The Officers Club BBS';
   pause_code := '@PAUSE@';
-  bbs_software := 1;
+  bbs_software := 11; {doorsys}
   statline := True;
   nodirect := False;
   color1 := False;
   EMSOK := False;
   NetOK := False;
   NoLocal := False;
-  fossilio := False;
+  fossilio := True;
+  noFossInit := True;
   digiio := False;
   lockbaud := 0;
+  statfore := 7;
+statback := 1;
+
   processcmdline;
   selectctl;
   ofm := filemode;
@@ -269,17 +264,6 @@ begin;
   if ioresult <> 0 then
   begin
     dderror('Configuration file, ' + fn + ', is missing! Using defaults');
-    sysop_first_name := 'System';
-    sysop_last_name := 'Operator';
-    board_name := 'Unknown BBS';
-    bbs_software := 11; { DOORSYS }
-    statline := True;
-    fossilio := True;
-    noFossInit := True;
-    statfore := 7;
-    statback := 1;
-    localcol := True;
-    pause_code := '@PAUSE';
   end else
   begin
     while not EOF(f) do
