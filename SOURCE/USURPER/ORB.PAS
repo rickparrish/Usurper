@@ -1075,8 +1075,8 @@ var
   drink:  array [1..9] of string[25];
   cost:   array [1..9] of word;
 
-  sdrink, i, j, y: integer;
-  xx, yy, c, x: longint;
+  sdrink, i, j: integer;
+  xx, c, x: longint;
   s:      s70;
 
   Adrink: ^DrinkRec;

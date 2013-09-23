@@ -43,11 +43,9 @@ var
   currentmax:    word; {holds the number of initalized pointer vars}
   nice:          array [1..global_maxplayers] of ^longint;
   infos:         array [1..global_maxplayers] of ^s120;
-  xx, yy, i, x, j, y: longint;
+  xx, i, x, j, y: longint;
   rulers:        s30;
   player0:       ^UserRec;
-  motivation:    boolean;
-
 
 procedure Write_Asci(var infile: s70);
 const Header = 'Usurper Team Rankings                     Scores';

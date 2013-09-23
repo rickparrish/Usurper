@@ -890,9 +890,6 @@ end;
 
 procedure Battle_Comment;
 const mean1 = 'Are you trying to kill me? ';
-var
-  slask: s70;
-
 begin
 
     {* produces fit random comments during player_vs_player battle *}
@@ -3238,12 +3235,9 @@ end;
 procedure Muffis; {Checks if program is registered}
 label
   9044,
-  9040,
-  9039,
   9046,
   8088,
-  9045,
-  9041;
+  9045;
 
 var
   yy, j, x, y: longint;

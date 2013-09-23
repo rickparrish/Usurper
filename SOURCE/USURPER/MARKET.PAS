@@ -42,7 +42,6 @@ uses
 const food_master = 'Alabat'; {shop keeper, food & drinks}
 var
   refresh: boolean;
-  ok:      boolean;
 
 function Set_Color(rank: byte): byte;
 begin

@@ -111,9 +111,6 @@ procedure Loadconfig(fn: string; var bbs_software: byte; var user_first_name, us
   end;
 
   function getsecond(s: string): string;
-  var
-    a:  integer;
-    s2: string;
   begin;
     while (length(s) > 0) and (s[1] = ' ') do
       Delete(s, 1, 1);
@@ -226,7 +223,7 @@ procedure Loadconfig(fn: string; var bbs_software: byte; var user_first_name, us
 var
   s:       string;
   f:       Text;
-  a, b, c: integer;
+  a: integer;
   ps, p1, p2, p3: string[80];
   ofm:     word;
 begin;

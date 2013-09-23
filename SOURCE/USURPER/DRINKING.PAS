@@ -42,7 +42,7 @@ const maxopp = 9; {opponents in drinking competiton}
 var
   Count, togo: integer;
 
-  losers_out, playerr, exit_ok, npc: boolean;
+  losers_out, playerr, exit_ok: boolean;
 
   pvalue:      longint;
 

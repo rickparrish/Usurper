@@ -57,7 +57,7 @@ var
   pl0:         UserRec;
   king:        KingRec;
 
-  no_play, ok: boolean;
+  no_play: boolean;
 
 begin
 

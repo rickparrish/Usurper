@@ -49,8 +49,6 @@ var
 
   sel, guards: byte;
 
-  cho:         char;
-
   team, refresh: boolean;
 
   bankman, ss, a, s, s2: s70;
@@ -442,7 +440,7 @@ var
 
   ledig: array[1..5] of boolean;
 
-  adios, found2, battle_over, no_robbery: boolean;
+  adios, battle_over, no_robbery: boolean;
 
   safet: saferec;   {BankSafe record}
   gubbe: onlinerec; {onlinerecord}

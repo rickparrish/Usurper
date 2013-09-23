@@ -964,7 +964,7 @@ var
 
   s:        s100;
 
-  size, justval: word;
+  size: word;
 
   x:        longint;
 

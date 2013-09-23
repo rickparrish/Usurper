@@ -112,15 +112,13 @@ end;
 procedure Healer;
 const disease_col = ulgray; {display disease names in this color}
 var
-  x, y, justval: integer;
+  y: integer;
 
   healed, found, leave_place: boolean;
 
   ch:     char;
 
-  i, j, cc, xx, total, cursecost: longint;
-
-  s:      s70;
+  i, total, cursecost: longint;
 
   cost:   array [1..5] of ^longint;
 

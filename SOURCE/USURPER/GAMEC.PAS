@@ -181,10 +181,9 @@ var
   ch, cho:     char;
 
   i, x:        word;
-  y:           integer;
 
   done, {done is debug variable remove when sharp version is released}
-  found, teamdngs, log_mortal_entrance: boolean;
+  teamdngs, log_mortal_entrance: boolean;
 
   s:           s100;
   s2:          string[6];
@@ -192,8 +191,6 @@ var
   temp, temp2: userrec;     {jakob, remove when sharp version is released}
   child:       childrec;    {jakob, remove when sharp version is released}
   relation:    relationrec; {jakob, remove when sharp version is released}
-
-  bardsong:    bardtype;    {bardtype is defined in file_io.pas}
 
   king:        kingrec;     {oh boy! the King!}
 

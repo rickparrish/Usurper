@@ -67,7 +67,7 @@ var
   counter:     integer;
   yy, i, j, k: longint;
 
-  afflicted, save_need, npcpurnews, bought, bother, found, skip_hunt: boolean;
+  afflicted, save_need, npcpurnews, bother: boolean;
 
   pl0, pl1:    ^UserRec;
   objekt:      ^orec;
@@ -1051,11 +1051,11 @@ var
   member:    array[1..5] of s70;
   done:      array [1..maxnr] of boolean;
 
-  ok, npccharge, npcbuy, npcnews, npc_married, go_ahead, npcallow: boolean;
+  ok, npccharge, npcbuy, npcnews, go_ahead, npcallow: boolean;
 
   vic, mem, attempts, y, interest: integer;
 
-  yy, rep, xx, townpot, zz, x, z, q, rand: longint;
+  yy, rep, xx, zz, x, q: longint;
 
   s2, ss, s: string;
 

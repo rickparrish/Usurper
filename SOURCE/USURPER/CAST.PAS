@@ -49,8 +49,6 @@ procedure Put_Out(imp: boolean; m1, m2, m3: s70);
 var
   i:     byte;
 
-  bye:   boolean;
-
   me:    array[1..3] of s70;
 
   commy: comrec;
@@ -98,7 +96,7 @@ var
 
   magic_res:    array[1..global_maxmon] of integer;
 
-  x, yy, cr, i, ii: integer;
+  x, cr, i, ii: integer;
 
   rad:          longint;
 

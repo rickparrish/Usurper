@@ -56,10 +56,6 @@ uses
 var
   dispat, norm_att, found, done, First: boolean;
 
-  ch:      char;
-
-  justval: integer;
-
   tempman: userrec;
 
   healed:  boolean;
@@ -413,13 +409,13 @@ var
 
   cho:        char;
 
-  fastgame, to_death, expert_press: boolean;
+  to_death, expert_press: boolean;
 
-  s, dungeon: s70;
+  s: s70;
 
   i, j, x, zz, yy, xx: longint;
 
-  y, diff, stab1: integer;
+  y, stab1: integer;
 
   k, mon, attack_order, dummy: byte;
 

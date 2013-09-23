@@ -47,10 +47,8 @@ procedure Supreme;
 const supcol = ulred; {supreme beings color in the NEWS and MAIL file}
 var
   x, i, gain: longint;
-  justval:    integer;
   ch:         char;
   s:          s70;
-  a:          s70;
   dummy:      ^userrec;
   First, second: boolean;
   txt:        Text;

@@ -696,7 +696,6 @@ var
    s2 : s70;
 
    done,
-   save,
    found,
    abort,
    go_ahead,
@@ -706,8 +705,7 @@ var
 
    i,
    j,
-   size,
-   new_relation : word;
+   size : word;
 
    x,
    y,

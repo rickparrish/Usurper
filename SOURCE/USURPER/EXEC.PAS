@@ -976,6 +976,13 @@ end;
 function do_exec(xfn: string; pars: string; spawn: integer; needed: word; newenv: boolean): integer;
 begin
   Dos.Exec(xfn, pars);
+  if (DosError = 0) then
+  begin
+    do_exec := DosExitCode;
+  end else
+  begin
+    do_exec := DosError;
+  end;
 end;
 
 {$ENDIF}

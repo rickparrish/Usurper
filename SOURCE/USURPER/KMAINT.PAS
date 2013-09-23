@@ -40,10 +40,6 @@ uses
   News, Various, Various2,
   Various3, File_Io;
 
-var
-  not_used: boolean;
-
-
 procedure King_Maintenance;
 var
   x, old_tax: integer;

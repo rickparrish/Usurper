@@ -40,7 +40,7 @@ uses
 
 procedure Resurrect;
 var
-  s, a, a2: s70;
+  a, a2: s70;
 
   x, yy: longint;
 

@@ -45,9 +45,7 @@ procedure Player_vs_Player2;
 var
   stab2:       integer;
 
-  slask, zz, x, q: longint;
-
-  s:           s70;
+  zz, x: longint;
 
   gold_mem:    longint;
   gold_string: s100;

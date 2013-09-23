@@ -136,7 +136,7 @@ var
 
   komihag, cho, ch: char;
 
-  y, zz, justval: integer;
+  zz, justval: integer;
 
   mincost, maxcost, cc, j, x, i, xx: longint;
 

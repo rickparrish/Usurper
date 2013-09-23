@@ -181,7 +181,7 @@ var
   ch, cho:     char;
 
   s:           string;
-  a, sl, ss:   s70;
+  a, sl:   s70;
 
   y:           integer;
 

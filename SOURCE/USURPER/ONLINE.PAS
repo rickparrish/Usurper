@@ -215,11 +215,6 @@ end; {Tell_Onliner *end*}
 function Tell_Onliner_Compact(const Sender: onlinerec; const receiver: s30; const mess: s70): boolean;
 var
   Result: boolean;
-
-  i:      word;
-
-  target: onlinerec;
-
 begin {see the related "tell_onliner" routine for details...}
 
   Result := False;
@@ -351,7 +346,6 @@ end; {Send to location *end*}
 procedure Online_Message; {send message to online player}
 var
   i:          longint;
-  j:          integer;
 
   s, he:      s70;
 
@@ -531,11 +525,9 @@ var
   i, j:       longint;
   size:       longint;
   Result:     boolean;
-  memmy:      integer;
   error:      integer;
   found, ok:  boolean;
   onlinne:    onlinerec;
-  done:       boolean;
   OnlineFile: file of OnlineRec;  {** Online record file **}
 begin
 
@@ -1192,7 +1184,6 @@ end;   {who_is_here *end*}
 
 procedure Who_is_On; {List of characters online}
 var
-  s, s1, s2: s90;
   i:         word;
   justval:   integer;
   ply:       onlinerec;
@@ -1639,8 +1630,6 @@ end; {kick_out_old_onliners *end*}
 
 procedure Give_Me_Exits_From(const caller: onlinerec;
   var loc1, loc2, loc3, loc4, loc5, loc6, loc7, loc8, loc9, loc10, loc11, loc12, loc13, loc14: integer);
-const location_exits = 14;
-var i: byte;
 begin
 
  {fake players make up their minds where to go based on the info on
@@ -2128,12 +2117,10 @@ const
   transcol         = 7; {transmission message color}
 
 var
-  i, j, k, l, g: integer;
+  j, g: integer;
   saved: array[1..global_maxnod, 1..2] of ^s70;
 
   save_needed, online_fight, online_trade2, found: boolean;
-
-  loc:   byte;
 
   s:     s70;
 

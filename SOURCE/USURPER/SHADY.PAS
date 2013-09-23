@@ -113,9 +113,7 @@ end; {display_menu *end*}
 procedure Shady_Shops;
 var
   cho:  char;
-  y:    word;
   done: boolean;
-  s:    s30;
 
   king: kingrec;
 

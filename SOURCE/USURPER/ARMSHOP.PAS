@@ -362,11 +362,11 @@ procedure Armor_Shop;
 var
   komihag, cho, ch: char;
 
-  cc, y, j, justval: integer;
+  cc, j, justval: integer;
 
   x, i, xx: longint;
 
-  Show, leave_place: boolean;
+  leave_place: boolean;
 
   zz:       word;
 

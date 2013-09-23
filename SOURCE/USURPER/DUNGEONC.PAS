@@ -132,11 +132,10 @@ begin
 end; {team_member_instruct *end*}
 
 function Team_Select: integer; {let player select team-mates to follow}
-const col = 13; {phrase color}
 var
   i:         longint;
 
-  y, j:      integer;
+  y:      integer;
 
   gtext1, gtext2: s70;
 
@@ -537,7 +536,7 @@ var
 
   dungeon_difficulty, y, need: integer;
 
-  leave_dungeons, done, alive, demon, First: boolean;
+  leave_dungeons, done, demon, First: boolean;
 
   ch, cho: char;
 

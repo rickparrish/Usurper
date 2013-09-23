@@ -44,7 +44,6 @@ uses
   relation;
 
 var
-  ch:      char;
   refresh: boolean;
 
 procedure Meny;
@@ -115,11 +114,11 @@ end; {display_menu *end*}
 
 procedure Chest_Looting;
 var
-  go_ahead, loadres, done, found, abort, spotted: boolean;
+  go_ahead, loadres, found, abort, spotted: boolean;
 
   ch:        char;
 
-  cc, check, posmem, counter: integer;
+  cc, posmem, counter: integer;
 
   i, j, size, x: word;
 

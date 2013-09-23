@@ -42,7 +42,7 @@ var
 
   oppo:           s30;
 
-  s, save_mess, outmessage: s70;
+  save_mess, outmessage: s70;
 
   nr1, nr2, maxm: longint;
 

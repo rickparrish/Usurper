@@ -53,9 +53,6 @@ uses
 procedure Newsy;
 var
   newsfile:   Text;
-
-  i:          integer;
-
   s1, s2, s3: s100;
 
 begin

@@ -48,7 +48,7 @@ const maxsorts = global_maxplayers * 2;
 var
   dummy: byte;
 
-  k, y:  word;
+  k:  word;
 
   gap, Count, counter: integer;
 

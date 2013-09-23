@@ -56,8 +56,6 @@ procedure Generic_News; {** Generic News **}
 var
   newsfile: Text;
 
-  i:        integer;
-
   header, datestr: s90;
 
   AnsiFile, AsciFile: s100;

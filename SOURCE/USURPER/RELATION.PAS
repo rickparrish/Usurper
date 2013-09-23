@@ -927,7 +927,7 @@ end;
 
 procedure Kill_Duplicate_Relations;
 var
-  i, j, size, hits, mem: word;
+  i, j, hits, mem: word;
 
   ok: boolean;
 

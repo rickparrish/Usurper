@@ -707,9 +707,6 @@ end;   {validate_all_relations *end*}
 
 procedure Relations_Editor; {for debugging purposes only!}
 var
-
-  rel:       Relationrec;
-
   ply, ply2: userrec;
 
   done, dimmy, really_done: boolean;
@@ -917,7 +914,6 @@ procedure Npc_Set_Out_To_Marry; {called from npcmaint.pas}
 var
   i, ii:    word;
   x:        longint;
-  j:        byte;
   s:        s70;
   child:    childrec;
   marry, spouse: userrec;

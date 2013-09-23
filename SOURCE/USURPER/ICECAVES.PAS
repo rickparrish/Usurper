@@ -44,7 +44,6 @@ var
   refresh: boolean;
 
 procedure Meny;
-const offset = 22;
 begin
   clearscreen;
   crlf;

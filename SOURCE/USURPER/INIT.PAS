@@ -374,7 +374,7 @@ type
     Gnoll,
     Mutant);
 
-const RaceNames: array[Races] of string[7] = ('Human',
+const RaceNames: array[Races] of string[8] = ('Human',
     'Hobbit',
     'Elf',
     'Half-Elf',

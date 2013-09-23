@@ -162,7 +162,7 @@ procedure The_Inn;
 const never: boolean = False;
 const maxlin         = 5; {max lines to add to Inn chat file}
 var
-  y, k, cc, size, Count, dgsize: integer;
+  k, cc, size, Count, dgsize: integer;
   roomcost:    array[1..4] of integer;
 
   c:           byte;
@@ -184,7 +184,7 @@ var
 const len = 70;            {max length of text lines}
 
   procedure Attack_Player; {attack a character}
-  var i, j, k, x: longint;
+  var i, j, x: longint;
   begin
 
     if player.pfights < 1 then

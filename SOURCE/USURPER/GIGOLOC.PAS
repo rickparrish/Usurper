@@ -100,7 +100,6 @@ procedure Gigolos;
 var
   cho:      char;
   yy, z, x: longint;
-  s:        string[90];
 
 begin
   z := 0;

@@ -1576,7 +1576,7 @@ end; {swappy *end*}
 procedure XPLose;
 var
   s:     s70;
-  z, zz: real;
+  zz: real;
   x:     longint;
   lost:  byte;
   lose:  ^real;
@@ -1779,7 +1779,6 @@ procedure Healing;
 
 var
   zz, x, z: longint;
-  s:        s70;
 
 begin
 
@@ -3185,9 +3184,6 @@ var
   Result, found: boolean;
 
   i:    word;
-
-  king: kingrec;
-
 begin {try to locate and load king from user/npc file}
 
       {init}

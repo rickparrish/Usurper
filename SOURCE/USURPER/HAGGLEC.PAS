@@ -37,7 +37,7 @@ uses
 
 function Haggle;
 var
-  diff, offer, temp, cost: longint;
+  offer, temp, cost: longint;
 
   accept: boolean;
 

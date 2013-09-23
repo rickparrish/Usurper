@@ -145,8 +145,6 @@ begin;
 end;
 
 procedure AsyncSelectDigiBoard;
-var
-  Insize, infree, outsize, outfree: word;
 begin;
 {$IFDEF MSDOS}
   AsyncIoType := Digi;
@@ -180,8 +178,6 @@ begin;
 end;
 
 procedure AsyncSetBaud(n: longint);
-var
-  i: byte;
 begin;
   case asynciotype of
     Fossil: if not NoFossInit then

@@ -705,7 +705,7 @@ end; {display_menu *end*}
 procedure Status;
 var
 
-  tempin, s, a, a2: s70;
+  tempin, a2: s70;
 
   ch:      char;
 

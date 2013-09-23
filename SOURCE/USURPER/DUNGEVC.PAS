@@ -1638,17 +1638,16 @@ end; {find_item_event *end*}
 function Dungeon_Event;
 var
 
-  j, xx, x, y, i: longint;
+   xx, x, y, i: longint;
 
   foes, rendezvous: byte;
 
   ch:      char;
 
-  ciao, goahead, visit, done: boolean;
+  ciao, visit: boolean;
 
   s, s2:   s70;
 
-  player0: ^userrec;
   objekt:  ^orec;
 
 begin

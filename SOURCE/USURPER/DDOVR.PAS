@@ -296,16 +296,9 @@ var
   var
     pcbfile:  file;
     pcb14:    pcb_sys_rec14;
-    qbbsout:  Text;
-    filname:  string[8];
-    lastname: string[20];
-    graph:    integer;
-    sys_name, sysopfirst, sysoplast: string[30];
-    a, b, i:  integer;
-    c:        char;
+    a, i:  integer;
     s:        string;
     Name:     string[25];
-    GM:       string[2];
 
   begin
     Assign(PCBFile, dropfilepath + 'PCBoard.Sys');
@@ -366,7 +359,7 @@ var
   procedure load_rbbs16;
   var
     fd:       Text;
-    a, b:     integer;
+    a:     integer;
     info_num: byte;
     s, s2:    string;
   begin
@@ -451,7 +444,6 @@ var
   var
     a:         integer;
     b:         boolean;
-    ton, toff: real;
   begin;
     user_access_level := 0;
     local := False;
@@ -529,7 +521,7 @@ var
     a:       integer;
     b:       boolean;
     f:       Text;
-    ss, s:   string;
+    s:   string;
     code, i: integer;
     sint:    word;
 
@@ -842,7 +834,7 @@ var
     b:     boolean;
     a:     integer;
     f:     Text;
-    s, s2: string;
+    s: string;
   begin;
     local := False;
     user_access_level := 0;

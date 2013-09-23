@@ -98,7 +98,6 @@ const never: boolean = False;
 var
   cho: char;
   xx:  longint;
-  s:   s70;
 
 begin
 

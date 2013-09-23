@@ -1692,7 +1692,7 @@ end; {check_truthfile *end*}
 
 procedure Write_To_Truth_file;
 var txt: Text;
-  i, j:  byte;
+  i:  byte;
   ok:    boolean;
 
 begin {write_to_truth_file}
@@ -1955,7 +1955,7 @@ const max_tries = 80;
 var
   i:          word;
 
-  tries, dum: byte;
+  tries: byte;
 
   mem:        boolean;
 
@@ -6901,7 +6901,7 @@ procedure ChatSend(msg: string; Conf: word);
 var
   Sr:   Searchrec;
   tIPC: IPCType;
-  freemessage, i, col: byte;
+  freemessage, i: byte;
 begin
 
   FindFirst(IPCpath + 'IPC????.IPC', Anyfile - Directory, sr);
@@ -7384,9 +7384,7 @@ end; {Multi_Chat *END*}
 
 procedure IPCHook; {scanning own ipc node for incoming messages}
 var
-  attr, i: byte;
-  Cline:   string;
-
+  i: byte;
 begin
 
   global_emptyline := True;

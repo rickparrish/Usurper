@@ -572,7 +572,6 @@ function SockRecv(_SockDesc: tSockDesc;
                   _SockBuffer: pointer;
                   _SockBufLen: ULong;
                   _SockFlags:  ULong): Longint;
-var Counter: Longint;
 begin
   {$IFDEF WIN32}
     SockRecv := recv(_SockDesc,

@@ -360,8 +360,6 @@ procedure Remove_Item;
 var
   yy, i:  longint;
 
-  ch:     char;
-
   s:      s70;
 
   objekt: ^orec;
@@ -898,11 +896,10 @@ end; {remove_item *end*}
 
 procedure Use_Item; {Used only by players online}
 var
-  yy, i: longint;
+  i: longint;
   y, j:  integer;
 
   ch:    char;
-  s:     s70;
 
   force_right, force_left: boolean;
 
@@ -2072,7 +2069,7 @@ begin
 end; {Check_Valid_Equipment *end*}
 
 function Allowed_To_Use;
-var i: byte;
+var
   a:   boolean;
 
 begin
@@ -2199,8 +2196,6 @@ var
   ChestItem: ChestItemRec;
 
   objekt:    ^orec;
-
-  s:         s70;
 
 begin {called from Home.pas}
 

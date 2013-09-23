@@ -42,21 +42,19 @@ uses
 
 procedure Maintenance;
 var
-  pay, mem, save, truly, found, king_found, resurrect: boolean;
+  pay, mem, king_found, resurrect: boolean;
 
   inact, plfights: integer;
 
   s, s1:   s90;
 
-  y, rep, mem2, maxtime, tfights, interest, dngfights: integer;
+  mem2, maxtime, tfights, interest, dngfights: integer;
 
   rr:      real;
 
-  i, j, x, xx, yy, townpot, townpotv, treasury_mem: longint;
+  i, x, xx, yy, townpot, townpotv, treasury_mem: longint;
 
   memy:    byte;
-
-  txt:     Text;
 
   pl0:     UserRec;
   aarmor:  armrec;

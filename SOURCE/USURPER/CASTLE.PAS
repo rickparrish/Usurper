@@ -132,7 +132,7 @@ var
 
   k, till, action, offset, offset2: byte;
 
-  ok, found, search, finito, accept: boolean;
+  ok, found, search, finito: boolean;
 
   pl0, pl1:  ^UserRec; {user records}
   King:      ^KingRec; {king record}
@@ -219,8 +219,6 @@ var
     ch:          char;
 
     done, abort: boolean;
-
-    i, j:        word;
 
     x:           longint;
 
@@ -818,7 +816,6 @@ var
   var
     cho:         char;
     i:           word;
-    x:           longint;
 
     s, s3, s2:   s70;
 
@@ -2581,8 +2578,6 @@ var
   j, size: word;
 
   i, x, y, cost, money: longint;
-
-  done:    boolean;
 
 begin {THE_CASTLE, MAIN PROC **START**}
 
