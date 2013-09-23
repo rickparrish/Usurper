@@ -385,7 +385,7 @@ var
 
   ply:       userrec;
 
-  go_ahead, break_out: boolean;
+  break_out: boolean;
 
   infos:     array [1..global_maxplayers] of ^s30;
 
@@ -394,7 +394,6 @@ begin
   {init}
   Result := '';
   currentmax := 0;
-  go_ahead := True;
   break_out := False;
 
   crlf;
@@ -558,6 +557,8 @@ begin
 
                 for k := 1 to currentmax do
                 begin
+                  { REETODO infos does not seem to be initialized -- it is below though, so
+                            maybe this runs after the NEW() below due to the looping and the ifs? }
                   if infos[k]^ = player0^.team then
                   begin
                     x := 1;

@@ -362,7 +362,7 @@ procedure Armor_Shop;
 var
   komihag, cho, ch: char;
 
-  cc, j, justval: integer;
+  cc, j: integer;
 
   x, i, xx: longint;
 
@@ -497,7 +497,6 @@ begin
       crlf;
       j := 0;
       cc := 3;
-      justval := 14;
 
       sd(5, ljust('#', 4));
       sd(5, ljust('Item', 16));
@@ -778,7 +777,6 @@ begin
           crlf;
           d(5, 'Ancient Armors                 Price');
           cc := 1;
-          justval := 14;
 
           for i := 1 to fs(FsArmorClassic) do
           begin

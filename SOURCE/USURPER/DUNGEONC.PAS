@@ -536,7 +536,7 @@ var
 
   dungeon_difficulty, y, need: integer;
 
-  leave_dungeons, done, demon, First: boolean;
+  leave_dungeons, done, demon: boolean;
 
   ch, cho: char;
 
@@ -622,7 +622,6 @@ begin
 
   {Set Dungeon Level}
   global_dungeonlevel := player.level;
-  First := False;
 
   crlf;
   d(5, 'The Dungeons of ' + dungeon_name);

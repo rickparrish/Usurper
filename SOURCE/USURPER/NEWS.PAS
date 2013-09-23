@@ -53,7 +53,7 @@ uses
 procedure Newsy;
 var
   newsfile:   Text;
-  s1, s2, s3: s100;
+  s1, s2: s100;
 
 begin
 
@@ -68,8 +68,6 @@ begin
     begin
       s1 := '-*Usurper*- Happenings of ' + fix_date(todays_date);
       s2 := ulgray + '-*Usurper*-' + ulgreen + ' Happenings of ' + fix_date(todays_date) + ugreen;
-
-      s3 := ulgray;
 
       write_to_text(newsfile, AGreenonBlack);
       writeln_to_text(newsfile, mkstring(length(s1), underscore));

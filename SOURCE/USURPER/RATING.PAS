@@ -46,8 +46,6 @@ uses
 const maxsorts = global_maxplayers * 2;
 
 var
-  dummy: byte;
-
   k:  word;
 
   gap, Count, counter: integer;
@@ -1076,8 +1074,6 @@ begin
   counter := 0;
   if (filescore = True) and (eansi^ <> '') then
   begin
-    dummy := 0;
-
     if open_txtfile(trewrite, ansifile, eansi^) then
     begin
       wrl(10, '    ' + eansi^);
@@ -1147,7 +1143,6 @@ begin
   if (filescore = True) and (easci^ <> '') then
   begin
 
-    dummy := 0;
     counter := 0;
     if open_txtfile(trewrite, ascifile, easci^) then
     begin
@@ -1411,8 +1406,6 @@ begin
 
   if (filescore = True) and (aansi^ <> '') then
   begin
-    dummy := 0;
-
     if open_txtfile(trewrite, ansifile, aansi^) then
     begin
       wrl(10, '    ' + aansi^);
@@ -1487,8 +1480,6 @@ begin
 
   if (filescore = True) and (aasci^ <> '') then
   begin
-
-    dummy := 0;
 
     if open_txtfile(trewrite, ascifile, aasci^) then
     begin
@@ -1787,8 +1778,6 @@ begin
   counter := 0;
   if (filescore = True) and (wansi^ <> '') then
   begin
-    dummy := 0;
-
     if open_txtfile(trewrite, ansifile, wansi^) then
     begin
       wrl(10, '    ' + wansi^);
@@ -1864,7 +1853,6 @@ begin
 
   if (filescore = True) and (wasci^ <> '') then
   begin
-    dummy := 0;
     counter := 0;
     if open_txtfile(trewrite, ascifile, wasci^) then
     begin
@@ -2156,8 +2144,6 @@ begin
   {Writing Ansi-File}
   if (filescore = True) and (mkillansi^ <> '') then
   begin
-    dummy := 0;
-
     if open_txtfile(trewrite, ansifile, mkillansi^) then
     begin
       wrl(10, '    ' + mkillansi^);
@@ -2254,8 +2240,6 @@ begin
   {Writing Ascii-File}
   if (filescore = True) and (mkillasci^ <> '') then
   begin
-    dummy := 0;
-
     if open_txtfile(trewrite, ascifile, mkillasci^) then
     begin
       wrl(10, '    ' + mkillasci^);
@@ -2578,8 +2562,6 @@ begin
 
   if (filescore = True) and (pkillansi^ <> '') then
   begin
-    dummy := 0;
-
     if open_txtfile(trewrite, ansifile, pkillansi^) then
     begin
       wrl(10, '    ' + pkillansi^);
@@ -2669,8 +2651,6 @@ begin
 
   if (filescore = True) and (pkillasci^ <> '') then
   begin
-    dummy := 0;
-
     if open_txtfile(trewrite, ascifile, pkillasci^) then
     begin
       wrl(10, '    ' + pkillasci^);

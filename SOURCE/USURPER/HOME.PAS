@@ -70,7 +70,7 @@ var
 
   ch:          char;
 
-  ok, done, found, child_mean, nursery_done, play_finished, other_kids_found: boolean;
+  ok, done, child_mean, nursery_done, play_finished, other_kids_found: boolean;
 
   {kid fight variables}
   s:           s90;
@@ -343,7 +343,6 @@ begin
                 begin
                   if child_array[i]^.Name <> '' then
                   begin
-                    found := False;
                     x := 0;
                     for j := 1 to max_kidparty do
                     begin
@@ -354,7 +353,6 @@ begin
                         (child_array[j]^.fatherid <> child_array[i]^.fatherid) then
                       begin
                         x := j;
-                        found := True;
                         break;
                       end;
                     end; {for j:= .end.}

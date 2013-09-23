@@ -164,7 +164,7 @@ var
 
   i, stolcount:   integer;
 
-  des, slask, s2: s70;
+  slask, s2: s70;
 
 begin
 
@@ -926,10 +926,6 @@ begin
   begin
 
     {* VICTOR is computer controlled *}
-
-    if loser.name2 = player.name2 then
-      des := 'your '
-    else des := loser.name2 + 's ';
 
     {* Right Hand Swap *}
     if (loser.rhand > 0) and (looting_hands in [BothHands, RightHand]) then

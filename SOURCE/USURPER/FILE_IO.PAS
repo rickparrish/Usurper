@@ -2051,6 +2051,7 @@ begin {this routine deals with all textfile related stuff.
       Inc(i);
     end else
     begin
+      { REETODO tries does not seem to be initialized }
       i := tries;
     end;
 
@@ -2157,7 +2158,6 @@ end; { DirExist END, from SWAG }
 {-----FILESIZE START-----}
 function Fs;
 var
-  dum:          byte;
   memmy, i:     integer;
   error:        integer;
   ok:           boolean;
@@ -2189,7 +2189,6 @@ begin
 
   {init}
   error := 0;
-  dum := 0;
   Result := 0;
   i := 0;
 
@@ -2891,7 +2890,6 @@ end; {-----FILESIZE END-----}
 {-----ITEM FILESIZE START-----}
 function FsOb;
 var
-  dum:      byte;
   memmy, i: integer;
   error:    word;
   ok:       boolean;
@@ -2901,7 +2899,6 @@ var
 begin
 
   {init}
-  dum := 0;
   error := 0;
   fsob := 0;
   i := 0;

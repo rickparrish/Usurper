@@ -65,7 +65,7 @@ var
   nice2:       array [1..maxnr] of ^s70;
 
   counter:     integer;
-  yy, i, j, k: longint;
+  i, j, k: longint;
 
   afflicted, save_need, npcpurnews, bother: boolean;
 
@@ -380,7 +380,6 @@ begin
 
       for i := 1 to maxnr do
       begin
-        yy := i;
         if pl0^.team = nice2[i]^ then
         begin
           Inc(power2[i]);
@@ -566,6 +565,7 @@ var
   bought, save_need: boolean;
 
   rhand_need, lhand_need, head_need, body_need, arms_need, lfinger_need, rfinger_need, legs_need,
+  { REETODO lhand, lfinger and neck2 are commented out below -- should they be?  If so, can remove variables here }
   feet_need, waist_need, neck_need, neck2_need, face_need, shield_need, hands_need, abody_need: boolean;
 
   minattack, minarmor, maxattack, maxarmor: word;
@@ -2278,6 +2278,7 @@ begin
       for i := 1 to maxnr do
       begin
 
+        { REETODO done does not appear to be initialized }
         if (nice2[i]^ <> '') and (random(3) = 0) and (done[i] = False) then
         begin
           s := nice2[i]^;

@@ -115,6 +115,7 @@ var
 
   x, y:   longint;
 
+  { REETODO s2 is assigned below, but not used -- seems useful, maybe it should be used? }
   s, s2:  s90;
 
   done, wrong_god, go_ahead: boolean;

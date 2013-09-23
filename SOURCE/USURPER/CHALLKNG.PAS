@@ -248,7 +248,7 @@ var
 
   end; {new_ruler *end*}
 
-var monsters_killed: boolean;
+var
   rounds: word;
 begin {CHALLENGE KING *START*}
 
@@ -306,13 +306,11 @@ begin {CHALLENGE KING *START*}
       if random(3) = 0 then
       begin
         {npc killed moat monsters!}
-        monsters_killed := True;
         global_killed := False;
         j := 0;
       end else
       begin
         {R.I.P.}
-        monsters_killed := False;
         global_killed := True;
         j := king.moatnr;
       end;

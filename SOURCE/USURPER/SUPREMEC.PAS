@@ -49,7 +49,6 @@ var
   x, i, gain: longint;
   ch:         char;
   s:          s70;
-  dummy:      ^userrec;
   First, second: boolean;
   txt:        Text;
 
@@ -58,9 +57,6 @@ var
   custtemp:   ^Userrec; {temporary user record}
 
 begin
-
-  {init pointer vars}
-  new(dummy);
 
   onliner.doing := 'on the final Quest!';
   add_onliner(OUpdateLocation, onliner);
@@ -507,6 +503,7 @@ begin
     for i := 1 to 4 do
     begin
       case i of
+        { REETODO custtemp is not initialized }
         1: custtemp^ := pl1;
         2: custtemp^ := pl2;
         3: custtemp^ := pl3;

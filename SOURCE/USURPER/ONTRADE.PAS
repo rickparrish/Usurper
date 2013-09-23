@@ -38,7 +38,7 @@ uses
   Various2, File_Io;
 
 var
-  mesleepy, sleepy, adios, imp, challenger: boolean;
+  adios, imp, challenger: boolean;
 
   oppo:           s30;
 
@@ -79,7 +79,6 @@ begin
     begin
       d(config.textcolor, 'The talks are over!');
       d(config.textcolor, 'The other part has left!');
-      mesleepy := True;
       adios := True;
       bye := True;
     end;
@@ -89,7 +88,6 @@ begin
 
       d(config.textcolor, 'The talks are over!');
       d(config.textcolor, 'You have not responded fast enough! (press ENTER)');
-      mesleepy := True;
       adios := True;
       bye := True;
 
@@ -162,7 +160,6 @@ begin
   if sleep >= global_online_maxwaits_bigloop then
   begin
     adios := True;
-    sleepy := True;
     sd(global_plycol, oppo);
     d(config.textcolor, ' has suddenly left you!');
   end else
@@ -246,7 +243,6 @@ begin
   error := 0;
   challenger := utman;
   imp := utman;
-  sleepy := False;
   adios := False;
   oppo := onliner.bname;
 

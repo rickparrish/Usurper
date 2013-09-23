@@ -136,7 +136,7 @@ var
 
   komihag, cho, ch: char;
 
-  zz, justval: integer;
+  zz: integer;
 
   mincost, maxcost, cc, j, x, i, xx: longint;
 
@@ -198,7 +198,6 @@ begin {Weapon Shop}
       crlf;
       d(5, 'Ancient Weapons            Price');
       cc := 1;
-      justval := 14;
 
       for i := 1 to fs(FsWeaponClassic) do
       begin
@@ -259,7 +258,6 @@ begin {Weapon Shop}
       clearscreen;
       j := 0;
       cc := 3;
-      justval := 14;
 
       sd(5, ljust('#', 4));
       sd(5, ljust('Item', 13));

@@ -94,14 +94,12 @@ begin;
 end;
 
 procedure AsyncReceiveChar(var ch: char);
-var
-  b: boolean;
 begin;
   case asyncIotype of
-    Fossil: b := async_receive(ch);
+    Fossil: async_receive(ch);
 {$IFDEF MSDOS}
     Internal: ch := ComReadCh(comport);
-    Digi: b := digi_receive(ch);
+    Digi: digi_receive(ch);
 {$ENDIF}
   end;
 end;

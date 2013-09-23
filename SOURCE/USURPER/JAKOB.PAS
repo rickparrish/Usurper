@@ -391,6 +391,7 @@ end;
 function EmptyStr: string;
 var s: string;
 begin
+  { REETODO s is uninitialized -- I repeat my comment from EDITOR, this function seems stupid! }
   cleanstring(s);
   emptystr := s;
 end;

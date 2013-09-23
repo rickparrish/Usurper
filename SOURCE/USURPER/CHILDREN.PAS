@@ -2454,7 +2454,7 @@ procedure Kidnapped_Children; {players manage kidnapped children, kids
 const offset = 20;
   max_ransom = 250000000; {guess..}
 var
-  refresh, kidnappmenu_done: boolean;
+  kidnappmenu_done: boolean;
 
   ch:    char;
 
@@ -2472,7 +2472,6 @@ begin
     {update online location, only if necessary}
     if onliner.location <> onloc_kidnapper then
     begin
-      refresh := True;
       onliner.location := onloc_kidnapper;
       onliner.doing := location_desc(onliner.location);
       add_onliner(OUpdateLocation, onliner);

@@ -1245,7 +1245,7 @@ var mission_active: boolean;
 
   procedure fight_scum(terrain: terrains; foes: byte);
   var i:     byte;
-    x, hps:  longint;
+    hps:  longint;
     s:       s70;
     weapon, armor, phrase: s70;
 
@@ -1437,8 +1437,6 @@ var mission_active: boolean;
       crlf;
       crlf;
       crlf;
-
-      x := random(5000) + 1000;
 
       d(14, '******* Successful Fight *********');
       d(config.textcolor, 'After this perfect battle you rest a while...');

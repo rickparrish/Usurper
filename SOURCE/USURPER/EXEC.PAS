@@ -315,8 +315,6 @@ function envcount: integer;
 
   { Returns count of strings in environment. }
 
-var
-  cnt: integer;
 begin
   if envptr = nil { If not yet changed } then
     envcount := dos.envcount
@@ -348,10 +346,8 @@ function name_eq(var n1, n2: string): boolean;
 
 var
   i:  integer;
-  eq: boolean;
 begin
   i := 1;
-  eq := False;
   while (i <= length(n1)) and (i <= length(n2)) and
     (upcase(n1[i]) = upcase(n2[i])) do
     i := i + 1;

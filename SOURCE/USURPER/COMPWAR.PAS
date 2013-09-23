@@ -50,8 +50,6 @@ var
   reward:       boolean;
   dummy:        byte;
 
-const soulstrike: longint = 0;
-
 begin
 
   skrik := True;
@@ -244,7 +242,6 @@ begin
     (player1.casted = False) then
   begin
     zz := player1.hps div 3;
-    soulstrike := zz;
     Dec(player1.hps, zz);
     player1.punch := soul_effect(player1, zz);
 
@@ -364,7 +361,6 @@ begin
     (player2.used_item = False) and (player2.casted = False) then
   begin
     zz := player2.hps div 3;
-    soulstrike := zz;
     Dec(player2.hps, zz);
     player2.punch := soul_effect(player2, zz);
 

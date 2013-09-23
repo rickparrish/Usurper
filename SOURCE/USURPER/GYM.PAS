@@ -2076,7 +2076,6 @@ procedure Meny;
 const offset = 18;
   offset2    = 26;
 var s: s90;
-  x:   byte;
 begin
 
   clearscreen;
@@ -2107,9 +2106,6 @@ begin
   end else crlf;
 
   menu2(ljust('(B)arrel Masters', offset));
-  if player.sex = 1 then
-    x := 2
-  else x := 1;
   menu2(ljust('(T)ug-of-war competition', offset2));
   if player.gym_owner > 0 then
   begin
@@ -2691,6 +2687,7 @@ begin {Main proc START}
                   player.healing := player.healing + 200;
                 end;
 
+                { REETODO x does not seem to be initialized }
                 if x = 0 then
                 begin
 
@@ -3370,6 +3367,7 @@ var
   {set to true if player attempts to take on the owning team on his own!}
   player_knocked: boolean;
 
+  { REETODO target_name2 seems to be used in places where it should be target_name }
   player_nemesis, target_name, target_name2: s30;
   kick_hit_string, kick_missed_string: s15;
 

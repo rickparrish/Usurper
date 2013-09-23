@@ -3240,7 +3240,7 @@ label
   9045;
 
 var
-  yy, j, x, y: longint;
+  yy, j, x: longint;
   a, bbs, sysop: s70;
   regnr: longint;
   i: integer;
@@ -3263,7 +3263,6 @@ begin
     j := length(a);
     yy := 0;
     x := 0;
-    y := 0;
     for i := 1 to length(a) do
     begin
       x := x + (Ord(a[i]) * i);

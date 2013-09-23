@@ -41,8 +41,6 @@ uses
 const manager = 'Jadu';
 
 var refresh: boolean;
-  justval:   byte;
-
 procedure Meny;
 begin
   clearscreen;
@@ -53,7 +51,6 @@ begin
   d(config.textcolor, 'He is wearing a monks robe and a golden ring.');
 
   crlf;
-  justval := 24;
 
   menu('(H)eal Disease');
   menu('(C)ursed item removal');

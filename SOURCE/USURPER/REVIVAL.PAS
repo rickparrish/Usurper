@@ -40,9 +40,9 @@ uses
 
 procedure Resurrect;
 var
-  a, a2: s70;
+  a: s70;
 
-  x, yy: longint;
+  yy: longint;
 
   i, j, size: word;
 
@@ -182,9 +182,6 @@ begin
                 sd(global_plycol, pl0^.name2);
                 d(config.textcolor, ' seems to be fit for fight!');
                 crlf;
-
-                x := 1;
-                a2 := '';
 
                 if pl0^.ai = 'H' then
                 begin

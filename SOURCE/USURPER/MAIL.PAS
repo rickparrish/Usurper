@@ -120,16 +120,12 @@ procedure Save_Mail(var postme: mailrec);
 const max_records = 65500; {max records allowed in mail database}
 var
   size, empty_mailslot: word;
-
-  saved:    boolean;
-
 begin
 
   {lock mail file and find space to save new mail record}
   {find deleted mail(record) in mailfile.}
 
   {init vars}
-  saved := False;
   empty_mailslot := 1;
 
   {lock mailfile}

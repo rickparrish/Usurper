@@ -44,7 +44,7 @@ uses
 procedure Player_vs_Player;
 const soulstrike: longint = 0;
 var
-  stab1, stab2, zz, x, gold_mem: longint;
+  stab1, zz, x, gold_mem: longint;
 
   cho:      char;
 
@@ -489,7 +489,6 @@ begin
     end;
 
     stab1 := 0;
-    stab2 := 0;
     {*Attacking player uses Backstab*}
     if (cho = '1') and (player.class = Assassin) then
     begin
@@ -564,7 +563,6 @@ begin
     begin
       player_vs_player2(fastgame, pl2, stab1, beg, soulstrike);
       stab1 := 0;
-      stab2 := 0;
     end;
     player.casted := False;
     pl2.casted := False;

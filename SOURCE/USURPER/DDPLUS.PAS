@@ -543,7 +543,7 @@ var
   f:       Text;
   g, counter, chcount: integer;
   c, quit: boolean;
-  k, ch:   char;
+  ch:   char;
   ansisave, swon: boolean;
   ofm:     word;
 begin
@@ -560,7 +560,6 @@ begin
   c := False;
   swon := False;
   g := Graphics;
-  k := ' ';
 
   Assign(f, 'ERROR');
   if pos('.', filenm) <> 0 then
@@ -601,6 +600,7 @@ begin
 
   while (not EOF(f)) and (not quit) do
   begin
+    { REETODO ch is not initialized }
     if ch = #10 then
     begin
       chcount := 0;
@@ -678,6 +678,7 @@ begin
 
   while (not EOF(f)) and (not quit) do
   begin
+    { REETODO ch is not initialized }
     if ch = #10 then
       Inc(counter);
     if (counter > global_screenlines - 1) and (not nonstop) then
@@ -1105,6 +1106,7 @@ begin;
           normal_exit;
 
         end else
+        { REETODO minute_warning is not initialized }
         if (config.inactivity - el_mn2 < 2) and (minute_warning = False) then
         begin
           minute_warning := True;
@@ -1538,7 +1540,7 @@ const
 var
 
   fg, bg:     integer;
-  x, y: integer;
+  x: integer;
   ch:         char;
   a:          integer;
   hexsave:    boolean;
@@ -1642,7 +1644,7 @@ const
   promptcol3 = 15;
 var
   fg, bg:     integer;
-  x, y: integer;
+  x: integer;
   ch:         char;
   a:          integer;
   hexsave:    boolean;
@@ -1723,7 +1725,7 @@ const
   promptcol3 = 15;
 var
   fg, bg:     integer;
-  x, y: integer;
+  x: integer;
   ch:         char;
   a:          integer;
   hexsave:    boolean;

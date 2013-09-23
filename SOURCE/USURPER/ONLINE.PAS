@@ -1836,16 +1836,11 @@ procedure Get_Random_Human_Onliner(var target: OnlineRec);
 const max_search = 128;
 var
   i, j:         word;
-  get_me_array: array[1..max_search] of word;
   temp:         OnlineRec;
 begin {returns a random human online player, see "move_fakeplayers" for use}
 
       {init variables}
   j := 0;
-  for i := 1 to max_search do
-  begin
-    get_me_array[i] := 0;
-  end;
 
   for i := 1 to fs(FsOnline) do
   begin
@@ -1865,7 +1860,6 @@ begin {returns a random human online player, see "move_fakeplayers" for use}
     d(15,'Matching Random Human Player : '+temp.name);
     }
         Inc(j);
-        get_me_array[j] := i;
         if j = max_search then
           break;
       end;

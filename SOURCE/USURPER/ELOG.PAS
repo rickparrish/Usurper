@@ -87,8 +87,6 @@ const
 
 var
   ErrFile:      Text;
-  A1:           byte;
-  YE:           boolean;
   OpenAttempts: integer;
   GoAhead:      boolean;
   Year, Month, Day: word;
@@ -132,8 +130,6 @@ var
   end;
 
 begin
-  A1 := 18;
-  YE := False;
   GetDate1(Month, day, year);
   if ErrorAddr = nil then
   begin
@@ -154,7 +150,6 @@ begin
 {$IFNDEF MSDOS}
     FileModeReadWrite := FileMode;
 {$ENDIF}
-    YE := False;
     Assign(ErrFile, logname);
     if F_EXISTS(logname) then
     begin
@@ -281,7 +276,6 @@ end;
 {$F-}
 
 {$F+} procedure MyExit1; {$F-}
-var SaveExitProc: POINTER;
 begin;
   TrapExit;
   SaveExitProc := Exitproc;

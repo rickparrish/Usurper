@@ -751,7 +751,6 @@ var ch: char;
       'nineteen');
   var i, x:      longint;
     newswritten: boolean;
-    girl_dead:   boolean;
     player0:     ^UserRec;
   begin
 
@@ -785,7 +784,6 @@ var ch: char;
     ch := menu_choices('(S)atisfy your lust', '(R)ough her up', '(W)alk away', '', '');
 
     newswritten := False;
-    girl_dead := False;
 
     case ch of
       'S': begin {rape time *start*}
@@ -869,7 +867,6 @@ var ch: char;
             '');
 
           newswritten := True;
-          girl_dead := True;
 
         end;
 
