@@ -1345,7 +1345,6 @@ var
   R:   TRect;
   x1, y1, x2, y2: byte;
   Dia: EqClDialogP;
-  bx:  byte;
 
   procedure Replace(nr: integer; s: string);
   begin

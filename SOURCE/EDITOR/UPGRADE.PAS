@@ -211,8 +211,6 @@ end;
 
 function GuessVersionByData: string;
 var
-  NpcsDat, MonsterDat: string;
-  NpcsDatFile, MonsterDatFile: file of byte;
   NpcsDatSize, MonsterDatSize: longint;
   Result: string;
 begin
@@ -328,7 +326,6 @@ end;
 
 function PerformUpgrade(OldVersion: string): boolean;
 var
-  Ch:     char;
   Result: boolean;
 begin
   { Assume failure }
@@ -363,7 +360,6 @@ function PerformUpgradeTo023c: boolean;
 var
   Buf:    array[1..121] of byte;
   InFile, OutFile: file;
-  NumRead, NumWritten: SmallWord;
   OldMonsterDat, TempMonsterDat: string;
   Result: boolean;
   StrengthLongInt: longint;
@@ -406,7 +402,6 @@ var
   Defense:  smallint;
   Hps:      longint;
   InFile, OutFile: file;
-  NumRead, NumWritten: SmallWord;
   OldMonsterDat, TempMonsterDat: string;
   Result:   boolean;
   Strength: longint;

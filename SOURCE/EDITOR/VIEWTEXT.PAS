@@ -138,7 +138,6 @@ var
   FileToView: Text;
   Line:       string;
   MaxWidth:   integer;
-  E:          TEvent;
 begin
   IsValid := True;
   if FileName <> nil then

@@ -347,7 +347,6 @@ begin
 end; {transfer_phrases .end.}
 
 procedure Transfer_Drink;
-var i: byte;
 begin
 
   if Direction = True then
@@ -392,7 +391,6 @@ begin
 end; {transfer_drink .end.}
 
 procedure Transfer_God;
-var i: byte;
 begin
 
   if Direction = True then
@@ -420,7 +418,6 @@ begin
 end; {transfer_god .end.}
 
 procedure Transfer_Child;
-var i: byte;
 begin
 
   if Direction = True then
@@ -2407,7 +2404,7 @@ procedure Export_Items;
 var
   tempfile:  file of objektrec;
   tmpobjekt: objektrec;
-  x, i:      longint;
+  i:      longint;
 
 begin
 
@@ -4022,7 +4019,7 @@ var
   R:     TRect;
   Dia:   GodDialogP;
 
-  x1, y1, x2, y2, t, ofy, i: byte;
+  x1, y1, x2, y2, t, i: byte;
 
   s:     s70;
 
@@ -4120,7 +4117,7 @@ var
   R:     TRect;
   Dia:   ChildDialogP;
 
-  x1, y1, x2, y2, t, ofy, i: byte;
+  x1, y1, x2, y2, t, i: byte;
 
   s:     s70;
 
@@ -4315,7 +4312,7 @@ var
   R:   TRect;
   Dia: PhraseDialogP; {Dialog Box}
 
-  x1, y1, x2, y2, t, i: byte;
+  x1, y1, x2, y2, t: byte;
 
   s:   s70;
 
@@ -4392,7 +4389,7 @@ procedure Drink_Ingredients_Editor(var a_drink: drinkrec); {called from drink_ed
 var
   R:       TRect;
   D:       XDialogP;
-  i, j, c: byte;
+  i, c: byte;
   sinfo:   array[1..global_max_drink_ingredients] of string[25];
   s:       s15;
 begin
@@ -4460,7 +4457,7 @@ var
   R:     TRect;
   Dia:   DrinkDialogP;
 
-  x1, y1, x2, y2, t, ofy, i: byte;
+  x1, y1, x2, y2, t, i: byte;
 
   s:     s70;
 
@@ -4562,7 +4559,7 @@ var
   s:       string[20];
   items:   PSitem;
 
-  w, hint: byte;
+  w: byte;
 
 begin
 

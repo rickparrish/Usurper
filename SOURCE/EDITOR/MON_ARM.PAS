@@ -35,7 +35,7 @@ uses
 
 procedure Arm_Monsters;
 var
-  ready1, ready2: boolean;
+  ready1: boolean;
   cc, cc2:        longint;
   i, j:           integer;
 

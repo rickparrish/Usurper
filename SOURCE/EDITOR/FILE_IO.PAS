@@ -666,7 +666,7 @@ end;
 
 procedure Load_Objekt;
 var
-  x, i:  word;
+  i:  word;
   ofil:  file of ObjektRec;
   memmy: integer;
   ok:    boolean;
@@ -1606,7 +1606,6 @@ var
   i:          word;
   IORes:      integer;
   tries:      byte;
-  dum:        byte;
   txt:        Text;
   memmy:      integer;
   lockmde:    byte;

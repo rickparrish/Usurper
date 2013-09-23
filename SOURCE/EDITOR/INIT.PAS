@@ -1690,8 +1690,6 @@ const
 const
   P: array[apColor..apMonochrome] of string[Length(CColor)] =
     (CColor, CBlackWhite, CMonochrome);
-var i: byte;
-
 begin
 
   p[apcolor, 1] := #$31;   {background}
@@ -1839,7 +1837,6 @@ end;
 procedure TMyapp.ToggleVideoMode;
 var
   NewMode: word;
-  R:       TRect;
 begin
   {$IFNDEF FPC}
     NewMode := ScreenMode xor smFont8x8;
@@ -1877,7 +1874,8 @@ end;
 
 
 procedure ClassicPickDialog.HandleEvent(var Event: TEvent);
-var i, index: longint;
+var
+  index: longint;
   carmor:     armrec;
   cweapon:    weaprec;
 begin
@@ -2403,9 +2401,6 @@ begin
 end;
 
 procedure IREDialog.HandleEvent(var Event: TEvent);
-var s:    string;
-  n1, n2: longint;
-
 begin
   inherited HandleEvent(event);
 
@@ -2485,7 +2480,8 @@ begin
 end;
 
 procedure ItemPickDialog2.HandleEvent(var Event: TEvent);
-var i, index: longint;
+var
+  index: longint;
   obbe:       objektrec;
 begin
 
@@ -2715,7 +2711,7 @@ procedure InvDialog.HandleEvent(var Event: TEvent);
   end;
 
 var
-  index, m, mem, kick: word;
+  m, mem, kick: word;
 
   obj:   objektrec;
   nytyp: objtype;
@@ -2901,7 +2897,7 @@ procedure EqDialog.HandleEvent(var Event: TEvent);
 
   end;
 
-var index: integer;
+var
   m:       word;
   obbe:    objektrec;
   mem:     array[1..16] of word;
@@ -4460,7 +4456,6 @@ end;
 
  {-------PHRASE DIALOG START--------}
 constructor PhraseDialog.Init(var Bounds: TRect; MyTitle: TTitleStr);
-var r: trect;
 begin
 
   TDialog.Init(Bounds, MyTitle);
@@ -4536,7 +4531,7 @@ end;
 
 constructor MonsterDialog.Init(var Bounds: TRect; MyTitle: TTitleStr);
 var r:        trect;
-  s1, s2, s3: string[90];
+  s1, s2: string[90];
   obj:        objektrec;
 begin
 
@@ -4589,7 +4584,7 @@ end;
 
 procedure MonsterDialog.HandleEvent(var Event: TEvent);
   procedure Update_Info;
-  var s1, s2, s3: string[90];
+  var s1, s2: string[90];
     obj:          objektrec;
   begin
     {updating WEAPOn / ARMOr POWEr}
@@ -4770,7 +4765,6 @@ end;
 
 {-------CHECKING DEPENDENCIES, DIALOG START--------}
 constructor DependDialog.Init(var Bounds: TRect; MyTitle: TTitleStr; ra: word; pry: objektrec);
-var r: trect;
 begin
   TDialog.Init(Bounds, MyTitle);
 
@@ -5356,7 +5350,6 @@ const xl = 30;
 var i:       integer;
   s:         string;
   s2:        string[6];
-  obj:       objektrec;
   max, diff: word;
   carmor:    armrec;
   cweapon:   weaprec;
@@ -5711,7 +5704,6 @@ end; {View ViewText Dialog ***END***}
 
      {Options Dialog ***START***}
 procedure OptionsDialog.HandleEvent(var Event: TEvent);
-var r: trect;
 begin
 
   inherited HandleEvent(event);
@@ -5730,7 +5722,6 @@ end; {Options Dialog ***END***}
 
      {More_Editors Dialog ***START***}
 procedure MoreEditorsDialog.HandleEvent(var Event: TEvent);
-var r: trect;
 begin
 
   inherited HandleEvent(event);
@@ -5823,7 +5814,7 @@ end; {More_Editors Dialog ***END***}
 
      {Global Monster Dialog ***START***}
 procedure GlobalMonsterDialog.HandleEvent(var Event: TEvent);
-var r:         trect;
+var
   i, j:        word;
   tempmonster: monsterrec;
   save_need:   boolean;

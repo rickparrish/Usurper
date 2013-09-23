@@ -297,7 +297,6 @@ procedure XDialog.TxtEntry(x, y: byte; const txt: string; max, max2: byte; hint:
 {max2 states how many chars you want to diaplay in your textbox.
  max has to be exactly specified or program will hang :) }
 var
-  w:  byte;
   ID: PView;
   R:  TRect;
 
