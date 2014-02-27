@@ -334,9 +334,9 @@ begin
     begin
       load_character(temp^, 2, i);
       if (temp^.name2 <> player.name2) and
-        (temp^.team = player.team) and
+        (temp^.team != player.team) and
         (is_online(temp^.name2, online_player) = False) and
-        (temp^.bankguard = False) and
+        (temp^.bankguard = True) and
         (temp^.hps > 0) then
       begin
 
@@ -618,7 +618,7 @@ begin
                 d(5, 'Go public?');
                 d(config.textcolor, 'The bank management is anxious to scare the');
                 d(config.textcolor, 'criminal elements from robbing the bank.');
-                d(config.textcolor, 'They bank would therefore appreciate if you would');
+                d(config.textcolor, 'The bank would therefore appreciate if you would');
                 d(config.textcolor, 'let them announce your employment.');
                 crlf;
 
@@ -869,7 +869,7 @@ begin
                   '?': begin
                     crlf;
                     crlf;
-                    menu('(R)ob!  (all your chivalry will be gone!)');
+                    menu('R(O)b!  (all your chivalry will be gone!)');
                     menu('(I)nspect guards');
                     menu('(A)bort');
                   end;
@@ -882,8 +882,7 @@ begin
                 {get user-input}
                 ch := upcase(getchar);
 
-                team := False;
-                if ch = 'R' then
+                if ch = 'O' then
                 begin
                   crlf;
                   if confirm('Rob the Bank ', 'N') = False then
@@ -891,6 +890,7 @@ begin
                     ch := ' ';
                   end else
                   begin
+                    team := False;
                     if player.team <> '' then
                     begin
                       if confirm('Bring the team with you ', 'Y') = True then
@@ -909,12 +909,12 @@ begin
                     ch := ' ';
                   end;
                 end;
-              until ch in ['R', 'A'];
+              until ch in ['O', 'A'];
 
               crlf;
               crlf;
               case ch of
-                'R': begin {** Robbery **}
+                'O': begin {** Robbery **}
                   for i := 1 to 4 do
                   begin
                     pl[i]^.name1 := emptystr;

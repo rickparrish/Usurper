@@ -648,7 +648,7 @@ begin
         crlf;
 
         d(config.textcolor, 'You enter the little hut where the master lives.');
-        d(config.textcolor, 'Two young men with shaved heads and armed with sticks');
+        d(config.textcolor, 'Two young men with shaved heads armed with sticks');
         d(config.textcolor, 'watch you closely when you enter.');
 
         repeat
@@ -681,6 +681,7 @@ begin
             if player.trains < 1 then
             begin
               d(15, 'You have no training sessions left!');
+              pause;
             end else
             begin
 
@@ -701,7 +702,7 @@ begin
                   if player.race = Hobbit then
                   begin
                     Inc(player.disres);
-                    d(14, 'For being a Hobbit you receive +1!');
+                    d(14, 'For being a Hobbit you receive extra disease resistance!');
                   end;
                   sd(config.textcolor, 'Your resistance is now : ');
                   d(10, immunity(player.disres));
@@ -710,6 +711,7 @@ begin
                   d(config.textcolor, ' training sessions left.');
 
                   again := False;
+                  if player.trains = 0 then pause;
                   if player.trains > 0 then
                   begin
                     crlf;

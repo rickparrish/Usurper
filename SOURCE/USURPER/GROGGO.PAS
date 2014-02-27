@@ -188,7 +188,7 @@ begin
   new(pl0);
   new(a);
   new(s);
-
+  new(msg);
   {h„mtar Groggoss namn fr†n .CFG}
   owner := cfg_string(21);
   if owner = '' then
@@ -390,7 +390,7 @@ begin
                   (pl0^.leprosy = True) and (pl0^.smallpox = True) and
                   (pl0^.measles = True) then
                 begin
-                  d(global_talkcol, 'That fellow already suffers from ALL diseases!');
+                  d(global_talkcol, 'That person already suffers from ALL diseases!');
                   found := False;
                 end;
 
@@ -482,7 +482,7 @@ begin
                     s^ := 'Black Magic used against You!';
 
                     case random(5) of
-                      { REETODO msg is not initialized }
+                      { REETODO msg is not initialized; Dan addressed }
                       0: begin pl0^.blind := True; msg^ := 'You are blind!'; end;
                       1: begin pl0^.plague := True; msg^ := 'You have the plague!'; end;
                       2: begin pl0^.smallpox := True; msg^ := 'You have smallpox!'; end;
