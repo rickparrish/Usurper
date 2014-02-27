@@ -745,7 +745,7 @@ begin
     begin
       if not silent then
       begin
-        d(3, 'Your miss your blow due to lack of concentration.');
+        d(3, 'You miss your blow due to lack of concentration.');
       end;
     end else
     begin
