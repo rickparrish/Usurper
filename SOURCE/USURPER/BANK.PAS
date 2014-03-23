@@ -334,7 +334,7 @@ begin
     begin
       load_character(temp^, 2, i);
       if (temp^.name2 <> player.name2) and
-        (temp^.team != player.team) and
+        (temp^.team <> player.team) and
         (is_online(temp^.name2, online_player) = False) and
         (temp^.bankguard = True) and
         (temp^.hps > 0) then
