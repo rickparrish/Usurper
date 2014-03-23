@@ -75,10 +75,12 @@ begin
       unable_to_create(global_teamrecordf, error);
     end else
     begin
+      new(rekord);
       rekord^.team := 'Dangerous Foes';
       rekord^.days := 2;
       Write(rekordfil, rekord^);
       Close(rekordfil);
+      dispose(rekord);
     end;
   end;
 
