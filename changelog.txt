@@ -8,6 +8,8 @@ Cosmetics:
 
 -Tried to address a crash in Groggo's due to msg not being initialized.
 
+- Fix maintenance crash due to unallocated variable during creation of TEAMREC.DAT
+
 Upgrading:
 - As of 0.24 Usurper now includes an auto upgrader, built into EDITOR.  New versions will create a data file indicating the installed version when the game is reset, but old versions don't have that file so EDITOR will try to guess the installed version by looking at the NPCS.DAT file (which seems to change often).
 - Currently upgrading is only supported for versions 0.20e and newer (excluding the W32 versions of 0.21 and 0.21a) -- if you want to upgrade an older game, then you'll have to handle the steps manually (download each release between your version and 0.20e and apply the updates one by one)
