@@ -482,7 +482,6 @@ begin
                     s^ := 'Black Magic used against You!';
 
                     case random(5) of
-                      { REETODO msg is not initialized; Dan addressed }
                       0: begin pl0^.blind := True; msg^ := 'You are blind!'; end;
                       1: begin pl0^.plague := True; msg^ := 'You have the plague!'; end;
                       2: begin pl0^.smallpox := True; msg^ := 'You have smallpox!'; end;
@@ -783,6 +782,7 @@ begin
   dispose(pl0);
   dispose(a);
   dispose(s);
+  dispose(msg);
 
 end; {Groggos_Magic *end*}
 

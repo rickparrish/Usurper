@@ -2688,6 +2688,7 @@ begin {Main proc START}
                 end;
 
                 { REETODO x does not seem to be initialized }
+                { Not sure what's up here }
                 if x = 0 then
                 begin
 
@@ -3367,7 +3368,6 @@ var
   {set to true if player attempts to take on the owning team on his own!}
   player_knocked: boolean;
 
-  { REETODO target_name2 seems to be used in places where it should be target_name }
   player_nemesis, target_name, target_name2: s30;
   kick_hit_string, kick_missed_string: s15;
 
@@ -3850,7 +3850,7 @@ begin {take_over_the_gym}
                   kick_missed_string := 'MISS';
                 end;
                 6: begin {joint-break}
-                  sd(config.textcolor, 'You attempt to break a bone in ' + target_name2 + config.textcol1 + ' body!');
+                  sd(config.textcolor, 'You attempt to break a bone in ' + target_name + config.textcol1 + ' body!');
                   kick_hit_string := 'CRACK!';
                   kick_missed_string := 'MISS';
                 end;
@@ -3876,7 +3876,7 @@ begin {take_over_the_gym}
                   kick_missed_string := 'MISS';
                 end;
                 11: begin {pull-hair}
-                  sd(config.textcolor, 'You grab hold of ' + target_name2 + config.textcol1 + ' hair!');
+                  sd(config.textcolor, 'You grab hold of ' + target_name + config.textcol1 + ' hair!');
                   kick_hit_string := 'PAIN!';
                   kick_missed_string := 'NO EFFECT';
                 end;

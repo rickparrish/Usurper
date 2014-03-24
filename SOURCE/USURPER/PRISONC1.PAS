@@ -435,6 +435,7 @@ begin
             sd(config.textcolor, '.');
 
             { REETODO cc is a byte, global_online_maxwaits = 4500, so this will never be true }
+            { Seems like just increasing cc from byte to integer should do the trick }
             if cc > global_online_maxwaits then
             begin
               abort := True;

@@ -2052,6 +2052,10 @@ begin {this routine deals with all textfile related stuff.
     end else
     begin
       { REETODO tries does not seem to be initialized }
+      { I have a feeling he meant i := max_tries to set a condition to exit the
+        loop -- but if that's the case error equaling 0 is already a condition
+        to exit the loop, so this whole else block seems unnecessary (and then
+        so is the tries variable }
       i := tries;
     end;
 

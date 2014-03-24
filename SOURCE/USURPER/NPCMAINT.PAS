@@ -2279,6 +2279,7 @@ begin
       begin
 
         { REETODO done does not appear to be initialized }
+        { Presumably just need to set all elements of done to false? }
         if (nice2[i]^ <> '') and (random(3) = 0) and (done[i] = False) then
         begin
           s := nice2[i]^;

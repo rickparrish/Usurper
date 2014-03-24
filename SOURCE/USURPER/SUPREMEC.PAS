@@ -504,6 +504,7 @@ begin
     begin
       case i of
         { REETODO custtemp is not initialized }
+        { Just new() before the for loop and dispose() after? }
         1: custtemp^ := pl1;
         2: custtemp^ := pl2;
         3: custtemp^ := pl3;
