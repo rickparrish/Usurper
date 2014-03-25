@@ -376,7 +376,7 @@ var
         end; {case .end.}
       end else
       begin
-        case random(4) of
+        case random(5) of
           0: d(global_plycol, temp.name2 + config.textcol1 + ' left the Gym.');
           1: d(global_plycol, temp.name2 + config.textcol1 + ' was kicked out!');
           2: d(global_plycol, temp.name2 + config.textcol1 + ' left the Gym ' + ulred + 'frustrated!');
@@ -2687,9 +2687,7 @@ begin {Main proc START}
                   player.healing := player.healing + 200;
                 end;
 
-                { REETODO x does not seem to be initialized }
-                { Not sure what's up here }
-                if x = 0 then
+                if random(2) = 0 then
                 begin
 
                   {improve relation with player or Npc?}
@@ -2725,7 +2723,7 @@ begin {Main proc START}
                   begin
                     crlf;
                     d(config.textcolor, 'A name suddenly pops into your head; ' + uplc + pl0^.name2 + config.textcol1 + '!');
-                    d(config.textcolor, 'Your mind is filled ' + uyellow + 'nice' + config.textcol1 +
+                    d(config.textcolor, 'Your mind is filled with ' + uyellow + 'nice' + config.textcol1 +
                       ' pictures of you and ' + uplc + pl0^.name2 + config.textcol1 + ' having a good time.');
                     d(15, 'Your relation with ' + uplc + pl0^.name2 + uwhite + ' improved!');
 
@@ -2750,7 +2748,7 @@ begin {Main proc START}
                 end;
 
                 {x:=0; {fusk!}
-                if x = 0 then
+                if random(2) = 0 then
                 begin
 
                   {worsen relation with player or Npc?}
@@ -2785,7 +2783,7 @@ begin {Main proc START}
                   begin
                     crlf;
                     d(config.textcolor, 'A name suddenly pops into your head; ' + uplc + pl0^.name2 + config.textcol1 + '!');
-                    d(config.textcolor, 'Your mind is filled ' + ulgray + 'dark' + config.textcol1 +
+                    d(config.textcolor, 'Your mind is filled with ' + ulgray + 'dark' + config.textcol1 +
                       ' thoughts of you inflicting' + ' pain on ' + uplc + pl0^.name2 + config.textcol1 + '!');
                     d(global_plycol, pl0^.name2 + config.textcol1 + ' is scum and must die!');
 

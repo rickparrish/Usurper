@@ -42,7 +42,8 @@ procedure Royal_Prison;
 const cap = 'Ronald'; {captain of the guard *same as in prisonf.pas}
 
 var cho:     char;
-  cc, days:  byte;
+  days : byte;
+  cc:  integer;
   s, s2, s4: s70;
 
   daystr:    string[4];
@@ -434,8 +435,6 @@ begin
             node_check;
             sd(config.textcolor, '.');
 
-            { REETODO cc is a byte, global_online_maxwaits = 4500, so this will never be true }
-            { Seems like just increasing cc from byte to integer should do the trick }
             if cc > global_online_maxwaits then
             begin
               abort := True;

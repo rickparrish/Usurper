@@ -566,6 +566,9 @@ var
 
   rhand_need, lhand_need, head_need, body_need, arms_need, lfinger_need, rfinger_need, legs_need,
   { REETODO lhand, lfinger and neck2 are commented out below -- should they be?  If so, can remove variables here }
+  {Dan - interesting. He seems to have forgotten to write code.}
+  {This prevents NPCs from buying left hand, left finger}
+  {and neck2 items. Let's leave it for now.}
   feet_need, waist_need, neck_need, neck2_need, face_need, shield_need, hands_need, abody_need: boolean;
 
   minattack, minarmor, maxattack, maxarmor: word;

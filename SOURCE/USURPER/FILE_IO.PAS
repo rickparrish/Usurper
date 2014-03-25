@@ -1955,7 +1955,6 @@ const max_tries = 80;
 var
   i:          word;
 
-  tries: byte;
 
   mem:        boolean;
 
@@ -2049,16 +2048,7 @@ begin {this routine deals with all textfile related stuff.
       unable_to_access(fname, error);
       delay2(global_lockdelay);
       Inc(i);
-    end else
-    begin
-      { REETODO tries does not seem to be initialized }
-      { I have a feeling he meant i := max_tries to set a condition to exit the
-        loop -- but if that's the case error equaling 0 is already a condition
-        to exit the loop, so this whole else block seems unnecessary (and then
-        so is the tries variable }
-      i := tries;
-    end;
-
+    end 
   until (error = 0) or (i >= max_tries); (* Quit if not a sharing deny *)
 
   (* Set FileMode to default *)

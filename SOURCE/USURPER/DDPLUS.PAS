@@ -1012,6 +1012,7 @@ begin;
   ch := #0;
   charorigin := localchar;
 
+  minute_warning:=False;
   repeat;
     if not local then
     begin
@@ -1118,9 +1119,6 @@ begin;
           normal_exit;
 
         end else
-        { REETODO minute_warning is not initialized }
-        { Seems like minute_warning should just be set to False before the
-          repeat loop starts }
         if (config.inactivity - el_mn2 < 2) and (minute_warning = False) then
         begin
           minute_warning := True;
