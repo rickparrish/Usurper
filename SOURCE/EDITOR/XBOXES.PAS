@@ -152,19 +152,6 @@ var  l: longint;
   errorl: integer;
   s:    string;
 begin
-  { REETODO l not initialized -- should it be using Command parameter? }
-  { I wonder if he meant to do Val(Data^, l, ErrorCode); ?  Assuming Data^ is
-    the value from the ValInputLine, that would make sense since he'd then be
-    ensuring the value is between the valid range, and if not, setting it to
-    the lower bound. 
-    XDialog.ValEntry uses this, which is used in ADDIT.PAS a lot -- so does this
-    mean nobody ever bothered trying to change integer values?
-    OK, so after going and trying to enter an invalid value in the door guard
-    editor I see validation for TValInputLine is handled by
-    TValInputLine.HandleEvent, so that makes sense why this bug never caused a
-    problem -- it probably never got called!  And based on what it does there
-    my hunch appears to be correct, so I'm updating (just in case this ever
-    does get called in the future) }
   Val(Data^, l, errorl);
   Valid := True;
   if (errorl <> 0) then

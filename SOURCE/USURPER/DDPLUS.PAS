@@ -558,6 +558,7 @@ begin
   counter := 1;
   chcount := 0;
   c := False;
+  ch := #0;
   swon := False;
   g := Graphics;
 
@@ -600,11 +601,6 @@ begin
 
   while (not EOF(f)) and (not quit) do
   begin
-    { REETODO ch is not initialized }
-    { Not sure what to do here -- add ch := #0 before while loop to initialize, 
-      move this block below the Read() call, or move this block to the bottom 
-      of the while loop (or something else?).
-      This function is breaking my brain -- I have no idea what its purpose is! }
     if ch = #10 then
     begin
       chcount := 0;
@@ -682,32 +678,8 @@ begin
 
   while (not EOF(f)) and (not quit) do
   begin
-    { REETODO ch is not initialized }
-    { Ahh, maybe this explains the previous comment.  Looks like it's watching
-      for #10 to count lines, and once the screen line count is exceeded it
-      pauses and waits for input.  So in that case it seems like any of the three
-      previously mentioned fixes should work fine -- moving this whole block to the
-      bottom of the while loop makes the most sense to me -- then the logic is to
-      read from file, display to screen, and pause if it's time to do so.
-      Seems really inefficient to read a character at a time instead of a line at a
-      time though -- might be good to flag for future optimization }
-    if ch = #10 then
-      Inc(counter);
-    if (counter > global_screenlines - 1) and (not nonstop) then
-    begin
-      counter := 1;
-      swrite('(C)ontinue, (N)on-stop, (S)top ? ');
-      sread_char(ch);
-      for b := 1 to 33 do
-        swrite(chr(8));
-      clreol;
-      if ch in ['S', 's'] then
-        Quit := True;
-      if ch in ['N', 'n'] then
-        nonstop := True;
-    end;
-
-  {$I-}Read(f, ch);{$I+}
+    { REETODO Future optimization?: Read line at a time instead of char at a time }
+    {$I-}Read(f, ch);{$I+}
     error := IOREsult;
     if error <> 0 then
       unable_to_read(nyfil, error);
@@ -726,6 +698,23 @@ begin
     end;
     if not quit then
       swritec(ch);
+      
+    { Check for LF to see if we need to pause }
+    if ch = #10 then
+      Inc(counter);
+    if (counter > global_screenlines - 1) and (not nonstop) then
+    begin
+      counter := 1;
+      swrite('(C)ontinue, (N)on-stop, (S)top ? ');
+      sread_char(ch);
+      for b := 1 to 33 do
+        swrite(chr(8));
+      clreol;
+      if ch in ['S', 's'] then
+        Quit := True;
+      if ch in ['N', 'n'] then
+        nonstop := True;
+    end;
   end;
 
   close_text(f);

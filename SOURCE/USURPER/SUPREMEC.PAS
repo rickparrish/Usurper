@@ -500,13 +500,10 @@ begin
   end else
   begin
     {player was killed}
+    new(custtemp);
     for i := 1 to 4 do
     begin
       case i of
-        { REETODO custtemp is not initialized }
-        { Just new() before the for loop and dispose() after? }
-        {Dan - I think so. Can you test that one?}
-        
         1: custtemp^ := pl1;
         2: custtemp^ := pl2;
         3: custtemp^ := pl3;
@@ -517,6 +514,7 @@ begin
         user_save(custtemp^);
       end;
     end;
+    dispose(custtemp);
 
     crlf;
     crlf;

@@ -107,17 +107,7 @@ end;
 function EmptyStr: string;
 var s: string;
 begin
-  { REETODO s not initialized -- this function seems stupid, can't it just do emptystr := ''? }
-  { CleanString does this: fillChar(s, sizeof(s), 0); which means the fact that s is not
-    initialized is not a problem -- but I still wonder what the purpose of this is?  Based on
-    what CleanString does, my guess is that this created "prettier" data files, since if you
-    do StringVariable := '' and then that string variable is written to a data file, you wind
-    up with a NULL byte (indicating the length of the string is zero) followed by random junk
-    padding out the rest of the length of the string variable, but based on what CleanString
-    does I think you'll wind up with all NULL bytes padding out the rest of the length of the
-    string (I could be wrong though, maybe you still wind up with random junk).  Assuming that's 
-    the only difference between StringVariable := '' and  StringVariable := EmptyStr, this 
-    functions seems silly! }
+  s := ''; // Make FPC warning about s not being initialized go away
   cleanstring(s);
   emptystr := s;
 end;

@@ -1081,6 +1081,7 @@ begin
   for i := 1 to maxnr do
   begin
     new(team2[i]);
+    done[i] := false;
   end;
 
   for i := 1 to mux do
@@ -2281,8 +2282,6 @@ begin
       for i := 1 to maxnr do
       begin
 
-        { REETODO done does not appear to be initialized }
-        { Presumably just need to set all elements of done to false? }
         if (nice2[i]^ <> '') and (random(3) = 0) and (done[i] = False) then
         begin
           s := nice2[i]^;
