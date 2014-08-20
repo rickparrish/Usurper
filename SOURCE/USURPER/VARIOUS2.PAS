@@ -2897,6 +2897,13 @@ begin
           '');
 
         {mail the king}
+  if f_exists(global_kingf) = True then
+  begin
+
+    {load king data}
+    load_king(fload, king);
+
+
         if (king.Name <> '') and (king.ai = 'H') then
         begin
           post(MailSend,
@@ -2922,7 +2929,7 @@ begin
             '',
             '');
         end;
-
+end;
         {news-paper}
         Newsy(True,
           'Quest Failure',

@@ -673,6 +673,7 @@ var
 begin {called by relation.pas => Relation_Maintenance
                  file_io.pas =>pack_relations}
 
+  override := False;
   for i := 1 to fs(FsRelation) do
   begin
 

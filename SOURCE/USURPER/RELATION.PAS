@@ -2210,7 +2210,7 @@ begin
 
         if global_utest then
         begin
-          d(21, 'Potential Error: Father to ' + child.Name + 'not found in player files.');
+          d(21, 'Potential Error: Father to child not found in player files.');
         end;
 
         father_exist := False;
