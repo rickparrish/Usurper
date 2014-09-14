@@ -107,7 +107,7 @@ end;
 function EmptyStr: string;
 var s: string;
 begin
-  s := ''; // Make FPC warning about s not being initialized go away
+  s := ''; { Make FPC warning about s not being initialized go away }
   cleanstring(s);
   emptystr := s;
 end;
