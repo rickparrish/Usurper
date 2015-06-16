@@ -552,7 +552,7 @@ begin
 
   end;
 
-  {save users and dispose of temporary pointer vars}
+  {save users}
   for i := 0 to 10 do
   begin
     if i > 0 then
@@ -562,7 +562,6 @@ begin
         user_save(pl[i]^);
       end;
     end;
-    dispose(pl[i]);
   end;
 
   {we write to all involved members of town control that has been lost}
@@ -613,7 +612,13 @@ begin
 
   end;   {turf .end.}
 
-         {dispose of the remaining pointer variables}
+  {dispose of temporary pointer vars}
+  for i := 0 to 10 do
+  begin
+    dispose(pl[i]);
+  end;
+
+  {dispose of the remaining pointer variables}
   dispose(s);
   dispose(s2);
 
