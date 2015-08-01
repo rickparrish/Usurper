@@ -60,7 +60,7 @@ const
   VERSION_021W32_OR_021aW32 = '0.21 (W32) or 0.21a (W32)';
   VERSION_023c_OR_023d_OR_023e_OR_023f = '0.23c or 0.23d or 0.23e or 0.23f';
 
-function CloseAndRenameFiles(var InFile: file; InFileName: string; var OutFile: file; OutFileName: string): boolean; forward;
+function CloseAndRenameFiles(var InFile: file; InFileName: string; var OutFile: file; BackupExtension: string): boolean; forward;
 function GetDataFileSize(InFileName: string): longint; forward;
 function GetOldVersion: string; forward;
 function GetVersionDatVersion: string; forward;
@@ -98,7 +98,7 @@ begin
     end else
     begin
       { Apparently it's an unsupported version }
-      UpgradeFailedReason := 'Unsupported version';
+      UpgradeFailedReason := 'Unknown/unsupported version';
       Result := False;
     end;
 
@@ -112,7 +112,7 @@ begin
   CheckVersion := Result;
 end;
 
-function CloseAndRenameFiles(var InFile: file; InFileName: string; var OutFile: file; OutFileName: string): boolean;
+function CloseAndRenameFiles(var InFile: file; InFileName: string; var OutFile: file; BackupExtension: string): boolean;
 var
   Result: boolean;
 begin
@@ -121,7 +121,7 @@ begin
   Close(InFile);
   Close(OutFile);
 
-  {$I-}Erase(InFile);{$I+}
+  {$I-}Rename(InFile, Copy(InFileName, 1, Pos('.', InFileName)) + BackupExtension);{$I+}
   if (IOResult = 0) then
   begin
     {$I-}Rename(OutFile, InFileName);{$I+}
@@ -130,11 +130,11 @@ begin
       Result := True;
     end else
     begin
-      UpgradeFailedReason := 'Unable to swap data files (rename)';
+      UpgradeFailedReason := 'Unable to swap data files (rename2)';
     end;
   end else
   begin
-    UpgradeFailedReason := 'Unable to swap data files (erase)';
+    UpgradeFailedReason := 'Unable to swap data files (rename1)';
   end;
 
   CloseAndRenameFiles := Result;
@@ -200,6 +200,7 @@ begin
     end else
     begin
       Result := VERSION_ERROR;
+      UpgradeFailedReason := 'Unable to read VERSION.DAT';
     end;
   end;
 
@@ -363,7 +364,7 @@ begin
       BlockWrite(OutFile, Buf, 121);
     end;
 
-    Result := CloseAndRenameFiles(InFile, OldMonsterDat, OutFile, TempMonsterDat);
+    Result := CloseAndRenameFiles(InFile, OldMonsterDat, OutFile, '23c');
 
     { Update VERSION.DAT }
     if (Result) then
@@ -421,7 +422,7 @@ begin
       BlockWrite(OutFile, Buf, 113);
     end;
 
-    Result := CloseAndRenameFiles(InFile, OldMonsterDat, OutFile, TempMonsterDat);
+    Result := CloseAndRenameFiles(InFile, OldMonsterDat, OutFile, '23d');
 
     { Update VERSION.DAT }
     if (Result) then
