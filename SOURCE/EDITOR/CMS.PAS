@@ -49,6 +49,9 @@ const
   cmMoreEditors   = 109;
   cmAbout         = 110;
   cmMain          = 111;
+  
+  {upgrade related}
+  cmUpgradeFailed    = 120;
 
   cmReset         = 140;
   cmDocFiles      = 141;

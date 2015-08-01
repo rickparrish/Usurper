@@ -39,7 +39,7 @@ uses
   {$IFDEF MSDOS}Overlay, {$ENDIF} Dos, {$IFDEF MSDOS}InitOver, {$ENDIF}
   DDplus, Init, Jakob, Maint, Cms, SortPl, VarGods, GodWorld, UserHunc, Gamec, Byebyec, Mail,
   Various, Various2, Rating, Relation, Relatio2, Post_To, Online, File_Io, {$IFDEF MSDOS}OverXms, {$ENDIF}
-  Various3, News, Children, InitGods {$IFDEF FPC}, RPPort{$ENDIF};
+  Various3, News, Children, InitGods, Version {$IFDEF FPC}, RPPort{$ENDIF};
 
  {bard : singing...love & battle hymns}
  {half-elves : hypnotize}
@@ -274,10 +274,6 @@ uses
 {$ENDIF}
 
 const            {version number also in DDPLUS.PAS}
-  uver     = '0.23f';
-  uversion = 'Usurper ' + uver; {prog & version}
-  ucomp    = '07/08/2013';      {compile date, mm/dd/yyyy}
-
   uctlfile = 'USURP.CTL'; {modem/fossil configuration file, used by DDPLUS}
   never    = False; {never leave the main loop}
 
@@ -342,43 +338,17 @@ var
 
 begin {* Main Program *}
 
-      { Check that DATA\VERSION.DAT exists, and contains the same version number as this EXE }
-  S := '';
-  Write('   - Looking for ' + Global_VersionF + '...');
-  if (F_Exists(Global_VersionF)) then
+  { Check that DATA\VERSION.DAT exists, and contains the same version number as this EXE }
+  if Not(CheckVersion) then
   begin
-    WriteLn('FOUND');
-
-    for i := 1 to 10 do
-    begin
-      Write('   - Trying to open file...');
-      if (Open_TxtFile(TReset, Txt, Global_VersionF)) then
-      begin
-        WriteLn('SUCCESS');
-        ReadLn_From_Text(Txt, S);
-        Close_Text(Txt);
-        WriteLn('   - Version from file: ' + S);
-        break;
-      end else
-      begin
-        WriteLn('FAILED');
-        Delay2(500);
-      end;
-    end;
-  end else
-  begin
-    WriteLn('NOT FOUND');
-  end;
-  Write('   - Expected version: ' + uver);
-  if (S = uver) then
-  begin
-    WriteLn(' (MATCH)');
-  end else
-  begin
-    WriteLn(' (DOES NOT MATCH)');
+    WriteLn(' Your version of Usurper needs to be upgraded.');
+    WriteLn('   Current: ' + OldVersion);
+    WriteLn('   New    : ' + uver);
     WriteLn;
-    WriteLn('   - Please run EDITOR to upgrade your version of Usurper');
-    WriteLn('   - Aborting...');
+    WriteLn(' I tried to upgrade for you, but failed:');
+    WriteLn(' ' + UpgradeFailedReason);
+    WriteLn;
+    WriteLn(' Please see UPGRADE.DOC for further instructions.');
     WriteLn;
     Halt;
   end;
@@ -589,7 +559,7 @@ begin {* Main Program *}
 
 
   {Set DDPlus Program variable}
-  progname := uversion;
+  progname := usurper_version;
 
   {Time has Expired Message (DDplus variable)}
   notime := '*** TIME HAS EXPIRED ***';
@@ -820,7 +790,7 @@ begin {* Main Program *}
     if not config.fastplay then
     begin
       clearscreen;
-      d(1, uversion + ',  Compiled ' + ucomp);
+      d(1, usurper_version + ',  Compiled ' + ucomp);
       d(1, 'JAS Software 2009,  Dark Deception Series IV *original version*');
       d(1, 'GNU GPL License 2007');
 
@@ -1073,7 +1043,7 @@ begin {* Main Program *}
 
         if config.viewgamesettings then
         begin
-          display_game_settings(uversion);
+          display_game_settings(usurper_version);
         end else
         begin
           crlf;
@@ -1173,7 +1143,7 @@ begin {* Main Program *}
           crlf;
           crlf;
           d(2, cool_string(53, '=', '-', 5, 10));
-          d(13, 'ALERT! This is an early test-version of ' + uversion + '.');
+          d(13, 'ALERT! This is an early test-version of ' + usurper_version + '.');
           d(13, 'Report any errors and bugs via e-mail to : jakob@dangarden.com');
           d(2, cool_string(53, '=', '-', 5, 10));
           pause;

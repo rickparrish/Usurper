@@ -22,12 +22,12 @@ Copyright 2007 Jakob Dangarden
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 }
 
-unit EXtra; {Usurper Editor - Misc}
+unit Extra; {Usurper Editor - Misc}
 
 interface
 
 uses
-  Init, Xboxes, Objects;
+  Init, Xboxes, Objects, Version;
 
 procedure FirstMenu;     {MAIN MENU}
 procedure Config_Editor; {Usurper Configuration Dialog}
@@ -57,6 +57,7 @@ procedure Options_Menu;
 procedure More_Editors_Menu;
 
 procedure About; {about box - who made the program + version etc. etc.}
+procedure OkBox(const toptext: string; const Text: string; Lines: Integer);
 function YesNoBox(const toptext: string; const Text: string): boolean;
 function Save_Request: boolean;
 
@@ -2239,8 +2240,8 @@ begin
       #13 + ^C'Usurper Editor' + s + #13 + ' ' +
       #13 + ^C + 'Version ' + uver + #13 + ' ' +
       #13 + ^C'GPL License 2007' + #13 + ^C'original game by ' + #13 + ^C'Jakob Dangarden' + #13 + ' ' +
-      #13 + ^C + 'Ported by' + #13 + ^C'Rick Parrish (http://randm.ca)' + #13 + ' ' +
-      #13 + ^C + 'Bugfixes by' + #13 + ^C'Dan')));
+      #13 + ^C + 'Ported by' + #13 + ^C'Rick Parrish' + #13 + ' ' +
+      #13 + ^C + 'Bugfixes by' + #13 + ^C'Dan Zingaro')));
     {1993,98}
 
     {Button}
@@ -2251,6 +2252,33 @@ begin
        {Execute Dialog}
   MyApp.ExecuteDialog(Dia, nil);
 
+end;
+
+procedure OkBox(const toptext: string; const Text: string; Lines: integer);
+var
+  Dia: XDialogP;
+  R:   TRect;
+begin
+  R.Assign(0, 0, 70, Lines + 6);
+  Dia := New(XDialogP, Init(R, toptext));
+  with Dia^ do
+  begin
+    Options := Options or ofCentered;
+
+    R.Grow(-1, -1);
+    Dec(R.B.Y, 3);
+
+    {Text}
+    Insert(New(PStaticText, Init(R, #13 + Text)));
+    {1993,98}
+
+    {Button}
+    Okbutton(30, Lines + 3);
+
+  end; {with Dia do .end.}
+
+       {Execute Dialog}
+  MyApp.ExecuteDialog(Dia, nil);
 end;
 
 function YesNoBox(const toptext: string; const Text: string): boolean;

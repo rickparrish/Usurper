@@ -21,20 +21,29 @@ Copyright 2013 Usurper Dev Team
     along with Usurper; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 }
-
-unit Upgrade;
+unit Version;
 
 interface
 
-procedure UpgradeIfNecessary;
+const
+  uver            = '0.24';
+  ucomp           = '07/31/2015';      {compile date, mm/dd/yyyy}
+  editor_version  = 'Usurper Editor ' + uver;
+  usurper_version = 'Usurper ' + uver; {prog & version}
+  ubeta: boolean  = False; {is this a BETA version?}
 
+var
+  OldVersion: string;
+  UpgradeFailedReason: string;
+
+function CheckVersion: boolean;
+  
 implementation
 
 uses
-  Crt, File_IO, Init {$IFDEF FPC}, RPPort{$ENDIF};
+  File_Io, Init;
 
 const
-  { Constants to use in version detection }
   VERSION_ERROR        = 'ERROR';
   VERSION_UNKNOWN      = 'UNKNOWN';
   VERSION_001_OR_001e  = '0.01 or 0.01e';
@@ -57,10 +66,51 @@ function GetOldVersion: string; forward;
 function GetVersionDatVersion: string; forward;
 function GuessVersionByData: string; forward;
 function OpenFiles(var InFile: file; InFileName: string; var OutFile: file; OutFileName: string): boolean; forward;
-function PerformUpgrade(OldVersion: string): boolean; forward;
-function PerformUpgradeTo023c: boolean; forward;
-function PerformUpgradeTo023d: boolean; forward;
-function UpdateVersionDat: boolean; forward;
+function UpdateVersionDat(version: string): boolean; forward;
+function UpgradeTo023c: boolean; forward;
+function UpgradeTo023d: boolean; forward;
+
+function CheckVersion: boolean;
+var
+  Result: boolean;
+begin
+  { Assume success }
+  Result := True;
+
+  { Check which version we're upgrading from to see what needs to be done }
+  OldVersion := GetOldVersion;
+  
+  if (OldVersion <> uver) then
+  begin
+    { Upgrade needed, check if it's supported, and if so, what needs doing }
+    if (OldVersion = VERSION_020e_OR_022_OR_023_OR_023a_OR_023b) or (OldVersion = VERSION_021DOS_OR_021aDOS) then
+    begin
+      Result := UpgradeTo023c;
+    end else
+    if (OldVersion = VERSION_023c_OR_023d_OR_023e_OR_023f) or (OldVersion = '0.23c') then
+    begin
+      Result := UpgradeTo023d;
+    end else
+    if (OldVersion = '0.23d') or (OldVersion = '0.23e') or (OldVersion = '0.23f') then
+    begin
+      { Currently no upgrade needed for these versions }
+      Result := UpdateVersionDat(uver);
+    end else
+    begin
+      { Apparently it's an unsupported version }
+      UpgradeFailedReason := 'Unsupported version';
+      Result := False;
+    end;
+
+    { We might have multiple updates needed, so recursively call this function }
+    if (Result) then
+    begin
+      Result := CheckVersion;
+    end;
+  end;
+
+  CheckVersion := Result;
+end;
 
 function CloseAndRenameFiles(var InFile: file; InFileName: string; var OutFile: file; OutFileName: string): boolean;
 var
@@ -68,31 +118,23 @@ var
 begin
   Result := False;
 
-  WriteLn('DONE');
-
   Close(InFile);
   Close(OutFile);
-
-  Write('     - Erasing ' + InFileName + '...');
 
   {$I-}Erase(InFile);{$I+}
   if (IOResult = 0) then
   begin
-    WriteLn('SUCCESS');
-    Write('     - Renaming ' + OutFileName + ' to ' + InFileName + '...');
-
     {$I-}Rename(OutFile, InFileName);{$I+}
     if (IOResult = 0) then
     begin
-      WriteLn('SUCCESS');
       Result := True;
     end else
     begin
-      WriteLn('FAILED');
+      UpgradeFailedReason := 'Unable to swap data files (rename)';
     end;
   end else
   begin
-    WriteLn('FAILED');
+    UpgradeFailedReason := 'Unable to swap data files (erase)';
   end;
 
   CloseAndRenameFiles := Result;
@@ -108,38 +150,21 @@ begin
 
   { First try in DATA directory }
   TryFileName := 'DATA' + DIRECTORY_SEPARATOR + InFileName;
-  Write('   - Looking for ' + TryFileName + '...');
   if not (F_Exists(TryFileName)) then
   begin
     { Not in DATA directory, so setup for base directory lookup }
-    WriteLn('NOT FOUND');
     TryFileName := InFileName;
-    Write('   - Looking for ' + TryFileName + '...');
   end;
 
   { Look for the filename created above }
   if (F_Exists(TryFileName)) then
   begin
-    WriteLn('FOUND');
-    Write('   - Determining size of file...');
-
     Assign(InFile, TryFileName);
     {$I-}Reset(InFile);{$I+}
     if (IOResult = 0) then
     begin
       {$I-}Result := FileSize(InFile);{$I+}
-      if (IOResult = 0) then
-      begin
-        WriteLn(Result, ' bytes');
-      end else
-      begin
-        WriteLn('ERROR');
-      end;
-
       Close(InFile);
-    end else
-    begin
-      WriteLn('ERROR');
     end;
   end;
 
@@ -150,60 +175,32 @@ function GetOldVersion: string;
 var
   Result: string;
 begin
-  WriteLn(' - Trying to determine your installed version...');
-
   Result := GetVersionDatVersion;
   if (Result = VERSION_UNKNOWN) then
+  begin
     Result := GuessVersionByData;
-  WriteLn;
+  end;
 
   GetOldVersion := Result;
 end;
 
 function GetVersionDatVersion: string;
 var
-  Ch:     char;
   InFile: Text;
   Result: string;
 begin
   Result := VERSION_UNKNOWN;
 
-  Write('   - Looking for ' + VersionF + '...');
-  if (F_Exists(VersionF)) then
+  if (F_Exists(Global_VersionF)) then
   begin
-    WriteLn('FOUND');
-
-    repeat
-      Write('   - Trying to open file...');
-      if (Open_TxtFile(TReset, InFile, VersionF)) then
-      begin
-        WriteLn('SUCCESS');
-        ReadLn_From_Text(InFile, Result);
-        Close_Text(InFile);
-        Ch := 'N'; { Causes repeat loop to terminate, since we got the verrsion we need }
-        WriteLn('   - Version from file: ' + Result);
-      end else
-      begin
-        WriteLn('FAILED');
-        Result := VERSION_ERROR;
-
-        WriteLn;
-        WriteLn(VersionF + ' exists, but I was unable to open it for input.  Try again?');
-        WriteLn;
-        WriteLn('  (Y)es, try reading the file again');
-        WriteLn('  (N)o, don''t bother I''m going to reset the game anyway');
-        WriteLn;
-        Write('  Your choice [y/n]: ');
-        repeat
-          Ch := UpCase(ReadKey);
-        until (Ch in ['Y', 'N']);
-        WriteLn;
-        WriteLn;
-      end;
-    until (Ch = 'N');
-  end else
-  begin
-    WriteLn('NOT FOUND');
+    if (Open_TxtFile(TReset, InFile, Global_VersionF)) then
+    begin
+      ReadLn_From_Text(InFile, Result);
+      Close_Text(InFile);
+    end else
+    begin
+      Result := VERSION_ERROR;
+    end;
   end;
 
   GetVersionDatVersion := Result;
@@ -221,7 +218,6 @@ begin
   MonsterDatSize := GetDataFileSize('MONSTER.DAT');
   if (NpcsDatSize > 0) and (MonsterDatSize > 0) then
   begin
-    { BP can't use a LongInt in a case statement?  Makes for ugly repetetive IFs... }
     if (NpcsDatSize = 37800) then
     begin
       Result := VERSION_001_OR_001e;
@@ -278,12 +274,7 @@ begin
     if (NpcsDatSize = 113590) then
     begin
       Result := VERSION_021W32_OR_021aW32;
-    end else
-    begin
-      Result := VERSION_UNKNOWN;
     end;
-
-    WriteLn('   - Size indicates version: ' + Result);
   end;
 
   GuessVersionByData := Result;
@@ -295,68 +286,52 @@ var
 begin
   Result := False;
 
-  Write('     - Opening ' + InFileName + ' for input...');
-
   Assign(InFile, InFileName);
   {$I-}Reset(InFile, 1);{$I+}
   if (IOResult = 0) then
   begin
-    WriteLn('SUCCESS');
-    Write('     - Opening ' + OutFileName + ' for output...');
-
     Assign(OutFile, OutFileName);
     {$I-}ReWrite(OutFile, 1);{$I+}
     if (IOResult = 0) then
     begin
-      WriteLn('SUCCESS');
-      Write('     - Converting ' + InFileName + ' to ' + OutFileName + '...');
       Result := True;
     end else
     begin
       Close(InFile);
-      WriteLn('FAILED');
+      UpgradeFailedReason := 'Unable to open data files (rewrite)';
     end;
   end else
   begin
-    WriteLn('FAILED');
+    UpgradeFailedReason := 'Unable to open data files (reset)';
   end;
 
   OpenFiles := Result;
 end;
 
-function PerformUpgrade(OldVersion: string): boolean;
+function UpdateVersionDat(version: string): boolean;
 var
-  Result: boolean;
+  OutFile: Text;
+  Result:  boolean;
 begin
   { Assume failure }
   Result := False;
 
-  WriteLn(' - Performing automatic upgrade');
-
-  { Check which version we're upgrading from to see what needs to be done }
-  if (OldVersion = VERSION_020e_OR_022_OR_023_OR_023a_OR_023b) or (OldVersion = VERSION_021DOS_OR_021aDOS) then
+  Assign(OutFile, Global_VersionF);
+  {$I-}ReWrite(OutFile);{$I+}
+  if (IOResult = 0) then
   begin
-    Result := PerformUpgradeTo023c;
-    if (Result) then
-      Result := PerformUpgradeTo023d;
-  end else
-  if (OldVersion = VERSION_023c_OR_023d_OR_023e_OR_023f) then
-  begin
-    Result := PerformUpgradeTo023d;
+    WriteLn(OutFile, version);
+    Close(OutFile);
+    Result := True;
   end else
   begin
-    WriteLn('   - On second thought, maybe not!  Your version of Usurper is not supported');
-    WriteLn('     by the auto upgrader');
+    UpgradeFailedReason := 'Unable to update VERSION.DAT to ' + version;
   end;
 
-  { If we succeeded above, update the VERSION.DAT file }
-  if (Result) then
-    Result := UpdateVersionDat;
-
-  PerformUpgrade := Result;
+  UpdateVersionDat := Result;
 end;
 
-function PerformUpgradeTo023c: boolean;
+function UpgradeTo023c: boolean;
 var
   Buf:    array[1..121] of byte;
   InFile, OutFile: file;
@@ -366,8 +341,6 @@ var
   StrengthSmallInt: smallint;
 begin
   Result := False;
-
-  WriteLn('   - Upgrading to 0.23c');
 
   OldMonsterDat := 'DATA' + DIRECTORY_SEPARATOR + 'MONSTER.DAT';
   TempMonsterDat := 'DATA' + DIRECTORY_SEPARATOR + 'MONSTER.$$$';
@@ -391,12 +364,18 @@ begin
     end;
 
     Result := CloseAndRenameFiles(InFile, OldMonsterDat, OutFile, TempMonsterDat);
+
+    { Update VERSION.DAT }
+    if (Result) then
+    begin
+      UpdateVersionDat('0.23c');
+    end;
   end;
 
-  PerformUpgradeTo023c := Result;
+  UpgradeTo023c := Result;
 end;
 
-function PerformUpgradeTo023d: boolean;
+function UpgradeTo023d: boolean;
 var
   Buf:      array[1..114] of byte;
   Defense:  smallint;
@@ -408,11 +387,6 @@ var
 begin
   Result := False;
   Defense := 0;
-
-  { TODO Is it worth it to prompt users before applying this update?
-         Probably only a small number of people customized their monsters, and even if they did,
-         it's likely they'll want the Hps and Defense to match the way the game used to play anyway }
-  WriteLn('   - Upgrading to 0.23d');
 
   OldMonsterDat := 'DATA' + DIRECTORY_SEPARATOR + 'MONSTER.DAT';
   TempMonsterDat := 'DATA' + DIRECTORY_SEPARATOR + 'MONSTER.$$$';
@@ -448,131 +422,15 @@ begin
     end;
 
     Result := CloseAndRenameFiles(InFile, OldMonsterDat, OutFile, TempMonsterDat);
-  end;
 
-  PerformUpgradeTo023d := Result;
-end;
-
-function UpdateVersionDat: boolean;
-var
-  OutFile: Text;
-  Result:  boolean;
-begin
-  Result := False;
-
-  WriteLn('   - Updating ' + VersionF + ' with current version');
-  Write('     - Opening ' + VersionF + ' for output...');
-
-  Assign(OutFile, VersionF);
-  {$I-}ReWrite(OutFile);{$I+}
-  if (IOResult = 0) then
-  begin
-    WriteLn('SUCCESS');
-    Write('     - Writing new version to file...');
-
-    WriteLn(OutFile, uver);
-    Close(OutFile);
-
-    WriteLn('SUCCESS');
-    Result := True;
-  end else
-  begin
-    WriteLn('FAILED');
-  end;
-
-  UpdateVersionDat := Result;
-end;
-
-procedure UpgradeIfNecessary;
-var
-  Ch: char;
-  NewVersion, OldVersion: string;
-begin
-  ClrScr;
-  WriteLn;
-  WriteLn('USURPER AUTO UPGRADER');
-  WriteLn;
-
-  { Get EDITOR.EXE and VERSION.DAT (or best guess) versions }
-  NewVersion := uver;
-  OldVersion := GetOldVersion;
-
-  { Check if we were able to retrieve the VERSION.DAT version }
-  if (OldVersion = VERSION_ERROR) then
-  begin
-    { Ignore, error message would have been presented to user earlier }
-  end else
-  if (OldVersion = VERSION_UNKNOWN) then
-  begin
-    WriteLn('Unable to determine which version of Usurper you have installed!');
-    WriteLn(' - If you will be resetting the game, then you can safely ignore this message');
-    WriteLn(' - If you want to upgrade your game, please see UPGRADE.TXT for instructions');
-    WriteLn;
-    WriteLn('Hit any key to continue');
-    ReadKey;
-  end else
-  if (NewVersion <> OldVersion) then
-  begin
-    WriteLn('It looks like your copy of Usurper needs to be upgraded!');
-    WriteLn;
-    WriteLn('       Existing version: ' + OldVersion);
-    WriteLn('  Version to upgrade to: ' + NewVersion);
-    WriteLn;
-    WriteLn('Would you like to attempt an automatic upgrade now?');
-    WriteLn('(I *STRONGLY* recommend you take a backup first!)');
-    WriteLn;
-    WriteLn('  (Y)es, upgrade now');
-    WriteLn('  (N)o, I''ll upgrade later or plan on resetting the game');
-    WriteLn('  (A)bort, I want to go take a backup or something');
-    WriteLn;
-    Write('  Your choice [y/n/a]: ');
-    repeat
-      Ch := UpCase(ReadKey);
-    until (Ch in ['Y', 'N', 'A']);
-    WriteLn;
-    WriteLn;
-
-    if (Ch = 'Y') then
+    { Update VERSION.DAT }
+    if (Result) then
     begin
-      ClrScr;
-      WriteLn;
-      WriteLn('USURPER AUTO UPGRADER');
-      WriteLn;
-
-      if (PerformUpgrade(OldVersion)) then
-      begin
-        WriteLn;
-        WriteLn('Upgrade complete.  Hit any key to continue');
-        ReadKey;
-      end else
-      begin
-        WriteLn;
-        WriteLn('I wasn''t able to upgrade your game.  Please either reset the game, or be');
-        WriteLn('careful with this program as some of the editors may expect data files with');
-        WriteLn('a different structure, so you could cause damage using them before upgrading.');
-        WriteLn;
-        WriteLn('If you want to retry the upgrade, just quit and run this program again.');
-        WriteLn;
-        WriteLn('Hit any key to continue');
-        ReadKey;
-      end;
-    end else
-    if (Ch = 'N') then
-    begin
-      WriteLn('OK, I won''t upgrade your game now.  Please either reset the game, or be');
-      WriteLn('careful with this program as some of the editors may expect data files with');
-      WriteLn('a different structure, so you could cause damage using them before upgrading.');
-      WriteLn;
-      WriteLn('If you want to perform the upgrade, just quit and run this program again.');
-      WriteLn;
-      WriteLn('Hit any key to continue');
-      ReadKey;
-    end else
-    if (Ch = 'A') then
-    begin
-      Halt;
+      UpdateVersionDat('0.23d');
     end;
   end;
+
+  UpgradeTo023d := Result;
 end;
 
 end.

@@ -27,8 +27,7 @@ program Editor;
  {Usurper - DoorGame Editor}
  {Tools:Borland Pascal 7.0 and TurboVision 2.0}
 
-                {to change version and year: look for uver in init.pas
-                 and extra.pas}
+                {to change version and year: look for uver in version.pas}
 
                 {looking for the reset game proc? look in init.pas
                  Procedure ResDialog.HandleEvent(var Event:TEvent);}
@@ -37,8 +36,8 @@ program Editor;
 
 
 uses
- {$IFDEF MSDOS}Overlay, {$ENDIF} Init, CfgVal, JakobE, muffi2, extra, file_io,
- Upgrade {$IFDEF FPC}, RPPort{$ENDIF};
+ {$IFDEF MSDOS}Overlay, {$ENDIF} Init, CfgVal, JakobE, muffi2, extra, file_io
+ {$IFDEF FPC}, RPPort{$ENDIF};
 
 {$IFDEF MSDOS}
   {---$O Addit}
@@ -81,8 +80,6 @@ var
   txt:  Text;
 
 begin
-  UpgradeIfNecessary;
-
   filemode := 66;
 {$IFNDEF MSDOS}
   FileModeReadWrite := FileMode;

@@ -31,7 +31,7 @@ procedure Terminate;
 implementation
 
 uses
-  init, file_io;
+  init, file_io, Version;
 
 var txt:         Text;
   a, sysop, bbs: string[90];

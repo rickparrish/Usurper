@@ -29,7 +29,7 @@ unit File_Io; {Usurper Editor - File I/O Routines}
 interface
 
 uses
-  Init;
+  Init, Version;
 
 {used by file procedures/functions}
 type FilAction = (FLoad, FSave, FLock, FUnlock);

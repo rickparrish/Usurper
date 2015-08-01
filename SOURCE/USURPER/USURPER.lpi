@@ -9,7 +9,6 @@
         <MainUnitHasUsesSectionForAllUnits Value="False"/>
         <MainUnitHasCreateFormStatements Value="False"/>
         <MainUnitHasTitleStatement Value="False"/>
-        <UseDefaultCompilerOptions Value="True"/>
         <SaveJumpHistory Value="False"/>
         <SaveFoldState Value="False"/>
       </Flags>

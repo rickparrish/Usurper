@@ -38,11 +38,6 @@ const
   msgs routines}
   vision_is_running: boolean = False;
 
-  {Editor Version}
-  uver           = '0.23f';
-  uversion       = 'Usurper Editor ' + uver;
-  ubeta: boolean = False; {is this a BETA version?}
-
   {number of options in USURPER.CFG}
   {see cfgdef.pas for help regarding adding/editing/removing config options}
   global_maxcdef = 198;
@@ -109,7 +104,7 @@ const
   childmalef     = global_datadir + 'CHILDMAL.DAT'; {children, male names *used by npcs*}
   childfemalef   = global_datadir + 'CHILDFEM.DAT';{children, female names *used by npcs*}
   bardsongf      = global_datadir + 'BARDSONG.DAT'; {bard song file *confirm deletion*}
-  VersionF       = global_datadir + 'VERSION.DAT'; {stores version number for data files, used by UPGRADE.PAS}
+  Global_VersionF= global_datadir + 'VERSION.DAT'; {stores version number for data files, used by UPGRADE.PAS}
 
   {news files}
   nwfileans      = global_scoredir + 'NEWS.ANS';
@@ -1243,7 +1238,8 @@ uses
   edlegs,
   edfood,
   edmonst,
-  edface;
+  edface,
+  Version;
 
 function TMyStatusLine.Hint(AHelpCtx: word): string; {Hint Texts - Displayed at bottom of Screen}
 const
@@ -1669,13 +1665,23 @@ begin
 
   {togglevideomode;}
 
-  with Event do
+  if Not(CheckVersion) then
   begin
-    What := evCommand;
-    Command := cmMain;
+    with Event do
+    begin
+      What := evCommand;
+      Command := cmUpgradeFailed;
+    end;
+    PutEvent(Event);
+  end else
+  begin
+    with Event do
+    begin
+      What := evCommand;
+      Command := cmMain;
+    end;
+    PutEvent(Event);
   end;
-  PutEvent(Event);
-
 end;
 
 function TMyApp.GetPalette: PPalette;
@@ -1774,6 +1780,24 @@ begin
         FirstMenu; {auto starting the main menu.}
         ClearEvent(Event);
         EndModal(cmClose);
+      end;
+
+      cmUpgradeFailed: begin
+        { upgrade failed, show warning dialog }
+        OkBox('Upgrade Failed!', ' Your version of Usurper needs to be upgraded.' + #13 +
+                                 '   Current: ' + OldVersion + #13 +
+                                 '   New    : ' + uver + #13 +
+                                 ' ' + #13 +
+                                 ' I tried to upgrade for you, but failed:' + #13 +
+                                 ' ' + UpgradeFailedReason + #13 +
+                                 ' ' + #13 +
+                                 ' Please see UPGRADE.DOC for further instructions.', 9);
+        with Event do
+        begin
+          What := evCommand;
+          Command := cmMain;
+        end;
+        PutEvent(Event);
       end;
     end;
   end;
@@ -2046,8 +2070,8 @@ begin
         delete_file(ChildBirthHistASCI);
 
       { Data file version }
-      if (F_Exists(VersionF)) then
-        Delete_File(VersionF);
+      if (F_Exists(Global_VersionF)) then
+        Delete_File(Global_VersionF);
     end;
     sx := 3;
     sy := 0;
@@ -2169,13 +2193,13 @@ begin
         delete_file(childrenf);
 
       { Data file version }
-      if (Open_TxtFile(TReWrite, Txt, VersionF)) then
+      if (Open_TxtFile(TReWrite, Txt, Global_VersionF)) then
       begin
         WriteLn_To_Text(Txt, uver);
         Close_Text(Txt);
       end else
       begin
-        Unable_To_Create(VersionF);
+        Unable_To_Create(Global_VersionF);
       end;
     end;
 

@@ -276,7 +276,7 @@ const global_carrierdropped: boolean = False;
                             {set to true when ddplus reports carried dropped, see ddplus.pas=proc dropmessage}
 const global_checkcarrier: boolean = False; {set to false when command line options are running}
 const global_mainttxt = 10; {color of p† maint text, when its running}
-const global_webaddress = 'http://www.randm.ca/usurper.aspx';
+const global_webaddress = 'http://www.usurper.info';
 const global_levelraise = '(you are eligible for a level raise!)'; {text displayed when player is eligible for level raise}
 
 
