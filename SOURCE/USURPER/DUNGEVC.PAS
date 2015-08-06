@@ -1658,6 +1658,7 @@ begin
   begin
 
     {*WISHING WELL START*}
+        dungeon_event := True;
 
     crlf;
     d(14, 'You have come across a Wishing WELL!');
@@ -1841,7 +1842,6 @@ begin
 
       if visit then
       begin
-        dungeon_event := True;
         player.wellwish := True;
       end;
 

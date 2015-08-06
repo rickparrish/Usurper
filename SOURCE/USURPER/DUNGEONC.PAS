@@ -933,6 +933,7 @@ begin
 
       end;
       'L': begin {look for monsters}
+        
         if (player.fights <= 0) and (global_auto_probe = Nowhere) then
         begin
           crlf;
@@ -956,7 +957,7 @@ begin
                 begin
                   user_save(custtemp^);
                 end;
-
+end;
                 player.hps := 0;
                 {player.allowed:=false;}
                 Reduce_Player_Resurrections(player, True);
@@ -983,7 +984,6 @@ begin
                   '',
                   '');
 
-              end;
               normal_exit; {EVENTEN ended with player being killed}
 
             end;
@@ -1329,7 +1329,7 @@ begin
               end;
             end; {for i:= .end.}
 
-            if global_killed = True then
+            if global_killed then
             begin
               {player has been killed in the dungeons}
 
@@ -1362,7 +1362,7 @@ begin
                 '',
                 '');
 
-              if global_begged = True then
+              if global_begged then
               begin
                 s := ' ' + uplc + player.name2 + config.textcol1;
                 case random(7) of
