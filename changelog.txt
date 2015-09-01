@@ -1,20 +1,23 @@
 Version 0.24:
 
+Versions:
+-Only win32 and linux versions, now compiled with FreePascal instead of VirtualPascal, are supported
+
 Bank:
 -Your own team could fight you when robbing the bank. Fixed.
 
 Cosmetics:
 -Some typos fixed. Pause prompts added so that text doesn't scroll away.
-
 -Tried to address a crash in Groggo's due to msg not being initialized.
+-Fix maintenance crash due to unallocated variable during creation of TEAMREC.DAT
+-Fix maintenance crash due to use-after-dispose bug in Gang Fights
 
-- Fix maintenance crash due to unallocated variable during creation of TEAMREC.DAT
+Setup:
+- If USURP.CTL does not exist, some (hopefully sane) defaults will be used.  (Makes testing easier since I don't have to keep recreating it after I wipe a directory)
 
 Upgrading:
 - As of 0.24 Usurper now includes an auto upgrader, built into EDITOR.  New versions will create a data file indicating the installed version when the game is reset, but old versions don't have that file so EDITOR will try to guess the installed version by looking at the NPCS.DAT file (which seems to change often).
 - Currently upgrading is only supported for versions 0.20e and newer (excluding the W32 versions of 0.21 and 0.21a) -- if you want to upgrade an older game, then you'll have to handle the steps manually (download each release between your version and 0.20e and apply the updates one by one)
-- When Usurper loads it will check the version data file, and if it does not match the expected value, it will refuse to run until the upgrade (or reset) has taken place.  This is to ensure data corruption does not occur.
-- If USURP.CTL does not exist, some (hopefully sane) defaults will be used.  (Makes testing easier since I don't have to keep recreating it after I wipe a directory)
 
 ----------
 

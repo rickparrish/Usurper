@@ -1,0 +1,8 @@
+apt-get install fpc fp-units-fv
+
+cd /usr/local/src
+wget https://github.com/rickparrish/Usurper/archive/master.zip
+unzip master.zip
+cd Usurper-master
+mkdir bin && mkdir bin/i386-linux
+sh build-linux.sh

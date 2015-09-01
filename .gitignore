@@ -1,7 +1,9 @@
-bin/
+bin/i386-linux/*
+!bin/i386-linux/EDITOR
+!bin/i386-linux/USURPER
+bin/i386-win32/*
+!bin/i386-win32/EDITOR32.exe
+!bin/i386-win32/USURPER32.exe
 lib/
+old-build/
 ORIGINAL ARCHIVES/
-BPC*.CFG
-BUILD*.CMD
-BUILD*.sh
-VPC*.CFG
