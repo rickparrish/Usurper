@@ -62,7 +62,12 @@ Type PLinuxObj = ^TLinuxObj;
 var
   FCarrier: Boolean;
 
-procedure SignalHandler(ASig: LongInt); cdecl;
+procedure FPCSignalHandler(ASig: cint);cdecl;
+begin
+   FCarrier := False;
+end;
+
+procedure VPSignalHandler(ASig: LongInt); cdecl;
 begin
   FCarrier := False;
 end;
@@ -72,6 +77,10 @@ constructor TLinuxObj.Init;
 var
   Act, Old: TSigAction;
 {$ENDIF}
+{$IFDEF FPC}
+var
+  oa, na: PSigActionRec;
+{$ENDIF}
 begin
   inherited Init;
 
@@ -79,13 +88,23 @@ begin
 
 {$IFDEF VPASCAL}
   FillChar(Act, SizeOf(Act), 0);
-  Act.sa_Handler := @SignalHandler;
+  Act.sa_Handler := @VPSignalHandler;
   Act.sa_Flags := SA_NODEFER;
   LnxSigAction(SIGHUP, Act, Old);
   LnxSigAction(SIGTERM, Act, Old);
 {$ENDIF}
-{$IFNDEF VPASCAL}
-  WriteLn('REEPORT LINUXCOM Init'); Halt;
+{$IFDEF FPC}
+  // http://www.freepascal.org/docs-html/rtl/baseunix/fpsigaction.html
+  new(na);
+  new(oa);
+  na^.sa_Handler := SigActionHandler(@FPCSignalHandler);
+  FillChar(na^.Sa_Mask, sizeof(na^.sa_mask), #0);
+  na^.Sa_Flags := 0;
+  {$IFDEF LINUX}
+    na^.Sa_Restorer := nil;
+  {$ENDIF}
+  fpSigAction(SIGHUP, na, oa);
+  fpSigAction(SIGTERM, na, oa);
 {$ENDIF}
 end; { constructor Init }
 
