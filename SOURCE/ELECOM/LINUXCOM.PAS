@@ -19,7 +19,7 @@ unit LinuxCom;
  INTERFACE
 (*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-*)
 
-uses Combase, Linux;
+uses Combase, Linux {$IFDEF FPC}, BaseUnix{$ENDIF};
 
 type TLinuxObj = Object(TCommObj)
         FosPort: Byte;
