@@ -1,8 +1,13 @@
-apt-get install fpc fp-units-fv
+# Install required packages (works on my Ubuntu 14.04 server anyway)
+sudo apt-get install fpc fp-units-fv
 
+# Remove previous source, if necessary
+sudo rm master.zip
+sudo rm -rf /usr/local/src/Usurper-master
+
+# Download, extract, and build new source
 cd /usr/local/src
-wget https://github.com/rickparrish/Usurper/archive/master.zip
-unzip master.zip
+sudo wget https://github.com/rickparrish/Usurper/archive/master.zip
+sudo unzip master.zip
 cd Usurper-master
-mkdir bin && mkdir bin/i386-linux
-sh build-linux.sh
+sudo sh build-linux.sh
