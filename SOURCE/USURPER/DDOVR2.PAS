@@ -258,10 +258,7 @@ statback := 1;
   {$I+}
   end;
 
-  if ioresult <> 0 then
-  begin
-    dderror('Configuration file, ' + fn + ', is missing! Using defaults');
-  end else
+  if ioresult = 0 then
   begin
     while not EOF(f) do
     begin;
