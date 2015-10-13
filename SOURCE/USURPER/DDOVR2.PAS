@@ -88,7 +88,7 @@ procedure Loadconfig(fn: string; var bbs_software: byte; var user_first_name, us
     end;
       a := 1;
       s2 := '';
-      while s[a] <> ' ' do
+      while (s[a] <> ' ') and (a <= length(s)) do
       begin;
         s2 := s2 + upcase(s[a]);
         a := a + 1;
@@ -153,7 +153,7 @@ procedure Loadconfig(fn: string; var bbs_software: byte; var user_first_name, us
 
   procedure BadParam(s: string);
   begin;
-    dderror('Invalid parameter');
+    dderror('Invalid parameter: ' + s);
     halt;
   end;
 
@@ -252,7 +252,7 @@ statback := 1;
 
   if ioresult <> 0 then
   begin
-    Assign(f, 'ddplus.ctl');
+    Assign(f, 'DDPLUS.CTL');
   {$i-}
     reset(f);
   {$I+}
