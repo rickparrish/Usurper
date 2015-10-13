@@ -276,6 +276,11 @@ begin
     begin
       Result := VERSION_021W32_OR_021aW32;
     end;
+  end else
+  if (NpcsDatSize = -1) and (MonsterDatSize = -1) then
+  begin
+    { Neither data file exists -- probably a fresh install, so assume current version }
+    Result := uver;
   end;
 
   GuessVersionByData := Result;
