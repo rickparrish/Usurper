@@ -60,7 +60,8 @@ const
   VERSION_021W32_OR_021aW32 = '0.21 (W32) or 0.21a (W32)';
   VERSION_023c_OR_023d_OR_023e_OR_023f = '0.23c or 0.23d or 0.23e or 0.23f';
 
-function CloseAndRenameFiles(var InFile: file; InFileName: string; var OutFile: file; BackupExtension: string): boolean; forward;
+function CloseAndRenameFiles(var InFile: file; InFileName: string; var OutFile: file; 
+                             BackupExtension: string): boolean; forward;
 function GetDataFileSize(InFileName: string): longint; forward;
 function GetOldVersion: string; forward;
 function GetVersionDatVersion: string; forward;

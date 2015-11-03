@@ -4,6 +4,11 @@ bin/i386-linux/*
 bin/i386-win32/*
 !bin/i386-win32/EDITOR32.exe
 !bin/i386-win32/USURPER32.exe
+bin/i386-msdos/*
+!bin/i386-msdos/EDITOR.exe
+!bin/i386-msdos/EDITOR.ovr
+!bin/i386-msdos/USURPER.exe
+!bin/i386-msdos/USURPER.ovr
 lib/
 old-build/
 ORIGINAL ARCHIVES/
