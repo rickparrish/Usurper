@@ -65,8 +65,9 @@ begin
   MemW[Seg0040:CursorPos] := CursorCoords;
 {$ENDIF}
 {$IFNDEF MSDOS}
-  RPRestoreScreen(SavedScreen);
-  RPGotoXY(CursorCoords);
+  // RPRestoreScreen(SavedScreen);
+  // RPGotoXY(CursorCoords);
+  ClrScr;
 {$ENDIF}
   ExitProc := ExitSave;
 end; { MyExitProc }
