@@ -339,7 +339,9 @@ end;
 
 procedure async_flush_output;
 begin
+{$IFNDEF UNIX}
   Com_FlushOutBuffer(MySlice);
+{$ENDIF}
 end;
 
 {$ENDIF}
