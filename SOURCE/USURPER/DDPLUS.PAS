@@ -1990,6 +1990,7 @@ end;
 procedure StatusMess(var fs: string);
 begin
   Set_Color(2, 0);
+  {$IFDEF MSDOS}
   case Tasker of
     1: writeln('DESQview Detected');
     2: writeln('MS-Windows Detected'); {jakob}
@@ -1999,6 +2000,13 @@ begin
     6: writeln('Dos 5.0+ Detected');
     else writeln('No Multiplexer Detected');
   end;
+  {$ENDIF}
+  {$IFDEF LINUX}
+  writeln('Linux Detected');
+  {$ENDIF}
+  {$IFDEF WIN32}
+  writeln('Windows Detected');
+  {$ENDIF}
   if FossilIO or DigiIO then
   begin
     Set_Foreground(10);
