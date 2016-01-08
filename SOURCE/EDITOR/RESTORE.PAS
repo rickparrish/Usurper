@@ -23,7 +23,7 @@ var
 implementation
 
 uses
-  Drivers {$IFNDEF MSDOS}, RPPort{$ENDIF};
+  Drivers {$IFNDEF MSDOS}, Crt, RPPort{$ENDIF};
 
 {$IFNDEF MSDOS}
 var
