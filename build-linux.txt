@@ -1,5 +1,5 @@
 # Install required packages (works on my Ubuntu 14.04 server anyway)
-sudo apt-get install fpc fp-units-fv
+sudo apt-get install ca-certificates fpc fp-units-fv
 
 # Remove previous source, if necessary
 sudo rm master.zip

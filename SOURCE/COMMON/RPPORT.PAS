@@ -9,6 +9,10 @@ interface
   uses
     Windows;
 {$ENDIF}
+{$IFDEF UNIX}
+  uses
+    Unix;
+{$ENDIF}
 
 type
   {$IFDEF FPC}
@@ -351,7 +355,7 @@ begin
       WriteLn('RPPORT RPPORT RPLockFile'); Halt;
     {$ENDIF}
     {$IFDEF UNIX}
-      RPLockFile := fpLock(handle, LOCK_EX);
+      RPLockFile := fpFlock(handle, LOCK_EX);
     {$ENDIF}
     {$IFDEF WIN32}
       if (Windows.LockFile(handle, start, 0, length, 0)) then
@@ -749,7 +753,7 @@ begin
       WriteLn('RPPORT RPPORT RPUnLockFile'); Halt;
     {$ENDIF}
     {$IFDEF UNIX}
-      RPLockFile := fpLock(handle, LOCK_UN);
+      RPUnLockFile := fpFlock(handle, LOCK_UN);
     {$ENDIF}
     {$IFDEF WIN32}
       if (Windows.UnLockFile(handle, start, 0, length, 0)) then
