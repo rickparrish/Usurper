@@ -347,7 +347,21 @@ begin
     RPLockFile := SysLockFile(handle, start, length);
   {$ENDIF}
   {$IFNDEF VPASCAL}
-    WriteLn('RPPORT RPPORT RPLockFile'); Halt;
+    {$IFDEF GO32V2}
+      WriteLn('RPPORT RPPORT RPLockFile'); Halt;
+    {$ENDIF}
+    {$IFDEF UNIX}
+      RPLockFile := fpLock(handle, LOCK_EX);
+    {$ENDIF}
+    {$IFDEF WIN32}
+      if (Windows.LockFile(handle, start, 0, length, 0)) then
+      begin
+        RPLockFile := 0;
+      end else
+      begin
+        RPLockFile := GetLastError;
+      end;
+    {$ENDIF}
   {$ENDIF}
 end;
 
@@ -731,7 +745,21 @@ begin
     RPUnLockFile := SysUnLockFile(handle, start, length);
   {$ENDIF}
   {$IFNDEF VPASCAL}
-    WriteLn('RPPORT RPPORT RPUnLockFIle'); Halt;
+    {$IFDEF GO32V2}
+      WriteLn('RPPORT RPPORT RPUnLockFile'); Halt;
+    {$ENDIF}
+    {$IFDEF UNIX}
+      RPLockFile := fpLock(handle, LOCK_UN);
+    {$ENDIF}
+    {$IFDEF WIN32}
+      if (Windows.UnLockFile(handle, start, 0, length, 0)) then
+      begin
+        RPUnLockFile := 0;
+      end else
+      begin
+        RPUnLockFile := GetLastError;
+      end;
+    {$ENDIF}
   {$ENDIF}
 end;
 
