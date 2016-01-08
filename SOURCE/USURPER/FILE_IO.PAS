@@ -874,57 +874,65 @@ begin
 
   c := 0;
   maxsize := fs(FsMail);
-
-  {keep in memory, for statistics display}
-  sizebefore := maxsize;
-
-  ypos := wherey;
-  for i := 1 to MaxSize do
+  if (maxsize > 0) then
   begin
-    GotoXy(1, ypos);
-    wrl(10, 'Processing       : ' + commastr(i) + '/' + commastr(maxsize));
-    load_mail(Fload, mail, i);
-    if (old_mail(mail)) or (mail.readflag) then
-    begin
-      Inc(c);
-    end else
-    begin
-      {save records that are kept}
+    {keep in memory, for statistics display}
+    sizebefore := maxsize;
 
-   {$I-}Write(tempfile, mail);{$I+}
-      error := IoResult;
-
-      if error <> 0 then
+    ypos := wherey;
+    for i := 1 to MaxSize do
+    begin
+      GotoXy(1, ypos);
+      wrl(10, 'Processing       : ' + commastr(i) + '/' + commastr(maxsize));
+      load_mail(Fload, mail, i);
+      if (old_mail(mail)) or (mail.readflag) then
       begin
-        unable_to_write(tempf, error);
-        exit;
+        Inc(c);
+      end else
+      begin
+        {save records that are kept}
+
+     {$I-}Write(tempfile, mail);{$I+}
+        error := IoResult;
+
+        if error <> 0 then
+        begin
+          unable_to_write(tempf, error);
+          exit;
+        end;
       end;
+    end; {for i:= .end.}
+
+   {$I-}Close(tempfile);{$I+}
+    error := IoResult;
+    if error <> 0 then
+    begin
+      unable_to_close(tempf, error);
+      exit;
     end;
-  end; {for i:= .end.}
 
- {$I-}Close(tempfile);{$I+}
-  error := IoResult;
-  if error <> 0 then
+    delete_file(global_mafile);
+    rename_file(tempf, global_mafile);
+
+    {display statistics}
+
+    maxsize := c;
+
+    rr := sizebefore - maxsize;
+    rr := rr / sizebefore;
+    rr := rr * 100;
+    x := 100 - round(rr);
+
+    wrl(10, '');
+    wrl(10, 'Done. (' + commastr(c) + ' records deleted)');
+    wrl(10, 'Space saved: ' + commastr(sizeof(mailrec) * maxsize) + ' bytes, ' + commastr(x) + '%');
+  end else
   begin
-    unable_to_close(tempf, error);
-    exit;
+    { 0 byte mail file, so delete it }
+    delete_file(global_mafile);
+    wrl(10, '');
+    wrl(10, 'Done. (0 byte file deleted)');
   end;
-
-  delete_file(global_mafile);
-  rename_file(tempf, global_mafile);
-
-  {display statistics}
-
-  maxsize := c;
-
-  rr := sizebefore - maxsize;
-  rr := rr / sizebefore;
-  rr := rr * 100;
-  x := 100 - round(rr);
-
-  wrl(10, '');
-  wrl(10, 'Done. (' + commastr(c) + ' records deleted)');
-  wrl(10, 'Space saved: ' + commastr(sizeof(mailrec) * maxsize) + ' bytes, ' + commastr(x) + '%');
 
 end; {packmail .end.}
 
