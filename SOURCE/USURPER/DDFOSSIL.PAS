@@ -57,7 +57,7 @@ implementation
 
 {$IFNDEF MSDOS}
 uses
-  EleNorm, RPPort;
+  Comm, RPPort;
 
 var LastChar: char;
   DidInit:    boolean;
@@ -84,7 +84,7 @@ procedure async_send(c: char);
 begin
   if not (DidInit) then
     Exit;
-  Com_SendChar(c);
+  CommWrite(c);
 end;
 
 {$ENDIF}
@@ -105,7 +105,7 @@ procedure async_send_string(s: string);
 begin
   if not (DidInit) then
     Exit;
-  Com_SendString(s);
+  CommWrite(s);
 end;
 
 {$ENDIF}
@@ -139,10 +139,10 @@ begin
     Exit;
 
   // Loop until we get a key we want
-  while (Com_CharAvail) and (ch = #0) do
+  while (CommCharAvail) and (ch = #0) do
   begin
     // Get next char
-    ch := Com_GetChar;
+    ch := CommReadChar;
 
     // Handle translating the LF character
     if (ch = #10) then
@@ -190,7 +190,7 @@ begin
   async_carrier_drop := False;
   if not (DidInit) then
     Exit;
-  async_carrier_drop := not Com_Carrier;
+  async_carrier_drop := not CommCarrier;
 end;
 
 {$ENDIF}
@@ -214,7 +214,7 @@ begin
   async_carrier_present := True;
   if not (DidInit) then
     Exit;
-  async_carrier_present := Com_Carrier;
+  async_carrier_present := CommCarrier;
 end;
 
 {$ENDIF}
@@ -238,7 +238,7 @@ begin
   async_buffer_check := False;
   if not (DidInit) then
     Exit;
-  async_buffer_check := Com_CharAvail;
+  async_buffer_check := CommCharAvail;
 end;
 
 {$ENDIF}
@@ -267,10 +267,10 @@ begin
     Com_StartUp(1);
   {$ENDIF}
   {$IFNDEF GO32V2}
-    Com_StartUp(2);
+//REETODO    Com_StartUp(2);
   {$ENDIF}
-  Com_SetDontClose(True);
-  Com_OpenQuick(port_num);
+//REETODO  Com_SetDontClose(True);
+  CommOpen(port_num);
   async_init_fossil := True;
 end;
 
@@ -292,7 +292,7 @@ procedure async_deinit_fossil;
 begin
   if not (DidInit) then
     Exit;
-  Com_ShutDown;
+  CommClose(false);
 end;
 
 {$ENDIF}
@@ -340,7 +340,7 @@ end;
 procedure async_flush_output;
 begin
 {$IFNDEF UNIX}
-  Com_FlushOutBuffer(MySlice);
+  CommFlushOutBuffer();
 {$ENDIF}
 end;
 
@@ -362,7 +362,7 @@ procedure async_purge_output;
 begin
   if not (DidInit) then
     Exit;
-  Com_PurgeOutBuffer;
+  CommPurgeOutBuffer;
 end;
 
 {$ENDIF}
@@ -383,7 +383,8 @@ procedure async_purge_input;
 begin
   if not (DidInit) then
     Exit;
-  Com_PurgeInBuffer;
+//REETODO  Com_PurgeInBuffer;
+WriteLn('RPPORT DDFossil async_purge_input');
 end;
 
 {$ENDIF}
@@ -657,11 +658,12 @@ var FInFree, FOutFree, FInUsed, FOutUsed: longint;
 begin
   if not (DidInit) then
     Exit;
-  Com_GetBufferStatus(FInFree, FOutFree, FInUsed, FOutUsed);
-  Insize := FInFree + FInUsed;
-  Infree := FInFree;
-  Outsize := FOutFree + FOutUsed;
-  Outfree := FOutFree;
+//REETODO  Com_GetBufferStatus(FInFree, FOutFree, FInUsed, FOutUsed);
+//REETODO  Insize := FInFree + FInUsed;
+//REETODO  Infree := FInFree;
+//REETODO  Outsize := FOutFree + FOutUsed;
+//REETODO  Outfree := FOutFree;
+WriteLn('RPPORT DDFossil Async_Buffer_Status');
 end;
 
 {$ENDIF}

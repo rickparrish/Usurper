@@ -52,8 +52,8 @@
       <Filename Value="..\..\bin\$(TargetCPU)-$(TargetOS)\USURPER32"/>
     </Target>
     <SearchPaths>
-      <IncludeFiles Value="..\common;..\elecom;$(ProjOutDir)"/>
-      <OtherUnitFiles Value="..\common;..\elecom"/>
+      <IncludeFiles Value="..\common;..\..\..\rmdoor;$(ProjOutDir)"/>
+      <OtherUnitFiles Value="..\common;..\..\..\rmdoor"/>
       <UnitOutputDirectory Value="..\..\lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Parsing>
