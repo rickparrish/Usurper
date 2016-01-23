@@ -23,7 +23,7 @@ var
 implementation
 
 uses
-  Drivers {$IFNDEF MSDOS}, Crt, RPPort{$ENDIF};
+  Drivers {$IFNDEF MSDOS}, RPPort{$ENDIF};
 
 {$IFNDEF MSDOS}
 var
@@ -65,9 +65,9 @@ begin
   MemW[Seg0040:CursorPos] := CursorCoords;
 {$ENDIF}
 {$IFNDEF MSDOS}
+  // REETODO This blanks the screen and leaves an invisible prompt on Linux
   // RPRestoreScreen(SavedScreen);
   // RPGotoXY(CursorCoords);
-  ClrScr;
 {$ENDIF}
   ExitProc := ExitSave;
 end; { MyExitProc }
