@@ -2,12 +2,18 @@
 sudo apt-get install ca-certificates fpc fp-units-fv
 
 # Remove previous source, if necessary
-sudo rm master.zip
-sudo rm -rf /usr/local/src/Usurper-master
+sudo rm -rf /usr/local/src/rmdoor
+sudo rm -rf /usr/local/src/usurper
 
 # Download, extract, and build new source
 cd /usr/local/src
-sudo wget https://github.com/rickparrish/Usurper/archive/master.zip
-sudo unzip master.zip
-cd Usurper-master
+sudo wget https://github.com/rickparrish/RMDoor/archive/master.zip -O rmdoor.zip
+sudo unzip rmdoor.zip
+sudo mv RMDoor-master rmdoor
+sudo rm rmdoor.zip
+sudo wget https://github.com/rickparrish/Usurper/archive/master.zip -O usurper.zip
+sudo unzip usurper.zip
+sudo mv Usurper-master usurper
+sudo rm usurper.zip
+cd usurper
 sudo sh build-linux.sh
