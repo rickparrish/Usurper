@@ -369,11 +369,13 @@ statback := 1;
   FileModeReadWrite := FileMode;
 {$ENDIF}
 
-{$IFDEF WIN32}
-  { ensure win32 doors run with fossil io (where we put the socket code) }
-  bbs_software := 15;
-  fossilio := True;
-  noFossInit := False;
+{$IFNDEF MSDOS}
+  {$IFNDEF GO32V2}
+    { ensure win32 doors run with fossil io (where we put the socket code) }
+    bbs_software := 15;
+    fossilio := True;
+    noFossInit := False;
+  {$ENDIF}
 {$ENDIF}
 
   case iomode of

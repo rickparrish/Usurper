@@ -1010,7 +1010,7 @@ begin;
       if charin(a) then
         charorigin := remotechar;
     end;
-    if keypressed then
+    if (a = #0) and keypressed then
       ReadScanCode(a);
 
     if (a <> #0) then
