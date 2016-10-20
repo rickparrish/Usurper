@@ -6608,14 +6608,8 @@ begin
 
  {$I-}Close(f);{$I+}
   error := IoResult; {get error}
-{$IFDEF MSDOS}
   if error <> 0 then
     unable_to_close(textrec(f).Name, error);
-{$ENDIF}
-{$IFNDEF MSDOS}
-  if error <> 0 then
-    unable_to_close(StrPas(textrec(f).Name), error);
-{$ENDIF}
 
 end; {close_text *end*}
 
@@ -6628,14 +6622,8 @@ begin
 
  {$I-}readln(f, s);{$I+}
   error := IoResult; {get error}
-{$IFDEF MSDOS}
   if error <> 0 then
     unable_to_read(textrec(f).Name, error);
-{$ENDIF}
-{$IFNDEF MSDOS}
-  if error <> 0 then
-    unable_to_read(StrPas(textrec(f).Name), error);
-{$ENDIF}
 end; {readln_from_text *end*}
 
 procedure Write_To_Text(var f: Text; const s: string);

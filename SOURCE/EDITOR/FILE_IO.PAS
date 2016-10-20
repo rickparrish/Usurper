@@ -1732,53 +1732,29 @@ procedure Close_Text(var f: Text);
 begin
 
  {$I-}Close(f);{$I+}
-{$IFDEF MSDOS}
   if IOResult <> 0 then
     unable_to_close(textrec(f).Name);
-{$ENDIF}
-{$IFNDEF MSDOS}
-  if IOResult <> 0 then
-    unable_to_close(StrPas(textrec(f).Name));
-{$ENDIF}
 end;
 
 procedure Readln_from_Text(var f: Text; var s: string);
 begin
  {$I-}readln(f, s);{$I+}
-{$IFDEF MSDOS}
   if IOResult <> 0 then
     unable_to_read(textrec(f).Name);
-{$ENDIF}
-{$IFNDEF MSDOS}
-  if IOResult <> 0 then
-    unable_to_read(StrPas(textrec(f).Name));
-{$ENDIF}
 end;
 
 procedure Write_To_Text(var f: Text; const s: string);
 begin
  {$I-}Write(f, s);{$I+}
-{$IFDEF MSDOS}
   if IOResult <> 0 then
     unable_to_write(textrec(f).Name);
-{$ENDIF}
-{$IFNDEF MSDOS}
-  if IOResult <> 0 then
-    unable_to_write(StrPas(textrec(f).Name));
-{$ENDIF}
 end;
 
 procedure Writeln_To_Text(var f: Text; const s: string);
 begin
  {$I-}writeln(f, s);{$I+}
-{$IFDEF MSDOS}
   if IOResult <> 0 then
     unable_to_write(textrec(f).Name);
-{$ENDIF}
-{$IFNDEF MSDOS}
-  if IOResult <> 0 then
-    unable_to_write(StrPas(textrec(f).Name));
-{$ENDIF}
 end;
 
 end. {Unit File_Io .end.}
