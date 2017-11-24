@@ -18,7 +18,7 @@ unit NetFileP;
 interface
 
 uses
-  Crt, Dos, DDPlus;             { Add CRT, DOS and DDPlus units }
+  Crt, Dos;             { Add CRT, DOS and DDPlus units }
 
 const {-- Types of file access available -----------------------------}
 

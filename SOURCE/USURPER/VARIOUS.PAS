@@ -160,7 +160,8 @@ procedure Player_Profile(const caller, ply: userrec);
 implementation
 
 uses
-  Crt, DDplus, Jakob,
+  DDPlus,
+  Crt, Jakob,
   Cms, Mail, Resetg,
   PlvsPlc, PlComp, Various2,
   Various3, Relation, News,

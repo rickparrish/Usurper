@@ -33,7 +33,7 @@ procedure Online_Duel(the_challenger: boolean);
 implementation
 
 uses
-  Jakob, Init, ddscott,
+  Jakob, Init,
   news, statusc, online,
   spellsu, cast, swapeq,
   various, various2, various3,

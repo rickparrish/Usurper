@@ -133,18 +133,17 @@ function Confirm(const Text: string; default: char): boolean; {Y/N confirmation}
 function Confirm2(const Text: string; default: char): char; {Y/N/= confirmation}
 
  {Misc}
-procedure Drop_Dos; {drop to dos}
 procedure Display_Bar_Status(force: boolean); {call to DDplus Display_Status (bar) proc}
 function Dos_Version: word;
 function Is_Share: boolean; {uses netfilep.pas shareinst function}
-function Jake_Tasker: byte; {call to DDScott proc}
+(*REENOTE UNUSED function Jake_Tasker: byte; {call to DDScott proc}*)
 function Param_Hunt(const h: string): boolean; {checking for Command Line parameters}
 
 implementation
 
 uses
+  DDPlus,
   Dos, Crt, Init,
-  DDplus, DDscott, ComIO,
   Exec, AnsiColr, SwagDate,
   Various, NetFilep, DispText,
   Online, File_IO {$IFNDEF MSDOS}, RPPort{$ENDIF};
@@ -1736,6 +1735,7 @@ var Result: longint;
   s:        s70;
   ok:       boolean;
   i:        byte;
+  ch:       char;
 
 begin
 
@@ -2327,66 +2327,6 @@ begin
   display_utext(Name);
 end;
 
-procedure Drop_Dos; {Sysop/local user has activated DROP TO DOS function}
-begin;
-
-  if not local then
-  begin
-    d(15, 'A God has entered the underworld ...');
-    crlf;
-    d(14, 'Suddenly you feel a strong hand on your shoulder ...');
-    d(14, 'You try to turn around but can''t. You hear a deep voice :');
-    d(15, '"Please rest a while my friend! I must attend to some');
-    d(15, 'important things in this realm."');
-  end else
-  begin
-    crlf;
-    d(15, 'Shell to DOS ...');
-    writeln(' type "EXIT" to return)');
-  end;
-
-  savescreen;
-  if not local then
-    AsyncCloseUp;
-  swapvectors;
-  do_exec(getenv('COMSPEC'), '', USE_ALL, $FFFF, True);
-  swapvectors;
-  if not local then
-    AsyncSelectPort(com_port);
-  restorescreen;
-
-  if not local then
-  begin
-    crlf;
-    d(15, 'A God is back from the underworld ...');
-    crlf;
-    d(14, 'A spell is lifted from you. You can move again!');
-    d(14, 'Perhaps it was just a dream ...');
-  end else
-  begin
-    crlf;
-    d(15, 'Back from DOS ...');
-  end;
-
-  {Has Screen Size Changed}
-  if local then
-  begin
-    global_screenlines := screenrows - 1; {-1 because the statline takes up 1}
-    {this is also used in usurper.pas}
-  end;
-
-
-{ savescreen;
- if not local then AsyncCloseUp;
- swapvectors;
- exec(getenv('COMSPEC'),'');
- swapvectors;
- if not local then AsyncSelectPort(com_port);
- restorescreen;
-}
-
-end; {drop_dos *end*}
-
 {$IFDEF MSDOS}
 function IsWin95: boolean; assembler;
 asm
@@ -2409,7 +2349,7 @@ end;
 
 {$ENDIF}
 
-function Jake_Tasker: byte; {Which OS is running?}
+(*REENOTE UNUSED function Jake_Tasker: byte; {Which OS is running?}
 var Result: byte;
 begin
 
@@ -2418,7 +2358,7 @@ begin
   {return result}
   jake_tasker := Result;
 
-end; {jake_tasker *end*}
+end; {jake_tasker *end*}*)
 
 procedure Display_Bar_Status; {call to DDplus Display_Status (bar) proc}
 begin

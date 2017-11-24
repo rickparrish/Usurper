@@ -73,7 +73,8 @@ function Location_Desc(const mode: integer): s70;
 implementation
 
 uses
-  Dos, DDplus, Cms, InitGods,
+  DDPlus,
+  Dos, Cms, InitGods,
   Jakob, Various, Various2,
   Various3, OnTrade, News,
   Mail, OnDuel, File_Io;

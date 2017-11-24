@@ -22,7 +22,8 @@ procedure MyExit1;
 implementation   (********************************)
 
 uses
-  Crt, Dos, DDPlus,
+  DDPlus,
+  Crt, Dos,
   Netfilep, Jakob, File_Io {$IFDEF FPC}, RPPort{$ENDIF}; {jakob}
 
 {$IFDEF MSDOS}

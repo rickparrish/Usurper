@@ -53,7 +53,7 @@ function Todays_Date: string; {date string[8] american}
 implementation
 
 uses
-  Dos, Crt, Init, DDscott, SwagDate;
+  Dos, Crt, Init, SwagDate;
 
 function Todays_Date; {date string[8] american}
 var

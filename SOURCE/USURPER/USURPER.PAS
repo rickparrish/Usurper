@@ -36,8 +36,9 @@ program Usurper; {Door-Game by Jakob Dangarden
 
 
 uses
+  DDPlus,
   {$IFDEF MSDOS}Overlay, {$ENDIF} Dos, {$IFDEF MSDOS}InitOver, {$ENDIF}
-  DDplus, Init, Jakob, Maint, Cms, SortPl, VarGods, GodWorld, UserHunc, Gamec, Byebyec, Mail,
+  Init, Jakob, Maint, Cms, SortPl, VarGods, GodWorld, UserHunc, Gamec, Byebyec, Mail,
   Various, Various2, Rating, Relation, Relatio2, Post_To, Online, File_Io, {$IFDEF MSDOS}OverXms, {$ENDIF}
   Various3, News, Children, InitGods, Version {$IFDEF FPC}, RPPort{$ENDIF};
 
