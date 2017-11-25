@@ -9,8 +9,13 @@ Become king, be a GOD or fall in love and have children.<br />
 
 ==============================
 Copyright 2009 Jakob Dangarden<br />
-Ported to Win32 by <a href="https://github.com/rickparrish">Rick Parrish</a><br />
-Additional programming by <a href="https://github.com/dan1982code">Dan</a><br />
+Ported by <a href="https://github.com/rickparrish">Rick Parrish</a><br />
+Massive amount of bugfixing by <a href="https://github.com/dan1982code">Dan</a><br />
+==============================
+
+==============================
+All binaries are currently compiled using Lazarus v1.6.4 w/ FPC 3.0.2
+==============================
 
 These files are part of Usurper.
 

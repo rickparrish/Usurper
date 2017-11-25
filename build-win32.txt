@@ -1,9 +1,0 @@
-Install Lazarus (only 32bit version has been tested)
-
-Open EDITOR.lpi and hit SHIFT-F9 (Build)
-Open USURPER.lpi and hit SHIFT-F9 (Build)
-
-NOTE: Always use the Build option when switching between projects.
-EDITOR and USURPER have some files with the same name but with different
-contents, and since they compile to the same directory this can cause
-problems.  So if you get weird errors while compiling, do a build instead.

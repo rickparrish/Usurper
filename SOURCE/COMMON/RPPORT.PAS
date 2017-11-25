@@ -5,7 +5,7 @@ unit RPPort;
 
 interface
 
-{$IFDEF WIN32}
+{$IFDEF WINDOWS}
   uses
     Windows;
 {$ENDIF}
@@ -18,7 +18,7 @@ type
   {$IFDEF FPC}
     SmallWord = System.Word;
   {$ENDIF}
-  {$IFNDEF WIN32}
+  {$IFNDEF WINDOWS}
     TCharInfo = packed record
       Ch:   char;
       Attr: byte;
@@ -65,7 +65,7 @@ implementation
   var
     Screen: TScreenBuf absolute $B800:0000;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFDEF WINDOWS}
   var
     StdOut: THandle;
 {$ENDIF}
@@ -320,7 +320,7 @@ begin
   {$ENDIF}
 end;
 
-{$IFDEF WIN32}
+{$IFDEF WINDOWS}
 procedure RPHideCursor;
 var
   CCI: TConsoleCursorInfo;
@@ -330,7 +330,7 @@ begin
   SetConsoleCursorInfo(StdOut, CCI);
 end;
 {$ENDIF}
-{$IFNDEF WIN32}
+{$IFNDEF WINDOWS}
   {$IFDEF FPC}
   procedure RPHideCursor;
   begin
@@ -357,7 +357,7 @@ begin
     {$IFDEF UNIX}
       RPLockFile := fpFlock(handle, LOCK_EX);
     {$ENDIF}
-    {$IFDEF WIN32}
+    {$IFDEF WINDOWS}
       if (Windows.LockFile(handle, start, 0, length, 0)) then
       begin
         RPLockFile := 0;
@@ -370,7 +370,7 @@ begin
 end;
 
 { REETODO Should detect screen size }
-{$IFDEF WIN32}
+{$IFDEF WINDOWS}
 procedure RPRestoreScreen(var screenBuf: TScreenBuf);
 var
   BufSize:  TCoord;
@@ -430,7 +430,7 @@ end;
 {$ENDIF}
 
 { REETODO Should detect screen size }
-{$IFDEF WIN32}
+{$IFDEF WINDOWS}
 procedure RPSaveScreen(var screenBuf: TScreenBuf);
 var
   BufSize:    TCoord;
@@ -494,7 +494,7 @@ begin
 end;
 {$ENDIF}
 
-{$IFDEF WIN32}
+{$IFDEF WINDOWS}
 function RPScreenSizeX: word;
 var
   CSBI: TConsoleScreenBufferInfo;
@@ -503,7 +503,7 @@ begin
   RPScreenSizeX := CSBI.srWindow.Right - CSBI.srWindow.Left + 1;
 end;
 {$ENDIF}
-{$IFNDEF WIN32}
+{$IFNDEF WINDOWS}
   {$IFDEF FPC}
   function RPScreenSizeX: word;
   begin
@@ -521,7 +521,7 @@ end;
   {$ENDIF}
 {$ENDIF}
 
-{$IFDEF WIN32}
+{$IFDEF WINDOWS}
 function RPScreenSizeY: word;
 var
   CSBI: TConsoleScreenBufferInfo;
@@ -530,7 +530,7 @@ begin
   RPScreenSizeY := CSBI.srWindow.Bottom - CSBI.srWindow.Top + 1;
 end;
 {$ENDIF}
-{$IFNDEF WIN32}
+{$IFNDEF WINDOWS}
   {$IFDEF FPC}
   function RPScreenSizeY: word;
   begin
@@ -557,7 +557,7 @@ begin
   Screen[AY, AX].Attr := AAttr;
 end;
 {$ENDIF}
-{$IFDEF WIN32}
+{$IFDEF WINDOWS}
 procedure RPSetAttrAt(AAttr, AX, AY: Byte);
 var
   NumWritten: longint;
@@ -708,7 +708,7 @@ begin
 end;
 {$ENDIF}
 
-{$IFDEF WIN32}
+{$IFDEF WINDOWS}
 procedure RPShowCursor;
 var
   CCI: TConsoleCursorInfo;
@@ -718,7 +718,7 @@ begin
   SetConsoleCursorInfo(StdOut, CCI);
 end;
 {$ENDIF}
-{$IFNDEF WIN32}
+{$IFNDEF WINDOWS}
   {$IFDEF FPC}
   procedure RPShowCursor;
   begin
@@ -755,7 +755,7 @@ begin
     {$IFDEF UNIX}
       RPUnLockFile := fpFlock(handle, LOCK_UN);
     {$ENDIF}
-    {$IFDEF WIN32}
+    {$IFDEF WINDOWS}
       if (Windows.UnLockFile(handle, start, 0, length, 0)) then
       begin
         RPUnLockFile := 0;
@@ -784,7 +784,7 @@ begin
 end;
 
 begin
-{$IFDEF WIN32}
+{$IFDEF WINDOWS}
   StdOut := GetStdHandle(STD_OUTPUT_HANDLE);
 {$ENDIF}
 {$IFDEF UNIX}

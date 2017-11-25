@@ -218,7 +218,7 @@ begin
    'L': FileMode:=fmReadOnly+fmDenyNone;
    'S': FileMode:=fmReadWrite+fmDenyAll;
   end;
-{$IFDEF WIN32}
+{$IFDEF WINDOWS}
   FileModeReadWrite := FileMode;
 {$ENDIF}
 
@@ -239,7 +239,7 @@ begin
  end;
  close(playerfile);
  filemode:=memmy;
-{$IFDEF WIN32}
+{$IFDEF WINDOWS}
  FileModeReadWrite := FileMode;
 {$ENDIF}
 end;
@@ -264,7 +264,7 @@ begin
    'L': FileMode:=fmReadOnly+fmDenyNone;
    'S': FileMode:=fmReadWrite+fmDenyAll;
   end;
-{$IFDEF WIN32}
+{$IFDEF WINDOWS}
   FileModeReadWrite := FileMode;
 {$ENDIF}
 
@@ -285,7 +285,7 @@ begin
  end;
  close(guardfile);
  filemode:=memmy;
-{$IFDEF WIN32}
+{$IFDEF WINDOWS}
  FileModeReadWrite := FileMode;
 {$ENDIF}
 end;
@@ -310,7 +310,7 @@ begin
    'L': FileMode:=fmReadOnly+fmDenyNone;
    'S': FileMode:=fmReadWrite+fmDenyAll;
   end;
-{$IFDEF WIN32}
+{$IFDEF WINDOWS}
   FileModeReadWrite := FileMode;
 {$ENDIF}
 
@@ -331,7 +331,7 @@ begin
  end;
  close(levelfile);
  filemode:=memmy;
-{$IFDEF WIN32}
+{$IFDEF WINDOWS}
  FileModeReadWrite := FileMode;
 {$ENDIF}
 end;
@@ -356,7 +356,7 @@ begin
    'L': FileMode:=fmReadOnly+fmDenyNone;
    'S': FileMode:=fmReadWrite+fmDenyAll;
   end;
-{$IFDEF WIN32}
+{$IFDEF WINDOWS}
   FileModeReadWrite := FileMode;
 {$ENDIF}
 
@@ -377,7 +377,7 @@ begin
  end;
  close(monsterfile);
  filemode:=memmy;
-{$IFDEF WIN32}
+{$IFDEF WINDOWS}
  FileModeReadWrite := FileMode;
 {$ENDIF}
 end;
@@ -398,7 +398,7 @@ begin
   assign(weapfile,weapofile);
 
   FileMode:=fmReadOnly+fmDenyNone;
-{$IFDEF WIN32}
+{$IFDEF WINDOWS}
   FileModeReadWrite := FileMode;
 {$ENDIF}
 
@@ -416,7 +416,7 @@ begin
  close(weapfile);
 
  filemode:=memmy;
-{$IFDEF WIN32}
+{$IFDEF WINDOWS}
  FileModeReadWrite := FileMode;
 {$ENDIF}
 end;
@@ -437,7 +437,7 @@ begin
   ok:=true;
   assign(armfile,armofile);
   FileMode:=fmReadOnly+fmDenyNone;
-{$IFDEF WIN32}
+{$IFDEF WINDOWS}
   FileModeReadWrite := FileMode;
 {$ENDIF}
   {$I-}reset(armfile);{$I+}
@@ -454,7 +454,7 @@ begin
  close(armfile);
 
  filemode:=memmy;
-{$IFDEF WIN32}
+{$IFDEF WINDOWS}
  FileModeReadWrite := FileMode;
 {$ENDIF}
 end;

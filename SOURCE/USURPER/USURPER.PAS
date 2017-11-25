@@ -1283,7 +1283,7 @@ begin {* Main Program *}
         crlf;
         d(config.textcolor, 'Programmers:');
         d(14, '                   Original author : Jakob Dangarden jakob@dangarden.com');
-        d(14, '            Win32/Linux/OS/2 Ports : Rick Parrish usurper@rickparrish.ca');
+        d(14, '               Windows/Linux Ports : Rick Parrish usurper@rickparrish.ca');
         d(14, '   Post 0.20e Fixes & Improvements : Dan dan1982code@hotmail.ca');
         crlf;
         {d(config.textcolor,'The Usurper project comprises approximately 180,000 lines of source code.');

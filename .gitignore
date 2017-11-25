@@ -1,19 +1,11 @@
 bin/i386-linux/*
-!bin/i386-linux/EDITORX
-!bin/i386-linux/USURPERX
+!bin/i386-linux/EDITOR
+!bin/i386-linux/USURPER
 bin/i386-win32/*
-!bin/i386-win32/EDITOR32.exe
-!bin/i386-win32/USURPER32.exe
-bin/i386-msdos/*
-!bin/i386-msdos/EDITOR.exe
-!bin/i386-msdos/EDITOR.ovr
-!bin/i386-msdos/USURPER.exe
-!bin/i386-msdos/USURPER.ovr
+!bin/i386-win32/EDITOR.exe
+!bin/i386-win32/USURPER.exe
 bin/x86_64-linux/*
-!bin/x86_64-linux/EDITORX
-!bin/x86_64-linux/USURPERX
-lib/
-old-build/
-ORIGINAL ARCHIVES/
-SOURCE/COMMON/DDPlus
-SOURCE/USURPER/DDPlus
+!bin/x86_64-linux/EDITOR
+!bin/x86_64-linux/USURPER
+bin/x86_64-win64/*
+obj/
