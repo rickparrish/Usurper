@@ -8,12 +8,14 @@ Be prepared for violent and bizarre nonstop action.<br />
 Become king, be a GOD or fall in love and have children.<br />
 
 ==============================
+
 Copyright 2009 Jakob Dangarden<br />
 Ported by <a href="https://github.com/rickparrish">Rick Parrish</a><br />
 Massive amount of bugfixing by <a href="https://github.com/dan1982code">Dan</a><br />
 <br />
 Windows binaries are compiled using Lazarus v1.6.4 w/ FPC 3.0.2<br />
 Linux binaries are compiled using Lazarus v1.6 w/ FPC 3.0.0<br />
+
 ==============================
 
 These files are part of Usurper.
