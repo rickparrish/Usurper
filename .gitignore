@@ -8,4 +8,6 @@ bin/x86_64-linux/*
 !bin/x86_64-linux/EDITOR
 !bin/x86_64-linux/USURPER
 bin/x86_64-win64/*
+!bin/x86_64-win64/EDITOR.exe
+!bin/x86_64-win64/USURPER.exe
 obj/
