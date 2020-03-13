@@ -281,34 +281,35 @@ begin
 
   end; {for i:= .end.}
 
-  gap := 1;
-  while gap < worknumbers do
-    gap := gap * 3 + 1;
+  gap := worknumbers div 2;
 
   while gap > 0 do
   begin
     for i := (gap + 1) to worknumbers do
     begin
-      xx := exp_array[i]^;
-      yy := pos_array[i];
       j := i - gap;
       while (j > 0) do
       begin
         k := j + gap;
-        if exp_array[j]^ >= xx then
+        if exp_array[j]^ >= exp_array[k]^ then
         begin
-          exp_array[k]^ := xx;
-          pos_array[k] := yy;
           j := 0;
         end else
         begin
-          exp_array[k]^ := exp_array[j]^;
-          pos_array[k] := pos_array[j];
+          xx := exp_array[j]^;
+          yy := pos_array[j];
+
+          exp_array[j]^ := exp_array[k]^;
+          pos_array[j] := pos_array[k];
+
+          exp_array[k]^ := xx;
+          pos_array[k] := yy;
+
           j := j - gap;
         end;
       end;
     end; {for i:= .end.}
-    gap := (gap - 1) div 3;
+    gap := gap div 2;
   end;
   {SortRoutine *END*}
 
