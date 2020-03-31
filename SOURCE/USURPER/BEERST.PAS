@@ -1042,7 +1042,7 @@ begin
               target := 1;
               if (sonarriv[i] = True) and (sonstam[i] > 0) then
               begin
-                if (cstam < 1) or (polare = '') then
+                if (cstam < 1) or (polare = '') or (arrived = False) then
                 begin
                   sd(3, son[i] + ' attacks You... ');
                 end else
