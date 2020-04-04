@@ -223,9 +223,9 @@ begin
   d(config.textcolor, 'You recall that some merchants use magic elixirs to make their selling easier...');
   sd(global_plycol, Reese^);
   d(config.textcolor, ' suddenly appears out of nowhere, with a smile on his face.');
-  d(config.textcolor, 'He is known as a respectable citizen, although evil tounges speaks of');
+  d(config.textcolor, 'He is known as a respectable citizen, although evil tongues speak of');
   d(config.textcolor, 'meetings with dark and mysterious creatures from the deep dungeons.');
-  sd(config.textcolor, 'You are interrupted in your thougts as ');
+  sd(config.textcolor, 'You are interrupted in your thoughts as ');
   sd(global_plycol, Reese^);
   d(config.textcolor, ' kindly asks');
   d(config.textcolor, 'what you want :');

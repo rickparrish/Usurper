@@ -354,6 +354,7 @@ begin         {monster #i casts monster_spell against tempman}
               25,            {punch}
               7,             {armpow}
               7);            {weappow}
+            monster[j]^.target := 1;
             break;
           end;
         end;
@@ -362,7 +363,7 @@ begin         {monster #i casts monster_spell against tempman}
 
       5: begin {Spell : Vice of Death}
         d(12, tempman.name2 + ' has been seized by cramps!');
-        d(12, tempman.name2 + ' is incapaciated!');
+        d(12, tempman.name2 + ' is incapacitated!');
 
         damage := monster[i]^.magiclevel * 2; {damage}
         if tempman.name2 = player.name2 then
