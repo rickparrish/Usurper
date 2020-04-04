@@ -52,8 +52,8 @@
       <Filename Value="..\bin\$(TargetCPU)-$(TargetOS)\USURPER"/>
     </Target>
     <SearchPaths>
-      <IncludeFiles Value="COMMON;USURPER;..\..\RMDoor;$(ProjOutDir)"/>
-      <OtherUnitFiles Value="COMMON;..\..\RMDoor"/>
+      <IncludeFiles Value="COMMON;USURPER;USURPER\DDPLUS;$(ProjOutDir)"/>
+      <OtherUnitFiles Value="COMMON;USURPER\DDPLUS"/>
       <UnitOutputDirectory Value="..\obj\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Parsing>
@@ -64,6 +64,8 @@
     </Parsing>
     <CodeGeneration>
       <SmartLinkUnit Value="True"/>
+      <TargetCPU Value="i386"/>
+      <TargetOS Value="win32"/>
       <Optimizations>
         <OptimizationLevel Value="3"/>
       </Optimizations>

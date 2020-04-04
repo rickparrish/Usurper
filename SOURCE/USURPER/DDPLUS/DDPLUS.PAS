@@ -942,7 +942,8 @@ begin
       a := #3;
       chatdone := True;
     end;
-    6: drop_dos; {jakob egna lilla drop-to-dos funktion}
+    // TODOZ Likely not going to implement this
+    // 6: drop_dos; {jakob egna lilla drop-to-dos funktion}
     7: Inc(time_credit, 5);
     8: Dec(time_credit, 5);
     10: begin

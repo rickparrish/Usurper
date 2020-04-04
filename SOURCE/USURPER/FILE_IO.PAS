@@ -193,7 +193,7 @@ implementation
 
 uses
   Crt, Dos, CMS, Elog,
-  DDplus, Jakob,
+  DDplus, DDScott, Jakob,
   Various, {$IFDEF MSDOS}TxtShare,{$ENDIF} AnsiColr,
   Mail, Invent, Relatio2,
   JakeLock, Online {$IFNDEF MSDOS}, Strings{$ENDIF};
