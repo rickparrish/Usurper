@@ -669,14 +669,14 @@ var
 type
   EditRec2 = record     {RECORD used in PLAYER/NPC DIALOG}
     {communicating with PLAYER REC, dialog page2}
-    spell:    array [1..maxspells] of word;
+    spell:    array [1..maxspells] of longint;
     desc:     array[1..4] of s70;
-    immortal: word;   {never delete character}
-    blind:    word;   {blindhet}
-    plague:   word;   {plague}
-    smallpox: word;   {smittkoppor}
-    measles:  word;   {measles}
-    leprosy:  word;   {leprosy}
+    immortal: longint;   {never delete character}
+    blind:    longint;   {blindhet}
+    plague:   longint;   {plague}
+    smallpox: longint;   {smittkoppor}
+    measles:  longint;   {measles}
+    leprosy:  longint;   {leprosy}
 
     maxtime: longint; {time left today (in minutes) }
 
@@ -709,12 +709,12 @@ type
     brawls:   longint;
     trains:   longint;
 
-    race:      integer;
-    human:     integer;
-    sex:       integer;
-    king:      integer; {gurka}
-    allowed:   integer;
-    class: integer;
+    race:      longint;
+    human:     longint;
+    sex:       longint;
+    king:      longint; {gurka}
+    allowed:   longint;
+    class:     longint;
 
     level:    longint;
     hps:      longint;
@@ -753,7 +753,7 @@ type
     Name:    s30;
     mother:  s30;
     father:  s30;
-    deleted: integer;
+    deleted: longint;
   end;
 
 type
@@ -761,7 +761,7 @@ type
                        GOD DIALOGUE and GOD RECORD}
     realname: s30;
     Name:     s30;
-    deleted:  integer;
+    deleted:  longint;
   end;
 
 type
@@ -773,7 +773,7 @@ type
     barmor:  longint;
     battack: longint;
     descp:   array [1..5] of string[70];
-    multi:   integer;
+    multi:   longint;
   end;
 
 type
@@ -786,8 +786,8 @@ type
     ordered: longint;
     lasthad: s30;
     lastdat: string[10];
-    secret:  integer; {secret recipe}
-    deleted: integer;
+    secret:  longint; {secret recipe}
+    deleted: longint;
   end;
 
   EditRecPhrase = record     {RECORD USED IN PHRASE EDITOR}
@@ -817,9 +817,9 @@ type
   armpow : longint; }
     iq:         longint;
     evil:       longint;
-    grabweap:   integer;  {kan vapnet er”vras?}
-    grabarm:    integer;  {kan armor er”vras?}
-    spell:      array[1..maxmspells] of integer; {spells}
+    grabweap:   longint;  {kan vapnet er”vras?}
+    grabarm:    longint;  {kan armor er”vras?}
+    spell:      array[1..maxmspells] of longint; {spells}
 
   end;
 
@@ -833,8 +833,8 @@ type
     desc1:  array[1..5] of string[70];
     desc2:  array[1..5] of string[70];
 
-    shop: integer;
-    dng:  integer;
+    shop: longint;
+    dng:  longint;
 
     minlev: longint;
     maxlev: longint;
@@ -849,10 +849,10 @@ type
     strength: longint;
     defence:  longint;
     str_need: longint;
-    cure:     integer;
-    good:     integer;
-    evil:     integer;
-    cursed:   integer;
+    cure:     longint;
+    good:     longint;
+    evil:     longint;
+    cursed:   longint;
 
   end;
 
