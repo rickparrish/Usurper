@@ -26,8 +26,8 @@ unit Version;
 interface
 
 const
-  uver            = '0.24';
-  ucomp           = '07/31/2015';      {compile date, mm/dd/yyyy}
+  uver            = '0.25';            {Don't forget to update CheckVersion when you update this}
+  ucomp           = '2021/08/04';      {compile date, mm/dd/yyyy}
   editor_version  = 'Usurper Editor ' + uver;
   usurper_version = 'Usurper ' + uver; {prog & version}
   ubeta: boolean  = False; {is this a BETA version?}
@@ -92,7 +92,7 @@ begin
     begin
       Result := UpgradeTo023d;
     end else
-    if (OldVersion = '0.23d') or (OldVersion = '0.23e') or (OldVersion = '0.23f') then
+    if (OldVersion >= '0.23d') and (OldVersion <= '0.24') then
     begin
       { Currently no upgrade needed for these versions }
       Result := UpdateVersionDat(uver);

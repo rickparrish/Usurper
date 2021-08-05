@@ -45,7 +45,7 @@
     <Version Value="11"/>
     <PathDelim Value="\"/>
     <Target>
-      <Filename Value="..\bin\$(TargetCPU)-$(TargetOS)\EDITOR"/>
+      <Filename Value="..\bin\$(TargetCPU)-$(TargetOS)\EDITOR.EXE"/>
     </Target>
     <SearchPaths>
       <IncludeFiles Value="EDITOR;COMMON;$(ProjOutDir)"/>

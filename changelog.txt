@@ -1,11 +1,12 @@
-Working version:
+Version 0.25 (unreleased):
 
 Versions:
-- Compiling for DOS/GO32V2, Win32, Win64, and Linux64 with Lazarus 2.0.12 / FPC 3.2.0.  Ubuntu doesn't seem to have a 32bit release anymore, so Linux32 is not available.
+- Compiling for DOS/GO32V2, Win32, Win64, Linux32, and Linux64 with Lazarus 2.0.12 / FPC 3.2.0.
 
 Setup:
 - New command-line parameter is used to start the game: USURPER.EXE /D<path to dropfile>.  For example USURPER.EXE /Dc:\sbbs\node1\door32.sys.
-- USURP.CTL is no longer needed / used
+- For STDIO mode on Linux add the /X parameter, eg USURPER.EXE /D<path to dropfile> /X
+- USURP.CTL files are no longer needed or used
 
 Fixes:
 - Crash with 0 byte MAIL.DAT file
@@ -13,6 +14,7 @@ Fixes:
 - Teammate(s) still present for fights when chased away by dogs while beer stealing 
 - Weird bug where a zombie summoned by a monster in the dungeon would not have a target set, leading to killing the player but not actually killing them.
 - Incorrect stats reported in EDITOR.EXE
+- Hitting ENTER for default option
 
 Version 0.24:
 
