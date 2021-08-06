@@ -36,7 +36,7 @@ program Usurper; {Door-Game by Jakob Dangarden
 
 
 uses
-  DDPlus,
+  Door, DDPlus,
   {$IFDEF MSDOS}Overlay, {$ENDIF} Dos, {$IFDEF MSDOS}InitOver, {$ENDIF}
   Init, Jakob, Maint, Cms, SortPl, VarGods, GodWorld, UserHunc, Gamec, Byebyec, Mail,
   Various, Various2, Rating, Relation, Relatio2, Post_To, Online, File_Io, {$IFDEF MSDOS}OverXms, {$ENDIF}
@@ -531,6 +531,21 @@ begin {* Main Program *}
   {should statline (bottom of screen) be displayed?}
   statline := True;
 
+  // Disable the prompt for a user name if /FMAINT or /HMAINT were
+  // passed on the command-line.  This is because they are usually run
+  // as a scheduled task, and so will hang waiting for sysop input
+  if (ParamCount > 0) then
+  begin
+    for I := 1 to ParamCount do
+    begin
+      S := LowerCase(ParamStr(I));
+      if (S = '/fmaint') or (S = '/hmaint') then
+      begin
+        DoorOnLocalLogin := nil;
+        break;
+      end;
+    end;
+  end;
 
   {Init DoorDriver}
   InitDoorDriver(uctlfile);
@@ -612,27 +627,30 @@ begin {* Main Program *}
     order_maint := True;
   end;
 
-  if (param_hunt('/FMAINT') = True) and (order_maint = False) then
+  if (param_hunt('/FMAINT') = True) then
   begin
     exit_ordered := True;
-    if open_txtfile(treset, txt, global_datefile) then
-    begin
-      readln_from_text(txt, s);
-      close_text(txt);
-    end else
-    begin
-      unable_to_access(global_datefile, access_error);
-    end;
 
-    if s <> todays_date then
+    if (order_maint = False) then
     begin
-      order_maint := True;
-    end else
-    begin
-      d(14, 'No maintenance is needed (use /HMAINT to force it).');
-      normal_exit;
-    end;
+      if open_txtfile(treset, txt, global_datefile) then
+      begin
+        readln_from_text(txt, s);
+        close_text(txt);
+      end else
+      begin
+        unable_to_access(global_datefile, access_error);
+      end;
 
+      if s <> todays_date then
+      begin
+        order_maint := True;
+      end else
+      begin
+        d(14, 'No maintenance is needed (use /HMAINT to force it).');
+        normal_exit;
+      end;
+    end;
   end;
 
   if (Config.AutoMaint = True) and (order_maint = False) then
