@@ -1406,61 +1406,57 @@ begin
 
         clearscreen;
         crlf;
+
+        sd(config.textcolor, ljust('Wisdom    : ' + commastr(player0.wisdom), justval));
+        sd(config.textcolor, ljust('Darkness       : ' + commastr(player0.dark), justval));
         crlf;
-
-        sd(config.textcolor, ljust('Wisdom     : ' + commastr(player0.wisdom), justval));
-        sd(config.textcolor, ljust('Darkness   : ' + commastr(player0.dark), justval));
+        sd(config.textcolor, ljust('Charisma  : ' + commastr(player0.charisma), justval));
+        sd(config.textcolor, ljust('Dungeon fights : ' + commastr(player0.fights), justval));
         crlf;
-
-        sd(config.textcolor, ljust('Charisma   : ' + commastr(player0.charisma), justval));
-        sd(config.textcolor, ljust('Dungeon fights     : ' + commastr(player0.fights), justval));
+        sd(config.textcolor, ljust('Agility   : ' + commastr(player0.agility), justval));
+        sd(config.textcolor, ljust('Teamfights     : ' + commastr(player0.tfights), justval));
         crlf;
-
-        sd(config.textcolor, ljust('Agility    : ' + commastr(player0.agility), justval));
-        sd(config.textcolor, ljust('Teamfights : ' + commastr(player0.tfights), justval));
+        sd(config.textcolor, ljust('Dexterity : ' + commastr(player0.dex), justval));
+        sd(config.textcolor, ljust('Player fights  : ' + commastr(player0.pfights), justval));
         crlf;
-
-        sd(config.textcolor, ljust('Dexterity  : ' + commastr(player0.dex), justval));
-        sd(config.textcolor, ljust('Player fights     : ' + commastr(player0.pfights), justval));
-
-        crlf;
-        sd(config.textcolor, ljust('Stamina    : ' + commastr(player0.stamina), justval));
-        sd(config.textcolor, ljust('Chivalry   : ' + commastr(player0.chiv), justval));
-
+        sd(config.textcolor, ljust('Stamina   : ' + commastr(player0.stamina), justval));
+        sd(config.textcolor, ljust('Chivalry       : ' + commastr(player0.chiv), justval));
         crlf;
 
         crlf;
-        sd(config.textcolor, 'Disease resistance  : ');
-        sd(config.textcolor, immunity(player0.disres));
-        crlf;
 
-        sd(config.textcolor, 'Drug addiction      : ' + commastr(player0.addict) + ' %');
+        sd(config.textcolor, ljust('Height : ' + commastr(player0.Height) + 'cm', justval));
+        sd(config.textcolor, ljust('Weight : ' + commastr(player0.weight) + 'kg', justval));
         crlf;
-        d(config.textcolor, 'Mental stability    : ' + commastr(player0.mental) + ' %');
-
+        sd(config.textcolor, ljust('Hair   : ' + color[player0.hair], justval));
+        sd(config.textcolor, ljust('Eyes   : ' + color[player0.eyes], justval));
         crlf;
-
-        sd(config.textcolor, 'Height : ');
-        sd(config.textcolor, commastr(player0.Height));
-        sd(config.textcolor, ' cm, Hair is ');
-        sd(config.textcolor, color[player0.hair]);
-        crlf;
-
-        sd(config.textcolor, 'Weight : ');
-        sd(config.textcolor, commastr(player0.weight));
-        sd(config.textcolor, ' kilos, Eyes are ');
-        sd(config.textcolor, color[player0.eyes]);
-        crlf;
-
-        sd(config.textcolor, 'Skin : ');
+        sd(config.textcolor, 'Skin   : ');
         sd(config.textcolor, color[player0.skin]);
+        crlf;
+
+        crlf;
+
+        sd(config.textcolor, ljust('Monster Kills : ' + commastr(player.m_kills), justval));
+        sd(config.textcolor, ljust('Monster Defeats : ' + commastr(player.m_defeats), justval));
+        crlf;
+        sd(config.textcolor, ljust('Player Kills  : ' + commastr(player.p_kills), justval));
+        sd(config.textcolor, ljust('Player Defeats  : ' + commastr(player.p_defeats), justval));
+        crlf;
+
+        crlf;
+
+        sd(config.textcolor, 'Disease resistance : ' + immunity(player0.disres));
+        crlf;
+        sd(config.textcolor, 'Drug addiction     : ' + commastr(player0.addict) + '%');
+        crlf;
+        sd(config.textcolor, 'Mental stability   : ' + commastr(player0.mental) + '%');
+        crlf;
 
         {Alchemist Poison}
         if player0.class = Alchemist then
         begin
-          crlf;
-          crlf;
-          sd(config.textcolor, 'Active Poison : ');
+          sd(config.textcolor, 'Active Poison      : ');
           if player0.poison > 0 then
           begin
 
@@ -1471,31 +1467,21 @@ begin
           begin
             sd(15, 'None');
           end;
+          crlf;
         end;
 
         crlf;
-        crlf;
-        sd(config.textcolor, 'Monster Kills : ');
-        d(15, commastr(player.m_kills));
 
-        sd(config.textcolor, '      Defeats : ');
-        d(15, commastr(player.m_defeats));
-
-        sd(config.textcolor, 'Player  Kills : ');
-        d(15, commastr(player.p_kills));
-
-        sd(config.textcolor, '      Defeats : ');
-        d(15, commastr(player.p_defeats));
-
-        sd(config.textcolor, '                 ..');
+        sd(config.textcolor, 'Time Left          : ');
         sd(10, commastr(time_left));
-        sd(config.textcolor, ' min left..');
-
-        sd(config.textcolor, '  Resurrections left..');
+        sd(config.textcolor, ' minutes');
+        crlf;
+        sd(config.textcolor, 'Resurrections left : ');
         sd(10, commastr(player.resurrections));
-
+        crlf;
 
         crlf;
+
         pause;
       end;
 
