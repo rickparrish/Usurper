@@ -97,8 +97,8 @@ begin {get random active God and return name of god in the NAME variable
   tries := 0;
   size := fs(fsgod);
 
-  {does the god-file exist?}
-  if f_exists(global_godfil) then
+  {does the god-file exist and have data?}
+  if (size > 0) and f_exists(global_godfil) then
   begin
 
     repeat
