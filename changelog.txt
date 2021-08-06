@@ -15,6 +15,14 @@ Fixes:
 - Weird bug where a zombie summoned by a monster in the dungeon would not have a target set, leading to killing the player but not actually killing them.
 - Incorrect stats reported in EDITOR.EXE
 - Hitting ENTER for default option
+- /FMAINT and /HMAINT won't prompt for user name, so they can be used in a timed event again
+- Divorcing when not married
+- Statusbar sometimes appeared in local mode
+
+Changes:
+- Display on (S)tatus -> (M)ore updated (line things up and re-arranged other things)
+
+----------
 
 Version 0.24:
 
