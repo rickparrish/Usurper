@@ -765,7 +765,7 @@ begin
  if found=false then begin
 
   d(12,'You are not married bird-brain!');
-  d(12,'Go and find yourself a '+sex5[player.sex]+' before it''s too late!');
+  d(12,'Go and find yourself a spouse before it''s too late!');
   pause;
   crlf;
 
