@@ -736,8 +736,8 @@ begin
 
  s:=is_player_married(player.name2,player.id);
 
+ found:=false;
  if s<>'' then begin
-  found:=false;
   {load spouse}
   for i:=1 to 2 do begin
 
