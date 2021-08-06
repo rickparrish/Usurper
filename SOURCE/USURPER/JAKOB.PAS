@@ -1058,6 +1058,11 @@ begin
   suspect_mode := False;
   read_data := False;
 
+  s := '@#' + upcasestr(Name);
+  if global_ansi then
+    s := s + '.ANS'
+  else s := s + '.ASC';
+
   if open_txtfile(treset, f, global_datadir + global_textdataf) then
   begin
 
@@ -1088,11 +1093,6 @@ begin
       end else
       begin
         {find start of picture}
-        s := '@#' + upcasestr(Name);
-        if global_ansi then
-          s := s + '.ANS'
-        else s := s + '.ASC';
-
         matching := False;
         c := 1;
         while (not EOF(f)) and (not read_data) do
@@ -1138,7 +1138,7 @@ begin
   if not read_data then
   begin
     Unable_to_find(s);
-    pause;
+    if (config.errors) then pause;
   end;
 
   set_foreground(default_fore);
