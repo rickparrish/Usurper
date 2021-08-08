@@ -441,7 +441,7 @@ begin;
   gotoxy(1, numlines);
   clreol;                          {jakob drop-dos}
   if f1toggle = 0 then
-    Write(' F1=Help Toggle ³ F2=Chat ³ F6=Dos ³ F7=+5Min ³ F8=-5Min ³ F10=Eject ³');
+    Write(' F1=Help Toggle ³ F2=Chat ³ F7=+5Min ³ F8=-5Min ³ F10=Eject ³');
   window(1, 1, 80, numlines - 1);
   gotoxy(x, y);
   textcolor(a);
@@ -942,7 +942,6 @@ begin
       a := #3;
       chatdone := True;
     end;
-    6: drop_dos; {jakob egna lilla drop-to-dos funktion}
     7: Inc(time_credit, 5);
     8: Dec(time_credit, 5);
     10: begin

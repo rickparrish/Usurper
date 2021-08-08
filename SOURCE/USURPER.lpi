@@ -48,8 +48,8 @@
       <Filename Value="..\bin\$(TargetCPU)-$(TargetOS)\USURPER.EXE"/>
     </Target>
     <SearchPaths>
-      <IncludeFiles Value="COMMON;USURPER;..\..\RMDoor;$(ProjOutDir)"/>
-      <OtherUnitFiles Value="COMMON;..\..\RMDoor"/>
+      <IncludeFiles Value="COMMON;USURPER;$(ProjOutDir)"/>
+      <OtherUnitFiles Value="COMMON"/>
       <UnitOutputDirectory Value="..\obj\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Parsing>

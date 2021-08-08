@@ -36,7 +36,7 @@ program Usurper; {Door-Game by Jakob Dangarden
 
 
 uses
-  Door, DDPlus,
+  DDPlus,
   {$IFDEF MSDOS}Overlay, {$ENDIF} Dos, {$IFDEF MSDOS}InitOver, {$ENDIF}
   Init, Jakob, Maint, Cms, SortPl, VarGods, GodWorld, UserHunc, Gamec, Byebyec, Mail,
   Various, Various2, Rating, Relation, Relatio2, Post_To, Online, File_Io, {$IFDEF MSDOS}OverXms, {$ENDIF}
@@ -530,22 +530,6 @@ begin {* Main Program *}
   end;
   {should statline (bottom of screen) be displayed?}
   statline := True;
-
-  // Disable the prompt for a user name if /FMAINT or /HMAINT were
-  // passed on the command-line.  This is because they are usually run
-  // as a scheduled task, and so will hang waiting for sysop input
-  if (ParamCount > 0) then
-  begin
-    for I := 1 to ParamCount do
-    begin
-      S := LowerCase(ParamStr(I));
-      if (S = '/fmaint') or (S = '/hmaint') then
-      begin
-        DoorOnLocalLogin := nil;
-        break;
-      end;
-    end;
-  end;
 
   {Init DoorDriver}
   InitDoorDriver(uctlfile);
