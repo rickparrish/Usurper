@@ -726,8 +726,6 @@ begin
 end;
 
 procedure SendText(s: string);
-var
-  a: integer;
 begin;
   {jakob}
   if (not AsyncCarrierPresent) then
@@ -735,8 +733,7 @@ begin;
     DropMessage;
   end else
   begin
-    for a := 1 to length(s) do
-      AsyncSendChar(s[a]);
+    AsyncSendString(s)
   end;
 
 end;
