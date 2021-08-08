@@ -466,6 +466,8 @@ var
   el_mn, el_hr, el_sc: longint; {jakob:longint}
   alias: string[30];
 begin;
+  if Local then Exit;
+
 {$IFNDEF LINUX}
   x := wherex;
   y := wherey;
