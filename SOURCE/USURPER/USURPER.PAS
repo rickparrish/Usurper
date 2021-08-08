@@ -1285,17 +1285,17 @@ begin {* Main Program *}
         crlf;
         d(config.textcolor, 'Programmers:');
         d(14, '                   Original author : Jakob Dangarden jakob@dangarden.com');
-        d(14, '               Windows/Linux Ports : Rick Parrish usurper@rickparrish.ca');
-        d(14, '   Post 0.20e Fixes & Improvements : Dan dan1982code@hotmail.ca');
+        d(14, '               Windows/Linux Ports : Rick Parrish rick@usurper.info');
+        d(14, '   Post 0.20e Fixes & Improvements : Dan Zingaro dan1982code@hotmail.ca');
         crlf;
         {d(config.textcolor,'The Usurper project comprises approximately 180,000 lines of source code.');
         crlf;}
         d(config.textcolor, 'Web:');
         d(14, '   ' + global_webaddress);
         crlf;
-        d(config.textcolor, 'Forum:');
-        d(14, '   http://www.usurper.dangarden.com (currently unmoderated)');
-        crlf;
+        // d(config.textcolor, 'Forum:');
+        // d(14, '   http://www.usurper.dangarden.com (currently unmoderated)');
+        // crlf;
         pause;
         crlf;
 

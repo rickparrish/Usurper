@@ -233,11 +233,11 @@ begin
     crlf;
 
     d(11, 'Internet');
-    d(5, 'WWW :  ' + global_webaddress);
-    d(5, 'Forum: http://www.usurper.dangarden.com');
+    d(5, 'WWW    : ' + global_webaddress);
+    // d(5, 'Forum: http://www.usurper.dangarden.com');
   {d(5,'FTP : ftp.brake.north.de     in the directory /pub/tmh/');
   }
-    d(5, 'E-mail : jakob@dangarden.com');
+    d(5, 'E-mail : rick@usurper.info');
     crlf;
 
 
