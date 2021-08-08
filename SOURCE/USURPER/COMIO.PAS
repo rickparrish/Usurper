@@ -16,7 +16,7 @@ type
   AsyncIoTypes = (Fossil, Internal, Bios, Digi);
 var
   AsyncIoType: AsyncIotypes;
-  initok, NoFossinit, fosBnu: boolean;
+  initok, NoFossinit, NoComm, fosBnu: boolean;
   internalinsize, internaloutsize: word;
 
 procedure AsyncSelectPort(pn: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}integer{$ENDIF});
@@ -43,6 +43,12 @@ implementation
 
 procedure AsyncSelectPort(pn: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}integer{$ENDIF});
 begin;
+  if NoComm then
+  begin
+    initok := True;
+    Exit;
+  end;
+
   case AsyncIoType of
     Fossil: begin
       port_num := pn{$IFDEF MSDOS} - 1{$ENDIF};
@@ -73,6 +79,8 @@ end;
 
 procedure AsyncSendChar(ch: char);
 begin;
+  if NoComm then Exit;
+
   case AsyncIoType of
     Fossil: async_send(ch);
 {$IFDEF MSDOS}
@@ -98,6 +106,8 @@ var
   i: integer;
 {$ENDIF}
 begin
+  if NoComm then Exit;
+
   case AsyncIoType of
     Fossil: async_send_string(s);
   {$IFDEF MSDOS}
@@ -115,6 +125,11 @@ end;
 
 procedure AsyncReceiveChar(var ch: char);
 begin;
+  if NoComm then begin
+    ch := #0;
+    Exit;
+  end;
+
   case asyncIotype of
     Fossil: async_receive(ch);
 {$IFDEF MSDOS}
@@ -126,6 +141,12 @@ end;
 
 function AsyncCarrierPresent: boolean;
 begin;
+  if NoComm then
+  begin
+    AsyncCarrierPresent := True;
+    Exit;
+  end;
+
   case asyncIoType of
     Fossil: AsyncCarrierPresent := async_carrier_present;
 {$IFDEF MSDOS}
@@ -137,6 +158,12 @@ end;
 
 function AsyncCharPresent: boolean;
 begin;
+  if NoComm then
+  begin
+    AsyncCharPresent := False;
+    Exit;
+  end;
+
   case asyncIoTYpe of
     Fossil: asyncCharPresent := Async_buffer_check;
 {$IFDEF MSDOS}
@@ -175,6 +202,8 @@ end;
 
 procedure AsyncCloseUp;
 begin;
+  if NoComm then Exit;
+
   case AsyncIoType of
     Fossil: Async_deinit_fossil;
 {$IFDEF MSDOS}
@@ -186,6 +215,8 @@ end;
 
 procedure AsyncCloseCom;
 begin;
+  if NoComm then Exit;
+
   case AsyncIoType of
     Fossil: Async_deinit_fossil;
 {$IFDEF MSDOS}
@@ -197,6 +228,8 @@ end;
 
 procedure AsyncSetBaud(n: longint);
 begin;
+  if NoComm then Exit;
+
   case asynciotype of
     Fossil: if not NoFossInit then
         if fosbnu then
@@ -220,6 +253,8 @@ end;
 
 procedure AsyncFlushOutput;
 begin;
+  if NoComm then Exit;
+
   case AsyncIOType of
     Fossil: async_flush_output;
 {$IFDEF MSDOS}
@@ -231,6 +266,8 @@ end;
 
 procedure AsyncPurgeOutput;
 begin;
+  if NoComm then Exit;
+
   case AsyncIOType of
     Fossil: async_purge_output;
 {$IFDEF MSDOS}
@@ -242,6 +279,16 @@ end;
 
 procedure AsyncBufferStatus(var Insize, infree, outsize, outfree: word; var fossilname: string);
 begin;
+  if NoComm then
+  begin
+    Insize := 32 * 1024;
+    infree := 32 * 1024;
+    outsize := 32 * 1024;
+    outfree := 32 * 1024;
+    fossilname := 'NoComm';
+    Exit;
+  end;
+
   case asynciotype of
     Fossil: async_buffer_Status(insize, infree, outsize, outfree, fossilname);
 {$IFDEF MSDOS}

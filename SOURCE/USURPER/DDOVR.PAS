@@ -602,6 +602,19 @@ var
  {$I-}
     reset(F);
  {$I+}
+
+    {$IFDEF UNIX}
+    // If we didn't fine DOOR32.SYS on Unix, check for door32.sys next
+    if ioresult <> 0 then
+    begin
+      writeln('DOOR32.SYS not found, trying "' + dropfilepath + 'door32.sys".');
+      Assign(f, dropfilepath + 'door32.sys');
+      {$I-}
+      reset(F);
+      {$I+}
+    end;
+    {$ENDIF}
+
     if ioresult <> 0 then
       dderror('Cannot load DOOR32.SYS');
 

@@ -17,7 +17,7 @@ procedure Loadconfig(fn: string; var bbs_software: byte; var user_first_name, us
   var local: boolean; var Graphics: byte; var color1: boolean; var color_chg: boolean;
   var NoFossInit: boolean; var board_name: string; var pause_code: string; var sysop_first_name: string;
   var sysop_last_name: string; var maxtime: word; var localcol: boolean; var statfore: byte;
-  var statback: byte; var statline: boolean; var EMSOk, NetOk, NoLocal: boolean; var fossilio, digiio: boolean;
+  var statback: byte; var statline: boolean; var EMSOk, NetOk, NoLocal, NoComm: boolean; var fossilio, digiio: boolean;
   var dropfilepath: string; var GoRip: byte; var lockbaud: longint; var nodirect: boolean;
   var port1, port2, port3, port4: word; var irq1, irq2, irq3, irq4: byte);
 
@@ -66,7 +66,7 @@ procedure Loadconfig(fn: string; var bbs_software: byte; var user_first_name, us
   var sysop_last_name: string; var maxtime: word;
   { var quiet: boolean; }
   var localcol: boolean; var statfore: byte; var statback: byte; var statline: boolean;
-  var EMSOk, NetOK, NoLocal: boolean; var fossilio, digiio: boolean; var dropfilepath: string;
+  var EMSOk, NetOK, NoLocal, NoComm: boolean; var fossilio, digiio: boolean; var dropfilepath: string;
   var GoRip: byte; var lockbaud: longint; var nodirect: boolean; var port1, port2, port3, port4: word;
   var irq1, irq2, irq3, irq4: byte);
 
@@ -194,6 +194,7 @@ procedure Loadconfig(fn: string; var bbs_software: byte; var user_first_name, us
           'R': GoRip := 4;
           'V': NoLocal := True;
           'W': NetOk := True;
+          'X': NoComm := True;
         end; {case .end.}
       end;
     end;
@@ -232,6 +233,7 @@ begin;
   EMSOK := False;
   NetOK := False;
   NoLocal := False;
+  NoComm := False;
   fossilio := True;
   noFossInit := False;
   digiio := False;

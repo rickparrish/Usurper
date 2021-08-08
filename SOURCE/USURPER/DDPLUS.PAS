@@ -2078,6 +2078,7 @@ begin;
     statline,
     EMSOK, NetOK,
     nolocal,
+    NoComm,
     fossilio,
     digiio,
     dropfilepath,
