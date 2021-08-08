@@ -25,7 +25,7 @@ uses
   {$IFDEF WINDOWS}
     Winsock, Sockets,
   {$ENDIF}
-  Classes, SysUtils;
+  SysUtils;
 
 function CommCarrier: Boolean;
 function CommCharAvail: Boolean;
