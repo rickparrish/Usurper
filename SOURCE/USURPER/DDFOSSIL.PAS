@@ -263,13 +263,6 @@ begin
   if (DidInit) then
     Exit;
   DidInit := True;
-  {$IFDEF GO32V2}
-    Com_StartUp(1);
-  {$ENDIF}
-  {$IFNDEF GO32V2}
-//REETODO    Com_StartUp(2);
-  {$ENDIF}
-//REETODO  Com_SetDontClose(True);
   CommOpen(port_num);
   async_init_fossil := True;
 end;
