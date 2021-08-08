@@ -31,8 +31,10 @@ function CommCarrier: Boolean;
 function CommCharAvail: Boolean;
 procedure CommClose(ADisconnect: Boolean);
 procedure CommFlushOutBuffer;
+procedure CommGetBufferStatus(var AInFree, AOutFree, AInUsed, AOutUsed: LongInt; AFossilName: String);
 procedure CommOpen(ACommNumber: LongInt);
 function CommPeekChar: Char;
+procedure CommPurgeInBuffer;
 procedure CommPurgeOutBuffer;
 function CommReadChar: Char;
 procedure CommSetBaud(ABaud: LongInt);
@@ -97,7 +99,63 @@ end;
 
 procedure CommFlushOutBuffer;
 begin
-  // REETODO No output buffer to flush at this time
+  // No output buffer to flush at this time
+end;
+
+procedure CommGetBufferStatus(var AInFree, AOutFree, AInUsed, AOutUsed: LongInt; AFossilName: String);
+{$IFDEF COMM_FOSSIL}
+type
+  FossilRecord = record
+    Size      : Word;
+    Spec      : Byte;
+    Rev       : Byte;
+    ID        : PChar;
+    InSize    : Word;
+    InFree    : Word;
+    OutSize   : Word;
+    OutFree   : Word;
+    SWidth    : Byte;
+    SHeight   : Byte;
+    BaudMask  : Byte;
+    Junk      : Word;
+  end;
+
+var
+  FossilInfo: FossilRecord;
+  Selector, Segment: Word;
+{$ENDIF}
+begin
+  {$IFDEF COMM_FOSSIL}
+    DosAlloc(Selector, Segment, SizeOf(FossilInfo));
+    if Int31Error <> 0 then Exit;
+
+    DosMemPut(Segment, 0, FossilInfo, SizeOf(FossilInfo));
+
+    Regs.AH := $1B;
+    Regs.DX := FCommNumber;
+    Regs.CX := SizeOf(FossilInfo);
+    Regs.ES := Segment;
+    Regs.DI := 0;
+    Intr($14, Regs);
+
+    DosMemGet(Segment, 0, FossilInfo, SizeOf(FossilInfo));
+    DosFree(Selector);
+
+    AInFree := FossilInfo.InFree;
+    AInUsed := FossilInfo.InSize - FossilInfo.InFree;
+
+    AOutFree := FossilInfo.OutFree;
+    AOutUsed := FossilInfo.OutSize - FossilInfo.OutFree;
+
+    AFossilName := StrPas(FossilInfo.ID);
+  {$ENDIF}
+  {$IFDEF COMM_SOCKET}
+    AInFree := (32 * 1024) - Length(FBuffer);
+    AInUsed := Length(FBuffer);
+    AOutFree := 32 * 1024;
+    AOutUsed := 0;
+    AFossilName := 'Socket';
+  {$ENDIF}
 end;
 
 procedure CommOpen(ACommNumber: LongInt);
@@ -147,9 +205,22 @@ begin
   Result := FBuffer[1];
 end;
 
+procedure CommPurgeInBuffer;
+begin
+  ReceiveData;
+  FBuffer := '';
+end;
+
 procedure CommPurgeOutBuffer;
 begin
-  // REETODO No output buffer to purge at this time
+  {$IFDEF COMM_FOSSIL}
+    Regs.AH := $09;
+    Regs.DX := FCommNumber;
+    Intr($14, Regs);
+  {$ENDIF}
+  {$IFDEF COMM_SOCKET}
+    // No output buffer to purge at this time
+  {$ENDIF}
 end;
 
 function CommReadChar: Char;
@@ -165,17 +236,47 @@ begin
 end;
 
 procedure CommSetBaud(ABaud: LongInt);
+{$IFDEF COMM_FOSSIL}
+var
+  W: Word;
+{$ENDIF}
 begin
   {$IFDEF COMM_FOSSIL}
-    WriteLn('REEPORT Comm CommSetBaud'); Halt;
+    Regs.AH := $00;
+    Regs.AL := $03;
+    Regs.DX := FCommNumber;
+    W := ABaud;
+
+    if ABaud > 76800 then
+    begin
+      {115200 } Regs.AL := Regs.AL or $80
+    end else
+    if ABaud > 57600 then
+    begin
+      { 76800 } Regs.AL := Regs.AL or $60
+    end else
+    begin
+      case w of
+        300: Regs.AL := Regs.AL or $40;
+        600: Regs.AL := Regs.AL or $60;
+        1200: Regs.AL := Regs.AL or $80;
+        2400: Regs.AL := Regs.AL or $A0;
+        4800: Regs.AL := Regs.AL or $C0;
+        9600: Regs.AL := Regs.AL or $E0;
+        9601..19200: Regs.AL := Regs.AL or $00;
+        19201..38400: Regs.AL := Regs.AL or $20;
+        38401..57600: Regs.AL := Regs.AL or $40;
+      end;
+    end;
+
+    Intr($14, Regs);
   {$ENDIF}
 end;
 
 procedure CommWrite(AText: String);
 begin
   {$IFDEF COMM_SOCKET}
-    // TODO Probably a better way to do this, works for now
-    // TODO Also, only for Telnet mode
+    // Telnet needs IAC to be doubled
     AText := StringReplace(AText, #255, #255#255, [rfReplaceAll]);
   {$ENDIF}
   CommWriteBlock(AText[1], Length(AText));

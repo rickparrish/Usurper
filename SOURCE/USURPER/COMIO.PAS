@@ -21,6 +21,7 @@ var
 
 procedure AsyncSelectPort(pn: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}integer{$ENDIF});
 procedure AsyncSendChar(ch: char);
+procedure AsyncSendString(s: string);
 procedure AsyncReceiveChar(var ch: char);
 function AsyncCarrierPresent: boolean;
 function AsyncCharPresent: boolean;
@@ -30,10 +31,8 @@ procedure AsyncSelectDigiBoard(var digiboardname: string);
 procedure AsyncCloseUp;
 procedure AsyncCloseCom(cp: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}integer{$ENDIF});
 procedure AsyncSetBaud(n: longint);
-procedure AsyncSetDTR(state: boolean);
 procedure AsyncFlushOutput;
 procedure AsyncPurgeOutput;
-procedure AsyncSetFlow(SoftTran, Hard, SoftRecv: boolean);
 procedure AsyncBufferStatus(var Insize, infree, outsize, outfree: word; var fossilname: string);
 procedure SetUpPorts;
 procedure LoadPorts(var port1, port2, port3, port4: word; var irq1, irq2, irq3, irq4: byte);
@@ -93,6 +92,27 @@ begin;
   end;
 end;
 
+procedure AsyncSendString(s: string);
+{$IFDEF MSDOS}
+var
+  i: integer;
+{$ENDIF}
+begin
+  case AsyncIoType of
+    Fossil: async_send_string(s);
+  {$IFDEF MSDOS}
+    Internal: begin
+      for i := 1 to length(s) do
+        AsyncSendChar(s[i]);
+    end;
+    Digi: begin
+      for i := 1 to length(s) do
+        AsyncSendChar(s[i]);
+    end;
+  {$ENDIF}
+  end;
+end;
+
 procedure AsyncReceiveChar(var ch: char);
 begin;
   case asyncIotype of
@@ -149,7 +169,7 @@ begin;
   digi_Get_Info(digiboardname);
 {$ENDIF}
 {$IFNDEF MSDOS}
-  // REENOTE Only use FOSSIL in Win32, won't ever select digiboard
+  // DigiBoard only supported in MSDOS
 {$ENDIF}
 end;
 
@@ -198,16 +218,6 @@ begin;
   AsyncIOType := Internal;
 end;
 
-procedure AsyncSetDTR(state: boolean);
-begin;
-  case AsyncIOType of
-    Fossil: async_set_dtr(state);
-{$IFDEF MSDOS}
-    Internal: SetDTR(comport, state);
-{$ENDIF}
-  end;
-end;
-
 procedure AsyncFlushOutput;
 begin;
   case AsyncIOType of
@@ -226,21 +236,6 @@ begin;
 {$IFDEF MSDOS}
     Internal: ClearCom(comport, 'O');
     Digi: digi_flush_output;
-{$ENDIF}
-  end;
-end;
-
-procedure AsyncSetFlow(SoftTran, Hard, SoftRecv: boolean);
-begin;
-  {*srl}
-  case AsyncIOType of
-    Fossil: async_set_flow(softtran, hard, softrecv);
-{$IFDEF MSDOS}
-    Internal: begin;
-      SetCTSMode(comport, hard);
-      SetRTSMode(comport, hard, C_RTSOn[comport], C_RTSOff[comport]);
-      SoftHandShake(comport, softtran, 'A', 'A');
-    end;
 {$ENDIF}
   end;
 end;
@@ -272,7 +267,7 @@ begin
   end;
 {$ENDIF}
 {$IFNDEF MSDOS}
-  // REENOTE Only use FOSSIL in Win32, no need to setup the ports
+  // No need to setup the ports
 {$ENDIF}
 end;
 
@@ -289,7 +284,7 @@ begin
   irq4 := D_PortInt[4];
 {$ENDIF}
 {$IFNDEF MSDOS}
-  // REENOTE Only use FOSSIL in Win32, no need to load the ports
+  // No need to load the ports
 {$ENDIF}
 end;
 
@@ -306,7 +301,7 @@ begin
   C_PortInt[4] := irq4;
 {$ENDIF}
 {$IFNDEF MSDOS}
-  // REENOTE Only use FOSSIL in Win32, no need to reset the ports
+  // No need to reset the ports
 {$ENDIF}
 end;
 

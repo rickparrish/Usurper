@@ -43,14 +43,8 @@ procedure async_deinit_fossil;
 procedure async_flush_output;
 procedure async_purge_output;
 procedure async_purge_input;
-procedure async_set_dtr(state: boolean);
-procedure async_watchdog_on;
-procedure async_watchdog_off;
-procedure async_warm_reboot;
-procedure async_cold_reboot;
 procedure async_set_baud(n: longint);
 procedure async_set_baudBnu(n: longint);
-procedure async_set_flow(SoftTran, Hard, SoftRecv: boolean);
 procedure Async_Buffer_Status(var Insize, Infree, OutSize, Outfree: word; var fossilname: string);
 
 implementation
@@ -291,29 +285,6 @@ end;
 {$ENDIF}
 
 {$IFDEF MSDOS}
-procedure async_set_dtr(state: boolean);
-var
-  regs: registers;
-begin
-  regs.ah := $06;
-  if state then
-    regs.al := 1 else regs.al := 0;
-  regs.dx := port_num;
-  intr($14, regs);
-end;
-
-{$ENDIF}
-{$IFNDEF MSDOS}
-procedure async_set_dtr(state: boolean);
-begin
-  if not (DidInit) then
-    Exit;
-  // REENOTE Telnet can't set DTR
-end;
-
-{$ENDIF}
-
-{$IFDEF MSDOS}
 procedure async_flush_output;
 var
   regs: registers;
@@ -332,9 +303,7 @@ end;
 
 procedure async_flush_output;
 begin
-{$IFNDEF UNIX}
   CommFlushOutBuffer();
-{$ENDIF}
 end;
 
 {$ENDIF}
@@ -376,94 +345,7 @@ procedure async_purge_input;
 begin
   if not (DidInit) then
     Exit;
-//REETODO  Com_PurgeInBuffer;
-WriteLn('RPPORT DDFossil async_purge_input');
-end;
-
-{$ENDIF}
-
-{$IFDEF MSDOS}
-procedure async_watchdog_on;
-var
-  regs: registers;
-begin
-  regs.ah := $14;
-  regs.al := $01;
-  regs.dx := port_num;
-  intr($14, regs);
-end;
-
-{$ENDIF}
-{$IFNDEF MSDOS}
-procedure async_watchdog_on;
-begin
-  if not (DidInit) then
-    Exit;
-  // REENOTE Nothing to do here
-end;
-
-{$ENDIF}
-
-{$IFDEF MSDOS}
-procedure async_watchdog_off;
-var
-  regs: registers;
-begin
-  regs.ah := $14;
-  regs.al := $00;
-  regs.dx := port_num;
-  intr($14, regs);
-end;
-
-{$ENDIF}
-{$IFNDEF MSDOS}
-procedure async_watchdog_off;
-begin
-  if not (DidInit) then
-    Exit;
-  // REENOTE Nothing to do here
-end;
-
-{$ENDIF}
-
-{$IFDEF MSDOS}
-procedure async_warm_reboot;
-var
-  regs: registers;
-begin
-  regs.ah := $17;
-  regs.al := $01;
-  intr($14, regs);
-end;
-
-{$ENDIF}
-{$IFNDEF MSDOS}
-procedure async_warm_reboot;
-begin
-  if not (DidInit) then
-    Exit;
-  // REENOTE Nothing to do here
-end;
-
-{$ENDIF}
-
-{$IFDEF MSDOS}
-procedure async_cold_reboot;
-var
-  regs: registers;
-begin
-  regs.ah := $17;
-  regs.al := $00;
-  intr($14, regs);
-end;
-
-{$ENDIF}
-{$IFNDEF MSDOS}
-procedure async_cold_reboot;
-begin
-  if not (DidInit) then
-    Exit;
-  // REENOTE Nothing to do here
+  CommPurgeInBuffer;
 end;
 
 {$ENDIF}
@@ -506,7 +388,7 @@ procedure async_set_baud(n: longint);
 begin
   if not (DidInit) then
     Exit;
-  // REENOTE Telnet can't set baud
+  CommSetBaud(n);
 end;
 
 {$ENDIF}
@@ -551,7 +433,7 @@ procedure async_set_baudBnu(n: longint);
 begin
   if not (DidInit) then
     Exit;
-  // REENOTE Telnet can't set baud
+  CommSetBaud(n);
 end;
 
 {$ENDIF}
@@ -576,34 +458,6 @@ used to set the baud rate, bits 5-7, according to this table:
 david  }
 
 {$IFDEF MSDOS}
-procedure async_set_flow(SoftTran, Hard, SoftRecv: boolean);
-var
-  regs: registers;
-begin
-  regs.ah := $0F;
-  regs.al := $00;
-  if softtran then
-    regs.al := regs.al or $01;
-  if Hard then
-    regs.al := regs.al or $02;
-  if SoftRecv then
-    regs.al := regs.al or $08;
-  regs.al := regs.al or $F0;
-  Intr($14, regs);
-end;
-
-{$ENDIF}
-{$IFNDEF MSDOS}
-procedure async_set_flow(SoftTran, Hard, SoftRecv: boolean);
-begin
-  if not (DidInit) then
-    Exit;
-  // REENOTE Telnet can't set flow
-end;
-
-{$ENDIF}
-
-{$IFDEF MSDOS}
 procedure async_get_fossil_data;
 var
   regs: registers;
@@ -618,13 +472,7 @@ end;
 
 {$ENDIF}
 {$IFNDEF MSDOS}
-procedure async_get_fossil_data;
-begin
-  if not (DidInit) then
-    Exit;
-  // REENOTE Telnet has no FOSSIL data to get
-end;
-
+  // async_get_fossil_data is only called internally from an IFDEF MSDOS
 {$ENDIF}
 
 {$IFDEF MSDOS}
@@ -651,12 +499,11 @@ var FInFree, FOutFree, FInUsed, FOutUsed: longint;
 begin
   if not (DidInit) then
     Exit;
-//REETODO  Com_GetBufferStatus(FInFree, FOutFree, FInUsed, FOutUsed);
-//REETODO  Insize := FInFree + FInUsed;
-//REETODO  Infree := FInFree;
-//REETODO  Outsize := FOutFree + FOutUsed;
-//REETODO  Outfree := FOutFree;
-WriteLn('RPPORT DDFossil Async_Buffer_Status');
+  CommGetBufferStatus(FInFree, FOutFree, FInUsed, FOutUsed, fossilname);
+  Insize := FInFree + FInUsed;
+  Infree := FInFree;
+  Outsize := FOutFree + FOutUsed;
+  Outfree := FOutFree;
 end;
 
 {$ENDIF}
