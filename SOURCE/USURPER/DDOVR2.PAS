@@ -233,7 +233,7 @@ begin;
   NetOK := False;
   NoLocal := False;
   fossilio := True;
-  noFossInit := True;
+  noFossInit := False;
   digiio := False;
   lockbaud := 0;
   statfore := 7;
@@ -319,7 +319,10 @@ statback := 1;
         if p1 = 'DIGI' then
           digiio := True  else
         if p1 = 'FOSSIL' then
-          fossilio := True else
+        begin
+          fossilio := True;
+          noFossInit := False;
+        end else
         if p1 = 'XFOSSIL' then
         begin
           fossilio := True;
