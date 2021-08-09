@@ -21,8 +21,80 @@
     <i18n>
       <EnableI18N LFM="False"/>
     </i18n>
-    <BuildModes Count="1">
+    <BuildModes Count="3">
       <Item1 Name="Default" Default="True"/>
+      <Item2 Name="Debug">
+        <CompilerOptions>
+          <Version Value="11"/>
+          <PathDelim Value="\"/>
+          <Target>
+            <Filename Value="..\bin\$(TargetCPU)-$(TargetOS)\USURPER.EXE"/>
+          </Target>
+          <SearchPaths>
+            <IncludeFiles Value="COMMON;USURPER;$(ProjOutDir)"/>
+            <OtherUnitFiles Value="COMMON"/>
+            <UnitOutputDirectory Value="..\obj\$(TargetCPU)-$(TargetOS)"/>
+          </SearchPaths>
+          <Parsing>
+            <SyntaxOptions>
+              <SyntaxMode Value="tp"/>
+              <IncludeAssertionCode Value="True"/>
+              <UseAnsiStrings Value="False"/>
+            </SyntaxOptions>
+          </Parsing>
+          <CodeGeneration>
+            <Checks>
+              <IOChecks Value="True"/>
+              <RangeChecks Value="True"/>
+              <OverflowChecks Value="True"/>
+              <StackChecks Value="True"/>
+            </Checks>
+            <VerifyObjMethodCallValidity Value="True"/>
+          </CodeGeneration>
+          <Linking>
+            <Debugging>
+              <DebugInfoType Value="dsDwarf2Set"/>
+              <UseHeaptrc Value="True"/>
+              <TrashVariables Value="True"/>
+              <StripSymbols Value="True"/>
+              <UseExternalDbgSyms Value="True"/>
+            </Debugging>
+          </Linking>
+        </CompilerOptions>
+      </Item2>
+      <Item3 Name="Release">
+        <CompilerOptions>
+          <Version Value="11"/>
+          <PathDelim Value="\"/>
+          <Target>
+            <Filename Value="..\bin\$(TargetCPU)-$(TargetOS)\USURPER.EXE"/>
+          </Target>
+          <SearchPaths>
+            <IncludeFiles Value="COMMON;USURPER;$(ProjOutDir)"/>
+            <OtherUnitFiles Value="COMMON"/>
+            <UnitOutputDirectory Value="..\obj\$(TargetCPU)-$(TargetOS)"/>
+          </SearchPaths>
+          <Parsing>
+            <SyntaxOptions>
+              <SyntaxMode Value="tp"/>
+              <UseAnsiStrings Value="False"/>
+            </SyntaxOptions>
+          </Parsing>
+          <CodeGeneration>
+            <SmartLinkUnit Value="True"/>
+            <Optimizations>
+              <OptimizationLevel Value="3"/>
+            </Optimizations>
+          </CodeGeneration>
+          <Linking>
+            <Debugging>
+              <GenerateDebugInfo Value="False"/>
+              <StripSymbols Value="True"/>
+            </Debugging>
+            <LinkSmart Value="True"/>
+          </Linking>
+        </CompilerOptions>
+      </Item3>
     </BuildModes>
     <PublishOptions>
       <Version Value="2"/>
@@ -48,8 +120,8 @@
       <Filename Value="..\bin\$(TargetCPU)-$(TargetOS)\USURPER.EXE"/>
     </Target>
     <SearchPaths>
-      <IncludeFiles Value="COMMON;USURPER;..\..\RMDoor;$(ProjOutDir)"/>
-      <OtherUnitFiles Value="COMMON;..\..\RMDoor"/>
+      <IncludeFiles Value="COMMON;USURPER;$(ProjOutDir)"/>
+      <OtherUnitFiles Value="COMMON"/>
       <UnitOutputDirectory Value="..\obj\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Parsing>

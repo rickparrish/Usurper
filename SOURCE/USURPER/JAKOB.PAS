@@ -142,7 +142,7 @@ function Param_Hunt(const h: string): boolean; {checking for Command Line parame
 implementation
 
 uses
-  DDPlus,
+  DDPlus, DDScott,
   Dos, Crt, Init,
   Exec, AnsiColr, SwagDate,
   Various, NetFilep, DispText,
