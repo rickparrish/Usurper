@@ -604,7 +604,7 @@ var
  {$I+}
 
     {$IFDEF UNIX}
-    // If we didn't fine DOOR32.SYS on Unix, check for door32.sys next
+    // If we didn't find DOOR32.SYS on Unix, check for door32.sys next
     if ioresult <> 0 then
     begin
       writeln('DOOR32.SYS not found, trying "' + dropfilepath + 'door32.sys".');
