@@ -1,1 +1,6 @@
 obj/
+bin/x86_64-win64/USURPER.CFG
+bin/x86_64-win64/DATA
+bin/x86_64-win64/DOCS
+bin/x86_64-win64/NODE
+bin/x86_64-win64/SCORES
