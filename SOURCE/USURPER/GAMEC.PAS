@@ -94,7 +94,7 @@ begin
   menu2(ljust('(F)ame', offset1));
   menu('(R)elations');
 
-  menu2(ljust('(2) Healing Hut', offset1));
+  menu2(ljust('(1) Healing Hut', offset1));
   menu('(*) Suicide');
 
   menu('(Q)uit Game');
@@ -680,16 +680,12 @@ begin
       '!': begin {who is online}
         who_is_on(False, True);
       end;
-      '1': begin {send items,money to another online player}
-        crlf;
-        send_stuff_online(True);
-      end;
       '?': begin {display menu}
         if player.expert = True then
           main_menu(True, False)
         else main_menu(False, False);
       end;
-      '2': begin {healing hut}
+      '1', '2': begin {healing hut}
 
         load_king(fload, king);
 
