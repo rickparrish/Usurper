@@ -1130,6 +1130,10 @@ begin;
   if ch = #20 then
   begin {CTRL+T jakobs rutin}
     online_message;
+  end else
+  if ch = #19 then
+  begin {CTRL+S}
+    send_stuff_online(True);
   end;
 
   { A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z}

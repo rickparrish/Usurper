@@ -50,50 +50,54 @@ var
   town_name: s70; {name of town, fetched from .CFG}
 
 procedure Meny;
-const offset = 18;
+const
+  offset1 = 21;
+  offset2 = 25;
 begin
   d(5, 'Main street of ' + ulcyan + town_name + config.textcol1);
   crlf;
 
-  menu2(ljust('(S)tatus', offset));
-  menu2(ljust('(G)ood Deeds', offset));
+  menu2(ljust('(S)tatus', offset1));
+  menu2(ljust('(G)ood Deeds', offset2));
+  d(8, '[Global Commands]');
+
+  menu2(ljust('(D)ungeons', offset1));
+  menu2(ljust('(E)vil Deeds', offset2));
   sd(config.textcolor, '(');
   sd(5, 'Ctrl+W');
   d(config.textcolor, ') Who is Online?');
 
-  menu2(ljust('(D)ungeons', offset));
-  menu2(ljust('(E)vil Deeds', offset));
+  menu2(ljust('(B)ank', offset1));
+  menu2(ljust('(V)isit Master', offset2));
   sd(config.textcolor, '(');
   sd(5, 'Ctrl+T');
-  d(config.textcolor, ') Send message to online player');
+  d(config.textcolor, ') Send message');
 
-  menu2(ljust('(B)ank', offset));
-  menu2(ljust('(V)isit Master', offset));
-  menu('(1) Send stuff to online player');
+  menu2(ljust('(I)nn', offset1));
+  menu2(ljust('(M)agic Shop', offset2));
+  sd(config.textcolor, '(');
+  sd(5, 'Ctrl+S');
+  d(config.textcolor, ') Send stuff');
 
-  menu2(ljust('(I)nn', offset));
-  menu2(ljust('(M)agic Shop', offset));
-  menu('(2) Healing Hut');
+  menu2(ljust('(C)hallenges', offset1));
+  menu(ljust('(N)ews', offset2));
 
+  menu2(ljust('(A)rmor Shop', offset1));
+  menu('(L)ist Characters');
 
-  menu2(ljust('(C)hallenges', offset));
-  menu('(N)ews of Today/Yesterday');
-
-  menu2(ljust('(A)rmor Shop', offset));
-  menu('(L)ist of Characters');
-
-  menu2(ljust('(W)eapon Store', offset));
+  menu2(ljust('(W)eapon Store', offset1));
   menu('(T)he Marketplace');
 
-  menu2(ljust('(Q)uit Game', offset));
+  menu2(ljust('(H)ome', offset1));
   menu('(X)tra Shops');
 
-  menu2(ljust('(H)ome', offset));
-  menu('(R)elations, Love & Hate');
+  menu2(ljust('(F)ame', offset1));
+  menu('(R)elations');
 
-  menu('(F)ame');
-
+  menu2(ljust('(2) Healing Hut', offset1));
   menu('(*) Suicide');
+
+  menu('(Q)uit Game');
 
 end; {meny *end*}
 
