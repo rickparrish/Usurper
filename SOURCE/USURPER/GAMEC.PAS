@@ -623,6 +623,7 @@ begin
 
   {report other players online}
   who_is_on(False, False);
+  pause;
 
   {main game loop .start.}
   repeat
