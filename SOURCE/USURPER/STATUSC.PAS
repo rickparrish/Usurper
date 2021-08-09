@@ -47,6 +47,10 @@ uses
 
 const nada        = '{nothing}';
   never_quit_loop = False;
+  justvalmore1    = 17;
+  justvalmore2    = 18;
+  justvalmore3    = 20;
+
 var
 
   justval:     integer;
@@ -1405,83 +1409,94 @@ begin
       'M': begin {more status...}
 
         clearscreen;
-        crlf;
 
-        sd(config.textcolor, ljust('Wisdom    : ' + commastr(player0.wisdom), justval));
-        sd(config.textcolor, ljust('Darkness       : ' + commastr(player0.dark), justval));
-        crlf;
-        sd(config.textcolor, ljust('Charisma  : ' + commastr(player0.charisma), justval));
-        sd(config.textcolor, ljust('Dungeon fights : ' + commastr(player0.fights), justval));
-        crlf;
-        sd(config.textcolor, ljust('Agility   : ' + commastr(player0.agility), justval));
-        sd(config.textcolor, ljust('Teamfights     : ' + commastr(player0.tfights), justval));
-        crlf;
-        sd(config.textcolor, ljust('Dexterity : ' + commastr(player0.dex), justval));
-        sd(config.textcolor, ljust('Player fights  : ' + commastr(player0.pfights), justval));
-        crlf;
-        sd(config.textcolor, ljust('Stamina   : ' + commastr(player0.stamina), justval));
-        sd(config.textcolor, ljust('Chivalry       : ' + commastr(player0.chiv), justval));
-        crlf;
+        d(5, '[Physical Appearance]');
+
+        sd(config.textcolor, ljust('Height:', justvalmore1));
+        sd(config.textcolor, ljust(commastr(player0.Height) + 'cm', justvalmore2));
+        sd(config.textcolor, ljust('Weight:', justvalmore3));
+        d(config.textcolor, ljust(commastr(player0.weight) + 'kg', justvalmore2));
+
+        sd(config.textcolor, ljust('Hair:', justvalmore1));
+        sd(config.textcolor, ljust(color[player0.hair], justvalmore2));
+        sd(config.textcolor, ljust('Eyes:', justvalmore3));
+        d(config.textcolor, ljust(color[player0.eyes], justvalmore2));
+
+        sd(config.textcolor, ljust('Skin:', justvalmore1));
+        d(config.textcolor, ljust(color[player0.skin], justvalmore2));
 
         crlf;
+        d(5, '[Personal Stats]');
 
-        sd(config.textcolor, ljust('Height : ' + commastr(player0.Height) + 'cm', justval));
-        sd(config.textcolor, ljust('Weight : ' + commastr(player0.weight) + 'kg', justval));
-        crlf;
-        sd(config.textcolor, ljust('Hair   : ' + color[player0.hair], justval));
-        sd(config.textcolor, ljust('Eyes   : ' + color[player0.eyes], justval));
-        crlf;
-        sd(config.textcolor, 'Skin   : ');
-        sd(config.textcolor, color[player0.skin]);
-        crlf;
+        sd(config.textcolor, ljust('Wisdom:', justvalmore1));
+        sd(config.textcolor, ljust(commastr(player0.wisdom), justvalmore2));
+        sd(config.textcolor, ljust('Disease resistance:', justvalmore3));
+        d(config.textcolor, ljust(immunity(player0.disres), justvalmore2));
 
-        crlf;
+        sd(config.textcolor, ljust('Charisma:', justvalmore1));
+        sd(config.textcolor, ljust(commastr(player0.charisma), justvalmore2));
+        sd(config.textcolor, ljust('Drug addiction:', justvalmore3));
+        d(config.textcolor, ljust(commastr(player0.addict) + '%', justvalmore2));
 
-        sd(config.textcolor, ljust('Monster Kills : ' + commastr(player.m_kills), justval));
-        sd(config.textcolor, ljust('Monster Defeats : ' + commastr(player.m_defeats), justval));
-        crlf;
-        sd(config.textcolor, ljust('Player Kills  : ' + commastr(player.p_kills), justval));
-        sd(config.textcolor, ljust('Player Defeats  : ' + commastr(player.p_defeats), justval));
-        crlf;
+        sd(config.textcolor, ljust('Agility:', justvalmore1));
+        sd(config.textcolor, ljust(commastr(player0.agility), justvalmore2));
+        sd(config.textcolor, ljust('Mental stability:', justvalmore3));
+        d(config.textcolor, ljust(commastr(player0.mental) + '%', justvalmore2));
 
-        crlf;
+        sd(config.textcolor, ljust('Dexterity:', justvalmore1));
+        sd(config.textcolor, ljust(commastr(player0.dex), justvalmore2));
+        sd(config.textcolor, ljust('Darkness:', justvalmore3));
+        d(config.textcolor, ljust(commastr(player0.dark), justvalmore2));
 
-        sd(config.textcolor, 'Disease resistance : ' + immunity(player0.disres));
-        crlf;
-        sd(config.textcolor, 'Drug addiction     : ' + commastr(player0.addict) + '%');
-        crlf;
-        sd(config.textcolor, 'Mental stability   : ' + commastr(player0.mental) + '%');
-        crlf;
+        sd(config.textcolor, ljust('Stamina:', justvalmore1));
+        sd(config.textcolor, ljust(commastr(player0.stamina), justvalmore2));
+        sd(config.textcolor, ljust('Chivalry:', justvalmore3));
+        d(config.textcolor, ljust(commastr(player0.chiv), justvalmore2));
 
         {Alchemist Poison}
         if player0.class = Alchemist then
         begin
-          sd(config.textcolor, 'Active Poison      : ');
+          sd(config.textcolor, ljust('Active poison:', justvalmore1));
           if player0.poison > 0 then
           begin
-
-            a2 := alchemist_poison(player0);
-            sd(15, a2);
-
+            a2 := LowerCase(alchemist_poison(player0));
+            d(config.textcolor, a2);
           end else
           begin
-            sd(15, 'None');
+            d(config.textcolor, 'none');
           end;
-          crlf;
         end;
 
         crlf;
+        d(5, '[Victories and Defeats]');
 
-        sd(config.textcolor, 'Time Left          : ');
-        sd(10, commastr(time_left));
-        sd(config.textcolor, ' minutes');
-        crlf;
-        sd(config.textcolor, 'Resurrections left : ');
-        sd(10, commastr(player.resurrections));
-        crlf;
+        sd(config.textcolor, ljust('Monster kills:', justvalmore1));
+        sd(config.textcolor, ljust(commastr(player.m_kills), justvalmore2));
+        sd(config.textcolor, ljust('Dungeon fights:', justvalmore3));
+        d(config.textcolor, ljust(commastr(player0.fights), justvalmore2));
+
+        sd(config.textcolor, ljust('Player kills:', justvalmore1));
+        sd(config.textcolor, ljust(commastr(player.p_kills), justvalmore2));
+        sd(config.textcolor, ljust('Teamfights:', justvalmore3));
+        d(config.textcolor, ljust(commastr(player0.tfights), justvalmore2));
+
+        sd(config.textcolor, ljust('Monster defeats:', justvalmore1));
+        sd(config.textcolor, ljust(commastr(player.m_defeats), justvalmore2));
+        sd(config.textcolor, ljust('Player fights:', justvalmore3));
+        d(config.textcolor, ljust(commastr(player0.pfights), justvalmore2));
+
+        sd(config.textcolor, ljust('Player defeats:', justvalmore1));
+        d(config.textcolor, ljust(commastr(player.p_defeats), justvalmore2));
 
         crlf;
+        d(5, '[Game Info]');
 
+        sd(config.textcolor, ljust('Time left:', justvalmore1));
+        sd(config.textcolor, ljust(commastr(time_left) + ' minutes', justvalmore2));
+        sd(config.textcolor, ljust('Resurrection left:', justvalmore3));
+        d(config.textcolor, ljust(commastr(player.resurrections), justvalmore2));
+
+        crlf;
         pause;
       end;
 
