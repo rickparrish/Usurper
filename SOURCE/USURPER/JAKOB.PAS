@@ -112,6 +112,7 @@ function Strip(const out: string): string; {remove all Usurper ansi}
 function Uconv(const out: string): string; {Usurper ANSI -> standard ANSI}
 
  {menu}
+function DisplayTextFile(const Name: String): Boolean;
 procedure Show_Usurper_Data(const Name: string; pausing: boolean);
 procedure Menu(const Text: string);
 procedure Menu2(const Text: string);
@@ -1034,6 +1035,61 @@ begin
   crlf;
 
 end; {pause *end*}
+
+function DisplayTextFile(const Name: String): Boolean;
+{show ansi/ascii from the text directory}
+var
+  AnsiSave: Boolean;
+  F: Text;
+  Filename, S: String;
+begin
+  // Assume failure
+  DisplayTextFile := False;
+
+  {keep ansi variable}
+  AnsiSave := AnsiOn;
+  AnsiOn := True; {process ansi locally, ddplus variable}
+
+  // Get filename
+  if global_ansi then
+  begin
+    Filename := global_textdir + upcasestr(Name) + '.ANS';
+  end else
+  begin
+    Filename := global_textdir + upcasestr(Name) + '.ASC';
+  end;
+
+  // Read file line by line
+  Assign(F, Filename);
+  {$I-}Reset(F);{$I+}
+  if (IOResult = 0) then
+  begin
+    while true do
+    begin
+      ReadLn(F, S);
+      SWrite(S);
+      if (EOF(F)) then Break;
+      Crlf;
+    end; {while .end.}
+
+    {close textfile}
+    Close(F);
+
+    DisplayTextFile := True;
+  end else
+  begin
+    {error accessing resource file}
+    unable_to_access(Filename, access_error);
+  end;
+
+  // Force resetting the foreground colour
+  current_foreground := config.textcolor + 1;
+  set_foreground(config.textcolor);
+
+  {restore ansi variable}
+  AnsiOn := AnsiSave;
+end; {DisplayTextFile *end*}
+
 
 procedure Show_Usurper_Data(const Name: string; pausing: boolean);
 {show ansi/text/data from the usurper resource file}

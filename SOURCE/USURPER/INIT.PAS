@@ -141,6 +141,7 @@ const
   global_docsdir        = 'DOCS' + DIRECTORY_SEPARATOR;   {Path to DOCS directory}
   global_nodedir        = 'NODE' + DIRECTORY_SEPARATOR;   {Path to NODE directory}
   global_scoredir       = 'SCORES' + DIRECTORY_SEPARATOR; {Path to SCORE and NEWS directory}
+  global_textdir        = 'TEXT' + DIRECTORY_SEPARATOR;   {Path to TEXT directory}
 
   {Files and their Paths}
   global_ucfg           = 'USURPER.CFG'; {Usurper configuration file}

@@ -54,6 +54,10 @@ const
   offset1 = 21;
   offset2 = 25;
 begin
+  // Try to display a custom ANSI/ASCII, and exit if we're successful so the
+  // default menu doesn't display
+  if (DisplayTextFile('MAINMENU')) then Exit;
+
   d(5, 'Main street of ' + ulcyan + town_name + config.textcol1);
   crlf;
 
