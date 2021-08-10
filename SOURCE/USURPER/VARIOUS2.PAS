@@ -3607,6 +3607,7 @@ begin
 
   my_pause;
 
+{$IFDEF MSDOS}
   wrl(tc, '');
   wr(tc, '"'); wr(hc, '/E');
   wrl(tc, '" Expanded Memory Specification If your machine has over one');
@@ -3631,6 +3632,7 @@ begin
   wrl(tc, '  You can''t use both /E and /X together.');
 
   my_pause;
+{$ENDIF}
 
   wrl(tc, '');
   wr(tc, '"'); wr(hc, '/L');
@@ -3676,14 +3678,23 @@ begin
   wrl(tc, '" This flags the program that a network is present even');
   wrl(tc, '  though no multitaskers are detected.  This is useful if the door is');
   wrl(tc, '  run on a network such as Novell that doesn''t use multitaskers.');
-  wrl(tc, '');
 
-  wr(tc, '"'); wr(hc, '/FMAINT');
+{$IFNDEF MSDOS}
+  wrl(tc, '');
+  wr(tc, '"'); wr(hc, '/X');
+  wrl(tc, '" This command will tell USURPER not to read/write from the');
+  wrl(tc, '  selected communications channel (ie don''t read/write from the');
+  wrl(tc, '  FOSSIL).  It was added to support Mystic on Linux, which automatically');
+  wrl(tc, '  redirects local I/O, and so socket I/O must be disabled to avoid');
+  wrl(tc, '  garbled screens.');
+{$ENDIF}
+my_pause;
+
+  wrl(tc, '"'); wr(hc, '/FMAINT');
   wrl(tc, '" This command is only useful if you have disabled the');
   wrl(tc, '  automatic maintenance. /FMAINT will only start maintenance');
   wrl(tc, '  if it is necessary. It will not run maintenance more than');
   wrl(tc, '  once a day.');
-  my_pause;
 
   wrl(tc, '');
   wr(tc, '"'); wr(hc, '/HMAINT');
