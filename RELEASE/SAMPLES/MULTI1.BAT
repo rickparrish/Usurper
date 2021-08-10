@@ -19,5 +19,5 @@ REM
 
 
 CD\BBS\DOORS\USURPER
-Usurper /N%1 /P:C:\BBS\NODE%1
+Usurper /N%1 /PC:\BBS\NODE%1
 CD\BBS\NODE%1
