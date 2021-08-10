@@ -1,0 +1,1490 @@
+( History of Usurper )
+
+
+
+----------------------------
+Version 0.20e  (08/31/2009)
+---------------------------- 
+Fixed
+-Items can no longer be taken from characters at Beggars Wall (BigTrucker, Collins)
+-NPC Rulers will not let themselves be hired/bribed to teams. (several)
+-Made it more expensive to Bribe/recruite NCP characters to teams (papa zito)
+-Intimate sessions made quicker (now with a pause..) (several)
+-trying a new delay routine. experimental.
+
+New
++Source code for Usurper has been released. The project has been released under the GNU GPL (General Public License v2).
+  the source code is located in 'Source20e.zip'.
++Lovers Corner and Home have moved to Main Street (reapern)
++Items can be stored at home (applies to Usurper running in NEW mode). See the new Editor option #197 (Biohazard)
++Items stored at home can be stolen (from dark deeds location). This can be configured/disabled in the editor.
++changed some of the NPC team names.
++added a new editor option (#198). Set the number of Bank Robbery attempts a player have each day. (Mangobob)
+
+
+----------------------------
+Version 0.20d  (09/13/2004)
+---------------------------- 
+Fixed
+-moved code into overlay to reduce size of usurper.exe
+
+
+New
++nothing
+
+
+----------------------------
+Version 0.20c  (09/12/2004)
+---------------------------- 
+Fixed
+-a problem with overflow in the Royal Treasury has been fixed (Lenny).
+-a overflow problem with player purse and bank account has been fixed (Lenny). 
+-gender confusion (Joseph)
+-speeded up the beer drinking competition (Syjefroi)
+-fixed a broken disease resistance check. the NPCS cheated.. (Collins)
+-fixed a problem with kidnapped children being sent to the Royal Orphanage (Collins)
+-fixed a problem with gang fights between active and wiped out teams (Lenny)
+
+New
++changed hitpoints reward for supreme being (final fight)
+
+
+----------------------------
+Version 0.20b  (08/26/2004)
+---------------------------- 
+Fixed
+-problem with sending unlimited numbers of Drinks to other Human players has been corrected.
+ (if a player is sent a free drink he must have drink attempts left before he can accept and consume the bewerage).
+-gnoll poison bite has been improved (it will occur more frequently).
+-tried to fix online trading (and duels), by adding a delay.
+
+New
++cost for creating drinks has increased slightly.
++NPC Kings (and Queens) are now ruling their Kingdom during maintenance. The goal is that they should
+ be able to do everything a player can do. However, right now NPC rulers only modify taxes and initiate Quests.
++changed phrases/sentences on a few places.
++It is now possible to send children to the Royal Orphanage when you are married (you need custody though).
+ NPC spouses may divorce players on the spot for this action (the risk/chance for divorce is high). 
++npc relation changes are published in the news-paper more often. Maybe this will be annoying, we will see. 
++new editor option #196. Name of Royal Quest-Master.
+
+----------------------------
+Version 0.20a  (08/22/2004)
+---------------------------- 
+Fixed
+-various fixes.
+-Pick-Pocket attempts can be controlled by the admin (see new stuff).
+-changed the way Buy-Another-Player-A-Drink works. Now the drink purchased counts against the person having the drink. (Lenny)
+
+New
++added a new editor option (#195). Set the number of pick pocket attempts a player have each day. (Lenny)
+
+
+
+----------------------------
+Version 0.19 *Public Test 6* (02/23/2003)
+---------------------------- 
+Fixed Stuff:
+-getting a massage with "White Oil" could reduce the number of your healing potins. (jxl)
+-a bug gave the npcs opportunity to fight the king even when losing to the royal guard. (rkl)
+-increased NPC couples chances of producing babies.
+-corrected a major bug which killed the opportunity for children to be born.
+New Stuff:
++changed the maintenance routine so users will see maintenance progress. hopefully this will work since I can't test it myself.
+
+
+----------------------------
+Version 0.19 *Public Test 5* (02/21/2003)
+---------------------------- 
+Fixed Stuff:
+-fixed a bug where the Gods daily deeds aren't updated on a daily basis. (several)
+-fixed a bunch of spelling errors. (Daniel Z)
+
+New Stuff:
++increased chances of pregnancy after intimacy acts.
++changed the way buying drinks at Orbs work. Buying drinks for others now counts as buying a drink for yourself.
+
+----------------------------
+Version 0.19 *Public Test 4* (02/16/2003)
+---------------------------- 
+FIXED STUFF:
+-fixed a bug which could make an offline player surrender to an inferior or dead opponent. (01, Josh and others)
+-fixed a bug where you could sacrifice an unlimited number of items. (testoverride,tempest)
+-fixed an exploit where you could send an unlimited amount of drinks to someone. (pillhead)
+-the editor now displays 0.19. Changed a few help texts in the configuration options.
+-results of sending flowers to npcs now goes into to the News.
+-fixed a bunch of spelling errors. (JP, Daniel Z)
+
+NEW STUFF:
++added a new editor option (#194). Here You can disallow/allow Adult Options.
++added some missing #editor options to 'Game Settings'.
++added a check for overdue players in ONLINERS.DAT when somebody press 'P'lay
++thanks to Daniel Z for providing an updated Sysop.doc and Usurper.doc where a lot of spelling errors have been corrected. I also updated the doc in regards to registration and download info.
+
+----------------------------
+Version 0.19 *Public Test 3* (01/27/2003)
+---------------------------- 
+FIXED STUFF:
+-fixed a bug when becoming GOD and both Mortals & Immortals are allowed. (tempest)
+
+----------------------------
+Version 0.19 *Public Test 2* (01/26/2003)
+---------------------------- 
+FIXED STUFF:
+-fixed a bug when becoming GOD. Username was not set correctly. (several)
+-fixed a spelling error when stealing beer barrels. (JP)
+-fixed a spelling error in the Castle (BiOHAZARD)
+-fixed a lot of stuff when giving alms at the Beggars Wall. (reapern66)
+-fixed heap overflow for Tug-Of-War. (reapern66)
+
+NEW STUFF:
++giving alms at the beggars wall may improve the relation with the receiver.
++added news events for a bunch of good deeds.
++radically increased the NPC experience share / day. Let's see how this works out.
+
+
+----------------------------
+Version 0.19 *Public Test 1* (01/23/2003)
+---------------------------- 
+FIXED STUFF:
+-fixed a bug where gods couldn't enter the game properly. (Aric)
+-fixed a bug where Intimacy Acts weren't updated when doing the act at home. (tempest)
+-speeded up the npc relations maintenance run. (this was actually done in the previous releases)
+-fixed a bug in the Magic Shoppe where lack of money to buy healing potions would result in a faulty message. (nat love)
+-fixed a spelling error when taking equipment from a foe. (01)
+
+----------------------------
+Version 0.18 *Official Release* (01/21/2003)
+---------------------------- 
+FIXED STUFF:
+-fixed a bug where kidnapped children were not displayed when you tried to manage them. (JP)
+-fixed spelling errors in the Gym. Lifting Beer Barrels. (BiOHAZARD)
+-added pause to procedure when finishing a quest. (reapern66)
+-changed the royal tax procedure. Citizens no longer gets taxed when the Royal Treasury is full. (lenny)
+-added info for the players attempting the dumb-bell practice. (lot of complaints on why this wasn't working)
+
+NEW STUFF:
++This is the official Release of Usurper 0.18. Prepare for more things to come in 0.19
++made it possible to see your ransom demanded for kidnapped children.
++added the names of a bunch people contributing to the beta-testing / suggestions for 0.18 to betateam.doc. If someone has been forgotten please let me know.
+
+----------------------------
+Version 0.18 *Public Test 8* (01/19/2003)
+---------------------------- 
+FIXED STUFF:
+-removed randomness for when babies are due. Instead I added option #193 where you can set labor days. (lenny)
+-fixed bug which caused the game to crash in gang fights. (several)
+-fixed bug in the gym when competing in Tug-Of-War
+-changed logic for NPCs entering messages in the daily chat-file. (JP)
+-removed the slowness introduced in the previous version.
+
+----------------------------
+Version 0.18 *Public Test 7* (01/15/2003)
+---------------------------- 
+FIXED STUFF:
+-fixed a problem with infiltrating Kings Castle. Messages no longer flashes by without chance to see what it reads. (Ratajczak).
+-fixed a game exit problem in the gym. (aric)
+-reduced size of usurper.exe and made some memory adjustments.
+-fixed problem were user stats were not updated when player picks 'L'ist of Character from the main menu (lenny)
+-fixed some cosmetic stuff. ugly colors etc. Added NPC/offline players comments to some situations.
+
+NEW STUFF:
++added "Resurrections left" to the player status screen. (several)
++added option (#192). You can set if a player should be able to have both immortal and mortal characters
+ or not. (aric)
++added default action to Dungeons. Pressing 'Enter' now equals pressing 'A'. Makes it easier to attack. (BiOHAZARD)
++added options to select gender when you approach somebody at the love corner. This can be useful if you 
+for example only are interested in girls (BiOHAZARD).
+
+
+----------------------------
+Version 0.18 *Public Test 6* (01/09/2003)
+---------------------------- 
+(if you are upgrading from a 0.18 version then you MUST run the converter 'GIVME6.EXE' first!)
+FIXED STUFF:
+-fixed problem a when the Gym is Free to take over. Message no longer flashes by without chance to see
+what it reads.(lenny *mighty*)
+-found and removed 1 cause to the 'onliners.dat' problem. (a bunch of people)
+-Added protection for 'onliners.dat' growing out of proportion. (a bunch of people)
+-added a a pause to the haggling functions, to aoid "scroll of death" problem. (Nohr)
+NEW STUFF:
++added option (#191). You can set how many resurrections a player can have each day. (BiOHAZARD)
+
+
+----------------------------
+Version 0.18 *Public Test 5* (01/06/2003)
+---------------------------- 
+FIXED STUFF:
+-fixed bug in where you wouldn't be disconnected for inactivity. (phillip)
+-fixed a bug where players would be paused at game entrance, without information. (phillip)
+-made a first attempt to eliminate the 'onliners.dat' file becoming extremely large. (*-*)
+-fixed a bug where the game would crash when Stealing Beer Barrels. (sect0r & aric)
+NEW STUFF:
++added a child list option to the nursery. (jake)
++players may now go to sleep in their home. (lenny *mighty*)
++added a gender mark (F/M) when approacing somebody at the Love Corner. (aric & sect0r)
++added option to set number of Intimacy acts per day. Editor option #189. (aric)
++added option to allow/disallow homo/bi marriages. Editor option #190. (aric)
+
+
+----------------------------
+Version 0.18 *Public Test 4* (01/06/2003)
+----------------------------
+FIXED STUFF:
+-fixed bug where a team which takes the Gym without opposition does not get to see information. Scrolled away.
+-fixed bug in tug-of-war where usurper would crash when inviting other team. (aric)
+-removed unnecessary (x) menu option in 'love history. (aric)
+-fixed typos. (aric)
+-fixed typos at the close-combat trainer. (biohazard)
+-fixed bug where editor option #173 would display incorrectly in 'game settings'. (aric)
+NEW STUFF:
++added option to toggle ghost players node activity ON/OFF. Editor option #188. (biohazard)
+
+
+
+----------------------------
+Version 0.18 *Public Test 3* (01/05/2003) - Stockholm
+----------------------------
+FIXED STUFF:
+-fixed a problem with the default configuration options not being written when resetting the game
+-renamed usurper.cfg in the distribution package to to prevent overwriting accidents.
+
+
+----------------------------
+Version 0.18 *Public Test 2* (01/05/2003) - Stockholm
+----------------------------
+FIXED STUFF:
+-fixed problem with conversion/upgrade program
+-fixed bug with fighting the last monster. In effect this made it impossible to become immortal.
+
+----------------------------
+Version 0.18 *Public Test 1* (01/04/2003) - Stockholm
+----------------------------
+FIXED STUFF:
+-fixed problems with negative money.
+-fixed a problem with slow game-play in the Dormitory.
+-player list now tags players who are online.
+-fixed problem with slow score writing.
+-fixed two problems in the Uman Caves; Indian Wrestling and
+ the "tame the bear" routine gave players endless opportunities. 
+-fixed a bug where online trading could provide more than max
+ healing potions (thanks Saint Heaven!)
+-fixed a bug where teammates didn't follow their attack orders in the
+ dungeons. 
+-fixed a bug where offline teammates lost money when buying potions in the
+ dungeons (sorry about this one! I know it caused people to commit suicide).
+-fixed a bug in the ansi color routines.
+-players stealing beer barrels using the wooden club weren't credited with
+ experience points for knocking out dogs and sons. fixed.
+-fixed bugs when casting spells in the dungeons. Duplicates and Demons
+ now fight to the bitter end, as well as picking their targets correctly.
+-when a player joined a team all nodes would get a "X joined your team!"
+ message. fixed.
+-maintenance semaphore file is automatically deleted should anything go wrong.
+-fixed the inn chatfile. the .asc file was in fact displayed with ansi codes.
+-computer characters who are victims of pick-pocketing are now updated
+ correctly.
+-thanks to Donato Sotero Navarro for straightening some misspelling.
+-fixed a bug in the player sorting routines.
+-mana is only displayed to spell users.
+-npcs were untouchable when they stayed at Beggars Wall. not anymore.
+-the editor and 'reset monsters' procedure had a bug which caused the
+ data-file not to be initialized properly (WIN NT). fixed.
+-alchemist poison wasn't displayed correctly on the status screen. fixed.
+-the drink list at Orbs couldn't be (a)borted. fixed.
+-old drinks were not removed at Orbs. fixed.
+-quests display had a small cosmetic problem. fixed. 
+-removed the annoying encounters with the monk. he is still there though.
+-user dropping carried during maint caused the program to abort. fixed.
+-when fighting in the dungeons, summoned creatures could regenerate
+ themselves and thus causing certain death to players involved. changed
+ this so magic generated monsters not can summon others.
+-the king was unable to release imprisoned players who were online. fixed.
+-royal guards can no longer infiltrate the castle.
+-taking drugs and then leaving the drug palace would cause the player to
+ be reported dead/drugged. fixed.
+-usurper now processes more than one command line option.
+-usurper will not break in the year 2000.
+
+NEW STUFF:
++immortals can make statements to the mortal world.
++made it easier to upgrade usurper. the convert.exe program will update the
+ usurper.cfg as well as the data files. you only have to answer a few
+ questions to get going with the new version.
++sysops can set an inactivity limit, after which players are booted from
+ the game (default is 15 minutes).
++if the sysop allows it, players may view game settings from the pre-entry
+ usurper menu.
++computer players will (if allowed) attempt to usurp the Crown. The NPCs are
+ restricted in the same way normal players are. In addition the NPCs will
+ not attack Royals with whom the have a good relation.
++added escape attempts from prison. it is now possible to escape without help
+ from the outside. see editor option 176.
+ Immortals may help their disciples escape.
++changed the newsfiles settings. If you leave the path for any newsfile
+ blank, then no file will be created.
++races and classes: the mutant are immune to evil acts from immortals.
+ half-elves can hypnotize their opponents (special ability). 
++changed the team attack order option "attack strongest" in the Dungeons.
+ your team mates will attack the most powerful monster. In 0.17 they
+ attacked the monster with the most hitpoints (thanks Dark Wanderer)
++support for extended (screen) line modes (full screen at last!)
++the names of the shop-keepers at the steroid and drug places can be
+ edited.
++added a bunch of ansi to the game! thanks to ALM­GHTy the artist!
++all documenation and textfiles are now located in the USURPER\DOCS directory.
++the usurper overlay file can now be placed onto a ramdrive to increase
+ performance. see sysop.doc for details.
++see editor options #167, #168, #169, #170, #171 for changing name of
+ Bobs Beer, Bob, Ted the Bartender and the Bishop.
++added more information generated to off-line players involved in fighting
+ in the dungeons. They will now get reports on how they deal(t) with new
+ equipment.
++sysops can now change the type of money the game will use. "Gold" is the
+ default currency, but you can have "silver" instead, if you like.
++added team commands to the dungeons, when you not are fighting.
++reinstated the option to have fake players enter the game (see editor
+ option #159).
++Sysops may change the name of the bartenders at Orbs (see editor option #165)
++taking defeated players gold is now optional.
++Editor option #53 has been made more flexible. Now you can specify if victors
+ in player fights should be able to take both hand items, only one or if
+ it should be randomized. (thanks to Stephen Warren for the suggestion!)
++backstabbing is more effective!
++you can now view drink ingredients in the drink editor.
++editor option #125 now sets the number of days a player-made drink will
+ stay in the database based on when it was ordered the last time.
++added a new ranking list; top 50 child producers.
++new option at the team-corner; (a)pply for membership.
++added first-hand information to items being found and to those already in
+ the inventory.
++added a search function when ordering/selecting drinks at Orbs.
++replaced the "Soft" option (#12). New editor options can set access for
+ different shops instead.
++new place; The Gym. A team can own this place and make it a private club.
+ If you want to take control of The Gym you must be in a team and
+ prepare to fist-fight your way to ownership. You do this by calling out the
+ team in control. In The Gym players can work out, have massage, compete in
+ weight-lifting, lift beer barrels and flex their muscle. The crew in
+ control can distribute free membership cards and also revoke the ones
+ they feel are out of date.
++new editor option #166. Set minimum age to marry. Note that NPCs are also
+ affected by this setting.
++made the moat creature "lake monster" a bit tougher.
++team members are now informed when their team-mates are sacked.
++when raising a level, a player can now go beyond 1k in mana and strength.
++players can marry and have children. They can set up relationships with
+ other players/npcs in the game. Children grow up and become orphants.
+ Children can *play* with other children or *beat* the heck out of them!
+ Abandon children may even be adopted.
++new dark deed available; poison children. If you don't like a player then
+ the act of poisoning his children may prove a way to get to him. Failure,
+ however, will not make Satan happy.
++new dark deed available; kidnap children. Rob other players of their
+ precious offspring. Fail and you will be jailed or worse.
++added a "most popular drinks" list to Orbs bar.
++made it easier(read:default) to buy potions from the Monk in the dungeons.
++sysops can now set the maxmimum # of quests a player can complete / day.
++new place; the Temple area. Here players do their praying, desecrating and
+ other god-related actions. You can of course worship immortals/gods here.
++bribe attempts in the recruiting area are now reported to team members.
++the monarch has new Special Tax Options. 
++sysops may now decide if the King should be resurrected when the
+ castle is infiltrated. Default is YES (editor option 149).
++the monarchs popularity can be checked in regular polls (optional).
++sysops can now set max wrestlings matchs a player may attempt / day in
+ the Uman Cave (editor option 150).
++sysops can remove the Kings authority over the shops. (editor option 151)
++added possibility to view/edit the "phrases" from the player/npc editor.
++the gamer can now punish players who drop carrier in fights and when
+ taking drugs (editor option 152)
++players are now prompted to to give their view on the ruler. this is done
+ every 3rd week, or when a new ruler has been installed.
++the numeric input system now accepts hotkeys, like the system in BRE and
+ SRE ('>' to maximize input, 'M' for million and 'K' for thousand).
+ (new players are automatically introduced to this concept)
++npcs teammates become more loyal when you send money to them.
+ (this is extremely important since relations now play a part in the game).
++players can now send drinks to each other from Orbs bar. You can also buy
+ Npcs a drink if you want.
++spell users can use the wishing well to increase their capacity.
++imprisoned players may now enter/check mail.
++new royal option. castle->orders->proclamation. used by the King to inform
+ his subjects of reforms or changes in the Realm.
++players can turn on/off the "auto_hate" flag. when ON you will auto-
+ matically start to dislike persons who treat you badly (attack/steal).
++Players may become immortal after they have accomplished their final
+ deed on earth. Immortals don't become gods at once. They have a career
+ ladder to climb, with a lot of work needed to become the most worshipped
+ one. See section on Immortals in Usurper.doc for more information.
++Relations. Some of the players actions will render automatic shift
+ in attitude and behavior from the character subjected to them.
+ NPCs remember all the wicked deeds they have been exposed to,
+ and will act upon them. On the other hand, prosperous relations may
+ result in marriage and babies. You can have fun and destroy others relations
+ too. See section on Relations in Usurper.doc for more information.
++The King has the authority to dissolve or ban marriages
+ (location: castle=>orders=>matrimonial decisions).
++The King has even greater power now with his control over the Royal
+ Orphanage. This is the place where the poor children are placed, whos
+ parents no longer can afford (or want) them. The more children in the
+ orphanage the more gold the King has to cough up. An evil ruler may even
+ decide to put the unwanted kids to the wolves.
+ An ultimately wrong-doing Monarch may even force Your kids to the orphanage
+ for no good reason.
++new dungeon events; "witch doctor", "glue"
++NPCS can usurp the throne (editor option 182). 
++children may be adopted (when both parents are dead)
++royal offspring get special treatment.
++added tug-of-war competition to the Gym. This could prove to be a fun event.
+ Players invite players/npcs or make it a random bout. It's all about
+ two teams pulling their end of a rope. The most tactical (strongest) team win.
++added a spinning cursor to various events where you have to wait for stuff.
++added a routine which removes players who are falsely reported online.
+ (usurper will remove players when their time limit have been exceeded).
++added a new option to the player/npc editor: edit the "time left today"
+ variable. you may set this to anything between 0 - 999 minutes.
+ (remember that if you set this variable to "0" player will not
+  be able to enter more this day)
+
+--------------------------
+Version 0.17 (1996-09-15) 
+--------------------------
+-fixed a problem with spell results not being displayed.
+-a bug caused the Royal Purse to be emptied.
+-a bug caused the Moat creatures to be added without having to pay for them.
+-a bug caused the program to crash if there were more than 17 moat creatures.
+-a bug prevented the King to use the Dark Avenger.
+-fixed a bug causing the player to get booted out when donating too much
+ money to the church or the poor.
+-fixed a bug in the message editor.
+-the "quaffing potions" options were not working as they should. now they do.
+-made the file routines more secure.
+-a problem in the gang war routine was fixed.
+-fixed a problem with an "endless loop" when using items in the dungeons.
+-npcs no longer participate in brawls at the dormitory, when editor option 39
+ is set to NO.
+-fixed a bug in the Haggle routines. Now it's possible to do some serious
+ haggling. Also, when you cross the line in the terms of haggling you are
+ banned from the store for the rest of the day.
+-the king/queen never got the equipment from defeated infiltrators. fixed.
+-removed the bug which enabled the King to hire the same npc guard more than
+ once.
+-the chatfile wasn't packed correctly. fixed.
+-some adjustments made to the Inn environment.
+-color fixes.
++would you like to be informed on every new release of Usurper by e-mail?
+ (search the document sysop.doc for info on how to subscribe).
++new editor option #96: set this to YES and players attacked in the Dorm
+ sometimes will be aided by their teammates. To save your partner from
+ attacks you must stay at the Dorm yourself.
++players may now attempt to free their friends from Prison.
++the king can now issue missions for the players to undertake.
++the king may now imprison players for more than 1 day (this is set from
+ the editor)
++made it a bit easier to murder people in the Dorm. Murdered people are also
+ reported dead (this was not handled correctly before).
++added chat rooms to the Inn. Multi-node chats are activated here.
++added a "drink" editor to the EDITOR.EXE.
++added a "moat creatures" editor to the EDITOR.EXE
++it is now possible to choose one of two different units in Usurpers
+ filehandling system. Choose either file-locking or Record-locking.
+ File-locking is slower but safer. Record-locking is faster but wont work
+ on all operating systems.
++new command line option : /DO_SENDMAIL, send mail to any player without
+ having to enter the game.
++it is now possible to change the colors in Usurper. see editor options
+ #140-147
+
+
+--------------------------
+Version 0.16 (1996-07-20) 
+--------------------------
+-news/mail color fixes all over the place.
+-colors have been standardized throughout the game.
+-fixed bug when attacking people att the Inn. Doorguards are now properly
+ reduced when attacked and attacking player gets to meet the right opponent
+ instead of Grimbold. Also fixed a bug where player didn't have to pay for
+ his room if he also hired door guards. 
+-improved file routines so semaphore files are updated correctly.
+-fixed bug in online battle, where a player could hang up and thereafter
+ log on and save his equipment.
+-fixed bug at Level masters. Crystal Ball function would bug out when used
+ on high level characters. Not anymore.
+-fixed bug which caused usurper to lock when player entered beer drinking
+ competition and no opponents were available.
+-new option at Bobs Beer. A player may now challenge any player(s) to the
+ beer competition. The reward for winning a beer contest has increased.
+ Offline winners are now given their prize and also notified by mail.
+-new option at the dormitory; pick-pocket sleeping guest.
+-new option at the dormitory; make a noise, and intimidate the guests.
+ (usually ends up in a BIG fistfight)
+-new drink option at Orbs. Players can now add their own special cocktails
+ to the standard drink-menu. Others may try them out and be happy or sad.
+-fixed gender bug in the editor (caused females to become males in a hurry).
+-fixed dark/good deeds slots in the editor. they were mixed up.
+-fixed bugs relating to creating scores. The game would crash if the players
+ and npcs were more than maxplayers allowed. This has been fixed. also
+ increased the maximum number of players to 400.  
+-fixed bug at the inn, where the number of player fights wasn't reduced after
+ a fight. 
+-the /X (XMS) and /E (EMS) switches are working (again).
+-changed the statusbar, so both alias and username are displayed.
+-changed fighting for Town Control, so when you challenge a team in which
+ everybody is dead you get Town Control directly.
+-added more information when checking listings in Bounty Room.
+-made the monster spells a bit less powerful. (see also >monstereditor>global
+ commands. also fixed the bug where the monster had all spells, even if
+ you disabled them through the editor.
+-made the npcs harder to bribe in the recruiting room.
+-players can no longer run away from battles when on a mission.
+-added a (very small) trouble shooting section to the Sysop.doc file.
+-speeded up the "insulted" fights when visiting bobs beer.
+-replaced the delay routine, so it wont slow down multinode systems.
+ (hint hint Oscar!)
+-misc dungeon bugs found and removed.
+-new command line option : /DO_PACKMAIL (packs the mail file)(see sysop.doc).
+-new command line option : /DO_PACKUSERS (packs the user file)(see sysop.doc).
+-new command line option : /DO_PACKNPCS (pack the npc file)(see sysop.doc)
+-new command line option : ? (displays all command line options)
+-KING/QUEEN functions implemented, hereby making it possible for users and
+ NPCs to attempt to usurp the throne. the king has a pretty good control over
+ the Usurper world; he can make life miserable for the other players. The
+ King (or Queen) may have his own Personal Guard Force and can also imprison
+ citizens and even stage executions. But on the other hand the King might just
+ be the good ruler who is loved by his people (not likely though, regarding the
+ moral status of the general Usurper gamer) (see usurper.doc for more info).
+-The comings and goings of the Royal People are logged in \SCORES\MONARCHS.ANS
+ and \SCORES\MONARCHS.ASC. Assassinations, deaths, suicides, abdications and
+ marriages are the standard news in this log.
+-if config option #121 is set to 0 then nobody can attempt to usurp the
+ throne (the royal title can be locked this way).
+-new config option #122; decides whether throne pretenders must be good, bad
+ or if any airhead may rule the land.
+-new config option #123; decides whether NPCs should be marked with a '*' in
+ the lists, thereby making them harder to distinguish from the users.
+-new config option #125; sets how many days cocktails should be kept at Orbs.
+-new config option #126; sets how many cocktails recipes should be kept at Orbs.
+-new config option #127; how should pick-pockets at the dorm be treated.
+-new config option #128; how should trouble-makers at the dorm be treated.
+-fixed bug when intro-display was off and maintenance was running on other
+ node.
+-time limit option in config option #87 has been removed. To limit sessions
+ use ddsetup and option 10 (time limit).
+-added more inter-node sessions.
+-fixed gender bug in the editor. also fixed a bug where deleted players
+ weren't handled correctly.
+-bounty list is now updated, so deleted players are removed here to.
+-fixed bug in the editor; runtime error caused when searching for
+ weapon/armor and choosing CANCEL (only in classic mode).
+-fixed online fight bug.
+-all inter-node files are now placed in \NODE directory, if nothing else is
+ specified (including onliners.dat and maint.flg).
+-optimized many routines for speed.
+
+--------------------------
+Version 0.15 (1996-03-17) 
+--------------------------
+-Removed unnecessary disc-access overhead when fighting in dungeons.
+ (especially slow was the performance when fighting monsters with spells)
+-Fixed nasty bug where config option #11 (no intro displayed) caused
+ the program to hang.
+-using /X and /E switches caused Usurper to exit with a runtime error when
+ writing scores. fixed.
+-fixed some small bugs in the editor. also improved the online help.
+-the semaphore files are placed in the DATA\ directory, if no path is specified
+ in the configuration. The docs were misleading about this. 
+-new FTP and WW sites (see support.doc). =Thanx Z™ BBS and Oscar Olsson!=
+-removed usurper.cfg and usurper.ctl from the archive. they only served the
+ purpose of making people angry when their old config files were overwritten.
+-added support for replacement of BAD WORDS in strings. It is basically the
+ same setup as in LORD. Usurper looks for DATA\BADWORDS.DAT file. See
+ Sysop.doc for details. Sample file can be found in SAMPLES.ZIP
+-improved file i/o error checking to all files used in the game.
+-fixed as many spelling errors I could find. They are everywhere! 
+-some cosmetic changes here and there (the armor/weaponshop display bug).
+
+
+--------------------------
+Version 0.14 (1996-03-01) 
+--------------------------
+*reduced memory requirements along with a lot of other internal changes.
+*the editor has been rewritten, now with mouse support, buttons and a more
+ user-friendly look.
+*fixed a number spell related bugs. also added spell descriptions in
+ the game. also replaced some with new ones. spell users may now view a
+ complete list of the spells, included the ones they don't have learned
+ yet.
+*player can now choose if he wants to raise one or all levels, if
+ this should be the case.
+*healing potions can now be taken from the status screen.
+*the status scrren now displays how far to got to next level.
+*some spells are now affecting groups of monsters instead of just
+ only one. 
+*items can be made class restricted.
+*messages to other teams can now be sent (did not work before).
+*monsters can now use spells. they have access to their own spell-book.
+ depending on their magic level, their spells grow stronger.
+ monster spells can be added/removed/edited from the editor.
+*updated the documentation with spell tables and more detailed info on
+ races and classes.
+*the converter proggie will move all datafiles to /DATA. And some files to
+ the /SCORES directory. Why? Because the .DAT files are getting too many.
+*NPCs can now be bribed more easily.
+*Ugly Joe is now running the Player Market.
+*new option in weapon store : buy the best weapon for the money you have.
+*removed 'best overall character' rating.
+*players can now end up in prison, after having commited vicious deeds.
+ players may also choose to fight the guards instead of automatically
+ go to prison (thanks to Gregory Powers for the suggestions!). 
+*added more variation to the dungeons. Numerous of events now take
+ place and force the player to make decisions (hopefully bad ones).
+ moral-based decisions are common here.
+ Examples:
+ +Bandit gangs that will blackmail/ransom weak players.
+ +Players will be asked to either help people with problems or take
+  advantage of their situation (rape a girl or rescue her).
+
+*Groggo can now cast spells on NPC characters to.
+ Improved disease resistance. Players have a greater chance of
+ escaping disease spells now.
+*Bad drinking experiences at Orbs no longer result in ZERO dark deeds.
+*npcs will no longer pick up cursed items.
+*party leaders can now take their team members to the level master and
+ raise their levels. 
+*added a more realistic touch when entering the game. If you go to sleep
+ in the dormitory, then you will wake up in the dormitory. The King can
+ go to sleep and wake up in the Castle. Prisoners will wake up in the
+ prison dungeon, where they may attempt an escape.  
+ npcs now handle their equipment in a more intelligent manner.
+ They compare new items with the ones already in use and the stuff in
+ their inventory. If inventory is full they toss away the worthless stuff
+ first.
+*status screen was not updated correctly. fixed.
+*Requested by many: NEW EDITOR OPTIONS 101-115.
+ If playing in NEW mode these options let you tailor the availability
+ of different armor/item groups. For example; leg,feet,arm and head
+ armors can be toggled off. These items would no longer be available
+ in the shops/dungeons or possible for players/npcs to use. 
+ The settings can be altered anytime, and does not require
+ a reset. 
+*Editor option #116 is new. It sets the number of days to keep Wanted
+ Posters (default is 30).
+*Editor options #117 - #120 define news and yesterday newsfiles (ansi+ascii).
+*Editor option #121 is new. It sets the minimum player level required to
+ usurp the throne (Usurp=to grab the throne by force).
+*Editor option #4 has changed. It now sets the number of days to keep
+ player mail (default is 8).
+*Editor option #3 has changed. It now sets the number of days to keep
+ items in the Player Market (default is 20).
+*the file \DATA\TNAMES.DATA contains a list of names used by the NPCs
+ when creating their teams. The names can be edited with a text-editor.
+
+--------------------------
+Version 0.13c (1995-08-20)
+--------------------------
+*multi2.bat file included, to help PcBoard sysops getting Usurper running.
+*NEWS.DAT has been replaced with NEWS.ANS and NEWS.ASC file. The same goes
+ for YNEWS.DAT.
+*ansi is now more widely used in both newsfiles and personal mail files.
+*added some social stuff to the internode situations.  
+*Usurper homepage available on the WWW. Address in sysop.doc
+
+Version 0.13b (1995-07-29)
+*Fixed the problems with people hanging up still being reported online.
+*Fixed the problem with denied access on the Editor.
+*Updated doordriver routines ; better support for OS/2.
+ Sysops should check the SAMPLE.CTL file. There has been some changes
+ in regards to supported dropfiles and digiboard support. You might have
+ to edit your USURP.CTL file(s) ;
+ PcBoard 12 and Callinfo dropfiles are no longer supported.
+*Added auto-equip function in Armorshop. The shopowner can provide help
+ for players who want to get the optimum equipment for they cash they hold.
+*Added wordwrapping functions.
+*Jump to Dos function is now called by pressing F5 (sysops only of course:).
+*Changed the attack formula.
+*Magician SLEEP spell lasts a bit longer (in fact, it can last very long).  
+*Reduced harm effect on most of the spells. Also made them a bit more 
+ randomized in effect.
+*improved npcs ai, their use of items in the inventory etc. 
+*fixed bug where bounty lists could display diseased, non existant players.
+*fixed bug where most wanted list displayed wrong player levels.
+*fixed bug which displayed wrong team in town holders hall of fame.
+*fixed the bug where you could get extreme xp for robbing the bank.
+*fixed bug which caused items in players market to be removed after 1 day.
+*fixed the bug where the system would freeze after buying too many
+ items in Alabats store.
+*Config option #51 has changed. It now controls whether a player can login
+ to more than 1 node simultaneously (default is YES).
+*Config option #98 has changed. It now controls how often Usurper should
+ check for internode activity (default is every 5 second).
+*New config option (#100) : Allow teams with only one member to
+ attack other teams? (Default is YES). 
+*Changed the names and added a few armor items.
+*Filelocking routines has changed (speeds up non DOS systems).
+*added a few options to online battles. 
+*added possibility to send stuff to online players (from main street)
+*USTRUCT.PAS file included. Contains pascal structures for Usurper 0.13.
+ Compile and run to see demo. 
+
+-----------------------------------
+
+Version 0.12 (1995-04-18)
+*Recompiled Usurper with doordriver update ;
+  [cut from DDplus 7.0a docs]
+  supporting baud rate for highspeed bnu fossils. Now port speeds of
+  57,600 and 115,200 for both X00 and BNU can be handled by either the
+  FOSSIL or the XFOSSIL options. Once again FOSSIL will initialize the
+  detected fossil to the port speed and XFOSSIL will accept the fossil
+  as-is with no initialization.
+*New editor option (#98). To reduce disc access when using Usurper. 
+ Set this new CHECK OTHER NODES ACTIVITY flag to one of the following values :
+        1 : check often (default). Used in previous versions of Usurper.
+        2 : check sometimes, at certain places in the game.
+        3 : never check (singel node systems may want to use this). 
+*New editor option (#99). If you want Usurper to check other nodes
+ activity and have a RAM drive you can set the drive and path here.
+ Using a RAM drive reduces disk access and speeds up operations. It is
+ warmly recommended.  
+*Corrected serious bug where teamleader didn't recieve any xps for win.
+*Fixed bugs related to the bounty menu. Wanted player levels are now updated.
+ Setting rewards anonymously no longer dipslays any names in the mail.
+*Fixed bug which caused NPCs being displayed both in INN and DORMITORY.
+*Fixed bug when robbing bank.
+*Fixed bug when finding items in dungeons. Gave OBJECT-LOAD ERROR.
+*Added option for user to choose if he wants to quit or wait when maintenance
+ is running on another node.
+*Reduced alchemists poison effect.
+*Teammates hired as bankguards will not attack teammates trying to rob the
+ bank. Also, teammates with chivalry points will refuse to join robberies.
+*Usurper has a NEW support/registration site! :
+  Walter Cade
+
+
+Version 0.11 (1995-03-28)
+*Fixed money bug in bounty room.
+
+Version 0.1 (1995-03-26)
+*Fixed a lot of small errors since th 0.09 version.
+*Usurper is running with a new Doordriver.
+ JPdoor has been replaced with DDplus. Hopefully this will solve
+ a lot of reported problems.
+ IMPORTANT => see README! file for information on how to upgrade. 
+*Corrected. Bug in MOST WANTED list top 15. The thugs involved should now
+ be displayed correctly.
+*Added. Longer messages than 1 line can be entered at the Inn.
+*Fixed. NPC teams maintain their ranks better now. They either recruit
+ new members or dissolve themselves.
+*Fixed. Npcs could hire more than one doorguard, ignoring restrictions
+ defined by Sysop. 
+*Fixed a lot of misspellings.
+*Fixed some cosmetics in the brawl situations. 
+
+Version 0.082 (1995-03-08)
+*you can now send a message to another node by pressing CTRL-Z, from
+ anywhere within the game.
+*added information about every file created by Usurper. See
+ usurper.doc for this.
+*corrected bug when finding items in dungeons.
+*new editor option (#97). Set filelocking on/off.
+*corrected 'staying alive' bonus. It is now only paid to survivers.
+
+Version 0.081 (1995-03-03)
+*corrected the bug which caused players immunity to reset. 
+*made the npcs heal themselves quicker.
+*improved the mail system.
+*corrected a bug in the object editor. The program would bomb if no
+ userfile was found.
+*corrected bug which caused escape from dungeon fight.
+*corrected bug at level master, causing too many level raises. 
+*added a 'search' function to the player/npc editor.
+*improved NPC 'equipment ai'. NPCs now scan their inventories and try
+ to carry the best equipment.
+*teammembers will now buy their own healing potions when they can.
+*added information in the weapon/armor shop. warnings are give to players
+ if they can't use the items they are buying.
+*corrected negative money bug when finding treasure.
+*cleared necessary items being evil & good.
+*bank interest bug corrected.
+
+Version 0.08 (1995-02-19)
+*players han have the menus set to Auto-Display by toggle a switch in
+ their personal configuration. 
+*implemented some new memory routines. systems with expanded memory
+ will notice a significant speed increase when the overlay buffer is placed
+ in the upper memory area. This function is automatically used when
+ there is enough memory available. To see if this option is activated
+ see the 'G'ame environment display.
+*bank bug, deposit on other account, has been corrected.
+*bug in the mad mages place, where you couldn't do anything, has been
+ corrected.
+*added IMPORT and EXPORT fileoptions to the Object Editor. 
+*corrected a bug which caused the program to bomb out in the team menu.
+*changed (and hopefully) improved the file-locking routines.
+*"usurper /scores" command is now working properly.
+*Gang holding town is no longer dissolved.
+*fixed bug which caused the computer to hang when attacking
+ people at the Inn.
+*improved inventory management.
+*added option in the stores to sell everything in one go.
+*changed some routines in online duels. also changed the filelocking
+ routines.
+*fixed the BREAD EATING bug. Where players could get fast hps.
+*speeded up npc maintenance.
+*gangfights now feature randomized matchplays. It's never sure who you
+ gonna meet...
+*Strong teams can be prevented from crushing small ones. Sysop can change
+ this with editor option #95.
+*Sysop can toggle fake players on/off with editor option #96.
+*A bounty hunter & assassin menu has been added to the game.
+ Players can set rewards on other players or NPCs. The NPCs will
+ hunt for bounties (The King can utilize this board in a special way).
+ Reward money can be collected after singel or team battle. Offline
+ players can of course also collect bounties, if they were to kill a
+ wanted player.
+ NPC bounty hunters will not hunt for teammates. However, the
+ better the pay the more chances they will take to get the rewards.
+ This means that low ranked NPCs can go on suicidal missions against a much
+ higher ranked player. Of course, even though a high ranked player can beat
+ ten minor NPCs, he may get whipped by the eleventh...
+ Don't forget that the NPCs will set their own bounties :) So its wise to
+ stay tuned to the wanted list, it can be profitable.
+*removed bug when stealing beer barrels. Teammate will now carry as many
+ barrel he can, not only one as in earlier versions.
+*classic mode now displays armor & weapon rankings.
+*players can check their team status from the standard STATUS menu.
+*changed score routine for BEST OVERALL CHARACTER.
+* NEWS.TXT  is now called NEWS.DAT
+  YNEWS.TXT is now called YNEWS.DAT
+  FAME.TXT is now called FAME.DAT
+* The player mail system has changed. All PLAYERxx.MIL files have
+  been replaced with one MAIL.DAT file.
+* The NPCs are a bit more intelligent when it comes to buying equipment.
+  They don't sell away good equipment every time they get some.
+  Also, they automatically starts to use equipment sent to them by a
+  player (in the teams menu for example).
+* The ascii file TRECORD.DAT contains a list of Record Holders for teams.
+  It is based on how long a team has had city control.
+  (this file is automatically created when a gang sets a new record)
+* Corrected the bug where F1 didn't display the right Statusbar.
+* Weapons and other items can now be made so they can be used by
+  good/evil characters only.
+* Corrected the bug where players got the wrong doorguards at the Inn.
+* Players can now take equipment from beggars at the Beggars Wall.
+* Removed the delay when entering the dungeons.
+* Added some more drama to the final battle with the Supreme Being.
+  The 'Golden, silver and bronze doors' can be extremely vital for
+  the outcome of the battle.
+* Added a Players Market (can be reached from the market place).
+  Here players can put their found/conquered items for sale.
+* Players can no longer manage the final monster by running away.
+* Fixed the problem with creation of new STRONG NPCs or computer controlled
+  players. You can now create a new character and give him/her high
+  experience points. At the maintenance this player will be upgraded
+  directly to the values that are corresponding to his experience.
+* Gangwars are a bit faster now.
+* Team leaders can control dungeon battles better now. Orders can be given
+  to which monsters to attack.
+* Computer controlled gangs can now be set to attack other gangs.
+  (set editor option #94 to YES)
+* Players can now improve their immunity towards diseases. They choose
+  either to train close-combat moves or disease defence.
+  (Hobbits always recieve +1 to the normal immunity increase)
+* More detailed info on your teammebers now. Other teams can also be
+  checked out.
+* Added some new stuff to the Alchemist store. Alchemists can
+  join a secret order that is rumoured to exist near town.
+* Npcs are now included in the scorefiles (optional).
+  Set (new) Editor option #92 to 'Yes' if you want the NPCs included
+  in the external score files.
+* Added two lists to the RATINGS menu :
+   +Most popular Race+ and +Most popular Profession+
+* Fixed the bug where the teammates wouldn't hit anything in the dungeons.
+  This occured when the QUAFFING option (#22) was set to '2'.
+* Players can now haggle in the weapon and armor store. Charisma is good
+  to have in haggle situations. To be a troll is always good in the weapon
+  store... Just one thing : don't push the shopkeepers around too much.
+  If you mess with them the will mess with you!
+* Fixed some bugs in the Brawl routines. Ted the Bartender is now
+  removed from the fight correctly.
+  Players can now ask for assistance in Brawlfights. This should
+  only be done when you are in desperate need of help, since hired help
+  in bars often tend to run away with your money or turn against you.
+* Reworked some spells. Clerics DIVINATION spell is now more effective.
+* Added a new store in the Marketplace. This one contains food and
+  drinks (can there be surprises there?).
+* Npc teams now try to keep their strength up.
+  They either recruit new members or dissolve themselves.
+* Sysops who want to limit the time a user can spend in Usurper every
+  day can set this with the new Editor option #87.
+* Sysops can now set the game so players lose experience points in
+  player versus player battles (editor option #90).
+* Usurper can now be run in either OLD or NEW mode.
+  the 'OLD' mode is similar to the older versions of Usurper.
+  the 'OLD' mode gives the player one weapon and one armor.
+  the 'NEW' mode gives the player many different kinds of armors (leg,
+  body, feet, shields...etc etc).
+  The 'OLD' mode has the same weapon and armor as the older versions of
+  Usurper. It is also faster and simpler to play.
+  This switch can be toggled in the middle of a game. But it's not
+  recommended.
+* The bank can now be robbed. Players can try for themselves or bring
+  their team with them. To get to the safe a player must first defeat
+  all the regular guards and then he might encounter other players, who
+  has signed up as bank guards (and get paid for it).
+  To become a bank guard a player must free from sin. Criminal elements
+  are not tolerated.
+  Players bank accounts are not affected by a robbery.
+    *** Available in registered versions only ****
+* Weapons bought in the store can now be used directly after
+  purchase (same as with armor). The same goes for equipment
+  bought in the magic store and stuff won in battle.
+* Most of the menus are now hotkey sensitive.
+* Expert menus are now optional. Can be toggled off/on in
+  the players configuration menu.
+* Output buffering can now turned off with the new
+  command line option /NOBUFFERS. Output buffering is otherwise
+  used by default.
+* The Statusbar at the bottom of the screen can be turned off with :
+  USURPER /NOSTAT.
+  This speeds up screen operations a bit. Inside the game the statusbar
+  is toggled by the Sysop with ALT-S or any function key.
+* Running Usurper on multinode systems.
+  New command line option : /P:{path to dropfile}
+  Overrides path in .CFG file. Can be useful in multinode environments.
+  Example : Usurper /P:C:\RA\NODE2\
+  Examples on batchfiles are given in the file SYSOP.DOC.
+  See also included sample : MULTI.BAT
+* Removed the "sacking teammate" bug. Sometimes the program would
+  generate a runtime error. Not anymore.
+* Corrected the bug where "ghost" players followed down the dungeons.
+  Monsters now pick REAL targets.
+* Sysop Keys
+  ALT-J shells out to DOS
+  Arrow Up   increases the users time with 1 minute
+  Arrow Down decreases the users time with 1 minute
+  F4  - displays the above options.
+  F10 - turns the status bar off.
+* Players can now utilize the following key combinations :
+   CTRL-W  who is online?
+   CTRL-E  toggle Expert menus ON/OFF.
+   CTRL-S  toggle 'outside attention' mode (more on this later on in this text)
+   CTRL-T  display time remaining.
+ (these keys can be used anytime and anywhere in the game)
+* Added a 'ONLY 2 MINUTES REMAINING' warning, so players won't get
+  thrown out in the middle of something.
+* Reduced the effect of the SoulStrike.
+* Corrected a heap of misspellings.
+* Improved the Editor a bit ; Player spells can be edited.
+                              Gender can also be changed now.
+* Usurper is now multinode aware.
+  File-locking is autodetected by detecting the presence of DOS's
+  SHARE.EXE program which allows sharing of files by different nodes.
+  If SHARE is detected the door assumes you are running a multinode BBS
+  and locks/unlocks its files as needed. There may be a brief delay if 2
+  or more nodes are running the door.
+  Don't forget to supply the correct nodenumber on the
+  command line : 'Usurper 1', for node 1
+                 'Usurper 2', for node 2 ...
+* Players can now battle each other online.
+  Challenges are made from the "Challenges" menu.
+* Players who are challenged offline or taken down the dungeons by
+  their teamleader are reported online (in the "who is online").
+  Their names are in a different color than the "real" onliners, and
+  their node number is replaced with the text "GHOST".
+  Player logged in locally have their node number replaced with the
+  text "LOCAL".
+  A character is not allowed to log in on more than one node
+  simultaneously.
+  A player can also be refused login because another player has
+  challenged/brought him down to the dungeons.
+  If this should be the case and you as player wants to join the action,
+  You can always send a message to the online player telling him/her
+  to let go of your character. This can be done from the Usurper Intro
+  menu.
+* Players can set their 'outside attention' level.
+  This option is set from the configuration menu (players status screen).
+
+   *All*      - This mode will display everything that happen in the game.
+                Public and private messages, online challenges and
+                info about when a player exits/enters the game.
+                (DEFAULT MODE).
+   *Personal* - Only listen to personal mesages and challenges.
+                No public messages from online players will be displayed.
+                No info about when a player exits/enters the game.
+   *Quiet*    - Refuse to accept any messages/challenges. The user
+                will play the game in splendid isolation.
+
+
+**************************************************************************
+**************************************************************************
+
+Version 0.07 (1994-08-26)
+
+(+) indicates changes since the 0.06 BETA release
+
++After having bought armors players are given the option to
+ immideately start to use the new equipment, without having
+ to enter the status display.
++Maximum number of players that Usurper can accept has been raised to 300
++Fixed messy score files
++Alchemists can now check if their weapons are poisoned in the
+ status screen.
++Recompiled Usurper with a new version of JpDoor
++Three rating lists have been added to the 'Score Corner' :
+   Weapon Masters Hall of Fame (whos got the best weapon value)
+   Armor Masters Hall of Fame (whos got the best armor value)
+   Equipment Masters Hall of Fame (whos got the most powerful equipment)
++All rating and score lists are now produced in both ansi and ascii
+ formats. With the Editor sysops can easily configure filenames and
+ paths for every file.
++Producing all scorefiles upon every exit of Usurper can take some
+ considerable time on slower systems and in games with alot of players.
+ By setting config option #84 to "No" Usurper must be forced to produce
+ any defined scorefiles. This can be done with the command line option :
+ 'Usurper /scores'. (To produce the extra scorefiles a registrated version
+  of Usurper is required)
++Sysops can now decide whether the losers of Beer Drinking Competitions
+ and Brawls should be locked out from further gaming that day.
+ (can be changed in the configuration, #85 and 86)
++Changes have been made to improve performance on systems with highspeed
+ modems and multitaskers.
++Usurper now shows the correct node number at the status bar (lower right
+ corner).
++Running Usurper /M (forced maintenance) no longer requires a dropfile
+ to be present.
++The first computer Team (Close Circle) will have a randomly created
+ password at every reset. This to prevent players from joining the team
+ and gain advantage.
++A new command line option has been added. By using '/DEBUG', sysops can
+ more effectively track down their problems with Usurper. A logfile will
+ be created under the name : DebugNNN.jpd, where NNN is the node active
+ (DEBUG001.JPD for node 1, DEBUG002 for node 2...).
++Maximum number of players is now 300.
++The Statusline now shows both the players handle and real name.
++Another new command line option is '/SNOOPOFF'. This will prevent any
+ output to the local console.
++Added more info to the user when maintenace is being performed. This to
+ prevent users from believing that the game has bugged out.
++New option in Usurper.cfg (#67). Automatic Maintenance can be toggled
+ On/off (default is ON). By disabling automatic maintenance Sysops can
+ decide when they want to run their daily maintenance.
++New option in Usurper.cfg (#68). Resurrection of dead players at
+ maintenance can now be toggled on/off (default is off). Turning this
+ to ON can make some games more interesting, with many targets for players
+ to attack after midnight.
++New option in Usurper.cfg (#69). A line is offered here for Sysops to
+ give Credits to users for helping out with registering Usurper, or
+ something else that has helped the game (only works in registered
+ version).
++Fixed Bank bug, where players accidentally could overflow their
+ accounts, or withdraw more than 2,000,000,000.
++'Grabbing items' logic has been changed. Objects are not placed auto-
+ matically in left or right hand/fingers, as they were before. A bug in
+ the 'stop using item' function has also been fixed.
++Monsters absorbation will no longer increase during long battles.
++Dungeon monsters have been made a bit tougher.
++Removed some nasty bugs that casused Usurper and Editor to bug out with
+ a Error 162 message.
++Team members not allowed to join the dungeon fighting will now
+ stay home (they insisted on tagging along in the 0.06 release)
++The 'drop all' command will not allow cursed items to be dumped.
++Magic Users will now continue to fight in the dungeons when their
+ mana is low. In the 0.06 release they just stood and watched when
+ they had used their mana. Now, they will also mix their magic with
+ normal attacks, making the battles more realistic/interesteing/unpre-
+ dictable
++Dead players will not appear any more in Beer Drinking competitions.
++Speeded up Beer Stealing procedure. Thieves can now carry more barrels
+ depending on how strong they are. Real strong players can carry up to
+ eight barrels in one go. The nasty bug where you got a negative amount
+ of money when stealing ALL barrels has been removed.
++Armor Shop menu has been cleaned up to provide easier access.
++Players who commit suicide can write their own suicide notes.
++Characters now hold their personal "kill records". Monster kills/defeats
+ and Player kills/defeats have been added to the statistics.
++Hitting 'R' from the main menu give players the option of viewing
+ statistics of all kind, and comparing their own records with other
+ players.
+
+*Whole teams can now enter the dungeons to fight monsters!
+ It's quite fun to bring down your mates for a little ride
+ downstairs... Hear them scream and brag after every little pathetic
+ effort they think they have accomplished. Or hear them scream for
+ help when they are laying stunned on the ground, with twelve laughing
+ monsters beating the hell out of them.
+ However, the real winners can be (online) low level characters
+ going down with their high level teammates. The other way around is
+ not so favourable to the lower level characters. One hit from a mighty
+ monster can put small timers to sleep quite quickly...
+ (can be toggled OFF/ON with the Editor)
+*All weapons and armors from earlier version have been discarded.
+ Usurper now supports a "full equipment" system, which means that
+ players can dress up their characters with different armors and
+ weapons. They can buy gloves, boots, pants, helmets, belts and much
+ more to give them better protection/equipment.
+ (Don't worry about players old weapons/armors! They are cashed in when
+  the conversion program is executed.)
+*To increase the flexibility of Usurper, an Object Editor has been added to
+ the Editor program. Approximately 500 objects are included as default.
+ However, sysops are free to create their own, or edit existing,  objects
+ with the Object Editor. Make your own weapons, armors, food, drinks,
+ magic stones, poisoned potions, cursed instruments or any
+ other strange items you can think of. You can of course write colorful
+ descriptions to every Object. Hidden information can also be included.
+ Objects can be configured to be monster weapons only, or only be available
+ in the shops, or they may be set to be found in the dungeons at certain
+ levels. It is also easy to create a "only one of its kind" type of object.
+ If, for example, a very powerful weapon is created, the Sysop can give it
+ to an NPC or a player and then toggle the Objects existance in the
+ shops/dungeons to OFF. Now the rest of the players probably want to have
+ a little "chat" with the lucky owner to this unique weapon. Players can
+ also be given special items after acheieving specific goals.
+ The above are only suggestions on how to make the game more challenging.
+ The real possibilites are restricted by your imagination alone.
+ Up to 65,000 different objects can be created and used.
+
+ <> Programmers Personal <>
+   Personally, I must admit that the making of new objects, especially
+   articles of clothing, has been the most enjoyable part in the making
+   of Usurper so far. And since the NPC:s do their own shopping, the
+   joy can be extended when watching how THEY dress. I don't know if
+   you must have special kind of humour to appreciate the occasion when
+   Ugluk comes rushing at you, wearing a Sombrero, jeans and ray-bans.
+   However, the default objects included in this package range from serious
+   articles to a number of more bizarre items. I like both types.
+
+*Don't forget to configure which items that shall be able to be taken
+ from defeated players. You can configure everything individually.
+ Personally, I don't recommend setting everything to YES, meaning that
+ a victor can take ALL the defeated players equipment. It's quite GRIM
+ to loose sixteen items in one go! However, being a real sadist, why not
+ allow the victor to take the defeated players inventory as well. The game
+ can be configured that way...if you like.
+*Difficulty for teams in dungeons can be changed with the Editor.
+*Sysops can now easily change the "xp needed to level" limits with the Editor.
+*Dungeons events have been reworked. The "get the treasure or die"
+ choices have been discarded.
+*Sysops can now create their own doorguards with the Editor.
+*Players can hire up to 10 heavy doorguards to protect themselves.
+*Players can now start their own Beer drinking competitions;
+ Challenge your friends/foes and see who can drink the most beer!
+*Players can now create their own cocktails at Orbs Health Club.
+*Sysops can now choose if they want to use Fossil Drivers or NOT.
+*Sysops can now decide if Usurper should load itself into EMS memory
+ or not. By default Usurper will not load itself into EMS. If you
+ want to use EMS memory then use the commandline option : Usurper /EMS
+*Sysops can now change maximum number of players allowed in the game.
+*Maximum number of healing potions that can be carried, can be changed.
+*Name of Dungeons can now be changed in Editor.exe / Edit Config file.
+*Include NPC:s level raises in the daily news is now optional.
+ Change this switch in Editor.exe / Edit Configuration file
+*NPC:s can now buy new weapons/armors/equipment, when they have the money.
+ This can be toggled ON/OFF in the Editor.
+*Players now have some more configurable phrases which are used in battle.
+*Monster Editor has been improved. It is now possible to edit monster
+ weapons, strength, resistance to magic, iq and more...
+*NPC:s can now be (e)xamined in the Dormitory.
+*Players can now set their own standard battlecries. This is mostly shown
+ during teamfights against monsters.
+*Prices have gone down at Groggos.
+*The documentation files have been updated.
+*Many many bugs fixed.
+*Recompiled Usurper with JpDoor 4.1
+
+Version 0.05 BETA (1994-03-20)
+*Added A Monster Editor to the Main Editor.
+*Sysops having problems with their Usurper configuration file can now
+ create it from the Editor (by answering simple questions).
+ NOTE! In this version there are many new configuration possibilities,
+       so I recommend that you use the editor configuration program to get
+       it all right.
+*Backstabbing in the dungeons now works.
+*The Game can be configured to make all NPC:s available in the Dormitory,
+ thus possible to challenge and defeat (switch in Usurper.cfg).
+*Healing Center has been implemented.
+*The armor basevalue can now be set freely ( 0-60 % ). A value of 10 means
+ that all armors absorb 10% of their armorvalues as a base value. The higher
+ you set this figure, the more effective the armors get  (default is 25%).
+*Sysops can now decide how they want the Healing procedure to work
+ in the dungeons : (what happens after a player quaffs healing potions)
+  1 : Player quaffs potions and then autoattacks monster
+  2 : Player quaffs potions, and then the monster gets a free attack round
+  3 : Player quaffs potions and can then choose another option
+*Starting money for new players can be changed in the Usurper.cfg file.
+*Number of Teamfights a player can perform can now be changed in the
+ Usurper.cfg file
+*Names of shopkeepers and levelmasters can now be changed in the .CFG
+*Removed the ugly bug where non-team players couldn't buy armors and
+ weapons.
+*Sysop can now decide how much Experience a player will loose when he dies
+ in the dungeons. This can be set for different levels.
+*The monsters in the dungeons now speak again (optional). Monster weapons
+ are also displayed during battle (as in earlier versions).
+*Monster weapons have been made more powerful (thus more attractive
+ to swap)
+*Local login now works as before, with /L as command-line switch.
+*Usurper can now be run in a "soft" mode. SOFT mode replaces drugs,
+ steroids, snuffing, whorehouse and gigolos with more decent social
+ activities (like burgalry and such =). Change this option in
+ Usurper.cfg. Running in Normal modes gives you these new options
+ additionally (look at Dark Deeds Menu for example...)
+*Beer stealing and kidnapping are new options in Dark Deeds menu.
+*Every time maintenance is run a CHAMPION is selected by comparing
+ every players statistics. Not only high level characters can
+ win this title. The values are based on what level you are, so a
+ low level character with extremely good base stats can take the title.
+ (you can also see a top 50 list when pressing 'O' from main menu)
+*Removed a bug which messed things up a bit when sending items to team-
+ mates.
+
+Version 0.04c : (1994-03-02)
+*Game Settings can now be viewed by players from the Intro-menu.
+*Sysops can now choose to skip the Intro-menu. (can be changed in
+ the .CFG file)
+*Removed the bugs which caused items to disappear/not be visible.
+*Drug/steriods bug has been removed.
+*Rings can now be purchased as before.
+*Successful Thievery now gives the player money.
+*Maintenance can now be forced by adding /M to the command line.
+*Citycontrol bugs have been fixed.
+*Players can now buy weapons/armors to their NPC teammembers.
+
+Version 0.04 : (1994-02-17)
+* Recompiled the game with a new doordriver ; JpDoor
+* Minor modifications and bugfixes
+
+Version 0.03 : (1994-02-02)
+* International Character Set available. (Swedish letters, at last!)
+* Added support for new dropfile ; CHAIN.TXT (for the WWIV BBS system)
+* The Paladins soulstrike has been improved. Offline Paladins don't fight
+  so stupid as before. They don't take so many risks with the soulstrike.
+* Numbers of dungeonfights can now be changed in Usurper.cfg
+* Days of inactivity before deletion can also be changed in Usurper.cfg
+* Added support for nonstandard IRQ. This can be changed in Usurper.cfg
+* Players can now encounter more than one monster at the same time in the
+  dungeons. Difficulty level can be set in Usurper.cfg by the sysop.
+* Removed bug which wouldn't give spellcasters new spells
+* Name of town can be changed in Usurper.cfg
+* NPC:s vicious tendencies can be configured in Usurper.cfg. This will
+  control the way the NPC:s summon demons and cast disease spells against
+  innocent and unknowing players.
+* Assassins backstab-power reduced.
+* Have tried to reduce the tedious man-to-man fights that could go on
+  forever. (mainly by reducing armor effect and increasing attack effect)
+* Added some info when fighting with teams and 'fast' option selected.
+  (so users don't hang up just because they think the system has crashed)
+* Removed the bug which kept spellcasters frozen after 1 casted spell.
+* Found the nasty bug which swapped away players great weapon/armor
+  for worthless ones.
+* The Editor has been upgraded.
+* Paladins and Assassins couldn't use their special attacks in some
+  fights. This has been fixed.
+* Removed bug where spellcasters would abort up a fight simply by aborting
+  a spellsession.
+* Removed a similar bug when aborting 'send items to player' option.
+* Smoother display in Bar-Fights.
+* 'Todays Truth' added. A little chatline, always displayed upon login.
+* Female players can now enjoy physical satisfaction from Gigolos.
+* Added some info to the status screen.
+* Hp-regenerating objects now work in the dungeons.
+* From this version and onwards, a 8086/88 version will always be shipped
+  along with the standard Usurper archive.
+* Recompiled Usurper with a new version of Tridoor.
+
+Version 0.02 : (1994-01-10)
+* (Sysops! Don't forget to follow instructions in README! file)
+* The Paladin has become a Class instead of Race.
+* The Hobbit replace the Paladin as race.
+* Added 11 Classes that new players can choose between.
+  (Old Usurper gamers are defaulted to the Warrior class)
+  Classes are as follows:
+  1. Alchemists   *Poison masters. Have their own shop!*
+  2. Assassins    *Special attack : backstab. Hard to hit.*
+  3. Barbarians   *Strongest*
+  4. Bards        *Good overall capabilities*
+  5. Clerics      *Weak in combat, but use spells*
+  6. Jesters      *Extremely hard to hit due to their acrobatic skills*
+  7. Magicians    *Offensive Spellcasters*
+  8. Paladins     *Strong. Have a special attack : soulstrike*
+  9. Rangers      *Strong and agile*
+ 10. Sages        *Mysterious spellcasters*
+ 11. Warriors     *Better defence against magic attacks than Barbarians*
+  (Note that some Race/Class combinations are impossible. Ie Troll/Paladin)
+
+* Spelltables for Clerics and Magicians (Sages have one too. But it is not
+  shown here.)
+
+-Clerics-
+---------
+Lvl 1 Cure Light
+    5 Armor
+   10 Baptize Monster
+   15 Cure Critic
+   20 Disease
+   25 Holy Explosion
+   30 Invisibility
+   40 Angel
+   50 Call Lightning
+   60 Heal
+   70 Divination
+   80 Gods Finger
+
+-Magicians-
+-----------
+Lvl 1 Magic Missile
+    5 Shield
+   10 Sleep
+   15 Web
+   20 Strength
+   25 Fireball
+   30 Fear
+   40 Lightning Bolt
+   50 Prismatic Cage
+   60 Pillar of Fire
+   70 Power Word KILL
+   80 Summon Demon
+
+* New abilities added : Stamina, Agility, Charisma, Dexterity, Wisdom and
+  Mana.
+* 14 different close-combat skills added.
+* Increased abilities upon level raises now depends on which Class the player
+  belong to.
+* Some new offline behaviour can be configured.
+* You can now write your personal description of your character.
+  This will be shown every time another player look at you.
+* Monster weapons can now be taken from successful battles.
+* Added more dungeon events. Made them a bit more flexible than the old
+  ones. As a result of this the dungeons have become more dangerous and
+  challenging. You cannot go down and just expect to kill your daily number
+  of monsters without getting into some serious trouble.
+* Drug addiction and Mental Stability stabilizes when players perform
+  a level raise.
+* Drug addiction and Mental stability parameters affect battles more
+  now. Lack of concentration and hallucinations are common problems.
+  Worst case scenarios are players with VERY low mental stability.
+  These nutcases can actually rise at midnight and do things they
+  never would have done in a healthy mode. They can also experience
+  hallucinations when they play.
+* New ANSI intro screen. Thanks to Jerry Barham at Crimson Knight BBS.
+* The configurable option where your character would buy healing
+  potions after every successful battle now work as it should.
+  When you log on, you will get a notice of each one of these
+  auto-purchases.
+* Attacking Akrappa, the levelmaster, is no longer possible.
+* Added some new items that can be found. You might for example find
+  Drug Darts. This can be thrown upon an enemy and cause his drug
+  addiction to raise (Not a very nice thing to do!).
+* New Shop added. The mad mage Groggo sell services to those who wish
+  to get rid of an enemy, but don't dare/have the muscles to fight for
+  themselves. Groggo can summon Demons against your foes, he can curse
+  them and give them diseases. The prices are quite reasonable, but
+  be careful! The old mage is very old, angry and vicious. He might do
+  things to players just because he woke up in a worse mood than usual.
+* As mentioned above, players are now affected by diseases. There are
+  different types of diseases, with the Plague as the most horrible.
+  Try to stay healthy! Diseases are not easily cured...
+* New Pub added. Bobs Beer Hut is a shady place where you can go if you are
+  looking for trouble. Brawls and thievery are common activities.
+  (This is function is only available in Registered programs)
+* The money receieved for City Control is now totally dependant upon
+  the gangmembers abilities. That is : the higher level a player has,
+  the more money for City Control. The money are summed up and thereafter
+  equally divided among the teammembers. A level 2 character will therefore
+  recieve the same amount as his teammate with a gamelevel of 50.
+* There are now 10 Levelmasters (Akrappa included). Players choose a
+  master to study for. They can change teacher whenever they want, but it
+  will cost a pretty grim sum of money. Different masters are good at
+  different things and will teach differently. It's a good idea to
+  experiment. Some players prefer raw strength, and other need spellpower.
+  It much depends on which class a player belong to.
+* Loosing a fight, or just dying in general, reduces a players
+  experience points by approximately 5%. This will only affect players
+  online.
+* Magical items, such as Rings, now works in Dungeons.
+* Suicide option now works properly.
+* Viped out a bunch of nasty bugs. Cleaned up the code a great deal.
+  The size of Usurper.exe file has been reduced. However, the total size
+  of Usurper continues to grow.
+* The number of teamfights a player can perform have been reduced
+  to three.
+* Sysops can now edit/add/change the NPCs (requested by many).
+* Many minor changes have slipped my mind (you will notice them
+  sooner or later).
+
+Version 0.01f : (1993-10-08)
+(To all Sysops : follow the instructions in the 'README!' file!)
+I recognized a couple of situations where the program
+would bomb out. These have been corrected.
+* All races can now REALLY resurrect teammates.
+* NPC Wizards now cast spells in gang combat.
+* 'Fight to death' option added.
+* Magical items can be purchased, others can be found. Many of these can be
+  very useful in battle, others are dangerous.
+* Items can now be sent to NPC:s (useful to increase team strength).
+* More computer characters have been added (big and tough guys).
+* More detailed info on NPC:s.
+* Gnoll poison effect is now stronger, depending on which level
+  the Gnoll is on.
+* New players can choose to be males/females. Gender support
+  also added in text.
+* Flee the dungeons now works properly.
+* Beg for mercy in the dungeons now works.
+* Players can configure some offline combat behaviour.
+* Lockups due to repeated keypressing are now gone.
+* Many small bugfixes and changes that i can't remember. And of course
+  some cosmetic enhancements.
+
+Version 0.01e : (1993-09-21)   *** FIRST PUBLIC RELEASE ***
+All races can resurrect teammates. Players can quit in
+'Begging mode'. This will place them on street disguised
+as beggars. Money can be earned. But as beggars are unarmed
+other players can easily have them murdered. However,
+murdering beggars are not good for character and will not
+yield much experience. 'The Castle' option has been replaced
+with 'The marketplace', where various actions can be made.
+Reworked the battle formulas in player-vs-player battles.
+Troll players now have more problems when recruiting
+good characters, as paladins and elves. Certain races
+just can't stand each other...
+Non-Player-Characters now form teams when they feel like
+it. Players can have a maximum of 250 healing potions.
+Rival gangmembers can now be bribed over to your team.
+A way to avoid teammembers from being bribed is to send
+them items/money making their loyalty increase.
+
+Version 0.01d : (1993-09-10)
+Computer controlled characters now uses Soulstrikes more
+efficiently. The Paladin character has been made more
+powerful. Send items to teammates now works. NPC:s increase
+their abilities as their experience goes up.
+A couple of more dungeon events added. Weapons and armors
+can be taken from dead oppponents in player/team fights.
+Add to that numerous of small changes and bugfixes.
+
+Version 0.01c : (1993-09-01)
+Added a Wishing Well in the dungeons. 'Good' characters
+will recieve rewards from the King. Stay-Alive Bonus to
+all characters who makes it through the day alive.
+Made life a little bit easier and rewarding in the dungeons.
+Added options to send items between teammates. Computer
+players now a bit trickier to beat. Usurper now also includes
+numerous of computer characters who can be sworn into your
+team and do some of the fighting! And of course some bugfixes.
+
+Version 0.01b : (1993-08-29)
+Minor bugfixes. New options : Resurrection of teammates.
+Teams can now also fight each other without city control
+involved.
+
+Version 0.01  : (1993-08-22)
+First shaky release on my own BBS, Silent Service.
+Some bugs noticed.
+
+(The development of Usurper started a sunny spring morning
+in April, 1993)
+
+                 *************************************
+                **** Best wishes to Sven and Muffi ****
+                 *************************************
+ÿÿ

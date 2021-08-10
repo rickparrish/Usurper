@@ -1,0 +1,624 @@
+ ***************************************
+ **** Usurper,  Sysop Documentation ****
+ ***************************************
+
+Program Information :
+
+ Door     - Usurper v0.20x
+ Producer - (c) 1993-2007 JAS Software, All Rights Reserved
+ Tools    - Borland Pascal 7.0 and DDplus 7.0
+                        
+Acknowledgements :
+ DDplus      - Distributed by Steve Lorenz and Bob Dalton - 1995
+
+(Copyright 1993,2007 Jakob Dangarden and JAS Software, All Rights Reserved)
+							
+
+
+ This file is part of Usurper.
+
+    Usurper is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    Usurper is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Usurper; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+
+
+
+Disclaimer
+----------
+The Usurper Door is distributed without warranty.
+In no case shall I be held responsible for any damages or losses
+resulting from you running this software. By running this program
+you have agreed to take responsibility for any problems that may result.
+If you do not agree to this, don't run the program.  
+
+
+
+
+
+Usurper ? 
+---------
+Usurper is a fast paced doorgame which only has one purpose :
+to give its players a moment of joy and relaxation. It only
+takes a couple of minutes to play each day, it's easy to understand
+and the gameplay is straightforward. Get bigger, meaner and stronger.
+The settings are a fantasy scenario inhabited with
+different races and creatures. The game can be completed when
+a player reaches the darkest dungeon at the bottom of the big
+mountain. He then gets immortalized. However, players can also
+struggle for earthly power. They can form teams who fight each other
+for gangland. Computer characters can also be sworn into the teams.
+characters can be played good or bad with different results and
+races have their own special abilities and weapons. 
+
+WARNING! Usurper sometimes confronts the players with brutal violence,
+sex and drugs. IF you feel offended, have any doubts or objections :
+don't run this door! If you like parts of the game but don't want the
+nasty ones, You can turn off the asocial features with the
+configuration program. 
+							
+
+
+
+Installation
+------------
+
+Make a subdirectory called USURPER (or something else you fancy).
+Unzip all files in the Usurper archive to this
+directory. 
+
+The next thing you should do is to run the EDITOR.EXE
+program. Choose the RESET GAME button and all the
+necessary datafiles will be created.
+Now select the CONFIGURATION button. If it is the first time installation
+then you should browse the different options and edit the ones you feel
+you want to change.
+
+
+The USURP.CTL file(s)
+---------------------
+Unzip the file SAMPLE.CTL from the SAMPLES.ZIP archive. Rename SAMPLE.CTL
+to USURP.CTL.
+
+Usurper needs the USURP.CTL file to set different options necessary when
+communicating with fosssil drivers or modems. 
+
+If you have a multinode system
+------------------------------
+Depending on your system, multinode or single system, you might wish to
+create more than one .CTL file. If you have different modem setups on 
+your lines (nodes) then you must create a USURPx.CTL file for every line
+Usurper can run on (x is representing a number, USURP1.CTL is used for node
+1 and USURP2.CTL is used for node 2 ... ).
+
+Single line systems should only need USURP.CTL.
+A 3 node system with different modem setups will need
+	USURP1.CTL,	
+	USURP2.CTL,
+    and USURP3.CTL.
+
+The USURP.CTL file is quite self explanatory and can be easily edited
+with a text editor. However, there is an alternative editor that can
+do the work for you ;
+  
+    Unzip the DDSETUP.ZIP package in the game directory. Type the
+    Command "DDSETUP" and then press the enter key.  When asked for the
+    name of the control file enter "USURP.CTL" and hit the F5 key
+    or click on the continue button to continue to the next page.
+    Use the on-line help key (F1) or click on the Help button for
+    information on anything you do not understand how to fill out.  There is a
+    DDSETUP.DOC provided if you need further information on how
+    to use the DDSETUP.EXE program. Two fully commented versions
+    are also provided. One is identified as GAME.CTL and this is the
+    UN-EDITED version.  The other is identified as SAMPLE.CTL and is
+    what a CTL file should look like AFTER it is edited (if the commented
+    lines are left in that is).  If for some reason the DDSETUP.EXE
+    program fails to work on your system you can always manually edit one
+    of the two examples provided and rename the one you use to
+    "USURP.CTL".
+
+    Where to put the .CTL file(s)?
+    Put this file wherever you are running the game executable file from.
+    If you are running multi-node you could put a copy in each node
+    directory and run from there.  If you change directory to the GAME
+    directory put the file here.  Examples of .BAT files for both single
+    and multi node systems are given in this document (if you keep on
+    reading).
+
+
+Have you set up your USURP.CTL file according to the instructions?
+Well, if you have that should be it! Now you can try to run Usurper with ;
+
+Usurper.Exe /L, and see if everything works.					
+Maintenance takes place automatically when needed. Since it can take
+quite some time you can disable the automatic maintenace with the Editor.exe
+program. Instead you can force Usurper to do its daily maint with the
+command line option '/FMAINT' (command line options are explained more
+in a special section in this document).
+
+
+
+
+To run Usurper
+--------------
+Batch File EXAMPLE for Usurper
+  These are a few samples of batch files to be used with Usurper
+  %1 is the Node Number which the BBS software passes to the
+  batch file.
+					
+  *** Example batch for a Multinode system START ***
+
+REM The /M1 option tells Usurper to look for the USURP1.CTL file.
+REM The /M2 option tells Usurper to look for the USURP2.CTL file ...
+REM If you remove the /M switch then Usurper will look for USURP.CTL
+REM The /P option forces Usurper to look for the dropfile in the given
+REM directory.
+ 			
+CD \BBS\DOORS\USURPER   
+USURPER /M%1 /PC:\BBS\NODE%1
+
+  *** Batch file example END ***				
+
+
+  *** Example batch for a Single node system START ***
+
+REM The /P option forces Usurper to look for the dropfile in the given
+REM directory.
+ 			
+CD \BBS\DOORS\USURPER   
+USURPER /PC:\BBS
+   *** Batch file example END ***				
+
+
+
+NOTE! You can also look at the samples file included :
+  (they are located in the SAMPLES.ZIP archive) 
+  MULTI1.BAT - RemoteAccess example 
+  MULTI2.BAT - PcBoard example
+							
+
+Improving Performance
+---------------------
+It is possible to increase the overall performance of
+Usurper by placing the file "USURPER.OVR" onto a ramdrive.
+If you elect to do this you must also set the following
+environment variable:
+
+ SET USUOVR=F:\
+
+If you have a ramdrive you should also set the editor option #99
+so usurper can use it for the semaphore files.
+
+Command Line Parameters
+-----------------------
+
+      "/Bxxxxx"   This tells GAME.EXE to lock its baud rate at
+      xxxxx.  In order to get the most efficiency out of a high speed
+      error correcting modem (9600 baud or above), you may lock the baud
+      rate to a speed higher than what the caller is actually using.
+      By locking the baud to say 38,400, the modem can compress text data
+      that is being sent and achieve a baud rate much higher than the
+      actual transmission rate.
+      This will lock the baud rate at the same value for all nodes that
+      use this command line.  If you prefer a more selective way to lock
+      baud use the 'LOCKBAUD' command in the USURP.CTL file.
+
+      "/Cx"     (where x is 1..4) This specifies a comport number.
+      Some bbs software does not create door information files (dropfiles)
+      that contain the comport number.  If your bbs does have a comport
+      listed in the dropfile then there is no need for this parameter.
+      The default is comport 0, local mode.
+
+      "/E" - Expanded Memory Specification If your machine has over one
+      megabyte of memory, then you may have some available. USURPER.EXE can
+      utilize EMS to improve game performance and reduce conventional
+      memory requirements.
+      This command will tell USURPER to use EMS memory to hold its
+      overlay buffer.  Otherwise disc area may be used to hold this buffer.
+      This needs a memory manager and when enabled and is compatible with
+      DESQview.
+
+      "/X" - Expanded Memory Specification If your machine has over one
+      megabyte of memory, then you may have some available. USURPER.EXE can
+      utilize XMS to improve game performance and reduce conventional
+      memory requirements.
+      This command will tell USURPER to use XMS memory to hold its
+      overlay buffer.  Otherwise disc area may be used to hold this buffer.
+      This needs a memory manager and when enabled and is compatible with
+      DESQview. (XMS memory is faster than EMS memory).
+      You can't use both /E and /X together. 
+
+      "/L"      This tells USURPER to load up in LOCAL mode.
+      This is good for testing or when a sysop just wants to "try out" the
+      door without messing with his BBS setup.  The "/L" mode will ask the
+      user for his name and run the door in local mode.
+
+      "/Nx"     (where x is 1..9) This specifies a "node number".
+      Some bbs software supports multinode environments in which you must
+      know the node number of the drop file to use. For example, RBBS-PC
+      uses DORINFOx.DEF. If you specified "/N2" then USURPER would use
+      DORINFO2.DEF.
+
+      "/Mx"     (where x is up to 2 filename acceptable characters)
+      Used to specify one of Multiple control files.  If you have created
+      more than one GAME.CTL file (GAME1.CTL, GAME2.CTL, etc.) for each
+      node or network PC then you can select the one you want by using
+      the /M parm.
+      Example:  "/M2" will force USURPER.EXE to use USURP2.CTL.
+
+      "/Pyyy"   This specifies the path to the drop files.
+      For example, "/PC:\WILDCAT\WCWORK\NODE1" would tell USURPER to
+      look for the drop file in C:\WILDCAT\WCWORK\NODE1. If this is left
+      out the program assumes the drop file is local.
+
+      "/V"    This command will tell USURPER not to show any display
+      on the local screen.  Only a colored screen and a message will be
+      displayed.  The cursor will not move as it will be turned off.
+      Saves a little processing on multi-tasking systems.
+
+      "/W"      This flags the program that a network is present even
+      though no multitaskers are detected.  This is useful if the door is
+      run on a network such as Novell that doesn't use multitaskers.
+      
+      "/FMAINT"	This command is only useful if you have disabled the
+                automatic maintenance. /FMAINT will only start maint
+                if it is necessary. It will not run maintenance more than
+                once a day.
+   
+      "/HMAINT" This command will unconditionally force Usurper to perform
+                maintenance. 
+
+      "/SCORES" This command will create any external score files
+                defined with the Editor.EXE program.
+
+      "/DO_PACKUSERS" this command will pack the userfile, removing
+                      all deleted and empty records. Don't execute this
+		      command when somebody is playing. 
+  
+      "/DO_PACKNPCS" this command will pack the npcfile, removing
+                      all deleted and empty records. Don't execute this
+		      command when somebody is playing.
+
+
+      "/DO_PACKMOAT" pack the moat file. removes deleted creatures.
+
+      "/DO_PACKRELATIONS" pack the relation file. removes old and
+                          inactive records.
+
+	"/DO_PACKGODS" pack the gods data-file. removes old and
+                         deleted immortals.
+      
+
+	"/DO_PACKCHILDREN" pack the children data-file. removes old and
+                         deleted children.
+
+      "/DO_PACKMAIL" this command will pack the mail file, deleting all
+                     old mail and pack the file. This command should not
+	             be necessary to carry out, since Usurper keeps the mail
+ 	             file updated. But it can be used if you think that 
+		     the \DATA\MAIL.DAT file has grown too big.	 
+
+      "/DO_SENDMAIL" send mail to any player without having to enter the
+                     game.
+
+Multinode use
+-------------
+ This game supports multinode use and provides automatic multi-tasker
+ support  (time slice releasing) for a wide variety of multi-taskers.
+ 
+           Common Problems (Locked Bauds, High Speed modems, etc)
+           ------------------------------------------------------
+
+ 1.   The game does NOT require a fossil driver to run.
+
+ 2.   If you are running a high speed modem (9600 baud or above), then I
+      suggest you run your bbs/mailer/doors at a locked baud rate. On high
+      speed error correcting modems, locking the baud rate will have a
+      noticeable increase on the speed of text that is sent. It's beyond
+      the scope of this document to discuss configuring your BBS and
+      mailer for a locked baud rate; you may wish to consult those docs
+      for information on that. Here are a few things to keep in mind when
+      setting up GAME with a locked baud rate:
+
+      a.  When using a locked baud rate, I highly recommend using a FOSSIL
+          driver. This game will work at high speeds without one though.
+          BNU is a good fossil driver which can even be loaded and unloaded
+          before and after you run this game.
+
+      b.  If you are using a fossil, then make sure to tell the fossil
+          that the port is locked. For BNU, to lock com1: at 38,400, you
+          would use something like "L0=38400" on BNU's command line.
+
+      c.  If you lock the baud for one program, it must be locked
+          for everything. You can't lock the baud for just this game, but
+          not your BBS/mailer.
+
+      d.  You may need to use the /B switch on the game.exe Command line
+          to specify the locked baud rate. For 19,200 this would be "/B19200"
+          and for 38,400 this would be "/B38400". Please note there is no
+          space between the "/B" and the baud rate.
+
+ 3.   What follows is some information on possible strange situations
+      that may occur:
+
+      a.  Low speed users can play the game, but high speed users get
+          garbage.
+     
+          - If you are not using the DORINFOx.DEF or DOOR.SYS drop file
+            then you may wish to find a converter program to convert
+            whatever drop file your BBS produces to the DORINFOx.DEF
+            or DOOR.SYS format and tell game.exe to use that.
+
+            Several converter programs are readily available on most
+            BBS systems. CallDoor is a good one if you can find it.
+
+      b.  The game hangs up when a user enters the game.
+
+          - Sounds like the game is getting the wrong baud rate somehow.
+            Try switching over to the DOOR.SYS drop file method
+            if possible.
+
+      c.  Text and screens are getting cut off.
+
+          - If you are running with a locked baud, then this could
+            be caused by some sort of FLOW CONTROL problem. Try using
+            a fossil if you aren't already.
+
+      d.  If you're using something other than the DOOR.SYS drop file,
+          then I always suggest trying to use DOOR.SYS if possible. It is
+          the most reliable method and has had the most testing. If that
+          is not possible try DORINFOx.DEF as an alternative.
+
+      e.  A door locks up node 1.  This can happen with fossils or the
+          internal communications routines because it uses the default
+          comport of 1 when NONE is found in the dropfile or game.ctl
+          file. To correct this make sure the right port is shown in
+          the dropfile OR game.ctl file.
+
+      f.  ANSI is reflected correctly on the local screen but the user
+          is getting garbage.  Assuming the user has ANSI installed then
+          most likely the problem is at your end. First make sure you
+          have configured the game.ctl file to show the correct locked
+          port rate. Second make sure the dropfile is passing the locked
+          port rate INSTEAD of the actual connect rate.  If it is not
+          passing the locked port rate then you may need to use a
+          different dropfile format OR use a dropfile converter program
+          to change the line to show the locked port rate INSTEAD of
+          the actual connect rate.
+
+
+
+
+SYSOP FUNCTION KEYS
+--------------------
+                        
+  F1  = Display available "F" Keys and what they do.
+  F2  = Open a scrolling chat window with the door user.
+  F6  = Shell out to DOS
+  F7  = Increments user time by 5 minutes.
+  F8  = Decrements user time by 5 minutes.
+  F10 = Ejects user from door and returns him/her to BBS after
+        showing a brief message.
+
+
+Helpfiles
+---------
+ DDSETUP.ZIP - Compressed copy of the DDSETUP.EXE program and associated
+               files. You can use this to make your USURP.CTL game
+               configuration file, otherwise use a texteditor.
+ÿÿ
+Sample files
+------------
+(These files are located in the SAMPLES.ZIP archive)
+MULTI1.BAT - RemoteAccess multinode batchfile.
+MULTI2.BAT - PcBoard multinode batchfile 
+BADWORDS.DAT - file with badwords you want to exclude from player language.
+SAMPLE.CFG   - sample Usurper.cfg file.
+SAMPLE.CTL   - sample Usurper.ctl file.
+
+Files created and used by Usurper: (USURPER/DATA)
+----------------------------------
+Armor.dat       => All armors for Usurper when running in CLASSIC mode.
+Banksafe.dat    => All information of what's in the bank vault.
+Chest.dat				=> Player store items here (available at their homes)
+Comments.dat    => Conversations at the Inn.
+Date.dat        => Needed for Usurper to know when it's time to run
+                   maintenance.
+Fakes.dat       => editable textfile with fake player info.
+Fame.dat        => All heros that have completed the game (ascii).
+Guards.dat      => Guards that can be hired for protection when staying at
+                   the Inn. 
+Gods.dat        => When a player completes the game he can choose to become
+                   a God. The Gods are stored in this file. Erasing this file
+                   will "only" vipe Usurper clean from immortals. 
+Levels.dat      => Information of the experience needed to raise a level.
+Mail.dat        => Various information posted to players.
+Maint.flg       => This file is created when Usurper is running it's 
+                   maintenance. It's created to prevent other nodes access
+                   to the game. As with the above ONLINERS.DAT file this file
+                   can be leftover after a computer lockup or some other
+                   strange reason. 
+Monster.dat     => Usurper dungeon monsters. Complete with weapons and all.
+News.dat        => What has happened today? (ascii).
+Npcs.dat        => The Non Player Controlled characters. 
+Objdat01-15.dat => All weapons,armors and other items for Usurper when
+                   running in NEW mode.
+King.dat        => This will be created when a new king or queen issues his
+                   or her orders.
+Onliners.dat    => This file contains all information of who is playing
+                   the game right now. Even if nobody is playing the game
+                   this file can exist. It is removed only at maintenance.
+                   There can be times when you would like to remove this
+                   file. For example : If somebody is playing Usurper and
+                   the system goes down because of a computer lockup, or
+                  some other reason, the game will report this user as
+                   playing when he/she is in fact trying to enter again!
+                   It is perfectly safe to erase the ONLINERS.DAT file when
+                   nobody really is playing.
+
+Teamrec.dat     => Which gang has held the town for the longest time.  
+Trecord.dat     => Hall of Fame for teams holding the town (ascii).
+Users.dat       => holds information of all human players.
+Usutext.dat     => holds all ansi/asc pictures used.
+MoatMon.dat     => holds the Moat creatures. Hired by the king to protect the
+                   Castle.
+Drinks.dat      => Custom made cocktails, available at Orbs Bar
+Wanted.dat      => Who is wanted and how much are their stinking heads worth.
+Weapon.dat      => All weapons for Usurper when running in CLASSIC mode.  
+Ynews.dat       => What happened yesterday (ascii).
+Rquests.dat     => All quests created by the King.
+Relation.dat    => Social relations data file.
+Children.dat    => Children produced in the game. Npc kids are stored here as well.
+Childmal.dat    => MALE children names, used by NPCs to name their newborn.
+Childfem.dat    => FEMALE children names, used by NPCs to name their newborn.
+Barrel.dat      => Beer barrel lifters top list (the gym).
+Gods.dat        => All immortal characters are put here. immortals are never
+                   deleted. 
+NpcChat.dat     => Npc chat comments, when they are active in the Inn chat log.
+Tnames.dat      => Names used by computer players when forming teams.
+                   A textfile which can be edited if you wish.
+Monarchs.ANS    => List of Monarchs, their comings and goings (ANSI).
+Monarchs.ASC    => List of Monarchs, their comings and goings (ASCII).
+
+MarrHist.ANS    => List of Marriages in the Realm (ANSI).
+MarrHist.ASC    => List of Marriages in the Realm (ASCII).
+
+BirtHist.ANS    => List of Child Birth/Deaths in the Realm (ANSI).
+BirtHist.ASC    => List of Child Birth/Deaths in the Realm (ASCII).
+
+Badwords.dat    => you can find a sample of this file in SAMPLES.ZIP.
+                   put this file in the \DATA directory if you want Usurper
+		   to replace bad words with others, defined by you. 
+                   The only area in which badwords are disallowed is in
+                   password routines (for obvious reasons).
+ERROR.LOG       => All error messages are logged to this file.
+
+
+
+
+
+ ---------------------------
+  Trouble Shooting/Problems
+ ---------------------------
+Q. The darn game reports that players are online, when they in fact are not.
+A. delete the file NODE/ONLINERS.DAT.
+
+Q. Usurper locks up under Windows 95!
+A.
+  highlight usurper.exe in WIn95
+  select properties
+  " "  program
+  " "  Advance
+  " "  Msdos Mode
+
+Q. Usurper freezes up on my users! locally it plays fine.
+A. Are you really using a FOSSIL? If not check Usurp.ctl and remove
+   the fossil reference there.
+Q. Usurper refuses to run maintenance when I type : Usurper /HMAINT
+   It just says "USURP.CTL not found. runtime error xxxx:xxxx".
+A. type : Usurper /HMAINT /Mx (where x is one of your node numbers).
+
+
+
+------------------------------
+ Acknowledgments and credits: (did I forget anyone?)
+------------------------------
+
+ BETA testers and other nice people :
+ Olle Olsson       *ideas and bug reports*   (2:203/321)
+ Donato Sotero Navarro *spelling!!*          (dubioz@rocketmail.com)
+ Alistair Cannon   *misspellings!*           (3:639/200)
+ Chris Gosley      *a zillion suggestions!*  ()
+ Daniel Svanstr"m  *serious bughunter*       (2:205/246)
+ Michael Grigutsch *thourough bughunter!*    (2:2426/5020)
+ Oscar Olsson      *vicious OS/2 mastermind* (2:201/345.1)
+
+ DDplus, the DoorDriver :
+ ------------------------
+ This relatively small section is just to recognize the GOOD people
+ who have made the DDPLUS based game a possibility.
+
+ Scott Baker       -=*=-  The authors of the original DoorDriver Kit
+ and                       are to be thanked for releasing the
+ Derrick Parkhurst         source code to their great kit!  Without
+                           that act of kindness DDPLUS would NOT
+                           be possible and neither would this game.
+                           Scott is the author of several door games,
+                           most notably Land of Devastation,
+                           which uses the original doordriver kit.
+ 
+ Steven Lorenz      -=*=- The author of the enhanced add on package
+                           to Scott Bakers DoorDriver Kit. Thanks to
+                           his code modifications, add ons and enhancements
+                           DDPLus is a much more complete and capable
+                           package then originally released in the
+                           DoorDriver Kit. He is also responsible for
+                           the DDPlus setup program which he freely donated.
+                           Steve is the author of several door games, most
+                           notably Railroad Empires, Romans At War, and
+                           Empires at War, all of which use DDPlus.
+
+ Bob Dalton         -=*=- The author of most of the DDPLus documentation
+                           and contributor of the MISC.PAS and INITOVER.PAS
+                           units used in the game. Bob is the author of
+                           several door games, such as GodFather of Crime,
+                           Rise To Power, Task Force Broadside, Ship of the
+                           Line, Grunt Fest, Way Freight and the Adventure
+                           Door Game Toolkit, all of which use DDPLus.
+
+ DESQview is a registered trademark of Quarterdeck Office Systems.
+ Ripscript & Ripterm are registered trademarks of TeleGrafix Communications.
+                   
+
+<++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++>
+
+
+
+
+                                                                
+ //// Always read the WHATS.NEW file for the latest news in Usurper ///
+
+
+INTERNET
+--------
+Download via WWW : http://come.to/usurper
+or http://www.geocities.com/TimesSquare/Dungeon/8079/
+
+
+
+ **********************************
+ **** Registration Information ****
+ **********************************
+Registration is not necessary for the 0.18 and 0.19 versions.
+
+Future versions may require a key to unlock all features.
+
+If you wish to register the game and receive a registration key you can
+send 20 US Dollars to my www.Paypal.com account: jakobd@usa.net
+
+
+
+Registration Benefits
+---------------------
+ +Access to all versions of Usurper now, and in the future.
+ +Access to several special places in the game.
+ +Access to various functions in the game editor.
+ +Players can go beyond the 90th dungeon level (the game can be completed). 
+
+(I apologize for misspellings in game & docs. However, English is NOT
+ my native language (Swedish is).)
+
+
+
+
+Have Fun!  (I had fun writing this baby.) 
