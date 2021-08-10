@@ -118,8 +118,6 @@ begin
         clearscreen;
         meny;
       end;
-      crlf;
-      sd(config.textcolor, 'Main Street (' + config.textcol2 + '?' + config.textcol1 + ' for menu) :');
     end else
     begin
       crlf;
