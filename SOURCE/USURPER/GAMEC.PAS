@@ -103,6 +103,8 @@ begin
 
   menu('(Q)uit Game');
 
+  crlf;
+  sd(config.textcolor, 'Main Street (' + config.textcol2 + '?' + config.textcol1 + ' for menu) : ');
 end; {meny *end*}
 
 procedure Main_Menu(force, short: boolean);
