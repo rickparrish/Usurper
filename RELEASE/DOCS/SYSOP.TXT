@@ -7,6 +7,13 @@ Program Information :
  Door     - Usurper v0.20x
  Producer - (c) 1993-2007 JAS Software, All Rights Reserved
  Tools    - Borland Pascal 7.0 and DDplus 7.0
+
+---
+
+ Door     - Usurper v0.25
+ Tools    - Lazarus v2.0.12 w/ FPC 3.2.0 and DDplus 7.0
+
+---
                         
 Acknowledgements :
  DDplus      - Distributed by Steve Lorenz and Bob Dalton - 1995
@@ -87,10 +94,13 @@ you want to change.
 
 The USURP.CTL file(s)
 ---------------------
-Unzip the file SAMPLE.CTL from the SAMPLES.ZIP archive. Rename SAMPLE.CTL
-to USURP.CTL.
+As of version 0.24 the USURP.CTL file is optional, as "smart" defaults will
+be used, which should hopefully work for most people.  If you'd like to override
+these defaults, then you can follow the usual step below.
 
-Usurper needs the USURP.CTL file to set different options necessary when
+Copy the USURP.CTL from the SAMPLES subdirectory, and edit to suit your needs.
+
+Usurper uses the USURP.CTL file to set different options necessary when
 communicating with fosssil drivers or modems. 
 
 If you have a multinode system
@@ -103,29 +113,12 @@ Usurper can run on (x is representing a number, USURP1.CTL is used for node
 
 Single line systems should only need USURP.CTL.
 A 3 node system with different modem setups will need
-	USURP1.CTL,	
-	USURP2.CTL,
+    USURP1.CTL, 
+    USURP2.CTL,
     and USURP3.CTL.
 
 The USURP.CTL file is quite self explanatory and can be easily edited
-with a text editor. However, there is an alternative editor that can
-do the work for you ;
-  
-    Unzip the DDSETUP.ZIP package in the game directory. Type the
-    Command "DDSETUP" and then press the enter key.  When asked for the
-    name of the control file enter "USURP.CTL" and hit the F5 key
-    or click on the continue button to continue to the next page.
-    Use the on-line help key (F1) or click on the Help button for
-    information on anything you do not understand how to fill out.  There is a
-    DDSETUP.DOC provided if you need further information on how
-    to use the DDSETUP.EXE program. Two fully commented versions
-    are also provided. One is identified as GAME.CTL and this is the
-    UN-EDITED version.  The other is identified as SAMPLE.CTL and is
-    what a CTL file should look like AFTER it is edited (if the commented
-    lines are left in that is).  If for some reason the DDSETUP.EXE
-    program fails to work on your system you can always manually edit one
-    of the two examples provided and rename the one you use to
-    "USURP.CTL".
+with a text editor. 
 
     Where to put the .CTL file(s)?
     Put this file wherever you are running the game executable file from.
@@ -137,11 +130,14 @@ do the work for you ;
 
 
 Have you set up your USURP.CTL file according to the instructions?
-Well, if you have that should be it! Now you can try to run Usurper with ;
+Well, if you have that should be it! Now you can try to run Usurper with:
 
-Usurper.Exe /L, and see if everything works.					
+USURPER.EXE /L
+
+and see if everything works.                    
+
 Maintenance takes place automatically when needed. Since it can take
-quite some time you can disable the automatic maintenace with the Editor.exe
+quite some time you can disable the automatic maintenace with the EDITOR.EXE
 program. Instead you can force Usurper to do its daily maint with the
 command line option '/FMAINT' (command line options are explained more
 in a special section in this document).
@@ -155,7 +151,17 @@ Batch File EXAMPLE for Usurper
   These are a few samples of batch files to be used with Usurper
   %1 is the Node Number which the BBS software passes to the
   batch file.
-					
+                    
+  *** Example batch for a Single node system OR a single-CTL Multinode system START ***
+
+REM The /P option forces Usurper to look for the dropfile in the given
+REM directory.
+            
+CD \BBS\DOORS\USURPER   
+USURPER /PC:\BBS\NODE%1
+
+  *** Batch file example END ***                
+
   *** Example batch for a Multinode system START ***
 
 REM The /M1 option tells Usurper to look for the USURP1.CTL file.
@@ -163,47 +169,23 @@ REM The /M2 option tells Usurper to look for the USURP2.CTL file ...
 REM If you remove the /M switch then Usurper will look for USURP.CTL
 REM The /P option forces Usurper to look for the dropfile in the given
 REM directory.
- 			
+            
 CD \BBS\DOORS\USURPER   
 USURPER /M%1 /PC:\BBS\NODE%1
 
-  *** Batch file example END ***				
+  *** Batch file example END ***                
 
 
-  *** Example batch for a Single node system START ***
-
-REM The /P option forces Usurper to look for the dropfile in the given
-REM directory.
- 			
-CD \BBS\DOORS\USURPER   
-USURPER /PC:\BBS
-   *** Batch file example END ***				
-
-
-
-NOTE! You can also look at the samples file included :
-  (they are located in the SAMPLES.ZIP archive) 
+NOTE! You can also look at the samples files included in the SAMPLES subdirectory.
   MULTI1.BAT - RemoteAccess example 
   MULTI2.BAT - PcBoard example
-							
-
-Improving Performance
----------------------
-It is possible to increase the overall performance of
-Usurper by placing the file "USURPER.OVR" onto a ramdrive.
-If you elect to do this you must also set the following
-environment variable:
-
- SET USUOVR=F:\
-
-If you have a ramdrive you should also set the editor option #99
-so usurper can use it for the semaphore files.
+                            
 
 Command Line Parameters
 -----------------------
 
-      "/Bxxxxx"   This tells GAME.EXE to lock its baud rate at
-      xxxxx.  In order to get the most efficiency out of a high speed
+      "/Bxxx"   This tells USURPER.EXE to lock its baud rate at
+      xxx.  In order to get the most efficiency out of a high speed
       error correcting modem (9600 baud or above), you may lock the baud
       rate to a speed higher than what the caller is actually using.
       By locking the baud to say 38,400, the modem can compress text data
@@ -218,25 +200,6 @@ Command Line Parameters
       that contain the comport number.  If your bbs does have a comport
       listed in the dropfile then there is no need for this parameter.
       The default is comport 0, local mode.
-
-      "/E" - Expanded Memory Specification If your machine has over one
-      megabyte of memory, then you may have some available. USURPER.EXE can
-      utilize EMS to improve game performance and reduce conventional
-      memory requirements.
-      This command will tell USURPER to use EMS memory to hold its
-      overlay buffer.  Otherwise disc area may be used to hold this buffer.
-      This needs a memory manager and when enabled and is compatible with
-      DESQview.
-
-      "/X" - Expanded Memory Specification If your machine has over one
-      megabyte of memory, then you may have some available. USURPER.EXE can
-      utilize XMS to improve game performance and reduce conventional
-      memory requirements.
-      This command will tell USURPER to use XMS memory to hold its
-      overlay buffer.  Otherwise disc area may be used to hold this buffer.
-      This needs a memory manager and when enabled and is compatible with
-      DESQview. (XMS memory is faster than EMS memory).
-      You can't use both /E and /X together. 
 
       "/L"      This tells USURPER to load up in LOCAL mode.
       This is good for testing or when a sysop just wants to "try out" the
@@ -261,7 +224,7 @@ Command Line Parameters
       look for the drop file in C:\WILDCAT\WCWORK\NODE1. If this is left
       out the program assumes the drop file is local.
 
-      "/V"    This command will tell USURPER not to show any display
+      "/V"      This command will tell USURPER not to show any display
       on the local screen.  Only a colored screen and a message will be
       displayed.  The cursor will not move as it will be turned off.
       Saves a little processing on multi-tasking systems.
@@ -270,46 +233,50 @@ Command Line Parameters
       though no multitaskers are detected.  This is useful if the door is
       run on a network such as Novell that doesn't use multitaskers.
       
-      "/FMAINT"	This command is only useful if you have disabled the
-                automatic maintenance. /FMAINT will only start maint
-                if it is necessary. It will not run maintenance more than
-                once a day.
+      "/X"      This command will tell USURPER not to read/write from the
+      selected communications channel (ie don't read/write from the
+      FOSSIL).  It was added to support Mystic on Linux, which automatically
+      redirects local I/O, and so socket I/O must be disabled to avoid
+      garbled screens.
+      
+      "/FMAINT" This command is only useful if you have disabled the
+      automatic maintenance. /FMAINT will only start maint
+      if it is necessary. It will not run maintenance more than
+      once a day.
    
       "/HMAINT" This command will unconditionally force Usurper to perform
-                maintenance. 
+      maintenance. 
 
       "/SCORES" This command will create any external score files
-                defined with the Editor.EXE program.
+      defined with the Editor.EXE program.
 
       "/DO_PACKUSERS" this command will pack the userfile, removing
-                      all deleted and empty records. Don't execute this
-		      command when somebody is playing. 
+      all deleted and empty records. Don't execute this
+      command when somebody is playing. 
   
       "/DO_PACKNPCS" this command will pack the npcfile, removing
-                      all deleted and empty records. Don't execute this
-		      command when somebody is playing.
-
+      all deleted and empty records. Don't execute this
+      command when somebody is playing.
 
       "/DO_PACKMOAT" pack the moat file. removes deleted creatures.
 
       "/DO_PACKRELATIONS" pack the relation file. removes old and
-                          inactive records.
+      inactive records.
 
-	"/DO_PACKGODS" pack the gods data-file. removes old and
-                         deleted immortals.
+      "/DO_PACKGODS" pack the gods data-file. removes old and
+      deleted immortals.
       
-
-	"/DO_PACKCHILDREN" pack the children data-file. removes old and
-                         deleted children.
+      "/DO_PACKCHILDREN" pack the children data-file. removes old and
+      deleted children.
 
       "/DO_PACKMAIL" this command will pack the mail file, deleting all
-                     old mail and pack the file. This command should not
-	             be necessary to carry out, since Usurper keeps the mail
- 	             file updated. But it can be used if you think that 
-		     the \DATA\MAIL.DAT file has grown too big.	 
+      old mail and pack the file. This command should not
+      be necessary to carry out, since Usurper keeps the mail
+      file updated. But it can be used if you think that 
+      the \DATA\MAIL.DAT file has grown too big.     
 
       "/DO_SENDMAIL" send mail to any player without having to enter the
-                     game.
+	  game.
 
 Multinode use
 -------------
@@ -404,33 +371,27 @@ SYSOP FUNCTION KEYS
                         
   F1  = Display available "F" Keys and what they do.
   F2  = Open a scrolling chat window with the door user.
-  F6  = Shell out to DOS
   F7  = Increments user time by 5 minutes.
   F8  = Decrements user time by 5 minutes.
   F10 = Ejects user from door and returns him/her to BBS after
         showing a brief message.
 
 
-Helpfiles
----------
- DDSETUP.ZIP - Compressed copy of the DDSETUP.EXE program and associated
-               files. You can use this to make your USURP.CTL game
-               configuration file, otherwise use a texteditor.
 ÿÿ
 Sample files
 ------------
-(These files are located in the SAMPLES.ZIP archive)
-MULTI1.BAT - RemoteAccess multinode batchfile.
-MULTI2.BAT - PcBoard multinode batchfile 
+(These files are located in the SAMPLES subdirectory)
+MULTI1.BAT   - RemoteAccess multinode batchfile.
+MULTI2.BAT   - PcBoard multinode batchfile 
 BADWORDS.DAT - file with badwords you want to exclude from player language.
-SAMPLE.CFG   - sample Usurper.cfg file.
-SAMPLE.CTL   - sample Usurper.ctl file.
+USURPER.CFG  - sample USURPER.CFG file.
+USURP.CTL    - sample USURP.CTL file.
 
 Files created and used by Usurper: (USURPER/DATA)
 ----------------------------------
 Armor.dat       => All armors for Usurper when running in CLASSIC mode.
 Banksafe.dat    => All information of what's in the bank vault.
-Chest.dat				=> Player store items here (available at their homes)
+Chest.dat       => Player store items here (available at their homes)
 Comments.dat    => Conversations at the Inn.
 Date.dat        => Needed for Usurper to know when it's time to run
                    maintenance.
@@ -470,6 +431,7 @@ Teamrec.dat     => Which gang has held the town for the longest time.
 Trecord.dat     => Hall of Fame for teams holding the town (ascii).
 Users.dat       => holds information of all human players.
 Usutext.dat     => holds all ansi/asc pictures used.
+Version.dat     => holds the current version number for the auto-upgrader
 MoatMon.dat     => holds the Moat creatures. Hired by the king to protect the
                    Castle.
 Drinks.dat      => Custom made cocktails, available at Orbs Bar
@@ -496,10 +458,10 @@ MarrHist.ASC    => List of Marriages in the Realm (ASCII).
 BirtHist.ANS    => List of Child Birth/Deaths in the Realm (ANSI).
 BirtHist.ASC    => List of Child Birth/Deaths in the Realm (ASCII).
 
-Badwords.dat    => you can find a sample of this file in SAMPLES.ZIP.
+Badwords.dat    => you can find a sample of this file in the SAMPLES subdirectory
                    put this file in the \DATA directory if you want Usurper
-		   to replace bad words with others, defined by you. 
-                   The only area in which badwords are disallowed is in
+                   to replace bad words with others, defined by you. 
+                   The only area in which badwords are allowed is in
                    password routines (for obvious reasons).
 ERROR.LOG       => All error messages are logged to this file.
 
@@ -522,7 +484,7 @@ A.
   " "  Msdos Mode
 
 Q. Usurper freezes up on my users! locally it plays fine.
-A. Are you really using a FOSSIL? If not check Usurp.ctl and remove
+A. Are you really using a FOSSIL? If not check USURP.CTL and remove
    the fossil reference there.
 Q. Usurper refuses to run maintenance when I type : Usurper /HMAINT
    It just says "USURP.CTL not found. runtime error xxxx:xxxx".
@@ -586,34 +548,26 @@ A. type : Usurper /HMAINT /Mx (where x is one of your node numbers).
 
 
                                                                 
- //// Always read the WHATS.NEW file for the latest news in Usurper ///
+ //// Always read the WHATSNEW.TXT file for the latest news in Usurper ///
 
 
 INTERNET
 --------
-Download via WWW : http://come.to/usurper
-or http://www.geocities.com/TimesSquare/Dungeon/8079/
+Download via WWW : https://www.usurper.info
+View the source  : https://www.github.com/rickparrish/Usurper
 
 
 
  **********************************
  **** Registration Information ****
  **********************************
-Registration is not necessary for the 0.18 and 0.19 versions.
-
-Future versions may require a key to unlock all features.
-
-If you wish to register the game and receive a registration key you can
-send 20 US Dollars to my www.Paypal.com account: jakobd@usa.net
+Registration is no longer necessary.  If you would like to support the author
+anyway, he previously indicated he accepts PayPal at jakobd@usa.net
+It would be a good idea to reach out to that email address first, just to confirm
+that he still has access to it.
 
 
 
-Registration Benefits
----------------------
- +Access to all versions of Usurper now, and in the future.
- +Access to several special places in the game.
- +Access to various functions in the game editor.
- +Players can go beyond the 90th dungeon level (the game can be completed). 
 
 (I apologize for misspellings in game & docs. However, English is NOT
  my native language (Swedish is).)

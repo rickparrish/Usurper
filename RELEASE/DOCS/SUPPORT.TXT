@@ -1,15 +1,9 @@
-Usurper Distribution Sites :  (August 2009)
-
-Usurper on InterNet:
---------------------
-http://usurper.shackbbs.com
-http://www.geocities.com/TimesSquare/Dungeon/8079/
+Usurper on the Internet
+-----------------------
+https://www.usurper.info
+https://www.github.com/rickparrish/Usurper
                     
-
-Forum
------
-www.usurper.dangarden.com
-
-Bug-reports & Suggestions,
-e-mail : jakob@dangarden.com
-         
+Bug-reports & Suggestions
+-------------------------
+e-mail : rick@usurper.info
+website: https://www.github.com/rickparrish/Usurper/issues
