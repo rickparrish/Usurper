@@ -1,0 +1,17 @@
+;Sample List of bad words and replacements. 
+;
+;Place this file in the \DATA directory if you want Usurper to use it.
+;Add the words and sentences you feel should be banned from the game.
+;Place long phrases first.
+;
+
+fucking Sysop|precious Sysop
+fuck|fudge
+shit|shoot
+dick|richard
+prick|thorn
+pussy|kitty
+cunt|meany
+bitch|she dog
+phuck|bless
+cock|pencil
