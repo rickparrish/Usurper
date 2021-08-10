@@ -329,7 +329,7 @@ var
 
   i:        longint;
 
-  kill_file, exit_ordered, order_maint, dimmy, First, play: boolean;
+  kill_file, exit_ordered, order_maint, dimmy, play: boolean;
 
   ch:       char;
 
@@ -702,50 +702,6 @@ begin {* Main Program *}
   if exit_ordered = True then
   begin
     normal_exit;
-  end;
-
-
-
-
-  {Do we need to move the .doc files?}
-  i := 1;
-  First := True;
-  repeat
-    case i of
-      1: s := 'WHATS.NEW';
-      2: s := 'README!';
-      3: s := 'USURPER.DOC';
-      4: s := 'SYSOP.DOC';
-      5: s := 'SUPPORT.DOC';
-      6: s := 'BETATEAM.DOC';
-      7: s := 'FUTURE.DOC';
-      8: s := 'USRPBETA.TXT';
-      9: s := 'BOARDRM.TXT';
-      10: s := '-LEGAL-.TXT';
-    end; {case .end.}
-
-    if f_exists(s) then
-    begin
-      if f_exists(global_docsdir + s) then
-        delete_file(global_docsdir + s);
-      if First = True then
-      begin
-        First := False;
-        d(config.textcolor, 'Updating Usurper files... please wait!');
-      end;
-      move_file(s, global_docsdir);
-    end;
-    Inc(i);
-  until i > 10;
-
-  {Need to move TEXT.DAT file?}
-  s := global_textdataf;
-  if f_exists(s) then
-  begin
-    if f_exists(global_datadir + s) then
-      delete_file(global_datadir + s);
-    d(config.textcolor, 'Updating Usurper files... please wait!');
-    move_file(s, global_datadir);
   end;
 
   {let's check the carrier}
