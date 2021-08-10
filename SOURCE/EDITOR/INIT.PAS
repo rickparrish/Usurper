@@ -1814,9 +1814,11 @@ const
 begin
   inherited GetEvent(Event);
   case Event.What of
-    evCommand: if (Event.Command = cmHelp) and not HelpInUse then
+    evCommand, evKeyDown:
+      if (((Event.What = evCommand) and (Event.Command = cmHelp)) or ((Event.What = evKeyDown) and (Event.Command = kbF1))) and not HelpInUse then
       begin
         HelpInUse := True;
+        {$IFDEF MSDOS}
         HelpStrm := New(PDosStream, Init(CalcHelpName(global_EDHELP), stOpenRead));
         HFile := New(PHelpFile, Init(HelpStrm));
         if HelpStrm^.Status <> stOk then
@@ -1833,6 +1835,10 @@ begin
           end;
           ClearEvent(Event);
         end;
+        {$ENDIF}
+        {$IFNDEF MSDOS}
+        NoFreePascalHelp;
+        {$ENDIF}
         HelpInUse := False;
       end;
     evMouseDown: if Event.Buttons <> 1 then

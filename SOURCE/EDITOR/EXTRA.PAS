@@ -57,6 +57,9 @@ procedure Options_Menu;
 procedure More_Editors_Menu;
 
 procedure About; {about box - who made the program + version etc. etc.}
+{$IFNDEF MSDOS}
+Procedure NoFreePascalHelp; {about box - letting user know FreePascal help is not available}
+{$ENDIF}
 procedure OkBox(const toptext: string; const Text: string; Lines: Integer);
 function YesNoBox(const toptext: string; const Text: string): boolean;
 function Save_Request: boolean;
@@ -2280,6 +2283,44 @@ begin
        {Execute Dialog}
   MyApp.ExecuteDialog(Dia, nil);
 end;
+
+{$IFNDEF MSDOS}
+Procedure NoFreePascalHelp;
+var
+  Dia: XDialogP;
+  R : TRect;
+
+begin
+
+ R.Assign(0, 0, 35, 13);
+ Dia := New(XDialogP, Init(R, 'Help Not Supported'));
+ With Dia^ do begin
+  Options := Options or ofCentered;
+
+  R.Grow(-1, -1);
+  Dec(R.B.Y, 3);
+
+  {Text}
+  Insert(New(PStaticText, Init(R,
+   #13 +
+   ^C'Usurper Editor' + #13 +
+   #13 + ^C+'Version '+ uver + #13 +
+   ^C' ' + #13 +
+   ^C'Sorry, help is not' + #13 +
+   ^C'supported in this' + #13 +
+   ^C'version of EDITOR.EXE')));
+  {1993,98}
+
+  {Button}
+  Okbutton(12,10);
+
+ end; {with Dia do .end.}
+
+ {Execute Dialog}
+ MyApp.ExecuteDialog(Dia,Nil);
+
+end;
+{$ENDIF}
 
 function YesNoBox(const toptext: string; const Text: string): boolean;
 var
