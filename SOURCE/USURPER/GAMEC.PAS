@@ -996,6 +996,7 @@ begin
       'S': begin {status}
         status(player);
         crlf;
+        refresh := True
       end;
       'N': begin {news-paper}
 
