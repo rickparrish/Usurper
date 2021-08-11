@@ -43,7 +43,7 @@ uses
   Home, Various, Various2,
   Various3, Mail, Online,
   Relation, Relatio2, Children,
-  File_Io;
+  File_Io, DispFile;
 
 var
   refresh:   boolean;

@@ -112,7 +112,6 @@ function Strip(const out: string): string; {remove all Usurper ansi}
 function Uconv(const out: string): string; {Usurper ANSI -> standard ANSI}
 
  {menu}
-function DisplayTextFile(const Name: String): Boolean;
 procedure Show_Usurper_Data(const Name: string; pausing: boolean);
 procedure Menu(const Text: string);
 procedure Menu2(const Text: string);
@@ -146,7 +145,7 @@ uses
   DDPlus, DDScott,
   Dos, Crt, Init,
   Exec, AnsiColr, SwagDate,
-  Various, NetFilep, DispText,
+  Various, NetFilep, DispFile, DispText,
   Online, File_IO {$IFNDEF MSDOS}, RPPort{$ENDIF};
 
 var carriage_return: boolean; {used by D and SD procedures (display routines)}
@@ -1035,65 +1034,6 @@ begin
   crlf;
 
 end; {pause *end*}
-
-function DisplayTextFile(const Name: String): Boolean;
-{show ansi/ascii from the text directory}
-var
-  AnsiSave: Boolean;
-  Buf: Array[1..250] of Char;
-  F: File of Char;
-  Filename, S: String;
-  NumRead: Integer;
-begin
-  // Assume failure
-  DisplayTextFile := False;
-
-  {keep ansi variable}
-  AnsiSave := AnsiOn;
-  AnsiOn := True; {process ansi locally, ddplus variable}
-
-  // Get filename
-  if global_ansi then
-  begin
-    Filename := global_textdir + upcasestr(Name) + '.ANS';
-  end else
-  begin
-    Filename := global_textdir + upcasestr(Name) + '.ASC';
-  end;
-
-  // Read file line by line
-  Assign(F, Filename);
-  {$I-}Reset(F);{$I+}
-  if (IOResult = 0) then
-  begin
-    while Not(EOF(F)) do
-    begin
-      BlockRead(F, Buf, SizeOf(Buf), NumRead);
-      if (NumRead > 0) then
-      begin
-        SetString(S, PChar(@Buf[1]), NumRead);
-        SSWrite(S);
-      end;
-    end; {while .end.}
-
-    {close textfile}
-    Close(F);
-
-    DisplayTextFile := True;
-  end else
-  begin
-    {error accessing resource file}
-    unable_to_access(Filename, access_error);
-  end;
-
-  // Force resetting the foreground colour
-  current_foreground := config.textcolor + 1;
-  set_foreground(config.textcolor);
-
-  {restore ansi variable}
-  AnsiOn := AnsiSave;
-end; {DisplayTextFile *end*}
-
 
 procedure Show_Usurper_Data(const Name: string; pausing: boolean);
 {show ansi/text/data from the usurper resource file}
