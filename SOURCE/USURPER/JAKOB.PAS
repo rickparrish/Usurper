@@ -1040,8 +1040,10 @@ function DisplayTextFile(const Name: String): Boolean;
 {show ansi/ascii from the text directory}
 var
   AnsiSave: Boolean;
-  F: Text;
+  Buf: Array[1..250] of Char;
+  F: File of Char;
   Filename, S: String;
+  NumRead: Integer;
 begin
   // Assume failure
   DisplayTextFile := False;
@@ -1064,12 +1066,14 @@ begin
   {$I-}Reset(F);{$I+}
   if (IOResult = 0) then
   begin
-    while true do
+    while Not(EOF(F)) do
     begin
-      ReadLn(F, S);
-      SWrite(S);
-      if (EOF(F)) then Break;
-      Crlf;
+      BlockRead(F, Buf, SizeOf(Buf), NumRead);
+      if (NumRead > 0) then
+      begin
+        SetString(S, PChar(@Buf[1]), NumRead);
+        SSWrite(S);
+      end;
     end; {while .end.}
 
     {close textfile}
@@ -1105,6 +1109,12 @@ var
   s:  string;
 
 begin
+  // Try to display the file from the TEXT directory before reading USUTEXT.DAT
+  if (DisplayTextFile(Name)) then
+  begin
+    if (pausing) then pause;
+    Exit;
+  end;
 
   {keep ansi variable}
   ansisave := ansion;
