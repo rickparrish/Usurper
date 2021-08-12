@@ -1,4 +1,4 @@
-[0;40;35mMain street of[1;30m [36m@TOWNNAME@
+[0;40;35m[2JMain street of [1;36m@TOWN_NAME@[0;40;35m
 
 [0;32m([35mS[32m)tatus[13C([35mG[32m)ood Deeds[13C[1;30m[Global Commands]
 [0;32m([35mD[32m)ungeons[11C([35mE[32m)vil Deeds[13C([35mCtrl+W[32m) Who is Online?
