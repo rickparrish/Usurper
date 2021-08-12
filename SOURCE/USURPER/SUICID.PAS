@@ -228,6 +228,7 @@ begin
   end;
   crlf;
   d(config.textcolor, 'Phew! You had us all worried with that suicide talk!');
+  pause;
 
 end; {Suicide *end*}
 

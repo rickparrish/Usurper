@@ -208,6 +208,7 @@ begin
     'A': begin
       crlf;
       d(config.textcolor, 'You walk away..');
+      pause;
       exit;
     end;
     '1': sagee := master[1];

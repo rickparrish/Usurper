@@ -1032,6 +1032,7 @@ begin
       end;
       'V': begin {The Level Masters}
         level_masters;
+        Refresh := True;
       end;
       'E': begin {Dark Deeds}
         crlf;
@@ -1133,6 +1134,7 @@ begin
         add_onliner(OUpdateLocation, onliner);
 
         suicide;
+        Refresh := True;
 
         onliner.doing := 'wandering the streets';
         add_onliner(OUpdateLocation, onliner);
