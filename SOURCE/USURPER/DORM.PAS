@@ -1025,7 +1025,8 @@ begin
         pause;
 
         global_auto_probe := NoWhere;
-        cho := '?';
+        cho := ' ';
+        Refresh := True;
       end;
     end; {case .end.}
 

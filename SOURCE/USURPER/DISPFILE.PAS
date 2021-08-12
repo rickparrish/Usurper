@@ -96,6 +96,8 @@ begin
   AnsiOn := AnsiSave;
 end; {DisplayTextFile *end*}
 
+// Partially implements the @ code formatting options supported by Synchronet
+// http://wiki.synchro.net/custom:atcodes
 function ExpandAtCode(AtCode, AtFormat: String): String;
 var
   DoLower, DoCenter, DoLeft, DoRight, DoThousands, DoUpper, DoZero: Boolean;

@@ -100,9 +100,16 @@
       <Version Value="2"/>
     </PublishOptions>
     <RunParams>
+      <local>
+        <CommandLineParams Value="/l"/>
+      </local>
       <FormatVersion Value="2"/>
       <Modes Count="1">
-        <Mode0 Name="default"/>
+        <Mode0 Name="default">
+          <local>
+            <CommandLineParams Value="/l"/>
+          </local>
+        </Mode0>
       </Modes>
     </RunParams>
     <Units Count="1">
