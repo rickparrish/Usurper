@@ -1,6 +1,4 @@
-{$IFNDEF MSDOS}
-{$I DEFINES.INC}
-{$ENDIF}
+{$mode objfpc}{$H+}
 {
  Copyright 2007 Jakob Dangarden
 
@@ -24,14 +22,12 @@ unit DispFile; {Usurper - Displays a file from the TEXT subdirectory}
 
 interface
 
-{$H+}
-
 function DisplayTextFile(const Name: String): Boolean;
 
 implementation
 
 uses
-  Math, SysUtils,
+  Math, StrUtils, SysUtils,
   DDPlus,
   File_IO, Init, Jakob, Various;
 
@@ -100,13 +96,178 @@ begin
   AnsiOn := AnsiSave;
 end; {DisplayTextFile *end*}
 
-function ExpandAtCodes(S: String): String;
+function ExpandAtCode(AtCode, AtFormat: String): String;
+var
+  DoLower, DoCenter, DoLeft, DoRight, DoThousands, DoUpper, DoZero: Boolean;
+  Err, I, Width: Integer;
+  WidthStr: String;
 begin
-  // Just a dumb implementation as a proof-of-concept.  Eventually want to support
-  // something like http://wiki.synchro.net/custom:atcodes with format modifiers
-  ExpandAtCodes := StringReplace(S, '@TOWNNAME@', TownName, [rfReplaceAll]);
+  case AtCode of
+    'HEIGHT': Result := Long2Str(player.Height);
+    'TOWNNAME': Result := TownName;
+    else
+    begin
+      // If we get here the @ code wasn't handled, so return it as is
+      if (AtFormat = '') then
+      begin
+        Result := '@' + AtCode + '@';
+      end else
+      begin
+        Result := '@' + AtCode + '|' + AtFormat + '@';
+      end;
+      Exit;
+    end;
+  end;
+
+  // If we get here the @ code was expanded, so now we need to check if
+  // we need to format it
+  if (AtFormat <> '') then
+  begin
+    DoLower := False;
+    DoCenter := False;
+    DoLeft := False;
+    DoRight := False;
+    DoThousands := False;
+    DoUpper := False;
+    DoZero := False;
+    WidthStr := '';
+
+    for I := 1 to Length(AtFormat) do
+    begin
+      case AtFormat[I] of
+        '0'..'9': WidthStr += AtFormat[I];
+        'C': DoCenter := True;
+        'L': DoLeft := True;
+        'R': DoRight := True;
+        'T': DoThousands := True;
+        'U': DoUpper := True;
+        'u': DoLower := True;
+        'Z': DoZero := True;
+      end;
+    end;
+
+    // Handle casing
+    if (DoUpper) then
+    begin
+      Result := UpperCase(Result);
+    end else if (DoLower) then
+    begin
+      Result := LowerCase(Result);
+    end;
+
+    // Handle thousands separator
+    if (DoThousands) then
+    begin
+      Val(Result, I, Err);
+      if (Err = 0) then
+      begin
+        Result := CommaStr(I);
+      end;
+    end;
+
+    // Handle padding/truncation
+    if (WidthStr <> '') then
+    begin
+      Val(WidthStr, Width, Err);
+      if (Err = 0) then
+      begin
+        // Truncate to at most Width characters
+        Result := LeftStr(Result, Width);
+
+        // If there are fewer characters than Width, pad as requested
+        if (Length(Result) < Width) then
+        begin
+          if (DoZero) then
+          begin
+            Result := AddChar('0', Result, Width);
+          end else
+          if (DoRight) then
+          begin
+            Result := StrUtils.PadLeft(Result, Width);
+          end else
+          if (DoCenter) then
+          begin
+            Result := StrUtils.PadCenter(Result, Width);
+          end else
+          if (DoLeft) then
+          begin
+            Result := StrUtils.PadRight(Result, Width);
+          end;
+        end;
+      end;
+    end;
+  end;
 end;
 
+function ExpandAtCodes(S: String): String;
+var
+  At1, At2, Pipe, SLen, Tail: Integer;
+  AtString, AtCode, AtFormat: String;
+begin
+  SLen := Length(S);
+  Result := '';
+  Tail := 1;
+
+  // Don't bother if the string is too short (min @X@ = 3)
+  if (SLen < 3) then
+  begin
+    Result := S;
+    Exit;
+  end;
+
+  while (true) do
+  begin
+    // Get the position of the first @ symbol, and break if there are none left
+    At1 := PosEx('@', S, Tail);
+    if (At1 = 0) then Break;
+
+    // Check if there is non-@ text between the tail and the next @ code
+    // and if there is, add it to the output variable
+    if (At1 > Tail) then
+    begin
+      Result += Copy(S, Tail, At1 - Tail);
+    end;
+
+    // Get the position of the second @ symbol, and break if there are none left
+    At2 := PosEx('@', S, At1 + 1);
+    if (At2 = 0) then Break;
+
+    // Copy the @ string, eliminating the leading and trailing @ symbols
+    AtString := Copy(S, At1 + 1, At2 - At1 - 1);
+
+    // Split the @ string into separate code and format pieces
+    // Minimum example is 'X:Y', hence the >= 3 and >= 2 checks
+    Pipe := Pos('|', AtString);
+    if (Length(AtString) >= 3) and (Pipe >= 2) and (Pipe < Length(AtString)) then
+    begin
+      AtCode := Copy(AtString, 1, Pipe - 1);
+      AtFormat := Copy(AtString, Pipe + 1, Length(AtString) - Pipe);
+    end else
+    begin
+      AtCode := AtString;
+      AtFormat := '';
+    end;
+
+    // Handle the expansion
+    Result += ExpandAtCode(AtCode, AtFormat);
+
+    // Update the tail to be next character that we need to process
+    Tail := At2 + 1;
+  end;
+
+  // If there was text left in the input string, copy it to the output string
+  if (Tail <= SLen) then
+  begin
+    Result += Copy(S, Tail, SLen - Tail + 1);
+  end;
+end;
+
+// Usurper is compiled with $MODE TP for maximum compatability with TP,
+// whereas this unit uses $MODE objfpc and $H+ to enable huge strings
+// This means when we want to write text, we need to do it in chunks of
+// no more than 255 characters, otherwise some data will be lost.
+// We chunk at 250 instead of 255 just in case there's a bit of #255
+// expansion (for Telnet connections)
 procedure WriteShortString(S: String);
 var
   I, SLen, ToRead: Integer;
@@ -121,7 +282,6 @@ begin
   end;
 
   // If we get here we have a long string, so we need to write it in chunks
-  // since the rest of Usurper is in $H- mode
   I := 1;
   while (I <= SLen) do
   begin
@@ -132,5 +292,7 @@ begin
 end;
 
 begin
+  // Initialize the variables that won't change as the game is played,
+  // so then we don't have to constantly read the config file as screens display
   TownName := cfg_string(9);
-end. {Unit DispText .end.}
+end. {Unit DispFile .end.}
