@@ -43,7 +43,7 @@ implementation
 uses
   DDplus, Cms, Jakob, invent,
   spellsu, various, various2,
-  various3, online, file_io;
+  various3, online, file_io, DispFile;
 
 const nada        = '{nothing}';
   never_quit_loop = False;
@@ -1408,6 +1408,18 @@ begin
 
       'M': begin {more status...}
 
+        // Try to display a custom ANSI, and exit if we succeed
+        // TODOX This could be called in the context of a team-mate, and in
+        // that case the current players status will be displayed instead of
+        // the team-mates status.  Maybe we add an optional argument that
+        // will use the current player by default, but allow specifying a
+        // custom player when necessary (like here)?
+        if (DisplayTextFile('STATUS_MORE')) then
+        begin
+          pause;
+          continue;
+        end;
+
         clearscreen;
 
         d(5, '[Physical Appearance]');
@@ -1471,22 +1483,22 @@ begin
         d(5, '[Victories and Defeats]');
 
         sd(config.textcolor, ljust('Monster kills:', justvalmore1));
-        sd(config.textcolor, ljust(commastr(player.m_kills), justvalmore2));
+        sd(config.textcolor, ljust(commastr(player0.m_kills), justvalmore2));
         sd(config.textcolor, ljust('Dungeon fights:', justvalmore3));
         d(config.textcolor, ljust(commastr(player0.fights), justvalmore2));
 
         sd(config.textcolor, ljust('Player kills:', justvalmore1));
-        sd(config.textcolor, ljust(commastr(player.p_kills), justvalmore2));
+        sd(config.textcolor, ljust(commastr(player0.p_kills), justvalmore2));
         sd(config.textcolor, ljust('Teamfights:', justvalmore3));
         d(config.textcolor, ljust(commastr(player0.tfights), justvalmore2));
 
         sd(config.textcolor, ljust('Monster defeats:', justvalmore1));
-        sd(config.textcolor, ljust(commastr(player.m_defeats), justvalmore2));
+        sd(config.textcolor, ljust(commastr(player0.m_defeats), justvalmore2));
         sd(config.textcolor, ljust('Player fights:', justvalmore3));
         d(config.textcolor, ljust(commastr(player0.pfights), justvalmore2));
 
         sd(config.textcolor, ljust('Player defeats:', justvalmore1));
-        d(config.textcolor, ljust(commastr(player.p_defeats), justvalmore2));
+        d(config.textcolor, ljust(commastr(player0.p_defeats), justvalmore2));
 
         crlf;
         d(5, '[Game Info]');
@@ -1494,7 +1506,7 @@ begin
         sd(config.textcolor, ljust('Time left:', justvalmore1));
         sd(config.textcolor, ljust(commastr(time_left) + ' minutes', justvalmore2));
         sd(config.textcolor, ljust('Resurrection left:', justvalmore3));
-        d(config.textcolor, ljust(commastr(player.resurrections), justvalmore2));
+        d(config.textcolor, ljust(commastr(player0.resurrections), justvalmore2));
 
         crlf;
         pause;

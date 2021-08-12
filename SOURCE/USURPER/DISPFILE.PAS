@@ -105,8 +105,47 @@ var
   WidthStr: String;
 begin
   case AtCode of
-    'HEIGHT': Result := Long2Str(player.Height);
-    'TOWNNAME': Result := TownName;
+    'ACTIVE_POISON':
+    begin
+      if GetClass(player) = Alchemist then
+      begin
+        if player.poison > 0 then
+        begin
+          Result := LowerCase(alchemist_poison(player));
+        end else
+        begin
+          Result := 'none';
+        end;
+      end else
+      begin
+        Result := 'not applicable';
+      end;
+    end;
+    'AGILITY': Result := Long2Str(player.agility);
+    'CHARISMA': Result := Long2Str(player.charisma);
+    'CHIVALRY': Result := Long2Str(player.chiv);
+    'DARKNESS': Result := Long2Str(player.dark);
+    'DEXTERITY': Result := Long2Str(player.dex);
+    'DISEASE_RESISTANCE': Result := immunity(player.disres);
+    'DRUG_ADDICTION': Result := Long2Str(player.addict) + '%';
+    'DUNGEON_FIGHTS': Result := Long2Str(player.fights);
+    'EYES': Result := color[player.eyes];
+    'HAIR': Result := color[player.hair];
+    'HEIGHT': Result := Long2Str(player.height) + 'cm';
+    'MENTAL_STABILITY': Result := Long2Str(player.mental) + '%';
+    'MONSTER_DEFEATS': Result := Long2Str(player.m_defeats);
+    'MONSTER_KILLS': Result := Long2Str(player.m_kills);
+    'PLAYER_DEFEATS': Result := Long2Str(player.p_defeats);
+    'PLAYER_FIGHTS': Result := Long2Str(player.pfights);
+    'PLAYER_KILLS': Result := Long2Str(player.p_kills);
+    'RESSURECTIONS_LEFT': Result := Long2Str(player.resurrections);
+    'SKIN': Result := color[player.skin];
+    'STAMINA': Result := Long2Str(player.stamina);
+    'TEAM_FIGHTS': Result := Long2Str(player.tfights);
+    'TIME_LEFT': Result := Long2Str(time_left);
+    'TOWN_NAME': Result := TownName;
+    'WEIGHT': Result := Long2Str(player.weight) + 'kg';
+    'WISDOM': Result := Long2Str(player.wisdom);
     else
     begin
       // If we get here the @ code wasn't handled, so return it as is

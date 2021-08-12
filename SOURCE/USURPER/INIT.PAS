@@ -1254,12 +1254,19 @@ var global_nwfileans:  s70; {newsfile ANSI}
 var global_ynwfileasc: s70; {yesterdays news ASCII}
 var global_ynwfileans: s70; {yesterdays news ANSI... defined by sysop. default below}
 
+// Used by DisplayTextFile, because it uses objfpc mode and can't access player.class
+function GetClass(player: UserRec): classes;
 procedure Init_Usu;
 
 implementation
 
 uses
   Dos;
+
+function GetClass(player: UserRec): classes;
+begin
+  GetClass := player.class;
+end;
 
 procedure Init_Usu; {Init Global Variables}
 var i: byte;
