@@ -115,6 +115,8 @@ function Race_Display(const mode: byte; race: races; const racenr: byte): s10;
 function Class_Corr2(i: byte): classes;
 function Class_Corr(class: classes): byte;
 function Class_Restricted(class: classes; var o: orec; instead: byte): boolean;
+function GetClass(player: UserRec): classes;
+
 
 {Help Texts}
 function Numeric_Help: s90;
@@ -459,6 +461,11 @@ begin
   else class_restricted := False;
 
 end; {class_restricted *end*}
+
+function GetClass(player: UserRec): classes;
+begin
+  GetClass := player.class;
+end;
 
 
 
