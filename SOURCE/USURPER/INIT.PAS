@@ -1212,7 +1212,7 @@ type {Config Reocrd}
     SpinCursor: boolean; {use spin cursor routines..may slow some routines}
 
     log_divine_entrance: boolean; {#164, log divine entries in the news}
-    Resurrections:       SmallWord; {191, how many ressurections a player have per day}
+    Resurrections:       SmallWord; {191, how many resurrections a player have per day}
 
     {Quest-Master}
     QuestMaster: s20;

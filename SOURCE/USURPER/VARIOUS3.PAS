@@ -3642,9 +3642,9 @@ end; {list_of_prisoners .end.}
 procedure Reduce_Player_Resurrections;
 var res: s20;
 begin
-  {decreases player PLYs ressurections. if TYPEINFO is TRUE then display how}
+  {decreases player PLYs resurrections. if TYPEINFO is TRUE then display how}
 
-  {many ressurections are left}
+  {many resurrections are left}
   if ply.resurrections > 0 then
   begin
     Dec(ply.resurrections);

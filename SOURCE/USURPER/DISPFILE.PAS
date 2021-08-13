@@ -138,7 +138,7 @@ begin
     'PLAYER_DEFEATS': Result := Long2Str(player.p_defeats);
     'PLAYER_FIGHTS': Result := Long2Str(player.pfights);
     'PLAYER_KILLS': Result := Long2Str(player.p_kills);
-    'RESSURECTIONS_LEFT': Result := Long2Str(player.resurrections);
+    'RESURRECTIONS_LEFT': Result := Long2Str(player.resurrections);
     'SKIN': Result := color[player.skin];
     'STAMINA': Result := Long2Str(player.stamina);
     'TEAM_FIGHTS': Result := Long2Str(player.tfights);
