@@ -18,6 +18,8 @@ Fixes:
   - Fixes hitting ENTER not selecting default option on some menus, NPC events, and the /FMAINT and /HMAINT parameters asking for a name
 - If displaying errors is disabled, don't pause when an error is encountered, because there's no error to read
 - Pause after displaying Online Players when first logging in (waking up at Home would skip past this screen)
+- Re-display main menu after viewing status, and aborting some actions
+- Waking up at the dorm was displaying the menu twice
 
 Changes:
 - Display on (S)tatus -> (M)ore updated (line things up and re-arranged other things)
@@ -29,6 +31,9 @@ Changes:
 - Help (F1) disabled in EDITOR.EXE since it requires a new EDITOR.HLP file to be compiled, and I'm not sure how to for FreeVision
 - DOC and DATA files will now be distributed in their subdirectory in the release archive, so Usurper will no longer move them at startup
 - Main menu can be customized by editing TEXT\MAINMENU.ANS (and .ASC)
+- USUTEXT.DAT is split into separate .ANS and .ASC files in the TEXT subdirectory, making it easier to customize screens
+- Implement an @-code system similar to Synchronet's, to allow displaying variables in the TEXT\*.ANS and .ASC screens
+- Status -> More can be customized by editing TEXT\STATUS_MORE.ANS (and .ASC)
 
 
 ----------------------------
