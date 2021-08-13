@@ -1409,12 +1409,7 @@ begin
       'M': begin {more status...}
 
         // Try to display a custom ANSI, and exit if we succeed
-        // TODOX This could be called in the context of a team-mate, and in
-        // that case the current players status will be displayed instead of
-        // the team-mates status.  Maybe we add an optional argument that
-        // will use the current player by default, but allow specifying a
-        // custom player when necessary (like here)?
-        if (DisplayTextFile('STATUS_MORE')) then
+        if (DisplayTextFile('STATUS_MORE', player0)) then
         begin
           pause;
           continue;

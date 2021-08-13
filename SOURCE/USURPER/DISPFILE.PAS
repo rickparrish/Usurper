@@ -22,16 +22,21 @@ unit DispFile; {Usurper - Displays a file from the TEXT subdirectory}
 
 interface
 
+uses
+  Init;
+
 function DisplayTextFile(const Name: String): Boolean;
+function DisplayTextFile(const Name: String; APlayer: UserRec): Boolean;
 
 implementation
 
 uses
   Math, StrUtils, SysUtils,
   DDPlus,
-  File_IO, Init, Jakob, Various;
+  File_IO, Jakob, Various;
 
 var
+  Player: UserRec;
   TownName: String;
 
 function ExpandAtCodes(S: String): String; forward;
@@ -39,6 +44,12 @@ procedure WriteShortString(S: String); forward;
 
 function DisplayTextFile(const Name: String): Boolean;
 {show ansi/ascii from the text directory}
+begin
+  // Call the other DisplayTextFile method, passing the current player
+  Result := DisplayTextFile(Name, Init.Player);
+end; {DisplayTextFile *end*}
+
+function DisplayTextFile(const Name: String; APlayer: UserRec): Boolean;
 var
   AnsiSave: Boolean;
   F: Text;
@@ -46,6 +57,9 @@ var
 begin
   // Assume failure
   DisplayTextFile := False;
+
+  // Store the given player variable, so @-code expansion can use it
+  Player := APlayer;
 
   {keep ansi variable}
   AnsiSave := AnsiOn;
