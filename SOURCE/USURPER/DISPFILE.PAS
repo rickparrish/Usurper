@@ -39,7 +39,9 @@ var
   Player: UserRec;
   TownName: String;
 
+function ExpandAtCode(AtCode, AtFormat: String; AbortOnNoCode: Boolean): String; forward;
 function ExpandAtCodes(S: String): String; forward;
+function ExpandBoolean(var AtFormat: String): String; forward;
 procedure WriteShortString(S: String); forward;
 
 function DisplayTextFile(const Name: String): Boolean;
@@ -112,12 +114,14 @@ end; {DisplayTextFile *end*}
 
 // Partially implements the @ code formatting options supported by Synchronet
 // http://wiki.synchro.net/custom:atcodes
-function ExpandAtCode(AtCode, AtFormat: String): String;
+function ExpandAtCode(AtCode, AtFormat: String; AbortOnNoCode: Boolean): String;
 var
-  DoLower, DoCenter, DoLeft, DoRight, DoThousands, DoUpper, DoZero: Boolean;
+  DoLower, DoCenter, DoLeft, DoParentheses, DoRight, DoThousands, DoUpper, DoZero: Boolean;
   Err, I, Width: Integer;
   WidthStr: String;
 begin
+  Result := '';
+
   case AtCode of
     'ACTIVE_POISON':
     begin
@@ -146,6 +150,17 @@ begin
     'EYES': Result := color[player.eyes];
     'HAIR': Result := color[player.hair];
     'HEIGHT': Result := Long2Str(player.height) + 'cm';
+    'IS_ALCHEMIST':
+    begin
+      if true or (GetClass(player) = Alchemist) then
+      begin
+        Result := ExpandBoolean(AtFormat);
+      end else
+      begin
+        Result := '';
+      end;
+      Exit;
+    end;
     'MENTAL_STABILITY': Result := Long2Str(player.mental) + '%';
     'MONSTER_DEFEATS': Result := Long2Str(player.m_defeats);
     'MONSTER_KILLS': Result := Long2Str(player.m_kills);
@@ -162,25 +177,40 @@ begin
     'WISDOM': Result := Long2Str(player.wisdom);
     else
     begin
-      // If we get here the @ code wasn't handled, so return it as is
-      if (AtFormat = '') then
+      if (AbortOnNoCode) then
       begin
-        Result := '@' + AtCode + '@';
+        // If we get here the @ code wasn't handled, so return it as is
+        if (AtFormat = '') then
+        begin
+          Result := '@' + AtCode + '@';
+        end else
+        begin
+          Result := '@' + AtCode + '|' + AtFormat + '@';
+        end;
+        Exit;
       end else
       begin
-        Result := '@' + AtCode + '|' + AtFormat + '@';
+        // If we get here the @ code wasn't handled, but we're OK continuing
+        // anyway -- this is probably because a boolean operator was used,
+        // and we want to allow outputing plain text
+        Result := AtCode;
       end;
-      Exit;
     end;
   end;
 
-  // If we get here the @ code was expanded, so now we need to check if
-  // we need to format it
+  // If we get here, that means Result now contains the text we want to display
+
+  // First we'll expand special sequences
+  Result := StringReplace(Result, '\r', #13, [rfReplaceAll]);
+  Result := StringReplace(Result, '\n', #10, [rfReplaceAll]);
+
+  // Then we'll check if a format has been requested
   if (AtFormat <> '') then
   begin
     DoLower := False;
     DoCenter := False;
     DoLeft := False;
+    DoParentheses := False;
     DoRight := False;
     DoThousands := False;
     DoUpper := False;
@@ -193,6 +223,7 @@ begin
         '0'..'9': WidthStr += AtFormat[I];
         'C': DoCenter := True;
         'L': DoLeft := True;
+        'P': DoParentheses := True;
         'R': DoRight := True;
         'T': DoThousands := True;
         'U': DoUpper := True;
@@ -218,6 +249,12 @@ begin
       begin
         Result := CommaStr(I);
       end;
+    end;
+
+    // Handle parentheses
+    if (DoParentheses) and (Trim(Result) <> '') then
+    begin
+      Result := '(' + Result + ')';
     end;
 
     // Handle padding/truncation
@@ -291,7 +328,7 @@ begin
     AtString := Copy(S, At1 + 1, At2 - At1 - 1);
 
     // Split the @ string into separate code and format pieces
-    // Minimum example is 'X:Y', hence the >= 3 and >= 2 checks
+    // Minimum example is 'X|Y', hence the >= 3 and >= 2 checks
     Pipe := Pos('|', AtString);
     if (Length(AtString) >= 3) and (Pipe >= 2) and (Pipe < Length(AtString)) then
     begin
@@ -304,7 +341,7 @@ begin
     end;
 
     // Handle the expansion
-    Result += ExpandAtCode(AtCode, AtFormat);
+    Result += ExpandAtCode(AtCode, AtFormat, True); // True = Abort if the code was not found
 
     // Update the tail to be next character that we need to process
     Tail := At2 + 1;
@@ -315,6 +352,27 @@ begin
   begin
     Result += Copy(S, Tail, SLen - Tail + 1);
   end;
+end;
+
+function ExpandBoolean(var AtFormat: String): String;
+var
+  AtCode: String;
+  Pipe: Integer;
+begin
+  // Split the @ string into separate code and format pieces
+  // Minimum example is 'X|Y', hence the >= 3 and >= 2 checks
+  Pipe := Pos('|', AtFormat);
+  if (Length(AtFormat) >= 3) and (Pipe >= 2) and (Pipe < Length(AtFormat)) then
+  begin
+    AtCode := Copy(AtFormat, 1, Pipe - 1);
+    AtFormat := Copy(AtFormat, Pipe + 1, Length(AtFormat) - Pipe);
+  end else
+  begin
+    AtCode := AtFormat;
+    AtFormat := '';
+  end;
+
+  Result := ExpandAtCode(AtCode, AtFormat, False); // False = Continue if code was not found
 end;
 
 // Usurper is compiled with $MODE TP for maximum compatability with TP,
