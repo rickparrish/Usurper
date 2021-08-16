@@ -369,6 +369,9 @@ begin
       begin
         clearscreen;
 
+        // Try to display a custom ANSI, and exit if we succeed
+        if (DisplayTextFile('STATUS_CLASSIC', player0)) then Exit;
+
         if (player0.name1 = player.name1) and
           (player0.name2 = player.name2) then
         begin
@@ -754,12 +757,15 @@ begin
     exit;
   end;
 
-  display_menu(player0, False, False);
+  // TODOY Trying to avoid displaying the full and short menu
+  // display_menu(player0, False, False);
 
   repeat
 
     {display menu}
-    display_menu(player0, True, True);
+    // TODOY Trying to avoid displaying the full and short menu
+    //       Originally the second False was True
+    display_menu(player0, True, False);
 
     repeat
 
@@ -797,9 +803,10 @@ begin
         spell_list(player0);
       end;
       '?': begin {expert menues}
-        if player.expert = True then
-          display_menu(player0, True, False)
-        else display_menu(player0, False, False);
+        // TODOY Trying to avoid displaying the full and short menu
+        //if player.expert = True then
+        //  display_menu(player0, True, False)
+        //else display_menu(player0, False, False);
       end;
 
       'T': begin {team}

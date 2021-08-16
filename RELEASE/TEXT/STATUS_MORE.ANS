@@ -8,8 +8,8 @@ Skin:[12C@SKIN|L17@
 Charisma:[8C@CHARISMA|L17@ Drug addiction:[5C@DRUG_ADDICTION@
 Agility:[9C@AGILITY|L17@ Mental stability:   @MENTAL_STABILITY@
 Dexterity:[7C@DEXTERITY|L17@ Darkness:[11C@DARKNESS@
-Stamina:[9C@STAMINA|L17@ Chivalry:[11C@CHIVALRY@ @IS_ALCHEMIST|\r\nActive Poison:[3C@@IS_ALCHEMIST|ACTIVE_POISON@
-
+Stamina:[9C@STAMINA|L17@ Chivalry:[11C@CHIVALRY@ 
+@IS_ALCHEMIST?Active Poison\c[3C#ACTIVE_POISON|L17#\r\n:@
 [35m[Victories and Defeats]
 [32mMonster kills:   @MONSTER_KILLS|L17@ Dungeon fights:[5C@DUNGEON_FIGHTS@
 Player kills:    @PLAYER_KILLS|L17@ Team fights:[8C@TEAM_FIGHTS@
@@ -17,6 +17,6 @@ Monster defeats: @MONSTER_DEFEATS|L17@ Player fights:[6C@PLAYER_FIGHTS@
 Player defeats:  @PLAYER_DEFEATS|L17@
 
 [35m[Game Info]
-[32mTime left (min): @TIME_LEFT|L17@ Resurrections left: @RESURRECTIONS_LEFT@
+[32mTime left (min): @TIME_LEFT|L17@ Resurrections left: @RESURRECTIONS@
 
 

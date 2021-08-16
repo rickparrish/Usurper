@@ -33,15 +33,15 @@ implementation
 uses
   Math, StrUtils, SysUtils,
   DDPlus,
-  File_IO, Jakob, Various;
+  File_IO, Jakob, Various, Various2;
 
 var
   Player: UserRec;
   TownName: String;
 
-function ExpandAtCode(AtCode, AtFormat: String; AbortOnNoCode: Boolean): String; forward;
+function ExpandAtCode(AtString: String): String; forward;
 function ExpandAtCodes(S: String): String; forward;
-function ExpandBoolean(var AtFormat: String): String; forward;
+function ExpandTernary(AtString: String): String; forward;
 procedure WriteShortString(S: String); forward;
 
 function DisplayTextFile(const Name: String): Boolean;
@@ -114,13 +114,29 @@ end; {DisplayTextFile *end*}
 
 // Partially implements the @ code formatting options supported by Synchronet
 // http://wiki.synchro.net/custom:atcodes
-function ExpandAtCode(AtCode, AtFormat: String; AbortOnNoCode: Boolean): String;
+function ExpandAtCode(AtString: String): String;
 var
   DoLower, DoCenter, DoLeft, DoParentheses, DoRight, DoThousands, DoUpper, DoZero: Boolean;
-  Err, I, Width: Integer;
-  WidthStr: String;
+  Err, I, Pipe, Width: Integer;
+  AtCode, AtFormat, WidthStr: String;
+
+  inarm: armrec;
+  inweap: weaprec;
 begin
   Result := '';
+
+  // Split the @ string into separate code and format pieces
+  // Minimum example is 'X|Y', hence the >= 3 and >= 2 checks
+  Pipe := Pos('|', AtString);
+  if (Length(AtString) >= 3) and (Pipe >= 2) and (Pipe < Length(AtString)) then
+  begin
+    AtCode := Copy(AtString, 1, Pipe - 1);
+    AtFormat := Copy(AtString, Pipe + 1, Length(AtString) - Pipe);
+  end else
+  begin
+    AtCode := AtString;
+    AtFormat := '';
+  end;
 
   case AtCode of
     'ACTIVE_POISON':
@@ -129,82 +145,105 @@ begin
       begin
         if player.poison > 0 then
         begin
-          Result := LowerCase(alchemist_poison(player));
+          Result := alchemist_poison(player);
         end else
         begin
-          Result := 'none';
+          Result := 'None';
         end;
       end else
       begin
-        Result := 'not applicable';
+        Result := 'Not Applicable';
       end;
     end;
+    'AGE': Result := Long2Str(player.age) + ' years';
     'AGILITY': Result := Long2Str(player.agility);
+    'ARMOUR_NAME':
+    begin
+      if (player.armor = 0) then
+      begin
+        Result := 'skin';
+      end else
+      begin
+        load_armor(player.armor, inarm);
+        Result := inarm.name;
+      end;
+    end;
+    'ARMOUR_POWER': Result := Long2Str(player.apow * 11);
+    'BANK': Result := Long2Str(player.bankgold);
     'CHARISMA': Result := Long2Str(player.charisma);
     'CHIVALRY': Result := Long2Str(player.chiv);
+    'CLASS': Result := classnames[GetClass(player)];
     'DARKNESS': Result := Long2Str(player.dark);
+    'DEFENCE': Result := Long2Str(player.defence);
     'DEXTERITY': Result := Long2Str(player.dex);
     'DISEASE_RESISTANCE': Result := immunity(player.disres);
     'DRUG_ADDICTION': Result := Long2Str(player.addict) + '%';
     'DUNGEON_FIGHTS': Result := Long2Str(player.fights);
+    'EXP': Result := Long2Str(player.exp);
     'EYES': Result := color[player.eyes];
+    'GOLD': Result := Long2Str(player.gold);
     'HAIR': Result := color[player.hair];
+    'HEALINGS': Result := Long2Str(player.healing);
     'HEIGHT': Result := Long2Str(player.height) + 'cm';
-    'IS_ALCHEMIST':
-    begin
-      if true or (GetClass(player) = Alchemist) then
-      begin
-        Result := ExpandBoolean(AtFormat);
-      end else
-      begin
-        Result := '';
-      end;
-      Exit;
-    end;
+    'HP_FRACTION': Result := Long2Str(player.hps) + '/' + Long2Str(player.maxhps);
+    'LEVEL': Result := Long2Str(player.level);
     'MENTAL_STABILITY': Result := Long2Str(player.mental) + '%';
+    'MONEY_TYPE':
+    begin
+      Result := config.moneytype;
+      Result[1] := UpCase(Result[1]);
+    end;
     'MONSTER_DEFEATS': Result := Long2Str(player.m_defeats);
     'MONSTER_KILLS': Result := Long2Str(player.m_kills);
+    'NAME': Result := player.name2;
+    'PICKPOCKETS': Result := Long2Str(player.pickpocketattempts);
     'PLAYER_DEFEATS': Result := Long2Str(player.p_defeats);
     'PLAYER_FIGHTS': Result := Long2Str(player.pfights);
     'PLAYER_KILLS': Result := Long2Str(player.p_kills);
-    'RESURRECTIONS_LEFT': Result := Long2Str(player.resurrections);
+    'RACE': Result := race_display(1, player.race, 0);
+    'RESURRECTIONS': Result := Long2Str(player.resurrections);
     'SKIN': Result := color[player.skin];
     'STAMINA': Result := Long2Str(player.stamina);
+    'STRENGTH': Result := Long2Str(player.strength);
     'TEAM_FIGHTS': Result := Long2Str(player.tfights);
+    'TEAM_NAME':
+    begin
+      if (player.team = '') then
+      begin
+        Result := '<not on a team>';
+      end else
+      begin
+        Result := player.team;
+      end;
+    end;
     'TIME_LEFT': Result := Long2Str(time_left);
     'TOWN_NAME': Result := TownName;
+    'TRAININGS': Result := Long2Str(player.trains);
+    'WEAPON_NAME':
+    begin
+      if (player.weapon = 0) then
+      begin
+        Result := 'bare hands';
+      end else
+      begin
+        load_weapon(player.weapon, inweap);
+        Result := inweap.name;
+      end;
+    end;
+    'WEAPON_POWER': Result := Long2Str(player.wpow * 11);
     'WEIGHT': Result := Long2Str(player.weight) + 'kg';
     'WISDOM': Result := Long2Str(player.wisdom);
     else
     begin
-      if (AbortOnNoCode) then
-      begin
-        // If we get here the @ code wasn't handled, so return it as is
-        if (AtFormat = '') then
-        begin
-          Result := '@' + AtCode + '@';
-        end else
-        begin
-          Result := '@' + AtCode + '|' + AtFormat + '@';
-        end;
-        Exit;
-      end else
-      begin
-        // If we get here the @ code wasn't handled, but we're OK continuing
-        // anyway -- this is probably because a boolean operator was used,
-        // and we want to allow outputing plain text
-        Result := AtCode;
-      end;
+      // If we get here the @ code wasn't handled, so return it as is
+      Result := '@' + AtString + '@';
+      Exit;
     end;
   end;
 
   // If we get here, that means Result now contains the text we want to display
 
-  // First we'll expand special sequences
-  Result := StringReplace(Result, '\r', #13, [rfReplaceAll]);
-  Result := StringReplace(Result, '\n', #10, [rfReplaceAll]);
-
-  // Then we'll check if a format has been requested
+  // Check if a format has been requested
   if (AtFormat <> '') then
   begin
     DoLower := False;
@@ -293,8 +332,8 @@ end;
 
 function ExpandAtCodes(S: String): String;
 var
-  At1, At2, Pipe, SLen, Tail: Integer;
-  AtString, AtCode, AtFormat: String;
+  At1, At2, SLen, Tail: Integer;
+  AtString: String;
 begin
   SLen := Length(S);
   Result := '';
@@ -327,21 +366,16 @@ begin
     // Copy the @ string, eliminating the leading and trailing @ symbols
     AtString := Copy(S, At1 + 1, At2 - At1 - 1);
 
-    // Split the @ string into separate code and format pieces
-    // Minimum example is 'X|Y', hence the >= 3 and >= 2 checks
-    Pipe := Pos('|', AtString);
-    if (Length(AtString) >= 3) and (Pipe >= 2) and (Pipe < Length(AtString)) then
+    // Check if this is a standard @ code, or a ternary conditional
+    if (LeftStr(AtString, 4) = 'CAN_') or (LeftStr(AtString, 4) = 'HAS_') or (LeftStr(AtString, 3) = 'IS_') then
     begin
-      AtCode := Copy(AtString, 1, Pipe - 1);
-      AtFormat := Copy(AtString, Pipe + 1, Length(AtString) - Pipe);
+      // It's a conditional
+      Result += ExpandTernary(AtString);
     end else
     begin
-      AtCode := AtString;
-      AtFormat := '';
+      // It's a standard code
+      Result += ExpandAtCode(AtString);
     end;
-
-    // Handle the expansion
-    Result += ExpandAtCode(AtCode, AtFormat, True); // True = Abort if the code was not found
 
     // Update the tail to be next character that we need to process
     Tail := At2 + 1;
@@ -354,25 +388,61 @@ begin
   end;
 end;
 
-function ExpandBoolean(var AtFormat: String): String;
+function ExpandTernary(AtString: String): String;
 var
-  AtCode: String;
-  Pipe: Integer;
+  AtCode, IfTrue, IfFalse: String;
+  Colon, QuestionMark: Integer;
+  IsTrue: Boolean;
 begin
-  // Split the @ string into separate code and format pieces
-  // Minimum example is 'X|Y', hence the >= 3 and >= 2 checks
-  Pipe := Pos('|', AtFormat);
-  if (Length(AtFormat) >= 3) and (Pipe >= 2) and (Pipe < Length(AtFormat)) then
-  begin
-    AtCode := Copy(AtFormat, 1, Pipe - 1);
-    AtFormat := Copy(AtFormat, Pipe + 1, Length(AtFormat) - Pipe);
-  end else
-  begin
-    AtCode := AtFormat;
-    AtFormat := '';
+  Result := '';
+  IsTrue := False;
+
+  // Split the @ string into separate code, true, and false pieces
+  // Example: IS_ME?It's me:It's not me
+  QuestionMark := Pos('?', AtString);
+  Colon := Pos(':', AtString);
+  AtCode := Copy(AtString, 1, QuestionMark - 1);
+  IfTrue := Copy(AtString, QuestionMark + 1, Colon - QuestionMark - 1);
+  IfFalse := Copy(AtString, Colon + 1, Length(AtString) - Colon);
+
+  case AtCode of
+    'CAN_LEVEL_UP': IsTrue := (level_raise(player.level, player.exp) = 0);
+    'HAS_MANA': IsTrue := (GetClass(player) in [Cleric, Sage, Magician]);
+    'HAS_TEAM': IsTrue := (player.team <> '');
+    'HAS_TRAININGS': IsTrue := (player.trains > 0);
+    'IS_ALCHEMIST': IsTrue := (GetClass(player) = Alchemist);
+    'IS_KING': IsTrue := (player.king and (player.sex = 1));
+    'IS_ME': IsTrue := (player.name1 = Init.player.name1);
+    'IS_QUEEN': IsTrue := (player.king and (player.sex <> 1));
+    else
+    begin
+      // If we get here the @ code wasn't handled, so return it as is
+      Result := '@' + AtString + '@';
+      Exit;
+    end;
   end;
 
-  Result := ExpandAtCode(AtCode, AtFormat, False); // False = Continue if code was not found
+  // If we get here, we need to update Result with either the true or false
+  // branch based on the result of the conditional variable
+  if (IsTrue) then Result := IfTrue else Result := IfFalse;
+
+  // Ternary @ codes use # instead, so check if we have any in our Result, and if
+  // so, pass them to ExpandAtCodes so they can be expanded
+  if (Pos('#', AtString) > 0) then
+  begin
+    Result := StringReplace(Result, '#', '@', [rfReplaceAll]);
+    Result := ExpandAtCodes(Result);
+  end;
+
+  // Handle any special chars that can be used in a ternary
+  if (Pos('\', Result) > 0) then
+  begin
+    Result := StringReplace(Result, '\a', '@', [rfReplaceAll]);
+    Result := StringReplace(Result, '\c', ':', [rfReplaceAll]);
+    Result := StringReplace(Result, '\h', '#', [rfReplaceAll]);
+    Result := StringReplace(Result, '\r', #13, [rfReplaceAll]);
+    Result := StringReplace(Result, '\n', #10, [rfReplaceAll]);
+  end;
 end;
 
 // Usurper is compiled with $MODE TP for maximum compatability with TP,
