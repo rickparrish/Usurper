@@ -897,6 +897,105 @@ begin
         '',
         '');
     end;
+	
+    {**Should level 100 player recover from drug addiction and regain some sanity? **}
+    {  1 in 7 chance is to aim for a once-per-week recovery schedule                 }
+    {  Recovery of 1-5 matches the amount given for raising a level in RAISE_PLAYER  }
+    if (player.level >= 100) then
+    begin
+      if (player.addict > 0) and (random(7) = 0) then
+      begin
+        player.addict := player.addict - (random(5) + 1);
+        if player.addict < 0 then
+        begin
+          player.addict := 0;
+        end;
+
+        {mail}
+        post(MailSend,
+          player.name2,
+          player.ai,
+          False,
+          mailrequest_nothing,
+          '',
+          umailheadc + 'Drug Addiction' + config.textcol1,
+          mkstring(14, underscore),
+          'Your Drug Addiction decreased!',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '');
+      end;
+
+      if (player.mental < 100) and (random(7) = 0) then
+      begin
+        player.mental := player.mental + (random(5) + 1);
+        if player.mental > 100 then
+        begin
+          player.mental := 100;
+        end;
+
+        {mail}
+        post(MailSend,
+          player.name2,
+          player.ai,
+          False,
+          mailrequest_nothing,
+          '',
+          umailheadc + 'Mental Stability' + config.textcol1,
+          mkstring(16, underscore),
+          'Your Mental Stability increased!',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '');
+      end;
+    end;
+
+    {**Should healing potion limit be enforced**}
+    if (player.healing > config.maxheals) then
+    begin
+      player.healing := config.maxheals;
+
+      {mail}
+      post(MailSend,
+        player.name2,
+        player.ai,
+        False,
+        mailrequest_nothing,
+        '',
+        umailheadc + 'Healing Potions' + config.textcol1,
+        mkstring(15, underscore),
+        'Some of your extra potions seem to have spoiled during the night!',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '');
+    end;
 
     {delete playe for inactivity?}
     if (player_active(player, False) = True) and
