@@ -52,7 +52,7 @@ var
 
   rr:      real;
 
-  i, x, xx, yy, townpot, townpotv, treasury_mem: longint;
+  i, x, xx, yy, townpot, townpotv, treasury_mem, extra_heals: longint;
 
   memy:    byte;
 
@@ -969,9 +969,11 @@ begin
     end;
 
     {**Should healing potion limit be enforced**}
-    if (player.healing > config.maxheals) then
+    {  50% of overage is spoiled per maint run  }
+    extra_heals := player.healing - config.maxheals;
+    if (extra_heals >= 2) then
     begin
-      player.healing := config.maxheals;
+      Dec(player.healing, extra_heals div 2);
 
       {mail}
       post(MailSend,
