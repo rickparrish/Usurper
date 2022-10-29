@@ -1821,13 +1821,29 @@ function skeypressed: boolean;
 var
   b: boolean;
 begin;
-  b := False;
-  if not local then
-    b := AsyncCharPresent;
+  // Check if we have a macro keypress
+  b := (macro <> '');
+	
   if not b then
-    b := keypressed;
-  if macro <> '' then
-    b := True;
+  begin
+    // No macro keypress, so check if we're local mode or not
+    if local then
+    begin
+	  // Local mode, so call keypressed to check for local keypress
+      b := keypressed;
+    end else
+    begin
+	  // Non-local mode, so call keypressed to check for local and AsyncCharPresent to check for remote keypress
+{$IFDEF LINUX}
+      // For some reason keypressed returns true when running Usurper under Synchronet 3.19b in Socket mode (possibly under other configurations, that's the only one I tested)
+	  // So we don't call keypressed in this scenario, because the lack of input means functions like display_file pause until a key is hit for real before outputing each character
+      b := AsyncCharPresent;
+{$ELSE}
+      b := keypressed or AsyncCharPresent;
+{$ENDIF}
+    end;
+  end;
+  
   skeypressed := b;
 end;
 
