@@ -1846,8 +1846,9 @@ begin;
     begin
 	  // Non-local mode, so call keypressed to check for local and AsyncCharPresent to check for remote keypress
 {$IFDEF LINUX}
-      // For some reason keypressed returns true when running Usurper under Synchronet 3.19b in Socket mode (possibly under other configurations, that's the only one I tested)
-	  // So we don't call keypressed in this scenario, because the lack of input means functions like display_file pause until a key is hit for real before outputing each character
+      // For some reason a neverending stream of #0 are sometimes available via keypressed/readkey (noticed under Linux using Synchronet 3.19b in Socket mode)
+	  // This causes displayfile1 to pause until an actual key is pressed in between outputting each character, so we're going to skip calling keypressed on Linux as a workaround
+	  // REETODO Find out why this is happening, and stop it if possible.  If not possible, other calls to keypressed likely need to be avoided under Linux in non-local mode
       b := AsyncCharPresent;
 {$ELSE}
       b := keypressed or AsyncCharPresent;
