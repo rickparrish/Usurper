@@ -642,7 +642,7 @@ var
   g, counter, b: integer;
   error: integer;
   c, quit, nonstop: boolean;
-  k, ch: char;
+  k, ch, last_ch: char;
   ansisave: boolean;
   nyfil: string[100];
 
@@ -656,6 +656,7 @@ begin
   c := False;
   g := Graphics;
   k := ' ';
+  last_ch := #0;
 
   Assign(f, 'ERROR');
   if pos('.', filen) <> 0 then
@@ -699,7 +700,17 @@ begin
       exit;
     end;
     if not quit then
-      swritec(ch);
+	begin
+	  // Under Linux the score files are LF terminated instead of CRLF terminated, so output a CR for "bare" LFs
+	  if (ch = #10) and (last_ch <> #13) then
+	  begin
+	    swritec(#13);
+	  end;
+      
+	  swritec(ch);
+	  
+	  last_ch := ch;
+	end;
       
     { Check for LF to see if we need to pause }
     if ch = #10 then
