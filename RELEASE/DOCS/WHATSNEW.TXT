@@ -20,6 +20,8 @@ Fixes:
 - Pause after displaying Online Players when first logging in (waking up at Home would skip past this screen)
 - Re-display main menu after viewing status, and aborting some actions
 - Waking up at the dorm was displaying the menu twice
+- Options that displayed a file (ie team scores, list of heros, news, etc) waited for a keypress before outputting each character in certain configurations
+  - Noticed with Synchronet running on Linux in Socket mode
 
 Changes:
 - Display on (S)tatus -> (M)ore updated (line things up and re-arranged other things)
@@ -34,6 +36,12 @@ Changes:
 - USUTEXT.DAT is split into separate .ANS and .ASC files in the TEXT subdirectory, making it easier to customize screens
 - Implement an @-code system similar to Synchronet's, to allow displaying variables in the TEXT\*.ANS and .ASC screens
 - Status -> More can be customized by editing TEXT\STATUS_MORE.ANS (and .ASC)
+- Level 100 players will have their drug addiction and mental stability improved at random (1 in 7 chance each maintenance run)
+  - This is limited to level 100 players because players below that will have these values improve when they gain a level.
+- Healing potion limit is enforced by spoiling 50% of the potions above the limit each maint run
+  - For example if the player has 2000 potions and the limit is 100 potions, then on the next maint run (2000-100)/2=950 of the potions will be removed from the player
+  - That will leave them with 1050, so on the next day (1050-100)/2=475 will be removed
+  - This will soften the blow a bit for players who have acquired a large stockpile -- rather than remove them all at once, they'll have a few days to use at least some of them  
 
 
 ----------------------------
