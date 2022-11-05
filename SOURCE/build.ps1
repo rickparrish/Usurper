@@ -1,3 +1,19 @@
+function New-Binary {
+    param (
+        [Parameter(Mandatory)]
+        $ProjectFile,
+        [Parameter(Mandatory)]
+        $TargetCpu,
+        [Parameter(Mandatory)]
+        $TargetOS
+    )
+	
+	& "C:\fpcupdeluxe\lazarus\lazbuild.exe" "--pcp=C:\fpcupdeluxe\config_lazarus", "--build-all", "--cpu=$TargetCpu", "--operating-system=$TargetOS", "$ProjectFile.lpi"
+	if ($LASTEXITCODE -ne 0) {
+		throw "lazbuild exited with exit code $LASTEXITCODE"
+	}
+}
+
 function New-Release-Archive {
     param (
         [Parameter(Mandatory)]
@@ -6,12 +22,12 @@ function New-Release-Archive {
         $TargetOS
     )
 
-    Write-Output "Creating archive for CPU=$TargetCpu OS=$TargetOS"
+    Write-Host "Creating archive for CPU=$TargetCpu OS=$TargetOS"
     $TenMinutesAgo = (Get-Date).AddMinutes(-10)
 
     # Ensure EDITOR.EXE exists
     $EditorPath = "..\bin\$TargetCpu-$TargetOS\EDITOR.EXE"
-    Write-Output " - Ensuring $EditorPath exists and was recently compiled"
+    Write-Host " - Ensuring $EditorPath exists and was recently compiled"
     if (-not (Test-Path -Path $EditorPath -PathType Leaf)) {
         throw "$EditorPath does not exist"
     }
@@ -21,7 +37,7 @@ function New-Release-Archive {
     
     # Ensure USURPER.EXE exists
     $UsurperPath = "..\bin\$TargetCpu-$TargetOS\USURPER.EXE"
-    Write-Output " - Ensuring $UsurperPath exists and was recently compiled"
+    Write-Host " - Ensuring $UsurperPath exists and was recently compiled"
     if (-not (Test-Path -Path $UsurperPath -PathType Leaf)) {
         throw "$UsurperPath does not exist"
     }
@@ -31,19 +47,19 @@ function New-Release-Archive {
 
     # Copy EDITOR.EXE and USURPER.EXE to RELEASE directory
     $ReleasePath = "..\RELEASE"
-    Write-Output " - Copying $EditorPath to $ReleasePath"
+    Write-Host " - Copying $EditorPath to $ReleasePath"
     Copy-Item $EditorPath -Destination $ReleasePath
-    Write-Output " - Copying $UsurperPath to $ReleasePath"
+    Write-Host " - Copying $UsurperPath to $ReleasePath"
     Copy-Item $UsurperPath -Destination $ReleasePath
 
     # Create ZIP file
     $ZipPath = "..\usurper-$TargetCpu-$TargetOS.zip"
     if (Test-Path -Path $ZipPath -PathType Leaf) {
-        Write-Output " - Deleting old $ZipPath"
+        Write-Host " - Deleting old $ZipPath"
         Remove-Item $ZipPath
     }
 
-    Write-Output " - Creating new $ZipPath"
+    Write-Host " - Creating new $ZipPath"
     Compress-Archive -Path "$ReleasePath\*" -DestinationPath $ZipPath
 }
 
@@ -51,6 +67,8 @@ function New-Release-Archive {
 try {
     Get-ChildItem -Path ..\bin -Directory | ForEach-Object { 
         $CpuOS = $_.Name.Split("-")
+		New-Binary "EDITOR" $CpuOS[0] $CpuOS[1]
+		New-Binary "USURPER" $CpuOS[0] $CpuOS[1]
         New-Release-Archive $CpuOS[0] $CpuOS[1]
     }
 } catch {
@@ -58,6 +76,8 @@ try {
     Write-Host $_
 }
 
-# Pause before closing
-Write-Host "Hit a key to quit"
-$Key = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown');
+# Pause if run via right-click option
+if ($MyInvocation.InvocationName -eq "&")
+{
+    pause
+}
