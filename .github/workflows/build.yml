@@ -29,7 +29,7 @@ jobs:
       - name: Build Usurper
         shell: pwsh
         run: |
-          .\SOURCE\build.ps1
+          .\build.ps1
           
       - uses: actions/upload-artifact@v2
         with:

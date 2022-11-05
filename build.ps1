@@ -8,7 +8,7 @@ function New-Binary {
         $TargetOS
     )
 	
-	& "C:\fpcupdeluxe\lazarus\lazbuild.exe" "--pcp=C:\fpcupdeluxe\config_lazarus", "--build-all", "--cpu=$TargetCpu", "--operating-system=$TargetOS", "$ProjectFile.lpi"
+	& "C:\fpcupdeluxe\lazarus\lazbuild.exe" "--pcp=C:\fpcupdeluxe\config_lazarus", "--build-all", "--cpu=$TargetCpu", "--operating-system=$TargetOS", "SOURCE\$ProjectFile.lpi"
 	if ($LASTEXITCODE -ne 0) {
 		throw "lazbuild exited with exit code $LASTEXITCODE"
 	}
@@ -26,7 +26,7 @@ function New-Release-Archive {
     $TenMinutesAgo = (Get-Date).AddMinutes(-10)
 
     # Ensure EDITOR.EXE exists
-    $EditorPath = "..\bin\$TargetCpu-$TargetOS\EDITOR.EXE"
+    $EditorPath = "bin\$TargetCpu-$TargetOS\EDITOR.EXE"
     Write-Host " - Ensuring $EditorPath exists and was recently compiled"
     if (-not (Test-Path -Path $EditorPath -PathType Leaf)) {
         throw "$EditorPath does not exist"
@@ -36,7 +36,7 @@ function New-Release-Archive {
     }
     
     # Ensure USURPER.EXE exists
-    $UsurperPath = "..\bin\$TargetCpu-$TargetOS\USURPER.EXE"
+    $UsurperPath = "bin\$TargetCpu-$TargetOS\USURPER.EXE"
     Write-Host " - Ensuring $UsurperPath exists and was recently compiled"
     if (-not (Test-Path -Path $UsurperPath -PathType Leaf)) {
         throw "$UsurperPath does not exist"
@@ -46,14 +46,14 @@ function New-Release-Archive {
     }
 
     # Copy EDITOR.EXE and USURPER.EXE to RELEASE directory
-    $ReleasePath = "..\RELEASE"
+    $ReleasePath = "RELEASE"
     Write-Host " - Copying $EditorPath to $ReleasePath"
     Copy-Item $EditorPath -Destination $ReleasePath
     Write-Host " - Copying $UsurperPath to $ReleasePath"
     Copy-Item $UsurperPath -Destination $ReleasePath
 
     # Create ZIP file
-    $ZipPath = "..\usurper-$TargetCpu-$TargetOS.zip"
+    $ZipPath = "usurper-$TargetCpu-$TargetOS.zip"
     if (Test-Path -Path $ZipPath -PathType Leaf) {
         Write-Host " - Deleting old $ZipPath"
         Remove-Item $ZipPath
@@ -63,10 +63,18 @@ function New-Release-Archive {
     Compress-Archive -Path "$ReleasePath\*" -DestinationPath $ZipPath
 }
 
-# Create a new ZIP file for each of the subdirectories under the bin directory
+
+
+
+
+# Define our build targets
+$Targets = "i386-go32v2", "i386-linux", "i386-win32", "x86_64-linux", "x86_64-win64"
+
+# Loop through our build targets, building EDITOR and USURPER for each, and then zipping up the RELEASE directory along with the new binaries
 try {
-    Get-ChildItem -Path ..\bin -Directory | ForEach-Object { 
-        $CpuOS = $_.Name.Split("-")
+
+	Foreach ($Target in $Targets) {
+        $CpuOS = $Target.Split("-")
 		New-Binary "EDITOR" $CpuOS[0] $CpuOS[1]
 		New-Binary "USURPER" $CpuOS[0] $CpuOS[1]
         New-Release-Archive $CpuOS[0] $CpuOS[1]
