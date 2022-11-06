@@ -10,8 +10,9 @@ function New-Binary {
 	
 	Write-Host "Building $ProjectFile for CPU=$TargetCpu and OS=$TargetOS"
 	
-	# Create the bin directory
+	# Create the bin and obj directories
 	$null = New-Item -ItemType "Directory" -Path "bin\$TargetCpu-$TargetOS" -Force
+	$null = New-Item -ItemType "Directory" -Path "obj\$TargetCpu-$TargetOS" -Force
 
 	$Process = Start-Process -NoNewWindow -PassThru -Wait -FilePath "C:\fpcupdeluxe\fpc\bin\x86_64-win64\fpc.exe" -ArgumentList "-B -T$TargetOS -P$TargetCpu -Mtp -Scgi -CX -O3 -g -gl -Xs -XX -l -vewnhibq -FiSOURCE\$ProjectFile -FiSOURCE\COMMON -Fiobj\$TargetCpu-$TargetOS -FuSOURCE\COMMON -FUobj\$TargetCpu-$TargetOS\ -FEbin\$TargetCpu-$TargetOS\ -obin\$TargetCpu-$TargetOS\$ProjectFile.EXE SOURCE\$ProjectFile\$ProjectFile.PAS"
 	if ($Process.ExitCode -ne 0) {
@@ -73,9 +74,15 @@ function New-Release-Archive {
 
 
 # Confirm fpcupdeluxe is available in C:\fpcupdeluxe
-if (!(Test-Path -Path "C:\fpcupdeluxe")) {
-	Invoke-WebRequest -Uri "https://github.com/rickparrish/fpcupdeluxe/releases/download/Usurper-3.2.2/fpcupdeluxe.zip" -OutFile "fpcupdeluxe.zip"
-	Expand-Archive "fpcupdeluxe.zip" -DestinationPath "C:\fpcupdeluxe"
+$FpcupDir = "C:\fpcupdeluxe"
+$FpcupZip = "fpcupdeluxe.zip"
+$FpcupUrl = "https://github.com/rickparrish/fpcupdeluxe/releases/download/Usurper-3.2.2/fpcupdeluxe.zip"
+if (!(Test-Path -Path $FpcupDir)) {
+	Write-Host "Downloading $FpcupUrl"
+	Invoke-WebRequest -Uri $FpcupUrl -OutFile $FpcupZip
+	
+	Write-Host "Extracting $FpcupZip to $FpcupDir"
+	Expand-Archive $FpcupZip -DestinationPath $FpcupDir
 }
 
 # Loop through our build targets, building EDITOR and USURPER for each, and then zipping up the RELEASE directory along with the new binaries
