@@ -29,7 +29,13 @@ jobs:
       - name: Build Usurper
         shell: pwsh
         run: |
-          .\build.ps1
+          .\build.ps1 > build.log
+          
+      - name: Upload log file
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-log
+          path: build.log
           
       - uses: "marvinpinto/action-automatic-releases@v1.2.1"
         with:
