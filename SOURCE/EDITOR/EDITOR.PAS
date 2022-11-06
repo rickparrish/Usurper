@@ -51,10 +51,10 @@ uses
   {$O Edweap2}
   {$O Edweap3}
   {$O Edmonst}
-  {$O edface}          {*biker game*
-  {$O eddrink}         {*grave.diggers* *vultures* *slaves* *black hawks*
-  {$O edrings}         {undertaker,
-  {$O edshield}        {zonk,septic,death,buzzard,69,ferret,stinky,
+  {$O edface}          {*biker game*}
+  {$O eddrink}         {*grave.diggers* *vultures* *slaves* *black hawks*}
+  {$O edrings}         {undertaker,}
+  {$O edshield}        {zonk,septic,death,buzzard,69,ferret,stinky,}
   {$O edbody} {bad max,scrag,hooks,toad,pinball,stone,midnight,}
   {$O edhead}{vanessa,stinkfinger,ferret}
   {$O edneck}
