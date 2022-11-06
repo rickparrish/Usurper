@@ -8,7 +8,7 @@ function New-Binary {
         $TargetOS
     )
 	
-	& "C:\fpcupdeluxe\lazarus\lazbuild.exe" "--pcp=C:\fpcupdeluxe\config_lazarus", "--build-all", "--cpu=$TargetCpu", "--operating-system=$TargetOS", "SOURCE\$ProjectFile.lpi"
+	& "C:\fpcupdeluxe\fpc\bin\x86_64-win64\fpc.exe" "-B", "-T$TargetOS", "-P$TargetCpu", "-Mtp", "-Scgi", "-CX", "-O3", "-g", "-gl", "-Xs", "-XX", "-l", "-vewnhibq", "-FiSOURCE\$ProjectFile", "-FiSOURCE\COMMON", "-Fiobj\$TargetCpu-$TargetOS", "-FuSOURCE\COMMON", "-FUobj\$TargetCpu-$TargetOS\", "-FEbin\$TargetCpu-$TargetOS\", "-obin\$TargetCpu-$TargetOS\$ProjectFile.EXE", "SOURCE\$ProjectFile\$ProjectFile.PAS"
 	if ($LASTEXITCODE -ne 0) {
 		throw "lazbuild exited with exit code $LASTEXITCODE"
 	}
@@ -67,25 +67,11 @@ function New-Release-Archive {
 
 
 
-# Define our build targets
-$Targets = "i386-go32v2", "i386-linux", "i386-win32", "x86_64-linux", "x86_64-win64"
-
 # Loop through our build targets, building EDITOR and USURPER for each, and then zipping up the RELEASE directory along with the new binaries
-try {
-
-	Foreach ($Target in $Targets) {
-        $CpuOS = $Target.Split("-")
-		New-Binary "EDITOR" $CpuOS[0] $CpuOS[1]
-		New-Binary "USURPER" $CpuOS[0] $CpuOS[1]
-        New-Release-Archive $CpuOS[0] $CpuOS[1]
-    }
-} catch {
-    Write-Host "An error occurred:"
-    Write-Host $_
-}
-
-# Pause if run via right-click option
-if ($MyInvocation.InvocationName -eq "&")
-{
-    pause
+$Targets = "i386-go32v2", "i386-linux", "i386-win32", "x86_64-linux", "x86_64-win64"
+Foreach ($Target in $Targets) {
+	$CpuOS = $Target.Split("-")
+	New-Binary "EDITOR" $CpuOS[0] $CpuOS[1]
+	New-Binary "USURPER" $CpuOS[0] $CpuOS[1]
+	New-Release-Archive $CpuOS[0] $CpuOS[1]
 }
