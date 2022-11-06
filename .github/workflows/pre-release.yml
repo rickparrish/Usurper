@@ -32,6 +32,7 @@ jobs:
           .\build.ps1 > build.log
           
       - name: Upload log file
+        if: success() || failure()
         uses: actions/upload-artifact@v2
         with:
           name: build-log
