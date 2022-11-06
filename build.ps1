@@ -1,3 +1,7 @@
+param (
+    [switch]$Debug = $false
+)
+ 
 function New-Binary {
     param (
         [Parameter(Mandatory)]
@@ -8,13 +12,44 @@ function New-Binary {
         $TargetOS
     )
 	
-	Write-Host "Building $ProjectFile for CPU=$TargetCpu and OS=$TargetOS"
+	if ($Debug) {
+		$DebugFlags = "-g -gl"
+	} else {
+		$DebugFlags = "-CX -O3 -Xs -XX"
+	}
+
+	Write-Host "Building $ProjectFile for CPU=$TargetCpu and OS=$TargetOS with DebugFlags=$DebugFlags"
 	
 	# Create the bin and obj directories
 	$null = New-Item -ItemType "Directory" -Path "bin\$TargetCpu-$TargetOS" -Force
 	$null = New-Item -ItemType "Directory" -Path "obj\$TargetCpu-$TargetOS" -Force
 
-	$Process = Start-Process -NoNewWindow -PassThru -Wait -FilePath "C:\fpcupdeluxe\fpc\bin\x86_64-win64\fpc.exe" -ArgumentList "-B -T$TargetOS -P$TargetCpu -Mtp -Scgi -CX -O3 -g -gl -Xs -XX -l -vewnhibq -FiSOURCE\$ProjectFile -FiSOURCE\COMMON -Fiobj\$TargetCpu-$TargetOS -FuSOURCE\COMMON -FUobj\$TargetCpu-$TargetOS\ -FEbin\$TargetCpu-$TargetOS\ -obin\$TargetCpu-$TargetOS\$ProjectFile.EXE SOURCE\$ProjectFile\$ProjectFile.PAS"
+	# Call fpc.exe to start the build
+	# Parameters and their effect
+	# -B 				Build all modules
+	# -CX 				Create also smartlinked library
+	# -g 				Generate debug information
+	# -gl 				Use line info unit (show more info with backtraces)
+	# -l 				Write logo
+	# -Mtp 				TP/BP 7.0 compatibility mode
+	# -O3 				Level 3 optimizations (-O2 + slow optimizations)
+	# -P$TargetCpu 		Set target CPU
+	# -Scgi 			Syntax options
+	#					c=Support operators like C (*=,+=,/= and -=)
+	#					g=Enable LABEL and GOTO (default in -Mtp and -Mdelphi)
+	#					i=Turn on inlining of procedures/functions declared as "inline"
+	# -T$TargetOS 		Target operating system
+	# -vewnhibq 		Be verbose
+	#					e=Show errors (default)
+	#					w=Show warnings
+	#					n=Show notes
+	#					h=Show hints
+	#					i=Show general info
+	#					b=Write file names messages with full path
+	#					q=Show message numbers
+	# -Xs 				Executable options: Strip all symbols from executable
+	# -XX 				Executable options: Try to smartlink units
+	$Process = Start-Process -NoNewWindow -PassThru -Wait -FilePath "C:\fpcupdeluxe\fpc\bin\x86_64-win64\fpc.exe" -ArgumentList "-B -T$TargetOS -P$TargetCpu -Mtp -Scgi $DebugFlags -l -vewnhibq -FiSOURCE\$ProjectFile -FiSOURCE\COMMON -Fiobj\$TargetCpu-$TargetOS -FuSOURCE\COMMON -FUobj\$TargetCpu-$TargetOS\ -FEbin\$TargetCpu-$TargetOS\ -obin\$TargetCpu-$TargetOS\$ProjectFile.EXE SOURCE\$ProjectFile\$ProjectFile.PAS"
 	if ($Process.ExitCode -ne 0) {
 		throw "fpc.exe exited with exit code $($Process.ExitCode)"
 	}
