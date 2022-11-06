@@ -14,8 +14,6 @@ function New-Binary {
 	
 	if ($Debug) {
 		$DebugFlags = "-g -gl"
-	} else {
-		$DebugFlags = "-CX -O3 -Xs -XX"
 	}
 
 	Write-Host "Building $ProjectFile for CPU=$TargetCpu and OS=$TargetOS with DebugFlags=$DebugFlags"
@@ -49,7 +47,7 @@ function New-Binary {
 	#					q=Show message numbers
 	# -Xs 				Executable options: Strip all symbols from executable
 	# -XX 				Executable options: Try to smartlink units
-	$Process = Start-Process -NoNewWindow -PassThru -Wait -FilePath "C:\fpcupdeluxe\fpc\bin\x86_64-win64\fpc.exe" -ArgumentList "-B -T$TargetOS -P$TargetCpu -Mtp -Scgi $DebugFlags -l -vewnhibq -FiSOURCE\$ProjectFile -FiSOURCE\COMMON -Fiobj\$TargetCpu-$TargetOS -FuSOURCE\COMMON -FUobj\$TargetCpu-$TargetOS\ -FEbin\$TargetCpu-$TargetOS\ -obin\$TargetCpu-$TargetOS\$ProjectFile.EXE SOURCE\$ProjectFile\$ProjectFile.PAS"
+	$Process = Start-Process -NoNewWindow -PassThru -Wait -FilePath "C:\fpcupdeluxe\fpc\bin\x86_64-win64\fpc.exe" -ArgumentList "-B -T$TargetOS -P$TargetCpu -Mtp -Scgi -CX -O3 $DebugFlags -Xs -XX -l -vewnhibq -FiSOURCE\$ProjectFile -FiSOURCE\COMMON -Fiobj\$TargetCpu-$TargetOS -FuSOURCE\COMMON -FUobj\$TargetCpu-$TargetOS\ -FEbin\$TargetCpu-$TargetOS\ -obin\$TargetCpu-$TargetOS\$ProjectFile.EXE SOURCE\$ProjectFile\$ProjectFile.PAS"
 	if ($Process.ExitCode -ne 0) {
 		throw "fpc.exe exited with exit code $($Process.ExitCode)"
 	}
