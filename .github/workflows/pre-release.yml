@@ -5,10 +5,10 @@ name: Pre-Release
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the "master" branch
-  #push:
-  #  branches: [ "master" ]
-  #pull_request:
-  #  branches: [ "master" ]
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -32,7 +32,7 @@ jobs:
           .\build.ps1 > build.log
           
       - name: Upload log file
-        if: success() || failure()
+        if: failure()
         uses: actions/upload-artifact@v2
         with:
           name: build-log
