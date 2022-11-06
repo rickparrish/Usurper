@@ -67,6 +67,12 @@ function New-Release-Archive {
 
 
 
+# Confirm fpcupdeluxe is available in C:\fpcupdeluxe
+if (!(Test-Path -Path "C:\fpcupdeluxe")) {
+	Invoke-WebRequest -Uri "https://github.com/rickparrish/fpcupdeluxe/releases/download/Usurper-3.2.2/fpcupdeluxe.zip" -OutFile "fpcupdeluxe.zip"
+	Expand-Archive "fpcupdeluxe.zip" -DestinationPath "C:\fpcupdeluxe"
+}
+
 # Loop through our build targets, building EDITOR and USURPER for each, and then zipping up the RELEASE directory along with the new binaries
 $Targets = "i386-go32v2", "i386-linux", "i386-win32", "x86_64-linux", "x86_64-win64"
 Foreach ($Target in $Targets) {
