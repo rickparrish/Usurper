@@ -11,11 +11,11 @@ function New-Binary {
 	Write-Host "Building $ProjectFile for CPU=$TargetCpu and OS=$TargetOS"
 	
 	# Create the bin directory
-	New-Item -ItemType "Directory" -Path "bin\$TargetCpu-$TargetOS" -Force
+	$null = New-Item -ItemType "Directory" -Path "bin\$TargetCpu-$TargetOS" -Force
 
-	& "C:\fpcupdeluxe\fpc\bin\x86_64-win64\fpc.exe" "-B", "-T$TargetOS", "-P$TargetCpu", "-Mtp", "-Scgi", "-CX", "-O3", "-g", "-gl", "-Xs", "-XX", "-l", "-vewnhibq", "-FiSOURCE\$ProjectFile", "-FiSOURCE\COMMON", "-Fiobj\$TargetCpu-$TargetOS", "-FuSOURCE\COMMON", "-FUobj\$TargetCpu-$TargetOS\", "-FEbin\$TargetCpu-$TargetOS\", "-obin\$TargetCpu-$TargetOS\$ProjectFile.EXE", "SOURCE\$ProjectFile\$ProjectFile.PAS"
-	if ($LASTEXITCODE -ne 0) {
-		throw "fpc.exe exited with exit code $LASTEXITCODE"
+	$Process = Start-Process -NoNewWindow -PassThru -Wait -FilePath "C:\fpcupdeluxe\fpc\bin\x86_64-win64\fpc.exe" -ArgumentList "-B -T$TargetOS -P$TargetCpu -Mtp -Scgi -CX -O3 -g -gl -Xs -XX -l -vewnhibq -FiSOURCE\$ProjectFile -FiSOURCE\COMMON -Fiobj\$TargetCpu-$TargetOS -FuSOURCE\COMMON -FUobj\$TargetCpu-$TargetOS\ -FEbin\$TargetCpu-$TargetOS\ -obin\$TargetCpu-$TargetOS\$ProjectFile.EXE SOURCE\$ProjectFile\$ProjectFile.PAS"
+	if ($Process.ExitCode -ne 0) {
+		throw "fpc.exe exited with exit code $($Process.ExitCode)"
 	}
 }
 
