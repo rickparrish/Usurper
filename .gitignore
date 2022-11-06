@@ -1,15 +1,5 @@
+usurper*.zip
+bin/
 obj/
-bin/i386-go32v2/USURPER.CFG
-bin/i386-go32v2/DATA
-bin/i386-go32v2/DOCS
-bin/i386-go32v2/NODE
-bin/i386-go32v2/SCORES
-bin/i386-go32v2/TEXT
-bin/x86_64-win64/USURPER.CFG
-bin/x86_64-win64/DATA
-bin/x86_64-win64/DOCS
-bin/x86_64-win64/NODE
-bin/x86_64-win64/SCORES
-bin/x86_64-win64/TEXT
 RELEASE/EDITOR.EXE
 RELEASE/USURPER.EXE
