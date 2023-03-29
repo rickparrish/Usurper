@@ -1590,13 +1590,13 @@ begin
   wisdom=yy
   mana=cp}
 
-  {happy.master = '0' {Akrappa, default}
+  {happy.master = '1' {Akrappa, default}
   case happy.master of
-    '0': begin {Akrappa}
+    '1': begin {Akrappa}
         {Akrappa is the default Master. The values change
         in reference to him.}
     end;
-    '1': begin {Singuman}
+    '2': begin {Singuman}
       for nec := 1 to right do
       begin
         Inc(i);
@@ -1607,7 +1607,7 @@ begin
           Dec(cp, 5);
       end;
     end;
-    '2': begin {Ishana}
+    '3': begin {Ishana}
       for nec := 1 to right do
       begin
         Dec(i, 2);
@@ -1621,7 +1621,7 @@ begin
           Inc(cp, 5);
       end;
     end;
-    '3': begin {Dzarrgo}
+    '4': begin {Dzarrgo}
       for nec := 1 to right do
       begin
         Inc(i, 2);
@@ -1635,7 +1635,7 @@ begin
           Inc(cp, 8);
       end;
     end;
-    '4': begin {Agni}
+    '5': begin {Agni}
       for nec := 1 to right do
       begin
         Dec(i);
@@ -1646,7 +1646,7 @@ begin
         Inc(yy, 3);
       end;
     end;
-    '5': begin {Apollonia}
+    '6': begin {Apollonia}
       for nec := 1 to right do
       begin
         Inc(i, 2);
@@ -1659,7 +1659,7 @@ begin
           Inc(cp, 7);
       end;
     end;
-    '6': begin {Sachmez}
+    '7': begin {Sachmez}
       for nec := 1 to right do
       begin
         i := 1;
@@ -1673,7 +1673,7 @@ begin
           Inc(cp, 12);
       end;
     end;
-    '7': begin {Umilak}
+    '8': begin {Umilak}
       for nec := 1 to right do
       begin
         i := 1;
@@ -1687,7 +1687,7 @@ begin
           Inc(cp, 14);
       end;
     end;
-    '8': begin {Asanga}
+    '9': begin {Asanga}
       for nec := 1 to right do
       begin
         Dec(i);
@@ -1697,7 +1697,7 @@ begin
           Inc(cp, 11);
       end;
     end;
-    '9': begin {Gregorius}
+    '0': begin {Gregorius}
       for nec := 1 to right do
       begin
         Inc(i, 2);

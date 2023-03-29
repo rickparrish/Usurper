@@ -27,7 +27,7 @@ interface
 
 const
   uver            = '0.25';            {Don't forget to update CheckVersion when you update this}
-  ucomp           = '2022/10/30';      {compile date, yyyy/mm/dd}
+  ucomp           = '2023/03/29';      {compile date, yyyy/mm/dd}
   editor_version  = 'Usurper Editor ' + uver;
   usurper_version = 'Usurper ' + uver; {prog & version}
   ubeta: boolean  = False; {is this a BETA version?}

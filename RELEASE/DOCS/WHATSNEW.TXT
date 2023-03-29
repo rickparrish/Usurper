@@ -22,6 +22,7 @@ Fixes:
 - Waking up at the dorm was displaying the menu twice
 - Options that displayed a file (ie team scores, list of heros, news, etc) waited for a keypress before outputting each character in certain configurations
   - Noticed with Synchronet running on Linux in Socket mode
+- Leveling up was applying the wrong master's attribute changes
 
 Changes:
 - Display on (S)tatus -> (M)ore updated (line things up and re-arranged other things)
