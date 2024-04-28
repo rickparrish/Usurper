@@ -22,6 +22,7 @@ AGILITY              The player's agility
 ARMOUR_NAME          The player's armour name
 ARMOUR_POWER         The player's armour power
 BANK                 The player's bank deposit amount
+BANKMAN              The bank manager's name
 CHARISMA             The player's charisma
 CHIVALRY             The player's chivalry
 CLASS                The player's class
@@ -46,6 +47,7 @@ HAIR                 The player's hair colour
 HEALINGS             The player's healing potion count
 HEIGHT               The player's height, including trailing 'cm'
 HP_FRACTION          The player's hit points in CURRENT/TOTAL format (eg 5/20)
+INNKEEPER            The inn keeper's name
 LEVEL                The player's level
 MENTAL_STABILITY     The player's mental stability, including trailing % sign
 MONEY_TYPE           The type of money used, as set in EDITOR (ie gold)

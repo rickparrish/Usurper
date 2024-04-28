@@ -189,6 +189,7 @@ begin
     'HEALINGS': Result := Long2Str(player.healing);
     'HEIGHT': Result := Long2Str(player.height) + 'cm';
     'HP_FRACTION': Result := Long2Str(player.hps) + '/' + Long2Str(player.maxhps);
+    'INNKEEPER': Result := Config.InnKeeper;
     'LEVEL': Result := Long2Str(player.level);
     'MENTAL_STABILITY': Result := Long2Str(player.mental) + '%';
     'MONEY_TYPE':

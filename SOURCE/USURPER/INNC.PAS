@@ -39,7 +39,7 @@ uses
   News, Mail, Npc_Chec,
   Various, Various2, Various3,
   Post_To, Relation, Online,
-  File_Io;
+  File_Io, DispFile;
 
 var
   sicken:  integer;
@@ -84,6 +84,8 @@ procedure Meny;
 const offset = 15;
 var s: s90;
 begin
+  // Try to display a custom ANSI, and exit if we succeed
+  if (DisplayTextFile('INN', player)) then Exit;
 
   s := 'The Empty Barrel, run by ' + config.innkeeper;
 
