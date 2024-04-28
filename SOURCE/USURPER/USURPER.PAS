@@ -36,7 +36,7 @@ program Usurper; {Door-Game by Jakob Dangarden
 
 
 uses
-  DDPlus,
+  DDPlus, DispFile,
   {$IFDEF MSDOS}Overlay, {$ENDIF} Dos, {$IFDEF MSDOS}InitOver, {$ENDIF}
   Init, Jakob, Maint, Cms, SortPl, VarGods, GodWorld, UserHunc, Gamec, Byebyec, Mail,
   Various, Various2, Rating, Relation, Relatio2, Post_To, Online, File_Io, {$IFDEF MSDOS}OverXms, {$ENDIF}
@@ -748,41 +748,45 @@ begin {* Main Program *}
 
     if not config.fastplay then
     begin
-      clearscreen;
-      d(1, usurper_version + ',  Compiled ' + ucomp);
-      d(1, 'JAS Software 2009,  Dark Deception Series IV *original version*');
-      d(1, 'GNU GPL License 2007');
+      // Try to display a custom ANSI, and display hardcoded menu if we fail
+      if Not(DisplayTextFile('LOGIN')) then
+      begin
+        clearscreen;
+        d(1, usurper_version + ',  Compiled ' + ucomp);
+        d(1, 'JAS Software 2009,  Dark Deception Series IV *original version*');
+        d(1, 'GNU GPL License 2007');
 
-   {no need for this..since its open source
-   if global_registered then d(9,'[Registered Copy]')
-                        else d(9,'[Unregistered Copy]');
-   }
+     {no need for this..since its open source
+     if global_registered then d(9,'[Registered Copy]')
+                          else d(9,'[Unregistered Copy]');
+     }
 
-      crlf;
-      menu2('(P)lay          ');
-      menu2('(I)nstructions    ');
-      menu2('(R)ecords   ');
-      menu('(G)ods');
+        crlf;
+        menu2('(P)lay          ');
+        menu2('(I)nstructions    ');
+        menu2('(R)ecords   ');
+        menu('(G)ods');
 
-      menu2('(L)ist Players  ');
-      menu2('(T)eam Rankings   ');
-      menu2('(H)eroes    ');
-      menu('(C)hildren');
+        menu2('(L)ist Players  ');
+        menu2('(T)eam Rankings   ');
+        menu2('(H)eroes    ');
+        menu('(C)hildren');
 
-      menu2('(E)nter as God  ');
-      menu2('(W)ho is online   ');
-      menu2('(S)ettings  ');
-      menu('(A)uthor info');
+        menu2('(E)nter as God  ');
+        menu2('(W)ho is online   ');
+        menu2('(S)ettings  ');
+        menu('(A)uthor info');
 
-      menu2('(N)ews          ');
-      menu2('(Y)esterdays News ');
-      menu('(1) Monarchs News');
+        menu2('(N)ews          ');
+        menu2('(Y)esterdays News ');
+        menu('(1) Monarchs News');
 
-      menu2('(Q)uit to BBS   ');
-      menu2('(M)essage         ');
-      menu('(2) Holy News');
+        menu2('(Q)uit to BBS   ');
+        menu2('(M)essage         ');
+        menu('(2) Holy News');
 
-      sd(config.textcolor, ':');
+        sd(config.textcolor, ':');
+      end;
 
   {
    meminfo;

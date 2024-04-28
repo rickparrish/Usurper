@@ -33,7 +33,7 @@ implementation
 uses
   Math, StrUtils, SysUtils,
   DDPlus,
-  File_IO, Jakob, Various, Various2;
+  File_IO, Jakob, Various, Various2, Version;
 
 var
   Player: UserRec;
@@ -173,6 +173,7 @@ begin
     'CHARISMA': Result := Long2Str(player.charisma);
     'CHIVALRY': Result := Long2Str(player.chiv);
     'CLASS': Result := classnames[GetClass(player)];
+    'COMPILED_DATE': Result := ucomp;
     'DARKNESS': Result := Long2Str(player.dark);
     'DEFENCE': Result := Long2Str(player.defence);
     'DEXTERITY': Result := Long2Str(player.dex);
@@ -219,6 +220,7 @@ begin
     'TIME_LEFT': Result := Long2Str(time_left);
     'TOWN_NAME': Result := TownName;
     'TRAININGS': Result := Long2Str(player.trains);
+    'VERSION': Result := uver;
     'WEAPON_NAME':
     begin
       if (player.weapon = 0) then

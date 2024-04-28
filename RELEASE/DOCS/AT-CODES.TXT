@@ -27,6 +27,7 @@ CHIVALRY             The player's chivalry
 CLASS                The player's class
                      Values: Assassin, Barbarian, Bard, Cleric, Jester,
                              Magician, Paladin, Ranger, Sage, Warrior
+COMPILED_DATE        The date the EXEs were compiled (eg 2024/04/28)
 DARKNESS             The player's darkness
 DEFENCE              The player's defence
 DEXTERITY            The player's dexterity
@@ -68,6 +69,7 @@ TEAM_NAME            The player's team name
 TIME_LEFT            The player's time left (in minutes) today
 TOWN_NAME            The name of the town, as set in EDITOR (ie Valhalla)
 TRAININGS            The player's number of trainings available to use
+VERSION              Usurper version (eg 0.25)
 WEAPON_NAME          The player's weapon name
 WEAPON_POWER         The player's weapon power
 WEIGHT               The player's weight, including trailing 'kg'
