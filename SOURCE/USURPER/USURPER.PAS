@@ -349,7 +349,7 @@ begin {* Main Program *}
     WriteLn(' I tried to upgrade for you, but failed:');
     WriteLn(' ' + UpgradeFailedReason);
     WriteLn;
-    WriteLn(' Please see UPGRADE.DOC for further instructions.');
+    WriteLn(' Please see README.TXT for further instructions.');
     WriteLn;
     Halt;
   end;
@@ -1084,7 +1084,7 @@ begin {* Main Program *}
 
         d(15, 'Instructions');
         crlf;
-        display_file(global_docsdir + 'USURPER.DOC');
+        display_file(global_docsdir + 'USURPER.TXT');
         pause;
 
       end;

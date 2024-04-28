@@ -897,7 +897,7 @@ begin
         '',
         '');
     end;
-	
+    
     {**Should level 100 player recover from drug addiction and regain some sanity? **}
     {  1 in 7 chance is to aim for a once-per-week recovery schedule                 }
     {  Recovery of 1-5 matches the amount given for raising a level in RAISE_PLAYER  }

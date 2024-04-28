@@ -56,6 +56,7 @@ const
   global_docsdir = 'DOCS' + DIRECTORY_SEPARATOR;    {Path to DOCS directory}
   global_nodedir = 'NODE' + DIRECTORY_SEPARATOR;    {Path to NODE files}
   global_scoredir = 'SCORES' + DIRECTORY_SEPARATOR; {Path to SCORE and NEWS files}
+  global_upgradesdir = 'UPGRADES' + DIRECTORY_SEPARATOR; { Path to UPGRADES files}
 
  {file with all online help-texts. raw-file : edhelp.txt.
  to compile raw helpfile, type: tvhc edhelp editor edhelp
@@ -148,13 +149,13 @@ const
   objf15       = global_datadir + 'OBJDAT15.DAT';
 
   {doc files}
-  whatsnewfile = global_docsdir + 'WHATS.NEW';
-  sysopdoc     = global_docsdir + 'SYSOP.DOC';
-  usurperdoc   = global_docsdir + 'USURPER.DOC';
-  readmefile   = global_docsdir + 'README!';
-  futuredoc    = global_docsdir + 'FUTURE.DOC';
-  supportdoc   = global_docsdir + 'SUPPORT.DOC';
-
+  whatsnewfile = global_docsdir + 'WHATSNEW.TXT';
+  sysopdoc     = global_docsdir + 'SYSOP.TXT';
+  usurperdoc   = global_docsdir + 'USURPER.TXT';
+  readmefile   = global_upgradesdir + 'README.TXT';
+  supportdoc   = global_docsdir + 'SUPPORT.TXT';
+  atcodesfile  = global_docsdir + 'AT-CODES.TXT';
+  betateamfile = global_docsdir + 'BETATEAM.TXT';
 
   {to mark characters as ERASED}
   delname1       = 'EMPTY';
@@ -1265,7 +1266,7 @@ begin
     hcChildEditor: hint := 'Child Editor';
     hcResetData: Hint := 'Reset Data files';
     hcResetGame: Hint := 'Reset GAME';
-    hcDocFiles: Hint := 'SYSOP.DOC, WHATS.NEW and other text files';
+    hcDocFiles: Hint := 'SYSOP.TXT, WHATSNEW.TXT and other text files';
     hcMoreEditors: Hint := 'More Editors';
 
     hcViewFile: Hint := 'View a textfile';
@@ -1273,8 +1274,9 @@ begin
     hcSysopDoc: Hint := sysopdoc + ' file';
     hcUsurperDoc: Hint := usurperdoc + ' file';
     hcReadMe: Hint := readmefile + ' file';
-    hcFutureDoc: Hint := futuredoc + ' file';
+    hcAtCodes: Hint := atcodesfile + ' file';
     hcSupportDoc: Hint := supportdoc + ' file';
+    hcBetaTeam: Hint := betateamfile + ' file';
 
     {moat editor related}
     hcMoatEditor: Hint := 'Moat Editor';
@@ -1791,7 +1793,7 @@ begin
                                  ' I tried to upgrade for you, but failed:' + #13 +
                                  ' ' + UpgradeFailedReason + #13 +
                                  ' ' + #13 +
-                                 ' Please see UPGRADE.DOC for further instructions.', 9);
+                                 ' Please see README.TXT for further instructions.', 9);
         with Event do
         begin
           What := evCommand;
@@ -5725,7 +5727,8 @@ begin
       cmUsurperDoc: show_me(UsurperDoc);
       cmReadMe: show_me(ReadMeFile);
       cmSupportDoc: show_me(SupportDoc);
-      cmFutureDoc: show_me(FutureDoc);
+      cmAtCodes: show_me(AtCodesFile);
+      cmBetaTeam: show_me(BetaTeamFile);
     end;
     ClearEvent(Event);
   end;

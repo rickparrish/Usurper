@@ -700,17 +700,17 @@ begin
       exit;
     end;
     if not quit then
-	begin
-	  // Under Linux the score files are LF terminated instead of CRLF terminated, so output a CR for "bare" LFs
-	  if (ch = #10) and (last_ch <> #13) then
-	  begin
-	    swritec(#13);
-	  end;
+    begin
+      // Under Linux the score files are LF terminated instead of CRLF terminated, so output a CR for "bare" LFs
+      if (ch = #10) and (last_ch <> #13) then
+      begin
+        swritec(#13);
+      end;
       
-	  swritec(ch);
-	  
-	  last_ch := ch;
-	end;
+      swritec(ch);
+      
+      last_ch := ch;
+    end;
       
     { Check for LF to see if we need to pause }
     if ch = #10 then
@@ -1834,21 +1834,21 @@ var
 begin;
   // Check if we have a macro keypress
   b := (macro <> '');
-	
+    
   if not b then
   begin
     // No macro keypress, so check if we're local mode or not
     if local then
     begin
-	  // Local mode, so call keypressed to check for local keypress
+      // Local mode, so call keypressed to check for local keypress
       b := keypressed;
     end else
     begin
-	  // Non-local mode, so call keypressed to check for local and AsyncCharPresent to check for remote keypress
+      // Non-local mode, so call keypressed to check for local and AsyncCharPresent to check for remote keypress
 {$IFDEF LINUX}
       // For some reason a neverending stream of #0 are sometimes available via keypressed/readkey (noticed under Linux using Synchronet 3.19b in Socket mode)
-	  // This causes displayfile1 to pause until an actual key is pressed in between outputting each character, so we're going to skip calling keypressed on Linux as a workaround
-	  // REETODO Find out why this is happening, and stop it if possible.  If not possible, other calls to keypressed likely need to be avoided under Linux in non-local mode
+      // This causes displayfile1 to pause until an actual key is pressed in between outputting each character, so we're going to skip calling keypressed on Linux as a workaround
+      // REETODO Find out why this is happening, and stop it if possible.  If not possible, other calls to keypressed likely need to be avoided under Linux in non-local mode
       b := AsyncCharPresent;
 {$ELSE}
       b := keypressed or AsyncCharPresent;

@@ -212,7 +212,7 @@ var
 begin
 
   {Assign Dialog}
-  R.Assign(2, 1, 26, 18); {x/y start for config box}
+  R.Assign(2, 1, 26, 20); {x/y start for config box}
   Dia := New(ViewTextDialogP, Init(R, 'View Textfiles'));
 
   Dia^.Options := Dia^.Options + ofCentered;
@@ -230,10 +230,11 @@ begin
   Dia^.MakeButton(x1, y1 + 4, w, '~S~ysop Doc', cmSysopDoc, bfGrabFocus, hcSysopDoc);
   Dia^.MakeButton(x1, y1 + 6, w, '~U~surper Doc', cmUsurperDoc, bfGrabFocus, hcUsurperDoc);
   Dia^.MakeButton(x1, y1 + 8, w, 'Su~p~port Doc', cmSupportDoc, bfGrabFocus, hcSupportDoc);
-  Dia^.MakeButton(x1, y1 + 10, w, '~F~uture', cmFutureDoc, bfGrabFocus, hcFutureDoc);
+  Dia^.MakeButton(x1, y1 + 10, w, '~A~T Codes', cmAtCodes, bfGrabFocus, hcAtCodes);
+  Dia^.MakeButton(x1, y1 + 12, w, '~B~eta Team', cmBetaTeam, bfGrabFocus, hcBetaTeam);
 
   {Dia^.MakeButton(x1,y1+8,w,'O~t~her ..',    cmViewFile,   bfGrabFocus,hcViewFile);  }
-  Dia^.MakeButton(x1, y1 + 12, w, '~O~k', cmOk, bfGrabFocus, hcGenOk);
+  Dia^.MakeButton(x1, y1 + 14, w, '~O~k', cmOk, bfGrabFocus, hcGenOk);
 
   {set default button}
   Dia^.SelectNext(False);
@@ -681,7 +682,7 @@ begin
     putin('* Line 6  => Daily Number of Dungeonfights (5-99)');
     putin('* Line 7  => Days of inactivity before deletion (15-999)');
     putin('* Line 8  => NonPlayerCharacters vicious tendencies :');
-    putin('	        0=Passive, 1=Random, 2=Annoying, 3=Persecution');
+    putin('             0=Passive, 1=Random, 2=Annoying, 3=Persecution');
     putin('* Line 9  => Name of Town (max 40 characters)');
     putin('* Line 10 => Dungeon difficulty (1-10)  10 is the toughest');
     putin('* Line 11 => Display INTRO-menu? (Yes/No)');
@@ -730,7 +731,7 @@ begin
     putin('* Line 40 => Number of Player Fights allowed (1-99).');
     putin('* Line 41 => Bank interest (1-15 %)');
     putin('* Line 42 => Allow NPC:s to create their own teams (Yes/No)');
-    putin('* Line 43 => Name of Dungeon Complex 	(Moria, Disney Land....it' + chr(39) + 's up to you)');
+    putin('* Line 43 => Name of Dungeon Complex (Moria, Disney Land....it' + chr(39) + 's up to you)');
     putin('* Line 44 => Include NPC:s level raises in the Daily news? (Yes/No)');
     putin('* Line 45 => Allow NPC:s to buy new Weapons/Armors for themselves? (Yes/No)');
     putin('* Line 46 => Include NPC weapon/armor purchases in the daily news (Yes/No)');
@@ -819,7 +820,7 @@ begin
     putin('             static files used for multi-node operations are stored.  A');
     putin('             RAM disk is highly recommended.');
     putin('             The directory specified here should be the drive and path to');
-    putin('	        a directory on a disk (preferably a RAM disk).');
+    putin('             a directory on a disk (preferably a RAM disk).');
     putin('             If you leave this field blank the semaphore files will be');
     putin('             created in the Usurper ' + global_datadir + 'directory.');
     putin('* Line 100 => Allow "one man teams" to attack other teams (default YES)');

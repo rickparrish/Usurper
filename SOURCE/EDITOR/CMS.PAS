@@ -61,8 +61,9 @@ const
   cmSysopDoc      = 143;
   cmUsurperDoc    = 144;
   cmReadMe        = 145;
-  cmFutureDoc     = 146;
+  cmAtCodes       = 146;
   cmSupportDoc    = 147;
+  cmBetaTeam      = 148;
 
   {Config Editor}
   CatchNum        = 150; {edit # config option}
@@ -211,8 +212,9 @@ const
   hcSysopDoc = 52;
   hcUsurperDoc = 53;
   hcReadMe = 54;
-  hcFutureDoc = 55;
+  hcAtCodes = 55;
   hcSupportDoc = 56;
+  hcBetaTeam = 57;
 
   {options menu}
   hcOptions = 60;

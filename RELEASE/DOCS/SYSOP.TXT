@@ -95,8 +95,8 @@ you want to change.
 The USURP.CTL file(s)
 ---------------------
 As of version 0.24 the USURP.CTL file is optional, as "smart" defaults will
-be used, which should hopefully work for most people.  If you'd like to override
-these defaults, then you can follow the usual step below.
+be used, which should hopefully work for most people.  If you'd like to
+override these defaults, then you can follow the usual step below.
 
 Copy the USURP.CTL from the SAMPLES subdirectory, and edit to suit your needs.
 
@@ -152,7 +152,7 @@ Batch File EXAMPLE for Usurper
   %1 is the Node Number which the BBS software passes to the
   batch file.
                     
-  *** Example batch for a Single node system OR a single-CTL Multinode system START ***
+  *** Example for a Single node system OR a single-CTL Multinode system ***
 
 REM The /P option forces Usurper to look for the dropfile in the given
 REM directory.
@@ -176,7 +176,7 @@ USURPER /M%1 /PC:\BBS\NODE%1
   *** Batch file example END ***                
 
 
-NOTE! You can also look at the samples files included in the SAMPLES subdirectory.
+NOTE! You can also look at the samples files in the SAMPLES subdirectory.
   MULTI1.BAT - RemoteAccess example 
   MULTI2.BAT - PcBoard example
                             
@@ -440,13 +440,13 @@ Weapon.dat      => All weapons for Usurper when running in CLASSIC mode.
 Ynews.dat       => What happened yesterday (ascii).
 Rquests.dat     => All quests created by the King.
 Relation.dat    => Social relations data file.
-Children.dat    => Children produced in the game. Npc kids are stored here as well.
+Children.dat    => Children produced in the game. Npc kids are saved here too.
 Childmal.dat    => MALE children names, used by NPCs to name their newborn.
 Childfem.dat    => FEMALE children names, used by NPCs to name their newborn.
 Barrel.dat      => Beer barrel lifters top list (the gym).
 Gods.dat        => All immortal characters are put here. immortals are never
                    deleted. 
-NpcChat.dat     => Npc chat comments, when they are active in the Inn chat log.
+NpcChat.dat     => Npc chat comments, when they are active in the Inn chat.
 Tnames.dat      => Names used by computer players when forming teams.
                    A textfile which can be edited if you wish.
 Monarchs.ANS    => List of Monarchs, their comings and goings (ANSI).
@@ -458,7 +458,7 @@ MarrHist.ASC    => List of Marriages in the Realm (ASCII).
 BirtHist.ANS    => List of Child Birth/Deaths in the Realm (ANSI).
 BirtHist.ASC    => List of Child Birth/Deaths in the Realm (ASCII).
 
-Badwords.dat    => you can find a sample of this file in the SAMPLES subdirectory
+Badwords.dat    => you can find a sample of this file in the SAMPLES dir.
                    put this file in the \DATA directory if you want Usurper
                    to replace bad words with others, defined by you. 
                    The only area in which badwords are allowed is in
@@ -563,8 +563,8 @@ View the source  : https://www.github.com/rickparrish/Usurper
  **********************************
 Registration is no longer necessary.  If you would like to support the author
 anyway, he previously indicated he accepts PayPal at jakobd@usa.net
-It would be a good idea to reach out to that email address first, just to confirm
-that he still has access to it.
+It would be a good idea to reach out to that email address first, just to 
+confirm that he still has access to it.
 
 
 

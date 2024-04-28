@@ -1,21 +1,22 @@
-As of version 0.25, Usurper supports customizing some of the screens by editing
-ANSI and ASCII files in the TEXT subdirectory.
+As of version 0.25, Usurper supports customizing some of the screens by 
+editing ANSI and ASCII files in the TEXT subdirectory.
 
-In these files, you can use @-codes (also known as Message Variables, MCI codes,
-etc) to display game and player information on the screen.
+In these files, you can use @-codes (also known as Message Variables, MCI
+codes, etc) to display game and player information on the screen.
 
-The @-code support is a partial implementation of the Synchronet @-code system, 
-which is described here: http://wiki.synchro.net/custom:atcodes
+The @-code support is a partial implementation of the Synchronet @-code
+system, which is described here: http://wiki.synchro.net/custom:atcodes
 
-================================================================================
+==============================================================================
 
-To embed a variable in a screen, you must wrap the variable in @ symbols, and 
+To embed a variable in a screen, you must wrap the variable in @ symbols, and
 use all upper case, for example @TOWN_NAME@ to display the name of your town.
 
 Currently supported @-code variables are:
 
 ACTIVE_POISON        The player's active poison (applies to Alchemist)
-                     Values: Not Applicable, None, Light, Medium, Strong, Deadly
+                     Values: Not Applicable, None, Light, Medium, Strong,
+                             Deadly
 AGE                  The player's age, including trailing 'years'
 AGILITY              The player's agility
 ARMOUR_NAME          The player's armour name
@@ -24,26 +25,29 @@ BANK                 The player's bank deposit amount
 CHARISMA             The player's charisma
 CHIVALRY             The player's chivalry
 CLASS                The player's class
-                     Values: Assassin, Barbarian, Bard, Cleric, Jester, Magician, Paladin, Ranger, Sage, Warrior
+                     Values: Assassin, Barbarian, Bard, Cleric, Jester,
+                             Magician, Paladin, Ranger, Sage, Warrior
 DARKNESS             The player's darkness
 DEFENCE              The player's defence
 DEXTERITY            The player's dexterity
 DISEASE_RESISTANCE   The player's disease resistance
-                     Values: very poor, poor, medium, average, above average, strong, very strong, EXTREME, *IMMUNE*
+                     Values: very poor, poor, medium, average, above average,
+                             strong, very strong, EXTREME, *IMMUNE*
 DRUG_ADDICTION       The player's drug addiction, including trailing % sign
 DUNGEON_FIGHTS       The player's dungeon fights left today
 EXP                  The player's experience points
 EYES                 The player's eye colour
-                     Values: white, red, blue, green, brown, black, purple, grey, yellow
+                     Values: white, red, blue, green, brown, black, purple,
+                             grey, yellow
 GOLD                 The player's money on hand amount
 HAIR                 The player's hair colour
                      Values: same as EYES
 HEALINGS             The player's healing potion count
 HEIGHT               The player's height, including trailing 'cm'
-HP_FRACTION          The player's hit points in CURRENT/TOTAL format (ie 20/20)
+HP_FRACTION          The player's hit points in CURRENT/TOTAL format (eg 5/20)
 LEVEL                The player's level
 MENTAL_STABILITY     The player's mental stability, including trailing % sign
-MONEY_TYPE           The type of money used in the game, as set in EDITOR (ie gold)
+MONEY_TYPE           The type of money used, as set in EDITOR (ie gold)
 MONSTER_DEFEATS      The player's number of deaths from a monster
 MONSTER_KILLS        The player's number of monster kills
 NAME                 The player's name
@@ -52,7 +56,8 @@ PLAYER_DEFEATS       The player's number of deaths from another player
 PLAYER_FIGHTS        The player's number of player fights left today
 PLAYER_KILLS         The player's number of player kills
 RACE                 The player's race
-                     Values: Dwarf, Elf, Gnoll, Gnome, Half-Elf, Hobbit, Human, Mutant, Orc, Troll
+                     Values: Dwarf, Elf, Gnoll, Gnome, Half-Elf, Hobbit,
+                             Human, Mutant, Orc, Troll
 RESURRECTIONS        The player's number of resurrections left today
 SKIN                 The player's skin colour
                      Values: same as EYES
@@ -68,14 +73,14 @@ WEAPON_POWER         The player's weapon power
 WEIGHT               The player's weight, including trailing 'kg'
 WISDOM               The player's wisdom
 
-================================================================================
+==============================================================================
 
-Optional format strings can be used to alter how the variable will be displayed.
-A pipe character (|) is used to separate the variable name from the format
-string, so for example @TOWN_NAME|U@ will display the town name in uppercase, or
-@TOWN_NAME|C20@ will display the town name centered in a 20 character wide
-section, or you can combine the two with @TOWN_NAME|UC80@ to display the town
-name in uppercase centered in a 40 character wide section.
+Optional format strings can be used to alter how the variable will be
+displayed. A pipe character (|) is used to separate the variable name from the
+format string, so for example @TOWN_NAME|U@ will display the town name in
+uppercase, or @TOWN_NAME|C20@ will display the town name centered in a 20
+character wide section, or you can combine the two with @TOWN_NAME|UC80@ to
+display the town name in uppercase centered in a 40 character wide section.
 
 Currently supported format specifiers are:
 
@@ -86,34 +91,35 @@ R##   Pad and right align the text in a section of the given width (eg R20)
 T     Add thousands separator to the text (intended for numeric values)
 U     Convert the text to uppercase
 u     Convert the text to lowercase
-Z##   Zero-pad and right align the text in a section of the given width (eg Z3)
+Z##   Zero-pad and right align the text in a section of given width (eg Z3)
 
-================================================================================
+==============================================================================
 
-In addition to the @-code variables like @TOWN_NAME@ mentioned above, there are 
-also boolean @-codes that can be used to conditionally show text.  The format
-for these @-codes is similar to the ?: ternary operator used in various
+In addition to the @-code variables like @TOWN_NAME@ mentioned above, there
+are also boolean @-codes that can be used to conditionally show text.  The
+format for these @-codes is similar to the ?: ternary operator used in various
 programming languages.  For example this type of @-code is used on the STATUS
 screen: @IS_ME?Your status, #NAME#:#NAME#'s status@
 
 This will display "Your status, #NAME#" if the user is looking at their own
 status screen because "IS_ME" will evaluate to true, or it will display
-"#NAME#'s status" if the user is looking at a teammates status, because "IS_ME"
-will evaluate to false.
+"#NAME#'s status" if the user is looking at a teammates status, because
+"IS_ME" will evaluate to false.
 
 There's a few things to keep in mind when using the boolean @-codes, because
 certain decisions were made in how to implement the parser to keep it simple:
 
 1) Variables embedded in the true/false portion of the string use # instead of
-   @, so in the example above you'll see that #NAME# was used instead of @NAME@
+   @, so in the example above you'll see that #NAME# was used instead of
+   @NAME@
 
 2) The three characters @ # : are reserved characters, and so if you need to
    display one of these characters in a boolean @-code, then you must use an
    alternate string, which is \a for @, \h for #, and \c for :
    
-In addition to the \a, \h, and \c strings mentioned above, boolean @-codes also
-support \r to insert a carriage return, and \n to insert a linefeed, which
-allows you to move to the next line if necessary.
+In addition to the \a, \h, and \c strings mentioned above, boolean @-codes
+also support \r to insert a carriage return, and \n to insert a linefeed,
+which allows you to move to the next line if necessary.
 
 Currently supported boolean @-codes are:
 
@@ -123,10 +129,12 @@ HAS_TEAM        True if the player is a member of a team
 HAS_TRAININGS   True if the player has training sessions they can use
 IS_ALCHEMIST    True if the player's class is an Alchemist
 IS_KING         True if the player is the king
-IS_ME           True if the screen is showing the player's info, False if it is showing another player's info (ie a teammate)
+IS_ME           True if the screen is showing the player's info, False if it
+                is showing another player's info (ie a teammate)
 IS_QUEEN        True if the player is the queen
 
-================================================================================
+==============================================================================
 
-Real-world examples of how all this works can be seen in TEXT\STATUS_CLASSIC.ANS
-(as well as other files, but it has a good combination of everything)
+Real-world examples of how all this works can be seen in
+TEXT\STATUS_CLASSIC.ANS (as well as other files, but it has a good combination
+of everything)

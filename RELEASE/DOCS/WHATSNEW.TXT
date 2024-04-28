@@ -5,141 +5,206 @@
 Version 0.25  (in development)
 ---------------------------- 
 Versions:
-- Compiling for DOS/GO32V2, Win32, Win64, Linux32, and Linux64 with Lazarus 2.0.12 / FPC 3.2.0.
+- Compiling for DOS/GO32V2, Win32, Win64, Linux32, and Linux64 with 
+  Lazarus 2.0.12 / FPC 3.2.0.
 
 Fixes:
 - Crash with 0 byte MAIL.DAT file
 - Revert to original SORTPL to fix USCORES generation
-- Teammate(s) still present for fights when chased away by dogs while beer stealing 
-- Weird bug where a zombie summoned by a monster in the dungeon would not have a target set, leading to killing the player but not actually killing them.
+- Teammate(s) still present for fights when chased away by dogs while beer 
+  stealing 
+- Weird bug where a zombie summoned by a monster in the dungeon would not have
+  a target set, leading to killing the player but not actually killing them.
 - Incorrect stats reported in EDITOR.EXE
 - Divorcing did not properly detect when the user was not married
-- Revert back from RMDoor to DDPlus, since Jakob inserted game-specific code into DDPlus
-  - Fixes hitting ENTER not selecting default option on some menus, NPC events, and the /FMAINT and /HMAINT parameters asking for a name
-- If displaying errors is disabled, don't pause when an error is encountered, because there's no error to read
-- Pause after displaying Online Players when first logging in (waking up at Home would skip past this screen)
+- Revert back from RMDoor to DDPlus, since Jakob inserted game-specific code 
+  into DDPlus
+  - Fixes hitting ENTER not selecting default option on some menus, NPC 
+    events, and the /FMAINT and /HMAINT parameters asking for a name
+- If displaying errors is disabled, don't pause when an error is encountered, 
+  because there's no error to read
+- Pause after displaying Online Players when first logging in (waking up at 
+  Home would skip past this screen)
 - Re-display main menu after viewing status, and aborting some actions
 - Waking up at the dorm was displaying the menu twice
-- Options that displayed a file (ie team scores, list of heros, news, etc) waited for a keypress before outputting each character in certain configurations
+- Options that displayed a file (ie team scores, list of heros, news, etc) 
+  waited for a keypress before outputting each character in certain 
+  configurations
   - Noticed with Synchronet running on Linux in Socket mode
 - Leveling up was applying the wrong master's attribute changes
 
 Changes:
-- Display on (S)tatus -> (M)ore updated (line things up and re-arranged other things)
+- Display on (S)tatus -> (M)ore updated (line things up and re-arranged other 
+  things)
 - Statusbar disabled in local mode
-- Update SendText method to write strings all at once instead of one character at a time (may help speed up display of some screens)
-- Repurpose /X parameter to allow Linux Mystic sysops to disable socket i/o, since Mystic automatically redirects local i/o, which causes garbled screens
-- Send stuff is now a global hotkey CTRL+S instead of hotkey '1' on the main menu
-- Healing hut is now hotkey '1' instead of '2' at the main menu ('2' is still accepted though)
-- Help (F1) disabled in EDITOR.EXE since it requires a new EDITOR.HLP file to be compiled, and I'm not sure how to for FreeVision
-- DOC and DATA files will now be distributed in their subdirectory in the release archive, so Usurper will no longer move them at startup
+- Update SendText method to write strings all at once instead of one character
+  at a time (may help speed up display of some screens)
+- Repurpose /X parameter to allow Linux Mystic sysops to disable socket i/o, 
+  since Mystic automatically redirects local i/o, which causes garbled screens
+- Send stuff is now a global hotkey CTRL+S instead of hotkey '1' on the main 
+  menu
+- Healing hut is now hotkey '1' instead of '2' at the main menu ('2' is still
+  accepted though)
+- Help (F1) disabled in EDITOR.EXE since it requires a new EDITOR.HLP file to
+  be compiled, and I'm not sure how to for FreeVision
+- DOC and DATA files will now be distributed in their subdirectory in the 
+  release archive, so Usurper will no longer move them at startup
 - Main menu can be customized by editing TEXT\MAINMENU.ANS (and .ASC)
-- USUTEXT.DAT is split into separate .ANS and .ASC files in the TEXT subdirectory, making it easier to customize screens
-- Implement an @-code system similar to Synchronet's, to allow displaying variables in the TEXT\*.ANS and .ASC screens
+- USUTEXT.DAT is split into separate .ANS and .ASC files in the TEXT 
+  subdirectory, making it easier to customize screens
+- Implement an @-code system similar to Synchronet's, to allow displaying 
+  variables in the TEXT\*.ANS and .ASC screens
 - Status -> More can be customized by editing TEXT\STATUS_MORE.ANS (and .ASC)
-- Level 100 players will have their drug addiction and mental stability improved at random (1 in 7 chance each maintenance run)
-  - This is limited to level 100 players because players below that will have these values improve when they gain a level.
-- Healing potion limit is enforced by spoiling 50% of the potions above the limit each maint run
-  - For example if the player has 2000 potions and the limit is 100 potions, then on the next maint run (2000-100)/2=950 of the potions will be removed from the player
-  - That will leave them with 1050, so on the next day (1050-100)/2=475 will be removed
-  - This will soften the blow a bit for players who have acquired a large stockpile -- rather than remove them all at once, they'll have a few days to use at least some of them  
+- Level 100 players will have their drug addiction and mental stability 
+  improved at random (1 in 7 chance each maintenance run)
+  - This is limited to level 100 players because players below that will have
+    these values improve when they gain a level.
+- Healing potion limit is enforced by spoiling 50% of the potions above the 
+  limit each maint run
+  - For example if the player has 2000 potions and the limit is 100 potions,
+    then on the next maint run (2000-100)/2=950 of the potions will be 
+	removed	from the player
+  - That will leave them with 1050, so on the next day (1050-100)/2=475 will
+    be removed
+  - This will soften the blow a bit for players who have acquired a large 
+    stockpile -- rather than remove them all at once, they'll have a few days
+	to use at least some of them  
 
 
 ----------------------------
 Version 0.24  (2015/09/01)
 ---------------------------- 
 Versions:
--Only win32 and linux versions, now compiled with FreePascal instead of VirtualPascal, are supported
+- Only win32 and linux versions, now compiled with FreePascal instead of 
+  VirtualPascal, are supported
 
 Bank:
--Your own team could fight you when robbing the bank. Fixed.
+- Your own team could fight you when robbing the bank. Fixed.
 
 Cosmetics:
--Some typos fixed. Pause prompts added so that text doesn't scroll away.
--Tried to address a crash in Groggo's due to msg not being initialized.
--Fix maintenance crash due to unallocated variable during creation of TEAMREC.DAT
--Fix maintenance crash due to use-after-dispose bug in Gang Fights
+- Some typos fixed. Pause prompts added so that text doesn't scroll away.
+- Tried to address a crash in Groggo's due to msg not being initialized.
+- Fix maintenance crash due to unallocated variable during creation of 
+  TEAMREC.DAT
+- Fix maintenance crash due to use-after-dispose bug in Gang Fights
 
 Setup:
-- If USURP.CTL does not exist, some (hopefully sane) defaults will be used.  (Makes testing easier since I don't have to keep recreating it after I wipe a directory)
+- If USURP.CTL does not exist, some (hopefully sane) defaults will be used.  
+  (Makes testing easier since I don't have to keep recreating it after I wipe
+  a directory)
 
 Upgrading:
-- As of 0.24 Usurper now includes an auto upgrader, built into EDITOR.  New versions will create a data file indicating the installed version when the game is reset, but old versions don't have that file so EDITOR will try to guess the installed version by looking at the NPCS.DAT file (which seems to change often).
-- Currently upgrading is only supported for versions 0.20e and newer (excluding the W32 versions of 0.21 and 0.21a) -- if you want to upgrade an older game, then you'll have to handle the steps manually (download each release between your version and 0.20e and apply the updates one by one)
+- As of 0.24 Usurper now includes an auto upgrader, built into EDITOR.  New 
+  versions will create a data file indicating the installed version when the
+  game is reset, but old versions don't have that file so EDITOR will try to
+  guess the installed version by looking at the NPCS.DAT file (which seems to
+  change often).
+- Currently upgrading is only supported for versions 0.20e and newer 
+  (excluding the W32 versions of 0.21 and 0.21a) -- if you want to upgrade an
+  older game, then you'll have to handle the steps manually (download each 
+  release between your version and 0.20e and apply the updates one by one)
 
 
 ----------------------------
 Version 0.23f  (2013/07/08)
 ---------------------------- 
 Sorting:
--Sped up generation of player lists. (The shellsort Jakob used is fine but inefficient. I optimized the shellsort in one place but there are tons of duplicated copies of the code that should be fixed too.)
+-Sped up generation of player lists. (The shellsort Jakob used is fine but 
+ inefficient. I optimized the shellsort in one place but there are tons of 
+ duplicated copies of the code that should be fixed too.)
 
 Text:
 -Minor cleanup and spelling
 
 Marriages:
--No more unrequited marriages created by maintenance. I think this is a bug I (Dan) introduced in my optimizations. NPCs will now never marry a human automatically; NPCs only marry other NPCs. Human-involved marriages will never happen automatically. (Thanks Brittany)
+-No more unrequited marriages created by maintenance. I think this is a bug I 
+ (Dan) introduced in my optimizations. NPCs will now never marry a human 
+ automatically; NPCs only marry other NPCs. Human-involved marriages will 
+ never happen automatically. (Thanks Brittany)
 -No more getting tons of 'feelings' messages from NPCs every day.
 
 Experience:
 -Reduced default intimacy acts/day from 10 to 2. 10 is kinda ridiculous.
--Halved experience earned from beer stealing, since it gave way too much. (Thanks Alex)
+-Halved experience earned from beer stealing, since it gave way too much. 
+ (Thanks Alex)
 
 Mail:
--No more receiving mail out-of-order. The upshot is that sending mail (including the reams of auto-generated mail) is much faster, but scanning for new mail will be slower toward the end of the day on busy systems. Mail is now automatically packed at the start of maintenance. (Thanks Rick)
+-No more receiving mail out-of-order. The upshot is that sending mail 
+ (including the reams of auto-generated mail) is much faster, but scanning for
+ new mail will be slower toward the end of the day on busy systems. Mail is 
+ now automatically packed at the start of maintenance. (Thanks Rick)
 
 Cosmetics:
--Depositing/withdrawing in the treasury doesn't accept values if you have no gold to deposit/withdraw (i.e. it works like the bank now)
--Cleaner level-raising text when you have the experience to raise multiple levels
--Some races/professions listed fake abilities that were never implemented (songs, dodge expert, immune to immortal gods). Removed. (I may implement some of these later, but for now they are just misleading.)
+-Depositing/withdrawing in the treasury doesn't accept values if you have no 
+ gold to deposit/withdraw (i.e. it works like the bank now)
+-Cleaner level-raising text when you have the experience to raise multiple 
+ levels
+-Some races/professions listed fake abilities that were never implemented 
+ (songs, dodge expert, immune to immortal gods). Removed. (I may implement 
+ some of these later, but for now they are just misleading.)
 
 Inn player fights:
 -Fight is now deducted if you die against doorguards
--Doorguards stayed dead if you killed some but died against doorguards, but all stayed alive if you killed doorguards and died against player. Fixed (dead doorguards stay dead)
+-Doorguards stayed dead if you killed some but died against doorguards, but 
+ all stayed alive if you killed doorguards and died against player. Fixed 
+ (dead doorguards stay dead)
 
 
 ----------------------------
 Version 0.23e  (2013/04/27)
 ---------------------------- 
 Pregnancy:
--Two mails could be received for a pregnancy (telling you that you and then your partner were pregnant). Fixed.
+-Two mails could be received for a pregnancy (telling you that you and then 
+ your partner were pregnant). Fixed.
 
 Scores:
--In the score ratings (equipment, weapon, armor, player killers, monster killers), deleted players caused gaps in numbering. Fixed. 
+-In the score ratings (equipment, weapon, armor, player killers, monster 
+ killers), deleted players caused gaps in numbering. Fixed. 
 
 Status line:
 -STATUS OFF in usurp.ctl to disable the status bar did not work. Fixed.
--Disabling the status bar screwed up inter-node processing (probably because status bar couldn't actually be disabled until my change above). Fixed.
+-Disabling the status bar screwed up inter-node processing (probably because 
+ status bar couldn't actually be disabled until my change above). Fixed.
 -f1 toggle did not work when status bar was disabled. Fixed.
 
 Maintenance:
 -NPCs never bought around-body armour. Fixed.
--The NPC king could be recruited to an NPC team (so that he was king and in a team at the same time). Fixed.
+-The NPC king could be recruited to an NPC team (so that he was king and in a
+ team at the same time). Fixed.
 
 Quests:
--When creating a quest, monsters would be listed multiple times (not aggregated like in the dungeons). Fixed.
+-When creating a quest, monsters would be listed multiple times (not 
+ aggregated like in the dungeons). Fixed.
 
 Chest Items:
 -Stealing items should not be available in classic mode. Fixed.
 -Unimplemented (e)xamine chest option. Removed.
-- 50% chance that home-owner sees you and initiates a fight, rather than 100% (a Jakob cheat that was left in by mistake). Fixed.
+- 50% chance that home-owner sees you and initiates a fight, rather than 100% 
+ (a Jakob cheat that was left in by mistake). Fixed.
 -Stealing should reduce dark deeds. Fixed.
 -Player should only see you if alive and at home. Fixed.
 -Should not be able to beg for mercy when seen stealing. Fixed.
--Stolen chest items show up as still available for stealing, but with *unknown* owner. Fixed.
+-Stolen chest items show up as still available for stealing, but with 
+ *unknown* owner. Fixed.
 -Player-owned items listed as owned by Pogo. Fixed.
 
 Spells:
 -Active spells were not reset before player fights. Fixed.
--Many spells did not work in player fights. Fixed, but I think this unbalances things (sage can use 'escape' spell and make the opponent miss for the rest of the fight). This is what Jakob intended (based on the code), but we'll work on balancing once I scrub all of the bugs.
+-Many spells did not work in player fights. Fixed, but I think this unbalances
+ things (sage can use 'escape' spell and make the opponent miss for the rest 
+ of the fight). This is what Jakob intended (based on the code), but we'll 
+ work on balancing once I scrub all of the bugs.
 -Angel caused dropped carrier in dungeon fights. Fixed. (Thanks Alex G)
 
 Uman cave:
--Result of last-allowed indian wrestling was cleared before it could be read. Fixed. (Thanks Alex G)
--In Indian Wrestling, players started with strange power like 4/48. Fixed so that initial power and maximum are both the same initial power
+-Result of last-allowed indian wrestling was cleared before it could be read. 
+ Fixed. (Thanks Alex G)
+-In Indian Wrestling, players started with strange power like 4/48. Fixed so 
+ that initial power and maximum are both the same initial power
 
 Fake players:
--Garbage occasionally produced when checking (^w)ho is online. Fixed. (Thanks Alex G)
+-Garbage occasionally produced when checking (^w)ho is online. Fixed. 
+ (Thanks Alex G)
 
 
 ----------------------------
@@ -147,22 +212,34 @@ Version 0.23d  (2013/03/30)
 ---------------------------- 
 ***************RESET MONSTER DATAFILES***************
 
-When upgrading to this release, you must use the editor to reset the monster datafiles. Choose Reset, then check the Monsters checkbox. The game will crash if you don't do this. Further details on why this happened below.
+When upgrading to this release, you must use the editor to reset the monster 
+datafiles. Choose Reset, then check the Monsters checkbox. The game will crash
+if you don't do this. Further details on why this happened below.
 
 Maintenance:
 -Maintenance with option #153 was slow. Fixed (wicked-fast now)
 
 Monsters:
--For 20 years, monsters' defense was ignored, regardless of its value in the monster editor. I've now activated monster defense, but to keep the game the same I have explicitly set all default monsters' defense to 0. This means that this change does not affect anything unless you want to run a custom game where monsters have defense (since now the defense values in the monster editor will be honoured if you change them from 0).
+-For 20 years, monsters' defense was ignored, regardless of its value in the 
+ monster editor. I've now activated monster defense, but to keep the game the 
+ same I have explicitly set all default monsters' defense to 0. This means 
+ that this change does not affect anything unless you want to run a custom 
+ game where monsters have defense (since now the defense values in the monster
+ editor will be honoured if you change them from 0).
 
 Experience:
--Terrible bug where 10% of experience could be lost when both you and your opponent die in a teamfight. Fixed.
+-Terrible bug where 10% of experience could be lost when both you and your 
+ opponent die in a teamfight. Fixed.
 +Editor now allows float experience losses (e.g. 3.5%)
-+Between 0 and 90% of experience can be lost now, as per the help text in the editor (before only 0-25% was accepted)
++Between 0 and 90% of experience can be lost now, as per the help text in the 
+ editor (before only 0-25% was accepted)
 
 Prison:
--Players were told that they were imprisoned when failing to thieve in Bob's, but they were not. Fixed.
--When (e)scaping from prison, you were kicked out of the game instead of put on Main Street. Fixed. (I think Jakob did this because he was worried that the player would not be initialized correctly. I tried to fix that.)
+-Players were told that they were imprisoned when failing to thieve in Bob's, 
+ but they were not. Fixed.
+-When (e)scaping from prison, you were kicked out of the game instead of put 
+ on Main Street. Fixed. (I think Jakob did this because he was worried that 
+ the player would not be initialized correctly. I tried to fix that.)
 -No more resurrecting players that are in prison
 
 Home:
@@ -178,25 +255,33 @@ Birthday:
 -Infinite loop with (l)ove reward. Fixed.
 
 Gangwars:
--Gangfights available should not be decremented when no one in rival gang is around to fight. Fixed.
+-Gangfights available should not be decremented when no one in rival gang is 
+ around to fight. Fixed.
 
 Inventory:
 -Trying to drop neck2 caused neck1 to be dropped. Fixed.
--Equipping a ring when both ring fingers were occupied always used the right finger. Fixed. (Neck is still messed up though.)
--Invalid numbers in the (s)top Using menu caused things to be dropped or inaccurate messages to be printed. Fixed.
+-Equipping a ring when both ring fingers were occupied always used the right 
+ finger. Fixed. (Neck is still messed up though.)
+-Invalid numbers in the (s)top Using menu caused things to be dropped or 
+ inaccurate messages to be printed. Fixed.
 -"decreased by +-5" ridiculousness fixed
 
 Team Corner:
--Using invalid teamnames in certain places let you send messages to nonexistent teams, join nonexistent teams, etc. Fixed.
+-Using invalid teamnames in certain places let you send messages to 
+ nonexistent teams, join nonexistent teams, etc. Fixed.
 
 Online trading/dueling:
--These were mostly broken because fake player movement would break the initiation process. Fixed.
+-These were mostly broken because fake player movement would break the 
+ initiation process. Fixed.
 
 Marrying:
--Saying 'y' to paying for marriage when it was not a love-love relationship caused money to be wasted. Fixed (now it costs money only when marriage actually happens.) Found this one on an old Usurper forum.
+-Saying 'y' to paying for marriage when it was not a love-love relationship 
+ caused money to be wasted. Fixed (now it costs money only when marriage 
+ actually happens.) Found this one on an old Usurper forum.
 
 Gods:
--Fixed horrendous bug that caused a player's god to be deleted if they simultaneously log-in on two nodes
+-Fixed horrendous bug that caused a player's god to be deleted if they 
+ simultaneously log-in on two nodes
 
 
 ----------------------------
@@ -204,10 +289,13 @@ Version 0.23c  (2013/03/03)
 ---------------------------- 
 ***************RESET MONSTER DATAFILES***************
 
-When upgrading to this release, you must use the editor to reset the monster datafiles. Choose Reset, then check the Monsters checkbox. The game will crash if you don't do this. Further details on why this happened below.
+When upgrading to this release, you must use the editor to reset the monster 
+datafiles. Choose Reset, then check the Monsters checkbox. The game will crash
+if you don't do this. Further details on why this happened below.
 
 Groggo's:
--When it was 'unfair' to cast a disease on someone, it was possible that follow-up questions would be asked anyway. Fixed.
+-When it was 'unfair' to cast a disease on someone, it was possible that 
+ follow-up questions would be asked anyway. Fixed.
 
 ctrl+w:
 -Fixed spurious "press return to continue" after checking who's online
@@ -218,49 +306,87 @@ Casting Spells:
 Statistics:
 -Pick-pocket attempts not shown in new mode. Fixed.
 -Spurious options shown when viewing stats of other players. Fixed.
-+Added player fights to statistics, and clarified "Fights" to mean "Dungeon fights"
++Added player fights to statistics, and clarified "Fights" to mean 
+ "Dungeon fights"
 
 Gym:
 -Disabled dumb-bells option; Jakob wrote no code for this
 +Gym now shows the owning team
 
 Dorm:
--(p)ickpocket -> (p)otions -> kill opponent could result in a "you took 0 healing potions" message if your kill caused the opponent to waste all potions. Fixed.
--When (w)aking up the guests, you had a 2/3 chance of hitting an opponent, regardless of which move you selected (and independent of your close-combat skills). This, in combination with being able to choose the same move every time in Bob's, made it completely pointless to train anything besides knifehand. Fixed (now the chance of hitting in the dorm depends on close-combat skill).
+-(p)ickpocket -> (p)otions -> kill opponent could result in a "you took 0 
+ healing potions" message if your kill caused the opponent to waste all 
+ potions. Fixed.
+-When (w)aking up the guests, you had a 2/3 chance of hitting an opponent, 
+ regardless of which move you selected (and independent of your close-combat 
+ skills). This, in combination with being able to choose the same move every 
+ time in Bob's, made it completely pointless to train anything besides 
+ knifehand. Fixed (now the chance of hitting in the dorm depends on 
+ close-combat skill).
 
 Quests:
 -NPC-created quests caused exception violation and fatal exit. Fixed.
 -NPC quests could be created so that a "reward" is 0. Fixed.
 
 Teams:
--Two different team rankings were being used: one in the team corner and one in the gangwars menu. Fixed to use the one that does not cause overflow (and hence huge positive and negative integer scores in the team score files).
+-Two different team rankings were being used: one in the team corner and one 
+ in the gangwars menu. Fixed to use the one that does not cause overflow (and 
+ hence huge positive and negative integer scores in the team score files).
 
 Monsters:
--Of interest here is two monster attributes: hitpoints and strength. Strength is supposed to be the attack power, and hitpoints is the starting hitpoints. Unfortunately, Jakob did something so that hitpoints was always calculated as a monster's strength * 3. So regardless of hitpoint setting, it was ignored and set to strength*3. This severely limited the usefulness of the monster editor, since strength was in effect used to calculate strength and hitpoints. I have now changed the code so that it honours the hitpoints setting. The monsters that ship with Usurper have now been modified so that their hitpoints are strength*3, instead of 0 (but of course we know that the 0 was meaningless since strength*3 was hard-coded). This is why the monster datafiles must be reset. In other places in the code (such as dungeon events, joining alchemist order, fighting demon), Jakob's hitpoint values will now be honoured (rather than just using strength*3). I do not know the outfall of my changes in these circumstances, and will continue to test.
+-Of interest here is two monster attributes: hitpoints and strength. Strength 
+ is supposed to be the attack power, and hitpoints is the starting hitpoints. 
+ Unfortunately, Jakob did something so that hitpoints was always calculated as
+ a monster's strength * 3. So regardless of hitpoint setting, it was ignored 
+ and set to strength*3. This severely limited the usefulness of the monster 
+ editor, since strength was in effect used to calculate strength and 
+ hitpoints. I have now changed the code so that it honours the hitpoints 
+ setting. The monsters that ship with Usurper have now been modified so that 
+ their hitpoints are strength*3, instead of 0 (but of course we know that the 
+ 0 was meaningless since strength*3 was hard-coded). This is why the monster 
+ datafiles must be reset. In other places in the code (such as dungeon events,
+ joining alchemist order, fighting demon), Jakob's hitpoint values will now be
+ honoured (rather than just using strength*3). I do not know the outfall of my
+ changes in these circumstances, and will continue to test.
 
 Dungeon:
--Removed duplicate "your share is..." messages when fighting alone in the dungeon
--When trying to join the orcs instead of saving the girl, you unintentionally saved the girl anyway. Fixed.
+-Removed duplicate "your share is..." messages when fighting alone in the 
+ dungeon
+-When trying to join the orcs instead of saving the girl, you unintentionally 
+ saved the girl anyway. Fixed.
 
 Bob's:
 -Fixed loop in drinking competition when inviting new participants
--In drinking competition, if the initiating player lost then the "favourite" always won the competition and the competition ended with no further rounds. Fixed.
+-In drinking competition, if the initiating player lost then the "favourite" 
+ always won the competition and the competition ended with no further rounds. 
+ Fixed.
 
 Supreme Being:
 -Fixed crashes with too many hitpoints
 
 Rick's change log:	
-    -Fixed a problem where the statusbar was still drawn at certain points even if it had been disabled.
-    -Fixed problem that caused Usurper to use an insane number of file handles (and caused lockups on Linux, which is how it was discovered).
-    -Fixed some screen display issues when running in a console window with a buffer size larger than the screen size (possibly introduced after the last release, so maybe nobody experienced this)
-    -Added support for native versions of Usurper on Linux and OS/2
-	  -Linux was only quickly tested on Ubuntu 12.10 under Synchronet (latest from CVS).  It's important you enable STDIO and use the uppercase DOOR32.SYS.  The command I used was USURPER /P%n
-	  -I have no method for testing OS/2, so if you try it out and run into problems feel free to contact me and I'll try to get things working.
-	-Fixed a nasty bug that affected the DOS version of Usurper.  I made a typo when porting to Win32 that caused seemingly random crashes (which were stack overflows).  Typo is now fixed, so if you were experiencing problems with DOS Usurper 0.23 and newer, hopefully that's fixed now.
-	-Added a help file for EDITOR32 (previously hitting F1 in EDITOR32 just gave an error message saying help was unavailable)
-	-Changed delay routine since the old "Super Delay" routine would:
-	 1) Use 100% CPU (or 100% of 1 core if on a multi-core processor)
-	 2) Cause Usurper to intermitently crash with a run-time error 207 at startup
+-Fixed a problem where the statusbar was still drawn at certain points even 
+ if it had been disabled.
+-Fixed problem that caused Usurper to use an insane number of file handles 
+ (and caused lockups on Linux, which is how it was discovered).
+-Fixed some screen display issues when running in a console window with a 
+ buffer size larger than the screen size (possibly introduced after the last 
+ release, so maybe nobody experienced this)
+-Added support for native versions of Usurper on Linux and OS/2
+  -Linux was only quickly tested on Ubuntu 12.10 under Synchronet (latest 
+   from CVS).  It's important you enable STDIO and use the uppercase 
+   DOOR32.SYS.  The command I used was USURPER /P%n
+  -I have no method for testing OS/2, so if you try it out and run into 
+   problems feel free to contact me and I'll try to get things working.
+-Fixed a nasty bug that affected the DOS version of Usurper.  I made a typo 
+ when porting to Win32 that caused seemingly random crashes (which were stack 
+ overflows).  Typo is now fixed, so if you were experiencing problems with DOS
+ Usurper 0.23 and newer, hopefully that's fixed now.
+-Added a help file for EDITOR32 (previously hitting F1 in EDITOR32 just gave 
+ an error message saying help was unavailable)
+-Changed delay routine since the old "Super Delay" routine would:
+ 1) Use 100% CPU (or 100% of 1 core if on a multi-core processor)
+ 2) Cause Usurper to intermitently crash with a run-time error 207 at startup
 
 
 ----------------------------
@@ -272,33 +398,48 @@ Text:
 Dungeon:
 -Wishing well could give 0 strength. Fixed.
 -L)ook could result in nothing (no fight and no event). Fixed.
--An event could follow the wishing well without having to do another look. Fixed.
+-An event could follow the wishing well without having to do another look. 
+ Fixed.
 -Optimized l)ook code
 
 Steroids shop:
--Bad error causing steroid 10 to add very little strength and remove very little mental stability
+-Bad error causing steroid 10 to add very little strength and remove very 
+ little mental stability
 
 Beer stealing:
 -Experience was not properly split with teammate. Fixed.
--After stealing is complete, experience gained and number of dogs/sons killed was not reported accurately. Fixed.
--Dark deed was used up even when 0)abort was chosen. Fixed. (Now you can use the bones option to determine number of dogs without wasting a dark deed, but I think this is better than penalizing for aborting.)
+-After stealing is complete, experience gained and number of dogs/sons killed 
+ was not reported accurately. Fixed.
+-Dark deed was used up even when 0)abort was chosen. Fixed. (Now you can use 
+ the bones option to determine number of dogs without wasting a dark deed, but
+ I think this is better than penalizing for aborting.)
 -Son stamina was not reset when stealing again. Fixed.
--Dog order was only randomized when you r)eturned and then b)eer stealing. Fixed (now it randomizes every time you g)o)
--More exp is given now for knocking out sons (previously they yielded the same exp as dogs, but sons are much harder to kill)
+-Dog order was only randomized when you r)eturned and then b)eer stealing. 
+ Fixed (now it randomizes every time you g)o)
+-More exp is given now for knocking out sons (previously they yielded the same
+ exp as dogs, but sons are much harder to kill)
 -Number of dogs and sons killed is reported separately now
 
 Dorm:
--If you had no dark deeds left, you could not pickpocket regardless of number of remaining pickpocket attempts. The strategy was then to pickpocket first, then use dark deeds later (since pickpocketting did not reduce dark deeds). Fixed (pickpocketting does not count as a dark deed)
+-If you had no dark deeds left, you could not pickpocket regardless of number 
+ of remaining pickpocket attempts. The strategy was then to pickpocket first, 
+ then use dark deeds later (since pickpocketting did not reduce dark deeds). 
+ Fixed (pickpocketting does not count as a dark deed)
 
 Player fights:
--Alchemist poison was not included in the "You hit x for y damage" messages, even though it was correctly applied. Fixed.
--The player fight code is a mess, with duplicate copies of code all over. This has to be fixed.
+-Alchemist poison was not included in the "You hit x for y damage" messages, 
+ even though it was correctly applied. Fixed.
+-The player fight code is a mess, with duplicate copies of code all over. This
+ has to be fixed.
 
 Groggo's:
--Magicians, sages, clerics, and alchemists were supposed to be less susceptible to demons and diseases, but a nasty bug caused them to be _most_ susceptible. Fixed.
+-Magicians, sages, clerics, and alchemists were supposed to be less 
+ susceptible to demons and diseases, but a nasty bug caused them to be _most_ 
+ susceptible. Fixed.
 
 Maintenance:
--Fixed the "could not find street-talk files" message that began every maintenance session
+-Fixed the "could not find street-talk files" message that began every 
+maintenance session
 -Sped up maintenance by reducing NPC marriage attempts
 
 Daily News:
@@ -308,19 +449,28 @@ Fixed.
 
 Bob's Beer:
 +Added Man in Robes event. It was in the source, but not accessible.
--Apologizing to an 'insulted!' event resulted in getting kicked back to Shady Shops. Fixed.
+-Apologizing to an 'insulted!' event resulted in getting kicked back to Shady 
+ Shops. Fixed.
 -Brawls produced way too much stuff in the daily news. Fixed.
--It was impossible to have the best two thief statuses when trying (T)hievery. Fixed (now an assassin can eventually become a 'master thief')
--In the drinking competition, choice of drink did not influence anything. Fixed (now stronger drinks lead to shorter competitions)
--In the drinking competition, messages for out-of-competition participants were not shown. Also, 'glug' messages for participants were sometimes not shown. Fixed.
+-It was impossible to have the best two thief statuses when trying (T)hievery.
+ Fixed (now an assassin can eventually become a 'master thief')
+-In the drinking competition, choice of drink did not influence anything. 
+ Fixed (now stronger drinks lead to shorter competitions)
+-In the drinking competition, messages for out-of-competition participants 
+ were not shown. Also, 'glug' messages for participants were sometimes not 
+ shown. Fixed.
 
 New Player Sequence:
--No more y/n on each behavior line entered. It was way too many questions for a new user, and they can change this behavior easily from the status screen.
+-No more y/n on each behavior line entered. It was way too many questions for 
+ a new user, and they can change this behavior easily from the status screen.
 -Stats was displayed twice for a new user. Fixed.
--New users were asked their opinion of the king, even though they can't possibly know anything yet. Fixed.
+-New users were asked their opinion of the king, even though they can't 
+ possibly know anything yet. Fixed.
 
 Mail:
--When you were not allowed to play further (0 res.), each (p)lay would read one remaining letter from the mail and then exit without giving you time to read the mail. Fixed.
+-When you were not allowed to play further (0 res.), each (p)lay would read 
+ one remaining letter from the mail and then exit without giving you time to 
+ read the mail. Fixed.
 
 
 ----------------------------
@@ -337,8 +487,10 @@ Version 0.23  (2013/01/29)
 Fixed
 -Broken chest looting
 -Assassin backstab command wasn't taking classic mode into account
--Monster defence calculation was using the wrong variable to access the monster array
--Monster defence calculation result wasn't being used (player.punch was being decremented before the defence calculation took place)
+-Monster defence calculation was using the wrong variable to access the 
+ monster array
+-Monster defence calculation result wasn't being used (player.punch was being 
+ decremented before the defence calculation took place)
 -Fix statusbar for guard reset in EDITOR
 
 New
@@ -349,20 +501,25 @@ New
 Version 0.20e  (08/31/2009)
 ---------------------------- 
 Fixed
--Items can no longer be taken from characters at Beggars Wall (BigTrucker, Collins)
+-Items can no longer be taken from characters at Beggars Wall 
+ (BigTrucker, Collins)
 -NPC Rulers will not let themselves be hired/bribed to teams. (several)
 -Made it more expensive to Bribe/recruite NCP characters to teams (papa zito)
 -Intimate sessions made quicker (now with a pause..) (several)
 -trying a new delay routine. experimental.
 
 New
-+Source code for Usurper has been released. The project has been released under the GNU GPL (General Public License v2).
-  the source code is located in 'Source20e.zip'.
++Source code for Usurper has been released. The project has been released 
+ under the GNU GPL (General Public License v2). the source code is located in 
+ 'Source20e.zip'.
 +Lovers Corner and Home have moved to Main Street (reapern)
-+Items can be stored at home (applies to Usurper running in NEW mode). See the new Editor option #197 (Biohazard)
-+Items stored at home can be stolen (from dark deeds location). This can be configured/disabled in the editor.
++Items can be stored at home (applies to Usurper running in NEW mode). See the
+ new Editor option #197 (Biohazard)
++Items stored at home can be stolen (from dark deeds location). This can be 
+ configured/disabled in the editor.
 +changed some of the NPC team names.
-+added a new editor option (#198). Set the number of Bank Robbery attempts a player have each day. (Mangobob)
++added a new editor option (#198). Set the number of Bank Robbery attempts a
+ player have each day. (Mangobob)
 
 
 ----------------------------
@@ -381,11 +538,12 @@ Version 0.20c  (09/12/2004)
 ---------------------------- 
 Fixed
 -a problem with overflow in the Royal Treasury has been fixed (Lenny).
--a overflow problem with player purse and bank account has been fixed (Lenny). 
+-a overflow problem with player purse and bank account has been fixed (Lenny).
 -gender confusion (Joseph)
 -speeded up the beer drinking competition (Syjefroi)
 -fixed a broken disease resistance check. the NPCS cheated.. (Collins)
--fixed a problem with kidnapped children being sent to the Royal Orphanage (Collins)
+-fixed a problem with kidnapped children being sent to the Royal Orphanage 
+ (Collins)
 -fixed a problem with gang fights between active and wiped out teams (Lenny)
 
 New
@@ -396,19 +554,23 @@ New
 Version 0.20b  (08/26/2004)
 ---------------------------- 
 Fixed
--problem with sending unlimited numbers of Drinks to other Human players has been corrected.
- (if a player is sent a free drink he must have drink attempts left before he can accept and consume the bewerage).
+-problem with sending unlimited numbers of Drinks to other Human players has
+ been corrected. (if a player is sent a free drink he must have drink attempts
+ left before he can accept and consume the bewerage).
 -gnoll poison bite has been improved (it will occur more frequently).
 -tried to fix online trading (and duels), by adding a delay.
 
 New
 +cost for creating drinks has increased slightly.
-+NPC Kings (and Queens) are now ruling their Kingdom during maintenance. The goal is that they should
- be able to do everything a player can do. However, right now NPC rulers only modify taxes and initiate Quests.
++NPC Kings (and Queens) are now ruling their Kingdom during maintenance. The
+ goal is that they should be able to do everything a player can do. However, 
+ right now NPC rulers only modify taxes and initiate Quests.
 +changed phrases/sentences on a few places.
-+It is now possible to send children to the Royal Orphanage when you are married (you need custody though).
- NPC spouses may divorce players on the spot for this action (the risk/chance for divorce is high). 
-+npc relation changes are published in the news-paper more often. Maybe this will be annoying, we will see. 
++It is now possible to send children to the Royal Orphanage when you are
+ married (you need custody though). NPC spouses may divorce players on the
+ spot for this action (the risk/chance for divorce is high). 
++npc relation changes are published in the news-paper more often. Maybe this
+ will be annoying, we will see. 
 +new editor option #196. Name of Royal Quest-Master.
 
 ----------------------------
@@ -417,10 +579,12 @@ Version 0.20a  (08/22/2004)
 Fixed
 -various fixes.
 -Pick-Pocket attempts can be controlled by the admin (see new stuff).
--changed the way Buy-Another-Player-A-Drink works. Now the drink purchased counts against the person having the drink. (Lenny)
+-changed the way Buy-Another-Player-A-Drink works. Now the drink purchased
+ counts against the person having the drink. (Lenny)
 
 New
-+added a new editor option (#195). Set the number of pick pocket attempts a player have each day. (Lenny)
++added a new editor option (#195). Set the number of pick pocket attempts a
+ player have each day. (Lenny)
 
 
 
@@ -428,33 +592,42 @@ New
 Version 0.19 *Public Test 6* (02/23/2003)
 ---------------------------- 
 Fixed Stuff:
--getting a massage with "White Oil" could reduce the number of your healing potins. (jxl)
--a bug gave the npcs opportunity to fight the king even when losing to the royal guard. (rkl)
+-getting a massage with "White Oil" could reduce the number of your healing
+ potins. (jxl)
+-a bug gave the npcs opportunity to fight the king even when losing to the
+ royal guard. (rkl)
 -increased NPC couples chances of producing babies.
 -corrected a major bug which killed the opportunity for children to be born.
 New Stuff:
-+changed the maintenance routine so users will see maintenance progress. hopefully this will work since I can't test it myself.
++changed the maintenance routine so users will see maintenance progress.
+ hopefully this will work since I can't test it myself.
 
 
 ----------------------------
 Version 0.19 *Public Test 5* (02/21/2003)
 ---------------------------- 
 Fixed Stuff:
--fixed a bug where the Gods daily deeds aren't updated on a daily basis. (several)
+-fixed a bug where the Gods daily deeds aren't updated on a daily basis.
+ (several)
 -fixed a bunch of spelling errors. (Daniel Z)
 
 New Stuff:
 +increased chances of pregnancy after intimacy acts.
-+changed the way buying drinks at Orbs work. Buying drinks for others now counts as buying a drink for yourself.
++changed the way buying drinks at Orbs work. Buying drinks for others now
+ counts as buying a drink for yourself.
 
 ----------------------------
 Version 0.19 *Public Test 4* (02/16/2003)
 ---------------------------- 
 FIXED STUFF:
--fixed a bug which could make an offline player surrender to an inferior or dead opponent. (01, Josh and others)
--fixed a bug where you could sacrifice an unlimited number of items. (testoverride,tempest)
--fixed an exploit where you could send an unlimited amount of drinks to someone. (pillhead)
--the editor now displays 0.19. Changed a few help texts in the configuration options.
+-fixed a bug which could make an offline player surrender to an inferior or
+ dead opponent. (01, Josh and others)
+-fixed a bug where you could sacrifice an unlimited number of items.
+ (testoverride,tempest)
+-fixed an exploit where you could send an unlimited amount of drinks to
+ someone. (pillhead)
+-the editor now displays 0.19. Changed a few help texts in the configuration
+ options.
 -results of sending flowers to npcs now goes into to the News.
 -fixed a bunch of spelling errors. (JP, Daniel Z)
 
@@ -462,13 +635,16 @@ NEW STUFF:
 +added a new editor option (#194). Here You can disallow/allow Adult Options.
 +added some missing #editor options to 'Game Settings'.
 +added a check for overdue players in ONLINERS.DAT when somebody press 'P'lay
-+thanks to Daniel Z for providing an updated Sysop.doc and Usurper.doc where a lot of spelling errors have been corrected. I also updated the doc in regards to registration and download info.
++thanks to Daniel Z for providing an updated Sysop.doc and Usurper.doc where a
+ lot of spelling errors have been corrected. I also updated the doc in regards
+ to registration and download info.
 
 ----------------------------
 Version 0.19 *Public Test 3* (01/27/2003)
 ---------------------------- 
 FIXED STUFF:
--fixed a bug when becoming GOD and both Mortals & Immortals are allowed. (tempest)
+-fixed a bug when becoming GOD and both Mortals & Immortals are allowed.
+ (tempest)
 
 ----------------------------
 Version 0.19 *Public Test 2* (01/26/2003)
@@ -483,7 +659,8 @@ FIXED STUFF:
 NEW STUFF:
 +giving alms at the beggars wall may improve the relation with the receiver.
 +added news events for a bunch of good deeds.
-+radically increased the NPC experience share / day. Let's see how this works out.
++radically increased the NPC experience share / day. Let's see how this works
+ out.
 
 
 ----------------------------
@@ -491,31 +668,41 @@ Version 0.19 *Public Test 1* (01/23/2003)
 ---------------------------- 
 FIXED STUFF:
 -fixed a bug where gods couldn't enter the game properly. (Aric)
--fixed a bug where Intimacy Acts weren't updated when doing the act at home. (tempest)
--speeded up the npc relations maintenance run. (this was actually done in the previous releases)
--fixed a bug in the Magic Shoppe where lack of money to buy healing potions would result in a faulty message. (nat love)
+-fixed a bug where Intimacy Acts weren't updated when doing the act at home.
+ (tempest)
+-speeded up the npc relations maintenance run. (this was actually done in the
+ previous releases)
+-fixed a bug in the Magic Shoppe where lack of money to buy healing potions 
+ would result in a faulty message. (nat love)
 -fixed a spelling error when taking equipment from a foe. (01)
 
 ----------------------------
 Version 0.18 *Official Release* (01/21/2003)
 ---------------------------- 
 FIXED STUFF:
--fixed a bug where kidnapped children were not displayed when you tried to manage them. (JP)
+-fixed a bug where kidnapped children were not displayed when you tried to 
+ manage them. (JP)
 -fixed spelling errors in the Gym. Lifting Beer Barrels. (BiOHAZARD)
 -added pause to procedure when finishing a quest. (reapern66)
--changed the royal tax procedure. Citizens no longer gets taxed when the Royal Treasury is full. (lenny)
--added info for the players attempting the dumb-bell practice. (lot of complaints on why this wasn't working)
+-changed the royal tax procedure. Citizens no longer gets taxed when the Royal
+ Treasury is full. (lenny)
+-added info for the players attempting the dumb-bell practice. (lot of 
+ complaints on why this wasn't working)
 
 NEW STUFF:
-+This is the official Release of Usurper 0.18. Prepare for more things to come in 0.19
++This is the official Release of Usurper 0.18. Prepare for more things to come
+ in 0.19
 +made it possible to see your ransom demanded for kidnapped children.
-+added the names of a bunch people contributing to the beta-testing / suggestions for 0.18 to betateam.doc. If someone has been forgotten please let me know.
++added the names of a bunch people contributing to the beta-testing / 
+ suggestions for 0.18 to betateam.doc. If someone has been forgotten please 
+ let me know.
 
 ----------------------------
 Version 0.18 *Public Test 8* (01/19/2003)
 ---------------------------- 
 FIXED STUFF:
--removed randomness for when babies are due. Instead I added option #193 where you can set labor days. (lenny)
+-removed randomness for when babies are due. Instead I added option #193 where
+ you can set labor days. (lenny)
 -fixed bug which caused the game to crash in gang fights. (several)
 -fixed bug in the gym when competing in Tug-Of-War
 -changed logic for NPCs entering messages in the daily chat-file. (JP)
@@ -525,33 +712,43 @@ FIXED STUFF:
 Version 0.18 *Public Test 7* (01/15/2003)
 ---------------------------- 
 FIXED STUFF:
--fixed a problem with infiltrating Kings Castle. Messages no longer flashes by without chance to see what it reads. (Ratajczak).
+-fixed a problem with infiltrating Kings Castle. Messages no longer flashes by
+ without chance to see what it reads. (Ratajczak).
 -fixed a game exit problem in the gym. (aric)
 -reduced size of usurper.exe and made some memory adjustments.
--fixed problem were user stats were not updated when player picks 'L'ist of Character from the main menu (lenny)
--fixed some cosmetic stuff. ugly colors etc. Added NPC/offline players comments to some situations.
+-fixed problem were user stats were not updated when player picks 'L'ist of 
+ Character from the main menu (lenny)
+-fixed some cosmetic stuff. ugly colors etc. Added NPC/offline players 
+ comments to some situations.
 
 NEW STUFF:
 +added "Resurrections left" to the player status screen. (several)
-+added option (#192). You can set if a player should be able to have both immortal and mortal characters
- or not. (aric)
-+added default action to Dungeons. Pressing 'Enter' now equals pressing 'A'. Makes it easier to attack. (BiOHAZARD)
-+added options to select gender when you approach somebody at the love corner. This can be useful if you 
++added option (#192). You can set if a player should be able to have both 
+ immortal and mortal characters or not. (aric)
++added default action to Dungeons. Pressing 'Enter' now equals pressing 'A'. 
+ Makes it easier to attack. (BiOHAZARD)
++added options to select gender when you approach somebody at the love corner.
+ This can be useful if you 
 for example only are interested in girls (BiOHAZARD).
 
 
 ----------------------------
 Version 0.18 *Public Test 6* (01/09/2003)
 ---------------------------- 
-(if you are upgrading from a 0.18 version then you MUST run the converter 'GIVME6.EXE' first!)
+(if you are upgrading from a 0.18 version then you MUST run the converter 
+'GIVME6.EXE' first!)
 FIXED STUFF:
--fixed problem a when the Gym is Free to take over. Message no longer flashes by without chance to see
+-fixed problem a when the Gym is Free to take over. Message no longer flashes
+ by without chance to see
 what it reads.(lenny *mighty*)
 -found and removed 1 cause to the 'onliners.dat' problem. (a bunch of people)
--Added protection for 'onliners.dat' growing out of proportion. (a bunch of people)
--added a a pause to the haggling functions, to aoid "scroll of death" problem. (Nohr)
+-Added protection for 'onliners.dat' growing out of proportion. 
+ (a bunch of people)
+-added a a pause to the haggling functions, to aoid "scroll of death" problem.
+ (Nohr)
 NEW STUFF:
-+added option (#191). You can set how many resurrections a player can have each day. (BiOHAZARD)
++added option (#191). You can set how many resurrections a player can have 
+ each day. (BiOHAZARD)
 
 
 ----------------------------
@@ -559,14 +756,19 @@ Version 0.18 *Public Test 5* (01/06/2003)
 ---------------------------- 
 FIXED STUFF:
 -fixed bug in where you wouldn't be disconnected for inactivity. (phillip)
--fixed a bug where players would be paused at game entrance, without information. (phillip)
--made a first attempt to eliminate the 'onliners.dat' file becoming extremely large. (*-*)
--fixed a bug where the game would crash when Stealing Beer Barrels. (sect0r & aric)
+-fixed a bug where players would be paused at game entrance, without 
+ information. (phillip)
+-made a first attempt to eliminate the 'onliners.dat' file becoming extremely
+ large. (*-*)
+-fixed a bug where the game would crash when Stealing Beer Barrels. 
+ (sect0r & aric)
 NEW STUFF:
 +added a child list option to the nursery. (jake)
 +players may now go to sleep in their home. (lenny *mighty*)
-+added a gender mark (F/M) when approacing somebody at the Love Corner. (aric & sect0r)
-+added option to set number of Intimacy acts per day. Editor option #189. (aric)
++added a gender mark (F/M) when approacing somebody at the Love Corner. 
+ (aric & sect0r)
++added option to set number of Intimacy acts per day. Editor option #189. 
+ (aric)
 +added option to allow/disallow homo/bi marriages. Editor option #190. (aric)
 
 
@@ -574,14 +776,18 @@ NEW STUFF:
 Version 0.18 *Public Test 4* (01/06/2003)
 ----------------------------
 FIXED STUFF:
--fixed bug where a team which takes the Gym without opposition does not get to see information. Scrolled away.
--fixed bug in tug-of-war where usurper would crash when inviting other team. (aric)
+-fixed bug where a team which takes the Gym without opposition does not get to
+ see information. Scrolled away.
+-fixed bug in tug-of-war where usurper would crash when inviting other team.
+ (aric)
 -removed unnecessary (x) menu option in 'love history. (aric)
 -fixed typos. (aric)
 -fixed typos at the close-combat trainer. (biohazard)
--fixed bug where editor option #173 would display incorrectly in 'game settings'. (aric)
+-fixed bug where editor option #173 would display incorrectly in 
+ 'game settings'. (aric)
 NEW STUFF:
-+added option to toggle ghost players node activity ON/OFF. Editor option #188. (biohazard)
++added option to toggle ghost players node activity ON/OFF. Editor option 
+ #188. (biohazard)
 
 
 
@@ -589,8 +795,10 @@ NEW STUFF:
 Version 0.18 *Public Test 3* (01/05/2003) - Stockholm
 ----------------------------
 FIXED STUFF:
--fixed a problem with the default configuration options not being written when resetting the game
--renamed usurper.cfg in the distribution package to to prevent overwriting accidents.
+-fixed a problem with the default configuration options not being written when
+ resetting the game
+-renamed usurper.cfg in the distribution package to to prevent overwriting 
+ accidents.
 
 
 ----------------------------
@@ -598,7 +806,8 @@ Version 0.18 *Public Test 2* (01/05/2003) - Stockholm
 ----------------------------
 FIXED STUFF:
 -fixed problem with conversion/upgrade program
--fixed bug with fighting the last monster. In effect this made it impossible to become immortal.
+-fixed bug with fighting the last monster. In effect this made it impossible
+ to become immortal.
 
 ----------------------------
 Version 0.18 *Public Test 1* (01/04/2003) - Stockholm
@@ -781,7 +990,7 @@ NEW STUFF:
 +royal offspring get special treatment.
 +added tug-of-war competition to the Gym. This could prove to be a fun event.
  Players invite players/npcs or make it a random bout. It's all about
- two teams pulling their end of a rope. The most tactical (strongest) team win.
+ two teams pulling their end of a rope. The most tactical (stronger) team wins
 +added a spinning cursor to various events where you have to wait for stuff.
 +added a routine which removes players who are falsely reported online.
  (usurper will remove players when their time limit have been exceeded).
@@ -895,7 +1104,7 @@ Version 0.16 (1996-07-20)
  the Usurper world; he can make life miserable for the other players. The
  King (or Queen) may have his own Personal Guard Force and can also imprison
  citizens and even stage executions. But on the other hand the King might just
- be the good ruler who is loved by his people (not likely though, regarding the
+ be the good ruler who is loved by his people (not likely, regarding the
  moral status of the general Usurper gamer) (see usurper.doc for more info).
 -The comings and goings of the Royal People are logged in \SCORES\MONARCHS.ANS
  and \SCORES\MONARCHS.ASC. Assassinations, deaths, suicides, abdications and
@@ -906,8 +1115,8 @@ Version 0.16 (1996-07-20)
  or if any airhead may rule the land.
 -new config option #123; decides whether NPCs should be marked with a '*' in
  the lists, thereby making them harder to distinguish from the users.
--new config option #125; sets how many days cocktails should be kept at Orbs.
--new config option #126; sets how many cocktails recipes should be kept at Orbs.
+-new config option #125; how many days cocktails should be kept at Orbs.
+-new config option #126; how many cocktails recipes should be kept at Orbs.
 -new config option #127; how should pick-pockets at the dorm be treated.
 -new config option #128; how should trouble-makers at the dorm be treated.
 -fixed bug when intro-display was off and maintenance was running on other
@@ -935,8 +1144,8 @@ Version 0.15 (1996-03-17)
 -using /X and /E switches caused Usurper to exit with a runtime error when
  writing scores. fixed.
 -fixed some small bugs in the editor. also improved the online help.
--the semaphore files are placed in the DATA\ directory, if no path is specified
- in the configuration. The docs were misleading about this. 
+-the semaphore files are placed in the DATA\ directory, if no path is 
+ specified in the configuration. The docs were misleading about this. 
 -new FTP and WW sites (see support.doc). =Thanx èZô BBS and Oscar Olsson!=
 -removed usurper.cfg and usurper.ctl from the archive. they only served the
  purpose of making people angry when their old config files were overwritten.
@@ -1081,7 +1290,7 @@ Version 0.12 (1995-04-18)
   detected fossil to the port speed and XFOSSIL will accept the fossil
   as-is with no initialization.
 *New editor option (#98). To reduce disc access when using Usurper. 
- Set this new CHECK OTHER NODES ACTIVITY flag to one of the following values :
+ Set this new CHECK OTHER NODES ACTIVITY flag to one of the following values:
         1 : check often (default). Used in previous versions of Usurper.
         2 : check sometimes, at certain places in the game.
         3 : never check (singel node systems may want to use this). 
@@ -1311,7 +1520,7 @@ Version 0.08 (1995-02-19)
 * Players can now utilize the following key combinations :
    CTRL-W  who is online?
    CTRL-E  toggle Expert menus ON/OFF.
-   CTRL-S  toggle 'outside attention' mode (more on this later on in this text)
+   CTRL-S  toggle 'outside attention' mode (more on this later)
    CTRL-T  display time remaining.
  (these keys can be used anytime and anywhere in the game)
 * Added a 'ONLY 2 MINUTES REMAINING' warning, so players won't get
@@ -1505,7 +1714,7 @@ Version 0.07 (1994-08-26)
  allow the victor to take the defeated players inventory as well. The game
  can be configured that way...if you like.
 *Difficulty for teams in dungeons can be changed with the Editor.
-*Sysops can now easily change the "xp needed to level" limits with the Editor.
+*Sysops can now easily change the "xp needed to level" limits with the Editor
 *Dungeons events have been reworked. The "get the treasure or die"
  choices have been discarded.
 *Sysops can now create their own doorguards with the Editor.

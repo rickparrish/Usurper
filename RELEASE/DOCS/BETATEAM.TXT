@@ -23,4 +23,5 @@ The Good Guys in the later years 2001 - 2003
  Olle Olsson      (Fido 2:203/321)      - Skilled bug hunter
  Daniel Svanstrom (Fido 2:205/246)      - Skilled bug hunter
  Johan Klitkou    (Fido 2:205/452)      - ANSi ARTISt!
- Johan Schöning   (user)		- Great player / suggestion machine / support / tester
+ Johan Schöning   (user)                - Great player / suggestion machine /
+                                          support / tester
