@@ -37,7 +37,7 @@ uses
   Statusc, Mail, PlvsMon,
   News, CompWar, PlComp,
   Npc_Chec, Various, Various2,
-  Various3, Online, File_Io;
+  Various3, Online, File_Io, DispFile;
 
 var
 
@@ -359,6 +359,8 @@ procedure Meny;
 const offset = 20;
 var a2: s90;
 begin
+  // Try to display a custom ANSI, and exit if we succeed
+  if (DisplayTextFile('BANK', player)) then Exit;
 
   a2 := 'Bank of Wealth, managed by ' + bankman + ' the Gnome';
 

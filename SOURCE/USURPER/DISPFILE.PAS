@@ -36,6 +36,7 @@ uses
   File_IO, Jakob, Various, Various2, Version;
 
 var
+  BankMan: String;
   Player: UserRec;
   TownName: String;
 
@@ -170,6 +171,7 @@ begin
     end;
     'ARMOUR_POWER': Result := Long2Str(player.apow * 11);
     'BANK': Result := Long2Str(player.bankgold);
+    'BANKMAN': Result := BankMan;
     'CHARISMA': Result := Long2Str(player.charisma);
     'CHIVALRY': Result := Long2Str(player.chiv);
     'CLASS': Result := classnames[GetClass(player)];
@@ -479,5 +481,6 @@ end;
 begin
   // Initialize the variables that won't change as the game is played,
   // so then we don't have to constantly read the config file as screens display
+  BankMan := cfg_string(19);
   TownName := cfg_string(9);
 end. {Unit DispFile .end.}

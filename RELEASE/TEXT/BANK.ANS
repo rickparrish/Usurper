@@ -1,0 +1,17 @@
+[0;40;37m[2J
+[35mBank of Wealth, managed by @BANKMAN@ the Gnome
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+[32mYou enter the bank, which resides in the finer areas of
+the town. A huge safe is located at the back of the room.
+You can also see some guards posted around the place.
+An old gnome appears and asks you of your business.
+
+gold on hand .. [1;33m@GOLD@[0;32m gold coins.
+gold in bank .. [1;33m@BANK@[0;32m gold coins.
+
+([35mD[32m)eposit gold[6C([35mP[32m)ut gold on other players account
+([35mW[32m)ithdraw[10C([35mT[32m)his is a robbery
+([35mS[32m)tatus[12C([35mA[32m)pply for Guard duty
+([35mR[32m)eturn[12C([35m*[32m) resign from guard duty
+ 
