@@ -19,7 +19,7 @@ var
   initok, NoFossinit, NoComm, fosBnu: boolean;
   internalinsize, internaloutsize: word;
 
-procedure AsyncSelectPort(pn: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}integer{$ENDIF});
+procedure AsyncSelectPort(pn: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}word{$ENDIF});
 procedure AsyncSendChar(ch: char);
 procedure AsyncSendString(s: string);
 procedure AsyncReceiveChar(var ch: char);
@@ -29,7 +29,7 @@ procedure AsyncSelectFossil(var fossilname: string);
 procedure AsyncSelectInternal;
 procedure AsyncSelectDigiBoard(var digiboardname: string);
 procedure AsyncCloseUp;
-procedure AsyncCloseCom(cp: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}integer{$ENDIF});
+procedure AsyncCloseCom(cp: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}word{$ENDIF});
 procedure AsyncSetBaud(n: longint);
 procedure AsyncFlushOutput;
 procedure AsyncPurgeOutput;
@@ -41,7 +41,7 @@ procedure ResetPorts(var port1, port2, port3, port4: word; var irq1, irq2, irq3,
 
 implementation
 
-procedure AsyncSelectPort(pn: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}integer{$ENDIF});
+procedure AsyncSelectPort(pn: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}word{$ENDIF});
 begin;
   if NoComm then
   begin
