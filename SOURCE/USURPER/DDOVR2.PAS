@@ -12,7 +12,7 @@ uses
 
 procedure Loadconfig(fn: string; var bbs_software: byte; var user_first_name, user_last_name: string;
   var user_access_level: word; var bbs_time_left: integer;
-  var com_port: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}word{$ENDIF}; var baud_rate: longint;
+  var com_port: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}longint{$ENDIF}; var baud_rate: longint;
   var node_num: integer; {jakob; originally BYTE in DDplus version}
   var local: boolean; var Graphics: byte; var color1: boolean; var color_chg: boolean;
   var NoFossInit: boolean; var board_name: string; var pause_code: string; var sysop_first_name: string;
@@ -60,7 +60,7 @@ end;
 
 procedure Loadconfig(fn: string; var bbs_software: byte; var user_first_name, user_last_name: string;
   var user_access_level: word; var bbs_time_left: integer;
-  var com_port: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}word{$ENDIF}; var baud_rate: longint;
+  var com_port: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}longint{$ENDIF}; var baud_rate: longint;
   var node_num: integer; var local: boolean; var Graphics: byte; var color1: boolean; var color_chg: boolean;
   var noFossInit: boolean; var board_name: string; var pause_code: string; var sysop_first_name: string;
   var sysop_last_name: string; var maxtime: word;

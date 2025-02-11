@@ -14,14 +14,14 @@ uses
 
 procedure GetBBSInfo(bbstype: word; var user_first_name, user_last_name: string; var user_access_level: word;
   var bbs_time_left: integer;
-  var com_port: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}word{$ENDIF}; var baud_rate: longint; var node_num: integer;
+  var com_port: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}longint{$ENDIF}; var baud_rate: longint; var node_num: integer;
   var local: boolean; var Graphics: byte; var color1: boolean; var color_chg: boolean; var board_name: string;
   var sysop_first_name: string; var sysop_last_name: string; var maxtime: word; var dropfilepath: string;
   var lockbaud: longint);
 
 procedure MakeInfoStrings(bbstype: word; var user_first_name, user_last_name: string;
   var user_access_level: word; var bbs_time_left: integer;
-  var com_port: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}word{$ENDIF}; var baud_rate, baud_modem: longint;
+  var com_port: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}longint{$ENDIF}; var baud_rate, baud_modem: longint;
   var node_num: integer; var local: boolean; var Graphics: byte; var color1: boolean; var color_chg: boolean;
   var board_name: string; var sysop_first_name: string; var sysop_last_name: string; var maxtime: word;
   var dropfilepath: string; var lockbaud: longint);
@@ -38,7 +38,7 @@ implementation
 
 procedure GetBBSInfo(bbstype: word; var user_first_name, user_last_name: string; var user_access_level: word;
   var bbs_time_left: integer;
-  var com_port: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}word{$ENDIF}; var baud_rate: longint; var node_num: integer;
+  var com_port: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}longint{$ENDIF}; var baud_rate: longint; var node_num: integer;
   var local: boolean; var Graphics: byte; var color1: boolean; var color_chg: boolean; var board_name: string;
   var sysop_first_name: string; var sysop_last_name: string; var maxtime: word; var dropfilepath: string;
   var lockbaud: longint);
@@ -1018,7 +1018,7 @@ end;
 
 procedure MakeInfoStrings(bbstype: word; var user_first_name, user_last_name: string;
   var user_access_level: word; var bbs_time_left: integer;
-  var com_port: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}word{$ENDIF}; var baud_rate, baud_modem: longint;
+  var com_port: {$IFDEF MSDOS}byte{$ENDIF}{$IFNDEF MSDOS}longint{$ENDIF}; var baud_rate, baud_modem: longint;
   var node_num: integer; var local: boolean; var Graphics: byte; var color1: boolean; var color_chg: boolean;
   var board_name: string; var sysop_first_name: string; var sysop_last_name: string; var maxtime: word;
   var dropfilepath: string; var lockbaud: longint);

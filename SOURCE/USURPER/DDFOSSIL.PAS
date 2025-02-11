@@ -29,7 +29,7 @@ type
     baud:    byte;
   end;
 var
-  port_num:   integer;
+  port_num:   longint;
   fossildata: fossildatatype;
 
 procedure async_send(c: char);
