@@ -31,7 +31,12 @@ Fixes:
   waited for a keypress before outputting each character in certain 
   configurations
   - Noticed with Synchronet running on Linux in Socket mode
+- Socket mode on Synchronet on Linux was reading a never-ending stream of
+  NULL bytes, breaking remote input
 - Leveling up was applying the wrong master's attribute changes
+- Socket handles > 32768 weren't being handled correctly, resulting in a lack
+  of i/o on the remote side
+- Speed up ANSI output by buffering writes
 
 Changes:
 - Display on (S)tatus -> (M)ore updated (line things up and re-arranged other 
@@ -68,7 +73,11 @@ Changes:
     be removed
   - This will soften the blow a bit for players who have acquired a large 
     stockpile -- rather than remove them all at once, they'll have a few days
-	to use at least some of them  
+	to use at least some of them 
+- More screens can be customized via .ANS/.ASC:
+  - Login screen (TEXT/LOGIN.ANS)
+  - Bank (TEXT/BANK.ANS)
+  - Inn (TEXT/INN.ANS)
 
 
 ----------------------------
@@ -883,7 +892,7 @@ NEW STUFF:
 +support for extended (screen) line modes (full screen at last!)
 +the names of the shop-keepers at the steroid and drug places can be
  edited.
-+added a bunch of ansi to the game! thanks to ALM≠GHTy the artist!
++added a bunch of ansi to the game! thanks to ALMÔøΩGHTy the artist!
 +all documenation and textfiles are now located in the USURPER\DOCS directory.
 +the usurper overlay file can now be placed onto a ramdrive to increase
  performance. see sysop.doc for details.
@@ -1146,7 +1155,7 @@ Version 0.15 (1996-03-17)
 -fixed some small bugs in the editor. also improved the online help.
 -the semaphore files are placed in the DATA\ directory, if no path is 
  specified in the configuration. The docs were misleading about this. 
--new FTP and WW sites (see support.doc). =Thanx èZô BBS and Oscar Olsson!=
+-new FTP and WW sites (see support.doc). =Thanx ÔøΩZÔøΩ BBS and Oscar Olsson!=
 -removed usurper.cfg and usurper.ctl from the archive. they only served the
  purpose of making people angry when their old config files were overwritten.
 -added support for replacement of BAD WORDS in strings. It is basically the
@@ -2039,4 +2048,4 @@ in April, 1993)
                  *************************************
                 **** Best wishes to Sven and Muffi ****
                  *************************************
-ˇˇ
+ÔøΩÔøΩ

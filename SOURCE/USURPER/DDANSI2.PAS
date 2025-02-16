@@ -293,19 +293,33 @@ end;
 procedure ansi_write_str(var s: string);
 var
   a: integer;
+  buf: string;
+
+  procedure WriteBuf;
+  begin
+    if (buf <> '') then
+    begin
+      Write(buf);
+      buf := '';
+    end;
+  end;
+
 begin;
+  buf := '';
+
   for a := 1 to length(s) do
   begin;
     case s[a] of
-      #12: clrscr;
-      #09: repeat; Write(' '); until wherex / 8 = wherex div 8;
-      #27: begin; escape := True; bbb := True; end;
+      #12: begin; WriteBuf(); clrscr; end;
+      #09: begin; WriteBuf(); repeat; Write(' '); until wherex / 8 = wherex div 8; end;
+      #27: begin; WriteBuf(); escape := True; bbb := True; end;
 
       else begin;
         if escape then
         begin;
           if (bbb = True) and (s[a] <> '[') then
           begin;
+            WriteBuf();
             blink := False;
             high := False;
             escape := False;
@@ -319,15 +333,17 @@ begin;
               escape := False;
             if (s[a] in ['u', 's', 'A', 'B', 'C', 'D', 'H', 'm', 'J', 'f', 'K', 'k', #14]) then
             begin;
+              WriteBuf();
               escape := False;
               eval_string(ansi_string);
               ansi_string := '';
             end;
           end;
-        end else Write(s[a]);
+        end else buf := buf + s[a];
       end;
     end;
   end;
+  WriteBuf();
 end;
 
 procedure InitDDAnsi;
